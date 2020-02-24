@@ -1,0 +1,691 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "968f3583_8d1f26cf",
+        "filename": "BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Please also add this (without the trailing comma) to src/dawn_native/CMakeLists.txt",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7f7f236_0f12ca77",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: add without the trailing comma to src/common/CMakeLists.txt",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb73adb1_4f815e62",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: mResourceHeap is immutable after creation, so instead of making it protected we could use GetResourceHeap() in child classes (and all changes to this .h and respective .cpp undone). Also all getters could be made const.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42c9891e_85b78d4a",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "When would we not use residency management?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2ff5d18_42d3cda1",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Is IDXGIAdapter required to be supported when D3D12 is supported? If not we\u0027ll need split getters for IDXGIAdapter1 vs. IDXGIAdapter3",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f95fad1e_9ca7a4f0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "We need to make sure the heap containing this buffer cannot be evicted until it is unmapped.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5680f59c_653d0be7",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02666500_2e75cd86",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: const",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3457c751_b977def1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Everytime to do \"TransitionUsage\" we also need to TrackResourceHeapUsage, so maybe the residency stuff should be coalesced in TransitionUsage (and the method renamed to something that better describes the new purpose).",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe1084a9_dc3db0ae",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "std::set is sloooow. Instead we could assume single-threaded recording for now and use an std::vector or std::dequeue. To avoid adding a Heap too many times, we could use a serial to track if the Heap has been added to the current command recording context already.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74ffb84a_5ff84ca7",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Ideally CommandRecordingContext is as dumb as possible outside of Open and ExecuteCommandList so we could instead pass the device to ExecuteCommandList (and remove the queue argument?)",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a55f0f6_448e09b6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Same comment as for CommandBufferD3D12 for the tracking of dst. Tracking of src still needs to happen.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecdfec88_6170a9b4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: this can return const VideoMemoryInfo\u0026",
+      "range": {
+        "startLine": 317,
+        "startChar": 4,
+        "endLine": 317,
+        "endChar": 26
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84220928_4a783457",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand what happens here. Do you have links to docs that explain external reservation etc?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca053b1_76c96f8d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Leftover draft code?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a09040c7_91f4bd0f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: instead of 0, 0, 0, 0 I think you can use {} which will default initialize members to 0.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4cd9759_f1a50aaa",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "This file could be merged into ResourceAllocatorManager to coalesce even more of the residency management logic there.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bae1aba_101a912f",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Lets add comments to explain why we do this residency stuff around CreateHeap calls.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6204a65_f6a26fe3",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "I think returning a std::unique_ptr\u003cResourceHeap\u003e should work so we don\u0027t need casts below.",
+      "range": {
+        "startLine": 52,
+        "startChar": 24,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d5e8aa_baccea47",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Were there any functional changes to this method?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "473e2c32_448a1567",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Why is the friend declaration needed?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d0c72fa_6d0aca89",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "When possible use early returns to simplify control flow:\n\n if (!mResidency...) {\n     return {};\n }\n\n bunch of logic\n\n\nis easier to read.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe0d9abc_fd75e51a",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Isn\u0027t this call somewhat expensive? It sounds like it might be doing one or more syscalls. Maybe we could do it only on Tick and hope things don\u0027t change too much between ticks?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0200bee7_fcba53df",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto about control flow simplification.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc2a8764_0a2daa52",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f8c1bb2_bb815ccd",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: no need for an else close since the if returns. the code can be simpler like below\n\n if (isResident) {\n     return {};\n }\n\n do stuff to make resident",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 18
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "992bec70_6bd6ce7c",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "EnsureHeapIsResident and ProcessResidency have essentially the same logic. There could be a single EnsureHeapsAreResident(Heap* heaps, size_t heapCount) method. And maybe a tine EnsureHeapIsResident that calls into EnsureHeapsAreResident(\u0026heap, 1).",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a34b9b0_178799b1",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "031c2b60_905552cf",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: this can be mode in the condition below.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaaaff03_a89e3d2d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed4430d_9a9dc3b6",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Instead of having an LRUEntry, maybe we could have d3d12::Heap be a LinkNode\u003cHeap\u003e and contain mSize and mLastUsedSerial. It would avoid some indirections and would help not use CONTAINING_RECORD which is an obscure macro.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ee1f956_18df99bb",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: ToBackend?",
+      "range": {
+        "startLine": 251,
+        "startChar": 21,
+        "endLine": 251,
+        "endChar": 32
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "986372e0_8b31bae0",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "Why do we need to ensure the heap is resident? The D3D12 docs for CreatePlacedResource don\u0027t mention it. It might be needed so the driver can write metadata in the memory but I\u0027d like confirmation from Rafael or the D3D12 team. If we need to keep this call, then we should have a comment explaining why.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "301a6826_8cd73b72",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: comment why we do this call",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "079dd021_4c2c6d4e",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "This is called only in ResourceAllocatorManager::DeallocateMemory so this extra logic could live there, in the same file as the allocation logic. This would make ResourceHeapAllocation a dumb structure which is simpler to understand.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db838eac_4435d76c",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: const",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c396c7_2a318629",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "What does the nullptr here mean? Do we require that the residency of the allocation be externally managed? Instead we could handle residency in Dawn. (TODO read docs about residency in d3d to understand how it works)",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c773df9a_a019d7bd",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4576753c_6f5c3841",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T16:06:06Z",
+      "side": 1,
+      "message": "nit: const",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
