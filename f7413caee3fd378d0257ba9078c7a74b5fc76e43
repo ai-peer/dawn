@@ -59,6 +59,29 @@
     },
     {
       "key": {
+        "uuid": "25d5dca8_d7d99106",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-24T22:28:37Z",
+      "side": 1,
+      "message": "The bot is red because this needs a TestSetUp override that\u0027s like DAWN_SKIP_TEST_IF(UsesWire());",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "f7413caee3fd378d0257ba9078c7a74b5fc76e43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "566fc840_31dfca1d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 39
