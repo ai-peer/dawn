@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c4bc4da_fc40df1f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T21:11:06Z",
+      "side": 1,
+      "message": "Let\u0027s not use the \"use\" word in this variable name. I got very confused because it made it seem like one was requesting-to-use, and other other was forcing-to-use. Perhaps mSpvcFlagSeen?",
+      "range": {
+        "startLine": 156,
+        "startChar": 9,
+        "endLine": 156,
+        "endChar": 23
+      },
+      "revId": "5f8718243ba78db2cd41f4c106be0f875bf5204f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
