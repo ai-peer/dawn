@@ -174,6 +174,10 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/D3D12Error.h"
         "d3d12/D3D12Info.cpp"
         "d3d12/D3D12Info.h"
+        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "d3d12/DescriptorHeapAllocationD3D12.h",
         "d3d12/DescriptorHeapAllocator.cpp"
         "d3d12/DescriptorHeapAllocator.h"
         "d3d12/DeviceD3D12.cpp"
