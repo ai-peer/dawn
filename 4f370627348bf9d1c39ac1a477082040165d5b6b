@@ -477,6 +477,24 @@
     },
     {
       "key": {
+        "uuid": "3772015c_35dec2b0",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-25T21:26:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d001c0c_462dc6ff",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "339aeac2_62cb5aeb",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 37
