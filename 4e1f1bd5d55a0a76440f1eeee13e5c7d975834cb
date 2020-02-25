@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d7bf80fd_a8eb6e21",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T20:07:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcd19b8d_a2df9255",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae0f5e32_f2f8c456",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6ac12418_b41be1c0",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T20:07:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0f5e32_f2f8c456",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d460742_848ffb31",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 6
@@ -47,6 +83,30 @@
       "writtenOn": "2020-02-25T13:13:42Z",
       "side": 1,
       "message": "Can\u0027t this be alignof(T)?",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6199631e_1a812128",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T20:07:48Z",
+      "side": 1,
+      "message": "It could, but I wanted to have the bind groups be 64-byte aligned. Sadly, we can\u0027t put the alignas specifier on the bind group like:\n\nclass alignas(64) BindGroup ...\n\nbecause then sizeof(BindGroup) will get rounded up to the next multiple of 64. Which uses a bit extra memory when the BlockInfo could be more tightly placed right after the BindGroup.\n\nSo instead, I have it specify desired alignment on the allocator.\n\nclass BindGroup...\nSlabAllocator\u003cBindGroup, 64\u003e",
+      "parentUuid": "7d460742_848ffb31",
       "range": {
         "startLine": 133,
         "startChar": 20,
@@ -93,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "cb98346c_54c70105",
+        "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T20:07:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71e725ac_6635e1c6",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3f74aeb_4c3ab3f7",
         "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
         "patchSetId": 6
@@ -107,6 +185,24 @@
       "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9729be5d_94c211ee",
+        "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T20:07:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3f74aeb_4c3ab3f7",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
