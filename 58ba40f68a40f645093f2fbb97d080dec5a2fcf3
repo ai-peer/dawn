@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac578bfc_73abcea1",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 44
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-25T22:03:30Z",
+      "side": 1,
+      "message": "A comment for the future, but don\u0027t want to block the CL more. It may require separately tracking the heaps first.\n\nAllocateGPUDescriptors should write out the heap allocation which contains the serials as an opaque object. We shouldn\u0027t be asking the allocator for the serial here -- that should happen inside AllocateGPUDescriptors(). And AllocateGPUDescriptors should also call device-\u003eGetPendingCommandSerial() itself and write that out as part of the opaque object.\n\nThat way, the BindGroup doesn\u0027t have to care about what a serial is at all. It just has an opaque GPU descriptor handle and can ask the allocator whether or not it\u0027s valid.",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "58ba40f68a40f645093f2fbb97d080dec5a2fcf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
