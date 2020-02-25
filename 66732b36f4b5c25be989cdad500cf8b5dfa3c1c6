@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4d768d8_b52422c2",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T10:25:42Z",
+      "side": 1,
+      "message": "Same comment as for the sampler compare toggle. Alternatively we could maintain lists of toggles to apply to get restrictions needed for this or that hardware.",
+      "revId": "66732b36f4b5c25be989cdad500cf8b5dfa3c1c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
