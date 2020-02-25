@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcd19b8d_a2df9255",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "Can you also add to src/common/CMakeLists.txt? (without the trailing commas)",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae0f5e32_f2f8c456",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "Can we have a general comment explaining how the slab allocator works? I spent a bunch of time trying to understand what\u0027s going on but I\u0027m not sure I get everything just looking at the code.",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d460742_848ffb31",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "Can\u0027t this be alignof(T)?",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f9f86f_a17bc7b0",
+        "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "I tried to figure out a way to test that an expression doesn\u0027t compile using some form of SFINAE but failed.",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71e725ac_6635e1c6",
+        "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "ubsan might yell at us in this test. Another way to do it would be to touch the memory after the first delete to check it isn\u0027t freed.",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3f74aeb_4c3ab3f7",
+        "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-25T13:13:42Z",
+      "side": 1,
+      "message": "I think there is a gtest InSequence that will force all EXPECT_CALL in the scope to be in sequence.",
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
