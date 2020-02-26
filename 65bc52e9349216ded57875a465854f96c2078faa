@@ -34,6 +34,24 @@
       "revId": "65bc52e9349216ded57875a465854f96c2078faa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e52ff165_fc73af76",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-26T01:57:42Z",
+      "side": 1,
+      "message": "We discussed offline that it\u0027s better to have individual toggles for feature restrictions since they\u0027re going to be shared on OpenGL ES, and D3D11 as well. You may be right that we could turn these into a few low-tier feature levels though, but we\u0027d need more investigation on defining those levels.\n\nWe wouldn\u0027t want to force more restrictions and expensive emulation if we don\u0027t have to, so I feel being specific is better. Feature levels are nice for users of an API, but as the implementation we can afford to spend more effort adapting to each specific toggle.\n\nDefinitely reasonable to have \"toggle-lists\" or \"toggle-groups\" elsewhere to enable several toggles at once to make something look-like an old device.",
+      "parentUuid": "d04e95e1_0791543f",
+      "revId": "65bc52e9349216ded57875a465854f96c2078faa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
