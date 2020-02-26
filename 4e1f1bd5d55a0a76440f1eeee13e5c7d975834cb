@@ -119,6 +119,53 @@
     },
     {
       "key": {
+        "uuid": "5c0c176e_3cf144ac",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Why do we want bindgroups to be 64-byte aligned?? So they are in different cachelines? It shouldn\u0027t matter.",
+      "parentUuid": "6199631e_1a812128",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608ff536_c7fc833d",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit: these names need to be updated.",
+      "range": {
+        "startLine": 145,
+        "startChar": 89,
+        "endLine": 145,
+        "endChar": 98
+      },
+      "revId": "4e1f1bd5d55a0a76440f1eeee13e5c7d975834cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4f9f86f_a17bc7b0",
         "filename": "src/tests/unittests/PlacementAllocatedTests.cpp",
         "patchSetId": 6

@@ -1,0 +1,527 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2a98190_048b969a",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Why do we recursively delete slabs? Also this could case somewhat unbounded recursion so we should prefer an iterative method.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "603bc44e_3f9601e8",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit: Maybe this could be done lazily on the first Allocate call.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3292da2a_fb47e513",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Same comments as for PopFront",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a2007b_ff86fc55",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "u-nit: ASSERT the freeList is inside the allocation?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd43a8ce_d24744e5",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit ASSERT head-\u003enextIndex \u003c mBlocksPerSlab",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "346aca00_b54a7101",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "parent vs. child is confusing because it changes the nomenclature, maybe originalPrev and originalNext",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2b42336_15985760",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "This is always true because Index is unsigned. Maybe check info-\u003eindex \u003c mBlocksPerSlab?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd6f48a4_1a3040a4",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "[1] This seems incorrect if mRecycledSlabs has more than one slab.",
+      "range": {
+        "startLine": 180,
+        "startChar": 30,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b65745f_0ac39c21",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "This would be simplified with aligned_alloc. Also the Slab allocation size could be computed once in the constructor.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc8ab8d7_b9d9dc5c",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "As a follow up can we have mechanisms similar to https://cs.chromium.org/chromium/src/third_party/angle/src/common/PoolAlloc.h which has guard blocks / canary values in debug mode, and a way to disable pool allocation when running under ASAN?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d35a79e_fbd37c47",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit: describe the three linked lists at this point, and maybe phrase stuff in term of state machine?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2950fff_80409d12",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit: IndexLinkNode and a comment explaining that this is essentially a singly linked list using indices instead of pointers so we need to store the index of \"this\".",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55935910_0c9661f4",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "By using malloc() and free() we can be sure that the returned pointer has enough alignment for all natural alignments which should be good for Slab so we don\u0027t need padding. If we really want to be bullet proof, we can use cstdlib\u0027s aligned_alloc. This would allow removing the allocation pointer since it is just `this`.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2be01a34_24afeefa",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "This method always returns `this`, maybe we don\u0027t need a return value?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b3abeed_2c91b385",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Instead of a pointer, maybe this could be an index?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e381933_a37aa02e",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "The slab linked list implementation could be made simpler if it were implemented using LinkedNode https://dawn-review.googlesource.com/c/dawn/+/14900/12/src/common/LinkedList.h maybe  we can land the current code and then simplify with LinkedNode once Brandon lands it.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbc2c5d5_4d99e4a5",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "The drawing is amazing to explain what all the different things are!",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f50d7678_4d90f7a3",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "mSlabBlocksOffset? Data is pretty generic.",
+      "range": {
+        "startLine": 126,
+        "startChar": 54,
+        "endLine": 126,
+        "endChar": 65
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63c6857a_3137784f",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "mBlockStride because of the padding at the end of blocks?",
+      "range": {
+        "startLine": 127,
+        "startChar": 54,
+        "endLine": 127,
+        "endChar": 64
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c8435c0_04b82b05",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "I\u0027m not super happy about this name but don\u0027t find a great replacement.",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ad92adb_22f04964",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "nit: comment wrapping",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc592410_37849571",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "mBlocksPerSlab?",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 143,
+        "endChar": 22
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7286a42_eec21bda",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "This would just become a LinkedList",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "754f80f8_78f1fbc5",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Why do we do have the two Available and Recycled slabs? Maybe we could have a list of empty slabs and only prune them when there are too many empty slabs?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a00db36_0ade1022",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Except it allocates two objects xD",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a18fdfe0_eee9acd2",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "The objects are not deallocated!",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bc4ce7d_4fb61025",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "528a15e7_05a1a2fb",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f9e0ff1_5c134379",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:41:55Z",
+      "side": 1,
+      "message": "Can we have a test that allocates a large number of object (\u003e1000, with \u003e10 slabs) and deallocates them at random (ideally not true random so the test isn\u0027t flaky) to check things work correctly? It might be able to catch the bug at [1].",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
