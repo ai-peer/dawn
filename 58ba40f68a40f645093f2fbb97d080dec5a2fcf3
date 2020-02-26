@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a08f90d7_9ce64478",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 44
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:47:19Z",
+      "side": 1,
+      "message": "unit: sort like in the GN file",
+      "revId": "58ba40f68a40f645093f2fbb97d080dec5a2fcf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac578bfc_73abcea1",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 44
@@ -18,6 +35,29 @@
         "startChar": 8,
         "endLine": 74,
         "endChar": 0
+      },
+      "revId": "58ba40f68a40f645093f2fbb97d080dec5a2fcf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f3453c_5ed7b3aa",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 44
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T12:47:19Z",
+      "side": 1,
+      "message": "u-nit: all caps, here and at the end of the file.",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 60
       },
       "revId": "58ba40f68a40f645093f2fbb97d080dec5a2fcf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
