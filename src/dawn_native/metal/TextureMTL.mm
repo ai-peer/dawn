@@ -335,7 +335,7 @@ namespace dawn_native { namespace metal {
     }
 
     Texture::Texture(Device* device,
-                     const TextureDescriptor* descriptor,
+                     const ExternalImageDescriptor* descriptor,
                      IOSurfaceRef ioSurface,
                      uint32_t plane)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {

@@ -95,7 +95,7 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
-        TextureBase* WrapSharedHandle(const TextureDescriptor* descriptor,
+        TextureBase* WrapSharedHandle(const ExternalImageDescriptor* descriptor,
                                       HANDLE sharedHandle,
                                       uint64_t acquireMutexKey);
         ResultOrError<ComPtr<IDXGIKeyedMutex>> CreateKeyedMutexForTexture(
