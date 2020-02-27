@@ -171,4 +171,10 @@ namespace dawn_native {
         return GetProcMapNamesForTestingInternal();
     }
 
+#ifdef DAWN_PLATFORM_LINUX
+    ExternalImageDescriptor::ExternalImageDescriptor(ExternalImageDescriptorType type)
+        : type(type) {
+    }
+#endif
+
 }  // namespace dawn_native
