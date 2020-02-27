@@ -181,7 +181,6 @@ TEST_P(DeviceLostTest, CreateComputePipelineFails) {
     wgpu::ComputePipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.computeStage.module = nullptr;
-    descriptor.nextInChain = nullptr;
     ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&descriptor));
 }
 
@@ -219,7 +218,6 @@ TEST_P(DeviceLostTest, CreateSwapChainFails) {
     SetCallbackAndLoseForTesting();
 
     wgpu::SwapChainDescriptor descriptor;
-    descriptor.nextInChain = nullptr;
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(nullptr, &descriptor));
 }
 

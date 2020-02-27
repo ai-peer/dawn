@@ -393,7 +393,6 @@ class CreateBufferMappedTests : public DawnTest {
 
       wgpu::CreateBufferMappedResult CreateBufferMapped(wgpu::BufferUsage usage, uint64_t size) {
           wgpu::BufferDescriptor descriptor;
-          descriptor.nextInChain = nullptr;
           descriptor.size = size;
           descriptor.usage = usage;
 
@@ -415,7 +414,6 @@ class CreateBufferMappedTests : public DawnTest {
       wgpu::CreateBufferMappedResult CreateBufferMappedAsyncAndWait(wgpu::BufferUsage usage,
                                                                     uint64_t size) {
           wgpu::BufferDescriptor descriptor;
-          descriptor.nextInChain = nullptr;
           descriptor.size = size;
           descriptor.usage = usage;
 
