@@ -35,7 +35,7 @@ namespace dawn_native { namespace metal {
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, id<MTLTexture> mtlTexture);
         Texture(Device* device,
-                const TextureDescriptor* descriptor,
+                const ExternalImageDescriptor* descriptor,
                 IOSurfaceRef ioSurface,
                 uint32_t plane);
         ~Texture();

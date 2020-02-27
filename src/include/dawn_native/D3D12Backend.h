@@ -32,6 +32,12 @@ namespace dawn_native { namespace d3d12 {
 
     // Note: SharedHandle must be a handle to a texture object.
     DAWN_NATIVE_EXPORT WGPUTexture WrapSharedHandle(WGPUDevice device,
+                                                    const ExternalImageDescriptor* descriptor,
+                                                    HANDLE sharedHandle,
+                                                    uint64_t acquireMutexKey);
+
+    // Note: SharedHandle must be a handle to a texture object.
+    DAWN_NATIVE_EXPORT WGPUTexture WrapSharedHandle(WGPUDevice device,
                                                     const WGPUTextureDescriptor* descriptor,
                                                     HANDLE sharedHandle,
                                                     uint64_t acquireMutexKey);
