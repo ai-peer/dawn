@@ -155,7 +155,7 @@ class WireMemoryTransferServiceTests : public WireTest {
     using ServerWriteHandle = server::MockMemoryTransferService::MockWriteHandle;
 
     std::pair<WGPUBuffer, WGPUBuffer> CreateBuffer() {
-        WGPUBufferDescriptor descriptor;
+        WGPUBufferDescriptor descriptor = {};
         descriptor.nextInChain = nullptr;
         descriptor.label = nullptr;
         descriptor.size = sizeof(mBufferContent);
@@ -171,7 +171,7 @@ class WireMemoryTransferServiceTests : public WireTest {
     }
 
     std::pair<WGPUCreateBufferMappedResult, WGPUCreateBufferMappedResult> CreateBufferMapped() {
-        WGPUBufferDescriptor descriptor;
+        WGPUBufferDescriptor descriptor = {};
         descriptor.nextInChain = nullptr;
         descriptor.label = nullptr;
         descriptor.size = sizeof(mBufferContent);
@@ -193,7 +193,7 @@ class WireMemoryTransferServiceTests : public WireTest {
     }
 
     WGPUCreateBufferMappedResult CreateBufferMappedAsync() {
-        WGPUBufferDescriptor descriptor;
+        WGPUBufferDescriptor descriptor = {};
         descriptor.nextInChain = nullptr;
         descriptor.label = nullptr;
         descriptor.size = sizeof(mBufferContent);
@@ -879,7 +879,7 @@ TEST_F(WireMemoryTransferServiceTests, CreateBufferMappedAsyncWriteHandleCreatio
     // Mock a WriteHandle creation failure
     MockWriteHandleCreationFailure();
 
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = sizeof(mBufferContent);
@@ -1035,7 +1035,7 @@ TEST_F(WireMemoryTransferServiceTests, CreateBufferMappedWriteHandleCreationFail
     // Mock a WriteHandle creation failure
     MockWriteHandleCreationFailure();
 
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = sizeof(mBufferContent);
@@ -1081,7 +1081,7 @@ TEST_F(WireMemoryTransferServiceTests, CreateBufferMappedHandleOpenFailure) {
     // Note: The handle is not serialized because sychronously opening it failed.
     EXPECT_CALL(clientMemoryTransferService, OnWriteHandleDestroy(clientHandle)).Times(1);
 
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = sizeof(mBufferContent);

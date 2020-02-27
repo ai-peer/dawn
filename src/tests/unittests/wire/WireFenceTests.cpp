@@ -50,7 +50,7 @@ class WireFenceTests : public WireTest {
             FlushClient();
         }
         {
-            WGPUFenceDescriptor descriptor;
+            WGPUFenceDescriptor descriptor = {};
             descriptor.nextInChain = nullptr;
             descriptor.label = nullptr;
             descriptor.initialValue = 1;

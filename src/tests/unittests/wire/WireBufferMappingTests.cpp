@@ -97,7 +97,7 @@ class WireBufferMappingTests : public WireTest {
         mockCreateBufferMappedCallback =
             std::make_unique<StrictMock<MockBufferCreateMappedCallback>>();
 
-        WGPUBufferDescriptor descriptor;
+        WGPUBufferDescriptor descriptor = {};
         descriptor.nextInChain = nullptr;
         descriptor.label = nullptr;
         descriptor.size = kBufferSize;
@@ -498,7 +498,7 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
 
 // Test successful CreateBufferMapped
 TEST_F(WireBufferMappingTests, CreateBufferMappedSuccess) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = 4;
@@ -526,7 +526,7 @@ TEST_F(WireBufferMappingTests, CreateBufferMappedSuccess) {
 
 // Test that releasing after CreateBufferMapped does not call Unmap
 TEST_F(WireBufferMappingTests, ReleaseAfterCreateBufferMapped) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = 4;
@@ -554,7 +554,7 @@ TEST_F(WireBufferMappingTests, ReleaseAfterCreateBufferMapped) {
 
 // Test that it is valid to map a buffer after CreateBufferMapped and Unmap
 TEST_F(WireBufferMappingTests, CreateBufferMappedThenMapSuccess) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = 4;
@@ -599,7 +599,7 @@ TEST_F(WireBufferMappingTests, CreateBufferMappedThenMapSuccess) {
 
 // Test that it is invalid to map a buffer after CreateBufferMapped before Unmap
 TEST_F(WireBufferMappingTests, CreateBufferMappedThenMapFailure) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = 4;
@@ -641,7 +641,7 @@ TEST_F(WireBufferMappingTests, CreateBufferMappedThenMapFailure) {
 
 // Test successful CreateBufferMappedAsync
 TEST_F(WireBufferMappingTests, CreateBufferMappedAsyncSuccess) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = kBufferSize;
@@ -686,7 +686,7 @@ TEST_F(WireBufferMappingTests, CreateBufferMappedAsyncSuccess) {
 
 // Test CreateBufferMappedAsync with map error
 TEST_F(WireBufferMappingTests, CreateBufferMappedAsyncMapError) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
 
@@ -720,7 +720,7 @@ TEST_F(WireBufferMappingTests, CreateBufferMappedAsyncMapError) {
 // Test that the CreateBufferMappedCallback isn't fired twice when unmap() is called inside the
 // callback
 TEST_F(WireBufferMappingTests, UnmapInsideCreateBufferMappedAsyncCallback) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = kBufferSize;
@@ -759,7 +759,7 @@ TEST_F(WireBufferMappingTests, UnmapInsideCreateBufferMappedAsyncCallback) {
 // Test that the CreateBufferMappedCallback isn't fired twice when the buffer is deleted inside
 // the callback
 TEST_F(WireBufferMappingTests, ReleaseInsideCreateBufferMappedAsyncCallback) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = kBufferSize;
@@ -798,7 +798,7 @@ TEST_F(WireBufferMappingTests, ReleaseInsideCreateBufferMappedAsyncCallback) {
 // Test that the CreateBufferMappedCallback isn't fired twice when the buffer is destroyed inside
 // the callback
 TEST_F(WireBufferMappingTests, DestroyInsideCreateBufferMappedAsyncCallback) {
-    WGPUBufferDescriptor descriptor;
+    WGPUBufferDescriptor descriptor = {};
     descriptor.nextInChain = nullptr;
     descriptor.label = nullptr;
     descriptor.size = kBufferSize;

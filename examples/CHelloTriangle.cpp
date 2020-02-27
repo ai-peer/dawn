@@ -29,7 +29,7 @@ void init() {
     queue = wgpuDeviceCreateQueue(device);
 
     {
-        WGPUSwapChainDescriptor descriptor;
+        WGPUSwapChainDescriptor descriptor = {};
         descriptor.nextInChain = nullptr;
         descriptor.label = nullptr;
         descriptor.implementation = GetSwapChainImplementation();
@@ -58,7 +58,7 @@ void init() {
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, fs).Release();
 
     {
-        WGPURenderPipelineDescriptor descriptor;
+        WGPURenderPipelineDescriptor descriptor = {};
         descriptor.label = nullptr;
         descriptor.nextInChain = nullptr;
 
@@ -66,7 +66,7 @@ void init() {
         descriptor.vertexStage.module = vsModule;
         descriptor.vertexStage.entryPoint = "main";
 
-        WGPUProgrammableStageDescriptor fragmentStage;
+        WGPUProgrammableStageDescriptor fragmentStage = {};
         fragmentStage.nextInChain = nullptr;
         fragmentStage.module = fsModule;
         fragmentStage.entryPoint = "main";
@@ -74,11 +74,11 @@ void init() {
 
         descriptor.sampleCount = 1;
 
-        WGPUBlendDescriptor blendDescriptor;
+        WGPUBlendDescriptor blendDescriptor = {};
         blendDescriptor.operation = WGPUBlendOperation_Add;
         blendDescriptor.srcFactor = WGPUBlendFactor_One;
         blendDescriptor.dstFactor = WGPUBlendFactor_One;
-        WGPUColorStateDescriptor colorStateDescriptor;
+        WGPUColorStateDescriptor colorStateDescriptor = {};
         colorStateDescriptor.nextInChain = nullptr;
         colorStateDescriptor.format = swapChainFormat;
         colorStateDescriptor.alphaBlend = blendDescriptor;
@@ -88,21 +88,21 @@ void init() {
         descriptor.colorStateCount = 1;
         descriptor.colorStates = &colorStateDescriptor;
 
-        WGPUPipelineLayoutDescriptor pl;
+        WGPUPipelineLayoutDescriptor pl = {};
         pl.nextInChain = nullptr;
         pl.label = nullptr;
         pl.bindGroupLayoutCount = 0;
         pl.bindGroupLayouts = nullptr;
         descriptor.layout = wgpuDeviceCreatePipelineLayout(device, &pl);
 
-        WGPUVertexStateDescriptor vertexState;
+        WGPUVertexStateDescriptor vertexState = {};
         vertexState.nextInChain = nullptr;
         vertexState.indexFormat = WGPUIndexFormat_Uint32;
         vertexState.vertexBufferCount = 0;
         vertexState.vertexBuffers = nullptr;
         descriptor.vertexState = &vertexState;
 
-        WGPURasterizationStateDescriptor rasterizationState;
+        WGPURasterizationStateDescriptor rasterizationState = {};
         rasterizationState.nextInChain = nullptr;
         rasterizationState.frontFace = WGPUFrontFace_CCW;
         rasterizationState.cullMode = WGPUCullMode_None;
@@ -126,10 +126,10 @@ void init() {
 
 void frame() {
     WGPUTextureView backbufferView = wgpuSwapChainGetCurrentTextureView(swapchain);
-    WGPURenderPassDescriptor renderpassInfo;
+    WGPURenderPassDescriptor renderpassInfo = {};
     renderpassInfo.nextInChain = nullptr;
     renderpassInfo.label = nullptr;
-    WGPURenderPassColorAttachmentDescriptor colorAttachment;
+    WGPURenderPassColorAttachmentDescriptor colorAttachment = {};
     {
         colorAttachment.attachment = backbufferView;
         colorAttachment.resolveTarget = nullptr;

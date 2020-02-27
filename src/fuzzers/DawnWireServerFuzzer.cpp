@@ -52,7 +52,7 @@ namespace {
     WGPUSwapChain ErrorDeviceCreateSwapChain(WGPUDevice device,
                                              WGPUSurface surface,
                                              const WGPUSwapChainDescriptor*) {
-        WGPUSwapChainDescriptor desc;
+        WGPUSwapChainDescriptor desc = {};
         desc.nextInChain = nullptr;
         desc.label = nullptr;
         // A 0 implementation will trigger a swapchain creation error.
