@@ -96,9 +96,11 @@ namespace {
         wgpu::Texture WrapIOSurface(const wgpu::TextureDescriptor* descriptor,
                                     IOSurfaceRef ioSurface,
                                     uint32_t plane) {
-            WGPUTexture texture = dawn_native::metal::WrapIOSurface(
-                device.Get(), reinterpret_cast<const WGPUTextureDescriptor*>(descriptor), ioSurface,
-                plane);
+            dawn_native::ExternalImageDescriptor externDesc = {};
+            externDesc.cTextureDescriptor =
+                reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
+            WGPUTexture texture =
+                dawn_native::metal::WrapIOSurface(device.Get(), &externDesc, ioSurface, plane);
             return wgpu::Texture::Acquire(texture);
         }
     };

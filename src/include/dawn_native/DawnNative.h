@@ -185,6 +185,25 @@ namespace dawn_native {
     DAWN_NATIVE_EXPORT uint64_t AcquireErrorInjectorCallCount();
     DAWN_NATIVE_EXPORT void InjectErrorAt(uint64_t index);
 
+    // The different types of ExternalImageDescriptors
+    enum ExternalImageDescriptorType {
+#ifdef __linux__
+        OpaqueFD,
+        DmaBuf,
+#endif  // __linux__
+    };
+
+    // Common properties of external images
+    struct DAWN_NATIVE_EXPORT ExternalImageDescriptor {
+      public:
+        ExternalImageDescriptor() {
+        }
+        ExternalImageDescriptor(ExternalImageDescriptorType type);
+
+        ExternalImageDescriptorType type;
+        const WGPUTextureDescriptor* cTextureDescriptor;  // Must match image creation params
+        bool isCleared;  // Sets whether the texture will be cleared before use
+    };
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNNATIVE_H_
