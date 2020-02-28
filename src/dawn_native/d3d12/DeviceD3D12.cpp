@@ -32,6 +32,7 @@
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/QueueD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
@@ -79,7 +80,10 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
 
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
+        mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
+
+        UpdateVideoMemoryInfo();
 
         DAWN_TRY(NextSerial());
 
@@ -175,7 +179,13 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
+    ResourceAllocatorManager* Device::GetResourceAllocatorManager() const {
+        return mResourceAllocatorManager.get();
+    }
+
     MaybeError Device::TickImpl() {
+        UpdateVideoMemoryInfo();
+
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
 
@@ -214,7 +224,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Device::ExecutePendingCommandContext() {
-        return mPendingCommands.ExecuteCommandList(mCommandQueue.Get());
+        return mPendingCommands.ExecuteCommandList(this);
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -290,14 +300,61 @@ namespace dawn_native { namespace d3d12 {
         CommandRecordingContext* commandRecordingContext;
         DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext());
 
-        ToBackend(destination)
-            ->TransitionUsageNow(commandRecordingContext, wgpu::BufferUsage::CopyDst);
+        Buffer* dstBuffer = ToBackend(destination);
+        StagingBuffer* srcBuffer = ToBackend(source);
+        dstBuffer->PrepareResourceForSubmissionNow(commandRecordingContext,
+                                                   wgpu::BufferUsage::CopyDst);
+        srcBuffer->PrepareResourceForSubmission(commandRecordingContext);
 
         commandRecordingContext->GetCommandList()->CopyBufferRegion(
-            ToBackend(destination)->GetD3D12Resource().Get(), destinationOffset,
-            ToBackend(source)->GetResource(), sourceOffset, size);
+            dstBuffer->GetD3D12Resource().Get(), destinationOffset, srcBuffer->GetResource(),
+            sourceOffset, size);
 
         return {};
+    }
+
+    ResidencyManager* Device::GetResidencyManager() const {
+        return mResidencyManager.get();
+    }
+
+    const VideoMemoryInfo& Device::GetVideoMemoryInfo() const {
+        return mVideoMemoryInfo;
+    }
+
+    // Allows an application component external to Dawn to cap Dawn's residency budget to prevent
+    // competition for device local memory. Returns the amount of memory reserved, which may be less
+    // that the requested reservation when under pressure.
+    uint64_t Device::SetExternalMemoryReservation(uint64_t requestedReservationSize) {
+        mVideoMemoryInfo.externalRequest = requestedReservationSize;
+        UpdateVideoMemoryInfo();
+        return mVideoMemoryInfo.externalReservation;
+    }
+
+    void Device::UpdateVideoMemoryInfo() {
+        DXGI_QUERY_VIDEO_MEMORY_INFO queryVideoMemoryInfo;
+        ToBackend(GetAdapter())
+            ->GetHardwareAdapter()
+            ->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &queryVideoMemoryInfo);
+
+        // The video memory budget provided by QueryVideoMemoryInfo is defined by the operating
+        // system, and may be lower than expected in certain scenarios. Under memory pressure, we
+        // cap the external reservation to half the available budget, which prevents the external
+        // component from consuming a disporportionate share of memory and ensures that Dawn can
+        // continue to make forward progress.
+        if (mVideoMemoryInfo.externalRequest >= queryVideoMemoryInfo.Budget / 2) {
+            mVideoMemoryInfo.externalReservation = queryVideoMemoryInfo.Budget / 2;
+        } else {
+            mVideoMemoryInfo.externalReservation = mVideoMemoryInfo.externalRequest;
+        }
+
+        // We cap Dawn's budget to 95% of the provided budget. Leaving some budget unused
+        // decreases fluctuations in the operating-system-defined budget, which improves stability
+        // for both Dawn and other applications on the system.
+        static constexpr float kBudgetCap = 0.95;
+        mVideoMemoryInfo.dawnBudget =
+            (queryVideoMemoryInfo.Budget - mVideoMemoryInfo.externalReservation) * kBudgetCap;
+        mVideoMemoryInfo.dawnUsage =
+            queryVideoMemoryInfo.CurrentUsage - mVideoMemoryInfo.externalReservation;
     }
 
     void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {
@@ -401,6 +458,7 @@ namespace dawn_native { namespace d3d12 {
         const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
         SetToggle(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
         SetToggle(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
+        SetToggle(Toggle::UseD3D12ResidencyManagement, true);
     }
 
     MaybeError Device::WaitForIdleForDestruction() {

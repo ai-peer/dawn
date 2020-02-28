@@ -20,6 +20,8 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -130,6 +132,35 @@ namespace dawn_native { namespace d3d12 {
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.
+    bool Buffer::PrepareResourceForSubmissionAndGetResourceBarrier(
+        CommandRecordingContext* commandContext,
+        D3D12_RESOURCE_BARRIER* barrier,
+        wgpu::BufferUsage newUsage) {
+        // Track the underlying heap to ensure residency (if it hasn't already been tracked).
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+
+        Serial pendingSerial = GetDevice()->GetPendingCommandSerial();
+        if (heap->GetLastRecordingSerial() < pendingSerial) {
+            heap->SetLastRecordingSerial(pendingSerial);
+            commandContext->TrackResourceHeapUsage(heap);
+        }
+
+        // Return the resource barrier.
+        return TransitionUsageAndGetResourceBarrier(commandContext, barrier, newUsage);
+    }
+
+    void Buffer::PrepareResourceForSubmissionNow(CommandRecordingContext* commandContext,
+                                                 wgpu::BufferUsage newUsage) {
+        D3D12_RESOURCE_BARRIER barrier;
+
+        if (PrepareResourceForSubmissionAndGetResourceBarrier(commandContext, &barrier, newUsage)) {
+            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        }
+    }
+
+    // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
+    // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
+    // cause subsequent errors.
     bool Buffer::TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                       D3D12_RESOURCE_BARRIER* barrier,
                                                       wgpu::BufferUsage newUsage) {
@@ -202,15 +233,6 @@ namespace dawn_native { namespace d3d12 {
         return true;
     }
 
-    void Buffer::TransitionUsageNow(CommandRecordingContext* commandContext,
-                                    wgpu::BufferUsage usage) {
-        D3D12_RESOURCE_BARRIER barrier;
-
-        if (TransitionUsageAndGetResourceBarrier(commandContext, &barrier, usage)) {
-            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
-        }
-    }
-
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
         return mResourceAllocation.GetGPUPointer();
     }
@@ -237,6 +259,12 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        DAWN_TRY(
+            ToBackend(GetDevice())->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
+
+        heap->SetResidencyLock(true);
+
         mWrittenMappedRange = {};
         D3D12_RANGE readRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
@@ -251,6 +279,12 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        DAWN_TRY(
+            ToBackend(GetDevice())->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
+
+        heap->SetResidencyLock(true);
+
         mWrittenMappedRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
         DAWN_TRY(CheckHRESULT(
@@ -265,6 +299,7 @@ namespace dawn_native { namespace d3d12 {
 
     void Buffer::UnmapImpl() {
         GetD3D12Resource()->Unmap(0, &mWrittenMappedRange);
+        ToBackend(mResourceAllocation.GetResourceHeap())->SetResidencyLock(false);
         mWrittenMappedRange = {};
     }
 

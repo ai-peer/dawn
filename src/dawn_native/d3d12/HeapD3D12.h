@@ -14,21 +14,41 @@
 
 #ifndef DAWNNATIVE_D3D12_HEAPD3D12_H_
 #define DAWNNATIVE_D3D12_HEAPD3D12_H_
-
+#include "common/LinkedList.h"
+#include "common/Serial.h"
 #include "dawn_native/ResourceHeap.h"
+
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Heap : public ResourceHeapBase {
+    class Heap : public ResourceHeapBase, public LinkNode<Heap> {
       public:
-        Heap(ComPtr<ID3D12Heap> heap);
-        ~Heap() = default;
+        Heap(ComPtr<ID3D12Pageable> d3d12Pageable, uint64_t size);
+        ~Heap();
 
         ComPtr<ID3D12Heap> GetD3D12Heap() const;
+        ComPtr<ID3D12Pageable> GetD3D12Pageable() const;
+
+        uint64_t GetLastRecordingSerial() const;
+        void SetLastRecordingSerial(Serial serial);
+
+        uint64_t GetLastSubmissionSerial() const;
+        void SetLastSubmissionSerial(Serial serial);
+
+        uint64_t GetSize() const;
+
+        bool IsResident() const;
+
+        void SetResidencyLock(bool residencyLock);
+        bool IsResidencyLocked() const;
 
       private:
-        ComPtr<ID3D12Heap> mHeap;
+        ComPtr<ID3D12Pageable> mD3d12Pageable;
+        Serial mLastRecordingSerial = 0;
+        Serial mLastSubmissionSerial = 0;
+        bool mResidencyLock = false;
+        uint64_t mSize = 0;
     };
 }}  // namespace dawn_native::d3d12
 

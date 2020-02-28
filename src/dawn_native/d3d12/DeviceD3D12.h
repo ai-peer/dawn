@@ -28,11 +28,19 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    struct VideoMemoryInfo {
+        uint64_t dawnBudget;
+        uint64_t dawnUsage;
+        uint64_t externalReservation;
+        uint64_t externalRequest;
+    };
+
     class CommandAllocatorManager;
     class DescriptorHeapAllocator;
     class ShaderVisibleDescriptorAllocator;
     class MapRequestTracker;
     class PlatformFunctions;
+    class ResidencyManager;
     class ResourceAllocatorManager;
 
 #define ASSERT_SUCCESS(hr)            \
@@ -74,6 +82,13 @@ namespace dawn_native { namespace d3d12 {
         Serial GetPendingCommandSerial() const override;
 
         const D3D12DeviceInfo& GetDeviceInfo() const;
+
+        ResourceAllocatorManager* GetResourceAllocatorManager() const;
+        ResidencyManager* GetResidencyManager() const;
+
+        const VideoMemoryInfo& GetVideoMemoryInfo() const;
+        uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
+        void UpdateVideoMemoryInfo();
 
         MaybeError NextSerial();
         MaybeError WaitForSerial(Serial serial);
@@ -160,8 +175,11 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
+        std::unique_ptr<ResidencyManager> mResidencyManager;
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mShaderVisibleDescriptorAllocator;
+
+        VideoMemoryInfo mVideoMemoryInfo = {};
     };
 
 }}  // namespace dawn_native::d3d12

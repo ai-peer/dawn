@@ -324,6 +324,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
       "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
       "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+      "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+      "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
       "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
       "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
       "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
@@ -1023,6 +1025,7 @@ source_set("dawn_white_box_tests_sources") {
   if (dawn_enable_d3d12) {
     sources += [
       "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+      "src/tests/white_box/D3D12Residency.cpp",
       "src/tests/white_box/D3D12SmallTextureTests.cpp",
     ]
   }

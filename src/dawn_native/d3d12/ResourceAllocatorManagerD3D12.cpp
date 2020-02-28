@@ -18,6 +18,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapAllocatorD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
     namespace {
@@ -166,7 +167,8 @@ namespace dawn_native { namespace d3d12 {
         ResourceHeapAllocation directAllocation;
         DAWN_TRY_ASSIGN(directAllocation,
                         CreateCommittedResource(heapType, resourceDescriptor, initialUsage));
-
+        mDevice->GetResidencyManager()->TrackResidentAllocation(
+            ToBackend(directAllocation.GetResourceHeap()));
         return directAllocation;
     }
 
@@ -186,6 +188,11 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mAllocationsToDelete.Enqueue(allocation, mDevice->GetPendingCommandSerial());
+
+        if (allocation.GetInfo().mMethod == AllocationMethod::kDirect) {
+            Heap* heap = ToBackend(allocation.GetResourceHeap());
+            heap->~Heap();
+        }
 
         // Invalidate the allocation immediately in case one accidentally
         // calls DeallocateMemory again using the same allocation.
@@ -246,7 +253,10 @@ namespace dawn_native { namespace d3d12 {
             return ResourceHeapAllocation{};  // invalid
         }
 
-        ID3D12Heap* heap = static_cast<Heap*>(allocation.GetResourceHeap())->GetD3D12Heap().Get();
+        Heap* heap = ToBackend(allocation.GetResourceHeap());
+
+        // Before calling CreatePlacedResource, we should ensure the target heap is resident.
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
 
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed
@@ -256,13 +266,14 @@ namespace dawn_native { namespace d3d12 {
         // barrier).
         // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createplacedresource
         ComPtr<ID3D12Resource> placedResource;
-        DAWN_TRY(CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreatePlacedResource(
-                                             heap, allocation.GetOffset(), &resourceDescriptor,
-                                             initialUsage, nullptr, IID_PPV_ARGS(&placedResource)),
-                                         "ID3D12Device::CreatePlacedResource"));
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            mDevice->GetD3D12Device()->CreatePlacedResource(
+                heap->GetD3D12Heap().Get(), allocation.GetOffset(), &resourceDescriptor,
+                initialUsage, nullptr, IID_PPV_ARGS(&placedResource)),
+            "ID3D12Device::CreatePlacedResource"));
 
         return ResourceHeapAllocation{allocation.GetInfo(), allocation.GetOffset(),
-                                      std::move(placedResource)};
+                                      std::move(placedResource), heap};
     }
 
     ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedResource(
@@ -288,6 +299,10 @@ namespace dawn_native { namespace d3d12 {
             return ResourceHeapAllocation{};  // Invalid
         }
 
+        // Calling CreateCommittedResource implicitly calls MakeResident, so we should make sure we
+        // are not overcommitting.
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(resourceInfo.SizeInBytes));
+
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
         ComPtr<ID3D12Resource> committedResource;
@@ -297,11 +312,16 @@ namespace dawn_native { namespace d3d12 {
                                         initialUsage, nullptr, IID_PPV_ARGS(&committedResource)),
                                     "ID3D12Device::CreateCommittedResource"));
 
+        // When using CreateCommittedResource, D3D12 creates an implicit heap that contains the
+        // resource allocation. Because Dawn's memory residency management occurs at the resource
+        // heap granularity, every directly allocated ResourceHeapAllocation also stores a Heap
+        // object.
+        Heap* heap = new Heap(committedResource, resourceInfo.SizeInBytes);
+
         AllocationInfo info;
         info.mMethod = AllocationMethod::kDirect;
 
-        return ResourceHeapAllocation{info,
-                                      /*offset*/ 0, std::move(committedResource)};
+        return ResourceHeapAllocation{info, /*offset*/ 0, std::move(committedResource), heap};
     }
 
 }}  // namespace dawn_native::d3d12
