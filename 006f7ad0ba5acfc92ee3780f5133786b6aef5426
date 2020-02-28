@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfa216b4_513d854a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "We should do something with descriptor-\u003eisCleared.",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7ba1451_7898c2e9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "We should do something with descriptor-\u003eisCleared. Can be in a follow-up.",
+      "range": {
+        "startLine": 272,
+        "startChar": 87,
+        "endLine": 272,
+        "endChar": 97
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e4af69d_5ad4efd6",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "Why do we need a default constructor?",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 9
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "484e2367_ba99a788",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "Can\u0027t this stay protected like previously in VulkanBackend.h?",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6c11771_a79ae3d8",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "ditto, can this stay const?",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d89f97ec_f50e46a5",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "nit: this shouldn\u0027t be needed since the desc has a default constructor.",
+      "range": {
+        "startLine": 105,
+        "startChar": 76,
+        "endLine": 105,
+        "endChar": 81
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed617113_c3a6ca1b",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:55:27Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 336,
+        "startChar": 72,
+        "endLine": 336,
+        "endChar": 77
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
