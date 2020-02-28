@@ -16,6 +16,24 @@
       "revId": "e299afa9ec114c4a1b94c7c47b8e60271a807fd5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9de9f0b_392293e7",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-28T22:11:04Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5a5fecfb_0683da14",
+      "revId": "e299afa9ec114c4a1b94c7c47b8e60271a807fd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
