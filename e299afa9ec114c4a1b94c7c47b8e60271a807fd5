@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a5fecfb_0683da14",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-02-28T13:45:27Z",
+      "side": 0,
+      "message": "nit: missing {}",
+      "revId": "e299afa9ec114c4a1b94c7c47b8e60271a807fd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
