@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5d210430_c3e4f206",
+        "filename": "BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "968f3583_8d1f26cf",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7f7f236_0f12ca77",
         "filename": "src/common/BUILD.gn",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b391740_3b153ca0",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f7f236_0f12ca77",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4ae00d3f_1a9122d4",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb73adb1_4f815e62",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42c9891e_85b78d4a",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 12
@@ -64,6 +118,24 @@
       "writtenOn": "2020-02-24T16:06:06Z",
       "side": 1,
       "message": "When would we not use residency management?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "321ad086_7b69a628",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "The plan is for it to always be on - but Rafael had some interest in being able to turn it off for debugging purposes.",
+      "parentUuid": "42c9891e_85b78d4a",
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0f476c46_a8b24f84",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Yes. Adapter3 is supported anytime D3D12 is.",
+      "parentUuid": "c2ff5d18_42d3cda1",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f95fad1e_9ca7a4f0",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 12
@@ -101,6 +191,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a418569e_8d9b7222",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done - added \"ResidencyLock\" functionality to d3d12::Heap",
+      "parentUuid": "f95fad1e_9ca7a4f0",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5dcfc242_29490b80",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done - added \"ResidencyLock\" functionality to d3d12::Heap",
+      "parentUuid": "5680f59c_653d0be7",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02666500_2e75cd86",
         "filename": "src/dawn_native/d3d12/BufferD3D12.h",
         "patchSetId": 12
@@ -135,6 +261,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "781ca704_5e8b66da",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Function has been removed.",
+      "parentUuid": "02666500_2e75cd86",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "7399f127_2965c013",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Did this. It\u0027s cleaner - although awkwardly named.",
+      "parentUuid": "3457c751_b977def1",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe1084a9_dc3db0ae",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
         "patchSetId": 12
@@ -169,6 +331,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2ba4b8c_663cea41",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done. Added \"LastRecordingSerial\" to d3d12::Heap, with logic in the \"PrepareResourceForSubmission\" functions.",
+      "parentUuid": "fe1084a9_dc3db0ae",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "573d2f51_32c2d5d3",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ffb84a_5ff84ca7",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a55f0f6_448e09b6",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -203,6 +401,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcaf821b_6e50d69c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7a55f0f6_448e09b6",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +445,30 @@
     },
     {
       "key": {
+        "uuid": "1245a6a0_a4f4a0cb",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecdfec88_6170a9b4",
+      "range": {
+        "startLine": 317,
+        "startChar": 4,
+        "endLine": 317,
+        "endChar": 26
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84220928_4a783457",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -240,6 +480,24 @@
       "writtenOn": "2020-02-24T16:06:06Z",
       "side": 1,
       "message": "I\u0027m not sure I understand what happens here. Do you have links to docs that explain external reservation etc?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb89055_abacf802",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "The external reservation is just a very naive mechanism to prevent Dawn from using all the video memory available to the process. This was done because we may also be doing composition through Skia/D3D12 within the same process, and we must share video memory with that component. Something more complex will likely be needed here.\n\nPrevious discussions:\n[1] https://docs.google.com/document/d/17vvOHqyQ6qxixDlkMroKU1UxkW9MN-pvHq8VZnLIjdk/edit?disco\u003dAAAADo-Q2aE\n[2] https://docs.google.com/document/d/17vvOHqyQ6qxixDlkMroKU1UxkW9MN-pvHq8VZnLIjdk/edit?disco\u003dAAAADo-Q2a0",
+      "parentUuid": "84220928_4a783457",
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -263,6 +521,24 @@
     },
     {
       "key": {
+        "uuid": "77abe139_7afb5e72",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "5ca053b1_76c96f8d",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a09040c7_91f4bd0f",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 12
@@ -277,6 +553,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7d92fef_2a7b526a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a09040c7_91f4bd0f",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -314,6 +608,24 @@
     },
     {
       "key": {
+        "uuid": "71457fbb_104d08db",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bae1aba_101a912f",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6204a65_f6a26fe3",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 12
@@ -325,6 +637,30 @@
       "writtenOn": "2020-02-24T16:06:06Z",
       "side": 1,
       "message": "I think returning a std::unique_ptr\u003cResourceHeap\u003e should work so we don\u0027t need casts below.",
+      "range": {
+        "startLine": 52,
+        "startChar": 24,
+        "endLine": 52,
+        "endChar": 40
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b3d3cc_fc70ebb5",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "I get a compile error when trying to return a std::unique_ptr\u003cHeap\u003e without casting. I don\u0027t think the function return type can be easily changed because it\u0027s virtual.",
+      "parentUuid": "b6204a65_f6a26fe3",
       "range": {
         "startLine": 52,
         "startChar": 24,
@@ -354,6 +690,24 @@
     },
     {
       "key": {
+        "uuid": "06d2beeb_2161d630",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "No. Reverted.",
+      "parentUuid": "01d5e8aa_baccea47",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "473e2c32_448a1567",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 12
@@ -368,6 +722,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38c135d0_586cbc82",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "It was needed to use CONTAINING_RECORD...but I\u0027ve removed this now that we no longer use CONTAINING_RECORD.",
+      "parentUuid": "473e2c32_448a1567",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -388,6 +760,24 @@
     },
     {
       "key": {
+        "uuid": "b3004c24_d9996e8b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d0c72fa_6d0aca89",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe0d9abc_fd75e51a",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 12
@@ -399,6 +789,24 @@
       "writtenOn": "2020-02-24T16:06:06Z",
       "side": 1,
       "message": "Isn\u0027t this call somewhat expensive? It sounds like it might be doing one or more syscalls. Maybe we could do it only on Tick and hope things don\u0027t change too much between ticks?",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88bd4294_404cb736",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "It isn\u0027t free, but I also haven\u0027t seen a significant cost in my initial profiling. I don\u0027t think this can be removed as is - moving to an update-on-Tick-only solution doesn\u0027t seem possible, because it\u0027s possible to do subsequent allocations without Tick being called. (i.e. a loop of device.CreateTexture()). This could easily cause OOM.\n\nA future optimization would be to transition the QueryVideoDeviceMemory calls to something based off the RegisterVideoMemoryBudgetChangeNotificationEvent [1] callback.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiadapter3-registervideomemorybudgetchangenotificationevent",
+      "parentUuid": "fe0d9abc_fd75e51a",
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -422,6 +830,24 @@
     },
     {
       "key": {
+        "uuid": "e33e26c9_08b8d5ee",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0200bee7_fcba53df",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc2a8764_0a2daa52",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 12
@@ -436,6 +862,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f769ba_c5f8210a",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc2a8764_0a2daa52",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -462,6 +906,30 @@
     },
     {
       "key": {
+        "uuid": "cef20fb8_ce8ade71",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f8c1bb2_bb815ccd",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 18
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "992bec70_6bd6ce7c",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 12
@@ -476,6 +944,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "128986f6_3158be78",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "992bec70_6bd6ce7c",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -496,6 +982,24 @@
     },
     {
       "key": {
+        "uuid": "612dc31b_9cb50111",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a34b9b0_178799b1",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "031c2b60_905552cf",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 12
@@ -510,6 +1014,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c302b39_82413fdb",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "031c2b60_905552cf",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -530,6 +1052,24 @@
     },
     {
       "key": {
+        "uuid": "f0d5ed59_18aa88ee",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaaaff03_a89e3d2d",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed4430d_9a9dc3b6",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
         "patchSetId": 12
@@ -544,6 +1084,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc89ece9_e62c4106",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ed4430d_9a9dc3b6",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -570,6 +1128,30 @@
     },
     {
       "key": {
+        "uuid": "a15658d8_1c035fda",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ee1f956_18df99bb",
+      "range": {
+        "startLine": 251,
+        "startChar": 21,
+        "endLine": 251,
+        "endChar": 32
+      },
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "986372e0_8b31bae0",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 12
@@ -581,6 +1163,24 @@
       "writtenOn": "2020-02-24T16:06:06Z",
       "side": 1,
       "message": "Why do we need to ensure the heap is resident? The D3D12 docs for CreatePlacedResource don\u0027t mention it. It might be needed so the driver can write metadata in the memory but I\u0027d like confirmation from Rafael or the D3D12 team. If we need to keep this call, then we should have a comment explaining why.",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "619ab8e0_2c4ae2ed",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "I found that if the heap isn\u0027t resident, trying to create a placed resource located on that heap will result in a error. I also can\u0027t find any documentation about this - I asked Rafael get confirmation.",
+      "parentUuid": "986372e0_8b31bae0",
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -604,6 +1204,24 @@
     },
     {
       "key": {
+        "uuid": "e0ddc8ce_413228ac",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "301a6826_8cd73b72",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "079dd021_4c2c6d4e",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 12
@@ -618,6 +1236,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e6b8d76_10c60a9d",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "079dd021_4c2c6d4e",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -638,6 +1274,24 @@
     },
     {
       "key": {
+        "uuid": "349f1838_43c36ae0",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Function has been removed.",
+      "parentUuid": "db838eac_4435d76c",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96c396c7_2a318629",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 12
@@ -652,6 +1306,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fe5e299_4ba35adb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Yes. I pass nullptr for the Heap when the texture is owned externally. I think we should leave residency management responsibilities on whatever entity \"owns\" the resource. In this case, that\u0027s D3D11 - which manages its own residency. I\u0027m not aware of any way to manage residency for this object on our side.\n\nAdded a comment.",
+      "parentUuid": "96c396c7_2a318629",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -672,6 +1344,24 @@
     },
     {
       "key": {
+        "uuid": "2521ea87_846d898c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "See above. Added a comment here too.",
+      "parentUuid": "c773df9a_a019d7bd",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4576753c_6f5c3841",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 12
@@ -686,6 +1376,24 @@
       "revId": "941ffcf804812d2100da233e64c19179c77d5821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7344c06_bd1e4ccc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "I\u0027ve removed this function.",
+      "parentUuid": "4576753c_6f5c3841",
+      "revId": "941ffcf804812d2100da233e64c19179c77d5821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

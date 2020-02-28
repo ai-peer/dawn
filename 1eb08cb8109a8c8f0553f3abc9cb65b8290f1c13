@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03762a28_faf69291",
+        "filename": "src/tests/white_box/D3D12Residency.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-28T21:12:36Z",
+      "side": 1,
+      "message": "Tests still need some work - basics are covered though.",
+      "revId": "1eb08cb8109a8c8f0553f3abc9cb65b8290f1c13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
