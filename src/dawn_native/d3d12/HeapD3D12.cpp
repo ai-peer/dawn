@@ -29,6 +29,17 @@ namespace dawn_native { namespace d3d12 {
         return mD3d12Pageable;
     }
 
+    // We set mLastRecordingSerial to denote the serial this heap was last recorded to be used. We
+    // must check this serial against the current serial when recording heap usages to ensure we do
+    // not process residency for this heap multiple times.
+    uint64_t Heap::GetLastRecordingSerial() const {
+        return mLastRecordingSerial;
+    }
+
+    void Heap::SetLastRecordingSerial(Serial serial) {
+        mLastRecordingSerial = serial;
+    }
+
     uint64_t Heap::GetSize() const {
         return mSize;
     }
