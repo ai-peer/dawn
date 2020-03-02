@@ -81,6 +81,8 @@ namespace dawn_native { namespace d3d12 {
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        mResidencyManager = ResidencyManager(this);
+
         DAWN_TRY(NextSerial());
 
         // Initialize indirect commands
@@ -152,6 +154,10 @@ namespace dawn_native { namespace d3d12 {
 
     CommandAllocatorManager* Device::GetCommandAllocatorManager() const {
         return mCommandAllocatorManager.get();
+    }
+
+    ResidencyManager* Device::GetResidencyManager() {
+        return &mResidencyManager;
     }
 
     ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext() {
@@ -403,6 +409,7 @@ namespace dawn_native { namespace d3d12 {
         const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
         SetToggle(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
         SetToggle(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
+        SetToggle(Toggle::UseD3D12ResidencyManagement, false);
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
