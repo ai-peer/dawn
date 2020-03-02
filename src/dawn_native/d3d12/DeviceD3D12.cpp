@@ -410,7 +410,7 @@ namespace dawn_native { namespace d3d12 {
         const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
         SetToggle(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
         SetToggle(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
-        SetToggle(Toggle::UseD3D12ResidencyManagement, false);
+        SetToggle(Toggle::UseD3D12ResidencyManagement, true);
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
