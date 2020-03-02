@@ -16,6 +16,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -69,6 +70,8 @@ namespace dawn_native { namespace d3d12 {
                 Release();
                 DAWN_TRY(std::move(error));
             }
+            DAWN_TRY(device->GetResidencyManager()->EnsureHeapsAreResident(
+                mHeapsPendingUsage.data(), mHeapsPendingUsage.size(), true));
 
             ID3D12CommandList* d3d12CommandList = GetCommandList();
             d3d12CommandQueue->ExecuteCommandLists(1, &d3d12CommandList);
