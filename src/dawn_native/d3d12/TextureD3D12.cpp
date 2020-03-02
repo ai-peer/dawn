@@ -22,6 +22,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/HeapD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
@@ -417,11 +418,53 @@ namespace dawn_native { namespace d3d12 {
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.
-    bool Texture::TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                       D3D12_RESOURCE_BARRIER* barrier,
-                                                       wgpu::TextureUsage newUsage) {
-        return TransitionUsageAndGetResourceBarrier(commandContext, barrier,
-                                                    D3D12TextureUsage(newUsage, GetFormat()));
+    bool Texture::TrackUsageAndGetResourceBarrier(
+        CommandRecordingContext* commandContext,
+        D3D12_RESOURCE_BARRIER* barrier,
+        wgpu::TextureUsage newUsage) {
+        return TrackUsageAndGetResourceBarrier(
+            commandContext, barrier, D3D12TextureUsage(newUsage, GetFormat()));
+    }
+
+    // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
+    // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
+    // cause subsequent errors.
+    bool Texture::TrackUsageAndGetResourceBarrier(
+        CommandRecordingContext* commandContext,
+        D3D12_RESOURCE_BARRIER* barrier,
+        D3D12_RESOURCE_STATES newState) {
+        // Track the underlying heap to ensure residency (if it hasn't already been tracked).
+        if (mResourceAllocation.GetInfo().mMethod != AllocationMethod::kExternal) {
+            Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+            ASSERT(heap != nullptr);
+
+            Serial pendingSerial = GetDevice()->GetPendingCommandSerial();
+            if (heap->GetLastRecordingSerial() < pendingSerial) {
+                heap->SetLastRecordingSerial(pendingSerial);
+                commandContext->TrackResourceHeapUsage(heap);
+            }
+        }
+
+        // Return the resource barrier.
+        return TransitionUsageAndGetResourceBarrier(commandContext, barrier, newState);
+    }
+
+    void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                                  wgpu::TextureUsage usage) {
+        D3D12_RESOURCE_BARRIER barrier;
+
+        if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, usage)) {
+            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        }
+    }
+
+    void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                                  D3D12_RESOURCE_STATES newState) {
+        D3D12_RESOURCE_BARRIER barrier;
+
+        if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, newState)) {
+            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        }
     }
 
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
@@ -502,20 +545,6 @@ namespace dawn_native { namespace d3d12 {
         return true;
     }
 
-    void Texture::TransitionUsageNow(CommandRecordingContext* commandContext,
-                                     wgpu::TextureUsage usage) {
-        TransitionUsageNow(commandContext, D3D12TextureUsage(usage, GetFormat()));
-    }
-
-    void Texture::TransitionUsageNow(CommandRecordingContext* commandContext,
-                                     D3D12_RESOURCE_STATES newState) {
-        D3D12_RESOURCE_BARRIER barrier;
-
-        if (TransitionUsageAndGetResourceBarrier(commandContext, &barrier, newState)) {
-            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
-        }
-    }
-
     D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(uint32_t baseMipLevel,
                                                             uint32_t baseArrayLayer,
                                                             uint32_t layerCount) const {
@@ -583,7 +612,7 @@ namespace dawn_native { namespace d3d12 {
 
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
-                TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE);
                 DescriptorHeapHandle dsvHeap;
                 DAWN_TRY_ASSIGN(dsvHeap, descriptorHeapAllocator->AllocateCPUHeap(
                                              D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1));
@@ -603,7 +632,7 @@ namespace dawn_native { namespace d3d12 {
                 commandList->ClearDepthStencilView(dsvHandle, clearFlags, fClearColor, clearColor,
                                                    0, nullptr);
             } else {
-                TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET);
+                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET);
                 DescriptorHeapHandle rtvHeap;
                 DAWN_TRY_ASSIGN(rtvHeap, descriptorHeapAllocator->AllocateCPUHeap(
                                              D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1));
@@ -637,7 +666,7 @@ namespace dawn_native { namespace d3d12 {
                             uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
             memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
 
-            TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST);
+            TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST);
 
             // compute d3d12 texture copy locations for texture and buffer
             Extent3D copySize = {GetSize().width, GetSize().height, 1};
