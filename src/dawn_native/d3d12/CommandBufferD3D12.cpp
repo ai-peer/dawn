@@ -131,8 +131,8 @@ namespace dawn_native { namespace d3d12 {
                         switch (bindingType) {
                             case wgpu::BindingType::StorageBuffer:
                                 ToBackend(mBuffers[index][binding])
-                                    ->TransitionUsageNow(commandContext,
-                                                         wgpu::BufferUsage::Storage);
+                                    ->PrepareResourceForSubmissionNow(commandContext,
+                                                                      wgpu::BufferUsage::Storage);
                                 break;
 
                             case wgpu::BindingType::StorageTexture:
@@ -510,10 +510,10 @@ namespace dawn_native { namespace d3d12 {
                 Texture* resolveTexture = ToBackend(resolveTarget->GetTexture());
 
                 // Transition the usages of the color attachment and resolve target.
-                colorTexture->TransitionUsageNow(commandContext,
-                                                 D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
-                resolveTexture->TransitionUsageNow(commandContext,
-                                                   D3D12_RESOURCE_STATE_RESOLVE_DEST);
+                colorTexture->PrepareResourceForSubmissionNow(commandContext,
+                                                              D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
+                resolveTexture->PrepareResourceForSubmissionNow(commandContext,
+                                                                D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
                 // Do MSAA resolve with ResolveSubResource().
                 ID3D12Resource* colorTextureHandle = colorTexture->GetD3D12Resource();
@@ -558,8 +558,8 @@ namespace dawn_native { namespace d3d12 {
         bindingTracker.SetID3D12DescriptorHeaps(commandList);
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](CommandRecordingContext* commandContext,
-                                    const PassResourceUsage& usages) -> bool {
+        auto PrepareResourcesForSubmission = [](CommandRecordingContext* commandContext,
+                                                const PassResourceUsage& usages) -> bool {
             std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
             ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
@@ -569,8 +569,8 @@ namespace dawn_native { namespace d3d12 {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.buffers[i])
-                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                               usages.bufferUsages[i])) {
+                        ->PrepareResourceForSubmissionAndGetResourceBarrier(
+                            commandContext, &barrier, usages.bufferUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 bufferUsages |= usages.bufferUsages[i];
@@ -593,8 +593,8 @@ namespace dawn_native { namespace d3d12 {
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.textures[i])
-                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                               usages.textureUsages[i])) {
+                        ->PrepareResourceForSubmissionAndGetResourceBarrier(
+                            commandContext, &barrier, usages.textureUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 textureUsages |= usages.textureUsages[i];
@@ -617,7 +617,8 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
+                    PrepareResourcesForSubmission(commandContext,
+                                                  passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(true);
                     DAWN_TRY(RecordComputePass(commandContext, &bindingTracker));
 
@@ -628,8 +629,8 @@ namespace dawn_native { namespace d3d12 {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    const bool passHasUAV =
-                        TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
+                    const bool passHasUAV = PrepareResourcesForSubmission(
+                        commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(false);
 
                     LazyClearRenderPassAttachments(beginRenderPassCmd);
@@ -644,8 +645,10 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopySrc);
-                    dstBuffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopyDst);
+                    srcBuffer->PrepareResourceForSubmissionNow(commandContext,
+                                                               wgpu::BufferUsage::CopySrc);
+                    dstBuffer->PrepareResourceForSubmissionNow(commandContext,
+                                                               wgpu::BufferUsage::CopyDst);
 
                     commandList->CopyBufferRegion(
                         dstBuffer->GetD3D12Resource().Get(), copy->destinationOffset,
@@ -667,8 +670,10 @@ namespace dawn_native { namespace d3d12 {
                             copy->destination.arrayLayer, 1);
                     }
 
-                    buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopySrc);
-                    texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
+                    buffer->PrepareResourceForSubmissionNow(commandContext,
+                                                            wgpu::BufferUsage::CopySrc);
+                    texture->PrepareResourceForSubmissionNow(commandContext,
+                                                             wgpu::TextureUsage::CopyDst);
 
                     auto copySplit = ComputeTextureCopySplit(
                         copy->destination.origin, copy->copySize, texture->GetFormat(),
@@ -702,8 +707,10 @@ namespace dawn_native { namespace d3d12 {
                     texture->EnsureSubresourceContentInitialized(
                         commandContext, copy->source.mipLevel, 1, copy->source.arrayLayer, 1);
 
-                    texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
-                    buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopyDst);
+                    texture->PrepareResourceForSubmissionNow(commandContext,
+                                                             wgpu::TextureUsage::CopySrc);
+                    buffer->PrepareResourceForSubmissionNow(commandContext,
+                                                            wgpu::BufferUsage::CopyDst);
 
                     TextureCopySplit copySplit = ComputeTextureCopySplit(
                         copy->source.origin, copy->copySize, texture->GetFormat(),
@@ -749,8 +756,10 @@ namespace dawn_native { namespace d3d12 {
                             commandContext, copy->destination.mipLevel, 1,
                             copy->destination.arrayLayer, 1);
                     }
-                    source->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
-                    destination->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
+                    source->PrepareResourceForSubmissionNow(commandContext,
+                                                            wgpu::TextureUsage::CopySrc);
+                    destination->PrepareResourceForSubmissionNow(commandContext,
+                                                                 wgpu::TextureUsage::CopyDst);
 
                     if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {
@@ -901,8 +910,8 @@ namespace dawn_native { namespace d3d12 {
                 Texture* resolveDestinationTexture =
                     ToBackend(resolveDestinationView->GetTexture());
 
-                resolveDestinationTexture->TransitionUsageNow(commandContext,
-                                                              D3D12_RESOURCE_STATE_RESOLVE_DEST);
+                resolveDestinationTexture->PrepareResourceForSubmissionNow(
+                    commandContext, D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
                 renderPassBuilder->SetRenderTargetEndingAccessResolve(i, attachmentInfo.storeOp,
                                                                       view, resolveDestinationView);
