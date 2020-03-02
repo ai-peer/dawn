@@ -18,6 +18,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapAllocatorD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
     namespace {
@@ -166,7 +167,8 @@ namespace dawn_native { namespace d3d12 {
         ResourceHeapAllocation directAllocation;
         DAWN_TRY_ASSIGN(directAllocation,
                         CreateCommittedResource(heapType, resourceDescriptor, initialUsage));
-
+        mDevice->GetResidencyManager()->TrackResidentAllocation(
+            ToBackend(directAllocation.GetResourceHeap()));
         return directAllocation;
     }
 
@@ -252,6 +254,9 @@ namespace dawn_native { namespace d3d12 {
 
         Heap* heap = ToBackend(allocation.GetResourceHeap());
 
+        // Before calling CreatePlacedResource, we should ensure the target heap is resident.
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
+
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed
         // upon Tick or after the last command list using the resource has completed
@@ -292,6 +297,10 @@ namespace dawn_native { namespace d3d12 {
         if (resourceInfo.SizeInBytes > kMaxHeapSize) {
             return ResourceHeapAllocation{};  // Invalid
         }
+
+        // Calling CreateCommittedResource implicitly calls MakeResident, so we should make sure we
+        // are not overcommitting.
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(resourceInfo.SizeInBytes));
 
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
