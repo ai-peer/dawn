@@ -117,6 +117,11 @@ class LinkNode {
         e->next_ = this;
     }
 
+    // Check if |this| is in a list.
+    bool IsInList() const {
+        return this->next_ != nullptr;
+    }
+
     // Remove |this| from the linked list.
     void RemoveFromList() {
         this->previous_->next_ = this->next_;

@@ -21,6 +21,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -244,6 +245,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
+        // The mapped buffer can be accessed at any time, so it must be locked to ensure it is never
+        // evicted.
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        ToBackend(GetDevice())->GetResidencyManager()->LockResidentHeap(heap);
+
         mWrittenMappedRange = {0, static_cast<size_t>(GetSize())};
         DAWN_TRY(CheckHRESULT(GetD3D12Resource()->Map(0, &mWrittenMappedRange,
                                                       reinterpret_cast<void**>(mappedPointer)),
@@ -252,6 +258,13 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        // The mapped buffer can be accessed at any time, so we must make the buffer resident and
+        // lock it to ensure it is never evicted.
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        ResidencyManager* residencyManager = ToBackend(GetDevice())->GetResidencyManager();
+        DAWN_TRY(residencyManager->EnsureHeapsAreResident(&heap, 1));
+        residencyManager->LockResidentHeap(heap);
+
         mWrittenMappedRange = {};
         D3D12_RANGE readRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
@@ -266,6 +279,13 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        // The mapped buffer can be accessed at any time, so we must make the buffer resident and
+        // lock it to ensure it is never evicted.
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        ResidencyManager* residencyManager = ToBackend(GetDevice())->GetResidencyManager();
+        DAWN_TRY(residencyManager->EnsureHeapsAreResident(&heap, 1));
+        residencyManager->LockResidentHeap(heap);
+
         mWrittenMappedRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
         DAWN_TRY(CheckHRESULT(
@@ -280,6 +300,10 @@ namespace dawn_native { namespace d3d12 {
 
     void Buffer::UnmapImpl() {
         GetD3D12Resource()->Unmap(0, &mWrittenMappedRange);
+        // When buffers are mapped, they are locked to keep them in resident memory. We must unlock
+        // them when they are unmapped.
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        ToBackend(GetDevice())->GetResidencyManager()->UnlockResidentHeap(heap);
         mWrittenMappedRange = {};
     }
 
