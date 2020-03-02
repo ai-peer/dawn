@@ -22,6 +22,7 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
 #include <memory>
@@ -34,6 +35,7 @@ namespace dawn_native { namespace d3d12 {
     class MapRequestTracker;
     class PlatformFunctions;
     class ResourceAllocatorManager;
+    class ResidencyManager;
 
 #define ASSERT_SUCCESS(hr)            \
     {                                 \
@@ -66,6 +68,7 @@ namespace dawn_native { namespace d3d12 {
         DescriptorHeapAllocator* GetDescriptorHeapAllocator() const;
         MapRequestTracker* GetMapRequestTracker() const;
         CommandAllocatorManager* GetCommandAllocatorManager() const;
+        ResidencyManager* GetResidencyManager();
 
         const PlatformFunctions* GetFunctions() const;
         ComPtr<IDXGIFactory4> GetFactory() const;
@@ -154,6 +157,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12CommandSignature> mDrawIndexedIndirectSignature;
 
         CommandRecordingContext mPendingCommands;
+        ResidencyManager mResidencyManager;
 
         SerialQueue<ComPtr<IUnknown>> mUsedComObjectRefs;
 
