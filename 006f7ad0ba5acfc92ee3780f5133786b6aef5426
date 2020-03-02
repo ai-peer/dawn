@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "349faef7_44b420a8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "will do in followup.",
+      "parentUuid": "dfa216b4_513d854a",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7ba1451_7898c2e9",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 8
@@ -39,6 +57,30 @@
       "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ce8e127_0f9d9fbe",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "yes, will do in followup.",
+      "parentUuid": "e7ba1451_7898c2e9",
+      "range": {
+        "startLine": 272,
+        "startChar": 87,
+        "endLine": 272,
+        "endChar": 97
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "d0f24c46_0e1e0068",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "I will change this struct back to what it was like before. I had these changes when I was using this descriptor for d3d12 and metal instead of extending it like in vulkan. Should not be a problem now.",
+      "parentUuid": "6e4af69d_5ad4efd6",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 9
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "484e2367_ba99a788",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 8
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "b21de187_1b74b057",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "484e2367_ba99a788",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6c11771_a79ae3d8",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 8
@@ -96,6 +180,24 @@
       "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c1f4a4_76a01be9",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6c11771_a79ae3d8",
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "3089905e_44a56a43",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d89f97ec_f50e46a5",
+      "range": {
+        "startLine": 105,
+        "startChar": 76,
+        "endLine": 105,
+        "endChar": 81
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed617113_c3a6ca1b",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 8
@@ -142,6 +268,30 @@
       "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78b2e0ea_68e5ea92",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T19:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed617113_c3a6ca1b",
+      "range": {
+        "startLine": 336,
+        "startChar": 72,
+        "endLine": 336,
+        "endChar": 77
+      },
+      "revId": "006f7ad0ba5acfc92ee3780f5133786b6aef5426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
