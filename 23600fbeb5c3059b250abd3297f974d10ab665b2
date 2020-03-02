@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba619219_90c67aef",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-02T22:04:18Z",
+      "side": 1,
+      "message": "@austin should I use the extended descriptors here as well (and be passing that around instead)?",
+      "revId": "23600fbeb5c3059b250abd3297f974d10ab665b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
