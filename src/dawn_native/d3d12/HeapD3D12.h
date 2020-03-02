@@ -15,16 +15,18 @@
 #ifndef DAWNNATIVE_D3D12_HEAPD3D12_H_
 #define DAWNNATIVE_D3D12_HEAPD3D12_H_
 
+#include "common/LinkedList.h"
 #include "common/Serial.h"
 #include "dawn_native/ResourceHeap.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Heap : public ResourceHeapBase {
+    class Heap : public ResourceHeapBase, public LinkNode<Heap> {
       public:
+        Heap() = default;
         Heap(ComPtr<ID3D12Pageable> d3d12Pageable, uint64_t size);
-        ~Heap() = default;
+        ~Heap();
 
         ComPtr<ID3D12Heap> GetD3D12Heap() const;
         ComPtr<ID3D12Pageable> GetD3D12Pageable() const;
@@ -35,11 +37,26 @@ namespace dawn_native { namespace d3d12 {
         Serial GetLastUsage() const;
         void SetLastUsage(Serial serial);
 
+        // The residency manager must know the last serial that any portion of the heap was
+        // submitted to be used so that we can ensure this heap stays resident in memory at least
+        // until that serial has completed.
+        uint64_t GetLastSubmissionSerial() const;
+        void SetLastSubmissionSerial(Serial serial);
+
         uint64_t GetSize() const;
+
+        bool IsResident() const;
+
+        // In some scenarios, such as async buffer mapping, we must lock residency to ensure the
+        // heap cannot be evicted.
+        void SetResidencyLock(bool residencyLock);
+        bool IsResidencyLocked() const;
 
       private:
         ComPtr<ID3D12Pageable> mD3d12Pageable;
         Serial mLastUsage = 0;
+        Serial mLastSubmissionSerial = 0;
+        bool mResidencyLock = false;
         uint64_t mSize = 0;
     };
 }}  // namespace dawn_native::d3d12
