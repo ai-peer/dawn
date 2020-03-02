@@ -21,6 +21,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -257,6 +258,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        DAWN_TRY(
+            ToBackend(GetDevice())->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
+        heap->SetResidencyLock(true);
+
         mWrittenMappedRange = {};
         D3D12_RANGE readRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
@@ -271,6 +277,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        DAWN_TRY(
+            ToBackend(GetDevice())->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1, false));
+        heap->SetResidencyLock(true);
+
         mWrittenMappedRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
         DAWN_TRY(CheckHRESULT(
@@ -285,6 +296,7 @@ namespace dawn_native { namespace d3d12 {
 
     void Buffer::UnmapImpl() {
         GetD3D12Resource()->Unmap(0, &mWrittenMappedRange);
+        ToBackend(mResourceAllocation.GetResourceHeap())->SetResidencyLock(false);
         mWrittenMappedRange = {};
     }
 
