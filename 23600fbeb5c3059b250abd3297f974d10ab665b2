@@ -16,6 +16,24 @@
       "revId": "23600fbeb5c3059b250abd3297f974d10ab665b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a515f392_77360c34",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-02T22:25:26Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong preference, though I sort of do like the way it is now. The function signature:\n\nWrapSharedHandle(const ExternalImageDescriptor* descriptor,\n                                          HANDLE sharedHandle,\n                                          uint64_t acquireMutexKey)\n\nOr WrapXYZ(const ExternalImageDescriptor* descriptor, X, Y, Z)\n\nis nice in that if you\u0027re reading code in the backend, it communicates the wrapping takes XYZ as platform-specific stuff and common data in ExternalImageDescriptor.",
+      "parentUuid": "ba619219_90c67aef",
+      "revId": "23600fbeb5c3059b250abd3297f974d10ab665b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
