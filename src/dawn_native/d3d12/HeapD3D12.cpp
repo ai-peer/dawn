@@ -19,6 +19,12 @@ namespace dawn_native { namespace d3d12 {
         : mD3d12Pageable(std::move(d3d12Pageable)), mSize(size) {
     }
 
+    Heap::~Heap() {
+        if (IsResident()) {
+            RemoveFromList();
+        }
+    }
+
     ComPtr<ID3D12Heap> Heap::GetD3D12Heap() const {
         ComPtr<ID3D12Heap> heap;
         ASSERT(SUCCEEDED(mD3d12Pageable.As(&heap)));
@@ -40,7 +46,33 @@ namespace dawn_native { namespace d3d12 {
         mLastRecordingSerial = serial;
     }
 
+    // The residency manager must know the last serial that any portion of the heap was submitted
+    // for use so that we can ensure this heap stays in resident memory at least until that serial
+    // has completed.
+    uint64_t Heap::GetLastSubmissionSerial() const {
+        return mLastSubmissionSerial;
+    }
+
+    void Heap::SetLastSubmissionSerial(Serial serial) {
+        mLastSubmissionSerial = serial;
+    }
+
     uint64_t Heap::GetSize() const {
         return mSize;
+    }
+
+    bool Heap::IsResident() const {
+        return next() != nullptr || previous() != nullptr;
+    }
+
+    // In some scenarios, such as async buffer mapping, we must lock residency to ensure the heap
+    // cannot be evicted.
+    void Heap::SetResidencyLock(bool residencyLock) {
+        ASSERT(IsResident());
+        mResidencyLock = residencyLock;
+    }
+
+    bool Heap::IsResidencyLocked() const {
+        return mResidencyLock;
     }
 }}  // namespace dawn_native::d3d12
