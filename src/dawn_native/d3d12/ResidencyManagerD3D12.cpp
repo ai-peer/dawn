@@ -189,7 +189,8 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    // Depending on the device's memory architecture, some heaps are not managed in the ResidencyManager.
+    // Depending on the device's memory architecture, some heaps are not managed in the
+    // ResidencyManager.
     bool ResidencyManager::ShouldTrackHeap(Heap* heap) const {
         // On UMA devices, all heap types exist in DXGI_MEMORY_SEGMENT_GROUP_LOCAL and must be
         // tracked.
@@ -272,5 +273,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mLRUCache.Append(heap);
+    }
+    uint64_t ResidencyManager::GetDawnBudget() {
+        return mVideoMemoryInfo.dawnBudget;
     }
 }}  // namespace dawn_native::d3d12

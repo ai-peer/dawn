@@ -37,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
         uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
 
         void TrackResidentAllocation(Heap* heap);
+        uint64_t GetDawnBudget();
 
       private:
         struct VideoMemoryInfo {
