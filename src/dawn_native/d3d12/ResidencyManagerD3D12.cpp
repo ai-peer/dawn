@@ -15,8 +15,11 @@
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 #include "dawn_native/d3d12/AdapterD3D12.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/Forward.h"
+#include "dawn_native/d3d12/HeapD3D12.h"
+
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -65,5 +68,135 @@ namespace dawn_native { namespace d3d12 {
             (queryVideoMemoryInfo.Budget - mVideoMemoryInfo.externalReservation) * kBudgetCap;
         mVideoMemoryInfo.dawnUsage =
             queryVideoMemoryInfo.CurrentUsage - mVideoMemoryInfo.externalReservation;
+    }
+
+    // Removes from the LRU and returns the least recently used heap when possible. Returns nullptr
+    // when nothing further can be evicted.
+    ResultOrError<Heap*> ResidencyManager::EvictSingleEntry() {
+        ASSERT(!mLRUCache.empty());
+        LinkNode<Heap>* node = mLRUCache.head();
+        while (node->value()->IsResidencyLocked() == true) {
+            // If all heaps in the cache are locked (unlikely), then nothing can be evicted.
+            if (node->next() == mLRUCache.head()) {
+                return nullptr;
+            }
+            node = node->next();
+        }
+
+        Heap* heap = node->value();
+        Serial lastSubmissionSerial = heap->GetLastSubmission();
+
+        // If the next candidate for eviction was inserted into the LRU during the current serial,
+        // it is because more memory is being used in a single command list than is available.
+        // In this scenario, we cannot make any more resources resident and thrashing must occur.
+        if (lastSubmissionSerial == mDevice->GetPendingCommandSerial()) {
+            return nullptr;
+        }
+
+        // We must ensure that any previous use of a resource has completed before the resource can
+        // be evicted.
+        if (lastSubmissionSerial > mDevice->GetCompletedCommandSerial()) {
+            DAWN_TRY(mDevice->WaitForSerial(lastSubmissionSerial));
+        }
+
+        heap->RemoveFromList();
+        return heap;
+    }
+
+    // Any time we need to make something resident in local memory, we must check that we have
+    // enough free memory to make the new object resident while also staying within our budget.
+    // If there isn't enough memory, we should evict until there is.
+    MaybeError ResidencyManager::EnsureCanMakeResident(uint64_t sizeToMakeResident) {
+        if (!mResidencyManagementEnabled) {
+            return {};
+        }
+
+        UpdateVideoMemoryInfo();
+
+        uint64_t memoryUsageAfterMakeResident = sizeToMakeResident + mVideoMemoryInfo.dawnUsage;
+
+        // Return when we can call MakeResident and remain under budget.
+        if (memoryUsageAfterMakeResident < mVideoMemoryInfo.dawnBudget) {
+            return {};
+        }
+
+        std::vector<ID3D12Pageable*> resourcesToEvict;
+
+        uint64_t sizeNeeded = memoryUsageAfterMakeResident - mVideoMemoryInfo.dawnBudget;
+        uint64_t sizeEvicted = 0;
+        while (sizeEvicted < sizeNeeded) {
+            Heap* heap;
+            DAWN_TRY_ASSIGN(heap, EvictSingleEntry());
+
+            // If no heap was returned, then nothing more can be evicted.
+            if (heap == nullptr) {
+                break;
+            }
+
+            sizeEvicted += heap->GetSize();
+            resourcesToEvict.push_back(heap->GetD3D12Pageable().Get());
+        }
+
+        if (resourcesToEvict.size() > 0) {
+            DAWN_TRY(CheckHRESULT(
+                mDevice->GetD3D12Device()->Evict(resourcesToEvict.size(), resourcesToEvict.data()),
+                "Evicting resident heaps to free device local memory"));
+        }
+
+        return {};
+    }
+
+    // Given a list of heaps that are pending usage, this function will estimate memory needed,
+    // evict resources until enough space is available, then make resident any heaps scheduled for
+    // usage.
+    MaybeError ResidencyManager::EnsureHeapsAreResident(Heap** heaps,
+                                                        size_t heapCount,
+                                                        bool keepResidentUntilNextSerial) {
+        if (!mResidencyManagementEnabled) {
+            return {};
+        }
+
+        std::vector<ID3D12Pageable*> heapsToMakeResident;
+        uint64_t sizeToMakeResident = 0;
+
+        for (size_t i = 0; i < heapCount; i++) {
+            if (heaps[i]->IsResident()) {
+                heaps[i]->RemoveFromList();
+            } else {
+                heapsToMakeResident.push_back(heaps[i]->GetD3D12Pageable().Get());
+                sizeToMakeResident += heaps[i]->GetSize();
+            }
+
+            mLRUCache.Append(heaps[i]);
+            if (keepResidentUntilNextSerial) {
+                heaps[i]->SetLastSubmission(mDevice->GetPendingCommandSerial());
+            }
+        }
+
+        if (heapsToMakeResident.size() != 0) {
+            DAWN_TRY(EnsureCanMakeResident(sizeToMakeResident));
+
+            // Note that MakeResident is a synchronous function and can add a significant
+            // overhead to command recording. In the future, it may be possible to decrease this
+            // overhead by using MakeResident on a secondary thread, or by instead making use of
+            // the EnqueueMakeResident function (which is not availabe on all Windows 10
+            // platforms).
+            DAWN_TRY(CheckHRESULT(mDevice->GetD3D12Device()->MakeResident(
+                                      heapsToMakeResident.size(), heapsToMakeResident.data()),
+                                  "Making scheduled-to-be-used resources resident in "
+                                  "device local memory"));
+        }
+
+        return {};
+    }
+
+    // When a new heap is allocated, the heap will be made resident upon creation. We must track
+    // when this happens to avoid calling MakeResident a second time.
+    void ResidencyManager::TrackResidentAllocation(Heap* heap) {
+        if (!mResidencyManagementEnabled) {
+            return;
+        }
+
+        mLRUCache.Append(heap);
     }
 }}  // namespace dawn_native::d3d12
