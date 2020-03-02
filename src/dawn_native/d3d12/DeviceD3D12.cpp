@@ -79,6 +79,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
 
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
+        mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
         mResidencyManager = ResidencyManager(this);
@@ -220,7 +221,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Device::ExecutePendingCommandContext() {
-        return mPendingCommands.ExecuteCommandList(mCommandQueue.Get());
+        return mPendingCommands.ExecuteCommandList(this);
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
