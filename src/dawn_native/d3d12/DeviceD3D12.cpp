@@ -81,6 +81,8 @@ namespace dawn_native { namespace d3d12 {
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        UpdateVideoMemoryInfo();
+
         DAWN_TRY(NextSerial());
 
         // Initialize indirect commands
@@ -176,6 +178,8 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Device::TickImpl() {
+        UpdateVideoMemoryInfo();
+
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
 
@@ -300,6 +304,46 @@ namespace dawn_native { namespace d3d12 {
             sourceOffset, size);
 
         return {};
+    }
+
+    const VideoMemoryInfo& Device::GetVideoMemoryInfo() const {
+        return mVideoMemoryInfo;
+    }
+
+    // Allows an application component external to Dawn to cap Dawn's residency budget to prevent
+    // competition for device local memory. Returns the amount of memory reserved, which may be less
+    // that the requested reservation when under pressure.
+    uint64_t Device::SetExternalMemoryReservation(uint64_t requestedReservationSize) {
+        mVideoMemoryInfo.externalRequest = requestedReservationSize;
+        UpdateVideoMemoryInfo();
+        return mVideoMemoryInfo.externalReservation;
+    }
+
+    void Device::UpdateVideoMemoryInfo() {
+        DXGI_QUERY_VIDEO_MEMORY_INFO queryVideoMemoryInfo;
+        ToBackend(GetAdapter())
+            ->GetHardwareAdapter()
+            ->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &queryVideoMemoryInfo);
+
+        // The video memory budget provided by QueryVideoMemoryInfo is defined by the operating
+        // system, and may be lower than expected in certain scenarios. Under memory pressure, we
+        // cap the external reservation to half the available budget, which prevents the external
+        // component from consuming a disporportionate share of memory and ensures that Dawn can
+        // continue to make forward progress.
+        if (mVideoMemoryInfo.externalRequest >= queryVideoMemoryInfo.Budget / 2) {
+            mVideoMemoryInfo.externalReservation = queryVideoMemoryInfo.Budget / 2;
+        } else {
+            mVideoMemoryInfo.externalReservation = mVideoMemoryInfo.externalRequest;
+        }
+
+        // We cap Dawn's budget to 95% of the provided budget. Leaving some budget unused
+        // decreases fluctuations in the operating-system-defined budget, which improves stability
+        // for both Dawn and other applications on the system.
+        static constexpr float kBudgetCap = 0.95;
+        mVideoMemoryInfo.dawnBudget =
+            (queryVideoMemoryInfo.Budget - mVideoMemoryInfo.externalReservation) * kBudgetCap;
+        mVideoMemoryInfo.dawnUsage =
+            queryVideoMemoryInfo.CurrentUsage - mVideoMemoryInfo.externalReservation;
     }
 
     void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {
