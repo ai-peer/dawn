@@ -47,12 +47,6 @@ namespace dawn_native { namespace d3d12 {
 
         DXGI_FORMAT GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
-        bool TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                  D3D12_RESOURCE_BARRIER* barrier,
-                                                  wgpu::TextureUsage newUsage);
-        void TransitionUsageNow(CommandRecordingContext* commandContext, wgpu::TextureUsage usage);
-        void TransitionUsageNow(CommandRecordingContext* commandContext,
-                                D3D12_RESOURCE_STATES newState);
 
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t baseMipLevel,
                                                        uint32_t baseArrayLayer,
@@ -63,6 +57,15 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t levelCount,
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
+
+        bool PrepareResourceForSubmissionAndGetResourceBarrier(
+            CommandRecordingContext* commandContext,
+            D3D12_RESOURCE_BARRIER* barrier,
+            wgpu::TextureUsage newUsage);
+        void PrepareResourceForSubmissionNow(CommandRecordingContext* commandContext,
+                                             wgpu::TextureUsage usage);
+        void PrepareResourceForSubmissionNow(CommandRecordingContext* commandContext,
+                                             D3D12_RESOURCE_STATES newState);
 
       private:
         using TextureBase::TextureBase;
@@ -83,6 +86,10 @@ namespace dawn_native { namespace d3d12 {
 
         UINT16 GetDepthOrArraySize();
 
+        bool PrepareResourceForSubmissionAndGetResourceBarrier(
+            CommandRecordingContext* commandContext,
+            D3D12_RESOURCE_BARRIER* barrier,
+            D3D12_RESOURCE_STATES newState);
         bool TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                   D3D12_RESOURCE_BARRIER* barrier,
                                                   D3D12_RESOURCE_STATES newState);
