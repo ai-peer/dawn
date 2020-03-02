@@ -50,6 +50,12 @@ namespace dawn_native { namespace d3d12 {
         : ExternalImageDescriptor(ExternalImageDescriptorType::DXGISharedHandle) {
     }
 
+    uint64_t SetExternalMemoryReservation(WGPUDevice device, uint64_t requestedReservationSize) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        return backendDevice->SetExternalMemoryReservation(requestedReservationSize);
+    }
+
     WGPUTexture WrapSharedHandle(WGPUDevice device,
                                  const ExternalImageDescriptorDXGISharedHandle* descriptor) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
