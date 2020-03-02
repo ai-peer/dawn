@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/CommandRecordingContext.h"
 
 namespace dawn_native { namespace d3d12 {
     Heap::Heap(ComPtr<ID3D12Pageable> d3d12Pageable, uint64_t size)
@@ -31,6 +32,19 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<ID3D12Pageable> Heap::GetD3D12Pageable() const {
         return mD3d12Pageable;
+    }
+
+    uint64_t Heap::GetLastUsageSerial() const {
+        return mLastUsageSerial;
+    }
+
+    void Heap::TrackUsage(Serial serial, CommandRecordingContext* recordingContext) {
+        if (serial <= mLastUsageSerial) {
+            return;
+        }
+
+        mLastUsageSerial = serial;
+        recordingContext->TrackResourceHeapUsage(this);
     }
 
     uint64_t Heap::GetSize() const {
