@@ -15,6 +15,9 @@
 #ifndef DAWNNATIVE_D3D12_RESIDENCYMANAGERD3D12_H_
 #define DAWNNATIVE_D3D12_RESIDENCYMANAGERD3D12_H_
 
+#include "common/LinkedList.h"
+#include "common/Serial.h"
+#include "dawn_native/Error.h"
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -27,17 +30,29 @@ namespace dawn_native { namespace d3d12 {
     };
 
     class Device;
+    class Heap;
 
     class ResidencyManager {
       public:
         ResidencyManager(Device* device);
+
+        MaybeError EnsureCanMakeResident(uint64_t allocationSize);
+        MaybeError EnsureHeapsAreResident(Heap** heaps,
+                                          size_t heapCount,
+                                          bool keepResidentUntilSerialCompletes);
+
         uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
 
+        void TrackResidentAllocation(Heap* heap);
+
       private:
-        Device* mDevice;
-        bool mResidencyManagementEnabled = false;
-        VideoMemoryInfo mVideoMemoryInfo = {};
+        Heap* EvictSingleEntry(Serial pendingCommandSerial);
         void UpdateVideoMemoryInfo();
+
+        Device* mDevice;
+        LinkedList<Heap> mLRUCache;
+        bool mResidencyManagementEnabled;
+        VideoMemoryInfo mVideoMemoryInfo = {};
     };
 
 }}  // namespace dawn_native::d3d12

@@ -33,6 +33,7 @@ namespace dawn_native { namespace d3d12 {
     class ShaderVisibleDescriptorAllocator;
     class MapRequestTracker;
     class PlatformFunctions;
+    class ResidencyManager;
     class ResourceAllocatorManager;
     class ResidencyManager;
 
