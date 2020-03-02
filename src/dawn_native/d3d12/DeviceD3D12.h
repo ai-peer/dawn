@@ -40,6 +40,7 @@ namespace dawn_native { namespace d3d12 {
     class ShaderVisibleDescriptorAllocator;
     class MapRequestTracker;
     class PlatformFunctions;
+    class ResidencyManager;
     class ResourceAllocatorManager;
 
 #define ASSERT_SUCCESS(hr)            \
@@ -81,6 +82,8 @@ namespace dawn_native { namespace d3d12 {
         Serial GetPendingCommandSerial() const override;
 
         const D3D12DeviceInfo& GetDeviceInfo() const;
+
+        ResidencyManager* GetResidencyManager() const;
 
         const VideoMemoryInfo& GetVideoMemoryInfo() const;
         uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
@@ -171,6 +174,7 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
+        std::unique_ptr<ResidencyManager> mResidencyManager;
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mShaderVisibleDescriptorAllocator;
 
