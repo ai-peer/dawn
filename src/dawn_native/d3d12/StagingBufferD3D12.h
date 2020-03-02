@@ -20,7 +20,7 @@
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
-
+    class CommandRecordingContext;
     class Device;
 
     class StagingBuffer : public StagingBufferBase {
@@ -31,6 +31,8 @@ namespace dawn_native { namespace d3d12 {
         ID3D12Resource* GetResource() const;
 
         MaybeError Initialize() override;
+
+        void TrackUsage(CommandRecordingContext* commandContext);
 
       private:
         Device* mDevice;
