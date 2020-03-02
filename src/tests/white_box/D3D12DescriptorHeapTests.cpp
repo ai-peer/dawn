@@ -85,4 +85,101 @@ TEST_P(D3D12DescriptorHeapTests, SwitchOverHeaps) {
     EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 1);
 }
 
+// Verify shader-visible heaps can be recycled for multiple submits.
+TEST_P(D3D12DescriptorHeapTests, PoolHeapsInMultipleSubmits) {
+    Device* d3dDevice = reinterpret_cast<Device*>(device.Get());
+
+    ShaderVisibleDescriptorAllocator* allocator = d3dDevice->GetShaderVisibleDescriptorAllocator();
+    const Serial heapSerial = allocator->GetShaderVisibleHeapsSerial();
+
+    constexpr D3D12_DESCRIPTOR_HEAP_TYPE heapType = D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER;
+    ComPtr<ID3D12DescriptorHeap> heap0 = allocator->GetShaderVisibleHeapForTesting(heapType);
+
+    // After switch #1, pool = [H0].
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 1);
+
+    ComPtr<ID3D12DescriptorHeap> heap1 = allocator->GetShaderVisibleHeapForTesting(heapType);
+
+    ASSERT_NE(heap0.Get(), heap1.Get());
+
+    d3dDevice->Tick();
+
+    // After switch #2, pool = [H0, H1].
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 2);
+
+    ComPtr<ID3D12DescriptorHeap> heap2 = allocator->GetShaderVisibleHeapForTesting(heapType);
+
+    // H0 is still pending and cannot be reused.
+    ASSERT_NE(heap0.Get(), heap2.Get());
+    ASSERT_NE(heap1.Get(), heap2.Get());
+
+    d3dDevice->Tick();
+
+    // After switch #3, pool = [H1, H2]
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 3);
+
+    // Resuse H0.
+    ASSERT_EQ(heap0.Get(), allocator->GetShaderVisibleHeapForTesting(heapType).Get());
+
+    d3dDevice->Tick();
+
+    // After switch #4, pool = [H2, H0]
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 4);
+
+    // Resuse H1.
+    ASSERT_EQ(heap1.Get(), allocator->GetShaderVisibleHeapForTesting(heapType).Get());
+
+    d3dDevice->Tick();
+
+    // After switch #5, pool = [H0, H1]
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 5);
+
+    // Reuse H2.
+    ASSERT_EQ(heap2.Get(), allocator->GetShaderVisibleHeapForTesting(heapType).Get());
+
+    d3dDevice->Tick();
+
+    // After switch #6, pool = [H1, H2]
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 6);
+
+    // Reuse H0
+    ASSERT_EQ(heap0.Get(), allocator->GetShaderVisibleHeapForTesting(heapType).Get());
+}
+
+// Verify switching shader-visible heaps do not recycle when used in the same submit.
+TEST_P(D3D12DescriptorHeapTests, PoolHeapsInSameSubmit) {
+    Device* d3dDevice = reinterpret_cast<Device*>(device.Get());
+
+    ShaderVisibleDescriptorAllocator* allocator = d3dDevice->GetShaderVisibleDescriptorAllocator();
+    const Serial heapSerial = allocator->GetShaderVisibleHeapsSerial();
+
+    constexpr D3D12_DESCRIPTOR_HEAP_TYPE heapType = D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER;
+    ComPtr<ID3D12DescriptorHeap> heap0 = allocator->GetShaderVisibleHeapForTesting(heapType);
+
+    // After switch #1-4, pool = [H0, H1, H2, H3, H4]
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    ComPtr<ID3D12DescriptorHeap> heap1 = allocator->GetShaderVisibleHeapForTesting(heapType);
+    ASSERT_NE(heap0.Get(), heap1.Get());
+
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    ComPtr<ID3D12DescriptorHeap> heap2 = allocator->GetShaderVisibleHeapForTesting(heapType);
+    ASSERT_NE(heap1.Get(), heap2.Get());
+
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    ComPtr<ID3D12DescriptorHeap> heap3 = allocator->GetShaderVisibleHeapForTesting(heapType);
+    ASSERT_NE(heap2.Get(), heap3.Get());
+
+    EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeaps().IsSuccess());
+    ComPtr<ID3D12DescriptorHeap> heap4 = allocator->GetShaderVisibleHeapForTesting(heapType);
+    ASSERT_NE(heap3.Get(), heap4.Get());
+
+    EXPECT_EQ(allocator->GetShaderVisibleHeapsSerial(), heapSerial + 4);
+}
+
 DAWN_INSTANTIATE_TEST(D3D12DescriptorHeapTests, D3D12Backend());
