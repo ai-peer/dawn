@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/HeapD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -60,4 +61,13 @@ namespace dawn_native { namespace d3d12 {
         return mUploadHeap.GetD3D12Resource().Get();
     }
 
+    // Track the underlying heap to ensure residency.
+    void StagingBuffer::TrackUsage(CommandRecordingContext* commandContext) {
+        Heap* heap = ToBackend(mUploadHeap.GetResourceHeap());
+        Serial pendingSerial = mDevice->GetPendingCommandSerial();
+        if (heap->GetLastRecordingSerial() < pendingSerial) {
+            heap->SetLastRecordingSerial(pendingSerial);
+            commandContext->TrackResourceHeapUsage(heap);
+        }
+    }
 }}  // namespace dawn_native::d3d12
