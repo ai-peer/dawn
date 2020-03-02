@@ -15,11 +15,21 @@
 #include "dawn_native/d3d12/HeapD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
-
-    Heap::Heap(ComPtr<ID3D12Heap> heap) : mHeap(std::move(heap)) {
+    Heap::Heap(ComPtr<ID3D12Pageable> d3d12Pageable, uint64_t size)
+        : mD3d12Pageable(std::move(d3d12Pageable)), mSize(size) {
     }
 
     ComPtr<ID3D12Heap> Heap::GetD3D12Heap() const {
-        return mHeap;
+        ComPtr<ID3D12Heap> heap;
+        ASSERT(SUCCEEDED(mD3d12Pageable.As(&heap)));
+        return heap;
+    }
+
+    ComPtr<ID3D12Pageable> Heap::GetD3D12Pageable() const {
+        return mD3d12Pageable;
+    }
+
+    uint64_t Heap::GetSize() const {
+        return mSize;
     }
 }}  // namespace dawn_native::d3d12

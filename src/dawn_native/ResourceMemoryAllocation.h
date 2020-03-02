@@ -31,6 +31,9 @@ namespace dawn_native {
         // Memory sub-divided using one or more blocks of various sizes.
         kSubAllocated,
 
+        // Memory is managed external to Dawn.
+        kExternal,
+
         // Memory not allocated or freed.
         kInvalid
     };
