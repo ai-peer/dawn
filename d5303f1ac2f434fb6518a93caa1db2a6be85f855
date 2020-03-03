@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cb8c9f71_c07f0f87",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a98190_048b969a",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "603bc44e_3f9601e8",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b880314d_aff50c63",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "603bc44e_3f9601e8",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9146077c_3ddd9b34",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3292da2a_fb47e513",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46a2007b_ff86fc55",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 7
@@ -67,6 +121,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "540407c0_0272cca4",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46a2007b_ff86fc55",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +182,30 @@
     },
     {
       "key": {
+        "uuid": "23248ab9_5f2dcc80",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "346aca00_b54a7101",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2b42336_15985760",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 7
@@ -127,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "5c0cf811_35f98123",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2b42336_15985760",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd6f48a4_1a3040a4",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 7
@@ -138,6 +252,30 @@
       "writtenOn": "2020-02-26T12:41:55Z",
       "side": 1,
       "message": "[1] This seems incorrect if mRecycledSlabs has more than one slab.",
+      "range": {
+        "startLine": 180,
+        "startChar": 30,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d71d3f3_4afb22b5",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Updated comments and used std::swap to hopefully be more clear what\u0027s happening",
+      "parentUuid": "bd6f48a4_1a3040a4",
       "range": {
         "startLine": 180,
         "startChar": 30,
@@ -167,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "af7d1845_bd3615d1",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "aligned_alloc is c++17. Moved to constructor.\nAlso update the computation so that we don\u0027t need any padding if the alignment is less than or equal to the default alignment malloc() would give.",
+      "parentUuid": "8b65745f_0ac39c21",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc8ab8d7_b9d9dc5c",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -181,6 +337,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1f23a81_9dde6ca2",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fc8ab8d7_b9d9dc5c",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -201,6 +375,24 @@
     },
     {
       "key": {
+        "uuid": "7f7eaf53_ecbb08be",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d35a79e_fbd37c47",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2950fff_80409d12",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -215,6 +407,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34f66ad5_f51f3b7b",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2950fff_80409d12",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -235,6 +445,24 @@
     },
     {
       "key": {
+        "uuid": "8fa198b7_70e982d2",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "natural alignments doesn\u0027t include something like:\n\nstruct alignas(256) Foo {\n};\n\nThere\u0027s a unittest for this and if we don\u0027t manually align.",
+      "parentUuid": "55935910_0c9661f4",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2be01a34_24afeefa",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -252,6 +480,24 @@
     },
     {
       "key": {
+        "uuid": "f93e1483_d5104324",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2be01a34_24afeefa",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b3abeed_2c91b385",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -263,6 +509,24 @@
       "writtenOn": "2020-02-26T12:41:55Z",
       "side": 1,
       "message": "Instead of a pointer, maybe this could be an index?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ac434a_a808efc9",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Why? We always need to access the node, to push/pop from the list, so it\u0027s faster to save the pointer instead of doing the math to compute it every time.",
+      "parentUuid": "2b3abeed_2c91b385",
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -286,6 +550,24 @@
     },
     {
       "key": {
+        "uuid": "00f6caa9_f7688a72",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "6e381933_a37aa02e",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbc2c5d5_4d99e4a5",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -300,6 +582,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a7031fc_0f6fea4d",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "fbc2c5d5_4d99e4a5",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -326,6 +626,30 @@
     },
     {
       "key": {
+        "uuid": "3ff5d0f4_6863847d",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f50d7678_4d90f7a3",
+      "range": {
+        "startLine": 126,
+        "startChar": 54,
+        "endLine": 126,
+        "endChar": 65
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63c6857a_3137784f",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -349,6 +673,30 @@
     },
     {
       "key": {
+        "uuid": "50c4f6c6_b63d10bf",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63c6857a_3137784f",
+      "range": {
+        "startLine": 127,
+        "startChar": 54,
+        "endLine": 127,
+        "endChar": 64
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c8435c0_04b82b05",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -366,6 +714,24 @@
     },
     {
       "key": {
+        "uuid": "ce6e7700_602e661a",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c8435c0_04b82b05",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ad92adb_22f04964",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -380,6 +746,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d3ec6d8_cecc2fd3",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad92adb_22f04964",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -406,6 +790,30 @@
     },
     {
       "key": {
+        "uuid": "1fce16b9_f9f451b6",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc592410_37849571",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 143,
+        "endChar": 22
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7286a42_eec21bda",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -423,6 +831,24 @@
     },
     {
       "key": {
+        "uuid": "1014f41e_cc0d6c0f",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d7286a42_eec21bda",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "754f80f8_78f1fbc5",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 7
@@ -434,6 +860,24 @@
       "writtenOn": "2020-02-26T12:41:55Z",
       "side": 1,
       "message": "Why do we do have the two Available and Recycled slabs? Maybe we could have a list of empty slabs and only prune them when there are too many empty slabs?",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdaa2eb4_fb48f8ae",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Added more text about this at the top. Generally, we want consecutive allocations to be contiguous, so if there\u0027s something like:\n\n\n     alloc, alloc, alloc, dealloc, alloc, alloc, alloc, alloc\nslab:  1.     1.     1.      2.      2.      1.    1.      1.\n\nA deallocation in the middle of a bunch of allocations will \"thrash\" the current slab that\u0027s servicing the allocations. Keeping the separate list is essentially like \"appending\" to the linked list so that they\u0027re after the available slabs.",
+      "parentUuid": "754f80f8_78f1fbc5",
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -457,6 +901,24 @@
     },
     {
       "key": {
+        "uuid": "8d5556dc_57fcf0f5",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Heh.",
+      "parentUuid": "5a00db36_0ade1022",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a18fdfe0_eee9acd2",
         "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
         "patchSetId": 7
@@ -471,6 +933,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3beb87df_4f1d7db4",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18fdfe0_eee9acd2",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -491,6 +971,24 @@
     },
     {
       "key": {
+        "uuid": "2cc39337_5affd4f2",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bc4ce7d_4fb61025",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "528a15e7_05a1a2fb",
         "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
         "patchSetId": 7
@@ -508,6 +1006,24 @@
     },
     {
       "key": {
+        "uuid": "81a458c6_8ee49d86",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "528a15e7_05a1a2fb",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f9e0ff1_5c134379",
         "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
         "patchSetId": 7
@@ -522,6 +1038,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae07f6a_858d2602",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f9e0ff1_5c134379",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
