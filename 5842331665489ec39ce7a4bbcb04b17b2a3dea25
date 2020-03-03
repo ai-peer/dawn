@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "81b05088_afc679cc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:12:27Z",
+      "side": 1,
+      "message": "This object is a single method, so maybe it could become a single function instead?",
+      "revId": "5842331665489ec39ce7a4bbcb04b17b2a3dea25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdc159ba_e02c0592",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -13,6 +30,30 @@
       "writtenOn": "2020-03-02T23:06:26Z",
       "side": 1,
       "message": "nit: This should be a separate index that we increment, not |i|. Color attachment indices may be sparse.\n\nToday in Dawn, I don\u0027t think we actually support this correctly, but that\u0027s just a bug and WebGPU will probably allow sparse attachments -- pretty sure all of the native APIs can do it",
+      "range": {
+        "startLine": 296,
+        "startChar": 77,
+        "endLine": 296,
+        "endChar": 78
+      },
+      "revId": "5842331665489ec39ce7a4bbcb04b17b2a3dea25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "687d2ba6_5f1121d9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:12:27Z",
+      "side": 1,
+      "message": "WebGPU uses a sequence\u003cattachment descriptor\u003e so I\u0027m not sure things are allowed to be sparse. But just in case, to make the D3D12 match the frontend we should address Austin\u0027s suggestion. Then we can see with the group if sparse arrays are allowed and how that would be surfaced in webgpu.h",
+      "parentUuid": "cdc159ba_e02c0592",
       "range": {
         "startLine": 296,
         "startChar": 77,
