@@ -22,6 +22,30 @@
       "revId": "8cd989b290ce38b0ee581f09517ca81bc3861fba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de8eaaa_305116ef",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-03-03T23:05:05Z",
+      "side": 1,
+      "message": "Fixed, but the change was moved to the parent CL, which introduced this class, for simplicity.",
+      "parentUuid": "550f139a_852f1b5e",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 13
+      },
+      "revId": "8cd989b290ce38b0ee581f09517ca81bc3861fba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
