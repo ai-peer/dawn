@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5ba6bc5f_81d6b9c7",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-03-03T23:04:00Z",
+      "side": 1,
+      "message": "NOTE: Unfortunately, the recent DEPS roll of third_party/Vulkan-Header is not sufficient because apparently the headers from third_party/khronos are included first. I\u0027m leaving this hack here at the moment to let the code compile. Let me know if you prefer to attempt the khronos/ fix first, and I\u0027ll rebase on top of it.",
+      "revId": "1610e0c025e42562f42088caa393bff002d5f27d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2df8c28a_dc96c9f5",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -25,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "5ace19ee_233a12e3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-03-03T23:04:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df8c28a_dc96c9f5",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 417,
+        "endChar": 99
+      },
+      "revId": "1610e0c025e42562f42088caa393bff002d5f27d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eea565b8_22956b61",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 2
@@ -36,6 +77,30 @@
       "writtenOn": "2020-02-21T19:07:45Z",
       "side": 1,
       "message": "nit: Maybe add a comment that \".features is populated by vkGetPhysicalDeviceFeatures2KHR\"\nso that it\u0027s clear where features2.features and properties2.properties are coming from",
+      "range": {
+        "startLine": 232,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "1610e0c025e42562f42088caa393bff002d5f27d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b698df_c62118bd",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-03-03T23:04:00Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "eea565b8_22956b61",
       "range": {
         "startLine": 232,
         "startChar": 12,
