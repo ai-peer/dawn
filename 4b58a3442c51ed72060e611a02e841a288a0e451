@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "525a5360_f45e0678",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T17:10:28Z",
+      "side": 1,
+      "message": "I just changed it to be ~Slab which is more clear than explaining that delete doesn\u0027t actually delete on PlacementAllocated objects.",
+      "parentUuid": "2748a4bd_2fcd2a80",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a760e1b_67db1aaa",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39c900af_bb3a9dd4",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T17:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a760e1b_67db1aaa",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e954d1d1_7cd77108",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T17:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815c86ac_81e238c9",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae2a469b_162c8445",
         "filename": "src/common/SlabAllocator.h",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "bbc033e7_b19243a7",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T17:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae2a469b_162c8445",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c983a59_0cee76f8",
         "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
         "patchSetId": 8
@@ -84,6 +156,24 @@
       "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11698472_e7eef5ec",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-03T17:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c983a59_0cee76f8",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
