@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2748a4bd_2fcd2a80",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "nit: comment why this free mAllocation but not the slab\u0027s `this`.",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a760e1b_67db1aaa",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure if new char[N] has the same alignment guarantees as malloc. We probably need to add the padding in all cases, unless we switch to using malloc / free",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "815c86ac_81e238c9",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "nit: to indicate the end of the list?",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae2a469b_162c8445",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "u-nit: constructor in the .cpp file?",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c983a59_0cee76f8",
+        "filename": "src/tests/unittests/SlabAllocatorTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "u-nit: comment before the test about how this is meant to find corner cases with partially empty slabs?",
+      "revId": "4b58a3442c51ed72060e611a02e841a288a0e451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -306,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "aca72edb_3273d70a",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "Thanks, the comment makes it clear!",
+      "parentUuid": "9d71d3f3_4afb22b5",
+      "range": {
+        "startLine": 180,
+        "startChar": 30,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b65745f_0ac39c21",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 7
@@ -335,6 +359,24 @@
       "side": 1,
       "message": "aligned_alloc is c++17. Moved to constructor.\nAlso update the computation so that we don\u0027t need any padding if the alignment is less than or equal to the default alignment malloc() would give.",
       "parentUuid": "8b65745f_0ac39c21",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7523e0e6_89203879",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "Arg, can we have a TODO to use it when we have C++17",
+      "parentUuid": "af7d1845_bd3615d1",
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -548,6 +590,24 @@
       "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "573bcb1e_8a694b40",
+        "filename": "src/common/SlabAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-03T11:02:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f0ac434a_a808efc9",
+      "revId": "d5303f1ac2f434fb6518a93caa1db2a6be85f855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
