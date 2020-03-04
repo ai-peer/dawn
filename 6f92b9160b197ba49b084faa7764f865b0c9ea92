@@ -16,6 +16,24 @@
       "revId": "6f92b9160b197ba49b084faa7764f865b0c9ea92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93d5ce1f_19686fa7",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T23:53:00Z",
+      "side": 0,
+      "message": "yep, this CL (https://chromium-review.googlesource.com/c/chromium/src/+/2085160) removes usage of that entrypoint in chromium. I will wait for that to merge before submitting this one.",
+      "parentUuid": "89dc9442_d202832c",
+      "revId": "6f92b9160b197ba49b084faa7764f865b0c9ea92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
