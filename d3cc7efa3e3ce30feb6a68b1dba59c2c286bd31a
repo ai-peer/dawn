@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "74b3e5b6_0707403e",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-04T09:38:46Z",
+      "side": 1,
+      "message": "Yep no need to restrict to external textures. And with the changes suggested in DawnNative.h, this could just be a call to texture-\u003eIsSubresourceContentInitialized()",
+      "parentUuid": "ae9345c0_8fc21cb1",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 59
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eedce077_b14e295a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 1
@@ -160,6 +184,47 @@
         "endLine": 178,
         "endChar": 15
       },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "370f7beb_08753d0a",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-04T09:38:46Z",
+      "side": 1,
+      "message": "+1, backdoor is the concept but it needn\u0027t appear in the function name.",
+      "parentUuid": "c749ff26_fe047bf2",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 15
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04c5b6a2_6ce518ab",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-04T09:38:46Z",
+      "side": 1,
+      "message": "Can we have arguments for miplevel and array layer? It could be useful for example when we use 2d array textures for WebXR interop.",
       "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
