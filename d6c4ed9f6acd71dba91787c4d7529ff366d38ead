@@ -126,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "12438bfa_694da027",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-04T23:50:08Z",
+      "side": 1,
+      "message": "Makes sense. Will remove.",
+      "parentUuid": "795847af_af10eaba",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52d4af10_2b6ff493",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -209,6 +233,24 @@
       "side": 1,
       "message": "Reactivating because you\u0027re latest iteration still leaks memory. Even though you\u0027re running an in-place destructor, the memory for the Heap object remains and is leaked.  \n\nI think you should be able to make the Heap object using std::make_unique in ResourceAllocatorManager::CreateCommittedResource. You can use std::move to transfer that to the ResourceHeapAllocation constructor.  ResourceHeapAllocation can then store the std::unique_ptr as a member variable. In the Invalidate call, it can reset the unique_ptr and delete the memory for the Heap. The destructor of Heap will release the reference to the committed resource.",
       "parentUuid": "92af3c5d_2ca315af",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "157e51a4_228893ca",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-04T23:50:08Z",
+      "side": 1,
+      "message": "Oh.\n\nWhat you describe works - but it requires another member (unique_ptr\u003cHeap\u003e mImplicitHeap) on the ResourceHeapAllocation. This member would be unused on most ResourceHeapAllocations, because suballocation seem to be more common. We could avoid this extra member by doing things manually as my current solution does - just with the delete operator. It seems like you\u0027re partial to a smart pointer solution though.",
+      "parentUuid": "7fa4d713_8eae1f66",
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
