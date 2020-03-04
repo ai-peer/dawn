@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "319ae154_e2b254a9",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T20:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b3a20b_bbc0cca8",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 59
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eedce077_b14e295a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 1
@@ -168,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "61c67bc6_01350a48",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T20:05:10Z",
+      "side": 1,
+      "message": "removed this function, just going to use IsSubresourceContentInitialized",
+      "parentUuid": "60a8b7ba_e4acd396",
+      "range": {
+        "startLine": 432,
+        "startChar": 9,
+        "endLine": 432,
+        "endChar": 52
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "515ccaa5_213d2d8d",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 1
@@ -188,6 +236,30 @@
       "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d7b8f75_554b803f",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T20:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "515ccaa5_213d2d8d",
+      "range": {
+        "startLine": 433,
+        "startChar": 47,
+        "endLine": 433,
+        "endChar": 57
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -238,6 +310,30 @@
     },
     {
       "key": {
+        "uuid": "e3da9365_c898d268",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T20:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "370f7beb_08753d0a",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 15
+      },
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04c5b6a2_6ce518ab",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 1
@@ -252,6 +348,24 @@
       "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7967c3b1_607c2eed",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-03-04T20:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c5b6a2_6ce518ab",
+      "revId": "d3cc7efa3e3ce30feb6a68b1dba59c2c286bd31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
