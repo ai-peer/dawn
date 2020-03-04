@@ -102,6 +102,30 @@
     },
     {
       "key": {
+        "uuid": "795847af_af10eaba",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T23:14:21Z",
+      "side": 1,
+      "message": "If ASSERT is debug-only, then your current code will have different behavior in retail vs. debug.  In debug, if the \u0027As\u0027 call succeeds, you\u0027ll return a valid object. In retail, you always return a ComPtr that has a nullptr member variable.\n\nWe should avoid writing code that behaves differently in debug vs. retail because retail only bugs can be a pain to debug.",
+      "parentUuid": "2055c4c1_3e673fa3",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52d4af10_2b6ff493",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -170,6 +194,24 @@
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fa4d713_8eae1f66",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T23:14:21Z",
+      "side": 1,
+      "message": "Reactivating because you\u0027re latest iteration still leaks memory. Even though you\u0027re running an in-place destructor, the memory for the Heap object remains and is leaked.  \n\nI think you should be able to make the Heap object using std::make_unique in ResourceAllocatorManager::CreateCommittedResource. You can use std::move to transfer that to the ResourceHeapAllocation constructor.  ResourceHeapAllocation can then store the std::unique_ptr as a member variable. In the Invalidate call, it can reset the unique_ptr and delete the memory for the Heap. The destructor of Heap will release the reference to the committed resource.",
+      "parentUuid": "92af3c5d_2ca315af",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
@@ -255,6 +297,24 @@
       "side": 1,
       "message": "Done.\n\n@Rafael - the expressions are not independent of each other.",
       "parentUuid": "62eb4d42_d5cd9b15",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcbbd50b_a17965a3",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T23:14:21Z",
+      "side": 1,
+      "message": "ASSERT(A \u0026\u0026 B) should always be re-written as:\nASSERT(A);\nASSERT(B);\n\nYour latest patchset has ASSERT(A \u003d\u003d B) which, I agree, can\u0027t be split up into two.",
+      "parentUuid": "9bc2d969_fe42c237",
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
