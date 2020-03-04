@@ -83,6 +83,7 @@ namespace dawn_native {
         // Dawn API
         TextureViewBase* CreateView(const TextureViewDescriptor* descriptor);
         void Destroy();
+        bool IsExternalTextureInitialized();
 
       protected:
         void DestroyInternal();
