@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94130be5_b2670790",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-04T19:29:22Z",
+      "side": 1,
+      "message": "nit: This code is quite dense (tightly-packed) and hard to read. Consider adding some whitespace and factor out a ShaderVisibleBuffer* so we don\u0027t have the [heapType] indexing everywhere.",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c529cf6c_d8e40189",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-04T19:29:22Z",
+      "side": 1,
+      "message": "This test is strongly tied to the details about how many ticks are between the pending serial and the completed serial. Seems a bit fragile if those internals ever change. Is there a way we can break that association?\n\nPerhaps we take the current test and refactor it into a for-loop over a constant |frameDepth| of 3 for now. In the future if Tick internals change we only have to update the constant in the test.\n - first we iterate up to |frameDepth| in a loop of { Allocate(), Tick() } and check that all heaps are unique\n - and then we do a few additional iterations iterating up to |frameDepth| that the same loop returns the same heaps in the expected order.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 69
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414c2d5d_8890a22d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-04T19:29:22Z",
+      "side": 1,
+      "message": "shouldn\u0027t this check that heap4 is not heap0 or heap1 or heap2 or heap3 ?\n\nMaybe it would be easier to use and std::set and check that inserting into the set always creates a new element.",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06df13a0_df7de8f8",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-04T19:29:22Z",
+      "side": 1,
+      "message": "The first test checks recycling, but we always allocate and tick to recycle one by one right after another. Can we also have a test like the second one that creates multiple heaps without recycling, and then ticks multiple times to recycle them into the pool, and then allocates again and checks we got all the same ones?",
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
