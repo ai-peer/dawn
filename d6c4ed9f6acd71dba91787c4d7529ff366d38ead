@@ -19,6 +19,47 @@
     },
     {
       "key": {
+        "uuid": "665268e8_3690a7d9",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T18:59:25Z",
+      "side": 1,
+      "message": "+1 to finding a better comment and name, though I do not have a suggestion. All of this memory is internal to Dawn since Dawn is managing it.",
+      "parentUuid": "955d5bc3_8894bf9c",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf7a9550_4b0b0205",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T18:59:25Z",
+      "side": 1,
+      "message": "Isn\u0027t ASSERT only evaluated in debug builds? If so, this will return nullptr in retail builds and likely crash in the caller.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52d4af10_2b6ff493",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -54,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "4cb07db6_f4ddecfe",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T18:59:25Z",
+      "side": 1,
+      "message": "+1 to eliminating the leak. You should be able to use std::make_unique and pass ownership to the constructor using std::move",
+      "parentUuid": "765eda6d_c23a93e3",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ed6022f_a35470d3",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 2
@@ -82,6 +141,24 @@
       "writtenOn": "2020-03-04T17:50:55Z",
       "side": 1,
       "message": "nit: ASSERT(info.mMethod \u003d\u003d External \u0026\u0026 heap \u003d\u003d nullptr)?",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62eb4d42_d5cd9b15",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T18:59:25Z",
+      "side": 1,
+      "message": "+1 and have each expression as its own ASSERT for better debugging.",
+      "parentUuid": "c34d82c3_6f6d4cc9",
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
