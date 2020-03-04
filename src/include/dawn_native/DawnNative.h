@@ -175,6 +175,9 @@ namespace dawn_native {
     // Backdoor to get the number of lazy clears for testing
     DAWN_NATIVE_EXPORT size_t GetLazyClearCountForTesting(WGPUDevice device);
 
+    // Backdoor to query if external texture has been initialized
+    DAWN_NATIVE_EXPORT bool IsExternalTextureInitialized(WGPUTexture texture);
+
     // Backdoor to get the order of the ProcMap for testing
     DAWN_NATIVE_EXPORT std::vector<const char*> GetProcMapNamesForTesting();
 

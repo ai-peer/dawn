@@ -429,6 +429,10 @@ namespace dawn_native {
         return true;
     }
 
+    bool TextureBase::IsExternalTextureInitialized() {
+        return IsSubresourceContentInitialized(0, 1, 0, 1);
+    }
+
     void TextureBase::SetIsSubresourceContentInitialized(bool isInitialized,
                                                          uint32_t baseMipLevel,
                                                          uint32_t levelCount,
