@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "955d5bc3_8894bf9c",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-04T17:50:55Z",
+      "side": 1,
+      "message": "nit: external is a property of ownership, not the method or how memory was allocated. Maybe \u0027AllocationMethod::Unknown\u0027 or a \"isExternal\" member?",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52d4af10_2b6ff493",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -13,6 +30,58 @@
       "writtenOn": "2020-03-04T09:59:26Z",
       "side": 1,
       "message": "This heap is leaked at the moment. Somewhere in the deallocation method call chain we should detect that the resource is direct and delete the heap.",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "765eda6d_c23a93e3",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-04T17:50:55Z",
+      "side": 1,
+      "message": "+1. Also, why are we storing committedResource on the RHA twice?",
+      "parentUuid": "52d4af10_2b6ff493",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ed6022f_a35470d3",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-04T17:50:55Z",
+      "side": 1,
+      "message": "nit: forward declare?",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c34d82c3_6f6d4cc9",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-04T17:50:55Z",
+      "side": 1,
+      "message": "nit: ASSERT(info.mMethod \u003d\u003d External \u0026\u0026 heap \u003d\u003d nullptr)?",
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
