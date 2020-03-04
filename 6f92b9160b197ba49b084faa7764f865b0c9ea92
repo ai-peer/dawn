@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89dc9442_d202832c",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-04T21:34:38Z",
+      "side": 0,
+      "message": "Since Chromium still uses this old entry point, deleting it here means the next Dawn roll will break. \n\nYou will need to first change Chromium to use the new entrypoint and then you can remove this entrypoint.",
+      "revId": "6f92b9160b197ba49b084faa7764f865b0c9ea92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
