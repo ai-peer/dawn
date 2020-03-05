@@ -150,6 +150,30 @@
     },
     {
       "key": {
+        "uuid": "fc5bfb5f_7a26e87c",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-05T17:58:57Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "12438bfa_694da027",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52d4af10_2b6ff493",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -272,6 +296,24 @@
       "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "523b9509_ee9746bd",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-05T17:58:57Z",
+      "side": 1,
+      "message": "Fixed - with \"delete heap\" in ResourceAllocatorManager::DeallocateMem",
+      "parentUuid": "498a0b18_f87040ee",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
