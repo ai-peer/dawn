@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92f722e8_f80eeb6d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-05T22:48:30Z",
+      "side": 1,
+      "message": "nit: Should remove the heap from the list so we know we get one of each.",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
