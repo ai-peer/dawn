@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "824fe791_4bda9419",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "nit: comment that malloc is guaranteed to return a pointer aligned enough for SingleBindingData.",
+      "range": {
+        "startLine": 180,
+        "startChar": 75,
+        "endLine": 180,
+        "endChar": 81
+      },
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9b9883e_2c490d36",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "This would be more clear and correct if we called the placement new in a loop instead.",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b32d828_76b2d855",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "if (mBindings !\u003d nullptr) and call the placement delete instead for more clarity and correctness?",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c33e80da_6c2dc25a",
         "filename": "src/dawn_native/BindGroup.h",
         "patchSetId": 12
@@ -19,6 +76,120 @@
         "endLine": 19,
         "endChar": 38
       },
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e95123d_0e4964e1",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "In a way this seems to be a property of the bind group layout.",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2419e14b_b1dde7b7",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "The CL could be simplified if instead the bindingData was comprised of an array of struct SingleBindingData { Ref\u003cObjectBase\u003e binding; uint32_t offset; uint32_t size}; and the structure used for proper typing everywhere. Also I think the buffer size and offsets should be uint64_ts?",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3357244a_5a7958ae",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "This will be moved in the null backend once all other backends use slab allocation right?",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce7f978_4cb6fec8",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "u-nit: use std::max?",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 13
+      },
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea55c2a_4e53d561",
+        "filename": "src/dawn_native/metal/BindGroupLayoutMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "and std::max(alignof(BindGroup), alignof(SingleBindingData))",
+      "range": {
+        "startLine": 25,
+        "startChar": 70,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a7b716_f9bd9c43",
+        "filename": "src/dawn_native/metal/BindGroupMTL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:19:00Z",
+      "side": 1,
+      "message": "ditto, this is a property of the layout",
       "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
