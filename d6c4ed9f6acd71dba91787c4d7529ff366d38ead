@@ -257,6 +257,24 @@
     },
     {
       "key": {
+        "uuid": "498a0b18_f87040ee",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T10:48:49Z",
+      "side": 1,
+      "message": "The complexity here is that implicit heaps should be destroyed as soon as their resource is freed while suballocation heaps should not. All three of the solutions (manual delete in DeallocateResource, an additional mImplicitHeap unique pointer, or making ResourceHeapBase refcounted) sound fine.",
+      "parentUuid": "157e51a4_228893ca",
+      "revId": "d6c4ed9f6acd71dba91787c4d7529ff366d38ead",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ed6022f_a35470d3",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 2
