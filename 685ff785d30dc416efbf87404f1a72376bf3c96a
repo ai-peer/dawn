@@ -2,6 +2,80 @@
   "comments": [
     {
       "key": {
+        "uuid": "a9b47f12_63b59b1a",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fae088d_42d098e7",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "This assert doesn\u0027t seem really needed.",
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c960f2d4_75a0d2a5",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "nit: this condition doesn\u0027t need to be in [1] and could be extracted out for readability.",
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8014e41f_4eb9357c",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "nit: could be \n\n  heap \u003d std::move(shaderVisibleBuffer.pool.front().heap);\n  shaderVisibleBuffer.pool.pop_front()",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 45
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94130be5_b2670790",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 5
@@ -18,6 +92,53 @@
         "startChar": 7,
         "endLine": 144,
         "endChar": 9
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07f90386_487db0e2",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "+1, we could store the type in ShaderVisibleBuffer and pass a ShaderVisibleBuffer* to this function.",
+      "parentUuid": "94130be5_b2670790",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684d9b48_52da3e21",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-05T11:30:30Z",
+      "side": 1,
+      "message": "nit: this could be declared as a struct for better readability.",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 68
       },
       "revId": "685ff785d30dc416efbf87404f1a72376bf3c96a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
