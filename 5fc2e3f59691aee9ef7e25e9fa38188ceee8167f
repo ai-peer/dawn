@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cc8c7a87_19ea90df",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-06T18:20:05Z",
+      "side": 1,
+      "message": "It cannot be extracted as suggested, the pool is empty upon Init() and must be under the check.",
+      "parentUuid": "c5fc8b16_d920f512",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 13
+      },
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3af3e26_8fa8a3d8",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2020-03-06T10:58:43Z",
       "side": 1,
       "message": "I worry a bit that these are change detector tests: they check very precisely the internal working of ShaderVisibleDescriptorAllocator and Tick() and will break each time we change the logic.\n\nWhat we should have, not necessarily in this CL is something were the heap size can be artificially limited to a small number, and we test things like:\n\n - Using many times a heap\u0027s worth of descriptors.\n - Same thing but reusing the same descriptor across multiple heaps.\n - Encoding a descriptor, submitting and then encoding more than one heap worth of descriptors.\n - Encoding a descriptor, finish() encoding to the end of the descriptor heap + one descriptor (overwriting the first one) then reusing the first descriptor and see it has been reencoded correctly.\n\nThe are end2end tests of corner cases in the current implementation and potential future implementations but are just valid end2end tests (they just try to test known internals). If implementations change significantly later, more tests can be added but the original ones stay valid.",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb64ab8_b230a53c",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-06T18:20:05Z",
+      "side": 1,
+      "message": "I like these tests. I\u0027d like to include them when I get to resizing heaps.",
+      "parentUuid": "d3af3e26_8fa8a3d8",
       "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -56,6 +98,24 @@
       "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5b6572f_b967e3e9",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-06T18:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92f722e8_f80eeb6d",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
