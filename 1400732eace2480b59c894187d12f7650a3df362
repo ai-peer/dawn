@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eedcd092_09779000",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T13:02:47Z",
+      "side": 1,
+      "message": "TrackUsageAndGetResourceBarrier? PrepareForSubmission seems like something that would happen only once per submission when we actually do it multiple times.",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 62
+      },
+      "revId": "1400732eace2480b59c894187d12f7650a3df362",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6393e976_bdd5a919",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T13:02:47Z",
+      "side": 1,
+      "message": "Why is this condition needed?",
+      "revId": "1400732eace2480b59c894187d12f7650a3df362",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
