@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "37ed2b9e_7b70b659",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-06T21:51:30Z",
+      "side": 1,
+      "message": "\u003e Since externally allocated textures aren\u0027t either of these and should not be handled like these, it seems odd to continue calling them kDirect.\n\nkDirect simply means the resource was not (internally) sub-allocated. The external caller could use a placed or committed resource, it makes no difference. kExternal is still implicitly treated as kDirect which is why I thought an ownership bit would make it more explicit/clear.",
+      "parentUuid": "4b7abf93_788d795f",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "dbef33fdd76410e4ea16431f20a4bac160a07860",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f87635c4_6f0cee7d",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 5
