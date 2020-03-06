@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4267c65f_1bc50367",
+        "filename": "src/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-06T03:03:12Z",
+      "side": 1,
+      "message": "Nit: To make the colors stand out a bit more and not be subject to GPU rounding errors, consider using brighter colors for two or more of the channels.",
+      "range": {
+        "startLine": 474,
+        "startChar": 63,
+        "endLine": 474,
+        "endChar": 100
+      },
+      "revId": "75c90a68af69fefe094da18058989e6ebbe0c04e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
