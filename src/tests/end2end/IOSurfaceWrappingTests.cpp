@@ -95,12 +95,14 @@ namespace {
       public:
         wgpu::Texture WrapIOSurface(const wgpu::TextureDescriptor* descriptor,
                                     IOSurfaceRef ioSurface,
-                                    uint32_t plane) {
+                                    uint32_t plane,
+                                    bool isCleared) {
             dawn_native::metal::ExternalImageDescriptorIOSurface externDesc;
             externDesc.cTextureDescriptor =
                 reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
             externDesc.ioSurface = ioSurface;
             externDesc.plane = plane;
+            externDesc.isCleared = isCleared;
             WGPUTexture texture = dawn_native::metal::WrapIOSurface(device.Get(), &externDesc);
             return wgpu::Texture::Acquire(texture);
         }
@@ -132,7 +134,7 @@ class IOSurfaceValidationTests : public IOSurfaceTestBase {
 // Test a successful wrapping of an IOSurface in a texture
 TEST_P(IOSurfaceValidationTests, Success) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    wgpu::Texture texture = WrapIOSurface(&descriptor, defaultIOSurface.get(), 0);
+    wgpu::Texture texture = WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true);
     ASSERT_NE(texture.Get(), nullptr);
 }
 
@@ -144,7 +146,7 @@ TEST_P(IOSurfaceValidationTests, InvalidTextureDescriptor) {
     descriptor.nextInChain = &chainedDescriptor;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -152,7 +154,7 @@ TEST_P(IOSurfaceValidationTests, InvalidTextureDescriptor) {
 TEST_P(IOSurfaceValidationTests, PlaneTooLarge) {
     DAWN_SKIP_TEST_IF(UsesWire());
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 1));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 1, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -163,7 +165,7 @@ TEST_P(IOSurfaceValidationTests, DISABLED_InvalidTextureDimension) {
     descriptor.dimension = wgpu::TextureDimension::e2D;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -173,7 +175,7 @@ TEST_P(IOSurfaceValidationTests, InvalidMipLevelCount) {
     descriptor.mipLevelCount = 2;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -183,7 +185,7 @@ TEST_P(IOSurfaceValidationTests, InvalidArrayLayerCount) {
     descriptor.arrayLayerCount = 2;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -193,7 +195,7 @@ TEST_P(IOSurfaceValidationTests, InvalidSampleCount) {
     descriptor.sampleCount = 4;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -203,7 +205,7 @@ TEST_P(IOSurfaceValidationTests, InvalidWidth) {
     descriptor.size.width = 11;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -213,7 +215,7 @@ TEST_P(IOSurfaceValidationTests, InvalidHeight) {
     descriptor.size.height = 11;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -223,7 +225,7 @@ TEST_P(IOSurfaceValidationTests, InvalidFormat) {
     descriptor.format = wgpu::TextureFormat::R8Unorm;
 
     ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0, true));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -298,7 +300,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
             textureDescriptor.arrayLayerCount = 1;
             textureDescriptor.mipLevelCount = 1;
             textureDescriptor.usage = wgpu::TextureUsage::Sampled;
-            wgpu::Texture wrappingTexture = WrapIOSurface(&textureDescriptor, ioSurface, 0);
+            wgpu::Texture wrappingTexture = WrapIOSurface(&textureDescriptor, ioSurface, 0, true);
 
             wgpu::TextureView textureView = wrappingTexture.CreateView();
 
@@ -340,7 +342,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
         textureDescriptor.arrayLayerCount = 1;
         textureDescriptor.mipLevelCount = 1;
         textureDescriptor.usage = wgpu::TextureUsage::OutputAttachment;
-        wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface, 0);
+        wgpu::Texture ioSurfaceTexture = WrapIOSurface(&textureDescriptor, ioSurface, 0, true);
 
         wgpu::TextureView ioSurfaceView = ioSurfaceTexture.CreateView();
 
@@ -440,6 +442,60 @@ TEST_P(IOSurfaceUsageTests, ClearRGBA8IOSurface) {
 
     uint32_t data = 0x04030201;
     DoClearTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data));
+}
+
+// 1. Wrap ioSurface and clear to color
+// 2. Check that color was written to ioSurface
+// 3. Wrap same ioSurface with isCleared = false
+// 4. Verify color is not visible in wrapped texture
+TEST_P(IOSurfaceUsageTests, UnclearedTextureIsCleared) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, 'RGBA', 4);
+    uint32_t data = 0x01000001;
+
+    // Get a texture view for the ioSurface
+    wgpu::TextureDescriptor textureDescriptor;
+    textureDescriptor.dimension = wgpu::TextureDimension::e2D;
+    textureDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDescriptor.size = {1, 1, 1};
+    textureDescriptor.sampleCount = 1;
+    textureDescriptor.arrayLayerCount = 1;
+    textureDescriptor.mipLevelCount = 1;
+    textureDescriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
+
+    {
+        wgpu::Texture ioSurfaceTexture =
+            WrapIOSurface(&textureDescriptor, ioSurface.get(), 0, true);
+
+        wgpu::TextureView ioSurfaceView = ioSurfaceTexture.CreateView();
+
+        utils::ComboRenderPassDescriptor renderPassDescriptor({ioSurfaceView}, {});
+        renderPassDescriptor.cColorAttachments[0].clearColor = {1 / 255.0f, 0.0f, 0.0f, 1 / 255.0f};
+
+        // Execute commands to clear the ioSurface
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDescriptor);
+        pass.EndPass();
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        // Wait for the commands touching the IOSurface to be scheduled
+        dawn_native::metal::WaitForCommandsToBeScheduled(device.Get());
+    }
+
+    // Check the correct data was written
+    IOSurfaceLock(ioSurface.get(), kIOSurfaceLockReadOnly, nullptr);
+    ASSERT_EQ(0, memcmp(IOSurfaceGetBaseAddress(ioSurface.get()), &data, sizeof(data)));
+    IOSurfaceUnlock(ioSurface.get(), kIOSurfaceLockReadOnly, nullptr);
+
+    // rewrap ioSurface and ensure color is not visible when isCleared set to false
+    {
+        wgpu::Texture ioSurfaceTexture =
+            WrapIOSurface(&textureDescriptor, ioSurface.get(), 0, false);
+        EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), ioSurfaceTexture, 0, 0);
+    }
 }
 
 DAWN_INSTANTIATE_TEST(IOSurfaceValidationTests, MetalBackend());
