@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "c5fc8b16_d920f512",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T10:58:43Z",
+      "side": 1,
+      "message": "I think i wasn\u0027t clear, I didn\u0027t mean that the condition could be extracted of the if, but that instead the whole if could be extracted out of the parent if. The code would look like the following:\n\n        // If there\u0027s a current heap, push it to the recycle queue.\n        if (shaderVisibleBuffer-\u003eheap !\u003d nullptr) {\n            shaderVisibleBuffer-\u003epool.push_back(\n                {mDevice-\u003eGetPendingCommandSerial(), std::move(shaderVisibleBuffer-\u003eheap)});\n        }\n\n        // Recycle an existing heap if possible \n        if (shaderVisibleBuffer-\u003epool.front().heapSerial \u003c\u003d mDevice-\u003eGetCompletedCommandSerial()) {\n            heap \u003d std::move(shaderVisibleBuffer-\u003epool.front().heap);\n            shaderVisibleBuffer-\u003epool.pop_front();\n        }\n\n        // No heap to recycle, create a new one\n        if (heap \u003d\u003d nullptr) {\n            stuff.\n        }",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 13
+      },
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3af3e26_8fa8a3d8",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T10:58:43Z",
+      "side": 1,
+      "message": "I worry a bit that these are change detector tests: they check very precisely the internal working of ShaderVisibleDescriptorAllocator and Tick() and will break each time we change the logic.\n\nWhat we should have, not necessarily in this CL is something were the heap size can be artificially limited to a small number, and we test things like:\n\n - Using many times a heap\u0027s worth of descriptors.\n - Same thing but reusing the same descriptor across multiple heaps.\n - Encoding a descriptor, submitting and then encoding more than one heap worth of descriptors.\n - Encoding a descriptor, finish() encoding to the end of the descriptor heap + one descriptor (overwriting the first one) then reusing the first descriptor and see it has been reencoded correctly.\n\nThe are end2end tests of corner cases in the current implementation and potential future implementations but are just valid end2end tests (they just try to test known internals). If implementations change significantly later, more tests can be added but the original ones stay valid.",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92f722e8_f80eeb6d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
