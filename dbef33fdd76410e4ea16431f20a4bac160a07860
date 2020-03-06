@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4b7abf93_788d795f",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-06T21:04:41Z",
+      "side": 1,
+      "message": "My perspective is that there\u0027s a clear correlation with how Dawn should handle each type: SubAllocated\u003d\u003dPlaced Resource, Direct\u003d\u003dCommitted Resource. Since externally allocated textures aren\u0027t either of these and should not be handled like these, it seems odd to continue calling them kDirect.\n\nAllocateMemory() is never called with external textures. The RHA is created inside the Texture constructor.\n\nDeallocateMemory() only deletes the reference to the external resource on our side - the actual teardown occurs in Texture::DestroyImpl. There should be no unintended effects from renaming this - and keeping externals as kDirect seems like the most confusing choice going forward.",
+      "parentUuid": "a14d18da_b2b85dae",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "dbef33fdd76410e4ea16431f20a4bac160a07860",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f87635c4_6f0cee7d",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 5
