@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "baef07a9_fbc45e47",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T09:56:08Z",
+      "side": 1,
+      "message": "nit: this could be defaulted to true as most tests use that.",
+      "revId": "75c90a68af69fefe094da18058989e6ebbe0c04e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15065c6f_9a52fbef",
+        "filename": "src/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T09:56:08Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "75c90a68af69fefe094da18058989e6ebbe0c04e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4267c65f_1bc50367",
         "filename": "src/tests/end2end/IOSurfaceWrappingTests.cpp",
         "patchSetId": 9
@@ -19,6 +53,23 @@
         "endLine": 474,
         "endChar": 100
       },
+      "revId": "75c90a68af69fefe094da18058989e6ebbe0c04e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af4d1c79_192c47eb",
+        "filename": "src/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-06T09:56:08Z",
+      "side": 1,
+      "message": "All of the code above could be replaced by\n\n        IOSurfaceLock(ioSurface, 0, nullptr);\n        memcpy(IOSurfaceGetBaseAddress(ioSurface), data, dataSize);\n        IOSurfaceUnlock(ioSurface, 0, nullptr);\n\nand the comment below updated.",
       "revId": "75c90a68af69fefe094da18058989e6ebbe0c04e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
