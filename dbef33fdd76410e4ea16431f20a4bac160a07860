@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a14d18da_b2b85dae",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-06T04:34:44Z",
+      "side": 1,
+      "message": "Adding a new method type could also introduce unexpected behavior if not handled. It\u0027s not clear to me what [Allocate|Deallocate]Memory() does with AllocationMethod::kExternal.\n\nI would suggest treating externals as kDirect (like before) but have a ownership bit in the RHA given kUnknown isn\u0027t exactly true nor kExternal an actual method which is also missing handling.",
+      "parentUuid": "590c9a4e_70cba448",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "dbef33fdd76410e4ea16431f20a4bac160a07860",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f87635c4_6f0cee7d",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 5
