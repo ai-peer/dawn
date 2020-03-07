@@ -677,12 +677,7 @@ namespace dawn_native { namespace vulkan {
                                      uint32_t layerCount,
                                      TextureBase::ClearValue clearValue) {
         Device* device = ToBackend(GetDevice());
-        VkImageSubresourceRange range = {};
-        range.aspectMask = GetVkAspectMask();
-        range.baseMipLevel = baseMipLevel;
-        range.levelCount = levelCount;
-        range.baseArrayLayer = baseArrayLayer;
-        range.layerCount = layerCount;
+
         uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
@@ -692,15 +687,35 @@ namespace dawn_native { namespace vulkan {
                 VkClearDepthStencilValue clearDepthStencilValue[1];
                 clearDepthStencilValue[0].depth = fClearColor;
                 clearDepthStencilValue[0].stencil = clearColor;
-                device->fn.CmdClearDepthStencilImage(recordingContext->commandBuffer, GetHandle(),
-                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                                     clearDepthStencilValue, 1, &range);
+                for (const auto& range : IterateUninitializedSubresources(
+                         {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                    VkImageSubresourceRange vkRange = {};
+                    vkRange.aspectMask = GetVkAspectMask();
+                    vkRange.baseMipLevel = range.baseMipLevel;
+                    vkRange.levelCount = range.mipLevelCount;
+                    vkRange.baseArrayLayer = range.baseArrayLayer;
+                    vkRange.layerCount = range.arrayLayerCount;
+
+                    device->fn.CmdClearDepthStencilImage(
+                        recordingContext->commandBuffer, GetHandle(),
+                        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, clearDepthStencilValue, 1, &vkRange);
+                }
             } else {
-                VkClearColorValue clearColorValue = {
-                    {fClearColor, fClearColor, fClearColor, fClearColor}};
-                device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
-                                              VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                              &clearColorValue, 1, &range);
+                for (const auto& range : IterateUninitializedSubresources(
+                         {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                    VkImageSubresourceRange vkRange = {};
+                    vkRange.aspectMask = GetVkAspectMask();
+                    vkRange.baseMipLevel = range.baseMipLevel;
+                    vkRange.levelCount = range.mipLevelCount;
+                    vkRange.baseArrayLayer = range.baseArrayLayer;
+                    vkRange.layerCount = range.arrayLayerCount;
+
+                    VkClearColorValue clearColorValue = {
+                        {fClearColor, fClearColor, fClearColor, fClearColor}};
+                    device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
+                                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                                  &clearColorValue, 1, &vkRange);
+                }
             }
         } else {
             // TODO(natlee@microsoft.com): test compressed textures are cleared
@@ -726,24 +741,27 @@ namespace dawn_native { namespace vulkan {
             bufferCopy.rowPitch = rowPitch;
 
             Extent3D copySize = {GetSize().width, GetSize().height, 1};
+            for (const auto& range : IterateUninitializedSubresources(
+                     {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                for (uint32_t level = range.baseMipLevel;
+                     level < range.baseMipLevel + range.mipLevelCount; ++level) {
+                    for (uint32_t layer = range.baseArrayLayer;
+                         layer < range.baseArrayLayer + range.arrayLayerCount; ++layer) {
+                        dawn_native::TextureCopy textureCopy;
+                        textureCopy.texture = this;
+                        textureCopy.origin = {0, 0, 0};
+                        textureCopy.mipLevel = level;
+                        textureCopy.arrayLayer = layer;
 
-            for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-                for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
-                     ++layer) {
-                    dawn_native::TextureCopy textureCopy;
-                    textureCopy.texture = this;
-                    textureCopy.origin = {0, 0, 0};
-                    textureCopy.mipLevel = level;
-                    textureCopy.arrayLayer = layer;
+                        VkBufferImageCopy region =
+                            ComputeBufferImageCopyRegion(bufferCopy, textureCopy, copySize);
 
-                    VkBufferImageCopy region =
-                        ComputeBufferImageCopyRegion(bufferCopy, textureCopy, copySize);
-
-                    // copy the clear buffer to the texture image
-                    device->fn.CmdCopyBufferToImage(
-                        recordingContext->commandBuffer,
-                        ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(), GetHandle(),
-                        VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+                        // copy the clear buffer to the texture image
+                        device->fn.CmdCopyBufferToImage(
+                            recordingContext->commandBuffer,
+                            ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(), GetHandle(),
+                            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+                    }
                 }
             }
         }
