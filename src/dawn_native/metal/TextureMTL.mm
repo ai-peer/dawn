@@ -387,34 +387,33 @@ namespace dawn_native { namespace metal {
 
             if (GetFormat().HasDepthOrStencil()) {
                 // Create a render pass to clear each subresource.
-                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-                    for (uint32_t arrayLayer = baseArrayLayer;
-                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
+                for (const auto& range : IterateUninitializedSubresources(
+                         {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                    for (uint32_t level = range.baseMipLevel;
+                         level < range.baseMipLevel + range.mipLevelCount; ++level) {
+                        for (uint32_t arrayLayer = range.baseArrayLayer;
+                             arrayLayer < range.baseArrayLayer + range.arrayLayerCount;
+                             ++arrayLayer) {
+                            MTLRenderPassDescriptor* descriptor =
+                                [MTLRenderPassDescriptor renderPassDescriptor];
 
-                        MTLRenderPassDescriptor* descriptor =
-                            [MTLRenderPassDescriptor renderPassDescriptor];
+                            if (GetFormat().HasDepth()) {
+                                descriptor.depthAttachment.texture = GetMTLTexture();
+                                descriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                                descriptor.depthAttachment.storeAction = MTLStoreActionStore;
+                                descriptor.depthAttachment.clearDepth = dClearColor;
+                            }
+                            if (GetFormat().HasStencil()) {
+                                descriptor.stencilAttachment.texture = GetMTLTexture();
+                                descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
+                                descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
+                                descriptor.stencilAttachment.clearStencil =
+                                    static_cast<uint32_t>(clearColor);
+                            }
 
-                        if (GetFormat().HasDepth()) {
-                            descriptor.depthAttachment.texture = GetMTLTexture();
-                            descriptor.depthAttachment.loadAction = MTLLoadActionClear;
-                            descriptor.depthAttachment.storeAction = MTLStoreActionStore;
-                            descriptor.depthAttachment.clearDepth = dClearColor;
+                            commandContext->BeginRender(descriptor);
+                            commandContext->EndRender();
                         }
-                        if (GetFormat().HasStencil()) {
-                            descriptor.stencilAttachment.texture = GetMTLTexture();
-                            descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
-                            descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
-                            descriptor.stencilAttachment.clearStencil =
-                                static_cast<uint32_t>(clearColor);
-                        }
-
-                        commandContext->BeginRender(descriptor);
-                        commandContext->EndRender();
                     }
                 }
             } else {
@@ -422,36 +421,36 @@ namespace dawn_native { namespace metal {
                 MTLRenderPassDescriptor* descriptor = nil;
                 uint32_t attachment = 0;
 
-                // Create multiple render passes with each subresource as a color attachment to
-                // clear them all.
-                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-                    for (uint32_t arrayLayer = baseArrayLayer;
-                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
+                for (const auto& range : IterateUninitializedSubresources(
+                         {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                    for (uint32_t level = range.baseMipLevel;
+                         level < range.baseMipLevel + range.mipLevelCount; ++level) {
+                        // Create multiple render passes with each subresource as a color attachment
+                        // to clear them all.
+                        for (uint32_t arrayLayer = range.baseArrayLayer;
+                             arrayLayer < range.baseArrayLayer + range.arrayLayerCount;
+                             ++arrayLayer) {
+                            if (descriptor == nil) {
+                                descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+                            }
 
-                        if (descriptor == nil) {
-                            descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-                        }
+                            descriptor.colorAttachments[attachment].texture = GetMTLTexture();
+                            descriptor.colorAttachments[attachment].loadAction = MTLLoadActionClear;
+                            descriptor.colorAttachments[attachment].storeAction =
+                                MTLStoreActionStore;
+                            descriptor.colorAttachments[attachment].clearColor = MTLClearColorMake(
+                                dClearColor, dClearColor, dClearColor, dClearColor);
+                            descriptor.colorAttachments[attachment].level = level;
+                            descriptor.colorAttachments[attachment].slice = arrayLayer;
 
-                        descriptor.colorAttachments[attachment].texture = GetMTLTexture();
-                        descriptor.colorAttachments[attachment].loadAction = MTLLoadActionClear;
-                        descriptor.colorAttachments[attachment].storeAction = MTLStoreActionStore;
-                        descriptor.colorAttachments[attachment].clearColor =
-                            MTLClearColorMake(dClearColor, dClearColor, dClearColor, dClearColor);
-                        descriptor.colorAttachments[attachment].level = level;
-                        descriptor.colorAttachments[attachment].slice = arrayLayer;
+                            attachment++;
 
-                        attachment++;
-
-                        if (attachment == kMaxColorAttachments) {
-                            attachment = 0;
-                            commandContext->BeginRender(descriptor);
-                            commandContext->EndRender();
-                            descriptor = nil;
+                            if (attachment == kMaxColorAttachments) {
+                                attachment = 0;
+                                commandContext->BeginRender(descriptor);
+                                commandContext->EndRender();
+                                descriptor = nil;
+                            }
                         }
                     }
                 }
@@ -493,43 +492,41 @@ namespace dawn_native { namespace metal {
             id<MTLBuffer> uploadBuffer = ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle();
 
             // Encode a buffer to texture copy to clear each subresource.
-            for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-                Extent3D virtualSize = GetMipLevelVirtualSize(level);
+            for (const auto& range : IterateUninitializedSubresources(
+                     {baseMipLevel, levelCount, baseArrayLayer, layerCount})) {
+                for (uint32_t level = range.baseMipLevel;
+                     level < range.baseMipLevel + range.mipLevelCount; ++level) {
+                    Extent3D virtualSize = GetMipLevelVirtualSize(level);
 
-                for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
-                     ++arrayLayer) {
-                    if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
-                        // Skip lazy clears if already initialized.
-                        continue;
-                    }
+                    for (uint32_t arrayLayer = range.baseArrayLayer;
+                         arrayLayer < range.baseArrayLayer + range.arrayLayerCount; ++arrayLayer) {
+                        // If the texture’s pixel format is a combined depth/stencil format, then
+                        // options must be set to either blit the depth attachment portion or blit
+                        // the stencil attachment portion.
+                        std::array<MTLBlitOption, 3> blitOptions = {
+                            MTLBlitOptionNone, MTLBlitOptionDepthFromDepthStencil,
+                            MTLBlitOptionStencilFromDepthStencil};
 
-                    // If the texture’s pixel format is a combined depth/stencil format, then
-                    // options must be set to either blit the depth attachment portion or blit the
-                    // stencil attachment portion.
-                    std::array<MTLBlitOption, 3> blitOptions = {
-                        MTLBlitOptionNone, MTLBlitOptionDepthFromDepthStencil,
-                        MTLBlitOptionStencilFromDepthStencil};
+                        auto blitOptionStart = blitOptions.begin();
+                        auto blitOptionEnd = blitOptionStart + 1;
+                        if (GetFormat().format == wgpu::TextureFormat::Depth24PlusStencil8) {
+                            blitOptionStart = blitOptions.begin() + 1;
+                            blitOptionEnd = blitOptionStart + 2;
+                        }
 
-                    auto blitOptionStart = blitOptions.begin();
-                    auto blitOptionEnd = blitOptionStart + 1;
-                    if (GetFormat().format == wgpu::TextureFormat::Depth24PlusStencil8) {
-                        blitOptionStart = blitOptions.begin() + 1;
-                        blitOptionEnd = blitOptionStart + 2;
-                    }
-
-                    for (auto it = blitOptionStart; it != blitOptionEnd; ++it) {
-                        [encoder copyFromBuffer:uploadBuffer
-                                   sourceOffset:uploadHandle.startOffset
-                              sourceBytesPerRow:largestMipBytesPerRow
-                            sourceBytesPerImage:largestMipBytesPerImage
-                                     sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
-                                                            1)
-                                      toTexture:GetMTLTexture()
-                               destinationSlice:arrayLayer
-                               destinationLevel:level
-                              destinationOrigin:MTLOriginMake(0, 0, 0)
-                                        options:(*it)];
+                        for (auto it = blitOptionStart; it != blitOptionEnd; ++it) {
+                            [encoder copyFromBuffer:uploadBuffer
+                                       sourceOffset:uploadHandle.startOffset
+                                  sourceBytesPerRow:largestMipBytesPerRow
+                                sourceBytesPerImage:largestMipBytesPerImage
+                                         sourceSize:MTLSizeMake(virtualSize.width,
+                                                                virtualSize.height, 1)
+                                          toTexture:GetMTLTexture()
+                                   destinationSlice:arrayLayer
+                                   destinationLevel:level
+                                  destinationOrigin:MTLOriginMake(0, 0, 0)
+                                            options:(*it)];
+                        }
                     }
                 }
             }

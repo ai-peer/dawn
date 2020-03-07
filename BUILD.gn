@@ -843,6 +843,7 @@ test("dawn_unittests") {
     "src/tests/unittests/SlabAllocatorTests.cpp",
     "src/tests/unittests/SystemUtilsTests.cpp",
     "src/tests/unittests/ToBackendTests.cpp",
+    "src/tests/unittests/UninitializedSubresourceIteratorTests.cpp",
     "src/tests/unittests/validation/BindGroupValidationTests.cpp",
     "src/tests/unittests/validation/BufferValidationTests.cpp",
     "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
