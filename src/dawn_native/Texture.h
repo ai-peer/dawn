@@ -68,6 +68,63 @@ namespace dawn_native {
                                                 uint32_t baseArrayLayer,
                                                 uint32_t layerCount);
 
+        struct SubresourceRange {
+            uint32_t baseMipLevel;
+            uint32_t mipLevelCount;
+            uint32_t baseArrayLayer;
+            uint32_t arrayLayerCount;
+
+            bool operator==(const SubresourceRange& rhs) const;
+            bool operator!=(const SubresourceRange& rhs) const;
+        };
+
+        class UninitializedSubresources {
+          public:
+            UninitializedSubresources(const std::vector<bool>& initializedState,
+                                      SubresourceRange range,
+                                      uint32_t totalMipLevelCount);
+
+            class Iterator {
+              public:
+                Iterator(const std::vector<bool>& initializedState,
+                         SubresourceRange range,
+                         uint32_t totalMipLevelCount,
+                         SubresourceRange startRange);
+                Iterator& operator++();
+
+                bool operator==(const Iterator& other) const;
+                bool operator!=(const Iterator& other) const;
+                SubresourceRange operator*() const {
+                    return mCurrentRange;
+                }
+
+              private:
+                SubresourceRange GetNextRange() const;
+
+                const std::vector<bool>& mInitializedState;
+                const SubresourceRange mBaseRange;
+                const uint32_t mTotalMipLevelCount;
+                SubresourceRange mCurrentRange;
+            };
+
+            Iterator begin() const {
+                return Iterator(mInitializedState, mRange, mTotalMipLevelCount,
+                                {mRange.baseMipLevel, 0, mRange.baseArrayLayer, 0});
+            }
+            Iterator end() const {
+                return Iterator(mInitializedState, mRange, mTotalMipLevelCount,
+                                {mRange.baseMipLevel + mRange.mipLevelCount, 0,
+                                 mRange.baseArrayLayer + mRange.arrayLayerCount, 0});
+            }
+
+          private:
+            const std::vector<bool>& mInitializedState;
+            const SubresourceRange mRange;
+            const uint32_t mTotalMipLevelCount;
+        };
+
+        UninitializedSubresources IterateUninitializedSubresources(SubresourceRange range) const;
+
         MaybeError ValidateCanUseInSubmitNow() const;
 
         bool IsMultisampledTexture() const;

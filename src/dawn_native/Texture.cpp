@@ -568,4 +568,163 @@ namespace dawn_native {
         ASSERT(!IsError());
         return mArrayLayerCount;
     }
+
+    TextureBase::UninitializedSubresources TextureBase::IterateUninitializedSubresources(
+        SubresourceRange range) const {
+        return UninitializedSubresources(mIsSubresourceContentInitializedAtIndex, range,
+                                         mMipLevelCount);
+    }
+
+    // SubresourceRange
+    bool TextureBase::SubresourceRange::operator==(const SubresourceRange& rhs) const {
+        return (baseMipLevel == rhs.baseMipLevel && mipLevelCount == rhs.mipLevelCount &&
+                baseArrayLayer == rhs.baseArrayLayer && arrayLayerCount == rhs.arrayLayerCount);
+    }
+
+    bool TextureBase::SubresourceRange::operator!=(const SubresourceRange& rhs) const {
+        return (baseMipLevel != rhs.baseMipLevel || mipLevelCount != rhs.mipLevelCount ||
+                baseArrayLayer != rhs.baseArrayLayer || arrayLayerCount != rhs.arrayLayerCount);
+    }
+
+    // UninitializedSubresources
+    TextureBase::UninitializedSubresources::UninitializedSubresources(
+        const std::vector<bool>& initializedState,
+        SubresourceRange range,
+        uint32_t totalMipLevelCount)
+        : mInitializedState(initializedState),
+          mRange(range),
+          mTotalMipLevelCount(totalMipLevelCount) {
+    }
+
+    TextureBase::UninitializedSubresources::Iterator::Iterator(
+        const std::vector<bool>& initializedState,
+        SubresourceRange range,
+        uint32_t totalMipLevelCount,
+        SubresourceRange startRange)
+        : mInitializedState(initializedState),
+          mBaseRange(range),
+          mTotalMipLevelCount(totalMipLevelCount),
+          mCurrentRange(startRange) {
+        mCurrentRange = GetNextRange();
+    }
+
+    TextureBase::UninitializedSubresources::Iterator&
+    TextureBase::UninitializedSubresources::Iterator::operator++() {
+        mCurrentRange = GetNextRange();
+        return *this;
+    }
+
+    bool TextureBase::UninitializedSubresources::Iterator::operator==(const Iterator& other) const {
+        return mCurrentRange == other.mCurrentRange;
+    }
+
+    bool TextureBase::UninitializedSubresources::Iterator::operator!=(const Iterator& other) const {
+        return mCurrentRange != other.mCurrentRange;
+    }
+
+    TextureBase::SubresourceRange TextureBase::UninitializedSubresources::Iterator::GetNextRange()
+        const {
+        // We can only yield an imaginary level x layer 2D subrectangle: Imagine mips are the
+        // rows and layers are columns.
+        // . . . . . . . . .
+        // . 1 . . . . . . 2
+        // 3 . . . . . . . .
+        // . . . . . . . . .
+        // . . . . . . . . 4
+        // 5 . . . 6 . . . .
+        // . . . . . . . . .
+        // If we have an uninitialized range spanning from (1) to (6), we're going to need to
+        // break it into: (1 -> 2), (3 -> 4), (5 -> 6).
+
+        // Start searching where the last range left off. On the last mip level, and array layer one
+        // after.
+        uint32_t mipLevel =
+            mCurrentRange.baseMipLevel + std::max(mCurrentRange.mipLevelCount, 1u) - 1;
+        uint32_t arrayLayer = mCurrentRange.baseArrayLayer + mCurrentRange.arrayLayerCount;
+
+        // Initiaize these to the max value. This indicates no uninitialized subresources are found
+        // yet.
+        uint32_t firstMipLevel = ~0;
+        uint32_t firstArrayLayer = ~0u;
+        bool done = false;
+
+        for (; mipLevel < mBaseRange.baseMipLevel + mBaseRange.mipLevelCount; ++mipLevel) {
+            for (; arrayLayer < mBaseRange.baseArrayLayer + mBaseRange.arrayLayerCount;
+                 ++arrayLayer) {
+                const bool isInitialized =
+                    mInitializedState[arrayLayer * mTotalMipLevelCount + mipLevel];
+
+                if (!isInitialized) {
+                    // When we find the first uninitialized layer, save it.
+                    if (firstArrayLayer == ~0u) {
+                        firstArrayLayer = arrayLayer;
+                        firstMipLevel = mipLevel;
+                    }
+                } else if (firstArrayLayer != ~0u) {
+                    // After finding an uninitialized subresource, once we find an initialized one,
+                    // break so we can return a contiguous range.
+                    done = true;
+                    break;
+                }
+            }
+
+            // |arrayLayer| is exclusive. It is one past the last uninitialized subresource.
+            // |mipLevel| is inclusive. It is the current mip we're looking at.
+
+            if (firstArrayLayer != ~0u) {
+                // Case: 1->? truncated to 1->2
+                // We've found the beginning of the uninitialized range,
+                if (!done && firstArrayLayer != mBaseRange.baseArrayLayer) {
+                    // but didn't find the end, and are now are moving on to the next mip.
+                    // The starting layer is not the first of the base range, so it will be
+                    // impossible to form a nice mip x layer 2D rectangle to specify the
+                    // subresource. Return now.
+                    ASSERT(firstMipLevel == mipLevel);
+                    return SubresourceRange{firstMipLevel, 1, firstArrayLayer,
+                                            arrayLayer - firstArrayLayer};
+                }
+            }
+
+            if (done) {
+                // We've found the start and end of the range.
+                ASSERT(firstArrayLayer != ~0u);
+                if (firstMipLevel == mipLevel) {
+                    // And they're on the same mip. Return the range.
+                    return SubresourceRange{firstMipLevel, 1, firstArrayLayer,
+                                            arrayLayer - firstArrayLayer};
+                }
+
+                ASSERT(firstArrayLayer == mBaseRange.baseArrayLayer);
+                if (arrayLayer != mBaseRange.baseArrayLayer + mBaseRange.arrayLayerCount) {
+                    // Case: Range 3->6 cut down to 3->4
+                    // The end layer didn't reach to the edge of the range, so we can't form a nice
+                    // mip x 2d layer 2D rectangle specifying the subresource.
+                    // Make a rectangle using the previous mip level.
+                    return SubresourceRange{firstMipLevel, mipLevel - firstMipLevel,
+                                            mBaseRange.baseArrayLayer, mBaseRange.arrayLayerCount};
+                }
+
+                ASSERT(firstArrayLayer == mBaseRange.baseArrayLayer);
+                ASSERT(arrayLayer == mBaseRange.baseArrayLayer + mBaseRange.arrayLayerCount);
+                // The good case: 3 -> 4
+                return SubresourceRange{firstMipLevel, mipLevel - firstMipLevel + 1,
+                                        mBaseRange.baseArrayLayer, mBaseRange.arrayLayerCount};
+            }
+
+            // On the next mip, start at the base array layer
+            arrayLayer = mBaseRange.baseArrayLayer;
+        }
+
+        if (firstArrayLayer != ~0u) {
+            // Nothing is initialized. Return the entire range.
+            ASSERT(!done);
+            ASSERT(firstArrayLayer == mBaseRange.baseArrayLayer);
+            return mBaseRange;
+        }
+
+        // Everything is initialized.
+        return SubresourceRange{mBaseRange.baseMipLevel + mBaseRange.mipLevelCount, 0,
+                                mBaseRange.baseArrayLayer + mBaseRange.arrayLayerCount, 0};
+    }
+
 }  // namespace dawn_native
