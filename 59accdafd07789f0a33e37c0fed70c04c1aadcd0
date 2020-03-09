@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "0811e369_7177ede1",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T13:50:08Z",
+      "side": 1,
+      "message": "nit ASSERT(!IsError()) inside if (mLayout) so we are sure that error bindgroups don\u0027t try to in-place destruct stuff in an invalid pointer.",
+      "parentUuid": "1733d53e_6132c17e",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c33e80da_6c2dc25a",
         "filename": "src/dawn_native/BindGroup.h",
         "patchSetId": 12
@@ -230,6 +248,24 @@
       "side": 1,
       "message": "Hm, I don\u0027t like that, because especially after we pack the bindings we don\u0027t need offset and size for non-buffer bindings. I made some other changes + static_asserts which makes the math computation a lot simpler and cleaner though.",
       "parentUuid": "2419e14b_b1dde7b7",
+      "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbd4be0d_1d06ca8e",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T13:50:08Z",
+      "side": 1,
+      "message": "Yeah that makes sense. The offset and size pointers could still be merged into a single one by having them in a single struct.",
+      "parentUuid": "739b67ce_60e5a0f3",
       "revId": "59accdafd07789f0a33e37c0fed70c04c1aadcd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
