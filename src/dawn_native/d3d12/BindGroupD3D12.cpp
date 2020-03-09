@@ -161,6 +161,7 @@ namespace dawn_native { namespace d3d12 {
                 } break;
 
                 case wgpu::BindingType::StorageTexture:
+                case wgpu::BindingType::WriteonlyStorageTexture:
                     UNREACHABLE();
                     break;
 

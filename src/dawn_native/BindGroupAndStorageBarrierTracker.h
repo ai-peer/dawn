@@ -62,6 +62,7 @@ namespace dawn_native {
                             break;
 
                         case wgpu::BindingType::StorageTexture:
+                        case wgpu::BindingType::WriteonlyStorageTexture:
                             // Not implemented.
 
                         default:
