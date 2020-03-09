@@ -136,6 +136,7 @@ namespace dawn_native { namespace d3d12 {
                                 break;
 
                             case wgpu::BindingType::StorageTexture:
+                            case wgpu::BindingType::WriteonlyStorageTexture:
                                 // Not implemented.
 
                             case wgpu::BindingType::UniformBuffer:
@@ -224,6 +225,7 @@ namespace dawn_native { namespace d3d12 {
                         case wgpu::BindingType::SampledTexture:
                         case wgpu::BindingType::Sampler:
                         case wgpu::BindingType::StorageTexture:
+                        case wgpu::BindingType::WriteonlyStorageTexture:
                             UNREACHABLE();
                             break;
                     }
