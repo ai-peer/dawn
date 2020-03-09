@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6a0f61d9_c2fb9954",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-09T20:11:11Z",
+      "side": 1,
+      "message": "Renamed to TrackUsageAndGetResourceBarrier + TrackUsageAndTransitionNow.",
+      "parentUuid": "eedcd092_09779000",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 62
+      },
+      "revId": "1400732eace2480b59c894187d12f7650a3df362",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6393e976_bdd5a919",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "1400732eace2480b59c894187d12f7650a3df362",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea42fbd5_2f524ab4",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-09T20:11:11Z",
+      "side": 1,
+      "message": "It\u0027s no longer needed. Removed.",
+      "parentUuid": "6393e976_bdd5a919",
+      "revId": "1400732eace2480b59c894187d12f7650a3df362",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
