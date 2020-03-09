@@ -26,10 +26,32 @@ namespace dawn_native {
     MaybeError ValidateBindingTypeWithShaderStageVisibility(
         wgpu::BindingType bindingType,
         wgpu::ShaderStage shaderStageVisibility) {
-        if (bindingType == wgpu::BindingType::StorageBuffer &&
-            (shaderStageVisibility & wgpu::ShaderStage::Vertex) != 0) {
-            return DAWN_VALIDATION_ERROR(
-                "storage buffer binding is not supported in vertex shader");
+        // TODO(jiawei.shao@intel.com): support read-only and read-write storage textures.
+        switch (bindingType) {
+            case wgpu::BindingType::StorageBuffer: {
+                if ((shaderStageVisibility & wgpu::ShaderStage::Vertex) != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "storage buffer binding is not supported in vertex shader");
+                }
+            } break;
+
+            case wgpu::BindingType::WriteonlyStorageTexture: {
+                if ((shaderStageVisibility &
+                     (wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment)) != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "write-only storage texture binding is only supported in compute shader");
+                }
+            } break;
+
+            case wgpu::BindingType::StorageTexture: {
+                return DAWN_VALIDATION_ERROR("Read-write storage texture binding is not supported");
+            } break;
+
+            case wgpu::BindingType::UniformBuffer:
+            case wgpu::BindingType::ReadonlyStorageBuffer:
+            case wgpu::BindingType::Sampler:
+            case wgpu::BindingType::SampledTexture:
+                break;
         }
 
         return {};
@@ -78,6 +100,7 @@ namespace dawn_native {
                     break;
                 case wgpu::BindingType::SampledTexture:
                 case wgpu::BindingType::Sampler:
+                case wgpu::BindingType::WriteonlyStorageTexture:
                     if (binding.hasDynamicOffset) {
                         return DAWN_VALIDATION_ERROR("Samplers and textures cannot be dynamic");
                     }
@@ -171,6 +194,7 @@ namespace dawn_native {
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
                     case wgpu::BindingType::StorageTexture:
+                    case wgpu::BindingType::WriteonlyStorageTexture:
                         UNREACHABLE();
                         break;
                 }
