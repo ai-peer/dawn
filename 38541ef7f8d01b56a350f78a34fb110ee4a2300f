@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88c34210_02b8b739",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-09T21:05:27Z",
+      "side": 1,
+      "message": "Nit: There shouldn\u0027t be a need to assert the heap is non-nullptr because you\u0027re dereferencing it two lines below.\n\n(Same goes for other places where you do the same thing)",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 32
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69ab893c_49a20dcb",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-09T21:05:27Z",
+      "side": 1,
+      "message": "Nit: Please move this (very useful) comment to the header file.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea0d95ad_1870252e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-09T21:05:27Z",
+      "side": 1,
+      "message": "I see this code copy and pasted in several places. Should we make it a helper method off of Heap?",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 0
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
