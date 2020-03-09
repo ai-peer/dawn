@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8b821988_054a6a75",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T10:59:19Z",
+      "side": 1,
+      "message": "Then we can also check !pool.empty() in that condition. Tying checking the loop doesn\u0027t seem semantically related to having a heap current",
+      "parentUuid": "cc8c7a87_19ea90df",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 13
+      },
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3af3e26_8fa8a3d8",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "I like these tests. I\u0027d like to include them when I get to resizing heaps.",
       "parentUuid": "d3af3e26_8fa8a3d8",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c11d920_f9dd1583",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T10:59:19Z",
+      "side": 1,
+      "message": "I thought we agreed in our last meeting that resizing wasn\u0027t needed anytime soon, if at all. On the other hand, these tests are needed sooner than later.",
+      "parentUuid": "8fb64ab8_b230a53c",
       "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
