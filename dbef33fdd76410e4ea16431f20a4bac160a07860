@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "a646afd2_2afe4272",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T13:56:34Z",
+      "side": 1,
+      "message": "kExternal shouldn\u0027t be treated as kDirect, because AFAIK the current approach is that residency of the resource is externally managed. Like Bryan said, kExternal is could be created either as a committed or a placed resource so it is a completely different allocation type (and not kDirect with an ownership bit).",
+      "parentUuid": "37ed2b9e_7b70b659",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "dbef33fdd76410e4ea16431f20a4bac160a07860",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f87635c4_6f0cee7d",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 5
