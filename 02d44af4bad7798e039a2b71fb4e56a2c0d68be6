@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b31627b_58b96391",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T15:12:43Z",
+      "side": 1,
+      "message": "nit: sentence appears twice? Also I think you meant to say D3D12 instead of Windows.",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5175fde8_96bb40e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T15:12:43Z",
+      "side": 1,
+      "message": "Why don\u0027t we just replace \"storage texture\" with \"writeonly storage texture\" and also add \"readonly storage texture\". This is a frontend patch so it\u0027s ok if SPIRV-Cross doesn\u0027t support it on D3D12.",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f79a013f_903eb377",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T15:12:43Z",
+      "side": 1,
+      "message": "\"writeonly storage buffer\" doesn\u0027t exist so I\u0027m not sure I understand.",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b0b0dbf_f68752d5",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T15:12:43Z",
+      "side": 1,
+      "message": "Please also add this without the comma to src/dawn_native/CMakeLists.txt",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "751fdb3e_d4e503b3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-09T15:12:43Z",
+      "side": 1,
+      "message": "I thought we could support writing to storage images in fragment shader?",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
