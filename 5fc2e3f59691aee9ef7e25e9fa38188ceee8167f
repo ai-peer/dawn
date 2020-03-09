@@ -186,6 +186,24 @@
     },
     {
       "key": {
+        "uuid": "35fc69e6_6ebcb9d5",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-09T22:02:54Z",
+      "side": 1,
+      "message": "Makes sense. But may I ask why have a toggle? We could test the overflow via MAX_SIZE + n where n \u003e 0.",
+      "parentUuid": "22a68a3c_0b4c7242",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92f722e8_f80eeb6d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
