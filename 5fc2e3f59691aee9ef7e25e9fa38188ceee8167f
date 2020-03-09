@@ -222,6 +222,24 @@
     },
     {
       "key": {
+        "uuid": "80fb7ce0_2d0da2ab",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-09T22:19:04Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "91d6a2a6_a7848ec3",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92f722e8_f80eeb6d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
