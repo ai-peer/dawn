@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "849b1a93_ce182014",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-09T21:45:32Z",
+      "side": 1,
+      "message": "I thought so but note the !pool.empty check is redundant/waste after Init() - SGTM.",
+      "parentUuid": "8b821988_054a6a75",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 13
+      },
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3af3e26_8fa8a3d8",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
@@ -123,6 +147,24 @@
       "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce7f2a15_3828f5ea",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-09T21:45:32Z",
+      "side": 1,
+      "message": "Pardon the confusion, I read \"heap size can be artificially limited to a small number\" to suggest dynamic resizing.\n\nAre you suggesting to add a toggle for some arbitrary fixed size (vs MAX)? \n\nI suspect we can add those tests w/o but I\u0027m happy to tackle it next.",
+      "parentUuid": "7c11d920_f9dd1583",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
