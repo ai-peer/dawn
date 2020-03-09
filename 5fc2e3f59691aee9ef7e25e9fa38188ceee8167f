@@ -204,6 +204,24 @@
     },
     {
       "key": {
+        "uuid": "91d6a2a6_a7848ec3",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-09T22:11:13Z",
+      "side": 1,
+      "message": "The CBV_SRV_UAV heap can hold a million descriptors. Ideally we want to test cases where CBV_SRC_UAV and SAMPLER heaps are recycling at different rates, without actually creating that many descriptors. It\u0027s simply an inefficient use of our testing resources.",
+      "parentUuid": "35fc69e6_6ebcb9d5",
+      "revId": "5fc2e3f59691aee9ef7e25e9fa38188ceee8167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92f722e8_f80eeb6d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 6
