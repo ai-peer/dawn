@@ -118,6 +118,30 @@
       "revId": "be6ff26e829e22aceeac35bd92c5b4fad5044e7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d55d1b5_fd4c83c4",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-09T22:27:17Z",
+      "side": 1,
+      "message": "You\u0027re looking at the wrong container (list vs set). Note: this test only checks if same or not.",
+      "parentUuid": "a36748ab_1ca99fa5",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 26
+      },
+      "revId": "be6ff26e829e22aceeac35bd92c5b4fad5044e7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
