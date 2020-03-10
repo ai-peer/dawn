@@ -16,6 +16,24 @@
       "revId": "c29f82d4e8d6fd3625bcfcab4351bed9bd84201e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e3b4e7d_f2f78279",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-10T19:07:36Z",
+      "side": 1,
+      "message": "Makes sense. Moved it there.",
+      "parentUuid": "a4c2429b_0db80122",
+      "revId": "c29f82d4e8d6fd3625bcfcab4351bed9bd84201e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

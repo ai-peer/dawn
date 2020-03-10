@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "603f8142_94722412",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-10T19:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88c34210_02b8b739",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 32
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69ab893c_49a20dcb",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a211ea61_6c6a0fcc",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-10T19:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69ab893c_49a20dcb",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea0d95ad_1870252e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa19a4c3_4b150b7d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-10T19:07:36Z",
+      "side": 1,
+      "message": "Moved the common logic into CommandRecordingContext, per Corentin\u0027s more recent comment.",
+      "parentUuid": "ea0d95ad_1870252e",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 0
+      },
+      "revId": "38541ef7f8d01b56a350f78a34fb110ee4a2300f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
