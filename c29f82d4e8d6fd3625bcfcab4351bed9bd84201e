@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4c2429b_0db80122",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-10T09:42:36Z",
+      "side": 1,
+      "message": "In a way this logic should be on the CommandRecordingContext instead of the Heap. Heaps are dumb containers of data, and happen to store a serial for an \"intrusive set\" computation in the CommandRecordingContext but the algorithm itself live in the CommandRecordingContext and should live as much as possible there.",
+      "revId": "c29f82d4e8d6fd3625bcfcab4351bed9bd84201e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
