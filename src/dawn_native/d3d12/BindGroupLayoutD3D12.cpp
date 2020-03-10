@@ -15,12 +15,19 @@
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 
 #include "common/BitSetIterator.h"
+#include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
-        : BindGroupLayoutBase(device, descriptor), mDescriptorCounts{} {
+        : BindGroupLayoutBase(device, descriptor),
+          mDescriptorCounts{},
+          mBindGroupAllocator(
+              4096,                                                                        // bytes
+              Align(sizeof(BindGroup), GetBindingDataAlignment()) + GetBindingDataSize(),  // size
+              std::max(alignof(BindGroup), GetBindingDataAlignment())  // alignment
+          ) {
         const auto& groupInfo = GetBindingInfo();
 
         for (uint32_t binding : IterateBitSet(groupInfo.mask)) {
@@ -135,6 +142,15 @@ namespace dawn_native { namespace d3d12 {
                     // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
             }
         }
+    }
+
+    BindGroup* BindGroupLayout::AllocateBindGroup(Device* device,
+                                                  const BindGroupDescriptor* descriptor) {
+        return mBindGroupAllocator.Allocate(device, descriptor);
+    }
+
+    void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup) {
+        mBindGroupAllocator.Deallocate(bindGroup);
     }
 
     const std::array<uint32_t, kMaxBindingsPerGroup>& BindGroupLayout::GetBindingOffsets() const {
