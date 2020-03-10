@@ -120,6 +120,24 @@
       "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85033218_d1c9992c",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T03:00:30Z",
+      "side": 1,
+      "message": "Also I see in MoltenVK \"fragmentStoresAndAtomics\" is only enabled on macOS, not iOS: https://github.com/KhronosGroup/MoltenVK/blob/master/MoltenVK/MoltenVK/GPUObjects/MVKDevice.mm#L1052",
+      "parentUuid": "82b711d4_99bc5db8",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
