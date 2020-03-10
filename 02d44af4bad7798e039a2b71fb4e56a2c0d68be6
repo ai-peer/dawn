@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "37bb5a80_aae83b29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T05:30:00Z",
+      "side": 1,
+      "message": "Done\n\nSorry about that.",
+      "parentUuid": "3b31627b_58b96391",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5175fde8_96bb40e7",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-09T15:12:43Z",
       "side": 1,
       "message": "Why don\u0027t we just replace \"storage texture\" with \"writeonly storage texture\" and also add \"readonly storage texture\". This is a frontend patch so it\u0027s ok if SPIRV-Cross doesn\u0027t support it on D3D12.",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b676069_74db274f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T05:30:00Z",
+      "side": 1,
+      "message": "I have two reasons to add \"storage texture\":\n\n1. To keep the consistency with \"storage buffer\" and \"readonly storage buffer\" in [1]. I need \"storage texture\" to represent \"readonly\", \"writeonly\", and \"read-write\" storage texture in [1].\n\n2. In the future we will also implement \"read-write\" storage texture, so although we remove it today, we still need to add it back later.",
+      "parentUuid": "5175fde8_96bb40e7",
       "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "40c7dc30_965278bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T05:30:00Z",
+      "side": 1,
+      "message": "Done\n\nSorry for my carelessness.",
+      "parentUuid": "f79a013f_903eb377",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b0b0dbf_f68752d5",
         "filename": "BUILD.gn",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf16e6f3_fa1edf4b",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T05:30:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b0b0dbf_f68752d5",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

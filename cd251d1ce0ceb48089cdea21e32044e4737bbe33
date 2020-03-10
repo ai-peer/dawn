@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fbd7a6f_1ce61c11",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T05:30:00Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "cd251d1ce0ceb48089cdea21e32044e4737bbe33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
