@@ -102,6 +102,24 @@
       "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82b711d4_99bc5db8",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T02:46:56Z",
+      "side": 1,
+      "message": "According to https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/WhatsNewiniOS9andOSX1011/WhatsNewiniOS9andOSX1011.html#//apple_ref/doc/uid/TP40014221-CH12-SW11 (\"Texture Usage\"), \"MTLTextureUsageShaderWrite enables writing to the texture from compute shaders\", so I am not sure if we should always support write-only storage textures in fragment shaders.",
+      "parentUuid": "1b0cfba9_cb7ba7a0",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
