@@ -22,6 +22,30 @@
       "revId": "c1655cb211c9ea41395267d58b32bf932a44a156",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4001fc5_221229ca",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-10T08:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eae4be2d_1e3ba19a",
+      "range": {
+        "startLine": 91,
+        "startChar": 7,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "c1655cb211c9ea41395267d58b32bf932a44a156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
