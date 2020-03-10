@@ -34,6 +34,24 @@
       "revId": "c29f82d4e8d6fd3625bcfcab4351bed9bd84201e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3372f2e_d988fc68",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-10T19:56:28Z",
+      "side": 1,
+      "message": "My instinct was to put it in heap so that it can better own the mLastUsageSerial member variable. But this alternative is fine also.\n\nI need to better keep up on which classes in Dawn are smart vs. \"dumb\" (Corentin\u0027s words).",
+      "parentUuid": "1e3b4e7d_f2f78279",
+      "revId": "c29f82d4e8d6fd3625bcfcab4351bed9bd84201e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
