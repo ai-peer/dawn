@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87dd9525_ade5ea9b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-10T09:23:24Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this change was made, we usually include external libraries after local files, and then standard library files.",
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6d45e7e_65e1f22d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-10T09:23:24Z",
+      "side": 1,
+      "message": "The TODO is fixed!",
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5ca54b6_d92a04a5",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-10T09:23:24Z",
+      "side": 1,
+      "message": "Why the extra highp?",
+      "range": {
+        "startLine": 96,
+        "startChar": 56,
+        "endLine": 96,
+        "endChar": 61
+      },
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
