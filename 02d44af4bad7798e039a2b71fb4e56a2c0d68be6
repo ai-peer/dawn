@@ -84,6 +84,24 @@
       "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0cfba9_cb7ba7a0",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-10T02:34:07Z",
+      "side": 1,
+      "message": "I remember Yunchao bringing this up recently. See vulkan\u0027s fragmentStoresAndAtomics.",
+      "parentUuid": "751fdb3e_d4e503b3",
+      "revId": "02d44af4bad7798e039a2b71fb4e56a2c0d68be6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
