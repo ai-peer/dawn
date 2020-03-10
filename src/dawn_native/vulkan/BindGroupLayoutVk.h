@@ -17,12 +17,14 @@
 
 #include "dawn_native/BindGroupLayout.h"
 
+#include "common/SlabAllocator.h"
 #include "common/vulkan_platform.h"
 
 #include <vector>
 
 namespace dawn_native { namespace vulkan {
 
+    class BindGroup;
     class Device;
 
     VkDescriptorType VulkanDescriptorType(wgpu::BindingType type, bool isDynamic);
@@ -53,8 +55,12 @@ namespace dawn_native { namespace vulkan {
 
         VkDescriptorSetLayout GetHandle() const;
 
-        ResultOrError<DescriptorSetAllocation> AllocateOneSet();
-        void Deallocate(DescriptorSetAllocation* allocation);
+        ResultOrError<BindGroup*> AllocateBindGroup(DeviceBase* device,
+                                                    const BindGroupDescriptor* descriptor);
+        void DeallocateBindGroup(BindGroup* bindGroup);
+
+        ResultOrError<DescriptorSetAllocation> AllocateOneDescriptorSet();
+        void DeallocateDescriptorSet(DescriptorSetAllocation* descriptorSetAllocation);
 
         // Interaction with the DescriptorSetService.
         void FinishDeallocation(size_t index);
@@ -74,6 +80,8 @@ namespace dawn_native { namespace vulkan {
         std::vector<size_t> mAvailableAllocations;
 
         VkDescriptorSetLayout mHandle = VK_NULL_HANDLE;
+
+        SlabAllocator<BindGroup> mBindGroupAllocator;
     };
 
 }}  // namespace dawn_native::vulkan
