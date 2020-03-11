@@ -36,6 +36,16 @@ TEST_F(CommandBufferValidationTest, EndedMidRenderPass) {
         encoder.Finish();
     }
 
+    // Control case, command buffer ended after the pass is ended.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass0 = encoder.BeginRenderPass(&dummyRenderPass);
+        pass0.EndPass();
+        wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&dummyRenderPass);
+        pass1.EndPass();
+        encoder.Finish();
+    }
+
     // Error case, command buffer ended mid-pass.
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -300,4 +310,41 @@ TEST_F(CommandBufferValidationTest, TextureWithReadAndWriteUsage) {
     pass.SetBindGroup(0, bg);
     pass.EndPass();
     ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+// Test that using the same texture as both readable and writable in the different passes is allowed
+TEST_F(CommandBufferValidationTest, TextureWithReadAndWriteUsageOnDifferentPasses) {
+    // Create a texture that will be used both as a sampled texture and a render target
+    wgpu::TextureDescriptor textureDescriptor;
+    textureDescriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+    textureDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDescriptor.dimension = wgpu::TextureDimension::e2D;
+    textureDescriptor.size = {1, 1, 1};
+    textureDescriptor.arrayLayerCount = 1;
+    textureDescriptor.sampleCount = 1;
+    textureDescriptor.mipLevelCount = 1;
+    wgpu::Texture t0 = device.CreateTexture(&textureDescriptor);
+    wgpu::TextureView v0 = t0.CreateView();
+    wgpu::Texture t1 = device.CreateTexture(&textureDescriptor);
+    wgpu::TextureView v1 = t1.CreateView();
+
+    // Create the bind group to use the texture as sampled
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BindingType::SampledTexture}});
+    wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, v0}});
+    wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, v1}});
+
+    // Create the render pass that will use the texture as an output attachment
+    utils::ComboRenderPassDescriptor renderPass0({v1});
+    utils::ComboRenderPassDescriptor renderPass1({v0});
+
+    // Use the texture as both sampeld and output attachment in the same pass
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass0 = encoder.BeginRenderPass(&renderPass0);
+    pass0.SetBindGroup(0, bg0);
+    pass0.EndPass();
+    wgpu::RenderPassEncoder pass1 = encoder.BeginRenderPass(&renderPass1);
+    pass1.SetBindGroup(0, bg1);
+    pass1.EndPass();
+    encoder.Finish();
 }

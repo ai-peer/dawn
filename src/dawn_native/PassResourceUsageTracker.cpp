@@ -25,10 +25,17 @@ namespace dawn_native {
         mBufferUsages[buffer] |= usage;
     }
 
-    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage) {
+    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture,
+                                                 wgpu::TextureUsage usage,
+                                                 uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount) {
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
         mTextureUsages[texture] |= usage;
+        texture->SetTextureSubresourceUsage(usage, baseMipLevel, levelCount, baseArrayLayer,
+                                            layerCount);
     }
 
     // Returns the per-pass usage for use by backends for APIs with explicit barriers.

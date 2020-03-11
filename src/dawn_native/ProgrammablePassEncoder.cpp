@@ -46,8 +46,11 @@ namespace dawn_native {
                     } break;
 
                     case wgpu::BindingType::SampledTexture: {
-                        TextureBase* texture = group->GetBindingAsTextureView(i)->GetTexture();
-                        usageTracker->TextureUsedAs(texture, wgpu::TextureUsage::Sampled);
+                        TextureViewBase* view = group->GetBindingAsTextureView(i);
+                        usageTracker->TextureUsedAs(view->GetTexture(), wgpu::TextureUsage::Sampled,
+                                                    view->GetBaseMipLevel(), view->GetLevelCount(),
+                                                    view->GetBaseArrayLayer(),
+                                                    view->GetLayerCount());
                     } break;
 
                     case wgpu::BindingType::ReadonlyStorageBuffer: {
