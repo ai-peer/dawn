@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0b52311_fec5a812",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-11T00:43:52Z",
+      "side": 1,
+      "message": "Why did this change? I don\u0027t see the device used in this function.",
+      "range": {
+        "startLine": 56,
+        "startChar": 59,
+        "endLine": 56,
+        "endChar": 73
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f69ec32e_4140e658",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-11T00:43:52Z",
+      "side": 1,
+      "message": "u-nit: extra whitespace",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e2a7c34_825bb84f",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-11T00:43:52Z",
+      "side": 1,
+      "message": "u-nit: whitespace above this",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
