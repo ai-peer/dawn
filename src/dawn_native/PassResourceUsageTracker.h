@@ -33,7 +33,12 @@ namespace dawn_native {
     class PassResourceUsageTracker {
       public:
         void BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage);
-        void TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage);
+        void TextureUsedAs(TextureBase* texture,
+                           wgpu::TextureUsage usage,
+                           uint32_t baseMipLevel = 0,
+                           uint32_t levelCount = 1,
+                           uint32_t baseArrayLayer = 0,
+                           uint32_t layerCount = 1);
 
         // Returns the per-pass usage for use by backends for APIs with explicit barriers.
         PassResourceUsage AcquireResourceUsage();

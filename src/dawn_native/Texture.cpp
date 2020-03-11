@@ -353,6 +353,8 @@ namespace dawn_native {
         uint32_t subresourceCount =
             GetSubresourceIndex(descriptor->mipLevelCount, descriptor->arrayLayerCount);
         mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
+        mSubresourceUsage =
+            std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
     }
 
     static Format kUnusedFormat;
@@ -443,6 +445,32 @@ namespace dawn_native {
                 mIsSubresourceContentInitializedAtIndex[subresourceIndex] = isInitialized;
             }
         }
+    }
+
+    void TextureBase::SetTextureSubresourceUsage(wgpu::TextureUsage usage,
+                                                 uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount) {
+        ASSERT(!IsError());
+        for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount; ++mipLevel) {
+            for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                 ++arrayLayer) {
+                uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
+                mSubresourceUsage[subresourceIndex] |= usage;
+            }
+        }
+    }
+
+    bool TextureBase::IsSubresourceUsageValid() const {
+        ASSERT(!IsError());
+        uint32_t totalIndex = GetSubresourceIndex(mMipLevelCount, mArrayLayerCount);
+        for (uint32_t index = 0; index < totalIndex; ++index) {
+            if (!wgpu::HasZeroOrOneBits(mSubresourceUsage[index])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
