@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e697e906_54b6d065",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-11T09:47:55Z",
+      "side": 1,
+      "message": "nit: maybe these and the computation for the alignment could be template helpers in BidnGroupLayoutBase that take the derived bindgroup class as a template argument.",
+      "range": {
+        "startLine": 136,
+        "startChar": 14,
+        "endLine": 136,
+        "endChar": 88
+      },
+      "revId": "684151ba141b647bd5a35e12331004491725dc35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52c6f7cc_1616fa21",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-11T09:47:55Z",
+      "side": 1,
+      "message": "ditto, maybe",
+      "range": {
+        "startLine": 39,
+        "startChar": 24,
+        "endLine": 40,
+        "endChar": 79
+      },
+      "revId": "684151ba141b647bd5a35e12331004491725dc35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
