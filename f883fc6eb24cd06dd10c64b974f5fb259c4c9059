@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "cdf520dd_d48e74d2",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-11T16:22:58Z",
+      "side": 1,
+      "message": "But previously we passed the command queue directly in, instead of calling GetCommandQueue() so we don\u0027t actually need the device. Anyway, it\u0027s minor. Fine with it if a later patch is going to use the device in this function, but if that\u0027s the case it should be in that CL.",
+      "parentUuid": "b2f5ad10_4ac3ed93",
+      "range": {
+        "startLine": 56,
+        "startChar": 59,
+        "endLine": 56,
+        "endChar": 73
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ea5e956_1f4da0c1",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 12
