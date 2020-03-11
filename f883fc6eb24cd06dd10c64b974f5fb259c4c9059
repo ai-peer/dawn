@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "b2f5ad10_4ac3ed93",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-11T09:58:05Z",
+      "side": 1,
+      "message": "It\u0027s at [1]",
+      "parentUuid": "a0b52311_fec5a812",
+      "range": {
+        "startLine": 56,
+        "startChar": 59,
+        "endLine": 56,
+        "endChar": 73
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ea5e956_1f4da0c1",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-11T09:58:05Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f69ec32e_4140e658",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 12
