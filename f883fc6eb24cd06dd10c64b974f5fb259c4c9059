@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "71f90f77_9194ca16",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-11T16:26:26Z",
+      "side": 1,
+      "message": "Austin is right, I\u0027m using device later to call device-\u003eGetResidencyManager(). I\u0027ll pull this out for now and introduce later.",
+      "parentUuid": "cdf520dd_d48e74d2",
+      "range": {
+        "startLine": 56,
+        "startChar": 59,
+        "endLine": 56,
+        "endChar": 73
+      },
+      "revId": "f883fc6eb24cd06dd10c64b974f5fb259c4c9059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ea5e956_1f4da0c1",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 12
