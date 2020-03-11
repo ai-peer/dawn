@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a765412_10220011",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-11T00:31:29Z",
+      "side": 1,
+      "message": "Nit: disporportionate --\u003e disproportionate",
+      "range": {
+        "startLine": 331,
+        "startChar": 38,
+        "endLine": 331,
+        "endChar": 54
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb1a2d9_5f9e82e4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-11T00:31:29Z",
+      "side": 1,
+      "message": "Why is UpdateVideoMemoryInfo a public method if it is only called internally to the Device class?",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
