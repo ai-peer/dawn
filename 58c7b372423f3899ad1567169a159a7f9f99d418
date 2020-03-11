@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "06d88e65_6a643e4a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-11T01:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87dd9525_ade5ea9b",
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6d45e7e_65e1f22d",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d97d7fd8_120819f7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-11T01:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6d45e7e_65e1f22d",
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e42052a_dd322280",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-11T01:26:55Z",
+      "side": 1,
+      "message": "Done\n\nI don\u0027t think we need it, either.",
+      "parentUuid": "d5ca54b6_d92a04a5",
+      "range": {
+        "startLine": 96,
+        "startChar": 56,
+        "endLine": 96,
+        "endChar": 61
+      },
+      "revId": "58c7b372423f3899ad1567169a159a7f9f99d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
