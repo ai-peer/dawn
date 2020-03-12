@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d1cdb88b_0e1f4090",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-12T14:29:42Z",
+      "side": 1,
+      "message": "This should be updated in BackendD3D12 since we can guarantee that D3D12 adapters will support IDXGIAdapter3",
+      "range": {
+        "startLine": 37,
+        "startChar": 46,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a765412_10220011",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
