@@ -243,7 +243,7 @@ namespace dawn_native {
                 info->base_type_id = binding.base_type_id;
                 if (binding.binding_type == shaderc_spvc_binding_type_sampled_texture) {
                     info->multisampled = binding.multisampled;
-                    info->textureDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
+                    info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                     info->textureComponentType = ToDawnFormatType(binding.texture_component_type);
                 }
                 info->type = ToWGPUBindingType(binding.binding_type);
@@ -390,7 +390,7 @@ namespace dawn_native {
                             compiler.get_type(imageType.type).basetype;
 
                         info->multisampled = imageType.ms;
-                        info->textureDimension =
+                        info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         info->textureComponentType =
                             SpirvCrossBaseTypeToFormatType(textureComponentType);
@@ -573,7 +573,7 @@ namespace dawn_native {
                     return false;
                 }
 
-                if (layoutInfo.textureDimensions[i] != moduleInfo.textureDimension) {
+                if (layoutInfo.viewDimensions[i] != moduleInfo.viewDimension) {
                     return false;
                 }
             }

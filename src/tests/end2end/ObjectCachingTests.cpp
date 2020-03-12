@@ -63,8 +63,8 @@ TEST_P(ObjectCachingTest, BindGroupLayoutTextureComponentType) {
 }
 
 // Test that two similar bind group layouts won't refer to the same one if they differ by
-// textureDimension
-TEST_P(ObjectCachingTest, BindGroupLayoutTextureDimension) {
+// viewDimension
+TEST_P(ObjectCachingTest, BindGroupLayoutTextureViewDimension) {
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {{1, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false, false,
                   wgpu::TextureViewDimension::e2D, wgpu::TextureComponentType::Float}});

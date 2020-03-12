@@ -73,8 +73,8 @@ namespace dawn_native {
             DAWN_TRY(ValidateBindingType(binding.type));
             DAWN_TRY(ValidateTextureComponentType(binding.textureComponentType));
 
-            if (binding.textureDimension != wgpu::TextureViewDimension::Undefined) {
-                DAWN_TRY(ValidateTextureViewDimension(binding.textureDimension));
+            if (binding.viewDimension != wgpu::TextureViewDimension::Undefined) {
+                DAWN_TRY(ValidateTextureViewDimension(binding.viewDimension));
             }
 
             if (binding.binding >= kMaxBindingsPerGroup) {
@@ -139,7 +139,7 @@ namespace dawn_native {
 
             for (uint32_t binding : IterateBitSet(info.mask)) {
                 HashCombine(&hash, info.visibilities[binding], info.types[binding],
-                            info.textureComponentTypes[binding], info.textureDimensions[binding]);
+                            info.textureComponentTypes[binding], info.viewDimensions[binding]);
             }
 
             return hash;
@@ -156,7 +156,7 @@ namespace dawn_native {
                 if ((a.visibilities[binding] != b.visibilities[binding]) ||
                     (a.types[binding] != b.types[binding]) ||
                     (a.textureComponentTypes[binding] != b.textureComponentTypes[binding]) ||
-                    (a.textureDimensions[binding] != b.textureDimensions[binding])) {
+                    (a.viewDimensions[binding] != b.viewDimensions[binding])) {
                     return false;
                 }
             }
@@ -178,10 +178,10 @@ namespace dawn_native {
             mBindingInfo.types[index] = binding.type;
             mBindingInfo.textureComponentTypes[index] = binding.textureComponentType;
 
-            if (binding.textureDimension == wgpu::TextureViewDimension::Undefined) {
-                mBindingInfo.textureDimensions[index] = wgpu::TextureViewDimension::e2D;
+            if (binding.viewDimension == wgpu::TextureViewDimension::Undefined) {
+                mBindingInfo.viewDimensions[index] = wgpu::TextureViewDimension::e2D;
             } else {
-                mBindingInfo.textureDimensions[index] = binding.textureDimension;
+                mBindingInfo.viewDimensions[index] = binding.viewDimension;
             }
             if (binding.hasDynamicOffset) {
                 mBindingInfo.hasDynamicOffset.set(index);

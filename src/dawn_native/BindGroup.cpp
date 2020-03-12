@@ -154,7 +154,7 @@ namespace dawn_native {
                     DAWN_TRY(ValidateTextureBinding(device, binding, wgpu::TextureUsage::Sampled,
                                                     layoutInfo.multisampled[bindingIndex],
                                                     layoutInfo.textureComponentTypes[bindingIndex],
-                                                    layoutInfo.textureDimensions[bindingIndex]));
+                                                    layoutInfo.viewDimensions[bindingIndex]));
                     break;
                 case wgpu::BindingType::Sampler:
                     DAWN_TRY(ValidateSamplerBinding(device, binding));

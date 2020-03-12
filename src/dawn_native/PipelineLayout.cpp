@@ -28,8 +28,7 @@ namespace dawn_native {
         bool operator==(const BindGroupLayoutBinding& lhs, const BindGroupLayoutBinding& rhs) {
             return lhs.binding == rhs.binding && lhs.visibility == rhs.visibility &&
                    lhs.type == rhs.type && lhs.hasDynamicOffset == rhs.hasDynamicOffset &&
-                   lhs.multisampled == rhs.multisampled &&
-                   lhs.textureDimension == rhs.textureDimension &&
+                   lhs.multisampled == rhs.multisampled && lhs.viewDimension == rhs.viewDimension &&
                    lhs.textureComponentType == rhs.textureComponentType;
         }
 
@@ -166,7 +165,7 @@ namespace dawn_native {
                     bindingSlot.type = bindingInfo.type;
                     bindingSlot.hasDynamicOffset = false;
                     bindingSlot.multisampled = bindingInfo.multisampled;
-                    bindingSlot.textureDimension = bindingInfo.textureDimension;
+                    bindingSlot.viewDimension = bindingInfo.viewDimension;
                     bindingSlot.textureComponentType =
                         Format::FormatTypeToTextureComponentType(bindingInfo.textureComponentType);
 

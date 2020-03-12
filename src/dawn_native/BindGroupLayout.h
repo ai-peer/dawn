@@ -45,7 +45,7 @@ namespace dawn_native {
             std::array<wgpu::ShaderStage, kMaxBindingsPerGroup> visibilities;
             std::array<wgpu::BindingType, kMaxBindingsPerGroup> types;
             std::array<wgpu::TextureComponentType, kMaxBindingsPerGroup> textureComponentTypes;
-            std::array<wgpu::TextureViewDimension, kMaxBindingsPerGroup> textureDimensions;
+            std::array<wgpu::TextureViewDimension, kMaxBindingsPerGroup> viewDimensions;
             std::bitset<kMaxBindingsPerGroup> hasDynamicOffset;
             std::bitset<kMaxBindingsPerGroup> multisampled;
             std::bitset<kMaxBindingsPerGroup> mask;

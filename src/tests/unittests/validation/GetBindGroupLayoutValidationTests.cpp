@@ -283,7 +283,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     desc.bindings = &binding;
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::e1D;
+        binding.viewDimension = wgpu::TextureViewDimension::e1D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture1D tex;
@@ -293,7 +293,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     }
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::e2D;
+        binding.viewDimension = wgpu::TextureViewDimension::e2D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture2D tex;
@@ -303,7 +303,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     }
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::e2DArray;
+        binding.viewDimension = wgpu::TextureViewDimension::e2DArray;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture2DArray tex;
@@ -313,7 +313,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     }
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::e3D;
+        binding.viewDimension = wgpu::TextureViewDimension::e3D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture3D tex;
@@ -323,7 +323,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     }
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::Cube;
+        binding.viewDimension = wgpu::TextureViewDimension::Cube;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
         #version 450
         layout(set = 0, binding = 0) uniform textureCube tex;
@@ -333,7 +333,7 @@ TEST_F(GetBindGroupLayoutTests, TextureDimension) {
     }
 
     {
-        binding.textureDimension = wgpu::TextureViewDimension::CubeArray;
+        binding.viewDimension = wgpu::TextureViewDimension::CubeArray;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
                 #version 450
                 layout(set = 0, binding = 0) uniform textureCubeArray tex;
