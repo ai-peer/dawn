@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8f9d050_b70c90a2",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-12T09:08:15Z",
+      "side": 1,
+      "message": "nit: Maybe this can just be a static_assert?\n\nAlso comment that we need to pass in derived because BindGroupBase might not be the first thing in the allocation.",
+      "range": {
+        "startLine": 63,
+        "startChar": 18,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "befd79dd6ab67b33c0147153565ac7c5f6288e8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
