@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e79a57f_a0e64622",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-12T14:38:42Z",
+      "side": 1,
+      "message": "Did we get information about the cost of this?",
+      "revId": "d6f2980b9ab3124270fae38174600766234763ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "167bb811_6e94bf38",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-12T14:38:42Z",
+      "side": 1,
+      "message": "nit: mVideoMemoryInfo.externalReservation \u003d std::max(budget / 2, externalReservation);\n\nAlso we should tag both this and the 95% with comments explaining it is just an initial heuristic (to avoid people cargo culting it)",
+      "revId": "d6f2980b9ab3124270fae38174600766234763ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
