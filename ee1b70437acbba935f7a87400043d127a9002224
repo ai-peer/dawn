@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e966c07_bc2c9e7d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-12T14:28:25Z",
+      "side": 1,
+      "message": "This could be simplified by first finding the 2D coordinate of the first uninitialized and last continuous subresource, without trying to return anything, and then doing computations of 1-\u003e2 3-\u003e4 or 5-\u003e6. There would be some overiterating but returning in the middle makes everything difficult to understand.\n\nTBH I\u0027m not sure we need to optimize our lazy-clear path this much and could have an iterator giving subresources one by one. It would massively simplify what we do here, as well as remove some nested loops in backends. I know we discussed this yesterday but looking at this function specifically I\u0027m not very comfortable doing the optimization unless we have a strong reason to do so.",
+      "revId": "ee1b70437acbba935f7a87400043d127a9002224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
