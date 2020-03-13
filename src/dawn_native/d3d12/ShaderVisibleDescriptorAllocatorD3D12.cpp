@@ -22,7 +22,13 @@ namespace dawn_native { namespace d3d12 {
     static_assert(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV == 0, "");
     static_assert(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER == 1, "");
 
-    uint32_t GetD3D12ShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE heapType) {
+    static constexpr const uint32_t kShaderVisibleMinHeapSizes[] = {4096, 512};
+
+    uint32_t GetD3D12ShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE heapType, bool useMinSize) {
+        if (useMinSize) {
+            return kShaderVisibleMinHeapSizes[heapType];
+        }
+
         switch (heapType) {
             case D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV:
                 return D3D12_MAX_SHADER_VISIBLE_DESCRIPTOR_HEAP_SIZE_TIER_1;
@@ -144,7 +150,8 @@ namespace dawn_native { namespace d3d12 {
         // TODO(bryan.bernhart@intel.com): Allocating to max heap size wastes memory
         // should the developer not allocate any bindings for the heap type.
         // Consider dynamically re-sizing GPU heaps.
-        const uint32_t descriptorCount = GetD3D12ShaderVisibleHeapSize(heapType);
+        const uint32_t descriptorCount = GetD3D12ShaderVisibleHeapSize(
+            heapType, mDevice->IsToggleEnabled(Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
 
         if (heap == nullptr) {
             D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
