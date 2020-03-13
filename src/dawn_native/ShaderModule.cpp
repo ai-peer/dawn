@@ -14,16 +14,15 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include <spirv-tools/libspirv.hpp>
+#include <spirv_cross.hpp>
+#include <sstream>
+
 #include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
-
-#include <spirv-tools/libspirv.hpp>
-#include <spirv_cross.hpp>
-
-#include <sstream>
 
 namespace dawn_native {
 
@@ -134,6 +133,77 @@ namespace dawn_native {
                         "Attempted to convert invalid spvc execution model to SingleShaderStage");
             }
         }
+
+        wgpu::TextureFormat ToWGPUTextureFormat(spv::ImageFormat format) {
+            switch (format) {
+                case spv::ImageFormatR8:
+                    return wgpu::TextureFormat::R8Unorm;
+                case spv::ImageFormatR8Snorm:
+                    return wgpu::TextureFormat::R8Snorm;
+                case spv::ImageFormatR8ui:
+                    return wgpu::TextureFormat::R8Uint;
+                case spv::ImageFormatR8i:
+                    return wgpu::TextureFormat::R8Sint;
+                case spv::ImageFormatR16ui:
+                    return wgpu::TextureFormat::R16Uint;
+                case spv::ImageFormatR16i:
+                    return wgpu::TextureFormat::R16Sint;
+                case spv::ImageFormatR16f:
+                    return wgpu::TextureFormat::R16Float;
+                case spv::ImageFormatRg8:
+                    return wgpu::TextureFormat::RG8Unorm;
+                case spv::ImageFormatRg8Snorm:
+                    return wgpu::TextureFormat::RG8Snorm;
+                case spv::ImageFormatRg8ui:
+                    return wgpu::TextureFormat::RG8Uint;
+                case spv::ImageFormatRg8i:
+                    return wgpu::TextureFormat::RG8Sint;
+                case spv::ImageFormatR32f:
+                    return wgpu::TextureFormat::R32Float;
+                case spv::ImageFormatR32ui:
+                    return wgpu::TextureFormat::R32Uint;
+                case spv::ImageFormatR32i:
+                    return wgpu::TextureFormat::R32Sint;
+                case spv::ImageFormatRg16ui:
+                    return wgpu::TextureFormat::RG16Uint;
+                case spv::ImageFormatRg16i:
+                    return wgpu::TextureFormat::RG16Sint;
+                case spv::ImageFormatRg16f:
+                    return wgpu::TextureFormat::RG16Float;
+                case spv::ImageFormatRgba8:
+                    return wgpu::TextureFormat::RGBA8Unorm;
+                case spv::ImageFormatRgba8Snorm:
+                    return wgpu::TextureFormat::RGBA8Snorm;
+                case spv::ImageFormatRgba8ui:
+                    return wgpu::TextureFormat::RGBA8Uint;
+                case spv::ImageFormatRgba8i:
+                    return wgpu::TextureFormat::RGBA8Sint;
+                case spv::ImageFormatRgb10A2:
+                    return wgpu::TextureFormat::RGB10A2Unorm;
+                case spv::ImageFormatR11fG11fB10f:
+                    return wgpu::TextureFormat::RG11B10Float;
+                case spv::ImageFormatRg32f:
+                    return wgpu::TextureFormat::RG32Float;
+                case spv::ImageFormatRg32ui:
+                    return wgpu::TextureFormat::RG32Uint;
+                case spv::ImageFormatRg32i:
+                    return wgpu::TextureFormat::RG32Sint;
+                case spv::ImageFormatRgba16ui:
+                    return wgpu::TextureFormat::RGBA16Uint;
+                case spv::ImageFormatRgba16i:
+                    return wgpu::TextureFormat::RGBA16Sint;
+                case spv::ImageFormatRgba16f:
+                    return wgpu::TextureFormat::RGBA16Float;
+                case spv::ImageFormatRgba32f:
+                    return wgpu::TextureFormat::RGBA32Float;
+                case spv::ImageFormatRgba32ui:
+                    return wgpu::TextureFormat::RGBA32Uint;
+                case spv::ImageFormatRgba32i:
+                    return wgpu::TextureFormat::RGBA32Sint;
+                default:
+                    return wgpu::TextureFormat::Undefined;
+            }
+        }
     }  // anonymous namespace
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase*,
@@ -173,7 +243,7 @@ namespace dawn_native {
         }
 
         return {};
-    }
+    }  // namespace
 
     // ShaderModuleBase
 
@@ -415,6 +485,15 @@ namespace dawn_native {
                         } else {
                             info->type = wgpu::BindingType::StorageTexture;
                         }
+
+                        spirv_cross::SPIRType::ImageType imageType =
+                            compiler.get_type(info->base_type_id).image;
+                        if (imageType.format == spv::ImageFormat::ImageFormatUnknown) {
+                            return DAWN_VALIDATION_ERROR(
+                                "No image format declaration on storage image");
+                        }
+
+                        info->storageTextureFormat = ToWGPUTextureFormat(imageType.format);
                     } break;
                     default:
                         info->type = bindingType;
