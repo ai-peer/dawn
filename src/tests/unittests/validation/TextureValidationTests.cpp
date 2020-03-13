@@ -347,7 +347,7 @@ TEST_F(TextureValidationTest, TextureFormatNotSupportTextureUsageStorage) {
 
     wgpu::TextureFormat kSupportedFormatsWithStorageUsage[] = {
         wgpu::TextureFormat::R32Uint,     wgpu::TextureFormat::R32Sint,
-        wgpu::TextureFormat::R32Uint,     wgpu::TextureFormat::RGBA8Unorm,
+        wgpu::TextureFormat::R32Float,    wgpu::TextureFormat::RGBA8Unorm,
         wgpu::TextureFormat::RGBA8Snorm,  wgpu::TextureFormat::RGBA8Uint,
         wgpu::TextureFormat::RGBA8Sint,   wgpu::TextureFormat::RG32Uint,
         wgpu::TextureFormat::RG32Sint,    wgpu::TextureFormat::RG32Float,
