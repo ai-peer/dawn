@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26c2f433_284489e5",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T11:29:32Z",
+      "side": 1,
+      "message": "I think the following would work too and be slightly less verbose:\n\n  struct TestSpec {\n    wgpu::ShaderStage stage;\n    wgpu::BindingType type;\n    bool valid;\n  }\n\n  constexpr kTestSpecs[] \u003d {\n    {wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageTexture, true},\n    // ...\n  };",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
