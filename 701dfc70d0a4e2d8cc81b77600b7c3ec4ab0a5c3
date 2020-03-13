@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e4eda74_7489eed1",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-13T19:07:08Z",
+      "side": 1,
+      "message": "Nit: There is no need to initialize a ComPtr to nullptr. The constructor already does this for you.",
+      "range": {
+        "startLine": 109,
+        "startChar": 46,
+        "endLine": 109,
+        "endChar": 56
+      },
+      "revId": "701dfc70d0a4e2d8cc81b77600b7c3ec4ab0a5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e62663df_69cd4583",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-13T19:07:08Z",
+      "side": 1,
+      "message": "Please use std::move when transferring ownership from one ComPtr to another.",
+      "range": {
+        "startLine": 113,
+        "startChar": 79,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "701dfc70d0a4e2d8cc81b77600b7c3ec4ab0a5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c001020b_96dcc2fa",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-13T19:07:08Z",
+      "side": 1,
+      "message": "Is there a reason why we need to make the residency manager be allocated on the heap instead of being a member of the class?  I prefer the latter as it gives us better locality of reference.",
+      "range": {
+        "startLine": 165,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 60
+      },
+      "revId": "701dfc70d0a4e2d8cc81b77600b7c3ec4ab0a5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7edf4ad4_f0f659b1",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-13T19:07:08Z",
+      "side": 1,
+      "message": "Nit: arbitraily --\u003e arbitrarily",
+      "range": {
+        "startLine": 59,
+        "startChar": 82,
+        "endLine": 59,
+        "endChar": 92
+      },
+      "revId": "701dfc70d0a4e2d8cc81b77600b7c3ec4ab0a5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
