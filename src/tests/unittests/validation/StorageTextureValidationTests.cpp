@@ -205,3 +205,43 @@ TEST_F(StorageTextureValidationTests, ReadWriteStorageTexture) {
         ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&descriptor));
     }
 }
+
+// Test that using read-only storage texture and write-only storage texture in
+// BindGroupLayout is valid, while using read-write storage texture is not allowed now.
+TEST_F(StorageTextureValidationTests, BindGroupLayoutWithStorageTextureBindingType) {
+    constexpr std::array<std::tuple<wgpu::ShaderStage, wgpu::BindingType, bool>, 9>
+        kStorageTextureSupportedInShaders = {
+            std::make_tuple(wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageTexture,
+                            true),
+            std::make_tuple(wgpu::ShaderStage::Vertex, wgpu::BindingType::WriteonlyStorageTexture,
+                            false),
+            std::make_tuple(wgpu::ShaderStage::Vertex, wgpu::BindingType::StorageTexture, false),
+            std::make_tuple(wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageTexture,
+                            true),
+            std::make_tuple(wgpu::ShaderStage::Fragment, wgpu::BindingType::WriteonlyStorageTexture,
+                            false),
+            std::make_tuple(wgpu::ShaderStage::Fragment, wgpu::BindingType::StorageTexture, false),
+            std::make_tuple(wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageTexture,
+                            true),
+            std::make_tuple(wgpu::ShaderStage::Compute, wgpu::BindingType::WriteonlyStorageTexture,
+                            true),
+            std::make_tuple(wgpu::ShaderStage::Compute, wgpu::BindingType::StorageTexture, false),
+        };
+
+    for (const auto& storageTextureSupportedInShader : kStorageTextureSupportedInShaders) {
+        const wgpu::ShaderStage shaderStage = std::get<0>(storageTextureSupportedInShader);
+        const wgpu::BindingType bindingType = std::get<1>(storageTextureSupportedInShader);
+        const bool isSupported = std::get<2>(storageTextureSupportedInShader);
+
+        wgpu::BindGroupLayoutBinding binding = {0, shaderStage, bindingType};
+        wgpu::BindGroupLayoutDescriptor descriptor;
+        descriptor.bindingCount = 1;
+        descriptor.bindings = &binding;
+
+        if (isSupported) {
+            device.CreateBindGroupLayout(&descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&descriptor));
+        }
+    }
+}

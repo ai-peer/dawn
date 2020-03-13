@@ -14,13 +14,13 @@
 
 #include "dawn_native/vulkan/BindGroupLayoutVk.h"
 
+#include <map>
+
 #include "common/BitSetIterator.h"
 #include "dawn_native/vulkan/DescriptorSetService.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/VulkanError.h"
-
-#include <map>
 
 namespace dawn_native { namespace vulkan {
 
@@ -61,6 +61,10 @@ namespace dawn_native { namespace vulkan {
                     return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC;
                 }
                 return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
+            case wgpu::BindingType::ReadonlyStorageTexture:
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                return VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
+            case wgpu::BindingType::StorageTexture:
             default:
                 UNREACHABLE();
         }

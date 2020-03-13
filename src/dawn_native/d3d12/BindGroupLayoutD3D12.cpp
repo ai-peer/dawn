@@ -36,19 +36,18 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] = mDescriptorCounts[CBV]++;
                     break;
                 case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::WriteonlyStorageTexture:
                     mBindingOffsets[binding] = mDescriptorCounts[UAV]++;
                     break;
                 case wgpu::BindingType::SampledTexture:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageTexture:
                     mBindingOffsets[binding] = mDescriptorCounts[SRV]++;
                     break;
                 case wgpu::BindingType::Sampler:
                     mBindingOffsets[binding] = mDescriptorCounts[Sampler]++;
                     break;
-
                 case wgpu::BindingType::StorageTexture:
-                case wgpu::BindingType::ReadonlyStorageTexture:
-                case wgpu::BindingType::WriteonlyStorageTexture:
                     UNREACHABLE();
                     break;
             }
@@ -122,19 +121,18 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] += descriptorOffsets[CBV];
                     break;
                 case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::WriteonlyStorageTexture:
                     mBindingOffsets[binding] += descriptorOffsets[UAV];
                     break;
                 case wgpu::BindingType::SampledTexture:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageTexture:
                     mBindingOffsets[binding] += descriptorOffsets[SRV];
                     break;
                 case wgpu::BindingType::Sampler:
                     mBindingOffsets[binding] += descriptorOffsets[Sampler];
                     break;
-
                 case wgpu::BindingType::StorageTexture:
-                case wgpu::BindingType::ReadonlyStorageTexture:
-                case wgpu::BindingType::WriteonlyStorageTexture:
                     UNREACHABLE();
                     break;
 
