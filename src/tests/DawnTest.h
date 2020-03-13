@@ -104,6 +104,9 @@ DawnTestParam D3D12Backend(std::initializer_list<const char*> forceEnabledWorkar
 DawnTestParam MetalBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                            std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
+DawnTestParam NullBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
+                          std::initializer_list<const char*> forceDisabledWorkarounds = {});
+
 DawnTestParam OpenGLBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                             std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
@@ -177,6 +180,7 @@ class DawnTestBase {
 
     bool IsD3D12() const;
     bool IsMetal() const;
+    bool IsNull() const;
     bool IsOpenGL() const;
     bool IsVulkan() const;
 
@@ -201,6 +205,9 @@ class DawnTestBase {
 
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
+
+    wgpu::Instance GetInstance() const;
+    dawn_native::Adapter GetAdapter() const;
 
   protected:
     wgpu::Device device;
@@ -315,8 +322,8 @@ class DawnTestBase {
 
 template <typename Params = DawnTestParam>
 class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<Params> {
-  private:
-    void SetUp() override final {
+  protected:
+    void SetUp() override {
         // DawnTestBase::SetUp() gets the adapter, and creates the device and wire.
         // It's separate from TestSetUp() so we can skip tests completely if no adapter
         // is available.
@@ -325,7 +332,6 @@ class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<
         TestSetUp();
     }
 
-  protected:
     DawnTestWithParams();
     ~DawnTestWithParams() override = default;
 
