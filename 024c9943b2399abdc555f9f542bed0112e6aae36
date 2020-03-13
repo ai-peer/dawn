@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76708ee7_5a580061",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-13T23:16:01Z",
+      "side": 1,
+      "message": "typo: that?",
+      "range": {
+        "startLine": 292,
+        "startChar": 40,
+        "endLine": 292,
+        "endChar": 49
+      },
+      "revId": "024c9943b2399abdc555f9f542bed0112e6aae36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82839e43_9eb97f7d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-13T23:16:01Z",
+      "side": 1,
+      "message": "The comment above the test says a single heap?\n\nalso constexpr values should be cased like kNumOfHeaps. Same for bindingsPerGroup above",
+      "range": {
+        "startLine": 325,
+        "startChar": 4,
+        "endLine": 326,
+        "endChar": 38
+      },
+      "revId": "024c9943b2399abdc555f9f542bed0112e6aae36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
