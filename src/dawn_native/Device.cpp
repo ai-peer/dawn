@@ -176,7 +176,8 @@ namespace dawn_native {
     }
 
     MaybeError DeviceBase::ValidateIsAlive() const {
-        if (DAWN_LIKELY(mLossStatus == LossStatus::Alive)) {
+        //XXX is that needed?
+        if (DAWN_LIKELY(mLossStatus != LossStatus::AlreadyLost)) {
             return {};
         }
         return DAWN_DEVICE_LOST_ERROR("Device is lost");
