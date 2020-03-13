@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "2c88f597_3fa77142",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-13T22:37:16Z",
+      "side": 1,
+      "message": "This switch and [1] are almost the same, I think they just serve to pick between CBV, UAV, SRV, and Sampler. Is it possible to factor out that function (DescriptorTypeForBindingType) and significantly simplify both of these?\n\nThis becomes:\n\n DescriptorType descriptorType \u003d DescriptorTypeForBindingType(groupInfo.types[binding]);\n mBindingOffsets[binding] +\u003d descriptorOffsets[descriptorType];",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "363ffa06_18e46bc1",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-13T22:37:16Z",
+      "side": 1,
+      "message": "Aren\u0027t these cases now covered by the new tests in StorageTextureValidationTests?",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26c2f433_284489e5",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
