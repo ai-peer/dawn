@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3eb0d3ab_5458e7a3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T22:11:52Z",
+      "side": 1,
+      "message": "Nothing official, but I\u0027ve done my own experiments and I\u0027m seeing \u003c 0.01% of CPU usage on a profile where I call UpdateVideoMemoryInfo() on Tick() at 60fps.",
+      "parentUuid": "3e79a57f_a0e64622",
+      "revId": "d6f2980b9ab3124270fae38174600766234763ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "167bb811_6e94bf38",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 14
@@ -33,6 +51,24 @@
       "revId": "d6f2980b9ab3124270fae38174600766234763ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c98fd9_514ecb37",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T22:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167bb811_6e94bf38",
+      "revId": "d6f2980b9ab3124270fae38174600766234763ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

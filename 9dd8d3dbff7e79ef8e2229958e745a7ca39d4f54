@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "92b677fc_edf67705",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T22:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1cdb88b_0e1f4090",
+      "range": {
+        "startLine": 37,
+        "startChar": 46,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a765412_10220011",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6f616210_24c5b19e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T22:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a765412_10220011",
+      "range": {
+        "startLine": 331,
+        "startChar": 38,
+        "endLine": 331,
+        "endChar": 54
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7eb1a2d9_5f9e82e4",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 12
@@ -68,6 +116,30 @@
       "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "909db261_d1286abf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T22:11:52Z",
+      "side": 1,
+      "message": "Method now private on ResidencyManager class. Resolving.",
+      "parentUuid": "7eb1a2d9_5f9e82e4",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "9dd8d3dbff7e79ef8e2229958e745a7ca39d4f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
