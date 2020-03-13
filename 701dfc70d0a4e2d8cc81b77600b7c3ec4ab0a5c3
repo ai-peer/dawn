@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "ee60048f_daa459f7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-13T19:58:58Z",
+      "side": 1,
+      "message": "There\u0027s nothing stopping us from allocating on the heap - but if we do, I have to add some new function to ResidencyManager to initialize the mResidencyManagementEnabled toggle so that I can set the correct value after Device::InitTogglesFromDriver() has ran.",
+      "parentUuid": "c001020b_96dcc2fa",
+      "range": {
+        "startLine": 165,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 60
+      },
+      "revId": "701dfc70d0a4e2d8cc81b77600b7c3ec4ab0a5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7edf4ad4_f0f659b1",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 15
