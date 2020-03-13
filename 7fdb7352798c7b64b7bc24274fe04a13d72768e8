@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df41b7d9_fedc58fc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "Maybe add validation that the format must have supportStorage so we get an error at shader module creation time. This would remove the need to perform the same validation in the compute pipeline but it\u0027s fine if we do it twice too. [1]",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dff06ca_41a03bdc",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "UNREACHABLE()",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a446a022_31e0a3f2",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "We have the same switch in TextureFormatTests. Maybe we could add a TextureFormatUtils file for use in the various tests? It could be src/utils.",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76000ecd_f6967fea",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "UNREACHABLE()",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "808d74d3_c1a6bc2f",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "Same comment as in the other CL. Or we could have a list of all the known formats somewhere and a function that returns whether it supports storage.",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71eb64b5_5d4337f0",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-13T12:00:50Z",
+      "side": 1,
+      "message": "The compute pipeline part would not be needed if we do [1]",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
