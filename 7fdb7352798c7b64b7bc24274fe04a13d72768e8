@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "09572fae_d857d1cf",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-14T00:03:52Z",
+      "side": 1,
+      "message": "In addition to the comment below, I think we should also produce a validation error if the imageType.format is one we don\u0027t support. You could hoist the ToWGPUTextureFormat up before this and check that textureFormat !\u003d wgpu::TextureFormat::Undefined instead.",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "df41b7d9_fedc58fc",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 3
@@ -64,6 +81,40 @@
       "writtenOn": "2020-03-13T12:00:50Z",
       "side": 1,
       "message": "UNREACHABLE()",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae2e4a6_584a9607",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-14T00:03:52Z",
+      "side": 1,
+      "message": "UNREACHABLE",
+      "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c706aab4_934c1682",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-14T00:03:52Z",
+      "side": 1,
+      "message": "UNREACHABLE",
       "revId": "7fdb7352798c7b64b7bc24274fe04a13d72768e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
