@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "441ee6b6_3c400c0c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:35:35Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2cdb729ff97ce57b8484e608a1d87c0d2a6b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e67f1d7_26902c3b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:35:35Z",
+      "side": 1,
+      "message": "nit: make this an std::unique_ptr\u003cResidencyManager\u003e and put it next to its friends like the ShaderVisibleResourceAllocator. It allows removing the include at [1] (that will need to be in DeviceD3D12.cpp instead)",
+      "revId": "2cdb729ff97ce57b8484e608a1d87c0d2a6b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60c2c3fe_a745e5cf",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:35:35Z",
+      "side": 1,
+      "message": "I think you forgot this: also we should tag both this and the 95% with comments explaining it is just an initial heuristic (to avoid people cargo culting it)",
+      "revId": "2cdb729ff97ce57b8484e608a1d87c0d2a6b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd810cda_5877c74b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:35:35Z",
+      "side": 1,
+      "message": "This won\u0027t be needed anymore.",
+      "revId": "2cdb729ff97ce57b8484e608a1d87c0d2a6b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
