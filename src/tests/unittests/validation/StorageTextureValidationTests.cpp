@@ -12,12 +12,133 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "common/Assert.h"
 #include "tests/unittests/validation/ValidationTest.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/TextureFormatUtils.h"
 #include "utils/WGPUHelpers.h"
 
 class StorageTextureValidationTests : public ValidationTest {
   protected:
+    const char* GetGLSLImageFormatQualifier(wgpu::TextureFormat textureFormat) {
+        switch (textureFormat) {
+            case wgpu::TextureFormat::R8Unorm:
+                return "r8";
+            case wgpu::TextureFormat::R8Snorm:
+                return "r8_snorm";
+            case wgpu::TextureFormat::R8Uint:
+                return "r8ui";
+            case wgpu::TextureFormat::R8Sint:
+                return "r8i";
+            case wgpu::TextureFormat::R16Uint:
+                return "r16ui";
+            case wgpu::TextureFormat::R16Sint:
+                return "r16i";
+            case wgpu::TextureFormat::R16Float:
+                return "r16f";
+            case wgpu::TextureFormat::RG8Unorm:
+                return "rg8";
+            case wgpu::TextureFormat::RG8Snorm:
+                return "rg8_snorm";
+            case wgpu::TextureFormat::RG8Uint:
+                return "rg8ui";
+            case wgpu::TextureFormat::RG8Sint:
+                return "rg8i";
+            case wgpu::TextureFormat::R32Float:
+                return "r32f";
+            case wgpu::TextureFormat::R32Uint:
+                return "r32ui";
+            case wgpu::TextureFormat::R32Sint:
+                return "r32i";
+            case wgpu::TextureFormat::RG16Uint:
+                return "rg16ui";
+            case wgpu::TextureFormat::RG16Sint:
+                return "rg16i";
+            case wgpu::TextureFormat::RG16Float:
+                return "rg16f";
+            case wgpu::TextureFormat::RGBA8Unorm:
+                return "rgba8";
+            case wgpu::TextureFormat::RGBA8Snorm:
+                return "rgba8_snorm";
+            case wgpu::TextureFormat::RGBA8Uint:
+                return "rgba8ui";
+            case wgpu::TextureFormat::RGBA8Sint:
+                return "rgba8i";
+            case wgpu::TextureFormat::RGB10A2Unorm:
+                return "rgb10_a2";
+            case wgpu::TextureFormat::RG11B10Float:
+                return "r11f_g11f_b10f";
+            case wgpu::TextureFormat::RG32Float:
+                return "rg32f";
+            case wgpu::TextureFormat::RG32Uint:
+                return "rg32ui";
+            case wgpu::TextureFormat::RG32Sint:
+                return "rg32i";
+            case wgpu::TextureFormat::RGBA16Uint:
+                return "rgba16ui";
+            case wgpu::TextureFormat::RGBA16Sint:
+                return "rgba16i";
+            case wgpu::TextureFormat::RGBA16Float:
+                return "rgba16f";
+            case wgpu::TextureFormat::RGBA32Float:
+                return "rgba32f";
+            case wgpu::TextureFormat::RGBA32Uint:
+                return "rgba32ui";
+            case wgpu::TextureFormat::RGBA32Sint:
+                return "rgba32i";
+            default:
+                UNREACHABLE();
+                return "";
+        }
+    }
+
+    std::string CreateComputeShaderWithStorageTexture(wgpu::BindingType storageTextureBindingType,
+                                                      wgpu::TextureFormat textureFormat) {
+        const char* memoryQualifier = "";
+        switch (storageTextureBindingType) {
+            case wgpu::BindingType::ReadonlyStorageTexture:
+                memoryQualifier = "readonly";
+                break;
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                memoryQualifier = "writeonly";
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+
+        const char* prefix = GetColorTextureComponentTypePrefix(textureFormat);
+
+        std::ostringstream ostream;
+        ostream << "#version 450\n"
+                   "layout (set = 0, binding = 0, "
+                << GetGLSLImageFormatQualifier(textureFormat) << ") uniform " << memoryQualifier
+                << " " << prefix
+                << "image2D image0;\n"
+                   "layout(std430, set = 0, binding = 0) buffer Buf { uint buf; };\n"
+                << "void main() {\n";
+
+        switch (storageTextureBindingType) {
+            case wgpu::BindingType::ReadonlyStorageTexture:
+                ostream << prefix
+                        << "vec4 pixel = imageLoad(image0, ivec2(gl_LocalInvocationID.xy));\n"
+                           "buf = uint(pixel.x);\n";
+                break;
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                ostream << "imageStore(image0, ivec2(gl_LocalInvocationID.xy), " << prefix
+                        << "vec4(0, 0, 0, "
+                           "0));\n";
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+
+        ostream << "}\n";
+
+        return ostream.str();
+    }
+
     wgpu::ShaderModule mDefaultVSModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
@@ -203,5 +324,46 @@ TEST_F(StorageTextureValidationTests, ReadWriteStorageTexture) {
         descriptor.computeStage.entryPoint = "main";
 
         ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&descriptor));
+    }
+}
+
+// Validate it is an error to declare a read-only or write-only storage texture in shaders with any
+// format that doesn't support TextureUsage::Storage texture usages.
+TEST_F(StorageTextureValidationTests, StorageTextureFormatInShaders) {
+    // Not include RGBA8UnormSrgb, BGRA8Unorm, BGRA8UnormSrgb because they are not related to any
+    // SPIR-V Image Formats.
+    constexpr std::array<wgpu::TextureFormat, 32> kWGPUTextureFormatSupportedAsSPIRVImageFormats = {
+        wgpu::TextureFormat::R32Uint,      wgpu::TextureFormat::R32Sint,
+        wgpu::TextureFormat::R32Float,     wgpu::TextureFormat::RGBA8Unorm,
+        wgpu::TextureFormat::RGBA8Snorm,   wgpu::TextureFormat::RGBA8Uint,
+        wgpu::TextureFormat::RGBA8Sint,    wgpu::TextureFormat::RG32Uint,
+        wgpu::TextureFormat::RG32Sint,     wgpu::TextureFormat::RG32Float,
+        wgpu::TextureFormat::RGBA16Uint,   wgpu::TextureFormat::RGBA16Sint,
+        wgpu::TextureFormat::RGBA16Float,  wgpu::TextureFormat::RGBA32Uint,
+        wgpu::TextureFormat::RGBA32Sint,   wgpu::TextureFormat::RGBA32Float,
+        wgpu::TextureFormat::R8Unorm,      wgpu::TextureFormat::R8Snorm,
+        wgpu::TextureFormat::R8Uint,       wgpu::TextureFormat::R8Sint,
+        wgpu::TextureFormat::R16Uint,      wgpu::TextureFormat::R16Sint,
+        wgpu::TextureFormat::R16Float,     wgpu::TextureFormat::RG8Unorm,
+        wgpu::TextureFormat::RG8Snorm,     wgpu::TextureFormat::RG8Uint,
+        wgpu::TextureFormat::RG8Sint,      wgpu::TextureFormat::RG16Uint,
+        wgpu::TextureFormat::RG16Sint,     wgpu::TextureFormat::RG16Float,
+        wgpu::TextureFormat::RGB10A2Unorm, wgpu::TextureFormat::RG11B10Float};
+
+    constexpr std::array<wgpu::BindingType, 2> kStorageTextureBindingTypes = {
+        wgpu::BindingType::ReadonlyStorageTexture, wgpu::BindingType::WriteonlyStorageTexture};
+
+    for (wgpu::BindingType storageTextureBindingType : kStorageTextureBindingTypes) {
+        for (wgpu::TextureFormat format : kWGPUTextureFormatSupportedAsSPIRVImageFormats) {
+            std::string computeShader =
+                CreateComputeShaderWithStorageTexture(storageTextureBindingType, format);
+            if (TextureFormatSupportsStorageTexture(format)) {
+                utils::CreateShaderModule(device, utils::SingleShaderStage::Compute,
+                                          computeShader.c_str());
+            } else {
+                ASSERT_DEVICE_ERROR(utils::CreateShaderModule(
+                    device, utils::SingleShaderStage::Compute, computeShader.c_str()));
+            }
+        }
     }
 }
