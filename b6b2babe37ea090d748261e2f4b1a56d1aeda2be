@@ -16,6 +16,24 @@
       "revId": "b6b2babe37ea090d748261e2f4b1a56d1aeda2be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36bb0b3_74cad496",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-16T17:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be341417_67eec17a",
+      "revId": "b6b2babe37ea090d748261e2f4b1a56d1aeda2be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
