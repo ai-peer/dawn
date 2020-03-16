@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abb178ca_ec59a1d4",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T10:56:51Z",
+      "side": 1,
+      "message": "nit: we might not need to do anything with the image. Unless that\u0027s needed for SPIRV-Cross to reflect the correct decorations?",
+      "revId": "588a6f6f1621ec60b507bd7407eb2bab1176af73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "849e6a4b_50ebe925",
+        "filename": "src/utils/TextureFormatUtils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T10:56:51Z",
+      "side": 1,
+      "message": "nit: put in the utils:: namespace?",
+      "revId": "588a6f6f1621ec60b507bd7407eb2bab1176af73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
