@@ -48,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "18b29274_612c0b42",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:07:28Z",
+      "side": 1,
+      "message": "u-nit: this is constand for the whole texture and could be move out of the level/layer loop.",
+      "revId": "bce756edce3560a3a391a15f23d80f5d4157b59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16f26723_d0b5fdd5",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -83,6 +100,30 @@
       "side": 1,
       "message": "Sorry, I only remembered this morning that I took an action item to fix that in the spec. For uses in the spec:\n\nIf 2d(/2d array), depth \u003d\u003d 1.\nIf 3d, arrayLayerCount \u003d\u003d 1.\n\nWe expect to change the API to merge the two, but we\u0027ll probably split them back out in the frontend in Dawn to avoid refactors for now (and probably keep it that way to make the code clearer).\n\n... all that said, I think this use of Extent3D is just as a semantic-free struct to ComputeTextureCopySplit. So we should do whatever that function expects. I don\u0027t think either ComputeTextureCopySplit and ClearTexture handle 3d textures now.",
       "parentUuid": "16f26723_d0b5fdd5",
+      "range": {
+        "startLine": 695,
+        "startChar": 16,
+        "endLine": 695,
+        "endChar": 66
+      },
+      "revId": "bce756edce3560a3a391a15f23d80f5d4157b59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9489f1c6_15e3e02e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:07:28Z",
+      "side": 1,
+      "message": "We\u0027ll need to update TextureCopySplitter when we add 3D textures to Dawn so maybe it is fine as is?",
+      "parentUuid": "86d597ee_82b122c9",
       "range": {
         "startLine": 695,
         "startChar": 16,
