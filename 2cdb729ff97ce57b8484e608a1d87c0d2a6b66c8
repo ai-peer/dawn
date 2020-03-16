@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a947bc06_773409f0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-16T15:35:17Z",
+      "side": 1,
+      "message": "Corentin, I had asked Brandon to make this be a normal member variable so that we can have better locality of reference. Might be good to do it for the other \"manager\" objects in the class as well. \n\nWhat do you think?",
+      "parentUuid": "2e67f1d7_26902c3b",
+      "revId": "2cdb729ff97ce57b8484e608a1d87c0d2a6b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60c2c3fe_a745e5cf",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 19
