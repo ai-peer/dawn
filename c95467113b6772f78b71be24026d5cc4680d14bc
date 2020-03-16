@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "99de67be_de1da435",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-16T05:23:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c88f597_3fa77142",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "363ffa06_18e46bc1",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-13T22:37:16Z",
       "side": 1,
       "message": "Aren\u0027t these cases now covered by the new tests in StorageTextureValidationTests?",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9796a2cf_7f3d8f85",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-16T05:23:05Z",
+      "side": 1,
+      "message": "These cases are reproducing the issue in chromium:1061156, which can only be reproduced on D3D12 and Vulkan backends. My fix is also on the Vulkan and D3D12 backends, which need end2end tests to cover.",
+      "parentUuid": "363ffa06_18e46bc1",
       "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee9eace_814100fb",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-16T05:23:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c2f433_284489e5",
+      "revId": "c95467113b6772f78b71be24026d5cc4680d14bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
