@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be341417_67eec17a",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-16T11:25:21Z",
+      "side": 1,
+      "message": "This path is missing the glClear call.",
+      "revId": "b6b2babe37ea090d748261e2f4b1a56d1aeda2be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
