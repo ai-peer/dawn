@@ -378,13 +378,17 @@ namespace dawn_native {
         auto ExtractResourcesBinding =
             [this](std::vector<shaderc_spvc_binding_info> bindings) -> MaybeError {
             for (const auto& binding : bindings) {
-                if (binding.binding >= kMaxBindingsPerGroup || binding.set >= kMaxBindGroups) {
+                if (binding.set >= kMaxBindGroups) {
                     return DAWN_VALIDATION_ERROR("Binding over limits in the SPIRV");
                 }
 
-                BindingInfo* info = &mBindingInfo[binding.set][binding.binding];
-                *info = {};
-                info->used = true;
+                const auto& it = mBindingInfo[binding.set].emplace(BindingNumber(binding.binding),
+                                                                   BindingInfo{});
+                if (!it.second) {
+                    return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
+                }
+
+                BindingInfo* info = &it.first->second;
                 info->id = binding.id;
                 info->base_type_id = binding.base_type_id;
                 if (binding.binding_type == shaderc_spvc_binding_type_sampled_texture) {
@@ -545,16 +549,20 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("No Descriptor Decoration set for resource");
                 }
 
-                uint32_t binding = compiler.get_decoration(resource.id, spv::DecorationBinding);
+                BindingNumber bindingNumber(
+                    compiler.get_decoration(resource.id, spv::DecorationBinding));
                 uint32_t set = compiler.get_decoration(resource.id, spv::DecorationDescriptorSet);
 
-                if (binding >= kMaxBindingsPerGroup || set >= kMaxBindGroups) {
+                if (set >= kMaxBindGroups) {
                     return DAWN_VALIDATION_ERROR("Binding over limits in the SPIRV");
                 }
 
-                BindingInfo* info = &mBindingInfo[set][binding];
-                *info = {};
-                info->used = true;
+                const auto& it = mBindingInfo[set].emplace(bindingNumber, BindingInfo{});
+                if (!it.second) {
+                    return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
+                }
+
+                BindingInfo* info = &it.first->second;
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
                 switch (bindingType) {
@@ -718,10 +726,8 @@ namespace dawn_native {
         }
 
         for (uint32_t group : IterateBitSet(~layout->GetBindGroupLayoutsMask())) {
-            for (size_t i = 0; i < kMaxBindingsPerGroup; ++i) {
-                if (mBindingInfo[group][i].used) {
-                    return false;
-                }
+            if (mBindingInfo[group].size() > 0) {
+                return false;
             }
         }
 
@@ -733,14 +739,20 @@ namespace dawn_native {
         const BindGroupLayoutBase* layout) const {
         ASSERT(!IsError());
 
-        const auto& layoutInfo = layout->GetBindingInfo();
-        for (size_t i = 0; i < kMaxBindingsPerGroup; ++i) {
-            const auto& moduleInfo = mBindingInfo[group][i];
-            const auto& layoutBindingType = layoutInfo.types[i];
+        const BindGroupLayoutBase::LayoutBindingInfo& layoutInfo = layout->GetBindingInfo();
+        const BindGroupLayoutBase::BindingMap& bindingMap = layout->GetBindingMap();
 
-            if (!moduleInfo.used) {
-                continue;
+        for (const auto& it : mBindingInfo[group]) {
+            BindingNumber bindingNumber = it.first;
+            const auto& moduleInfo = it.second;
+
+            auto bindingIt = bindingMap.find(bindingNumber);
+            if (bindingIt == bindingMap.end()) {
+                return false;
             }
+            BindingIndex bindingIndex(bindingIt->second);
+
+            const auto& layoutBindingType = layoutInfo.types[bindingIndex];
 
             if (layoutBindingType != moduleInfo.type) {
                 // Binding mismatch between shader and bind group is invalid. For example, a
@@ -755,7 +767,7 @@ namespace dawn_native {
                 }
             }
 
-            if ((layoutInfo.visibilities[i] & StageBit(mExecutionModel)) == 0) {
+            if ((layoutInfo.visibilities[bindingIndex] & StageBit(mExecutionModel)) == 0) {
                 return false;
             }
 
@@ -763,24 +775,26 @@ namespace dawn_native {
                 case wgpu::BindingType::SampledTexture: {
                     Format::Type layoutTextureComponentType =
                         Format::TextureComponentTypeToFormatType(
-                            layoutInfo.textureComponentTypes[i]);
+                            layoutInfo.textureComponentTypes[bindingIndex]);
                     if (layoutTextureComponentType != moduleInfo.textureComponentType) {
                         return false;
                     }
 
-                    if (layoutInfo.textureDimensions[i] != moduleInfo.textureDimension) {
+                    if (layoutInfo.textureDimensions[bindingIndex] != moduleInfo.textureDimension) {
                         return false;
                     }
                 } break;
 
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture: {
-                    ASSERT(layoutInfo.storageTextureFormats[i] != wgpu::TextureFormat::Undefined);
+                    ASSERT(layoutInfo.storageTextureFormats[bindingIndex] !=
+                           wgpu::TextureFormat::Undefined);
                     ASSERT(moduleInfo.storageTextureFormat != wgpu::TextureFormat::Undefined);
-                    if (layoutInfo.storageTextureFormats[i] != moduleInfo.storageTextureFormat) {
+                    if (layoutInfo.storageTextureFormats[bindingIndex] !=
+                        moduleInfo.storageTextureFormat) {
                         return false;
                     }
-                    if (layoutInfo.textureDimensions[i] != moduleInfo.textureDimension) {
+                    if (layoutInfo.textureDimensions[bindingIndex] != moduleInfo.textureDimension) {
                         return false;
                     }
                 } break;
