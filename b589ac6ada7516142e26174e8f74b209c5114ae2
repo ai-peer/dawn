@@ -16,6 +16,24 @@
       "revId": "b589ac6ada7516142e26174e8f74b209c5114ae2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "575055ba_cfd2d5a6",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-17T01:01:45Z",
+      "side": 1,
+      "message": "yup, you can\u0027t use FramebufferTextureLayer on a TEXTURE_2D. has to be 2D_ARRAY or 3D.",
+      "parentUuid": "693e7905_92fb4058",
+      "revId": "b589ac6ada7516142e26174e8f74b209c5114ae2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
