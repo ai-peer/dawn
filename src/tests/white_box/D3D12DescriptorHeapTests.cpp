@@ -33,9 +33,34 @@ class D3D12DescriptorHeapTests : public DawnTest {
     void TestSetUp() override {
         DAWN_SKIP_TEST_IF(UsesWire());
         mD3DDevice = reinterpret_cast<Device*>(device.Get());
+
+        mSimpleVSModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        void main() {
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
+            gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
+        })");
+
+        mSimpleFSModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout (location = 0) out vec4 fragColor;
+        layout (set = 0, binding = 0) uniform colorBuffer {
+            vec4 color;
+        };
+        void main() {
+            fragColor = color;
+        })");
+    }
+
+    uint32_t GetShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE heapType) const {
+        return mD3DDevice->GetShaderVisibleDescriptorAllocator()
+            ->GetShaderVisibleHeapSizeForTesting(heapType);
     }
 
     Device* mD3DDevice = nullptr;
+
+    wgpu::ShaderModule mSimpleVSModule;
+    wgpu::ShaderModule mSimpleFSModule;
 };
 
 // Verify the shader visible heaps switch over within a single submit.
@@ -198,4 +223,327 @@ TEST_P(D3D12DescriptorHeapTests, PoolHeapsInPendingAndMultipleSubmits) {
     EXPECT_EQ(allocator->GetShaderVisiblePoolSizeForTesting(heapType), kNumOfSwitches);
 }
 
-DAWN_INSTANTIATE_TEST(D3D12DescriptorHeapTests, D3D12Backend());
+// Verify encoding a heaps worth of the same bindgroup multiple times works.
+// Shader-visible heaps will switch out |kNumOfHeaps| times.
+TEST_P(D3D12DescriptorHeapTests, EncodeSameBindGroupOverflows) {
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+    pipelineDescriptor.vertexStage.module = mSimpleVSModule;
+    pipelineDescriptor.cFragmentStage.module = mSimpleFSModule;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    const uint32_t heapSize = GetShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+
+    std::array<float, 4> redColor = {1, 0, 0, 1};
+    wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(device, &redColor, sizeof(redColor),
+                                                             wgpu::BufferUsage::Uniform);
+
+    std::vector<wgpu::BindGroup> bindGroups;
+    for (uint32_t i = 0; i < heapSize; i++) {
+        bindGroups.push_back(utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                  {{0, uniformBuffer}}));
+    }
+
+    // Encode a heap worth of descriptors |kNumOfHeaps| times.
+    constexpr uint32_t kNumOfHeaps = 2;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+        pass.SetPipeline(renderPipeline);
+
+        for (uint32_t i = 0; i < kNumOfHeaps * heapSize; ++i) {
+            pass.SetBindGroup(0, bindGroups[i % heapSize]);
+            pass.Draw(3, 1, 0, 0);
+        }
+
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kRed, renderPass.color, 0, 0);
+}
+
+// Verify submitting one bindgroup then a heaps worth of still works.
+// Shader-visible heaps should switch out once upon encoding 1 + |heapSize| descriptors.
+TEST_P(D3D12DescriptorHeapTests, EncodeSingleAndManyBindGroups) {
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+    pipelineDescriptor.vertexStage.module = mSimpleVSModule;
+    pipelineDescriptor.cFragmentStage.module = mSimpleFSModule;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    // Encode a single descriptor and submit.
+    {
+        std::array<float, 4> blackColor = {0, 0, 0, 1};
+        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+            device, &blackColor, sizeof(blackColor), wgpu::BufferUsage::Uniform);
+
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+            device, renderPipeline.GetBindGroupLayout(0), {{0, uniformBuffer}});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+            pass.SetPipeline(renderPipeline);
+            pass.SetBindGroup(0, bindGroup);
+            pass.Draw(3, 1, 0, 0);
+            pass.EndPass();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kBlack, renderPass.color, 0, 0);
+
+    // Encode a heap worth of descriptors.
+    {
+        const uint32_t heapSize = GetShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+
+        std::array<float, 4> redColor = {1, 0, 0, 1};
+        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+            device, &redColor, sizeof(redColor), wgpu::BufferUsage::Uniform);
+
+        std::vector<wgpu::BindGroup> bindGroups;
+        for (uint32_t i = 0; i < heapSize; i++) {
+            bindGroups.push_back(utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                      {{0, uniformBuffer}}));
+        }
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+            pass.SetPipeline(renderPipeline);
+
+            for (uint32_t i = 0; i < heapSize; ++i) {
+                pass.SetBindGroup(0, bindGroups[i]);
+                pass.Draw(3, 1, 0, 0);
+            }
+
+            pass.EndPass();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kRed, renderPass.color, 0, 0);
+}
+
+// Verify encoding a single bindgroup then a heaps worth plus one works.
+// Shader-visible heaps should switch out once and re-encode the first descriptor.
+TEST_P(D3D12DescriptorHeapTests, EncodeUBOOverwritesHeap) {
+    const uint32_t heapSize = GetShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+
+    // Create a pipeline that uses the uniform bind group layout.
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+    pipelineDescriptor.vertexStage.module = mSimpleVSModule;
+    pipelineDescriptor.cFragmentStage.module = mSimpleFSModule;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    // Encode a heap worth of descriptors plus one more.
+    {
+        std::array<float, 4> blackColor = {0, 0, 0, 1};
+        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+            device, &blackColor, sizeof(blackColor), wgpu::BufferUsage::Uniform);
+
+        std::vector<wgpu::BindGroup> bindGroups;
+        for (uint32_t i = 0; i < heapSize; i++) {
+            bindGroups.push_back(utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                      {{0, uniformBuffer, 0, sizeof(blackColor)}}));
+        }
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+            pass.SetPipeline(pipeline);
+
+            for (uint32_t i = 0; i < heapSize + 1; ++i) {
+                pass.SetBindGroup(0, bindGroups[i % heapSize]);
+                pass.Draw(3, 1, 0, 0);
+            }
+
+            pass.EndPass();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    // Encode a bindgroup again to overwrite the first descriptor.
+    {
+        std::array<float, 4> redColor = {1, 0, 0, 1};
+        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+            device, &redColor, sizeof(redColor), wgpu::BufferUsage::Uniform);
+
+        wgpu::BindGroup firstBindGroup = utils::MakeBindGroup(
+            device, pipeline.GetBindGroupLayout(0), {{0, uniformBuffer, 0, sizeof(redColor)}});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+            pass.SetPipeline(pipeline);
+
+            pass.SetBindGroup(0, firstBindGroup);
+            pass.Draw(3, 1, 0, 0);
+
+            pass.EndPass();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    // Make sure |firstBindGroup| was encoded correctly.
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kRed, renderPass.color, 0, 0);
+}
+
+// Verify encoding many heaps worth of bindgroups still works.
+TEST_P(D3D12DescriptorHeapTests, EncodeManyUBOAndSamplers) {
+    wgpu::ShaderModule vsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        layout (set = 0, binding = 0) uniform vertexUniformBuffer {
+            mat2 transform;
+        };
+        void main() {
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
+            gl_Position = vec4(transform * pos[gl_VertexIndex], 0.f, 1.f);
+        })");
+
+    wgpu::ShaderModule fsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout (set = 0, binding = 1) uniform sampler sampler0;
+        layout (set = 0, binding = 2) uniform texture2D texture0;
+        layout (location = 0) out vec4 fragColor;
+        void main() {
+            fragColor = texture(sampler2D(texture0, sampler0), gl_FragCoord.xy);
+        })");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+    pipelineDescriptor.vertexStage.module = vsModule;
+    pipelineDescriptor.cFragmentStage.module = fsModule;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    constexpr float dummy = 0.0f;
+    constexpr float transform[] = {1.f, 0.f, dummy, dummy, 0.f, 1.f, dummy, dummy};
+    wgpu::Buffer buffer = utils::CreateBufferFromData(device, &transform, sizeof(transform),
+                                                      wgpu::BufferUsage::Uniform);
+
+    wgpu::SamplerDescriptor samplerDescriptor;
+    samplerDescriptor.minFilter = wgpu::FilterMode::Nearest;
+    samplerDescriptor.magFilter = wgpu::FilterMode::Nearest;
+    samplerDescriptor.mipmapFilter = wgpu::FilterMode::Nearest;
+    samplerDescriptor.addressModeU = wgpu::AddressMode::ClampToEdge;
+    samplerDescriptor.addressModeV = wgpu::AddressMode::ClampToEdge;
+    samplerDescriptor.addressModeW = wgpu::AddressMode::ClampToEdge;
+    samplerDescriptor.lodMinClamp = kLodMin;
+    samplerDescriptor.lodMaxClamp = kLodMax;
+    samplerDescriptor.compare = wgpu::CompareFunction::Never;
+
+    wgpu::Sampler sampler = device.CreateSampler(&samplerDescriptor);
+
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = kRTSize;
+    descriptor.size.height = kRTSize;
+    descriptor.size.depth = 1;
+    descriptor.arrayLayerCount = 1;
+    descriptor.sampleCount = 1;
+    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::TextureView textureView = texture.CreateView();
+
+    // Fill image data
+    int width = kRTSize, height = kRTSize;
+    int widthInBytes = width * sizeof(RGBA8);
+    widthInBytes = (widthInBytes + 255) & ~255;
+    int sizeInBytes = widthInBytes * height;
+    int size = sizeInBytes / sizeof(RGBA8);
+    std::vector<RGBA8> data = std::vector<RGBA8>(size);
+    for (int i = 0; i < size; i++) {
+        data[i] = RGBA8(0, 255, 0, 255);
+    }
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    // Upload image data to test texture.
+    {
+        wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), sizeInBytes,
+                                                                 wgpu::BufferUsage::CopySrc);
+
+        wgpu::BufferCopyView bufferCopyView =
+            utils::CreateBufferCopyView(stagingBuffer, 0, widthInBytes, 0);
+        wgpu::TextureCopyView textureCopyView =
+            utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
+        wgpu::Extent3D copySize = {width, height, 1};
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+    }
+
+    // Encode a heap worth of descriptors |kNumOfHeaps| times.
+    {
+        constexpr uint32_t kNumOfBindGroups = 3;
+        std::vector<wgpu::BindGroup> bindGroups;
+        for (uint32_t i = 0; i < kNumOfBindGroups; i++) {
+            bindGroups.push_back(utils::MakeBindGroup(
+                device, pipeline.GetBindGroupLayout(0),
+                {{0, buffer, 0, sizeof(transform)}, {1, sampler}, {2, textureView}}));
+        }
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+        pass.SetPipeline(pipeline);
+
+        constexpr uint32_t kBindingsPerGroup = 3;
+        constexpr uint32_t kNumOfHeaps = 5;
+
+        const uint32_t heapSize = GetShaderVisibleHeapSize(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        const uint32_t bindGroupsPerHeap = heapSize / kBindingsPerGroup;
+
+        for (uint32_t i = 0; i < kNumOfHeaps * bindGroupsPerHeap; ++i) {
+            pass.SetBindGroup(0, bindGroups[i % kNumOfBindGroups]);
+            pass.Draw(3, 1, 0, 0);
+        }
+
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, kRTSize - 1, 0);
+}
+
+DAWN_INSTANTIATE_TEST(D3D12DescriptorHeapTests,
+                      D3D12Backend(),
+                      D3D12Backend({"use_d3d12_small_shader_visible_heap"}));
