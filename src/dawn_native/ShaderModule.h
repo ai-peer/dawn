@@ -28,6 +28,7 @@
 
 #include <array>
 #include <bitset>
+#include <map>
 #include <vector>
 
 namespace spirv_cross {
@@ -57,11 +58,9 @@ namespace dawn_native {
             wgpu::TextureViewDimension textureDimension = wgpu::TextureViewDimension::Undefined;
             Format::Type textureComponentType = Format::Type::Float;
             bool multisampled = false;
-            bool used = false;
             wgpu::TextureFormat storageTextureFormat = wgpu::TextureFormat::Undefined;
         };
-        using ModuleBindingInfo =
-            std::array<std::array<BindingInfo, kMaxBindingsPerGroup>, kMaxBindGroups>;
+        using ModuleBindingInfo = std::array<std::map<uint32_t, BindingInfo>, kMaxBindGroups>;
 
         const ModuleBindingInfo& GetBindingInfo() const;
         const std::bitset<kMaxVertexAttributes>& GetUsedVertexAttributes() const;

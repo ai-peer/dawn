@@ -510,16 +510,15 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutStorageBindingsInVertexShad
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer}});
 }
 
-// Tests setting OOB checks for kMaxBindingsPerGroup in bind group layouts.
-TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutBindingOOB) {
-    // Checks that kMaxBindingsPerGroup - 1 is valid.
-    utils::MakeBindGroupLayout(device, {{kMaxBindingsPerGroup - 1, wgpu::ShaderStage::Vertex,
+// Tests setting that bind group layout bindings numbers may be >= kMaxBindingsPerGroup.
+TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutBindingUnbounded) {
+    // Checks that kMaxBindingsPerGroup is valid.
+    utils::MakeBindGroupLayout(device, {{kMaxBindingsPerGroup, wgpu::ShaderStage::Vertex,
                                          wgpu::BindingType::UniformBuffer}});
 
-    // Checks that kMaxBindingsPerGroup is OOB
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(
-        device,
-        {{kMaxBindingsPerGroup, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer}}));
+    // Checks that kMaxBindingsPerGroup + 1 is valid.
+    utils::MakeBindGroupLayout(device, {{kMaxBindingsPerGroup + 1, wgpu::ShaderStage::Vertex,
+                                         wgpu::BindingType::UniformBuffer}});
 }
 
 // This test verifies that the BindGroupLayout bindings are correctly validated, even if the

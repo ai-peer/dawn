@@ -30,28 +30,29 @@ namespace dawn_native {
         void TrackBindGroupResourceUsage(PassResourceUsageTracker* usageTracker,
                                          BindGroupBase* group) {
             const auto& layoutInfo = group->GetLayout()->GetBindingInfo();
-
-            for (uint32_t i : IterateBitSet(layoutInfo.mask)) {
-                wgpu::BindingType type = layoutInfo.types[i];
+            for (uint32_t bindingIndex = 0; bindingIndex < layoutInfo.bindingCount;
+                 ++bindingIndex) {
+                wgpu::BindingType type = layoutInfo.types[bindingIndex];
 
                 switch (type) {
                     case wgpu::BindingType::UniformBuffer: {
-                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
                         usageTracker->BufferUsedAs(buffer, wgpu::BufferUsage::Uniform);
                     } break;
 
                     case wgpu::BindingType::StorageBuffer: {
-                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
                         usageTracker->BufferUsedAs(buffer, wgpu::BufferUsage::Storage);
                     } break;
 
                     case wgpu::BindingType::SampledTexture: {
-                        TextureBase* texture = group->GetBindingAsTextureView(i)->GetTexture();
+                        TextureBase* texture =
+                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
                         usageTracker->TextureUsedAs(texture, wgpu::TextureUsage::Sampled);
                     } break;
 
                     case wgpu::BindingType::ReadonlyStorageBuffer: {
-                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
                         usageTracker->BufferUsedAs(buffer, kReadOnlyStorage);
                     } break;
 

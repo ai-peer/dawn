@@ -311,21 +311,21 @@ namespace dawn_native {
         auto ExtractResourcesBinding =
             [this](std::vector<shaderc_spvc_binding_info> bindings) -> MaybeError {
             for (const auto& binding : bindings) {
-                if (binding.binding >= kMaxBindingsPerGroup || binding.set >= kMaxBindGroups) {
+                if (binding.set >= kMaxBindGroups) {
                     return DAWN_VALIDATION_ERROR("Binding over limits in the SPIRV");
                 }
 
-                BindingInfo* info = &mBindingInfo[binding.set][binding.binding];
-                *info = {};
-                info->used = true;
-                info->id = binding.id;
-                info->base_type_id = binding.base_type_id;
+                BindingInfo info = {};
+                info.id = binding.id;
+                info.base_type_id = binding.base_type_id;
                 if (binding.binding_type == shaderc_spvc_binding_type_sampled_texture) {
-                    info->multisampled = binding.multisampled;
-                    info->textureDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
-                    info->textureComponentType = ToDawnFormatType(binding.texture_component_type);
+                    info.multisampled = binding.multisampled;
+                    info.textureDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
+                    info.textureComponentType = ToDawnFormatType(binding.texture_component_type);
                 }
-                info->type = ToWGPUBindingType(binding.binding_type);
+                info.type = ToWGPUBindingType(binding.binding_type);
+
+                mBindingInfo[binding.set].insert(std::make_pair(binding.binding, info));
             }
             return {};
         };
@@ -453,51 +453,49 @@ namespace dawn_native {
                 uint32_t binding = compiler.get_decoration(resource.id, spv::DecorationBinding);
                 uint32_t set = compiler.get_decoration(resource.id, spv::DecorationDescriptorSet);
 
-                if (binding >= kMaxBindingsPerGroup || set >= kMaxBindGroups) {
+                if (set >= kMaxBindGroups) {
                     return DAWN_VALIDATION_ERROR("Binding over limits in the SPIRV");
                 }
 
-                BindingInfo* info = &mBindingInfo[set][binding];
-                *info = {};
-                info->used = true;
-                info->id = resource.id;
-                info->base_type_id = resource.base_type_id;
+                BindingInfo info = {};
+                info.id = resource.id;
+                info.base_type_id = resource.base_type_id;
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
                         spirv_cross::SPIRType::ImageType imageType =
-                            compiler.get_type(info->base_type_id).image;
+                            compiler.get_type(info.base_type_id).image;
                         spirv_cross::SPIRType::BaseType textureComponentType =
                             compiler.get_type(imageType.type).basetype;
 
-                        info->multisampled = imageType.ms;
-                        info->textureDimension =
+                        info.multisampled = imageType.ms;
+                        info.textureDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
-                        info->textureComponentType =
+                        info.textureComponentType =
                             SpirvCrossBaseTypeToFormatType(textureComponentType);
-                        info->type = bindingType;
+                        info.type = bindingType;
                     } break;
                     case wgpu::BindingType::StorageBuffer: {
                         // Differentiate between readonly storage bindings and writable ones
                         // based on the NonWritable decoration
                         spirv_cross::Bitset flags = compiler.get_buffer_block_flags(resource.id);
                         if (flags.get(spv::DecorationNonWritable)) {
-                            info->type = wgpu::BindingType::ReadonlyStorageBuffer;
+                            info.type = wgpu::BindingType::ReadonlyStorageBuffer;
                         } else {
-                            info->type = wgpu::BindingType::StorageBuffer;
+                            info.type = wgpu::BindingType::StorageBuffer;
                         }
                     } break;
                     case wgpu::BindingType::StorageTexture: {
                         spirv_cross::Bitset flags = compiler.get_decoration_bitset(resource.id);
                         if (flags.get(spv::DecorationNonReadable)) {
-                            info->type = wgpu::BindingType::WriteonlyStorageTexture;
+                            info.type = wgpu::BindingType::WriteonlyStorageTexture;
                         } else if (flags.get(spv::DecorationNonWritable)) {
-                            info->type = wgpu::BindingType::ReadonlyStorageTexture;
+                            info.type = wgpu::BindingType::ReadonlyStorageTexture;
                         } else {
-                            info->type = wgpu::BindingType::StorageTexture;
+                            info.type = wgpu::BindingType::StorageTexture;
                         }
 
                         spirv_cross::SPIRType::ImageType imageType =
-                            compiler.get_type(info->base_type_id).image;
+                            compiler.get_type(info.base_type_id).image;
                         wgpu::TextureFormat storageTextureFormat =
                             ToWGPUTextureFormat(imageType.format);
                         if (storageTextureFormat == wgpu::TextureFormat::Undefined) {
@@ -510,11 +508,13 @@ namespace dawn_native {
                             return DAWN_VALIDATION_ERROR(
                                 "The storage texture format is not supported");
                         }
-                        info->storageTextureFormat = storageTextureFormat;
+                        info.storageTextureFormat = storageTextureFormat;
                     } break;
                     default:
-                        info->type = bindingType;
+                        info.type = bindingType;
                 }
+
+                mBindingInfo[set].insert(std::make_pair(binding, info));
             }
             return {};
         };
@@ -621,10 +621,8 @@ namespace dawn_native {
         }
 
         for (uint32_t group : IterateBitSet(~layout->GetBindGroupLayoutsMask())) {
-            for (size_t i = 0; i < kMaxBindingsPerGroup; ++i) {
-                if (mBindingInfo[group][i].used) {
-                    return false;
-                }
+            if (mBindingInfo[group].size() > 0) {
+                return false;
             }
         }
 
@@ -637,13 +635,19 @@ namespace dawn_native {
         ASSERT(!IsError());
 
         const auto& layoutInfo = layout->GetBindingInfo();
-        for (size_t i = 0; i < kMaxBindingsPerGroup; ++i) {
-            const auto& moduleInfo = mBindingInfo[group][i];
-            const auto& layoutBindingType = layoutInfo.types[i];
+        const auto& bindingMap = layout->GetBindingMap();
 
-            if (!moduleInfo.used) {
-                continue;
+        for (const auto it : mBindingInfo[group]) {
+            uint32_t binding = it.first;
+            const auto& moduleInfo = it.second;
+
+            auto bindingIt = bindingMap.find(binding);
+            if (bindingIt == bindingMap.end()) {
+                return false;
             }
+            uint32_t bindingIndex = bindingIt->second;
+
+            const auto& layoutBindingType = layoutInfo.types[bindingIndex];
 
             if (layoutBindingType != moduleInfo.type) {
                 // Binding mismatch between shader and bind group is invalid. For example, a
@@ -658,18 +662,18 @@ namespace dawn_native {
                 }
             }
 
-            if ((layoutInfo.visibilities[i] & StageBit(mExecutionModel)) == 0) {
+            if ((layoutInfo.visibilities[bindingIndex] & StageBit(mExecutionModel)) == 0) {
                 return false;
             }
 
             if (layoutBindingType == wgpu::BindingType::SampledTexture) {
-                Format::Type layoutTextureComponentType =
-                    Format::TextureComponentTypeToFormatType(layoutInfo.textureComponentTypes[i]);
+                Format::Type layoutTextureComponentType = Format::TextureComponentTypeToFormatType(
+                    layoutInfo.textureComponentTypes[bindingIndex]);
                 if (layoutTextureComponentType != moduleInfo.textureComponentType) {
                     return false;
                 }
 
-                if (layoutInfo.textureDimensions[i] != moduleInfo.textureDimension) {
+                if (layoutInfo.textureDimensions[bindingIndex] != moduleInfo.textureDimension) {
                     return false;
                 }
             }
