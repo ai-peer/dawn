@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22f511d6_8989cc70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T02:19:37Z",
+      "side": 1,
+      "message": "It looks like CopyResource allows copies between the same type group (formats with the same bit layout), just like texture views. IIRC eventually we will have texture views with different formats from their textures (within those type groups), at which time we probably will also want to allow copies within type groups. (Assuming we can actually support both on all backends.)\n\nBut we don\u0027t need to do anything about this now; we\u0027ll find and fix the assert later when implementing that support.",
+      "revId": "498755318e3e5c287cb87f956bab92fb20faddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb9700be_cdc7a4f5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T02:19:37Z",
+      "side": 1,
+      "message": "nit: outer parens not needed",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "498755318e3e5c287cb87f956bab92fb20faddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbef32cd_5bb1d8dc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T02:19:37Z",
+      "side": 1,
+      "message": "isn\u0027t this tautological for 2d textures, but incorrect for 3d textures? For 2d it could be src-\u003eGetArrayLayers() \u003d\u003d copySize.depth instead, but I think for both 2d and 3d it could be srcSize.depth \u003d\u003d copySize.depth?",
+      "range": {
+        "startLine": 72,
+        "startChar": 20,
+        "endLine": 72,
+        "endChar": 58
+      },
+      "revId": "498755318e3e5c287cb87f956bab92fb20faddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3765976f_3ba97937",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T02:19:37Z",
+      "side": 1,
+      "message": "Is it possible to use extra parens, extra newlines, or extra end-of-line comments (//) to get the formatter to keep this readable? (i.e. grouped into pairs of \u003d\u003d comparisons.)\n\nI think it would also be slightly more readable to compare copySize \u003d\u003d src \u0026\u0026 copySize \u003d\u003d dst for each element.\n\n  // TODO: support 3d textures\n  ASSERT(src-\u003eGetArrayLayers() \u003d\u003d srcSize.depth);\n  ASSERT(dst-\u003eGetArrayLayers() \u003d\u003d dstSize.depth);\n\n  return 1 \u003d\u003d src-\u003eGetNumMipLevels() \u0026\u0026\n         1 \u003d\u003d dst-\u003eGetNumMipLevels() \u0026\u0026\n         copySize.width \u003d\u003d srcSize.width \u0026\u0026\n         copySize.width \u003d\u003d dstSize.width \u0026\u0026\n         copySize.height \u003d\u003d srcSize.height \u0026\u0026\n         copySize.height \u003d\u003d dstSize.height \u0026\u0026\n         copySize.depth \u003d\u003d srcSize.depth \u0026\u0026\n         copySize.depth \u003d\u003d dstSize.depth;",
+      "revId": "498755318e3e5c287cb87f956bab92fb20faddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
