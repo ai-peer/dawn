@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "693e7905_92fb4058",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T00:59:06Z",
+      "side": 1,
+      "message": "not important, but do we have to use FramebufferTexture2D at all? (is it required for non-array textures? or can we simplify and always use FramebufferTextureLayer?)",
+      "revId": "b589ac6ada7516142e26174e8f74b209c5114ae2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
