@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "28a9e5bf_43dae00d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-17T01:11:30Z",
+      "side": 1,
+      "message": "I think we need to implement in this function too (can be a followup)\n\n+cc rharrison",
+      "revId": "588a6f6f1621ec60b507bd7407eb2bab1176af73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "abb178ca_ec59a1d4",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
