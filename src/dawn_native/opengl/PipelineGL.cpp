@@ -109,17 +109,17 @@ namespace dawn_native { namespace opengl {
         for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const auto& groupInfo = layout->GetBindGroupLayout(group)->GetBindingInfo();
 
-            for (uint32_t binding = 0; binding < kMaxBindingsPerGroup; ++binding) {
-                if (!groupInfo.mask[binding]) {
-                    continue;
-                }
+            for (const auto& it : layout->GetBindGroupLayout(group)->GetBindingMap()) {
+                uint32_t binding = it.first;
+                uint32_t bindingIndex = it.second;
 
                 std::string name = GetBindingName(group, binding);
-                switch (groupInfo.types[binding]) {
+                switch (groupInfo.types[bindingIndex]) {
                     case wgpu::BindingType::UniformBuffer: {
                         GLint location = gl.GetUniformBlockIndex(mProgram, name.c_str());
                         if (location != -1) {
-                            gl.UniformBlockBinding(mProgram, location, indices[group][binding]);
+                            gl.UniformBlockBinding(mProgram, location,
+                                                   indices[group][bindingIndex]);
                         }
                     } break;
 
@@ -129,7 +129,7 @@ namespace dawn_native { namespace opengl {
                             mProgram, GL_SHADER_STORAGE_BLOCK, name.c_str());
                         if (location != GL_INVALID_INDEX) {
                             gl.ShaderStorageBlockBinding(mProgram, location,
-                                                         indices[group][binding]);
+                                                         indices[group][bindingIndex]);
                         }
                     } break;
 

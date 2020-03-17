@@ -44,12 +44,15 @@ namespace dawn_native { namespace vulkan {
         std::array<VkDescriptorImageInfo, kMaxBindingsPerGroup> writeImageInfo;
 
         const auto& layoutInfo = GetLayout()->GetBindingInfo();
-        for (uint32_t bindingIndex : IterateBitSet(layoutInfo.mask)) {
+        for (const auto& it : GetLayout()->GetBindingMap()) {
+            uint32_t binding = it.first;
+            uint32_t bindingIndex = it.second;
+
             auto& write = writes[numWrites];
             write.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
             write.pNext = nullptr;
             write.dstSet = GetHandle();
-            write.dstBinding = bindingIndex;
+            write.dstBinding = binding;
             write.dstArrayElement = 0;
             write.descriptorCount = 1;
             write.descriptorType = VulkanDescriptorType(layoutInfo.types[bindingIndex],
