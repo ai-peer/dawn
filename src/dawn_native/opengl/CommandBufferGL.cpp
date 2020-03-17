@@ -242,7 +242,8 @@ namespace dawn_native { namespace opengl {
                 const auto& layout = group->GetLayout()->GetBindingInfo();
                 uint32_t currentDynamicIndex = 0;
 
-                for (uint32_t bindingIndex : IterateBitSet(layout.mask)) {
+                for (uint32_t bindingIndex = 0; bindingIndex < layout.bindingCount;
+                     ++bindingIndex) {
                     switch (layout.types[bindingIndex]) {
                         case wgpu::BindingType::UniformBuffer: {
                             BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);

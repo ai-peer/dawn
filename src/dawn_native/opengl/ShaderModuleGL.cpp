@@ -173,19 +173,18 @@ namespace dawn_native { namespace opengl {
         // Also unsets the SPIRV "Binding" decoration as it outputs "layout(binding=)" which
         // isn't supported on OSX's OpenGL.
         for (uint32_t group = 0; group < kMaxBindGroups; ++group) {
-            for (uint32_t binding = 0; binding < kMaxBindingsPerGroup; ++binding) {
-                const auto& info = bindingInfo[group][binding];
-                if (info.used) {
-                    if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-                        mSpvcContext.SetName(info.base_type_id, GetBindingName(group, binding));
-                        mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_binding);
-                        mSpvcContext.UnsetDecoration(info.id,
-                                                     shaderc_spvc_decoration_descriptorset);
-                    } else {
-                        compiler->set_name(info.base_type_id, GetBindingName(group, binding));
-                        compiler->unset_decoration(info.id, spv::DecorationBinding);
-                        compiler->unset_decoration(info.id, spv::DecorationDescriptorSet);
-                    }
+            for (const auto& it : bindingInfo[group]) {
+                uint32_t binding = it.first;
+                const auto& info = it.second;
+
+                if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+                    mSpvcContext.SetName(info.base_type_id, GetBindingName(group, binding));
+                    mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_binding);
+                    mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_descriptorset);
+                } else {
+                    compiler->set_name(info.base_type_id, GetBindingName(group, binding));
+                    compiler->unset_decoration(info.id, spv::DecorationBinding);
+                    compiler->unset_decoration(info.id, spv::DecorationDescriptorSet);
                 }
             }
         }
