@@ -96,20 +96,21 @@ namespace dawn_native { namespace d3d12 {
             const auto& bindingOffsets =
                 ToBackend(layout->GetBindGroupLayout(group))->GetBindingOffsets();
             const auto& groupBindingInfo = moduleBindingInfo[group];
-            for (uint32_t binding = 0; binding < groupBindingInfo.size(); ++binding) {
-                const BindingInfo& bindingInfo = groupBindingInfo[binding];
-                if (bindingInfo.used) {
-                    uint32_t bindingOffset = bindingOffsets[binding];
-                    if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-                        DAWN_TRY(CheckSpvcSuccess(
-                            mSpvcContext.SetDecoration(
-                                bindingInfo.id, SHADERC_SPVC_DECORATION_BINDING, bindingOffset),
-                            "Unable to set decorating binding before generating HLSL shader w/ "
-                            "spvc"));
-                    } else {
-                        compiler->set_decoration(bindingInfo.id, spv::DecorationBinding,
-                                                 bindingOffset);
-                    }
+            for (const auto& it : groupBindingInfo) {
+                uint32_t binding = it.first;
+                const BindingInfo& bindingInfo = it.second;
+                BindingIndex bindingIndex =
+                    layout->GetBindGroupLayout(group)->GetBindingIndex(binding);
+
+                uint32_t bindingOffset = bindingOffsets[bindingIndex];
+                if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+                    DAWN_TRY(CheckSpvcSuccess(
+                        mSpvcContext.SetDecoration(bindingInfo.id, SHADERC_SPVC_DECORATION_BINDING,
+                                                   bindingOffset),
+                        "Unable to set decorating binding before generating HLSL shader w/ "
+                        "spvc"));
+                } else {
+                    compiler->set_decoration(bindingInfo.id, spv::DecorationBinding, bindingOffset);
                 }
             }
         }
