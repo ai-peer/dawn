@@ -22,6 +22,86 @@
       "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e94dacc_3954b43e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T02:56:26Z",
+      "side": 1,
+      "message": "nit: maybe give this a typedef and replace auto",
+      "range": {
+        "startLine": 121,
+        "startChar": 14,
+        "endLine": 121,
+        "endChar": 18
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de14b28d_59ebbd9b",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T02:56:26Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s necessary to hash the binding count, it should implicitly affect the hash due to the loop below.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "380ba334_28a3e7d4",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T02:56:26Z",
+      "side": 1,
+      "message": "nit: It probably doesn\u0027t cost anything to index this so many times, but it is a little harder to read (than the old version which accessed it once at the top of the loop body).",
+      "range": {
+        "startLine": 209,
+        "startChar": 36,
+        "endLine": 209,
+        "endChar": 53
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94394e5c_b2d6098a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T02:56:26Z",
+      "side": 1,
+      "message": "Can it happen that two BGLs are equivalent and have the same map, but the map is constructed in a different order causing this hash to differ?\n\nIf we had a reverse map, it would be a dense array and this would be easy....",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
