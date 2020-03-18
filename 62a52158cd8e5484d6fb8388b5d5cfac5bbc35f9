@@ -102,6 +102,47 @@
       "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0b50cbc_2b005e63",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T04:07:47Z",
+      "side": 1,
+      "message": "Never mind, apparently std::map is ordered by key. Add a comment about that?",
+      "parentUuid": "94394e5c_b2d6098a",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1753c788_f4cf92db",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-18T04:07:47Z",
+      "side": 1,
+      "message": "Probably we should use unordered_map everywhere where we don\u0027t depend on the order. Which I think includes this one?\n\nI suspect they\u0027re all small enough that flat_map would be better, but we don\u0027t have it...",
+      "range": {
+        "startLine": 134,
+        "startChar": 24,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
