@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "4d718a76_4612101e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "+1 to adding comments when you call into the residency manager. In those comments, please explain the rationale for why you sometimes choose to pass true vs. false for the last parameter: keepResidentUntilNextSerial",
+      "range": {
+        "startLine": 258,
+        "startChar": 92,
+        "endLine": 258,
+        "endChar": 97
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27e76ecc_a6493c7a",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 22
@@ -104,6 +127,29 @@
     },
     {
       "key": {
+        "uuid": "070453d4_016cf048",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Nit: Also explain that since members of the list are not reference counted, failure to remove heaps from the list in the destructor means use-after-freed during subsequent walks of the list.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "534a3f5a_960a2bc6",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 22
@@ -138,6 +184,29 @@
     },
     {
       "key": {
+        "uuid": "89e51c11_b7b2d537",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Please add an overall comment that describes the lifetime of the class in the linked list + when it gets added/removed.",
+      "range": {
+        "startLine": 25,
+        "startChar": 42,
+        "endLine": 25,
+        "endChar": 63
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc1f0106_da946061",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 22
@@ -149,6 +218,116 @@
       "writtenOn": "2020-03-18T14:17:02Z",
       "side": 1,
       "message": "Maybe the CommandRecordingContext and ResidencyManager could be friends of this class since they use it intrusively for their state tracking.",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8da9e2d7_a80d3775",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "I prefer that we not use friends for things other than test classes. Otherwise, it\u0027s difficult to reason about member variables that can be changed in many different places/files.  \n\nInstead, consider grouping the class methods into ones that are considered internal to a group of objects and ones that are external.",
+      "parentUuid": "bc1f0106_da946061",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7607cf3_7df06a87",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Please add a comment that explains the difference between \"last usage\" and \"last submission\".",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 35
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12670af8_e38593c2",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Nit: This can be simplified to be \"while(node-\u003evalue()-\u003eIsResidencyLocked())\"",
+      "range": {
+        "startLine": 78,
+        "startChar": 49,
+        "endLine": 78,
+        "endChar": 57
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fe770a3_dd24257e",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure it is best if we block for the most recently used heap to finish with the GPU before evicting it. Should we, instead, move onto the next item in the list and see if that one can be evicted without waiting?",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 67
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aa73b51_3f6dc16f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "You should add a residency stress test which artificially limits the amount of memory available to Dawn. The test should then queue an increasing amount of work so we exercise all of the if conditionals in your code.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 32
+      },
       "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -195,6 +374,52 @@
     },
     {
       "key": {
+        "uuid": "9a259930_84b8105e",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Nit: To avoid re-indexing into the array multiple times and easier debugging, please pull heaps[i] into a local variable in the for loop and use it instead.",
+      "range": {
+        "startLine": 163,
+        "startChar": 16,
+        "endLine": 163,
+        "endChar": 24
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c1153f_bcc0f51a",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Can we optimize this by not adding the heap to the passed in array to begin with?",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 43
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a3b67d8_3751460d",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 22
@@ -211,6 +436,29 @@
         "startChar": 44,
         "endLine": 172,
         "endChar": 78
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4060c5ec_c4935650",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-18T20:23:20Z",
+      "side": 1,
+      "message": "Nit: availabe --\u003e available",
+      "range": {
+        "startLine": 182,
+        "startChar": 62,
+        "endLine": 182,
+        "endChar": 70
       },
       "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
