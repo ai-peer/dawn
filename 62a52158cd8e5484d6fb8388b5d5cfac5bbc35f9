@@ -123,6 +123,91 @@
     },
     {
       "key": {
+        "uuid": "b3ecea6e_df67abaa",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "Maybe have something that ensure buffers are sorted before the rest if we change the enum values.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ded9fd6_7742afb7",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "Maybe add a comment before BindGroupLayoutBase that explains the packing etc.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5583f415_45314f97",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "Making this a structure of arrays was probably a mistake. Maybe it would make sense to have a single:\n\n  struct BindingInfo {\n      wgpu::ShaderStage visibility;\n      wgpu::BindingType type;\n      ...\n      bool hasDynamicOffset;\n      bool multisampled;\n  }\n\nThen use that both in the ShaderModule data extraction (spirv_ids being in a different table) and BindGroupLayout.\n\nThen BindGroupLayout could have an std::vector\u003cBindingInfo\u003e that\u0027s a private thing, and const BindingInfo\u0026 GetBindingInfo(uint32_t bindingIndex); then bindingIndex would get translated internally to a packed index via an std::array + std::map (so that small indices have a fast path)? BindGroup would need the packed index so there would be another GetPackedIndex(uint32_t bindingIndex).\n\nThis wouldn\u0027t be changes done in this CL, but WDYT about them?",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e335e32_7387c5b6",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "nit: this could be in an anonymous namespace in the BindGroupLayout.cpp",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f39e060c_014fb5c2",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "nit: alphabetical order.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1753c788_f4cf92db",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 1
@@ -140,6 +225,104 @@
         "endLine": 134,
         "endChar": 27
       },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f74d7874_5a8c7283",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "We should never depend on the order outside of BGL and BG, because that\u0027s where packing inside an array happens. I\u0027m not sure we need another data-structure: hot code is CreateBindGroup and SetBindGroup, the rest should be cold.\n\nOf course when we get abseil\u0027s swiss tables in, we can replace this one too.",
+      "parentUuid": "1753c788_f4cf92db",
+      "range": {
+        "startLine": 134,
+        "startChar": 24,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5abace0c_ec96ce05",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "nit: we should probably two this in two steps: first emplace and validate that the bool returned is true (otherwise we have duplicate bindings in the shader), then get the pointer to the BindingInfo. Ditto for the SPIRV-Cross path.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6479d218_9d2902b0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "nit: This could be a getter so that how binding infos are stored is an implementation detail.",
+      "range": {
+        "startLine": 649,
+        "startChar": 55,
+        "endLine": 649,
+        "endChar": 60
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f100a16d_a484556a",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "I think this should be bindingIndex. In general the binding map should only ever be used by the frontend and the ShaderModule specializations.",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7948857_90768bfb",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T13:50:40Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
