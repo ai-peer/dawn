@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "278d71ce_4297d03f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T10:28:31Z",
+      "side": 1,
+      "message": "The texture dimension should also be checked for storage textures, can we have a test that would have caught that?",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55921f19_51ef82a6",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T10:28:31Z",
+      "side": 1,
+      "message": "Note: in a sense this is more of a BindGroupLayout tests and not just Storage texture test.\n\nThe testing done here is very good, but it\u0027s a lot of effort to spend on the dawn_end2end_tests. If you want we could reduce the combinatorial explosion a bit for dawn_end2end_tests and assume the WebGPU CTS will have that combinatorial explosion we need.",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bf1c5f9_abc5b5f8",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T10:28:31Z",
+      "side": 1,
+      "message": "u-nit: can we have some block comments and more whitespace to let the code breath a little?",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd4a5cdd_a75a4a0a",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T10:28:31Z",
+      "side": 1,
+      "message": "nit: we could build this from kAllTextureFormats and TextureFormatSupportsStorageTexture.",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d9adc5_3c2f67e2",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-18T10:28:31Z",
+      "side": 1,
+      "message": "u-nit: add some whitespace and comments to separate code blocks.",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
