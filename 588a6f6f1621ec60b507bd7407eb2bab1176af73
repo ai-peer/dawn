@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "18519fe9_9a7be477",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-18T01:27:18Z",
+      "side": 1,
+      "message": "shaderc_spvc_binding_type_readonly_storage_texture and shaderc_spvc_binding_type_writeonly_storage_texture has been supported in shaderc:\nhttps://github.com/google/shaderc/pull/1001\n\nThanks for Ryan\u0027s help!",
+      "parentUuid": "f8bfb1c6_775d38ca",
+      "revId": "588a6f6f1621ec60b507bd7407eb2bab1176af73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abb178ca_ec59a1d4",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
