@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7c336edb_05af62d0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-19T00:46:12Z",
+      "side": 1,
+      "message": "Empty if()",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "278d71ce_4297d03f",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 3
@@ -36,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "db524aca_789f8d2e",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-19T00:46:12Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to keep them here, but for future tests we can skimp on the effort. :)",
+      "parentUuid": "55921f19_51ef82a6",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8bf1c5f9_abc5b5f8",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 3
@@ -64,6 +99,24 @@
       "writtenOn": "2020-03-18T10:28:31Z",
       "side": 1,
       "message": "nit: we could build this from kAllTextureFormats and TextureFormatSupportsStorageTexture.",
+      "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "533c4c76_d3b38b9d",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-19T00:46:12Z",
+      "side": 1,
+      "message": "Could alternatively do `if (!TextureFormatSupportsStorageTexture(...)) { continue; }` at the tops of the two relevant loop bodies.",
+      "parentUuid": "dd4a5cdd_a75a4a0a",
       "revId": "3f87e5d52cab63342ff0ca3a2c2d6607a733db37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
