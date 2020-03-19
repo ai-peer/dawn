@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "460c77df_fcb97b58",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-19T21:45:27Z",
+      "side": 1,
+      "message": "I think I understand + modified the test. Note two changes: 1) R32Uint can\u0027t be used as it\u0027s not blend-able and 2) assumed the formula had a typo (+1 not -1).",
+      "parentUuid": "7e5825de_f5df5263",
+      "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07717abd_0e9ee797",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb047f1b_b160f0d6",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-19T21:45:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07717abd_0e9ee797",
+      "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a5f0f57e_06ad6312",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-19T21:45:27Z",
+      "side": 1,
+      "message": "This was meant for multiple submits (NOT same) case - reworded.\n\nAdded a new test for the SAME submit as well.",
+      "parentUuid": "1d023d5f_3f41cf36",
+      "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f2f04c8_ac085f95",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "cf1f7cb3_76dc1a5c",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-19T21:45:27Z",
+      "side": 1,
+      "message": "TIL - Done.",
+      "parentUuid": "4f2f04c8_ac085f95",
+      "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f14e85a_88dc4052",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -84,6 +156,24 @@
       "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886ee2cf_a3bbbeda",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-19T21:45:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f14e85a_88dc4052",
+      "revId": "37fb19a8b2df702b74093b7c376e691e473d9288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
