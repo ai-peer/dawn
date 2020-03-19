@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30652eb6_90516b54",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-19T21:05:03Z",
+      "side": 1,
+      "message": "unit: was confused at first because I thought this meant all the formats tested were combined depth/stencil formats. Maybe say \"depth-only and combined\" formats.",
+      "range": {
+        "startLine": 684,
+        "startChar": 51,
+        "endLine": 684,
+        "endChar": 68
+      },
+      "revId": "d8bbae324b6cee7ea6cbf1457fce760e6f5ce733",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
