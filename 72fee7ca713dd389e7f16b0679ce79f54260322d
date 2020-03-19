@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac2a7455_b7c46f1e",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-19T23:02:11Z",
+      "side": 1,
+      "message": "Rendering black could also happen if we don\u0027t render and lazy clear on the readback. It may be okay because this has nonzero alpha, but I think it\u0027s best if we pick a different color.",
+      "range": {
+        "startLine": 339,
+        "startChar": 8,
+        "endLine": 342,
+        "endChar": 0
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1da91df4_5a45ee4d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-19T23:02:11Z",
+      "side": 1,
+      "message": "These are all red; could we also do additive blending as well here?",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 374,
+        "endChar": 9
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04aa9a96_1a2dab42",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-19T23:02:11Z",
+      "side": 1,
+      "message": "This test is testing the (size + 1)th descriptor, but I think there\u0027s value in using non-black and varying values here instead of just taking up descriptor space. The test could also pass if we messed up descriptor encoding and read from the wrong offset in the buffer (alpha \u003d 1 would actually be red \u003d 1)",
+      "range": {
+        "startLine": 422,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 0
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
