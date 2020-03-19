@@ -242,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "486361ed_9ac7f604",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-19T09:49:22Z",
+      "side": 1,
+      "message": "That works too. Since we\u0027re doing a lot of intrusive tracking I\u0027d like to find a way to allow a part of a class to be only accessible by another one. Unfortunately C++ doesn\u0027t have facilities for this.",
+      "parentUuid": "8da9e2d7_a80d3775",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7607cf3_7df06a87",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 22
@@ -299,6 +317,30 @@
       "writtenOn": "2020-03-18T20:23:20Z",
       "side": 1,
       "message": "I\u0027m not sure it is best if we block for the most recently used heap to finish with the GPU before evicting it. Should we, instead, move onto the next item in the list and see if that one can be evicted without waiting?",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 67
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5d26a62_f166bafb",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-19T09:49:22Z",
+      "side": 1,
+      "message": "This is an LRU cache so items further down the list will have a higher serial anyway.",
+      "parentUuid": "7fe770a3_dd24257e",
       "range": {
         "startLine": 99,
         "startChar": 12,
