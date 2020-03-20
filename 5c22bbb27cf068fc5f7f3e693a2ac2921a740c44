@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7edfce15_b16dd122",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:38:54Z",
+      "side": 1,
+      "message": "Would be nice to test both, especially since WebGPU will probably only exercise one path (or at least that\u0027s how the spec is today). Don\u0027t have a good way to parameterize now though. Maybe next sprint I\u0027ll port the DawnPerfTest parameterization to DawnTest as well. Overall, I think we should have _some_ combinatorial test support for Dawn, and not just rely on WebGPU.",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 63
+      },
+      "revId": "5c22bbb27cf068fc5f7f3e693a2ac2921a740c44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
