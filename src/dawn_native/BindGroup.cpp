@@ -127,15 +127,11 @@ namespace dawn_native {
         }
 
         DAWN_TRY(device->ValidateObject(descriptor->layout));
-
-        const BindGroupLayoutBase::LayoutBindingInfo& layoutInfo =
-            descriptor->layout->GetBindingInfo();
-
-        const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
-
-        if (descriptor->bindingCount != bindingMap.size()) {
+        if (descriptor->bindingCount != descriptor->layout->GetBindingCount()) {
             return DAWN_VALIDATION_ERROR("numBindings mismatch");
         }
+
+        const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
 
         std::bitset<kMaxBindingsPerGroup> bindingsSet;
         for (uint32_t i = 0; i < descriptor->bindingCount; ++i) {
@@ -146,15 +142,18 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("setting non-existent binding");
             }
             BindingIndex bindingIndex = it->second;
-            ASSERT(bindingIndex < layoutInfo.bindingCount);
+            ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
             if (bindingsSet[bindingIndex]) {
                 return DAWN_VALIDATION_ERROR("binding set twice");
             }
             bindingsSet.set(bindingIndex);
 
+            const BindGroupLayoutBase::BindingInfo& bindingInfo =
+                descriptor->layout->GetBindingInfo(bindingIndex);
+
             // Perform binding-type specific validation.
-            switch (layoutInfo.types[bindingIndex]) {
+            switch (bindingInfo.type) {
                 case wgpu::BindingType::UniformBuffer:
                     DAWN_TRY(ValidateBufferBinding(device, binding, wgpu::BufferUsage::Uniform));
                     break;
@@ -163,12 +162,10 @@ namespace dawn_native {
                     DAWN_TRY(ValidateBufferBinding(device, binding, wgpu::BufferUsage::Storage));
                     break;
                 case wgpu::BindingType::SampledTexture:
-                    DAWN_TRY(
-                        ValidateTextureBinding(device, binding, wgpu::TextureUsage::Sampled,
-                                               layoutInfo.multisampled[bindingIndex],
-                                               layoutInfo.textureComponentTypes[bindingIndex],
-                                               layoutInfo.textureDimensions[bindingIndex],
-                                               layoutInfo.storageTextureFormats[bindingIndex]));
+                    DAWN_TRY(ValidateTextureBinding(
+                        device, binding, wgpu::TextureUsage::Sampled, bindingInfo.multisampled,
+                        bindingInfo.textureComponentType, bindingInfo.textureDimension,
+                        bindingInfo.storageTextureFormat));
                     break;
                 case wgpu::BindingType::Sampler:
                     DAWN_TRY(ValidateSamplerBinding(device, binding));
@@ -177,12 +174,10 @@ namespace dawn_native {
                 // write-only storage textures.
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
-                    DAWN_TRY(
-                        ValidateTextureBinding(device, binding, wgpu::TextureUsage::Storage,
-                                               layoutInfo.multisampled[bindingIndex],
-                                               layoutInfo.textureComponentTypes[bindingIndex],
-                                               layoutInfo.textureDimensions[bindingIndex],
-                                               layoutInfo.storageTextureFormats[bindingIndex]));
+                    DAWN_TRY(ValidateTextureBinding(
+                        device, binding, wgpu::TextureUsage::Storage, bindingInfo.multisampled,
+                        bindingInfo.textureComponentType, bindingInfo.textureDimension,
+                        bindingInfo.storageTextureFormat));
                     break;
                 case wgpu::BindingType::StorageTexture:
                     UNREACHABLE();
@@ -274,9 +269,9 @@ namespace dawn_native {
     BufferBinding BindGroupBase::GetBindingAsBufferBinding(BindingIndex bindingIndex) {
         ASSERT(!IsError());
         ASSERT(bindingIndex < mLayout->GetBindingCount());
-        ASSERT(mLayout->GetBindingInfo().types[bindingIndex] == wgpu::BindingType::UniformBuffer ||
-               mLayout->GetBindingInfo().types[bindingIndex] == wgpu::BindingType::StorageBuffer ||
-               mLayout->GetBindingInfo().types[bindingIndex] ==
+        ASSERT(mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::UniformBuffer ||
+               mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::StorageBuffer ||
+               mLayout->GetBindingInfo(bindingIndex).type ==
                    wgpu::BindingType::ReadonlyStorageBuffer);
         BufferBase* buffer = static_cast<BufferBase*>(mBindingData.bindings[bindingIndex].Get());
         return {buffer, mBindingData.bufferData[bindingIndex].offset,
@@ -286,14 +281,14 @@ namespace dawn_native {
     SamplerBase* BindGroupBase::GetBindingAsSampler(BindingIndex bindingIndex) {
         ASSERT(!IsError());
         ASSERT(bindingIndex < mLayout->GetBindingCount());
-        ASSERT(mLayout->GetBindingInfo().types[bindingIndex] == wgpu::BindingType::Sampler);
+        ASSERT(mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::Sampler);
         return static_cast<SamplerBase*>(mBindingData.bindings[bindingIndex].Get());
     }
 
     TextureViewBase* BindGroupBase::GetBindingAsTextureView(BindingIndex bindingIndex) {
         ASSERT(!IsError());
         ASSERT(bindingIndex < mLayout->GetBindingCount());
-        ASSERT(mLayout->GetBindingInfo().types[bindingIndex] == wgpu::BindingType::SampledTexture);
+        ASSERT(mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::SampledTexture);
         return static_cast<TextureViewBase*>(mBindingData.bindings[bindingIndex].Get());
     }
 
