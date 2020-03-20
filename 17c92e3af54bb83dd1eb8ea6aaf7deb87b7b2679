@@ -22,6 +22,30 @@
       "revId": "17c92e3af54bb83dd1eb8ea6aaf7deb87b7b2679",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e97cb497_7d389df3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T18:02:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e71fb219_a7180784",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 24
+      },
+      "revId": "17c92e3af54bb83dd1eb8ea6aaf7deb87b7b2679",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
