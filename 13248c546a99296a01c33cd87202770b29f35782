@@ -22,6 +22,23 @@
       "revId": "13248c546a99296a01c33cd87202770b29f35782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90067825_aa36a2e2",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T07:07:04Z",
+      "side": 1,
+      "message": "just wondering: why?",
+      "revId": "13248c546a99296a01c33cd87202770b29f35782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

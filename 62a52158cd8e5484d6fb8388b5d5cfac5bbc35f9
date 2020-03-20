@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "e29409c1_4e4184ac",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T07:07:04Z",
+      "side": 1,
+      "message": "I read this as something like\n\n if (a.type !\u003d b.type) {\n  if (a is buffer) { return true; }\n  if (b is buffer) { return false; }\n  return a.type \u003c b.type;\n }\n\n? but the thing you have works too.\n\nI\u0027d want to write it as a static_assert but I can\u0027t think of a way to ensure it\u0027s exhaustive (like we can do with a switch).",
+      "parentUuid": "a372322e_8f5c40d2",
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ded9fd6_7742afb7",
         "filename": "src/dawn_native/BindGroupLayout.h",
         "patchSetId": 1
@@ -571,6 +589,30 @@
       "side": 1,
       "message": "In the follow-up after storing the info as an array-of-structs not a struct-of-arrays, right?",
       "parentUuid": "6479d218_9d2902b0",
+      "range": {
+        "startLine": 649,
+        "startChar": 55,
+        "endLine": 649,
+        "endChar": 60
+      },
+      "revId": "62a52158cd8e5484d6fb8388b5d5cfac5bbc35f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed8ac88_7b6d1cd4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T07:07:04Z",
+      "side": 1,
+      "message": "It could be done first to abstract whether it\u0027s AoS or SoA, but I think let\u0027s skip it for this patch since we\u0027d want to abstract it in all the other code too.",
+      "parentUuid": "ed0f6068_c3ec807c",
       "range": {
         "startLine": 649,
         "startChar": 55,
