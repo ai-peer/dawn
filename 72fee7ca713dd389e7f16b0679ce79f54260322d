@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3c943ae4_90a2a38b",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-20T23:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac2a7455_b7c46f1e",
+      "range": {
+        "startLine": 339,
+        "startChar": 8,
+        "endLine": 342,
+        "endChar": 0
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1da91df4_5a45ee4d",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 5
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "19fdd239_1896fcd0",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-20T23:45:16Z",
+      "side": 1,
+      "message": "Did a bit of both - fill with varied colors but have red last to check.",
+      "parentUuid": "a3495d11_948e2c0b",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 374,
+        "endChar": 9
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04aa9a96_1a2dab42",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 5
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "f7cf6600_ff322aca",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-20T23:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04aa9a96_1a2dab42",
+      "range": {
+        "startLine": 422,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 0
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acd92a2e_9a68588a",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 5
@@ -112,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "5b1e8954_05315f55",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-20T23:45:16Z",
+      "side": 1,
+      "message": "Good catch, fixed.",
+      "parentUuid": "acd92a2e_9a68588a",
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "305aff57_e1f80fcc",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 5
@@ -126,6 +216,24 @@
       "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01fe99b_d69991fc",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-20T23:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "305aff57_e1f80fcc",
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
