@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "0d85b40f_cacd5f6f",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T17:50:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "34bbc23c_92739de8",
+      "range": {
+        "startLine": 244,
+        "startChar": 40,
+        "endLine": 244,
+        "endChar": 41
+      },
+      "revId": "13248c546a99296a01c33cd87202770b29f35782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49be9e35_2e97a856",
         "filename": "src/dawn_native/BindGroupLayout.h",
         "patchSetId": 5
@@ -457,6 +481,24 @@
       "revId": "13248c546a99296a01c33cd87202770b29f35782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "705610c9_ff15f2a1",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T17:50:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4caea017_bb659c16",
+      "revId": "13248c546a99296a01c33cd87202770b29f35782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
