@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "a3495d11_948e2c0b",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T13:20:27Z",
+      "side": 1,
+      "message": "Or maybe just have the last one red, so we know it\u0027s using the new 0th bindgroup in the heap and not the one created in the first part of the test.",
+      "parentUuid": "1da91df4_5a45ee4d",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 374,
+        "endChar": 9
+      },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "04aa9a96_1a2dab42",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 5
@@ -65,6 +89,40 @@
         "endLine": 430,
         "endChar": 0
       },
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acd92a2e_9a68588a",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T13:20:27Z",
+      "side": 1,
+      "message": "The test description says \n\n// Shader-visible heaps should switch out once then re-encode the first descriptor at the same\n// offset in the heap.\n\nBut there\u0027s not switch happening there since bindgroup 0 is reused in the same submit. There should be heapSize + 1 bindgroups.",
+      "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "305aff57_e1f80fcc",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T13:20:27Z",
+      "side": 1,
+      "message": "The point was to reuse the first bindgroup. Instead of creating a new one, we could setSubData in the uniform buffer in the part used by firstBindGroup.",
       "revId": "72fee7ca713dd389e7f16b0679ce79f54260322d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
