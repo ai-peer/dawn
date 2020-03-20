@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7ebab5f7_01d52dd3",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5cb4b27_f0b3639b",
+      "range": {
+        "startLine": 41,
+        "startChar": 72,
+        "endLine": 41,
+        "endChar": 83
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41945a21_d595dedb",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 4
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "de8042e6_cd7de24e",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done, changed to \"\"",
+      "parentUuid": "4ec6c28a_11f8e408",
+      "range": {
+        "startLine": 103,
+        "startChar": 52,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21471a8f_005c983f",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 4
@@ -83,6 +131,30 @@
       "writtenOn": "2020-03-19T23:27:31Z",
       "side": 1,
       "message": "why not use SampleUtils.h ? That way we can reuse the argument parsing, backend selection, and a bunch of set up code.\n\noh, nvm. Those use the old swapchains which is the opposite of what we want. Maybe we can factor some of it, like device setup and arg parsing?\n\nMainly would like to see the backend selection in this manual test so on systems which support more than one API we can more easily test them all.",
+      "range": {
+        "startLine": 260,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 0
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87e5820e_b52ecd35",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "What I\u0027d like to do with this example next, is having a list of two devices for each adapter, then you can switch the adapter on which a window is used. WDYT? Maybe it\u0027d still be worth adding a default backend command line argument, I\u0027m not sure.",
+      "parentUuid": "21471a8f_005c983f",
       "range": {
         "startLine": 260,
         "startChar": 4,
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "f6f0bd96_d452ff70",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "592d4cbe_18547adf",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 9
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac1eb7e0_54f88771",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 4
@@ -138,6 +234,30 @@
       "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8e1bf19_babacd94",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac1eb7e0_54f88771",
+      "range": {
+        "startLine": 325,
+        "startChar": 8,
+        "endLine": 332,
+        "endChar": 13
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -164,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "f79faced_f07479b8",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done. Actually I meant that mTexture will keep mCurrentDrawable.texture alive.",
+      "parentUuid": "6f0303ba_924944ae",
+      "range": {
+        "startLine": 116,
+        "startChar": 11,
+        "endLine": 116,
+        "endChar": 19
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "699c21a1_af764040",
         "filename": "src/dawn_native/metal/SwapChainMTL.mm",
         "patchSetId": 4
@@ -187,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "99a0b056_dffb647e",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699c21a1_af764040",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 9
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85adaf3d_cb82baea",
         "filename": "src/tests/end2end/SwapChainTests.cpp",
         "patchSetId": 4
@@ -201,6 +369,24 @@
       "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "507dce02_69c0b400",
+        "filename": "src/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-20T09:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85adaf3d_cb82baea",
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
