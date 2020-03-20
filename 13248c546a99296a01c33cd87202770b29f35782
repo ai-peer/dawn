@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2a6d515_54f6dfa8",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T05:27:55Z",
+      "side": 1,
+      "message": "Added construction-looking things like this to help understand what \"binding.binding\" is",
+      "range": {
+        "startLine": 131,
+        "startChar": 45,
+        "endLine": 131,
+        "endChar": 75
+      },
+      "revId": "13248c546a99296a01c33cd87202770b29f35782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
