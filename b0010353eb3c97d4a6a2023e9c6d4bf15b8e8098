@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b5cb4b27_f0b3639b",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T02:28:27Z",
+      "side": 1,
+      "message": "\"as VSync in\"?",
+      "range": {
+        "startLine": 41,
+        "startChar": 72,
+        "endLine": 41,
+        "endChar": 83
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41945a21_d595dedb",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 4
@@ -13,6 +36,30 @@
       "writtenOn": "2020-03-19T23:27:31Z",
       "side": 1,
       "message": "nit: Not that it matters so much, but is this what you wanted?",
+      "range": {
+        "startLine": 103,
+        "startChar": 52,
+        "endLine": 103,
+        "endChar": 69
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ec6c28a_11f8e408",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T02:28:27Z",
+      "side": 1,
+      "message": "The title gets set later during runtime.",
+      "parentUuid": "41945a21_d595dedb",
       "range": {
         "startLine": 103,
         "startChar": 52,
@@ -41,6 +88,29 @@
         "startChar": 4,
         "endLine": 270,
         "endChar": 0
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "592d4cbe_18547adf",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T02:28:27Z",
+      "side": 1,
+      "message": "\"Or\"?",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 9
       },
       "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -111,6 +181,23 @@
         "endLine": 129,
         "endChar": 9
       },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85adaf3d_cb82baea",
+        "filename": "src/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-20T02:28:27Z",
+      "side": 1,
+      "message": "wrong comment",
       "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
