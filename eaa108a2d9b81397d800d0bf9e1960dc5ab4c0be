@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3b4cf88_2a3aad30",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "typo: background",
+      "range": {
+        "startLine": 30,
+        "startChar": 45,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5758861_9d6ae0c2",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "typo: triangles",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2c02da7_3e1a5b98",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "typo: bigger",
+      "range": {
+        "startLine": 46,
+        "startChar": 86,
+        "endLine": 46,
+        "endChar": 92
+      },
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9d816a0_262f87de",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "typo: cycling",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 47
+      },
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e861946_23da7e02",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "typo: cycling",
+      "range": {
+        "startLine": 52,
+        "startChar": 40,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a28815c_46aa81f4",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "nit: ASSERT(chosenAdapter !\u003d nullptr);",
+      "revId": "eaa108a2d9b81397d800d0bf9e1960dc5ab4c0be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

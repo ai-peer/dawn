@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "e08c557f_e803ef84",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-20T15:50:53Z",
+      "side": 1,
+      "message": "Hm, I think as long as we can switch it later on, it\u0027s fine if the initial adapter is the first one.",
+      "parentUuid": "87e5820e_b52ecd35",
+      "range": {
+        "startLine": 260,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 0
+      },
+      "revId": "b0010353eb3c97d4a6a2023e9c6d4bf15b8e8098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "592d4cbe_18547adf",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 4
