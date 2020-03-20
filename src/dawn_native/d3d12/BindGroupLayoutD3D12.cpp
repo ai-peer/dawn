@@ -45,18 +45,17 @@ namespace dawn_native { namespace d3d12 {
         : BindGroupLayoutBase(device, descriptor),
           mDescriptorCounts{},
           mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
-        const BindGroupLayoutBase::LayoutBindingInfo& groupInfo = GetBindingInfo();
+        for (BindingIndex bindingIndex = 0; bindingIndex < GetBindingCount(); ++bindingIndex) {
+            const BindGroupLayoutBase::BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
-        for (BindingIndex bindingIndex = 0; bindingIndex < groupInfo.bindingCount; ++bindingIndex) {
             // For dynamic resources, Dawn uses root descriptor in D3D12 backend.
             // So there is no need to allocate the descriptor from descriptor heap. Skip counting
             // dynamic resources for calculating size of descriptor heap.
-            if (groupInfo.hasDynamicOffset[bindingIndex]) {
+            if (bindingInfo.hasDynamicOffset) {
                 continue;
             }
 
-            DescriptorType descriptorType =
-                WGPUBindingTypeToDescriptorType(groupInfo.types[bindingIndex]);
+            DescriptorType descriptorType = WGPUBindingTypeToDescriptorType(bindingInfo.type);
             mBindingOffsets[bindingIndex] = mDescriptorCounts[descriptorType]++;
         }
 
