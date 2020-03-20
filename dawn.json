@@ -868,8 +868,9 @@
     "present mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "no v sync"},
-            {"value": 1, "name": "v sync"}
+            {"value": 0, "name": "immediate"},
+            {"value": 1, "name": "fifo"},
+            {"value": 2, "name": "mailbox"}
         ]
     },
     "programmable stage descriptor": {
