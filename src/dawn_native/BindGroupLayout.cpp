@@ -310,6 +310,9 @@ namespace dawn_native {
 
             const auto& it = mBindingMap.emplace(BindingNumber(binding.binding), i);
             ASSERT(it.second);
+            if (binding.binding < mFastBindingMap.size()) {
+                mFastBindingMap[binding.binding] = i;
+            }
         }
         ASSERT(CheckBufferBindingsFirst(mBindingInfo.data(), mBindingCount));
     }
@@ -335,7 +338,7 @@ namespace dawn_native {
         return mBindingMap;
     }
 
-    BindingIndex BindGroupLayoutBase::GetBindingIndex(BindingNumber bindingNumber) const {
+    BindingIndex BindGroupLayoutBase::GetBindingIndexSlow(BindingNumber bindingNumber) const {
         ASSERT(!IsError());
         const auto& it = mBindingMap.find(bindingNumber);
         ASSERT(it != mBindingMap.end());
