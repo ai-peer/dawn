@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3447873_137ec139",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-23T18:03:13Z",
+      "side": 1,
+      "message": "I found that we can have multiple mapped buffers within a single heap, so moved from binary locked/unlocked to a refcount.",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

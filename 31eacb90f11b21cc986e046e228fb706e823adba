@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e1e2c85_11ec6f7d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-23T18:03:13Z",
+      "side": 0,
+      "message": "No longer needed per comment in StagingBufferD3D12.cpp",
+      "revId": "31eacb90f11b21cc986e046e228fb706e823adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad20ccd3_08ada3f4",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-23T18:03:13Z",
+      "side": 0,
+      "message": "I added this in Residency Management #3. With the changes in BufferD3D12.cpp, a staging buffer will be locked resident upon creation and never removed until destruction - so there\u0027s no need to track its usage.",
+      "revId": "31eacb90f11b21cc986e046e228fb706e823adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
