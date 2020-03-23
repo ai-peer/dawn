@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3840f8_ffc79bef",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-23T17:48:48Z",
+      "side": 1,
+      "message": "unit: Can we put this next to the other std::array\u0027s in this struct?",
+      "revId": "681029e5105361feffa5bec53fcc83f33da12a74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
