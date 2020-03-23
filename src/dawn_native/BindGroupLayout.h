@@ -60,6 +60,7 @@ namespace dawn_native {
             std::bitset<kMaxBindingsPerGroup> hasDynamicOffset;
             std::bitset<kMaxBindingsPerGroup> multisampled;
             BindingIndex bindingCount;
+            std::array<wgpu::TextureFormat, kMaxBindingsPerGroup> storageTextureFormats;
         };
 
         // A map from the BindingNumber to its packed BindingIndex.
