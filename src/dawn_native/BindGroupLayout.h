@@ -70,7 +70,14 @@ namespace dawn_native {
             return mBindingInfo[bindingIndex];
         }
         const BindingMap& GetBindingMap() const;
-        BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
+        BindingIndex GetBindingIndex(BindingNumber bindingNumber) const {
+            ASSERT(!IsError());
+            ASSERT(mBindingMap.find(bindingNumber) != mBindingMap.end());
+            if (bindingNumber < mFastBindingMap.size()) {
+                return mFastBindingMap[bindingNumber];
+            }
+            return GetBindingIndexSlow(bindingNumber);
+        }
 
         // Functors necessary for the unordered_set<BGLBase*>-based cache.
         struct HashFunc {
@@ -119,6 +126,8 @@ namespace dawn_native {
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
+        BindingIndex GetBindingIndexSlow(BindingNumber bindingNumber) const;
+
         BindingIndex mBindingCount;
         BindingIndex mBufferCount = 0;  // |BindingIndex| because buffers are packed at the front.
         uint32_t mDynamicUniformBufferCount = 0;
@@ -128,6 +137,8 @@ namespace dawn_native {
 
         // Map from BindGroupLayoutEntry.binding to packed indices.
         BindingMap mBindingMap;
+        // Accelerated flat map for when |BindingNumber| is small.
+        std::array<BindingIndex, kMaxBindingsPerGroup> mFastBindingMap;
     };
 
 }  // namespace dawn_native
