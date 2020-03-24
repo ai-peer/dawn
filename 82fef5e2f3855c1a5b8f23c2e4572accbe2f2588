@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "957ee5ea_da655c93",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T10:29:50Z",
+      "side": 1,
+      "message": "Thanks for the pointer, this makes sense. It also says that it\u0027s only allowed for sampled images. combined image and sampler, or input attachments. So not for non-sampled access.",
+      "parentUuid": "8ea927fe_55c0bc3a",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b10f761d_82a47a5a",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
