@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8ea927fe_55c0bc3a",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-24T10:26:45Z",
+      "side": 1,
+      "message": "According to https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageLayout.html, for VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, \"this layout is valid only for image subresources of images created with the VK_IMAGE_USAGE_SAMPLED_BIT or VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT usage bit enabled\". On Vulkan backend we can only ensure VK_IMAGE_USAGE_STORAGE_BIT is set for storage texture usage, so we cannot always set VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL for all storage textures on Vulkan.",
+      "parentUuid": "7cfdb7cf_923c8283",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b10f761d_82a47a5a",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
