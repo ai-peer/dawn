@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "152d2372_c75eb462",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T11:07:46Z",
+      "side": 1,
+      "message": "nit: Also explain that the heap is already resident because it was just created.",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa00ab78_e858b68f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T11:07:46Z",
+      "side": 1,
+      "message": "What happens if you create a buffer, map it, and then destroy it? Is the memory first made non-lock-resident before DeallocateMemory?",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3447873_137ec139",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 23
@@ -16,6 +50,58 @@
       "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0ac1d3b_73716557",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T11:07:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3447873_137ec139",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e28f8d1_c89a23f5",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T11:07:46Z",
+      "side": 1,
+      "message": "If the node is not currently locked, then it needs to be removed from the LRU before the residency lock is incremented. This allows skipping the loop in [1]",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e078e62e_b28e0a8b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T11:07:46Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
