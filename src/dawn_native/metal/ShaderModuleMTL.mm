@@ -18,6 +18,7 @@
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 
+#include <spirv-tools/optimizer.hpp>
 #include <spirv_msl.hpp>
 
 #include <sstream>
@@ -95,7 +96,12 @@ namespace dawn_native { namespace metal {
                                          uint32_t sampleMask) {
         ASSERT(!IsError());
         ASSERT(out);
-        const std::vector<uint32_t>& spirv = GetSpirv();
+        const std::vector<uint32_t>& origSpirv = GetSpirv();
+
+        std::vector<uint32_t> spirv;
+        spvtools::Optimizer optimizer(SPV_ENV_VULKAN_1_1);
+        optimizer.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
+        optimizer.Run(origSpirv.data(), origSpirv.size(), &spirv);
 
         std::unique_ptr<spirv_cross::CompilerMSL> compilerImpl;
         spirv_cross::CompilerMSL* compiler;
