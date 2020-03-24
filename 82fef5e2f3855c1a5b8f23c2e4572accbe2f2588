@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd015da4_527a60db",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "nit: // anonymous namespace",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cfdb7cf_923c8283",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "I think this should be VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL for readonly storage textures and GENERAL for writeonly.",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b10f761d_82a47a5a",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "nit: partial aggregate initialization is a bit confusing here because it\u0027s not clear what\u0027s defaulted and what\u0027s not. Consider doing the following:\n\n  wgpu::BindGroupLayoutBinding binding; // We can rely on the default values set here\n  binding.binding \u003d ...;\n  binding.type \u003d ...;\n  binding.visibility \u003d ...;\n  binding.storageTextureFormat \u003d ...;\n  binding.hasDynamicOffset \u003d true;",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960bd964_107a7bcb",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "nit: can we have a control case with a texture?",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a84bc452_00f446df",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ddfb524_c78eb38c",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61377e13_666302d7",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-24T09:49:05Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
