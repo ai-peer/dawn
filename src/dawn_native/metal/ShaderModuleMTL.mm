@@ -18,6 +18,7 @@
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 
+#include <spirv-tools/optimizer.hpp>
 #include <spirv_msl.hpp>
 
 #include <sstream>
@@ -69,7 +70,11 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError ShaderModule::Initialize(const ShaderModuleDescriptor* descriptor) {
-        mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
+        // mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
+        spvtools::Optimizer optimizer(SPV_ENV_VULKAN_1_1);
+        optimizer.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
+        optimizer.Run(descriptor->code, descriptor->codeSize, &mSpirv);
+
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
             shaderc_spvc::CompileOptions options = GetMSLCompileOptions();
 
