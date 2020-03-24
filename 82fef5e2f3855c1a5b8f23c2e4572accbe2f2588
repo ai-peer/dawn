@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "23ac7308_88acdf96",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-24T18:02:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "957ee5ea_da655c93",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b10f761d_82a47a5a",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
@@ -83,6 +101,23 @@
       "writtenOn": "2020-03-24T09:49:05Z",
       "side": 1,
       "message": "nit: partial aggregate initialization is a bit confusing here because it\u0027s not clear what\u0027s defaulted and what\u0027s not. Consider doing the following:\n\n  wgpu::BindGroupLayoutBinding binding; // We can rely on the default values set here\n  binding.binding \u003d ...;\n  binding.type \u003d ...;\n  binding.visibility \u003d ...;\n  binding.storageTextureFormat \u003d ...;\n  binding.hasDynamicOffset \u003d true;",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bb5c5e6_ac4c04d0",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-24T18:02:41Z",
+      "side": 1,
+      "message": "ditto on partial aggregate initializer",
       "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
