@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "846545e4_bd1bce36",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T10:19:11Z",
+      "side": 1,
+      "message": "nit: this type could probably be put in the dawn_native namespace directly given how prevalent it is.",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 50
+      },
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3ff18c9_a222c4e4",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T10:19:11Z",
+      "side": 1,
+      "message": "nit: the binding info could be passed to that function directly instead of extracting a ton of members just to pass them.",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dcaa65b_78904e5a",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T10:19:11Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a13dc2a_47e14d59",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T10:19:11Z",
+      "side": 1,
+      "message": "I assume this is inlined because it is a hot function and inlining gives perf gains?",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
