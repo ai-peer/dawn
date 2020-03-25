@@ -73,6 +73,24 @@
       "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4b9f4a7_28ea0a30",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-25T17:35:34Z",
+      "side": 1,
+      "message": "Rather not inlining is a perf regression (don\u0027t remember exactly how much). Previously code grabbed a reference to the whole object and operator[] indexing was inlined.",
+      "parentUuid": "7a13dc2a_47e14d59",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
