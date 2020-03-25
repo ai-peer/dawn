@@ -109,6 +109,23 @@
       "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ff4c337_1c252966",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-25T19:27:48Z",
+      "side": 1,
+      "message": "Equivalent to bindingIndex now?",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
