@@ -91,6 +91,24 @@
       "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0de6707d_12ec5494",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T18:03:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e4b9f4a7_28ea0a30",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
