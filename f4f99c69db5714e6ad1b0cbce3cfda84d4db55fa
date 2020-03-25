@@ -206,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "d4a624fb_578d8ffc",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Because I\u0027ve added the residency lock upon mapping, and residency unlock upon unmap - staging buffers will always be locked resident because they are mapped on creation and unmapped on destruction. This makes it unnecessary to track usage for residency purposes.",
+      "parentUuid": "4407d81c_3152fbec",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee3b3c4e_aaebdd79",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 22
@@ -217,6 +235,24 @@
       "writtenOn": "2020-03-24T11:07:46Z",
       "side": 1,
       "message": "Why was this removed? Is it no longer useful?",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63a62804_5d7fbf46",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "I\u0027ve added this back in. I\u0027ve seen some unexpected behavior on my Nvidia test machine, where allocations are more permissive than they should be when overcommitted. I\u0027ve heard from Rafael who heard from the D3D team that we can\u0027t guarantee CreateHeap or CreateCommittedResource will succeed if we\u0027re over budget, so we must call EnsureCanMakeResident beforehand.",
+      "parentUuid": "ee3b3c4e_aaebdd79",
       "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -793,6 +829,30 @@
     },
     {
       "key": {
+        "uuid": "e30b0a60_58cf34e4",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Oops. Fixed it now.",
+      "parentUuid": "2bba6b49_57151fc4",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 89
+      },
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24a37914_a91203eb",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 22
@@ -1156,6 +1216,24 @@
       "writtenOn": "2020-03-24T11:07:46Z",
       "side": 1,
       "message": "Why was this removed?",
+      "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2216e7c_702e1984",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Because I\u0027ve added the residency lock upon mapping, and residency unlock upon unmap - staging buffers will always be resident because they are mapped on creation and unmapped on destruction. This makes it unnecessary to track usage for residency purposes.",
+      "parentUuid": "c4fc31eb_433f4f22",
       "revId": "f4f99c69db5714e6ad1b0cbce3cfda84d4db55fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

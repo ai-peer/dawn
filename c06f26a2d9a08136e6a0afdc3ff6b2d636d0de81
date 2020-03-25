@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25620400_e4989a55",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "I think this is what you meant?",
+      "parentUuid": "2ba00c0d_96a66732",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 38
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "152d2372_c75eb462",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 23
@@ -39,6 +63,24 @@
       "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "049b0a55_386944f0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "152d2372_c75eb462",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "c013e4b0_61f77ea1",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "This has changed significantly - resolving.",
+      "parentUuid": "c1e99706_feae75d0",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 0
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa00ab78_e858b68f",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 23
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "1c234904_d4616b50",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Good catch - it would have just left the heap locked resident (probably unnecessarily). This is handled now.",
+      "parentUuid": "aa00ab78_e858b68f",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fbb60f_eb5bf933",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 23
@@ -93,6 +177,30 @@
       "writtenOn": "2020-03-25T01:53:30Z",
       "side": 1,
       "message": "In practice, when will the \"last usage\" serial be different than the \"last submission\" serial?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df4153ea_deb6b8c0",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Any time a heap is reused between two submits, and the first submit takes a long time to finish execution (until at least after the usages for the next frame have been recorded)",
+      "parentUuid": "90fbb60f_eb5bf933",
       "range": {
         "startLine": 44,
         "startChar": 1,
@@ -157,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "d8e61c7e_2a27206b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Done. The locking code has changed significantly.",
+      "parentUuid": "2e28f8d1_c89a23f5",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b95785ec_a7b694eb",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 23
@@ -180,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "5f9b596e_f76663a0",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b95785ec_a7b694eb",
+      "range": {
+        "startLine": 101,
+        "startChar": 25,
+        "endLine": 101,
+        "endChar": 59
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e078e62e_b28e0a8b",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 23
@@ -194,6 +344,24 @@
       "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e40fe39_9498a592",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e078e62e_b28e0a8b",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -217,6 +385,30 @@
       "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b33470a9_572a9b08",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-25T23:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02ef01fd_513a7945",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
