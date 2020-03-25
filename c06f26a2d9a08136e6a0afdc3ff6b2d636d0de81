@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2ba00c0d_96a66732",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-25T01:53:30Z",
+      "side": 1,
+      "message": "Nit: Please add an assert that the previous pointer is also nullptr.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 38
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "152d2372_c75eb462",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 23
@@ -30,6 +53,29 @@
       "writtenOn": "2020-03-24T11:07:46Z",
       "side": 1,
       "message": "What happens if you create a buffer, map it, and then destroy it? Is the memory first made non-lock-resident before DeallocateMemory?",
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90fbb60f_eb5bf933",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-25T01:53:30Z",
+      "side": 1,
+      "message": "In practice, when will the \"last usage\" serial be different than the \"last submission\" serial?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 0
+      },
       "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
