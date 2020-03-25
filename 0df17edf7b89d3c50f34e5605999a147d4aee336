@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9efc9c87_b8136eed",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-25T10:21:23Z",
+      "side": 1,
+      "message": "unit: trailing whitespace",
+      "revId": "0df17edf7b89d3c50f34e5605999a147d4aee336",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
