@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a0ef4d24_d3d01188",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-26T02:44:54Z",
+      "side": 1,
+      "message": "Hm, I think if we do that we should merge it with the ShaderModuleBase::BindingInfo.\nIf we merge them, I think that\u0027ll be a separate CL to avoid changing too much at once.\nBut.. I don\u0027t think we should actually merge them because this BGL::BindingInfo has |visibility| and |hasDynamicOffset| which isn\u0027t relevant for SM::BindingInfo. Feels sort of confusing to have meaningless members around.\n\nWDYT?",
+      "parentUuid": "846545e4_bd1bce36",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 50
+      },
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3ff18c9_a222c4e4",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 5
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "0a46e20b_2fb7b01a",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-26T02:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ff18c9_a222c4e4",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dcaa65b_78904e5a",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ab2a996_26c4fe64",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-26T02:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dcaa65b_78904e5a",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -126,6 +186,24 @@
       "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e30439a0_c01d4d41",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-26T02:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ff4c337_1c252966",
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
