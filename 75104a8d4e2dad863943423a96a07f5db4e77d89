@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6ce7a6ec_9831c4ac",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-26T18:20:37Z",
+      "side": 1,
+      "message": "Yes. Fixed.",
+      "parentUuid": "b173f486_53d777b1",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbf8ab04_1436caa9",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 24
@@ -33,6 +51,24 @@
       "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4332abed_a57a9f44",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-26T18:20:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf8ab04_1436caa9",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5d32a35d_7e54c2d3",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-26T18:20:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24b8586_04d7f8dd",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93cf1673_000b96d9",
         "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
         "patchSetId": 24
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "9e282008_4b6f71c4",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-26T18:20:37Z",
+      "side": 1,
+      "message": "Ah. You\u0027re right. I was thinking it wouldn\u0027t have to be tracked, but I see that it does now.",
+      "parentUuid": "93cf1673_000b96d9",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9677a34e_143db533",
         "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
         "patchSetId": 24
@@ -84,6 +156,24 @@
       "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e6f9f2b_b7a0f708",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-26T18:20:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9677a34e_143db533",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
