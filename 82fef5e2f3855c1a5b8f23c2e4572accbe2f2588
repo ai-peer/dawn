@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3e705eb_ce35f9f3",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd015da4_527a60db",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cfdb7cf_923c8283",
         "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
         "patchSetId": 2
@@ -107,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "0d4fcd9e_81c3c370",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b10f761d_82a47a5a",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bb5c5e6_ac4c04d0",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
@@ -121,6 +157,24 @@
       "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6765db6_0158717e",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bb5c5e6_ac4c04d0",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "ae50597a_e29f8259",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "960bd964_107a7bcb",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a84bc452_00f446df",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
@@ -155,6 +227,24 @@
       "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f50e272_278c6b52",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a84bc452_00f446df",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -175,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "c127c6be_0959e3a4",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ddfb524_c78eb38c",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61377e13_666302d7",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
@@ -189,6 +297,24 @@
       "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f014b39_1bca6974",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-26T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61377e13_666302d7",
+      "revId": "82fef5e2f3855c1a5b8f23c2e4572accbe2f2588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
