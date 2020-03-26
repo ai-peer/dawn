@@ -379,15 +379,21 @@ namespace dawn_native {
                 }
 
                 const auto& it = mBindingInfo[binding.set].emplace(BindingNumber(binding.binding),
-                                                                   BindingInfo{});
+                                                                   ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
 
-                BindingInfo* info = &it.first->second;
+                ShaderBindingInfo* info = &it.first->second;
                 info->id = binding.id;
                 info->base_type_id = binding.base_type_id;
                 info->type = ToWGPUBindingType(binding.binding_type);
+
+                // Defaults.
+                info->textureDimension = wgpu::TextureViewDimension::Undefined;
+                info->textureComponentType = Format::Type::Float;
+                info->multisampled = false;
+                info->storageTextureFormat = wgpu::TextureFormat::Undefined;
 
                 switch (info->type) {
                     case wgpu::BindingType::SampledTexture: {
@@ -558,14 +564,21 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
                 }
 
-                const auto& it = mBindingInfo[set].emplace(bindingNumber, BindingInfo{});
+                const auto& it = mBindingInfo[set].emplace(bindingNumber, ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
 
-                BindingInfo* info = &it.first->second;
+                ShaderBindingInfo* info = &it.first->second;
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
+
+                // Defaults.
+                info->textureDimension = wgpu::TextureViewDimension::Undefined;
+                info->textureComponentType = Format::Type::Float;
+                info->multisampled = false;
+                info->storageTextureFormat = wgpu::TextureFormat::Undefined;
+
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
                         spirv_cross::SPIRType::ImageType imageType =
@@ -755,8 +768,7 @@ namespace dawn_native {
             }
             BindingIndex bindingIndex(bindingIt->second);
 
-            const BindGroupLayoutBase::BindingInfo& bindingInfo =
-                layout->GetBindingInfo(bindingIndex);
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
             const auto& layoutBindingType = bindingInfo.type;
 
             if (layoutBindingType != moduleInfo.type) {

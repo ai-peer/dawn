@@ -171,14 +171,13 @@ namespace dawn_native {
 
     namespace {
 
-        void HashCombineBindingInfo(size_t* hash, const BindGroupLayoutBase::BindingInfo& info) {
+        void HashCombineBindingInfo(size_t* hash, const BindingInfo& info) {
             HashCombine(hash, info.hasDynamicOffset, info.multisampled, info.visibility, info.type,
                         info.textureComponentType, info.textureDimension,
                         info.storageTextureFormat);
         }
 
-        bool operator!=(const BindGroupLayoutBase::BindingInfo& a,
-                        const BindGroupLayoutBase::BindingInfo& b) {
+        bool operator!=(const BindingInfo& a, const BindingInfo& b) {
             return a.hasDynamicOffset != b.hasDynamicOffset ||          //
                    a.multisampled != b.multisampled ||                  //
                    a.visibility != b.visibility ||                      //
@@ -219,8 +218,7 @@ namespace dawn_native {
 
         // This is a utility function to help ASSERT that the BGL-binding comparator places buffers
         // first.
-        bool CheckBufferBindingsFirst(const BindGroupLayoutBase::BindingInfo* bindings,
-                                      BindingIndex count) {
+        bool CheckBufferBindingsFirst(const BindingInfo* bindings, BindingIndex count) {
             ASSERT(count <= kMaxBindingsPerGroup);
 
             BindingIndex lastBufferIndex = 0;
