@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b173f486_53d777b1",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:55:58Z",
+      "side": 1,
+      "message": "Doesn\u0027t this directly contradict [1]?",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbf8ab04_1436caa9",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:55:58Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c24b8586_04d7f8dd",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:55:58Z",
+      "side": 1,
+      "message": "I suggest having a helper function \"ShouldTrackHeap()\" and use it in all the places we check for isUMA (even the locking for mapping).",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93cf1673_000b96d9",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:55:58Z",
+      "side": 1,
+      "message": "There is missing residency management for the upload heap here.",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9677a34e_143db533",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:55:58Z",
+      "side": 1,
+      "message": "and here.",
+      "revId": "75104a8d4e2dad863943423a96a07f5db4e77d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
