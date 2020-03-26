@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "7a0a845a_f965c2d2",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-26T16:39:54Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll try it out in a follow-up",
+      "parentUuid": "ebca7312_7b1a94f7",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 50
+      },
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3ff18c9_a222c4e4",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 5
