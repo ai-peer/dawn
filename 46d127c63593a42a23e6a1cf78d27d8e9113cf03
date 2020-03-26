@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ebca7312_7b1a94f7",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-26T09:31:23Z",
+      "side": 1,
+      "message": "Also the ShaderModule needs to keep some SPIR-V IDs around. IMHO it\u0027s ok to merge the two types, and keeping the SPIRV IDs in a side-table. In a way the BindingInfo in the BindGroupLayout is more important than the one deduced in the shader, because that one is only used for validating compatibility and GetBindGroupLayout. I don\u0027t mind the unused members too much because it makes sense that the ShaderModule can\u0027t know about the dynamic offset or the visibility.",
+      "parentUuid": "a0ef4d24_d3d01188",
+      "range": {
+        "startLine": 152,
+        "startChar": 18,
+        "endLine": 152,
+        "endChar": 50
+      },
+      "revId": "46d127c63593a42a23e6a1cf78d27d8e9113cf03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3ff18c9_a222c4e4",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 5
