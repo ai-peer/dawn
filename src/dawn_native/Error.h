@@ -22,7 +22,13 @@
 
 namespace dawn_native {
 
-    enum class InternalErrorType : uint32_t { Validation, DeviceLost, Unimplemented, OutOfMemory };
+    enum class InternalErrorType : uint32_t {
+        Validation,
+        DeviceLost,
+        Internal,
+        Unimplemented,
+        OutOfMemory
+    };
 
     // MaybeError and ResultOrError are meant to be used as return value for function that are not
     // expected to, but might fail. The handling of error is potentially much slower than successes.
@@ -44,7 +50,9 @@ namespace dawn_native {
     ::dawn_native::ErrorData::Create(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 #define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Validation, MESSAGE)
 #define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::DeviceLost, MESSAGE)
-#define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Unimplemented, MESSAGE)
+#define DAWN_INTERNAL_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Internal, MESSAGE)
+#define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) \
+    DAWN_MAKE_ERROR(InternalErrorType::Internal, std::string("Unimplemented: ") + MESSAGE)
 #define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::OutOfMemory, MESSAGE)
 
 #define DAWN_CONCAT1(x, y) x##y
@@ -83,6 +91,9 @@ namespace dawn_native {
 
     // Assert that errors are device loss so that we can continue with destruction
     void AssertAndIgnoreDeviceLossError(MaybeError maybeError);
+
+    wgpu::ErrorType ToWGPUErrorType(InternalErrorType type);
+    InternalErrorType FromWGPUErrorType(wgpu::ErrorType type);
 
 }  // namespace dawn_native
 
