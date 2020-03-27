@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eb0266b5_f73f78cd",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-03-27T17:36:29Z",
+      "side": 1,
+      "message": "It is not only a OutputAttachment usage here, but also being used as a render target. See code on line 373. \n\nI will test storage textures in compute pass. But I\u0027d like to track render target as writable resource in order to cover this situation. You can also see the test for TextureReadAndWriteUsage on line 279. This test is similar to that one, just call multiple SetBindGroup on the same index with a draw/dispatch.",
+      "parentUuid": "0d9ad0d2_28e67502",
+      "range": {
+        "startLine": 353,
+        "startChar": 38,
+        "endLine": 353,
+        "endChar": 81
+      },
+      "revId": "c366df61d0dd6bf990ef615b1670118b62a27109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29d66752_36381fcc",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "c366df61d0dd6bf990ef615b1670118b62a27109",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4a6184d_2ed9cc7e",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-03-27T17:36:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d66752_36381fcc",
+      "range": {
+        "startLine": 376,
+        "startChar": 42,
+        "endLine": 376,
+        "endChar": 49
+      },
+      "revId": "c366df61d0dd6bf990ef615b1670118b62a27109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
