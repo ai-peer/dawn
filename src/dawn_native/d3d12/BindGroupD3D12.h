@@ -27,7 +27,8 @@ namespace dawn_native { namespace d3d12 {
 
     class BindGroup : public BindGroupBase, public PlacementAllocated {
       public:
-        static BindGroup* Create(Device* device, const BindGroupDescriptor* descriptor);
+        static ResultOrError<BindGroup*> Create(Device* device,
+                                                const BindGroupDescriptor* descriptor);
 
         BindGroup(Device* device, const BindGroupDescriptor* descriptor);
         ~BindGroup() override;
@@ -39,11 +40,21 @@ namespace dawn_native { namespace d3d12 {
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;
 
       private:
+        MaybeError Initialize();
+
         Serial mLastUsageSerial = 0;
         Serial mHeapSerial = 0;
 
         D3D12_GPU_DESCRIPTOR_HANDLE mBaseCbvSrvUavDescriptor = {0};
         D3D12_GPU_DESCRIPTOR_HANDLE mBaseSamplerDescriptor = {0};
+
+        struct CPUDescriptorHeapAllocation {
+            D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor = {0};
+            uint32_t heapIndex = -1;
+        };
+
+        CPUDescriptorHeapAllocation mCPUSamplerAllocation;
+        CPUDescriptorHeapAllocation mCPUCbvSrvUavAllocation;
     };
 }}  // namespace dawn_native::d3d12
 

@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroupLayout.h"
 
 #include "common/SlabAllocator.h"
+#include "dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -48,12 +49,26 @@ namespace dawn_native { namespace d3d12 {
         const D3D12_DESCRIPTOR_RANGE* GetCbvUavSrvDescriptorRanges() const;
         const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
 
+        ResultOrError<NonShaderVisibleHeapAllocation> AllocateSampler();
+        ResultOrError<NonShaderVisibleHeapAllocation> AllocateCbvSrvUav();
+
+        void DeallocateCbvSrvUav(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor, uint32_t heapIndex);
+        void DeallocateSampler(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor, uint32_t heapIndex);
+
+        // For testing purposes only.
+        uint32_t GetCbvSrvUavPoolSizeForTesting() const;
+        uint32_t GetDescriptorHeapSizeForTesting() const;
+
       private:
         std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
         std::array<uint32_t, DescriptorType::Count> mDescriptorCounts;
         D3D12_DESCRIPTOR_RANGE mRanges[DescriptorType::Count];
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
+
+        // TODO(dawn:155): Store and bucket allocators by size on the device.
+        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mSamplerAllocator;
+        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mCbvSrvUavAllocator;
     };
 
 }}  // namespace dawn_native::d3d12
