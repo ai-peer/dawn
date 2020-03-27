@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8256ca21_59d0e0aa",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-27T01:42:11Z",
+      "side": 1,
+      "message": "Could we just put defaults in BindingInfo instead of adding a constructor to ShaderBindingInfo?",
+      "revId": "82847af6f3f7a4b16662a96ca2e75af476bf2c2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a69920_d6b7b888",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-27T01:42:11Z",
+      "side": 1,
+      "message": "Not new, but these have no defaults; can\u0027t remember if they get zeroed on default construction.",
+      "revId": "82847af6f3f7a4b16662a96ca2e75af476bf2c2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68cc1c37_98165857",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 4
