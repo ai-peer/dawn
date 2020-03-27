@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "debceb08_3930c818",
+        "filename": "src/tests/unittests/validation/ResourceRWTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-27T01:35:35Z",
+      "side": 1,
+      "message": "readable",
+      "range": {
+        "startLine": 127,
+        "startChar": 69,
+        "endLine": 127,
+        "endChar": 78
+      },
+      "revId": "ca4bf8d3af6d358332a575d218b70020daf46923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
