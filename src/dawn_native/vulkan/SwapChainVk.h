@@ -19,23 +19,50 @@
 
 #include "common/vulkan_platform.h"
 
+#include <vector>
+
 namespace dawn_native { namespace vulkan {
 
     class Device;
+    class Texture;
 
-    class SwapChain final : public OldSwapChainBase {
+    class OldSwapChain : public OldSwapChainBase {
       public:
-        static SwapChain* Create(Device* device, const SwapChainDescriptor* descriptor);
+        static OldSwapChain* Create(Device* device, const SwapChainDescriptor* descriptor);
 
       protected:
-        SwapChain(Device* device, const SwapChainDescriptor* descriptor);
-        ~SwapChain() override;
+        OldSwapChain(Device* device, const SwapChainDescriptor* descriptor);
+        ~OldSwapChain() override;
 
         TextureBase* GetNextTextureImpl(const TextureDescriptor* descriptor) override;
         MaybeError OnBeforePresent(TextureBase* texture) override;
 
       private:
         wgpu::TextureUsage mTextureUsage;
+    };
+
+    class SwapChain : public NewSwapChainBase {
+      public:
+        static ResultOrError<SwapChain*> Create(Device* device,
+                                                Surface* surface,
+                                                NewSwapChainBase* previousSwapChain,
+                                                const SwapChainDescriptor* descriptor);
+        ~SwapChain() override;
+
+      private:
+        using NewSwapChainBase::NewSwapChainBase;
+        MaybeError Initialize(NewSwapChainBase* previousSwapChain);
+
+        MaybeError PresentImpl() override;
+        ResultOrError<TextureViewBase*> GetCurrentTextureViewImpl() override;
+        void DetachFromSurfaceImpl() override;
+
+        VkSurfaceKHR mVkSurface = VK_NULL_HANDLE;
+        VkSwapchainKHR mSwapChain = VK_NULL_HANDLE;
+        std::vector<VkImage> mSwapChainImages;
+        uint32_t mLastImageIndex = 0;
+
+        Ref<Texture> mTexture;
     };
 
 }}  // namespace dawn_native::vulkan
