@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d9ad0d2_28e67502",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-27T17:26:53Z",
+      "side": 1,
+      "message": "not sure about this test: Is a texture with OutputAttachment usage in a bind group actually writable ? OutputAttachments can only be written to by the render pass store / resolve. I would this should be testing with storage textures instead. (when we have them)",
+      "range": {
+        "startLine": 353,
+        "startChar": 38,
+        "endLine": 353,
+        "endChar": 81
+      },
+      "revId": "c366df61d0dd6bf990ef615b1670118b62a27109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29d66752_36381fcc",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-27T17:26:53Z",
+      "side": 1,
+      "message": "typo: sampled",
+      "range": {
+        "startLine": 376,
+        "startChar": 42,
+        "endLine": 376,
+        "endChar": 49
+      },
+      "revId": "c366df61d0dd6bf990ef615b1670118b62a27109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
