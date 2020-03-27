@@ -25,8 +25,11 @@
 namespace dawn_native { namespace d3d12 {
 
     // static
-    BindGroup* BindGroup::Create(Device* device, const BindGroupDescriptor* descriptor) {
-        return ToBackend(descriptor->layout)->AllocateBindGroup(device, descriptor);
+    ResultOrError<BindGroup*> BindGroup::Create(Device* device,
+                                                const BindGroupDescriptor* descriptor) {
+        BindGroup* bindGroup = ToBackend(descriptor->layout)->AllocateBindGroup(device, descriptor);
+        DAWN_TRY(bindGroup->Initialize());
+        return bindGroup;
     }
 
     BindGroup::BindGroup(Device* device, const BindGroupDescriptor* descriptor)
@@ -34,66 +37,49 @@ namespace dawn_native { namespace d3d12 {
     }
 
     BindGroup::~BindGroup() {
-        ToBackend(GetLayout())->DeallocateBindGroup(this);
+        BindGroupLayout* bgl = ToBackend(GetLayout());
+
+        bgl->DeallocateBindGroup(this);
+
+        if (mCPUCbvSrvUavAllocation.baseDescriptor.ptr != 0) {
+            bgl->DeallocateCbvSrvUav(mCPUCbvSrvUavAllocation.baseDescriptor,
+                                     mCPUCbvSrvUavAllocation.heapIndex);
+        }
+
+        if (mCPUSamplerAllocation.baseDescriptor.ptr != 0) {
+            bgl->DeallocateSampler(mCPUSamplerAllocation.baseDescriptor,
+                                   mCPUSamplerAllocation.heapIndex);
+        }
     }
 
-    ResultOrError<bool> BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator) {
+    MaybeError BindGroup::Initialize() {
         Device* device = ToBackend(GetDevice());
 
-        if (allocator->IsAllocationStillValid(mLastUsageSerial, mHeapSerial)) {
-            return true;
+        BindGroupLayout* bgl = ToBackend(GetLayout());
+
+        NonShaderVisibleHeapAllocation cbvUavSrvAllocation;
+        if (bgl->GetCbvUavSrvDescriptorCount() > 0) {
+            DAWN_TRY_ASSIGN(cbvUavSrvAllocation, bgl->AllocateCbvSrvUav());
+
+            mCPUCbvSrvUavAllocation.baseDescriptor = cbvUavSrvAllocation.GetCPUHandle(0);
+            mCPUCbvSrvUavAllocation.heapIndex = cbvUavSrvAllocation.GetHeapIndex();
         }
 
-        // Attempt to allocate descriptors for the currently bound shader-visible heaps.
-        // If either failed, return early to re-allocate and switch the heaps.
-        const BindGroupLayout* bgl = ToBackend(GetLayout());
-        const Serial pendingSerial = device->GetPendingCommandSerial();
+        NonShaderVisibleHeapAllocation samplerAllocation;
+        if (bgl->GetSamplerDescriptorCount() > 0) {
+            DAWN_TRY_ASSIGN(samplerAllocation, bgl->AllocateSampler());
 
-        const uint32_t cbvUavSrvDescriptorCount = bgl->GetCbvUavSrvDescriptorCount();
-        DescriptorHeapAllocation cbvSrvUavDescriptorHeapAllocation;
-        if (cbvUavSrvDescriptorCount > 0) {
-            DAWN_TRY_ASSIGN(
-                cbvSrvUavDescriptorHeapAllocation,
-                allocator->AllocateGPUDescriptors(cbvUavSrvDescriptorCount, pendingSerial,
-                                                  D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
-            if (cbvSrvUavDescriptorHeapAllocation.IsInvalid()) {
-                return false;
-            }
-
-            mBaseCbvSrvUavDescriptor = cbvSrvUavDescriptorHeapAllocation.GetGPUHandle(0);
+            mCPUSamplerAllocation.baseDescriptor = samplerAllocation.GetCPUHandle(0);
+            mCPUSamplerAllocation.heapIndex = samplerAllocation.GetHeapIndex();
         }
-
-        const uint32_t samplerDescriptorCount = bgl->GetSamplerDescriptorCount();
-        DescriptorHeapAllocation samplerDescriptorHeapAllocation;
-        if (samplerDescriptorCount > 0) {
-            DAWN_TRY_ASSIGN(samplerDescriptorHeapAllocation,
-                            allocator->AllocateGPUDescriptors(samplerDescriptorCount, pendingSerial,
-                                                              D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER));
-            if (samplerDescriptorHeapAllocation.IsInvalid()) {
-                return false;
-            }
-
-            mBaseSamplerDescriptor = samplerDescriptorHeapAllocation.GetGPUHandle(0);
-        }
-
-        // Record both the device and heap serials to determine later if the allocations are still
-        // valid.
-        mLastUsageSerial = pendingSerial;
-        mHeapSerial = allocator->GetShaderVisibleHeapsSerial();
 
         const auto& bindingOffsets = bgl->GetBindingOffsets();
 
         ID3D12Device* d3d12Device = device->GetD3D12Device().Get();
 
-        for (BindingIndex bindingIndex = 0; bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
+        for (BindingIndex bindingIndex = bgl->GetDynamicBufferCount();
+             bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
             const BindGroupLayoutBase::BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
-
-            // It's not necessary to create descriptors in descriptor heap for dynamic
-            // resources. So skip allocating descriptors in descriptor heaps for dynamic
-            // buffers.
-            if (bindingInfo.hasDynamicOffset) {
-                continue;
-            }
 
             switch (bindingInfo.type) {
                 case wgpu::BindingType::UniformBuffer: {
@@ -106,8 +92,7 @@ namespace dawn_native { namespace d3d12 {
                     desc.BufferLocation = ToBackend(binding.buffer)->GetVA() + binding.offset;
 
                     d3d12Device->CreateConstantBufferView(
-                        &desc, cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(
-                                   bindingOffsets[bindingIndex]));
+                        &desc, cbvUavSrvAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::StorageBuffer: {
                     BufferBinding binding = GetBindingAsBufferBinding(bindingIndex);
@@ -130,8 +115,7 @@ namespace dawn_native { namespace d3d12 {
 
                     d3d12Device->CreateUnorderedAccessView(
                         ToBackend(binding.buffer)->GetD3D12Resource().Get(), nullptr, &desc,
-                        cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(
-                            bindingOffsets[bindingIndex]));
+                        cbvUavSrvAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::ReadonlyStorageBuffer: {
                     BufferBinding binding = GetBindingAsBufferBinding(bindingIndex);
@@ -150,23 +134,20 @@ namespace dawn_native { namespace d3d12 {
                     desc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_RAW;
                     d3d12Device->CreateShaderResourceView(
                         ToBackend(binding.buffer)->GetD3D12Resource().Get(), &desc,
-                        cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(
-                            bindingOffsets[bindingIndex]));
+                        cbvUavSrvAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::SampledTexture: {
                     auto* view = ToBackend(GetBindingAsTextureView(bindingIndex));
                     auto& srv = view->GetSRVDescriptor();
                     d3d12Device->CreateShaderResourceView(
                         ToBackend(view->GetTexture())->GetD3D12Resource(), &srv,
-                        cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(
-                            bindingOffsets[bindingIndex]));
+                        cbvUavSrvAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::Sampler: {
                     auto* sampler = ToBackend(GetBindingAsSampler(bindingIndex));
                     auto& samplerDesc = sampler->GetSamplerDescriptor();
                     d3d12Device->CreateSampler(
-                        &samplerDesc,
-                        samplerDescriptorHeapAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
+                        &samplerDesc, samplerAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
 
                 case wgpu::BindingType::StorageTexture:
@@ -178,6 +159,66 @@ namespace dawn_native { namespace d3d12 {
                     // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
             }
         }
+
+        return {};
+    }
+
+    ResultOrError<bool> BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator) {
+        Device* device = ToBackend(GetDevice());
+
+        if (allocator->IsAllocationStillValid(mLastUsageSerial, mHeapSerial)) {
+            return true;
+        }
+
+        // Attempt to allocate descriptors for the currently bound shader-visible heaps.
+        // If either failed, return early to re-allocate and switch the heaps.
+        const BindGroupLayout* bgl = ToBackend(GetLayout());
+        const Serial pendingSerial = device->GetPendingCommandSerial();
+
+        ID3D12Device* d3d12Device = device->GetD3D12Device().Get();
+
+        // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
+        // simple copies per bindgroup, a single non-simple copy could be issued.
+        // TODO(dawn:155): Consider doing this optimization.
+        const uint32_t cbvUavSrvDescriptorCount = bgl->GetCbvUavSrvDescriptorCount();
+        if (cbvUavSrvDescriptorCount > 0) {
+            DescriptorHeapAllocation cbvSrvUavDescriptorHeapAllocation;
+            DAWN_TRY_ASSIGN(
+                cbvSrvUavDescriptorHeapAllocation,
+                allocator->AllocateGPUDescriptors(cbvUavSrvDescriptorCount, pendingSerial,
+                                                  D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
+            if (cbvSrvUavDescriptorHeapAllocation.IsInvalid()) {
+                return false;
+            }
+
+            d3d12Device->CopyDescriptorsSimple(
+                cbvUavSrvDescriptorCount, cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(0),
+                mCPUCbvSrvUavAllocation.baseDescriptor, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+            mBaseCbvSrvUavDescriptor = cbvSrvUavDescriptorHeapAllocation.GetGPUHandle(0);
+        }
+
+        const uint32_t samplerDescriptorCount = bgl->GetSamplerDescriptorCount();
+        if (samplerDescriptorCount > 0) {
+            DescriptorHeapAllocation samplerDescriptorHeapAllocation;
+            DAWN_TRY_ASSIGN(samplerDescriptorHeapAllocation,
+                            allocator->AllocateGPUDescriptors(samplerDescriptorCount, pendingSerial,
+                                                              D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER));
+            if (samplerDescriptorHeapAllocation.IsInvalid()) {
+                return false;
+            }
+
+            d3d12Device->CopyDescriptorsSimple(
+                samplerDescriptorCount, samplerDescriptorHeapAllocation.GetCPUHandle(0),
+                mCPUSamplerAllocation.baseDescriptor, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+
+            mBaseSamplerDescriptor = samplerDescriptorHeapAllocation.GetGPUHandle(0);
+        }
+
+        // Record both the device and heap serials to determine later if the allocations are still
+        // valid.
+        mLastUsageSerial = pendingSerial;
+        mHeapSerial = allocator->GetShaderVisibleHeapsSerial();
 
         return true;
     }

@@ -41,6 +41,9 @@ namespace dawn_native { namespace d3d12 {
         }
     }  // anonymous namespace
 
+    // TODO(dawn:155): Figure out this value.
+    static constexpr uint32_t kDescriptorHeapSize = 1024;
+
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
           mDescriptorCounts{},
@@ -128,6 +131,20 @@ namespace dawn_native { namespace d3d12 {
             DescriptorType descriptorType = WGPUBindingTypeToDescriptorType(bindingInfo.type);
             mBindingOffsets[bindingIndex] += descriptorOffsets[descriptorType];
         }
+
+        const uint32_t cbvUavSrvDescriptorCount = GetCbvUavSrvDescriptorCount();
+        if (cbvUavSrvDescriptorCount > 0) {
+            mCbvSrvUavAllocator = std::make_unique<NonShaderVisibleDescriptorAllocator>(
+                device, cbvUavSrvDescriptorCount, kDescriptorHeapSize,
+                D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        }
+
+        const uint32_t samplerDescriptorCount = GetSamplerDescriptorCount();
+        if (samplerDescriptorCount > 0) {
+            mSamplerAllocator = std::make_unique<NonShaderVisibleDescriptorAllocator>(
+                device, GetSamplerDescriptorCount(), kDescriptorHeapSize,
+                D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        }
     }
 
     BindGroup* BindGroupLayout::AllocateBindGroup(Device* device,
@@ -167,6 +184,36 @@ namespace dawn_native { namespace d3d12 {
 
     const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetSamplerDescriptorRanges() const {
         return &mRanges[Sampler];
+    }
+
+    ResultOrError<NonShaderVisibleHeapAllocation> BindGroupLayout::AllocateSampler() {
+        return mSamplerAllocator->AllocateCPUDescriptors();
+    }
+
+    ResultOrError<NonShaderVisibleHeapAllocation> BindGroupLayout::AllocateCbvSrvUav() {
+        return mCbvSrvUavAllocator->AllocateCPUDescriptors();
+    }
+
+    void BindGroupLayout::DeallocateCbvSrvUav(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor,
+                                              uint32_t heapIndex) {
+        mCbvSrvUavAllocator->Deallocate(baseDescriptor, heapIndex);
+    }
+
+    void BindGroupLayout::DeallocateSampler(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor,
+                                            uint32_t heapIndex) {
+        mSamplerAllocator->Deallocate(baseDescriptor, heapIndex);
+    }
+
+    uint32_t BindGroupLayout::GetCbvSrvUavPoolSizeForTesting() const {
+        return mCbvSrvUavAllocator->GetPoolSizeForTesting();
+    }
+
+    uint32_t BindGroupLayout::GetSamplerPoolSizeForTesting() const {
+        return mSamplerAllocator->GetPoolSizeForTesting();
+    }
+
+    uint32_t BindGroupLayout::GetDescriptorHeapSizeForTesting() const {
+        return kDescriptorHeapSize;
     }
 
 }}  // namespace dawn_native::d3d12
