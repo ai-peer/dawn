@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d29ca13f_eddddee5",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-27T19:53:30Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "25620400_e4989a55",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 38
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "152d2372_c75eb462",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 23
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "Any time a heap is reused between two submits, and the first submit takes a long time to finish execution (until at least after the usages for the next frame have been recorded)",
       "parentUuid": "90fbb60f_eb5bf933",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "c06f26a2d9a08136e6a0afdc3ff6b2d636d0de81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8c4fa43_644403a5",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-27T19:53:30Z",
+      "side": 1,
+      "message": "Apologies but I still don\u0027t quite understand. Do you mind giving and example here and in the code to illustrate?",
+      "parentUuid": "df4153ea_deb6b8c0",
       "range": {
         "startLine": 44,
         "startChar": 1,

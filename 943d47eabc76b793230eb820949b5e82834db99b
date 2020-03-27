@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81babb3f_c54b6892",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-27T19:53:30Z",
+      "side": 1,
+      "message": "All heaps must be tracked for residency, even upload and readback heaps. Hence, \u0027ShouldTrackHeap\u0027 can be removed.",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 0
+      },
+      "revId": "943d47eabc76b793230eb820949b5e82834db99b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9863fd73_19678010",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-27T19:53:30Z",
+      "side": 1,
+      "message": "Since we\u0027re going to be skipping over locked heaps for the purposes of residency management, can we avoid putting them in the array to begin with? That would avoid visiting them in this loop and would turn this if check into an assert.",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 0
+      },
+      "revId": "943d47eabc76b793230eb820949b5e82834db99b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
