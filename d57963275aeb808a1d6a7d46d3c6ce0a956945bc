@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4a2f1ea7_d793bc57",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-27T18:13:26Z",
+      "side": 1,
+      "message": "We should also return an error if IncrementResidencyLock() would overflow the refcount. Unlikely, but someone could potentially make a ridiculous number of mappable buffers.",
+      "revId": "d57963275aeb808a1d6a7d46d3c6ce0a956945bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c8527f0_07686de7",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 25
