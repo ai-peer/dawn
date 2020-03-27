@@ -109,12 +109,25 @@ namespace dawn_native {
         mLossStatus = LossStatus::AlreadyLost;
     }
 
-    void DeviceBase::HandleError(wgpu::ErrorType type, const char* message) {
-        if (type == wgpu::ErrorType::DeviceLost) {
+    void DeviceBase::HandleError(InternalErrorType type, const char* message) {
+        // If we receive an internal error, assume the backend can't recover and proceed with
+        // device destruction. We first wait for all previous commands to be completed so that
+        // backend objects can be freed immediately, before handling the loss.
+        if (type == InternalErrorType::Internal) {
+            mLossStatus = LossStatus::BeingLost;
+            // Assert that errors are device loss so that we can continue with destruction.
+            AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
             HandleLoss(message);
         }
-        // Still forward device loss to error scope so it can reject them all
-        mCurrentErrorScope->HandleError(type, message);
+
+        // The device was lost of realz, call the loss handler because all the backend objects are
+        // as if no longer in use.
+        if (type == InternalErrorType::DeviceLost) {
+            HandleLoss(message);
+        }
+
+        // Still forward device loss and internal errors to the error scopes so they all reject.
+        mCurrentErrorScope->HandleError(ToWGPUErrorType(type), message);
     }
 
     void DeviceBase::InjectError(wgpu::ErrorType type, const char* message) {
@@ -122,10 +135,10 @@ namespace dawn_native {
             return;
         }
         if (DAWN_UNLIKELY(type == wgpu::ErrorType::NoError)) {
-            HandleError(wgpu::ErrorType::Validation, "Invalid injected error NoError");
+            HandleError(InternalErrorType::Validation, "Invalid injected error NoError");
             return;
         }
-        HandleError(type, message);
+        HandleError(FromWGPUErrorType(type), message);
     }
 
     void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
@@ -200,10 +213,7 @@ namespace dawn_native {
             return;
         }
 
-        mLossStatus = LossStatus::BeingLost;
-        // Assert that errors are device loss so that we can continue with destruction
-        AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
-        HandleError(wgpu::ErrorType::DeviceLost, "Device lost for testing");
+        HandleError(InternalErrorType::Internal, "Device lost for testing");
     }
 
     bool DeviceBase::IsLost() const {
