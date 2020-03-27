@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c8527f0_07686de7",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-27T14:20:36Z",
+      "side": 1,
+      "message": "nit: this would be more readable written like this (the comment is moved inside the function and split):\n\n  // On UMA devices all heaps are in ...\n  if (mDevice-\u003eGetDeviceInfo().isUMA) {\n    return true;\n  }\n\n  // On discrete devices the residency bla bla bla\n  return heap-\u003eGetD3D12HeapType() \u003d\u003d D3D12_HEAP_TYPE_DEFAULT;",
+      "revId": "d57963275aeb808a1d6a7d46d3c6ce0a956945bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
