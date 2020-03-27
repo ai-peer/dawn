@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cadef61_a977bb50",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-27T23:07:37Z",
+      "side": 1,
+      "message": "in general, it would help to be more specific in the comments. There\u0027s a Read+Write usage conflict with ReadonlyStorage and Storage; or in the others Index and Storage.\n\nMany of these tests are similar, and it would be great if we could factor such that we could pass in a list of buffers to usage as each type and have the bulk of the test body shared.\n\nLike:\n\nDoRWTest({\n  BindingHelper{ IndexBuffer, buffer0 },\n  BindingHelper{ BindGroup, 0, buffer0, Storage, buffer1 ReadonlyStorage },\n  BindingHelper{ BindGroup, 0, buffer1 ReadonlyStorage },\n});\n\nBindingHelper is some helper struct with different constructor args to aid with this,\nkind of like BindingINitialzationHelper\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/utils/WGPUHelpers.h;l\u003d106?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F",
+      "range": {
+        "startLine": 174,
+        "startChar": 48,
+        "endLine": 174,
+        "endChar": 56
+      },
+      "revId": "bbc9ddbcad47a375d7b48adf774503162cbf3a17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
