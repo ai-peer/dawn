@@ -17,11 +17,18 @@
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/dawn_platform.h"
 
+#include "common/Log.h"
+
 namespace dawn_native {
 
     void AssertAndIgnoreDeviceLossError(MaybeError maybeError) {
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> errorData = maybeError.AcquireError();
+
+            for (auto& record: error->GetBacktrace()) {
+                DAWN_DEBUG() << "  - " << record.file << ":" << record.line << "(" << record.function << ")";
+            }
+
             ASSERT(errorData->GetType() == InternalErrorType::DeviceLost);
         }
     }
