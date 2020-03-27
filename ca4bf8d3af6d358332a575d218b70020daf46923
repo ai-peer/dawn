@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ec06e5c1_d5173d3a",
+        "filename": "src/tests/unittests/validation/ResourceRWTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-27T14:28:11Z",
+      "side": 1,
+      "message": "nit: ResourceUsageTrackingTest?",
+      "revId": "ca4bf8d3af6d358332a575d218b70020daf46923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "debceb08_3930c818",
         "filename": "src/tests/unittests/validation/ResourceRWTrackingTests.cpp",
         "patchSetId": 5
@@ -19,6 +36,40 @@
         "endLine": 127,
         "endChar": 78
       },
+      "revId": "ca4bf8d3af6d358332a575d218b70020daf46923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "294522ad_ad8d7f31",
+        "filename": "src/tests/unittests/validation/ResourceRWTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-27T14:28:11Z",
+      "side": 1,
+      "message": "nit: put the DummyRenderPass just before BeginRenderPass, it makes it more clear that there is the copy first, and then the render pass.",
+      "revId": "ca4bf8d3af6d358332a575d218b70020daf46923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75b5eb9f_dd6249b9",
+        "filename": "src/tests/unittests/validation/ResourceRWTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-27T14:28:11Z",
+      "side": 1,
+      "message": "nit: can be moved in the first test case.",
       "revId": "ca4bf8d3af6d358332a575d218b70020daf46923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
