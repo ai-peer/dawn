@@ -15,7 +15,9 @@
 #include "tests/DawnTest.h"
 
 #include "dawn_native/Toggles.h"
+#include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
@@ -91,6 +93,29 @@ class D3D12DescriptorHeapTests : public DawnTest {
 
     wgpu::ShaderModule mSimpleVSModule;
     wgpu::ShaderModule mSimpleFSModule;
+};
+
+class DummyNonShaderVisibleDescriptorAllocator {
+  public:
+    DummyNonShaderVisibleDescriptorAllocator(Device* device,
+                                             uint32_t descriptorCount,
+                                             uint32_t heapSize)
+        : mAllocator(device, descriptorCount, heapSize, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER) {
+    }
+
+    NonShaderVisibleHeapAllocation AllocateCPUDescriptors() {
+        dawn_native::ResultOrError<NonShaderVisibleHeapAllocation> result =
+            mAllocator.AllocateCPUDescriptors();
+        return (result.IsSuccess()) ? result.AcquireSuccess() : NonShaderVisibleHeapAllocation{};
+    }
+
+    void Deallocate(NonShaderVisibleHeapAllocation& allocation) {
+        D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor = allocation.GetCPUHandle(0);
+        mAllocator.Deallocate(baseDescriptor, allocation.GetHeapIndex());
+    }
+
+  private:
+    NonShaderVisibleDescriptorAllocator mAllocator;
 };
 
 // Verify the shader visible heaps switch over within a single submit.
@@ -686,6 +711,295 @@ TEST_P(D3D12DescriptorHeapTests, EncodeManyUBOAndSamplers) {
         EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 0, 0);
         EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, kRTSize - 1, 0);
     }
+}
+
+// Verify a single allocate/deallocate.
+// One non-shader visible heap will be created.
+TEST_P(D3D12DescriptorHeapTests, Single) {
+    constexpr uint32_t kDescriptorCount = 4;
+    constexpr uint32_t kHeapSize = 12;
+    DummyNonShaderVisibleDescriptorAllocator allocator(mD3DDevice, kDescriptorCount, kHeapSize);
+
+    NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+    EXPECT_EQ(allocation.GetHeapIndex(), 0u);
+    EXPECT_TRUE(allocation.GetCPUHandle(0).ptr);
+
+    allocator.Deallocate(allocation);
+}
+
+// Verify allocating many times causes the pool to increase in size.
+// Creates |kNumOfHeaps| non-shader visible heaps.
+TEST_P(D3D12DescriptorHeapTests, Sequential) {
+    constexpr uint32_t kDescriptorCount = 4;
+    constexpr uint32_t kHeapSize = 12;
+    DummyNonShaderVisibleDescriptorAllocator allocator(mD3DDevice, kDescriptorCount, kHeapSize);
+
+    // Allocate |kNumOfHeaps| worth.
+    constexpr uint32_t kNumOfHeaps = 2;
+    constexpr uint32_t allocationsPerHeap = kHeapSize / kDescriptorCount;
+
+    std::set<uint32_t> allocatedHeaps;
+
+    std::vector<NonShaderVisibleHeapAllocation> allocations;
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumOfHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        EXPECT_EQ(allocation.GetHeapIndex(), i / allocationsPerHeap);
+        EXPECT_TRUE(allocation.GetCPUHandle(0).ptr);
+        allocations.push_back(allocation);
+        allocatedHeaps.insert(allocation.GetHeapIndex());
+    }
+
+    EXPECT_EQ(allocatedHeaps.size(), kNumOfHeaps);
+
+    // Check alignments.
+    const uint32_t sizeInBytes =
+        allocations[1].GetCPUHandle(0).ptr - allocations[0].GetCPUHandle(0).ptr;
+
+    // Allocations[0..2] went into first heap.
+    for (uint32_t i = 1; i < allocationsPerHeap; i++) {
+        EXPECT_EQ(allocations[i].GetCPUHandle(0).ptr - allocations[i - 1].GetCPUHandle(0).ptr,
+                  sizeInBytes);
+    }
+
+    // Allocations[3..5] went into second heap.
+    for (uint32_t i = allocationsPerHeap + 1; i < allocationsPerHeap * 2; i++) {
+        EXPECT_EQ(allocations[i].GetCPUHandle(0).ptr - allocations[i - 1].GetCPUHandle(0).ptr,
+                  sizeInBytes);
+    }
+
+    // Deallocate all.
+    for (NonShaderVisibleHeapAllocation& allocation : allocations) {
+        allocator.Deallocate(allocation);
+    }
+}
+
+// Verify that re-allocating a number of allocations < pool size, all heaps are reused.
+// Creates and reuses |kNumofHeaps| non-shader visible heaps.
+TEST_P(D3D12DescriptorHeapTests, ReuseFreedHeaps) {
+    constexpr uint32_t kDescriptorCount = 4;
+    constexpr uint32_t kHeapSize = 100;
+    DummyNonShaderVisibleDescriptorAllocator allocator(mD3DDevice, kDescriptorCount, kHeapSize);
+
+    constexpr uint32_t kNumofHeaps = 10;
+    constexpr uint32_t allocationsPerHeap = kHeapSize / kDescriptorCount;
+
+    std::list<NonShaderVisibleHeapAllocation> allocations;
+    std::set<size_t> allocationPtrs;
+
+    // Allocate |kNumofHeaps| heaps worth.
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumofHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        allocations.push_back(allocation);
+        EXPECT_TRUE(allocationPtrs.insert(allocation.GetCPUHandle(0).ptr).second);
+    }
+
+    // Deallocate all.
+    for (NonShaderVisibleHeapAllocation& allocation : allocations) {
+        allocator.Deallocate(allocation);
+    }
+
+    // Re-allocate all again.
+    std::set<size_t> reallocatedPtrs;
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumofHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        EXPECT_TRUE(reallocatedPtrs.insert(allocation.GetCPUHandle(0).ptr).second);
+        EXPECT_TRUE(std::find(allocationPtrs.begin(), allocationPtrs.end(),
+                              allocation.GetCPUHandle(0).ptr) != allocationPtrs.end());
+    }
+
+    // Deallocate all again.
+    for (NonShaderVisibleHeapAllocation& allocation : allocations) {
+        allocator.Deallocate(allocation);
+    }
+}
+
+// Verify allocating then deallocating many times.
+TEST_P(D3D12DescriptorHeapTests, AllocateDeallocateMany) {
+    constexpr uint32_t kDescriptorCount = 4;
+    constexpr uint32_t kHeapSize = 100;
+    DummyNonShaderVisibleDescriptorAllocator allocator(mD3DDevice, kDescriptorCount, kHeapSize);
+
+    const uint32_t allocationsPerHeap = kHeapSize / kDescriptorCount;
+
+    std::list<NonShaderVisibleHeapAllocation> list3;
+    std::list<NonShaderVisibleHeapAllocation> list5;
+    std::list<NonShaderVisibleHeapAllocation> allocations;
+
+    constexpr uint32_t kNumofHeaps = 2;
+
+    // Allocate |kNumofHeaps| heaps worth.
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumofHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        EXPECT_TRUE(allocation.GetCPUHandle(0).ptr);
+        if (i % 3 == 0) {
+            list3.push_back(allocation);
+        } else {
+            allocations.push_back(allocation);
+        }
+    }
+
+    // Deallocate every 3rd allocation.
+    for (auto it = list3.begin(); it != list3.end(); it = list3.erase(it)) {
+        allocator.Deallocate(*it);
+    }
+
+    // Allocate again.
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumofHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        EXPECT_TRUE(allocation.GetCPUHandle(0).ptr);
+        if (i % 5 == 0) {
+            list5.push_back(allocation);
+        } else {
+            allocations.push_back(allocation);
+        }
+    }
+
+    // Deallocate every 5th allocation.
+    for (auto it = list5.begin(); it != list5.end(); it = list5.erase(it)) {
+        allocator.Deallocate(*it);
+    }
+
+    // Allocate again.
+    for (uint32_t i = 0; i < allocationsPerHeap * kNumofHeaps; i++) {
+        NonShaderVisibleHeapAllocation allocation = allocator.AllocateCPUDescriptors();
+        EXPECT_TRUE(allocation.GetCPUHandle(0).ptr);
+        allocations.push_back(allocation);
+    }
+
+    // Deallocate remaining.
+    for (NonShaderVisibleHeapAllocation& allocation : allocations) {
+        allocator.Deallocate(allocation);
+    }
+}
+
+// Verify creating a number of bindgroups < non-shader visible pool size, all heaps are re-used.
+// Creates and reuses two heaps worth of bindgroups per heap type.
+TEST_P(D3D12DescriptorHeapTests, ReuseManyUBOAndSamplers) {
+    DAWN_SKIP_TEST_IF(!mD3DDevice->IsToggleEnabled(
+        dawn_native::Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
+
+    // Create a solid green texture.
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = kRTSize;
+    descriptor.size.height = kRTSize;
+    descriptor.size.depth = 1;
+    descriptor.arrayLayerCount = 1;
+    descriptor.sampleCount = 1;
+    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment |
+                       wgpu::TextureUsage::CopySrc;
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::TextureView textureView = texture.CreateView();
+
+    {
+        utils::BasicRenderPass renderPass = utils::BasicRenderPass(kRTSize, kRTSize, texture);
+
+        utils::ComboRenderPassDescriptor renderPassDesc({textureView});
+        renderPassDesc.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
+        renderPassDesc.cColorAttachments[0].clearColor = {0.0f, 1.0f, 0.0f, 1.0f};
+        renderPass.renderPassInfo.cColorAttachments[0].attachment = textureView;
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        auto pass = encoder.BeginRenderPass(&renderPassDesc);
+        pass.EndPass();
+
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+
+        RGBA8 filled(0, 255, 0, 255);
+        EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 0, 0);
+    }
+
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+
+    pipelineDescriptor.vertexStage.module = mSimpleVSModule;
+
+    pipelineDescriptor.cFragmentStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout (set = 0, binding = 0) uniform sampler sampler0;
+        layout (set = 0, binding = 1) uniform texture2D texture0;
+        layout (set = 0, binding = 2) uniform buffer0 {
+            vec4 color;
+        };
+        layout (location = 0) out vec4 fragColor;
+        void main() {
+            fragColor = texture(sampler2D(texture0, sampler0), gl_FragCoord.xy);
+            fragColor += color;
+        })");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    wgpu::BindGroupLayout bgl = pipeline.GetBindGroupLayout(0);
+    BindGroupLayout* backendBgl = reinterpret_cast<BindGroupLayout*>(bgl.Get());
+
+    const uint32_t heapSize = backendBgl->GetDescriptorHeapSizeForTesting() * 2;
+
+    std::set<uint32_t> cbvSrvUavPoolSizes;
+    std::set<uint32_t> samplerPoolSizes;
+
+    constexpr uint32_t kNumOfSubmits = 5;
+
+    wgpu::SamplerDescriptor samplerDescriptor;
+    wgpu::Sampler sampler = device.CreateSampler(&samplerDescriptor);
+
+    for (uint32_t i = 0; i < kNumOfSubmits; i++) {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            std::vector<wgpu::BindGroup> bindGroups;
+            for (uint32_t j = 0; j < heapSize - 1; j++) {
+                std::array<float, 4> fillColor = GetSolidColor(i + j + 1);  // Avoid black.
+                wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+                    device, &fillColor, sizeof(fillColor), wgpu::BufferUsage::Uniform);
+
+                bindGroups.push_back(utils::MakeBindGroup(
+                    device, bgl,
+                    {{0, sampler}, {1, textureView}, {2, uniformBuffer, 0, sizeof(fillColor)}}));
+            }
+
+            std::array<float, 4> redColor = {1, 0, 0, 1};
+            wgpu::Buffer lastUniformBuffer = utils::CreateBufferFromData(
+                device, &redColor, sizeof(redColor), wgpu::BufferUsage::Uniform);
+
+            bindGroups.push_back(
+                utils::MakeBindGroup(device, bgl,
+                                     {{0, sampler},
+                                      {1, textureView},
+                                      {2, lastUniformBuffer, 0, sizeof(lastUniformBuffer)}}));
+
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+            pass.SetPipeline(pipeline);
+
+            for (uint32_t j = 0; j < heapSize; j++) {
+                pass.SetBindGroup(0, bindGroups[j]);
+                pass.Draw(3, 1, 0, 0);
+            }
+
+            pass.EndPass();
+
+            wgpu::CommandBuffer commands = encoder.Finish();
+            queue.Submit(1, &commands);
+
+            // Final accumulated color is result of sampled + UBO color.
+            RGBA8 filled(255, 255, 0, 255);
+            RGBA8 notFilled(0, 0, 0, 0);
+            EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 0, 0);
+            EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, kRTSize - 1, 0);
+
+            cbvSrvUavPoolSizes.insert(backendBgl->GetCbvSrvUavPoolSizeForTesting());
+            samplerPoolSizes.insert(backendBgl->GetSamplerPoolSizeForTesting());
+        }
+    }
+
+    // Verify pool size has not increased.
+    EXPECT_EQ(cbvSrvUavPoolSizes.size(), 1u);
+    EXPECT_EQ(samplerPoolSizes.size(), 1u);
 }
 
 DAWN_INSTANTIATE_TEST(D3D12DescriptorHeapTests,

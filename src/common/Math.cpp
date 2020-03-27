@@ -152,3 +152,10 @@ float SRGBToLinear(float srgb) {
         return std::pow((srgb + 0.055f) / 1.055f, 2.4f);
     }
 }
+
+uint64_t RoundUp(uint64_t n, uint64_t m) {
+    ASSERT(m > 0);
+    ASSERT(n > 0);
+    ASSERT(n + m >= n);
+    return ((n + m - 1) / m) * m;
+}
