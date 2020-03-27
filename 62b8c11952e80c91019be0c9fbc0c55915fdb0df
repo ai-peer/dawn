@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03b9ef43_0166debc",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-03-27T16:47:20Z",
+      "side": 1,
+      "message": "I will remove the comment after a couple of tests for texture compute (depends on writeonly texture support).",
+      "range": {
+        "startLine": 404,
+        "startChar": 5,
+        "endLine": 407,
+        "endChar": 37
+      },
+      "revId": "62b8c11952e80c91019be0c9fbc0c55915fdb0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
