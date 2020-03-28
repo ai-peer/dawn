@@ -19,7 +19,8 @@ DawnJSONGenerator(
 )
 
 add_library(dawn_native STATIC ${DAWN_DUMMY_FILE})
-target_sources(dawn_native PRIVATE
+add_library(dawn_native_shared SHARED ${DAWN_DUMMY_FILE})
+set(DAWN_NATIVE_SOURCES
     "${DAWN_INCLUDE_DIR}/dawn_native/DawnNative.h"
     "${DAWN_INCLUDE_DIR}/dawn_native/dawn_native_export.h"
     ${DAWN_NATIVE_UTILS_GEN_SOURCES}
@@ -137,7 +138,26 @@ target_sources(dawn_native PRIVATE
     "Toggles.h"
     "dawn_platform.h"
 )
+target_sources(dawn_native PRIVATE ${DAWN_NATIVE_SOURCES})
+target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_SOURCES})
+
+target_compile_definitions(dawn_native_shared PUBLIC DAWN_NATIVE_SHARED_LIBRARY
+                                              PRIVATE DAWN_NATIVE_IMPLEMENTATION)
+
+if (MSVC)
+    target_compile_options(dawn_native_shared PRIVATE /wd4251)
+endif()
+
 target_link_libraries(dawn_native
+    PUBLIC dawncpp_headers
+    PRIVATE dawn_common
+            dawn_platform
+            dawn_internal_config
+            shaderc_spvc
+            spirv-cross-core
+)
+
+target_link_libraries(dawn_native_shared
     PUBLIC dawncpp_headers
     PRIVATE dawn_common
             dawn_platform
@@ -149,10 +169,11 @@ target_link_libraries(dawn_native
 if (DAWN_USE_X11)
     find_package(X11 REQUIRED)
     target_link_libraries(dawn_native PRIVATE ${X11_LIBRARIES})
+    target_link_libraries(dawn_native_shared PRIVATE ${X11_LIBRARIES})
 endif()
 
 if (DAWN_ENABLE_D3D12)
-    target_sources(dawn_native PRIVATE
+    set(DAWN_NATIVE_D3D12_SOURCES
         "${DAWN_INCLUDE_DIR}/dawn_native/D3D12Backend.h"
         "d3d12/AdapterD3D12.cpp"
         "d3d12/AdapterD3D12.h"
@@ -176,8 +197,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/D3D12Error.h"
         "d3d12/D3D12Info.cpp"
         "d3d12/D3D12Info.h"
-        "d3d12/DescriptorHeapAllocationD3D12.cpp",
-        "d3d12/DescriptorHeapAllocationD3D12.h",
+        "d3d12/DescriptorHeapAllocationD3D12.cpp"
+        "d3d12/DescriptorHeapAllocationD3D12.h"
         "d3d12/DescriptorHeapAllocator.cpp"
         "d3d12/DescriptorHeapAllocator.h"
         "d3d12/DeviceD3D12.cpp"
@@ -209,8 +230,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/SamplerD3D12.h"
         "d3d12/ShaderModuleD3D12.cpp"
         "d3d12/ShaderModuleD3D12.h"
-        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
-        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp"
+        "d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
         "d3d12/StagingBufferD3D12.cpp"
         "d3d12/StagingBufferD3D12.h"
         "d3d12/SwapChainD3D12.cpp"
@@ -223,11 +244,14 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/UtilsD3D12.h"
         "d3d12/d3d12_platform.h"
     )
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_D3D12_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_D3D12_SOURCES})
     target_link_libraries(dawn_native PRIVATE dxguid.lib)
+    target_link_libraries(dawn_native_shared PRIVATE dxguid.lib)
 endif()
 
 if (DAWN_ENABLE_METAL)
-    target_sources(dawn_native PRIVATE
+    set(DAWN_NATIVE_METAL_SOURCES
         "${DAWN_INCLUDE_DIR}/dawn_native/MetalBackend.h"
         "Surface_metal.mm"
         "metal/BackendMTL.h"
@@ -266,20 +290,26 @@ if (DAWN_ENABLE_METAL)
         "metal/UtilsMetal.h"
         "metal/UtilsMetal.mm"
     )
-    target_link_libraries(dawn_native PRIVATE
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_METAL_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_METAL_SOURCES})
+    set(DAWN_NATIVE_METAL_LINK_LIBRARIES
         "-framework Cocoa"
         "-framework IOKit"
         "-framework IOSurface"
         "-framework QuartzCore"
     )
+    target_link_libraries(dawn_native PRIVATE ${DAWN_NATIVE_METAL_LINK_LIBRARIES})
+    target_link_libraries(dawn_native_shared PRIVATE ${DAWN_NATIVE_METAL_LINK_LIBRARIES})
 endif()
 
 if (DAWN_ENABLE_NULL)
-    target_sources(dawn_native PRIVATE
+    set(DAWN_NATIVE_NULL_SOURCES
         "${DAWN_INCLUDE_DIR}/dawn_native/NullBackend.h"
         "null/DeviceNull.cpp"
         "null/DeviceNull.h"
     )
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_NULL_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_NULL_SOURCES})
 endif()
 
 if (DAWN_ENABLE_OPENGL)
@@ -293,7 +323,7 @@ if (DAWN_ENABLE_OPENGL)
         RESULT_VARIABLE "DAWN_NATIVE_OPENGL_AUTOGEN_SOURCES"
     )
 
-    target_sources(dawn_native PRIVATE
+    set(DAWN_NATIVE_OPENGL_SOURCES
         "${DAWN_INCLUDE_DIR}/dawn_native/OpenGLBackend.h"
         ${DAWN_NATIVE_OPENGL_AUTOGEN_SOURCES}
         "opengl/BackendGL.cpp"
@@ -339,12 +369,15 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/UtilsGL.h"
         "opengl/opengl_platform.h"
     )
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_OPENGL_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_OPENGL_SOURCES})
 
     target_link_libraries(dawn_native PRIVATE dawn_khronos_platform)
+    target_link_libraries(dawn_native_shared PRIVATE dawn_khronos_platform)
 endif()
 
 if (DAWN_ENABLE_VULKAN)
-    target_sources(dawn_native PRIVATE
+    set(DAWN_NATIVE_VULKAN_SOURCES
         "${DAWN_INCLUDE_DIR}/dawn_native/VulkanBackend.h"
         "vulkan/AdapterVk.cpp"
         "vulkan/AdapterVk.h"
@@ -404,36 +437,48 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/external_memory/MemoryService.h"
         "vulkan/external_semaphore/SemaphoreService.h"
     )
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_VULKAN_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_VULKAN_SOURCES})
 
     target_link_libraries(dawn_native PUBLIC dawn_vulkan_headers)
+    target_link_libraries(dawn_native_shared PUBLIC dawn_vulkan_headers)
 
     if (UNIX AND NOT APPLE)
-        target_sources(dawn_native PRIVATE
+        set(DAWN_NATIVE_VULKAN_PLATFORM_SOURCES
             "vulkan/external_memory/MemoryServiceOpaqueFD.cpp"
             "vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp"
         )
     else()
-        target_sources(dawn_native PRIVATE
+        set(DAWN_NATIVE_VULKAN_PLATFORM_SOURCES
             "vulkan/external_memory/MemoryServiceNull.cpp"
             "vulkan/external_semaphore/SemaphoreServiceNull.cpp"
         )
     endif()
+
+    target_sources(dawn_native PRIVATE ${DAWN_NATIVE_VULKAN_PLATFORM_SOURCES})
+    target_sources(dawn_native_shared PRIVATE ${DAWN_NATIVE_VULKAN_PLATFORM_SOURCES})
 endif()
 
 # TODO how to do the component build in CMake?
 target_sources(dawn_native PRIVATE "DawnNative.cpp")
+target_sources(dawn_native_shared PRIVATE "DawnNative.cpp")
 if (DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE "d3d12/D3D12Backend.cpp")
+    target_sources(dawn_native_shared PRIVATE "d3d12/D3D12Backend.cpp")
 endif()
 if (DAWN_ENABLE_METAL)
     target_sources(dawn_native PRIVATE "metal/MetalBackend.mm")
+    target_sources(dawn_native_shared PRIVATE "metal/MetalBackend.mm")
 endif()
 if (DAWN_ENABLE_NULL)
     target_sources(dawn_native PRIVATE "null/NullBackend.cpp")
+    target_sources(dawn_native_shared PRIVATE "null/NullBackend.cpp")
 endif()
 if (DAWN_ENABLE_OPENGL)
     target_sources(dawn_native PRIVATE "opengl/OpenGLBackend.cpp")
+    target_sources(dawn_native_shared PRIVATE "opengl/OpenGLBackend.cpp")
 endif()
 if (DAWN_ENABLE_VULKAN)
     target_sources(dawn_native PRIVATE "vulkan/VulkanBackend.cpp")
+    target_sources(dawn_native_shared PRIVATE "vulkan/VulkanBackend.cpp")
 endif()
