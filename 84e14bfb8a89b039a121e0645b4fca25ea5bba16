@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37eb204e_4d184443",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T18:52:07Z",
+      "side": 1,
+      "message": "Nit: of realz --\u003e for real",
+      "range": {
+        "startLine": 123,
+        "startChar": 31,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5111215_98d8733a",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T18:52:07Z",
+      "side": 1,
+      "message": "Out of curiosity, why is it that ToWGPUErrorType maps both DeviceLost and Internal to DeviceLost but going the opposite way DeviceLost maps to Internal?  Seems like FromWGPUErrorType should at least map DeviceLost to DeviceLost.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
