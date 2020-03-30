@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "268e928d_ef7257d2",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-30T18:42:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4825386f_9232be7d",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 0
+      },
+      "revId": "943d47eabc76b793230eb820949b5e82834db99b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9863fd73_19678010",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 26
