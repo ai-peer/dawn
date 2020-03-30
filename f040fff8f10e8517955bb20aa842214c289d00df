@@ -22,6 +22,30 @@
       "revId": "f040fff8f10e8517955bb20aa842214c289d00df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bee00379_2389c854",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-03-30T23:23:50Z",
+      "side": 1,
+      "message": "ShouldTrackHeap is being reported as 0.0% CPU in WPA for Aquarium.",
+      "parentUuid": "cfd09243_31d90a54",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "f040fff8f10e8517955bb20aa842214c289d00df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
