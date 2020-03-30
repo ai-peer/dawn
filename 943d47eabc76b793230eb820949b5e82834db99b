@@ -45,6 +45,30 @@
       "revId": "943d47eabc76b793230eb820949b5e82834db99b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a21f890_c8ee7cd1",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T10:27:56Z",
+      "side": 1,
+      "message": "I\u0027m mildly against this suggestion. Not adding them to the array means that each time we encounter a resource we need to ask:\n\n - Was its heap already added to the set of heaps for this submission.\n - If no, is this heap residency locked?\n\nThat\u0027s the same number of conditions and it makes the entities that look at the residency lock in two places. In particular when we do multi-threading you should be able to map a buffer while residency is being manipulated so it\u0027s easier only the ResidencyManager looks at, and mutates it.",
+      "parentUuid": "9863fd73_19678010",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 0
+      },
+      "revId": "943d47eabc76b793230eb820949b5e82834db99b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
