@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "ff5e030a_262bfff9",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-30T21:32:17Z",
+      "side": 1,
+      "message": "I feel we should keep logic out of the Device to avoid making it too complex. Maybe we can do this the way the Vulkan backend does.\n\nBindGroupLayoutVk:AllocateBindGroup does what Corentin suggested. First DAWN_TRY(allocates) the descriptor(s), and then allocates the CPU-side bind group object and passes the descriptor(s) into the constructor of the CPU object.",
+      "parentUuid": "80d6b3e1_7a9aa1ff",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb746707_7467832c",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 4
@@ -81,6 +99,46 @@
       "writtenOn": "2020-03-30T13:08:03Z",
       "side": 1,
       "message": "Likewise the deallocations could be handled inside DeallocateBindGroup, so that only the BindGroupLayout knows about the slab allocation mechanism. The Bindgroup would just be a container of state-tracking data.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efb69117_ab6eedc7",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-30T21:32:17Z",
+      "side": 1,
+      "message": "We should imagine that this effectively frees this \"immediately\" so we should do it at the end of the block.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1e26436_6c0bf04b",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-30T21:32:17Z",
+      "side": 1,
+      "message": "nit: Comment to remind the reader that dynamic buffers are packed at the front and we skip over them here because they\u0027re not staged with CPU descriptors",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 69
+      },
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
