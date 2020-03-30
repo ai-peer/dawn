@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4825386f_9232be7d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T17:03:07Z",
+      "side": 1,
+      "message": "Heard back from folks internally.\n\nInstead of basing things on whether the heap type is default, as per above, you should instead call GetCustomHeapProperties. With the structure you get back, use the following text from MSDN to determine which memory segment (local vs. non-local) the memory ended up. \n\n\"When the adapter is UMA, D3D12_MEMORY_POOL_L0 and DXGI_MEMORY_SEGMENT_GROUP_LOCAL refer to the same memory.\nWhen the adapter is not UMA: D3D12_MEMORY_POOL_L0 and DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL refer to the same memory. D3D12_MEMORY_POOL_L1 and DXGI_MEMORY_SEGMENT_GROUP_LOCAL refer to the same memory\"",
+      "parentUuid": "642991cf_27e00c48",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 0
+      },
+      "revId": "943d47eabc76b793230eb820949b5e82834db99b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9863fd73_19678010",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 26
