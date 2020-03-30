@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "41c9ab6a_b9b4d4f1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T18:26:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c04eec9_205123e3",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbe3cdee_b5a88c44",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 2
@@ -81,6 +105,24 @@
       "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbc202fc_446277dd",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T18:26:39Z",
+      "side": 1,
+      "message": "Done. I left the member variable as mSwapChainTexture since that seems to be the prevailing coding standard for member variables",
+      "parentUuid": "a63189b8_87dcee2a",
+      "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
