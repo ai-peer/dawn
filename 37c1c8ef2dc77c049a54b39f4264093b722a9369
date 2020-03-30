@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4c04eec9_205123e3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T16:35:20Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "3af359ab_8eb8a930",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bbe3cdee_b5a88c44",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2020-03-30T10:16:44Z",
       "side": 1,
       "message": "I was hoping the logic could stay entirely in the Chromium side but maybe it isn\u0027t possible.\n\nnit:bool isSwapChainBuffer/Texture?",
+      "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a63189b8_87dcee2a",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T16:35:20Z",
+      "side": 1,
+      "message": "I was originally hoping more of the logic could stay in Chromium but ID3D12SharingContract is queried from the command queue. I didn\u0027t want to expose more than absolutely necessary outside of Dawn. \n\nI\u0027ll rename the variable in my next patch.",
+      "parentUuid": "bbe3cdee_b5a88c44",
       "revId": "37c1c8ef2dc77c049a54b39f4264093b722a9369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
