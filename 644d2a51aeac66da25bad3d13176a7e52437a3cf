@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "879fab48_dcd50536",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T10:34:58Z",
+      "side": 1,
+      "message": "For testing unused bindings, I suggest having a dummy render pipeline or even compute pipeline that doesn\u0027t use any bindings, and we can check without the render \u003c-\u003e compute stage difference.",
+      "revId": "644d2a51aeac66da25bad3d13176a7e52437a3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51c2fc0a_f7578b13",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T10:34:58Z",
+      "side": 1,
+      "message": "That should be discussed with the group, maybe we skip bindings with only wgpu::ShaderStage::Compute for tracking in render pass.",
+      "revId": "644d2a51aeac66da25bad3d13176a7e52437a3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
