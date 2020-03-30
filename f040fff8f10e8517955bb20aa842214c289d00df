@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfd09243_31d90a54",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-30T21:18:35Z",
+      "side": 1,
+      "message": "Do you mind doing a quick perf sanity check to make sure calling GetCustomHeapProperties at this location doesn\u0027t adversely affect performance?  If it does, we should have each heap keep a \u0027memory segment\u0027 member variable we check instead.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "f040fff8f10e8517955bb20aa842214c289d00df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
