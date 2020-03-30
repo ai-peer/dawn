@@ -16,6 +16,24 @@
       "revId": "375c317018e4d325a4a1ab6656efcd0b225d0fe4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62f5bae1_2a3ac76b",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-03-30T23:33:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daab254d_2f515df2",
+      "revId": "375c317018e4d325a4a1ab6656efcd0b225d0fe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
