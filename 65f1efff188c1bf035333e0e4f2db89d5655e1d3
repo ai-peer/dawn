@@ -1,0 +1,351 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ace6c7fc_2ae3ad6d",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: this is clearer written as m \u003e\u003d std::limits::max\u003cuint64_t\u003e() - n",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31da55c5_941633e3",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: remove commas",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80d6b3e1_7a9aa1ff",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "How about removing this function in favor of calling descriptor-\u003elayout-\u003eAllocateBindGroup() directly in the device? That function could first allocate the CPU descriptors, then pass that information in the constructor or initialize?",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb746707_7467832c",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "This will need rebased one top of Austin\u0027s BG changes.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b86dfc5_a5dc7d99",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Likewise the deallocations could be handled inside DeallocateBindGroup, so that only the BindGroupLayout knows about the slab allocation mechanism. The Bindgroup would just be a container of state-tracking data.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac99967a_b9d92e38",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Note for this CL. Typing these is getting annoying, WDYT of calling them \"view\" descriptors, so that this variable becomes viewAllocation?",
+      "range": {
+        "startLine": 144,
+        "startChar": 24,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1d316dc_26dc2f0c",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "This could be just the allocation and not the allocator. The allocator could be forward-declared. Might even be removed with other suggested changes.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf8dcb9b_456255b8",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Given the changes suggested I didn\u0027t look at the implementation yet. The interface looks good though.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9419817_335c8b92",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: Instead of working with raw handles, we could use the heapIndex + allocationIndex in that heap (and have that pair made opaque inside a structure). The allocation would just need to grab a free allocationIndex and do baseDescriptor + mSizeIncrement * allocationIndex.",
+      "range": {
+        "startLine": 54,
+        "startChar": 53,
+        "endLine": 54,
+        "endChar": 67
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dcd82ed_f95a45ca",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: the freeIndices could be stored in a vector and pushed / popped. It would use much less memory in general than HeapBlock + allocation metadata + std::list entry + re-allocation metadata.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac129f6_061e1ef5",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Free sounds like they have been destroyed, maybe mPartialHeaps? Also you can use LinkedList and make NonShaderVisibleBuffer a LinkedNode.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26d2aa15_9a95e393",
+        "filename": "src/tests/unittests/MathTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "All these cases use powers of two, which Align is good enough for. Can we have tests with non power of two?",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "834c58b7_4597c6ff",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "did you mean EXPECT_NE(allocation.GetCPUHandle(0).ptr, 0);?",
+      "range": {
+        "startLine": 725,
+        "startChar": 4,
+        "endLine": 725,
+        "endChar": 48
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92cfb1bb_a4a7510e",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Since we want to control precisely the number of allocations that can be made per block, maybe it should be an argument instead of the heap size, and the multiplication is done in DummyNonShaderVisibleDescriptorAllocator",
+      "range": {
+        "startLine": 781,
+        "startChar": 85,
+        "endLine": 781,
+        "endChar": 94
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6796a35_9d90cbcd",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "I\u0027m super confused by this test, it looks like it should fail and seems extremely brittle. How can we create twice the amount of bindgroups per heap type and at the same time stay under the non-shader visible pool size?",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f556ac08_f0d4b8f3",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "Why times 2? Isn\u0027t that going to create two blocks instead of the 1 we are checking for?",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08e125e5_a761b4a1",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: why do it 5 times? Isn\u0027t 1 enough?",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b8380a0_54eecfff",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "nit: comment is out of date, this test doesn\u0027t accumulate colors.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efb5bfff_26fd15d1",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-30T13:08:03Z",
+      "side": 1,
+      "message": "It\u0027s not clear when the bindgroups are freed because it depends on complex refcounting going on inside the backend. I don\u0027t think we should be testing exactly when the allocations are reused.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
