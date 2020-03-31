@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f76a7ed_0e35a9c7",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "In Dawn we prefer using the std::limits version.",
+      "range": {
+        "startLine": 159,
+        "startChar": 16,
+        "endLine": 159,
+        "endChar": 26
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f609c6f2_da356b4f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1020fd57_80b7692f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "Maybe have else clauses that assign an invalid NonShaderVisibleHeapAllocation so that we can avoid the condition in [1]",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a182e6a5_02e450a7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "nit: maybe have an IsValid() method?",
+      "range": {
+        "startLine": 170,
+        "startChar": 27,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea1d4b2_2c28d045",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "Maybe this could be next to NonShaderVisibleHeapAllocationD3D12 so that the BG doesn\u0027t have to include the BGL\u0027s header?",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "701ea458_1366c3d7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 41,
+        "startChar": 33,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08425cf7_0bb1372a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 42,
+        "startChar": 33,
+        "endLine": 42,
+        "endChar": 60
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd4c9c67_1626c769",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "nit: if",
+      "range": {
+        "startLine": 31,
+        "startChar": 72,
+        "endLine": 31,
+        "endChar": 75
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

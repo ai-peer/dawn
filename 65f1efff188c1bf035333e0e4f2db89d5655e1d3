@@ -324,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "b65d666a_d21e6347",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "Bascially any places we use the cbvUavSrv / cbvSrvUav name. But this can be done as we touch code that uses that name.",
+      "parentUuid": "b9dddfde_395b2110",
+      "range": {
+        "startLine": 144,
+        "startChar": 24,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1d316dc_26dc2f0c",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 4
@@ -391,6 +415,23 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5c9362b_832acb66",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "The comments on this file haven\u0027t been addressed.",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
@@ -463,6 +504,24 @@
       "side": 1,
       "message": "\u003e Also you can use LinkedList and make NonShaderVisibleBuffer a LinkedNode.\n\nDid you still mean mFreeHeaps? Only mPool uses NonShaderVisibleBuffer but needs random access.",
       "parentUuid": "3ac129f6_061e1ef5",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af3466c9_27cce288",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:52:12Z",
+      "side": 1,
+      "message": "Sorry I misread that type declaration. Seems like it could be an std::vector used as a stack instead of an std::list.",
+      "parentUuid": "9451f344_9a236c67",
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
