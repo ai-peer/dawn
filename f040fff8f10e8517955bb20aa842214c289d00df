@@ -70,6 +70,30 @@
       "revId": "f040fff8f10e8517955bb20aa842214c289d00df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe24dedb_e2800b89",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T08:54:11Z",
+      "side": 1,
+      "message": "LGTM, we could also cache the memoryPoolPreference value on the Heap object itself but let\u0027s not block this CL on that.",
+      "parentUuid": "e0f59271_626637d8",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "f040fff8f10e8517955bb20aa842214c289d00df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
