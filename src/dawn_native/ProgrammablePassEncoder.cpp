@@ -56,6 +56,7 @@ namespace dawn_native {
                     } break;
 
                     case wgpu::BindingType::Sampler:
+                    case wgpu::BindingType::ComparisonSampler:
                         break;
 
                     case wgpu::BindingType::StorageTexture:

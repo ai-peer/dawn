@@ -161,7 +161,8 @@ namespace dawn_native { namespace d3d12 {
                         cbvSrvUavDescriptorHeapAllocation.GetCPUHandle(
                             bindingOffsets[bindingIndex]));
                 } break;
-                case wgpu::BindingType::Sampler: {
+                case wgpu::BindingType::Sampler:
+                case wgpu::BindingType::ComparisonSampler: {
                     auto* sampler = ToBackend(GetBindingAsSampler(bindingIndex));
                     auto& samplerDesc = sampler->GetSamplerDescriptor();
                     d3d12Device->CreateSampler(

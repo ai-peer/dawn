@@ -417,6 +417,11 @@ namespace dawn_native {
                         info->textureDimension =
                             ToWGPUTextureViewDimension(binding.texture_dimension);
                     } break;
+
+                        // TODO: For samplers, check if it's a comparison sampler, and
+                        // set |info->type| to wgpu::BindingType::Sampler/ComparisonSampler
+                        // accordingly.
+
                     default:
                         break;
                 }
@@ -620,6 +625,11 @@ namespace dawn_native {
                         info->textureDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                     } break;
+
+                        // TODO: For samplers, check if |resource.id| is in
+                        // |compiler.comparison_ids| (it's protected), and set |info->type| to
+                        // wgpu::BindingType::Sampler/ComparisonSampler accordingly.
+
                     default:
                         info->type = bindingType;
                 }
@@ -802,6 +812,7 @@ namespace dawn_native {
                 case wgpu::BindingType::ReadonlyStorageBuffer:
                 case wgpu::BindingType::StorageBuffer:
                 case wgpu::BindingType::Sampler:
+                case wgpu::BindingType::ComparisonSampler:
                     break;
 
                 case wgpu::BindingType::StorageTexture:

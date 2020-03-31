@@ -162,6 +162,7 @@ namespace dawn_native {
                                                     bindingInfo));
                     break;
                 case wgpu::BindingType::Sampler:
+                case wgpu::BindingType::ComparisonSampler:
                     DAWN_TRY(ValidateSamplerBinding(device, binding));
                     break;
                 // TODO(jiawei.shao@intel.com): support creating bind group with read-only and
@@ -273,7 +274,8 @@ namespace dawn_native {
     SamplerBase* BindGroupBase::GetBindingAsSampler(BindingIndex bindingIndex) {
         ASSERT(!IsError());
         ASSERT(bindingIndex < mLayout->GetBindingCount());
-        ASSERT(mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::Sampler);
+        ASSERT(mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::Sampler ||
+               mLayout->GetBindingInfo(bindingIndex).type == wgpu::BindingType::ComparisonSampler);
         return static_cast<SamplerBase*>(mBindingData.bindings[bindingIndex].Get());
     }
 

@@ -51,6 +51,7 @@ namespace dawn_native {
             case wgpu::BindingType::UniformBuffer:
             case wgpu::BindingType::ReadonlyStorageBuffer:
             case wgpu::BindingType::Sampler:
+            case wgpu::BindingType::ComparisonSampler:
             case wgpu::BindingType::SampledTexture:
             case wgpu::BindingType::ReadonlyStorageTexture:
                 break;
@@ -79,6 +80,7 @@ namespace dawn_native {
             case wgpu::BindingType::UniformBuffer:
             case wgpu::BindingType::ReadonlyStorageBuffer:
             case wgpu::BindingType::Sampler:
+            case wgpu::BindingType::ComparisonSampler:
             case wgpu::BindingType::SampledTexture:
                 break;
             default:
@@ -134,6 +136,7 @@ namespace dawn_native {
                     break;
                 case wgpu::BindingType::SampledTexture:
                 case wgpu::BindingType::Sampler:
+                case wgpu::BindingType::ComparisonSampler:
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
                     if (binding.hasDynamicOffset) {
@@ -232,6 +235,7 @@ namespace dawn_native {
                         break;
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
+                    case wgpu::BindingType::ComparisonSampler:
                     case wgpu::BindingType::StorageTexture:
                     case wgpu::BindingType::ReadonlyStorageTexture:
                     case wgpu::BindingType::WriteonlyStorageTexture:
@@ -299,6 +303,7 @@ namespace dawn_native {
                         break;
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
+                    case wgpu::BindingType::ComparisonSampler:
                     case wgpu::BindingType::StorageTexture:
                     case wgpu::BindingType::ReadonlyStorageTexture:
                     case wgpu::BindingType::WriteonlyStorageTexture:
