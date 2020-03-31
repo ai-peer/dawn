@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24f30fa9_80228ceb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T10:14:09Z",
+      "side": 1,
+      "message": "Aww you caught it :(",
+      "parentUuid": "37eb204e_4d184443",
+      "range": {
+        "startLine": 123,
+        "startChar": 31,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5111215_98d8733a",
         "filename": "src/dawn_native/Error.cpp",
         "patchSetId": 6
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "a5111215_98d8733a",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87992612_2bbdf65e",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-03-31T10:14:09Z",
+      "side": 1,
+      "message": "Done\n\nFromWGPUError: That\u0027s because we don\u0027t want InjectError(DeviceLost) to cause Dawn to shut down ungracefully. I reworked this in the latest patchset.",
+      "parentUuid": "9a1ffd52_80c4e442",
       "range": {
         "startLine": 29,
         "startChar": 0,
