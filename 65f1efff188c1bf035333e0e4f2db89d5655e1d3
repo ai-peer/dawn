@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae8a301a_82481cc9",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace6c7fc_2ae3ad6d",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31da55c5_941633e3",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42fe14b6_26965479",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31da55c5_941633e3",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "e4793522_1667a082",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "SGTM. I left Create() following VK.",
+      "parentUuid": "ff5e030a_262bfff9",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb746707_7467832c",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 4
@@ -85,6 +139,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52ea6781_ebe41c7a",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb746707_7467832c",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "35e76e6a_36e95672",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b86dfc5_a5dc7d99",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efb69117_ab6eedc7",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 4
@@ -119,6 +209,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b65a781_e7f4f8df",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efb69117_ab6eedc7",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "8eddace6_cf0c8191",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1e26436_6c0bf04b",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 69
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac99967a_b9d92e38",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 4
@@ -168,6 +300,30 @@
     },
     {
       "key": {
+        "uuid": "b9dddfde_395b2110",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "+1. LMK if to rename others.",
+      "parentUuid": "ac99967a_b9d92e38",
+      "range": {
+        "startLine": 144,
+        "startChar": 24,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1d316dc_26dc2f0c",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 4
@@ -185,6 +341,24 @@
     },
     {
       "key": {
+        "uuid": "55476444_ae0ce0ef",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1d316dc_26dc2f0c",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf8dcb9b_456255b8",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 4
@@ -199,6 +373,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "011cfae7_6b1b2e31",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf8dcb9b_456255b8",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -259,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "9451f344_9a236c67",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "\u003e Also you can use LinkedList and make NonShaderVisibleBuffer a LinkedNode.\n\nDid you still mean mFreeHeaps? Only mPool uses NonShaderVisibleBuffer but needs random access.",
+      "parentUuid": "3ac129f6_061e1ef5",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26d2aa15_9a95e393",
         "filename": "src/tests/unittests/MathTests.cpp",
         "patchSetId": 4
@@ -273,6 +483,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc30db6f_8b1a11d4",
+        "filename": "src/tests/unittests/MathTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "26d2aa15_9a95e393",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -299,6 +527,30 @@
     },
     {
       "key": {
+        "uuid": "81f9d127_7bec499e",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ah, thanks.",
+      "parentUuid": "834c58b7_4597c6ff",
+      "range": {
+        "startLine": 725,
+        "startChar": 4,
+        "endLine": 725,
+        "endChar": 48
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92cfb1bb_a4a7510e",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -322,6 +574,30 @@
     },
     {
       "key": {
+        "uuid": "e48cdadb_ba5d295f",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92cfb1bb_a4a7510e",
+      "range": {
+        "startLine": 781,
+        "startChar": 85,
+        "endLine": 781,
+        "endChar": 94
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6796a35_9d90cbcd",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -336,6 +612,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19724ebf_649cc56b",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Apologies, removed.",
+      "parentUuid": "f6796a35_9d90cbcd",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -356,6 +650,24 @@
     },
     {
       "key": {
+        "uuid": "66d4a5e1_47cb49f8",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f556ac08_f0d4b8f3",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08e125e5_a761b4a1",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -370,6 +682,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be75d855_9566c234",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "08e125e5_a761b4a1",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -390,6 +720,24 @@
     },
     {
       "key": {
+        "uuid": "40f20615_b0de330d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b8380a0_54eecfff",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efb5bfff_26fd15d1",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -404,6 +752,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cb6fb8e_df0f68e1",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T01:14:59Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "efb5bfff_26fd15d1",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
