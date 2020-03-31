@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1199e487_69ccbe13",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f76a7ed_0e35a9c7",
+      "range": {
+        "startLine": 159,
+        "startChar": 16,
+        "endLine": 159,
+        "endChar": 26
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f609c6f2_da356b4f",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 5
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "3ff89d54_4dbfd563",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f609c6f2_da356b4f",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1020fd57_80b7692f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f608a6b_d3415e80",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Can\u0027t think of a way to completely avoid the check (w/o storing NonShaderVisibleHeapAllocation directly) but did replace with IsValid().",
+      "parentUuid": "1020fd57_80b7692f",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "ecbba989_d11f3bd7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a182e6a5_02e450a7",
+      "range": {
+        "startLine": 170,
+        "startChar": 27,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea1d4b2_2c28d045",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 5
@@ -96,6 +180,24 @@
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78dbce3d_c3e78f3d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea1d4b2_2c28d045",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "90e3dd48_1858c644",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Cannot be const since Deallocate() modifies them.",
+      "parentUuid": "701ea458_1366c3d7",
+      "range": {
+        "startLine": 41,
+        "startChar": 33,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08425cf7_0bb1372a",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 5
@@ -142,6 +268,30 @@
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be3fbe00_e673aec2",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "See other comment.",
+      "parentUuid": "08425cf7_0bb1372a",
+      "range": {
+        "startLine": 42,
+        "startChar": 33,
+        "endLine": 42,
+        "endChar": 60
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -168,6 +318,30 @@
     },
     {
       "key": {
+        "uuid": "112df05e_038e92a6",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "77e8cfde_db3db97d",
+      "range": {
+        "startLine": 50,
+        "startChar": 14,
+        "endLine": 50,
+        "endChar": 22
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24b637b5_f0c82445",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 5
@@ -188,6 +362,30 @@
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bc365f1_9fea296d",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24b637b5_f0c82445",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 51
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -214,6 +412,30 @@
     },
     {
       "key": {
+        "uuid": "6cbbd5a3_735e5a73",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd4c9c67_1626c769",
+      "range": {
+        "startLine": 31,
+        "startChar": 72,
+        "endLine": 31,
+        "endChar": 75
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93b3a555_a15a9e6e",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 5
@@ -234,6 +456,30 @@
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f0ab7d7_be1cfd2a",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b3a555_a15a9e6e",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

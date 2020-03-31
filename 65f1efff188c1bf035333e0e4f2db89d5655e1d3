@@ -435,6 +435,24 @@
     },
     {
       "key": {
+        "uuid": "d6385ab6_45e4d9b2",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5c9362b_832acb66",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9419817_335c8b92",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 4
@@ -458,6 +476,30 @@
     },
     {
       "key": {
+        "uuid": "ff5be024_00e264c5",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "I think this meant to have allocationIndex be heap (NOT allocation) local. Does the BG store the allocationIndex or convert from baseDescriptor? I went with the latter.",
+      "parentUuid": "b9419817_335c8b92",
+      "range": {
+        "startLine": 54,
+        "startChar": 53,
+        "endLine": 54,
+        "endChar": 67
+      },
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4dcd82ed_f95a45ca",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 4
@@ -472,6 +514,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "454c1613_d9e0ec94",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dcd82ed_f95a45ca",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -525,6 +585,24 @@
       "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f924ed18_bf17b7de",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-03-31T22:51:19Z",
+      "side": 1,
+      "message": "Ah, thanks.",
+      "parentUuid": "af3466c9_27cce288",
+      "revId": "65f1efff188c1bf035333e0e4f2db89d5655e1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
