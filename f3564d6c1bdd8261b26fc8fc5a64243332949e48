@@ -145,6 +145,52 @@
     },
     {
       "key": {
+        "uuid": "77e8cfde_db3db97d",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-31T18:46:09Z",
+      "side": 1,
+      "message": "Here, and other relevant offsets/sizes. CPU descriptor ptr offsets are size_t not uint64_t\nhttps://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_cpu_descriptor_handle",
+      "range": {
+        "startLine": 50,
+        "startChar": 14,
+        "endLine": 50,
+        "endChar": 22
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b637b5_f0c82445",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-31T18:46:09Z",
+      "side": 1,
+      "message": "nit: In Dawn, we like to pass mutable arguments by pointer",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 51
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd4c9c67_1626c769",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 5
@@ -161,6 +207,29 @@
         "startChar": 72,
         "endLine": 31,
         "endChar": 75
+      },
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93b3a555_a15a9e6e",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-03-31T18:46:09Z",
+      "side": 1,
+      "message": "Strong agreement with Corentin on Patchset 4 that this would be better as a list of free allocation indices. We shouldn\u0027t need to do any computation with start/end pointers since every block of descriptors returned from AllocateCPUDescriptors is exactly the same size.",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 42
       },
       "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
