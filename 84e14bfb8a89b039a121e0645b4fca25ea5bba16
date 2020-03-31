@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ff13bf5e_eff9f724",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-31T16:51:52Z",
+      "side": 1,
+      "message": "Still an issue in the latest patch.",
+      "parentUuid": "438f35da_05897eed",
+      "range": {
+        "startLine": 123,
+        "startChar": 31,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5111215_98d8733a",
         "filename": "src/dawn_native/Error.cpp",
         "patchSetId": 6
@@ -189,6 +213,30 @@
       "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae8be7e6_d05c3f82",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-03-31T16:51:52Z",
+      "side": 1,
+      "message": "The latest patchset shows no deltas in this function. Did you mean to fix it in a different manner?",
+      "parentUuid": "3bab6f02_44c2bc56",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "84e14bfb8a89b039a121e0645b4fca25ea5bba16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
