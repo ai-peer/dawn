@@ -83,6 +83,15 @@
     {%- endif -%}
 {% endmacro %}
 
+namespace {
+
+    struct WGPUChainedStructTransfer {
+        WGPUSType sType;
+        bool hasNext;
+    };
+
+}  // anonymous namespace
+
 //* The main [de]serialization macro
 //* Methods are very similar to structures that have one member corresponding to each arguments.
 //* This macro takes advantage of the similarity to output [de]serialization code for a record
@@ -100,6 +109,14 @@
             {{Return}}WireCmd commandId;
         {% endif %}
 
+        {% if record.extensible %}
+            bool hasNextInChain;
+        {% endif %}
+
+        {% if record.chained %}
+            WGPUChainedStructTransfer chain;
+        {% endif %}
+
         //* Value types are directly in the command, objects being replaced with their IDs.
         {% for member in members if member.annotation == "value" %}
             {{member_transfer_type(member)}} {{as_varName(member.name)}};
@@ -115,11 +132,22 @@
         {% endfor %}
     };
 
+    {% if record.chained %}
+        static_assert(offsetof({{Return}}{{name}}Transfer, chain) == 0, "");
+    {% endif %}
+
     //* Returns the required transfer size for `record` in addition to the transfer structure.
     DAWN_DECLARE_UNUSED size_t {{Return}}{{name}}GetExtraRequiredSize(const {{Return}}{{name}}{{Cmd}}& record) {
         DAWN_UNUSED(record);
 
         size_t result = 0;
+
+        //* Gather how much space will be needed for the extension chain.
+        {% if record.extensible %}
+            if (record.nextInChain != nullptr) {
+                result += GetChainedStructExtraRequiredSize(record.nextInChain);
+            }
+        {% endif %}
 
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
@@ -187,6 +215,15 @@
             {{serialize_member(member, "record." + memberName, "transfer->" + memberName)}}
         {% endfor %}
 
+        {% if record.extensible %}
+            if (record.nextInChain != nullptr) {
+                transfer->hasNextInChain = true;
+                SerializeChainedStruct(record.nextInChain, buffer);
+            } else {
+                transfer->hasNextInChain = false;
+            }
+        {% endif %}
+
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
             {% set memberName = as_varName(member.name) %}
@@ -243,10 +280,6 @@
             ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});
         {% endif %}
 
-        {% if record.extensible %}
-            record->nextInChain = nullptr;
-        {% endif %}
-
         {% if record.derived_method %}
             record->selfId = transfer->self;
         {% endif %}
@@ -256,6 +289,13 @@
             {% set memberName = as_varName(member.name) %}
             {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
         {% endfor %}
+
+        {% if record.extensible %}
+            record->nextInChain = nullptr;
+            if (transfer->hasNextInChain) {
+                DESERIALIZE_TRY(DeserializeChainedStruct(&record->nextInChain, buffer, size, allocator));
+            }
+        {% endif %}
 
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
@@ -424,6 +464,14 @@ namespace dawn_wire {
             return DeserializeResult::Success;
         }
 
+        size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct);
+        void SerializeChainedStruct(WGPUChainedStruct const* chainedStruct,
+                                    char** buffer);
+        DeserializeResult DeserializeChainedStruct(const WGPUChainedStruct** out,
+                                                   const volatile char** buffer,
+                                                   size_t* size,
+                                                   DeserializeAllocator* allocator);
+
         //* Output structure [de]serialization first because it is used by commands.
         {% for type in by_category["structure"] %}
             {% set name = as_cType(type.name) %}
@@ -432,6 +480,108 @@ namespace dawn_wire {
                   is_cmd=False)}}
             {% endif %}
         {% endfor %}
+
+        size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct) {
+            ASSERT(chainedStruct != nullptr);
+            size_t result = 0;
+            while (chainedStruct != nullptr) {
+                switch (chainedStruct->sType) {
+                    {% for sType in types["s type"].values if sType.valid and sType.name.CamelCase() not in client_side_structures %}
+                        case {{as_cEnum(types["s type"].name, sType.name)}}: {
+                            const auto& typedStruct = *reinterpret_cast<{{as_cType(sType.name)}} const *>(chainedStruct);
+                            result += sizeof({{as_cType(sType.name)}}Transfer);
+                            result += {{as_cType(sType.name)}}GetExtraRequiredSize(typedStruct);
+                            chainedStruct = typedStruct.chain.next;
+                            break;
+                        }
+                    {% endfor %}
+                    default:
+                        // Invalid enum. Reserve space for the transfer header and stop walking the chain.
+                        result += sizeof(WGPUChainedStructTransfer);
+                        return result;
+                }
+            }
+            return result;
+        }
+
+        void SerializeChainedStruct(WGPUChainedStruct const* chainedStruct,
+                                    char** buffer) {
+            ASSERT(chainedStruct != nullptr);
+            ASSERT(buffer != nullptr);
+            do {
+                switch (chainedStruct->sType) {
+                    {% for sType in types["s type"].values if sType.valid and sType.name.CamelCase() not in client_side_structures %}
+                        case {{as_cEnum(types["s type"].name, sType.name)}}: {
+                            const auto& typedStruct = *reinterpret_cast<{{as_cType(sType.name)}} const*>(chainedStruct);
+
+                            auto* transfer = reinterpret_cast<{{as_cType(sType.name)}}Transfer*>(*buffer);
+                            transfer->chain.sType = chainedStruct->sType;
+                            transfer->chain.hasNext = typedStruct.chain.next != nullptr;
+                            *buffer += sizeof({{as_cType(sType.name)}}Transfer);
+                            {{as_cType(sType.name)}}Serialize(typedStruct, transfer, buffer);
+
+                            chainedStruct = typedStruct.chain.next;
+                        } break;
+                    {% endfor %}
+                    default: {
+                        // Invalid enum. Write the invalid transfer header with hasNext == false.
+                        // Stop walking the chain.
+                        WGPUChainedStructTransfer* transfer = reinterpret_cast<WGPUChainedStructTransfer*>(*buffer);
+                        transfer->sType = chainedStruct->sType;
+                        transfer->hasNext = false;
+                        *buffer += sizeof(WGPUChainedStructTransfer);
+                        return;
+                    }
+                }
+            } while (chainedStruct != nullptr);
+        }
+
+        DeserializeResult DeserializeChainedStruct(const WGPUChainedStruct** out,
+                                                   const volatile char** buffer,
+                                                   size_t* size,
+                                                   DeserializeAllocator* allocator) {
+            bool hasNext;
+            do {
+                if (*size < sizeof(WGPUChainedStructTransfer)) {
+                    return DeserializeResult::FatalError;
+                }
+                WGPUSType sType = reinterpret_cast<const volatile WGPUChainedStructTransfer*>(*buffer)->sType;
+                switch (sType) {
+                    {% for sType in types["s type"].values if sType.valid and sType.name.CamelCase() not in client_side_structures %}
+                        case {{as_cEnum(types["s type"].name, sType.name)}}: {
+                            const volatile {{as_cType(sType.name)}}Transfer* transfer = nullptr;
+                            DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
+
+                            {{as_cType(sType.name)}}* outStruct = nullptr;
+                            DESERIALIZE_TRY(GetSpace(allocator, sizeof({{as_cType(sType.name)}}), &outStruct));
+                            outStruct->chain.sType = sType;
+                            outStruct->chain.next = nullptr;
+
+                            *out = reinterpret_cast<WGPUChainedStruct*>(outStruct);
+                            out = &outStruct->chain.next;
+
+                            DESERIALIZE_TRY({{as_cType(sType.name)}}Deserialize(outStruct, transfer, buffer, size, allocator));
+
+                            hasNext = transfer->chain.hasNext;
+                        } break;
+                    {% endfor %}
+                    default: {
+                        WGPUChainedStruct* outStruct = nullptr;
+                        DESERIALIZE_TRY(GetSpace(allocator, sizeof(WGPUChainedStruct), &outStruct));
+                        outStruct->sType = sType;
+                        outStruct->next = nullptr;
+
+                        *out = reinterpret_cast<WGPUChainedStruct*>(outStruct);
+                        out = &outStruct->next;
+
+                        hasNext = false;
+                        *buffer += sizeof(WGPUChainedStructTransfer);
+                    } break;
+                }
+            } while (hasNext);
+
+            return DeserializeResult::Success;
+        }
 
         //* Output [de]serialization helpers for commands
         {% for command in cmd_records["command"] %}

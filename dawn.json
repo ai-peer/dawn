@@ -1376,7 +1376,7 @@
         "category": "enum",
         "javascript": false,
         "values": [
-            {"value": 0, "name": "invalid"},
+            {"value": 0, "name": "invalid", "valid": false},
             {"value": 1, "name": "surface descriptor from metal layer"},
             {"value": 2, "name": "surface descriptor from windows HWND"},
             {"value": 3, "name": "surface descriptor from xlib"},
