@@ -18,7 +18,7 @@
 #include "common/PlacementAllocated.h"
 #include "common/Serial.h"
 #include "dawn_native/BindGroup.h"
-#include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -27,9 +27,13 @@ namespace dawn_native { namespace d3d12 {
 
     class BindGroup : public BindGroupBase, public PlacementAllocated {
       public:
-        static BindGroup* Create(Device* device, const BindGroupDescriptor* descriptor);
+        static ResultOrError<BindGroup*> Create(Device* device,
+                                                const BindGroupDescriptor* descriptor);
 
-        BindGroup(Device* device, const BindGroupDescriptor* descriptor);
+        BindGroup(Device* device,
+                  const BindGroupDescriptor* descriptor,
+                  NonShaderVisibleHeapAllocation viewAllocation,
+                  NonShaderVisibleHeapAllocation samplerAllocation);
         ~BindGroup() override;
 
         // Returns true if the BindGroup was successfully populated.
@@ -44,6 +48,9 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_GPU_DESCRIPTOR_HANDLE mBaseCbvSrvUavDescriptor = {0};
         D3D12_GPU_DESCRIPTOR_HANDLE mBaseSamplerDescriptor = {0};
+
+        CPUDescriptorHeapAllocation mCPUSamplerAllocation;
+        CPUDescriptorHeapAllocation mCPUCbvSrvUavAllocation;
     };
 }}  // namespace dawn_native::d3d12
 

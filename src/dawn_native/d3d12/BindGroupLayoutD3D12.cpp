@@ -17,6 +17,7 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
     namespace {
@@ -40,6 +41,9 @@ namespace dawn_native { namespace d3d12 {
             }
         }
     }  // anonymous namespace
+
+    // TODO(dawn:155): Figure out this value.
+    static constexpr uint32_t kDescriptorHeapSize = 1024;
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
@@ -128,14 +132,51 @@ namespace dawn_native { namespace d3d12 {
             DescriptorType descriptorType = WGPUBindingTypeToDescriptorType(bindingInfo.type);
             mBindingOffsets[bindingIndex] += descriptorOffsets[descriptorType];
         }
+
+        const uint32_t cbvUavSrvDescriptorCount = GetCbvUavSrvDescriptorCount();
+        if (cbvUavSrvDescriptorCount > 0) {
+            mCbvSrvUavAllocator = std::make_unique<NonShaderVisibleDescriptorAllocator>(
+                device, cbvUavSrvDescriptorCount, kDescriptorHeapSize,
+                D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        }
+
+        const uint32_t samplerDescriptorCount = GetSamplerDescriptorCount();
+        if (samplerDescriptorCount > 0) {
+            mSamplerAllocator = std::make_unique<NonShaderVisibleDescriptorAllocator>(
+                device, GetSamplerDescriptorCount(), kDescriptorHeapSize,
+                D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        }
     }
 
-    BindGroup* BindGroupLayout::AllocateBindGroup(Device* device,
-                                                  const BindGroupDescriptor* descriptor) {
-        return mBindGroupAllocator.Allocate(device, descriptor);
+    ResultOrError<BindGroup*> BindGroupLayout::AllocateBindGroup(
+        Device* device,
+        const BindGroupDescriptor* descriptor) {
+        NonShaderVisibleHeapAllocation viewAllocation;
+        if (GetCbvUavSrvDescriptorCount() > 0) {
+            DAWN_TRY_ASSIGN(viewAllocation, mCbvSrvUavAllocator->AllocateCPUDescriptors());
+        }
+
+        NonShaderVisibleHeapAllocation samplerAllocation;
+        if (GetSamplerDescriptorCount() > 0) {
+            DAWN_TRY_ASSIGN(samplerAllocation, mSamplerAllocator->AllocateCPUDescriptors(););
+        }
+
+        return mBindGroupAllocator.Allocate(device, descriptor, viewAllocation, samplerAllocation);
     }
 
-    void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup) {
+    void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup,
+                                              CPUDescriptorHeapAllocation& viewAllocation,
+                                              CPUDescriptorHeapAllocation& samplerAllocation) {
+        if (viewAllocation.baseDescriptor.ptr != 0) {
+            mCbvSrvUavAllocator->Deallocate(viewAllocation.baseDescriptor,
+                                            viewAllocation.heapIndex);
+        }
+
+        if (samplerAllocation.baseDescriptor.ptr != 0) {
+            mSamplerAllocator->Deallocate(samplerAllocation.baseDescriptor,
+                                          samplerAllocation.heapIndex);
+        }
+
         mBindGroupAllocator.Deallocate(bindGroup);
     }
 
