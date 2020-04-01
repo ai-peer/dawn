@@ -123,6 +123,10 @@ namespace dawn_native {
              {"use_d3d12_small_shader_visible_heap",
               "Enable use of a small D3D12 shader visible heap, instead of using a large one by "
               "default. This setting is used to test bindgroup encoding."}},
+            {Toggle::RestrictD3D12ResidencyBudgetForTesting,
+             {"restrict_d3d12_residency_budget_for_testing",
+              "Artificially restricts D3D12 residency manager's budget to 100MB for testing "
+              "purposes."}},
         }};
 
     }  // anonymous namespace

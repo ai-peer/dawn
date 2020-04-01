@@ -314,6 +314,11 @@ namespace dawn_native { namespace d3d12 {
         ToBackend(GetDevice())->DeallocateMemory(mResourceAllocation);
     }
 
+    bool Buffer::CheckIsResidentForTesting() const {
+        Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+        return heap->IsInList() || heap->IsResidencyLocked();
+    }
+
     MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {
     }
 
