@@ -38,6 +38,8 @@ namespace dawn_native { namespace d3d12 {
 
         void TrackResidentAllocation(Heap* heap);
 
+        uint64_t GetDawnBudgetForTesting() const;
+
       private:
         struct VideoMemoryInfo {
             uint64_t dawnBudget;

@@ -94,10 +94,6 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void ResidencyManager::UpdateVideoMemoryInfo() {
-        if (!mResidencyManagementEnabled) {
-            return;
-        }
-
         DXGI_QUERY_VIDEO_MEMORY_INFO queryVideoMemoryInfo;
         ToBackend(mDevice->GetAdapter())
             ->GetHardwareAdapter()
@@ -279,5 +275,9 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mLRUCache.Append(heap);
+    }
+
+    uint64_t ResidencyManager::GetDawnBudgetForTesting() const {
+        return mVideoMemoryInfo.dawnBudget;
     }
 }}  // namespace dawn_native::d3d12
