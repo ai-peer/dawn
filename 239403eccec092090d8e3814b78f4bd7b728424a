@@ -94,6 +94,30 @@
       "revId": "239403eccec092090d8e3814b78f4bd7b728424a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3796f01_d908445e",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-01T18:41:52Z",
+      "side": 1,
+      "message": "OOM in WebGPU is *only* for recoverable cases (unrecoverable cases are device loss). I extend that backend notion to the app: we shouldn\u0027t expose OOM in any place where an application couldn\u0027t reasonably recover from it, as it will hurt portability. I think the only reasonable places to expect OOM are createBuffer and createTexture (because those are the ones where you can create a smaller buffer/texture, or delete some old ones, to try to free up memory). Other OOMs, even if not strictly speaking fatal, IMO should cause device loss as long as they\u0027re rare enough that we provide no API facilities for the application to recover.\n\nI\u0027m pretty sure we more or less agreed on these semantics at one point (since it\u0027s conservative and can be changed later). Here\u0027s the doc where this should have been discussed (but is not really touched on now):\nhttps://github.com/gpuweb/gpuweb/blob/master/design/ErrorHandling.md\nOne thing unhandled here (I think it was handled by an earlier draft) is OOMs on small buffers/textures. These are cases where an application would never expect an OOM and therefore probably won\u0027t handle it. The old idea was to make any uncaptured OOM lose the device, that way any buffer/texture OOM that wasn\u0027t enclosed with an appropriate error scope would lose the device. If we did this then it might be okay to expose OOMs from other calls, as the app would only enclose those in error scopes if they thought they had a way to handle it.",
+      "parentUuid": "a02f73d6_7beb53dc",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "239403eccec092090d8e3814b78f4bd7b728424a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
