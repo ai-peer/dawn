@@ -157,7 +157,10 @@ namespace dawn_native {
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
 
+        QueueBase* GetDefaultQueue();
+
         void InjectError(wgpu::ErrorType type, const char* message);
+        void LoseForTesting();
 
         void Tick();
 
@@ -166,12 +169,14 @@ namespace dawn_native {
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
 
+        void Reference();
+        void Release();
+
+        // End of the Dawn API
+
         MaybeError ValidateIsAlive() const;
 
         ErrorScope* GetCurrentErrorScope();
-
-        void Reference();
-        void Release();
 
         virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
             size_t size) = 0;
@@ -190,7 +195,6 @@ namespace dawn_native {
         bool IsValidationEnabled() const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
-        void LoseForTesting();
         bool IsLost() const;
 
       protected:
@@ -207,6 +211,8 @@ namespace dawn_native {
         enum class LossStatus { Alive, BeingLost, AlreadyLost };
         LossStatus mLossStatus = LossStatus::Alive;
 
+        Ref<QueueBase> mDefaultQueue;
+
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) = 0;
@@ -217,7 +223,6 @@ namespace dawn_native {
             const ComputePipelineDescriptor* descriptor) = 0;
         virtual ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) = 0;
-        virtual ResultOrError<QueueBase*> CreateQueueImpl() = 0;
         virtual ResultOrError<RenderPipelineBase*> CreateRenderPipelineImpl(
             const RenderPipelineDescriptor* descriptor) = 0;
         virtual ResultOrError<SamplerBase*> CreateSamplerImpl(
@@ -246,7 +251,6 @@ namespace dawn_native {
                                                  const ComputePipelineDescriptor* descriptor);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
-        MaybeError CreateQueueInternal(QueueBase** result);
         MaybeError CreateRenderBundleEncoderInternal(
             RenderBundleEncoder** result,
             const RenderBundleEncoderDescriptor* descriptor);

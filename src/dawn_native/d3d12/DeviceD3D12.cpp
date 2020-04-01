@@ -49,6 +49,7 @@ namespace dawn_native { namespace d3d12 {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
         }
+        mDefaultQueue = new Queue(this);
     }
 
     MaybeError Device::Initialize() {
@@ -118,6 +119,8 @@ namespace dawn_native { namespace d3d12 {
 
     Device::~Device() {
         BaseDestructor();
+
+        mDefaultQueue = nullptr;
     }
 
     ComPtr<ID3D12Device> Device::GetD3D12Device() const {
@@ -255,9 +258,6 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return PipelineLayout::Create(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return new Queue(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

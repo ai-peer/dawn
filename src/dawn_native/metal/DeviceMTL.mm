@@ -52,10 +52,14 @@ namespace dawn_native { namespace metal {
         if (descriptor != nil) {
             ApplyToggleOverrides(descriptor);
         }
+
+        mDefaultQueue = new Queue(this);
     }
 
     Device::~Device() {
         BaseDestructor();
+
+        mDefaultQueue = nullptr;
     }
 
     void Device::InitTogglesFromDriver() {
@@ -114,9 +118,6 @@ namespace dawn_native { namespace metal {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return new Queue(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

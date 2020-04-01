@@ -53,6 +53,8 @@ namespace dawn_native { namespace vulkan {
 
         // Set the device as lost until successfully created.
         mLossStatus = LossStatus::AlreadyLost;
+
+        mDefaultQueue = new Queue(this);
     }
 
     MaybeError Device::Initialize() {
@@ -91,6 +93,8 @@ namespace dawn_native { namespace vulkan {
 
     Device::~Device() {
         BaseDestructor();
+
+        mDefaultQueue = nullptr;
 
         mDescriptorSetService = nullptr;
 
@@ -142,9 +146,6 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return PipelineLayout::Create(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return Queue::Create(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

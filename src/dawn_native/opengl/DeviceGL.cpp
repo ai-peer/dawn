@@ -42,6 +42,7 @@ namespace dawn_native { namespace opengl {
             ApplyToggleOverrides(descriptor);
         }
         mFormatTable = BuildGLFormatTable();
+        mDefaultQueue = new Queue(this);
     }
 
     Device::~Device() {
@@ -103,9 +104,6 @@ namespace dawn_native { namespace opengl {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return new Queue(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

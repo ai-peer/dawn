@@ -99,6 +99,7 @@
             "BufferMapWriteAsync",
             "BufferSetSubData",
             "DeviceCreateBufferMappedAsync",
+            "DeviceGetDefaultQueue",
             "DevicePopErrorScope",
             "DeviceSetDeviceLostCallback",
             "DeviceSetUncapturedErrorCallback",

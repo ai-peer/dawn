@@ -84,6 +84,8 @@ namespace dawn_native { namespace null {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
         }
+
+        mDefaultQueue = new Queue(this);
     }
 
     Device::~Device() {
@@ -91,6 +93,8 @@ namespace dawn_native { namespace null {
         // This assert is in the destructor rather than Device::Destroy() because it needs to make
         // sure buffers have been destroyed before the device.
         ASSERT(mMemoryUsage == 0);
+
+        mDefaultQueue = nullptr;
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -116,9 +120,6 @@ namespace dawn_native { namespace null {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return new Queue(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

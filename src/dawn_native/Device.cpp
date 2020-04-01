@@ -82,8 +82,9 @@ namespace dawn_native {
     }
 
     DeviceBase::~DeviceBase() {
-        // Devices must explicitly free the uploader
+        // Devices must explicitly free the uploader and the default queue.
         ASSERT(mDynamicUploader == nullptr);
+        ASSERT(mDefaultQueue.Get() == nullptr);
         ASSERT(mDeferredCreateBufferMappedAsyncResults.empty());
 
         ASSERT(mCaches->attachmentStates.empty());
@@ -544,13 +545,8 @@ namespace dawn_native {
         return result;
     }
     QueueBase* DeviceBase::CreateQueue() {
-        QueueBase* result = nullptr;
-
-        if (ConsumedError(CreateQueueInternal(&result))) {
-            return QueueBase::MakeError(this);
-        }
-
-        return result;
+        // TODO(dawn:22): Remove this once users use GetDefaultQueue
+        return GetDefaultQueue();
     }
     SamplerBase* DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
         SamplerBase* result = nullptr;
@@ -653,6 +649,14 @@ namespace dawn_native {
         if (mRefCount == 0) {
             delete this;
         }
+    }
+
+    QueueBase* DeviceBase::GetDefaultQueue() {
+        // Backends are supposed to the set the default queue on initialization.
+        ASSERT(mDefaultQueue.Get() != nullptr);
+        // Returns a new reference to the queue.
+        mDefaultQueue->Reference();
+        return mDefaultQueue.Get();
     }
 
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
@@ -780,12 +784,6 @@ namespace dawn_native {
             DAWN_TRY(ValidatePipelineLayoutDescriptor(this, descriptor));
         }
         DAWN_TRY_ASSIGN(*result, GetOrCreatePipelineLayout(descriptor));
-        return {};
-    }
-
-    MaybeError DeviceBase::CreateQueueInternal(QueueBase** result) {
-        DAWN_TRY(ValidateIsAlive());
-        DAWN_TRY_ASSIGN(*result, CreateQueueImpl());
         return {};
     }
 
