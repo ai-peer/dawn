@@ -26,8 +26,9 @@ namespace dawn_native { namespace d3d12 {
 
     ResidencyManager::ResidencyManager(Device* device)
         : mDevice(device),
-          mResidencyManagementEnabled(
-              device->IsToggleEnabled(Toggle::UseD3D12ResidencyManagement)) {
+          mResidencyManagementEnabled(device->IsToggleEnabled(Toggle::UseD3D12ResidencyManagement)),
+          mRestrictBudgetForTesting(
+              device->IsToggleEnabled(Toggle::RestrictD3D12ResidencyBudgetForTesting)) {
         UpdateVideoMemoryInfo();
     }
 
@@ -94,10 +95,6 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void ResidencyManager::UpdateVideoMemoryInfo() {
-        if (!mResidencyManagementEnabled) {
-            return;
-        }
-
         DXGI_QUERY_VIDEO_MEMORY_INFO queryVideoMemoryInfo;
         ToBackend(mDevice->GetAdapter())
             ->GetHardwareAdapter()
@@ -110,7 +107,7 @@ namespace dawn_native { namespace d3d12 {
         // continue to make forward progress. Note the choice to halve memory is arbitrarily chosen
         // and subject to future experimentation.
         mVideoMemoryInfo.externalReservation =
-            std::min(queryVideoMemoryInfo.Budget / 2, mVideoMemoryInfo.externalReservation);
+            std::min(queryVideoMemoryInfo.Budget / 2, mVideoMemoryInfo.externalRequest);
 
         // We cap Dawn's budget to 95% of the provided budget. Leaving some budget unused
         // decreases fluctuations in the operating-system-defined budget, which improves stability
@@ -121,6 +118,12 @@ namespace dawn_native { namespace d3d12 {
             (queryVideoMemoryInfo.Budget - mVideoMemoryInfo.externalReservation) * kBudgetCap;
         mVideoMemoryInfo.dawnUsage =
             queryVideoMemoryInfo.CurrentUsage - mVideoMemoryInfo.externalReservation;
+
+        // If the toggle RestrictD3D12ResidencyBudgetForTesting has been enabled, just ignore the
+        // calculated budget and set to 100MB.
+        if (mRestrictBudgetForTesting) {
+            mVideoMemoryInfo.dawnBudget = 100000000;
+        }
     }
 
     // Removes from the LRU and returns the least recently used heap when possible. Returns nullptr
@@ -279,5 +282,9 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mLRUCache.Append(heap);
+    }
+
+    uint64_t ResidencyManager::GetDawnBudgetForTesting() const {
+        return mVideoMemoryInfo.dawnBudget;
     }
 }}  // namespace dawn_native::d3d12
