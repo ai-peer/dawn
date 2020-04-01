@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5270bfa_b06f3a72",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T00:22:25Z",
+      "side": 1,
+      "message": "Can viewAllocation and samplerAllocation be passed by const reference?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8908723_e68570e1",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T00:22:25Z",
+      "side": 1,
+      "message": "Instead of pushing back a uint64_t allocation index for every free block in the heap, can we use a bit vector instead?  Each bit in the vector would represent a block in the buffer: 1 means free, 0 means taken. The position in the bit vector can be used to calculate the uint64_t offset when we need it.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca86f1f_56eee92c",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T00:22:25Z",
+      "side": 1,
+      "message": "I think I understand how your allocator works but I am confused by your explanation. If every allocation is \u0027block\u0027 size bytes, what do you mean when you say \"the entire free block is allocated from the heap\"?  This implies that there can be different sized blocks. \n\nWhen people typically use the word \"fragmented\" to describe a heap, they mean that there are lots of little blocks scattered throughout the heap but none big enough to service an allocation request. In your heap, this will never happen as I understand it. If there is free space, the space should always be big enough for at least one allocation.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 50
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2781eb8_fe7a9b57",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T00:22:25Z",
+      "side": 1,
+      "message": "Do CPU descriptor heaps suffer from the same slow allocation problem that GPU descriptor heaps do?  If not, can we dispense with pooling them?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7958c7da_2020de76",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T00:22:25Z",
+      "side": 1,
+      "message": "Please add comments describing what these member variables (mSizeIncrement, mBlockSize, mHeapSize) are used for and what the units are.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
