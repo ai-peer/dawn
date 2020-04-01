@@ -38,15 +38,10 @@ namespace dawn_native { namespace d3d12 {
 
         // We set mLastRecordingSerial to denote the serial this heap was last recorded to be used.
         // We must check this serial against the current serial when recording heap usages to ensure
-        // we do not process residency for this heap multiple times.
+        // we do not process residency for this heap multiple times. This serial is also be used to
+        // determine if the resource is still in use on a previously submitted command list.
         Serial GetLastUsage() const;
         void SetLastUsage(Serial serial);
-
-        // The residency manager must know the last serial that any portion of the heap was
-        // submitted to be used so that we can ensure this heap stays resident in memory at least
-        // until that serial has completed.
-        uint64_t GetLastSubmission() const;
-        void SetLastSubmission(Serial serial);
 
         uint64_t GetSize() const;
 
@@ -64,8 +59,6 @@ namespace dawn_native { namespace d3d12 {
         D3D12_HEAP_TYPE mD3d12HeapType;
         // mLastUsage denotes the last time this heap was recorded for use.
         Serial mLastUsage = 0;
-        // mLastSubmission denotes the last time this heap was submitted to the GPU.
-        Serial mLastSubmission = 0;
         uint32_t mResidencyLockRefCount = 0;
         uint64_t mSize = 0;
     };

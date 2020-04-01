@@ -128,19 +128,19 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<Heap*> ResidencyManager::RemoveSingleEntryFromLRU() {
         ASSERT(!mLRUCache.empty());
         Heap* heap = mLRUCache.head()->value();
-        Serial lastSubmissionSerial = heap->GetLastSubmission();
+        Serial lastUsageSerial = heap->GetLastUsage();
 
         // If the next candidate for eviction was inserted into the LRU during the current serial,
         // it is because more memory is being used in a single command list than is available.
         // In this scenario, we cannot make any more resources resident and thrashing must occur.
-        if (lastSubmissionSerial == mDevice->GetPendingCommandSerial()) {
+        if (lastUsageSerial == mDevice->GetPendingCommandSerial()) {
             return nullptr;
         }
 
         // We must ensure that any previous use of a resource has completed before the resource can
         // be evicted.
-        if (lastSubmissionSerial > mDevice->GetCompletedCommandSerial()) {
-            DAWN_TRY(mDevice->WaitForSerial(lastSubmissionSerial));
+        if (lastUsageSerial > mDevice->GetCompletedCommandSerial()) {
+            DAWN_TRY(mDevice->WaitForSerial(lastUsageSerial));
         }
 
         heap->RemoveFromList();
@@ -217,7 +217,6 @@ namespace dawn_native { namespace d3d12 {
         std::vector<ID3D12Pageable*> heapsToMakeResident;
         uint64_t sizeToMakeResident = 0;
 
-        Serial pendingCommandSerial = mDevice->GetPendingCommandSerial();
         for (size_t i = 0; i < heapCount; i++) {
             Heap* heap = heaps[i];
 
@@ -241,7 +240,6 @@ namespace dawn_native { namespace d3d12 {
             }
 
             mLRUCache.Append(heap);
-            heap->SetLastSubmission(pendingCommandSerial);
         }
 
         if (heapsToMakeResident.size() != 0) {

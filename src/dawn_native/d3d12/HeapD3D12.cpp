@@ -54,14 +54,6 @@ namespace dawn_native { namespace d3d12 {
         mLastUsage = serial;
     }
 
-    uint64_t Heap::GetLastSubmission() const {
-        return mLastSubmission;
-    }
-
-    void Heap::SetLastSubmission(Serial serial) {
-        mLastSubmission = serial;
-    }
-
     uint64_t Heap::GetSize() const {
         return mSize;
     }
