@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "3d64768c_865f5869",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T23:28:59Z",
+      "side": 1,
+      "message": "The purpose of my feedback was around the size used, especially when we were storing uin64_t indices for each and every free descriptor in the heap. \n\nI know that Dawn has a BitSetIterator what does not test every single bit, though we would need to adapt it for bit vectors.\n\nBut maybe it\u0027s not so bad now that we\u0027re using 32bit integers. Bryan, how much memory are we talking about here?",
+      "parentUuid": "e8291f47_0616d384",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06fb53d7_bc0b6524",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 6

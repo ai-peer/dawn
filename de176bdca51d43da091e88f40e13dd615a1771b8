@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c87c2e6_a9eda8ff",
+        "filename": "src/dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T23:28:59Z",
+      "side": 1,
+      "message": "Please clarify the units of these parameters. I presume sizeIncrement is in bytes and represents the number of bytes per descriptor.\n\nWhat about offset?  Is it an offset in bytes or is it in units of descriptors?",
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d7716f6_e920305b",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-01T23:28:59Z",
+      "side": 1,
+      "message": "Potential space saving: since size increment varies based the heap type, consider querying the device for this information instead of storing it locally.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
