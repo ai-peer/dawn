@@ -257,8 +257,10 @@ namespace dawn_native { namespace d3d12 {
         Heap* heap = ToBackend(allocation.GetResourceHeap());
 
         // Before calling CreatePlacedResource, we must ensure the target heap is resident.
-        // CreatePlacedResource will fail if it is not.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1));
+        // CreatePlacedResource will fail if it is not. We set keepUntilNextSerial as false because
+        // calling CreatePlacedResource does not depend on the next GPU submission.
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(
+            &heap, 1, /*keepUntilNextSerial*/ false));
 
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed
