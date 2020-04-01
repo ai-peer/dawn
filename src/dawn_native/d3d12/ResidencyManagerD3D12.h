@@ -38,6 +38,8 @@ namespace dawn_native { namespace d3d12 {
 
         void TrackResidentAllocation(Heap* heap);
 
+        uint64_t GetDawnBudgetForTesting() const;
+
       private:
         struct VideoMemoryInfo {
             uint64_t dawnBudget;
@@ -52,6 +54,7 @@ namespace dawn_native { namespace d3d12 {
         Device* mDevice;
         LinkedList<Heap> mLRUCache;
         bool mResidencyManagementEnabled = false;
+        bool mRestrictBudgetForTesting = false;
         VideoMemoryInfo mVideoMemoryInfo = {};
     };
 
