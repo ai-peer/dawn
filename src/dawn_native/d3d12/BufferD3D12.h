@@ -43,6 +43,9 @@ namespace dawn_native { namespace d3d12 {
         void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
                                         wgpu::BufferUsage newUsage);
 
+        bool CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const;
+        bool CheckIsResidentForTesting() const;
+
       private:
         // Dawn API
         MaybeError MapReadAsyncImpl(uint32_t serial) override;
