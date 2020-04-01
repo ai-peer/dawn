@@ -70,6 +70,30 @@
       "revId": "239403eccec092090d8e3814b78f4bd7b728424a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a02f73d6_7beb53dc",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-01T18:13:20Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027ve talked a ton about what can OOM in the group yet. I could see though that it would be possible for other GPUDevice.create* functions to return OOM. Either way, it seems good to keep both versions so we can differentiate errors that are/aren\u0027t allowed to OOM.\n\nBut yes, we probably shouldn\u0027t use CheckOutOfMemoryHRESULT in the GPU descriptor allocation because Dawn should make sure we don\u0027t exceed the system resources (descriptor heap residency management)?",
+      "parentUuid": "ec74dd69_4e1f4d75",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "239403eccec092090d8e3814b78f4bd7b728424a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
