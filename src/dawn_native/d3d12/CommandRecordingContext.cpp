@@ -71,7 +71,8 @@ namespace dawn_native { namespace d3d12 {
                 DAWN_TRY(std::move(error));
             }
             DAWN_TRY(device->GetResidencyManager()->EnsureHeapsAreResident(
-                mHeapsPendingUsage.data(), mHeapsPendingUsage.size()));
+                mHeapsPendingUsage.data(), mHeapsPendingUsage.size(),
+                /*keepUntilNextSerial*/ true));
 
             ID3D12CommandList* d3d12CommandList = GetCommandList();
             device->GetCommandQueue()->ExecuteCommandLists(1, &d3d12CommandList);

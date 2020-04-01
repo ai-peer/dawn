@@ -209,7 +209,9 @@ namespace dawn_native { namespace d3d12 {
     // Given a list of heaps that are pending usage, this function will estimate memory needed,
     // evict resources until enough space is available, then make resident any heaps scheduled for
     // usage.
-    MaybeError ResidencyManager::EnsureHeapsAreResident(Heap** heaps, size_t heapCount) {
+    MaybeError ResidencyManager::EnsureHeapsAreResident(Heap** heaps,
+                                                        size_t heapCount,
+                                                        bool keepUntilNextSerial) {
         if (!mResidencyManagementEnabled) {
             return {};
         }
@@ -240,8 +242,11 @@ namespace dawn_native { namespace d3d12 {
                 sizeToMakeResident += heap->GetSize();
             }
 
+            if (keepUntilNextSerial) {
+                heap->SetLastSubmission(pendingCommandSerial);
+            }
+
             mLRUCache.Append(heap);
-            heap->SetLastSubmission(pendingCommandSerial);
         }
 
         if (heapsToMakeResident.size() != 0) {

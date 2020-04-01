@@ -258,7 +258,8 @@ namespace dawn_native { namespace d3d12 {
 
         // Before calling CreatePlacedResource, we must ensure the target heap is resident.
         // CreatePlacedResource will fail if it is not.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(&heap, 1));
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureHeapsAreResident(
+            &heap, 1, /*keepUntilNextSerial*/ false));
 
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed

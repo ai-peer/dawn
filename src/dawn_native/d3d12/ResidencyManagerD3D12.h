@@ -32,7 +32,7 @@ namespace dawn_native { namespace d3d12 {
         MaybeError LockMappableHeap(Heap* heap);
         void UnlockMappableHeap(Heap* heap);
         MaybeError EnsureCanMakeResident(uint64_t allocationSize);
-        MaybeError EnsureHeapsAreResident(Heap** heaps, size_t heapCount);
+        MaybeError EnsureHeapsAreResident(Heap** heaps, size_t heapCount, bool keepUntilNextSerial);
 
         uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
 
