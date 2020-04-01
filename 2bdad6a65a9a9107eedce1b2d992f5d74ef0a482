@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e8291f47_0616d384",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-01T22:57:38Z",
+      "side": 1,
+      "message": "Yea, 1. we don\u0027t have a dynamically sized bit vector class right now, and 2. it could be much slower to do a bitscan if many of the first bits are zero. It could be worth trying this out when/if we make such a dynamically sized bit vector, but I think the list of indices is fine for now. Memory savings would be nice if the bit vector is just as fast.",
+      "parentUuid": "fcf3e0dd_50c0bc9b",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06fb53d7_bc0b6524",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 6
