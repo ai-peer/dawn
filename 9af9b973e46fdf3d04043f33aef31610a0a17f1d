@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "54c0b305_f582fb9b",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7f4203_d1a3a4ed",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaa901dd_2d18396f",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "dd02a5f3_91650fde",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaa901dd_2d18396f",
+      "range": {
+        "startLine": 163,
+        "startChar": 13,
+        "endLine": 163,
+        "endChar": 28
+      },
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16bc4e62_d7390ed7",
         "filename": "generator/templates/dawn_native/wgpu_structs.h",
         "patchSetId": 2
@@ -56,6 +98,24 @@
       "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea70bf8b_8ac5d013",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Yes it was caught by existing static asserts",
+      "parentUuid": "16bc4e62_d7390ed7",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "08d4a020_80c28df9",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Done. I think this is what you meant",
+      "parentUuid": "59e07eed_f23ada12",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e837267d_a4ade61f",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 2
@@ -87,6 +165,24 @@
       "writtenOn": "2020-04-02T14:26:16Z",
       "side": 1,
       "message": "Maybe add a TODO about not silently discarding unknown sTypes and add an ASSERT? This shouldn\u0027t matter for Chromium but might for people that use a webgpu.h that\u0027s not from the same version that compiled this WireCmd.cpp.",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd71d11f_df41a187",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Hm, I think this will need another case specifically for the Invalid enum so that tests don\u0027t hit the assertion, which is fine. Alternatively, a warning log?",
+      "parentUuid": "e837267d_a4ade61f",
       "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -133,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "01e074cb_e39e8bb0",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ddce51_e896a681",
+      "range": {
+        "startLine": 548,
+        "startChar": 77,
+        "endLine": 548,
+        "endChar": 80
+      },
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32b68ee6_72a6b091",
         "filename": "generator/templates/webgpu_cpp.h",
         "patchSetId": 2
@@ -147,6 +267,24 @@
       "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72259918_0185ebaa",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T17:29:04Z",
+      "side": 1,
+      "message": "Yes it was caught by existing static asserts",
+      "parentUuid": "32b68ee6_72a6b091",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
