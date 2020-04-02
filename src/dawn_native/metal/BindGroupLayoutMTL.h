@@ -23,7 +23,7 @@ namespace dawn_native { namespace metal {
     class BindGroup;
     class Device;
 
-    class BindGroupLayout : public BindGroupLayoutBase {
+    class BindGroupLayout final : public BindGroupLayoutBase {
       public:
         BindGroupLayout(DeviceBase* device, const BindGroupLayoutDescriptor* descriptor);
 

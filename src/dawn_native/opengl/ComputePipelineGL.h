@@ -25,7 +25,7 @@ namespace dawn_native { namespace opengl {
 
     class Device;
 
-    class ComputePipeline : public ComputePipelineBase, public PipelineGL {
+    class ComputePipeline final : public ComputePipelineBase, public PipelineGL {
       public:
         ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
 

@@ -701,7 +701,7 @@ namespace dawn_native { namespace vulkan {
                                                      waitSemaphores))) {
             // Delete the Texture if it was created
             if (result != nullptr) {
-                delete result;
+                result->Release();
             }
 
             // Clear the signal semaphore

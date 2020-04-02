@@ -23,7 +23,7 @@ namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    class Sampler : public SamplerBase {
+    class Sampler final : public SamplerBase {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
 

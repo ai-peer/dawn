@@ -460,8 +460,8 @@ namespace dawn_native {
     }
     BufferBase* DeviceBase::CreateBuffer(const BufferDescriptor* descriptor) {
         BufferBase* result = nullptr;
-
-        if (ConsumedError(CreateBufferInternal(&result, descriptor))) {
+        if (ConsumedError(CreateBufferInternal(descriptor), &result)) {
+            ASSERT(result == nullptr);
             return BufferBase::MakeError(this);
         }
 
@@ -473,11 +473,11 @@ namespace dawn_native {
         uint8_t* data = nullptr;
 
         uint64_t size = descriptor->size;
-        if (ConsumedError(CreateBufferInternal(&buffer, descriptor)) ||
+        if (ConsumedError(CreateBufferInternal(descriptor), &buffer) ||
             ConsumedError(buffer->MapAtCreation(&data))) {
             // Map failed. Replace the buffer with an error buffer.
             if (buffer != nullptr) {
-                delete buffer;
+                buffer->Release();
             }
             buffer = BufferBase::MakeErrorMapped(this, size, &data);
         }
@@ -737,14 +737,13 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError DeviceBase::CreateBufferInternal(BufferBase** result,
-                                                const BufferDescriptor* descriptor) {
+    ResultOrError<BufferBase*> DeviceBase::CreateBufferInternal(
+        const BufferDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
         }
-        DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor));
-        return {};
+        return CreateBufferImpl(descriptor);
     }
 
     MaybeError DeviceBase::CreateComputePipelineInternal(

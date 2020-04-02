@@ -25,7 +25,7 @@ namespace dawn_native { namespace d3d12 {
     class BindGroup;
     class Device;
 
-    class BindGroupLayout : public BindGroupLayoutBase {
+    class BindGroupLayout final : public BindGroupLayoutBase {
       public:
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
 
