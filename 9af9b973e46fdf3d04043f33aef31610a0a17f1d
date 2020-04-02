@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7f4203_d1a3a4ed",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "nit: add dummy until it is implement.",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaa901dd_2d18396f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "nit: might_have_dawn_object then? ^^",
+      "range": {
+        "startLine": 163,
+        "startChar": 13,
+        "endLine": 163,
+        "endChar": 28
+      },
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16bc4e62_d7390ed7",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "Was this caught with the static asserts, if not can we add static asserts to make sure we don\u0027t regress?",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59e07eed_f23ada12",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "nit: Add an assert for chained structs that check members have already been set by the caller.",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e837267d_a4ade61f",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "Maybe add a TODO about not silently discarding unknown sTypes and add an ASSERT? This shouldn\u0027t matter for Chromium but might for people that use a webgpu.h that\u0027s not from the same version that compiled this WireCmd.cpp.",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b4923be_16a8ed85",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ddce51_e896a681",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "outChainNext? previousChainLink?",
+      "range": {
+        "startLine": 548,
+        "startChar": 77,
+        "endLine": 548,
+        "endChar": 80
+      },
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b68ee6_72a6b091",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:26:16Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9af9b973e46fdf3d04043f33aef31610a0a17f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
