@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "3a464455_e594a054",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:39:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f608a6b_d3415e80",
+      "revId": "f3564d6c1bdd8261b26fc8fc5a64243332949e48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a182e6a5_02e450a7",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 5
