@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "42579bde_8c61925a",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "@RC, I think so - added a note to dawn:306.",
+      "parentUuid": "ee9aeaec_b78d836f",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06fb53d7_bc0b6524",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 6

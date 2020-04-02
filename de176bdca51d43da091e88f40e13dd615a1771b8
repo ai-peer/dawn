@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "67bf657f_bca87907",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb44cd0_78eb3882",
+      "range": {
+        "startLine": 146,
+        "startChar": 24,
+        "endLine": 146,
+        "endChar": 49
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c87c2e6_a9eda8ff",
         "filename": "src/dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h",
         "patchSetId": 7
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "638353df_32596232",
+        "filename": "src/dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c87c2e6_a9eda8ff",
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f4d85b2_c57fee15",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 7
@@ -56,6 +98,24 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "844108d9_b70b9b1f",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f4d85b2_c57fee15",
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "cb9597ff_e54571ce",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a591b0f_f8e5cad7",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "970671b9_360bf566",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 7
@@ -96,6 +180,24 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da7367d5_68462654",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "970671b9_360bf566",
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -136,6 +238,24 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3924d13e_d6c70a95",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec208a5_189f4e2f",
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -231,6 +351,30 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d306800_e27d653f",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T18:45:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5523af2_d78e6ed7",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
