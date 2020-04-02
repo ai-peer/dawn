@@ -74,6 +74,9 @@ namespace dawn_native { namespace d3d12 {
             // If these options are changed, the values in DawnSPIRVCrossHLSLFastFuzzer.cpp need to
             // be updated.
             spirv_cross::CompilerGLSL::Options options_glsl;
+            // Force all uninitialized variables to be 0, otherwise they will fail to compile
+            // by FXC.
+            options_glsl.force_zero_initialized_variables = true;
 
             spirv_cross::CompilerHLSL::Options options_hlsl;
             options_hlsl.shader_model = 51;
