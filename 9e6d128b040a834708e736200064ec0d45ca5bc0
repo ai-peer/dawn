@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdb5ed3d_9f8fdf31",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-02T14:41:36Z",
+      "side": 1,
+      "message": "nit: dawn::WarningLog() \u003c\u003c stuff;\n\nEventually I think we\u0027ll change it to report the compilation to the user somehow but not need to address in this patch stack.",
+      "revId": "9e6d128b040a834708e736200064ec0d45ca5bc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
