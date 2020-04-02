@@ -341,11 +341,14 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
 
             const PlatformFunctions* functions = device->GetFunctions();
-            if (FAILED(functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr,
-                                             nullptr, nullptr, entryPoint, compileTarget,
-                                             compileFlags, 0, &compiledShader[stage], &errors))) {
+            MaybeError error = CheckHRESULT(
+                functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
+                                      nullptr, entryPoint, compileTarget, compileFlags, 0,
+                                      &compiledShader[stage], &errors),
+                "D3DCompile");
+            if (error.IsError()) {
                 printf("%s\n", reinterpret_cast<char*>(errors->GetBufferPointer()));
-                ASSERT(false);
+                DAWN_TRY(std::move(error));
             }
 
             if (shader != nullptr) {
