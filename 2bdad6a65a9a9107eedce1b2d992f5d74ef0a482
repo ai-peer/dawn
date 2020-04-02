@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "18146274_48ee9539",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-02T01:22:09Z",
+      "side": 1,
+      "message": "Yup, depends on the heap size and given it\u0027s 1024 (value is TODO), uint16 is sufficient for now (or 2KB/heap). Is that more reasonable RC?",
+      "parentUuid": "3d64768c_865f5869",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2bdad6a65a9a9107eedce1b2d992f5d74ef0a482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06fb53d7_bc0b6524",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 6
