@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "255a325f_ebde0057",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-02T19:25:37Z",
+      "side": 1,
+      "message": "Please add a comment why the samplerAllocation objects are Offset here in this constructor but not in other places of the code.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 98
+      },
+      "revId": "7a653cbcd6014ade550bc882f0c57bd37e74114f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61e0e458_bff7597b",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-02T19:25:37Z",
+      "side": 1,
+      "message": "Please add an assert after the DeallocateBindGroup call that all of the member variables have been cleared of data.",
+      "range": {
+        "startLine": 145,
+        "startChar": 1,
+        "endLine": 147,
+        "endChar": 0
+      },
+      "revId": "7a653cbcd6014ade550bc882f0c57bd37e74114f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f761568b_7693bc8b",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-02T19:25:37Z",
+      "side": 1,
+      "message": "You can use `std::move(newBuffer)` here to avoid an necessary AddRef of the ComPtr.",
+      "range": {
+        "startLine": 96,
+        "startChar": 27,
+        "endLine": 96,
+        "endChar": 36
+      },
+      "revId": "7a653cbcd6014ade550bc882f0c57bd37e74114f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e03575eb_e44ce4bc",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-02T19:25:37Z",
+      "side": 1,
+      "message": "Nit: Please add a comment that the numbers stored in mAvailableHeaps are indices into mPool.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "7a653cbcd6014ade550bc882f0c57bd37e74114f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
