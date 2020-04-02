@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d12a058_7e323c4e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T15:20:37Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need the break if there\u0027s a return",
+      "range": {
+        "startLine": 848,
+        "startChar": 20,
+        "endLine": 848,
+        "endChar": 26
+      },
+      "revId": "1823a2659857460e86caae5d219ff9a06bde9349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93b0c205_1e26dabc",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T15:20:37Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need the break if there\u0027s a return",
+      "range": {
+        "startLine": 656,
+        "startChar": 20,
+        "endLine": 657,
+        "endChar": 26
+      },
+      "revId": "1823a2659857460e86caae5d219ff9a06bde9349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad77c934_64108f0d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T15:20:37Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need the break if there\u0027s a return",
+      "range": {
+        "startLine": 1015,
+        "startChar": 20,
+        "endLine": 1016,
+        "endChar": 26
+      },
+      "revId": "1823a2659857460e86caae5d219ff9a06bde9349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "461f040d_c9d0adf0",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T15:20:37Z",
+      "side": 1,
+      "message": "nit: Don\u0027t need the break if there\u0027s a return",
+      "range": {
+        "startLine": 574,
+        "startChar": 20,
+        "endLine": 576,
+        "endChar": 0
+      },
+      "revId": "1823a2659857460e86caae5d219ff9a06bde9349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
