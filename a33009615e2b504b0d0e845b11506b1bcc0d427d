@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "925fdfce_6efecb23",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2020-04-02T15:40:07Z",
+      "side": 1,
+      "message": "(to make this more obvious, i\u0027d remove the else:\n\n  if (foo)\n    return ...;\n  return ...;\n\nis shorter, overall less indented, and it\u0027s clearer that we won\u0027t execute after the 2nd return.)",
+      "revId": "a33009615e2b504b0d0e845b11506b1bcc0d427d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
