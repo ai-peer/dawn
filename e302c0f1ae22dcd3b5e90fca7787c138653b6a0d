@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "734ea82d_392da335",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-02T19:58:57Z",
+      "side": 1,
+      "message": "Pretty sure these are all exclusive, would be clearer if they are elif-chained. Also since both `is_cmd` and `chain` have to be the first member if present, but this makes it look like they could both be present.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 19
+      },
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb9ccf64_ddde707e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-02T19:58:57Z",
+      "side": 1,
+      "message": "Similar static assert for commandId would be nice (unless I\u0027m missing an existing one)",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96a955cc_65fe876b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-02T19:58:57Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f12d22f0_6704899b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-02T19:58:57Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
