@@ -39,6 +39,30 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8585fa95_37567108",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-02T00:48:04Z",
+      "side": 1,
+      "message": "We need this for every bind group allocation which is really hot. Caching it would be worth the performance. There shouldn\u0027t be a ton of these allocators, and Bryan has a TODO to dedup all the allocators that have the same mSizeIncrement, so that should drop the number of objects a bunch.",
+      "parentUuid": "5d7716f6_e920305b",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
