@@ -48,6 +48,8 @@ config("dawn_internal") {
     "${dawn_root}/src",
   ]
 
+  cflags = ["-Wunreachable-code-break"]
+
   defines = []
   if (dawn_always_assert || dcheck_always_on || is_debug ||
       use_fuzzing_engine) {
