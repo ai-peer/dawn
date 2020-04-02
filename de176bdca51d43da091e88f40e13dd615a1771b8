@@ -87,6 +87,30 @@
       "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5523af2_d78e6ed7",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-02T01:57:20Z",
+      "side": 1,
+      "message": "Good to hear the number of these objects are being minimized. I\u0027m fine leaving size increment here for now.",
+      "parentUuid": "3152d55d_7e7f239e",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "de176bdca51d43da091e88f40e13dd615a1771b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
