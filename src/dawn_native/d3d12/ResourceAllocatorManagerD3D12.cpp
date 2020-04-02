@@ -101,8 +101,8 @@ namespace dawn_native { namespace d3d12 {
                             } else {
                                 return Default_OnlyNonRenderableOrDepthTextures;
                             }
-                            break;
                         }
+
                         default:
                             UNREACHABLE();
                     }
