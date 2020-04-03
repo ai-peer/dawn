@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca59f7b7_3584ddb1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:05:02Z",
+      "side": 1,
+      "message": "Do you forsee having something both before and after DeviceBase::Initialize() in some backend?\n\nOtherwise we could just have\nDeviceBase::Initialize() {\n  InitializeImpl() // virtual\n  // then DeviceBase stuff\n\n  // ^ or DeviceBase stuff first, then Impl\n}",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "510eb666_147cdb8c",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:05:02Z",
+      "side": 1,
+      "message": "All the backends have this Acquire, TRY(Initialize()), Detach pattern now.\nWhat about a static Device::Create with private constructor and Initialize() so that the only possible creation pattern is this one? This would also match the other fallible creation patterns elsewhere in Dawn for Buffer, Texture, etc.",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 35
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
