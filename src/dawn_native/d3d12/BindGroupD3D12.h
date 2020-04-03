@@ -25,7 +25,7 @@ namespace dawn_native { namespace d3d12 {
     class Device;
     class ShaderVisibleDescriptorAllocator;
 
-    class BindGroup : public BindGroupBase, public PlacementAllocated {
+    class BindGroup final : public BindGroupBase, public PlacementAllocated {
       public:
         static ResultOrError<BindGroup*> Create(Device* device,
                                                 const BindGroupDescriptor* descriptor);
@@ -36,7 +36,6 @@ namespace dawn_native { namespace d3d12 {
                   const CPUDescriptorHeapAllocation& viewAllocation,
                   uint32_t samplerSizeIncrement,
                   const CPUDescriptorHeapAllocation& samplerAllocation);
-        ~BindGroup() override;
 
         // Returns true if the BindGroup was successfully populated.
         ResultOrError<bool> Populate(ShaderVisibleDescriptorAllocator* allocator);
@@ -45,6 +44,8 @@ namespace dawn_native { namespace d3d12 {
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;
 
       private:
+        ~BindGroup() override;
+
         Serial mLastUsageSerial = 0;
         Serial mHeapSerial = 0;
 
