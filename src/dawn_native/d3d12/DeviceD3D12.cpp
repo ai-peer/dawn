@@ -16,7 +16,6 @@
 
 #include "common/Assert.h"
 #include "dawn_native/BackendConnection.h"
-#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
@@ -189,10 +188,6 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Device::TickImpl() {
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
-
-        // Uploader should tick before the resource allocator
-        // as it enqueued resources to be released.
-        mDynamicUploader->Deallocate(mCompletedSerial);
 
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
@@ -436,14 +431,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Device::Destroy() {
-        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        ASSERT(GetState() == State::Disconnected);
 
         // Immediately forget about all pending commands
         mPendingCommands.Release();
-
-        // Free services explicitly so that they can free D3D12 resources before destruction of the
-        // device.
-        mDynamicUploader = nullptr;
 
         // GPU is no longer executing commands. Existing objects do not get freed until the device
         // is destroyed. To ensure objects are always released, force the completed serial to be
