@@ -53,6 +53,16 @@ namespace dawn_native {
         std::unordered_set<Object*, typename Object::HashFunc, typename Object::EqualityFunc>;
 
     struct DeviceBase::Caches {
+        ~Caches() {
+            ASSERT(attachmentStates.empty());
+            ASSERT(bindGroupLayouts.empty());
+            ASSERT(computePipelines.empty());
+            ASSERT(pipelineLayouts.empty());
+            ASSERT(renderPipelines.empty());
+            ASSERT(samplers.empty());
+            ASSERT(shaderModules.empty());
+        }
+
         ContentLessObjectCache<AttachmentStateBlueprint> attachmentStates;
         ContentLessObjectCache<BindGroupLayoutBase> bindGroupLayouts;
         ContentLessObjectCache<ComputePipelineBase> computePipelines;
@@ -76,17 +86,7 @@ namespace dawn_native {
     }
 
     DeviceBase::~DeviceBase() {
-        // Devices must explicitly free the uploader
-        ASSERT(mDynamicUploader == nullptr);
         ASSERT(mDeferredCreateBufferMappedAsyncResults.empty());
-
-        ASSERT(mCaches->attachmentStates.empty());
-        ASSERT(mCaches->bindGroupLayouts.empty());
-        ASSERT(mCaches->computePipelines.empty());
-        ASSERT(mCaches->pipelineLayouts.empty());
-        ASSERT(mCaches->renderPipelines.empty());
-        ASSERT(mCaches->samplers.empty());
-        ASSERT(mCaches->shaderModules.empty());
     }
 
     MaybeError DeviceBase::Initialize() {
@@ -98,21 +98,54 @@ namespace dawn_native {
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
 
+        // Starting from now the backend can start doing reentrant calls so the device is marked as
+        // alive.
+        mState = State::Alive;
+
         return {};
     }
 
     void DeviceBase::BaseDestructor() {
-        if (mLossStatus != LossStatus::Alive) {
-            // if device is already lost, we may still have fences and error scopes to clear since
-            // the time the device was lost, clear them now before we destruct the device.
-            mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-            mFenceSignalTracker->Tick(GetCompletedCommandSerial());
-            return;
+        // Disconnect the device, depending on which state we are currently in.
+        switch (mState) {
+            case State::BeingCreated:
+                // The GPU timeline was never started so we don't have to wait.
+                mState = State::BeingDisconnected;
+                break;
+
+            case State::Alive:
+                // Alive is the other state which can have GPU work happening. Wait for all of it to
+                // complete before proceeding with destruction.
+                // Assert that errors are device loss so that we can continue with destruction
+                AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+                mState = State::Disconnected;
+                break;
+
+            case State::BeingDisconnected:
+                // Getting disconnected is a transient state happening in a single API call so there
+                // is always an external reference keeping the Device alive, which means the
+                // destructor cannot run while BeingDisconnected.
+                UNREACHABLE();
+                break;
+
+            case State::Disconnected:
+                break;
         }
-        // Assert that errors are device loss so that we can continue with destruction
-        AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+
+        // The GPU timeline is finished so all services can be freed immediately. They need to be
+        // freed before Destroy() because they might relinquish resources that will be freed in
+        // Destroy().
+        // Still tick the ones that might have pending callbacks.
+        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
+        mErrorScopeTracker = nullptr;
+        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+        mFenceSignalTracker = nullptr;
+        mDynamicUploader = nullptr;
+
+        // Tell the backend that it can free all the objects now that the GPU timeline is empty.
         Destroy();
-        mLossStatus = LossStatus::AlreadyLost;
+
+        mCaches = nullptr;
     }
 
     void DeviceBase::HandleError(InternalErrorType type, const char* message) {
@@ -120,16 +153,24 @@ namespace dawn_native {
         // device destruction. We first wait for all previous commands to be completed so that
         // backend objects can be freed immediately, before handling the loss.
         if (type == InternalErrorType::Internal) {
-            mLossStatus = LossStatus::BeingLost;
-            // Assert that errors are device loss so that we can continue with destruction.
+            // Move away from the Available state so that the application cannot use this device
+            // anymore.
+            // TODO(cwallez@chromium.org): Do we need atomics for this to become visible to other
+            // threads in a multithreaded scenario?
+            mState = State::BeingDisconnected;
+
+            // Assert that errors are device losses so that we can continue with destruction.
             AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
-            HandleLoss(message);
+            mState = State::Disconnected;
+
+            // Now everything is as if the device was lost.
+            type = InternalErrorType::DeviceLost;
         }
 
-        // The device was lost for real, call the loss handler because all the backend objects are
-        // as if no longer in use.
-        if (type == InternalErrorType::DeviceLost) {
-            HandleLoss(message);
+        // The device was lost, call the application callback.
+        if (type == InternalErrorType::DeviceLost && mDeviceLostCallback != nullptr) {
+            mDeviceLostCallback(message, mDeviceLostUserdata);
+            mDeviceLostCallback = nullptr;
         }
 
         // Still forward device loss and internal errors to the error scopes so they all reject.
@@ -200,35 +241,27 @@ namespace dawn_native {
     }
 
     MaybeError DeviceBase::ValidateIsAlive() const {
-        if (DAWN_LIKELY(mLossStatus == LossStatus::Alive)) {
+        if (DAWN_LIKELY(mState == State::Alive)) {
             return {};
         }
         return DAWN_DEVICE_LOST_ERROR("Device is lost");
     }
 
-    void DeviceBase::HandleLoss(const char* message) {
-        if (mLossStatus == LossStatus::AlreadyLost) {
-            return;
-        }
-
-        Destroy();
-        mLossStatus = LossStatus::AlreadyLost;
-
-        if (mDeviceLostCallback) {
-            mDeviceLostCallback(message, mDeviceLostUserdata);
-        }
-    }
-
     void DeviceBase::LoseForTesting() {
-        if (mLossStatus == LossStatus::AlreadyLost) {
+        if (mState != State::Alive) {
             return;
         }
 
         HandleError(InternalErrorType::Internal, "Device lost for testing");
     }
 
+    DeviceBase::State DeviceBase::GetState() const {
+        return mState;
+    }
+
     bool DeviceBase::IsLost() const {
-        return mLossStatus != LossStatus::Alive;
+        ASSERT(mState != State::BeingCreated);
+        return mState != State::Alive;
     }
 
     AdapterBase* DeviceBase::GetAdapter() const {
@@ -644,6 +677,9 @@ namespace dawn_native {
             return;
         }
 
+        // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
+        // tick the dynamic uploader before the backend resource allocators.
+        mDynamicUploader->Deallocate(GetCompletedCommandSerial());
         mErrorScopeTracker->Tick(GetCompletedCommandSerial());
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
     }

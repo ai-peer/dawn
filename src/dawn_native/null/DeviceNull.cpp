@@ -16,7 +16,6 @@
 
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/Commands.h"
-#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/Surface.h"
@@ -86,9 +85,6 @@ namespace dawn_native { namespace null {
 
     Device::~Device() {
         BaseDestructor();
-        // This assert is in the destructor rather than Device::Destroy() because it needs to make
-        // sure buffers have been destroyed before the device.
-        ASSERT(mMemoryUsage == 0);
     }
 
     MaybeError Device::Initialize() {
@@ -182,11 +178,12 @@ namespace dawn_native { namespace null {
     }
 
     void Device::Destroy() {
-        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        ASSERT(GetState() == State::Disconnected);
 
-        mDynamicUploader = nullptr;
-
+        // Clear pending operations before checking mMemoryUsage because some operations keep a
+        // reference to Buffers.
         mPendingOperations.clear();
+        ASSERT(mMemoryUsage == 0);
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
