@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c8bb9b87_5c685b6f",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T16:36:11Z",
+      "side": 1,
+      "message": "Done. Also added a static assert that at most one of them is true",
+      "parentUuid": "734ea82d_392da335",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 19
+      },
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb9ccf64_ddde707e",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "551a7a3a_0e3648b4",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T16:36:11Z",
+      "side": 1,
+      "message": "Didn\u0027t add because the commandId doesn\u0027t actually have to be first",
+      "parentUuid": "fb9ccf64_ddde707e",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "5c49d456_bf1175b1",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T16:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96a955cc_65fe876b",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f12d22f0_6704899b",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -73,6 +133,24 @@
       "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32aa3fc4_9b5885d7",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T16:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f12d22f0_6704899b",
+      "revId": "e302c0f1ae22dcd3b5e90fca7787c138653b6a0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
