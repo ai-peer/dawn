@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14cae7f8_d88bcc0e",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:44:37Z",
+      "side": 1,
+      "message": "type: this should be indices, there are other occurences of this typo in this CL, can you fix them?",
+      "range": {
+        "startLine": 62,
+        "startChar": 26,
+        "endLine": 62,
+        "endChar": 34
+      },
+      "revId": "0c23bc3dc99b44dc048fd7e6e01f3d334405bf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19660859_215bc9d2",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:44:37Z",
+      "side": 1,
+      "message": "nit: You used indices in other places.",
+      "range": {
+        "startLine": 64,
+        "startChar": 51,
+        "endLine": 64,
+        "endChar": 58
+      },
+      "revId": "0c23bc3dc99b44dc048fd7e6e01f3d334405bf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
