@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5fcf8b4c_d625b4b0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:28:49Z",
+      "side": 1,
+      "message": "Also, if there\u0027s backend-specific stuff both before and after Base::Initialize() (you mentioned re-entrancy somewhere), we could perhaps still do the following:\n\nprivate virtual void DeviceBase::InitializeImpl() \u003d 0;\n\nprotected void DeviceBase::BaseInitialize() {\n  // ASSERT called just once.\n  // stuff.\n}\n\npublic void DeviceBase::Initialize {\n  InitializeImpl();\n  // ASSERT Impl did call BaseInitialize()\n}",
+      "parentUuid": "ca59f7b7_3584ddb1",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "510eb666_147cdb8c",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 2
