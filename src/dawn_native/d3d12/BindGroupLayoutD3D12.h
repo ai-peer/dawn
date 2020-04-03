@@ -27,7 +27,7 @@ namespace dawn_native { namespace d3d12 {
     class NonShaderVisibleDescriptorAllocator;
     class CPUDescriptorHeapAllocation;
 
-    class BindGroupLayout : public BindGroupLayoutBase {
+    class BindGroupLayout final : public BindGroupLayoutBase {
       public:
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
 
@@ -54,6 +54,7 @@ namespace dawn_native { namespace d3d12 {
         const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
 
       private:
+        ~BindGroupLayout() override = default;
         std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
         std::array<uint32_t, DescriptorType::Count> mDescriptorCounts;
         D3D12_DESCRIPTOR_RANGE mRanges[DescriptorType::Count];
