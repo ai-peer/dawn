@@ -152,7 +152,7 @@ class ViewportTest : public DawnTest {
         }
 
         wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
-        wgpu::Queue queue = device.CreateQueue();
+        wgpu::Queue queue = device.GetDefaultQueue();
         queue.Submit(1, &commandBuffer);
 
         const RGBA8 kColor[ColorTypeCount] = {
