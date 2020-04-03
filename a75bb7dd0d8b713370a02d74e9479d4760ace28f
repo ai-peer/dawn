@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a118625_12014f09",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:22:18Z",
+      "side": 1,
+      "message": "Either \nboth: force enabling of ; force disabling of \n  or: force enable ; force disable\n\nslightly prefer the latter",
+      "range": {
+        "startLine": 40,
+        "startChar": 24,
+        "endLine": 40,
+        "endChar": 94
+      },
+      "revId": "a75bb7dd0d8b713370a02d74e9479d4760ace28f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba829b0e_da65b686",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:22:18Z",
+      "side": 1,
+      "message": "Not just WebGPU objects. There\u0027s AttachmentState, and maybe other objects in the future, like descriptor allocators?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 102
+      },
+      "revId": "a75bb7dd0d8b713370a02d74e9479d4760ace28f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42568ff6_60b9d91e",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T17:22:18Z",
+      "side": 1,
+      "message": "cheaper (modulo hashing)",
+      "range": {
+        "startLine": 61,
+        "startChar": 64,
+        "endLine": 61,
+        "endChar": 68
+      },
+      "revId": "a75bb7dd0d8b713370a02d74e9479d4760ace28f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
