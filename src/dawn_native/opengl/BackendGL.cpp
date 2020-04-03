@@ -182,7 +182,9 @@ namespace dawn_native { namespace opengl {
         ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override {
             // There is no limit on the number of devices created from this adapter because they can
             // all share the same backing OpenGL context.
-            return {new Device(this, descriptor, mFunctions)};
+            Ref<Device> device = AcquireRef(new Device(this, descriptor));
+            DAWN_TRY(device->Initialize());
+            return device.Detach();
         }
 
         void InitializeSupportedExtensions() {

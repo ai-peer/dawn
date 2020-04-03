@@ -39,6 +39,8 @@ namespace dawn_native { namespace opengl {
                const OpenGLFunctions& functions);
         ~Device();
 
+        MaybeError Initialize();
+
         // Contains all the OpenGL entry points, glDoFoo is called via device->gl.DoFoo.
         const OpenGLFunctions gl;
 

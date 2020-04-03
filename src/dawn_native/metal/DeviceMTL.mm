@@ -46,13 +46,17 @@ namespace dawn_native { namespace metal {
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
-        mCommandQueue = [mMtlDevice newCommandQueue];
-
-        InitTogglesFromDriver();
     }
 
     Device::~Device() {
         BaseDestructor();
+    }
+
+    MaybeError Device::Initialize() {
+        InitTogglesFromDriver();
+        mCommandQueue = [mMtlDevice newCommandQueue];
+
+        return DeviceBase::Initialize();
     }
 
     void Device::InitTogglesFromDriver() {

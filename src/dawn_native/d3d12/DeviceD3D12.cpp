@@ -110,7 +110,7 @@ namespace dawn_native { namespace d3d12 {
         GetD3D12Device()->CreateCommandSignature(&programDesc, NULL,
                                                  IID_PPV_ARGS(&mDrawIndexedIndirectSignature));
 
-        return {};
+        return DeviceBase::Initialize();
     }
 
     Device::~Device() {
