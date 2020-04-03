@@ -1,0 +1,305 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86a46ea_aae63d37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: the first line is a bit long, people say 60-70 should be the maximum.",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd9b1d97_cdaa4faa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "SGTM",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d30832b_b3a9999d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "I have concerns about this because ResultOrError is optimized for naked pointers (by using low bits for a success vs. error tag) but optimizing it for Ref\u003cObject\u003e will be more difficult.",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e14cf5e_33039abe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "Can you elaborate? I\u0027m not sure what this means.",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bedba7ff_d14829e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "Is there a bug this is associated with?",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c86bf72b_2d4ae497",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: override",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca17f95e_b4797dcb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "LGTM, this is more explicit now that we have a ConsumeError that can extract the result from ResultOrError.",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38101959_a14ef6a6",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: override",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "126ac2a1_0eba3994",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "I think this is actually an override from RefCounted so it should be ~ObjectBase override \u003d default;",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b7d1338_ce837e46",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "Why is this not overriding the base class destructor? ditto for other \u003d defaults.",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6a2b3b_c00e9add",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: \u003ddefault destructor? Same in other Queue derived classes",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23b3f937_299f9542",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: remove this condition that should never be false.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "473349fc_26b1bece",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: no default destructor?",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d432a485_b3d194d9",
+        "filename": "src/dawn_native/metal/SamplerMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: override",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd7854f_f4519ba3",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: this is missing a destructor",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5055761f_1a6e96e1",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "nit: override",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414249f4_68b8d4fe",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-03T07:38:08Z",
+      "side": 1,
+      "message": "ditto, that condition should never happen",
+      "range": {
+        "startLine": 54,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
