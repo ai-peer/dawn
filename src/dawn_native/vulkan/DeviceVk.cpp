@@ -89,7 +89,7 @@ namespace dawn_native { namespace vulkan {
         // the decision if it is not applicable.
         ApplyDepth24PlusS8Toggle();
 
-        return DeviceBase::Initialize();
+        return DeviceBase::Initialize(new Queue(this));
     }
 
     Device::~Device() {
@@ -118,9 +118,6 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return PipelineLayout::Create(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return Queue::Create(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
