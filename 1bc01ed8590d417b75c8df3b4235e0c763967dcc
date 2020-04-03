@@ -423,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "0dfd64f6_28fd55c2",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-03T22:12:48Z",
+      "side": 1,
+      "message": "@Austin, yes, we can remove the \u003ddefault destructors in the most derived class if we so the special thing for blueprints. That would be my preference but I do not feel strongly.",
+      "parentUuid": "f6964be5_7aa20369",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23b3f937_299f9542",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
