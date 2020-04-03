@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "2b3c6d62_b8077f97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T21:38:29Z",
+      "side": 1,
+      "message": "This would be very nice to have",
+      "parentUuid": "970f3262_25ff4368",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bedba7ff_d14829e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -381,6 +399,24 @@
       "side": 1,
       "message": "Since QueueBase does not have a public destructor, adding a private destructor for these and similar classes is not strictly necessary. Only the blueprint ones need to override the public constructor with a private one. \n\nI can add a private destructor if you want the code to be more explicit.",
       "parentUuid": "dc6a2b3b_c00e9add",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6964be5_7aa20369",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T21:38:29Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly about this.\n\nIf you do your suggestion in your commit message to make base destructors of cached objects protected with a special thing for blueprints, then all of the other private, trivial, destructor overrides that are only there to prevent using them, could be removed which would be more consistent.",
+      "parentUuid": "41b7869d_2ffd83e2",
       "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

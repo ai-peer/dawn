@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c94fb328_13b4c322",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T21:38:29Z",
+      "side": 1,
+      "message": "protected protected?",
+      "range": {
+        "startLine": 7,
+        "startChar": 37,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "e55727af9f4703feb4a360bd078cb43d6649a918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
