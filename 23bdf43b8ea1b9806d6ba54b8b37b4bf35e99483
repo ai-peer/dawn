@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14cd89ff_ddf78dcc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-03T16:46:05Z",
+      "side": 1,
+      "message": "We ForceSet these because the backend will break if we don\u0027t; \n\nI think some of the toggles in DeviceMTL should do the same\nIf baseVertex/baseInstance/samplerCompare are unsupported, we need to force disable them",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
