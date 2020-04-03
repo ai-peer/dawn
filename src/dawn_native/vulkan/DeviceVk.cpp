@@ -83,7 +83,7 @@ namespace dawn_native { namespace vulkan {
         // the decision if it is not applicable.
         ApplyDepth24PlusS8Toggle();
 
-        return {};
+        return DeviceBase::Initialize();
     }
 
     Device::~Device() {

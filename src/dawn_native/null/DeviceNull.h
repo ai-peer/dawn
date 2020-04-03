@@ -86,6 +86,8 @@ namespace dawn_native { namespace null {
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
         ~Device();
 
+        MaybeError Initialize();
+
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
 
