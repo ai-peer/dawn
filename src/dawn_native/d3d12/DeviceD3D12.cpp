@@ -113,7 +113,7 @@ namespace dawn_native { namespace d3d12 {
         GetD3D12Device()->CreateCommandSignature(&programDesc, NULL,
                                                  IID_PPV_ARGS(&mDrawIndexedIndirectSignature));
 
-        return DeviceBase::Initialize();
+        return DeviceBase::Initialize(new Queue(this));
     }
 
     Device::~Device() {
@@ -251,9 +251,6 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return PipelineLayout::Create(this, descriptor);
-    }
-    ResultOrError<QueueBase*> Device::CreateQueueImpl() {
-        return new Queue(this);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

@@ -90,7 +90,8 @@ namespace dawn_native {
         ASSERT(mDeferredCreateBufferMappedAsyncResults.empty());
     }
 
-    MaybeError DeviceBase::Initialize() {
+    MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
+        mDefaultQueue = AcquireRef(defaultQueue);
         mRootErrorScope = AcquireRef(new ErrorScope());
         mCurrentErrorScope = mRootErrorScope.Get();
 
@@ -584,13 +585,8 @@ namespace dawn_native {
         return result;
     }
     QueueBase* DeviceBase::CreateQueue() {
-        QueueBase* result = nullptr;
-
-        if (ConsumedError(CreateQueueInternal(&result))) {
-            return QueueBase::MakeError(this);
-        }
-
-        return result;
+        // TODO(dawn:22): Remove this once users use GetDefaultQueue
+        return GetDefaultQueue();
     }
     SamplerBase* DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
         SamplerBase* result = nullptr;
@@ -699,6 +695,15 @@ namespace dawn_native {
         }
     }
 
+    QueueBase* DeviceBase::GetDefaultQueue() {
+        // Backends gave the default queue during initialization.
+        ASSERT(mDefaultQueue.Get() != nullptr);
+
+        // Returns a new reference to the queue.
+        mDefaultQueue->Reference();
+        return mDefaultQueue.Get();
+    }
+
     void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
         ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
@@ -793,12 +798,6 @@ namespace dawn_native {
             DAWN_TRY(ValidatePipelineLayoutDescriptor(this, descriptor));
         }
         DAWN_TRY_ASSIGN(*result, GetOrCreatePipelineLayout(descriptor));
-        return {};
-    }
-
-    MaybeError DeviceBase::CreateQueueInternal(QueueBase** result) {
-        DAWN_TRY(ValidateIsAlive());
-        DAWN_TRY_ASSIGN(*result, CreateQueueImpl());
         return {};
     }
 
