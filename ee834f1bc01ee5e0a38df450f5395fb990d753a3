@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15f8f2c8_4007e7db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-04T00:56:29Z",
+      "side": 1,
+      "message": "This was already kinda true, but the naming now moreso conflicts with our destroy() functions on other objects (buffer, texture, and probably eventually GPUDevice in js). Would like to find a new name for it and maybe for BaseDestructor too, like ShutDownImpl+ShutDown or something",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e7cf4b5_86010639",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-04T00:56:29Z",
+      "side": 1,
+      "message": "Comment makes it sound like this should be ::Disconnected; should it be?",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5dd9566_5b397c50",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-04T00:56:29Z",
+      "side": 1,
+      "message": "What would be the impact of that? Freeing resources one tick earlier?",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
