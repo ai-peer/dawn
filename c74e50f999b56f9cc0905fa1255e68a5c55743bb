@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "dbd5d39f_cc5e4a1a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-04T00:06:22Z",
+      "side": 1,
+      "message": "What\u0027s the point of initializing these here instead of the constructor, since they\u0027re infallible?",
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca59f7b7_3584ddb1",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 2
