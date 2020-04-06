@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "48f7d482_ba9bc0d7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-06T18:22:02Z",
+      "side": 1,
+      "message": "In that CL though, couldn\u0027t we just as easily put the default queue creation inside DeviceBase::Initialize ?\n\nI don\u0027t think having Base::Initialize call virtual Derived::InitializeImpl is so much more complex than having Derived::Initialize call DeviceBase::Initialize. And the former avoids needing the backend to call back into the frontend.",
+      "parentUuid": "f566c6a9_fbe42a44",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "510eb666_147cdb8c",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 2
