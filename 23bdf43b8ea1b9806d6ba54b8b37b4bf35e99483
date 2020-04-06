@@ -176,6 +176,30 @@
       "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f412836a_8abae78e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-06T16:06:09Z",
+      "side": 1,
+      "message": "Right, from a testing perspective we wouldn\u0027t be force disabling it, but shouldn\u0027t we still protect against crashing?\n\nWe\u0027d still warn that we ignored that preference, and then you\u0027d hit validation errors if you try to use BaseVertex",
+      "parentUuid": "1c97bfc4_568cb66b",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
