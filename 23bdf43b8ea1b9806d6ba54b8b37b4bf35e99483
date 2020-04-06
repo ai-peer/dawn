@@ -200,6 +200,30 @@
       "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "546a101b_d9ab8aff",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T16:13:26Z",
+      "side": 1,
+      "message": "I don\u0027t think we should protect users from toggles. These are meant to be for advanced use only and only a few we would advertise as ways to gain more perf (like the ones disabling validation).\n\nIf we really want to protect users, we could have some toggles that would be testing-only, and there would be an \"allow_testing_toggles_dont_do_this_except_in_tests\" toggle that we\u0027d use in tests.",
+      "parentUuid": "f412836a_8abae78e",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
