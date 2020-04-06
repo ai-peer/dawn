@@ -152,6 +152,30 @@
       "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c97bfc4_568cb66b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T15:56:49Z",
+      "side": 1,
+      "message": "That\u0027s why \"dusableBaseVertex\" is more like a workaround, where it is safe to override to enable it but not safe to override to disable it.",
+      "parentUuid": "b9b95e44_60efd795",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
