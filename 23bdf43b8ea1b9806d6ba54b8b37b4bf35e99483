@@ -128,6 +128,30 @@
       "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9b95e44_60efd795",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-06T15:50:10Z",
+      "side": 1,
+      "message": "If the user provides a forceDisabledToggle DisableBaseVertex (so base vertex is manually enabled), then the Metal backend needs to force set it to re-disable it (by forcing the toggle to true) otherwise the Metal driver will crash.",
+      "parentUuid": "806eea00_718fc016",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
