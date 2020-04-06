@@ -596,6 +596,27 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutVisibilityNone) {
     device.CreateBindGroupLayout(&descriptor);
 }
 
+// This test verifies that the binding should not exist in bind group if its visibility in
+// BindGroupLayout is none
+TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutVisibilityNoneCompatiblityWithBindGroup) {
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                    {1, wgpu::ShaderStage::None, wgpu::BindingType::UniformBuffer},
+                });
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::Uniform;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    // No binding in bind group for binding 1 is valid
+    utils::MakeBindGroup(device, bgl, {{0, buffer}});
+
+    // To add a binding for binding 1 is invalid
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, buffer}, {1, buffer}}));
+}
+
 // Check that dynamic buffer numbers exceed maximum value in one bind group layout.
 TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     wgpu::BindGroupLayout bgl[2];
@@ -1288,6 +1309,36 @@ TEST_F(BindGroupLayoutCompatibilityTest, ROStorageInBGLWithRWStorageInShader) {
                   wgpu::BindingType::ReadonlyStorageBuffer, true},
                  {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                   wgpu::BindingType::ReadonlyStorageBuffer, true}});
+
+    ASSERT_DEVICE_ERROR(CreateRenderPipeline(&bindGroupLayout));
+
+    ASSERT_DEVICE_ERROR(CreateComputePipeline(&bindGroupLayout));
+}
+
+// Test cases that test bind group layout mismatch with shader. If bind group layout has more
+// bindings than shader, it is valid.
+TEST_F(BindGroupLayoutCompatibilityTest, BGLHasMoreBindingsThanShader) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true},
+                 {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true},
+                 {2, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true}});
+
+    CreateRenderPipeline(&bindGroupLayout);
+
+    CreateComputePipeline(&bindGroupLayout);
+}
+
+// Test cases that test bind group layout mismatch with shader. If bind group layout has less
+// bndings than shader, it is invalid.
+TEST_F(BindGroupLayoutCompatibilityTest, BGLHasLessBindingsThanShader) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true}});
 
     ASSERT_DEVICE_ERROR(CreateRenderPipeline(&bindGroupLayout));
 
