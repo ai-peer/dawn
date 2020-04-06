@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7bd10db3_ffd77dff",
+        "filename": "docs/debug_markers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-06T16:18:09Z",
+      "side": 1,
+      "message": "nit: the .dll still has the lib prefix though",
+      "revId": "6c74a5400523f76b970eadeb25fa4ee0001e4599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
