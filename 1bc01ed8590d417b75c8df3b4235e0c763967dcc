@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "318cbd98_45b89163",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-06T18:05:49Z",
+      "side": 1,
+      "message": "Turns out you can\u0027t have a base class call a private method of a subclass. Since the derived class constructor needs to be public anyways, might as well keep AcquireRef, which already returns a Ref object. \n\nFWIW, the RefCounted/scoped_ref objects in Chromium behalf this way as well.\n\nI\u0027m going to remove this suggestion from the change description.",
+      "parentUuid": "3855fef8_a6499c6d",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bedba7ff_d14829e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
