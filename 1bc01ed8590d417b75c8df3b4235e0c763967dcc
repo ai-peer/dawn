@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "3855fef8_a6499c6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T10:04:17Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "2b3c6d62_b8077f97",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bedba7ff_d14829e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "No, but I can add one.",
       "parentUuid": "bedba7ff_d14829e2",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49a18646_9d3c2581",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T10:04:17Z",
+      "side": 1,
+      "message": "Or Bug: None for untracked refactorings.",
+      "parentUuid": "0af2a4ff_a75d6374",
       "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -441,6 +477,24 @@
     },
     {
       "key": {
+        "uuid": "d570cbce_014bbf95",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T10:04:17Z",
+      "side": 1,
+      "message": "Agreed that this would be slightly better and my preference too. We can keep iterating on this CL, or land it and fix it up as a follow up.",
+      "parentUuid": "0dfd64f6_28fd55c2",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23b3f937_299f9542",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
@@ -520,6 +574,24 @@
       "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7effaf2e_5eac57a0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T10:04:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2a72c38a_3e327b3e",
+      "revId": "1bc01ed8590d417b75c8df3b4235e0c763967dcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
