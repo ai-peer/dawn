@@ -22,7 +22,7 @@ Debug markers on D3D12 are implemented with the [PIX Event Runtime](https://blog
 To enable marker functionality, you must:
 1. Click the download link on https://www.nuget.org/packages/WinPixEventRuntime
 2. Rename the .nupkg file to a .zip extension, then extract its contents.
-3. Copy `bin\WinPixEventRuntime.dll` into the same directory as `libdawn_native.dll`.
+3. Copy `bin\WinPixEventRuntime.dll` into the same directory as `dawn_native.dll`.
 4. Launch your application.
 
 You may now call the debug marker APIs mentioned above and see them from your GPU debugging tool. When using your tool, it is supported to both launch your application with the debugger attached, or attach the debugger while your application is running.
