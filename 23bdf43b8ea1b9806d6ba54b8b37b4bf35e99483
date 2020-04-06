@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fe14b82a_9de825d3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:28:47Z",
+      "side": 1,
+      "message": "SetDefaultToggles uses the \"SetToggle\" API so the overridden toggles take precedence.",
+      "parentUuid": "519b47bf_b185dd6e",
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b7c193d_9a9166f5",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "6c2996ea_987a75a9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:28:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b7c193d_9a9166f5",
+      "range": {
+        "startLine": 902,
+        "startChar": 8,
+        "endLine": 902,
+        "endChar": 47
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14cd89ff_ddf78dcc",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2020-04-03T16:46:05Z",
       "side": 1,
       "message": "We ForceSet these because the backend will break if we don\u0027t; \n\nI think some of the toggles in DeviceMTL should do the same\nIf baseVertex/baseInstance/samplerCompare are unsupported, we need to force disable them",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "806eea00_718fc016",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:28:47Z",
+      "side": 1,
+      "message": "That\u0027s a good note. I think the reason why these need to be special and use ForceSetToggle and not the other is that there is no \"safe\" choice because we can take either one path or the other depending on the driver, and we need to be able to test both but not break if we try to test the unsupported path.\n\nBy comparison things like using a better code path like D3D12 render passes have a safe path which is disabling them, so tests forceDisable D3D12 render passes and assume the regular test provides coverage for the option being enabled. Workarounds are similar in that they have a safe path which is them being enabled, so the tests will test normally and with the workaround forceEnabled.\n\nDisableBaseVertex and DisableBaseInstance is like a workaround, where it is safe to always enable it so I expect tests will do that. I will add a discussion of this to the documentation I have in this patch stack about the toggle facility.",
+      "parentUuid": "14cd89ff_ddf78dcc",
       "range": {
         "startLine": 459,
         "startChar": 8,
