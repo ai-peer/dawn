@@ -22,6 +22,30 @@
       "revId": "bbc9ddbcad47a375d7b48adf774503162cbf3a17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "022974c6_8a76703c",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-06T21:29:02Z",
+      "side": 1,
+      "message": "That\u0027s true. The tests are quite similar. But the situation is that when I look at all tests I added, there are too many small differences here and there among the tests. So it is not easy to write a template with very few parameters for the majority of tests. \n\nAlternatively I can add helpers as you suggested for bindgroup and bindGroupLayout creation only. But the code snippet for BG and BGL is not long at all in each test. So it may not simplify the code.\n\nAnd I revised the comments to be more specific and informative for each test and deleted duplicated comments as you suggested.",
+      "parentUuid": "9cadef61_a977bb50",
+      "range": {
+        "startLine": 174,
+        "startChar": 48,
+        "endLine": 174,
+        "endChar": 56
+      },
+      "revId": "bbc9ddbcad47a375d7b48adf774503162cbf3a17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

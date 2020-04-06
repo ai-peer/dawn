@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c593e5bc_f2452e40",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-06T21:29:02Z",
+      "side": 1,
+      "message": "Hmm, the unused bindings for inappropriate shader stage (for example, bindings are for compute stage, but they are used in a render pass) are different from what you are saying here. But your comments remind me that the unused bindings can happen in another situation: bindings are set and bound in bind group(s), but some of the bindings\u0027 layout are not included in pipeline layout of current pipeline. I added tests for this situation.",
+      "parentUuid": "879fab48_dcd50536",
+      "revId": "644d2a51aeac66da25bad3d13176a7e52437a3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51c2fc0a_f7578b13",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "644d2a51aeac66da25bad3d13176a7e52437a3cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7de1dc59_ff2453b7",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-06T21:29:02Z",
+      "side": 1,
+      "message": "Currently, I trace all bindings in bind groups even: 1)the binding\u0027s shader stages may be  incorrect for current pass, 2) the binding\u0027s layout may not be included in pipeline layout of current pipeline.",
+      "parentUuid": "51c2fc0a_f7578b13",
+      "revId": "644d2a51aeac66da25bad3d13176a7e52437a3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
