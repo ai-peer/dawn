@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d5a37d1f_79cda788",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T14:02:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15f8f2c8_4007e7db",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e7cf4b5_86010639",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5fef88e5_fbf162ca",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T14:02:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e7cf4b5_86010639",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5dd9566_5b397c50",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c046c8c4_d1e87399",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T14:02:02Z",
+      "side": 1,
+      "message": "Yes, updated the comment.",
+      "parentUuid": "b5dd9566_5b397c50",
+      "revId": "ee834f1bc01ee5e0a38df450f5395fb990d753a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
