@@ -224,6 +224,30 @@
       "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17007c21_b97bdae5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-06T16:35:00Z",
+      "side": 1,
+      "message": "Hm okay, I see that we shouldn\u0027t treat workarounds the same as other types of toggles. Maybe in the future we could have a different type that\u0027s more guarded as you suggested. Or have workarounds only enable-able or something like that.",
+      "parentUuid": "546a101b_d9ab8aff",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 464,
+        "endChar": 9
+      },
+      "revId": "23bdf43b8ea1b9806d6ba54b8b37b4bf35e99483",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
