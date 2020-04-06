@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b2784068_38e3a92b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:48:53Z",
+      "side": 1,
+      "message": "For a couple reasons:\n - They might want to make backend calls on creation in the future.\n - To crash hard and in a visible way if backends forget to call Initialize\n - To prevent backends from doing reentrant calls before calling Initialize.",
+      "parentUuid": "dbd5d39f_cc5e4a1a",
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca59f7b7_3584ddb1",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 2
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "f566c6a9_fbe42a44",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:48:53Z",
+      "side": 1,
+      "message": "Both options seemed ok but the one in this CL seemed marginally simpler. It also meshes well with the backend needing to give some information to the frontend in Initialize, like the default queue in https://dawn-review.googlesource.com/c/dawn/+/18802/2",
+      "parentUuid": "5fcf8b4c_d625b4b0",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 40
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "510eb666_147cdb8c",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 2
@@ -86,6 +128,30 @@
       "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a050bf_5bd3e9d0",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-06T13:48:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "510eb666_147cdb8c",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 35
+      },
+      "revId": "c74e50f999b56f9cc0905fa1255e68a5c55743bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
