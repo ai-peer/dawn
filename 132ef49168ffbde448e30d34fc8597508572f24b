@@ -16,6 +16,200 @@
       "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "067b2d7f_61282f78",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "nit: make it a constant so it can be referred to in computations in tests.",
+      "range": {
+        "startLine": 34,
+        "startChar": 67,
+        "endLine": 34,
+        "endChar": 76
+      },
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45fd9901_8ec36097",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "nit: this can be return by value.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 59
+      },
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5f51737_abfcf19f",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "nit: const std::vector...",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0133e2b5_9525abed",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "And this could be a single std::vector since we either pass whole sets, or a single buffer in tests (a single buffer could be passed as {buffer} )",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 58
+      },
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f7bdb1d_c12fd90f",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "We could have a 4-byte buffer created on test startup that we reuse to do the copy. The minimal copy size of 4 bytes would be enough to ensure the whole resource is made resident so we don\u0027t need to recreate data all the time with a different size. (and bufferSize would disappear)",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c3376d_89ac0d72",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "textures?",
+      "range": {
+        "startLine": 104,
+        "startChar": 42,
+        "endLine": 104,
+        "endChar": 50
+      },
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896aa7ed_d8c8f861",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "No need to restate this every time since it is a property of the fixture. Ditto below.",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "360982e4_4134e6a6",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "This is not guaranteed if one of the buffers in bufferSet2 was suballocated in the same heap as a buffer in bufferSet1.",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1d401cc_db20e932",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "762fc57f_ff374ac5",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:42:03Z",
+      "side": 1,
+      "message": "Can we have an ASSERT that this is the case? It\u0027s an implementation detail that is likely to change in the future and we want to keep the test testing the correct behavior.",
+      "revId": "132ef49168ffbde448e30d34fc8597508572f24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
