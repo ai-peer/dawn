@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e3a6d70_4a40c52b",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-07T19:27:48Z",
+      "side": 1,
+      "message": "Looks correct for the validation, but shouldn\u0027t we compute this prior to validation?\n\nOr do we not need to because we don\u0027t use the binding size in any of the backend APIs?",
+      "revId": "33e4a2c7b719acebc2e2981dacfe53bc5e951233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
