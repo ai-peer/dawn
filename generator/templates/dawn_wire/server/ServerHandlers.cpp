@@ -31,6 +31,7 @@ namespace dawn_wire { namespace server {
                     , *this
                 {%- endif -%}
             );
+            cmd.DebugPrint();
 
             if (deserializeResult == DeserializeResult::FatalError) {
                 return false;
