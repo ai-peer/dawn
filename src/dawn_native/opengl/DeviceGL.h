@@ -37,7 +37,7 @@ namespace dawn_native { namespace opengl {
         Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
                const OpenGLFunctions& functions);
-        ~Device();
+        ~Device() override;
 
         // Contains all the OpenGL entry points, glDoFoo is called via device->gl.DoFoo.
         const OpenGLFunctions gl;

@@ -84,7 +84,7 @@ namespace dawn_native { namespace null {
     class Device : public DeviceBase {
       public:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
-        ~Device();
+        ~Device() override;
 
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
@@ -148,7 +148,7 @@ namespace dawn_native { namespace null {
     class Adapter : public AdapterBase {
       public:
         Adapter(InstanceBase* instance);
-        virtual ~Adapter();
+        virtual ~Adapter() override;
 
         // Used for the tests that intend to use an adapter without all extensions enabled.
         void SetSupportedExtensions(const std::vector<const char*>& requiredExtensions);
