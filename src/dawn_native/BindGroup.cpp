@@ -199,7 +199,7 @@ namespace dawn_native {
                                  void* bindingDataStart)
         : ObjectBase(device),
           mLayout(descriptor->layout),
-          mBindingData(mLayout->ComputeBindingDataPointers(bindingDataStart)) {
+          mBindingData(descriptor->layout->ComputeBindingDataPointers(bindingDataStart)) {
         for (BindingIndex i = 0; i < mLayout->GetBindingCount(); ++i) {
             // TODO(enga): Shouldn't be needed when bindings are tightly packed.
             // This is to fill Ref<ObjectBase> holes with nullptrs.
