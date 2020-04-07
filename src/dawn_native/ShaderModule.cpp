@@ -119,6 +119,12 @@ namespace dawn_native {
                     return wgpu::BindingType::WriteonlyStorageTexture;
                 case shaderc_spvc_binding_type_storage_texture:
                     return wgpu::BindingType::StorageTexture;
+                default:
+                    // This default needs to be here temporarily, to avoid
+                    // build/dependency issues when spvc adds a new entry to the
+                    // enum. Once the new entry is available I will land a
+                    // second patch to remove this default.
+                    return wgpu::BindingType::Sampler;
             }
             UNREACHABLE();
         }
