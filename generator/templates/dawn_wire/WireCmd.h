@@ -117,6 +117,8 @@ namespace dawn_wire {
             {%- endif -%}
         );
 
+        void DebugPrint();
+
         {% if command.derived_method %}
             //* Command handlers want to know the object ID in addition to the backing object.
             //* Doesn't need to be filled before Serialize, or GetRequiredSize.

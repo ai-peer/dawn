@@ -96,6 +96,44 @@ namespace {
 
 }  // anonymous namespace
 
+namespace dawn_wire {
+    std::ostream& operator<<(std::ostream& s, ObjectType objectType) {
+        switch (objectType) {
+            {% for type in by_category["object"] %}
+                case ObjectType::{{type.name.CamelCase()}}:
+                    s << "{{type.name.CamelCase()}}";
+                    break;
+            {% endfor %}
+            default:
+                s << static_cast<uint32_t>(objectType) << " (ObjectType)";
+                break;
+        }
+        return s;
+    }
+
+    std::ostream& operator<<(std::ostream& s, ObjectHandle objectHandle) {
+        s << "ObjectHandle(id: " << objectHandle.id << ", serial: " << objectHandle.generation << ")";
+        return s;
+    }
+
+    {% for type in by_category["enum"] %}
+        {% set name = as_cType(type.name) %}
+        std::ostream& operator<<(std::ostream& s, {{name}} value) {
+            switch (value) {
+                {% for v in type.values %}
+                    case {{as_cEnum(type.name, v.name)}}:
+                        s << "{{as_cEnum(type.name, v.name)}}";
+                        break;
+                {% endfor %}
+                default:
+                    s << static_cast<uint32_t>(value) << " ({{type.name.CamelCase()}})";
+                    break;
+            }
+            return s;
+        }
+    {% endfor %}
+}
+
 //* The main [de]serialization macro
 //* Methods are very similar to structures that have one member corresponding to each arguments.
 //* This macro takes advantage of the similarity to output [de]serialization code for a record
@@ -399,6 +437,32 @@ namespace {
         return WireResult::Success;
     }
     DAWN_UNUSED_FUNC({{Return}}{{name}}Deserialize);
+
+    DAWN_DECLARE_UNUSED dawn::LogMessage {{Return}}{{name}}DebugPrint(dawn::LogMessage&& out, {{Return}}{{name}}{{Cmd}}* record, uint32_t indentLevel) {
+        std::string indent(indentLevel * 2, ' ');
+        out << "{{Return}}{{name}} {\n";
+        {% if record.derived_method %}
+            out << indent << "  selfId: " << record->selfId << "\n";
+        {% endif %}
+        {% for member in members %}
+            {% set memberName = as_varName(member.name) %}
+            {% if member.annotation == "value" %}
+                {% if member.type.category == "object" %}
+                    out << indent << "  {{memberName}}: " << ObjectType::{{member.type.name.CamelCase()}} << " " << record->{{memberName}} << "\n";
+                {% elif member.type.category == "structure" %}
+                    out << indent << "  {{memberName}}: ";
+                    out = {{as_cType(member.type.name)}}DebugPrint(std::move(out), &record->{{memberName}}, indentLevel + 1);
+                {% else %}
+                    out << indent << "  {{memberName}}: " << record->{{memberName}} << "\n";
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        out << indent << "}\n";
+        return std::move(out);
+    }
+
+    DAWN_UNUSED_FUNC({{Return}}{{name}}DebugPrint);
+
 {% endmacro %}
 
 {% macro write_command_serialization_methods(command, is_return) %}
@@ -441,6 +505,12 @@ namespace {
                 , resolver
             {%- endif -%}
         );
+    }
+
+    void {{Cmd}}::DebugPrint() {
+        dawn::LogMessage log = dawn::DebugLog();
+        log << "\n";
+        {{Name}}DebugPrint(std::move(log), this, 0);
     }
 {% endmacro %}
 
