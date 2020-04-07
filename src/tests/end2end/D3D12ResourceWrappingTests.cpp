@@ -69,27 +69,27 @@ namespace {
                                    wgpu::TextureUsage::OutputAttachment |
                                    wgpu::TextureUsage::CopyDst;
 
-            d3dDescriptor.Width = kTestWidth;
-            d3dDescriptor.Height = kTestHeight;
-            d3dDescriptor.MipLevels = 1;
-            d3dDescriptor.ArraySize = 1;
-            d3dDescriptor.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-            d3dDescriptor.SampleDesc.Count = 1;
-            d3dDescriptor.SampleDesc.Quality = 0;
-            d3dDescriptor.Usage = D3D11_USAGE_DEFAULT;
-            d3dDescriptor.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
-            d3dDescriptor.CPUAccessFlags = 0;
-            d3dDescriptor.MiscFlags =
+            baseD3dDescriptor.Width = kTestWidth;
+            baseD3dDescriptor.Height = kTestHeight;
+            baseD3dDescriptor.MipLevels = 1;
+            baseD3dDescriptor.ArraySize = 1;
+            baseD3dDescriptor.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+            baseD3dDescriptor.SampleDesc.Count = 1;
+            baseD3dDescriptor.SampleDesc.Quality = 0;
+            baseD3dDescriptor.Usage = D3D11_USAGE_DEFAULT;
+            baseD3dDescriptor.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
+            baseD3dDescriptor.CPUAccessFlags = 0;
+            baseD3dDescriptor.MiscFlags =
                 D3D11_RESOURCE_MISC_SHARED_NTHANDLE | D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
         }
 
       protected:
-        void WrapSharedHandle(const wgpu::TextureDescriptor* dawnDescriptor,
-                              const D3D11_TEXTURE2D_DESC* d3dDescriptor,
+        void WrapSharedHandle(const wgpu::TextureDescriptor* dawnDesc,
+                              const D3D11_TEXTURE2D_DESC* baseD3dDescriptor,
                               wgpu::Texture* dawnTexture,
                               ID3D11Texture2D** d3d11TextureOut) const {
             ComPtr<ID3D11Texture2D> d3d11Texture;
-            HRESULT hr = mD3d11Device->CreateTexture2D(d3dDescriptor, nullptr, &d3d11Texture);
+            HRESULT hr = mD3d11Device->CreateTexture2D(baseD3dDescriptor, nullptr, &d3d11Texture);
             ASSERT_EQ(hr, S_OK);
 
             ComPtr<IDXGIResource1> dxgiResource;
@@ -104,7 +104,7 @@ namespace {
 
             dawn_native::d3d12::ExternalImageDescriptorDXGISharedHandle externDesc;
             externDesc.cTextureDescriptor =
-                reinterpret_cast<const WGPUTextureDescriptor*>(dawnDescriptor);
+                reinterpret_cast<const WGPUTextureDescriptor*>(dawnDesc);
             externDesc.sharedHandle = sharedHandle;
             externDesc.acquireMutexKey = 0;
             WGPUTexture texture = dawn_native::d3d12::WrapSharedHandle(device.Get(), &externDesc);
@@ -123,7 +123,7 @@ namespace {
         ComPtr<ID3D11Device> mD3d11Device;
         ComPtr<ID3D11DeviceContext> mD3d11DeviceContext;
 
-        D3D11_TEXTURE2D_DESC d3dDescriptor;
+        D3D11_TEXTURE2D_DESC baseD3dDescriptor;
         wgpu::TextureDescriptor dawnDescriptor;
     };
 
@@ -140,7 +140,7 @@ TEST_P(D3D12SharedHandleValidation, Success) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture);
+    WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture);
 
     ASSERT_NE(texture.Get(), nullptr);
 }
@@ -154,7 +154,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidTextureDescriptor) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -166,7 +167,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidMipLevelCount) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -178,7 +180,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidArrayLayerCount) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -190,7 +193,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidSampleCount) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -202,7 +206,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidWidth) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -214,7 +219,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidHeight) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -226,7 +232,8 @@ TEST_P(D3D12SharedHandleValidation, InvalidFormat) {
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -234,11 +241,12 @@ TEST_P(D3D12SharedHandleValidation, InvalidFormat) {
 // Test an error occurs if the number of D3D mip levels is greater than 1.
 TEST_P(D3D12SharedHandleValidation, InvalidNumD3DMipLevels) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    d3dDescriptor.MipLevels = 2;
+    baseD3dDescriptor.MipLevels = 2;
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -246,11 +254,12 @@ TEST_P(D3D12SharedHandleValidation, InvalidNumD3DMipLevels) {
 // Test an error occurs if the number of array levels is greater than 1.
 TEST_P(D3D12SharedHandleValidation, InvalidD3DArraySize) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    d3dDescriptor.ArraySize = 2;
+    baseD3dDescriptor.ArraySize = 2;
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    ASSERT_DEVICE_ERROR(WrapSharedHandle(&dawnDescriptor, &d3dDescriptor, &texture, &d3d11Texture));
+    ASSERT_DEVICE_ERROR(
+        WrapSharedHandle(&dawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture));
 
     ASSERT_EQ(texture.Get(), nullptr);
 }
@@ -416,7 +425,7 @@ TEST_P(D3D12SharedHandleUsageTests, ClearInD3D11CopyAndReadbackInD3D12) {
     wgpu::Texture dawnSrcTexture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    WrapAndClearD3D11Texture(&dawnDescriptor, &d3dDescriptor, &dawnSrcTexture, clearColor,
+    WrapAndClearD3D11Texture(&dawnDescriptor, &baseD3dDescriptor, &dawnSrcTexture, clearColor,
                              &d3d11Texture, &dxgiKeyedMutex);
 
     // Create a texture on the device and copy the source texture to it.
@@ -439,7 +448,7 @@ TEST_P(D3D12SharedHandleUsageTests, ClearInD3D11ReadbackInD3D12) {
     wgpu::Texture dawnTexture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    WrapAndClearD3D11Texture(&dawnDescriptor, &d3dDescriptor, &dawnTexture, clearColor,
+    WrapAndClearD3D11Texture(&dawnDescriptor, &baseD3dDescriptor, &dawnTexture, clearColor,
                              &d3d11Texture, &dxgiKeyedMutex);
 
     // Readback the destination texture and ensure it contains the colors we used
@@ -459,7 +468,7 @@ TEST_P(D3D12SharedHandleUsageTests, ClearInD3D12ReadbackInD3D11) {
     wgpu::Texture dawnTexture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    WrapAndClearD3D11Texture(&dawnDescriptor, &d3dDescriptor, &dawnTexture, d3d11ClearColor,
+    WrapAndClearD3D11Texture(&dawnDescriptor, &baseD3dDescriptor, &dawnTexture, d3d11ClearColor,
                              &d3d11Texture, &dxgiKeyedMutex);
 
     const wgpu::Color d3d12ClearColor{0.0f, 0.0f, 1.0f, 1.0f};
@@ -484,7 +493,7 @@ TEST_P(D3D12SharedHandleUsageTests, ClearTwiceInD3D12ReadbackInD3D11) {
     wgpu::Texture dawnTexture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    WrapAndClearD3D11Texture(&dawnDescriptor, &d3dDescriptor, &dawnTexture, d3d11ClearColor,
+    WrapAndClearD3D11Texture(&dawnDescriptor, &baseD3dDescriptor, &dawnTexture, d3d11ClearColor,
                              &d3d11Texture, &dxgiKeyedMutex);
 
     const wgpu::Color d3d12ClearColor1{0.0f, 0.0f, 1.0f, 1.0f};
@@ -511,7 +520,7 @@ TEST_P(D3D12SharedHandleUsageTests, UnclearedTextureIsCleared) {
     wgpu::Texture dawnTexture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    WrapAndClearD3D11Texture(&dawnDescriptor, &d3dDescriptor, &dawnTexture, clearColor,
+    WrapAndClearD3D11Texture(&dawnDescriptor, &baseD3dDescriptor, &dawnTexture, clearColor,
                              &d3d11Texture, &dxgiKeyedMutex, false);
 
     // Readback the destination texture and ensure it contains the colors we used
