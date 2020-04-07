@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f0e27e2_e2a28d51",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T07:50:38Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to see what\u0027s going on in this test. How about splitting it in 4 tests:\n\nConflictBetweenStagesInBindGroup\nConflictInOtherStageInBindGroup\nConflictWithUnusedPipelineBinding // Note that this one is a bit redundant because the first two tests don\u0027t use a pipeline at all!\nBufferUsedAsMultipleReadOnlyUsage",
+      "revId": "fa801afa0e1c61e9216b0ec7518d28ee5717c4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b640bde7_f1181945",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T07:50:38Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s what the test does: buffer1 is unused but more importantly it\u0027s not used as two usages at the same time.",
+      "revId": "fa801afa0e1c61e9216b0ec7518d28ee5717c4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
