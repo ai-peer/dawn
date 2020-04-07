@@ -15,7 +15,7 @@
 #ifndef DAWNNATIVE_D3D12_DEVICED3D12_H_
 #define DAWNNATIVE_D3D12_DEVICED3D12_H_
 
-#include "dawn_native/dawn_platform.h"
+#include <memory>
 
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
@@ -23,8 +23,7 @@
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
-
-#include <memory>
+#include "dawn_native/dawn_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -32,6 +31,7 @@ namespace dawn_native { namespace d3d12 {
     class DescriptorHeapAllocator;
     class ShaderVisibleDescriptorAllocator;
     class MapRequestTracker;
+    class NonShaderVisibleDescriptorAllocatorManager;
     class PlatformFunctions;
     class ResourceAllocatorManager;
     class ResidencyManager;
@@ -100,6 +100,8 @@ namespace dawn_native { namespace d3d12 {
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
         ShaderVisibleDescriptorAllocator* GetShaderVisibleDescriptorAllocator() const;
+        NonShaderVisibleDescriptorAllocatorManager* GetNonShaderVisibleDescriptorAllocatorManager()
+            const;
 
         TextureBase* WrapSharedHandle(const ExternalImageDescriptor* descriptor,
                                       HANDLE sharedHandle,
@@ -170,6 +172,8 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ResidencyManager> mResidencyManager;
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mShaderVisibleDescriptorAllocator;
+        std::unique_ptr<NonShaderVisibleDescriptorAllocatorManager>
+            mNonShaderVisibleDescriptorAllocatorManager;
     };
 
 }}  // namespace dawn_native::d3d12

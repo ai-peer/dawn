@@ -28,6 +28,7 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
+#include "dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/QueueD3D12.h"
@@ -83,6 +84,9 @@ namespace dawn_native { namespace d3d12 {
         mShaderVisibleDescriptorAllocator =
             std::make_unique<ShaderVisibleDescriptorAllocator>(this);
         DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
+
+        mNonShaderVisibleDescriptorAllocatorManager =
+            std::make_unique<NonShaderVisibleDescriptorAllocatorManager>(this);
 
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResidencyManager = std::make_unique<ResidencyManager>(this);
@@ -466,5 +470,10 @@ namespace dawn_native { namespace d3d12 {
 
     ShaderVisibleDescriptorAllocator* Device::GetShaderVisibleDescriptorAllocator() const {
         return mShaderVisibleDescriptorAllocator.get();
+    }
+
+    NonShaderVisibleDescriptorAllocatorManager*
+    Device::GetNonShaderVisibleDescriptorAllocatorManager() const {
+        return mNonShaderVisibleDescriptorAllocatorManager.get();
     }
 }}  // namespace dawn_native::d3d12
