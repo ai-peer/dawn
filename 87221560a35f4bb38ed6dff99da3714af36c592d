@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ecf16e06_c352feb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-07T21:32:41Z",
+      "side": 1,
+      "message": "Bug: dawn:367",
+      "revId": "87221560a35f4bb38ed6dff99da3714af36c592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fde011d6_83db044c",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2020-04-07T21:29:03Z",
       "side": 1,
       "message": "nit: can it be marked unreachable?\n\nBut if you\u0027re only going to have this in briefly, then doesn\u0027t really matter.",
+      "revId": "87221560a35f4bb38ed6dff99da3714af36c592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cce31234_6054dac7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-07T21:32:41Z",
+      "side": 1,
+      "message": "Yea I think we could just have default: UNREACHABLE() instead of the UNREACHABLE() outside the switch statement. This should be okay today because we don\u0027t have any tests that use comparison samplers -- which means no build breakage. I don\u0027t care so much though since it\u0027s temporary.",
+      "parentUuid": "fde011d6_83db044c",
       "revId": "87221560a35f4bb38ed6dff99da3714af36c592d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
