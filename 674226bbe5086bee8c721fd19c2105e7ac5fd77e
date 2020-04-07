@@ -46,6 +46,30 @@
       "revId": "674226bbe5086bee8c721fd19c2105e7ac5fd77e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e645e5_8eb5da91",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-07T21:28:10Z",
+      "side": 1,
+      "message": "Okay. I guess if they both come back as OperationError in JS it doesn\u0027t really matter anyway.",
+      "parentUuid": "c2a30ac8_9245b048",
+      "range": {
+        "startLine": 377,
+        "startChar": 33,
+        "endLine": 377,
+        "endChar": 65
+      },
+      "revId": "674226bbe5086bee8c721fd19c2105e7ac5fd77e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
