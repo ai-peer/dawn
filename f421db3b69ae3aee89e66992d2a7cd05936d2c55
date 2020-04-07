@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a6bfaae_f637c71e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:30:02Z",
+      "side": 1,
+      "message": "Isn\u0027t it extremely likely that applications are going to use newly created resources for something right after creation, like initializing them? Why do we need to care about a bunch of createPlacedResource without any usage of the resources?",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b5ac92d_85e638a7",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:30:02Z",
+      "side": 1,
+      "message": "My understanding is that the heap will still be inserted at the end of the LRU cache. Since we check resources one by one when trying to evict, if any newer resource is before that heap in the LRU, then we won\u0027t see it. So I don\u0027t think this CL will work in real use cases (vs. a synthetic test that would only create placed resources).",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6110db42_9ddb4050",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:30:02Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s the correct semantic of what\u0027s happening: what we want to say is \"please keep this heap resident while I call CreatePlacedResource\" which is more like the \"Lock/Unlock\" path.",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
