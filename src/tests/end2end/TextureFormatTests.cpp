@@ -12,15 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "tests/DawnTest.h"
+#include <type_traits>
 
 #include "common/Assert.h"
 #include "common/Math.h"
+#include "tests/DawnTest.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/TextureFormatUtils.h"
 #include "utils/WGPUHelpers.h"
-
-#include <type_traits>
 
 // An expectation for float buffer content that can correctly compare different NaN values and
 // supports a basic tolerance for comparison of finite values.
@@ -229,11 +228,9 @@ class TextureFormatTest : public DawnTest {
         ASSERT(expectedRenderDataSize % 4 == 0);
 
         // Create the texture we will sample from
-        wgpu::TextureDescriptor sampleTextureDesc;
-        sampleTextureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
-        sampleTextureDesc.size = {width, 1, 1};
-        sampleTextureDesc.format = sampleFormatInfo.format;
-        wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDesc);
+        wgpu::Texture sampleTexture =
+            utils::CreateTexture(device, width, 1, sampleFormatInfo.format,
+                                 wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled);
 
         wgpu::Buffer uploadBuffer = utils::CreateBufferFromData(device, sampleData, sampleDataSize,
                                                                 wgpu::BufferUsage::CopySrc);
@@ -241,12 +238,9 @@ class TextureFormatTest : public DawnTest {
         // Create the texture that we will render results to
         ASSERT(expectedRenderDataSize == width * renderFormatInfo.texelByteSize);
 
-        wgpu::TextureDescriptor renderTargetDesc;
-        renderTargetDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment;
-        renderTargetDesc.size = {width, 1, 1};
-        renderTargetDesc.format = renderFormatInfo.format;
-
-        wgpu::Texture renderTarget = device.CreateTexture(&renderTargetDesc);
+        wgpu::Texture renderTarget = utils::CreateTexture(
+            device, width, 1, renderFormatInfo.format,
+            wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment);
 
         // Create the readback buffer for the data in renderTarget
         wgpu::BufferDescriptor readbackBufferDesc;
@@ -404,7 +398,7 @@ class TextureFormatTest : public DawnTest {
         ASSERT(sizeof(float) * formatInfo.componentCount == formatInfo.texelByteSize);
         ASSERT(formatInfo.type == wgpu::TextureComponentType::Float);
 
-        std::vector<float> textureData = {+0.0f,  -0.0f, 1.0f,     1.0e-29f,
+        std::vector<float> textureData = {+0.0f,   -0.0f, 1.0f,     1.0e-29f,
                                           1.0e29f, NAN,   INFINITY, -INFINITY};
 
         DoFloatFormatSamplingTest(formatInfo, textureData, textureData);
@@ -721,4 +715,8 @@ TEST_P(TextureFormatTest, RG11B10Float) {
 // TODO(cwallez@chromium.org): Add tests for depth-stencil formats when we know if they are copyable
 // in WebGPU.
 
-DAWN_INSTANTIATE_TEST(TextureFormatTest, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(TextureFormatTest,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      VulkanBackend());

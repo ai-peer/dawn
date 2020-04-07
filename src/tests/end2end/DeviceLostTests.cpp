@@ -225,16 +225,8 @@ TEST_P(DeviceLostTest, CreateSwapChainFails) {
 TEST_P(DeviceLostTest, CreateTextureFails) {
     SetCallbackAndLoseForTesting();
 
-    wgpu::TextureDescriptor descriptor;
-    descriptor.size.width = 4;
-    descriptor.size.height = 4;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.mipLevelCount = 1;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-
-    ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+    ASSERT_DEVICE_ERROR(utils::CreateTexture(device, 4, 4, wgpu::TextureFormat::RGBA8Unorm,
+                                             wgpu::TextureUsage::OutputAttachment));
 }
 
 TEST_P(DeviceLostTest, TickFails) {

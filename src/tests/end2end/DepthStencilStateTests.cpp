@@ -25,32 +25,15 @@ class DepthStencilStateTest : public DawnTest {
         void TestSetUp() override {
             DawnTest::TestSetUp();
 
-            wgpu::TextureDescriptor renderTargetDescriptor;
-            renderTargetDescriptor.dimension = wgpu::TextureDimension::e2D;
-            renderTargetDescriptor.size.width = kRTSize;
-            renderTargetDescriptor.size.height = kRTSize;
-            renderTargetDescriptor.size.depth = 1;
-            renderTargetDescriptor.arrayLayerCount = 1;
-            renderTargetDescriptor.sampleCount = 1;
-            renderTargetDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-            renderTargetDescriptor.mipLevelCount = 1;
-            renderTargetDescriptor.usage =
-                wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-            renderTarget = device.CreateTexture(&renderTargetDescriptor);
+            renderTarget = utils::CreateTexture(
+                device, kRTSize, kRTSize, wgpu::TextureFormat::RGBA8Unorm,
+                wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
 
             renderTargetView = renderTarget.CreateView();
 
-            wgpu::TextureDescriptor depthDescriptor;
-            depthDescriptor.dimension = wgpu::TextureDimension::e2D;
-            depthDescriptor.size.width = kRTSize;
-            depthDescriptor.size.height = kRTSize;
-            depthDescriptor.size.depth = 1;
-            depthDescriptor.arrayLayerCount = 1;
-            depthDescriptor.sampleCount = 1;
-            depthDescriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
-            depthDescriptor.mipLevelCount = 1;
-            depthDescriptor.usage = wgpu::TextureUsage::OutputAttachment;
-            depthTexture = device.CreateTexture(&depthDescriptor);
+            depthTexture = utils::CreateTexture(device, kRTSize, kRTSize,
+                                                wgpu::TextureFormat::Depth24PlusStencil8,
+                                                wgpu::TextureUsage::OutputAttachment);
 
             depthTextureView = depthTexture.CreateView();
 

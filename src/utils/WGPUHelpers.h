@@ -126,6 +126,16 @@ namespace utils {
         const wgpu::BindGroupLayout& layout,
         std::initializer_list<BindingInitializationHelper> bindingsInitializer);
 
+    wgpu::Texture CreateTexture(wgpu::Device device,
+                                uint32_t width,
+                                uint32_t height,
+                                wgpu::TextureFormat format,
+                                wgpu::TextureUsage usage,
+                                uint32_t arrayLayerCount = 1,
+                                uint32_t mipLevelCount = 1,
+                                uint32_t sampleCount = 1,
+                                wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D);
+
 }  // namespace utils
 
 #endif  // UTILS_DAWNHELPERS_H_

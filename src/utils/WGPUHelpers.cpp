@@ -337,4 +337,26 @@ namespace utils {
         return device.CreateBindGroup(&descriptor);
     }
 
+    wgpu::Texture CreateTexture(wgpu::Device device,
+                                uint32_t width,
+                                uint32_t height,
+                                wgpu::TextureFormat format,
+                                wgpu::TextureUsage usage,
+                                uint32_t arrayLayerCount,
+                                uint32_t mipLevelCount,
+                                uint32_t sampleCount,
+                                wgpu::TextureDimension dimension) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = dimension;
+        descriptor.size.width = width;
+        descriptor.size.height = height;
+        descriptor.size.depth = 1;
+        descriptor.arrayLayerCount = arrayLayerCount;
+        descriptor.sampleCount = sampleCount;
+        descriptor.format = format;
+        descriptor.mipLevelCount = mipLevelCount;
+        descriptor.usage = usage;
+        return device.CreateTexture(&descriptor);
+    }
+
 }  // namespace utils

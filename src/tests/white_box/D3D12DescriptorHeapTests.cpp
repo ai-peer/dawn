@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "tests/DawnTest.h"
-
 #include "dawn_native/Toggles.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "tests/DawnTest.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
@@ -61,17 +60,9 @@ class D3D12DescriptorHeapTests : public DawnTest {
                                           wgpu::TextureFormat format) {
         DAWN_ASSERT(width > 0 && height > 0);
 
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = width;
-        descriptor.size.height = height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = 1;
-        descriptor.sampleCount = 1;
-        descriptor.format = format;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-        wgpu::Texture color = device.CreateTexture(&descriptor);
+        wgpu::Texture color = utils::CreateTexture(
+            device, width, height, format,
+            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
 
         return utils::BasicRenderPass(width, height, color);
     }
@@ -584,18 +575,10 @@ TEST_P(D3D12DescriptorHeapTests, EncodeReuseUBOMultipleSubmits) {
 // Shader-visible heaps should switch out |kNumOfHeaps| times.
 TEST_P(D3D12DescriptorHeapTests, EncodeManyUBOAndSamplers) {
     // Create a solid filled texture.
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = kRTSize;
-    descriptor.size.height = kRTSize;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment |
-                       wgpu::TextureUsage::CopySrc;
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        utils::CreateTexture(device, kRTSize, kRTSize, wgpu::TextureFormat::RGBA8Unorm,
+                             wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment |
+                                 wgpu::TextureUsage::CopySrc);
     wgpu::TextureView textureView = texture.CreateView();
 
     {

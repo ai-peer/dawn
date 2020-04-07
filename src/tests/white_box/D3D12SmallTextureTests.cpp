@@ -16,6 +16,8 @@
 
 #include "dawn_native/d3d12/TextureD3D12.h"
 
+#include "utils/WGPUHelpers.h"
+
 using namespace dawn_native::d3d12;
 
 class D3D12SmallTextureTests : public DawnTest {
@@ -45,29 +47,19 @@ TEST_P(D3D12SmallTextureTests, AlignSmallCompressedTexture) {
     // TODO(http://crbug.com/dawn/282): Investigate GPU/driver rejections of small alignment.
     DAWN_SKIP_TEST_IF(IsIntel() || IsNvidia());
 
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = 8;
-    descriptor.size.height = 8;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::BC1RGBAUnorm;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::Sampled;
-
     // Create a smaller one that allows use of the smaller alignment.
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture = utils::CreateTexture(device, 8, 8, wgpu::TextureFormat::BC1RGBAUnorm,
+                                                 wgpu::TextureUsage::Sampled);
     Texture* d3dTexture = reinterpret_cast<Texture*>(texture.Get());
 
     EXPECT_EQ(d3dTexture->GetD3D12Resource()->GetDesc().Alignment,
               static_cast<uint64_t>(D3D12_SMALL_RESOURCE_PLACEMENT_ALIGNMENT));
 
     // Create a larger one (>64KB) that forbids use the smaller alignment.
-    descriptor.size.width = 4096;
-    descriptor.size.height = 4096;
-
-    texture = device.CreateTexture(&descriptor);
+    constexpr uint32_t kWidth = 4096;
+    constexpr uint32_t kHeight = 4096;
+    texture = utils::CreateTexture(device, kWidth, kHeight, wgpu::TextureFormat::BC1RGBAUnorm,
+                                   wgpu::TextureUsage::Sampled);
     d3dTexture = reinterpret_cast<Texture*>(texture.Get());
 
     EXPECT_EQ(d3dTexture->GetD3D12Resource()->GetDesc().Alignment,

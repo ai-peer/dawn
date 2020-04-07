@@ -159,15 +159,7 @@ class StorageTextureValidationTests : public ValidationTest {
                                 wgpu::TextureFormat format,
                                 uint32_t sampleCount = 1,
                                 uint32_t arrayLayerCount = 1) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size = {16, 16, 1};
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = sampleCount;
-        descriptor.format = format;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = usage;
-        return device.CreateTexture(&descriptor);
+        return utils::CreateTexture(device, 16, 16, format, usage, arrayLayerCount, sampleCount);
     }
 
     const wgpu::ShaderModule mDefaultVSModule =

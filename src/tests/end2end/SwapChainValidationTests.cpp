@@ -224,13 +224,8 @@ TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
 
     // Create a second texture to be used as render pass attachment. Validation will check that the
     // size of the view matches the size of this texture.
-    wgpu::TextureDescriptor textureDesc;
-    textureDesc.usage = wgpu::TextureUsage::OutputAttachment;
-    textureDesc.dimension = wgpu::TextureDimension::e2D;
-    textureDesc.size = {1, 1, 1};
-    textureDesc.format = wgpu::TextureFormat::R8Unorm;
-    textureDesc.sampleCount = 1;
-    wgpu::Texture secondTexture = device.CreateTexture(&textureDesc);
+    wgpu::Texture secondTexture = utils::CreateTexture(device, 1, 1, wgpu::TextureFormat::R8Unorm,
+                                                       wgpu::TextureUsage::OutputAttachment);
 
     // Get the swapchain view and try to use it in the render pass to trigger all the validation.
     wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);

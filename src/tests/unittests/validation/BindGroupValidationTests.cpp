@@ -40,15 +40,8 @@ class BindGroupValidationTest : public ValidationTest {
             mSampler = device.CreateSampler(&descriptor);
         }
         {
-            wgpu::TextureDescriptor descriptor;
-            descriptor.dimension = wgpu::TextureDimension::e2D;
-            descriptor.size = {16, 16, 1};
-            descriptor.arrayLayerCount = 1;
-            descriptor.sampleCount = 1;
-            descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-            descriptor.mipLevelCount = 1;
-            descriptor.usage = wgpu::TextureUsage::Sampled;
-            mSampledTexture = device.CreateTexture(&descriptor);
+            mSampledTexture = utils::CreateTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                   wgpu::TextureUsage::Sampled);
             mSampledTextureView = mSampledTexture.CreateView();
         }
     }
@@ -288,15 +281,9 @@ TEST_F(BindGroupValidationTest, TextureUsage) {
     utils::MakeBindGroup(device, layout, {{0, mSampledTextureView}});
 
     // Make an output attachment texture and try to set it for a SampledTexture binding
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size = {16, 16, 1};
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-    wgpu::Texture outputTexture = device.CreateTexture(&descriptor);
+    constexpr wgpu::TextureUsage kUsage = wgpu::TextureUsage::OutputAttachment;
+    wgpu::Texture outputTexture =
+        utils::CreateTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, kUsage);
     wgpu::TextureView outputTextureView = outputTexture.CreateView();
     ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, outputTextureView}}));
 }
@@ -311,15 +298,8 @@ TEST_F(BindGroupValidationTest, TextureComponentType) {
     utils::MakeBindGroup(device, layout, {{0, mSampledTextureView}});
 
     // Make a Uint component typed texture and try to set it to a Float component binding.
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size = {16, 16, 1};
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::RGBA8Uint;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::Sampled;
-    wgpu::Texture uintTexture = device.CreateTexture(&descriptor);
+    wgpu::Texture uintTexture = utils::CreateTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Uint,
+                                                     wgpu::TextureUsage::Sampled);
     wgpu::TextureView uintTextureView = uintTexture.CreateView();
 
     ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, uintTextureView}}));

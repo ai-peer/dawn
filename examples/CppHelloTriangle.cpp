@@ -51,17 +51,8 @@ void initBuffers() {
 }
 
 void initTextures() {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = 1024;
-    descriptor.size.height = 1024;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
-    texture = device.CreateTexture(&descriptor);
+    texture = utils::CreateTexture(device, 1024, 1024, wgpu::TextureFormat::RGBA8Unorm,
+                                   wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled);
 
     wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     sampler = device.CreateSampler(&samplerDesc);

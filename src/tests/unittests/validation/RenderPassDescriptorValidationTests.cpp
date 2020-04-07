@@ -51,18 +51,8 @@ wgpu::Texture CreateTexture(wgpu::Device& device,
                             uint32_t mipLevelCount,
                             uint32_t sampleCount = 1,
                             wgpu::TextureUsage usage = wgpu::TextureUsage::OutputAttachment) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = dimension;
-    descriptor.size.width = width;
-    descriptor.size.height = height;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = arrayLayerCount;
-    descriptor.sampleCount = sampleCount;
-    descriptor.format = format;
-    descriptor.mipLevelCount = mipLevelCount;
-    descriptor.usage = usage;
-
-    return device.CreateTexture(&descriptor);
+    return utils::CreateTexture(device, width, height, format, usage, arrayLayerCount,
+                                mipLevelCount, sampleCount, dimension);
 }
 
 wgpu::TextureView Create2DAttachment(wgpu::Device& device,
