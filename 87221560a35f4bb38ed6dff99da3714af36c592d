@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fde011d6_83db044c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-07T21:29:03Z",
+      "side": 1,
+      "message": "nit: can it be marked unreachable?\n\nBut if you\u0027re only going to have this in briefly, then doesn\u0027t really matter.",
+      "revId": "87221560a35f4bb38ed6dff99da3714af36c592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
