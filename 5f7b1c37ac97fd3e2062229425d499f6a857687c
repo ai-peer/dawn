@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e6d6406_8f05c409",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:48:58Z",
+      "side": 1,
+      "message": "Turning the descriptor in a function call like this means we\u0027ll get a bunch of numbers that are hard to understand. How about at least splitting the function into several ones? It would make it easier to understand what the arguments are.\n\n Create2DTexture(device, width, height, format, usage, mipLevelCount \u003d 1)\n Create2DMultisampledTexture(device, width, height, format, usage, sampleCount)\n Create2DArrayTexture(device, width, height, depth, format, usage, mipLevelCount \u003d 1)\n\nSometimes existing calls won\u0027t match one of these signatures (like in validation tests trying invalid descriptors) but that\u0027s fine because these are the places where we\u0027d like to see the exact descriptor used.",
+      "revId": "5f7b1c37ac97fd3e2062229425d499f6a857687c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
