@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "14671dc0_fefbb37e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-07T16:47:07Z",
+      "side": 1,
+      "message": "You\u0027re right that this is an unusual scenario - but it\u0027s still a potential point of failure. Calling MakeResident can fail if we\u0027re overcommitted - so by requiring that heaps stay resident for longer than necessary, we increase the likelihood we\u0027ll be overcommitted, which increases the chances of a MakeResident failure.\n\nI\u0027m speculating - but this seems like it could happen in a scenario where an application using Dawn has some kind of \"loading screen\" where everything needed to render the next scene is allocated at once. If those resources just happen to be allocated using CreatePlacedResource and the total resource set size exceeds total local memory, - the next call to MakeResident could fail, which we can\u0027t recover from.",
+      "parentUuid": "0a6bfaae_f637c71e",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6b5ac92d_85e638a7",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a5e88872_e8fabe6e",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-07T16:47:07Z",
+      "side": 1,
+      "message": "Your understanding of the LRU is correct, these CreatePlaceResource heaps will not be seen until everything previously in the LRU has been evicted. But that\u0027s also when the problem occurs - once a CreatePlacedResource becomes the top entry, nothing further can be evicted until we submit (even though its valid to evict them).",
+      "parentUuid": "6b5ac92d_85e638a7",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6110db42_9ddb4050",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2020-04-07T08:30:02Z",
       "side": 1,
       "message": "I don\u0027t think that\u0027s the correct semantic of what\u0027s happening: what we want to say is \"please keep this heap resident while I call CreatePlacedResource\" which is more like the \"Lock/Unlock\" path.",
+      "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a4bd47_3a5c625f",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-07T16:47:07Z",
+      "side": 1,
+      "message": "This is a good point and seems like it might be a better solution. I\u0027ll try this for the next iteration.",
+      "parentUuid": "6110db42_9ddb4050",
       "revId": "f421db3b69ae3aee89e66992d2a7cd05936d2c55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
