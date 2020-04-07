@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c68a6a72_6dc37cbe",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-07T16:33:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t that be FlushClient() ?\n\nalso nit: for a little more clarity on what causes what, maybe put the expectations and the thing that causes it right next to each other.\n\nEXPECT_CALL(clientMemoryTransferService, OnReadHandleDestroy(clientHandle)).Times(1);\nwgpuBufferDestroy(buffer);\n\nEXPECT_CALL(serverMemoryTransferService, OnReadHandleDestroy(serverHandle)).Times(1);\nEXPECT_CALL(api, BufferDestroy(apiBuffer)).Times(1);\nFlushClient();",
+      "range": {
+        "startLine": 629,
+        "startChar": 4,
+        "endLine": 634,
+        "endChar": 18
+      },
+      "revId": "22013b867d535a8160532078f9a2918b488133f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc7287a1_6f720aed",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-07T16:33:49Z",
+      "side": 1,
+      "message": "Only looking at this code, it\u0027s unclear why the unmap is part of the test.\nHere, and in the other tests, could you add a comment that normally we would see the writeHandle serialized/deserialized on the client/server, but that doesn\u0027t happen since the mapping is discarded?",
+      "range": {
+        "startLine": 636,
+        "startChar": 4,
+        "endLine": 640,
+        "endChar": 0
+      },
+      "revId": "22013b867d535a8160532078f9a2918b488133f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
