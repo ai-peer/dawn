@@ -94,6 +94,7 @@ config("dawn_internal") {
       "-Winconsistent-missing-destructor-override",
       "-Wshadow-field",
       "-Wmissing-field-initializers",
+      "-Wtautological-type-limit-compare",
       "-Wcstring-format-directive",
     ]
   }
