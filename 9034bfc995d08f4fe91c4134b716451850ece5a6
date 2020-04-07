@@ -34,6 +34,24 @@
       "revId": "9034bfc995d08f4fe91c4134b716451850ece5a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b0fd533_1616e6bb",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-07T00:41:29Z",
+      "side": 1,
+      "message": "Good catch. I think it was thought to be the whole buffer but it should only be the remaining size from the offset.",
+      "parentUuid": "62dc1b53_afe57124",
+      "revId": "9034bfc995d08f4fe91c4134b716451850ece5a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
