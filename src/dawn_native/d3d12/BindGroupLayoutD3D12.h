@@ -15,9 +15,8 @@
 #ifndef DAWNNATIVE_D3D12_BINDGROUPLAYOUTD3D12_H_
 #define DAWNNATIVE_D3D12_BINDGROUPLAYOUTD3D12_H_
 
-#include "dawn_native/BindGroupLayout.h"
-
 #include "common/SlabAllocator.h"
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -61,9 +60,8 @@ namespace dawn_native { namespace d3d12 {
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
 
-        // TODO(dawn:155): Store and bucket allocators by size on the device.
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mSamplerAllocator;
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mViewAllocator;
+        NonShaderVisibleDescriptorAllocator* mSamplerAllocator = nullptr;
+        NonShaderVisibleDescriptorAllocator* mViewAllocator = nullptr;
     };
 
 }}  // namespace dawn_native::d3d12
