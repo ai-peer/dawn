@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f9c8112_0940b016",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-07T06:21:20Z",
+      "side": 1,
+      "message": "Kai mentioned zero visibility binding in bind group layout at https://github.com/gpuweb/gpuweb/issues/657. But we can\u0027t designate a resource for it in bind group (at least in Dawn). So we can have this kind bindings and we don\u0027t need to trace its usage.",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
