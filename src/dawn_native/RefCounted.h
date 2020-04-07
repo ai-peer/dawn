@@ -77,8 +77,14 @@ namespace dawn_native {
         }
 
         ~Ref() {
-            Release();
-            mPointee = nullptr;
+            // Detach before calling pointee->Release().
+            // Slab-allocated classes hold a ref to their parent, and if
+            // this is the last reference, it will be a use-after-free to
+            // assign to |mPointee| after calling pointee->Release();
+            T* pointee = Detach();
+            if (pointee != nullptr) {
+                pointee->Release();
+            }
         }
 
         operator bool() {

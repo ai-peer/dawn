@@ -74,6 +74,10 @@ namespace dawn_native {
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
+        // NOTE: |mLayout| MUST be the LAST member variable with a non-trivial destructor.
+        // BindGroups are slab-allocated by their BindGroupLayout, so if this is the last
+        // reference to the BGL, then touching any member variables at all after destruction
+        // of |mLayout| would be a use-after-free.
         Ref<BindGroupLayoutBase> mLayout;
         BindGroupLayoutBase::BindingDataPointers mBindingData;
     };
