@@ -16,6 +16,120 @@
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d268d97b_cb9ee002",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "I\u0027m surprised this fails, what validation error does this cause?",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2fc6cf7_0aec7e36",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "nit: std::vector\u003cwgpu::BindGroupLayout\u003e? This way you can do CreateComputePipeline({bgl0, bgl1}) Same for renderpipeline.",
+      "range": {
+        "startLine": 1260,
+        "startChar": 48,
+        "endLine": 1261,
+        "endChar": 62
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf16a5b1_0a00b8b9",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "The comment is misleading because mismatch sounds like the test should fail. How about:\n\nTest that it is valid to set a pipeline layout with bind groups unused by the pipeline.",
+      "range": {
+        "startLine": 1330,
+        "startChar": 0,
+        "endLine": 1331,
+        "endChar": 38
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79ecaebb_52317a49",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "Can we also have a test where one of the BGLs has an extra entry?",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a241ad_b421fadb",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "In general phrase comments before tests as \"Test that it is valid/invalid to ....\" In this case that it is invalid to compile a pipeline with a pipeline layout that doesn\u0027t have all necessary bind group layouts.\n\nAlso can we have a test for when there is a BGL, but it doesn\u0027t have all the entries used by the pipeline? (it would be empty or have an unrelated entry)",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4682c34c_a085eba3",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T08:07:14Z",
+      "side": 1,
+      "message": "I don\u0027t understand what this test is trying to do. And from what I understand it should fail because the BGLs have only storage buffers, while the pipelines have readonly storage buffers, so the binding type validation should fail.",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
