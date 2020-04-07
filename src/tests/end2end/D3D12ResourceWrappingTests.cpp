@@ -84,7 +84,7 @@ namespace {
         }
 
       protected:
-        void WrapSharedHandle(const wgpu::TextureDescriptor* dawnDescriptor,
+        void WrapSharedHandle(const wgpu::TextureDescriptor* dawnDesc,
                               const D3D11_TEXTURE2D_DESC* d3dDescriptor,
                               wgpu::Texture* dawnTexture,
                               ID3D11Texture2D** d3d11TextureOut) const {
@@ -104,7 +104,7 @@ namespace {
 
             dawn_native::d3d12::ExternalImageDescriptorDXGISharedHandle externDesc;
             externDesc.cTextureDescriptor =
-                reinterpret_cast<const WGPUTextureDescriptor*>(dawnDescriptor);
+                reinterpret_cast<const WGPUTextureDescriptor*>(dawnDesc);
             externDesc.sharedHandle = sharedHandle;
             externDesc.acquireMutexKey = 0;
             WGPUTexture texture = dawn_native::d3d12::WrapSharedHandle(device.Get(), &externDesc);
