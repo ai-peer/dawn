@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "249870eb_d311ccb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T14:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab25c4fa_51e4712a",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 23,
+        "endChar": 68
+      },
+      "revId": "f2ac5737945589fe83dfaf4b8f8d9e8e5b2c9151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "556433f9_4238bf80",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "f2ac5737945589fe83dfaf4b8f8d9e8e5b2c9151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb089373_5bffed50",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-07T14:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "556433f9_4238bf80",
+      "range": {
+        "startLine": 185,
+        "startChar": 28,
+        "endLine": 185,
+        "endChar": 34
+      },
+      "revId": "f2ac5737945589fe83dfaf4b8f8d9e8e5b2c9151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
