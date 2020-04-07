@@ -20,6 +20,7 @@
 #include "utils/BackendBinding.h"
 #include "utils/GLFWUtils.h"
 #include "utils/TerribleCommandBuffer.h"
+#include "utils/WGPUHelpers.h"
 
 #include <dawn/dawn_proc.h>
 #include <dawn/dawn_wsi.h>
@@ -184,17 +185,9 @@ wgpu::SwapChain GetSwapChain(const wgpu::Device& device) {
 }
 
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = 640;
-    descriptor.size.height = 480;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-    auto depthStencilTexture = device.CreateTexture(&descriptor);
+    wgpu::Texture depthStencilTexture =
+        utils::CreateTexture(device, 640, 480, wgpu::TextureFormat::Depth24PlusStencil8,
+                             wgpu::TextureUsage::OutputAttachment);
     return depthStencilTexture.CreateView();
 }
 

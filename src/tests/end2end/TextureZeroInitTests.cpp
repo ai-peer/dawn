@@ -34,21 +34,12 @@ class TextureZeroInitTest : public DawnTest {
         DAWN_SKIP_TEST_IF(UsesWire());
         DawnTest::TestSetUp();
     }
-    wgpu::TextureDescriptor CreateTextureDescriptor(uint32_t mipLevelCount,
-                                                    uint32_t arrayLayerCount,
-                                                    wgpu::TextureUsage usage,
-                                                    wgpu::TextureFormat format) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = kSize;
-        descriptor.size.height = kSize;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = 1;
-        descriptor.format = format;
-        descriptor.mipLevelCount = mipLevelCount;
-        descriptor.usage = usage;
-        return descriptor;
+    wgpu::Texture CreateTexture(wgpu::TextureUsage usage,
+                                wgpu::TextureFormat format,
+                                uint32_t mipLevelCount = 1,
+                                uint32_t arrayLayerCount = 1) {
+        return utils::CreateTexture(device, kSize, kSize, format, usage, arrayLayerCount,
+                                    mipLevelCount);
     }
     wgpu::TextureViewDescriptor CreateTextureViewDescriptor(uint32_t baseMipLevel,
                                                             uint32_t baseArrayLayer) {
@@ -117,9 +108,8 @@ class TextureZeroInitTest : public DawnTest {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly to Zero after first usage
 TEST_P(TextureZeroInitTest, CopyTextureToBufferSource) {
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture = CreateTexture(
+        wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kColorFormat);
 
     // Texture's first usage is in EXPECT_PIXEL_RGBA8_EQ's call to CopyTextureToBuffer
     RGBA8 filledWithZeros(0, 0, 0, 0);
@@ -137,10 +127,9 @@ TEST_P(TextureZeroInitTest, RenderingMipMapClearsToZero) {
     uint32_t baseArrayLayer = 0;
     uint32_t layerCount = 1;
 
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        levelCount, layerCount, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
-        kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        CreateTexture(wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
+                      kColorFormat, levelCount, layerCount);
 
     wgpu::TextureViewDescriptor viewDescriptor =
         CreateTextureViewDescriptor(baseMipLevel, baseArrayLayer);
@@ -182,10 +171,9 @@ TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
     uint32_t baseArrayLayer = 2;
     uint32_t layerCount = 4;
 
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        levelCount, layerCount, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
-        kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        CreateTexture(wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
+                      kColorFormat, levelCount, layerCount);
 
     wgpu::TextureViewDescriptor viewDescriptor =
         CreateTextureViewDescriptor(baseMipLevel, baseArrayLayer);
@@ -219,11 +207,9 @@ TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
 
 // This tests CopyBufferToTexture fully overwrites copy so lazy init is not needed.
 TEST_P(TextureZeroInitTest, CopyBufferToTexture) {
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        4, 1,
+    wgpu::Texture texture = CreateTexture(
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
-        kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+        kColorFormat, 4, 1);
 
     std::vector<uint8_t> data(kFormatBlockByteSize * kSize * kSize, 100);
     wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
@@ -249,11 +235,9 @@ TEST_P(TextureZeroInitTest, CopyBufferToTexture) {
 // Test for a copy only to a subset of the subresource, lazy init is necessary to clear the other
 // half.
 TEST_P(TextureZeroInitTest, CopyBufferToTextureHalf) {
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        4, 1,
+    wgpu::Texture texture = CreateTexture(
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
-        kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+        kColorFormat, 4, 1);
 
     std::vector<uint8_t> data(kFormatBlockByteSize * kSize * kSize, 100);
     wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
@@ -281,19 +265,16 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureHalf) {
 
 // This tests CopyTextureToTexture fully overwrites copy so lazy init is not needed.
 TEST_P(TextureZeroInitTest, CopyTextureToTexture) {
-    wgpu::TextureDescriptor srcDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc, kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+    wgpu::Texture srcTexture =
+        CreateTexture(wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc, kColorFormat);
 
     wgpu::TextureCopyView srcTextureCopyView =
         utils::CreateTextureCopyView(srcTexture, 0, 0, {0, 0, 0});
 
-    wgpu::TextureDescriptor dstDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::CopySrc,
-                                kColorFormat);
-    wgpu::Texture dstTexture = device.CreateTexture(&dstDescriptor);
+    wgpu::Texture dstTexture =
+        CreateTexture(wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::CopySrc,
+                      kColorFormat);
 
     wgpu::TextureCopyView dstTextureCopyView =
         utils::CreateTextureCopyView(dstTexture, 0, 0, {0, 0, 0});
@@ -318,11 +299,9 @@ TEST_P(TextureZeroInitTest, CopyTextureToTexture) {
 // This Tests the CopyTextureToTexture's copy only to a subset of the subresource, lazy init is
 // necessary to clear the other half.
 TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
-    wgpu::TextureDescriptor srcDescriptor = CreateTextureDescriptor(
-        1, 1,
+    wgpu::Texture srcTexture = CreateTexture(
         wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst,
         kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
 
     // fill srcTexture with 100
     {
@@ -342,12 +321,10 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
     wgpu::TextureCopyView srcTextureCopyView =
         utils::CreateTextureCopyView(srcTexture, 0, 0, {0, 0, 0});
 
-    wgpu::TextureDescriptor dstDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::CopySrc,
-                                kColorFormat);
-    wgpu::Texture dstTexture = device.CreateTexture(&dstDescriptor);
+    wgpu::Texture dstTexture =
+        CreateTexture(wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::CopySrc,
+                      kColorFormat);
 
     wgpu::TextureCopyView dstTextureCopyView =
         utils::CreateTextureCopyView(dstTexture, 0, 0, {0, 0, 0});
@@ -374,17 +351,13 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
 // This tests the texture with depth attachment and load op load will init depth stencil texture to
 // 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
-    wgpu::TextureDescriptor srcDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::OutputAttachment,
-                                kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+    wgpu::Texture srcTexture =
+        CreateTexture(wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::OutputAttachment,
+                      kColorFormat);
 
-    wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
-        kDepthStencilFormat);
-    wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilDescriptor);
+    wgpu::Texture depthStencilTexture = CreateTexture(
+        wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kDepthStencilFormat);
 
     utils::ComboRenderPassDescriptor renderPassDescriptor({srcTexture.CreateView()},
                                                           depthStencilTexture.CreateView());
@@ -416,17 +389,13 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
 // This tests the texture with stencil attachment and load op load will init depth stencil texture
 // to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
-    wgpu::TextureDescriptor srcDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::OutputAttachment,
-                                kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+    wgpu::Texture srcTexture =
+        CreateTexture(wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::OutputAttachment,
+                      kColorFormat);
 
-    wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
-        kDepthStencilFormat);
-    wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilDescriptor);
+    wgpu::Texture depthStencilTexture = CreateTexture(
+        wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kDepthStencilFormat);
 
     utils::ComboRenderPassDescriptor renderPassDescriptor({srcTexture.CreateView()},
                                                           depthStencilTexture.CreateView());
@@ -458,17 +427,13 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
 // This tests the texture with depth stencil attachment and load op load will init depth stencil
 // texture to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
-    wgpu::TextureDescriptor srcDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::OutputAttachment,
-                                kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+    wgpu::Texture srcTexture =
+        CreateTexture(wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::OutputAttachment,
+                      kColorFormat);
 
-    wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
-        kDepthStencilFormat);
-    wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilDescriptor);
+    wgpu::Texture depthStencilTexture = CreateTexture(
+        wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kDepthStencilFormat);
 
     utils::ComboRenderPassDescriptor renderPassDescriptor({srcTexture.CreateView()},
                                                           depthStencilTexture.CreateView());
@@ -496,9 +461,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
 
 // This tests the color attachments clear to 0s
 TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture = CreateTexture(
+        wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc, kColorFormat);
     utils::BasicRenderPass renderPass = utils::BasicRenderPass(kSize, kSize, texture, kColorFormat);
     renderPass.renderPassInfo.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
 
@@ -520,13 +484,9 @@ TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
 // This tests the clearing of sampled textures in render pass
 TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
     // Create needed resources
-    wgpu::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 1, wgpu::TextureUsage::Sampled, kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
-
-    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
-    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+    wgpu::Texture texture = CreateTexture(wgpu::TextureUsage::Sampled, kColorFormat);
+    wgpu::Texture renderTexture = CreateTexture(
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
 
     wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
@@ -567,11 +527,8 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
 // This tests the clearing of sampled textures during compute pass
 TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
     // Create needed resources
-    wgpu::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 1, wgpu::TextureUsage::Sampled, kColorFormat);
-    descriptor.size.width = 1;
-    descriptor.size.height = 1;
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        utils::CreateTexture(device, 1, 1, kColorFormat, wgpu::TextureUsage::Sampled);
 
     uint32_t bufferSize = kFormatBlockByteSize * sizeof(uint32_t);
     wgpu::BufferDescriptor bufferDescriptor;
@@ -631,9 +588,7 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
-    wgpu::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 1, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture = CreateTexture(wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
 
     // Set buffer with dirty data so we know it is cleared by the lazy cleared texture copy
     uint32_t rowPitch = Align(kSize * kFormatBlockByteSize, kTextureRowPitchAlignment);
@@ -660,11 +615,9 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClearUnalignedSize) {
-    wgpu::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 1, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
-    descriptor.size.width = kUnalignedSize;
-    descriptor.size.height = kUnalignedSize;
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        utils::CreateTexture(device, kUnalignedSize, kUnalignedSize, kNonrenderableColorFormat,
+                             wgpu::TextureUsage::CopySrc);
 
     // Set buffer with dirty data so we know it is cleared by the lazy cleared texture copy
     uint32_t rowPitch = Align(kUnalignedSize * kFormatBlockByteSize, kTextureRowPitchAlignment);
@@ -691,9 +644,8 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClearUnalignedSize) {
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 // with more than 1 array layers
 TEST_P(TextureZeroInitTest, NonRenderableTextureClearWithMultiArrayLayers) {
-    wgpu::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 2, wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        CreateTexture(wgpu::TextureUsage::CopySrc, kNonrenderableColorFormat, 1, 2);
 
     // Set buffer with dirty data so we know it is cleared by the lazy cleared texture copy
     uint32_t bufferSize = kFormatBlockByteSize * kSize * kSize;
@@ -723,13 +675,11 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClearWithMultiArrayLayers) {
 // because it will be lazy cleared by the EXPECT_TEXTURE_RGBA8_EQ call.
 TEST_P(TextureZeroInitTest, RenderPassStoreOpClear) {
     // Create needed resources
-    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopyDst, kColorFormat);
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        CreateTexture(wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopyDst, kColorFormat);
 
-    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
-    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+    wgpu::Texture renderTexture = CreateTexture(
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
 
     wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
@@ -792,19 +742,15 @@ TEST_P(TextureZeroInitTest, RenderPassStoreOpClear) {
 //      Because LoadOp is Load and the subresource is uninitialized, the texture will be cleared to
 //      0's This means the depth and stencil test will pass and the red square is drawn.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
-    wgpu::TextureDescriptor srcDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
-                                    wgpu::TextureUsage::OutputAttachment,
-                                kColorFormat);
-    wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+    wgpu::Texture srcTexture =
+        CreateTexture(wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::OutputAttachment,
+                      kColorFormat);
 
-    wgpu::TextureDescriptor depthStencilDescriptor =
-        CreateTextureDescriptor(1, 1,
-                                wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc |
-                                    wgpu::TextureUsage::CopyDst,
-                                kDepthStencilFormat);
-    wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilDescriptor);
+    wgpu::Texture depthStencilTexture =
+        CreateTexture(wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc |
+                          wgpu::TextureUsage::CopyDst,
+                      kDepthStencilFormat);
 
     // Setup the renderPass for the first pass.
     // We want to fail the depth and stencil test here so that nothing gets drawn and we can
@@ -867,18 +813,15 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
 // Test that if one mip of a texture is initialized and another is uninitialized, lazy clearing the
 // uninitialized mip does not clear the initialized mip.
 TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
-    wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
-        2, 1,
+    wgpu::Texture sampleTexture = CreateTexture(
         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
-        kColorFormat);
-    wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDescriptor);
+        kColorFormat, 2, 1);
 
     wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
 
-    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
-    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+    wgpu::Texture renderTexture = CreateTexture(
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
 
     // Fill the sample texture's second mip with data
     uint32_t mipSize = kSize >> 1;
@@ -945,18 +888,15 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
 // Test that if one layer of a texture is initialized and another is uninitialized, lazy clearing
 // the uninitialized layer does not clear the initialized layer.
 TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
-    wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
-        1, 2,
+    wgpu::Texture sampleTexture = CreateTexture(
         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
-        kColorFormat);
-    wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDescriptor);
+        kColorFormat, 1, 2);
 
     wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
 
-    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
-        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
-    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+    wgpu::Texture renderTexture = CreateTexture(
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
 
     // Fill the sample texture's second array layer with data
     std::vector<uint8_t> data(kFormatBlockByteSize * kSize * kSize, 2);
@@ -1024,11 +964,10 @@ TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(sampleTexture.Get(), 0, 1, 0, 2));
 }
 
-DAWN_INSTANTIATE_TEST(
-    TextureZeroInitTest,
-    D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
-    D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"},
-                 {"use_d3d12_render_pass"}),
-    OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
-    MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
-    VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
+DAWN_INSTANTIATE_TEST(TextureZeroInitTest,
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"},
+                                   {"use_d3d12_render_pass"}),
+                      OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));

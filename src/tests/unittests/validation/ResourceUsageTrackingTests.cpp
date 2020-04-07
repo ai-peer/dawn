@@ -29,16 +29,7 @@ namespace {
         }
 
         wgpu::Texture CreateTexture(wgpu::TextureUsage usage, wgpu::TextureFormat format) {
-            wgpu::TextureDescriptor descriptor;
-            descriptor.dimension = wgpu::TextureDimension::e2D;
-            descriptor.size = {1, 1, 1};
-            descriptor.arrayLayerCount = 1;
-            descriptor.sampleCount = 1;
-            descriptor.mipLevelCount = 1;
-            descriptor.usage = usage;
-            descriptor.format = format;
-
-            return device.CreateTexture(&descriptor);
+            return utils::CreateTexture(device, 1, 1, format, usage);
         }
     };
 

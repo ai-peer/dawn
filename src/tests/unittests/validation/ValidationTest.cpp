@@ -18,6 +18,7 @@
 #include "dawn/dawn_proc.h"
 #include "dawn/webgpu.h"
 #include "dawn_native/NullBackend.h"
+#include "utils/WGPUHelpers.h"
 
 ValidationTest::ValidationTest() {
     instance = std::make_unique<dawn_native::Instance>();
@@ -100,17 +101,8 @@ void ValidationTest::OnDeviceError(WGPUErrorType type, const char* message, void
 
 ValidationTest::DummyRenderPass::DummyRenderPass(const wgpu::Device& device)
     : attachmentFormat(wgpu::TextureFormat::RGBA8Unorm), width(400), height(400) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = width;
-    descriptor.size.height = height;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = attachmentFormat;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-    attachment = device.CreateTexture(&descriptor);
+    attachment = utils::CreateTexture(device, width, height, attachmentFormat,
+                                      wgpu::TextureUsage::OutputAttachment);
 
     wgpu::TextureView view = attachment.CreateView();
     mColorAttachment.attachment = view;

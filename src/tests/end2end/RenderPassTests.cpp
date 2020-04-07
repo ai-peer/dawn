@@ -52,17 +52,9 @@ protected:
     }
 
     wgpu::Texture CreateDefault2DTexture() {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = kRTSize;
-        descriptor.size.height = kRTSize;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = 1;
-        descriptor.sampleCount = 1;
-        descriptor.format = kFormat;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-        return device.CreateTexture(&descriptor);
+        return utils::CreateTexture(
+            device, kRTSize, kRTSize, kFormat,
+            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
     }
 
     wgpu::ShaderModule mVSModule;
