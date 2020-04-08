@@ -61,9 +61,8 @@ namespace dawn_native { namespace d3d12 {
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
 
-        // TODO(dawn:155): Store and bucket allocators by size on the device.
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mSamplerAllocator;
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mViewAllocator;
+        NonShaderVisibleDescriptorAllocator* mSamplerAllocator = nullptr;
+        NonShaderVisibleDescriptorAllocator* mViewAllocator = nullptr;
     };
 
 }}  // namespace dawn_native::d3d12
