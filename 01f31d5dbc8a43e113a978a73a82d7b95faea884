@@ -103,6 +103,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ecc9566_e19218e4",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T21:46:46Z",
+      "side": 1,
+      "message": "I don\u0027t love the idea of needing a deletion queue, or making an extra object to ref things. The main issue is that we need to have better control of the destruction order.\nHere\u0027s another idea:\n\nWe take advantage of the fact that BindGroup is RefCounted and is only destroyed using \"delete this\" inside RefCounted::Release(). Rafael\u0027s private/protected destructor change should have helped with ensuring things stay this way.\n\nAdd an optional virtual function which by default just calls delete.\nvirtual void RefCounted::DeleteThis() { delete this; } \n\n\nBindGroupBase can override this:\n\nvoid BindGroupBase::DeleteThis() override {\n  Ref\u003cBindGroupLayoutBase\u003e layout \u003d std::move(this-\u003emLayout);\n  delete this;\n}\n\nThis makes sure that the BGL is always unref-ed after the BindGroup is completely destroyed.",
+      "parentUuid": "4534e8f3_59e74bc4",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
