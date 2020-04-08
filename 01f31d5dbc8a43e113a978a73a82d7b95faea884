@@ -151,6 +151,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b96749e_52965e0e",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T22:10:56Z",
+      "side": 1,
+      "message": "Don\u0027t think a template overload would work because we need it on RefCounted, not Ref; and holding an extra ref from the bind group wouldn\u0027t be sufficient. We have to hold it external to the bind group so that the BGL can completely outlive the bind group.\n\nWith the DeleteThese idea, it could indeed be a pre-delete acquire of a Ref\u003cObjectBase\u003e. But then we have to return only one object, or a list of objects. That seems suboptimal if in some future we want to acquire a variable number of resources.",
+      "parentUuid": "d33a7954_0454b87a",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
