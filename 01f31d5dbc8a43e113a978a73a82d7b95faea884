@@ -56,6 +56,29 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4534e8f3_59e74bc4",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-08T16:57:44Z",
+      "side": 1,
+      "message": "Reading through the code and bug, I understand what is happening. This CL will fix the problem but I agree with Corentin that mLayout should always be the last member variable, and be commented as such like you\u0027ve done.\n\nHaving a deletion queue means you need to service the queue regularly, which comes with its own set of drawbacks. \n\nOne way I can think to solve the problem is to have BindGroup be reference counted by a special smart pointer which holds a Ref to both the BindGroup and the allocator it belongs to. If calling Release on the BindGroup returns a reference count of 1, the special smart pointer knows it is holding onto the last reference to BindGroup and would tell the allocator to get rid of its memory. This way, BindGroup doesn\u0027t need special ordering of member variables. Deletion of its memory is guaranteed to happen outside of the object, after all destructors have run.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
