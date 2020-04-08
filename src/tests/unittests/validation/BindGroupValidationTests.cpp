@@ -1204,7 +1204,8 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
         return device.CreateBuffer(&bufferDescriptor);
     }
 
-    wgpu::RenderPipeline CreateRenderPipeline(wgpu::BindGroupLayout* bindGroupLayout) {
+    wgpu::RenderPipeline CreateRenderPipeline(wgpu::BindGroupLayout* bindGroupLayout,
+                                              uint32_t count) {
         wgpu::ShaderModule vsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
                 #version 450
@@ -1217,23 +1218,26 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
                 layout(std140, set = 0, binding = 0) buffer SBuffer {
                     vec2 value2;
                 } sBuffer;
-                layout(std140, set = 0, binding = 1) readonly buffer RBuffer {
+                layout(std140, set = 1, binding = 0) readonly buffer RBuffer {
                     vec2 value3;
                 } rBuffer;
                 layout(location = 0) out vec4 fragColor;
                 void main() {
                 })");
 
+        wgpu::PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = count;
+        descriptor.bindGroupLayouts = bindGroupLayout;
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
         pipelineDescriptor.vertexStage.module = vsModule;
         pipelineDescriptor.cFragmentStage.module = fsModule;
-        wgpu::PipelineLayout pipelineLayout =
-            utils::MakeBasicPipelineLayout(device, bindGroupLayout);
+        wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&descriptor);
         pipelineDescriptor.layout = pipelineLayout;
         return device.CreateRenderPipeline(&pipelineDescriptor);
     }
 
-    wgpu::ComputePipeline CreateComputePipeline(wgpu::BindGroupLayout* bindGroupLayout) {
+    wgpu::ComputePipeline CreateComputePipeline(wgpu::BindGroupLayout* bindGroupLayout,
+                                                uint32_t count) {
         wgpu::ShaderModule csModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
                 #version 450
@@ -1244,14 +1248,16 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
                 layout(std140, set = 0, binding = 0) buffer SBuffer {
                     float value2;
                 } dst;
-                layout(std140, set = 0, binding = 1) readonly buffer RBuffer {
+                layout(std140, set = 1, binding = 0) readonly buffer RBuffer {
                     readonly float value3;
                 } rdst;
                 void main() {
                 })");
 
-        wgpu::PipelineLayout pipelineLayout =
-            utils::MakeBasicPipelineLayout(device, bindGroupLayout);
+        wgpu::PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = count;
+        descriptor.bindGroupLayouts = bindGroupLayout;
+        wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&descriptor);
 
         wgpu::ComputePipelineDescriptor csDesc;
         csDesc.layout = pipelineLayout;
@@ -1267,15 +1273,18 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
 // valid.
 TEST_F(BindGroupLayoutCompatibilityTest, RWStorageInBGLWithROStorageInShader) {
     // Set up the bind group layout.
-    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
-                  wgpu::BindingType::StorageBuffer, true},
-                 {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
-                  wgpu::BindingType::StorageBuffer, true}});
+                  wgpu::BindingType::StorageBuffer}});
+    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
 
-    CreateRenderPipeline(&bindGroupLayout);
+    wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
 
-    CreateComputePipeline(&bindGroupLayout);
+    CreateRenderPipeline(bgl, 2);
+
+    CreateComputePipeline(bgl, 2);
 }
 
 // Test cases that test bind group layout mismatch with shader. The first item in bind group layout
@@ -1283,13 +1292,298 @@ TEST_F(BindGroupLayoutCompatibilityTest, RWStorageInBGLWithROStorageInShader) {
 // invalid.
 TEST_F(BindGroupLayoutCompatibilityTest, ROStorageInBGLWithRWStorageInShader) {
     // Set up the bind group layout.
-    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
-                  wgpu::BindingType::ReadonlyStorageBuffer, true},
+                  wgpu::BindingType::ReadonlyStorageBuffer}});
+    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer}});
+
+    wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
+
+    ASSERT_DEVICE_ERROR(CreateRenderPipeline(bgl, 2));
+
+    ASSERT_DEVICE_ERROR(CreateComputePipeline(bgl, 2));
+}
+
+// Test that it is valid to set a pipeline layout with unused bindings by the pipeline.
+TEST_F(BindGroupLayoutCompatibilityTest, PipelineLayoutWithExtraBindings) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer},
                  {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
-                  wgpu::BindingType::ReadonlyStorageBuffer, true}});
+                  wgpu::BindingType::UniformBuffer}});
+    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer}});
+    wgpu::BindGroupLayout bgl2 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
 
-    ASSERT_DEVICE_ERROR(CreateRenderPipeline(&bindGroupLayout));
+    // pipeline layout bgl has unused binding set (bgl2) and unused entry in a binding set (bgl0).
+    wgpu::BindGroupLayout bgl[3] = {bgl0, bgl1, bgl2};
 
-    ASSERT_DEVICE_ERROR(CreateComputePipeline(&bindGroupLayout));
+    CreateRenderPipeline(bgl, 3);
+
+    CreateComputePipeline(bgl, 3);
+}
+
+// Test that it is invalid to set a pipeline layout that doesn't have all necessary bindings
+// required by the pipeline.
+TEST_F(BindGroupLayoutCompatibilityTest, PipelineLayoutLackOfBindings) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
+
+    // missing a binding set (bgl1) in pipeline layout
+    {
+        wgpu::BindGroupLayout bgl[1] = {bgl0};
+
+        ASSERT_DEVICE_ERROR(CreateRenderPipeline(bgl, 1));
+
+        ASSERT_DEVICE_ERROR(CreateComputePipeline(bgl, 1));
+    }
+
+    // bgl1 is not missing, but it is empty
+    {
+        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(device, {});
+        wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
+
+        ASSERT_DEVICE_ERROR(CreateRenderPipeline(bgl, 2));
+
+        ASSERT_DEVICE_ERROR(CreateComputePipeline(bgl, 2));
+    }
+
+    // bgl1 is neither missing nor empty, but it doesn't contain the necessary binding
+    {
+        wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+            device, {{1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                      wgpu::BindingType::UniformBuffer}});
+        wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
+
+        ASSERT_DEVICE_ERROR(CreateRenderPipeline(bgl, 2));
+
+        ASSERT_DEVICE_ERROR(CreateComputePipeline(bgl, 2));
+    }
+}
+
+// Test that it is valid to set bind groups with unused bindings by the pipeline.
+TEST_F(BindGroupLayoutCompatibilityTest, BindGroupWithExtraBindings) {
+    // Set up the bind group layout and pipeline layout, and create pipeline.
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
+    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer}});
+    wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
+    wgpu::RenderPipeline renderPipeline = CreateRenderPipeline(bgl, 2);
+    wgpu::ComputePipeline computePipeline = CreateComputePipeline(bgl, 2);
+
+    // create 3 bind groups, note that there are extra bind group (bg2) and extra entry for a needed
+    // bind group (binding 1 in bg1).
+    wgpu::Buffer buffer0 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer0}});
+
+    // TODO (yunchao.he@intel.com): if bind group has extra entry (like bgl1_1 below), it should
+    // be valid.
+    // wgpu::BindGroupLayout bgl1_1 = utils::MakeBindGroupLayout(
+    //     device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+    //               wgpu::BindingType::ReadonlyStorageBuffer},
+    //              {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+    //               wgpu::BindingType::ReadonlyStorageBuffer}});
+    // wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1_1, {{0, buffer1}, {1, buffer1}});
+    wgpu::Buffer buffer1 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl1, {{0, buffer1}});
+
+    wgpu::BindGroupLayout bgl2 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
+    wgpu::Buffer buffer2 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bg2 = utils::MakeBindGroup(device, bgl2, {{0, buffer2}});
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        rp.SetBindGroup(0, bg0);
+        rp.SetBindGroup(1, bg1);
+        rp.SetBindGroup(2, bg2);
+        rp.SetPipeline(renderPipeline);
+        rp.Draw(3);
+        rp.EndPass();
+        encoder.Finish();
+    }
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        cp.SetBindGroup(0, bg0);
+        cp.SetBindGroup(1, bg1);
+        cp.SetBindGroup(2, bg2);
+        cp.SetPipeline(computePipeline);
+        cp.Dispatch(1);
+        cp.EndPass();
+        encoder.Finish();
+    }
+}
+
+// Test that it is invalid to set bind groups that don't have all necessary bindings required
+// by the pipeline.
+TEST_F(BindGroupLayoutCompatibilityTest, BindGroupsLackOfBindings) {
+    // Set up the bind group layout and pipeline layout, and create pipeline.
+    wgpu::BindGroupLayout bgl0 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer}});
+    wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer}});
+    wgpu::BindGroupLayout bgl[2] = {bgl0, bgl1};
+    wgpu::RenderPipeline renderPipeline = CreateRenderPipeline(bgl, 2);
+    wgpu::ComputePipeline computePipeline = CreateComputePipeline(bgl, 2);
+
+    wgpu::Buffer buffer0 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl0, {{0, buffer0}});
+
+    // A binding set (bgl1) related bind group is missing
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        rp.SetBindGroup(0, bg0);
+        rp.SetPipeline(renderPipeline);
+        rp.Draw(3);
+        rp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        cp.SetBindGroup(0, bg0);
+        cp.SetPipeline(computePipeline);
+        cp.Dispatch(1);
+        cp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // bgl1 related bind group is not missing, but its bind group is empty
+    wgpu::BindGroupLayout bgl1_1 = utils::MakeBindGroupLayout(device, {});
+    wgpu::BindGroup bg1_1 = utils::MakeBindGroup(device, bgl1_1, {});
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        rp.SetBindGroup(0, bg0);
+        rp.SetBindGroup(1, bg1_1);
+        rp.SetPipeline(renderPipeline);
+        rp.Draw(3);
+        rp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        cp.SetBindGroup(0, bg0);
+        cp.SetBindGroup(1, bg1_1);
+        cp.SetPipeline(computePipeline);
+        cp.Dispatch(1);
+        cp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // bgl1 related bind group is neither missing nor empty, but it doesn't contain the necessary
+    // binding
+    wgpu::BindGroupLayout bgl1_2 = utils::MakeBindGroupLayout(
+        device, {{1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::UniformBuffer}});
+    wgpu::Buffer buffer1 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
+    wgpu::BindGroup bg1_2 = utils::MakeBindGroup(device, bgl1_2, {{1, buffer1}});
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        rp.SetBindGroup(0, bg0);
+        rp.SetBindGroup(1, bg1_2);
+        rp.SetPipeline(renderPipeline);
+        rp.Draw(3);
+        rp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        cp.SetBindGroup(0, bg0);
+        cp.SetBindGroup(1, bg1_2);
+        cp.SetPipeline(computePipeline);
+        cp.Dispatch(1);
+        cp.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
+// Test that it is valid that bindings in pipeline layout don't match bindings in bind group if
+// both of them have enough bindings used by shaders
+TEST_F(BindGroupLayoutCompatibilityTest, BGLInPipelineMismatchBGLInBindGroup) {
+    constexpr uint32_t kBindingNum = 3;
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bgl[kBindingNum + 1];
+    wgpu::BindGroup bg[kBindingNum + 1];
+    wgpu::Buffer buffer[kBindingNum + 1];
+    for (uint32_t i = 0; i < kBindingNum + 1; ++i) {
+        bgl[i] = utils::MakeBindGroupLayout(
+            device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                      wgpu::BindingType::StorageBuffer}});
+        buffer[i] = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+        bg[i] = utils::MakeBindGroup(device, bgl[i], {{0, buffer[i]}});
+    }
+
+    wgpu::RenderPipeline renderPipeline = CreateRenderPipeline(bgl, kBindingNum);
+    wgpu::ComputePipeline computePipeline = CreateComputePipeline(bgl, kBindingNum);
+
+    // Bindings in bind groups are more than bindings in pipeline layout in render/compute pass.
+    // Their bindings don't need to match each other. But both of them should have enough bindings
+    // for shaders.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        for (uint32_t i = 0; i < kBindingNum + 1; ++i) {
+            rp.SetBindGroup(i, bg[i]);
+        }
+        rp.SetPipeline(renderPipeline);
+        rp.EndPass();
+
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        for (uint32_t i = 0; i < kBindingNum + 1; ++i) {
+            cp.SetBindGroup(i, bg[i]);
+        }
+        cp.SetPipeline(computePipeline);
+        cp.EndPass();
+        encoder.Finish();
+    }
+
+    // Bindings in bind groups are less than bindings in pipeline layout in render/compute pass.
+    // Their bindings don't need to match each other. But both of them should have enough bindings
+    // for shaders.
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
+        for (uint32_t i = 0; i < kBindingNum - 1; ++i) {
+            rp.SetBindGroup(i, bg[i]);
+        }
+        rp.SetPipeline(renderPipeline);
+        rp.EndPass();
+
+        wgpu::ComputePassEncoder cp = encoder.BeginComputePass();
+        for (uint32_t i = 0; i < kBindingNum - 1; ++i) {
+            cp.SetBindGroup(i, bg[i]);
+        }
+        cp.SetPipeline(computePipeline);
+        cp.EndPass();
+        encoder.Finish();
+    }
 }
