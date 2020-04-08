@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc4e38c4_0794c2af",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "nit: can use the default value.",
+      "range": {
+        "startLine": 80,
+        "startChar": 88,
+        "endLine": 80,
+        "endChar": 90
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d5dc2eb_3eb6b2e0",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 121,
+        "startChar": 81,
+        "endLine": 121,
+        "endChar": 84
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ef15b7c_1d3e3dce",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "nit: could use the default.",
+      "range": {
+        "startLine": 319,
+        "startChar": 86,
+        "endLine": 319,
+        "endChar": 89
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c00b0e22_489b5e52",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "nit: maybe group with width and height, since in upstream WebGPU arrayLayerCount was moved into size.depth.",
+      "range": {
+        "startLine": 347,
+        "startChar": 39,
+        "endLine": 347,
+        "endChar": 64
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b9d41f0_1bacdb02",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "nit: \u003d 1?",
+      "range": {
+        "startLine": 142,
+        "startChar": 39,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00c6a052_d6649e06",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:26:24Z",
+      "side": 1,
+      "message": "nit: these two can be removed because they have to be 1 at the moment.",
+      "range": {
+        "startLine": 148,
+        "startChar": 71,
+        "endLine": 150,
+        "endChar": 69
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
