@@ -677,6 +677,12 @@ namespace dawn_native {
         if (ConsumedError(TickImpl())) {
             return;
         }
+        // TickImpl will update the completed serial,
+        // if current completed serial is the same as before, then we already ticked
+        // return to avoid ticking again
+        if (IsCompletedSerialUpdated()) {
+            return;
+        }
 
         // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
         // tick the dynamic uploader before the backend resource allocators. This would allow

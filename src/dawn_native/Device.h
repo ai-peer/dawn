@@ -326,6 +326,8 @@ namespace dawn_native {
         TogglesSet mOverridenToggles;
         size_t mLazyClearCountForTesting = 0;
 
+        virtual bool IsCompletedSerialUpdated() const = 0;
+
         ExtensionsSet mEnabledExtensions;
     };
 

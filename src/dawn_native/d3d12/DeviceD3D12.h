@@ -144,9 +144,12 @@ namespace dawn_native { namespace d3d12 {
         MaybeError WaitForIdleForDestruction() override;
 
         Serial mCompletedSerial = 0;
+        Serial mLastCompletedCommandSerial = 0;
         Serial mLastSubmittedSerial = 0;
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent = nullptr;
+        bool mIsCompletedSerialUpdated = false;
+        bool IsCompletedSerialUpdated() const override;
 
         ComPtr<ID3D12Device> mD3d12Device;  // Device is owned by adapter and will not be outlived.
         ComPtr<ID3D12CommandQueue> mCommandQueue;

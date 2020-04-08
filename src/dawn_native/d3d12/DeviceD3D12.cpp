@@ -189,9 +189,21 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
+    bool Device::IsCompletedSerialUpdated() const {
+        return mIsCompletedSerialUpdated;
+    }
+
     MaybeError Device::TickImpl() {
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
+
+        // If new serial is the same as before, we already ticked, return to avoid ticking again
+        if (mLastCompletedCommandSerial == mCompletedSerial) {
+            mIsCompletedSerialUpdated = true;
+            return {};
+        }
+        mIsCompletedSerialUpdated = false;
+        mLastCompletedCommandSerial = mCompletedSerial;
 
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
