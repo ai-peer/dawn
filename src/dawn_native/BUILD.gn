@@ -28,7 +28,9 @@ if (is_mac) {
   }
 }
 
-if (dawn_enable_vulkan_validation_layers) {
+enable_vulkan_validation_layers = dawn_enable_vulkan_validation_layers &&
+                                  dawn_vulkan_validation_layers_dir != ""
+if (enable_vulkan_validation_layers) {
   import("//build_overrides/vulkan_validation_layers.gni")
 }
 
@@ -537,7 +539,7 @@ source_set("dawn_native_sources") {
         "//third_party/fuchsia-sdk:vulkan_validation",
       ]
     }
-    if (dawn_enable_vulkan_validation_layers) {
+    if (enable_vulkan_validation_layers) {
       defines += [
         "DAWN_ENABLE_VULKAN_VALIDATION_LAYERS",
         "DAWN_VK_DATA_DIR=\"$vulkan_data_subdir\"",
@@ -597,7 +599,7 @@ dawn_component("dawn_native") {
   if (dawn_enable_vulkan) {
     sources += [ "vulkan/VulkanBackend.cpp" ]
 
-    if (dawn_enable_vulkan_validation_layers) {
+    if (enable_vulkan_validation_layers) {
       data_deps = [
         "${dawn_vulkan_validation_layers_dir}:vulkan_validation_layers",
       ]
