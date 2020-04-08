@@ -199,6 +199,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53b0c860_41a4f99f",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T22:26:55Z",
+      "side": 1,
+      "message": "Ah sorry, wasn\u0027t clear. The frontend refcounting is a bit different from the internal refcounting. It can\u0027t be Ref\u003c\u003e because wgpu::BindGroup is not a Ref\u003c\u003e. When wgpu::BindGroup falls off the stack, it directly calls RefCounted::Release() so we have no opportunity to intervene.\n\nWe *could* specialize both the frontend and backend versions, but that seems like more complexity than the DeleteThis idea",
+      "parentUuid": "a251fd84_1f6a25c9",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
