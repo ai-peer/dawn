@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "024b528a_4aeea149",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1397,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "I added two more tests to cover whether bindings in pipeline (used in shaders) match bindings in bind group in current render/compute pass. I followed the similar rule: extra bind group, and extra entry in a bind group. However, if we have extra entry in bind group, it will fail now. I suppose it is incorrect. So I added a TODO here. please correct me if it is not what you supposed to.",
+      "range": {
+        "startLine": 1390,
+        "startChar": 4,
+        "endLine": 1397,
+        "endChar": 96
+      },
+      "revId": "1a0f278dfbc6476d13f2d221b28aba64df3b5695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

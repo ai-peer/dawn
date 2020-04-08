@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e4888919_008b3bf2",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "It says that \"numBindings mismatch\". I will fix this bug in a separate patch. Removing the unexpected tests in this CL now.",
+      "parentUuid": "d268d97b_cb9ee002",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2fc6cf7_0aec7e36",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -56,6 +74,30 @@
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25a2ce18_2f8df28a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "Yeah. I also noticed this. Well, I need to use \u0027count\u0027 to limit the BGL number in pipeline layout. It is not always the full length being used in following tests.",
+      "parentUuid": "e2fc6cf7_0aec7e36",
+      "range": {
+        "startLine": 1260,
+        "startChar": 48,
+        "endLine": 1261,
+        "endChar": 62
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "630a0cb1_54afa098",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf16a5b1_0a00b8b9",
+      "range": {
+        "startLine": 1330,
+        "startChar": 0,
+        "endLine": 1331,
+        "endChar": 38
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79ecaebb_52317a49",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -96,6 +162,24 @@
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f18323c_c3c75744",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79ecaebb_52317a49",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "fc122e1e_6e675f21",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a241ad_b421fadb",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4682c34c_a085eba3",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -127,6 +229,24 @@
       "writtenOn": "2020-04-07T08:07:14Z",
       "side": 1,
       "message": "I don\u0027t understand what this test is trying to do. And from what I understand it should fail because the BGLs have only storage buffers, while the pipelines have readonly storage buffers, so the binding type validation should fail.",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cde4b95_3ca947ed",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-08T06:47:22Z",
+      "side": 1,
+      "message": "Hmmm, if BGL has storage buffer, and pipeline has readonly storage binding, it is valid. But it is invalid vice versa. However, this is not the key point in this test. So I changed it to readonly storage bindings in BGL as well. \n\nLet me explain the tests a little bit: I added two tests to check that pipeline layout has unused bindings (compared to pipeline\u0027s bindings, which are designated by shaders) or lack of bindings (compared to pipeline\u0027s bindings), and I added another two tests to check that bind groups has unused bindings (compared to pipeline\u0027s bindings), or lack of bindings (compared to pipeline\u0027s bindings). \n\nSo you can see that there are 3 places to set bindings: 1) bindings used by pipeline (designated by shader code), 2) pipeline layout, 3) bind groups for current pass. We tested 1) vs 2), and 1) vs 3). Both of those tests manifest that 2) and 3) should have enough bindings used by pipeline. So how about 2) vs 3)? This test manifest that bindings in 2) and bindings in 3) have no impact to each other.",
+      "parentUuid": "4682c34c_a085eba3",
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
