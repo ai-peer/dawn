@@ -175,6 +175,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a251fd84_1f6a25c9",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-08T22:17:06Z",
+      "side": 1,
+      "message": "I think this is what you said, but we couldn\u0027t have it be part of the RefCounted because then you still have circular ownership: the RefCounted itself is inside the slab allocation. (right?)\nHaving it be part of Ref seems like it would work - it\u0027s external to the BindGroup - even though every Ref to a BindGroup would also be one whole ref to its allocator or BGL.\n\nDeleteThis: Right, it\u0027s not just a pre-delete, but also a post-delete destructor. Never mind that then. DeleteThis looks OK.",
+      "parentUuid": "9b96749e_52965e0e",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
