@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bb82396_a458a2cb",
+        "filename": "scripts/dawn_overrides_with_defaults.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000593
+      },
+      "writtenOn": "2020-04-08T18:03:37Z",
+      "side": 1,
+      "message": "Type: validation",
+      "revId": "ddc9ecf0ad214f53a56d4e26a7e5a279ffd494fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
