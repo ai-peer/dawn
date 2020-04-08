@@ -85,17 +85,9 @@ protected:
         mPipeline = device.CreateRenderPipeline(&pipelineDescriptor);
         mBindGroupLayout = mPipeline.GetBindGroupLayout(0);
 
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = 2;
-        descriptor.size.height = 2;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = 1;
-        descriptor.sampleCount = 1;
-        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
-        wgpu::Texture texture = device.CreateTexture(&descriptor);
+        wgpu::Texture texture =
+            utils::Create2DTexture(device, 2, 2, wgpu::TextureFormat::RGBA8Unorm,
+                                   wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled);
 
         // Create a 2x2 checkerboard texture, with black in the top left and bottom right corners.
         const uint32_t rowPixels = kTextureRowPitchAlignment / sizeof(RGBA8);

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
 
@@ -31,17 +32,9 @@ wgpu::Texture Create2DArrayTexture(wgpu::Device& device,
                                    uint32_t height = kHeight,
                                    uint32_t mipLevelCount = kDefaultMipLevels,
                                    uint32_t sampleCount = 1) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = width;
-    descriptor.size.height = height;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = arrayLayerCount;
-    descriptor.sampleCount = sampleCount;
-    descriptor.format = kDefaultTextureFormat;
-    descriptor.mipLevelCount = mipLevelCount;
-    descriptor.usage = wgpu::TextureUsage::Sampled;
-    return device.CreateTexture(&descriptor);
+    return utils::Create2DMultisampledTexture(device, width, height, kDefaultTextureFormat,
+                                              wgpu::TextureUsage::Sampled, arrayLayerCount,
+                                              mipLevelCount, sampleCount);
 }
 
 wgpu::TextureViewDescriptor CreateDefaultViewDescriptor(wgpu::TextureViewDimension dimension) {
@@ -348,11 +341,9 @@ TEST_F(TextureViewValidationTest, DestroyCreateTextureView) {
 
 // Test that only TextureAspect::All is supported
 TEST_F(TextureViewValidationTest, AspectMustBeAll) {
-    wgpu::TextureDescriptor descriptor = {};
-    descriptor.size = {1, 1, 1};
-    descriptor.format = wgpu::TextureFormat::Depth32Float;
-    descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
-    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    wgpu::Texture texture =
+        utils::Create2DTexture(device, 1, 1, wgpu::TextureFormat::Depth32Float,
+                               wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment);
 
     wgpu::TextureViewDescriptor viewDescriptor = {};
     viewDescriptor.aspect = wgpu::TextureAspect::All;

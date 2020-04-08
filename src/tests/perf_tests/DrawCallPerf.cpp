@@ -280,18 +280,14 @@ void DrawCallPerf::TestSetUp() {
 
     // Create the color / depth stencil attachments.
     {
-        wgpu::TextureDescriptor descriptor = {};
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = kTextureSize;
-        descriptor.size.height = kTextureSize;
-        descriptor.size.depth = 1;
-        descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-
-        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        mColorAttachment = device.CreateTexture(&descriptor).CreateView();
-
-        descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
-        mDepthStencilAttachment = device.CreateTexture(&descriptor).CreateView();
+        mColorAttachment = utils::Create2DTexture(device, kTextureSize, kTextureSize,
+                                                  wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::OutputAttachment)
+                               .CreateView();
+        mDepthStencilAttachment = utils::Create2DTexture(device, kTextureSize, kTextureSize,
+                                                         wgpu::TextureFormat::Depth24PlusStencil8,
+                                                         wgpu::TextureUsage::OutputAttachment)
+                                      .CreateView();
     }
 
     // Create vertex buffer(s)

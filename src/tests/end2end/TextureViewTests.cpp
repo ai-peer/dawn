@@ -33,17 +33,8 @@ namespace {
                                   uint32_t arrayLayerCount,
                                   uint32_t mipLevelCount,
                                   wgpu::TextureUsage usage) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = width;
-        descriptor.size.height = height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = 1;
-        descriptor.format = kDefaultFormat;
-        descriptor.mipLevelCount = mipLevelCount;
-        descriptor.usage = usage;
-        return device.CreateTexture(&descriptor);
+        return utils::Create2DArrayTexture(device, width, height, kDefaultFormat, usage,
+                                           arrayLayerCount, mipLevelCount);
     }
 
     wgpu::ShaderModule CreateDefaultVertexShaderModule(wgpu::Device device) {
