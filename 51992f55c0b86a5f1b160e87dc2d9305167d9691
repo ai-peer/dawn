@@ -101,6 +101,30 @@
     },
     {
       "key": {
+        "uuid": "073387bd_6cab6a07",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:47:19Z",
+      "side": 1,
+      "message": "There\u0027s only one place that uses the count feature. It could special case the bindgroup at kBindingNum + 1 to enable other tests to be nicer to read.",
+      "parentUuid": "25a2ce18_2f8df28a",
+      "range": {
+        "startLine": 1260,
+        "startChar": 48,
+        "endLine": 1261,
+        "endChar": 62
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf16a5b1_0a00b8b9",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -247,6 +271,41 @@
       "side": 1,
       "message": "Hmmm, if BGL has storage buffer, and pipeline has readonly storage binding, it is valid. But it is invalid vice versa. However, this is not the key point in this test. So I changed it to readonly storage bindings in BGL as well. \n\nLet me explain the tests a little bit: I added two tests to check that pipeline layout has unused bindings (compared to pipeline\u0027s bindings, which are designated by shaders) or lack of bindings (compared to pipeline\u0027s bindings), and I added another two tests to check that bind groups has unused bindings (compared to pipeline\u0027s bindings), or lack of bindings (compared to pipeline\u0027s bindings). \n\nSo you can see that there are 3 places to set bindings: 1) bindings used by pipeline (designated by shader code), 2) pipeline layout, 3) bind groups for current pass. We tested 1) vs 2), and 1) vs 3). Both of those tests manifest that 2) and 3) should have enough bindings used by pipeline. So how about 2) vs 3)? This test manifest that bindings in 2) and bindings in 3) have no impact to each other.",
       "parentUuid": "4682c34c_a085eba3",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c51b2b0_8148ecdf",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:47:19Z",
+      "side": 1,
+      "message": "Thanks for the explanation for readonly vs regular storage buffers, I forgot that special case.\n\n2) and 3) should definitely have interactions, that\u0027s the core of what bind group layouts are for. I think the test was missing an operation that caused the check to happen. See comment below.",
+      "parentUuid": "7cde4b95_3ca947ed",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "359bedb1_7f8b094b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:47:19Z",
+      "side": 1,
+      "message": "The matching of the pipeline\u0027s layout with the bind groups is done only if Draw/Dispatch is called.",
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
