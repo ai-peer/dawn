@@ -22,6 +22,40 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df4881ca_2c9c8c18",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:01:14Z",
+      "side": 1,
+      "message": "nit: put it at the bottom so it isn\u0027t an issue id BindingDataPointers accidentally grow a non-trivial destructor.",
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e888d717_b588e8c7",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:01:14Z",
+      "side": 1,
+      "message": "Can we also have a TODO to find a less fragile solution, for example with a deletion queue like you suggested in the bug? I think UBSan will complain about what we\u0027re doing here.",
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
