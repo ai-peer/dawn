@@ -32,6 +32,7 @@ namespace dawn_native { namespace d3d12 {
     class DescriptorHeapAllocator;
     class ShaderVisibleDescriptorAllocator;
     class MapRequestTracker;
+    class NonShaderVisibleDescriptorAllocatorManager;
     class PlatformFunctions;
     class ResourceAllocatorManager;
     class ResidencyManager;
@@ -100,6 +101,8 @@ namespace dawn_native { namespace d3d12 {
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
         ShaderVisibleDescriptorAllocator* GetShaderVisibleDescriptorAllocator() const;
+        NonShaderVisibleDescriptorAllocatorManager* GetNonShaderVisibleDescriptorAllocatorManager()
+            const;
 
         TextureBase* WrapSharedHandle(const ExternalImageDescriptor* descriptor,
                                       HANDLE sharedHandle,
@@ -170,6 +173,8 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ResidencyManager> mResidencyManager;
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mShaderVisibleDescriptorAllocator;
+        std::unique_ptr<NonShaderVisibleDescriptorAllocatorManager>
+            mNonShaderVisibleDescriptorAllocatorManager;
     };
 
 }}  // namespace dawn_native::d3d12
