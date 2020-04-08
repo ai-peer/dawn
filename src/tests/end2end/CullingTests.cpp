@@ -59,16 +59,9 @@ class CullingTest : public DawnTest {
     }
 
     wgpu::Texture Create2DTextureForTest(wgpu::TextureFormat format) {
-        wgpu::TextureDescriptor textureDescriptor;
-        textureDescriptor.dimension = wgpu::TextureDimension::e2D;
-        textureDescriptor.format = format;
-        textureDescriptor.usage =
-            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-        textureDescriptor.arrayLayerCount = 1;
-        textureDescriptor.mipLevelCount = 1;
-        textureDescriptor.sampleCount = 1;
-        textureDescriptor.size = {kSize, kSize, 1};
-        return device.CreateTexture(&textureDescriptor);
+        return utils::Create2DTexture(
+            device, kSize, kSize, format,
+            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
     }
 
     void DoTest(wgpu::FrontFace frontFace,

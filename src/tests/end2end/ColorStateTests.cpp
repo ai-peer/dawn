@@ -743,19 +743,10 @@ TEST_P(ColorStateTest, IndependentColorState) {
     std::array<wgpu::Texture, 4> renderTargets;
     std::array<wgpu::TextureView, 4> renderTargetViews;
 
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = kRTSize;
-    descriptor.size.height = kRTSize;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
-    descriptor.sampleCount = 1;
-    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-    descriptor.mipLevelCount = 1;
-    descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-
     for (uint32_t i = 0; i < 4; ++i) {
-        renderTargets[i] = device.CreateTexture(&descriptor);
+        renderTargets[i] = utils::Create2DTexture(
+            device, kRTSize, kRTSize, wgpu::TextureFormat::RGBA8Unorm,
+            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
         renderTargetViews[i] = renderTargets[i].CreateView();
     }
 
