@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "641b87c5_ac959f9a",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T23:19:48Z",
+      "side": 1,
+      "message": "I think we could just move CheckPassedFences into IsCompletedSerialUpdated, and return mLastCompletedSerial !\u003d mCompletedSerial. That way, DeviceBase can skip TickImpl completely if the completed serial didn\u0027t change.\n\nTickImpl() would set `mLastCompletedSerial \u003d mCompletedSerial`\n\nOther backends would be simpler. ex.) D3D12 can do mCompletedSerial !\u003d mFence-\u003eGetCompletedValue()",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 25
+      },
+      "revId": "4329d07bab294ba9f6a62af6d9f13ad49051fc3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
