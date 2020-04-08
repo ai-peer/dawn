@@ -16,6 +16,24 @@
       "revId": "33e4a2c7b719acebc2e2981dacfe53bc5e951233",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e32b19e0_72b8f21e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T11:49:34Z",
+      "side": 1,
+      "message": "Good catch, we also need to do it in the bindgroup constructor. I\u0027ll put up another CL with the one place where this matters at the moment.",
+      "parentUuid": "6e3a6d70_4a40c52b",
+      "revId": "33e4a2c7b719acebc2e2981dacfe53bc5e951233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
