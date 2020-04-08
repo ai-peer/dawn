@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "89c64250_5b98c0ed",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc4e38c4_0794c2af",
+      "range": {
+        "startLine": 80,
+        "startChar": 88,
+        "endLine": 80,
+        "endChar": 90
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d5dc2eb_3eb6b2e0",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b893d4f9_ae3ce495",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d5dc2eb_3eb6b2e0",
+      "range": {
+        "startLine": 121,
+        "startChar": 81,
+        "endLine": 121,
+        "endChar": 84
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "03b07bb8_f39a2153",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ef15b7c_1d3e3dce",
+      "range": {
+        "startLine": 319,
+        "startChar": 86,
+        "endLine": 319,
+        "endChar": 89
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c00b0e22_489b5e52",
         "filename": "src/utils/WGPUHelpers.cpp",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74c65477_025001d0",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c00b0e22_489b5e52",
+      "range": {
+        "startLine": 347,
+        "startChar": 39,
+        "endLine": 347,
+        "endChar": 64
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "da07db9c_ecf50cf5",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b9d41f0_1bacdb02",
+      "range": {
+        "startLine": 142,
+        "startChar": 39,
+        "endLine": 142,
+        "endChar": 61
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00c6a052_d6649e06",
         "filename": "src/utils/WGPUHelpers.h",
         "patchSetId": 4
@@ -137,6 +257,30 @@
       "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81136623_c73af7ea",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-08T13:51:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00c6a052_d6649e06",
+      "range": {
+        "startLine": 148,
+        "startChar": 71,
+        "endLine": 150,
+        "endChar": 69
+      },
+      "revId": "444ce2948aa3a92b1d042d999f083c7493711af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
