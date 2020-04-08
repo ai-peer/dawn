@@ -115,6 +115,9 @@ namespace dawn_native { namespace metal {
         // different thread, so it needs to be atomic.
         std::atomic<uint64_t> mCompletedSerial;
 
+        bool mIsCompletedSerialUpdated = false;
+        bool IsCompletedSerialUpdated() const override;
+
         // mLastSubmittedCommands will be accessed in a Metal schedule handler that can be fired on
         // a different thread so we guard access to it with a mutex.
         std::mutex mLastSubmittedCommandsMutex;
