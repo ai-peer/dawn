@@ -127,6 +127,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d33a7954_0454b87a",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-08T22:02:42Z",
+      "side": 1,
+      "message": "As an implementation idea for Rafael\u0027s suggestion, could we template-overload Ref\u003c\u003e for BindGroups and have that Ref overload hold an extra Ref to the allocator (or BGL)?\n\nI think your new suggestion would also work, though I don\u0027t think we need to `delete this` inside the helper. Couldn\u0027t it just be a pre-delete function?",
+      "parentUuid": "e5e38741_c1d8094c",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
