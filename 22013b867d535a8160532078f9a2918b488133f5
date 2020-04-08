@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "379200bc_d2916860",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:56:35Z",
+      "side": 1,
+      "message": "Good suggestion, done.",
+      "parentUuid": "c68a6a72_6dc37cbe",
+      "range": {
+        "startLine": 629,
+        "startChar": 4,
+        "endLine": 634,
+        "endChar": 18
+      },
+      "revId": "22013b867d535a8160532078f9a2918b488133f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc7287a1_6f720aed",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 2
@@ -69,6 +93,30 @@
       "revId": "22013b867d535a8160532078f9a2918b488133f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1757f9e9_75d73114",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:56:35Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s needed because the mock are StrictMocks already. Added a comment that unmap only results in unmap.",
+      "parentUuid": "c95d73c3_1db8268e",
+      "range": {
+        "startLine": 636,
+        "startChar": 4,
+        "endLine": 640,
+        "endChar": 0
+      },
+      "revId": "22013b867d535a8160532078f9a2918b488133f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

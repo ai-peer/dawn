@@ -70,6 +70,30 @@
       "revId": "674226bbe5086bee8c721fd19c2105e7ac5fd77e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9029497b_7c57b445",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-08T09:56:35Z",
+      "side": 1,
+      "message": "That\u0027s correct, at some point we might want to revisit Unknown vs. Failed in native to see if we can match the JS API more closely.",
+      "parentUuid": "34e645e5_8eb5da91",
+      "range": {
+        "startLine": 377,
+        "startChar": 33,
+        "endLine": 377,
+        "endChar": 65
+      },
+      "revId": "674226bbe5086bee8c721fd19c2105e7ac5fd77e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
