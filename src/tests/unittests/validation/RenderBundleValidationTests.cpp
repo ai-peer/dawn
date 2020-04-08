@@ -850,18 +850,14 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
         device.CreateRenderBundleEncoder(&renderBundleDesc);
     wgpu::RenderBundle renderBundle = renderBundleEncoder.Finish();
 
-    wgpu::TextureDescriptor textureDesc = {};
-    textureDesc.usage = wgpu::TextureUsage::OutputAttachment;
-    textureDesc.size = wgpu::Extent3D({400, 400, 1});
+    wgpu::Texture tex0 = utils::Create2DTexture(device, 400, 400, wgpu::TextureFormat::RGBA8Unorm,
+                                                wgpu::TextureUsage::OutputAttachment);
 
-    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
-    wgpu::Texture tex0 = device.CreateTexture(&textureDesc);
+    wgpu::Texture tex1 = utils::Create2DTexture(device, 400, 400, wgpu::TextureFormat::RG16Float,
+                                                wgpu::TextureUsage::OutputAttachment);
 
-    textureDesc.format = wgpu::TextureFormat::RG16Float;
-    wgpu::Texture tex1 = device.CreateTexture(&textureDesc);
-
-    textureDesc.format = wgpu::TextureFormat::R16Sint;
-    wgpu::Texture tex2 = device.CreateTexture(&textureDesc);
+    wgpu::Texture tex2 = utils::Create2DTexture(device, 400, 400, wgpu::TextureFormat::R16Sint,
+                                                wgpu::TextureUsage::OutputAttachment);
 
     // Test the success case
     {

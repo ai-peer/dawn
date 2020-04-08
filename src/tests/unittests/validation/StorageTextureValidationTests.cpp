@@ -155,19 +155,15 @@ class StorageTextureValidationTests : public ValidationTest {
         return ostream.str();
     }
 
-    wgpu::Texture CreateTexture(wgpu::TextureUsage usage,
-                                wgpu::TextureFormat format,
-                                uint32_t sampleCount = 1,
-                                uint32_t arrayLayerCount = 1) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size = {16, 16, 1};
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = sampleCount;
-        descriptor.format = format;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = usage;
-        return device.CreateTexture(&descriptor);
+    wgpu::Texture Create2DTexture(wgpu::TextureUsage usage,
+                                  wgpu::TextureFormat format,
+                                  uint32_t sampleCount = 1,
+                                  uint32_t arrayLayerCount = 1) {
+        if (sampleCount == 1) {
+            return utils::Create2DArrayTexture(device, 16, 16, arrayLayerCount, format, usage);
+        } else {
+            return utils::Create2DMultisampledTexture(device, 16, 16, format, usage, sampleCount);
+        }
     }
 
     const wgpu::ShaderModule mDefaultVSModule =
@@ -701,7 +697,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureBindingTypeInBindGroup) {
         // Texture views are allowed to be used as storage textures in a bind group.
         {
             wgpu::TextureView textureView =
-                CreateTexture(wgpu::TextureUsage::Storage, kStorageTextureFormat).CreateView();
+                Create2DTexture(wgpu::TextureUsage::Storage, kStorageTextureFormat).CreateView();
             utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
         }
     }
@@ -729,7 +725,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureUsageInBindGroup) {
         for (wgpu::TextureUsage usage : kTextureUsages) {
             // Create texture views with different texture usages
             wgpu::TextureView textureView =
-                CreateTexture(usage, kStorageTextureFormat).CreateView();
+                Create2DTexture(usage, kStorageTextureFormat).CreateView();
 
             // Verify that the texture used as storage texture must be created with the texture
             // usage wgpu::TextureUsage::STORAGE.
@@ -770,7 +766,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroup) {
 
                 // Create texture views with different texture formats.
                 wgpu::TextureView storageTextureView =
-                    CreateTexture(wgpu::TextureUsage::Storage, textureViewFormat).CreateView();
+                    Create2DTexture(wgpu::TextureUsage::Storage, textureViewFormat).CreateView();
 
                 // Verify that the format of the texture view used as storage texture in a bind
                 // group must match the storage texture format declaration in the bind group layout.
@@ -799,7 +795,7 @@ TEST_F(StorageTextureValidationTests, StorageTextureViewDimensionInBindGroup) {
         wgpu::TextureViewDimension::Cube, wgpu::TextureViewDimension::CubeArray};
 
     wgpu::Texture texture =
-        CreateTexture(wgpu::TextureUsage::Storage, kStorageTextureFormat, 1, kArrayLayerCount);
+        Create2DTexture(wgpu::TextureUsage::Storage, kStorageTextureFormat, 1, kArrayLayerCount);
 
     wgpu::TextureViewDescriptor kDefaultTextureViewDescriptor;
     kDefaultTextureViewDescriptor.format = kStorageTextureFormat;

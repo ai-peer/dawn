@@ -76,17 +76,10 @@ class CopyTests_T2B : public CopyTests {
 
         void DoTest(const TextureSpec& textureSpec, const BufferSpec& bufferSpec) {
             // Create a texture that is `width` x `height` with (`level` + 1) mip levels.
-            wgpu::TextureDescriptor descriptor;
-            descriptor.dimension = wgpu::TextureDimension::e2D;
-            descriptor.size.width = textureSpec.width;
-            descriptor.size.height = textureSpec.height;
-            descriptor.size.depth = 1;
-            descriptor.arrayLayerCount = textureSpec.arraySize;
-            descriptor.sampleCount = 1;
-            descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-            descriptor.mipLevelCount = textureSpec.level + 1;
-            descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
-            wgpu::Texture texture = device.CreateTexture(&descriptor);
+            wgpu::Texture texture = utils::Create2DArrayTexture(
+                device, textureSpec.width, textureSpec.height, textureSpec.arraySize,
+                wgpu::TextureFormat::RGBA8Unorm,
+                wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, textureSpec.level + 1);
 
             uint32_t width = textureSpec.width >> textureSpec.level;
             uint32_t height = textureSpec.height >> textureSpec.level;
@@ -191,17 +184,9 @@ protected:
                           bufferData.data());
 
         // Create a texture that is `width` x `height` with (`level` + 1) mip levels.
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = textureSpec.width;
-        descriptor.size.height = textureSpec.height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = 1;
-        descriptor.sampleCount = 1;
-        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        descriptor.mipLevelCount = textureSpec.level + 1;
-        descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
-        wgpu::Texture texture = device.CreateTexture(&descriptor);
+        wgpu::Texture texture = utils::Create2DTexture(
+            device, textureSpec.width, textureSpec.height, wgpu::TextureFormat::RGBA8Unorm,
+            wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, textureSpec.level + 1);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
@@ -272,29 +257,15 @@ class CopyTests_T2T : public CopyTests {
 
   protected:
     void DoTest(const TextureSpec& srcSpec, const TextureSpec& dstSpec, const CopySize& copy) {
-        wgpu::TextureDescriptor srcDescriptor;
-        srcDescriptor.dimension = wgpu::TextureDimension::e2D;
-        srcDescriptor.size.width = srcSpec.width;
-        srcDescriptor.size.height = srcSpec.height;
-        srcDescriptor.size.depth = 1;
-        srcDescriptor.arrayLayerCount = srcSpec.arraySize;
-        srcDescriptor.sampleCount = 1;
-        srcDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        srcDescriptor.mipLevelCount = srcSpec.level + 1;
-        srcDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
-        wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
+        wgpu::Texture srcTexture = utils::Create2DArrayTexture(
+            device, srcSpec.width, srcSpec.height, srcSpec.arraySize,
+            wgpu::TextureFormat::RGBA8Unorm,
+            wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst, srcSpec.level + 1);
 
-        wgpu::TextureDescriptor dstDescriptor;
-        dstDescriptor.dimension = wgpu::TextureDimension::e2D;
-        dstDescriptor.size.width = dstSpec.width;
-        dstDescriptor.size.height = dstSpec.height;
-        dstDescriptor.size.depth = 1;
-        dstDescriptor.arrayLayerCount = dstSpec.arraySize;
-        dstDescriptor.sampleCount = 1;
-        dstDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        dstDescriptor.mipLevelCount = dstSpec.level + 1;
-        dstDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
-        wgpu::Texture dstTexture = device.CreateTexture(&dstDescriptor);
+        wgpu::Texture dstTexture = utils::Create2DArrayTexture(
+            device, dstSpec.width, dstSpec.height, dstSpec.arraySize,
+            wgpu::TextureFormat::RGBA8Unorm,
+            wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst, dstSpec.level + 1);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 

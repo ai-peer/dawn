@@ -28,27 +28,6 @@ class CopyCommandTest : public ValidationTest {
         return device.CreateBuffer(&descriptor);
     }
 
-    wgpu::Texture Create2DTexture(uint32_t width,
-                                  uint32_t height,
-                                  uint32_t mipLevelCount,
-                                  uint32_t arrayLayerCount,
-                                  wgpu::TextureFormat format,
-                                  wgpu::TextureUsage usage,
-                                  uint32_t sampleCount = 1) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = width;
-        descriptor.size.height = height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = sampleCount;
-        descriptor.format = format;
-        descriptor.mipLevelCount = mipLevelCount;
-        descriptor.usage = usage;
-        wgpu::Texture tex = device.CreateTexture(&descriptor);
-        return tex;
-    }
-
     // TODO(jiawei.shao@intel.com): support more pixel formats
     uint32_t TextureFormatPixelSize(wgpu::TextureFormat format) {
         switch (format) {
@@ -272,8 +251,8 @@ class CopyCommandTest_B2T : public CopyCommandTest {};
 TEST_F(CopyCommandTest_B2T, Success) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Different copies, including some that touch the OOB condition
     {
@@ -325,8 +304,8 @@ TEST_F(CopyCommandTest_B2T, Success) {
 TEST_F(CopyCommandTest_B2T, OutOfBoundsOnBuffer) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // OOB on the buffer because we copy too many pixels
     TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, 0, {0, 0, 0},
@@ -357,8 +336,8 @@ TEST_F(CopyCommandTest_B2T, OutOfBoundsOnBuffer) {
 TEST_F(CopyCommandTest_B2T, OutOfBoundsOnTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // OOB on the texture because x + width overflows
     TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, 0, {13, 12, 0},
@@ -384,8 +363,8 @@ TEST_F(CopyCommandTest_B2T, OutOfBoundsOnTexture) {
 // Test that we force Z=0 and Depth=1 on copies to 2D textures
 TEST_F(CopyCommandTest_B2T, ZDepthConstraintFor2DTextures) {
     wgpu::Buffer source = CreateBuffer(16 * 4, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Z=1 on an empty copy still errors
     TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 0, 0, {0, 0, 1},
@@ -400,10 +379,10 @@ TEST_F(CopyCommandTest_B2T, ZDepthConstraintFor2DTextures) {
 TEST_F(CopyCommandTest_B2T, IncorrectUsage) {
     wgpu::Buffer source = CreateBuffer(16 * 4, wgpu::BufferUsage::CopySrc);
     wgpu::Buffer vertex = CreateBuffer(16 * 4, wgpu::BufferUsage::Vertex);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
-    wgpu::Texture sampled =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::Sampled);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
+    wgpu::Texture sampled = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                   wgpu::TextureUsage::Sampled, 5);
 
     // Incorrect source usage
     TestB2TCopy(utils::Expectation::Failure, vertex, 0, 256, 0, destination, 0, 0, {0, 0, 0},
@@ -417,8 +396,8 @@ TEST_F(CopyCommandTest_B2T, IncorrectUsage) {
 TEST_F(CopyCommandTest_B2T, IncorrectRowPitch) {
     uint64_t bufferSize = BufferSizeForTextureCopy(128, 16, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination = Create2DTexture(128, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                                wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 128, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Default row pitch is not 256-byte aligned
     TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 0, 0, {0, 0, 0},
@@ -436,8 +415,8 @@ TEST_F(CopyCommandTest_B2T, IncorrectRowPitch) {
 TEST_F(CopyCommandTest_B2T, ImageHeightConstraint) {
     uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
     // Image height is zero (Valid)
     TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0, destination, 0, 0, {0, 0, 0},
@@ -460,8 +439,8 @@ TEST_F(CopyCommandTest_B2T, ImageHeightConstraint) {
 TEST_F(CopyCommandTest_B2T, IncorrectBufferOffset) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Correct usage
     TestB2TCopy(utils::Expectation::Success, source, bufferSize - 4, 256, 0, destination, 0, 0,
@@ -482,8 +461,8 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffset) {
 TEST_F(CopyCommandTest_B2T, CopyToMultisampledTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination = Create2DTexture(2, 2, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                                wgpu::TextureUsage::CopyDst, 4);
+    wgpu::Texture destination = utils::Create2DMultisampledTexture(
+        device, 2, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 4);
 
     TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, 0, {0, 0, 0},
                 {2, 2, 1});
@@ -507,8 +486,8 @@ TEST_F(CopyCommandTest_B2T, BufferOrTextureInErrorState) {
     wgpu::Extent3D extent3D = {1, 1, 1};
 
     {
-        wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                                    wgpu::TextureUsage::CopyDst);
+        wgpu::Texture destination = utils::Create2DTexture(
+            device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
         wgpu::TextureCopyView textureCopyView =
             utils::CreateTextureCopyView(destination, 0, 0, {1, 1, 1});
 
@@ -545,8 +524,8 @@ TEST_F(CopyCommandTest_B2T, TextureCopyBufferSizeLastRowComputation) {
 
         for (wgpu::TextureFormat format : kFormats) {
             wgpu::Buffer source = CreateBuffer(kInvalidBufferSize, wgpu::BufferUsage::CopySrc);
-            wgpu::Texture destination =
-                Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopyDst);
+            wgpu::Texture destination = utils::Create2DTexture(device, kWidth, kHeight, format,
+                                                               wgpu::TextureUsage::CopyDst);
             TestB2TCopy(utils::Expectation::Failure, source, 0, kRowPitch, 0, destination, 0, 0,
                         {0, 0, 0}, {kWidth, kHeight, 1});
         }
@@ -555,8 +534,8 @@ TEST_F(CopyCommandTest_B2T, TextureCopyBufferSizeLastRowComputation) {
     {
         for (wgpu::TextureFormat format : kFormats) {
             uint32_t validBufferSize = BufferSizeForTextureCopy(kWidth, kHeight, 1, format);
-            wgpu::Texture destination =
-                Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopyDst);
+            wgpu::Texture destination = utils::Create2DTexture(device, kWidth, kHeight, format,
+                                                               wgpu::TextureUsage::CopyDst);
 
             // Verify the return value of BufferSizeForTextureCopy() is exactly the minimum valid
             // buffer size in this test.
@@ -581,8 +560,8 @@ TEST_F(CopyCommandTest_B2T, CopyToMipmapOfNonSquareTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 2, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
     uint32_t maxMipmapLevel = 3;
-    wgpu::Texture destination = Create2DTexture(
-        4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 4, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, maxMipmapLevel);
 
     // Copy to top level mip map
     TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0, destination, maxMipmapLevel - 1, 0,
@@ -606,8 +585,8 @@ class CopyCommandTest_T2B : public CopyCommandTest {};
 // Test a successfull T2B copy
 TEST_F(CopyCommandTest_T2B, Success) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Different copies, including some that touch the OOB condition
@@ -659,8 +638,8 @@ TEST_F(CopyCommandTest_T2B, Success) {
 // Test OOB conditions on the texture
 TEST_F(CopyCommandTest_T2B, OutOfBoundsOnTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // OOB on the texture because x + width overflows
@@ -683,8 +662,8 @@ TEST_F(CopyCommandTest_T2B, OutOfBoundsOnTexture) {
 // Test OOB conditions on the buffer
 TEST_F(CopyCommandTest_T2B, OutOfBoundsOnBuffer) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // OOB on the buffer because we copy too many pixels
@@ -715,8 +694,8 @@ TEST_F(CopyCommandTest_T2B, OutOfBoundsOnBuffer) {
 // Test that we force Z=0 and Depth=1 on copies from to 2D textures
 TEST_F(CopyCommandTest_T2B, ZDepthConstraintFor2DTextures) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Z=1 on an empty copy still errors
@@ -731,10 +710,10 @@ TEST_F(CopyCommandTest_T2B, ZDepthConstraintFor2DTextures) {
 // Test T2B copies with incorrect buffer usage
 TEST_F(CopyCommandTest_T2B, IncorrectUsage) {
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture sampled =
-        Create2DTexture(16, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::Sampled);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture sampled = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                   wgpu::TextureUsage::Sampled, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
     wgpu::Buffer vertex = CreateBuffer(bufferSize, wgpu::BufferUsage::Vertex);
 
@@ -748,8 +727,8 @@ TEST_F(CopyCommandTest_T2B, IncorrectUsage) {
 
 TEST_F(CopyCommandTest_T2B, IncorrectRowPitch) {
     uint64_t bufferSize = BufferSizeForTextureCopy(128, 16, 1);
-    wgpu::Texture source = Create2DTexture(128, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                           wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DTexture(device, 128, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopyDst, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
 
     // Default row pitch is not 256-byte aligned
@@ -767,8 +746,8 @@ TEST_F(CopyCommandTest_T2B, IncorrectRowPitch) {
 
 TEST_F(CopyCommandTest_T2B, ImageHeightConstraint) {
     uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 1);
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 16, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Image height is zero (Valid)
@@ -791,8 +770,8 @@ TEST_F(CopyCommandTest_T2B, ImageHeightConstraint) {
 // Test T2B copies with incorrect buffer offset usage
 TEST_F(CopyCommandTest_T2B, IncorrectBufferOffset) {
     uint64_t bufferSize = BufferSizeForTextureCopy(128, 16, 1);
-    wgpu::Texture source = Create2DTexture(128, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                           wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 128, 16, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, 5);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
     // Correct usage
@@ -810,8 +789,8 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffset) {
 
 // Test multisampled textures cannot be used in T2B copies.
 TEST_F(CopyCommandTest_T2B, CopyFromMultisampledTexture) {
-    wgpu::Texture source = Create2DTexture(2, 2, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                           wgpu::TextureUsage::CopySrc, 4);
+    wgpu::Texture source = utils::Create2DMultisampledTexture(
+        device, 2, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 4);
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
@@ -848,8 +827,8 @@ TEST_F(CopyCommandTest_T2B, BufferOrTextureInErrorState) {
     }
 
     {
-        wgpu::Texture destination = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                                    wgpu::TextureUsage::CopyDst);
+        wgpu::Texture destination = utils::Create2DTexture(
+            device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
         wgpu::TextureCopyView textureCopyView =
             utils::CreateTextureCopyView(destination, 0, 0, {1, 1, 1});
 
@@ -874,8 +853,8 @@ TEST_F(CopyCommandTest_T2B, TextureCopyBufferSizeLastRowComputation) {
         constexpr uint32_t kInvalidBufferSize = kRowPitch * (kHeight - 1) + kWidth;
 
         for (wgpu::TextureFormat format : kFormats) {
-            wgpu::Texture source =
-                Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopyDst);
+            wgpu::Texture source = utils::Create2DTexture(device, kWidth, kHeight, format,
+                                                          wgpu::TextureUsage::CopyDst);
 
             wgpu::Buffer destination = CreateBuffer(kInvalidBufferSize, wgpu::BufferUsage::CopySrc);
             TestT2BCopy(utils::Expectation::Failure, source, 0, 0, {0, 0, 0}, destination, 0,
@@ -886,8 +865,8 @@ TEST_F(CopyCommandTest_T2B, TextureCopyBufferSizeLastRowComputation) {
     {
         for (wgpu::TextureFormat format : kFormats) {
             uint32_t validBufferSize = BufferSizeForTextureCopy(kWidth, kHeight, 1, format);
-            wgpu::Texture source =
-                Create2DTexture(kWidth, kHeight, 1, 1, format, wgpu::TextureUsage::CopySrc);
+            wgpu::Texture source = utils::Create2DTexture(device, kWidth, kHeight, format,
+                                                          wgpu::TextureUsage::CopySrc);
 
             // Verify the return value of BufferSizeForTextureCopy() is exactly the minimum valid
             // buffer size in this test.
@@ -912,8 +891,8 @@ TEST_F(CopyCommandTest_T2B, TextureCopyBufferSizeLastRowComputation) {
 // Test copy from mip map of non square texture to buffer
 TEST_F(CopyCommandTest_T2B, CopyFromMipmapOfNonSquareTexture) {
     uint32_t maxMipmapLevel = 3;
-    wgpu::Texture source = Create2DTexture(4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                           wgpu::TextureUsage::CopySrc);
+    wgpu::Texture source = utils::Create2DTexture(device, 4, 2, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, maxMipmapLevel);
     uint64_t bufferSize = BufferSizeForTextureCopy(4, 2, 1);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
@@ -937,10 +916,10 @@ TEST_F(CopyCommandTest_T2B, CopyFromMipmapOfNonSquareTexture) {
 class CopyCommandTest_T2T : public CopyCommandTest {};
 
 TEST_F(CopyCommandTest_T2T, Success) {
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Different copies, including some that touch the OOB condition
     {
@@ -990,10 +969,10 @@ TEST_F(CopyCommandTest_T2T, Success) {
 }
 
 TEST_F(CopyCommandTest_T2T, IncorrectUsage) {
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Incorrect source usage causes failure
     TestT2TCopy(utils::Expectation::Failure, destination, 0, 0, {0, 0, 0}, destination, 0, 0,
@@ -1005,10 +984,10 @@ TEST_F(CopyCommandTest_T2T, IncorrectUsage) {
 }
 
 TEST_F(CopyCommandTest_T2T, OutOfBounds) {
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // OOB on source
     {
@@ -1058,10 +1037,10 @@ TEST_F(CopyCommandTest_T2T, OutOfBounds) {
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthConstraints) {
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Empty copy on source with z > 0 fails
     TestT2TCopy(utils::Expectation::Failure, source, 0, 0, {0, 0, 1}, destination, 0, 0, {0, 0, 0},
@@ -1077,10 +1056,10 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthConstraints) {
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthStencil) {
-    wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8,
-                                           wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination = Create2DTexture(
-        16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
 
     // Success when entire depth stencil subresource is copied
     TestT2TCopy(utils::Expectation::Success, source, 0, 0, {0, 0, 0}, destination, 0, 0, {0, 0, 0},
@@ -1092,10 +1071,10 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthStencil) {
 }
 
 TEST_F(CopyCommandTest_T2T, FormatsMismatch) {
-    wgpu::Texture source =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Uint, wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination =
-        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Uint, wgpu::TextureUsage::CopySrc, 5);
+    wgpu::Texture destination = utils::Create2DArrayTexture(
+        device, 16, 16, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 5);
 
     // Failure when formats don't match
     TestT2TCopy(utils::Expectation::Failure, source, 0, 0, {0, 0, 0}, destination, 0, 0, {0, 0, 0},
@@ -1103,12 +1082,12 @@ TEST_F(CopyCommandTest_T2T, FormatsMismatch) {
 }
 
 TEST_F(CopyCommandTest_T2T, MultisampledCopies) {
-    wgpu::Texture sourceMultiSampled1x = Create2DTexture(
-        16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 1);
-    wgpu::Texture sourceMultiSampled4x = Create2DTexture(
-        16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 4);
-    wgpu::Texture destinationMultiSampled4x = Create2DTexture(
-        16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 4);
+    wgpu::Texture sourceMultiSampled1x = utils::Create2DTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 1);
+    wgpu::Texture sourceMultiSampled4x = utils::Create2DMultisampledTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc, 4);
+    wgpu::Texture destinationMultiSampled4x = utils::Create2DMultisampledTexture(
+        device, 16, 16, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 4);
 
     // Success when entire multisampled subresource is copied
     {
@@ -1131,10 +1110,10 @@ TEST_F(CopyCommandTest_T2T, MultisampledCopies) {
 // Test copy to mip map of non square textures
 TEST_F(CopyCommandTest_T2T, CopyToMipmapOfNonSquareTexture) {
     uint32_t maxMipmapLevel = 3;
-    wgpu::Texture source = Create2DTexture(4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm,
-                                           wgpu::TextureUsage::CopySrc);
-    wgpu::Texture destination = Create2DTexture(
-        4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    wgpu::Texture source = utils::Create2DTexture(device, 4, 2, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopySrc, maxMipmapLevel);
+    wgpu::Texture destination = utils::Create2DTexture(
+        device, 4, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, maxMipmapLevel);
     // Copy to top level mip map
     TestT2TCopy(utils::Expectation::Success, source, maxMipmapLevel - 1, 0, {0, 0, 0}, destination,
                 maxMipmapLevel - 1, 0, {0, 0, 0}, {1, 1, 1});
@@ -1166,8 +1145,8 @@ class CopyCommandTest_CompressedTextureFormats : public CopyCommandTest {
         constexpr wgpu::TextureUsage kUsage =
             wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::Sampled;
         constexpr uint32_t kArrayLayers = 1;
-        return CopyCommandTest::Create2DTexture(width, height, mipmapLevels, kArrayLayers, format,
-                                                kUsage, 1);
+        return utils::Create2DArrayTexture(device, width, height, kArrayLayers, format, kUsage,
+                                           mipmapLevels);
     }
 
     static uint32_t CompressedFormatBlockSizeInBytes(wgpu::TextureFormat format) {
