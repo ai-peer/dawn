@@ -223,6 +223,30 @@
       "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e65314c_0f41ce80",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-08T23:47:39Z",
+      "side": 1,
+      "message": "Ack/SGTM",
+      "parentUuid": "53b0c860_41a4f99f",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "01f31d5dbc8a43e113a978a73a82d7b95faea884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
