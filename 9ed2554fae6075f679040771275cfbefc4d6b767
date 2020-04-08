@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d84dadb_645fa19a",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T15:28:05Z",
+      "side": 1,
+      "message": "nit: don\u0027t need both virtual and override",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 36
+      },
+      "revId": "9ed2554fae6075f679040771275cfbefc4d6b767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e511888_312aac8a",
+        "filename": "src/dawn_native/vulkan/AdapterVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T15:28:05Z",
+      "side": 1,
+      "message": "nit: don\u0027t need both virtual and override",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 45
+      },
+      "revId": "9ed2554fae6075f679040771275cfbefc4d6b767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
