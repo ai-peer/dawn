@@ -202,17 +202,9 @@ namespace utils {
                                           uint32_t height) {
         DAWN_ASSERT(width > 0 && height > 0);
 
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = width;
-        descriptor.size.height = height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = 1;
-        descriptor.sampleCount = 1;
-        descriptor.format = BasicRenderPass::kDefaultColorFormat;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-        wgpu::Texture color = device.CreateTexture(&descriptor);
+        wgpu::Texture color =
+            Create2DTexture(device, width, height, BasicRenderPass::kDefaultColorFormat,
+                            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc);
 
         return BasicRenderPass(width, height, color);
     }
@@ -335,6 +327,48 @@ namespace utils {
         descriptor.bindings = bindings.data();
 
         return device.CreateBindGroup(&descriptor);
+    }
+
+    wgpu::Texture Create2DTexture(wgpu::Device device,
+                                  uint32_t width,
+                                  uint32_t height,
+                                  wgpu::TextureFormat format,
+                                  wgpu::TextureUsage usage,
+                                  uint32_t mipLevelCount) {
+        return Create2DMultisampledTexture(device, width, height, format, usage, 1, mipLevelCount,
+                                           1);
+    }
+
+    wgpu::Texture Create2DArrayTexture(wgpu::Device device,
+                                       uint32_t width,
+                                       uint32_t height,
+                                       wgpu::TextureFormat format,
+                                       wgpu::TextureUsage usage,
+                                       uint32_t arrayLayerCount,
+                                       uint32_t mipLevelCount) {
+        return Create2DMultisampledTexture(device, width, height, format, usage, arrayLayerCount,
+                                           mipLevelCount, 1);
+    }
+
+    wgpu::Texture Create2DMultisampledTexture(wgpu::Device device,
+                                              uint32_t width,
+                                              uint32_t height,
+                                              wgpu::TextureFormat format,
+                                              wgpu::TextureUsage usage,
+                                              uint32_t arrayLayerCount,
+                                              uint32_t mipLevelCount,
+                                              uint32_t sampleCount) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = wgpu::TextureDimension::e2D;
+        descriptor.size.width = width;
+        descriptor.size.height = height;
+        descriptor.size.depth = 1;
+        descriptor.arrayLayerCount = arrayLayerCount;
+        descriptor.sampleCount = sampleCount;
+        descriptor.format = format;
+        descriptor.mipLevelCount = mipLevelCount;
+        descriptor.usage = usage;
+        return device.CreateTexture(&descriptor);
     }
 
 }  // namespace utils

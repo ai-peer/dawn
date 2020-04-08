@@ -35,18 +35,8 @@ class CopyCommandTest : public ValidationTest {
                                   wgpu::TextureFormat format,
                                   wgpu::TextureUsage usage,
                                   uint32_t sampleCount = 1) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size.width = width;
-        descriptor.size.height = height;
-        descriptor.size.depth = 1;
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = sampleCount;
-        descriptor.format = format;
-        descriptor.mipLevelCount = mipLevelCount;
-        descriptor.usage = usage;
-        wgpu::Texture tex = device.CreateTexture(&descriptor);
-        return tex;
+        return utils::Create2DMultisampledTexture(device, width, height, format, usage,
+                                                  arrayLayerCount, mipLevelCount, sampleCount);
     }
 
     // TODO(jiawei.shao@intel.com): support more pixel formats

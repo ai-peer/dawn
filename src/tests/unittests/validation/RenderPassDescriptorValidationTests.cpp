@@ -42,35 +42,23 @@ class RenderPassDescriptorValidationTest : public ValidationTest {
     }
 };
 
-wgpu::Texture CreateTexture(wgpu::Device& device,
-                            wgpu::TextureDimension dimension,
-                            wgpu::TextureFormat format,
-                            uint32_t width,
-                            uint32_t height,
-                            uint32_t arrayLayerCount,
-                            uint32_t mipLevelCount,
-                            uint32_t sampleCount = 1,
-                            wgpu::TextureUsage usage = wgpu::TextureUsage::OutputAttachment) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = dimension;
-    descriptor.size.width = width;
-    descriptor.size.height = height;
-    descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = arrayLayerCount;
-    descriptor.sampleCount = sampleCount;
-    descriptor.format = format;
-    descriptor.mipLevelCount = mipLevelCount;
-    descriptor.usage = usage;
-
-    return device.CreateTexture(&descriptor);
+wgpu::Texture Create2DTexture(wgpu::Device& device,
+                              wgpu::TextureFormat format,
+                              uint32_t width,
+                              uint32_t height,
+                              uint32_t arrayLayerCount,
+                              uint32_t mipLevelCount,
+                              uint32_t sampleCount = 1,
+                              wgpu::TextureUsage usage = wgpu::TextureUsage::OutputAttachment) {
+    return utils::Create2DMultisampledTexture(device, width, height, format, usage, arrayLayerCount,
+                                              mipLevelCount, sampleCount);
 }
 
 wgpu::TextureView Create2DAttachment(wgpu::Device& device,
                                      uint32_t width,
                                      uint32_t height,
                                      wgpu::TextureFormat format) {
-    wgpu::Texture texture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, format, width, height, 1, 1);
+    wgpu::Texture texture = Create2DTexture(device, format, width, height, 1, 1);
     return texture.CreateView();
 }
 
@@ -199,11 +187,10 @@ TEST_F(RenderPassDescriptorValidationTest, DepthStencilStoreOpMismatch) {
     constexpr wgpu::TextureFormat kColorFormat = wgpu::TextureFormat::RGBA8Unorm;
     constexpr wgpu::TextureFormat kDepthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
 
-    wgpu::Texture colorTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                               kSize, kSize, kArrayLayers, kLevelCount);
+    wgpu::Texture colorTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::Texture depthStencilTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kDepthStencilFormat, kSize, kSize,
-                      kArrayLayers, kLevelCount);
+        Create2DTexture(device, kDepthStencilFormat, kSize, kSize, kArrayLayers, kLevelCount);
 
     wgpu::TextureViewDescriptor descriptor;
     descriptor.dimension = wgpu::TextureViewDimension::e2D;
@@ -249,11 +236,10 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
 
     constexpr uint32_t kArrayLayers = 10;
 
-    wgpu::Texture colorTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                               kSize, kSize, kArrayLayers, kLevelCount);
+    wgpu::Texture colorTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::Texture depthStencilTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kDepthStencilFormat, kSize, kSize,
-                      kArrayLayers, kLevelCount);
+        Create2DTexture(device, kDepthStencilFormat, kSize, kSize, kArrayLayers, kLevelCount);
 
     wgpu::TextureViewDescriptor baseDescriptor;
     baseDescriptor.dimension = wgpu::TextureViewDimension::e2DArray;
@@ -342,11 +328,10 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
 
     constexpr uint32_t kLevelCount = 4;
 
-    wgpu::Texture colorTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                               kSize, kSize, kArrayLayers, kLevelCount);
+    wgpu::Texture colorTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::Texture depthStencilTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kDepthStencilFormat, kSize, kSize,
-                      kArrayLayers, kLevelCount);
+        Create2DTexture(device, kDepthStencilFormat, kSize, kSize, kArrayLayers, kLevelCount);
 
     wgpu::TextureViewDescriptor baseDescriptor;
     baseDescriptor.dimension = wgpu::TextureViewDimension::e2D;
@@ -434,12 +419,10 @@ TEST_F(RenderPassDescriptorValidationTest, NonMultisampledColorWithResolveTarget
     static constexpr uint32_t kSampleCount = 1;
     static constexpr wgpu::TextureFormat kColorFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-    wgpu::Texture colorTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
-                      kLevelCount, kSampleCount);
-    wgpu::Texture resolveTargetTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
-                      kLevelCount, kSampleCount);
+    wgpu::Texture colorTexture = Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers,
+                                                 kLevelCount, kSampleCount);
+    wgpu::Texture resolveTargetTexture = Create2DTexture(device, kColorFormat, kSize, kSize,
+                                                         kArrayLayers, kLevelCount, kSampleCount);
     wgpu::TextureView colorTextureView = colorTexture.CreateView();
     wgpu::TextureView resolveTargetTextureView = resolveTargetTexture.CreateView();
 
@@ -470,9 +453,8 @@ class MultisampledRenderPassDescriptorValidationTest : public RenderPassDescript
 
   private:
     wgpu::TextureView CreateColorTextureView(uint32_t sampleCount) {
-        wgpu::Texture colorTexture =
-            CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat, kSize, kSize,
-                          kArrayLayers, kLevelCount, sampleCount);
+        wgpu::Texture colorTexture = Create2DTexture(device, kColorFormat, kSize, kSize,
+                                                     kArrayLayers, kLevelCount, sampleCount);
 
         return colorTexture.CreateView();
     }
@@ -510,8 +492,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledResolveTarget
 // It is not allowed to use a resolve target with array layer count > 1.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetArrayLayerMoreThanOne) {
     constexpr uint32_t kArrayLayers2 = 2;
-    wgpu::Texture resolveTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                                 kSize, kSize, kArrayLayers2, kLevelCount);
+    wgpu::Texture resolveTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers2, kLevelCount);
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView();
 
     utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
@@ -522,8 +504,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetArrayLayerMo
 // It is not allowed to use a resolve target with mipmap level count > 1.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetMipmapLevelMoreThanOne) {
     constexpr uint32_t kLevelCount2 = 2;
-    wgpu::Texture resolveTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                                 kSize, kSize, kArrayLayers, kLevelCount2);
+    wgpu::Texture resolveTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount2);
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView();
 
     utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
@@ -536,8 +518,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetMipmapLevelM
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetUsageNoOutputAttachment) {
     constexpr wgpu::TextureUsage kUsage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
     wgpu::Texture nonColorUsageResolveTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
-                      kLevelCount, 1, kUsage);
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount, 1, kUsage);
     wgpu::TextureView nonColorUsageResolveTextureView = nonColorUsageResolveTexture.CreateView();
 
     utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
@@ -547,8 +528,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetUsageNoOutpu
 
 // It is not allowed to use a resolve target which is in error state.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetInErrorState) {
-    wgpu::Texture resolveTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                                 kSize, kSize, kArrayLayers, kLevelCount);
+    wgpu::Texture resolveTexture =
+        Create2DTexture(device, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::TextureViewDescriptor errorTextureView;
     errorTextureView.dimension = wgpu::TextureViewDimension::e2D;
     errorTextureView.format = kColorFormat;
@@ -573,8 +554,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, MultisampledColorWithReso
 // It is not allowed to use a resolve target in a format different from the color attachment.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetDifferentFormat) {
     constexpr wgpu::TextureFormat kColorFormat2 = wgpu::TextureFormat::BGRA8Unorm;
-    wgpu::Texture resolveTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat2,
-                                                 kSize, kSize, kArrayLayers, kLevelCount);
+    wgpu::Texture resolveTexture =
+        Create2DTexture(device, kColorFormat2, kSize, kSize, kArrayLayers, kLevelCount);
     wgpu::TextureView resolveTextureView = resolveTexture.CreateView();
 
     utils::ComboRenderPassDescriptor renderPass = CreateMultisampledRenderPass();
@@ -585,8 +566,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ResolveTargetDifferentFor
 // Tests on the size of the resolve target.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, ColorAttachmentResolveTargetCompatibility) {
     constexpr uint32_t kSize2 = kSize * 2;
-    wgpu::Texture resolveTexture = CreateTexture(device, wgpu::TextureDimension::e2D, kColorFormat,
-                                                 kSize2, kSize2, kArrayLayers, kLevelCount + 1);
+    wgpu::Texture resolveTexture =
+        Create2DTexture(device, kColorFormat, kSize2, kSize2, kArrayLayers, kLevelCount + 1);
 
     wgpu::TextureViewDescriptor textureViewDescriptor;
     textureViewDescriptor.nextInChain = nullptr;
@@ -622,9 +603,8 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, ColorAttachmentResolveTar
 // Tests on the sample count of depth stencil attachment.
 TEST_F(MultisampledRenderPassDescriptorValidationTest, DepthStencilAttachmentSampleCount) {
     constexpr wgpu::TextureFormat kDepthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
-    wgpu::Texture multisampledDepthStencilTexture =
-        CreateTexture(device, wgpu::TextureDimension::e2D, kDepthStencilFormat, kSize, kSize,
-                      kArrayLayers, kLevelCount, kSampleCount);
+    wgpu::Texture multisampledDepthStencilTexture = Create2DTexture(
+        device, kDepthStencilFormat, kSize, kSize, kArrayLayers, kLevelCount, kSampleCount);
     wgpu::TextureView multisampledDepthStencilTextureView =
         multisampledDepthStencilTexture.CreateView();
 
@@ -632,8 +612,7 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, DepthStencilAttachmentSam
     // one of the color attachment.
     {
         wgpu::Texture depthStencilTexture =
-            CreateTexture(device, wgpu::TextureDimension::e2D, kDepthStencilFormat, kSize, kSize,
-                          kArrayLayers, kLevelCount);
+            Create2DTexture(device, kDepthStencilFormat, kSize, kSize, kArrayLayers, kLevelCount);
         wgpu::TextureView depthStencilTextureView = depthStencilTexture.CreateView();
 
         utils::ComboRenderPassDescriptor renderPass(
