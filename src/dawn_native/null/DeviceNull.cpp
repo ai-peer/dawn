@@ -234,6 +234,10 @@ namespace dawn_native { namespace null {
         return mLastSubmittedSerial + 1;
     }
 
+    bool Device::IsCompletedSerialUpdated() const {
+        return mIsCompletedSerialUpdated;
+    }
+
     MaybeError Device::TickImpl() {
         SubmitPendingOperations();
         return {};

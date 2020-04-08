@@ -170,8 +170,20 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
+    bool Device::IsCompletedSerialUpdated() const {
+        return mIsCompletedSerialUpdated;
+    }
+
     MaybeError Device::TickImpl() {
         Serial completedSerial = GetCompletedCommandSerial();
+
+        // If new serial is the same as before, we already ticked, return to avoid ticking again
+        if (mLastCompletedCommandSerial == completedSerial) {
+            mIsCompletedSerialUpdated = true;
+            return {};
+        }
+        mIsCompletedSerialUpdated = false;
+        mLastCompletedCommandSerial = completedSerial;
 
         mMapTracker->Tick(completedSerial);
 

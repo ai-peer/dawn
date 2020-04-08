@@ -218,6 +218,7 @@ namespace dawn_native {
 
         MaybeError Initialize();
         void ShutDownBase();
+        Serial mLastCompletedCommandSerial;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -325,6 +326,8 @@ namespace dawn_native {
         TogglesSet mEnabledToggles;
         TogglesSet mOverridenToggles;
         size_t mLazyClearCountForTesting = 0;
+
+        virtual bool IsCompletedSerialUpdated() const = 0;
 
         ExtensionsSet mEnabledExtensions;
     };
