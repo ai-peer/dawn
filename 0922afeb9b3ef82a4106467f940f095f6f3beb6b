@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06733f45_87410fd8",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T15:51:31Z",
+      "side": 1,
+      "message": "nit: would be more clear to name this bindingSize",
+      "range": {
+        "startLine": 230,
+        "startChar": 25,
+        "endLine": 230,
+        "endChar": 35
+      },
+      "revId": "0922afeb9b3ef82a4106467f940f095f6f3beb6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44f52cd6_c23e64c1",
+        "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-08T15:51:31Z",
+      "side": 1,
+      "message": "unit: This name is now a little deceiving. The binding is 512 but the buffer is not. name it 768?\n\nside note: We should probably test with some non-power-of-two buffers",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "0922afeb9b3ef82a4106467f940f095f6f3beb6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
