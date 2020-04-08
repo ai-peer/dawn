@@ -159,15 +159,11 @@ class StorageTextureValidationTests : public ValidationTest {
                                 wgpu::TextureFormat format,
                                 uint32_t sampleCount = 1,
                                 uint32_t arrayLayerCount = 1) {
-        wgpu::TextureDescriptor descriptor;
-        descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size = {16, 16, 1};
-        descriptor.arrayLayerCount = arrayLayerCount;
-        descriptor.sampleCount = sampleCount;
-        descriptor.format = format;
-        descriptor.mipLevelCount = 1;
-        descriptor.usage = usage;
-        return device.CreateTexture(&descriptor);
+        if (sampleCount == 1) {
+            return utils::Create2DArrayTexture(device, 16, 16, arrayLayerCount, format, usage);
+        } else {
+            return utils::Create2DMultisampledTexture(device, 16, 16, format, usage, sampleCount);
+        }
     }
 
     const wgpu::ShaderModule mDefaultVSModule =
