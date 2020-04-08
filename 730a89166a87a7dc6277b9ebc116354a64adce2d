@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "41b85ba4_f4cd59a8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-08T21:37:48Z",
+      "side": 1,
+      "message": "How do you feel about returning a non-null allocator and omit the checks? No `checks x O(kMaxBGLs)` seems like a good deal for a extra/unused allocator.",
+      "parentUuid": "9113bc9f_c00123f6",
+      "range": {
+        "startLine": 136,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9ad4940_f5a497e2",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "55bfca21_9cf7a72e",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-08T21:37:48Z",
+      "side": 1,
+      "message": "I tend to prefer lazy construct when either the number could get large or creation becomes heavy. Here it\u0027s n\u003d16 (small?) and only contains tracking structures. Is it too much?",
+      "parentUuid": "c9ad4940_f5a497e2",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 93
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7f605b94_86ac2f98",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2020-04-08T19:27:59Z",
       "side": 1,
       "message": "nit: in Dawn we like to include std lib paths after our own",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7bb431_36a7d0e5",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-08T21:37:48Z",
+      "side": 1,
+      "message": "Bummer. I had my IDE auto-save to be configured to chromium\u0027s clang-format, do you manually  `git cl format`?",
+      "parentUuid": "7f605b94_86ac2f98",
       "range": {
         "startLine": 18,
         "startChar": 0,
