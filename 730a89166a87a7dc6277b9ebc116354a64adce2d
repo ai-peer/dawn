@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3f23d02a_c7905226",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-09T20:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ceacdd5_a1191075",
+      "range": {
+        "startLine": 136,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aeb0320_de1014a1",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 3
@@ -87,6 +111,24 @@
       "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "912f3083_328b285c",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-09T20:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aeb0320_de1014a1",
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +215,30 @@
       "side": 1,
       "message": "Ah I had forgotten n is just 16. We should consider revisting if that number changes or when we get to different feature levels that can support a greater number of bindings.",
       "parentUuid": "476b5940_6b22cb99",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 93
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffbd143a_91fd5721",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-09T20:31:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "21e4a711_354bae5b",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -300,6 +366,30 @@
       "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ab4a502_e9288a71",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-09T20:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58083b40_26205793",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
