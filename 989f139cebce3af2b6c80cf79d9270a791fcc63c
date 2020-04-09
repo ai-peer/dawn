@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb2298f2_4ae51774",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T15:59:52Z",
+      "side": 0,
+      "message": "TODO remove once https://chromium-review.googlesource.com/c/chromium/src/+/2144155 is landed, tests moved and Chromium gn targets changed again.\n\nAlso take care of libdawn_proc before landing.",
+      "revId": "989f139cebce3af2b6c80cf79d9270a791fcc63c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
