@@ -256,6 +256,30 @@
     },
     {
       "key": {
+        "uuid": "8d1d95fd_47aa1402",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T17:07:02Z",
+      "side": 1,
+      "message": "Weird, I thought Chromium style was the same. We don\u0027t change anything related to that in our .clang_format.",
+      "parentUuid": "31f75a65_bd9785d6",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58083b40_26205793",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
         "patchSetId": 3
