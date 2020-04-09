@@ -170,8 +170,14 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
+    bool Device::IsCompletedSerialUnchanged() {
         Serial completedSerial = GetCompletedCommandSerial();
+        // returns true when completed serial is unchanged
+        return completedSerial == mLastCompletedCommandSerial;
+    }
+
+    MaybeError Device::TickImpl() {
+        mLastCompletedCommandSerial = completedSerial;
 
         mMapTracker->Tick(completedSerial);
 

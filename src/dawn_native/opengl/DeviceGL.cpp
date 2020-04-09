@@ -166,8 +166,14 @@ namespace dawn_native { namespace opengl {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
+    bool Device::IsCompletedSerialUnchanged() {
         CheckPassedFences();
+        // returns true when completed serial is unchanged
+        return mLastCompletedSerial == mCompletedSerial;
+    }
+
+    MaybeError Device::TickImpl() {
+        mLastCompletedSerial = mCompletedSerial;
         return {};
     }
 

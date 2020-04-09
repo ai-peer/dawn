@@ -172,8 +172,15 @@ namespace dawn_native { namespace vulkan {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
+    bool Device::IsCompletedSerialUnchanged() {
         CheckPassedFences();
+        // returns true when completed serial is unchanged
+        return mLastCompletedCommandSerial == mCompletedSerial;
+    }
+
+    MaybeError Device::TickImpl() {
+        mLastCompletedCommandSerial = mCompletedSerial;
+
         RecycleCompletedCommands();
 
         mDescriptorSetService->Tick(mCompletedSerial);
