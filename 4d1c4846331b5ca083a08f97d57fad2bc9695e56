@@ -22,6 +22,23 @@
       "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "288a0bea_c8618492",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-09T20:44:09Z",
+      "side": 1,
+      "message": "nit: is it possible to make a private \"operator delete(void*) \u003d default\" to prevent external deletes?",
+      "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
