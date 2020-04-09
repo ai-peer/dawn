@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df489ed7_2a830abc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T23:30:14Z",
+      "side": 1,
+      "message": "Please provide a short description of your change as part of the commit message.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e75eff1_921b2ded",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T23:30:14Z",
+      "side": 1,
+      "message": "For this and other comments in the file, please eliminate run-on sentences, capitalize the first word and put a period at the end of the sentence.",
+      "range": {
+        "startLine": 677,
+        "startChar": 8,
+        "endLine": 678,
+        "endChar": 40
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b290357e_ab214831",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T23:30:14Z",
+      "side": 1,
+      "message": "To avoid adding another member variable to the class, can we restructure this function as follows?\n\n bool Device::UpdateCompletedSerial() {\n   const Serial newSerial \u003d mFence-\u003eGetCompletedValue();\n   if (newSerial !\u003d mCompletedSerial) {\n     mCompletedSerial \u003d newSerial;\n     return true;\n   }\n   return false;\n }\n\nIf the function returns true, the serial has been updated and TickImpl can proceed. If returns false, TickImpl can be skipped.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a0fcbc_e7534b42",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T23:30:14Z",
+      "side": 1,
+      "message": "Please move this method so that it is next to the other methods in the file.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 1
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
