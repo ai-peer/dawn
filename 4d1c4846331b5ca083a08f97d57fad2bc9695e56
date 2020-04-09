@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2c275fa_511c24a2",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T19:12:41Z",
+      "side": 1,
+      "message": "Nit: Consider making the base class DeleteThis protected and calling it in place of \u0027delete this\u0027.",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 1
+      },
+      "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
