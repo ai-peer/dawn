@@ -52,6 +52,24 @@
       "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600ba055_00146f41",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T17:05:04Z",
+      "side": 1,
+      "message": "Yeah that could work be we\u0027d need some validation to avoid overflows still.",
+      "parentUuid": "48bf512c_bf166d0b",
+      "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
