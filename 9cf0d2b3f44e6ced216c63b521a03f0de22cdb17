@@ -34,6 +34,24 @@
       "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48bf512c_bf166d0b",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-09T16:57:21Z",
+      "side": 1,
+      "message": "My only idea was to create a modified descriptor and pass that into validation and backends.",
+      "parentUuid": "7bb4ee4a_d5c7e02e",
+      "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
