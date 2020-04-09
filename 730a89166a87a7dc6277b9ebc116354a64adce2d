@@ -346,6 +346,30 @@
     },
     {
       "key": {
+        "uuid": "3568023e_0bb6beea",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-09T20:35:31Z",
+      "side": 1,
+      "message": "My `git cl format` leaves it untouched even after my IDE auto-saves. How annoying, reverted.",
+      "parentUuid": "8d1d95fd_47aa1402",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58083b40_26205793",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
         "patchSetId": 3
