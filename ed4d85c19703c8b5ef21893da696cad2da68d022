@@ -22,6 +22,30 @@
       "revId": "ed4d85c19703c8b5ef21893da696cad2da68d022",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d078e3ff_e55de811",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T17:12:34Z",
+      "side": 1,
+      "message": "Yeah this is the reverse change. I don\u0027t know what happened. I used git cl format.",
+      "parentUuid": "d6b3b594_f4aae684",
+      "range": {
+        "startLine": 604,
+        "startChar": 6,
+        "endLine": 606,
+        "endChar": 7
+      },
+      "revId": "ed4d85c19703c8b5ef21893da696cad2da68d022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
