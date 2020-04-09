@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5cba73a3_5310bfc0",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T21:10:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c275fa_511c24a2",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 1
+      },
+      "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "288a0bea_c8618492",
         "filename": "src/dawn_native/RefCounted.h",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a81705c4_ee57489f",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T21:10:01Z",
+      "side": 1,
+      "message": "Nope:\n\"Only special member functions may be defaulted\"\n\nAnd even if we:\nvoid operator delete(void* ptr) {\n  ::operator delete(ptr);\n}\n\n\"virtual destructor requires an unambiguous, accessible \u0027operator delete\u0027\"",
+      "parentUuid": "288a0bea_c8618492",
+      "revId": "4d1c4846331b5ca083a08f97d57fad2bc9695e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
