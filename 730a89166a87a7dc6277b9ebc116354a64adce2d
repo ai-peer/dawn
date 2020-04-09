@@ -49,6 +49,23 @@
     },
     {
       "key": {
+        "uuid": "7aeb0320_de1014a1",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T10:00:26Z",
+      "side": 1,
+      "message": "This is pretty overkill to have a whole foo bar baz allocator manager just to hold two fixed-size arrays and no logic. How about just putting them in the device?",
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c9ad4940_f5a497e2",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 3
@@ -84,6 +101,30 @@
       "side": 1,
       "message": "I tend to prefer lazy construct when either the number could get large or creation becomes heavy. Here it\u0027s n\u003d16 (small?) and only contains tracking structures. Is it too much?",
       "parentUuid": "c9ad4940_f5a497e2",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 93
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "476b5940_6b22cb99",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T10:00:26Z",
+      "side": 1,
+      "message": "IMHO that\u0027s probably fine. We want to optimize for runtime when we can.",
+      "parentUuid": "55bfca21_9cf7a72e",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -136,6 +177,29 @@
         "startChar": 0,
         "endLine": 18,
         "endChar": 16
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58083b40_26205793",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T10:00:26Z",
+      "side": 1,
+      "message": "I just realized this should probably be StagingDescriptorAllocator instead of NonShaderVisibleDescriptorAllocator that\u0027s a bit of a concept overload.",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 26
       },
       "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
