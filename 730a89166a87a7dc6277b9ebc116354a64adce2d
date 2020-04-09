@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1ceacdd5_a1191075",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T16:30:03Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly about this. If we want to have no checks then I\u0027d prefer having a null allocator at index 0. But we should add a comment about this in the header next to the method declaration.",
+      "parentUuid": "41b85ba4_f4cd59a8",
+      "range": {
+        "startLine": 136,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7aeb0320_de1014a1",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 3
@@ -137,6 +161,30 @@
     },
     {
       "key": {
+        "uuid": "21e4a711_354bae5b",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T16:30:03Z",
+      "side": 1,
+      "message": "Ah I had forgotten n is just 16. We should consider revisting if that number changes or when we get to different feature levels that can support a greater number of bindings.",
+      "parentUuid": "476b5940_6b22cb99",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 93
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f605b94_86ac2f98",
         "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
         "patchSetId": 3
@@ -172,6 +220,30 @@
       "side": 1,
       "message": "Bummer. I had my IDE auto-save to be configured to chromium\u0027s clang-format, do you manually  `git cl format`?",
       "parentUuid": "7f605b94_86ac2f98",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "730a89166a87a7dc6277b9ebc116354a64adce2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31f75a65_bd9785d6",
+        "filename": "src/dawn_native/d3d12/NonShaderVisibleDescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T16:30:03Z",
+      "side": 1,
+      "message": "oh hm, I thought we were using Chromium\u0027s style -- I guess not though.\n\nI think git cl format only does include ordering if there\u0027s no whitespace between them",
+      "parentUuid": "ed7bb431_36a7d0e5",
       "range": {
         "startLine": 18,
         "startChar": 0,
