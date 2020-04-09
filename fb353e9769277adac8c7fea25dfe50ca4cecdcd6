@@ -22,6 +22,29 @@
       "revId": "fb353e9769277adac8c7fea25dfe50ca4cecdcd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5799cb47_1c5f18b3",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-09T01:40:29Z",
+      "side": 1,
+      "message": "Please change these and other asserts that check for constant conditions to EXPECT macros instead. ASSERT is for conditions where the test cannot move forward if they\u0027re false like resource creation. If the ASSERT condition is false, the test ends right away.\n\nIf an EXPECT condition is false, the test fails but it keeps running, potentially emitting other EXPECT failures. For logging, EXPECT is better because you get more pieces of data to help you diagnose failures. For ASSERT, only the first failure is emitted and the test ends.",
+      "range": {
+        "startLine": 130,
+        "startChar": 1,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "fb353e9769277adac8c7fea25dfe50ca4cecdcd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
