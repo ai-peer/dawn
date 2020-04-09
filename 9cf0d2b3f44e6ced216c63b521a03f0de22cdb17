@@ -16,6 +16,24 @@
       "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bb4ee4a_d5c7e02e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-09T11:56:58Z",
+      "side": 1,
+      "message": "That would be difficult: the base way to do this would be to modify the descriptor, but it is const. A slightly ugly way to do it would be to pass a std::array\u003cuint64_t, kMaxBindingsPerGroup\u003e that\u0027s filled by the validation and then used in BindGroup\u0027s constructor.\n\nAnother thing is that the validation can be disabled, so even if the validation did precompute it, we\u0027d need to have a second place where we compute it for when the validation is disabled.\n\nLet me know if you have some other ideas, I could implement them as a follow-up.",
+      "parentUuid": "fb297a50_02e2fca3",
+      "revId": "9cf0d2b3f44e6ced216c63b521a03f0de22cdb17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
