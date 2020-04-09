@@ -24,7 +24,7 @@ namespace dawn_native { namespace d3d12 {
 
     class BindGroup;
     class Device;
-    class NonShaderVisibleDescriptorAllocator;
+    class StagingDescriptorAllocator;
     class CPUDescriptorHeapAllocation;
 
     class BindGroupLayout final : public BindGroupLayoutBase {
@@ -61,9 +61,8 @@ namespace dawn_native { namespace d3d12 {
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
 
-        // TODO(dawn:155): Store and bucket allocators by size on the device.
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mSamplerAllocator;
-        std::unique_ptr<NonShaderVisibleDescriptorAllocator> mViewAllocator;
+        StagingDescriptorAllocator* mSamplerAllocator = nullptr;
+        StagingDescriptorAllocator* mViewAllocator = nullptr;
     };
 
 }}  // namespace dawn_native::d3d12

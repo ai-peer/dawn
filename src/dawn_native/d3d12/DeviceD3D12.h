@@ -17,6 +17,7 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "common/Constants.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
@@ -31,6 +32,7 @@ namespace dawn_native { namespace d3d12 {
     class CommandAllocatorManager;
     class DescriptorHeapAllocator;
     class ShaderVisibleDescriptorAllocator;
+    class StagingDescriptorAllocator;
     class MapRequestTracker;
     class PlatformFunctions;
     class ResourceAllocatorManager;
@@ -101,6 +103,13 @@ namespace dawn_native { namespace d3d12 {
 
         ShaderVisibleDescriptorAllocator* GetShaderVisibleDescriptorAllocator() const;
 
+        // Returns nullptr when descriptor count is zero.
+        StagingDescriptorAllocator* GetViewStagingDescriptorAllocator(
+            uint32_t descriptorCount) const;
+
+        StagingDescriptorAllocator* GetSamplerStagingDescriptorAllocator(
+            uint32_t descriptorCount) const;
+
         TextureBase* WrapSharedHandle(const ExternalImageDescriptor* descriptor,
                                       HANDLE sharedHandle,
                                       uint64_t acquireMutexKey,
@@ -170,6 +179,15 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ResidencyManager> mResidencyManager;
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mShaderVisibleDescriptorAllocator;
+
+        // Index corresponds to the descriptor count in the range [0, kMaxBindingsPerGroup].
+        static constexpr uint32_t kNumOfStagingDescriptorAllocators = kMaxBindingsPerGroup + 1;
+
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
+            mViewAllocators;
+
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
+            mSamplerAllocators;
     };
 
 }}  // namespace dawn_native::d3d12
