@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e45e9b27_a0854d07",
+        "filename": "src/tests/unittests/wire/WireDisconnectTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-09T18:04:01Z",
+      "side": 1,
+      "message": "We could also scope this to each test, but it would mean if a callback came back at some other unexpected time, it would deref garabage. The test would crash which is probably okay, but maybe more annoying to debug?",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 68
+      },
+      "revId": "79b0c4169795aaefe0e5b69f81104adc5dbaf237",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
