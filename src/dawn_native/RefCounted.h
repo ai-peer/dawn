@@ -34,6 +34,10 @@ namespace dawn_native {
       protected:
         virtual ~RefCounted() = default;
 
+      private:
+        // A Derived class may override this if they require a custom deleter.
+        virtual void DeleteThis();
+
         std::atomic_uint64_t mRefCount;
     };
 
