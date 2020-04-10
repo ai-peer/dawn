@@ -314,12 +314,14 @@ class DawnTestBase {
 };
 
 // Skip a test when the given condition is satisfied.
-#define DAWN_SKIP_TEST_IF(condition)                        \
-    if (condition) {                                        \
-        dawn::InfoLog() << "Test skipped: " #condition "."; \
-        GTEST_SKIP();                                       \
-        return;                                             \
-    }
+#define DAWN_SKIP_TEST_IF(condition)                            \
+    do {                                                        \
+        if (condition) {                                        \
+            dawn::InfoLog() << "Test skipped: " #condition "."; \
+            GTEST_SKIP();                                       \
+            return;                                             \
+        }                                                       \
+    } while (0)
 
 template <typename Params = DawnTestParam>
 class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<Params> {
