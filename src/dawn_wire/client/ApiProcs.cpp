@@ -46,9 +46,9 @@ namespace dawn_wire { namespace client {
         }
     }  // namespace
 
-    void ClientBufferMapReadAsync(WGPUBuffer cBuffer,
-                                  WGPUBufferMapReadCallback callback,
-                                  void* userdata) {
+    void ClientHandwrittenBufferMapReadAsync(WGPUBuffer cBuffer,
+                                             WGPUBufferMapReadCallback callback,
+                                             void* userdata) {
         Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
 
         uint32_t serial = buffer->requestSerial++;
@@ -76,9 +76,9 @@ namespace dawn_wire { namespace client {
         SerializeBufferMapAsync(buffer, serial, readHandle);
     }
 
-    void ClientBufferMapWriteAsync(WGPUBuffer cBuffer,
-                                   WGPUBufferMapWriteCallback callback,
-                                   void* userdata) {
+    void ClientHandwrittenBufferMapWriteAsync(WGPUBuffer cBuffer,
+                                              WGPUBufferMapWriteCallback callback,
+                                              void* userdata) {
         Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
 
         uint32_t serial = buffer->requestSerial++;
@@ -107,8 +107,8 @@ namespace dawn_wire { namespace client {
         SerializeBufferMapAsync(buffer, serial, writeHandle);
     }
 
-    WGPUBuffer ClientDeviceCreateBuffer(WGPUDevice cDevice,
-                                        const WGPUBufferDescriptor* descriptor) {
+    WGPUBuffer ClientHandwrittenDeviceCreateBuffer(WGPUDevice cDevice,
+                                                   const WGPUBufferDescriptor* descriptor) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         Client* wireClient = device->GetClient();
 
@@ -130,7 +130,7 @@ namespace dawn_wire { namespace client {
         return reinterpret_cast<WGPUBuffer>(buffer);
     }
 
-    WGPUCreateBufferMappedResult ClientDeviceCreateBufferMapped(
+    WGPUCreateBufferMappedResult ClientHandwrittenDeviceCreateBufferMapped(
         WGPUDevice cDevice,
         const WGPUBufferDescriptor* descriptor) {
         Device* device = reinterpret_cast<Device*>(cDevice);
@@ -190,10 +190,10 @@ namespace dawn_wire { namespace client {
         return result;
     }
 
-    void ClientDeviceCreateBufferMappedAsync(WGPUDevice cDevice,
-                                             const WGPUBufferDescriptor* descriptor,
-                                             WGPUBufferCreateMappedCallback callback,
-                                             void* userdata) {
+    void ClientHandwrittenDeviceCreateBufferMappedAsync(WGPUDevice cDevice,
+                                                        const WGPUBufferDescriptor* descriptor,
+                                                        WGPUBufferCreateMappedCallback callback,
+                                                        void* userdata) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         Client* wireClient = device->GetClient();
 
@@ -264,25 +264,27 @@ namespace dawn_wire { namespace client {
         writeHandle->SerializeCreate(allocatedBuffer + commandSize);
     }
 
-    void ClientDevicePushErrorScope(WGPUDevice cDevice, WGPUErrorFilter filter) {
+    void ClientHandwrittenDevicePushErrorScope(WGPUDevice cDevice, WGPUErrorFilter filter) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         device->PushErrorScope(filter);
     }
 
-    bool ClientDevicePopErrorScope(WGPUDevice cDevice, WGPUErrorCallback callback, void* userdata) {
+    bool ClientHandwrittenDevicePopErrorScope(WGPUDevice cDevice,
+                                              WGPUErrorCallback callback,
+                                              void* userdata) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         return device->RequestPopErrorScope(callback, userdata);
     }
 
-    uint64_t ClientFenceGetCompletedValue(WGPUFence cSelf) {
+    uint64_t ClientHandwrittenFenceGetCompletedValue(WGPUFence cSelf) {
         auto fence = reinterpret_cast<Fence*>(cSelf);
         return fence->completedValue;
     }
 
-    void ClientFenceOnCompletion(WGPUFence cFence,
-                                 uint64_t value,
-                                 WGPUFenceOnCompletionCallback callback,
-                                 void* userdata) {
+    void ClientHandwrittenFenceOnCompletion(WGPUFence cFence,
+                                            uint64_t value,
+                                            WGPUFenceOnCompletionCallback callback,
+                                            void* userdata) {
         Fence* fence = reinterpret_cast<Fence*>(cFence);
         if (value > fence->signaledValue) {
             ClientDeviceInjectError(reinterpret_cast<WGPUDevice>(fence->device),
@@ -303,10 +305,10 @@ namespace dawn_wire { namespace client {
         fence->requests.Enqueue(std::move(request), value);
     }
 
-    void ClientBufferSetSubData(WGPUBuffer cBuffer,
-                                uint64_t start,
-                                uint64_t count,
-                                const void* data) {
+    void ClientHandwrittenBufferSetSubData(WGPUBuffer cBuffer,
+                                           uint64_t start,
+                                           uint64_t count,
+                                           const void* data) {
         Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
 
         BufferSetSubDataInternalCmd cmd;
@@ -321,7 +323,7 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer);
     }
 
-    void ClientBufferUnmap(WGPUBuffer cBuffer) {
+    void ClientHandwrittenBufferUnmap(WGPUBuffer cBuffer) {
         Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
 
         // Invalidate the local pointer, and cancel all other in-flight requests that would
@@ -368,7 +370,7 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer, *buffer->device->GetClient());
     }
 
-    void ClientBufferDestroy(WGPUBuffer cBuffer) {
+    void ClientHandwrittenBufferDestroy(WGPUBuffer cBuffer) {
         Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
 
         // Cancel or remove all mappings
@@ -384,7 +386,8 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer, *buffer->device->GetClient());
     }
 
-    WGPUFence ClientQueueCreateFence(WGPUQueue cSelf, WGPUFenceDescriptor const* descriptor) {
+    WGPUFence ClientHandwrittenQueueCreateFence(WGPUQueue cSelf,
+                                                WGPUFenceDescriptor const* descriptor) {
         Queue* queue = reinterpret_cast<Queue*>(cSelf);
         Device* device = queue->device;
 
@@ -407,7 +410,7 @@ namespace dawn_wire { namespace client {
         return cFence;
     }
 
-    void ClientQueueSignal(WGPUQueue cQueue, WGPUFence cFence, uint64_t signalValue) {
+    void ClientHandwrittenQueueSignal(WGPUQueue cQueue, WGPUFence cFence, uint64_t signalValue) {
         Fence* fence = reinterpret_cast<Fence*>(cFence);
         Queue* queue = reinterpret_cast<Queue*>(cQueue);
         if (fence->queue != queue) {
@@ -441,15 +444,15 @@ namespace dawn_wire { namespace client {
     void ClientDeviceRelease(WGPUDevice) {
     }
 
-    void ClientDeviceSetUncapturedErrorCallback(WGPUDevice cSelf,
-                                                WGPUErrorCallback callback,
-                                                void* userdata) {
+    void ClientHandwrittenDeviceSetUncapturedErrorCallback(WGPUDevice cSelf,
+                                                           WGPUErrorCallback callback,
+                                                           void* userdata) {
         Device* device = reinterpret_cast<Device*>(cSelf);
         device->SetUncapturedErrorCallback(callback, userdata);
     }
-    void ClientDeviceSetDeviceLostCallback(WGPUDevice cSelf,
-                                           WGPUDeviceLostCallback callback,
-                                           void* userdata) {
+    void ClientHandwrittenDeviceSetDeviceLostCallback(WGPUDevice cSelf,
+                                                      WGPUDeviceLostCallback callback,
+                                                      void* userdata) {
         Device* device = reinterpret_cast<Device*>(cSelf);
         device->SetDeviceLostCallback(callback, userdata);
     }
