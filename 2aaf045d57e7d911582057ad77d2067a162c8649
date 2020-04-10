@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "d9ab6de4_908322bf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-10T20:01:13Z",
+      "side": 1,
+      "message": "I actually tried this before uploading my patch, but ran into issues with WaitForSerial updating mCompletedSerial as well, I think that\u0027s why I even ended up adding the bool member because I mainly just want mLastCompletedCommandSerial to be tracking the last ticked serial.",
+      "parentUuid": "b290357e_ab214831",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15a0fcbc_e7534b42",
         "filename": "src/dawn_native/metal/DeviceMTL.h",
         "patchSetId": 4
