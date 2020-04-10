@@ -222,6 +222,7 @@ test("dawn_unittests") {
     "src/tests/unittests/wire/WireFenceTests.cpp",
     "src/tests/unittests/wire/WireInjectTextureTests.cpp",
     "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+    "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
     "src/tests/unittests/wire/WireOptionalTests.cpp",
     "src/tests/unittests/wire/WireTest.cpp",
     "src/tests/unittests/wire/WireTest.h",
