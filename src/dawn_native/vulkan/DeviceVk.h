@@ -168,6 +168,10 @@ namespace dawn_native { namespace vulkan {
         std::vector<VkFence> mUnusedFences;
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        // mLastCompletedSerial and mCompletedSerial need to start at different Serials so that the
+        // first tick will register.
+        Serial mLastCompletedCommandSerial = -1;
+        bool IsCompletedSerialUnchanged() override;
 
         MaybeError PrepareRecordingContext();
         void RecycleCompletedCommands();
