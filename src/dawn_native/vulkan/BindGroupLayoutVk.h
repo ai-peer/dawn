@@ -17,23 +17,20 @@
 
 #include "dawn_native/BindGroupLayout.h"
 
+#include "common/Serial.h"
 #include "common/SlabAllocator.h"
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/DescriptorSetAllocation.h"
 
 #include <vector>
 
 namespace dawn_native { namespace vulkan {
 
     class BindGroup;
+    class DescriptorSetAllocator;
     class Device;
 
     VkDescriptorType VulkanDescriptorType(wgpu::BindingType type, bool isDynamic);
-
-    // Contains a descriptor set along with data necessary to track its allocation.
-    struct DescriptorSetAllocation {
-        size_t index = 0;
-        VkDescriptorSet set = VK_NULL_HANDLE;
-    };
 
     // In Vulkan descriptor pools have to be sized to an exact number of descriptors. This means
     // it's hard to have something where we can mix different types of descriptor sets because
@@ -58,31 +55,17 @@ namespace dawn_native { namespace vulkan {
 
         ResultOrError<BindGroup*> AllocateBindGroup(Device* device,
                                                     const BindGroupDescriptor* descriptor);
-        void DeallocateBindGroup(BindGroup* bindGroup);
-
-        ResultOrError<DescriptorSetAllocation> AllocateOneDescriptorSet();
-        void DeallocateDescriptorSet(DescriptorSetAllocation* descriptorSetAllocation);
-
-        // Interaction with the DescriptorSetService.
-        void FinishDeallocation(size_t index);
+        void DeallocateBindGroup(BindGroup* bindGroup,
+                                 DescriptorSetAllocation* descriptorSetAllocation);
 
       private:
         ~BindGroupLayout() override;
         MaybeError Initialize();
 
-        std::vector<VkDescriptorPoolSize> mPoolSizes;
-
-        struct SingleDescriptorSetAllocation {
-            VkDescriptorPool pool = VK_NULL_HANDLE;
-            // Descriptor sets are freed when the pool is destroyed.
-            VkDescriptorSet set = VK_NULL_HANDLE;
-        };
-        std::vector<SingleDescriptorSetAllocation> mAllocations;
-        std::vector<size_t> mAvailableAllocations;
-
         VkDescriptorSetLayout mHandle = VK_NULL_HANDLE;
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
+        Ref<DescriptorSetAllocator> mDescriptorSetAllocator;
     };
 
 }}  // namespace dawn_native::vulkan

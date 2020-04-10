@@ -29,6 +29,10 @@ namespace dawn_native { namespace vulkan {
 
         void DeleteWhenUnused(VkBuffer buffer);
         void DeleteWhenUnused(VkDescriptorPool pool);
+        // TODO(b/154522740): We should be able to delete VkDescriptorSetLayout immediately,
+        // but Swiftshader doesn't properly implement object lifetimes. Remove this when the
+        // bug is resolved.
+        void DeleteWhenUnused(VkDescriptorSetLayout descriptorSetLayout);
         void DeleteWhenUnused(VkDeviceMemory memory);
         void DeleteWhenUnused(VkFramebuffer framebuffer);
         void DeleteWhenUnused(VkImage image);
@@ -48,6 +52,7 @@ namespace dawn_native { namespace vulkan {
         Device* mDevice = nullptr;
         SerialQueue<VkBuffer> mBuffersToDelete;
         SerialQueue<VkDescriptorPool> mDescriptorPoolsToDelete;
+        SerialQueue<VkDescriptorSetLayout> mDescriptorSetLayoutsToDelete;
         SerialQueue<VkDeviceMemory> mMemoriesToDelete;
         SerialQueue<VkFramebuffer> mFramebuffersToDelete;
         SerialQueue<VkImage> mImagesToDelete;
