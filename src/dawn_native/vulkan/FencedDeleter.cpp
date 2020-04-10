@@ -24,6 +24,7 @@ namespace dawn_native { namespace vulkan {
     FencedDeleter::~FencedDeleter() {
         ASSERT(mBuffersToDelete.Empty());
         ASSERT(mDescriptorPoolsToDelete.Empty());
+        ASSERT(mDescriptorSetLayoutsToDelete.Empty());
         ASSERT(mFramebuffersToDelete.Empty());
         ASSERT(mImagesToDelete.Empty());
         ASSERT(mImageViewsToDelete.Empty());
@@ -44,6 +45,11 @@ namespace dawn_native { namespace vulkan {
 
     void FencedDeleter::DeleteWhenUnused(VkDescriptorPool pool) {
         mDescriptorPoolsToDelete.Enqueue(pool, mDevice->GetPendingCommandSerial());
+    }
+
+    void FencedDeleter::DeleteWhenUnused(VkDescriptorSetLayout descriptorSetLayout) {
+        mDescriptorSetLayoutsToDelete.Enqueue(descriptorSetLayout,
+                                              mDevice->GetPendingCommandSerial());
     }
 
     void FencedDeleter::DeleteWhenUnused(VkDeviceMemory memory) {
@@ -163,6 +169,12 @@ namespace dawn_native { namespace vulkan {
             mDevice->fn.DestroyDescriptorPool(vkDevice, pool, nullptr);
         }
         mDescriptorPoolsToDelete.ClearUpTo(completedSerial);
+
+        for (VkDescriptorSetLayout descriptorSetLayout :
+             mDescriptorSetLayoutsToDelete.IterateUpTo(completedSerial)) {
+            mDevice->fn.DestroyDescriptorSetLayout(vkDevice, descriptorSetLayout, nullptr);
+        }
+        mDescriptorSetLayoutsToDelete.ClearUpTo(completedSerial);
 
         for (VkSampler sampler : mSamplersToDelete.IterateUpTo(completedSerial)) {
             mDevice->fn.DestroySampler(vkDevice, sampler, nullptr);
