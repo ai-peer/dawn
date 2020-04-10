@@ -873,7 +873,6 @@ test("dawn_unittests") {
     "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
     "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
     "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
-    "src/tests/unittests/validation/RenderPassValidationTests.cpp",
     "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
     "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
     "src/tests/unittests/validation/SamplerValidationTests.cpp",
