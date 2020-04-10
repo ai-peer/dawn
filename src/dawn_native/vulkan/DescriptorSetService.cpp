@@ -26,13 +26,15 @@ namespace dawn_native { namespace vulkan {
         ASSERT(mDeallocations.Empty());
     }
 
-    void DescriptorSetService::AddDeferredDeallocation(BindGroupLayout* layout, size_t index) {
-        mDeallocations.Enqueue({layout, index}, mDevice->GetPendingCommandSerial());
+    void DescriptorSetService::AddDeferredDeallocation(BindGroupLayout* layout,
+                                                       uint32_t poolIndex,
+                                                       uint16_t setIndex) {
+        mDeallocations.Enqueue({layout, poolIndex, setIndex}, mDevice->GetPendingCommandSerial());
     }
 
     void DescriptorSetService::Tick(Serial completedSerial) {
         for (Deallocation& dealloc : mDeallocations.IterateUpTo(completedSerial)) {
-            dealloc.layout->FinishDeallocation(dealloc.index);
+            dealloc.layout->FinishDeallocation(dealloc.poolIndex, dealloc.setIndex);
         }
 
         mDeallocations.ClearUpTo(completedSerial);
