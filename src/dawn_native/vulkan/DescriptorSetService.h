@@ -34,7 +34,9 @@ namespace dawn_native { namespace vulkan {
         ~DescriptorSetService();
 
         // Will call layout->FinishDeallocation when the serial is passed.
-        void AddDeferredDeallocation(BindGroupLayout* layout, size_t index);
+        void AddDeferredDeallocation(BindGroupLayout* layout,
+                                     uint32_t poolIndex,
+                                     uint16_t setIndex);
 
         void Tick(Serial completedSerial);
 
@@ -43,7 +45,8 @@ namespace dawn_native { namespace vulkan {
 
         struct Deallocation {
             Ref<BindGroupLayout> layout;
-            size_t index;
+            uint32_t poolIndex;
+            uint16_t setIndex;
         };
         SerialQueue<Deallocation> mDeallocations;
     };
