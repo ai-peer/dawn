@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5437713f_20e927c3",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-11T01:36:19Z",
+      "side": 1,
+      "message": "update comment",
+      "revId": "a5c91749ef929d581d3f69681fa34fa1d4a8e5c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
