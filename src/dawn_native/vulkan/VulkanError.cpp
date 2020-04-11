@@ -19,9 +19,10 @@
 namespace dawn_native { namespace vulkan {
 
     const char* VkResultAsString(::VkResult result) {
-        // Convert to a uint32_t to silence and MSVC warning that the fake errors don't appear in
+        // Convert to a int32_t to silence and MSVC warning that the fake errors don't appear in
         // the original VkResult enum.
-        uint32_t code = static_cast<uint32_t>(result);
+        // It is OK to cast to int32_t because max enum is 0x7FFFFFFF.
+        int32_t code = static_cast<int32_t>(result);
 
         switch (code) {
             case VK_SUCCESS:
