@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c10113b_dc431c65",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T16:18:32Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "26b7d8f6d719f13b802fdc85797cb1ea75f4ef98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

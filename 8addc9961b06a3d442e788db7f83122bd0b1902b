@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3431b35c_06a92737",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T16:18:32Z",
+      "side": 1,
+      "message": "I suggest doing asking the backend to \"update the serial\", query and see if it is the same as the last time we called Tick. This allows backend to artificially increment the serial when no GPU work has been submitted, like in [1]. This will also likely be needed in other backends.\n\nWe need this to drive callbacks like the one for mapReadAsync while the GPU is not being used. This is causing the timeout failures you see.",
+      "revId": "8addc9961b06a3d442e788db7f83122bd0b1902b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
