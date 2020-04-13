@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acb4045e_eac61175",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "I think we should use member.constant_length in this case, even if it is always 1 at the moment.",
+      "range": {
+        "startLine": 58,
+        "startChar": 53,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80cfc1c8_5cd09c66",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "warn and return false?",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 29
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "977823eb_a74584a7",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 131,
+        "startChar": 104,
+        "endLine": 131,
+        "endChar": 128
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a992e3b_d3e467a0",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "Why do we need this factory function?",
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ccb17f_c48ca73c",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "nit: Can\u0027t this be inlined?",
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdea1769_e09020eb",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "nit: no need for this as it is set below",
+      "range": {
+        "startLine": 128,
+        "startChar": 69,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13cd1e21_eee1d6c9",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:18:17Z",
+      "side": 1,
+      "message": "nit: Can we have a test with an extension struct too?",
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
