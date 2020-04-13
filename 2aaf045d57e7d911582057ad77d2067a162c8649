@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "9cff2507_00ec0a5d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-13T17:00:37Z",
+      "side": 1,
+      "message": "OK. If we MUST have an extra member variable, please name it something like mLastProcessedTickSerial or mLastTickSerial to make it clear what its purpose is compared to the other serials in the class.",
+      "parentUuid": "d9ab6de4_908322bf",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "2aaf045d57e7d911582057ad77d2067a162c8649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15a0fcbc_e7534b42",
         "filename": "src/dawn_native/metal/DeviceMTL.h",
         "patchSetId": 4
