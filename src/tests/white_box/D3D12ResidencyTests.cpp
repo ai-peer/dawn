@@ -27,6 +27,12 @@ constexpr uint32_t kDirectlyAllocatedResourceSize = 5000000;  // 5MB
 constexpr uint32_t kSuballocatedResourceSize = 1000000;       // 1MB
 constexpr uint32_t kSourceBufferSize = 4;                     // 4B
 
+constexpr wgpu::BufferUsage kMapReadBufferUsage =
+    wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+constexpr wgpu::BufferUsage kMapWriteBufferUsage =
+    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+constexpr wgpu::BufferUsage kNonMappableBufferUsage = wgpu::BufferUsage::CopyDst;
+
 class D3D12ResidencyTests : public DawnTest {
   protected:
     void TestSetUp() override {
@@ -44,11 +50,13 @@ class D3D12ResidencyTests : public DawnTest {
             utils::CreateBufferFromData(device, &one, sizeof(one), wgpu::BufferUsage::CopySrc);
     }
 
-    std::vector<wgpu::Buffer> AllocateBuffers(uint32_t bufferSize, uint32_t numberOfBuffers) {
+    std::vector<wgpu::Buffer> AllocateBuffers(uint32_t bufferSize,
+                                              uint32_t numberOfBuffers,
+                                              wgpu::BufferUsage usage) {
         std::vector<wgpu::Buffer> buffers;
 
         for (uint64_t i = 0; i < numberOfBuffers; i++) {
-            buffers.push_back(CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst));
+            buffers.push_back(CreateBuffer(bufferSize, usage));
         }
 
         return buffers;
@@ -122,7 +130,8 @@ class D3D12ResidencyTests : public DawnTest {
 TEST_P(D3D12ResidencyTests, OvercommitSmallResources) {
     // Create suballocated buffers to fill half the budget.
     std::vector<wgpu::Buffer> bufferSet1 = AllocateBuffers(
-        kSuballocatedResourceSize, ((kRestrictedBudgetSize / 2) / kSuballocatedResourceSize));
+        kSuballocatedResourceSize, ((kRestrictedBudgetSize / 2) / kSuballocatedResourceSize),
+        kNonMappableBufferUsage);
 
     // Check that all the buffers allocated are resident. Also make sure they were suballocated
     // internally.
@@ -134,7 +143,8 @@ TEST_P(D3D12ResidencyTests, OvercommitSmallResources) {
 
     // Create enough directly-allocated buffers to use the entire budget.
     std::vector<wgpu::Buffer> bufferSet2 = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize,
+        kNonMappableBufferUsage);
 
     // Check that everything in bufferSet1 is now evicted.
     for (uint32_t i = 0; i < bufferSet1.size(); i++) {
@@ -158,9 +168,9 @@ TEST_P(D3D12ResidencyTests, OvercommitSmallResources) {
 // correctly.
 TEST_P(D3D12ResidencyTests, OvercommitLargeResources) {
     // Create directly-allocated buffers to fill half the budget.
-    std::vector<wgpu::Buffer> bufferSet1 =
-        AllocateBuffers(kDirectlyAllocatedResourceSize,
-                        ((kRestrictedBudgetSize / 2) / kDirectlyAllocatedResourceSize));
+    std::vector<wgpu::Buffer> bufferSet1 = AllocateBuffers(
+        kDirectlyAllocatedResourceSize,
+        ((kRestrictedBudgetSize / 2) / kDirectlyAllocatedResourceSize), kNonMappableBufferUsage);
 
     // Check that all the allocated buffers are resident. Also make sure they were directly
     // allocated internally.
@@ -171,7 +181,8 @@ TEST_P(D3D12ResidencyTests, OvercommitLargeResources) {
 
     // Create enough directly-allocated buffers to use the entire budget.
     std::vector<wgpu::Buffer> bufferSet2 = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize,
+        kNonMappableBufferUsage);
 
     // Check that everything in bufferSet1 is now evicted.
     for (uint32_t i = 0; i < bufferSet1.size(); i++) {
@@ -192,13 +203,8 @@ TEST_P(D3D12ResidencyTests, OvercommitLargeResources) {
 
 // Check that calling MapReadAsync makes the buffer resident and keeps it locked resident.
 TEST_P(D3D12ResidencyTests, AsyncMappedBufferRead) {
-    // Dawn currently only manages LOCAL_MEMORY. Mappable buffers exist in NON_LOCAL_MEMORY on
-    // discrete devices.
-    DAWN_SKIP_TEST_IF(!IsUMA());
-
     // Create a mappable buffer.
-    wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst);
-
+    wgpu::Buffer buffer = CreateBuffer(4, kMapReadBufferUsage);
     uint32_t data = 12345;
     buffer.SetSubData(0, sizeof(uint32_t), &data);
 
@@ -207,7 +213,8 @@ TEST_P(D3D12ResidencyTests, AsyncMappedBufferRead) {
 
     // Create and touch enough buffers to use the entire budget.
     std::vector<wgpu::Buffer> bufferSet = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, (kRestrictedBudgetSize / kDirectlyAllocatedResourceSize),
+        kMapReadBufferUsage);
     TouchBuffers(0, bufferSet.size(), bufferSet);
 
     // The mappable buffer should have been evicted.
@@ -230,25 +237,23 @@ TEST_P(D3D12ResidencyTests, AsyncMappedBufferRead) {
     // This should evict the mappable buffer.
     buffer.Unmap();
     std::vector<wgpu::Buffer> bufferSet2 = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, (kRestrictedBudgetSize / kDirectlyAllocatedResourceSize),
+        kMapReadBufferUsage);
     TouchBuffers(0, bufferSet2.size(), bufferSet2);
     EXPECT_FALSE(CheckIfBufferIsResident(buffer));
 }
 
 // Check that calling MapWriteAsync makes the buffer resident and keeps it locked resident.
 TEST_P(D3D12ResidencyTests, AsyncMappedBufferWrite) {
-    // Dawn currently only manages LOCAL_MEMORY. Mappable buffers exist in NON_LOCAL_MEMORY on
-    // discrete devices.
-    DAWN_SKIP_TEST_IF(!IsUMA());
-
     // Create a mappable buffer.
-    wgpu::Buffer buffer = CreateBuffer(4, wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc);
+    wgpu::Buffer buffer = CreateBuffer(4, kMapWriteBufferUsage);
     // The mappable buffer should be resident.
     EXPECT_TRUE(CheckIfBufferIsResident(buffer));
 
     // Create and touch enough buffers to use the entire budget.
     std::vector<wgpu::Buffer> bufferSet1 = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, (kRestrictedBudgetSize / kDirectlyAllocatedResourceSize),
+        kMapReadBufferUsage);
     TouchBuffers(0, bufferSet1.size(), bufferSet1);
 
     // The mappable buffer should have been evicted.
@@ -271,7 +276,8 @@ TEST_P(D3D12ResidencyTests, AsyncMappedBufferWrite) {
     // This should evict the mappable buffer.
     buffer.Unmap();
     std::vector<wgpu::Buffer> bufferSet2 = AllocateBuffers(
-        kDirectlyAllocatedResourceSize, kRestrictedBudgetSize / kDirectlyAllocatedResourceSize);
+        kDirectlyAllocatedResourceSize, (kRestrictedBudgetSize / kDirectlyAllocatedResourceSize),
+        kMapReadBufferUsage);
     TouchBuffers(0, bufferSet2.size(), bufferSet2);
     EXPECT_FALSE(CheckIfBufferIsResident(buffer));
 }
