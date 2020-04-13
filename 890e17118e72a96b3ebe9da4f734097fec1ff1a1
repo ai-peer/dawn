@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5d9a850_800faf47",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T22:29:55Z",
+      "side": 1,
+      "message": "Corentin: to answer your question about this class in the other CL:\nThis function makes it nicer to get the unbound callback. You can call foo.Callback() instead of MockCallback\u003cWGPUDeviceLostCallback\u003e::Callback, or decltype(foo)::Callback",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "890e17118e72a96b3ebe9da4f734097fec1ff1a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82741981_10d2376e",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T22:29:55Z",
+      "side": 1,
+      "message": "Corentin: to answer your question about this class in the other CL:\nthis can\u0027t be inlined because we need to use the template parameter deduction to generate the index sequence to unpack the tuple into arguments.",
+      "range": {
+        "startLine": 88,
+        "startChar": 10,
+        "endLine": 88,
+        "endChar": 18
+      },
+      "revId": "890e17118e72a96b3ebe9da4f734097fec1ff1a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -46,6 +46,30 @@
       "revId": "79b0c4169795aaefe0e5b69f81104adc5dbaf237",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5a9caea_a745589d",
+        "filename": "src/tests/unittests/wire/WireDisconnectTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T22:29:55Z",
+      "side": 1,
+      "message": "True. Changed this to be test-level scope.",
+      "parentUuid": "10b16b08_763d27db",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 68
+      },
+      "revId": "79b0c4169795aaefe0e5b69f81104adc5dbaf237",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
