@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c73ca92_c4b8aa32",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T21:58:27Z",
+      "side": 1,
+      "message": "nit: prefer std::array",
+      "range": {
+        "startLine": 1372,
+        "startChar": 29,
+        "endLine": 1372,
+        "endChar": 46
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55622ee6_4eabaa82",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T21:58:27Z",
+      "side": 1,
+      "message": "nit: this could be { bgl.begin(), bgl.end() }",
+      "range": {
+        "startLine": 1384,
+        "startChar": 63,
+        "endLine": 1384,
+        "endChar": 87
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e032e026_8cab2dd8",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T21:58:27Z",
+      "side": 1,
+      "message": "nit: we never actually use these buffers except put them in the bind group, so we don\u0027t need to keep them around in an array",
+      "range": {
+        "startLine": 1457,
+        "startChar": 4,
+        "endLine": 1457,
+        "endChar": 37
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5ee48f9_0da28c4b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1469,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T21:58:27Z",
+      "side": 1,
+      "message": "typo: Compared",
+      "range": {
+        "startLine": 1469,
+        "startChar": 7,
+        "endLine": 1469,
+        "endChar": 16
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91e7300f_8011ff4d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-13T21:58:27Z",
+      "side": 1,
+      "message": "Can we have a helper that checks both compute/render for a pipeline + list of bind groups?\nThis code is very common and can be factored out",
+      "range": {
+        "startLine": 1470,
+        "startChar": 4,
+        "endLine": 1493,
+        "endChar": 5
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
