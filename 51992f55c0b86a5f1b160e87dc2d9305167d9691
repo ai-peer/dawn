@@ -125,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "f5a4f24f_074c9b56",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T06:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "073387bd_6cab6a07",
+      "range": {
+        "startLine": 1260,
+        "startChar": 48,
+        "endLine": 1261,
+        "endChar": 62
+      },
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf16a5b1_0a00b8b9",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -295,6 +319,24 @@
     },
     {
       "key": {
+        "uuid": "3619a461_2a2eaad2",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T06:49:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6c51b2b0_8148ecdf",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "359bedb1_7f8b094b",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -309,6 +351,24 @@
       "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1e939bc_3c8baa70",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T06:49:27Z",
+      "side": 1,
+      "message": "Ack. Dawn code has more validations for Drawn/Dispatch.\n\nI added Draw/Dispatch in other tests, but didn\u0027t added them in this test by mistake...",
+      "parentUuid": "359bedb1_7f8b094b",
+      "revId": "51992f55c0b86a5f1b160e87dc2d9305167d9691",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

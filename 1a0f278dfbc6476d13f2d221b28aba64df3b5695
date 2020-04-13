@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "ecfea095_a6f77429",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T06:49:27Z",
+      "side": 1,
+      "message": "I removed RenderPassValidationTests.cpp. The tests in that file are fully contained in the new added tests. And the new tests are more inclusive. And all tests are about bindings. RenderPassValidationTests doesn\u0027t look like a good name. So I\u0027d like to put the tests here.\n\nYou are correct that validation for bindgroup\u0027s layout and the pipeline\u0027s BGL may doesn\u0027t know about anything about specific bindings in pipeline (designated by shaders). But once we set the pipeline\u0027s BGL, we need to set pipeline, which means that we have already set an appropriate pipeline with bindings via shaders. And there are validations between bindgroup/pipeline\u0027s BGL and bindings in pipeline. I know that the latter validation might be triggered by Draw/Dispatch in Dawn, but this is like a temp (or unstable? whatever) implementation. And the new tests show that the requirement about bindings is: bindings associated with bind group \u003e\u003d bindings in pipeline layout \u003e\u003d bindings in pipeline (shaders). If this rule is obeyed, then validation can pass. Otherwise, validation fails.",
+      "parentUuid": "fe3bc0b4_3d5244fc",
+      "revId": "1a0f278dfbc6476d13f2d221b28aba64df3b5695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1029e0d1_476907fe",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T06:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38651185_5ca349b5",
+      "range": {
+        "startLine": 1372,
+        "startChar": 48,
+        "endLine": 1372,
+        "endChar": 80
+      },
+      "revId": "1a0f278dfbc6476d13f2d221b28aba64df3b5695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "024b528a_4aeea149",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 4
