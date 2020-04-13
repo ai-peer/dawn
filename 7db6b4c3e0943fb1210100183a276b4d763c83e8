@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6a7d65cc_f8275488",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T23:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c73ca92_c4b8aa32",
+      "range": {
+        "startLine": 1372,
+        "startChar": 29,
+        "endLine": 1372,
+        "endChar": 46
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55622ee6_4eabaa82",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4e3153f_5c45a37f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T23:40:47Z",
+      "side": 1,
+      "message": "Not really, there are 4 elements in the bind group array, but I use 3 of them.",
+      "parentUuid": "55622ee6_4eabaa82",
+      "range": {
+        "startLine": 1384,
+        "startChar": 63,
+        "endLine": 1384,
+        "endChar": 87
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "96637b24_ec5c8c7e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T23:40:47Z",
+      "side": 1,
+      "message": "Hmm, the reason I used an array is that I can use a for loop below.",
+      "parentUuid": "e032e026_8cab2dd8",
+      "range": {
+        "startLine": 1457,
+        "startChar": 4,
+        "endLine": 1457,
+        "endChar": 37
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5ee48f9_0da28c4b",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "93cbe2cc_c16a1756",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1469,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T23:40:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5ee48f9_0da28c4b",
+      "range": {
+        "startLine": 1469,
+        "startChar": 7,
+        "endLine": 1469,
+        "endChar": 16
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91e7300f_8011ff4d",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 8
@@ -114,6 +210,30 @@
       "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b344154a_61d8984f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T23:40:47Z",
+      "side": 1,
+      "message": "Done\n\nThat\u0027s correct. The code duplicated a lot, and we can use helper functions with limited parameters.",
+      "parentUuid": "91e7300f_8011ff4d",
+      "range": {
+        "startLine": 1470,
+        "startChar": 4,
+        "endLine": 1493,
+        "endChar": 5
+      },
+      "revId": "7db6b4c3e0943fb1210100183a276b4d763c83e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
