@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53b9c9dc_14a6d47b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T07:32:56Z",
+      "side": 1,
+      "message": "nit: BindGroupLayoutVisibilityNoneExpectsBindGroupEntry",
+      "revId": "2506435524e7823a20233a0c945eed0c8467bc2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
