@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55b48621_75111036",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6de31d7_22b30246",
+      "range": {
+        "startLine": 1274,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 9
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcfa11f0_2162893f",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "feb35989_ed93dd4c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Done\n\nJust thought that the variable name \"pipelineLayout\" might be clearer. Anyway, it is not a big deal.",
+      "parentUuid": "fcfa11f0_2162893f",
+      "range": {
+        "startLine": 1288,
+        "startChar": 25,
+        "endLine": 1288,
+        "endChar": 39
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4bb988f_c1288c3b",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 7
@@ -62,6 +110,24 @@
       "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b6f36ea_f4d05840",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4bb988f_c1288c3b",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "97802c28_abc60ce8",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2704f390_264c1d10",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47b7eacd_0d1b1f0a",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 7
@@ -96,6 +180,24 @@
       "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e6fb2e8_13ac50c1",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47b7eacd_0d1b1f0a",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "eb8d2069_dfdae3cf",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Hmm, I just want to say that there is one more binding (and bind group and bind group layout) than pipeline layout, although the result (kBindingNum + 1) indeed equals to kMaxBindGroups (which is 4) by chance.",
+      "parentUuid": "43528891_a41242ab",
+      "range": {
+        "startLine": 1545,
+        "startChar": 30,
+        "endLine": 1545,
+        "endChar": 45
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "156a5e2c_c569b9b6",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 7
@@ -136,6 +262,24 @@
       "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a2e5590_a8f06afd",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-13T16:47:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "156a5e2c_c569b9b6",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
