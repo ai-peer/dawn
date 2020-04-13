@@ -310,7 +310,8 @@ namespace dawn_native { namespace d3d12 {
         // CreateCommittedResource will implicitly make the created resource resident. We must
         // ensure enough free memory exists before allocating to avoid an out-of-memory error when
         // overcommitted.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(resourceInfo.SizeInBytes));
+        DAWN_TRY(
+            mDevice->GetResidencyManager()->EnsureCanAllocate(resourceInfo.SizeInBytes, heapType));
 
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
