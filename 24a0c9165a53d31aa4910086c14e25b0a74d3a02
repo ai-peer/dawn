@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6de31d7_22b30246",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "nit: Test that it is valid to pass a writable storage buffer in the pipeline layout, when the shader uses the binding as a readonly storage buffer.",
+      "range": {
+        "startLine": 1274,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 9
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcfa11f0_2162893f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "You can use the initializer syntax: CreateRenderPipeline({bgl0, bgl1}) ditto everywhere else",
+      "range": {
+        "startLine": 1288,
+        "startChar": 25,
+        "endLine": 1288,
+        "endChar": 39
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4bb988f_c1288c3b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "nit: Test that it is invalid ...",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2704f390_264c1d10",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "This could be repurposed to test that setting an extra bindgroup that isn\u0027t used by the pipeline layout is valid.",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47b7eacd_0d1b1f0a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "See comment on the bug, that shouldn\u0027t be valid. Overall I don\u0027t think we should test the pipeline \u003c-\u003e bind group per binding. Instead we should have tests that the bind group layouts are the exact same.",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43528891_a41242ab",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "Or kMaxBindGroups?",
+      "range": {
+        "startLine": 1545,
+        "startChar": 30,
+        "endLine": 1545,
+        "endChar": 45
+      },
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "156a5e2c_c569b9b6",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-13T08:46:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "24a0c9165a53d31aa4910086c14e25b0a74d3a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
