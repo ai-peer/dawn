@@ -22,6 +22,30 @@
       "revId": "9c1a8f87a9dba2941c75bb64fdec5bc1a56597bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72b5b89d_01a07e66",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-14T17:40:47Z",
+      "side": 1,
+      "message": "Good idea, done",
+      "parentUuid": "097f6639_89ee71dd",
+      "range": {
+        "startLine": 144,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 41
+      },
+      "revId": "9c1a8f87a9dba2941c75bb64fdec5bc1a56597bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
