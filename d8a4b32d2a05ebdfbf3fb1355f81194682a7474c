@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "088c428b_b205223d",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-14T22:42:46Z",
+      "side": 1,
+      "message": "nit: different (and below)",
+      "range": {
+        "startLine": 132,
+        "startChar": 34,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "d8a4b32d2a05ebdfbf3fb1355f81194682a7474c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
