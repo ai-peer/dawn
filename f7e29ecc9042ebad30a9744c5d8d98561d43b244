@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4ad5182_50cd470d",
+        "filename": "src/common/BitSetIterator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-14T17:02:01Z",
+      "side": 1,
+      "message": "unit: kBitsPerWord",
+      "range": {
+        "startLine": 54,
+        "startChar": 32,
+        "endLine": 54,
+        "endChar": 43
+      },
+      "revId": "f7e29ecc9042ebad30a9744c5d8d98561d43b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
