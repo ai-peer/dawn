@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "21c5b753_93fae32f",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-14T23:22:22Z",
+      "side": 1,
+      "message": "Yup, these commands are never sent anywhere because the wire is disconnected so no one reads them. And the client doesn\u0027t read commands after writing them",
+      "parentUuid": "62532df9_3de0b07b",
+      "revId": "d9ad63dbe312d976ffd631d6e9aea3407724c04f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "809b5312_5d298d2d",
         "filename": "src/tests/MockCallback.h",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "d9ad63dbe312d976ffd631d6e9aea3407724c04f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80f2bdc0_5e48c8b4",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-14T23:22:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "809b5312_5d298d2d",
+      "revId": "d9ad63dbe312d976ffd631d6e9aea3407724c04f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
