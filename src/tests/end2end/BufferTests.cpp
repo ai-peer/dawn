@@ -249,6 +249,16 @@ TEST_P(BufferSetSubDataTests, SmallDataAtZero) {
     EXPECT_BUFFER_U32_EQ(value, buffer, 0);
 }
 
+// Test the simplest set sub data: setting nothing
+TEST_P(BufferSetSubDataTests, ZeroSized) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    buffer.SetSubData(0, 0, nullptr);
+}
+
 // Call SetSubData at offset 0 via a u32 twice. Test that data is updated accoordingly.
 TEST_P(BufferSetSubDataTests, SetTwice) {
     wgpu::BufferDescriptor descriptor;

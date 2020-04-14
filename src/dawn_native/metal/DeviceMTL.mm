@@ -213,10 +213,6 @@ namespace dawn_native { namespace metal {
 
         mLastSubmittedSerial++;
 
-        // Ensure the blit encoder is ended. It may have been opened to perform a lazy clear or
-        // buffer upload.
-        mCommandContext.EndBlit();
-
         // Acquire the pending command buffer, which is retained. It must be released later.
         id<MTLCommandBuffer> pendingCommands = mCommandContext.AcquireCommands();
 
