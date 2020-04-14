@@ -421,6 +421,8 @@ namespace dawn_native {
                         info->storageTextureFormat = storageTextureFormat;
                         info->textureDimension =
                             ToWGPUTextureViewDimension(binding.texture_dimension);
+                        printf("In shader module, binding type = %d\n",
+                               static_cast<int>(info->type));
                         break;
                     }
                     default:

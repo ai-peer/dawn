@@ -153,6 +153,7 @@ namespace dawn_native {
                     BindGroupLayoutEntry bindingSlot;
                     bindingSlot.binding = bindingNumber;
 
+                    printf("In pipeline layout, bindingInfo.type = %d\n", bindingInfo.type);
                     DAWN_TRY(ValidateBindingTypeWithShaderStageVisibility(
                         bindingInfo.type, StageBit(module->GetExecutionModel())));
                     DAWN_TRY(ValidateStorageTextureFormat(device, bindingInfo.type,
