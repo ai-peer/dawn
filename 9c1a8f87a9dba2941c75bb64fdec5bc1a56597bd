@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "097f6639_89ee71dd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-14T16:57:03Z",
+      "side": 1,
+      "message": "nit: This could be removed from the State::Alive switch-case above and always be set to Disconnected (not in the else-block). Probably more clear that we always end up in the Disconnected state by this point.",
+      "range": {
+        "startLine": 144,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 41
+      },
+      "revId": "9c1a8f87a9dba2941c75bb64fdec5bc1a56597bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
