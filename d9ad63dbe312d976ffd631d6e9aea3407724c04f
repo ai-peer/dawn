@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62532df9_3de0b07b",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-14T23:00:55Z",
+      "side": 1,
+      "message": "This will invalidate any previous pointers to the mDummyCmdSpace. Is that okay?",
+      "revId": "d9ad63dbe312d976ffd631d6e9aea3407724c04f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "809b5312_5d298d2d",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-14T23:00:55Z",
+      "side": 1,
+      "message": "nit: It\u0027s very hard to tell the `new`-allocated object is getting acquired by a std::unique_ptr here. How about just using std::make_unique and moving it into the set?",
+      "revId": "d9ad63dbe312d976ffd631d6e9aea3407724c04f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
