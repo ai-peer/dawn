@@ -51,7 +51,7 @@ class BitSetIterator final {
       private:
         unsigned long getNextBit();
 
-        static const size_t BitsPerWord = sizeof(uint32_t) * 8;
+        static constexpr size_t BitsPerWord = sizeof(uint32_t) * 8;
         std::bitset<N> mBits;
         unsigned long mCurrentBit;
         unsigned long mOffset;
