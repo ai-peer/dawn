@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2d00722_9594b9c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-14T16:58:32Z",
+      "side": 1,
+      "message": "nit: also changes deps libdawn_proc -\u003e dawn_proc",
+      "revId": "cdd3cab226bce55bfa83f8c08b73f71de89bef14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
