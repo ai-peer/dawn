@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b59d9043_9c378a29",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-14T08:41:27Z",
+      "side": 1,
+      "message": "Ack, please add this in a comment.",
+      "parentUuid": "a5d9a850_800faf47",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "890e17118e72a96b3ebe9da4f734097fec1ff1a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82741981_10d2376e",
         "filename": "src/tests/MockCallback.h",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-13T22:29:55Z",
       "side": 1,
       "message": "Corentin: to answer your question about this class in the other CL:\nthis can\u0027t be inlined because we need to use the template parameter deduction to generate the index sequence to unpack the tuple into arguments.",
+      "range": {
+        "startLine": 88,
+        "startChar": 10,
+        "endLine": 88,
+        "endChar": 18
+      },
+      "revId": "890e17118e72a96b3ebe9da4f734097fec1ff1a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f08e9ba_54d4f3c0",
+        "filename": "src/tests/MockCallback.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-14T08:41:27Z",
+      "side": 1,
+      "message": "Ack, please add this in a comment.",
+      "parentUuid": "82741981_10d2376e",
       "range": {
         "startLine": 88,
         "startChar": 10,
