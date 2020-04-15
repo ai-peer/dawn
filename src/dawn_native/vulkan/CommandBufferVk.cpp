@@ -389,6 +389,12 @@ namespace dawn_native { namespace vulkan {
             switch (type) {
                 case Command::CopyBufferToBuffer: {
                     CopyBufferToBufferCmd* copy = mCommands.NextCommand<CopyBufferToBufferCmd>();
+
+                    // Vulkan validation rules prohibit empty copies
+                    if (copy->size == 0) {
+                        break;
+                    }
+
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
