@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87e265d4_35a2f3ea",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T15:15:55Z",
+      "side": 1,
+      "message": "nit: Comment why we have this\nalso, have we told Intel about this issue? They should probably eventually fix it on their side, especially if the Metal validation layers don\u0027t surface it",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 270,
+        "endChar": 0
+      },
+      "revId": "4ee16947e1a41f9bf3c8c66370bc2e1a8f44176d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
