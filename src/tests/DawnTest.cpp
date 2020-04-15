@@ -924,11 +924,11 @@ void DawnTestBase::SlotMapReadCallback(WGPUBufferMapAsyncStatus status,
 
 void DawnTestBase::ResolveExpectations() {
     for (const auto& expectation : mDeferredExpectations) {
-        DAWN_ASSERT(mReadbackSlots[expectation.readbackSlot].mappedData != nullptr);
+        const ReadbackSlot& readback = mReadbackSlots[expectation.readbackSlot];
+        DAWN_ASSERT(readback.mappedData != nullptr || readback.bufferSize == 0);
 
         // Get a pointer to the mapped copy of the data for the expectation.
-        const char* data =
-            static_cast<const char*>(mReadbackSlots[expectation.readbackSlot].mappedData);
+        const char* data = static_cast<const char*>(readback.mappedData);
         data += expectation.readbackOffset;
 
         uint32_t size;
