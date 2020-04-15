@@ -31,7 +31,9 @@ namespace dawn_native { namespace metal {
             storageMode = MTLResourceStorageModePrivate;
         }
 
-        uint32_t currentSize = GetSize();
+        // TODO(cwallez@chromium.org): Have a global "zero" buffer that can do everything instead
+        // of creating a new 4-byte buffer?
+        uint32_t currentSize = std::max(GetSize(), uint64_t(4u));
         // Metal validation layer requires the size of uniform buffer and storage buffer to be no
         // less than the size of the buffer block defined in shader, and the overall size of the
         // buffer must be aligned to the largest alignment of its members.
