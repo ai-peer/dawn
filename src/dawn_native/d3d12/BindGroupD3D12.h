@@ -38,7 +38,8 @@ namespace dawn_native { namespace d3d12 {
                   const CPUDescriptorHeapAllocation& samplerAllocation);
 
         // Returns true if the BindGroup was successfully populated.
-        ResultOrError<bool> Populate(ShaderVisibleDescriptorAllocator* allocator);
+        ResultOrError<bool> Populate(ShaderVisibleDescriptorAllocator* allocator,
+                                     ID3D12Device* d3d12Device);
 
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseCbvUavSrvDescriptor() const;
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;

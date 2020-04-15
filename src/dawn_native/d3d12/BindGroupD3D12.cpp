@@ -150,9 +150,8 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mCPUSamplerAllocation.IsValid());
     }
 
-    ResultOrError<bool> BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator) {
-        Device* device = ToBackend(GetDevice());
-
+    ResultOrError<bool> BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator,
+                                            ID3D12Device* d3d12Device) {
         if (allocator->IsAllocationStillValid(mLastUsageSerial, mHeapSerial)) {
             return true;
         }
@@ -160,9 +159,8 @@ namespace dawn_native { namespace d3d12 {
         // Attempt to allocate descriptors for the currently bound shader-visible heaps.
         // If either failed, return early to re-allocate and switch the heaps.
         const BindGroupLayout* bgl = ToBackend(GetLayout());
+        Device* device = ToBackend(GetDevice());
         const Serial pendingSerial = device->GetPendingCommandSerial();
-
-        ID3D12Device* d3d12Device = device->GetD3D12Device().Get();
 
         // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
         // simple copies per bindgroup, a single non-simple copy could be issued.

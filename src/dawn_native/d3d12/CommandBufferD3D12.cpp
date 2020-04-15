@@ -95,6 +95,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroupStateTracker(Device* device)
             : BindGroupAndStorageBarrierTrackerBase(),
+              mD3D12Device(device->GetD3D12Device().Get()),
               mAllocator(device->GetShaderVisibleDescriptorAllocator()) {
         }
 
@@ -114,7 +115,7 @@ namespace dawn_native { namespace d3d12 {
             bool didCreateBindGroups = true;
             for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
                 DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                ToBackend(mBindGroups[index])->Populate(mAllocator));
+                                ToBackend(mBindGroups[index])->Populate(mAllocator, mD3D12Device));
                 if (!didCreateBindGroups) {
                     break;
                 }
@@ -134,8 +135,9 @@ namespace dawn_native { namespace d3d12 {
                 SetID3D12DescriptorHeaps(commandList);
 
                 for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                    ToBackend(mBindGroups[index])->Populate(mAllocator));
+                    DAWN_TRY_ASSIGN(
+                        didCreateBindGroups,
+                        ToBackend(mBindGroups[index])->Populate(mAllocator, mD3D12Device));
                     ASSERT(didCreateBindGroups);
                 }
             }
@@ -289,6 +291,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         bool mInCompute = false;
+
+        ID3D12Device* mD3D12Device;
 
         ShaderVisibleDescriptorAllocator* mAllocator;
     };
