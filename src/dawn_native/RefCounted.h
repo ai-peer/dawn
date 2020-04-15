@@ -49,10 +49,19 @@ namespace dawn_native {
         Ref(T* p) : mPointee(p) {
             Reference();
         }
+        template <typename U>
+        Ref(U* p) : mPointee(p) {
+            Reference();
+        }
 
         Ref(const Ref<T>& other) : mPointee(other.mPointee) {
             Reference();
         }
+        template <typename U>
+        Ref(const Ref<U>& other) : mPointee(other.mPointee) {
+            Reference();
+        }
+
         Ref<T>& operator=(const Ref<T>& other) {
             if (&other == this)
                 return *this;
@@ -63,15 +72,35 @@ namespace dawn_native {
 
             return *this;
         }
-
-        Ref(Ref<T>&& other) {
+        template <typename U>
+        Ref<T>& operator=(const Ref<U>& other) {
+            other.Reference();
+            Release();
             mPointee = other.mPointee;
+
+            return *this;
+        }
+
+        Ref(Ref<T>&& other) : mPointee(other.mPointee) {
             other.mPointee = nullptr;
         }
+        template <typename U>
+        Ref(Ref<U>&& other) : mPointee(other.mPointee) {
+            other.mPointee = nullptr;
+        }
+
         Ref<T>& operator=(Ref<T>&& other) {
             if (&other == this)
                 return *this;
 
+            Release();
+            mPointee = other.mPointee;
+            other.mPointee = nullptr;
+
+            return *this;
+        }
+        template <typename U>
+        Ref<T>& operator=(Ref<U>&& other) {
             Release();
             mPointee = other.mPointee;
             other.mPointee = nullptr;
@@ -116,6 +145,9 @@ namespace dawn_native {
         }
 
       private:
+        template <typename U>
+        friend class Ref;
+
         void Reference() const {
             if (mPointee != nullptr) {
                 mPointee->Reference();
