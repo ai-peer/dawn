@@ -172,8 +172,28 @@ namespace dawn_native { namespace vulkan {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
+    void Device::UpdateSerial() {
+        if (mCompletedSerial == mLastSubmittedSerial) {
+            // If there's no GPU work in flight we still need to artificially increment the
+            // serial so that CPU operations waiting on GPU completion can know they don't have
+            // to wait.
+            mCompletedSerial++;
+            mLastSubmittedSerial++;
+        }
+    }
+
+    bool Device::IsCompletedSerialUnchanged() {
         CheckPassedFences();
+        if (mLastProcessedTickSerial == mCompletedSerial) {
+            UpdateSerial();
+            return true;
+        }
+        return false;
+    }
+
+    MaybeError Device::TickImpl() {
+        mLastProcessedTickSerial = mCompletedSerial;
+
         RecycleCompletedCommands();
 
         mDescriptorSetService->Tick(mCompletedSerial);
@@ -183,12 +203,8 @@ namespace dawn_native { namespace vulkan {
 
         if (mRecordingContext.used) {
             DAWN_TRY(SubmitPendingCommands());
-        } else if (mCompletedSerial == mLastSubmittedSerial) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            mCompletedSerial++;
-            mLastSubmittedSerial++;
         }
+        UpdateSerial();
 
         return {};
     }

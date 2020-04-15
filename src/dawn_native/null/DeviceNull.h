@@ -143,6 +143,7 @@ namespace dawn_native { namespace null {
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        bool IsCompletedSerialUnchanged() override;
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
 
         static constexpr size_t kMaxMemoryUsage = 256 * 1024 * 1024;

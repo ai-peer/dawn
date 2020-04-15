@@ -674,6 +674,10 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
+        // If current completed serial is the same as before, don't tick again.
+        if (IsCompletedSerialUnchanged()) {
+            return;
+        }
         if (ConsumedError(TickImpl())) {
             return;
         }

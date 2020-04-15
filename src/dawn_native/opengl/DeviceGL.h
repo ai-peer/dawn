@@ -102,7 +102,9 @@ namespace dawn_native { namespace opengl {
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        Serial mLastProcessedTickSerial = 0;
         std::queue<std::pair<GLsync, Serial>> mFencesInFlight;
+        bool IsCompletedSerialUnchanged() override;
 
         GLFormatTable mFormatTable;
     };
