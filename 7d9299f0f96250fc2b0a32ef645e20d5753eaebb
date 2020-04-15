@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "323c60bf_57b21e89",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acb4045e_eac61175",
+      "range": {
+        "startLine": 58,
+        "startChar": 53,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80cfc1c8_5cd09c66",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "eed80e99_754a308f",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80cfc1c8_5cd09c66",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 29
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "977823eb_a74584a7",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce26e7ab_75f8b07e",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977823eb_a74584a7",
+      "range": {
+        "startLine": 131,
+        "startChar": 104,
+        "endLine": 131,
+        "endChar": 128
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "8dba608a_6c5d8d13",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdea1769_e09020eb",
+      "range": {
+        "startLine": 128,
+        "startChar": 69,
+        "endLine": 128,
+        "endChar": 86
+      },
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13cd1e21_eee1d6c9",
         "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
         "patchSetId": 3
@@ -142,6 +238,24 @@
       "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5875e359_3e7d62b8",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13cd1e21_eee1d6c9",
+      "revId": "7d9299f0f96250fc2b0a32ef645e20d5753eaebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

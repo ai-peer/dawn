@@ -22,6 +22,30 @@
       "revId": "d8a4b32d2a05ebdfbf3fb1355f81194682a7474c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3917ed4_9cbf4635",
+        "filename": "src/tests/unittests/wire/WireMultipleDeviceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-15T17:56:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "088c428b_b205223d",
+      "range": {
+        "startLine": 132,
+        "startChar": 34,
+        "endLine": 132,
+        "endChar": 44
+      },
+      "revId": "d8a4b32d2a05ebdfbf3fb1355f81194682a7474c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
