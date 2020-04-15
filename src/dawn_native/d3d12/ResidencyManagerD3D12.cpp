@@ -1,3 +1,4 @@
+#include "ResidencyManagerD3D12.h"
 // Copyright 2020 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,6 +30,13 @@ namespace dawn_native { namespace d3d12 {
           mResidencyManagementEnabled(
               device->IsToggleEnabled(Toggle::UseD3D12ResidencyManagement)) {
         UpdateVideoMemoryInfo();
+    }
+
+    ResidencyManager::~ResidencyManager() {
+        // If any heap in the LRU outlives the ResidencyManager, the LRU cache will still exist in
+        // memory and will attempt to reference the LRU head node when the rest of the list is
+        // destroyed. We must remove the head node from the list to prevent an access violation.
+        mLRUCache.head()->RemoveFromList();
     }
 
     // Increments number of locks on a heap to ensure the heap remains resident.
