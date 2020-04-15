@@ -22,6 +22,30 @@
       "revId": "c3c8bc12beeee3a58b061cff83cfebc3e436cadc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3225e328_dc400fd2",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T09:54:42Z",
+      "side": 1,
+      "message": "Yes we\u0027ll need to have some sort of \"native spec\" for webgpu.h-specific things.",
+      "parentUuid": "cac0d148_04f9ffe7",
+      "range": {
+        "startLine": 188,
+        "startChar": 11,
+        "endLine": 188,
+        "endChar": 81
+      },
+      "revId": "c3c8bc12beeee3a58b061cff83cfebc3e436cadc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
