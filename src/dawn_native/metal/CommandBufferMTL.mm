@@ -729,6 +729,11 @@ namespace dawn_native { namespace metal {
                 case Command::CopyBufferToBuffer: {
                     CopyBufferToBufferCmd* copy = mCommands.NextCommand<CopyBufferToBufferCmd>();
 
+                    // Metal drivers crash on empty copies
+                    if (copy->size == 0) {
+                        break;
+                    }
+
                     [commandContext->EnsureBlit()
                            copyFromBuffer:ToBackend(copy->source)->GetMTLBuffer()
                              sourceOffset:copy->sourceOffset
