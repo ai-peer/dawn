@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c7dd3c7_e5d38cb3",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this is already the case, you should be able to use Sampled with ReadonlyStorage.",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0094adea_7a7f932a",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "This should track readonly and writeonly separately.",
+      "range": {
+        "startLine": 69,
+        "startChar": 81,
+        "endLine": 69,
+        "endChar": 88
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f14fcda_81932214",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "ditto, although it might be good to keep it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "946ea47b_e12eba25",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad22566d_b1d5c39b",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "nit: not needed, it is the default.",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5546c1be_2ba4f769",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "nit: ASSERT(kWidth * texelSize \u003c\u003d kTextureRowPitchAlignment)",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e640932_1a09fe4c",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "nit: We could just have a CreateTextureWithTestData and queue.submit directly in this function. Also it could be a single helper function split with blocks. Right now there\u0027s a bunch of protected methods that aren\u0027t used in any child classes.",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c43a9f5c_4157f270",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "nit: CheckDrawsGreen",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33aa394f_11dcf1ba",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "Can we have a 1x1 attachment for this? We could even render a single point!",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f75dc3c_06a101a2",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "What about having a common shader code that has:\n\n layout ... the test texture\n\n bool doTest() {\n   samples the texture and directly checks in the shader using computations that the content is correct.\n }\n\nThen each test below could have a simple variation:\n\nFS would output green or red depending on the result of DoTest, Compute would write into a storage buffer the result of DoTest, and VS would forward to the FS.",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a94c887_38eb6e05",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-15T16:02:06Z",
+      "side": 1,
+      "message": "ditto for the write case. Also it should be supported in the pixel shader, see https://github.com/gpuweb/gpuweb/issues/639",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
