@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "31cf77f3_f4faa7c0",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:39:16Z",
+      "side": 1,
+      "message": "\u003e I fail to find any restrictions that disallows a texture being used as both SAMPLED, read-only STORAGE and write-only STORAGE in the same render pass encoder.\n\nThat would be a restriction in the usage scope, defined here https://gpuweb.github.io/gpuweb//#usage-scope-validation (it will need a lot of expanding). write-only storage is a mutating usage so it cannot be used in combination with anything else.\n\nHowever sampled and readonly storage are both non-mutating so they are ok to use in the same render pass.\n\nComputePassEncoders have \"dispatch\" as the usage scope so it is valid to use a texture as multiple mutating usages are this point (validation would need to be inside dispatch eventually, not needed for some time).",
+      "parentUuid": "e4661d9c_b964610a",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0094adea_7a7f932a",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 13
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "Based on [1], I don\u0027t think we need to track readonly and writeonly separately as either they can or cannot be used together (when the texture is being used as an OUTPUT_ATTACHMENT).",
       "parentUuid": "0094adea_7a7f932a",
+      "range": {
+        "startLine": 69,
+        "startChar": 81,
+        "endLine": 69,
+        "endChar": 88
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d6e401_564c0eca",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:39:16Z",
+      "side": 1,
+      "message": "See comment there.",
+      "parentUuid": "d1701918_83fa98b6",
       "range": {
         "startLine": 69,
         "startChar": 81,
@@ -239,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "82f95b19_46b9b7e5",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:39:16Z",
+      "side": 1,
+      "message": "You can do so with a loop, like you did for the compute shader.",
+      "parentUuid": "a58fc1bd_6019cf4b",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f75dc3c_06a101a2",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 13
@@ -285,6 +345,24 @@
       "side": 1,
       "message": "Then I think I should first change the related validation rules then go back to this CL. What do you think?",
       "parentUuid": "2a94c887_38eb6e05",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcdf2e46_14c43d6a",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:39:16Z",
+      "side": 1,
+      "message": "Either order sounds fine.",
+      "parentUuid": "27c56aa0_e82aa057",
       "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
