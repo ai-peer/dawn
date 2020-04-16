@@ -36,7 +36,8 @@ namespace {
             }
 
             // Create the D3D11 device/contexts that will be used in subsequent tests
-            ComPtr<ID3D12Device> d3d12Device = dawn_native::d3d12::GetD3D12Device(device.Get());
+            ComPtr<ID3D12Device> d3d12Device =
+                dawn_native::d3d12::GetD3D12DeviceForTesting(device.Get());
 
             const LUID adapterLuid = d3d12Device->GetAdapterLuid();
 

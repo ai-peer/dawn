@@ -56,7 +56,7 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Device::Initialize() {
         InitTogglesFromDriver();
 
-        mD3d12Device = ToBackend(GetAdapter())->GetDevice();
+        mD3d12Device = ToBackend(GetAdapter())->GetDevice().Get();
 
         ASSERT(mD3d12Device != nullptr);
 
@@ -135,7 +135,7 @@ namespace dawn_native { namespace d3d12 {
         ShutDownBase();
     }
 
-    ComPtr<ID3D12Device> Device::GetD3D12Device() const {
+    ID3D12Device* Device::GetD3D12Device() const {
         return mD3d12Device;
     }
 
@@ -187,7 +187,7 @@ namespace dawn_native { namespace d3d12 {
         // Callers of GetPendingCommandList do so to record commands. Only reserve a command
         // allocator when it is needed so we don't submit empty command lists
         if (!mPendingCommands.IsOpen()) {
-            DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
+            DAWN_TRY(mPendingCommands.Open(mD3d12Device, mCommandAllocatorManager.get()));
         }
         return &mPendingCommands;
     }
@@ -363,7 +363,7 @@ namespace dawn_native { namespace d3d12 {
             D3D_FEATURE_LEVEL d3dFeatureLevel;
             IUnknown* const iUnknownQueue = mCommandQueue.Get();
             DAWN_TRY(CheckHRESULT(GetFunctions()->d3d11on12CreateDevice(
-                                      mD3d12Device.Get(), 0, nullptr, 0, &iUnknownQueue, 1, 1,
+                                      mD3d12Device, 0, nullptr, 0, &iUnknownQueue, 1, 1,
                                       &d3d11Device, &d3d11DeviceContext, &d3dFeatureLevel),
                                   "D3D12 11on12 device create"));
 
