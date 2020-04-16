@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b97ce62_f54e0c3b",
+        "filename": "build_overrides/dawn.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T17:03:18Z",
+      "side": 1,
+      "message": "Do you plan to set this as well in [chromium]//src/build_overrides/dawn.gni ? or is it for standalone only for now?\n\nI don\u0027t think that having Vulkan loader will work in a Chromium checkout will work so well until we make vulkan-loader a DEP of Chromium. Right now Chromium imports ANGLE\u0027s version\n\nI remember trying to add vulkan-loader to Dawn but finding that in a Chromium build both ANGLE and Dawn were producing this target which is a BUILD.gn error. We could point Dawn to ANGLE\u0027s vulkan-loader, but then we\u0027ll probably run into breakages if ANGLE\u0027s version differs from ours.",
+      "revId": "779099702d40423d1919fcd597a72fbcaf028c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
