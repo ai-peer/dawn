@@ -152,6 +152,9 @@ void ProcTableAsClass::CallFenceOnCompletionCallback(WGPUFence fence,
 MockProcTable::MockProcTable() {
 }
 
+MockProcTable::~MockProcTable() {
+}
+
 void MockProcTable::IgnoreAllReleaseCalls() {
     {% for type in by_category["object"] %}
         EXPECT_CALL(*this, {{as_MethodSuffix(type.name, Name("release"))}}(_)).Times(AnyNumber());
