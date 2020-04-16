@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f98fc1a_dda81cd2",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T18:05:31Z",
+      "side": 1,
+      "message": "Just noticed that after https://dawn-review.googlesource.com/c/dawn/+/19288/6, dawn_native fires NoError, and dawn_wire fires Unknown.\n\nMaybe we can run validation tests on the wire with aggressive auto-flushing so that it\u0027s as-if everything is synchronous. Will maybe help catch these inconsistencies.\n\nexcept.... for this case the device is never destroyed until the whole wire is so we can\u0027t do that now :(",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "1064e43b7dc0e17cb80a7a9628d4d678c165956d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
