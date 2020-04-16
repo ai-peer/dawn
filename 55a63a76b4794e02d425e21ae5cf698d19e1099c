@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ef16b53_1e7168c8",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T16:27:14Z",
+      "side": 1,
+      "message": ":-/ vulkan validation layers should probably name this vvl_use_x11..",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 7
+      },
+      "revId": "55a63a76b4794e02d425e21ae5cf698d19e1099c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
