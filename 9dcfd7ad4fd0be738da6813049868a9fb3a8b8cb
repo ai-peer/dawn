@@ -22,6 +22,30 @@
       "revId": "9dcfd7ad4fd0be738da6813049868a9fb3a8b8cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44bf1804_5b4681e1",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T17:29:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aadfbf1_9ad1aba1",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 1
+      },
+      "revId": "9dcfd7ad4fd0be738da6813049868a9fb3a8b8cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
