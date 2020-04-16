@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5dfd74f4_49ec1357",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T16:54:28Z",
+      "side": 1,
+      "message": "Does swiftshader produce this now? Or should this part of the change be in the subsequent change to add vulkan loader on Mac?",
+      "range": {
+        "startLine": 46,
+        "startChar": 35,
+        "endLine": 46,
+        "endChar": 50
+      },
+      "revId": "c2b8a94b497f96288b2389993959e40488205845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
