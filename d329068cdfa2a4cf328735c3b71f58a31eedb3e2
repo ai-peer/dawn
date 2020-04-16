@@ -70,6 +70,30 @@
       "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2ed6fc2_1d836f10",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-16T16:22:51Z",
+      "side": 1,
+      "message": "If this is only for testing then let\u0027s also give it a better name. Otherwise, it\u0027s not clear if it can be shared or not.",
+      "parentUuid": "38f0bacd_620c8ef5",
+      "range": {
+        "startLine": 98,
+        "startChar": 35,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
