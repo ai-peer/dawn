@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "40f29d9e_250a6487",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-16T15:10:45Z",
+      "side": 1,
+      "message": "Worse than an access violation, you may get use-after-free.",
+      "range": {
+        "startLine": 12,
+        "startChar": 37,
+        "endLine": 12,
+        "endChar": 69
+      },
+      "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f2f8b589_158c2f77",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -53,6 +76,29 @@
       "writtenOn": "2020-04-16T12:44:34Z",
       "side": 1,
       "message": "nit: extra include.",
+      "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3aee4b0_44744c3f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-16T15:10:45Z",
+      "side": 1,
+      "message": "Instead of doing cleanup here in ~ResidencyManager, why not have the LinkedList class itself unlink the head in its own destructor? Then, future users of the LinkedList class will not have to worry about this gotcha.",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 43
+      },
       "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
