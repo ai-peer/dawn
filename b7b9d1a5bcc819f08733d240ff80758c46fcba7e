@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f4a116f_6469d38b",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-16T01:52:13Z",
+      "side": 1,
+      "message": "Is it possible to ASSERT_TRUE(..) \u003c\u003c ...;?",
+      "revId": "b7b9d1a5bcc819f08733d240ff80758c46fcba7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "968713f2_a2c4e75c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-16T01:52:13Z",
+      "side": 1,
+      "message": "nit: just wrap the whole macro contents with do-while?",
+      "revId": "b7b9d1a5bcc819f08733d240ff80758c46fcba7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
