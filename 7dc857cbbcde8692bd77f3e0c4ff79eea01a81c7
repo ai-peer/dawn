@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4661d9c_b964610a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-16T05:02:29Z",
+      "side": 1,
+      "message": "[1]\nOh maybe I have some misunderstandings here. Please correct me if there is anything wrong.\n\nNow there are 5 texture usages in WebGPU:\nCOPY_SRC (not allowed in either compute pass or render pass encoder)\nCOPY_DST (not allowed in either compute pass or render pass encoder)\nSAMPLED\nSTORAGE (read-only and write-only)\nOUTPUT_ATTACHMENT \n\nSo here we need to take SAMPLED, STORAGE(read-only and write-only) and OUTPUT_ATTACHMENT into consideration.\n\nAccording to my previous thought, here we actually need to check:\n- In a render pass encoder, a texture used as OUTPUT_ATTACHMENT cannot be used as either SAMPLED or STORAGE(including read-only and write-only). I fail to find any restrictions that disallows a texture being used as both SAMPLED, read-only STORAGE and write-only STORAGE in the same render pass encoder.\n- In a compute pass encoder, a texture cannot be used as OUTPUT_ATTACHMENT, so there should be no restrictions as we can use a texture as SAMPLED, read-only STORAGE and write-only storage altogether.",
+      "parentUuid": "7c7dd3c7_e5d38cb3",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0094adea_7a7f932a",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 13
@@ -30,6 +48,30 @@
       "writtenOn": "2020-04-15T16:02:06Z",
       "side": 1,
       "message": "This should track readonly and writeonly separately.",
+      "range": {
+        "startLine": 69,
+        "startChar": 81,
+        "endLine": 69,
+        "endChar": 88
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1701918_83fa98b6",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-16T05:02:29Z",
+      "side": 1,
+      "message": "Based on [1], I don\u0027t think we need to track readonly and writeonly separately as either they can or cannot be used together (when the texture is being used as an OUTPUT_ATTACHMENT).",
+      "parentUuid": "0094adea_7a7f932a",
       "range": {
         "startLine": 69,
         "startChar": 81,
@@ -179,6 +221,24 @@
     },
     {
       "key": {
+        "uuid": "a58fc1bd_6019cf4b",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-16T05:02:29Z",
+      "side": 1,
+      "message": "I don\u0027t use 1x1 attachment because I want to make sure the coordinates in the image load and store are the same across all the backends.",
+      "parentUuid": "33aa394f_11dcf1ba",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4f75dc3c_06a101a2",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 13
@@ -207,6 +267,24 @@
       "writtenOn": "2020-04-15T16:02:06Z",
       "side": 1,
       "message": "ditto for the write case. Also it should be supported in the pixel shader, see https://github.com/gpuweb/gpuweb/issues/639",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c56aa0_e82aa057",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-16T05:02:29Z",
+      "side": 1,
+      "message": "Then I think I should first change the related validation rules then go back to this CL. What do you think?",
+      "parentUuid": "2a94c887_38eb6e05",
       "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
