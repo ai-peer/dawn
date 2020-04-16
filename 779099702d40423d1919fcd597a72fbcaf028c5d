@@ -16,6 +16,24 @@
       "revId": "779099702d40423d1919fcd597a72fbcaf028c5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e78df0e5_b37fdff7",
+        "filename": "build_overrides/dawn.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T17:37:14Z",
+      "side": 1,
+      "message": "That was the plan eventually yes, but I haven\u0027t thought through all of it. I think the loader should be fine because it has an extremely minimal interface (a .so name and vkGetProcAddress) so we should be fine. I\u0027m not sure what was the problem we encountered before.",
+      "parentUuid": "4b97ce62_f54e0c3b",
+      "revId": "779099702d40423d1919fcd597a72fbcaf028c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
