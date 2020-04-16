@@ -22,6 +22,30 @@
       "revId": "c2b8a94b497f96288b2389993959e40488205845",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ea30b7d_55a36700",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T17:35:43Z",
+      "side": 1,
+      "message": "Good catch, that was supposed to be part of the following CL. We don\u0027t need to special case swiftshader now because we can always rely on a loader and setting an environment variable so it finds swiftshader.",
+      "parentUuid": "5dfd74f4_49ec1357",
+      "range": {
+        "startLine": 46,
+        "startChar": 35,
+        "endLine": 46,
+        "endChar": 50
+      },
+      "revId": "c2b8a94b497f96288b2389993959e40488205845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
