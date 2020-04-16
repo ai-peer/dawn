@@ -22,6 +22,30 @@
       "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7097be41_e9ed65c7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-16T00:20:51Z",
+      "side": 1,
+      "message": "I see you added a backend EXPORT that also returns COM - can you confirm this is no longer required?",
+      "parentUuid": "6292da46_be2519a4",
+      "range": {
+        "startLine": 98,
+        "startChar": 35,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
