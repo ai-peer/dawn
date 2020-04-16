@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aadfbf1_9ad1aba1",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T17:12:03Z",
+      "side": 1,
+      "message": "uunit: \u003d default ?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 1
+      },
+      "revId": "9dcfd7ad4fd0be738da6813049868a9fb3a8b8cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
