@@ -37,7 +37,7 @@ class TextureValidationTest : public ValidationTest {
         return descriptor;
     }
 
-    wgpu::Queue queue = device.CreateQueue();
+    wgpu::Queue queue = device.GetDefaultQueue();
 
   private:
     static constexpr uint32_t kWidth = 32;
