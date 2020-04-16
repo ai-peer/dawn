@@ -330,6 +330,24 @@
     },
     {
       "key": {
+        "uuid": "3e5216b7_ff195e05",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-16T17:06:38Z",
+      "side": 1,
+      "message": "Yes. That\u0027s my intention.",
+      "parentUuid": "1f4279bf_51237470",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02bcfc42_028d1b20",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 7
@@ -344,6 +362,24 @@
       "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "664135a5_f7a383fe",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-16T17:06:38Z",
+      "side": 1,
+      "message": "Yes. It still report error if we remove the binding in shader. But this one looks like more \"common\".",
+      "parentUuid": "02bcfc42_028d1b20",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -367,6 +403,30 @@
       "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9640f122_e0439227",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-16T17:06:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5418c5ae_2d157b56",
+      "range": {
+        "startLine": 623,
+        "startChar": 3,
+        "endLine": 624,
+        "endChar": 44
+      },
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
