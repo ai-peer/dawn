@@ -59,7 +59,7 @@ namespace dawn_native { namespace d3d12 {
         Serial GetLastSubmittedCommandSerial() const final override;
         MaybeError TickImpl() override;
 
-        ComPtr<ID3D12Device> GetD3D12Device() const;
+        ID3D12Device* GetD3D12Device() const;
         ComPtr<ID3D12CommandQueue> GetCommandQueue() const;
         ID3D12SharingContract* GetSharingContract() const;
 
@@ -157,7 +157,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent = nullptr;
 
-        ComPtr<ID3D12Device> mD3d12Device;  // Device is owned by adapter and will not be outlived.
+        ID3D12Device* mD3d12Device;  // Device is owned by adapter and will not be outlived.
         ComPtr<ID3D12CommandQueue> mCommandQueue;
         ComPtr<ID3D12SharingContract> mD3d12SharingContract;
 
