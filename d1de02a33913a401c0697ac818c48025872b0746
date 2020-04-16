@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "500e2823_a1a691c7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-16T16:48:21Z",
+      "side": 1,
+      "message": "While I am on board with Get returning a raw pointer, I think member variables should still be ComPtr.\n\nSince adapters are given to external developers, removing ComPtr here means we enforce that consumers destroy things in a certain order: device first, adapters second. Doing this will lead to subtle bugs and possible use-after-free. With ComPtr for member variables, our code is more robust. \n\nSee Brandon\u0027s linked list change for an example.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 92
+      },
+      "revId": "d1de02a33913a401c0697ac818c48025872b0746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "742d740c_c94e5b4e",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 4
