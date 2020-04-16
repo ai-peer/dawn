@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7e12f6d2_13c92c8c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T05:22:18Z",
+      "side": 1,
+      "message": "ASSERT_TRUE prints the contents of the statement and I didn\u0027t really like that it redundantly said\nFailed: EndExpectedDeviceError\nExpected device error in:\n..",
+      "parentUuid": "5f4a116f_6469d38b",
+      "revId": "b7b9d1a5bcc819f08733d240ff80758c46fcba7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "968713f2_a2c4e75c",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-16T01:52:13Z",
       "side": 1,
       "message": "nit: just wrap the whole macro contents with do-while?",
+      "revId": "b7b9d1a5bcc819f08733d240ff80758c46fcba7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20603e68_3371340c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T05:22:18Z",
+      "side": 1,
+      "message": "Maybe I\u0027ll put just the if part in the do-while. Can\u0027t do the whole thing because some usages of this macro create new block-scope variables.",
+      "parentUuid": "968713f2_a2c4e75c",
       "revId": "b7b9d1a5bcc819f08733d240ff80758c46fcba7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
