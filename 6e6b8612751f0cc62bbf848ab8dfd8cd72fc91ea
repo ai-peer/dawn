@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03625834_eb695f30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:44:34Z",
+      "side": 1,
+      "message": "Please use shorter commit message title (60-70 characters are accepted limits)",
+      "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2f8b589_158c2f77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:44:34Z",
+      "side": 1,
+      "message": "the the",
+      "range": {
+        "startLine": 13,
+        "startChar": 58,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95797285_1a605766",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:44:34Z",
+      "side": 1,
+      "message": "nit: extra include.",
+      "revId": "6e6b8612751f0cc62bbf848ab8dfd8cd72fc91ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
