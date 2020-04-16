@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f22f41e_6e49d9e3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:28:45Z",
+      "side": 1,
+      "message": "The crash is Intel specific but the Metal validation layers also assert on this:\n\n-[MTLDebugBlitCommandEncoder copyFromBuffer:sourceOffset:toBuffer:destinationOffset:size:]:1171: failed assertion `size(0) must not be 0.\u0027\n\nAdded a comment.",
+      "parentUuid": "87e265d4_35a2f3ea",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 270,
+        "endChar": 0
+      },
+      "revId": "4ee16947e1a41f9bf3c8c66370bc2e1a8f44176d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4719141b_dde881d7",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "4ee16947e1a41f9bf3c8c66370bc2e1a8f44176d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2431b952_5f75caf5",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T09:28:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4719141b_dde881d7",
+      "revId": "4ee16947e1a41f9bf3c8c66370bc2e1a8f44176d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
