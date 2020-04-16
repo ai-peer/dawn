@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "309ec0cf_d2cb2f7d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T17:50:42Z",
+      "side": 1,
+      "message": "Instead of inserting these into a set, could we have a macro that makes a static bool per callsite ?\n\nmaybe we don\u0027t even need the warning count to be per-device and can have a global warning count backdoor; then this could be a simple ONCE(dawn::WarningLog() \u003c\u003c \"asdf\"); thing. or like DEBUG_ONCE(), WARN_ONCE(), etc.\n\nshould be fine because deprecated API tests shouldn\u0027t be producing other warnings?",
+      "range": {
+        "startLine": 724,
+        "startChar": 8,
+        "endLine": 724,
+        "endChar": 67
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d283770_d2061eab",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T17:50:42Z",
+      "side": 1,
+      "message": "nit: member of ErrorScopeValidationTest so we dont\u0027 need to get it in all the tests",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 49
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f3a66d_48c400b0",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T17:50:42Z",
+      "side": 1,
+      "message": "whoa, that\u0027s a surprising member variable; we should put this in the constructor or SetUp() and not initialize it like this.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 49
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
