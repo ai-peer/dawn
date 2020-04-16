@@ -46,6 +46,30 @@
       "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f0bacd_620c8ef5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T07:39:00Z",
+      "side": 1,
+      "message": "That\u0027s unrelated, we can re-wrap in a COM pointer when sharing outside of Dawn. +1 for the more general fix.",
+      "parentUuid": "7097be41_e9ed65c7",
+      "range": {
+        "startLine": 98,
+        "startChar": 35,
+        "endLine": 98,
+        "endChar": 51
+      },
+      "revId": "d329068cdfa2a4cf328735c3b71f58a31eedb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
