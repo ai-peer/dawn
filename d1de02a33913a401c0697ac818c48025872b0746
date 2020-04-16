@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97216e67_01d2511f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:36:22Z",
+      "side": 1,
+      "message": "This would more clear with:\n\nRemove ComPtr from d3d12::Device::GetD3D12Device()",
+      "revId": "d1de02a33913a401c0697ac818c48025872b0746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "742d740c_c94e5b4e",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:36:22Z",
+      "side": 1,
+      "message": "nit: move it at the bottom so ForTesting stuff isn\u0027t the first thing we see in the header.",
+      "revId": "d1de02a33913a401c0697ac818c48025872b0746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
