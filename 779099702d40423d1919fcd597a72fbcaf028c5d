@@ -34,6 +34,24 @@
       "revId": "779099702d40423d1919fcd597a72fbcaf028c5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "377900e0_e2114b43",
+        "filename": "build_overrides/dawn.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T18:12:54Z",
+      "side": 1,
+      "message": "Okay, should be fine to point to ANGLE\u0027s. The problem I had was I was trying to *build* the loader. At some point Vulkan headers and Vulkan loader should probably be a Chromium DEP and not point to ANGLE. Makes the dep graph kinda confusing",
+      "parentUuid": "e78df0e5_b37fdff7",
+      "revId": "779099702d40423d1919fcd597a72fbcaf028c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
