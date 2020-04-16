@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cdaf12a8_6f3d9547",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:44:48Z",
+      "side": 1,
+      "message": "No worries, it\u0027s hard and took me a couple minutes to come up with this one.",
+      "parentUuid": "3e512078_3fee5d68",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11d051f7_b84fe0b8",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 7
@@ -291,6 +309,64 @@
       "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f4279bf_51237470",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:44:48Z",
+      "side": 1,
+      "message": "Ah I see, so it\u0027s:\n\n - Both invisible\n - Partially visible\n - Visible but partially used\n\nIt makes more sense, I still think that the previous cases kinda cover this one but it\u0027s probably fine to have this slight redundancy in testing.",
+      "parentUuid": "467fe1df_b458dfed",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02bcfc42_028d1b20",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:44:48Z",
+      "side": 1,
+      "message": "Maybe this could be removed, but it would make the pipeline have an empty layout, which is very much a corner case, so I don\u0027t know.",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5418c5ae_2d157b56",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T16:44:48Z",
+      "side": 1,
+      "message": "This isn\u0027t needed.",
+      "range": {
+        "startLine": 623,
+        "startChar": 3,
+        "endLine": 624,
+        "endChar": 44
+      },
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
