@@ -33,6 +33,24 @@
       "revId": "d1de02a33913a401c0697ac818c48025872b0746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a74f05a_cc9d1170",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-16T16:45:41Z",
+      "side": 1,
+      "message": "Likely that other embedders of Dawn will want to get the d3d12 device as well?\n\nThat\u0027s why we have GetMetalDevice and `VkInstance GetInstance(WGPUDevice)`\n\nOk to name it ForTesting now, but we might just end up renaming it back. WDYT?",
+      "parentUuid": "742d740c_c94e5b4e",
+      "revId": "d1de02a33913a401c0697ac818c48025872b0746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
