@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ff6ca14_366ca20d",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "nit: Test that it is invalid to have resource usage conflicts even when one of the bindings is not visible to the programmable pass where it is used.\n\nDitto below",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11d051f7_b84fe0b8",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "We could probably have a single buffer.",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3561a7d5_8db57218",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "This first binding isn\u0027t useful for the test.",
+      "range": {
+        "startLine": 438,
+        "startChar": 25,
+        "endLine": 438,
+        "endChar": 99
+      },
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b79f37f_75732ae9",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148c7064_d95c9ca3",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "Same here, we only need a single buffer, and check for conflict between storage vs. index or storage vs. readonly storage.",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0da2d3df_33af7872",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "Ditto, only a single buffer should be necessary",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "907c63d9_a73bcf2c",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "There\u0027s a single readonly usage, consider using readonlystorage vs. uniform.",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3997f076_48dc5c44",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T12:53:37Z",
+      "side": 1,
+      "message": "What additional coverage does this test give? The results would be the same if we removed the pipeline entirely.",
+      "revId": "e6df3aaf8a286a9f20fdfef2eaf6cee7300b35de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
