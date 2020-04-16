@@ -25,7 +25,7 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device) {
+    ComPtr<ID3D12Device> GetD3D12DeviceForTesting(WGPUDevice device) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
 
         return backendDevice->GetD3D12Device();
