@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b49950aa_ea568f74",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-16T06:21:00Z",
+      "side": 1,
+      "message": "Done\n\nSplit into 4 tests as suggested, with the name revised slightly. \n\nFor \"unused pipeline bindings\", the \"unused\" is among pipeline and bind group. There are some bindings in bind group, but the bindings are not used in pipeline (shaders). \n\nHowever, in the first two tests (ConflictBetweenStagesInBindGroup and ConflictInOtherStageInBindGroup), we can found some bindings are \"unused\" via bind group (or bind group layout) bindings alone because their shader stages are unused, no need to compare with pipeline. So they are seen as different tests.",
+      "parentUuid": "0f0e27e2_e2a28d51",
+      "revId": "fa801afa0e1c61e9216b0ec7518d28ee5717c4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b640bde7_f1181945",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "fa801afa0e1c61e9216b0ec7518d28ee5717c4ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8df27e_2cbcf772",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-16T06:21:00Z",
+      "side": 1,
+      "message": "I am saying buffer0, which has multiple readonly usages.",
+      "parentUuid": "b640bde7_f1181945",
+      "revId": "fa801afa0e1c61e9216b0ec7518d28ee5717c4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
