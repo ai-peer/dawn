@@ -76,6 +76,23 @@
     },
     {
       "key": {
+        "uuid": "a3dfb5e7_0bb4c0a7",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T23:47:58Z",
+      "side": 1,
+      "message": "Why does this need to have a value other than 0x8000\u00270000? Are we already using 0x8000\u00270000 as a texture usage somewhere else? If so, put this next to that.",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2edf3cf_2b447177",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
