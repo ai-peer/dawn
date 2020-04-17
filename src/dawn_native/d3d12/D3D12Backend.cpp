@@ -51,11 +51,26 @@ namespace dawn_native { namespace d3d12 {
         : ExternalImageDescriptor(ExternalImageDescriptorType::DXGISharedHandle) {
     }
 
-    uint64_t SetExternalMemoryReservation(WGPUDevice device, uint64_t requestedReservationSize) {
+    uint64_t SetExternalMemoryReservation(WGPUDevice device,
+                                          uint64_t requestedReservationSize,
+                                          MemorySegment memorySegment) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
 
+        DXGI_MEMORY_SEGMENT_GROUP dxgiSegment;
+
+        switch (memorySegment) {
+            case MemorySegment::Local:
+                dxgiSegment = DXGI_MEMORY_SEGMENT_GROUP_LOCAL;
+                break;
+            case MemorySegment::NonLocal:
+                dxgiSegment = DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL;
+                break;
+            default:
+                UNREACHABLE();
+        }
+
         return backendDevice->GetResidencyManager()->SetExternalMemoryReservation(
-            requestedReservationSize);
+            dxgiSegment, requestedReservationSize);
     }
 
     WGPUTexture WrapSharedHandle(WGPUDevice device,
