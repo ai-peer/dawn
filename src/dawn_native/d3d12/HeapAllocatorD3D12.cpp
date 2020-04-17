@@ -44,15 +44,17 @@ namespace dawn_native { namespace d3d12 {
 
         // CreateHeap will implicitly make the created heap resident. We must ensure enough free
         // memory exists before allocating to avoid an out-of-memory error when overcommitted.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(size));
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
+            size, GetDXGIMemorySegmentGroup(mDevice, heapDesc.Properties.Type)));
 
         ComPtr<ID3D12Heap> d3d12Heap;
         DAWN_TRY(CheckOutOfMemoryHRESULT(
             mDevice->GetD3D12Device()->CreateHeap(&heapDesc, IID_PPV_ARGS(&d3d12Heap)),
             "ID3D12Device::CreateHeap"));
 
-        std::unique_ptr<ResourceHeapBase> heapBase =
-            std::make_unique<Heap>(std::move(d3d12Heap), heapDesc.Properties.Type, size);
+        std::unique_ptr<ResourceHeapBase> heapBase = std::make_unique<Heap>(
+            std::move(d3d12Heap), GetDXGIMemorySegmentGroup(mDevice, heapDesc.Properties.Type),
+            size);
 
         // Calling CreateHeap implicitly calls MakeResident on the new heap. We must track this to
         // avoid calling MakeResident a second time.
