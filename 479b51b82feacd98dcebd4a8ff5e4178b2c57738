@@ -68,6 +68,30 @@
       "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3865eeba_989219c9",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T01:04:04Z",
+      "side": 1,
+      "message": "I\u0027m surprised this is allowed :P",
+      "parentUuid": "52f3a66d_48c400b0",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 49
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
