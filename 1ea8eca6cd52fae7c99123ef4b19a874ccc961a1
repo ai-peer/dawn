@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf1a2e5e_1844346b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T00:53:46Z",
+      "side": 1,
+      "message": "Isn\u0027t this redundant? wgpu::SamplerDescriptor already has default values for those three fields.",
+      "revId": "1ea8eca6cd52fae7c99123ef4b19a874ccc961a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f68cee9f_f5a2d657",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1593,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T00:53:46Z",
+      "side": 1,
+      "message": "uNit: probably should also be Never since that bug would be slightly more likely. Or test both.",
+      "revId": "1ea8eca6cd52fae7c99123ef4b19a874ccc961a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
