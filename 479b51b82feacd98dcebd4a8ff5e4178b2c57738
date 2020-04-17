@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "62423290_92184a3d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T09:59:40Z",
+      "side": 1,
+      "message": "IDK, it seems a bit dirty to have static variables etc, especially if it\u0027s used just for tracking deprecations. Efficiency doesn\u0027t really matter but having it be as minimal as possible does?",
+      "parentUuid": "309ec0cf_d2cb2f7d",
+      "range": {
+        "startLine": 724,
+        "startChar": 8,
+        "endLine": 724,
+        "endChar": 67
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d283770_d2061eab",
         "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79898bf_c07fd2f1",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T09:59:40Z",
+      "side": 1,
+      "message": "It isn\u0027t, there\u0027s a compilation error if I remove it.\n\nIn general ValidationTests don\u0027t have the default queue created for you.",
+      "parentUuid": "5d283770_d2061eab",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 49
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -92,6 +140,30 @@
       "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca771e9_1514ddd3",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T09:59:40Z",
+      "side": 1,
+      "message": "Wuuut yeah I didn\u0027t even know this was possible.",
+      "parentUuid": "3865eeba_989219c9",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 49
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
