@@ -46,6 +46,30 @@
       "revId": "1064e43b7dc0e17cb80a7a9628d4d678c165956d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14bf4d8e_27d45c6f",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T15:52:43Z",
+      "side": 1,
+      "message": "yea of course, it\u0027s unrelated; just something I noticed",
+      "parentUuid": "ed3a7a5f_723ea55d",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "1064e43b7dc0e17cb80a7a9628d4d678c165956d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
