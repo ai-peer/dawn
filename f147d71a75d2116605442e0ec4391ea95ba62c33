@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c2f5b6ef_85793cd0",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T20:11:30Z",
+      "side": 1,
+      "message": "I was going to make this comment as well, but we initialize it already:\n\n D3D12_SAMPLER_DESC mSamplerDesc \u003d {};\n\nand I believe 0 \u003d\u003d NEVER.",
+      "parentUuid": "957bbcdd_cf8bebef",
+      "revId": "f147d71a75d2116605442e0ec4391ea95ba62c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05fc6c07_ee690382",
         "filename": "src/dawn_native/metal/SamplerMTL.mm",
         "patchSetId": 4
