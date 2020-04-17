@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d777d3a8_ed9cf9c8",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-17T10:27:03Z",
+      "side": 1,
+      "message": "Thanks for your comment. I\u0027ve submitted a patch to add all these texture usage scope validations in a render pass (https://dawn-review.googlesource.com/c/dawn/+/19820). PTAL, thanks!\n\nThe usage validation in the compute pass needs a bit more changes so I decide to do it in another patch.",
+      "parentUuid": "31cf77f3_f4faa7c0",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0094adea_7a7f932a",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 13
