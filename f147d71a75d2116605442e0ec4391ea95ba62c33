@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "1378fd3a_4195ca44",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-17T20:23:14Z",
+      "side": 1,
+      "message": "I don\u0027t think it really needs fixing. Code shouldn\u0027t be so hot that this matters.",
+      "parentUuid": "f10d055c_96d1fe3c",
+      "revId": "f147d71a75d2116605442e0ec4391ea95ba62c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05fc6c07_ee690382",
         "filename": "src/dawn_native/metal/SamplerMTL.mm",
         "patchSetId": 4
