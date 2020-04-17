@@ -170,6 +170,42 @@ class StorageTextureValidationTests : public ValidationTest {
         return device.CreateTexture(&descriptor);
     }
 
+    wgpu::RenderPipeline CreateRenderPipelineWithStorageTexture(
+        wgpu::BindingType storageTextureType) {
+        const char* fs = nullptr;
+        switch (storageTextureType) {
+            case wgpu::BindingType::ReadonlyStorageTexture: {
+                fs = R"(
+                #version 450
+                layout(set = 0, binding = 0, rgba8) uniform readonly image2D image0;
+                layout(location = 0) out vec4 fragColor;
+                void main() {
+                    fragColor = imageLoad(image0, ivec2(gl_FragCoord.xy));
+                })";
+                break;
+            }
+            case wgpu::BindingType::WriteonlyStorageTexture: {
+                fs = R"(
+                #version 450
+                layout(set = 0, binding = 0, rgba8) uniform writeonly image2D image0;
+                void main() {
+                    imageStore(image0, ivec2(gl_FragCoord.xy), vec4(1.f, 0.f, 0.f, 1.f));
+                })";
+                break;
+            }
+            default:
+                UNREACHABLE();
+                return wgpu::RenderPipeline();
+        }
+
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.layout = nullptr;
+        descriptor.vertexStage.module = mDefaultVSModule;
+        descriptor.cFragmentStage.module =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, fs);
+        return device.CreateRenderPipeline(&descriptor);
+    }
+
     const wgpu::ShaderModule mDefaultVSModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
@@ -188,8 +224,8 @@ class StorageTextureValidationTests : public ValidationTest {
         wgpu::BindingType::ReadonlyStorageTexture, wgpu::BindingType::WriteonlyStorageTexture};
 };
 
-// Validate read-only storage textures can be declared in vertex and fragment
-// shaders, while writeonly storage textures can't.
+// Validate read-only storage textures can be declared in vertex and fragment shaders, while
+// writeonly storage textures cannot be used in vertex shaders.
 TEST_F(StorageTextureValidationTests, RenderPipeline) {
     // Readonly storage texture can be declared in a vertex shader.
     {
@@ -209,22 +245,7 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
     }
 
     // Read-only storage textures can be declared in a fragment shader.
-    {
-        wgpu::ShaderModule fsModule =
-            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
-            #version 450
-            layout(set = 0, binding = 0, rgba8) uniform readonly image2D image0;
-            layout(location = 0) out vec4 fragColor;
-            void main() {
-                fragColor = imageLoad(image0, ivec2(gl_FragCoord.xy));
-            })");
-
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.layout = nullptr;
-        descriptor.vertexStage.module = mDefaultVSModule;
-        descriptor.cFragmentStage.module = fsModule;
-        device.CreateRenderPipeline(&descriptor);
-    }
+    CreateRenderPipelineWithStorageTexture(wgpu::BindingType::ReadonlyStorageTexture);
 
     // Write-only storage textures cannot be declared in a vertex shader.
     {
@@ -243,22 +264,8 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
-    // Write-only storage textures cannot be declared in a fragment shader.
-    {
-        wgpu::ShaderModule fsModule =
-            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
-            #version 450
-            layout(set = 0, binding = 0, rgba8) uniform writeonly image2D image0;
-            void main() {
-                imageStore(image0, ivec2(gl_FragCoord.xy), vec4(1.f, 0.f, 0.f, 1.f));
-            })");
-
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.layout = nullptr;
-        descriptor.vertexStage.module = mDefaultVSModule;
-        descriptor.cFragmentStage.module = fsModule;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
-    }
+    // Write-only storage textures can be declared in a fragment shader.
+    CreateRenderPipelineWithStorageTexture(wgpu::BindingType::WriteonlyStorageTexture);
 }
 
 // Validate both read-only and write-only storage textures can be declared in
@@ -374,7 +381,7 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutWithStorageTextureBindingTy
          {wgpu::ShaderStage::Vertex, wgpu::BindingType::WriteonlyStorageTexture, false},
          {wgpu::ShaderStage::Vertex, wgpu::BindingType::StorageTexture, false},
          {wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageTexture, true},
-         {wgpu::ShaderStage::Fragment, wgpu::BindingType::WriteonlyStorageTexture, false},
+         {wgpu::ShaderStage::Fragment, wgpu::BindingType::WriteonlyStorageTexture, true},
          {wgpu::ShaderStage::Fragment, wgpu::BindingType::StorageTexture, false},
          {wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageTexture, true},
          {wgpu::ShaderStage::Compute, wgpu::BindingType::WriteonlyStorageTexture, true},
@@ -862,4 +869,178 @@ TEST_F(StorageTextureValidationTests, MultisampledStorageTexture) {
 
         ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&descriptor));
     }
+}
+
+// Verify it is valid to use a texture as either read-only storage texture or write-only storage
+// texture in a render pass.
+TEST_F(StorageTextureValidationTests, StorageTextureInRenderPass) {
+    constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::Texture storageTexture = CreateTexture(wgpu::TextureUsage::Storage, kFormat);
+
+    wgpu::Texture outputAttachment = CreateTexture(wgpu::TextureUsage::OutputAttachment, kFormat);
+    utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
+
+    for (wgpu::BindingType storageTextureType : kSupportedStorageTextureBindingTypes) {
+        // Create a render pipeline that contains a storage texture.
+        wgpu::RenderPipeline pipelineWithStorageTexture =
+            CreateRenderPipelineWithStorageTexture(storageTextureType);
+
+        // Create a bind group that contains a storage texture.
+        wgpu::BindGroup bindGroupWithStorageTexture =
+            utils::MakeBindGroup(device, pipelineWithStorageTexture.GetBindGroupLayout(0),
+                                 {{0, storageTexture.CreateView()}});
+
+        // It is valid to use a texture as read-only or write-only storage texture in the render
+        // pass.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
+        renderPassEncoder.SetPipeline(pipelineWithStorageTexture);
+        renderPassEncoder.SetBindGroup(0, bindGroupWithStorageTexture);
+        renderPassEncoder.Draw(3);
+        renderPassEncoder.EndPass();
+        encoder.Finish();
+    }
+}
+
+// Verify it is valid to use a a texture as both read-only storage texture and sampled texture in
+// one render pass, while it is invalid to use a texture as both write-only storage texture and
+// sampled texture in one render pass.
+TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneRenderPass) {
+    constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::Texture storageTexture =
+        CreateTexture(wgpu::TextureUsage::Storage | wgpu::TextureUsage::Sampled, kFormat);
+
+    wgpu::Texture outputAttachment = CreateTexture(wgpu::TextureUsage::OutputAttachment, kFormat);
+    utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
+
+    // Create a render pipeline that contains a sampled texture.
+    wgpu::ShaderModule fsModuleWithSampledTexture =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+            #version 450
+            layout(set = 0, binding = 0) uniform texture2D myTexture;
+            layout(set = 0, binding = 1) uniform sampler mySampler;
+            void main() {
+            })");
+    utils::ComboRenderPipelineDescriptor pipelineDesc(device);
+    pipelineDesc.vertexStage.module = mDefaultVSModule;
+    pipelineDesc.cFragmentStage.module = fsModuleWithSampledTexture;
+    pipelineDesc.cColorStates[0].format = kFormat;
+    wgpu::RenderPipeline pipelineWithSampledTexture = device.CreateRenderPipeline(&pipelineDesc);
+
+    wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+
+    // Create a bind group that contains a storage texture and a sampler.
+    wgpu::BindGroup bindGroupWithSampler = utils::MakeBindGroup(
+        device, pipelineWithSampledTexture.GetBindGroupLayout(0),
+        {{0, storageTexture.CreateView()}, {1, device.CreateSampler(&samplerDesc)}});
+
+    for (wgpu::BindingType storageTextureType : kSupportedStorageTextureBindingTypes) {
+        // Create a render pipeline that contains a storage texture.
+        wgpu::RenderPipeline pipelineWithStorageTexture =
+            CreateRenderPipelineWithStorageTexture(storageTextureType);
+
+        // Create a bind group that contains a storage texture.
+        wgpu::BindGroup bindGroupWithStorageTexture =
+            utils::MakeBindGroup(device, pipelineWithStorageTexture.GetBindGroupLayout(0),
+                                 {{0, storageTexture.CreateView()}});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
+
+        // StorageTexture is used as a storage texture in the first draw.
+        renderPassEncoder.SetPipeline(pipelineWithStorageTexture);
+        renderPassEncoder.SetBindGroup(0, bindGroupWithStorageTexture);
+        renderPassEncoder.Draw(3);
+
+        // StorageTexture is used as a sampled texture in the second draw.
+        renderPassEncoder.SetPipeline(pipelineWithSampledTexture);
+        renderPassEncoder.SetBindGroup(0, bindGroupWithSampler);
+        renderPassEncoder.Draw(3);
+
+        renderPassEncoder.EndPass();
+        switch (storageTextureType) {
+            case wgpu::BindingType::ReadonlyStorageTexture:
+                encoder.Finish();
+                break;
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                ASSERT_DEVICE_ERROR(encoder.Finish());
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+    }
+}
+
+// Verify it is invalid to use a a texture as both storage texture (either read-only or write-only)
+// and output attachment in one render pass.
+TEST_F(StorageTextureValidationTests, StorageTextureAndOutputAttachmentInOneRenderPass) {
+    constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::Texture storageTexture =
+        CreateTexture(wgpu::TextureUsage::Storage | wgpu::TextureUsage::OutputAttachment, kFormat);
+    utils::ComboRenderPassDescriptor renderPassDescriptor({storageTexture.CreateView()});
+
+    for (wgpu::BindingType storageTextureType : kSupportedStorageTextureBindingTypes) {
+        // Create a render pipeline that contains a storage texture.
+        wgpu::RenderPipeline pipelineWithReadOnlyStorageTexture =
+            CreateRenderPipelineWithStorageTexture(storageTextureType);
+
+        // Create a bind group that contains a storage texture.
+        wgpu::BindGroup bindGroupWithReadOnlyStorageTexture =
+            utils::MakeBindGroup(device, pipelineWithReadOnlyStorageTexture.GetBindGroupLayout(0),
+                                 {{0, storageTexture.CreateView()}});
+
+        // It is invalid to use a texture as both storage texture and output attachment in one
+        // render pass.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
+        renderPassEncoder.SetPipeline(pipelineWithReadOnlyStorageTexture);
+        renderPassEncoder.SetBindGroup(0, bindGroupWithReadOnlyStorageTexture);
+        renderPassEncoder.Draw(3);
+        renderPassEncoder.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
+// Verify it is invalid to use a a texture as both read-only storage texture and write-only storage
+// texture in one render pass.
+TEST_F(StorageTextureValidationTests, ReadOnlyStorageTextureAndWriteOnlyStorageTexture) {
+    constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::Texture storageTexture = CreateTexture(wgpu::TextureUsage::Storage, kFormat);
+
+    // Create a render pipeline that contains a read-only storage texture.
+    wgpu::RenderPipeline pipelineWithReadOnlyStorageTexture =
+        CreateRenderPipelineWithStorageTexture(wgpu::BindingType::ReadonlyStorageTexture);
+
+    // Create a render pipeline that contains a write-only storage texture.
+    wgpu::RenderPipeline pipelineWithWriteOnlyStorageTexture =
+        CreateRenderPipelineWithStorageTexture(wgpu::BindingType::WriteonlyStorageTexture);
+
+    // Create a bind group that contains only one read-only storage texture.
+    wgpu::BindGroup bindGroupWithReadOnlyStorageTexture =
+        utils::MakeBindGroup(device, pipelineWithReadOnlyStorageTexture.GetBindGroupLayout(0),
+                             {{0, storageTexture.CreateView()}});
+
+    // Create a bind group that contains only one write-only storage texture.
+    wgpu::BindGroup bindGroupWithWriteOnlyStorageTexture =
+        utils::MakeBindGroup(device, pipelineWithWriteOnlyStorageTexture.GetBindGroupLayout(0),
+                             {{0, storageTexture.CreateView()}});
+
+    wgpu::Texture outputAttachment = CreateTexture(wgpu::TextureUsage::OutputAttachment, kFormat);
+    utils::ComboRenderPassDescriptor renderPassDescriptor({outputAttachment.CreateView()});
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
+
+    // StorageTexture is used as a read-only storage texture in the first draw.
+    renderPassEncoder.SetPipeline(pipelineWithReadOnlyStorageTexture);
+    renderPassEncoder.SetBindGroup(0, bindGroupWithReadOnlyStorageTexture);
+    renderPassEncoder.Draw(3);
+
+    // StorageTexture is used as a write-only storage texture in the second draw.
+    renderPassEncoder.SetPipeline(pipelineWithWriteOnlyStorageTexture);
+    renderPassEncoder.SetBindGroup(0, bindGroupWithWriteOnlyStorageTexture);
+    renderPassEncoder.Draw(3);
+
+    renderPassEncoder.EndPass();
+    ASSERT_DEVICE_ERROR(encoder.Finish());
 }

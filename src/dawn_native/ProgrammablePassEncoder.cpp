@@ -55,16 +55,28 @@ namespace dawn_native {
 
                     case wgpu::BindingType::ReadonlyStorageBuffer: {
                         BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
-                        usageTracker->BufferUsedAs(buffer, kReadOnlyStorage);
+                        usageTracker->BufferUsedAs(buffer, kReadOnlyStorageBuffer);
                         break;
                     }
 
                     case wgpu::BindingType::Sampler:
                         break;
 
+                    case wgpu::BindingType::ReadonlyStorageTexture: {
+                        TextureBase* texture =
+                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
+                        usageTracker->TextureUsedAs(texture, kReadonlyStorageTexture);
+                        break;
+                    }
+
+                    case wgpu::BindingType::WriteonlyStorageTexture: {
+                        TextureBase* texture =
+                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
+                        usageTracker->TextureUsedAs(texture, wgpu::TextureUsage::Storage);
+                        break;
+                    }
+
                     case wgpu::BindingType::StorageTexture:
-                    case wgpu::BindingType::ReadonlyStorageTexture:
-                    case wgpu::BindingType::WriteonlyStorageTexture:
                         UNREACHABLE();
                         break;
                 }
