@@ -16,7 +16,7 @@
 #define DAWNNATIVE_ERRORSCOPETRACKER_H_
 
 #include "common/SerialQueue.h"
-#include "dawn_native/RefCounted.h"
+#include "common/RefCounted.h"
 
 namespace dawn_native {
 
