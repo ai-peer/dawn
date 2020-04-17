@@ -22,6 +22,30 @@
       "revId": "1064e43b7dc0e17cb80a7a9628d4d678c165956d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed3a7a5f_723ea55d",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T10:02:40Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m wondering more and more if we should just put the validation tests in end2end tests so we also test code paths in the backend and the wire stuff. For this one, I think we\u0027ll have to spec on the webgpu-native side what happens when you destroy a device with pending popErrorScopes and enforce consistent behavior.\n\nIs it ok if I don\u0027t do anything specific for this now?",
+      "parentUuid": "6f98fc1a_dda81cd2",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 9
+      },
+      "revId": "1064e43b7dc0e17cb80a7a9628d4d678c165956d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
