@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cc9c201_bb4c09aa",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:54:58Z",
+      "side": 1,
+      "message": "We really need to figure out why we do different formatting with GN. How did you do this one? I usually do `git cl format`",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eabed4a2_49d88f1f",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:54:58Z",
+      "side": 1,
+      "message": "That\u0027s a pretty nice style, maybe we could start pushing for this more generally in tests.",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c45de52d_b20098c4",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:54:58Z",
+      "side": 1,
+      "message": "nit: remove the extra line so the creation is a single block.",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e54d3b32_eb18d343",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:54:58Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b391821a_693da06d",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:54:58Z",
+      "side": 1,
+      "message": "nit: Maybe we should put the format too for having tests with R32 and Depth32.",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
