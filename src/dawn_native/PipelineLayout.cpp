@@ -72,10 +72,10 @@ namespace dawn_native {
         uint32_t totalDynamicStorageBufferCount = 0;
         for (uint32_t i = 0; i < descriptor->bindGroupLayoutCount; ++i) {
             DAWN_TRY(device->ValidateObject(descriptor->bindGroupLayouts[i]));
-            totalDynamicUniformBufferCount +=
-                descriptor->bindGroupLayouts[i]->GetDynamicUniformBufferCount();
-            totalDynamicStorageBufferCount +=
-                descriptor->bindGroupLayouts[i]->GetDynamicStorageBufferCount();
+            totalDynamicUniformBufferCount += static_cast<uint32_t>(
+                descriptor->bindGroupLayouts[i]->GetDynamicUniformBufferCount());
+            totalDynamicStorageBufferCount += static_cast<uint32_t>(
+                descriptor->bindGroupLayouts[i]->GetDynamicStorageBufferCount());
         }
 
         if (totalDynamicUniformBufferCount > kMaxDynamicUniformBufferCount) {
@@ -95,7 +95,7 @@ namespace dawn_native {
                                            const PipelineLayoutDescriptor* descriptor)
         : CachedObject(device) {
         ASSERT(descriptor->bindGroupLayoutCount <= kMaxBindGroups);
-        for (uint32_t group = 0; group < descriptor->bindGroupLayoutCount; ++group) {
+        for (BindGroupCount group{0}; group < descriptor->bindGroupLayoutCount; ++group) {
             mBindGroupLayouts[group] = descriptor->bindGroupLayouts[group];
             mMask.set(group);
         }
@@ -132,14 +132,14 @@ namespace dawn_native {
         std::array<std::map<BindingNumber, BindingIndex>, kMaxBindGroups> usedBindingsMap = {};
 
         // A counter of how many bindings we've populated in |entryData|
-        std::array<uint32_t, kMaxBindGroups> entryCounts = {};
+        std::array<BindingCount, kMaxBindGroups> entryCounts = {};
 
-        uint32_t bindGroupLayoutCount = 0;
+        BindGroupCount bindGroupLayoutCount{0};
         for (uint32_t moduleIndex = 0; moduleIndex < count; ++moduleIndex) {
             const ShaderModuleBase* module = modules[moduleIndex];
             const ShaderModuleBase::ModuleBindingInfo& info = module->GetBindingInfo();
 
-            for (uint32_t group = 0; group < info.size(); ++group) {
+            for (BindGroupCount group{0}; group < info.size(); ++group) {
                 for (const auto& it : info[group]) {
                     BindingNumber bindingNumber = it.first;
                     const ShaderModuleBase::ShaderBindingInfo& bindingInfo = it.second;
@@ -181,14 +181,14 @@ namespace dawn_native {
                         }
                     }
 
-                    uint32_t currentBindingCount = entryCounts[group];
+                    BindingCount currentBindingCount = entryCounts[group];
                     entryData[group][currentBindingCount] = bindingSlot;
 
                     usedBindingsMap[group][bindingNumber] = currentBindingCount;
 
                     entryCounts[group]++;
 
-                    bindGroupLayoutCount = std::max(bindGroupLayoutCount, group + 1);
+                    bindGroupLayoutCount = std::max(bindGroupLayoutCount, ++BindGroupCount(group));
                 }
             }
         }
@@ -225,7 +225,7 @@ namespace dawn_native {
         return pipelineLayout;
     }
 
-    const BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(uint32_t group) const {
+    const BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupIndex group) const {
         ASSERT(!IsError());
         ASSERT(group < kMaxBindGroups);
         ASSERT(mMask[group]);
@@ -234,7 +234,7 @@ namespace dawn_native {
         return bgl;
     }
 
-    BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(uint32_t group) {
+    BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupIndex group) {
         ASSERT(!IsError());
         ASSERT(group < kMaxBindGroups);
         ASSERT(mMask[group]);
@@ -254,22 +254,22 @@ namespace dawn_native {
         return {(1 << GroupsInheritUpTo(other)) - 1u};
     }
 
-    uint32_t PipelineLayoutBase::GroupsInheritUpTo(const PipelineLayoutBase* other) const {
+    BindGroupCount PipelineLayoutBase::GroupsInheritUpTo(const PipelineLayoutBase* other) const {
         ASSERT(!IsError());
 
-        for (uint32_t i = 0; i < kMaxBindGroups; ++i) {
+        for (BindGroupCount i{0}; i < kMaxBindGroups; ++i) {
             if (!mMask[i] || mBindGroupLayouts[i].Get() != other->mBindGroupLayouts[i].Get()) {
                 return i;
             }
         }
-        return kMaxBindGroups;
+        return BindGroupCount(kMaxBindGroups);
     }
 
     size_t PipelineLayoutBase::HashFunc::operator()(const PipelineLayoutBase* pl) const {
         size_t hash = Hash(pl->mMask);
 
         for (uint32_t group : IterateBitSet(pl->mMask)) {
-            HashCombine(&hash, pl->GetBindGroupLayout(group));
+            HashCombine(&hash, pl->GetBindGroupLayout(BindGroupIndex(group)));
         }
 
         return hash;
@@ -282,7 +282,8 @@ namespace dawn_native {
         }
 
         for (uint32_t group : IterateBitSet(a->mMask)) {
-            if (a->GetBindGroupLayout(group) != b->GetBindGroupLayout(group)) {
+            if (a->GetBindGroupLayout(BindGroupIndex(group)) !=
+                b->GetBindGroupLayout(BindGroupIndex(group))) {
                 return false;
             }
         }

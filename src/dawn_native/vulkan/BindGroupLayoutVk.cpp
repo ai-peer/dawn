@@ -118,7 +118,7 @@ namespace dawn_native { namespace vulkan {
         // Compute the size of descriptor pools used for this layout.
         std::map<VkDescriptorType, uint32_t> descriptorCountPerType;
 
-        for (BindingIndex bindingIndex = 0; bindingIndex < GetBindingCount(); ++bindingIndex) {
+        for (BindingCount bindingIndex{0}; bindingIndex < GetBindingCount(); ++bindingIndex) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
             VkDescriptorType vulkanType =
                 VulkanDescriptorType(bindingInfo.type, bindingInfo.hasDynamicOffset);

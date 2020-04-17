@@ -50,7 +50,7 @@ namespace dawn_native { namespace d3d12 {
         // This is because they are created as root descriptors which are never heap allocated.
         // Since dynamic buffers are packed in the front, we can skip over these bindings by
         // starting from the dynamic buffer count.
-        for (BindingIndex bindingIndex = bgl->GetDynamicBufferCount();
+        for (BindingCount bindingIndex = bgl->GetDynamicBufferCount();
              bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
 

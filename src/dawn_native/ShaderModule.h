@@ -61,8 +61,9 @@ namespace dawn_native {
             using BindingInfo::visibility;
         };
 
-        using ModuleBindingInfo =
-            std::array<std::map<BindingNumber, ShaderBindingInfo>, kMaxBindGroups>;
+        using ModuleBindingInfo = TypedIndexedArray<std::map<BindingNumber, ShaderBindingInfo>,
+                                                    kMaxBindGroups,
+                                                    BindGroupIndex>;
 
         const ModuleBindingInfo& GetBindingInfo() const;
         const std::bitset<kMaxVertexAttributes>& GetUsedVertexAttributes() const;
@@ -95,7 +96,8 @@ namespace dawn_native {
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
-        bool IsCompatibleWithBindGroupLayout(size_t group, const BindGroupLayoutBase* layout) const;
+        bool IsCompatibleWithBindGroupLayout(BindGroupIndex group,
+                                             const BindGroupLayoutBase* layout) const;
 
         // Different implementations reflection into the shader depending on
         // whether using spvc, or directly accessing spirv-cross.

@@ -71,11 +71,10 @@ namespace dawn_native {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
 
-        BindingIndex GetBindingCount() const;
-        // Returns |BindingIndex| because dynamic buffers are packed at the front.
-        BindingIndex GetDynamicBufferCount() const;
-        uint32_t GetDynamicUniformBufferCount() const;
-        uint32_t GetDynamicStorageBufferCount() const;
+        BindingCount GetBindingCount() const;
+        BindingCount GetDynamicBufferCount() const;
+        DynamicUniformBufferBindingCount GetDynamicUniformBufferCount() const;
+        DynamicStorageBufferBindingCount GetDynamicStorageBufferCount() const;
 
         struct BufferBindingData {
             uint64_t offset;
@@ -110,12 +109,12 @@ namespace dawn_native {
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
-        BindingIndex mBindingCount;
-        BindingIndex mBufferCount = 0;  // |BindingIndex| because buffers are packed at the front.
-        uint32_t mDynamicUniformBufferCount = 0;
-        uint32_t mDynamicStorageBufferCount = 0;
+        BindingCount mBindingCount;
+        BindingCount mBufferCount{0};
+        DynamicUniformBufferBindingCount mDynamicUniformBufferCount{0};
+        DynamicStorageBufferBindingCount mDynamicStorageBufferCount{0};
 
-        std::array<BindingInfo, kMaxBindingsPerGroup> mBindingInfo;
+        TypedIndexedArray<BindingInfo, kMaxBindingsPerGroup, BindingIndex> mBindingInfo;
 
         // Map from BindGroupLayoutEntry.binding to packed indices.
         BindingMap mBindingMap;

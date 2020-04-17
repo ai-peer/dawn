@@ -38,7 +38,8 @@ namespace dawn_native { namespace vulkan {
         uint32_t numSetLayouts = 0;
         std::array<VkDescriptorSetLayout, kMaxBindGroups> setLayouts;
         for (uint32_t setIndex : IterateBitSet(GetBindGroupLayoutsMask())) {
-            setLayouts[numSetLayouts] = ToBackend(GetBindGroupLayout(setIndex))->GetHandle();
+            setLayouts[numSetLayouts] =
+                ToBackend(GetBindGroupLayout(BindGroupIndex(setIndex)))->GetHandle();
             numSetLayouts++;
         }
 

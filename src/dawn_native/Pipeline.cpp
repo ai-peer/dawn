@@ -81,7 +81,8 @@ namespace dawn_native {
             return BindGroupLayoutBase::MakeError(GetDevice());
         }
 
-        if (!mLayout->GetBindGroupLayoutsMask()[groupIndex]) {
+        BindGroupIndex group(groupIndex);
+        if (!mLayout->GetBindGroupLayoutsMask()[group]) {
             // Get or create an empty bind group layout.
             // TODO(enga): Consider caching this object on the Device and reusing it.
             // Today, this can't be done correctly because of the order of Device destruction.
@@ -99,7 +100,7 @@ namespace dawn_native {
             return bgl;
         }
 
-        BindGroupLayoutBase* bgl = mLayout->GetBindGroupLayout(groupIndex);
+        BindGroupLayoutBase* bgl = mLayout->GetBindGroupLayout(group);
         bgl->Reference();
         return bgl;
     }

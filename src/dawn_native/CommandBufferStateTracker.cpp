@@ -91,8 +91,10 @@ namespace dawn_native {
             bool matches = true;
 
             for (uint32_t i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
-                if (mBindgroups[i] == nullptr ||
-                    mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout()) {
+                BindGroupIndex group(i);
+                if (mBindgroups[group] == nullptr ||
+                    mLastPipelineLayout->GetBindGroupLayout(group) !=
+                        mBindgroups[group]->GetLayout()) {
                     matches = false;
                     break;
                 }
@@ -145,7 +147,7 @@ namespace dawn_native {
         SetPipelineCommon(pipeline);
     }
 
-    void CommandBufferStateTracker::SetBindGroup(uint32_t index, BindGroupBase* bindgroup) {
+    void CommandBufferStateTracker::SetBindGroup(BindGroupIndex index, BindGroupBase* bindgroup) {
         mBindgroups[index] = bindgroup;
     }
 

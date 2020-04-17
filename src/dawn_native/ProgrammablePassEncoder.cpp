@@ -29,8 +29,8 @@ namespace dawn_native {
     namespace {
         void TrackBindGroupResourceUsage(PassResourceUsageTracker* usageTracker,
                                          BindGroupBase* group) {
-            for (BindingIndex bindingIndex = 0;
-                 bindingIndex < group->GetLayout()->GetBindingCount(); ++bindingIndex) {
+            for (BindingCount bindingIndex{0}; bindingIndex < group->GetLayout()->GetBindingCount();
+                 ++bindingIndex) {
                 wgpu::BindingType type = group->GetLayout()->GetBindingInfo(bindingIndex).type;
 
                 switch (type) {
@@ -150,7 +150,7 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("dynamicOffset count mismatch");
                 }
 
-                for (BindingIndex i = 0; i < dynamicOffsetCount; ++i) {
+                for (BindingCount i{0}; i < dynamicOffsetCount; ++i) {
                     const BindingInfo& bindingInfo = layout->GetBindingInfo(i);
 
                     // BGL creation sorts bindings such that the dynamic buffer bindings are first.

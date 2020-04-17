@@ -234,17 +234,17 @@ namespace dawn_native {
 
         // This is a utility function to help ASSERT that the BGL-binding comparator places buffers
         // first.
-        bool CheckBufferBindingsFirst(const BindingInfo* bindings, BindingIndex count) {
+        bool CheckBufferBindingsFirst(const BindingInfo* bindings, BindingCount count) {
             ASSERT(count <= kMaxBindingsPerGroup);
 
-            BindingIndex lastBufferIndex = 0;
+            BindingIndex lastBufferIndex{0};
             BindingIndex firstNonBufferIndex = std::numeric_limits<BindingIndex>::max();
-            for (BindingIndex i = 0; i < count; ++i) {
+            for (BindingCount i{0}; i < count; ++i) {
                 switch (bindings[i].type) {
                     case wgpu::BindingType::UniformBuffer:
                     case wgpu::BindingType::StorageBuffer:
                     case wgpu::BindingType::ReadonlyStorageBuffer:
-                        lastBufferIndex = std::max(i, lastBufferIndex);
+                        lastBufferIndex = std::max(BindingIndex(i), lastBufferIndex);
                         break;
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
@@ -252,7 +252,7 @@ namespace dawn_native {
                     case wgpu::BindingType::StorageTexture:
                     case wgpu::BindingType::ReadonlyStorageTexture:
                     case wgpu::BindingType::WriteonlyStorageTexture:
-                        firstNonBufferIndex = std::min(i, firstNonBufferIndex);
+                        firstNonBufferIndex = std::min(BindingIndex(i), firstNonBufferIndex);
                         break;
                     default:
                         UNREACHABLE();
@@ -277,7 +277,7 @@ namespace dawn_native {
 
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
-        for (BindingIndex i = 0; i < mBindingCount; ++i) {
+        for (BindingCount i{0}; i < mBindingCount; ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[i];
             mBindingInfo[i].type = binding.type;
             mBindingInfo[i].visibility = binding.visibility;
@@ -380,7 +380,7 @@ namespace dawn_native {
         if (a->GetBindingCount() != b->GetBindingCount()) {
             return false;
         }
-        for (BindingIndex i = 0; i < a->GetBindingCount(); ++i) {
+        for (BindingCount i{0}; i < a->GetBindingCount(); ++i) {
             if (a->mBindingInfo[i] != b->mBindingInfo[i]) {
                 return false;
             }
@@ -388,20 +388,21 @@ namespace dawn_native {
         return a->mBindingMap == b->mBindingMap;
     }
 
-    BindingIndex BindGroupLayoutBase::GetBindingCount() const {
+    BindingCount BindGroupLayoutBase::GetBindingCount() const {
         return mBindingCount;
     }
 
-    BindingIndex BindGroupLayoutBase::GetDynamicBufferCount() const {
-        return mDynamicStorageBufferCount + mDynamicUniformBufferCount;
+    BindingCount BindGroupLayoutBase::GetDynamicBufferCount() const {
+        return BindingCount(static_cast<uint32_t>(mDynamicStorageBufferCount) +
+                            static_cast<uint32_t>(mDynamicUniformBufferCount));
     }
 
-    uint32_t BindGroupLayoutBase::GetDynamicUniformBufferCount() const {
-        return mDynamicUniformBufferCount;
+    DynamicUniformBufferBindingCount BindGroupLayoutBase::GetDynamicUniformBufferCount() const {
+        return DynamicUniformBufferBindingCount(mDynamicUniformBufferCount);
     }
 
-    uint32_t BindGroupLayoutBase::GetDynamicStorageBufferCount() const {
-        return mDynamicStorageBufferCount;
+    DynamicStorageBufferBindingCount BindGroupLayoutBase::GetDynamicStorageBufferCount() const {
+        return DynamicStorageBufferBindingCount(mDynamicStorageBufferCount);
     }
 
     size_t BindGroupLayoutBase::GetBindingDataSize() const {

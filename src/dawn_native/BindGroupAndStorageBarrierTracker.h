@@ -29,7 +29,7 @@ namespace dawn_native {
       public:
         BindGroupAndStorageBarrierTrackerBase() = default;
 
-        void OnSetBindGroup(uint32_t index,
+        void OnSetBindGroup(BindGroupIndex index,
                             BindGroupBase* bindGroup,
                             uint32_t dynamicOffsetCount,
                             uint32_t* dynamicOffsets) {
@@ -39,7 +39,7 @@ namespace dawn_native {
 
                 const BindGroupLayoutBase* layout = bindGroup->GetLayout();
 
-                for (BindingIndex bindingIndex = 0; bindingIndex < layout->GetBindingCount();
+                for (BindingCount bindingIndex{0}; bindingIndex < layout->GetBindingCount();
                      ++bindingIndex) {
                     const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
 
@@ -79,10 +79,16 @@ namespace dawn_native {
         }
 
       protected:
-        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mBuffersNeedingBarrier = {};
-        std::array<std::array<wgpu::BindingType, kMaxBindingsPerGroup>, kMaxBindGroups>
+        TypedIndexedArray<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups, BindGroupIndex>
+            mBuffersNeedingBarrier = {};
+        TypedIndexedArray<TypedIndexedArray<wgpu::BindingType, kMaxBindingsPerGroup, BindingIndex>,
+                          kMaxBindGroups,
+                          BindGroupIndex>
             mBindingTypes = {};
-        std::array<std::array<BufferBase*, kMaxBindingsPerGroup>, kMaxBindGroups> mBuffers = {};
+        TypedIndexedArray<TypedIndexedArray<BufferBase*, kMaxBindingsPerGroup, BindingIndex>,
+                          kMaxBindGroups,
+                          BindGroupIndex>
+            mBuffers = {};
     };
 
 }  // namespace dawn_native
