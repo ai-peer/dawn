@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa11836_483e9e24",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T21:49:42Z",
+      "side": 1,
+      "message": "I\u0027ll probably change this to 512 for now, but may need to tune more in the future. 512 was just as fast, 256 was a little slower.\n\nThe microbenchmarks can be a little noisy, so we can probably revisit when we have more real-world test cases.",
+      "range": {
+        "startLine": 26,
+        "startChar": 55,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
