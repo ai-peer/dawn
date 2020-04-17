@@ -20,6 +20,8 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/dawn_platform.h"
 
+#include "dawn_native/d3d12/d3d12_platform.h"
+
 namespace dawn_native { namespace d3d12 {
 
     class Device;
@@ -34,22 +36,29 @@ namespace dawn_native { namespace d3d12 {
         MaybeError EnsureCanMakeResident(uint64_t allocationSize);
         MaybeError EnsureHeapsAreResident(Heap** heaps, size_t heapCount);
 
-        uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
+        uint64_t SetExternalMemoryReservation(DXGI_MEMORY_SEGMENT_GROUP segment,
+                                              uint64_t requestedReservationSize);
 
         void TrackResidentAllocation(Heap* heap);
 
-        void RestrictBudgetForTesting(uint64_t);
+        void RestrictBudgetForTesting(uint64_t artificialBudgetCap);
 
       private:
-        struct VideoMemoryInfo {
-            uint64_t dawnBudget;
-            uint64_t dawnUsage;
+        struct MemorySegmentInfo {
+            uint64_t budget;
+            uint64_t usage;
             uint64_t externalReservation;
             uint64_t externalRequest;
         };
+
+        struct VideoMemoryInfo {
+            MemorySegmentInfo local;
+            MemorySegmentInfo nonLocal;
+        };
+
         ResultOrError<Heap*> RemoveSingleEntryFromLRU();
         bool ShouldTrackHeap(Heap* heap) const;
-        void UpdateVideoMemoryInfo();
+        void UpdateMemorySegmentInfo(DXGI_MEMORY_SEGMENT_GROUP segment);
 
         Device* mDevice;
         LinkedList<Heap> mLRUCache;
