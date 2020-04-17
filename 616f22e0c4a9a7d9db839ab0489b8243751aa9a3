@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "59258bd7_3dd9d54c",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T16:16:43Z",
+      "side": 1,
+      "message": "hmm I don\u0027t think my git cl format touches BUILD.gn files. For this one, I got a presubmit error when uploading that told me to run `gn format BUILD.gn`",
+      "parentUuid": "5cc9c201_bb4c09aa",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eabed4a2_49d88f1f",
         "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-17T08:54:58Z",
       "side": 1,
       "message": "That\u0027s a pretty nice style, maybe we could start pushing for this more generally in tests.",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a893ed43_5d27c4a2",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T16:16:43Z",
+      "side": 1,
+      "message": "Yep, I\u0027m liking it quite a bit :)\nI\u0027m also thinking we could have c-style helpers that take the descriptor by value and not by pointer so we can do it all without naming the descriptor!\n\nmUniformBuffer \u003d CreateBuffer(device, wgpu::BufferDescriptor {\n  .usage \u003d wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst,\n  .size \u003d sizeof(float),\n});",
+      "parentUuid": "eabed4a2_49d88f1f",
       "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -81,6 +117,24 @@
       "writtenOn": "2020-04-17T08:54:58Z",
       "side": 1,
       "message": "nit: Maybe we should put the format too for having tests with R32 and Depth32.",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee762630_c67ba82c",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T16:16:43Z",
+      "side": 1,
+      "message": "tldr; We should probably make this test D32 for now only, and skip it on D3D12 where we need to reinterpret the texture view as R32, and skip it on OpenGL where the bufferToTexture copy part of the test doesn\u0027t work.\n\nHonestly I\u0027m not sure R32 is even valid either and just happens to work. \nThe comparison sampler stuff seems grossly unspecified. This particular test right now works on NVIDIA but not Intel OpenGL, and there are no debug layer errors from any of the APIs.\n\nI *think* on OpenGL it\u0027s only supposed to be valid for textures whose internal format is GL_DEPTH_COMPONENT_X\nhttps://www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glTexParameter.xhtml\n\nGL_TEXTURE_COMPARE_MODE\nSpecifies the texture comparison mode for currently bound depth textures. That is, a texture whose internal format is GL_DEPTH_COMPONENT_*; see glTexImage2D) Permissible values are:\n\nGL_COMPARE_REF_TO_TEXTURE\nSpecifies that the interpolated and clamped r texture coordinate should be compared to the value in the currently bound depth texture. See the discussion of GL_TEXTURE_COMPARE_FUNC for details of how the comparison is evaluated. The result of the comparison is assigned to the red channel.\n\nGL_NONE\nSpecifies that the red channel should be assigned the appropriate value from the currently bound depth texture.\n\nSo ^this does say explicitly that it takes the (r) component, but it also says that it\u0027s for GL_DEPTH_COMPNOENT_X. Maybe it just happens to work on NVIDIA.\n\n\nHLSL seems to be more general and makes no reference to depth.\nhttps://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-to-samplecmp\nThe comparison is a single component comparison between the first component stored in\nthe texture, and the comparison value passed into the method.\n\nVulkan is unclear. All of the documentation talks about \"depth\", makes no reference to \"first component\" and also doesn\u0027t say whether or not color is invalid or not. Also, there are some odd parts of the spec that say:\n\u003e The “Depth” operand of OpTypeImage is ignored\n\u003e Depth is whether or not this image is a depth image. (Note that whether or not depth\ncomparisons are actually done is a property of the sampling opcode, not of this type\ndeclaration.)\n\nWhich sort of sounds like it\u0027s supposed to work with Color? Maybe?\n\nFWIW, I checked Swiftshader\u0027s implementation and it implements the comparison sampler by always taking the first component which is inline with the DX12 / HLSL documentation\n\nMetal - who knows, but experimentally it\u0027s very strange:\n - D32Float - works as expected\n - R32Float - works as expected\n - RG32Float - ignores the comparison part and just returns the R compoent\n - RGBA8Unorm - unsure what this does, but it\u0027s not the R component as a float, and it\u0027s not the whole thing reinterpret_cast as a 32-bit float. I do get 0 from the comparison though",
+      "parentUuid": "b391821a_693da06d",
       "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
