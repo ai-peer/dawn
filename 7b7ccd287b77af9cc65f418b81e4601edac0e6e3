@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13dcab46_c0e8bf05",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:43:01Z",
+      "side": 1,
+      "message": "nit: could just be \u003d {}; given we reassign everything below.",
+      "revId": "7b7ccd287b77af9cc65f418b81e4601edac0e6e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d2b7136_1de4d035",
+        "filename": "src/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:43:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7b7ccd287b77af9cc65f418b81e4601edac0e6e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a93376c8_68a71510",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:43:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7b7ccd287b77af9cc65f418b81e4601edac0e6e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
