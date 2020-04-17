@@ -139,11 +139,15 @@ namespace dawn_native { namespace vulkan {
                                     mDirtyBindGroupsObjectChangedOrIsDynamic, mBindGroups,
                                     mDynamicOffsetCounts, mDynamicOffsets);
 
-                for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    for (uint32_t bindingIndex : IterateBitSet(mBuffersNeedingBarrier[index])) {
-                        switch (mBindingTypes[index][bindingIndex]) {
+                for (uint32_t groupIndexValue : IterateBitSet(mBindGroupLayoutsMask)) {
+                    BindGroupIndex group(groupIndexValue);
+                    for (uint32_t bindingIndexValue :
+                         IterateBitSet(mBuffersNeedingBarrier[group])) {
+                        BindingIndex bindingIndex(bindingIndexValue);
+
+                        switch (mBindingTypes[group][bindingIndex]) {
                             case wgpu::BindingType::StorageBuffer:
-                                ToBackend(mBuffers[index][bindingIndex])
+                                ToBackend(mBuffers[group][bindingIndex])
                                     ->TransitionUsageNow(recordingContext,
                                                          wgpu::BufferUsage::Storage);
                                 break;
@@ -603,8 +607,8 @@ namespace dawn_native { namespace vulkan {
                         dynamicOffsets = mCommands.NextData<uint32_t>(cmd->dynamicOffsetCount);
                     }
 
-                    descriptorSets.OnSetBindGroup(cmd->index, bindGroup, cmd->dynamicOffsetCount,
-                                                  dynamicOffsets);
+                    descriptorSets.OnSetBindGroup(BindGroupIndex(cmd->index), bindGroup,
+                                                  cmd->dynamicOffsetCount, dynamicOffsets);
                     break;
                 }
 
@@ -823,8 +827,8 @@ namespace dawn_native { namespace vulkan {
                         dynamicOffsets = iter->NextData<uint32_t>(cmd->dynamicOffsetCount);
                     }
 
-                    descriptorSets.OnSetBindGroup(cmd->index, bindGroup, cmd->dynamicOffsetCount,
-                                                  dynamicOffsets);
+                    descriptorSets.OnSetBindGroup(BindGroupIndex(cmd->index), bindGroup,
+                                                  cmd->dynamicOffsetCount, dynamicOffsets);
                     break;
                 }
 

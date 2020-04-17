@@ -427,8 +427,8 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
                 }
 
-                const auto& it = mBindingInfo[binding.set].emplace(BindingNumber(binding.binding),
-                                                                   ShaderBindingInfo{});
+                const auto& it = mBindingInfo[BindGroupIndex(binding.set)].emplace(
+                    BindingNumber(binding.binding), ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
@@ -601,13 +601,14 @@ namespace dawn_native {
 
                 BindingNumber bindingNumber(
                     compiler.get_decoration(resource.id, spv::DecorationBinding));
-                uint32_t set = compiler.get_decoration(resource.id, spv::DecorationDescriptorSet);
+                BindGroupIndex group(
+                    compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
 
-                if (set >= kMaxBindGroups) {
+                if (group >= kMaxBindGroups) {
                     return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
                 }
 
-                const auto& it = mBindingInfo[set].emplace(bindingNumber, ShaderBindingInfo{});
+                const auto& it = mBindingInfo[group].emplace(bindingNumber, ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
@@ -774,14 +775,15 @@ namespace dawn_native {
     bool ShaderModuleBase::IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const {
         ASSERT(!IsError());
 
-        for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        for (uint32_t groupValue : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            BindGroupIndex group(groupValue);
             if (!IsCompatibleWithBindGroupLayout(group, layout->GetBindGroupLayout(group))) {
                 return false;
             }
         }
 
         for (uint32_t group : IterateBitSet(~layout->GetBindGroupLayoutsMask())) {
-            if (mBindingInfo[group].size() > 0) {
+            if (mBindingInfo[BindGroupIndex(group)].size() > 0) {
                 return false;
             }
         }
@@ -790,7 +792,7 @@ namespace dawn_native {
     }
 
     bool ShaderModuleBase::IsCompatibleWithBindGroupLayout(
-        size_t group,
+        BindGroupIndex group,
         const BindGroupLayoutBase* layout) const {
         ASSERT(!IsError());
 

@@ -95,7 +95,7 @@ namespace dawn_native {
                         commands->NextData<uint32_t>(cmd->dynamicOffsetCount);
                     }
 
-                    commandBufferState->SetBindGroup(cmd->index, cmd->group.Get());
+                    commandBufferState->SetBindGroup(BindGroupIndex(cmd->index), cmd->group.Get());
                     break;
                 }
 
@@ -270,7 +270,7 @@ namespace dawn_native {
                     if (cmd->dynamicOffsetCount > 0) {
                         commands->NextData<uint32_t>(cmd->dynamicOffsetCount);
                     }
-                    commandBufferState.SetBindGroup(cmd->index, cmd->group.Get());
+                    commandBufferState.SetBindGroup(BindGroupIndex(cmd->index), cmd->group.Get());
                     break;
                 }
 
