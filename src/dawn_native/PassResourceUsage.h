@@ -25,6 +25,13 @@ namespace dawn_native {
     class BufferBase;
     class TextureBase;
 
+    // Add an extra buffer usage (readonly storage buffer usage) and an extra texture usage
+    // (readonly storage texture usage) for render pass resource tracking
+    static constexpr wgpu::BufferUsage kReadOnlyStorageBuffer =
+        static_cast<wgpu::BufferUsage>(0x80000000);
+    static constexpr wgpu::TextureUsage kReadonlyStorageTexture =
+        static_cast<wgpu::TextureUsage>(static_cast<uint32_t>(kReadOnlyStorageBuffer) >> 1);
+
     // Which resources are used by pass and how they are used. The command buffer validation
     // pre-computes this information so that backends with explicit barriers don't have to
     // re-compute it.
