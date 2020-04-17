@@ -204,7 +204,7 @@ namespace dawn_native { namespace d3d12 {
             if (dynamicOffsetCount != 0) {
                 // Update dynamic offsets.
                 // Dynamic buffer bindings are packed at the beginning of the layout.
-                for (BindingIndex bindingIndex = 0; bindingIndex < dynamicOffsetCount;
+                for (BindingCount bindingIndex{0}; bindingIndex < dynamicOffsetCount;
                      ++bindingIndex) {
                     uint32_t parameterIndex =
                         pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);

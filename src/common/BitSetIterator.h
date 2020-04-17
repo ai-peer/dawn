@@ -132,4 +132,9 @@ BitSetIterator<N, uint32_t> IterateBitSet(const std::bitset<N>& bitset) {
     return BitSetIterator<N, uint32_t>(bitset);
 }
 
+template <typename Result, size_t N>
+BitSetIterator<N, Result> IterateBitSet(const std::bitset<N>& bitset) {
+    return BitSetIterator<N, Result>(bitset);
+}
+
 #endif  // COMMON_BITSETITERATOR_H_

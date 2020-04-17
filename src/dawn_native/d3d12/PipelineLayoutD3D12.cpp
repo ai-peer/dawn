@@ -130,7 +130,7 @@ namespace dawn_native { namespace d3d12 {
 
             // Init root descriptors in root signatures for dynamic buffer bindings.
             // These are packed at the beginning of the layout binding info.
-            for (BindingIndex dynamicBindingIndex = 0;
+            for (BindingCount dynamicBindingIndex{0};
                  dynamicBindingIndex < bindGroupLayout->GetDynamicBufferCount();
                  ++dynamicBindingIndex) {
                 const BindingInfo& bindingInfo =
