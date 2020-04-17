@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "417d0b78_ecdfe0f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "This contains two commit messages, did you mean to do two separate CLs?",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1602d32c_1577b793",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "This will be useful in backends too. Can it be in the Texture.h header like for Buffer.h?",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5138083b_6f6f2e29",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "nit: They could probably be in dawn_platform.h instead to be globally visible.",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdad1fee_86a387c6",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "Can we hardcode a constant? Also can we have a test to check it is invalid to create buffers / textures with this usage? (it would make sure we never grow usage such that they intersect these internal usages.)",
+      "range": {
+        "startLine": 33,
+        "startChar": 40,
+        "endLine": 33,
+        "endChar": 90
+      },
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2edf3cf_2b447177",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "nit: We don\u0027t need a pipeline to test that, since the usage tracking is done on setBindGroup",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1de1149_73b0e770",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "nit: no need for a sampler to test the sampled usage.",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f92a882_08ffaffd",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "We could create a single BindGroup that contains both the sampled usage and the read/write storage usage. Then start a render pass to bind the group.",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66d7ec5d_01cce447",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T13:04:58Z",
+      "side": 1,
+      "message": "ditto, no need for the pipeline and the draw.",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
