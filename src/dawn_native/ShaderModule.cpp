@@ -396,8 +396,7 @@ namespace dawn_native {
                 switch (info->type) {
                     case wgpu::BindingType::SampledTexture: {
                         info->multisampled = binding.multisampled;
-                        info->textureDimension =
-                            ToWGPUTextureViewDimension(binding.texture_dimension);
+                        info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         info->textureComponentType =
                             ToDawnFormatType(binding.texture_component_type);
                         break;
@@ -419,8 +418,7 @@ namespace dawn_native {
                         }
                         info->multisampled = binding.multisampled;
                         info->storageTextureFormat = storageTextureFormat;
-                        info->textureDimension =
-                            ToWGPUTextureViewDimension(binding.texture_dimension);
+                        info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         break;
                     }
                     default:
@@ -581,7 +579,7 @@ namespace dawn_native {
                             compiler.get_type(imageType.type).basetype;
 
                         info->multisampled = imageType.ms;
-                        info->textureDimension =
+                        info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         info->textureComponentType =
                             SpirvCrossBaseTypeToFormatType(textureComponentType);
@@ -625,7 +623,7 @@ namespace dawn_native {
                         }
                         info->multisampled = imageType.ms;
                         info->storageTextureFormat = storageTextureFormat;
-                        info->textureDimension =
+                        info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         break;
                     }
@@ -790,7 +788,7 @@ namespace dawn_native {
                         return false;
                     }
 
-                    if (bindingInfo.textureDimension != moduleInfo.textureDimension) {
+                    if (bindingInfo.viewDimension != moduleInfo.viewDimension) {
                         return false;
                     }
                     break;
@@ -803,7 +801,7 @@ namespace dawn_native {
                     if (bindingInfo.storageTextureFormat != moduleInfo.storageTextureFormat) {
                         return false;
                     }
-                    if (bindingInfo.textureDimension != moduleInfo.textureDimension) {
+                    if (bindingInfo.viewDimension != moduleInfo.viewDimension) {
                         return false;
                     }
                     break;
