@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e021d91_b933dee7",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-17T01:20:07Z",
+      "side": 1,
+      "message": "Need to add tests for the new functionality added to this file.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "d0cafc962ee20e736baf9f0f0f95befc4ecac09a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6141fb82_3275faa3",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-17T01:20:07Z",
+      "side": 1,
+      "message": "Use TChild instead of U as the template parameter.",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 28
+      },
+      "revId": "d0cafc962ee20e736baf9f0f0f95befc4ecac09a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
