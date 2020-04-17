@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6b994c3_b391915a",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:34:25Z",
+      "side": 1,
+      "message": "nit: We should still initialize ComparisonFunc when undefined otherwise it could be garbage that cause problems in the driver.",
+      "revId": "f147d71a75d2116605442e0ec4391ea95ba62c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05fc6c07_ee690382",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-17T08:34:25Z",
+      "side": 1,
+      "message": "nit: And explain that we don\u0027t need to set it because it already has a default value and the Metal debug device complains if we do.",
+      "revId": "f147d71a75d2116605442e0ec4391ea95ba62c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
