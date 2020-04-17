@@ -95,7 +95,8 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroupStateTracker(Device* device)
             : BindGroupAndStorageBarrierTrackerBase(),
-              mAllocator(device->GetShaderVisibleDescriptorAllocator()) {
+              mViewAllocator(device->GetViewShaderVisibleDescriptorAllocator()),
+              mSamplerAllocator(device->GetSamplerShaderVisibleDescriptorAllocator()) {
         }
 
         void SetInComputePass(bool inCompute_) {
@@ -111,21 +112,27 @@ namespace dawn_native { namespace d3d12 {
             // Re-populating all bindgroups after the last one fails causes duplicated allocations
             // to occur on overflow.
             // TODO(bryan.bernhart@intel.com): Consider further optimization.
-            bool didCreateBindGroups = true;
+            bool didCreateViews = true;
+            bool didCreateSamplers = true;
             for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
-                DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                ToBackend(mBindGroups[index])->Populate(mAllocator));
-                if (!didCreateBindGroups) {
+                BindGroup* group = ToBackend(mBindGroups[index]);
+                DAWN_TRY_ASSIGN(didCreateViews, group->PopulateViews(mViewAllocator));
+                DAWN_TRY_ASSIGN(didCreateSamplers, group->PopulateSamplers(mSamplerAllocator));
+                if (!didCreateViews && !didCreateSamplers) {
                     break;
                 }
             }
 
-            // This will re-create bindgroups for both heaps even if only one overflowed.
-            // TODO(bryan.bernhart@intel.com): Consider re-allocating heaps independently
-            // such that overflowing one doesn't re-allocate the another.
             ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
-            if (!didCreateBindGroups) {
-                DAWN_TRY(mAllocator->AllocateAndSwitchShaderVisibleHeaps());
+
+            if (!didCreateViews || !didCreateSamplers) {
+                if (!didCreateViews) {
+                    DAWN_TRY(mViewAllocator->AllocateAndSwitchShaderVisibleHeap());
+                }
+
+                if (!didCreateSamplers) {
+                    DAWN_TRY(mSamplerAllocator->AllocateAndSwitchShaderVisibleHeap());
+                }
 
                 mDirtyBindGroupsObjectChangedOrIsDynamic |= mBindGroupLayoutsMask;
                 mDirtyBindGroups |= mBindGroupLayoutsMask;
@@ -134,9 +141,11 @@ namespace dawn_native { namespace d3d12 {
                 SetID3D12DescriptorHeaps(commandList);
 
                 for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                    ToBackend(mBindGroups[index])->Populate(mAllocator));
-                    ASSERT(didCreateBindGroups);
+                    BindGroup* group = ToBackend(mBindGroups[index]);
+                    DAWN_TRY_ASSIGN(didCreateViews, group->PopulateViews(mViewAllocator));
+                    DAWN_TRY_ASSIGN(didCreateSamplers, group->PopulateSamplers(mSamplerAllocator));
+                    ASSERT(didCreateViews);
+                    ASSERT(didCreateSamplers);
                 }
             }
 
@@ -182,8 +191,8 @@ namespace dawn_native { namespace d3d12 {
 
         void SetID3D12DescriptorHeaps(ID3D12GraphicsCommandList* commandList) {
             ASSERT(commandList != nullptr);
-            std::array<ID3D12DescriptorHeap*, 2> descriptorHeaps =
-                mAllocator->GetShaderVisibleHeaps();
+            std::array<ID3D12DescriptorHeap*, 2> descriptorHeaps = {
+                mViewAllocator->GetShaderVisibleHeap(), mSamplerAllocator->GetShaderVisibleHeap()};
             ASSERT(descriptorHeaps[0] != nullptr);
             ASSERT(descriptorHeaps[1] != nullptr);
             commandList->SetDescriptorHeaps(2, descriptorHeaps.data());
@@ -267,8 +276,7 @@ namespace dawn_native { namespace d3d12 {
 
             if (cbvUavSrvCount > 0) {
                 uint32_t parameterIndex = pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
-                const D3D12_GPU_DESCRIPTOR_HANDLE baseDescriptor =
-                    group->GetBaseCbvUavSrvDescriptor();
+                const D3D12_GPU_DESCRIPTOR_HANDLE baseDescriptor = group->GetBaseViewDescriptor();
                 if (mInCompute) {
                     commandList->SetComputeRootDescriptorTable(parameterIndex, baseDescriptor);
                 } else {
@@ -290,7 +298,8 @@ namespace dawn_native { namespace d3d12 {
 
         bool mInCompute = false;
 
-        ShaderVisibleDescriptorAllocator* mAllocator;
+        ShaderVisibleDescriptorAllocator* mViewAllocator;
+        ShaderVisibleDescriptorAllocator* mSamplerAllocator;
     };
 
     namespace {

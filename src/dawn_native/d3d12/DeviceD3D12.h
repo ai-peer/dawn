@@ -101,7 +101,8 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
-        ShaderVisibleDescriptorAllocator* GetShaderVisibleDescriptorAllocator() const;
+        ShaderVisibleDescriptorAllocator* GetViewShaderVisibleDescriptorAllocator() const;
+        ShaderVisibleDescriptorAllocator* GetSamplerShaderVisibleDescriptorAllocator() const;
 
         // Returns nullptr when descriptor count is zero.
         StagingDescriptorAllocator* GetViewStagingDescriptorAllocator(
@@ -187,6 +188,9 @@ namespace dawn_native { namespace d3d12 {
 
         std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
             mSamplerAllocators;
+
+        std::unique_ptr<ShaderVisibleDescriptorAllocator> mViewShaderVisibleDescriptorAllocator;
+        std::unique_ptr<ShaderVisibleDescriptorAllocator> mSamplerShaderVisibleDescriptorAllocator;
     };
 
 }}  // namespace dawn_native::d3d12

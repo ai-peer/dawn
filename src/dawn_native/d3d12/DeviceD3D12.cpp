@@ -83,9 +83,14 @@ namespace dawn_native { namespace d3d12 {
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
 
-        mShaderVisibleDescriptorAllocator =
-            std::make_unique<ShaderVisibleDescriptorAllocator>(this);
-        DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
+        mViewShaderVisibleDescriptorAllocator = std::make_unique<ShaderVisibleDescriptorAllocator>(
+            this, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        DAWN_TRY(mViewShaderVisibleDescriptorAllocator->Initialize());
+
+        mSamplerShaderVisibleDescriptorAllocator =
+            std::make_unique<ShaderVisibleDescriptorAllocator>(this,
+                                                               D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        DAWN_TRY(mSamplerShaderVisibleDescriptorAllocator->Initialize());
 
         // Zero sized allocator is never requested and does not need to exist.
         for (uint32_t countIndex = 1; countIndex < kNumOfStagingDescriptorAllocators;
@@ -210,7 +215,8 @@ namespace dawn_native { namespace d3d12 {
 
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
-        mShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
+        mViewShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
+        mSamplerShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
@@ -467,8 +473,12 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mPendingCommands.IsOpen());
     }
 
-    ShaderVisibleDescriptorAllocator* Device::GetShaderVisibleDescriptorAllocator() const {
-        return mShaderVisibleDescriptorAllocator.get();
+    ShaderVisibleDescriptorAllocator* Device::GetViewShaderVisibleDescriptorAllocator() const {
+        return mViewShaderVisibleDescriptorAllocator.get();
+    }
+
+    ShaderVisibleDescriptorAllocator* Device::GetSamplerShaderVisibleDescriptorAllocator() const {
+        return mSamplerShaderVisibleDescriptorAllocator.get();
     }
 
     StagingDescriptorAllocator* Device::GetViewStagingDescriptorAllocator(
