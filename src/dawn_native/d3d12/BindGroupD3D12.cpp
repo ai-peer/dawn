@@ -150,10 +150,10 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mCPUSamplerAllocation.IsValid());
     }
 
-    ResultOrError<bool> BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator) {
+    ResultOrError<bool> BindGroup::PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator) {
         Device* device = ToBackend(GetDevice());
 
-        if (allocator->IsAllocationStillValid(mLastUsageSerial, mHeapSerial)) {
+        if (viewAllocator->IsAllocationStillValid(&mGPUViewAllocation)) {
             return true;
         }
 
@@ -162,59 +162,81 @@ namespace dawn_native { namespace d3d12 {
         const BindGroupLayout* bgl = ToBackend(GetLayout());
         const Serial pendingSerial = device->GetPendingCommandSerial();
 
-        ID3D12Device* d3d12Device = device->GetD3D12Device();
-
         // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
         // simple copies per bindgroup, a single non-simple copy could be issued.
         // TODO(dawn:155): Consider doing this optimization.
         const uint32_t viewDescriptorCount = bgl->GetCbvUavSrvDescriptorCount();
         if (viewDescriptorCount > 0) {
-            DescriptorHeapAllocation viewDescriptorHeapAllocation;
-            DAWN_TRY_ASSIGN(
-                viewDescriptorHeapAllocation,
-                allocator->AllocateGPUDescriptors(viewDescriptorCount, pendingSerial,
-                                                  D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
-            if (viewDescriptorHeapAllocation.IsInvalid()) {
+            D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor;
+            D3D12_GPU_DESCRIPTOR_HANDLE baseGPUDescriptor;
+            if (!viewAllocator->AllocateGPUDescriptors(viewDescriptorCount, pendingSerial,
+                                                       &baseCPUDescriptor, &baseGPUDescriptor)) {
                 return false;
             }
 
-            d3d12Device->CopyDescriptorsSimple(
-                viewDescriptorCount, viewDescriptorHeapAllocation.GetCPUHandle(0),
-                mCPUViewAllocation.OffsetFrom(0, 0), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+            device->GetD3D12Device()->CopyDescriptorsSimple(viewDescriptorCount, baseCPUDescriptor,
+                                                            mCPUViewAllocation.OffsetFrom(0, 0),
+                                                            D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-            mBaseViewDescriptor = viewDescriptorHeapAllocation.GetGPUHandle(0);
+            // Record both the device and heap serials to determine later if the allocations are
+            // still valid.
+            mGPUViewAllocation.mBaseDescriptor = std::move(baseGPUDescriptor);
+            mGPUViewAllocation.mLastUsageSerial = pendingSerial;
+            mGPUViewAllocation.mHeapSerial = viewAllocator->GetShaderVisibleHeapSerial();
         }
-
-        const uint32_t samplerDescriptorCount = bgl->GetSamplerDescriptorCount();
-        if (samplerDescriptorCount > 0) {
-            DescriptorHeapAllocation samplerDescriptorHeapAllocation;
-            DAWN_TRY_ASSIGN(samplerDescriptorHeapAllocation,
-                            allocator->AllocateGPUDescriptors(samplerDescriptorCount, pendingSerial,
-                                                              D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER));
-            if (samplerDescriptorHeapAllocation.IsInvalid()) {
-                return false;
-            }
-
-            d3d12Device->CopyDescriptorsSimple(
-                samplerDescriptorCount, samplerDescriptorHeapAllocation.GetCPUHandle(0),
-                mCPUSamplerAllocation.OffsetFrom(0, 0), D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
-
-            mBaseSamplerDescriptor = samplerDescriptorHeapAllocation.GetGPUHandle(0);
-        }
-
-        // Record both the device and heap serials to determine later if the allocations are still
-        // valid.
-        mLastUsageSerial = pendingSerial;
-        mHeapSerial = allocator->GetShaderVisibleHeapsSerial();
 
         return true;
     }
 
-    D3D12_GPU_DESCRIPTOR_HANDLE BindGroup::GetBaseCbvUavSrvDescriptor() const {
-        return mBaseViewDescriptor;
+    ResultOrError<bool> BindGroup::PopulateSamplers(
+        ShaderVisibleDescriptorAllocator* samplerAllocator) {
+        Device* device = ToBackend(GetDevice());
+
+        // CR: Calling IsAllocationStillValid x 2 is slower where the beneifit of eliminating extra
+        // calls to CopyDescriptorsSimple does not offset.
+        if (samplerAllocator->IsAllocationStillValid(&mGPUSamplerAllocation)) {
+            return true;
+        }
+
+        // Attempt to allocate descriptors for the currently bound shader-visible heaps.
+        // If either failed, return early to re-allocate and switch the heaps.
+        const BindGroupLayout* bgl = ToBackend(GetLayout());
+        const Serial pendingSerial = device->GetPendingCommandSerial();
+
+        // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
+        // simple copies per bindgroup, a single non-simple copy could be issued.
+        // TODO(dawn:155): Consider doing this optimization.
+        const uint32_t samplerDescriptorCount = bgl->GetSamplerDescriptorCount();
+        if (samplerDescriptorCount > 0) {
+            D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor;
+            D3D12_GPU_DESCRIPTOR_HANDLE baseGPUDescriptor;
+            if (!samplerAllocator->AllocateGPUDescriptors(samplerDescriptorCount, pendingSerial,
+                                                          &baseCPUDescriptor, &baseGPUDescriptor)) {
+                return false;
+            }
+
+            device->GetD3D12Device()->CopyDescriptorsSimple(
+                samplerDescriptorCount, baseCPUDescriptor, mCPUSamplerAllocation.OffsetFrom(0, 0),
+                D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+
+            // CR: It would be nice to do "handle = GPUHandle(..)" here instead but constructing a rvalue
+            // causes a regression.
+
+            // Record both the device and heap serials to determine later if the allocations are
+            // still valid.
+            mGPUSamplerAllocation.mBaseDescriptor = std::move(baseGPUDescriptor);
+            mGPUSamplerAllocation.mLastUsageSerial = pendingSerial;
+            mGPUSamplerAllocation.mHeapSerial = samplerAllocator->GetShaderVisibleHeapSerial();
+        }
+
+        return true;
+    }
+
+    D3D12_GPU_DESCRIPTOR_HANDLE BindGroup::GetBaseViewDescriptor() const {
+        return mGPUViewAllocation.GetBaseDescriptor();
     }
 
     D3D12_GPU_DESCRIPTOR_HANDLE BindGroup::GetBaseSamplerDescriptor() const {
-        return mBaseSamplerDescriptor;
+        return mGPUSamplerAllocation.GetBaseDescriptor();
     }
 }}  // namespace dawn_native::d3d12
