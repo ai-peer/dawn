@@ -78,7 +78,9 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "layout", "type": "bind group layout"},
             {"name": "binding count", "type": "uint32_t"},
-            {"name": "bindings", "type": "bind group entry", "annotation": "const*", "length": "binding count"}
+            {"name": "bindings", "type": "bind group entry", "annotation": "const*", "length": "binding count"},
+            {"name": "entry count", "type": "uint32_t"},
+            {"name": "entries", "type": "bind group entry", "annotation": "const*", "length": "entry count"}
         ]
     },
     "bind group layout": {
@@ -105,7 +107,9 @@
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "binding count", "type": "uint32_t"},
-            {"name": "bindings", "type": "bind group layout entry", "annotation": "const*", "length": "binding count"}
+            {"name": "bindings", "type": "bind group layout entry", "annotation": "const*", "length": "binding count"},
+            {"name": "entry count", "type": "uint32_t"},
+            {"name": "entries", "type": "bind group layout entry", "annotation": "const*", "length": "entry count"}
         ]
     },
     "binding type": {
