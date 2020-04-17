@@ -44,7 +44,7 @@ namespace dawn_native { namespace d3d12 {
 
         // CreateHeap will implicitly make the created heap resident. We must ensure enough free
         // memory exists before allocating to avoid an out-of-memory error when overcommitted.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(size));
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(size, heapDesc.Properties.Type));
 
         ComPtr<ID3D12Heap> d3d12Heap;
         DAWN_TRY(CheckOutOfMemoryHRESULT(
