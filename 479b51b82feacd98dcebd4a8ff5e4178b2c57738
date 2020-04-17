@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ac075a73_882ffecd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T15:50:17Z",
+      "side": 1,
+      "message": "Eh, I guess so, and eventually there should be nearly no deprecation warnings at all.",
+      "parentUuid": "62423290_92184a3d",
+      "range": {
+        "startLine": 724,
+        "startChar": 8,
+        "endLine": 724,
+        "endChar": 67
+      },
+      "revId": "479b51b82feacd98dcebd4a8ff5e4178b2c57738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d283770_d2061eab",
         "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
         "patchSetId": 4
