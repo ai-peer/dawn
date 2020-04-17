@@ -310,7 +310,8 @@ namespace dawn_native { namespace d3d12 {
         // CreateCommittedResource will implicitly make the created resource resident. We must
         // ensure enough free memory exists before allocating to avoid an out-of-memory error when
         // overcommitted.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanMakeResident(resourceInfo.SizeInBytes));
+        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
+            resourceInfo.SizeInBytes, GetDXGIMemorySegmentGroup(mDevice, heapType)));
 
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
@@ -326,7 +327,8 @@ namespace dawn_native { namespace d3d12 {
         // heap granularity, every directly allocated ResourceHeapAllocation also stores a Heap
         // object. This object is created manually, and must be deleted manually upon deallocation
         // of the committed resource.
-        Heap* heap = new Heap(committedResource, heapType, resourceInfo.SizeInBytes);
+        Heap* heap = new Heap(committedResource, GetDXGIMemorySegmentGroup(mDevice, heapType),
+                              resourceInfo.SizeInBytes);
 
         // Calling CreateCommittedResource implicitly calls MakeResident on the resource. We must
         // track this to avoid calling MakeResident a second time.
