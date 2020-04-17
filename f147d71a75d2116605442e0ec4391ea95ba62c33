@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f10d055c_96d1fe3c",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-17T20:13:18Z",
+      "side": 1,
+      "message": "Ah, I guess I can fix this up in a later patch",
+      "parentUuid": "c2f5b6ef_85793cd0",
+      "revId": "f147d71a75d2116605442e0ec4391ea95ba62c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05fc6c07_ee690382",
         "filename": "src/dawn_native/metal/SamplerMTL.mm",
         "patchSetId": 4
