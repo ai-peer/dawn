@@ -33,7 +33,9 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError LockHeap(Heap* heap);
         void UnlockHeap(Heap* heap);
-        MaybeError EnsureCanMakeResident(uint64_t allocationSize);
+        MaybeError EnsureCanAllocate(uint64_t allocationSize, D3D12_HEAP_TYPE heapType);
+        MaybeError EnsureCanMakeResident(uint64_t allocationSize,
+                                         DXGI_MEMORY_SEGMENT_GROUP memorySegment);
         MaybeError EnsureHeapsAreResident(Heap** heaps, size_t heapCount);
 
         uint64_t SetExternalMemoryReservation(DXGI_MEMORY_SEGMENT_GROUP segment,
@@ -56,13 +58,13 @@ namespace dawn_native { namespace d3d12 {
             MemorySegmentInfo nonLocal;
         };
 
-        ResultOrError<Heap*> RemoveSingleEntryFromLRU();
+        ResultOrError<Heap*> RemoveSingleEntryFromLRU(DXGI_MEMORY_SEGMENT_GROUP memorySegment);
         void UpdateMemorySegmentInfo(DXGI_MEMORY_SEGMENT_GROUP segment);
-        bool ShouldTrackHeap(Heap* heap) const;
         void UpdateVideoMemoryInfo();
 
         Device* mDevice;
-        LinkedList<Heap> mLRUCache;
+        LinkedList<Heap> mLocalLRUCache;
+        LinkedList<Heap> mNonLocalLRUCache;
         bool mResidencyManagementEnabled = false;
         bool mRestrictBudgetForTesting = false;
         VideoMemoryInfo mVideoMemoryInfo = {};
