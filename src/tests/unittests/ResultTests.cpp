@@ -14,31 +14,57 @@
 
 #include <gtest/gtest.h>
 
+#include "common/RefCounted.h"
 #include "common/Result.h"
 
 namespace {
 
 template<typename T, typename E>
 void TestError(Result<T, E>* result, E expectedError) {
-    ASSERT_TRUE(result->IsError());
-    ASSERT_FALSE(result->IsSuccess());
+    EXPECT_TRUE(result->IsError());
+    EXPECT_FALSE(result->IsSuccess());
 
     std::unique_ptr<E> storedError = result->AcquireError();
-    ASSERT_EQ(*storedError, expectedError);
+    EXPECT_EQ(*storedError, expectedError);
 }
 
 template<typename T, typename E>
 void TestSuccess(Result<T, E>* result, T expectedSuccess) {
-    ASSERT_FALSE(result->IsError());
-    ASSERT_TRUE(result->IsSuccess());
+    EXPECT_FALSE(result->IsError());
+    EXPECT_TRUE(result->IsSuccess());
 
     T storedSuccess = result->AcquireSuccess();
-    ASSERT_EQ(storedSuccess, expectedSuccess);
+    EXPECT_EQ(storedSuccess, expectedSuccess);
 }
 
 static int dummyError = 0xbeef;
 static float dummySuccess = 42.0f;
 static const float dummyConstSuccess = 42.0f;
+
+class AClass : public RefCounted {
+  public:
+    int a = 0;
+};
+
+static AClass dummySuccessObj;
+
+// Tests using the following overload of TestSuccess make
+// local Ref instances to dummySuccessObj. Tests should
+// ensure any local Ref objects made along the way continue
+// to point to dummySuccessObj.
+template <typename T, typename E>
+void TestSuccess(Result<Ref<T>, E>* result, T* expectedSuccess) {
+    EXPECT_FALSE(result->IsError());
+    EXPECT_TRUE(result->IsSuccess());
+
+    const Ref<T> storedSuccess = result->AcquireSuccess();
+    EXPECT_EQ(storedSuccess.Get(), expectedSuccess);
+
+    // dummySuccessObj starts with a reference count of 1.
+    // Once we call AcquireSuccess, storedSuccess should contain
+    // the only other reference to dummySuccesObj.
+    EXPECT_EQ(storedSuccess->GetRefCountForTesting(), 2u);
+}
 
 // Result<void, E*>
 
@@ -66,16 +92,16 @@ TEST(ResultOnlyPointerError, ReturningError) {
 // Test constructing a success Result<void, E>
 TEST(ResultOnlyPointerError, ConstructingSuccess) {
     Result<void, int> result;
-    ASSERT_TRUE(result.IsSuccess());
-    ASSERT_FALSE(result.IsError());
+    EXPECT_TRUE(result.IsSuccess());
+    EXPECT_FALSE(result.IsError());
 }
 
 // Test moving a success Result<void, E>
 TEST(ResultOnlyPointerError, MovingSuccess) {
     Result<void, int> result;
     Result<void, int> movedResult(std::move(result));
-    ASSERT_TRUE(movedResult.IsSuccess());
-    ASSERT_FALSE(movedResult.IsError());
+    EXPECT_TRUE(movedResult.IsSuccess());
+    EXPECT_FALSE(movedResult.IsError());
 }
 
 // Test returning a success Result<void, E>
@@ -83,8 +109,8 @@ TEST(ResultOnlyPointerError, ReturningSuccess) {
     auto CreateError = []() -> Result<void, int> { return {}; };
 
     Result<void, int> result = CreateError();
-    ASSERT_TRUE(result.IsSuccess());
-    ASSERT_FALSE(result.IsError());
+    EXPECT_TRUE(result.IsSuccess());
+    EXPECT_FALSE(result.IsError());
 }
 
 // Result<T*, E*>
@@ -202,6 +228,54 @@ TEST(ResultBothPointerWithConstResult, ReturningSuccess) {
 
     Result<const float*, int> result = CreateSuccess();
     TestSuccess(&result, &dummyConstSuccess);
+}
+
+// Result<Ref<T>, E>
+
+// Test constructing an error Result<Ref<T>, E>
+TEST(ResultRefT, ConstructingError) {
+    Result<Ref<AClass>, int> result(std::make_unique<int>(dummyError));
+    TestError(&result, dummyError);
+}
+
+// Test moving an error Result<Ref<T>, E>
+TEST(ResultRefT, MovingError) {
+    Result<Ref<AClass>, int> result(std::make_unique<int>(dummyError));
+    Result<Ref<AClass>, int> movedResult(std::move(result));
+    TestError(&movedResult, dummyError);
+}
+
+// Test returning an error Result<Ref<T>, E>
+TEST(ResultRefT, ReturningError) {
+    auto CreateError = []() -> Result<Ref<AClass>, int> {
+        return {std::make_unique<int>(dummyError)};
+    };
+
+    Result<Ref<AClass>, int> result = CreateError();
+    TestError(&result, dummyError);
+}
+
+// Test constructing a success Result<Ref<T>, E>
+TEST(ResultRefT, ConstructingSuccess) {
+    Ref<AClass> refObj(&dummySuccessObj);
+    Result<Ref<AClass>, int> result(std::move(refObj));
+    TestSuccess(&result, &dummySuccessObj);
+}
+
+// Test moving a success Result<Ref<T>, E>
+TEST(ResultRefT, MovingSuccess) {
+    Ref<AClass> refObj(&dummySuccessObj);
+    Result<Ref<AClass>, int> result(std::move(refObj));
+    Result<Ref<AClass>, int> movedResult(std::move(result));
+    TestSuccess(&movedResult, &dummySuccessObj);
+}
+
+// Test returning a success Result<Ref<T>, E>
+TEST(ResultRefT, ReturningSuccess) {
+    auto CreateSuccess = []() -> Result<Ref<AClass>, int> { return Ref<AClass>(&dummySuccessObj); };
+
+    Result<Ref<AClass>, int> result = CreateSuccess();
+    TestSuccess(&result, &dummySuccessObj);
 }
 
 // Result<T, E>
