@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03abdb41_fa7b6a48",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-18T00:44:31Z",
+      "side": 1,
+      "message": "It\u0027s investigated here:\nhttps://github.com/gpuweb/gpuweb/issues/659\nThe only guaranteed-sampleable depth formats in Vulkan are depth32float and depth16unorm.\nThere are no sampleable DS formats, and even X8_D24 isn\u0027t sampleable so depth24plus isn\u0027t sampleable.\n\nSo, I think what you have here is already correct (until we add depth16unorm).",
+      "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
