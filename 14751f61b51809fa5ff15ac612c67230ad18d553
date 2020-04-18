@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00e4f345_6b05ed54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-18T00:06:18Z",
+      "side": 1,
+      "message": "viewDimension",
+      "range": {
+        "startLine": 7,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "14751f61b51809fa5ff15ac612c67230ad18d553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0ec18b_71c0cbc3",
+        "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-18T00:06:18Z",
+      "side": 1,
+      "message": "I guess if you use non-designated initializers, it\u0027s still a breaking change :\\",
+      "revId": "14751f61b51809fa5ff15ac612c67230ad18d553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
