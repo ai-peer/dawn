@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "cb6d1d11_7310fe50",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-18T01:38:42Z",
+      "side": 1,
+      "message": "Why do mMaxSets this way? I\u0027d think that the best performance would be achieved with a fixed mMaxSets (because IIUC it sets the number of allocations in a slab), not a fixed kMaxDescriptorsPerPool.",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9648cbf_1a5bdaf1",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-18T01:38:42Z",
+      "side": 1,
+      "message": "nit: ASSERT \u003e 0",
+      "range": {
+        "startLine": 42,
+        "startChar": 44,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e992034_74068d83",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
