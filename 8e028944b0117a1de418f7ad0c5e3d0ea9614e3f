@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0e5a4a5_f3eeb3e8",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-18T00:13:07Z",
+      "side": 1,
+      "message": "nit: Could this be a switch statement with an UNREACHABLE in the default case?",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 9
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c5dd9e_7d55ae9f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-18T00:13:07Z",
+      "side": 1,
+      "message": "Do we need to have an Update function that updates both of the memory segments?\n\nLooking at the next patch, EnsureCanMakeResident gets called with the memory segment we\u0027re operating on. Then, wouldn\u0027t we only need to query the video memory for just one of the segments at a time and not both?",
+      "range": {
+        "startLine": 147,
+        "startChar": 27,
+        "endLine": 147,
+        "endChar": 48
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
