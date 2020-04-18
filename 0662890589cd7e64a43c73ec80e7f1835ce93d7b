@@ -22,6 +22,57 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e992034_74068d83",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-18T00:31:39Z",
+      "side": 1,
+      "message": "unit: also suggest checking for leaks via ASSERT(freeSetIndices \u003d\u003d MaxSets).",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2122516_2be871fe",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-18T00:31:39Z",
+      "side": 1,
+      "message": "unit: check allocationInfo is valid to prevent use-after-free.",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "887fb6e0_85ff499c",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-18T00:31:39Z",
+      "side": 1,
+      "message": "nit: isn\u0027t this more simply `return result;`?",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
