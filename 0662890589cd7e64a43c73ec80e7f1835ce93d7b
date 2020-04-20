@@ -271,6 +271,24 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55bd39fa_b8f89add",
+        "filename": "src/dawn_native/vulkan/DescriptorSetService.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T18:30:58Z",
+      "side": 1,
+      "message": "That, or a SerialQueue of layouts that need ticking but without a layout added more than once per tick.",
+      "parentUuid": "a9adac41_74cf022f",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
