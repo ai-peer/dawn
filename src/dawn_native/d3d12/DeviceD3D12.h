@@ -153,6 +153,8 @@ namespace dawn_native { namespace d3d12 {
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        Serial mLastProcessedTickSerial = 0;
+        bool IsCompletedSerialUnchanged() override;
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent = nullptr;
 
