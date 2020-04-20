@@ -18,6 +18,8 @@
 
 #include <memory>
 
+#include "dawn_native/dawn_platform.h"
+
 using namespace testing;
 
 class MockBufferMapReadCallback {
@@ -159,6 +161,16 @@ TEST_F(BufferValidationTest, CreationMapUsageRestrictions) {
 
         ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
     }
+}
+
+// Verify it is an error to create a buffer with a buffer usage that should only be used
+// internally.
+TEST_F(BufferValidationTest, InternalBufferUsage) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = dawn_native::kReadOnlyStorageBuffer;
+
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }
 
 // Test the success case for mapping buffer for reading
