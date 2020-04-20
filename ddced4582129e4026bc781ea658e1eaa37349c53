@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8bc1a83a_5d8e1929",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T16:52:11Z",
+      "side": 1,
+      "message": "Chapter 35 of the Vulkan spec says, \"The “Depth” operand of OpTypeImage is ignored.\" :P\n\nSince we can only sample depth formats, then we can change Depth32Float (and 16unorm when we have it) in the format table to be Type::Float instead of Type::Other, and remove this entire check",
+      "parentUuid": "102ff5f3_9afff03e",
+      "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2481a4fa_28fdf5ab",
         "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
         "patchSetId": 6
