@@ -16,7 +16,8 @@
 #define DAWNNATIVE_D3D12_RENDERPASSBUILDERD3D12_H_
 
 #include "common/Constants.h"
-#include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/Error.h"
+#include "dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <array>
@@ -24,8 +25,7 @@
 namespace dawn_native { namespace d3d12 {
 
     class TextureView;
-
-    struct OMSetRenderTargetArgs;
+    class Device;
 
     // RenderPassBuilder stores parameters related to render pass load and store operations.
     // When the D3D12 render pass API is available, the needed descriptors can be fetched
@@ -34,7 +34,8 @@ namespace dawn_native { namespace d3d12 {
     // operations is extracted from the descriptors.
     class RenderPassBuilder {
       public:
-        RenderPassBuilder(const OMSetRenderTargetArgs& args, bool hasUAV);
+        RenderPassBuilder(Device* device, bool hasUAV);
+        ~RenderPassBuilder();
 
         uint32_t GetColorAttachmentCount() const;
 
@@ -72,17 +73,25 @@ namespace dawn_native { namespace d3d12 {
                               DXGI_FORMAT format);
         void SetStencilNoAccess();
 
+        MaybeError AllocateRenderTargetView(TextureView* view);
+        MaybeError AllocateDepthStencilView(TextureView* view);
+
       private:
+        Device* mDevice;
+
         uint32_t mColorAttachmentCount = 0;
         bool mHasDepth = false;
         D3D12_RENDER_PASS_FLAGS mRenderPassFlags = D3D12_RENDER_PASS_FLAG_NONE;
         D3D12_RENDER_PASS_DEPTH_STENCIL_DESC mRenderPassDepthStencilDesc;
         std::array<D3D12_RENDER_PASS_RENDER_TARGET_DESC, kMaxColorAttachments>
             mRenderPassRenderTargetDescriptors;
-        const D3D12_CPU_DESCRIPTOR_HANDLE* mRenderTargetViews;
+        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> mRenderTargetViews;
         std::array<D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
                    kMaxColorAttachments>
             mSubresourceParams;
+
+        std::array<CPUDescriptorHeapAllocation, kMaxColorAttachments> mRenderTargetAllocations;
+        CPUDescriptorHeapAllocation mDepthStencilViewAllocation;
     };
 }}  // namespace dawn_native::d3d12
 
