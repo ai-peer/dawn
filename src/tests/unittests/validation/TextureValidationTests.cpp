@@ -15,6 +15,7 @@
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "common/Constants.h"
+#include "dawn_native/dawn_platform.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/TextureFormatUtils.h"
 #include "utils/WGPUHelpers.h"
@@ -358,6 +359,14 @@ TEST_F(TextureValidationTest, TextureFormatNotSupportTextureUsageStorage) {
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
     }
+}
+
+// Verify it is an error to create a texture with a texture usage that should only be used
+// internally.
+TEST_F(TextureValidationTest, InternalTextureUsage) {
+    wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+    descriptor.usage = dawn_native::kReadonlyStorageTexture;
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
 }
 
 // Test it is an error to create a texture with format "Undefined".
