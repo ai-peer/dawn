@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe8bbf9a_9206733f",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T17:45:10Z",
+      "side": 1,
+      "message": "nit: consistent designated initializer style in making these descriptors",
+      "range": {
+        "startLine": 334,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 6
+      },
+      "revId": "c37f4fb384cbca6415ca70295c5f03ef9af8fc37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
