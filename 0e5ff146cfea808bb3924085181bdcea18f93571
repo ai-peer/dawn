@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fc98481_59db744c",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:14:24Z",
+      "side": 1,
+      "message": "nit: since we are testing in a render pass this could be fragment. Yunchao has CLs up that test that the visibility isn\u0027t used for the checks but it\u0027d be nice to not assume it in this test.",
+      "range": {
+        "startLine": 878,
+        "startChar": 64,
+        "endLine": 878,
+        "endChar": 71
+      },
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "688abe42_ee07a2a4",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:14:24Z",
+      "side": 1,
+      "message": "nit: This can probably be \n\nutils::MakeBindGroupLayout(device, {{.binding \u003d 0, .type \u003d storageTextureType, .visibility \u003d wgpu::ShaderStage::Fragment, .storageTextureFormat \u003d kFormat}});\n\nIt take advantage of e2D being the default.\n\nCL format should put each . on its own line which make the declaration pretty clear.",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f99cd567_0f22558b",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:14:24Z",
+      "side": 1,
+      "message": "ditto, and here it would make the declaration more clear because we wouldn\u0027t have to follow what has been copied and what\u0027s new between entries.\n\nDitto in other tests",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec304067_f136c601",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:14:24Z",
+      "side": 1,
+      "message": "This needs to be a whitebox test, end2end or validation tests are not allowed to access implementation details for dawn_native like this one. Can we undo this change and the one for buffers, and then add a new whitebox test for example \"ResourcePrivateUsageTest\" (it could be in a followup CL to unblock this)",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
