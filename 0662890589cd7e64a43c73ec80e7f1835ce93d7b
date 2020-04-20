@@ -129,6 +129,30 @@
     },
     {
       "key": {
+        "uuid": "c249650c_c5c0a580",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T16:43:30Z",
+      "side": 1,
+      "message": "Experimentally (at least in simple workloads) it doesn\u0027t seem to matter. Most of our benefit comes from reusing the descriptor sets and not from pool-allocating.\n\nI don\u0027t feel very strongly, but I have a slight preference to keep it this way because it matches what the CPU-side slab allocator does and the D3D12 descriptor allocators. Even if one BGL is bigger, The slabs are fixed-size across all layouts and we suballocate blocks for each bind group out of them. I guess this means that the fragmentation cost is constant regardless of the number of bindings in the layout.",
+      "parentUuid": "cb6d1d11_7310fe50",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e992034_74068d83",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -197,6 +221,24 @@
     },
     {
       "key": {
+        "uuid": "5bfd0080_d68bc20e",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T16:43:30Z",
+      "side": 1,
+      "message": "DAWN_TRY also includes a DAWN_UNLIKELY and records the callsite in the error stacktrace which is nice to have.",
+      "parentUuid": "887fb6e0_85ff499c",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c85b2ee_59cdfdb9",
         "filename": "src/dawn_native/vulkan/DescriptorSetService.h",
         "patchSetId": 5
@@ -208,6 +250,24 @@
       "writtenOn": "2020-04-20T08:40:09Z",
       "side": 1,
       "message": "Maybe this could be done only once per serial, with the serialQueue of poolIndex / setIndex living in DescriptorSetAllocator?",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9adac41_74cf022f",
+        "filename": "src/dawn_native/vulkan/DescriptorSetService.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T16:43:30Z",
+      "side": 1,
+      "message": "Hm that\u0027s a good idea, and this class would instead hold an unordered set of layouts that need ticking ?",
+      "parentUuid": "9c85b2ee_59cdfdb9",
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
