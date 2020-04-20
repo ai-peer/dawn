@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20a92db4_5067a2e1",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-20T19:44:39Z",
+      "side": 1,
+      "message": "Rename to CPUDescriptorAllocator?",
+      "revId": "49933003c791d499a5866fd51c96f681f8e4b320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684478e2_bd788d64",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-20T19:44:39Z",
+      "side": 1,
+      "message": "Move deferred deletion into own .cpp?",
+      "revId": "49933003c791d499a5866fd51c96f681f8e4b320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
