@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db1469eb_3d648348",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:41:40Z",
+      "side": 1,
+      "message": "we should do something to make sure this never overflows size_t",
+      "range": {
+        "startLine": 107,
+        "startChar": 13,
+        "endLine": 107,
+        "endChar": 81
+      },
+      "revId": "6ea5fa1fcc12b0d2f56aaa8307d890f6c8cdd644",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bce72b9c_632a1614",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:41:40Z",
+      "side": 1,
+      "message": "nit: I\u0027d be surprised if this std::move does anything because it\u0027s a simple struct.",
+      "range": {
+        "startLine": 112,
+        "startChar": 40,
+        "endLine": 112,
+        "endChar": 68
+      },
+      "revId": "6ea5fa1fcc12b0d2f56aaa8307d890f6c8cdd644",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
