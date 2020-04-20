@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01d94948_f2d2c628",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-20T20:07:06Z",
+      "side": 1,
+      "message": "Not sure this is the right way to do this. I added this enum to avoid including dxgi.h for DXGI_MEMORY_SEGMENT_GROUP.",
+      "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "7980ef3d_c074f7bd",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-20T20:07:06Z",
+      "side": 1,
+      "message": "@Austin: Done.\n\n@Corentin: The way I\u0027m understanding this - this doesn\u0027t really work for UpdateMemorySegmentInfo or UpdateVideoMemoryInfo because these functions are usually called outside SetExternalMemoryReservation.",
+      "parentUuid": "0cd568f8_e06e8dbc",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 9
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f896396_7f5595a7",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
@@ -66,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "d4e362cf_ff28baf4",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-20T20:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f896396_7f5595a7",
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4bc2bdc_541c1641",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
@@ -77,6 +119,24 @@
       "writtenOn": "2020-04-20T08:58:20Z",
       "side": 1,
       "message": "[2]",
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f464947_75b34a5d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-20T20:07:06Z",
+      "side": 1,
+      "message": "\"What\u0027s more we could select a pointer to either local or nonLocal in that switch and then pass it around so we don\u0027t need to check segment again at [1], [2] ...\"\n\nThis comment doesn\u0027t really seem to apply to [2]. UpdateMemorySegmentInfo is used outside of SetExternalMemoryReservation.",
+      "parentUuid": "e4bc2bdc_541c1641",
       "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -118,6 +178,30 @@
       "side": 1,
       "message": "[3]",
       "parentUuid": "d3c5dd9e_7d55ae9f",
+      "range": {
+        "startLine": 147,
+        "startChar": 27,
+        "endLine": 147,
+        "endChar": 48
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4126a6fd_7a096174",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-20T20:07:06Z",
+      "side": 1,
+      "message": "I removed UpdateVideoMemoryInfo. Not sure if it\u0027s the right way to go. You\u0027ll see I basically inlined the function in ResidencyManager() and RestrictBudgetForTesting(). The observation is valid for EnsureCanMakeResident, however.",
+      "parentUuid": "7ec2e253_7dd3248d",
       "range": {
         "startLine": 147,
         "startChar": 27,
