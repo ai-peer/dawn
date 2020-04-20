@@ -96,6 +96,24 @@
     },
     {
       "key": {
+        "uuid": "c2b5e0c5_abc7797a",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:54:36Z",
+      "side": 1,
+      "message": "No worries, it\u0027s kinda magic that it gets translated to 2D and doesn\u0027t match the signature of the structure in WebGPU.",
+      "parentUuid": "6ee921c4_fb218bba",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f99cd567_0f22558b",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 6
