@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "421ae3de_59981bbd",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:40:09Z",
+      "side": 1,
+      "message": "nit: Can you edit the CMakeLists.txt too?",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1aa11836_483e9e24",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -19,6 +36,47 @@
         "endLine": 26,
         "endChar": 59
       },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b970e83_1df38462",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:40:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1aa11836_483e9e24",
+      "range": {
+        "startLine": 26,
+        "startChar": 55,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "628d2075_00bb2694",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:40:09Z",
+      "side": 1,
+      "message": "Note at some point we\u0027ll have to handle what happens with empty bind groups, that\u0027s valid in WebGPU but invalid in Vulkan.",
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -88,6 +146,23 @@
     },
     {
       "key": {
+        "uuid": "3f1d0eb9_487c2514",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:40:09Z",
+      "side": 1,
+      "message": "nit: DescriptorPool* ?",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2122516_2be871fe",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -116,6 +191,23 @@
       "writtenOn": "2020-04-18T00:31:39Z",
       "side": 1,
       "message": "nit: isn\u0027t this more simply `return result;`?",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c85b2ee_59cdfdb9",
+        "filename": "src/dawn_native/vulkan/DescriptorSetService.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:40:09Z",
+      "side": 1,
+      "message": "Maybe this could be done only once per serial, with the serialQueue of poolIndex / setIndex living in DescriptorSetAllocator?",
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
