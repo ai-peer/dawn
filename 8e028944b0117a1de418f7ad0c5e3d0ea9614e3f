@@ -25,6 +25,64 @@
     },
     {
       "key": {
+        "uuid": "0cd568f8_e06e8dbc",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:58:20Z",
+      "side": 1,
+      "message": "What\u0027s more we could select a pointer to either local or nonLocal in that switch and then pass it around so we don\u0027t need to check segment again at [1], [2] or update both segments at [3]",
+      "parentUuid": "c0e5a4a5_f3eeb3e8",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 9
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f896396_7f5595a7",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:58:20Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4bc2bdc_541c1641",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:58:20Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3c5dd9e_7d55ae9f",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
@@ -36,6 +94,30 @@
       "writtenOn": "2020-04-18T00:13:07Z",
       "side": 1,
       "message": "Do we need to have an Update function that updates both of the memory segments?\n\nLooking at the next patch, EnsureCanMakeResident gets called with the memory segment we\u0027re operating on. Then, wouldn\u0027t we only need to query the video memory for just one of the segments at a time and not both?",
+      "range": {
+        "startLine": 147,
+        "startChar": 27,
+        "endLine": 147,
+        "endChar": 48
+      },
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec2e253_7dd3248d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:58:20Z",
+      "side": 1,
+      "message": "[3]",
+      "parentUuid": "d3c5dd9e_7d55ae9f",
       "range": {
         "startLine": 147,
         "startChar": 27,
