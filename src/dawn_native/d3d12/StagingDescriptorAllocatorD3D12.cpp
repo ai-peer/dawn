@@ -29,8 +29,6 @@ namespace dawn_native { namespace d3d12 {
           mBlockSize(descriptorCount * mSizeIncrement),
           mHeapSize(RoundUp(heapSize, descriptorCount)),
           mHeapType(heapType) {
-        ASSERT(heapType == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV ||
-               heapType == D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
         ASSERT(descriptorCount <= heapSize);
     }
 
@@ -98,6 +96,8 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void StagingDescriptorAllocator::Deallocate(CPUDescriptorHeapAllocation* allocation) {
+        ASSERT(allocation->IsValid());
+
         const uint32_t heapIndex = allocation->GetHeapIndex();
 
         ASSERT(heapIndex < mPool.size());
@@ -130,6 +130,24 @@ namespace dawn_native { namespace d3d12 {
 
     StagingDescriptorAllocator::Index StagingDescriptorAllocator::GetFreeBlockIndicesSize() const {
         return ((mHeapSize * mSizeIncrement) / mBlockSize);
+    }
+
+    void StagingDescriptorAllocator::DeferredDeallocate(CPUDescriptorHeapAllocation* allocation) {
+        mAllocationsToDelete.Enqueue(*allocation, mDevice->GetPendingCommandSerial());
+
+        // Invalidate the handle in case the developer accidentally uses it again.
+        allocation->Invalidate();
+
+        ASSERT(!allocation->IsValid());
+    }
+
+    void StagingDescriptorAllocator::Tick(Serial completedSerial) {
+        for (CPUDescriptorHeapAllocation& allocation :
+             mAllocationsToDelete.IterateUpTo(completedSerial)) {
+            Deallocate(&allocation);
+        }
+
+        mAllocationsToDelete.ClearUpTo(completedSerial);
     }
 
 }}  // namespace dawn_native::d3d12

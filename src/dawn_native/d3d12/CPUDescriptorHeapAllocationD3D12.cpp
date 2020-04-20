@@ -45,4 +45,9 @@ namespace dawn_native { namespace d3d12 {
         mBaseDescriptor = {0};
     }
 
+    D3D12_CPU_DESCRIPTOR_HANDLE CPUDescriptorHeapAllocation::GetBaseDescriptor() const {
+        ASSERT(IsValid());
+        return mBaseDescriptor;
+    }
+
 }}  // namespace dawn_native::d3d12

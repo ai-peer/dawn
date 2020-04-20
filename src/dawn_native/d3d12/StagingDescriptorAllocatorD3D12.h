@@ -49,6 +49,11 @@ namespace dawn_native { namespace d3d12 {
 
         uint32_t GetSizeIncrement() const;
 
+        // Will call Deallocate when the serial is passed.
+        void DeferredDeallocate(CPUDescriptorHeapAllocation* allocation);
+
+        void Tick(Serial completedSerial);
+
       private:
         using Index = uint16_t;
 
@@ -71,6 +76,8 @@ namespace dawn_native { namespace d3d12 {
         uint32_t mHeapSize;       // Size of the heap (in number of descriptors).
 
         D3D12_DESCRIPTOR_HEAP_TYPE mHeapType;
+
+        SerialQueue<CPUDescriptorHeapAllocation> mAllocationsToDelete;
     };
 
 }}  // namespace dawn_native::d3d12
