@@ -16,6 +16,41 @@
       "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "102ff5f3_9afff03e",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T09:11:15Z",
+      "side": 1,
+      "message": "In SPIRV there is a depth boolean on OpTypeImage. https://www.khronos.org/registry/spir-v/specs/unified1/SPIRV.html#OpTypeImage Maybe there should be a new componentType that\u0027s Depth instead?",
+      "parentUuid": "03abdb41_fa7b6a48",
+      "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2481a4fa_28fdf5ab",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T09:11:15Z",
+      "side": 1,
+      "message": "Can we have a TODO here so we revisit it later?",
+      "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
