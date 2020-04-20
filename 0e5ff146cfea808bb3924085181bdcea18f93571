@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "6ee921c4_fb218bba",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T08:47:04Z",
+      "side": 1,
+      "message": "Oh I just saw the default value of textureViewDimension in struct wgpu::BindGroupLayoutEntry is Undefined and missed the place that really set it. Sorry about that.",
+      "parentUuid": "332fea79_d8338c88",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f99cd567_0f22558b",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 6
