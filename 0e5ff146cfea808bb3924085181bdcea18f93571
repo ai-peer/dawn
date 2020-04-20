@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "332fea79_d8338c88",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T08:43:05Z",
+      "side": 1,
+      "message": "Weird, it should be defaulted here https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/BindGroupLayout.cpp;l\u003d286?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n\nit follows WebGPU where if it is not defined, then it is e2D: https://gpuweb.github.io/gpuweb//#dom-gpubindgrouplayoutentry-viewdimension",
+      "parentUuid": "723aa1d9_9539a1a5",
+      "revId": "0e5ff146cfea808bb3924085181bdcea18f93571",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f99cd567_0f22558b",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 6
