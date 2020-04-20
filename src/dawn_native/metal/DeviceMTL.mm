@@ -167,19 +167,34 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
+    void Device::UpdateSerial() {
+        if (GetCompletedCommandSerial() == mLastSubmittedSerial) {
+            // If there's no GPU work in flight we still need to artificially increment the
+            // serial so that CPU operations waiting on GPU completion can know they don't have
+            // to wait.
+            mCompletedSerial++;
+            mLastSubmittedSerial++;
+        }
+    }
+
+    bool Device::IsCompletedSerialUnchanged() {
+        if (mLastProcessedTickSerial == GetCompletedCommandSerial()) {
+            UpdateSerial();
+            return true;
+        }
+        return false;
+    }
+
     MaybeError Device::TickImpl() {
         Serial completedSerial = GetCompletedCommandSerial();
+        mLastProcessedTickSerial = completedSerial;
 
         mMapTracker->Tick(completedSerial);
 
         if (mCommandContext.GetCommands() != nil) {
             SubmitPendingCommandBuffer();
-        } else if (completedSerial == mLastSubmittedSerial) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            mCompletedSerial++;
-            mLastSubmittedSerial++;
         }
+        UpdateSerial();
 
         return {};
     }

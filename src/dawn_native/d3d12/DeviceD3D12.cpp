@@ -204,10 +204,30 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
-        // Perform cleanup operations to free unused objects
+    void Device::UpdateSerial() {
+        if (mCompletedSerial == mLastSubmittedSerial) {
+            // If there's no GPU work in flight we still need to artificially increment the
+            // serial so that CPU operations waiting on GPU completion can know they don't have
+            // to wait.
+            mCompletedSerial++;
+            mLastSubmittedSerial++;
+        }
+    }
+
+    bool Device::IsCompletedSerialUnchanged() {
         mCompletedSerial = mFence->GetCompletedValue();
 
+        if (mLastProcessedTickSerial == mCompletedSerial) {
+            UpdateSerial();
+            return true;
+        }
+        return false;
+    }
+
+    MaybeError Device::TickImpl() {
+        mLastProcessedTickSerial = mCompletedSerial;
+
+        // Perform cleanup operations to free unused objects
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
         mShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
