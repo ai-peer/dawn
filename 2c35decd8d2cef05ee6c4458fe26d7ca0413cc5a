@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "695a4491_ce313442",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done\nOh I meant this CL should be based on https://dawn-review.googlesource.com/c/dawn/+/19784. Sorry that I should have sent out that CL first.",
+      "parentUuid": "417d0b78_ecdfe0f5",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1602d32c_1577b793",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "51d78518_2bd867e4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1602d32c_1577b793",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5138083b_6f6f2e29",
         "filename": "src/dawn_native/PassResourceUsage.h",
         "patchSetId": 4
@@ -50,6 +86,24 @@
       "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb483123_ec96c4d5",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5138083b_6f6f2e29",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +147,48 @@
     },
     {
       "key": {
+        "uuid": "720013be_3751d0bc",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdad1fee_86a387c6",
+      "range": {
+        "startLine": 33,
+        "startChar": 40,
+        "endLine": 33,
+        "endChar": 90
+      },
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3836e504_0e1c3159",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done\nNow I find it unnecessary to have a value other than 0x80000000 and I\u0027ve fixed in the latest CL.",
+      "parentUuid": "a3dfb5e7_0bb4c0a7",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2edf3cf_2b447177",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
@@ -107,6 +203,24 @@
       "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "485c914e_83345b92",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2edf3cf_2b447177",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "bf165f3f_81003a4d",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1de1149_73b0e770",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f92a882_08ffaffd",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
@@ -144,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "ae70a36e_80baacfa",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f92a882_08ffaffd",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66d7ec5d_01cce447",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 4
@@ -158,6 +308,24 @@
       "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3993f6c_4e843107",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-20T03:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d7ec5d_01cce447",
+      "revId": "2c35decd8d2cef05ee6c4458fe26d7ca0413cc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
