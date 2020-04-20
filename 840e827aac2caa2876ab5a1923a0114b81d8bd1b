@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce6eefea_20f973e7",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-20T09:03:10Z",
+      "side": 1,
+      "message": "FYI once we can rely on C++17 we could have common stuff in the dawn:: namespace, dawn_native in dawn::native and dawn_wire in dawn::wire. This way stuff in common doesn\u0027t pollute the global namespace.",
+      "revId": "840e827aac2caa2876ab5a1923a0114b81d8bd1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
