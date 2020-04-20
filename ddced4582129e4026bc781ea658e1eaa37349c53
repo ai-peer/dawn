@@ -69,6 +69,24 @@
       "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd41571_62542f6f",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2481a4fa_28fdf5ab",
+      "revId": "ddced4582129e4026bc781ea658e1eaa37349c53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

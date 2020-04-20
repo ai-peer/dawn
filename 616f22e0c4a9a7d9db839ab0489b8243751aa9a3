@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b8187f1d_3ed41769",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c45de52d_b20098c4",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e54d3b32_eb18d343",
         "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
         "patchSetId": 5
@@ -103,6 +121,24 @@
       "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec969eb6_e75b7515",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:19:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e54d3b32_eb18d343",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -174,6 +210,24 @@
       "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a135b2f_9f947776",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-20T23:19:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c42b116c_d88eea94",
+      "revId": "616f22e0c4a9a7d9db839ab0489b8243751aa9a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
