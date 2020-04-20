@@ -101,16 +101,15 @@ namespace dawn_native { namespace d3d12 {
 
         ID3D12DescriptorHeap* descriptorHeap = mShaderVisibleBuffers[heapType].heap.Get();
 
-        D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor =
-            descriptorHeap->GetCPUDescriptorHandleForHeapStart();
-        baseCPUDescriptor.ptr += mSizeIncrements[heapType] * startOffset;
+        const uint64_t heapOffset = mSizeIncrements[heapType] * startOffset;
 
-        D3D12_GPU_DESCRIPTOR_HANDLE baseGPUDescriptor =
-            descriptorHeap->GetGPUDescriptorHandleForHeapStart();
-        baseGPUDescriptor.ptr += mSizeIncrements[heapType] * startOffset;
+        const D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor = {
+            descriptorHeap->GetCPUDescriptorHandleForHeapStart().ptr + heapOffset};
 
-        return DescriptorHeapAllocation{mSizeIncrements[heapType], baseCPUDescriptor,
-                                        baseGPUDescriptor};
+        const D3D12_GPU_DESCRIPTOR_HANDLE baseGPUDescriptor = {
+            descriptorHeap->GetGPUDescriptorHandleForHeapStart().ptr + heapOffset};
+
+        return DescriptorHeapAllocation{std::move(baseCPUDescriptor), std::move(baseGPUDescriptor)};
     }
 
     std::array<ID3D12DescriptorHeap*, 2> ShaderVisibleDescriptorAllocator::GetShaderVisibleHeaps()
