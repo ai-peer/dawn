@@ -122,7 +122,7 @@ namespace dawn_native { namespace metal {
     }
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
-        return new PipelineLayout(this, descriptor);
+        return PipelineLayout::Create(this, descriptor);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {

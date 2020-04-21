@@ -20,8 +20,16 @@
 
 namespace dawn_native { namespace metal {
 
-    PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor)
-        : PipelineLayoutBase(device, descriptor) {
+    // static
+    ResultOrError<PipelineLayout*> PipelineLayout::Create(
+        Device* device,
+        const PipelineLayoutDescriptor* descriptor) {
+        Ref<PipelineLayout> pipeline = AcquireRef(new PipelineLayout(device, descriptor));
+        DAWN_TRY(pipeline->Initialize(descriptor));
+        return pipeline.Detach();
+    }
+
+    MaybeError PipelineLayout::Initialize(const PipelineLayoutDescriptor* descriptor) {
         // Each stage has its own numbering namespace in CompilerMSL.
         for (auto stage : IterateStages(kAllStages)) {
             uint32_t bufferIndex = 0;
@@ -56,14 +64,15 @@ namespace dawn_native { namespace metal {
                         case wgpu::BindingType::StorageTexture:
                         case wgpu::BindingType::ReadonlyStorageTexture:
                         case wgpu::BindingType::WriteonlyStorageTexture:
-                            UNREACHABLE();
-                            break;
+                            return DAWN_VALIDATION_ERROR("Storage textures are not yet implemented on Metal");
                     }
                 }
             }
 
             mBufferBindingCount[stage] = bufferIndex;
         }
+
+        return {};
     }
 
     const PipelineLayout::BindingIndexInfo& PipelineLayout::GetBindingIndexInfo(
