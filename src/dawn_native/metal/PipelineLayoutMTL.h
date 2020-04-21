@@ -38,7 +38,8 @@ namespace dawn_native { namespace metal {
 
     class PipelineLayout final : public PipelineLayoutBase {
       public:
-        PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
+        static ResultOrError<PipelineLayout*> Create(Device* device,
+                                                     const PipelineLayoutDescriptor* descriptor);
 
         using BindingIndexInfo =
             std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups>;
@@ -49,6 +50,9 @@ namespace dawn_native { namespace metal {
 
       private:
         ~PipelineLayout() override = default;
+        using PipelineLayoutBase::PipelineLayoutBase;
+        MaybeError Initialize(const PipelineLayoutDescriptor* descriptor);
+
         PerStage<BindingIndexInfo> mIndexInfo;
         PerStage<uint32_t> mBufferBindingCount;
     };
