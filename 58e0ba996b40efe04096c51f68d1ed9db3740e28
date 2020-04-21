@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ba92da67_a4d69c46",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-21T23:38:04Z",
+      "side": 1,
+      "message": "OK. I will do this for buffer in compute pass. \n\nFor the barrier stuff, I can add appropriate end2end tests to expose the issue and fix it after I finish subresource.",
+      "parentUuid": "ee41aa50_72e821bf",
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "682e1aa7_d4a6beeb",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 1
