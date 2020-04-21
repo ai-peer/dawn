@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a88362de_f7bb94d1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "unit: this can be in the block of includes above.",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55509f5f_62784262",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "The staging allocator is too powerful for what we need for RTV/DSV. The only things we do with them is use them transiently \"in the current serial\" so a RingBuffer / linear allocator would work well here. In contrast the staging allocator is a more general allocator.\n\nHaving things allocated transiently means we wouldn\u0027t need to care about deallocating in [1] [2] [3]. How about having a TransientCPUDescriptorAllocator that\u0027s specialized for RTV and DSV creation so that in SetupRenderPass we can do something like the following:\n\n  D3D12_CPU_DESCRIPTOR rtv;\n  DAWN_TRY_ASSIGN(rtv, device-\u003eGetRTVAllocator().Allocate(myTextureView));\n  renderPassBuilder-\u003eSetRTV(i, rtv);",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e674322e_e1483c0e",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8470e740_feb33839",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "I have concerns that this makes the RenderPassBuilder a \"smart\" object. How about passing the device in AllocateRTV/DSV, or even better to the allocation outside and give it to SetRTV(attachment, descriptor)?",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f34b025c_dae7f83a",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "This should take uint32_t attachment to match other functions. Also they function grouping seems a bit random in this header and could be improved.",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "056e15bd_49248670",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8af91a41_a80ef45e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:52:12Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
