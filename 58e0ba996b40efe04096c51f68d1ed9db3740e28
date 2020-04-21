@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b7b3c0b_df0c3527",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T09:05:31Z",
+      "side": 1,
+      "message": "note: The same change will have to be done for buffers, but no need to do it in this CL.and maybe Yunchao can look at it?\n\nAlso I\u0027m fairly certain the memory barriers in Vulkan and D3D12 won\u0027t handle this correctly, but that\u0027s not needed at this point.",
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
