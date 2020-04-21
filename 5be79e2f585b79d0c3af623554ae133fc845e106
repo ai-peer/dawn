@@ -22,6 +22,30 @@
       "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b985295_ef22e915",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-21T23:33:58Z",
+      "side": 1,
+      "message": "Whoops. I didn\u0027t notice Jiawei has ore more patch for resource tracking in addition to https://dawn-review.googlesource.com/c/dawn/+/19820. \n\nI will revise this after his patch is landed.",
+      "parentUuid": "19674ab5_1c38e1bb",
+      "range": {
+        "startLine": 838,
+        "startChar": 16,
+        "endLine": 844,
+        "endChar": 54
+      },
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
