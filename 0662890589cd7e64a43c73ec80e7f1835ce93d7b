@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc0b54b4_5f490058",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "421ae3de_59981bbd",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa11836_483e9e24",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -80,6 +98,24 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbd56c7b_db1a4730",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Ack. Added an assert about the descriptor count so we know to fix this.",
+      "parentUuid": "628d2075_00bb2694",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -153,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "d6338f6c_0a37c041",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9648cbf_1a5bdaf1",
+      "range": {
+        "startLine": 42,
+        "startChar": 44,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e992034_74068d83",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -167,6 +227,24 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a722599_bfc946bf",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e992034_74068d83",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -187,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "0ef0eecc_f98c9f84",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f1d0eb9_487c2514",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2122516_2be871fe",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
@@ -201,6 +297,24 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49aa8963_4bc0755b",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2122516_2be871fe",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -289,6 +403,24 @@
       "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a58d12_abc401f6",
+        "filename": "src/dawn_native/vulkan/DescriptorSetService.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55bd39fa_b8f89add",
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
