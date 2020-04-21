@@ -213,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "22271cc9_a42000a4",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-21T01:23:41Z",
+      "side": 1,
+      "message": "\u003e I guess this means that the fragmentation cost is constant regardless of the number of bindings in the layout.\n\nBlocks are effectively smaller for larger BGLs, in how many BGLs they can hold, so I\u0027d think the fragmentation would be less bad for larger BGLs. But you\u0027d end up with a higher amortized allocations-per-BGL for the same reason.\n\nAnyway, absent an opinion from someone else, I don\u0027t think it really makes a difference.",
+      "parentUuid": "c249650c_c5c0a580",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e992034_74068d83",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
