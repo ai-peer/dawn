@@ -653,8 +653,11 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
-        if (ConsumedError(TickImpl())) {
-            return;
+        // If current completed serial is the same as before, don't tick again.
+        if (!IsCompletedSerialProcessed()) {
+            if (ConsumedError(TickImpl())) {
+                return;
+            }
         }
 
         // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
