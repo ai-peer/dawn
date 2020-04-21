@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4352b802_022a8f26",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-21T04:08:55Z",
+      "side": 1,
+      "message": "Do we need this check? When storageTextureFormat is undefined, ValidateTextureFormat() should return an error.\n\nWe have had a unittest to test storageTextureFormat \u003d\u003d wgpu::TextureFormat::Undefined:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/StorageTextureValidationTests.cpp;l\u003d514",
+      "revId": "43929d3a16851775529389122726fe835441cfe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
