@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19674ab5_1c38e1bb",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T21:40:47Z",
+      "side": 1,
+      "message": "I believe in a compute pass this will be allowed, but not in render passes. Jiawei changed the validation in this CL and we should do the same for buffers.\nhttps://dawn-review.googlesource.com/c/dawn/+/20120",
+      "range": {
+        "startLine": 838,
+        "startChar": 16,
+        "endLine": 844,
+        "endChar": 54
+      },
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
