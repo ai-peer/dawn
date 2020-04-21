@@ -34,6 +34,24 @@
       "revId": "43929d3a16851775529389122726fe835441cfe8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d63ae922_9c286192",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-21T05:48:48Z",
+      "side": 1,
+      "message": "OK. Thanks for your explanation.",
+      "parentUuid": "d8451af5_b0638462",
+      "revId": "43929d3a16851775529389122726fe835441cfe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
