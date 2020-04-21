@@ -32,6 +32,7 @@ namespace utils {
                                           SingleShaderStage stage,
                                           const char* source);
     wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source);
+    std::vector<uint32_t> CompileGLSLToSpirv(SingleShaderStage stage, const char* source);
 
     wgpu::Buffer CreateBufferFromData(const wgpu::Device& device,
                                       const void* data,
@@ -91,7 +92,7 @@ namespace utils {
                                                  const wgpu::BindGroupLayout* bindGroupLayout);
     wgpu::BindGroupLayout MakeBindGroupLayout(
         const wgpu::Device& device,
-        std::initializer_list<wgpu::BindGroupLayoutEntry> bindingsInitializer);
+        std::initializer_list<wgpu::BindGroupLayoutEntry> entriesInitializer);
 
     // Helpers to make creating bind groups look nicer:
     //
@@ -124,7 +125,7 @@ namespace utils {
     wgpu::BindGroup MakeBindGroup(
         const wgpu::Device& device,
         const wgpu::BindGroupLayout& layout,
-        std::initializer_list<BindingInitializationHelper> bindingsInitializer);
+        std::initializer_list<BindingInitializationHelper> entriesInitializer);
 
 }  // namespace utils
 
