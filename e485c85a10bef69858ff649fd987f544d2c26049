@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "953e3d0f_2d209a8b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T23:36:20Z",
+      "side": 1,
+      "message": "I don\u0027t care so much. It\u0027s nice to have less code. True the staging allocator is more general, but the way it\u0027s always being used here for transient allocations will make it hand out allocations in nearly the same way that a ring / linear allocator would.",
+      "parentUuid": "a898852e_50863359",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e674322e_e1483c0e",
         "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
         "patchSetId": 2
