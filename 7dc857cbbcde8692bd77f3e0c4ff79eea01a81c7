@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "210c37b8_1e4d2d35",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-21T06:11:10Z",
+      "side": 1,
+      "message": "Done in another CL.",
+      "parentUuid": "d777d3a8_ed9cf9c8",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0094adea_7a7f932a",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 13
@@ -141,6 +159,30 @@
       "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "406f745c_74ccaf4d",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-21T06:11:10Z",
+      "side": 1,
+      "message": "Done in another CL.",
+      "parentUuid": "97d6e401_564c0eca",
+      "range": {
+        "startLine": 69,
+        "startChar": 81,
+        "endLine": 69,
+        "endChar": 88
+      },
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -328,6 +370,24 @@
       "writtenOn": "2020-04-15T16:02:06Z",
       "side": 1,
       "message": "What about having a common shader code that has:\n\n layout ... the test texture\n\n bool doTest() {\n   samples the texture and directly checks in the shader using computations that the content is correct.\n }\n\nThen each test below could have a simple variation:\n\nFS would output green or red depending on the result of DoTest, Compute would write into a storage buffer the result of DoTest, and VS would forward to the FS.",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0be44b58_35f7e388",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-21T06:11:10Z",
+      "side": 1,
+      "message": "Sorry that I am not quite clear here...\n\nHere we need to test 5 combos:\n- read-only in VS\n- read-only in FS\n- read-only in CS\n- write-only in CS\n- write-only in FS (will add in the next patch set)\n\nAnd The following is what I thought:\n1. For \"read-only in VS and read-only in FS\":\n   Compare the pixels between the one from imageLoad() on the read-only storage texture and the one from texelFetch() on the reference texture, if they are equal, then output Green to the output attachment, else Red.\n\n2. For \"read-only in CS\":\n   Compare the pixels between the one from imageLoad() on the read-only storage texture and the one from texelFetch() on the reference texture, if they are equal then output 1 to the output storage buffer, else 0.\n\n3. For \"write-only in CS\" and \"write-only in FS\":\n   - Read the value from a reference read-only storage buffer and write it to the write-only storage texture with imageStore();\n   - Copy the pixel from the write-only storage texture into a temporary buffer;\n   - Compare the value between the temporary buffer and the reference read-only storage buffer to check if they are all equal.\n\nCould you explain it a bit more for me?",
+      "parentUuid": "4f75dc3c_06a101a2",
       "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
