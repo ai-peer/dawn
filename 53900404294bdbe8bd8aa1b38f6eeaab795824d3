@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48c004b3_251a4a69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:25:50Z",
+      "side": 1,
+      "message": "nit: do we have a bug ID?",
+      "revId": "53900404294bdbe8bd8aa1b38f6eeaab795824d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83e3b4c8_10a9132f",
+        "filename": "src/common/Result.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:25:50Z",
+      "side": 1,
+      "message": "nit: Result\u003cRef\u003cT\u003e, E\u003e",
+      "range": {
+        "startLine": 176,
+        "startChar": 19,
+        "endLine": 176,
+        "endChar": 33
+      },
+      "revId": "53900404294bdbe8bd8aa1b38f6eeaab795824d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c283329_c920df55",
+        "filename": "src/tests/unittests/ResultTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:25:50Z",
+      "side": 1,
+      "message": "nit: Maybe this could be declared in tests to avoid modifying a static variable.",
+      "revId": "53900404294bdbe8bd8aa1b38f6eeaab795824d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b7d56b9_30548086",
+        "filename": "src/tests/unittests/ResultTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:25:50Z",
+      "side": 1,
+      "message": "Can we also have this test while the Ref is in the Result\u003c\u003e to check the Result\u003c\u003e correctly has ownership of a ref?",
+      "revId": "53900404294bdbe8bd8aa1b38f6eeaab795824d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
