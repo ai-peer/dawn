@@ -67,6 +67,10 @@ namespace dawn_native {
         switch (bindingType) {
             case wgpu::BindingType::ReadonlyStorageTexture:
             case wgpu::BindingType::WriteonlyStorageTexture: {
+                if (storageTextureFormat == wgpu::TextureFormat::Undefined) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Storage texture bindings require storageTextureFormat");
+                }
                 DAWN_TRY(ValidateTextureFormat(storageTextureFormat));
 
                 const Format* format = nullptr;
