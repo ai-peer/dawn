@@ -69,12 +69,6 @@ class WireMultipleDeviceTests : public testing::Test {
             mS2cBuf->SetHandler(mWireClient.get());
 
             mClientDevice = mWireClient->GetDevice();
-
-            // The GetDefaultQueue is done on WireClient startup so we expect it now.
-            mClientQueue = wgpuDeviceGetDefaultQueue(mClientDevice);
-            mServerQueue = mApi.GetNewQueue();
-            EXPECT_CALL(mApi, DeviceGetDefaultQueue(mServerDevice)).WillOnce(Return(mServerQueue));
-            FlushClient();
         }
 
         ~WireHolder() {
@@ -103,14 +97,6 @@ class WireMultipleDeviceTests : public testing::Test {
             return mServerDevice;
         }
 
-        WGPUQueue ClientQueue() {
-            return mClientQueue;
-        }
-
-        WGPUQueue ServerQueue() {
-            return mServerQueue;
-        }
-
       private:
         testing::StrictMock<MockProcTable> mApi;
         std::unique_ptr<dawn_wire::WireServer> mWireServer;
@@ -119,8 +105,6 @@ class WireMultipleDeviceTests : public testing::Test {
         std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
         WGPUDevice mServerDevice;
         WGPUDevice mClientDevice;
-        WGPUQueue mServerQueue;
-        WGPUQueue mClientQueue;
     };
 
     void ExpectInjectedError(WireHolder* wire) {
@@ -150,12 +134,20 @@ TEST_F(WireMultipleDeviceTests, ValidatesSameDevice) {
     WireHolder wireA;
     WireHolder wireB;
 
-    // Create the fence
+    // Create the objects
+    WGPUQueue queueA = wgpuDeviceGetDefaultQueue(wireA.ClientDevice());
+    WGPUQueue queueB = wgpuDeviceGetDefaultQueue(wireB.ClientDevice());
+
     WGPUFenceDescriptor desc = {};
-    WGPUFence fenceA = wgpuQueueCreateFence(wireA.ClientQueue(), &desc);
+    WGPUFence fenceA = wgpuQueueCreateFence(queueA, &desc);
+
+    // Flush on wire B. We should see the queue created.
+    EXPECT_CALL(*wireB.Api(), DeviceGetDefaultQueue(wireB.ServerDevice()))
+        .WillOnce(Return(wireB.Api()->GetNewQueue()));
+    wireB.FlushClient();
 
     // Signal with a fence from a different wire.
-    wgpuQueueSignal(wireB.ClientQueue(), fenceA, 1u);
+    wgpuQueueSignal(queueB, fenceA, 1u);
 
     // We should inject an error into the server.
     ExpectInjectedError(&wireB);
@@ -174,11 +166,11 @@ TEST_F(WireMultipleDeviceTests, DifferentDeviceObjectCreationIsError) {
 
     wireA.FlushClient();
 
-    std::array<WGPUBindGroupBinding, 2> bindings = {};
+    std::array<WGPUBindGroupBinding, 2> entries = {};
 
     // Create a buffer on wire A.
     WGPUBufferDescriptor bufferDesc = {};
-    bindings[0].buffer = wgpuDeviceCreateBuffer(wireA.ClientDevice(), &bufferDesc);
+    entries[0].buffer = wgpuDeviceCreateBuffer(wireA.ClientDevice(), &bufferDesc);
     EXPECT_CALL(*wireA.Api(), DeviceCreateBuffer(wireA.ServerDevice(), _))
         .WillOnce(Return(wireA.Api()->GetNewBuffer()));
 
@@ -186,7 +178,7 @@ TEST_F(WireMultipleDeviceTests, DifferentDeviceObjectCreationIsError) {
 
     // Create a sampler on wire B.
     WGPUSamplerDescriptor samplerDesc = {};
-    bindings[1].sampler = wgpuDeviceCreateSampler(wireB.ClientDevice(), &samplerDesc);
+    entries[1].sampler = wgpuDeviceCreateSampler(wireB.ClientDevice(), &samplerDesc);
     EXPECT_CALL(*wireB.Api(), DeviceCreateSampler(wireB.ServerDevice(), _))
         .WillOnce(Return(wireB.Api()->GetNewSampler()));
 
@@ -195,8 +187,8 @@ TEST_F(WireMultipleDeviceTests, DifferentDeviceObjectCreationIsError) {
     // Create a bind group on wire A using the bgl (A), buffer (A), and sampler (B).
     WGPUBindGroupDescriptor bgDesc = {};
     bgDesc.layout = bglA;
-    bgDesc.bindingCount = bindings.size();
-    bgDesc.bindings = bindings.data();
+    bgDesc.entryCount = entries.size();
+    bgDesc.entries = entries.data();
     WGPUBindGroup bindGroupA = wgpuDeviceCreateBindGroup(wireA.ClientDevice(), &bgDesc);
 
     // It should inject an error because the sampler is from a different device.

@@ -282,12 +282,7 @@ namespace dawn_native {
         }
     }  // anonymous namespace
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase*,
-                                              const ShaderModuleDescriptor* descriptor) {
-        if (descriptor->nextInChain != nullptr) {
-            return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
-        }
-
+    MaybeError ValidateSpirv(DeviceBase*, const uint32_t* code, uint32_t codeSize) {
         spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
 
         std::ostringstream errorStream;
@@ -314,8 +309,47 @@ namespace dawn_native {
             }
         });
 
-        if (!spirvTools.Validate(descriptor->code, descriptor->codeSize)) {
+        if (!spirvTools.Validate(code, codeSize)) {
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        return {};
+    }
+
+    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
+                                              const ShaderModuleDescriptor* descriptor) {
+        if (descriptor->codeSize != 0) {
+            if (descriptor->nextInChain != nullptr) {
+                return DAWN_VALIDATION_ERROR("Cannot set both code/codeSize and nextInChain");
+            }
+
+            device->EmitDeprecationWarning(
+                "ShaderModuleDescriptor::code/codeSize is deprecated, chain "
+                "ShaderModuleSPIRVDescriptor instead.");
+            return ValidateSpirv(device, descriptor->code, descriptor->codeSize);
+        }
+
+        // For now only a single SPIRV or WGSL subdescriptor is allowed.
+        const ChainedStruct* chainedDescriptor = descriptor->nextInChain;
+        if (chainedDescriptor->nextInChain != nullptr) {
+            return DAWN_VALIDATION_ERROR("chained nextInChain must be nullptr");
+        }
+
+        switch (chainedDescriptor->sType) {
+            case wgpu::SType::ShaderModuleSPIRVDescriptor: {
+                const ShaderModuleSPIRVDescriptor* spirvDesc =
+                    static_cast<const ShaderModuleSPIRVDescriptor*>(chainedDescriptor);
+                DAWN_TRY(ValidateSpirv(device, spirvDesc->code, spirvDesc->codeSize));
+                break;
+            }
+
+            case wgpu::SType::ShaderModuleWGSLDescriptor: {
+                return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
+                break;
+            }
+
+            default:
+                return DAWN_VALIDATION_ERROR("Unsupported sType");
         }
 
         return {};
@@ -324,7 +358,19 @@ namespace dawn_native {
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
-        : CachedObject(device), mCode(descriptor->code, descriptor->code + descriptor->codeSize) {
+        : CachedObject(device) {
+        // Extract the correct SPIRV from the descriptor.
+        if (descriptor->codeSize != 0) {
+            mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
+        } else {
+            ASSERT(descriptor->nextInChain != nullptr);
+            ASSERT(descriptor->nextInChain->sType == wgpu::SType::ShaderModuleSPIRVDescriptor);
+
+            const ShaderModuleSPIRVDescriptor* spirvDesc =
+                static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
+            mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+        }
+
         mFragmentOutputFormatBaseTypes.fill(Format::Other);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvcParser)) {
             mSpvcContext.SetUseSpvcParser(true);
@@ -395,8 +441,7 @@ namespace dawn_native {
                 switch (info->type) {
                     case wgpu::BindingType::SampledTexture: {
                         info->multisampled = binding.multisampled;
-                        info->textureDimension =
-                            ToWGPUTextureViewDimension(binding.texture_dimension);
+                        info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         info->textureComponentType =
                             ToDawnFormatType(binding.texture_component_type);
                         break;
@@ -418,8 +463,7 @@ namespace dawn_native {
                         }
                         info->multisampled = binding.multisampled;
                         info->storageTextureFormat = storageTextureFormat;
-                        info->textureDimension =
-                            ToWGPUTextureViewDimension(binding.texture_dimension);
+                        info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         break;
                     }
                     default:
@@ -580,7 +624,7 @@ namespace dawn_native {
                             compiler.get_type(imageType.type).basetype;
 
                         info->multisampled = imageType.ms;
-                        info->textureDimension =
+                        info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         info->textureComponentType =
                             SpirvCrossBaseTypeToFormatType(textureComponentType);
@@ -624,7 +668,7 @@ namespace dawn_native {
                         }
                         info->multisampled = imageType.ms;
                         info->storageTextureFormat = storageTextureFormat;
-                        info->textureDimension =
+                        info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         break;
                     }
@@ -799,7 +843,7 @@ namespace dawn_native {
                         return false;
                     }
 
-                    if (bindingInfo.textureDimension != moduleInfo.textureDimension) {
+                    if (bindingInfo.viewDimension != moduleInfo.viewDimension) {
                         return false;
                     }
                     break;
@@ -812,7 +856,7 @@ namespace dawn_native {
                     if (bindingInfo.storageTextureFormat != moduleInfo.storageTextureFormat) {
                         return false;
                     }
-                    if (bindingInfo.textureDimension != moduleInfo.textureDimension) {
+                    if (bindingInfo.viewDimension != moduleInfo.viewDimension) {
                         return false;
                     }
                     break;
@@ -838,7 +882,7 @@ namespace dawn_native {
     size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
         size_t hash = 0;
 
-        for (uint32_t word : module->mCode) {
+        for (uint32_t word : module->mSpirv) {
             HashCombine(&hash, word);
         }
 
@@ -847,7 +891,7 @@ namespace dawn_native {
 
     bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
                                                     const ShaderModuleBase* b) const {
-        return a->mCode == b->mCode;
+        return a->mSpirv == b->mSpirv;
     }
 
     MaybeError ShaderModuleBase::CheckSpvcSuccess(shaderc_spvc_status status,
@@ -858,7 +902,15 @@ namespace dawn_native {
         return {};
     }
 
-    shaderc_spvc::CompileOptions ShaderModuleBase::GetCompileOptions() {
+    shaderc_spvc::Context* ShaderModuleBase::GetContext() {
+        return &mSpvcContext;
+    }
+
+    const std::vector<uint32_t>& ShaderModuleBase::GetSpirv() const {
+        return mSpirv;
+    }
+
+    shaderc_spvc::CompileOptions ShaderModuleBase::GetCompileOptions() const {
         shaderc_spvc::CompileOptions options;
         options.SetValidate(GetDevice()->IsValidationEnabled());
         return options;
