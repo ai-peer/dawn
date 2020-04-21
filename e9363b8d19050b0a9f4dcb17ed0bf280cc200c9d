@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2549985e_c7945b2d",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T11:18:33Z",
+      "side": 1,
+      "message": "nit: this could draw a single point. Or maybe even be a compute shader",
+      "revId": "e9363b8d19050b0a9f4dcb17ed0bf280cc200c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac69d018_b870743e",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T11:18:33Z",
+      "side": 1,
+      "message": "nit: GetBindGroupLayout doesn\u0027t work here because we don\u0027t have metadata for ComparisonSampler yet right?",
+      "revId": "e9363b8d19050b0a9f4dcb17ed0bf280cc200c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
