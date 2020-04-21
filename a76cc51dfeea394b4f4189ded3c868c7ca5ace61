@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dd0954ab_7508f33b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-21T21:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8adaa88_c050f6cd",
+      "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01d94948_f2d2c628",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -51,6 +69,24 @@
       "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d9a4dd_c1c0ea7a",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-21T21:02:38Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "3152dda1_5651eb88",
+      "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
