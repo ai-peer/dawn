@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7b66c96_260bd73a",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:01:26Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b6dc341_c21303df",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:01:26Z",
+      "side": 1,
+      "message": "nit: could be changed to be a forward declaration",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "912d737a_be0057f4",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:01:26Z",
+      "side": 1,
+      "message": "This is a bit scary because the layout is destroyed by BindGroupLayout that has a different lifetime than this object (especially after deduping). Maybe we could pass the layout in Allocate and then pipe it to AllocateDescriptorPool? It probably means that the deduping would have to be per VkDescriptorSetLayout and not per map\u003csizes\u003e though.",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6362345a_637d66f3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T08:01:26Z",
+      "side": 1,
+      "message": "uunit: Ref\u003cDescriptorSetAllocator\u003e\u0026",
+      "range": {
+        "startLine": 175,
+        "startChar": 13,
+        "endLine": 175,
+        "endChar": 17
+      },
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
