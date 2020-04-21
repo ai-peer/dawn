@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a21b2981_31307284",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T23:01:04Z",
+      "side": 1,
+      "message": "Probably got mixed up in the iterations, but here we switch on our enums to get DXGI_ enums, and then in SetExternalMemoryReservation, switch on the DXGI_ enums to get the pointer to the segment info.\n\nI think we can remove the intermediate jump through the DXGI_ enums",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "fc600b2b37b74e84e2b141fb5895c2d59157363c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
