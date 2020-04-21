@@ -16,6 +16,47 @@
       "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee41aa50_72e821bf",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T21:14:55Z",
+      "side": 1,
+      "message": "I added this thing about memory barriers to the task tracker so we don\u0027t forget.",
+      "parentUuid": "1b7b3c0b_df0c3527",
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "682e1aa7_d4a6beeb",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T21:14:55Z",
+      "side": 1,
+      "message": "typo: double \"a\"",
+      "range": {
+        "startLine": 1029,
+        "startChar": 30,
+        "endLine": 1029,
+        "endChar": 33
+      },
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
