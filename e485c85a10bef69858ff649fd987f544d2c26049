@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "62d34df5_aa1691a6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88362de_f7bb94d1",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55509f5f_62784262",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-21T08:52:12Z",
       "side": 1,
       "message": "The staging allocator is too powerful for what we need for RTV/DSV. The only things we do with them is use them transiently \"in the current serial\" so a RingBuffer / linear allocator would work well here. In contrast the staging allocator is a more general allocator.\n\nHaving things allocated transiently means we wouldn\u0027t need to care about deallocating in [1] [2] [3]. How about having a TransientCPUDescriptorAllocator that\u0027s specialized for RTV and DSV creation so that in SetupRenderPass we can do something like the following:\n\n  D3D12_CPU_DESCRIPTOR rtv;\n  DAWN_TRY_ASSIGN(rtv, device-\u003eGetRTVAllocator().Allocate(myTextureView));\n  renderPassBuilder-\u003eSetRTV(i, rtv);",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a898852e_50863359",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "I have a slight preference for reusing StagingDescriptorAllocator as it already provides heap management, also does well with transient allocations (due to stack) and tests. It\u0027s only missing TransientCPUDescriptorAllocator() which I think is orthogonal to ringbuffer vs not.\n\nDo you feel strongly about having a more specialized allocator? For consideration, I\u0027ve updated the CL to eliminate [1][2][3].",
+      "parentUuid": "55509f5f_62784262",
       "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5dc58245_3591a86f",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e674322e_e1483c0e",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8470e740_feb33839",
         "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "078f902b_3c1f5c3e",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8470e740_feb33839",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "15d36e46_075a9586",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f34b025c_dae7f83a",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "056e15bd_49248670",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "91e532ac_3614fb91",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "056e15bd_49248670",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8af91a41_a80ef45e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -118,6 +226,24 @@
       "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d5e684c_d95f7fdb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-21T21:18:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8af91a41_a80ef45e",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
