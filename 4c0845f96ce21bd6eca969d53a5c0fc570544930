@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bad6dbb_b50599af",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T22:50:38Z",
+      "side": 1,
+      "message": "Should this have the \u0026other \u003d\u003d this check and early return?",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 44
+      },
+      "revId": "4c0845f96ce21bd6eca969d53a5c0fc570544930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a1a21cb_fda7bf59",
+        "filename": "src/tests/unittests/RefCountedTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-21T22:50:38Z",
+      "side": 1,
+      "message": "why? isn\u0027t deleted allocated in this stack frame?",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 25
+      },
+      "revId": "4c0845f96ce21bd6eca969d53a5c0fc570544930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
