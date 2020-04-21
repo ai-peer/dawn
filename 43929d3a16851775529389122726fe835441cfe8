@@ -16,6 +16,24 @@
       "revId": "43929d3a16851775529389122726fe835441cfe8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8451af5_b0638462",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-21T05:47:32Z",
+      "side": 1,
+      "message": "It\u0027s not required for correct validation, but the error message \"Invalid value for WGPUTextureFormat\" was really confusing. This just fixes the message.",
+      "parentUuid": "4352b802_022a8f26",
+      "revId": "43929d3a16851775529389122726fe835441cfe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
