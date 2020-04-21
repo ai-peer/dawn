@@ -394,6 +394,24 @@
     },
     {
       "key": {
+        "uuid": "d2d39ea2_c8f11b81",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T07:45:45Z",
+      "side": 1,
+      "message": "Sorry this wasn\u0027t super clear.\n\nFor the read-only case, I don\u0027t think we need to have a reference texture since we can programmatically compute what the value of the texel should be. So there would be a single shader code that does this test that would be embedded in a FS, VS, and CS.\n\nSimilarly for the write-only case, we can compute the value programmatically in the shader, and have a small shader code that loops and writes to the writeonly storage textures without the need for a readonly storage buffer. The copy to a buffer and checking of the content would stay.",
+      "parentUuid": "0be44b58_35f7e388",
+      "revId": "7dc857cbbcde8692bd77f3e0c4ff79eea01a81c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a94c887_38eb6e05",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 13
