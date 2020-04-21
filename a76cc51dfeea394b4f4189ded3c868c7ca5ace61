@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e8adaa88_c050f6cd",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T07:31:42Z",
+      "side": 1,
+      "message": "nit: No need for an explicit return at the end of functions.",
+      "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01d94948_f2d2c628",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -13,6 +30,24 @@
       "writtenOn": "2020-04-20T20:07:06Z",
       "side": 1,
       "message": "Not sure this is the right way to do this. I added this enum to avoid including dxgi.h for DXGI_MEMORY_SEGMENT_GROUP.",
+      "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3152dda1_5651eb88",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T07:31:42Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "01d94948_f2d2c628",
       "revId": "a76cc51dfeea394b4f4189ded3c868c7ca5ace61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

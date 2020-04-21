@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "41a2d407_2d47edb3",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-21T07:31:42Z",
+      "side": 1,
+      "message": "But it\u0027s not used outside of this class so we can pass it pointers to members. The only difficult is that you need DXGI_MEMORY_SEGMENT_GROUP in addition to the pointer, but that can be stored in the VideoMemoryInfo.\n\nAlternatively (but slightly worse imo) we can have a helper function that does the switch to get the pointer to the member.",
+      "parentUuid": "7f464947_75b34a5d",
+      "revId": "8e028944b0117a1de418f7ad0c5e3d0ea9614e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3c5dd9e_7d55ae9f",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
