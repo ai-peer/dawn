@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0cbbecaf_46e63da6",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-22T00:07:33Z",
+      "side": 1,
+      "message": "If I add the \u0027\u0026other \u003d\u003d this\u0027 comparison, the compiler will output the following error: \n\n ./../src\\common/RefCounted.h(107,20): error: comparison of distinct pointer types \n (\u0027Ref\u003cRCTestDerived\u003e *\u0027 and \u0027Ref\u003cRCTest\u003e *\u0027)\n         if (\u0026other \u003d\u003d this)\n             ~~~~~~ ^  ~~~~\n\nSince the pointers are of distinct types, they should never point to the same thing.",
+      "parentUuid": "8bad6dbb_b50599af",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 44
+      },
+      "revId": "4c0845f96ce21bd6eca969d53a5c0fc570544930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a1a21cb_fda7bf59",
         "filename": "src/tests/unittests/RefCountedTests.cpp",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "4c0845f96ce21bd6eca969d53a5c0fc570544930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "767662bb_1574d624",
+        "filename": "src/tests/unittests/RefCountedTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-22T00:07:33Z",
+      "side": 1,
+      "message": "Done. Copy/paste error from a different test.",
+      "parentUuid": "2a1a21cb_fda7bf59",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 25
+      },
+      "revId": "4c0845f96ce21bd6eca969d53a5c0fc570544930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
