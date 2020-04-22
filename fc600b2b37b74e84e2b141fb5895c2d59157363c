@@ -22,6 +22,30 @@
       "revId": "fc600b2b37b74e84e2b141fb5895c2d59157363c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da9beea6_77b165f4",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-22T03:50:47Z",
+      "side": 1,
+      "message": "Good call. Done.",
+      "parentUuid": "a21b2981_31307284",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "fc600b2b37b74e84e2b141fb5895c2d59157363c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
