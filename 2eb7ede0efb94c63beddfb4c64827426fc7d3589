@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "080e24de_ee0fdb1f",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T17:23:06Z",
+      "side": 1,
+      "message": "nit: Can also test zero-sized implicit binding where offset \u003d\u003d bufferSize",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 31
+      },
+      "revId": "2eb7ede0efb94c63beddfb4c64827426fc7d3589",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
