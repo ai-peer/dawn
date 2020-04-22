@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d97f5d7_01890b0f",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T15:12:33Z",
+      "side": 1,
+      "message": "uunit: I think this reads more like english if it\u0027s \"allocate transient\" instead of \"transient allocate\"",
+      "range": {
+        "startLine": 136,
+        "startChar": 32,
+        "endLine": 136,
+        "endChar": 63
+      },
+      "revId": "278ef8c47390f17b0a02d6cd794d9203b7e04bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
