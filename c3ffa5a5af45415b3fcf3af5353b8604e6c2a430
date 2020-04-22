@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e542c36_b607f77c",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T17:12:23Z",
+      "side": 1,
+      "message": "nit: don\u0027t think we need \"in texels\" anymore",
+      "range": {
+        "startLine": 882,
+        "startChar": 56,
+        "endLine": 882,
+        "endChar": 64
+      },
+      "revId": "c3ffa5a5af45415b3fcf3af5353b8604e6c2a430",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
