@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "32361525_52f4b98c",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T19:31:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2549985e_c7945b2d",
+      "revId": "e9363b8d19050b0a9f4dcb17ed0bf280cc200c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac69d018_b870743e",
         "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "e9363b8d19050b0a9f4dcb17ed0bf280cc200c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e2f0d5f_76678fe4",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T19:31:46Z",
+      "side": 1,
+      "message": "Yea, that\u0027s correct",
+      "parentUuid": "ac69d018_b870743e",
+      "revId": "e9363b8d19050b0a9f4dcb17ed0bf280cc200c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
