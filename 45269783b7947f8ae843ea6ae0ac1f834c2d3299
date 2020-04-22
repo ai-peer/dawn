@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bcedc2df_6d5b22d1",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-22T22:14:50Z",
+      "side": 1,
+      "message": "I like that better than artificially incrementing. And just to make sure, the callbacks were the only reason for artificial increments? Can we do that in another CL ?",
+      "parentUuid": "e10883c7_24b6dda0",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a87b62_d1cab0c1",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-22T20:35:49Z",
       "side": 1,
       "message": "OpenGL didn\u0027t have this before; why is it needed now?",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 35
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cd4038c_f481eaa9",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-22T22:14:50Z",
+      "side": 1,
+      "message": "hmm I was having issues with hanging but couldn\u0027t debug locally, and this seemed to help it, maybe I need to check passed fences again somewhere, I can upload more patches to see.",
+      "parentUuid": "41a87b62_d1cab0c1",
       "range": {
         "startLine": 168,
         "startChar": 12,
