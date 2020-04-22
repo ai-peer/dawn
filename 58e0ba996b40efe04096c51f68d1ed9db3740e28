@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "b6761add_8d3c9fec",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-22T00:28:06Z",
+      "side": 1,
+      "message": "Oh I just thought as I did the storage texture resource scope tracking validation on render pass, I should also complete the compute pass part and I didn\u0027t realize it may have conflict on Yunchao\u0027s work. Sorry about that.\n\nFor the remaining work on storage textures, I will only add tests on very simple usage of storage textures. The tests on the barriers and state transitions will rely on Yunchao\u0027s efforts.",
+      "parentUuid": "ba92da67_a4d69c46",
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "682e1aa7_d4a6beeb",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 1
@@ -75,6 +93,30 @@
       "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd20c685_a328459b",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-04-22T00:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682e1aa7_d4a6beeb",
+      "range": {
+        "startLine": 1029,
+        "startChar": 30,
+        "endLine": 1029,
+        "endChar": 33
+      },
+      "revId": "58e0ba996b40efe04096c51f68d1ed9db3740e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
