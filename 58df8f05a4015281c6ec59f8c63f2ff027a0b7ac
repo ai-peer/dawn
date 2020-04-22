@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "484cebcf_d9f0913a",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:42:10Z",
+      "side": 1,
+      "message": "can we \"return AcquireRef(...\", there are a few other callsites like this as well.",
+      "range": {
+        "startLine": 163,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 34
+      },
+      "revId": "58df8f05a4015281c6ec59f8c63f2ff027a0b7ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
