@@ -159,8 +159,10 @@ namespace dawn_native { namespace null {
         const SwapChainDescriptor* descriptor) {
         return new SwapChain(this, surface, previousSwapChain, descriptor);
     }
-    ResultOrError<TextureBase*> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-        return new Texture(this, descriptor, TextureBase::TextureState::OwnedInternal);
+    ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+        Ref<Texture> texture =
+            AcquireRef(new Texture(this, descriptor, TextureBase::TextureState::OwnedInternal));
+        return std::move(texture);
     }
     ResultOrError<TextureViewBase*> Device::CreateTextureViewImpl(
         TextureBase* texture,
