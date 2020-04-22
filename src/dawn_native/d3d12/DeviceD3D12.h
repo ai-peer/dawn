@@ -153,6 +153,12 @@ namespace dawn_native { namespace d3d12 {
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        // mLastProcessedTickSerial and mCompletedSerial need to start at different Serials so that
+        // the first tick will register.
+        Serial mLastProcessedTickSerial = -1;
+        bool IsCompletedSerialProcessed() override;
+        void UpdateSerial();
+
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent = nullptr;
 

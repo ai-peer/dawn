@@ -321,6 +321,9 @@ namespace dawn_native {
         TogglesSet mOverridenToggles;
         size_t mLazyClearCountForTesting = 0;
 
+        // Checks if mCompletedSerial has stayed the same to help avoid overly ticking.
+        virtual bool IsCompletedSerialProcessed() = 0;
+
         ExtensionsSet mEnabledExtensions;
     };
 
