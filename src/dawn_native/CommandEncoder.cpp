@@ -110,16 +110,16 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidateImageHeight(const Format& format,
-                                       uint32_t imageHeight,
-                                       uint32_t copyHeight) {
-            if (imageHeight < copyHeight) {
-                return DAWN_VALIDATION_ERROR("Image height must not be less than the copy height.");
+        MaybeError ValidateRowsPerImage(const Format& format,
+                                        uint32_t rowsPerImage,
+                                        uint32_t copyHeight) {
+            if (rowsPerImage < copyHeight) {
+                return DAWN_VALIDATION_ERROR("rowsPerImage must not be less than the copy height.");
             }
 
-            if (imageHeight % format.blockHeight != 0) {
+            if (rowsPerImage % format.blockHeight != 0) {
                 return DAWN_VALIDATION_ERROR(
-                    "Image height must be a multiple of compressed texture format block width");
+                    "rowsPerImage must be a multiple of compressed texture format block width");
             }
 
             return {};
@@ -180,37 +180,37 @@ namespace dawn_native {
 
         MaybeError ComputeTextureCopyBufferSize(const Format& textureFormat,
                                                 const Extent3D& copySize,
-                                                uint32_t rowPitch,
-                                                uint32_t imageHeight,
+                                                uint32_t bytesPerRow,
+                                                uint32_t rowsPerImage,
                                                 uint32_t* bufferSize) {
-            ASSERT(imageHeight >= copySize.height);
+            ASSERT(rowsPerImage >= copySize.height);
             uint32_t blockByteSize = textureFormat.blockByteSize;
             uint32_t blockWidth = textureFormat.blockWidth;
             uint32_t blockHeight = textureFormat.blockHeight;
 
             // TODO(cwallez@chromium.org): check for overflows
-            uint32_t slicePitch = rowPitch * imageHeight / blockWidth;
-            uint32_t sliceSize = rowPitch * (copySize.height / blockHeight - 1) +
+            uint32_t slicePitch = bytesPerRow * rowsPerImage / blockWidth;
+            uint32_t sliceSize = bytesPerRow * (copySize.height / blockHeight - 1) +
                                  (copySize.width / blockWidth) * blockByteSize;
             *bufferSize = (slicePitch * (copySize.depth - 1)) + sliceSize;
 
             return {};
         }
 
-        uint32_t ComputeDefaultRowPitch(const Format& format, uint32_t width) {
+        uint32_t ComputeDefaultBytesPerRow(const Format& format, uint32_t width) {
             return width / format.blockWidth * format.blockByteSize;
         }
 
-        MaybeError ValidateRowPitch(const Format& format,
-                                    const Extent3D& copySize,
-                                    uint32_t rowPitch) {
-            if (rowPitch % kTextureRowPitchAlignment != 0) {
-                return DAWN_VALIDATION_ERROR("Row pitch must be a multiple of 256");
+        MaybeError ValidateBytesPerRow(const Format& format,
+                                       const Extent3D& copySize,
+                                       uint32_t bytesPerRow) {
+            if (bytesPerRow % kTextureBytesPerRowAlignment != 0) {
+                return DAWN_VALIDATION_ERROR("bytesPerRow must be a multiple of 256");
             }
 
-            if (rowPitch < copySize.width / format.blockWidth * format.blockByteSize) {
+            if (bytesPerRow < copySize.width / format.blockWidth * format.blockByteSize) {
                 return DAWN_VALIDATION_ERROR(
-                    "Row pitch must not be less than the number of bytes per row");
+                    "bytesPerRow must not be less than the number of bytes per row");
             }
 
             return {};
@@ -641,16 +641,16 @@ namespace dawn_native {
             copy->copySize = *copySize;
             copy->destination.mipLevel = destination->mipLevel;
             copy->destination.arrayLayer = destination->arrayLayer;
-            if (source->rowPitch == 0) {
-                copy->source.rowPitch =
-                    ComputeDefaultRowPitch(destination->texture->GetFormat(), copySize->width);
+            if (source->bytesPerRow == 0) {
+                copy->source.bytesPerRow =
+                    ComputeDefaultBytesPerRow(destination->texture->GetFormat(), copySize->width);
             } else {
-                copy->source.rowPitch = source->rowPitch;
+                copy->source.bytesPerRow = source->bytesPerRow;
             }
-            if (source->imageHeight == 0) {
-                copy->source.imageHeight = copySize->height;
+            if (source->rowsPerImage == 0) {
+                copy->source.rowsPerImage = copySize->height;
             } else {
-                copy->source.imageHeight = source->imageHeight;
+                copy->source.rowsPerImage = source->rowsPerImage;
             }
 
             if (GetDevice()->IsValidationEnabled()) {
@@ -677,16 +677,16 @@ namespace dawn_native {
             copy->source.arrayLayer = source->arrayLayer;
             copy->destination.buffer = destination->buffer;
             copy->destination.offset = destination->offset;
-            if (destination->rowPitch == 0) {
-                copy->destination.rowPitch =
-                    ComputeDefaultRowPitch(source->texture->GetFormat(), copySize->width);
+            if (destination->bytesPerRow == 0) {
+                copy->destination.bytesPerRow =
+                    ComputeDefaultBytesPerRow(source->texture->GetFormat(), copySize->width);
             } else {
-                copy->destination.rowPitch = destination->rowPitch;
+                copy->destination.bytesPerRow = destination->bytesPerRow;
             }
-            if (destination->imageHeight == 0) {
-                copy->destination.imageHeight = copySize->height;
+            if (destination->rowsPerImage == 0) {
+                copy->destination.rowsPerImage = copySize->height;
             } else {
-                copy->destination.imageHeight = destination->imageHeight;
+                copy->destination.rowsPerImage = destination->rowsPerImage;
             }
 
             if (GetDevice()->IsValidationEnabled()) {
@@ -825,20 +825,21 @@ namespace dawn_native {
                     DAWN_TRY(
                         ValidateTextureSampleCountInCopyCommands(copy->destination.texture.Get()));
 
-                    DAWN_TRY(ValidateImageHeight(copy->destination.texture->GetFormat(),
-                                                 copy->source.imageHeight, copy->copySize.height));
+                    DAWN_TRY(ValidateRowsPerImage(copy->destination.texture->GetFormat(),
+                                                  copy->source.rowsPerImage,
+                                                  copy->copySize.height));
                     DAWN_TRY(ValidateImageOrigin(copy->destination.texture->GetFormat(),
                                                  copy->destination.origin));
                     DAWN_TRY(ValidateImageCopySize(copy->destination.texture->GetFormat(),
                                                    copy->copySize));
 
                     uint32_t bufferCopySize = 0;
-                    DAWN_TRY(ValidateRowPitch(copy->destination.texture->GetFormat(),
-                                              copy->copySize, copy->source.rowPitch));
+                    DAWN_TRY(ValidateBytesPerRow(copy->destination.texture->GetFormat(),
+                                                 copy->copySize, copy->source.bytesPerRow));
 
                     DAWN_TRY(ComputeTextureCopyBufferSize(
                         copy->destination.texture->GetFormat(), copy->copySize,
-                        copy->source.rowPitch, copy->source.imageHeight, &bufferCopySize));
+                        copy->source.bytesPerRow, copy->source.rowsPerImage, &bufferCopySize));
 
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->destination, copy->copySize));
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->source, bufferCopySize));
@@ -858,20 +859,20 @@ namespace dawn_native {
 
                     DAWN_TRY(ValidateTextureSampleCountInCopyCommands(copy->source.texture.Get()));
 
-                    DAWN_TRY(ValidateImageHeight(copy->source.texture->GetFormat(),
-                                                 copy->destination.imageHeight,
-                                                 copy->copySize.height));
+                    DAWN_TRY(ValidateRowsPerImage(copy->source.texture->GetFormat(),
+                                                  copy->destination.rowsPerImage,
+                                                  copy->copySize.height));
                     DAWN_TRY(ValidateImageOrigin(copy->source.texture->GetFormat(),
                                                  copy->source.origin));
                     DAWN_TRY(
                         ValidateImageCopySize(copy->source.texture->GetFormat(), copy->copySize));
 
                     uint32_t bufferCopySize = 0;
-                    DAWN_TRY(ValidateRowPitch(copy->source.texture->GetFormat(), copy->copySize,
-                                              copy->destination.rowPitch));
+                    DAWN_TRY(ValidateBytesPerRow(copy->source.texture->GetFormat(), copy->copySize,
+                                                 copy->destination.bytesPerRow));
                     DAWN_TRY(ComputeTextureCopyBufferSize(
                         copy->source.texture->GetFormat(), copy->copySize,
-                        copy->destination.rowPitch, copy->destination.imageHeight,
+                        copy->destination.bytesPerRow, copy->destination.rowsPerImage,
                         &bufferCopySize));
 
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->source, copy->copySize));
