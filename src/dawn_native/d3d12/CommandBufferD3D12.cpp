@@ -95,6 +95,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroupStateTracker(Device* device)
             : BindGroupAndStorageBarrierTrackerBase(),
+              mDevice(device),
               mAllocator(device->GetShaderVisibleDescriptorAllocator()) {
         }
 
@@ -112,13 +113,41 @@ namespace dawn_native { namespace d3d12 {
             // to occur on overflow.
             // TODO(bryan.bernhart@intel.com): Consider further optimization.
             bool didCreateBindGroups = true;
+
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxBindGroups> srcViewHandles;
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxBindGroups> dstViewHandles;
+
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxBindGroups> srcSamplerHandles;
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxBindGroups> dstSamplerHandles;
+
+            std::array<uint32_t, kMaxBindGroups> viewCounts;
+            std::array<uint32_t, kMaxBindGroups> samplerCounts;
+
+            uint32_t viewRanges = 0;
+            uint32_t samplerRanges = 0;
+
             for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
-                DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                ToBackend(mBindGroups[index])->Populate(mAllocator));
+                DAWN_TRY_ASSIGN(
+                    didCreateBindGroups,
+                    ToBackend(mBindGroups[index])
+                        ->Populate(mAllocator, &dstViewHandles[viewRanges],
+                                   &srcViewHandles[viewRanges], &dstSamplerHandles[samplerRanges],
+                                   &srcSamplerHandles[samplerRanges], &viewCounts[viewRanges],
+                                   &samplerCounts[samplerRanges], &viewRanges, &samplerRanges));
                 if (!didCreateBindGroups) {
                     break;
                 }
             }
+
+            ID3D12Device* d3d12Device = mDevice->GetD3D12Device();
+
+            d3d12Device->CopyDescriptors(viewRanges, dstViewHandles.data(), viewCounts.data(),
+                                         viewRanges, srcViewHandles.data(), viewCounts.data(),
+                                         D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+            d3d12Device->CopyDescriptors(
+                samplerRanges, dstSamplerHandles.data(), samplerCounts.data(), samplerRanges,
+                srcSamplerHandles.data(), samplerCounts.data(), D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
 
             // This will re-create bindgroups for both heaps even if only one overflowed.
             // TODO(bryan.bernhart@intel.com): Consider re-allocating heaps independently
@@ -133,11 +162,29 @@ namespace dawn_native { namespace d3d12 {
                 // Must be called before applying the bindgroups.
                 SetID3D12DescriptorHeaps(commandList);
 
+                uint32_t viewRanges = 0;
+                uint32_t samplerRanges = 0;
+
                 for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    DAWN_TRY_ASSIGN(didCreateBindGroups,
-                                    ToBackend(mBindGroups[index])->Populate(mAllocator));
+                    DAWN_TRY_ASSIGN(
+                        didCreateBindGroups,
+                        ToBackend(mBindGroups[index])
+                            ->Populate(mAllocator, &dstViewHandles[viewRanges],
+                                       &srcViewHandles[viewRanges], &dstSamplerHandles[samplerRanges],
+                                       &srcSamplerHandles[samplerRanges], &viewCounts[viewRanges],
+                                       &samplerCounts[samplerRanges], &viewRanges, &samplerRanges));
+
                     ASSERT(didCreateBindGroups);
                 }
+
+                d3d12Device->CopyDescriptors(viewRanges, dstViewHandles.data(), viewCounts.data(),
+                                             viewRanges, srcViewHandles.data(), viewCounts.data(),
+                                             D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+                d3d12Device->CopyDescriptors(samplerRanges, dstSamplerHandles.data(),
+                                             samplerCounts.data(), samplerRanges,
+                                             srcSamplerHandles.data(), samplerCounts.data(),
+                                             D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
             }
 
             for (uint32_t index : IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
@@ -289,6 +336,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         bool mInCompute = false;
+
+        Device* mDevice;
 
         ShaderVisibleDescriptorAllocator* mAllocator;
     };
