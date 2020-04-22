@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e10883c7_24b6dda0",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T20:35:49Z",
+      "side": 1,
+      "message": "Hm, so if we don\u0027t submit any more commands, but keep ticking, won\u0027t this function always return false? (so we\u0027ll never be \"done\")\n\nSay mCompletedSerial \u003d 2, mLastSubmittedSerial \u003d 2, mLastProcessedTickSerial \u003d 1\n\nTick()\n  - IsCompletedSerialProcessed() \u003d\u003e false\n  - TickImpl()\n     - mLastProcessedTickSerial \u003c-- 2\n     - UpdateSerial()\n       - mCompletedSerial \u003c-- 3\n       - mLastSubmittedSerial \u003c-- 3\n\nAnd tick again, it\u0027ll do the same thing. mLastProcessedTickSerial will never catch up, so IsCompletedSerialProcessed() will always return false\n\n\nInstead of artificially incrementing the serial to continue making progress, maybe the better way to drive callbacks as Corentin mentioned before:\n\u003e We need this to drive callbacks like the one for mapReadAsync while the GPU is not being used. This is causing the timeout failures you see.\n\nwould be to explicit set a flag on fence.Signal and buffer.MapAsync which sets some \"needs pending tick\" flag. Then, IsCompletedSerialProcessed() becomes:\n  mLastProcessedTickSerial \u003d\u003d GetCompletedCommandSerial() || mHasPendingTick\n\nWhat do you all think?",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41a87b62_d1cab0c1",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T20:35:49Z",
+      "side": 1,
+      "message": "OpenGL didn\u0027t have this before; why is it needed now?",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 35
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4edb33ba_91dfa787",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T20:35:49Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 182,
+        "startChar": 3,
+        "endLine": 190,
+        "endChar": 5
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
