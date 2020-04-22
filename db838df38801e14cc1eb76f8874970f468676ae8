@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74a060c1_7634bd10",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:31:21Z",
+      "side": 1,
+      "message": "This does what the first part of ResidencyManager::SetExternalMemoryReservation does. Maybe we can dedup them.",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 5
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
