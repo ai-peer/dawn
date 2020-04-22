@@ -38,7 +38,15 @@ namespace dawn_native { namespace d3d12 {
                   const CPUDescriptorHeapAllocation& samplerAllocation);
 
         // Returns true if the BindGroup was successfully populated.
-        ResultOrError<bool> Populate(ShaderVisibleDescriptorAllocator* allocator);
+        ResultOrError<bool> Populate(ShaderVisibleDescriptorAllocator* allocator,
+                                     D3D12_CPU_DESCRIPTOR_HANDLE* baseViewDescriptor,
+                                     D3D12_CPU_DESCRIPTOR_HANDLE* baseStagingViewDescriptor,
+                                     D3D12_CPU_DESCRIPTOR_HANDLE* baseSamplerDescriptor,
+                                     D3D12_CPU_DESCRIPTOR_HANDLE* baseStagingSamplerDescriptor,
+                                     uint32_t* viewDescriptorSize,
+                                     uint32_t* samplerDescriptorSize,
+                                     uint32_t* viewRanges,
+                                     uint32_t* samplerRanges);
 
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseCbvUavSrvDescriptor() const;
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;
