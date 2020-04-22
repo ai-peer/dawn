@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "c34d8906_54cb53bd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-22T21:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "953e3d0f_2d209a8b",
+      "revId": "e485c85a10bef69858ff649fd987f544d2c26049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e674322e_e1483c0e",
         "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
         "patchSetId": 2
