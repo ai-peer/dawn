@@ -136,8 +136,9 @@ namespace dawn_native { namespace opengl {
         const SwapChainDescriptor* descriptor) {
         return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
     }
-    ResultOrError<TextureBase*> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-        return new Texture(this, descriptor);
+    ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+        Ref<Texture> texture = AcquireRef(new Texture(this, descriptor));
+        return ResultOrError<Ref<TextureBase>>(std::move(texture));
     }
     ResultOrError<TextureViewBase*> Device::CreateTextureViewImpl(
         TextureBase* texture,
