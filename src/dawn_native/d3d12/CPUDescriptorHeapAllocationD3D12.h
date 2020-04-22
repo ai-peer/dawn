@@ -35,6 +35,8 @@ namespace dawn_native { namespace d3d12 {
 
         void Invalidate();
 
+        D3D12_CPU_DESCRIPTOR_HANDLE GetBaseDescriptor() const;
+
       private:
         D3D12_CPU_DESCRIPTOR_HANDLE mBaseDescriptor = {0};
         uint32_t mHeapIndex = -1;
