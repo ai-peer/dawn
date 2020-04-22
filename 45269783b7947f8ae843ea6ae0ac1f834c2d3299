@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "c5789b71_d2dc063e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T22:39:24Z",
+      "side": 1,
+      "message": "whoops. forgot parentheses.",
+      "parentUuid": "96d15abf_9870699e",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a87b62_d1cab0c1",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 12
