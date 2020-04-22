@@ -113,6 +113,11 @@ namespace dawn_native { namespace metal {
         // The completed serial is updated in a Metal completion handler that can be fired on a
         // different thread, so it needs to be atomic.
         std::atomic<uint64_t> mCompletedSerial;
+        // mLastProcessedTickSerial and mCompletedSerial need to start at different Serials so that
+        // the first tick will register.
+        Serial mLastProcessedTickSerial = -1;
+        bool IsCompletedSerialProcessed() override;
+        void UpdateSerial();
 
         // mLastSubmittedCommands will be accessed in a Metal schedule handler that can be fired on
         // a different thread so we guard access to it with a mutex.
