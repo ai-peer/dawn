@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a0622176_dbcb0239",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:16:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b66c96_260bd73a",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b6dc341_c21303df",
         "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ace5ab35_ad79afc1",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:16:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6dc341_c21303df",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "912d737a_be0057f4",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
         "patchSetId": 7
@@ -50,6 +86,24 @@
       "revId": "7f15cb35f8a3449587088bb530225c985123661a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7b50b7e_70dfbc71",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:16:45Z",
+      "side": 1,
+      "message": "Fixed this up so the allocator doesn\u0027t have a separate lifetime anymore",
+      "parentUuid": "912d737a_be0057f4",
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "7f15cb35f8a3449587088bb530225c985123661a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d14f418b_214cde3b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:16:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6362345a_637d66f3",
+      "range": {
+        "startLine": 175,
+        "startChar": 13,
+        "endLine": 175,
+        "endChar": 17
+      },
+      "revId": "7f15cb35f8a3449587088bb530225c985123661a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

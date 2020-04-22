@@ -261,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "8ba27e97_00ce3ae2",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-22T23:16:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8a94b8c1_365bded9",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "0662890589cd7e64a43c73ec80e7f1835ce93d7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e992034_74068d83",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
         "patchSetId": 5
