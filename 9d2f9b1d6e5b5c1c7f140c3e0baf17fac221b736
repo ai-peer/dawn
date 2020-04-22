@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25e0cb69_509a00db",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-22T09:23:56Z",
+      "side": 1,
+      "message": "nit: This can likely be removed in favor of the more general template below.",
+      "revId": "9d2f9b1d6e5b5c1c7f140c3e0baf17fac221b736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee8974c_b22acb61",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-22T09:23:56Z",
+      "side": 1,
+      "message": "ditto, maybe it\u0027s ok to lose the early return.",
+      "revId": "9d2f9b1d6e5b5c1c7f140c3e0baf17fac221b736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2b650d_93d3a83a",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-22T09:23:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9d2f9b1d6e5b5c1c7f140c3e0baf17fac221b736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6fe38a9_2f60ac7b",
+        "filename": "src/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-22T09:23:56Z",
+      "side": 1,
+      "message": "nit: Maybe group with the constexpr constructor from nullptr?",
+      "revId": "9d2f9b1d6e5b5c1c7f140c3e0baf17fac221b736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
