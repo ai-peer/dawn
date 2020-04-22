@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "11bfc485_3ba6e771",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-22T22:36:23Z",
+      "side": 1,
+      "message": "Methods which begin with the word `Is` should be for const methods, not methods which have side effects. I think we should find a better name for this method.",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 45
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e10883c7_24b6dda0",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 12
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "I like that better than artificially incrementing. And just to make sure, the callbacks were the only reason for artificial increments? Can we do that in another CL ?",
       "parentUuid": "e10883c7_24b6dda0",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96d15abf_9870699e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-22T22:36:23Z",
+      "side": 1,
+      "message": "\u003e mLastProcessedTickSerial \u003d\u003d GetCompletedCommandSerial() || mHasPendingTick\n\nmHasPendingTick is a boolean. It cannot be assigned to a serial.",
+      "parentUuid": "bcedc2df_6d5b22d1",
       "range": {
         "startLine": 180,
         "startChar": 4,
