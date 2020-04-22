@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bedc50ae_88a8fa0d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-22T20:28:43Z",
+      "side": 1,
+      "message": "Nit: I see this code here and in RestrictBudgetForTesting. Consider pulling out into a helper method called UpdateMemorySegmentInfo, with no parameters.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 0
+      },
+      "revId": "890f10620cc68de39d50f67745d90275429a7485",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
