@@ -296,6 +296,38 @@ TEST(ResultRefT, ReturningSuccess) {
     TestSuccess(&result, &success);
 }
 
+class Base : public RefCounted {};
+class Child : public Base {};
+
+// Test constructing a Result<Ref<TChild>, E>
+TEST(ResultRefT, ConversionFromChildConstructor) {
+    Child child;
+    Ref<Child> refChild(&child);
+
+    Result<Ref<Base>, int> result(std::move(refChild));
+    TestSuccess<Base>(&result, &child);
+}
+
+// Test copy constructing Result<Ref<TChild>, E>
+TEST(ResultRefT, ConversionFromChildCopyConstructor) {
+    Child child;
+    Ref<Child> refChild(&child);
+
+    Result<Ref<Child>, int> resultChild(std::move(refChild));
+    Result<Ref<Child>, int> result(std::move(resultChild));
+    TestSuccess(&result, &child);
+}
+
+// Test assignment operator for Result<Ref<TChild>, E>
+TEST(ResultRefT, ConversionFromChildAssignmentOperator) {
+    Child child;
+    Ref<Child> refChild(&child);
+
+    Result<Ref<Child>, int> resultChild(std::move(refChild));
+    Result<Ref<Child>, int> result = std::move(resultChild);
+    TestSuccess(&result, &child);
+}
+
 // Result<T, E>
 
 // Test constructing an error Result<T, E>
