@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f705d2a_bc359c7c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:07:51Z",
+      "side": 1,
+      "message": "TODO: it must be a multiple of the bytesPerRow",
+      "revId": "bfaedf3888d5cfe802ce1239f592973e8383664d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82addd0b_4ab452c9",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:07:51Z",
+      "side": 1,
+      "message": "These don\u0027t get surfaced to chrome dev tools, right? that would be really confusing.",
+      "revId": "bfaedf3888d5cfe802ce1239f592973e8383664d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
