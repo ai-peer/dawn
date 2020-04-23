@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3b5256d6_0ceb4fc7",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T10:15:59Z",
+      "side": 1,
+      "message": "This is always the same value and could be passed in the constructor by ResourceMemoryAllocator. It means GetDXGIMemorySegmentGroup could be a helper function inside ResourceMemoryAllocator.cpp",
+      "range": {
+        "startLine": 48,
+        "startChar": 18,
+        "endLine": 48,
+        "endChar": 78
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74a060c1_7634bd10",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 9
@@ -18,6 +41,63 @@
         "startChar": 4,
         "endLine": 88,
         "endChar": 5
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ab36c08_7ac25e71",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T10:15:59Z",
+      "side": 1,
+      "message": "nit: just return EnsureCanMakeResident(...)",
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2490428_c95dc0b5",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T10:15:59Z",
+      "side": 1,
+      "message": "Maybe this could be moved in EnsureCanMakeResident and replaced with an ASSERT here?",
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53702efa_d7350e79",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T10:15:59Z",
+      "side": 1,
+      "message": "This is always the case and could be an ASSERT instead.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 0
       },
       "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
