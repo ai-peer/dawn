@@ -46,6 +46,30 @@
       "revId": "215d58201db22001e45b1b91fcd9232495261b4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64177cae_001e55fb",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-23T20:22:31Z",
+      "side": 1,
+      "message": "Good to know. Looks like we\u0027ll have to keep it after all.",
+      "parentUuid": "e6ba2630_394dac54",
+      "range": {
+        "startLine": 51,
+        "startChar": 37,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "215d58201db22001e45b1b91fcd9232495261b4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
