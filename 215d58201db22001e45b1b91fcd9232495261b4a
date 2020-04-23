@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86ae41a_1c115d0d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-23T20:00:14Z",
+      "side": 1,
+      "message": "Nit: The constructor of linked list and the node class take care of initializing everything to the correct values. We can safely lose the \"\u003d {}\" here.",
+      "range": {
+        "startLine": 51,
+        "startChar": 37,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "215d58201db22001e45b1b91fcd9232495261b4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
