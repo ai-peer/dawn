@@ -22,6 +22,30 @@
       "revId": "215d58201db22001e45b1b91fcd9232495261b4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ba2630_394dac54",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:07:50Z",
+      "side": 1,
+      "message": "It doesn’t seem like I can. Because I initialize DXGI_MEMORY_SEGMENT_GROUP below, I must initialize everything else to avoid a “missing field initializer” warning.",
+      "parentUuid": "f86ae41a_1c115d0d",
+      "range": {
+        "startLine": 51,
+        "startChar": 37,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "215d58201db22001e45b1b91fcd9232495261b4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
