@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d1775c93_123ebafe",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T14:49:23Z",
+      "side": 1,
+      "message": "Maybe put this close to other private virtual methods?",
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11bfc485_3ba6e771",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 12
@@ -132,6 +149,30 @@
       "side": 1,
       "message": "\u003e And just to make sure, the callbacks were the only reason for artificial increments? \n\nI believe so. Buffer map requests add tracking on the pending command serial so we need to keep ticking anyway to make sure they complete.\n\nQueue::Signal and Error scopes get enqueued on the last submitted serial.\nFor those, it may be okay to tick while mLastSubmittedSerial !\u003d mCompletedSerial\n\nSo maybe we keep track of the largest serial that a callback is waiting for.\n\nI think we would still need to keep the artificial increments because the buffer requests get attached to that specific serial, but we would only artificially Tick up to the serial that the buffer is waiting for.",
       "parentUuid": "c5789b71_d2dc063e",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "541ef791_2b6f5416",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T14:49:23Z",
+      "side": 1,
+      "message": "There\u0027s several problems: that we don\u0027t tick if the serial didn\u0027t change at all, so we need a mechanism to say \"I\u0027m still waiting on callbacks set in the same serial please tick\". And the backends use the pendingCommandSerial for the mapping, when it should be the last submitted serial.\n\nSo the main logic in DeviceBase would become:\n\n CheckForSerial();\n if (mCompletedSerial !\u003d mLastProcessedSerial || mHasNewCallbacks) {\n   mLastProcessedSerial \u003d mCompletedSerial;\n   m HasNewCallbacks \u003d false;\n   TickImpl();\n }\n\nOverall I feel that the frontend should take more ownership of the serials, ticking, etc. As well as the MapRequestTrackers. There\u0027s no reasons these are in the backends since they are all the same.",
+      "parentUuid": "adb4ca0d_9e45fba5",
       "range": {
         "startLine": 180,
         "startChar": 4,
