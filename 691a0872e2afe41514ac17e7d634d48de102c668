@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0663f93_fc011d73",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:14:39Z",
+      "side": 1,
+      "message": "nit: also test, say, SetIndexBuffer(buffer, 4, 0) and SetIndexBuffer(buffer, 256 - 4, 0)",
+      "revId": "691a0872e2afe41514ac17e7d634d48de102c668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f391ec_8d06e718",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:14:39Z",
+      "side": 1,
+      "message": "same",
+      "revId": "691a0872e2afe41514ac17e7d634d48de102c668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c74bce08_0b0b11a7",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:14:39Z",
+      "side": 1,
+      "message": "same",
+      "revId": "691a0872e2afe41514ac17e7d634d48de102c668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e71dbdf5_9b7cc9fc",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T21:14:39Z",
+      "side": 1,
+      "message": "same",
+      "revId": "691a0872e2afe41514ac17e7d634d48de102c668",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
