@@ -22,6 +22,30 @@
       "revId": "c407c92c7cbd286f0da6ac674f5d2d2adb214fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d64cbdbe_d3bb2338",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T11:44:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa25fcf_98ccb341",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 19
+      },
+      "revId": "c407c92c7cbd286f0da6ac674f5d2d2adb214fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
