@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f01850b_917f39ae",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-23T18:45:55Z",
+      "side": 1,
+      "message": "unit: BGL.h already included this",
+      "revId": "82b3b8c48788bc3d1e3051f069006de9c3137cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5daff341_5d3aaac6",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-23T18:45:55Z",
+      "side": 1,
+      "message": "unit: comment VkDescriptorType doesn\u0027t matter (ie. dummy)?",
+      "revId": "82b3b8c48788bc3d1e3051f069006de9c3137cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
