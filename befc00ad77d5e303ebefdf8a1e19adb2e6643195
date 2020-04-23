@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c4b9c59_f24620a8",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T09:53:03Z",
+      "side": 1,
+      "message": "nit: samplerHeap",
+      "range": {
+        "startLine": 672,
+        "startChar": 44,
+        "endLine": 672,
+        "endChar": 54
+      },
+      "revId": "befc00ad77d5e303ebefdf8a1e19adb2e6643195",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
