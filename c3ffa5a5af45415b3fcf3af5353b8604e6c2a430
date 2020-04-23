@@ -22,6 +22,30 @@
       "revId": "c3ffa5a5af45415b3fcf3af5353b8604e6c2a430",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d09631c_a5c4a206",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-23T11:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e542c36_b607f77c",
+      "range": {
+        "startLine": 882,
+        "startChar": 56,
+        "endLine": 882,
+        "endChar": 64
+      },
+      "revId": "c3ffa5a5af45415b3fcf3af5353b8604e6c2a430",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
