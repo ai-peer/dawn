@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "751ba0ad_b5cb3c09",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-23T01:31:28Z",
+      "side": 1,
+      "message": "this is here temporarily because I didn\u0027t bother making a new file.",
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32893993_c034baf7",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-23T01:31:28Z",
+      "side": 1,
+      "message": "maybe we can infer Size from the TypedInteger? would be a little prettier to use",
+      "range": {
+        "startLine": 216,
+        "startChar": 31,
+        "endLine": 216,
+        "endChar": 35
+      },
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9bdfa9a_0740e819",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-23T01:31:28Z",
+      "side": 1,
+      "message": "This and all the for loops is sort of not ideal. It should be BindingIndex, but if it is, it\u0027ll hit the range assertion on the ++ operator on the last loop iteration :(",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
