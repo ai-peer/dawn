@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9fda47c_d39e4737",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:01:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3b5256d6_0ceb4fc7",
+      "range": {
+        "startLine": 48,
+        "startChar": 18,
+        "endLine": 48,
+        "endChar": 78
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74a060c1_7634bd10",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "62c24095_32433128",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:01:17Z",
+      "side": 1,
+      "message": "Did this by switching over to using the MemorySegment enum everywhere.",
+      "parentUuid": "74a060c1_7634bd10",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 5
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ab36c08_7ac25e71",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 9
@@ -62,6 +110,24 @@
       "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86d8d375_fdd8282b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab36c08_7ac25e71",
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "96d584bf_644d8f2c",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2490428_c95dc0b5",
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53702efa_d7350e79",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 9
@@ -93,6 +177,30 @@
       "writtenOn": "2020-04-23T10:15:59Z",
       "side": 1,
       "message": "This is always the case and could be an ASSERT instead.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 0
+      },
+      "revId": "db838df38801e14cc1eb76f8874970f468676ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95501020_e3b496bd",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-04-23T20:01:17Z",
+      "side": 1,
+      "message": "TrackResidentAllocation is used outside of ResidencyManager after allocations, so we must keep this for when’s residency is toggled off.",
+      "parentUuid": "53702efa_d7350e79",
       "range": {
         "startLine": 298,
         "startChar": 0,
