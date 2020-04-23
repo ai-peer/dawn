@@ -22,6 +22,98 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a361642a_0a4de521",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T20:43:27Z",
+      "side": 1,
+      "message": "maybe have a .value() or .asInt() to do this?",
+      "range": {
+        "startLine": 173,
+        "startChar": 28,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b057180_157be550",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T20:43:27Z",
+      "side": 1,
+      "message": "operator\u003d would be more natural here, and could have the same type restrictions as the constructor.",
+      "range": {
+        "startLine": 228,
+        "startChar": 26,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "645d4748_4a62f1f5",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T20:43:27Z",
+      "side": 1,
+      "message": "would an implicit integer -\u003e TypedInteger constructor be safe and work here? I\u0027m not sure we necessarily need this templated IterateBitSet.",
+      "range": {
+        "startLine": 94,
+        "startChar": 17,
+        "endLine": 94,
+        "endChar": 46
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d39a50d_5a6f4216",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-23T20:43:27Z",
+      "side": 1,
+      "message": "should be BindGroupIndex?",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
