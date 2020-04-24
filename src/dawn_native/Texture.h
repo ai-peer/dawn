@@ -81,6 +81,14 @@ namespace dawn_native {
         Extent3D GetMipLevelPhysicalSize(uint32_t level) const;
         Extent3D GetMipLevelVirtualSize(uint32_t level) const;
 
+        void SetSubresourceUsage(wgpu::TextureUsage usage,
+                                 uint32_t baseMipLevel,
+                                 uint32_t levelCount,
+                                 uint32_t baseArrayLayer,
+                                 uint32_t layerCount);
+        bool GetAndResetSubresourceUsageValidationStatus();
+        void ResetSubresourceUsages();
+
         // Dawn API
         TextureViewBase* CreateView(const TextureViewDescriptor* descriptor);
         void Destroy();
@@ -105,6 +113,9 @@ namespace dawn_native {
 
         // TODO(natlee@microsoft.com): Use a more optimized data structure to save space
         std::vector<bool> mIsSubresourceContentInitializedAtIndex;
+
+        bool mSubresourceUsageValid = true;
+        std::vector<wgpu::TextureUsage> mSubresourceUsage;
     };
 
     class TextureViewBase : public ObjectBase {
