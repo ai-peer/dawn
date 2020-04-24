@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "82895bda_251262dc",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-24T16:14:04Z",
+      "side": 1,
+      "message": "TypedInteger compiles to \"using BindingIndex \u003d uint32_t\" if there\u0027s no assertions, so I didn\u0027t want to add any methods.\n\nCould be AsInt(bindingIndex) I guess but then it\u0027s kinda the same as a static_cast\n\nThe reason is I want TypedInteger to be a no-op is because some compilers lose some SSE optimizations if you do the struct wrapping the integer thing.",
+      "parentUuid": "a361642a_0a4de521",
+      "range": {
+        "startLine": 173,
+        "startChar": 28,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7b057180_157be550",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 4
@@ -59,6 +83,30 @@
       "writtenOn": "2020-04-23T20:43:27Z",
       "side": 1,
       "message": "operator\u003d would be more natural here, and could have the same type restrictions as the constructor.",
+      "range": {
+        "startLine": 228,
+        "startChar": 26,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b9fb377_a2a95c7d",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-24T16:14:04Z",
+      "side": 1,
+      "message": "Do you know if there\u0027s a way to only define operator\u003d if the rhs is constexpr? I didn\u0027t want to allow randomly reassigning it because it\u0027s not so obvious you\u0027re assigning to typed integer in a function body; \n\nBindingCount count;\nfor (BindingIndex i : IterateBitSet\u003cBindingIndex\u003e(foo)) {\n\n   .....\n\n   // lots more code\n\n   ...\n\n\n   if (something) {\n      count \u003d i;\n   } else if (something else) {\n      count \u003d 0; // should be fine\n   } else {\n      count \u003d foobar * asdf; // may not be typed!\n      // compare to:\n      // count \u003d BindingCount(foobar * asdf); // clear that I\u0027m try to do this.\n   }\n\n   ...\n}",
+      "parentUuid": "7b057180_157be550",
       "range": {
         "startLine": 228,
         "startChar": 26,
