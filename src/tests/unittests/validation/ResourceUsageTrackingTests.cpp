@@ -826,16 +826,23 @@ namespace {
     // resource tracking. Test code is ready, but it depends on writeonly storage buffer support
 
     // TODO (yunchao.he@intel.com):
-    // 1. Add tests for overritten tests:
+    // * Add tests for overritten tests:
     //     1) multiple SetBindGroup on the same index
     //     2) multiple SetVertexBuffer on the same index
     //     3) multiple SetIndexBuffer
-    // 2. useless bindings in bind groups. For example, a bind group includes bindings for compute
+    //
+    // * useless bindings in bind groups. For example, a bind group includes bindings for compute
     // stage, but the bind group is used in render pass.
-    // 3. more read write tracking tests for texture which need readonly storage texture and
+    //
+    // * more read write tracking tests for texture which need readonly storage texture and
     // writeonly storage texture support
-    // 4. resource write and read dependency
+    //
+    // * resource write and read dependency
     //     1) across passes (render + render, compute + compute, compute and render mixed) is valid
     //     2) across draws/dispatches is invalid
+    //
+    //	* Add tests for multiple threading, in which we can have multiple encoders upon the same
+    //	resource simultaneously. Note that this is a long-term task because we have no multiple
+    //  threading support yet.
 
 }  // anonymous namespace

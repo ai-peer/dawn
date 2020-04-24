@@ -30,13 +30,18 @@ namespace dawn_native {
     // Which resources are used by pass and how they are used. The command buffer validation
     // pre-computes this information so that backends with explicit barriers don't have to
     // re-compute it.
+    struct TextureUsageTracker {
+        wgpu::TextureUsage textureUsage;
+        std::vector<wgpu::TextureUsage> subresourceUsages;
+    };
+
     struct PassResourceUsage {
         PassType passType;
         std::vector<BufferBase*> buffers;
         std::vector<wgpu::BufferUsage> bufferUsages;
 
         std::vector<TextureBase*> textures;
-        std::vector<wgpu::TextureUsage> textureUsages;
+        std::vector<TextureUsageTracker> textureUsages;
     };
 
     using PerPassUsages = std::vector<PassResourceUsage>;
