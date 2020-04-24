@@ -257,6 +257,30 @@
     },
     {
       "key": {
+        "uuid": "6c9ccff4_d14b290f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-24T16:03:35Z",
+      "side": 1,
+      "message": "Okay, so to recap:\n 1. We can factor things such that the frontend owns the serial tracking.\n 2. Then we can add a \"has callbacks\" signal so that we don\u0027t haven\u0027t to increment the serial if there\u0027s nothing waiting\n 3. And then, we can skip TickImpl if we processed the last completed serial and there are no pending callbacks.",
+      "parentUuid": "2100b7c6_45c89f4f",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a87b62_d1cab0c1",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 12
