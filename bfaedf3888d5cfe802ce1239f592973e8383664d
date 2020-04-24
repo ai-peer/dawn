@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "61f07e57_d49f17bf",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-24T21:19:43Z",
+      "side": 1,
+      "message": "Right, sorry. I got confused because of the message.\n\nIt should say \"must be a multiple of compressed texture format block *height*\".",
+      "parentUuid": "e3255f5b_104c5629",
+      "revId": "bfaedf3888d5cfe802ce1239f592973e8383664d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82addd0b_4ab452c9",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
