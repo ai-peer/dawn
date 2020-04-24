@@ -47,9 +47,11 @@ namespace dawn_native {
                     }
 
                     case wgpu::BindingType::SampledTexture: {
-                        TextureBase* texture =
-                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
-                        usageTracker->TextureUsedAs(texture, wgpu::TextureUsage::Sampled);
+                        TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
+                        usageTracker->TextureUsedAs(view->GetTexture(), wgpu::TextureUsage::Sampled,
+                                                    view->GetBaseMipLevel(), view->GetLevelCount(),
+                                                    view->GetBaseArrayLayer(),
+                                                    view->GetLayerCount());
                         break;
                     }
 
@@ -64,16 +66,20 @@ namespace dawn_native {
                         break;
 
                     case wgpu::BindingType::ReadonlyStorageTexture: {
-                        TextureBase* texture =
-                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
-                        usageTracker->TextureUsedAs(texture, kReadonlyStorageTexture);
+                        TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
+                        usageTracker->TextureUsedAs(view->GetTexture(), kReadonlyStorageTexture,
+                                                    view->GetBaseMipLevel(), view->GetLevelCount(),
+                                                    view->GetBaseArrayLayer(),
+                                                    view->GetLayerCount());
                         break;
                     }
 
                     case wgpu::BindingType::WriteonlyStorageTexture: {
-                        TextureBase* texture =
-                            group->GetBindingAsTextureView(bindingIndex)->GetTexture();
-                        usageTracker->TextureUsedAs(texture, wgpu::TextureUsage::Storage);
+                        TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
+                        usageTracker->TextureUsedAs(view->GetTexture(), wgpu::TextureUsage::Storage,
+                                                    view->GetBaseMipLevel(), view->GetLevelCount(),
+                                                    view->GetBaseArrayLayer(),
+                                                    view->GetLayerCount());
                         break;
                     }
 

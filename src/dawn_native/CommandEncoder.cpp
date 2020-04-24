@@ -555,11 +555,15 @@ namespace dawn_native {
                         descriptor->colorAttachments[i].clearColor;
 
                     usageTracker.TextureUsedAs(view->GetTexture(),
-                                               wgpu::TextureUsage::OutputAttachment);
+                                               wgpu::TextureUsage::OutputAttachment,
+                                               view->GetBaseMipLevel(), view->GetLevelCount(),
+                                               view->GetBaseArrayLayer(), view->GetLayerCount());
 
                     if (resolveTarget != nullptr) {
-                        usageTracker.TextureUsedAs(resolveTarget->GetTexture(),
-                                                   wgpu::TextureUsage::OutputAttachment);
+                        usageTracker.TextureUsedAs(
+                            resolveTarget->GetTexture(), wgpu::TextureUsage::OutputAttachment,
+                            view->GetBaseMipLevel(), view->GetLevelCount(),
+                            view->GetBaseArrayLayer(), view->GetLayerCount());
                     }
                 }
 
@@ -581,7 +585,9 @@ namespace dawn_native {
                         descriptor->depthStencilAttachment->stencilStoreOp;
 
                     usageTracker.TextureUsedAs(view->GetTexture(),
-                                               wgpu::TextureUsage::OutputAttachment);
+                                               wgpu::TextureUsage::OutputAttachment,
+                                               view->GetBaseMipLevel(), view->GetLevelCount(),
+                                               view->GetBaseArrayLayer(), view->GetLayerCount());
                 }
 
                 cmd->width = width;
