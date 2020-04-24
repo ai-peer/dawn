@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23f732df_520f909e",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-24T21:57:30Z",
+      "side": 1,
+      "message": "Please update this comment with the new check you\u0027re adding.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 1
+      },
+      "revId": "562a590cb724b57970a9fcc116e7066dae3e2771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea279cb_3a08255e",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-24T21:57:30Z",
+      "side": 1,
+      "message": "Please copy this comment to the code you added in ResourceAllocatorManager::CreatePlacedResource.  \n\n(Consider factoring the checks into a helper method)",
+      "range": {
+        "startLine": 315,
+        "startChar": 1,
+        "endLine": 317,
+        "endChar": 1
+      },
+      "revId": "562a590cb724b57970a9fcc116e7066dae3e2771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
