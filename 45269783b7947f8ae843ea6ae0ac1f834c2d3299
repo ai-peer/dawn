@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "603bb9ba_c7e0d884",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-24T00:36:56Z",
+      "side": 1,
+      "message": "Ok, I renamed it to DidCompletedSerialProcess, let me know if you have other suggestions, thanks!",
+      "parentUuid": "11bfc485_3ba6e771",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 45
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e10883c7_24b6dda0",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 12
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "There\u0027s several problems: that we don\u0027t tick if the serial didn\u0027t change at all, so we need a mechanism to say \"I\u0027m still waiting on callbacks set in the same serial please tick\". And the backends use the pendingCommandSerial for the mapping, when it should be the last submitted serial.\n\nSo the main logic in DeviceBase would become:\n\n CheckForSerial();\n if (mCompletedSerial !\u003d mLastProcessedSerial || mHasNewCallbacks) {\n   mLastProcessedSerial \u003d mCompletedSerial;\n   m HasNewCallbacks \u003d false;\n   TickImpl();\n }\n\nOverall I feel that the frontend should take more ownership of the serials, ticking, etc. As well as the MapRequestTrackers. There\u0027s no reasons these are in the backends since they are all the same.",
       "parentUuid": "adb4ca0d_9e45fba5",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14720909_4f54f46c",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-24T00:36:56Z",
+      "side": 1,
+      "message": "can we move the serial variables from the backend to frontend then? I was wondering this before I started my change and had asked Austin about this, he said you were concerned about backend changing protected members of the frontend. Is this still a concern to you?",
+      "parentUuid": "541ef791_2b6f5416",
       "range": {
         "startLine": 180,
         "startChar": 4,
