@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69ece114_76ae41a7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T14:39:09Z",
+      "side": 1,
+      "message": "Instead of extracting data from the view everytime we call TextureUsedAs maybe we could use TextureViewUsedAs and let the usageTracker extract the information it needs.",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f866f00d_616a7a38",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T14:39:09Z",
+      "side": 1,
+      "message": "The subresource usages cannot be set on the texture, because there can be multiple command encoders being encoded at the same time that use the texture with different usages. Instead I suggest replacing PassUsageResourceTracker::mTextureUsages with a map\u003cTextureBase*, SubresourceUsage\u003e with SubresourceUsage being a std::vector\u003cUsage\u003e for now (and then it can be optimized later).",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d05d9a_158151e0",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T14:39:09Z",
+      "side": 1,
+      "message": "nit: This can be replaced with CreateTexture since that\u0027s always the line following this call.",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f82777be_ddd2c8f0",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T14:39:09Z",
+      "side": 1,
+      "message": "ditto, or use defaults and designated initializers like so:\n\n wgpu::TextureViewDescriptor viewDesc \u003d {\n     .format \u003d kColorFormat,\n     .baseArrayLayer \u003d foo,\n     .baseMipLevel \u003d bar,\n };\n texture.CreateView(\u0026viewDesc);",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
