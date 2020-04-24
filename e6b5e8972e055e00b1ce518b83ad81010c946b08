@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f3171d_b63fe089",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T02:47:51Z",
+      "side": 1,
+      "message": "Alternatively, texture subresource tracking information can be put into PassResourceUsage. But resource usage in compute pass is per each dispatch, not per pass. So I\u0027d like to put it here. And I can add code to set/track/reset subresource tracking info via functions above in dispatch() for compute pass later. \n\nPrevious code of textureUsage for each texture in PassResourceUsage can be seen as a fast path when there is no multiple write or read/write in a pass.",
+      "range": {
+        "startLine": 117,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "e6b5e8972e055e00b1ce518b83ad81010c946b08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
