@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5641921b_878ce212",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000593
+      },
+      "writtenOn": "2020-04-24T17:00:31Z",
+      "side": 1,
+      "message": "can this just be \u003d default?",
+      "revId": "d11860abd82682dcf0750491d9f5b650c4aa1451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
