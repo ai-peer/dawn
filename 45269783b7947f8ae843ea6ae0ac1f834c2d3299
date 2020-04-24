@@ -233,6 +233,30 @@
     },
     {
       "key": {
+        "uuid": "2100b7c6_45c89f4f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T14:16:34Z",
+      "side": 1,
+      "message": "It is still a concern, so there should be a clear interface between the frontend and the backend that does not involve protected variables.",
+      "parentUuid": "14720909_4f54f46c",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 0
+      },
+      "revId": "45269783b7947f8ae843ea6ae0ac1f834c2d3299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41a87b62_d1cab0c1",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 12
