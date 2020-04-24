@@ -355,6 +355,9 @@ namespace dawn_native {
             GetSubresourceIndex(descriptor->mipLevelCount, descriptor->arrayLayerCount);
         mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
 
+        mSubresourceUsage =
+            std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
+
         // Add readonly storage usage if the texture has a storage usage. The validation rules in
         // ValidatePassResourceUsage will make sure we don't use both at the same time.
         if (mUsage & wgpu::TextureUsage::Storage) {
@@ -450,6 +453,38 @@ namespace dawn_native {
                 mIsSubresourceContentInitializedAtIndex[subresourceIndex] = isInitialized;
             }
         }
+    }
+
+    void TextureBase::SetSubresourceUsage(wgpu::TextureUsage usage,
+                                          uint32_t baseMipLevel,
+                                          uint32_t levelCount,
+                                          uint32_t baseArrayLayer,
+                                          uint32_t layerCount) {
+        ASSERT(!IsError());
+        for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount; ++mipLevel) {
+            for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                 ++arrayLayer) {
+                uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
+                mSubresourceUsage[subresourceIndex] |= usage;
+            }
+        }
+    }
+
+    bool TextureBase::GetAndResetSubresourceUsageValidationStatus() {
+        bool valid = mSubresourceUsageValid;
+        mSubresourceUsageValid = true;
+        return valid;
+    }
+
+    void TextureBase::ResetSubresourceUsages() {
+        ASSERT(!IsError());
+        uint32_t totalIndex = GetSubresourceIndex(mMipLevelCount, mArrayLayerCount);
+        for (uint32_t index = 0; index < totalIndex; ++index) {
+            if (!wgpu::HasZeroOrOneBits(mSubresourceUsage[index])) {
+                mSubresourceUsageValid = false;
+            }
+        }
+        mSubresourceUsage = std::vector<wgpu::TextureUsage>(totalIndex, wgpu::TextureUsage::None);
     }
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
