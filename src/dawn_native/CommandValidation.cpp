@@ -306,10 +306,10 @@ namespace dawn_native {
         }
 
         // Textures can only be used as single-write or multiple read.
-        // TODO(cwallez@chromium.org): implement per-subresource tracking
         for (size_t i = 0; i < pass.textures.size(); ++i) {
             const TextureBase* texture = pass.textures[i];
-            wgpu::TextureUsage usage = pass.textureUsages[i];
+            TextureUsageTracker usageTracker = pass.textureUsages[i];
+            wgpu::TextureUsage usage = usageTracker.textureUsage;
 
             if (usage & ~texture->GetUsage()) {
                 return DAWN_VALIDATION_ERROR("Texture missing usage for the pass");
@@ -318,11 +318,20 @@ namespace dawn_native {
             bool readOnly = (usage & kReadOnlyTextureUsages) == usage;
             bool singleUse = wgpu::HasZeroOrOneBits(usage);
             if (pass.passType == PassType::Render && !readOnly && !singleUse) {
-                return DAWN_VALIDATION_ERROR(
-                    "Texture used as writable usage and another usage in render pass");
+                uint32_t subresourceCount = usageTracker.subresourceUsages.size();
+                if (subresourceCount <= 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Texture used as writable usage and another usage in render pass");
+                } else {
+                    for (uint32_t index = 0; index < subresourceCount; ++index) {
+                        if (!wgpu::HasZeroOrOneBits(usageTracker.subresourceUsages[index])) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Texture used as writable usage and another usage in render pass");
+                        }
+                    }
+                }
             }
         }
-
         return {};
     }
 

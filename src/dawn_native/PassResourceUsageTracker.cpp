@@ -27,10 +27,35 @@ namespace dawn_native {
         mBufferUsages[buffer] |= usage;
     }
 
-    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage) {
+    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture,
+                                                 wgpu::TextureUsage usage,
+                                                 uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount) {
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
-        mTextureUsages[texture] |= usage;
+        // textureUsage is used for textures that don't have subresource. And it is also used as a
+        // fast path during texture's usage tracking for textures that have subresources.
+        mTextureUsages[texture].textureUsage |= usage;
+
+        // If the texture has subresource, set usages for subresource
+        if (texture->GetNumMipLevels() > 1 || texture->GetArrayLayers() > 1) {
+            uint32_t subresourceCount =
+                texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers());
+            if (!mTextureUsages[texture].subresourceUsages.size()) {
+                mTextureUsages[texture].subresourceUsages =
+                    std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
+            }
+            for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
+                 ++mipLevel) {
+                for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                     ++arrayLayer) {
+                    uint32_t subresourceIndex = texture->GetSubresourceIndex(mipLevel, arrayLayer);
+                    mTextureUsages[texture].subresourceUsages[subresourceIndex] |= usage;
+                }
+            }
+        }
     }
 
     // Returns the per-pass usage for use by backends for APIs with explicit barriers.
@@ -49,7 +74,16 @@ namespace dawn_native {
 
         for (auto& it : mTextureUsages) {
             result.textures.push_back(it.first);
-            result.textureUsages.push_back(it.second);
+            TextureUsageTracker textureTracker;
+            textureTracker.textureUsage = it.second.textureUsage;
+            if (it.second.subresourceUsages.size() > 0) {
+                textureTracker.subresourceUsages.reserve(it.second.subresourceUsages.size());
+                for (auto& sub : it.second.subresourceUsages) {
+                    textureTracker.subresourceUsages.push_back(sub);
+                }
+                it.second.subresourceUsages.clear();
+            }
+            result.textureUsages.push_back(textureTracker);
         }
 
         mBufferUsages.clear();

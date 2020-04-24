@@ -466,7 +466,8 @@ namespace dawn_native { namespace d3d12 {
                 // Clear textures that are not output attachments. Output attachments will be
                 // cleared during record render pass if the texture subresource has not been
                 // initialized before the render pass.
-                if (!(usages.textureUsages[i] & wgpu::TextureUsage::OutputAttachment)) {
+                if (!(usages.textureUsages[i].textureUsage &
+                      wgpu::TextureUsage::OutputAttachment)) {
                     texture->EnsureSubresourceContentInitialized(commandContext, 0,
                                                                  texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
@@ -479,10 +480,10 @@ namespace dawn_native { namespace d3d12 {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.textures[i])
                         ->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                          usages.textureUsages[i])) {
+                                                          usages.textureUsages[i].textureUsage)) {
                     barriers.push_back(barrier);
                 }
-                textureUsages |= usages.textureUsages[i];
+                textureUsages |= usages.textureUsages[i].textureUsage;
             }
 
             if (barriers.size()) {
