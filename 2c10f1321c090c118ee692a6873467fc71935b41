@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "a88a1f86_10bc819d",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-24T21:48:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need `explicit` on it?",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a361642a_0a4de521",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 4
@@ -72,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "57d4cf05_e2797cf4",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-24T21:48:04Z",
+      "side": 1,
+      "message": "ah, right. I think the static_cast is fine then, although I suppose we could use uint32_t{bindingIndex} to be slightly more brief?\n\nWould be nice if the bitset\u0027s accessor could be typed, but that\u0027s a huge pain....",
+      "parentUuid": "82895bda_251262dc",
+      "range": {
+        "startLine": 173,
+        "startChar": 28,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7b057180_157be550",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 4
@@ -107,6 +148,30 @@
       "side": 1,
       "message": "Do you know if there\u0027s a way to only define operator\u003d if the rhs is constexpr? I didn\u0027t want to allow randomly reassigning it because it\u0027s not so obvious you\u0027re assigning to typed integer in a function body; \n\nBindingCount count;\nfor (BindingIndex i : IterateBitSet\u003cBindingIndex\u003e(foo)) {\n\n   .....\n\n   // lots more code\n\n   ...\n\n\n   if (something) {\n      count \u003d i;\n   } else if (something else) {\n      count \u003d 0; // should be fine\n   } else {\n      count \u003d foobar * asdf; // may not be typed!\n      // compare to:\n      // count \u003d BindingCount(foobar * asdf); // clear that I\u0027m try to do this.\n   }\n\n   ...\n}",
       "parentUuid": "7b057180_157be550",
+      "range": {
+        "startLine": 228,
+        "startChar": 26,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bc5cad7_82696976",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-04-24T21:48:04Z",
+      "side": 1,
+      "message": "Ah, fair point. I don\u0027t know of a way to do that; it doesn\u0027t seem to be possible.\n\nAlso I just learned that `BindingIndex i \u003d 0` won\u0027t resolve to use `operator\u003d` anyway; that requires an implicit constructor.\n\nIt might actually be okay to weaken this though, with an implicit constructor(I) and operator\u003d(I). It\u0027s not common that you would reassign to a BindingIndex anyway, and it still gets typechecked on read (I think?)",
+      "parentUuid": "0b9fb377_a2a95c7d",
       "range": {
         "startLine": 228,
         "startChar": 26,
