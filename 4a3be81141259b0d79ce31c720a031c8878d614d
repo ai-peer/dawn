@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9750d28_872aee3d",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T12:08:53Z",
+      "side": 1,
+      "message": "FYI: I just renamed this to kTextureBytesPerRowAlignment",
+      "range": {
+        "startLine": 58,
+        "startChar": 37,
+        "endLine": 58,
+        "endChar": 62
+      },
+      "revId": "4a3be81141259b0d79ce31c720a031c8878d614d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5abee0f7_b1670b82",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T12:08:53Z",
+      "side": 1,
+      "message": "nit: the output texture is 1x1 so this can be EXPECT_PIXEL_RGBA8_EQ with no expected array.",
+      "revId": "4a3be81141259b0d79ce31c720a031c8878d614d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31fb392c_eec857c6",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T12:08:53Z",
+      "side": 1,
+      "message": "nit: Comment needs further updating, \"that reads the texels from the read-only storage texture and writes 1 if they all have the expected value.\"",
+      "revId": "4a3be81141259b0d79ce31c720a031c8878d614d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2a49655_28f1433b",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T12:08:53Z",
+      "side": 1,
+      "message": "The shader test code could be reused between the different tests:\n\n const char* commonReadOnlyTestCode \u003d R\"(\n     layout (set \u003d 0, binding \u003d 0, r32ui) uniform readonly uimage2D srcImage;\n     bool doTest() {\n         for (uint y \u003d 0; y \u003c 4; ++y) {\n             for (uint x \u003d 0; x \u003c 4; ++x) {\n                 uvec4 expected \u003d vec4(1u + x + y * 4u, 0, 0, 1u);\n                 uvec4 pixel \u003d imageLoad(srcImage, ivec2(x, y));\n                 if (pixel !\u003d expected) {\n                     return false;\n                 }\n             }\n         }\n         return true;\n     }\n )\";\n\nThen computeShader becomes:\n\n std::string computeShader \u003d R\"(\n      #version450\n      layout (set \u003d 0, binding \u003d 1, std430) buffer DstBuffer {\n          uint result;\n      };\n  )\";\n  computeShader +\u003d commonReadOnlyTestCode;\n  computeShader +\u003d R\"(\n      void main() {\n          result \u003d uint(doTest());\n      }\n  )\";\n\nSimilarly the test code for the writeonly storage texture could be factored.\n\nOnce we have WGSL, I intend to write helper functions to do that for you, so all you need to do is pass the code containing doTest and the helper does everything for you (and allows using GTest like macros like EXPECT_EQ inside the shader, then write debug information to an SSBO that\u0027s read back and gives nice error messages).",
+      "revId": "4a3be81141259b0d79ce31c720a031c8878d614d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
