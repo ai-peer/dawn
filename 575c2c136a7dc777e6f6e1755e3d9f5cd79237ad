@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4dc1614a_48dbf9e2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-24T15:59:57Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "69ece114_76ae41a7",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f866f00d_616a7a38",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 6
@@ -47,6 +65,24 @@
       "writtenOn": "2020-04-24T14:39:09Z",
       "side": 1,
       "message": "nit: This can be replaced with CreateTexture since that\u0027s always the line following this call.",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02e61ccf_7da2f9a3",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-24T15:59:57Z",
+      "side": 1,
+      "message": "Or just use the designated initializer. It should be nearly the same amount of code given the defaults, and each parameter is more clear because it\u0027s labeled with the member name. I guess there\u0027s just one extra \"device.CreateTexture\" call.\n\nCorentin, is webgpu_cpp.h allowed to have more things on top of webgpu.h? On top of the automatic refcounting, I\u0027d like to add obj.CreateXYZ overloads that take the descriptor by value. Alternatively could be utils, but simply having it in webgpu_cpp.h would be quite nice for native users as well.",
+      "parentUuid": "f7d05d9a_158151e0",
       "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
