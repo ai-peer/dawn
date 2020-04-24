@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "397f413a_62bfa37d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T22:45:39Z",
+      "side": 1,
+      "message": "Agreed. But it is not easy to do this from a TextureUsedAs() call in Bundle [1]. Let\u0027s revisit this when we implement subresource support for bundle.",
+      "parentUuid": "4dc1614a_48dbf9e2",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f866f00d_616a7a38",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 6
@@ -51,6 +69,24 @@
       "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea9fc802_8db74fcd",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T22:45:39Z",
+      "side": 1,
+      "message": "Done. \n\nGood point. I didn\u0027t realize that we may have multiple threading which can have multiple encoder upon the same texture. So reset/clear the usage during ecoder finish can\u0027t prevent this situation.",
+      "parentUuid": "f866f00d_616a7a38",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "b8854cbe_b5826e92",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T22:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e61ccf_7da2f9a3",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f82777be_ddd2c8f0",
         "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
         "patchSetId": 6
@@ -103,6 +157,24 @@
       "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "780d9a73_983af400",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T22:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82777be_ddd2c8f0",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

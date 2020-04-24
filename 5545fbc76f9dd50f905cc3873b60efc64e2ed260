@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2c32e60_cc8ad748",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-24T22:45:39Z",
+      "side": 1,
+      "message": "[1] is here.\nNo texture view info in PassResourceUsage, so we can\u0027t easily extract texture view info. And the TextureUsedAs() here loses subresource usage tracking info. So I added a TODO.",
+      "range": {
+        "startLine": 157,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 86
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
