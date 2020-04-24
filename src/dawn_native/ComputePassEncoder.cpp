@@ -49,19 +49,21 @@ namespace dawn_native {
 
                 return {};
             })) {
-            mEncodingContext->ExitPass(this, mUsageTracker.AcquireResourceUsage());
+            mEncodingContext->ExitPass(this, false, mUsageTracker.AcquireResourceUsage());
         }
     }
 
     void ComputePassEncoder::Dispatch(uint32_t x, uint32_t y, uint32_t z) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
-            dispatch->x = x;
-            dispatch->y = y;
-            dispatch->z = z;
+        if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+                DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
+                dispatch->x = x;
+                dispatch->y = y;
+                dispatch->z = z;
 
-            return {};
-        });
+                return {};
+            })) {
+            mEncodingContext->ExitDispatch(mUsageTracker.AcquireResourceUsage());
+        }
     }
 
     void ComputePassEncoder::DispatchIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
