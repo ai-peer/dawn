@@ -16,6 +16,24 @@
       "revId": "d11860abd82682dcf0750491d9f5b650c4aa1451",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cc7f23d_d899ad75",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-24T17:01:35Z",
+      "side": 1,
+      "message": "It can\u0027t because of the volatile.",
+      "parentUuid": "5641921b_878ce212",
+      "revId": "d11860abd82682dcf0750491d9f5b650c4aa1451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
