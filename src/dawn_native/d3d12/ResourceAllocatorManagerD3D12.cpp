@@ -258,7 +258,8 @@ namespace dawn_native { namespace d3d12 {
             resourceInfo =
                 mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
         }
-        if (resourceInfo.SizeInBytes == 0) {
+        if (resourceInfo.SizeInBytes == 0 ||
+            resourceInfo.SizeInBytes == std::numeric_limits<uint64_t>::max()) {
             return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
         }
 
@@ -315,7 +316,8 @@ namespace dawn_native { namespace d3d12 {
         // lost (too large for driver). Instead, treat the error as a OOM.
         D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
             mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
-        if (resourceInfo.SizeInBytes == 0) {
+        if (resourceInfo.SizeInBytes == 0 ||
+            resourceInfo.SizeInBytes == std::numeric_limits<uint64_t>::max()) {
             return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
         }
 
