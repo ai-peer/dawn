@@ -72,7 +72,10 @@ namespace dawn_native {
 
         // Functions to set current encoder state
         void EnterPass(const ObjectBase* passEncoder);
-        void ExitPass(const ObjectBase* passEncoder, PassResourceUsage passUsages);
+        void ExitPass(const ObjectBase* passEncoder,
+                      bool isRenderPass,
+                      PassResourceUsage passUsages);
+        void ExitDispatch(PassResourceUsage passUsages);
         MaybeError Finish();
 
         const PerPassUsages& GetPassUsages() const;

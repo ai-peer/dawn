@@ -57,7 +57,11 @@ namespace dawn_native {
 
                 return {};
             })) {
-            mEncodingContext->ExitPass(this, mUsageTracker.AcquireResourceUsage());
+            PassResourceUsage passUsage = mUsageTracker.AcquireResourceUsage();
+            for (uint32_t i = 0; i < passUsage.textures.size(); ++i) {
+                passUsage.textures[i]->ResetSubresourceUsages();
+            }
+            mEncodingContext->ExitPass(this, true, passUsage);
         }
     }
 

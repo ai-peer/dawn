@@ -641,9 +641,7 @@ namespace {
             pass.SetPipeline(cp);
             pass.Dispatch(1);
             pass.EndPass();
-            encoder.Finish();
-            // TODO (yunchao.he@intel.com): add resource tracking per dispatch for compute pass
-            // ASSERT_DEVICE_ERROR(encoder.Finish());
+            ASSERT_DEVICE_ERROR(encoder.Finish());
         }
     }
 
