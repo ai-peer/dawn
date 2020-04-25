@@ -704,7 +704,12 @@ namespace dawn_native { namespace metal {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    LazyClearForPass(passResourceUsages[nextPassNumber]);
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
+                    if (nextPassNumber < passResourceUsages.size()) {
+                        LazyClearForPass(passResourceUsages[nextPassNumber]);
+                    }
                     commandContext->EndBlit();
 
                     EncodeComputePass(commandContext);
@@ -716,6 +721,9 @@ namespace dawn_native { namespace metal {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
                     LazyClearForPass(passResourceUsages[nextPassNumber]);
                     commandContext->EndBlit();
 

@@ -49,39 +49,44 @@ namespace dawn_native {
 
                 return {};
             })) {
-            mEncodingContext->ExitPass(this, mUsageTracker.AcquireResourceUsage());
+            mEncodingContext->ExitPass(this, false, mUsageTracker.AcquireResourceUsage());
         }
     }
 
     void ComputePassEncoder::Dispatch(uint32_t x, uint32_t y, uint32_t z) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
-            dispatch->x = x;
-            dispatch->y = y;
-            dispatch->z = z;
+        if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+                DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
+                dispatch->x = x;
+                dispatch->y = y;
+                dispatch->z = z;
 
-            return {};
-        });
+                return {};
+            })) {
+            mEncodingContext->ExitDispatch(mUsageTracker.AcquireResourceUsage());
+        }
     }
 
     void ComputePassEncoder::DispatchIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
+        if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+                DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
 
-            if (indirectOffset >= indirectBuffer->GetSize() ||
-                indirectOffset + kDispatchIndirectSize > indirectBuffer->GetSize()) {
-                return DAWN_VALIDATION_ERROR("Indirect offset out of bounds");
-            }
+                if (indirectOffset >= indirectBuffer->GetSize() ||
+                    indirectOffset + kDispatchIndirectSize > indirectBuffer->GetSize()) {
+                    return DAWN_VALIDATION_ERROR("Indirect offset out of bounds");
+                }
 
-            DispatchIndirectCmd* dispatch =
-                allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
-            dispatch->indirectBuffer = indirectBuffer;
-            dispatch->indirectOffset = indirectOffset;
+                DispatchIndirectCmd* dispatch =
+                    allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
+                dispatch->indirectBuffer = indirectBuffer;
+                dispatch->indirectOffset = indirectOffset;
 
-            mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+                // TODO (yunchao.he@intel.com): add buffer usage tracking tests for indirect buffer
+                mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
-            return {};
-        });
+                return {};
+            })) {
+            mEncodingContext->ExitDispatch(mUsageTracker.AcquireResourceUsage());
+        }
     }
 
     void ComputePassEncoder::SetPipeline(ComputePipelineBase* pipeline) {
