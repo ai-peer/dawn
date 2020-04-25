@@ -32,6 +32,7 @@ namespace dawn_native {
     // re-compute it.
     struct PassResourceUsage {
         PassType passType;
+        bool needTracking = true;
         std::vector<BufferBase*> buffers;
         std::vector<wgpu::BufferUsage> bufferUsages;
 

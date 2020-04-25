@@ -502,6 +502,9 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
                     PrepareResourcesForSubmission(commandContext,
                                                   passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(true);
@@ -515,8 +518,14 @@ namespace dawn_native { namespace d3d12 {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    const bool passHasUAV = PrepareResourcesForSubmission(
-                        commandContext, passResourceUsages[nextPassNumber]);
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
+                    const bool passHasUAV = false;
+                    if (nextPassNumber < passResourceUsages.size()) {
+                        passHasUAV = PrepareResourcesForSubmission(
+                            commandContext, passResourceUsages[nextPassNumber]);
+                    }
                     bindingTracker.SetInComputePass(false);
 
                     LazyClearRenderPassAttachments(beginRenderPassCmd);

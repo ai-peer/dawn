@@ -781,7 +781,9 @@ namespace dawn_native {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         for (const PassResourceUsage& passUsage : perPassUsages) {
-            DAWN_TRY(ValidatePassResourceUsage(passUsage));
+            if (passUsage.needTracking) {
+                DAWN_TRY(ValidatePassResourceUsage(passUsage));
+            }
         }
 
         uint64_t debugGroupStackSize = 0;
