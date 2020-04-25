@@ -704,7 +704,13 @@ namespace dawn_native { namespace metal {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    LazyClearForPass(passResourceUsages[nextPassNumber]);
+                    // Bypass resources that are outside of dispatch in compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    } else {
+                        LazyClearForPass(passResourceUsages[nextPassNumber]);
+                    }
+
                     commandContext->EndBlit();
 
                     EncodeComputePass(commandContext);
@@ -715,6 +721,11 @@ namespace dawn_native { namespace metal {
 
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
+
+                    // Bypass resources that are outside of dispatch in the previous compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
 
                     LazyClearForPass(passResourceUsages[nextPassNumber]);
                     commandContext->EndBlit();

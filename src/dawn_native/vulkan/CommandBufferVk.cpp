@@ -532,6 +532,11 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
+                    // Bypass resources that are outside of dispatch in the previous compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
+
                     TransitionForPass(recordingContext, passResourceUsages[nextPassNumber]);
 
                     LazyClearRenderPassAttachments(cmd);
@@ -544,7 +549,12 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(recordingContext, passResourceUsages[nextPassNumber]);
+                    // Bypass resources that are outside of dispatch in compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    } else {
+                        TransitionForPass(recordingContext, passResourceUsages[nextPassNumber]);
+                    }
                     RecordComputePass(recordingContext);
 
                     nextPassNumber++;

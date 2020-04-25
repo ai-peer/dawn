@@ -436,15 +436,27 @@ namespace dawn_native { namespace opengl {
             switch (type) {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
-                    TransitionForPass(passResourceUsages[nextPassNumber]);
-                    ExecuteComputePass();
 
+                    // Bypass resources that are outside of dispatch in compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    } else {
+                        TransitionForPass(passResourceUsages[nextPassNumber]);
+                    }
+
+                    ExecuteComputePass();
                     nextPassNumber++;
                     break;
                 }
 
                 case Command::BeginRenderPass: {
                     auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
+
+                    // Bypass resources that are outside of dispatch in the previous compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
+
                     TransitionForPass(passResourceUsages[nextPassNumber]);
 
                     LazyClearRenderPassAttachments(cmd);

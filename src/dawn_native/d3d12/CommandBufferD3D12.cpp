@@ -502,8 +502,14 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    PrepareResourcesForSubmission(commandContext,
-                                                  passResourceUsages[nextPassNumber]);
+                    // Bypass resources that are outside of dispatch in compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    } else {
+                        PrepareResourcesForSubmission(commandContext,
+                                                      passResourceUsages[nextPassNumber]);
+                    }
+
                     bindingTracker.SetInComputePass(true);
                     DAWN_TRY(RecordComputePass(commandContext, &bindingTracker));
 
@@ -514,6 +520,11 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
+
+                    // Bypass resources that are outside of dispatch in the previous compute pass
+                    if (!passResourceUsages[nextPassNumber].needTracking) {
+                        nextPassNumber++;
+                    }
 
                     const bool passHasUAV = PrepareResourcesForSubmission(
                         commandContext, passResourceUsages[nextPassNumber]);
