@@ -16,6 +16,24 @@
       "revId": "6e4132c7cdb5a53dc8988666a4a9f266323143dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec5a4e40_2b158110",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-04-27T18:26:15Z",
+      "side": 1,
+      "message": "Sorry, hope it\u0027s fine now.",
+      "parentUuid": "b234e25a_4536955e",
+      "revId": "6e4132c7cdb5a53dc8988666a4a9f266323143dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8dd55349_5891ecec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-04-27T18:26:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1e4d33d_cf4b65e8",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2bcf861d_450f0ccc",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "beff9763_95be6de6",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-04-27T18:26:15Z",
+      "side": 1,
+      "message": "Oh that\u0027s really good to know. In DawnPerfTestPlatform - AcquireTraceEventBuffer, there is a std::transform used.",
+      "parentUuid": "2bcf861d_450f0ccc",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "388022b5_94344b43",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
@@ -68,6 +104,24 @@
       "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d52b0ac7_cc0f0a47",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-04-27T18:26:15Z",
+      "side": 1,
+      "message": "Do you mean like this?\n {0, wgpu::ShaderStage::Fragment, storageTextureType, false, false, wgpu::TextureViewDimension::Undefined, wgpu::TextureViewDimension::Undefined, wgpu::TextureComponentType::Float, kFormat}",
+      "parentUuid": "388022b5_94344b43",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
