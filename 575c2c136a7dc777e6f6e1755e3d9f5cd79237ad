@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4ce64c21_9d7b4a67",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "See comment there, I think this could be done because we shouldn\u0027t need the view in [1].",
+      "parentUuid": "397f413a_62bfa37d",
+      "revId": "575c2c136a7dc777e6f6e1755e3d9f5cd79237ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f866f00d_616a7a38",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 6

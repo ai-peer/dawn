@@ -2,6 +2,188 @@
   "comments": [
     {
       "key": {
+        "uuid": "4726d8cc_f269ba53",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "This should use const\u0026 otherwise a copy of the whole structure (including the vector) happens.",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e0061f0_4b641ef5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: this could be if (don\u0027t need to check subresources) {continue;}\n\nThis is pretty interesting, because in most cases we can assume that textures won\u0027t be used with usages that require checking per subresource, nice! Can have a comment to that explains why we keep usage in TextureUsageTracker when the same information can be deduced from subresourceUsage?",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197a2803_2a4cf418",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "This should never happen and could be ASSERTed instead.",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 325,
+        "endChar": 1
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dceb33b8_5d91eeb7",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: This could use the range-for construct: for (wgpu::TextureUsage sub\u003dresourceUsage : ...).",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc1104d0_d108b6f5",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: the comment should stay with PassResourceUsage, and maybe we should have a new explanation for TextureUsageTracker.",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76aed3c9_f4681456",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: PassTextureUsage?",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d11ce937_0f11804d",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: \"texture\" in textureUsage is a bit redundant since we already are in the TextureUsageTracker. Just \"usage\" would work.",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "025cd852_45b22e05",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "This comment needs to be updated. I think something like the following could work well:\n\n  auto insertion \u003d mTextureUsages.emplace(texture);\n\n  PassTextureUsage* textureUsage \u003d \u0026*insertion-\u003efirst;\n\n  // This is a new entry, initialize the subresource usage vector.\n  if (insertion.second) {\n      ...\n  }\n\n  textureUsage-\u003eusage |\u003d ...;\n  for miplevels and baseArrayLayers, ...",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1483b37d_26a9a6c7",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "It\u0027s probably unnecessary to special case textures with a single subresource. We can do better, more general optimizations later.",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 73
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a10d2f_2ab6382e",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "I think this whole block can instead be result.textureUsages.push_back(std::move(it.second));",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2c32e60_cc8ad748",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 8
@@ -19,6 +201,115 @@
         "endLine": 161,
         "endChar": 86
       },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a787a2e_009407af",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "This could be implemented with another call on PassResourceUsage to merge one in another: we already have the information for subresource usage in the renderbundle pass resource usage, we just need to add it to the current pass resource usage. (so we don\u0027t need the data of the view)\n\nActually can we have tests for subresource tracking across, for example two render bundles used in the same pass? It doesn\u0027t need to be comprehensive but a couple test cases would be good.",
+      "parentUuid": "e2c32e60_cc8ad748",
+      "range": {
+        "startLine": 157,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 86
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b300f1ed_407b13a4",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "Nit: Multithreading is not the only case where this can happen, for example in a single threaded case someone can do: (imagine it is VR)\n\n  leftEyePass \u003d ...;\n  rightEyePass \u003d ...;\n\n  for (object in objects) {\n     render in leftEyePass;\n     render in RightEyePass;\n  }\n\nIn this example the texture usages are the same but it shows we can have multiple encoders encoding at the same time.",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6257627_84fc3ace",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "nit: this is the default.",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd2a5b18_3b4216e7",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65cc83a0_cd3272d9",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d28c944_4d937e53",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T08:13:31Z",
+      "side": 1,
+      "message": "Also add tests for conflicts between usages in two render bundles used in the same pass?",
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
