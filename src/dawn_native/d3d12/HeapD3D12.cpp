@@ -16,16 +16,7 @@
 
 namespace dawn_native { namespace d3d12 {
     Heap::Heap(ComPtr<ID3D12Pageable> d3d12Pageable, MemorySegment memorySegment, uint64_t size)
-        : mD3d12Pageable(std::move(d3d12Pageable)), mMemorySegment(memorySegment), mSize(size) {
-    }
-
-    Heap::~Heap() {
-        // When a heap is destroyed, it no longer resides in resident memory, so we must evict
-        // it from the LRU cache. If this heap is not manually removed from the LRU-cache, the
-        // ResidencyManager will attempt to use it after it has been deallocated.
-        if (IsInResidencyLRUCache()) {
-            RemoveFromList();
-        }
+        : Pageable(d3d12Pageable, memorySegment, size) {
     }
 
     // This function should only be used when mD3D12Pageable was initialized from a
@@ -37,54 +28,6 @@ namespace dawn_native { namespace d3d12 {
         HRESULT result = mD3d12Pageable.As(&heap);
         ASSERT(SUCCEEDED(result));
         return heap.Get();
-    }
-
-    ID3D12Pageable* Heap::GetD3D12Pageable() const {
-        return mD3d12Pageable.Get();
-    }
-
-    MemorySegment Heap::GetMemorySegment() const {
-        return mMemorySegment;
-    }
-
-    Serial Heap::GetLastUsage() const {
-        return mLastUsage;
-    }
-
-    void Heap::SetLastUsage(Serial serial) {
-        mLastUsage = serial;
-    }
-
-    uint64_t Heap::GetLastSubmission() const {
-        return mLastSubmission;
-    }
-
-    void Heap::SetLastSubmission(Serial serial) {
-        mLastSubmission = serial;
-    }
-
-    uint64_t Heap::GetSize() const {
-        return mSize;
-    }
-
-    bool Heap::IsInResidencyLRUCache() const {
-        return IsInList();
-    }
-
-    void Heap::IncrementResidencyLock() {
-        mResidencyLockRefCount++;
-    }
-
-    void Heap::DecrementResidencyLock() {
-        mResidencyLockRefCount--;
-    }
-
-    bool Heap::IsResidencyLocked() const {
-        if (mResidencyLockRefCount == 0) {
-            return false;
-        }
-
-        return true;
     }
 
 }}  // namespace dawn_native::d3d12
