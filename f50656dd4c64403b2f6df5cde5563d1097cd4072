@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "5ff65f23_de21cc26",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T18:29:17Z",
+      "side": 1,
+      "message": "Yep, so the include should be in the .cpp file so as to minimize the contagiousness of includes.",
+      "parentUuid": "beff9763_95be6de6",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "388022b5_94344b43",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
