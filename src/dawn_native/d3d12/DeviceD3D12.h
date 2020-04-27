@@ -55,8 +55,6 @@ namespace dawn_native { namespace d3d12 {
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
 
-        Serial GetCompletedCommandSerial() const final override;
-        Serial GetLastSubmittedCommandSerial() const final override;
         MaybeError TickImpl() override;
 
         ID3D12Device* GetD3D12Device() const;
@@ -155,8 +153,6 @@ namespace dawn_native { namespace d3d12 {
         void ShutDownImpl() override;
         MaybeError WaitForIdleForDestruction() override;
 
-        Serial mCompletedSerial = 0;
-        Serial mLastSubmittedSerial = 0;
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent = nullptr;
 

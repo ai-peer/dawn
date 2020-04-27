@@ -46,8 +46,7 @@ namespace dawn_native { namespace metal {
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
 
-        Serial GetCompletedCommandSerial() const final override;
-        Serial GetLastSubmittedCommandSerial() const final override;
+        Serial GetCompletedCommandSerial() const override;
         MaybeError TickImpl() override;
 
         id<MTLDevice> GetMTLDevice();
@@ -108,7 +107,6 @@ namespace dawn_native { namespace metal {
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
 
-        Serial mLastSubmittedSerial = 0;
         CommandRecordingContext mCommandContext;
 
         // The completed serial is updated in a Metal completion handler that can be fired on a

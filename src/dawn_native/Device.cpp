@@ -292,6 +292,22 @@ namespace dawn_native {
         return mFenceSignalTracker.get();
     }
 
+    Serial DeviceBase::GetCompletedCommandSerial() const {
+        return mCompletedSerial;
+    }
+
+    void DeviceBase::SetCompletedCommandSerial(Serial completedSerial) {
+        mCompletedSerial = completedSerial;
+    }
+
+    Serial DeviceBase::GetLastSubmittedCommandSerial() const {
+        return mLastSubmittedSerial;
+    }
+
+    void DeviceBase::IncrementLastSubmittedCommandSerial() {
+        mLastSubmittedSerial++;
+    }
+
     ResultOrError<const Format*> DeviceBase::GetInternalFormat(wgpu::TextureFormat format) const {
         size_t index = ComputeFormatIndex(format);
         if (index >= mFormatTable.size()) {

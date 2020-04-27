@@ -147,20 +147,12 @@ namespace dawn_native { namespace opengl {
 
     void Device::SubmitFenceSync() {
         GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-        mLastSubmittedSerial++;
-        mFencesInFlight.emplace(sync, mLastSubmittedSerial);
-    }
-
-    Serial Device::GetCompletedCommandSerial() const {
-        return mCompletedSerial;
-    }
-
-    Serial Device::GetLastSubmittedCommandSerial() const {
-        return mLastSubmittedSerial;
+        IncrementLastSubmittedCommandSerial();
+        mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
     }
 
     Serial Device::GetPendingCommandSerial() const {
-        return mLastSubmittedSerial + 1;
+        return GetLastSubmittedCommandSerial() + 1;
     }
 
     MaybeError Device::TickImpl() {
@@ -184,8 +176,8 @@ namespace dawn_native { namespace opengl {
 
             mFencesInFlight.pop();
 
-            ASSERT(fenceSerial > mCompletedSerial);
-            mCompletedSerial = fenceSerial;
+            ASSERT(fenceSerial > GetCompletedCommandSerial());
+            SetCompletedCommandSerial(fenceSerial);
         }
     }
 
@@ -207,7 +199,8 @@ namespace dawn_native { namespace opengl {
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
+        IncrementLastSubmittedCommandSerial();
+        SetCompletedCommandSerial(GetLastSubmittedCommandSerial());
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
