@@ -17,6 +17,7 @@
 
 #include <dawn_platform/DawnPlatform.h>
 
+#include <algorithm>
 #include <memory>
 #include <mutex>
 #include <thread>
