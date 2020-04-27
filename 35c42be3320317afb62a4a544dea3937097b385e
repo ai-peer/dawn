@@ -33,6 +33,24 @@
       "revId": "35c42be3320317afb62a4a544dea3937097b385e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0616d34_ed6adad6",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-04-27T18:43:06Z",
+      "side": 1,
+      "message": "Yes I ran git cl format before uploading",
+      "parentUuid": "c8324774_a1ef0e2d",
+      "revId": "35c42be3320317afb62a4a544dea3937097b385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
