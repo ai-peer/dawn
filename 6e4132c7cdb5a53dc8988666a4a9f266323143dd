@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b234e25a_4536955e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:32:22Z",
+      "side": 1,
+      "message": "nit: usually commit messages should look like the following (not a super strict guideline, but the title always need to be separated from the rest with a newline for example)\n\n\n  Commit title in less than 60-70 characters.\n\n  Paragraphs of explanations wrapped to 70 characters.\n  They can contain lists or pseudo Markdown if you want even if\n  Gerrit doesn\u0027t show Markdown (nor our repo).\n\n  Bug: ....\n\n  Change-Id: ...",
+      "revId": "6e4132c7cdb5a53dc8988666a4a9f266323143dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
