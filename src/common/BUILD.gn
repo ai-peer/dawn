@@ -104,6 +104,14 @@ config("dawn_internal") {
       "-Wstrict-prototypes",
       "-Wtautological-unsigned-zero-compare",
     ]
+
+    cflags += [
+      "-pedantic",
+      "-Wno-c++20-designator"
+      "-Wno-gnu-zero-variadic-macro-arguments",
+      "-Wno-nested-anon-types",
+      "-Wno-four-char-constants",
+    ]
   }
 }
 
