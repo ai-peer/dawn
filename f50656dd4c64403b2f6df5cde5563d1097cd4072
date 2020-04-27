@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "99e4969d_73a3c32e",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T16:29:35Z",
+      "side": 1,
+      "message": "The part about the include not being needed hasn\u0027t been addressed. If possible can we move it to the .cpp file?",
+      "parentUuid": "2bcf861d_450f0ccc",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "388022b5_94344b43",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 2
