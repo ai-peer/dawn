@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8a2173fc_572ee85c",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure min / max has a lot of value, it requires having more types and means that operations like foo + n - 1 can break depending on the order the C++ standard defines operators are evaluated. Also as you mentioned offline, we\u0027re going to have variable device limits, so there won\u0027t be a single kMaxBindGroups value that\u0027s valid.",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c348bcfa_25e7b8e6",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "Without min/max I don\u0027t think that\u0027s needed.",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "000420f8_8bcf7a2f",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 4
@@ -25,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "ada72630_d587ac75",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "Overall I think we should have our own implementation of std::array (like you did below) and std::bitset that take TypedInteger as index values. We likely need to make our own bitset for the performance of BitSetIterator anyway. ANGLE\u0027s source can be a useful starting point although we\u0027ll need to improve in a couple places.",
+      "parentUuid": "000420f8_8bcf7a2f",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 58
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a88a1f86_10bc819d",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 4
@@ -36,6 +94,40 @@
       "writtenOn": "2020-04-24T21:48:04Z",
       "side": 1,
       "message": "Doesn\u0027t this need `explicit` on it?",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf72afb8_dfef8c29",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "What do you think of making the binops and comparison ops only work on two typed integers of the same type? It would make the code slightly more verbose but add even more type safety. It would be interesting to see what additional changes it will require in this CL.",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f86bde9_af21b526",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "Interesting, this is because these types are supposed to transparently be the standard types in release?",
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -172,6 +264,30 @@
       "side": 1,
       "message": "Ah, fair point. I don\u0027t know of a way to do that; it doesn\u0027t seem to be possible.\n\nAlso I just learned that `BindingIndex i \u003d 0` won\u0027t resolve to use `operator\u003d` anyway; that requires an implicit constructor.\n\nIt might actually be okay to weaken this though, with an implicit constructor(I) and operator\u003d(I). It\u0027s not common that you would reassign to a BindingIndex anyway, and it still gets typechecked on read (I think?)",
       "parentUuid": "0b9fb377_a2a95c7d",
+      "range": {
+        "startLine": 228,
+        "startChar": 26,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb4998dc_26a224ba",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:51:19Z",
+      "side": 1,
+      "message": "I\u0027m worried that making the constructor implicit will remove half the usefulness of making typed integers.",
+      "parentUuid": "5bc5cad7_82696976",
       "range": {
         "startLine": 228,
         "startChar": 26,
