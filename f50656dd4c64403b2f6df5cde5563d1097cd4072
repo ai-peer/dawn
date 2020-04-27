@@ -158,6 +158,24 @@
       "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdb28209_018af279",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T18:30:19Z",
+      "side": 1,
+      "message": "Yep, it\u0027s ugly but that\u0027s what we have to do for now.",
+      "parentUuid": "d52b0ac7_cc0f0a47",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
