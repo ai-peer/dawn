@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "452e09c6_cd460432",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T07:26:00Z",
+      "side": 1,
+      "message": "nit: this could probably be a larger structure that\u0027s passed by pointer instead of many arguments.",
+      "revId": "daa2eff0ba80d2f6a53714a19a6bc4850ef50c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee8730ab_f7c19fc8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T07:26:00Z",
+      "side": 1,
+      "message": "At most 4 bingroups are grouped together, and I believe the forest demo only uses one or two bindgroups at a time. Gains from CopyDescriptor could come from batching as many updates as possible during encoding. Basically CopyDescriptor would only happen when switching heaps, or when the encoding is finished.",
+      "revId": "daa2eff0ba80d2f6a53714a19a6bc4850ef50c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
