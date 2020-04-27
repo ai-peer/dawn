@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e4d33d_cf4b65e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:10:41Z",
+      "side": 1,
+      "message": "nit: Fixes for MSVC compilation.\n\nDescribe fix 1, describe fix2\n\nPlease also add \"Bug: dawn:394\" at the end so that the CL is referenced in the https://bugs.chromium.org/p/dawn/issues/detail?id\u003d394 issue I just created.",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bcf861d_450f0ccc",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:10:41Z",
+      "side": 1,
+      "message": "nit: alphabetical order. You can run `git cl format` to automatically format all the code files. Why is this included needed in the file? I can\u0027t find it.",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "388022b5_94344b43",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T12:10:41Z",
+      "side": 1,
+      "message": "For bind group layouts we try to keep it as a single aggregate structure similar to:\n\n  utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, storageTextureType, kFormat}});\n\nbut there might be missing values in the initializer above.\n\nSame comment everywhere else in this file.",
+      "revId": "f50656dd4c64403b2f6df5cde5563d1097cd4072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
