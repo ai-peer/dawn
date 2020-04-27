@@ -155,10 +155,6 @@ namespace dawn_native { namespace vulkan {
         return TextureView::Create(texture, descriptor);
     }
 
-    Serial Device::GetCompletedCommandSerial() const {
-        return mCompletedSerial;
-    }
-
     Serial Device::GetLastSubmittedCommandSerial() const {
         return mLastSubmittedSerial;
     }
@@ -171,22 +167,24 @@ namespace dawn_native { namespace vulkan {
         CheckPassedFences();
         RecycleCompletedCommands();
 
-        for (Ref<BindGroupLayout>& bgl :
-             mBindGroupLayoutsPendingDeallocation.IterateUpTo(mCompletedSerial)) {
-            bgl->FinishDeallocation(mCompletedSerial);
-        }
-        mBindGroupLayoutsPendingDeallocation.ClearUpTo(mCompletedSerial);
+        Serial completedSerial = GetCompletedCommandSerial();
 
-        mMapRequestTracker->Tick(mCompletedSerial);
-        mResourceMemoryAllocator->Tick(mCompletedSerial);
-        mDeleter->Tick(mCompletedSerial);
+        for (Ref<BindGroupLayout>& bgl :
+             mBindGroupLayoutsPendingDeallocation.IterateUpTo(completedSerial)) {
+            bgl->FinishDeallocation(completedSerial);
+        }
+        mBindGroupLayoutsPendingDeallocation.ClearUpTo(completedSerial);
+
+        mMapRequestTracker->Tick(completedSerial);
+        mResourceMemoryAllocator->Tick(completedSerial);
+        mDeleter->Tick(completedSerial);
 
         if (mRecordingContext.used) {
             DAWN_TRY(SubmitPendingCommands());
-        } else if (mCompletedSerial == mLastSubmittedSerial) {
+        } else if (completedSerial == mLastSubmittedSerial) {
             // If there's no GPU work in flight we still need to artificially increment the serial
             // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            mCompletedSerial++;
+            SetCompletedCommandSerial(completedSerial++);
             mLastSubmittedSerial++;
         }
 
@@ -487,8 +485,8 @@ namespace dawn_native { namespace vulkan {
             mUnusedFences.push_back(fence);
             mFencesInFlight.pop();
 
-            ASSERT(fenceSerial > mCompletedSerial);
-            mCompletedSerial = fenceSerial;
+            ASSERT(fenceSerial > GetCompletedCommandSerial());
+            SetCompletedCommandSerial(fenceSerial);
         }
     }
 
@@ -542,10 +540,10 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Device::RecycleCompletedCommands() {
-        for (auto& commands : mCommandsInFlight.IterateUpTo(mCompletedSerial)) {
+        for (auto& commands : mCommandsInFlight.IterateUpTo(GetCompletedCommandSerial())) {
             mUnusedCommands.push_back(commands);
         }
-        mCommandsInFlight.ClearUpTo(mCompletedSerial);
+        mCommandsInFlight.ClearUpTo(GetCompletedCommandSerial());
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
@@ -732,7 +730,7 @@ namespace dawn_native { namespace vulkan {
         while (!mFencesInFlight.empty()) {
             VkFence fence = mFencesInFlight.front().first;
             Serial fenceSerial = mFencesInFlight.front().second;
-            ASSERT(fenceSerial > mCompletedSerial);
+            ASSERT(fenceSerial > GetCompletedCommandSerial());
 
             VkResult result = VkResult::WrapUnsafe(VK_TIMEOUT);
             do {
@@ -746,7 +744,7 @@ namespace dawn_native { namespace vulkan {
             fn.DestroyFence(mVkDevice, fence, nullptr);
 
             mFencesInFlight.pop();
-            mCompletedSerial = fenceSerial;
+            SetCompletedCommandSerial(fenceSerial);
         }
         return {};
     }
@@ -790,7 +788,7 @@ namespace dawn_native { namespace vulkan {
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
+        SetCompletedCommandSerial(mLastSubmittedSerial + 1);
 
         // Assert that errors are device loss so that we can continue with destruction
         AssertAndIgnoreDeviceLossError(TickImpl());
@@ -808,7 +806,7 @@ namespace dawn_native { namespace vulkan {
 
         // Releasing the uploader enqueues buffers to be released.
         // Call Tick() again to clear them before releasing the deleter.
-        mDeleter->Tick(mCompletedSerial);
+        mDeleter->Tick(GetCompletedCommandSerial());
 
         mMapRequestTracker = nullptr;
 

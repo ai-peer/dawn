@@ -82,7 +82,6 @@ namespace dawn_native { namespace vulkan {
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
 
-        Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
         MaybeError TickImpl() override;
 
@@ -167,7 +166,6 @@ namespace dawn_native { namespace vulkan {
         std::queue<std::pair<VkFence, Serial>> mFencesInFlight;
         // Fences in the unused list aren't reset yet.
         std::vector<VkFence> mUnusedFences;
-        Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
 
         MaybeError PrepareRecordingContext();

@@ -177,7 +177,7 @@ namespace dawn_native { namespace metal {
         } else if (completedSerial == mLastSubmittedSerial) {
             // If there's no GPU work in flight we still need to artificially increment the serial
             // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            mCompletedSerial++;
+            SetCompletedCommandSerial(completedSerial++);
             mLastSubmittedSerial++;
         }
 
@@ -237,6 +237,7 @@ namespace dawn_native { namespace metal {
                                    pendingSerial);
             ASSERT(pendingSerial > mCompletedSerial.load());
             this->mCompletedSerial = pendingSerial;
+            SetCompletedCommandSerial(pendingSerial);
         }];
 
         TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",

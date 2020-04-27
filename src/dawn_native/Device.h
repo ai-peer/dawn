@@ -86,7 +86,8 @@ namespace dawn_native {
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) = 0;
 
-        virtual Serial GetCompletedCommandSerial() const = 0;
+        Serial GetCompletedCommandSerial() const;
+        void SetCompletedCommandSerial(Serial completedSerial);
         virtual Serial GetLastSubmittedCommandSerial() const = 0;
         virtual Serial GetPendingCommandSerial() const = 0;
         virtual MaybeError TickImpl() = 0;
@@ -322,6 +323,8 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        Serial mCompletedSerial = 0;
     };
 
 }  // namespace dawn_native
