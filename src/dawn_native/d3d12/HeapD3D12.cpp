@@ -39,6 +39,15 @@ namespace dawn_native { namespace d3d12 {
         return heap;
     }
 
+    // This function should only be used when mD3D12Pageable was initialized from an ID3D12Pageable
+    // that was initially created as an ID3D12DescriptorHeap (i.e. ShaderVisibleDescriptorHeap).
+    ComPtr<ID3D12DescriptorHeap> Heap::GetD3D12DescriptorHeap() const {
+        ComPtr<ID3D12DescriptorHeap> descriptorHeap;
+        HRESULT result = mD3d12Pageable.As(&descriptorHeap);
+        ASSERT(SUCCEEDED(result));
+        return descriptorHeap;
+    }
+
     ComPtr<ID3D12Pageable> Heap::GetD3D12Pageable() const {
         return mD3d12Pageable;
     }

@@ -25,11 +25,11 @@ namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    // This class is used to represent heap allocations, but also serves as a node within the
+    // This class is used to represent pageable allocations and serves as a node within the
     // ResidencyManager's LRU cache. This node is inserted into the LRU-cache when it is first
     // allocated, and any time it is scheduled to be used by the GPU. This node is removed from the
-    // LRU cache when it is evicted from resident memory due to budget constraints, or when the heap
-    // is destroyed.
+    // LRU cache when it is evicted from resident memory due to budget constraints, or when the
+    // allocation is freed.
     class Heap : public ResourceHeapBase, public LinkNode<Heap> {
       public:
         Heap(ComPtr<ID3D12Pageable> d3d12Pageable, MemorySegment memorySegment, uint64_t size);
@@ -37,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Heap> GetD3D12Heap() const;
         ComPtr<ID3D12Pageable> GetD3D12Pageable() const;
+        ComPtr<ID3D12DescriptorHeap> GetD3D12DescriptorHeap() const;
         MemorySegment GetMemorySegment() const;
 
         // We set mLastRecordingSerial to denote the serial this heap was last recorded to be used.
