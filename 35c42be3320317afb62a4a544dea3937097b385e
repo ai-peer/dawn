@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "636f175c_bbd6f03e",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T18:41:21Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "35c42be3320317afb62a4a544dea3937097b385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8324774_a1ef0e2d",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-27T18:41:21Z",
+      "side": 1,
+      "message": "In Dawn we usually put the cstdlib include below the dawn includes. Did git CL format do that for you?",
+      "revId": "35c42be3320317afb62a4a544dea3937097b385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
