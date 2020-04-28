@@ -272,6 +272,53 @@
       "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e95ef5a8_d8aaaea2",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T21:05:21Z",
+      "side": 1,
+      "message": "Dawn prefers object* when mutable and const object\u0026 when immutable. I think we can use const\u0026 here",
+      "parentUuid": "ca602cb9_91f93dfc",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 47
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d93912e_adba0bc6",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T21:05:21Z",
+      "side": 1,
+      "message": "typo: successful",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
