@@ -86,9 +86,11 @@ namespace dawn_native {
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) = 0;
 
-        virtual Serial GetCompletedCommandSerial() const = 0;
-        virtual Serial GetLastSubmittedCommandSerial() const = 0;
-        virtual Serial GetPendingCommandSerial() const = 0;
+        Serial GetCompletedCommandSerial() const;
+        void SetCompletedCommandSerial(Serial completedSerial);
+        Serial GetLastSubmittedCommandSerial() const;
+        void IncrementLastSubmittedCommandSerial();
+        Serial GetPendingCommandSerial() const;
         virtual MaybeError TickImpl() = 0;
 
         // Many Dawn objects are completely immutable once created which means that if two
@@ -322,6 +324,9 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        Serial mCompletedSerial = 0;
+        Serial mLastSubmittedSerial = 0;
     };
 
 }  // namespace dawn_native
