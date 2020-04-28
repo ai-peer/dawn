@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1ec342a_caeabc38",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Do we need this Impl version because mCompletedSerial is atomic?",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 5
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23608281_145794b3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Could the frontend take over the artificial incrementing?",
+      "range": {
+        "startLine": 174,
+        "startChar": 10,
+        "endLine": 179,
+        "endChar": 9
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f9d9806_594490b6",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could store the serial, and then we return it in `Serial Device::CheckCompletedSerial() override`",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 63
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d597d5b_24bc7689",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Could the frontend take over the artificial incrementing?",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 46
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25d03a97_843ae251",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could be AssumeCommandsComplete()",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 189,
+        "endChar": 67
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a18584f_4adc866b",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe here we would store the last submitted serial, and then return it in `Serial Device::CheckCompletedSerial() override`",
+      "range": {
+        "startLine": 238,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 67
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1f7fdc5_10a26f41",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could be `Serial Device::CheckCompletedSerial() override` and simply return the latest completed fenceSerial, and the frontend will set the completed serial.",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cf50547_b3f1a8b7",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could be AssumeCommandsComplete()",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 67
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0460ffa2_3bce30e9",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Could the frontend take over the artificial incrementing?",
+      "range": {
+        "startLine": 176,
+        "startChar": 10,
+        "endLine": 181,
+        "endChar": 9
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a21852d5_85715da1",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could be `Serial Device::CheckCompletedSerial() override` and simply return the latest completed fenceSerial, and the frontend will set the completed serial.",
+      "range": {
+        "startLine": 462,
+        "startChar": 4,
+        "endLine": 484,
+        "endChar": 5
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c9c73ef_de098350",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-28T19:52:21Z",
+      "side": 1,
+      "message": "Maybe this could be AssumeCommandsComplete()",
+      "range": {
+        "startLine": 781,
+        "startChar": 8,
+        "endLine": 785,
+        "endChar": 67
+      },
+      "revId": "f33381f3077b3b5ad51cd5d208e23b119e9d4561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
