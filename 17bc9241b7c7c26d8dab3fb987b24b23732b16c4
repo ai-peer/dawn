@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5949604_b20cf51f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-28T18:01:46Z",
+      "side": 1,
+      "message": "note: this is temporary",
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
