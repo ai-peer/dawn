@@ -133,6 +133,24 @@
       "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4202d4f_6a2bf680",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:49:14Z",
+      "side": 1,
+      "message": "I have already undo this, Corentin. Otherwise, the CL can\u0027t been built successfully.",
+      "parentUuid": "f73f19e3_ed20912b",
+      "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
