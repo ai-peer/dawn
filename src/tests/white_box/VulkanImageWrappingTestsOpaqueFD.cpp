@@ -962,8 +962,8 @@ namespace dawn_native { namespace vulkan {
         // Draw a non-trivial picture
         uint32_t width = 640, height = 480, pixelSize = 4;
         uint32_t bytesPerRow = Align(width * pixelSize, kTextureBytesPerRowAlignment);
-        uint32_t size = bytesPerRow * (height - 1) + width * pixelSize;
-        unsigned char data[size];
+        std::vector<unsigned char> data(bytesPerRow * (height - 1) + width * pixelSize);
+
         for (uint32_t row = 0; row < height; row++) {
             for (uint32_t col = 0; col < width; col++) {
                 float normRow = static_cast<float>(row) / height;
@@ -979,8 +979,8 @@ namespace dawn_native { namespace vulkan {
 
         // Write the picture
         {
-            wgpu::Buffer copySrcBuffer =
-                utils::CreateBufferFromData(secondDevice, data, size, wgpu::BufferUsage::CopySrc);
+            wgpu::Buffer copySrcBuffer = utils::CreateBufferFromData(
+                secondDevice, data.data(), data.size(), wgpu::BufferUsage::CopySrc);
             wgpu::BufferCopyView copySrc =
                 utils::CreateBufferCopyView(copySrcBuffer, 0, bytesPerRow, 0);
             wgpu::TextureCopyView copyDst =
