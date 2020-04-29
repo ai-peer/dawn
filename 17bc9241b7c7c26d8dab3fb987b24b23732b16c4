@@ -303,6 +303,30 @@
     },
     {
       "key": {
+        "uuid": "4f625c92_8e5de885",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-29T21:32:54Z",
+      "side": 1,
+      "message": "Since the performance is the same, this comes down to which approach is easiest to comprehend and debug.  \n\nIf the only difference between populating the two heaps is which member variables you pass to helper functions to do all of the work, then it might be better to do them separately. Offline, you said you had it that way initially. Did you switch to the approach in your CL because you thought it would be faster?",
+      "parentUuid": "6165b6db_722ac94c",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdc3fc8f_32a428b6",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -641,6 +665,30 @@
       "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "689b470a_364fe14e",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-29T21:32:54Z",
+      "side": 1,
+      "message": "Spoke offline. I see your point about being different enough that sharing code is not necessary.",
+      "parentUuid": "2dbc60b4_19f39121",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 9
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

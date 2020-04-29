@@ -45,6 +45,30 @@
       "revId": "fdf13f4c57a7602e37e96ca17af092be029b64ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68ea69b3_a49f7343",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-29T21:32:54Z",
+      "side": 1,
+      "message": "FWIW, the convention in Chromium code is to have static create methods which allocate fail-able resources and pass those using std::move to the private constructor. \n\nI like this approach because there is no confusion about whether you need initialize-after-create, nor do you end up creating objects that you need to immediately destroy if the fail-able allocations do end up failing.",
+      "parentUuid": "34bc6f82_86b6f197",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "fdf13f4c57a7602e37e96ca17af092be029b64ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
