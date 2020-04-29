@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d6925ba_ca244a82",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T18:30:58Z",
+      "side": 1,
+      "message": "Why do we need to call reserve here ?",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 90
+      },
+      "revId": "113b42bbb6d86d36b602562f9f6cc1cfba243cd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
