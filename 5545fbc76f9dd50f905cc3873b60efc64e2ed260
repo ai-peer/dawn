@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bcf58912_3efda6ea",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4726d8cc_f269ba53",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e0061f0_4b641ef5",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "698a0448_9c5ad6a0",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Comment was added. \n\nIt seems to me that we don\u0027t need if (no subresources) {continue}; please read the comment I added.",
+      "parentUuid": "0e0061f0_4b641ef5",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "a3ff496a_a970dc0c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "please see my comment: subresourceCount \u003c\u003d 1 means that no subresource (only 1 mip level and 1 layer)",
+      "parentUuid": "197a2803_2a4cf418",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 325,
+        "endChar": 1
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dceb33b8_5d91eeb7",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -73,6 +133,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5f3ebd3_9f701d60",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dceb33b8_5d91eeb7",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "bf9e669f_be87e87f",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc1104d0_d108b6f5",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76aed3c9_f4681456",
         "filename": "src/dawn_native/PassResourceUsage.h",
         "patchSetId": 8
@@ -107,6 +203,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4104da96_73450791",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76aed3c9_f4681456",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "d8512b7d_d5b13833",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d11ce937_0f11804d",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "025cd852_45b22e05",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
@@ -138,6 +270,24 @@
       "writtenOn": "2020-04-27T08:13:31Z",
       "side": 1,
       "message": "This comment needs to be updated. I think something like the following could work well:\n\n  auto insertion \u003d mTextureUsages.emplace(texture);\n\n  PassTextureUsage* textureUsage \u003d \u0026*insertion-\u003efirst;\n\n  // This is a new entry, initialize the subresource usage vector.\n  if (insertion.second) {\n      ...\n  }\n\n  textureUsage-\u003eusage |\u003d ...;\n  for miplevels and baseArrayLayers, ...",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7134db44_e1355f6b",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "The code above doesn\u0027t work, I also tried to revise it slightly to fix potential typos, it doesn\u0027t work either. Sorry. For example, when we use MapVariable.emplace(), shouldn\u0027t it MapVariable.emplace(key, value)? \n\nI can dig more tomorrow, but the current one works too.",
+      "parentUuid": "025cd852_45b22e05",
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -167,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "3423d880_3e08c3b2",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "OK. I removed the special case that textures don\u0027t have subresources (aka a single subresource). We can revisit this when we do opmizations later.",
+      "parentUuid": "1483b37d_26a9a6c7",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 73
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1a10d2f_2ab6382e",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
@@ -181,6 +355,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f4517f6_5230c2d6",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done.\n\nGood point!",
+      "parentUuid": "f1a10d2f_2ab6382e",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -231,6 +423,30 @@
     },
     {
       "key": {
+        "uuid": "13291967_c4d4a49c",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done\n\nGood point!",
+      "parentUuid": "1a787a2e_009407af",
+      "range": {
+        "startLine": 157,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 86
+      },
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b300f1ed_407b13a4",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 8
@@ -245,6 +461,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c91596ae_386170c6",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b300f1ed_407b13a4",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -265,6 +499,24 @@
     },
     {
       "key": {
+        "uuid": "64931c2a_08d5d61a",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "I tried this before, and I revisited this again. I think the default value is the total levleCount, not 1. If I remove this line, the tests fail.",
+      "parentUuid": "e6257627_84fc3ace",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd2a5b18_3b4216e7",
         "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
         "patchSetId": 8
@@ -279,6 +531,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b04ed74d_52029580",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "same reason",
+      "parentUuid": "bd2a5b18_3b4216e7",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -299,6 +569,24 @@
     },
     {
       "key": {
+        "uuid": "35d42f8c_cf11ffd3",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65cc83a0_cd3272d9",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d28c944_4d937e53",
         "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
         "patchSetId": 8
@@ -313,6 +601,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f53b03b_7281b5e8",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:40:39Z",
+      "side": 1,
+      "message": "Done. \n\nAdded a TODO. Will add tests for bundles later.",
+      "parentUuid": "6d28c944_4d937e53",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
