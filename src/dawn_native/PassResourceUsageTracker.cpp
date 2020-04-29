@@ -27,10 +27,46 @@ namespace dawn_native {
         mBufferUsages[buffer] |= usage;
     }
 
-    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage) {
+    void PassResourceUsageTracker::TextureViewUsedAs(TextureViewBase* view,
+                                                     wgpu::TextureUsage usage) {
+        TextureBase* texture = view->GetTexture();
+        uint32_t baseMipLevel = view->GetBaseMipLevel();
+        uint32_t levelCount = view->GetLevelCount();
+        uint32_t baseArrayLayer = view->GetBaseArrayLayer();
+        uint32_t layerCount = view->GetLayerCount();
+
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
-        mTextureUsages[texture] |= usage;
+        // Set usage for the whole texture
+        mTextureUsages[texture].usage |= usage;
+
+        // Set usages for subresources
+        uint32_t subresourceCount =
+            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers());
+        if (!mTextureUsages[texture].subresourceUsages.size()) {
+            mTextureUsages[texture].subresourceUsages =
+                std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
+        }
+        for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount; ++mipLevel) {
+            for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                 ++arrayLayer) {
+                uint32_t subresourceIndex = texture->GetSubresourceIndex(mipLevel, arrayLayer);
+                mTextureUsages[texture].subresourceUsages[subresourceIndex] |= usage;
+            }
+        }
+    }
+
+    void PassResourceUsageTracker::AddTextureUsage(TextureBase* texture,
+                                                   const PassTextureUsage& textureUsage) {
+        mTextureUsages[texture].usage |= textureUsage.usage;
+
+        uint32_t subresourceCount =
+            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers());
+        ASSERT(textureUsage.subresourceUsages.size() == subresourceCount);
+        mTextureUsages[texture].subresourceUsages.reserve(textureUsage.subresourceUsages.size());
+        for (uint32_t i = 0; i < subresourceCount; ++i) {
+            mTextureUsages[texture].subresourceUsages[i] |= textureUsage.subresourceUsages[i];
+        }
     }
 
     // Returns the per-pass usage for use by backends for APIs with explicit barriers.
@@ -49,7 +85,7 @@ namespace dawn_native {
 
         for (auto& it : mTextureUsages) {
             result.textures.push_back(it.first);
-            result.textureUsages.push_back(it.second);
+            result.textureUsages.push_back(std::move(it.second));
         }
 
         mBufferUsages.clear();
