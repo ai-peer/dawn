@@ -46,6 +46,30 @@
       "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa68a6b_e83ae7b1",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T06:54:45Z",
+      "side": 1,
+      "message": "As we discussed during Monday\u0027s sync meeting, let\u0027s merge the patch if the test logic is correct for compute, and then revisit the validation for compute in future. The resource tracking in compute is likely per dispatch, but it is easy to revise these tests when we write the validation code: just change ASSERT_DEVICE_ERROR (encoder.Finish()); \nto \nencoder.Finish();\n\nOr maybe I can add a comment or TODO right now. \n\nI have a few patches to cover tests for compute at my local machine, they are similar to the tests for render, but use readonly or writeonly storage texture (Jiawei just added these two binding types). Then I don\u0027t need to re-rampup on these tests in future.\n\nWDYT? looks like this is the way we agreed.",
+      "parentUuid": "1b985295_ef22e915",
+      "range": {
+        "startLine": 838,
+        "startChar": 16,
+        "endLine": 844,
+        "endChar": 54
+      },
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
