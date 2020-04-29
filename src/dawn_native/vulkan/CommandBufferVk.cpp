@@ -140,7 +140,8 @@ namespace dawn_native { namespace vulkan {
                                     mDynamicOffsetCounts, mDynamicOffsets);
 
                 for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    for (uint32_t bindingIndex : IterateBitSet(mBuffersNeedingBarrier[index])) {
+                    for (uint32_t bindingIndex : IterateBitSet((
+                             mBuffersNeedingBarrier[index] | mTextureViewsNeedingBarrier[index]))) {
                         switch (mBindingTypes[index][bindingIndex]) {
                             case wgpu::BindingType::StorageBuffer:
                                 ToBackend(mBuffers[index][bindingIndex])
@@ -148,9 +149,17 @@ namespace dawn_native { namespace vulkan {
                                                          wgpu::BufferUsage::Storage);
                                 break;
 
-                            case wgpu::BindingType::StorageTexture:
+                            // Read-only and write-only storage textures must use general layout
+                            // because load and store operations on storage images can only be done
+                            // on the images in VK_IMAGE_LAYOUT_GENERAL layout.
                             case wgpu::BindingType::ReadonlyStorageTexture:
                             case wgpu::BindingType::WriteonlyStorageTexture:
+                                ToBackend(mTextureViews[index][bindingIndex]->GetTexture())
+                                    ->TransitionUsageNow(recordingContext,
+                                                         wgpu::TextureUsage::Storage);
+                                break;
+
+                            case wgpu::BindingType::StorageTexture:
                                 // Not implemented.
 
                             case wgpu::BindingType::UniformBuffer:

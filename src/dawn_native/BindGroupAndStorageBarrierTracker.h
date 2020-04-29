@@ -36,6 +36,8 @@ namespace dawn_native {
             if (this->mBindGroups[index] != bindGroup) {
                 mBuffers[index] = {};
                 mBuffersNeedingBarrier[index] = {};
+                mTextureViews[index] = {};
+                mTextureViewsNeedingBarrier[index] = {};
 
                 const BindGroupLayoutBase* layout = bindGroup->GetLayout();
 
@@ -63,11 +65,18 @@ namespace dawn_native {
                                 bindGroup->GetBindingAsBufferBinding(bindingIndex).buffer;
                             break;
 
-                        case wgpu::BindingType::StorageTexture:
+                        // Read-only and write-only storage textures must use general layout
+                        // because load and store operations on storage images can only be done on
+                        // the images in VK_IMAGE_LAYOUT_GENERAL layout.
                         case wgpu::BindingType::ReadonlyStorageTexture:
                         case wgpu::BindingType::WriteonlyStorageTexture:
-                            // Not implemented.
+                            mTextureViewsNeedingBarrier[index].set(bindingIndex);
+                            mTextureViews[index][bindingIndex] =
+                                bindGroup->GetBindingAsTextureView(bindingIndex);
+                            break;
 
+                        case wgpu::BindingType::StorageTexture:
+                            // Not implemented.
                         default:
                             UNREACHABLE();
                             break;
@@ -80,9 +89,13 @@ namespace dawn_native {
 
       protected:
         std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mBuffersNeedingBarrier = {};
+        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mTextureViewsNeedingBarrier =
+            {};
         std::array<std::array<wgpu::BindingType, kMaxBindingsPerGroup>, kMaxBindGroups>
             mBindingTypes = {};
         std::array<std::array<BufferBase*, kMaxBindingsPerGroup>, kMaxBindGroups> mBuffers = {};
+        std::array<std::array<TextureViewBase*, kMaxBindingsPerGroup>, kMaxBindGroups>
+            mTextureViews = {};
     };
 
 }  // namespace dawn_native
