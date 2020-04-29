@@ -36,6 +36,8 @@ namespace dawn_native {
             if (this->mBindGroups[index] != bindGroup) {
                 mBuffers[index] = {};
                 mBuffersNeedingBarrier[index] = {};
+                mTextureViews[index] = {};
+                mTextureViewsNeedingBarrier[index] = {};
 
                 const BindGroupLayoutBase* layout = bindGroup->GetLayout();
 
@@ -51,6 +53,7 @@ namespace dawn_native {
                     switch (bindingInfo.type) {
                         case wgpu::BindingType::UniformBuffer:
                         case wgpu::BindingType::ReadonlyStorageBuffer:
+                        case wgpu::BindingType::ReadonlyStorageTexture:
                         case wgpu::BindingType::Sampler:
                         case wgpu::BindingType::ComparisonSampler:
                         case wgpu::BindingType::SampledTexture:
@@ -63,11 +66,14 @@ namespace dawn_native {
                                 bindGroup->GetBindingAsBufferBinding(bindingIndex).buffer;
                             break;
 
-                        case wgpu::BindingType::StorageTexture:
-                        case wgpu::BindingType::ReadonlyStorageTexture:
                         case wgpu::BindingType::WriteonlyStorageTexture:
-                            // Not implemented.
+                            mTextureViewsNeedingBarrier[index].set(bindingIndex);
+                            mTextureViews[index][bindingIndex] =
+                                bindGroup->GetBindingAsTextureView(bindingIndex);
+                            break;
 
+                        case wgpu::BindingType::StorageTexture:
+                            // Not implemented.
                         default:
                             UNREACHABLE();
                             break;
@@ -80,9 +86,13 @@ namespace dawn_native {
 
       protected:
         std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mBuffersNeedingBarrier = {};
+        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mTextureViewsNeedingBarrier =
+            {};
         std::array<std::array<wgpu::BindingType, kMaxBindingsPerGroup>, kMaxBindGroups>
             mBindingTypes = {};
         std::array<std::array<BufferBase*, kMaxBindingsPerGroup>, kMaxBindGroups> mBuffers = {};
+        std::array<std::array<TextureViewBase*, kMaxBindingsPerGroup>, kMaxBindGroups>
+            mTextureViews = {};
     };
 
 }  // namespace dawn_native
