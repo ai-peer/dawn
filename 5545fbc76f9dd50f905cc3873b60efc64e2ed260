@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "322eb139_03c1a9e6",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T11:45:31Z",
+      "side": 1,
+      "message": "Sorry this wasn\u0027t clear, what I meant was we could have an early return like the following:\n\n if (pass.passType \u003d\u003d PassType::Compute || readOnly || singleUse) {\n   return {};\n }\n\nIn general such early return help reducing the nesting of the control flow and improve readability of the code.",
+      "parentUuid": "698a0448_9c5ad6a0",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "197a2803_2a4cf418",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -288,6 +306,24 @@
       "side": 1,
       "message": "The code above doesn\u0027t work, I also tried to revise it slightly to fix potential typos, it doesn\u0027t work either. Sorry. For example, when we use MapVariable.emplace(), shouldn\u0027t it MapVariable.emplace(key, value)? \n\nI can dig more tomorrow, but the current one works too.",
       "parentUuid": "025cd852_45b22e05",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3725fafe_fa59cf96",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T11:45:31Z",
+      "side": 1,
+      "message": "Mmmmh ok. Basically my concern is that this code is doing a lot of lookup in the std::map, but ideally a single lookup is needed that does the insertion if needed, and returns an iterator to the texture we\u0027re interested in.\n\nReducing the number of lookups is important because they are fairly expensive and this function will be super hot.",
+      "parentUuid": "7134db44_e1355f6b",
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
