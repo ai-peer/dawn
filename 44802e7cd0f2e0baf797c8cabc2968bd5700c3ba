@@ -116,6 +116,23 @@
       "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f73f19e3_ed20912b",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T19:38:14Z",
+      "side": 1,
+      "message": "Sorry for the contradictory comments but we just realized we can\u0027t use designated initializers like this because it is a clang / GCC / C++20 extension and we should instead use standard C++. Can you undo this? Otherwise I\u0027ll remove all designated initializers once I remove the warning suppression.",
+      "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
