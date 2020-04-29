@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "217477ed_432ac77c",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T17:42:52Z",
+      "side": 1,
+      "message": "Could these be merged into one mBindingsNeedingBarrier ?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 15
+      },
+      "revId": "d67620846f90edbba58fe76cbfc0f9df16776044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc73f5e9_69025bdb",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T17:42:52Z",
+      "side": 1,
+      "message": "Could these be merged into one with ObjectBase*. I don\u0027t think we can have both a TextureView and a Buffer in the same binding. We\u0027d have to cast after checking the mBindingTypes enum though",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 31
+      },
+      "revId": "d67620846f90edbba58fe76cbfc0f9df16776044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
