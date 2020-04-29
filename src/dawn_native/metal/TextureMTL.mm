@@ -112,13 +112,13 @@ namespace dawn_native { namespace metal {
 
         ResultOrError<wgpu::TextureFormat> GetFormatEquivalentToIOSurfaceFormat(uint32_t format) {
             switch (format) {
-                case 'RGBA':
+                case FourCC('R', 'G', 'B', 'A'):
                     return wgpu::TextureFormat::RGBA8Unorm;
-                case 'BGRA':
+                case FourCC('B', 'G', 'R', 'A'):
                     return wgpu::TextureFormat::BGRA8Unorm;
-                case '2C08':
+                case FourCC('2', 'C', '0', '8'):
                     return wgpu::TextureFormat::RG8Unorm;
-                case 'L008':
+                case FourCC('L', '0', '0', '8'):
                     return wgpu::TextureFormat::R8Unorm;
                 default:
                     return DAWN_VALIDATION_ERROR("Unsupported IOSurface format");

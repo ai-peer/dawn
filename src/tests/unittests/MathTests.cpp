@@ -209,3 +209,8 @@ TEST(Math, RoundUp) {
     ASSERT_EQ(RoundUp(0x7FFFFFFFFFFFFFFFull, 0x8000000000000000ull), 0x8000000000000000ull);
     ASSERT_EQ(RoundUp(1, 1), 1u);
 }
+
+// Test for FourCC
+TEST(Math, FourCC) {
+    ASSERT_EQ(FourCC(1, 2, 3, 4), 0x04030201u);
+}
