@@ -384,6 +384,24 @@
     },
     {
       "key": {
+        "uuid": "79144731_2e97e99a",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T20:12:27Z",
+      "side": 1,
+      "message": "I think the reference is ok. If we find out that performance is a problem here we can try doing the more complex method later.",
+      "parentUuid": "19975a34_8b97d8a6",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1483b37d_26a9a6c7",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
