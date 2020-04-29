@@ -330,6 +330,24 @@
     },
     {
       "key": {
+        "uuid": "6e2d4910_aa6c0427",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T18:14:29Z",
+      "side": 1,
+      "message": "I think we can use lower_bound and emplace_hint\n\n// Find the entry with key \u003c\u003d texture\nauto it \u003d mTextureUsages.lower_bound(texture);\n\nif (it \u003d\u003d mTextureUsages.end() || it-\u003efirst !\u003d texture) {\n  // If the texture is not in the map, insert it. The hint variant makes\n  // this a constant time operation because we already found the nearest entry.\n  it \u003d mTextureUsages.emplace_hint(it, { None, std::vector\u003c\u003e(count, None) });\n}\n\n// Rest of the code uses |it| to avoid further lookups.",
+      "parentUuid": "3725fafe_fa59cf96",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1483b37d_26a9a6c7",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
