@@ -116,7 +116,6 @@ config("dawn_internal") {
     cflags += [
       "-Wno-gnu-zero-variadic-macro-arguments",
       "-Wno-language-extension-token",
-      "-Wno-microsoft-enum-value",
     ]
   }
 }
