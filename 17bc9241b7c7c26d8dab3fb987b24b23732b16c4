@@ -327,6 +327,30 @@
     },
     {
       "key": {
+        "uuid": "342e085b_789a67c7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-29T22:07:14Z",
+      "side": 1,
+      "message": "Ended up here because of 1) AE\u0027s macros favored single-pass and 2) IterateBitSet is hot (dawn:306). Both were conclusive. However, is CL is one of many and I\u0027m hesitant to draw perf conclusions.\n\nHow about a TODO?",
+      "parentUuid": "4f625c92_8e5de885",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdc3fc8f_32a428b6",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e5f0edd0_32928fe9",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-29T22:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab5e19ee_6aef5060",
+      "range": {
+        "startLine": 36,
+        "startChar": 55,
+        "endLine": 36,
+        "endChar": 57
+      },
+      "revId": "fdf13f4c57a7602e37e96ca17af092be029b64ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34bc6f82_86b6f197",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 5
@@ -69,6 +93,30 @@
       "revId": "fdf13f4c57a7602e37e96ca17af092be029b64ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e15aee4_22c7a8f4",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-29T22:07:14Z",
+      "side": 1,
+      "message": "Done / Ack.",
+      "parentUuid": "34bc6f82_86b6f197",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "fdf13f4c57a7602e37e96ca17af092be029b64ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
