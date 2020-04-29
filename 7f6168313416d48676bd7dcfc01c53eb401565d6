@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d883a887_4569d0ff",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T19:07:03Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 92
+      },
+      "revId": "7f6168313416d48676bd7dcfc01c53eb401565d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c879482c_bc605f5a",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-29T19:07:03Z",
+      "side": 1,
+      "message": "I think this should either be resize(..) or match what you have at [1]. reserve(..) doesn\u0027t change the size of the vector; it only adjusts the capacity such that a future resize(..) won\u0027t reallocate memory\n\nSince this code is duplicated, perhaps we can factor out the code to get or create the mTextureUsages[texture] entry with the subresources vector initialized.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 9
+      },
+      "revId": "7f6168313416d48676bd7dcfc01c53eb401565d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
