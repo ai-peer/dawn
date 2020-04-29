@@ -22,7 +22,10 @@ config("glm_public_config") {
   # GLM tries to suppress the warning for clang but gets confused by clang-cl
   # and thinks it is MSVC.
   if (is_win && is_clang) {
-    cflags = [ "-Wnested-anon-types" ]
+    cflags = [
+      "-Wgnu-anonymous-struct",
+      "-Wnested-anon-types",
+    ]
   }
 }
 source_set("glm") {
