@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "62271d8c_e1bbf1c9",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "nit: This could return the GPUDescriptorHeapAllocation directly instead of extracting data left and right to put it right back in the GPUDescriptorHeapAllocation.",
+      "range": {
+        "startLine": 176,
+        "startChar": 76,
+        "endLine": 176,
+        "endChar": 93
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40f83e36_8139582d",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 4
@@ -72,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "d8d0b69d_8a3891f4",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "+1, I thought this was to be done in an earlier CL. It would help with perf.",
+      "parentUuid": "40f83e36_8139582d",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 23
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bdc3b27_d35ec9a4",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "No strong opinion. It would using pointer-to-member right? The calling convention will probably make this very cheap, otherwise later down the line we can make the helper function a template so that it is inlined on both sides.",
+      "parentUuid": "fa000bc0_df2660dc",
+      "range": {
+        "startLine": 193,
+        "startChar": 35,
+        "endLine": 193,
+        "endChar": 51
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5949604_b20cf51f",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
         "patchSetId": 4
@@ -112,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "d51633e4_0e688886",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "IsAllocationStillValid would save us. No opinion on whether the loops should be split or not.",
+      "parentUuid": "a9621195_35887cc9",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdc3fc8f_32a428b6",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -123,6 +218,30 @@
       "writtenOn": "2020-04-28T20:19:14Z",
       "side": 1,
       "message": "Is there a reason why the code above iterates over mDirtyBindGroups while this code iterates over mBindGroupLayoutsMask?",
+      "range": {
+        "startLine": 144,
+        "startChar": 38,
+        "endLine": 144,
+        "endChar": 74
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38fde684_7903f7ae",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "Yes, if we switch heaps, we must reencode all bindgroups because potentially all of them contains views / samplers that must be reencoded in heaps.",
+      "parentUuid": "cdc3fc8f_32a428b6",
       "range": {
         "startLine": 144,
         "startChar": 38,
@@ -158,6 +277,40 @@
     },
     {
       "key": {
+        "uuid": "32940541_74c1fed1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "nit: Hide the make_unique + Initialize in a Create static member method?",
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1653895c_edbbb145",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "Note: this is now unused.",
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6659938_cdc5debb",
         "filename": "src/dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h",
         "patchSetId": 4
@@ -175,6 +328,47 @@
         "endLine": 37,
         "endChar": 31
       },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56823027_30f40773",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "Alternatively make this a struct and all members const so they can\u0027t be change (they would also lose the m prefix). Either way is fine.",
+      "parentUuid": "d6659938_cdc5debb",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "541ec623_9cbbd3ae",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "nit: return AllocateAndSwitchShaderVisibleHeap()",
       "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -310,6 +504,30 @@
       "writtenOn": "2020-04-28T21:05:21Z",
       "side": 1,
       "message": "typo: successful",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83233558_b1ed3592",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-29T14:09:52Z",
+      "side": 1,
+      "message": "and nit: returns true if the allocation was successful, when false is returned the current heap is full and AllocateAndSwitchShaderVisibleHeap must be called.",
+      "parentUuid": "4d93912e_adba0bc6",
       "range": {
         "startLine": 40,
         "startChar": 29,
