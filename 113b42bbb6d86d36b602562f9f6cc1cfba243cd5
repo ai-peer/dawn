@@ -22,6 +22,30 @@
       "revId": "113b42bbb6d86d36b602562f9f6cc1cfba243cd5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "888b241b_5c065f30",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "You captured a mistake, Austin. Thank you. We need to reserve the space only if its subresourceUsages vector is empty, which means that it is the first time to track the current texture.",
+      "parentUuid": "0d6925ba_ca244a82",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 90
+      },
+      "revId": "113b42bbb6d86d36b602562f9f6cc1cfba243cd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

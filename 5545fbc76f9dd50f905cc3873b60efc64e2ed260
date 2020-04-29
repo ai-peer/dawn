@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "cd046941_ca669683",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "322eb139_03c1a9e6",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "197a2803_2a4cf418",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -345,6 +363,24 @@
       "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19975a34_8b97d8a6",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "Thanks for your explanation and review, Corentin and Austin! \n\nWhat about a reference to PassTextureUsage? The use the reference, we don\u0027t need to access to the std::map either. We can just use the reference, it is simple and clear. Can it remove redandunt access to std::map? If not, I will try Austin\u0027s method.",
+      "parentUuid": "6e2d4910_aa6c0427",
+      "revId": "5545fbc76f9dd50f905cc3873b60efc64e2ed260",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

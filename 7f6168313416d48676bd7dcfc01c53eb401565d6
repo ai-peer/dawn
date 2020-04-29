@@ -45,6 +45,30 @@
       "revId": "7f6168313416d48676bd7dcfc01c53eb401565d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1641c39_e987cbf8",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "You are correct, Done! \n\nI should have written tests for bundles, will add such tests later. \n\nLet\u0027s do optimizations later, maybe with validation for compute added.",
+      "parentUuid": "c879482c_bc605f5a",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 9
+      },
+      "revId": "7f6168313416d48676bd7dcfc01c53eb401565d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

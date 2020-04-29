@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e404ae8_c1d5805d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "Ack \u0026 Done!",
+      "parentUuid": "7ad0082a_43d50c90",
+      "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22a59a5c_045daaa1",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 10
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "971d38a3_8764952a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a59a5c_045daaa1",
+      "range": {
+        "startLine": 333,
+        "startChar": 44,
+        "endLine": 333,
+        "endChar": 52
+      },
+      "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "106a01f4_aa55bebc",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 10
@@ -56,6 +98,24 @@
       "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbe6cfbb_5a95ca66",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-29T19:24:18Z",
+      "side": 1,
+      "message": "Done. \n\nAnd I realized that we can add one more unittest for this. Becuase the current tests can\u0027t capture this mistake.\n\nWe checked the readOnly and singleUse twice, maybe we can use a simple function and call that function. I will revisit it if needed when I do usage validation for compute.",
+      "parentUuid": "106a01f4_aa55bebc",
+      "revId": "44802e7cd0f2e0baf797c8cabc2968bd5700c3ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
