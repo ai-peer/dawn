@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "041be080_1193f62e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-30T21:26:06Z",
+      "side": 1,
+      "message": "Nit: fronthend --\u003e frontend",
+      "range": {
+        "startLine": 7,
+        "startChar": 47,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7b065073_f3b1712d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -110,6 +133,29 @@
     },
     {
       "key": {
+        "uuid": "bc25f64e_031291e2",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-30T21:26:06Z",
+      "side": 1,
+      "message": "Nit: Please move stray methods like this to where the other methods are defined.\n\n(Same goes for the derived classes)",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 50
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "babceea4_16884085",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 13
@@ -155,6 +201,29 @@
       "writtenOn": "2020-04-30T20:45:25Z",
       "side": 1,
       "message": "Instead of having fenceSerial and previousFenceSerial, how about doing:\n\nSerial fenceSerial;\nwhile () {\n    tentativeSerial \u003d mFencesInFlight.front ...\n    if (...) {\n        return fenceSerial\n    }\n    fenceSerial \u003d tentativeSerial.\n}\n\nreturn fenceSerial;",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11f59f1b_c5de88a0",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-04-30T21:26:06Z",
+      "side": 1,
+      "message": "Since previousFenceSerial is always assigned inside of the loop before it is used, you should be able to move its declaration to be inside of the loop.",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 46
+      },
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
