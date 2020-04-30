@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2843373_38c99fcf",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-30T20:46:53Z",
+      "side": 1,
+      "message": "unit: the buffer shouldn\u0027t need to be present in the shader.",
+      "revId": "a059d97b3662d036f8bd69e962cf6f8cfca899d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
