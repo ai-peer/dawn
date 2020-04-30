@@ -45,6 +45,30 @@
       "revId": "c05a0e1aac13e817bb755fa70327cfe7ab6bb11c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb73b2fa_e2a5b294",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-04-30T18:55:22Z",
+      "side": 0,
+      "message": "I see, didn\u0027t realize we called it in alive state as well. Thanks for catching that.",
+      "parentUuid": "06b31b07_1b3d969e",
+      "range": {
+        "startLine": 731,
+        "startChar": 8,
+        "endLine": 750,
+        "endChar": 9
+      },
+      "revId": "c05a0e1aac13e817bb755fa70327cfe7ab6bb11c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
