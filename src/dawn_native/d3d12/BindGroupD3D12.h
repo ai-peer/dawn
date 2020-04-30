@@ -25,6 +25,7 @@ namespace dawn_native { namespace d3d12 {
 
     class Device;
     class ShaderVisibleDescriptorAllocator;
+    struct GPUDescriptorHeapCacheEntry;
 
     class BindGroup final : public BindGroupBase, public PlacementAllocated {
       public:
@@ -54,7 +55,7 @@ namespace dawn_native { namespace d3d12 {
 
         ~BindGroup() override;
 
-        GPUDescriptorHeapAllocation mGPUSamplerAllocation;
+        GPUDescriptorHeapCacheEntry* mGPUSamplerAllocationEntry;
         GPUDescriptorHeapAllocation mGPUViewAllocation;
 
         CPUDescriptorHeapAllocation mCPUSamplerAllocation;
