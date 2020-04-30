@@ -375,6 +375,30 @@
     },
     {
       "key": {
+        "uuid": "f69edfe5_612b3f31",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-30T21:01:22Z",
+      "side": 1,
+      "message": "Namely the reasons cited (1)(2) but I haven\u0027t tested on a fully optimized build yet which is why I want to re-visit.",
+      "parentUuid": "22735211_92efe188",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "17bc9241b7c7c26d8dab3fb987b24b23732b16c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdc3fc8f_32a428b6",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4

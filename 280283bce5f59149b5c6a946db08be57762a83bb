@@ -22,6 +22,30 @@
       "revId": "280283bce5f59149b5c6a946db08be57762a83bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5471b85_82dc4944",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a49588_e0ca0db4",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 81
+      },
+      "revId": "280283bce5f59149b5c6a946db08be57762a83bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b15e295c_bf98db63",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3982753_f8bd05e3",
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7050ffe_1668f7b7",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a01a7a1d_808ce320",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7050ffe_1668f7b7",
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4301e2ee_38f4c809",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-04-30T21:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414ca2c2_f6c88e2a",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
