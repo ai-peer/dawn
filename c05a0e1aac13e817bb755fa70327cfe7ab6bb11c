@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9de60744_49dee9f7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 0,
+      "message": "Also, we probably don\u0027t need this call since we check all the fences just below anyway.",
+      "range": {
+        "startLine": 729,
+        "startChar": 8,
+        "endLine": 729,
+        "endChar": 25
+      },
+      "revId": "c05a0e1aac13e817bb755fa70327cfe7ab6bb11c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06b31b07_1b3d969e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 0,
+      "message": "I think this code could stay here. We call WaitForIdleForDestruction also in the Alive state in Device::ShutDownBase, so putting this code in CheckCompletedSerial only if the state is BeingDisconnected would behave differently.\n\nInstead of setting mCompletedSerial at the end, it may work to call AssumeCommandsCompleted() instead.",
+      "range": {
+        "startLine": 731,
+        "startChar": 8,
+        "endLine": 750,
+        "endChar": 9
+      },
+      "revId": "c05a0e1aac13e817bb755fa70327cfe7ab6bb11c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

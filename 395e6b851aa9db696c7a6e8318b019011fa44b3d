@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f181a46_470f1da6",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 1,
+      "message": "nit: I think this is better named \"CheckPassedSerials\" or \"CheckCompletedCommands\" to match the other functions which refer to \"command serial\"",
+      "range": {
+        "startLine": 94,
+        "startChar": 13,
+        "endLine": 94,
+        "endChar": 30
+      },
+      "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72df6a2b_ca4adf7d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 1,
+      "message": "nit: This comment is no longer accurate",
+      "range": {
+        "startLine": 454,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 15
+      },
+      "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1263a7c1_315d7c86",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70227941_9623b53d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T18:00:17Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct, we don\u0027t want to return the fenceSerial if the fence is in the NOT_READY state.\n\nThis function needs to have some way of signaling that nothing happened. Instead, could we have\n\nbool Device::CheckCompletedSerial(Serial* completedSerial)\n\nand write the new serial value to completedSerial ? We can return false if there\u0027s no change.\n\nWhen we write the value, we should assert that it\u0027s greater than the current value.\n\nI think this should fix the failing ASSERT at [1] in the test",
+      "range": {
+        "startLine": 491,
+        "startChar": 16,
+        "endLine": 493,
+        "endChar": 17
+      },
+      "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
