@@ -16,6 +16,24 @@
       "revId": "a059d97b3662d036f8bd69e962cf6f8cfca899d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c54e761_80815f47",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-30T20:57:21Z",
+      "side": 1,
+      "message": "Ack\n\nbind groups can have more bindings than pipeline.",
+      "parentUuid": "e2843373_38c99fcf",
+      "revId": "a059d97b3662d036f8bd69e962cf6f8cfca899d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
