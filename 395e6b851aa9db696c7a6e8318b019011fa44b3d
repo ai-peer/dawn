@@ -157,6 +157,30 @@
       "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8ba546_17b88181",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T20:45:30Z",
+      "side": 1,
+      "message": "Ah, right, I think that\u0027s good.",
+      "parentUuid": "9ab21b39_008d4662",
+      "range": {
+        "startLine": 491,
+        "startChar": 16,
+        "endLine": 493,
+        "endChar": 17
+      },
+      "revId": "395e6b851aa9db696c7a6e8318b019011fa44b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

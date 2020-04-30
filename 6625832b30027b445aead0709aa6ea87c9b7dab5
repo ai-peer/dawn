@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7b065073_f3b1712d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T20:45:30Z",
+      "side": 1,
+      "message": "nit: Bug #",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4334d0b_c3b372f4",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 13
@@ -30,6 +47,29 @@
       "writtenOn": "2020-04-30T20:45:25Z",
       "side": 1,
       "message": "nit: ASSERT it is \u003c\u003d last submitted",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c425f889_b9bd4bdb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T20:45:30Z",
+      "side": 1,
+      "message": "nit: Could we add some assertions about |completedSerial| It\u0027ll help make sure we don\u0027t make a mistake in implementing CheckCompletedSerial? If I understand correctly, completedSerial should never be less than mCompletedSerial, unless it is 0 (there were no fences to check)",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 9
+      },
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -132,6 +172,29 @@
       "writtenOn": "2020-04-30T20:45:25Z",
       "side": 1,
       "message": "Stray rename here and in other places in dawn_wire?",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "640a78db_423f8fd4",
+        "filename": "src/dawn_wire/client/Fence.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-04-30T20:45:30Z",
+      "side": 1,
+      "message": "looks like you need a rename and caught this one too; This one should probably stay as CheckPassedFences",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 31
+      },
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
