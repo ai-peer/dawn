@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d301eb38_5b485050",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-30T15:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d741813_368d857e",
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cf4d79f_2a4f0afc",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e23d7b6d_ddb4669b",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-30T15:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cf4d79f_2a4f0afc",
+      "range": {
+        "startLine": 820,
+        "startChar": 0,
+        "endLine": 833,
+        "endChar": 0
+      },
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -125,6 +167,30 @@
       "side": 1,
       "message": "\u003e As we discussed during Monday\u0027s sync meeting, let\u0027s merge the patch if the test logic is correct for compute, and then revisit the validation for compute in future. The resource tracking in compute is likely per dispatch, but it is easy to revise these tests when we write the validation code: just change ASSERT_DEVICE_ERROR (encoder.Finish()); \n\u003e to \n\u003e encoder.Finish();\n\u003e \n\u003e Or maybe I can add a comment or TODO right now. \n\u003e \n\u003e I have a few patches to cover tests for compute at my local machine, they are similar to the tests for render, but use readonly or writeonly storage texture (Jiawei just added these two binding types). Then I don\u0027t need to re-rampup on these tests in future.\n\u003e \n\u003e WDYT? looks like this is the way we agreed.\n\nLanding with a TODO that says they are incorrect sounds fine, and this way we can check that the validation change actually does something :)",
       "parentUuid": "faa68a6b_e83ae7b1",
+      "range": {
+        "startLine": 838,
+        "startChar": 16,
+        "endLine": 844,
+        "endChar": 54
+      },
+      "revId": "5be79e2f585b79d0c3af623554ae133fc845e106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afb5276f_c979d39f",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-04-30T15:59:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "95870bbc_6e82cefc",
       "range": {
         "startLine": 838,
         "startChar": 16,
