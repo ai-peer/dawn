@@ -25,7 +25,7 @@ namespace dawn_wire { namespace client {
         requests.Clear();
     }
 
-    void Fence::CheckPassedFences() {
+    void Fence::CheckPassedSerials() {
         for (auto& request : requests.IterateUpTo(completedValue)) {
             request.completionCallback(WGPUFenceCompletionStatus_Success, request.userdata);
         }
