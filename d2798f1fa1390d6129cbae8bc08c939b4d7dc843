@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3982753_f8bd05e3",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-30T07:39:30Z",
+      "side": 1,
+      "message": "As mentioned in one of the comment threads, since Create is an implementation detail of ShaderVisibleDescriptorAllocator it can call AllocatateAndSwitchShaderVisibleHeap directly and Initialize can be removed.",
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7050ffe_1668f7b7",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-30T07:39:30Z",
+      "side": 1,
+      "message": "nit: I think you forgot this comment about adding a comment (though it wasn\u0027t very clear)\n\n\u003e returns true if the allocation was successful, when false is returned the current heap is full and AllocateAndSwitchShaderVisibleHeap must be called.",
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414ca2c2_f6c88e2a",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-30T07:39:30Z",
+      "side": 1,
+      "message": "That\u0027s not what we care about, we care about this value never been returned in a GPUDescriptorHeapAllocation.",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "d2798f1fa1390d6129cbae8bc08c939b4d7dc843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
