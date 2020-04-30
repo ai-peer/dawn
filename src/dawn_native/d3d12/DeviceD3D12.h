@@ -23,6 +23,7 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
+#include "dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
 #include <memory>
@@ -109,6 +110,8 @@ namespace dawn_native { namespace d3d12 {
 
         StagingDescriptorAllocator* GetSamplerStagingDescriptorAllocator(
             uint32_t descriptorCount) const;
+
+        GPUDescriptorHeapCache* GetSamplerHeapCache();
 
         StagingDescriptorAllocator* GetRenderTargetViewAllocator() const;
 
@@ -198,6 +201,8 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mViewShaderVisibleDescriptorAllocator;
 
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mSamplerShaderVisibleDescriptorAllocator;
+
+        GPUDescriptorHeapCache mSamplerHeapCache;
     };
 
 }}  // namespace dawn_native::d3d12
