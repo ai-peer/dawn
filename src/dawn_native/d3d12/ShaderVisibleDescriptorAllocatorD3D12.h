@@ -18,6 +18,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/RingBufferAllocator.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocationD3D12.h"
+#include "dawn_native/d3d12/PageableD3D12.h"
 
 #include <array>
 #include <list>
@@ -25,6 +26,13 @@
 namespace dawn_native { namespace d3d12 {
 
     class Device;
+
+    class ShaderVisibleDescriptorHeap : public Pageable {
+      public:
+        ShaderVisibleDescriptorHeap(ComPtr<ID3D12DescriptorHeap> desc, uint64_t size);
+        ~ShaderVisibleDescriptorHeap();
+        ID3D12DescriptorHeap* GetD3D12DescriptorHeap() const;
+    };
 
     // Manages descriptor heap allocators used by the device to create descriptors using allocation
     // methods based on the heap type.
@@ -54,11 +62,11 @@ namespace dawn_native { namespace d3d12 {
       private:
         struct SerialDescriptorHeap {
             Serial heapSerial;
-            ComPtr<ID3D12DescriptorHeap> heap;
+            std::unique_ptr<ShaderVisibleDescriptorHeap> heap;
         };
 
         struct ShaderVisibleBuffer {
-            ComPtr<ID3D12DescriptorHeap> heap;
+            std::unique_ptr<ShaderVisibleDescriptorHeap> heap;
             RingBufferAllocator allocator;
             std::list<SerialDescriptorHeap> pool;
             D3D12_DESCRIPTOR_HEAP_TYPE heapType;
@@ -75,6 +83,7 @@ namespace dawn_native { namespace d3d12 {
         std::array<ShaderVisibleBuffer, 2> mShaderVisibleBuffers;
         std::array<uint32_t, 2> mSizeIncrements;
     };
+
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_SHADERVISIBLEDESCRIPTORALLOCATOR_H_
