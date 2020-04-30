@@ -18,7 +18,7 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
-class ComparisonSamplerTest : public DawnTest {
+class DepthSamplingTest : public DawnTest {
   protected:
     static constexpr wgpu::CompareFunction kCompareFunctions[] = {
         wgpu::CompareFunction::Never,
@@ -34,6 +34,64 @@ class ComparisonSamplerTest : public DawnTest {
     void TestSetUp() override {
         DawnTest::TestSetUp();
 
+        wgpu::BufferDescriptor uniformBufferDesc;
+        uniformBufferDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+        uniformBufferDesc.size = sizeof(float);
+        mUniformBuffer = device.CreateBuffer(&uniformBufferDesc);
+
+        wgpu::BufferDescriptor textureUploadDesc;
+        textureUploadDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+        textureUploadDesc.size = sizeof(float);
+        mTextureUploadBuffer = device.CreateBuffer(&textureUploadDesc);
+
+        wgpu::TextureDescriptor inputTextureDesc;
+        inputTextureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled |
+                                 wgpu::TextureUsage::OutputAttachment;
+        inputTextureDesc.size = {1, 1, 1};
+        inputTextureDesc.format = wgpu::TextureFormat::Depth32Float;
+        mInputTexture = device.CreateTexture(&inputTextureDesc);
+
+        wgpu::TextureDescriptor outputTextureDesc;
+        outputTextureDesc.usage =
+            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
+        outputTextureDesc.size = {1, 1, 1};
+        outputTextureDesc.format = wgpu::TextureFormat::R32Float;
+        mOutputTexture = device.CreateTexture(&outputTextureDesc);
+    }
+
+    wgpu::RenderPipeline CreateSamplingRenderPipeline() {
+        wgpu::ShaderModule vsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+                #version 450
+                void main() {
+                    gl_Position = vec4(0.f, 0.f, 0.f, 1.f);
+                    gl_PointSize = 1.0;
+                }
+            )");
+
+        wgpu::ShaderModule fsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+                #version 450
+                layout(set = 0, binding = 0) uniform sampler samp;
+                layout(set = 0, binding = 1) uniform texture2D tex;
+
+                layout(location = 0) out float samplerResult;
+
+                void main() {
+                    samplerResult = texture(sampler2D(tex, samp), vec2(0.5, 0.5)).r;
+                }
+            )");
+
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+        pipelineDescriptor.vertexStage.module = vsModule;
+        pipelineDescriptor.cFragmentStage.module = fsModule;
+        pipelineDescriptor.primitiveTopology = wgpu::PrimitiveTopology::PointList;
+        pipelineDescriptor.cColorStates[0].format = wgpu::TextureFormat::R32Float;
+
+        return device.CreateRenderPipeline(&pipelineDescriptor);
+    }
+
+    wgpu::RenderPipeline CreateComparisonRenderPipeline() {
         wgpu::ShaderModule vsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
                 #version 450
@@ -59,6 +117,7 @@ class ComparisonSamplerTest : public DawnTest {
                 }
             )");
 
+        // TODO(dawn:367): Cannot use GetBindGroupLayout without shader reflection data.
         wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ComparisonSampler},
                      {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture},
@@ -69,35 +128,64 @@ class ComparisonSamplerTest : public DawnTest {
         pipelineDescriptor.cFragmentStage.module = fsModule;
         pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
         pipelineDescriptor.primitiveTopology = wgpu::PrimitiveTopology::PointList;
+        pipelineDescriptor.cColorStates[0].format = wgpu::TextureFormat::R32Float;
 
-        mRenderPipeline = device.CreateRenderPipeline(&pipelineDescriptor);
-
-        wgpu::BufferDescriptor uniformBufferDesc;
-        uniformBufferDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
-        uniformBufferDesc.size = sizeof(float);
-        mUniformBuffer = device.CreateBuffer(&uniformBufferDesc);
-
-        wgpu::BufferDescriptor textureUploadDesc;
-        textureUploadDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
-        textureUploadDesc.size = sizeof(float);
-        mTextureUploadBuffer = device.CreateBuffer(&textureUploadDesc);
-
-        wgpu::TextureDescriptor inputTextureDesc;
-        inputTextureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled |
-                                 wgpu::TextureUsage::OutputAttachment;
-        inputTextureDesc.size = {1, 1, 1};
-        inputTextureDesc.format = wgpu::TextureFormat::Depth32Float;
-        mInputTexture = device.CreateTexture(&inputTextureDesc);
-
-        wgpu::TextureDescriptor outputTextureDesc;
-        outputTextureDesc.usage =
-            wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
-        outputTextureDesc.size = {1, 1, 1};
-        outputTextureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
-        mOutputTexture = device.CreateTexture(&outputTextureDesc);
+        return device.CreateRenderPipeline(&pipelineDescriptor);
     }
 
-    void DoCompareRefTest(float compareRef,
+    void UpdateInputTexture(wgpu::CommandEncoder commandEncoder, float textureValue) {
+        mTextureUploadBuffer.SetSubData(0, sizeof(float), &textureValue);
+
+        wgpu::BufferCopyView bufferCopyView;
+        bufferCopyView.buffer = mTextureUploadBuffer;
+        bufferCopyView.offset = 0;
+        bufferCopyView.bytesPerRow = kTextureBytesPerRowAlignment;
+        bufferCopyView.rowsPerImage = 1;
+
+        wgpu::TextureCopyView textureCopyView;
+        textureCopyView.texture = mInputTexture;
+        textureCopyView.origin = {0, 0, 0};
+
+        wgpu::Extent3D copySize = {1, 1, 1};
+
+        commandEncoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+    }
+
+    void DoSamplingTest(wgpu::RenderPipeline pipeline, std::vector<float> textureValues) {
+        wgpu::SamplerDescriptor samplerDesc;
+        wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
+
+        wgpu::BindGroup bindGroup =
+            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                 {
+                                     {0, sampler},
+                                     {1, mInputTexture.CreateView()},
+                                 });
+
+        for (float textureValue : textureValues) {
+            // Set the input depth texture to the provided texture value
+            wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+            UpdateInputTexture(commandEncoder, textureValue);
+
+            // Render into the output texture
+            {
+                utils::ComboRenderPassDescriptor passDescriptor({mOutputTexture.CreateView()});
+                wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&passDescriptor);
+                pass.SetPipeline(pipeline);
+                pass.SetBindGroup(0, bindGroup);
+                pass.Draw(3);
+                pass.EndPass();
+            }
+
+            wgpu::CommandBuffer commands = commandEncoder.Finish();
+            queue.Submit(1, &commands);
+
+            EXPECT_PIXEL_FLOAT_EQ(textureValue, mOutputTexture, 0, 0);
+        }
+    }
+
+    void DoCompareRefTest(wgpu::RenderPipeline pipeline,
+                          float compareRef,
                           wgpu::CompareFunction compare,
                           std::vector<float> textureValues) {
         mUniformBuffer.SetSubData(0, sizeof(float), &compareRef);
@@ -107,7 +195,7 @@ class ComparisonSamplerTest : public DawnTest {
         wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
 
         wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, mRenderPipeline.GetBindGroupLayout(0),
+            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
                                  {
                                      {0, sampler},
                                      {1, mInputTexture.CreateView()},
@@ -147,28 +235,14 @@ class ComparisonSamplerTest : public DawnTest {
             }
 
             // Set the input depth texture to the provided texture value
-            mTextureUploadBuffer.SetSubData(0, sizeof(float), &textureValue);
-
-            wgpu::BufferCopyView bufferCopyView;
-            bufferCopyView.buffer = mTextureUploadBuffer;
-            bufferCopyView.offset = 0;
-            bufferCopyView.bytesPerRow = kTextureBytesPerRowAlignment;
-            bufferCopyView.rowsPerImage = 1;
-
-            wgpu::TextureCopyView textureCopyView;
-            textureCopyView.texture = mInputTexture;
-            textureCopyView.origin = {0, 0, 0};
-
-            wgpu::Extent3D copySize = {1, 1, 1};
-
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
-            commandEncoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+            UpdateInputTexture(commandEncoder, textureValue);
 
             // Render into the output texture
             {
                 utils::ComboRenderPassDescriptor passDescriptor({mOutputTexture.CreateView()});
                 wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&passDescriptor);
-                pass.SetPipeline(mRenderPipeline);
+                pass.SetPipeline(pipeline);
                 pass.SetBindGroup(0, bindGroup);
                 pass.Draw(3);
                 pass.EndPass();
@@ -177,42 +251,63 @@ class ComparisonSamplerTest : public DawnTest {
             wgpu::CommandBuffer commands = commandEncoder.Finish();
             queue.Submit(1, &commands);
 
-            EXPECT_PIXEL_RGBA8_EQ(success ? RGBA8(255, 255, 255, 255) : RGBA8(0, 0, 0, 0),
-                                  mOutputTexture, 0, 0);
+            EXPECT_PIXEL_FLOAT_EQ(success ? 1.0 : 0.0, mOutputTexture, 0, 0);
         }
     }
 
   private:
-    wgpu::RenderPipeline mRenderPipeline;
     wgpu::Buffer mUniformBuffer;
     wgpu::Buffer mTextureUploadBuffer;
     wgpu::Texture mInputTexture;
     wgpu::Texture mOutputTexture;
 };
 
+// Test that sampling a depth texrture works
+TEST_P(DepthSamplingTest, Sample) {
+    wgpu::RenderPipeline pipeline = CreateSamplingRenderPipeline();
+
+    // Test 0, between [0, 1], and 1.
+    DoSamplingTest(pipeline, {0.0, 0.37, 1.0});
+}
+
+// Test that sampling a depth texture works, when the texture contents are outside the
+// 0-1 range.
+TEST_P(DepthSamplingTest, SampleUnnormalizedContents) {
+    // TODO(enga): Sampling depth textures is clamped. Unless we reinterpret
+    // contents as R32F.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+    wgpu::RenderPipeline pipeline = CreateSamplingRenderPipeline();
+
+    // Test values not between [0, 1]
+    DoSamplingTest(pipeline, {-0.4, 1.2});
+}
+
 // Test that sampling with all of the compare functions works.
-TEST_P(ComparisonSamplerTest, CompareFunctions) {
+TEST_P(DepthSamplingTest, CompareFunctions) {
+    wgpu::RenderPipeline pipeline = CreateComparisonRenderPipeline();
+
     // Test a "normal" ref value between 0 and 1; as well as negative and > 1 refs.
     for (float compareRef : {-0.1, 0.4, 1.2}) {
         // Test 0, below the ref, equal to, above the ref, and 1.
         for (wgpu::CompareFunction f : kCompareFunctions) {
-            DoCompareRefTest(compareRef, f, {0.0, 0.3, 0.4, 0.5, 1.0});
+            DoCompareRefTest(pipeline, compareRef, f, {0.0, 0.3, 0.4, 0.5, 1.0});
         }
     }
 }
 
 // Test that sampling with all of the compare functions works, when the texture contents
 // are outside the 0-1 range.
-TEST_P(ComparisonSamplerTest, CompareFunctionsUnnormalizedContents) {
-    // TODO(enga): Copies to depth textures are clamped. Unless we reinterpret
+TEST_P(DepthSamplingTest, CompareFunctionsUnnormalizedContents) {
+    // TODO(enga): Sampling depth textures is clamped. Unless we reinterpret
     // contents as R32F.
     DAWN_SKIP_TEST_IF(IsOpenGL());
+    wgpu::RenderPipeline pipeline = CreateComparisonRenderPipeline();
 
     // Test a "normal" ref value between 0 and 1; as well as negative and > 1 refs.
     for (float compareRef : {-0.1, 0.4, 1.2}) {
         // Test negative, and above 1.
         for (wgpu::CompareFunction f : kCompareFunctions) {
-            DoCompareRefTest(compareRef, f, {-0.2, 1.3});
+            DoCompareRefTest(pipeline, compareRef, f, {-0.2, 1.3});
         }
     }
 }
@@ -220,4 +315,4 @@ TEST_P(ComparisonSamplerTest, CompareFunctionsUnnormalizedContents) {
 // TODO(crbug.com/dawn/367): Does not work on D3D12 because we need to reinterpret the texture view
 // as R32Float to sample it. See tables here:
 // https://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/hardware-support-for-direct3d-12-1-formats
-DAWN_INSTANTIATE_TEST(ComparisonSamplerTest, MetalBackend(), OpenGLBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST(DepthSamplingTest, MetalBackend(), OpenGLBackend(), VulkanBackend());
