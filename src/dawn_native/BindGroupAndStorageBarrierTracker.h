@@ -34,8 +34,8 @@ namespace dawn_native {
                             uint32_t dynamicOffsetCount,
                             uint32_t* dynamicOffsets) {
             if (this->mBindGroups[index] != bindGroup) {
-                mBuffers[index] = {};
-                mBuffersNeedingBarrier[index] = {};
+                mBindings[index] = {};
+                mBindingsNeedingBarrier[index] = {};
 
                 const BindGroupLayoutBase* layout = bindGroup->GetLayout();
 
@@ -58,16 +58,23 @@ namespace dawn_native {
                             break;
 
                         case wgpu::BindingType::StorageBuffer:
-                            mBuffersNeedingBarrier[index].set(bindingIndex);
-                            mBuffers[index][bindingIndex] =
-                                bindGroup->GetBindingAsBufferBinding(bindingIndex).buffer;
+                            mBindingsNeedingBarrier[index].set(bindingIndex);
+                            mBindings[index][bindingIndex] = reinterpret_cast<ObjectBase*>(
+                                bindGroup->GetBindingAsBufferBinding(bindingIndex).buffer);
+                            break;
+
+                        // Read-only and write-only storage textures must use general layout
+                        // because load and store operations on storage images can only be done on
+                        // the images in VK_IMAGE_LAYOUT_GENERAL layout.
+                        case wgpu::BindingType::ReadonlyStorageTexture:
+                        case wgpu::BindingType::WriteonlyStorageTexture:
+                            mBindingsNeedingBarrier[index].set(bindingIndex);
+                            mBindings[index][bindingIndex] = reinterpret_cast<ObjectBase*>(
+                                bindGroup->GetBindingAsTextureView(bindingIndex));
                             break;
 
                         case wgpu::BindingType::StorageTexture:
-                        case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture:
                             // Not implemented.
-
                         default:
                             UNREACHABLE();
                             break;
@@ -79,10 +86,10 @@ namespace dawn_native {
         }
 
       protected:
-        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mBuffersNeedingBarrier = {};
+        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> mBindingsNeedingBarrier = {};
         std::array<std::array<wgpu::BindingType, kMaxBindingsPerGroup>, kMaxBindGroups>
             mBindingTypes = {};
-        std::array<std::array<BufferBase*, kMaxBindingsPerGroup>, kMaxBindGroups> mBuffers = {};
+        std::array<std::array<ObjectBase*, kMaxBindingsPerGroup>, kMaxBindGroups> mBindings = {};
     };
 
 }  // namespace dawn_native
