@@ -27,7 +27,7 @@ namespace dawn_wire { namespace client {
         using ObjectBase::ObjectBase;
 
         ~Fence();
-        void CheckPassedFences();
+        void CheckPassedSerials();
 
         struct OnCompletionData {
             WGPUFenceOnCompletionCallback completionCallback = nullptr;

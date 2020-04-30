@@ -190,7 +190,7 @@ namespace dawn_wire { namespace client {
         }
 
         fence->completedValue = value;
-        fence->CheckPassedFences();
+        fence->CheckPassedSerials();
         return true;
     }
 
