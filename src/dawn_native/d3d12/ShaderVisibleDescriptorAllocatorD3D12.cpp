@@ -16,6 +16,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -114,8 +115,8 @@ namespace dawn_native { namespace d3d12 {
         // users.
         // TODO(dawn:256): Consider periodically triming to avoid OOM.
         if (mHeap != nullptr) {
-            mPool.push_back(
-                {mDevice->GetPendingCommandSerial(), std::move(shaderVisibleDescriptorHeap)});
+            mDevice->GetResidencyManager()->UnlockHeap(mHeap.get());
+            mPool.push_back({mDevice->GetPendingCommandSerial(), std::move(mHeap)});
         }
 
         // Recycle existing heap if possible.
@@ -131,6 +132,9 @@ namespace dawn_native { namespace d3d12 {
             mHeapType, mDevice->IsToggleEnabled(Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
 
         if (shaderVisibleDescriptorHeap == nullptr) {
+            DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
+                mSizeIncrement * descriptorCount, MemorySegment::Local));
+
             ComPtr<ID3D12DescriptorHeap> heap;
             D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
             heapDescriptor.Type = mHeapType;
@@ -144,6 +148,7 @@ namespace dawn_native { namespace d3d12 {
                 std::move(heap), mSizeIncrement * descriptorCount);
         }
 
+        DAWN_TRY(mDevice->GetResidencyManager()->LockHeap(shaderVisibleDescriptorHeap.get()));
         // Create a FIFO buffer from the recently created heap.
         mHeap = std::move(shaderVisibleDescriptorHeap);
         mAllocator = RingBufferAllocator(descriptorCount);

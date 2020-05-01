@@ -82,14 +82,6 @@ namespace dawn_native { namespace d3d12 {
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
 
-        DAWN_TRY_ASSIGN(
-            mViewShaderVisibleDescriptorAllocator,
-            ShaderVisibleDescriptorAllocator::Create(this, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
-
-        DAWN_TRY_ASSIGN(
-            mSamplerShaderVisibleDescriptorAllocator,
-            ShaderVisibleDescriptorAllocator::Create(this, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER));
-
         // Zero sized allocator is never requested and does not need to exist.
         for (uint32_t countIndex = 1; countIndex < kNumOfStagingDescriptorAllocators;
              countIndex++) {
@@ -112,6 +104,13 @@ namespace dawn_native { namespace d3d12 {
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        DAWN_TRY_ASSIGN(
+            mViewShaderVisibleDescriptorAllocator,
+            ShaderVisibleDescriptorAllocator::Create(this, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
+
+        DAWN_TRY_ASSIGN(
+            mSamplerShaderVisibleDescriptorAllocator,
+            ShaderVisibleDescriptorAllocator::Create(this, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER));
         DAWN_TRY(NextSerial());
 
         // Initialize indirect commands
