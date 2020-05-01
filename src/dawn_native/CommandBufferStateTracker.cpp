@@ -121,16 +121,16 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Missing index buffer");
         }
 
+        if (aspects[VALIDATION_ASPECT_PIPELINE]) {
+            return DAWN_VALIDATION_ERROR("Missing pipeline");
+        }
+
         if (aspects[VALIDATION_ASPECT_VERTEX_BUFFERS]) {
             return DAWN_VALIDATION_ERROR("Missing vertex buffer");
         }
 
         if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
             return DAWN_VALIDATION_ERROR("Missing bind group");
-        }
-
-        if (aspects[VALIDATION_ASPECT_PIPELINE]) {
-            return DAWN_VALIDATION_ERROR("Missing pipeline");
         }
 
         UNREACHABLE();
