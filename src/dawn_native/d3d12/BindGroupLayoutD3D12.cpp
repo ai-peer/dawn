@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 
 #include "common/BitSetIterator.h"
+#include "common/HashUtils.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
@@ -147,6 +148,23 @@ namespace dawn_native { namespace d3d12 {
             viewSizeIncrement = mViewAllocator->GetSizeIncrement();
         }
 
+        // Sampler heap allocations can be re-used if the samplers at the corresponding bindpoints
+        // are equivalent. This is particularly important for the GPU sampler heap, which is much
+        // smaller than the view heap and switches incur expensive pipeline flushes. The hash value
+        // of 0 returns an invalid allocation.
+        // TODO(dawn:155): Deduplicate CPU sampler heap allocations.
+        BindingInfoKey samplerBindingInfoHash = 0;
+        for (uint32_t i = 0; i < descriptor->entryCount; ++i) {
+            const BindGroupEntry& entry = descriptor->entries[i];
+            if (entry.sampler != nullptr) {
+                const BindGroupLayoutBase* bindGroupLayoutBase = descriptor->layout;
+                const BindingIndex bindingIndex =
+                    descriptor->layout->GetBindingIndex(BindingNumber(entry.binding));
+                ASSERT(bindingIndex < bindGroupLayoutBase->GetBindingCount());
+                HashCombine(&samplerBindingInfoHash, bindingIndex, Hash(entry.sampler));
+            }
+        }
+
         uint32_t samplerSizeIncrement = 0;
         CPUDescriptorHeapAllocation samplerAllocation;
         if (GetSamplerDescriptorCount() > 0) {
@@ -155,7 +173,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         return mBindGroupAllocator.Allocate(device, descriptor, viewSizeIncrement, viewAllocation,
-                                            samplerSizeIncrement, samplerAllocation);
+                                            samplerSizeIncrement, samplerAllocation,
+                                            samplerBindingInfoHash);
     }
 
     void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup,

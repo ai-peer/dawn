@@ -35,7 +35,8 @@ namespace dawn_native { namespace d3d12 {
                          uint32_t viewSizeIncrement,
                          const CPUDescriptorHeapAllocation& viewAllocation,
                          uint32_t samplerSizeIncrement,
-                         const CPUDescriptorHeapAllocation& samplerAllocation)
+                         const CPUDescriptorHeapAllocation& samplerAllocation,
+                         BindingInfoKey samplerBindingInfoHash)
         : BindGroupBase(this, device, descriptor) {
         BindGroupLayout* bgl = ToBackend(GetLayout());
 
@@ -142,6 +143,8 @@ namespace dawn_native { namespace d3d12 {
                     // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
             }
         }
+
+        mGPUSamplerAllocationEntry = device->GetSamplerHeapCache()->Acquire(samplerBindingInfoHash);
     }
 
     BindGroup::~BindGroup() {
@@ -149,6 +152,8 @@ namespace dawn_native { namespace d3d12 {
             ->DeallocateBindGroup(this, &mCPUViewAllocation, &mCPUSamplerAllocation);
         ASSERT(!mCPUViewAllocation.IsValid());
         ASSERT(!mCPUSamplerAllocation.IsValid());
+
+        ToBackend(GetDevice())->GetSamplerHeapCache()->Release(mGPUSamplerAllocationEntry);
     }
 
     bool BindGroup::PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator) {
@@ -162,7 +167,7 @@ namespace dawn_native { namespace d3d12 {
         const BindGroupLayout* bgl = ToBackend(GetLayout());
         return Populate(samplerAllocator, bgl->GetSamplerDescriptorCount(),
                         D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mCPUSamplerAllocation,
-                        &mGPUSamplerAllocation);
+                        &mGPUSamplerAllocationEntry->allocation);
     }
 
     bool BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator,
@@ -198,6 +203,6 @@ namespace dawn_native { namespace d3d12 {
     }
 
     D3D12_GPU_DESCRIPTOR_HANDLE BindGroup::GetBaseSamplerDescriptor() const {
-        return mGPUSamplerAllocation.GetBaseDescriptor();
+        return mGPUSamplerAllocationEntry->allocation.GetBaseDescriptor();
     }
 }}  // namespace dawn_native::d3d12
