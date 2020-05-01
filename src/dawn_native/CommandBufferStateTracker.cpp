@@ -70,7 +70,7 @@ namespace dawn_native {
         // Generate an error immediately if a non-lazy aspect is missing as computing lazy aspects
         // requires the pipeline to be set.
         if ((missingAspects & ~kLazyAspects).any()) {
-            return GenerateAspectError(missingAspects);
+            return GenerateAspectError(missingAspects & ~kLazyAspects);
         }
 
         RecomputeLazyAspects(missingAspects);
