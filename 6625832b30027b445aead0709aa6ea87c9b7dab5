@@ -289,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "ab3c8714_a884df16",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T19:58:32Z",
+      "side": 1,
+      "message": "yes, I\u0027ll be adding that in the other CL.",
+      "parentUuid": "22963ab2_9b84e7d7",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc25f64e_031291e2",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 13
@@ -350,6 +368,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae08324_689fbb25",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T19:58:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "babceea4_16884085",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
