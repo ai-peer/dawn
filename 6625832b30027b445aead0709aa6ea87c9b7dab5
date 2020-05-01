@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "ef3fe562_fe5359d1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T19:56:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2064b72_a996cfcd",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c8cadba_2036fdd1",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 13
@@ -385,6 +403,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cbb9b6f_d1cb6028",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T19:56:56Z",
+      "side": 1,
+      "message": "ah youre right. Added CheckPassedSerial to tickimpl, I\u0027ll fold that into Tick in the other CL. Done.",
+      "parentUuid": "f20c52a7_a329cf28",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
