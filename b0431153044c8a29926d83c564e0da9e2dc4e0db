@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "006ab893_b361d7fe",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-01T20:27:12Z",
+      "side": 1,
+      "message": "change lgtm, but there\u0027s a pattern here where the arg passed into GenerateAspectError MUST be the same as the one we check .any() on.\n\nCan we refactor this so that instead, we do:\n\n DAWN_TRY(CheckMissingAspects(missingAspects \u0026 ~kLazyAspects));\n\nwhere CheckMissingAspects is the same as GenerateAspectError, except it handles !aspects.any() instead of ASSERTing",
+      "revId": "b0431153044c8a29926d83c564e0da9e2dc4e0db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
