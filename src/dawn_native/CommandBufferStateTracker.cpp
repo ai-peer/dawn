@@ -70,14 +70,14 @@ namespace dawn_native {
         // Generate an error immediately if a non-lazy aspect is missing as computing lazy aspects
         // requires the pipeline to be set.
         if ((missingAspects & ~kLazyAspects).any()) {
-            return GenerateAspectError(missingAspects);
+            return GenerateNonLazyAspectError(missingAspects);
         }
 
         RecomputeLazyAspects(missingAspects);
 
         missingAspects = requiredAspects & ~mAspects;
         if (missingAspects.any()) {
-            return GenerateAspectError(missingAspects);
+            return GenerateLazyAspectError(missingAspects);
         }
 
         return {};
@@ -114,12 +114,22 @@ namespace dawn_native {
         }
     }
 
-    MaybeError CommandBufferStateTracker::GenerateAspectError(ValidationAspects aspects) {
-        ASSERT(aspects.any());
+    MaybeError CommandBufferStateTracker::GenerateNonLazyAspectError(ValidationAspects aspects) {
+        ASSERT((aspects & ~kLazyAspects).any());
 
         if (aspects[VALIDATION_ASPECT_INDEX_BUFFER]) {
             return DAWN_VALIDATION_ERROR("Missing index buffer");
         }
+
+        if (aspects[VALIDATION_ASPECT_PIPELINE]) {
+            return DAWN_VALIDATION_ERROR("Missing pipeline");
+        }
+
+        UNREACHABLE();
+    }
+
+    MaybeError CommandBufferStateTracker::GenerateLazyAspectError(ValidationAspects aspects) {
+        ASSERT((aspects & kLazyAspects).any());
 
         if (aspects[VALIDATION_ASPECT_VERTEX_BUFFERS]) {
             return DAWN_VALIDATION_ERROR("Missing vertex buffer");
@@ -127,10 +137,6 @@ namespace dawn_native {
 
         if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
             return DAWN_VALIDATION_ERROR("Missing bind group");
-        }
-
-        if (aspects[VALIDATION_ASPECT_PIPELINE]) {
-            return DAWN_VALIDATION_ERROR("Missing pipeline");
         }
 
         UNREACHABLE();

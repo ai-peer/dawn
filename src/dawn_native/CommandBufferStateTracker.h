@@ -46,7 +46,8 @@ namespace dawn_native {
       private:
         MaybeError ValidateOperation(ValidationAspects requiredAspects);
         void RecomputeLazyAspects(ValidationAspects aspects);
-        MaybeError GenerateAspectError(ValidationAspects aspects);
+        MaybeError GenerateNonLazyAspectError(ValidationAspects aspects);
+        MaybeError GenerateLazyAspectError(ValidationAspects aspects);
 
         void SetPipelineCommon(PipelineBase* pipeline);
 
