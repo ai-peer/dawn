@@ -125,6 +125,14 @@ namespace {
             pass.SetBindGroup(0, bg);
             pass.EndPass();
             encoder.Finish();
+
+            // It is invalid to use the buffer as both storage and readonly storage in a single
+            // dispatch. wgpu::CommandEncoder encoder1 = device.CreateCommandEncoder();
+            // wgpu::ComputePassEncoder pass1 = encoder1.BeginComputePass();
+            // pass1.SetBindGroup(0, bg);
+            // pass1.Dispatch(1);
+            // pass1.EndPass();
+            // encoder1.Finish();
         }
     }
 

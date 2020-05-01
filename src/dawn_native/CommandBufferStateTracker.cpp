@@ -147,6 +147,7 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetBindGroup(uint32_t index, BindGroupBase* bindgroup) {
         mBindgroups[index] = bindgroup;
+        mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
     }
 
     void CommandBufferStateTracker::SetIndexBuffer() {
@@ -155,6 +156,7 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetVertexBuffer(uint32_t slot) {
         mVertexBufferSlotsUsed.set(slot);
+        mAspects.set(VALIDATION_ASPECT_VERTEX_BUFFERS);
     }
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
