@@ -22,6 +22,30 @@
       "revId": "2ba90d6654861d7b11e64f50b4e0d4e5d232c291",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da3330c_52b65143",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-01T19:32:16Z",
+      "side": 0,
+      "message": "Ack. And I verified at my local side with the \"test code\". I submitted a new patch set (patch set 4) as you suggested, and removed the \"test code\".\n\nPatch set 2 ~ 4 are 3 different methods to fix this tiny bug. And we can also combine 2 of them, or combine all 3 methods. But it looks like this is the simpliest way. :)",
+      "parentUuid": "ba819cfd_9729d921",
+      "range": {
+        "startLine": 73,
+        "startChar": 39,
+        "endLine": 73,
+        "endChar": 53
+      },
+      "revId": "2ba90d6654861d7b11e64f50b4e0d4e5d232c291",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
