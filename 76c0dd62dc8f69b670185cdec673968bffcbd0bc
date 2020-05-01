@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e4c8ce9_2024a596",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-01T16:30:14Z",
+      "side": 1,
+      "message": "nit: if |hash| is not in |mCache|, operator[] will default-construct the entry, so we don\u0027t need the .find() \u003d\u003d .cend() part",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "76c0dd62dc8f69b670185cdec673968bffcbd0bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
