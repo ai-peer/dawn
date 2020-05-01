@@ -82,10 +82,6 @@ namespace dawn_native { namespace d3d12 {
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
 
-        mShaderVisibleDescriptorAllocator =
-            std::make_unique<ShaderVisibleDescriptorAllocator>(this);
-        DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
-
         // Zero sized allocator is never requested and does not need to exist.
         for (uint32_t countIndex = 1; countIndex < kNumOfStagingDescriptorAllocators;
              countIndex++) {
@@ -108,6 +104,9 @@ namespace dawn_native { namespace d3d12 {
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        mShaderVisibleDescriptorAllocator =
+            std::make_unique<ShaderVisibleDescriptorAllocator>(this);
+        DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
         DAWN_TRY(NextSerial());
 
         // Initialize indirect commands

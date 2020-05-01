@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -142,6 +143,7 @@ namespace dawn_native { namespace d3d12 {
         // users.
         // TODO(dawn:256): Consider periodically triming to avoid OOM.
         if (shaderVisibleBuffer->heap != nullptr) {
+            mDevice->GetResidencyManager()->UnlockHeap(shaderVisibleBuffer->heap.get());
             shaderVisibleBuffer->pool.push_back(
                 {mDevice->GetPendingCommandSerial(), std::move(shaderVisibleBuffer->heap)});
         }
@@ -151,6 +153,7 @@ namespace dawn_native { namespace d3d12 {
             shaderVisibleBuffer->pool.front().heapSerial <= mDevice->GetCompletedCommandSerial()) {
             shaderVisibleDescriptorHeap = std::move(shaderVisibleBuffer->pool.front().heap);
             shaderVisibleBuffer->pool.pop_front();
+            DAWN_TRY(mDevice->GetResidencyManager()->LockHeap(shaderVisibleDescriptorHeap.get()));
         }
 
         const D3D12_DESCRIPTOR_HEAP_TYPE heapType = shaderVisibleBuffer->heapType;
@@ -162,6 +165,11 @@ namespace dawn_native { namespace d3d12 {
             heapType, mDevice->IsToggleEnabled(Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
 
         if (shaderVisibleDescriptorHeap == nullptr) {
+            DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
+                mDevice->GetD3D12Device()->GetDescriptorHandleIncrementSize(heapType) *
+                    descriptorCount,
+                MemorySegment::Local));
+
             ComPtr<ID3D12DescriptorHeap> heap;
             D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
             heapDescriptor.Type = heapType;
@@ -173,6 +181,7 @@ namespace dawn_native { namespace d3d12 {
                                              "ID3D12Device::CreateDescriptorHeap"));
             shaderVisibleDescriptorHeap = std::make_unique<ShaderVisibleDescriptorHeap>(
                 std::move(heap), mSizeIncrements[heapType] * descriptorCount);
+            DAWN_TRY(mDevice->GetResidencyManager()->LockHeap(shaderVisibleDescriptorHeap.get()));
         }
 
         // Create a FIFO buffer from the recently created heap.
