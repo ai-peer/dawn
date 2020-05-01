@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b475cabc_358b9ad4",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-01T21:46:59Z",
+      "side": 1,
+      "message": "All of this code seems like a good candidate for a helper function of either BindGropuLayout or the descriptor object itself.",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 0
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a317710f_40c1b4a9",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-01T21:46:59Z",
+      "side": 1,
+      "message": "Similar to my previous comment, consider having a destructor of GPUDescriptHeapCacheEntry which ensures refcount is 0.",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e1f170_5f651328",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-01T21:46:59Z",
+      "side": 1,
+      "message": "For better encapsulation, consider making GPUDescriptorHeapCacheEntry a class with refcount being a private member. This way, it can manage its own reference count and tell the sampler cache to delete itself when the reference drops to zero. \n\nGPUDescriptorHeapCacheEntry would have its own Release method which take the cache as a parameter.\n\nThe Delete method of the cache would assert that reference count is, in fact, zero before removing the entry.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00b72045_b8880349",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-01T21:46:59Z",
+      "side": 1,
+      "message": "Why does hash need to also be in the GPUDescriptorHeapCacheEntry? Doesn\u0027t unordered_map already store it as part of its lookup?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93c35e13_40c3d5f1",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-01T21:46:59Z",
+      "side": 1,
+      "message": "Please add a destructor that asserts if there are any entries remaining in mCache. If there are, we\u0027ve leaked allocations.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
