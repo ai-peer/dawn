@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7e646267_c86dcfd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "041be080_1193f62e",
+      "range": {
+        "startLine": 7,
+        "startChar": 47,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b065073_f3b1712d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 13
@@ -39,6 +63,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d7d0425_0de97a88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b065073_f3b1712d",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "549f2e6e_856dea54",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "should we add calls to AssumeCommandsComplete to all the WaitForIdles then? I think only null and vulkan do so right now.",
+      "parentUuid": "a4334d0b_c3b372f4",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c8cadba_2036fdd1",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 13
@@ -73,6 +133,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0449b2f9_cb7fdc31",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c8cadba_2036fdd1",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "fea617e1_a0aade69",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c425f889_b9bd4bdb",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 9
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d9197e3_f79bae69",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 13
@@ -113,6 +215,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6e859fd_34d0ed62",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d9197e3_f79bae69",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -144,6 +264,30 @@
       "writtenOn": "2020-04-30T21:26:06Z",
       "side": 1,
       "message": "Nit: Please move stray methods like this to where the other methods are defined.\n\n(Same goes for the derived classes)",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 50
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a5bbc63_6075883d",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Sorry I wanted to keep this private so that\u0027s why it wasn\u0027t with the others.",
+      "parentUuid": "bc25f64e_031291e2",
       "range": {
         "startLine": 330,
         "startChar": 0,
@@ -190,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "04810c9c_c662872c",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "hmm it was to set mCompletedSerial in DeviceBase. in the metal backend, CheckCompletedSerial will only return the mCompletedSerial we have stored, so that it can sync with the frontend. it\u0027s a bit confusing for metal since we have store mCompletedSerial in both metal backend and in the frontend, since it needs to keep the atomic serial. Is this ok?",
+      "parentUuid": "0cd6d9af_8136e5f9",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8bd4f900_d2078596",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 13
@@ -204,6 +366,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf2387c2_ef0aedb2",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Sure, haha this was actually how I did it before and then switched to having previous because it was easier to explain in the comment",
+      "parentUuid": "8bd4f900_d2078596",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -230,6 +410,30 @@
     },
     {
       "key": {
+        "uuid": "d8a51bb0_90a5f5bb",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11f59f1b_c5de88a0",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 46
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb35d63b_9203e057",
         "filename": "src/dawn_wire/client/Fence.cpp",
         "patchSetId": 13
@@ -244,6 +448,24 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f39fff4_7c5b81dc",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb35d63b_9203e057",
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -267,6 +489,30 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce30730_cf69e7d6",
+        "filename": "src/dawn_wire/client/Fence.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-01T01:31:49Z",
+      "side": 1,
+      "message": "oops, thanks.",
+      "parentUuid": "640a78db_423f8fd4",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
