@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6acb04d_9acb3fde",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-02T01:44:50Z",
+      "side": 1,
+      "message": "nit: it isn\u0027t really \"passing\" anything \"through\", so maybe \"NoOpRenderPipeline\"?",
+      "range": {
+        "startLine": 45,
+        "startChar": 29,
+        "endLine": 45,
+        "endChar": 60
+      },
+      "revId": "a8a02bc733d2184ee06b4c432def25c05c485971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416e2c54_1defb2da",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-02T01:44:50Z",
+      "side": 1,
+      "message": "nit: Would you mind splitting this test in two since it\u0027s testing two different pieces of behavior?",
+      "revId": "a8a02bc733d2184ee06b4c432def25c05c485971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
