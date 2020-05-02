@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "f0c82b70_8b8b36ab",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-02T01:39:58Z",
+      "side": 1,
+      "message": "And I\u0027d inline `requiredAspects * ~mAspects` here too, there\u0027s no reason to put it in the variable.",
+      "parentUuid": "965a93e8_f31426eb",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 9
+      },
+      "revId": "7360309af49b4a469eb0adeab8ed8e29d7344583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33572887_34eca9d0",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 5
