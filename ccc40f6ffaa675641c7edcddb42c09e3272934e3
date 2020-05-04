@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "602581f7_53ca14bb",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T08:35:40Z",
+      "side": 1,
+      "message": "This comment is a bit misleading: it is valid to bind any bindgroups for indices that the pipeline doesn\u0027t use. That\u0027s the validation in https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/CommandBufferStateTracker.cpp;l\u003d93\nBut if the pipeline declared a bind group layout for this group, any bindgroup with a different layout (even if a superset) would be invalid.",
+      "revId": "ccc40f6ffaa675641c7edcddb42c09e3272934e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
