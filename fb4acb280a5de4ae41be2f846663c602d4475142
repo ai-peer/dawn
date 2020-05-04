@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "848d2d8e_ff9be62d",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:50:06Z",
+      "side": 1,
+      "message": "Note: |samplerBindingInfoHash| will go away for CPU dedup.",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
