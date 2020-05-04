@@ -154,17 +154,22 @@ namespace dawn_native { namespace metal {
         return new TextureView(texture, descriptor);
     }
 
-    Serial Device::GetCompletedCommandSerial() const {
+    Serial Device::CheckCompletedSerial() {
         static_assert(std::is_same<Serial, uint64_t>::value, "");
+        // Sometimes we artificially increment serials in the device base, or assume commands
+        // complete, so we need to keep the mac's completed serial updated by checking if the
+        // completed serial has surpassed our command serial. If it has, we want to update our
+        // command serial. If our serial is newer, we will return it to the device base, and it will
+        // be updated there.
+        if (GetCompletedCommandSerial() > mCompletedSerial) {
+            mCompletedSerial = GetCompletedCommandSerial();
+        }
         return mCompletedSerial.load();
     }
 
-    Serial Device::GetLastSubmittedCommandSerial() const {
-        return mLastSubmittedSerial;
-    }
-
-    Serial Device::GetPendingCommandSerial() const {
-        return mLastSubmittedSerial + 1;
+    Serial SyncCompletedSerial() {
+        mCompletedSerial = GetCompletedCommandSerial();
+        return mCompletedSerial;
     }
 
     MaybeError Device::TickImpl() {
@@ -174,11 +179,10 @@ namespace dawn_native { namespace metal {
 
         if (mCommandContext.GetCommands() != nil) {
             SubmitPendingCommandBuffer();
-        } else if (completedSerial == mLastSubmittedSerial) {
+        } else if (completedSerial == GetLastSubmittedCommandSerial()) {
             // If there's no GPU work in flight we still need to artificially increment the serial
             // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            mCompletedSerial++;
-            mLastSubmittedSerial++;
+            ArtificiallyIncrementSerials();
         }
 
         return {};
@@ -208,7 +212,7 @@ namespace dawn_native { namespace metal {
             return;
         }
 
-        mLastSubmittedSerial++;
+        IncrementLastSubmittedCommandSerial();
 
         // Acquire the pending command buffer, which is retained. It must be released later.
         id<MTLCommandBuffer> pendingCommands = mCommandContext.AcquireCommands();
@@ -231,7 +235,8 @@ namespace dawn_native { namespace metal {
 
         // Update the completed serial once the completed handler is fired. Make a local copy of
         // mLastSubmittedSerial so it is captured by value.
-        Serial pendingSerial = mLastSubmittedSerial;
+        Serial pendingSerial = GetLastSubmittedCommandSerial();
+        // this ObjC block runs on a different thread
         [pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
             TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                    pendingSerial);
@@ -301,15 +306,16 @@ namespace dawn_native { namespace metal {
         [mCommandContext.AcquireCommands() release];
 
         // Wait for all commands to be finished so we can free resources
-        while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
+        while (GetCompletedCommandSerial() != GetLastSubmittedCommandSerial()) {
             usleep(100);
         }
 
-        // Artificially increase the serials so work that was pending knows it can complete.
-        mCompletedSerial++;
-        mLastSubmittedSerial++;
+        ArtificiallyIncrementSerials();
 
         DAWN_TRY(TickImpl());
+
+        AssumeCommandsComplete();
+
         return {};
     }
 
