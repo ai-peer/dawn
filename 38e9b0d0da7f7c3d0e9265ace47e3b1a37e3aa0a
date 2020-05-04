@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9415ecf6_26cc2b4e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T16:38:39Z",
+      "side": 1,
+      "message": "This was already here, but the comment makes it sound like we only need to add this pipeline stage if flags \u003d\u003d 0. Is that true?",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 72
+      },
+      "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
