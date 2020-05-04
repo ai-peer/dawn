@@ -49,7 +49,7 @@ void RefCounted::Reference() {
     mRefCount.fetch_add(kRefCountIncrement, std::memory_order_relaxed);
 }
 
-void RefCounted::Release() {
+uint64_t RefCounted::Release() {
     ASSERT((mRefCount & ~kPayloadMask) != 0);
 
     // The release fence here is to make sure all accesses to the object on a thread A
@@ -71,6 +71,8 @@ void RefCounted::Release() {
         std::atomic_thread_fence(std::memory_order_acquire);
         DeleteThis();
     }
+
+    return mRefCount >> kPayloadBits;
 }
 
 void RefCounted::DeleteThis() {

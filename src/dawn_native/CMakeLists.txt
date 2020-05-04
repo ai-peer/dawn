@@ -185,6 +185,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/Forward.h"
         "d3d12/GPUDescriptorHeapAllocationD3D12.cpp"
         "d3d12/GPUDescriptorHeapAllocationD3D12.h"
+        "d3d12/GPUDescriptorHeapCacheD3D12.cpp"
+        "d3d12/GPUDescriptorHeapCacheD3D12.h"
         "d3d12/HeapAllocatorD3D12.cpp"
         "d3d12/HeapAllocatorD3D12.h"
         "d3d12/HeapD3D12.cpp"

@@ -19,7 +19,7 @@
 #include "common/Serial.h"
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
-#include "dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h"
+#include "dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -36,7 +36,8 @@ namespace dawn_native { namespace d3d12 {
                   uint32_t viewSizeIncrement,
                   const CPUDescriptorHeapAllocation& viewAllocation,
                   uint32_t samplerSizeIncrement,
-                  const CPUDescriptorHeapAllocation& samplerAllocation);
+                  const CPUDescriptorHeapAllocation& samplerAllocation,
+                  BindingInfoKey samplerBindingInfoHash);
 
         // Returns true if the BindGroup was successfully populated.
         bool PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator);
@@ -54,7 +55,7 @@ namespace dawn_native { namespace d3d12 {
 
         ~BindGroup() override;
 
-        GPUDescriptorHeapAllocation mGPUSamplerAllocation;
+        GPUDescriptorHeapCacheEntry* mGPUSamplerAllocationEntry;
         GPUDescriptorHeapAllocation mGPUViewAllocation;
 
         CPUDescriptorHeapAllocation mCPUSamplerAllocation;
