@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "323d3fe7_ac9445a0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T09:02:12Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be adressed.",
+      "parentUuid": "fea617e1_a0aade69",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 325,
+        "endChar": 9
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d9197e3_f79bae69",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 13
@@ -351,6 +375,30 @@
       "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "833b0889_7ec96bd6",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T09:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a5bbc63_6075883d",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 50
+      },
+      "revId": "6625832b30027b445aead0709aa6ea87c9b7dab5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
