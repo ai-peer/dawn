@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0eb83da_f69098cd",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T08:51:02Z",
+      "side": 1,
+      "message": "nit: comment for 1) can be removed this the fastpath isn\u0027t present in the code anymore.",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c282ff46_3d9e6438",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T08:51:02Z",
+      "side": 1,
+      "message": "nit: the comment is a bit out of date \"and will return a textureUsage with usage \u003d 0 and an empty vector.\"\n\nCan we also have a TODO to optimize this?",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "363f79eb_3b811d53",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T08:51:02Z",
+      "side": 1,
+      "message": "nit: We can avoid allocating with zeros and then or-ing into these zeros by doing the following.\n\n  passTextureUsage.subresourceUsages \u003d textureUsage.subresourceUsages;\n  return;",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
