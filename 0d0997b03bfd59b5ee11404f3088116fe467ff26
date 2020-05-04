@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c607314_4ca741e6",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T15:59:44Z",
+      "side": 1,
+      "message": "typo: sampled",
+      "range": {
+        "startLine": 799,
+        "startChar": 40,
+        "endLine": 799,
+        "endChar": 47
+      },
+      "revId": "0d0997b03bfd59b5ee11404f3088116fe467ff26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
