@@ -122,6 +122,24 @@
       "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd262bcc_3f0a981c",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-04T16:33:28Z",
+      "side": 1,
+      "message": "Oops. I misunderstood Corentin\u0027s intention, Sorry. Thanks for your explanation, Austin!",
+      "parentUuid": "8df69220_3d5afd5d",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
