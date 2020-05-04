@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d380707c_2edf51e4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-04T16:19:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0eb83da_f69098cd",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c282ff46_3d9e6438",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 15
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4d605056_1642de65",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-04T16:19:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c282ff46_3d9e6438",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "363f79eb_3b811d53",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 15
@@ -50,6 +86,24 @@
       "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a542c662_a51bee06",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-04T16:19:52Z",
+      "side": 1,
+      "message": "Per my understanding, the allocation is not a must. If we use a texture in a bindgroup before ExecuteBundle for a particular pass (considering that we have bindings in non-bundle code in a pass), then the allocation will not happen (the allocation has already happened when the texture is first used outside of bundle). If the texture is first used by bindings in the bundle in a pass, then we need the allocation code.\n\nPlease correct me if I made a mistake.",
+      "parentUuid": "363f79eb_3b811d53",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
