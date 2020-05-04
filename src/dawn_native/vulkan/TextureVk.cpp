@@ -86,7 +86,7 @@ namespace dawn_native { namespace vulkan {
                         VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
                 }
             }
-            if (usage & wgpu::TextureUsage::Present) {
+            if (usage & kPresentTextureUsage) {
                 // There is no access flag for present because the VK_KHR_SWAPCHAIN extension says
                 // that vkQueuePresentKHR makes the memory of the image visible to the presentation
                 // engine. There's also a note explicitly saying dstAccessMask should be 0. On the
@@ -132,7 +132,7 @@ namespace dawn_native { namespace vulkan {
                     } else {
                         return VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
                     }
-                case wgpu::TextureUsage::Present:
+                case kPresentTextureUsage:
                     return VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
                 default:
                     UNREACHABLE();
@@ -170,13 +170,13 @@ namespace dawn_native { namespace vulkan {
                     flags |= VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
                 }
             }
-            if (usage & wgpu::TextureUsage::Present) {
-                // There is no pipeline stage for present but a pipeline stage is required so we use
-                // "bottom of pipe" to block as little as possible and vkQueuePresentKHR will make
-                // the memory visible to the presentation engine. The spec explicitly mentions that
-                // "bottom of pipe" is ok. On the other direction, synchronization happens with a
-                // semaphore so bottom of pipe is ok too (but maybe it could be "top of pipe" to
-                // block less?)
+            if (usage & kPresentTextureUsage) {
+                // There is no pipeline stage for present but a pipeline stage is required so we
+                // use "bottom of pipe" to block as little as possible and vkQueuePresentKHR will
+                // make the memory visible to the presentation engine. The spec explicitly
+                // mentions that "bottom of pipe" is ok. On the other direction, synchronizing at
+                // the "top of pipe" would block less, but it doesn't matter because swapchain
+                // textures always start a new frame as "uninitialized".
                 flags |= VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
             }
 
