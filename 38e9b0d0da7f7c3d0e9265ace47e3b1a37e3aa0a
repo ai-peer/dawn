@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "61de78c5_38731fc1",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-04T22:22:51Z",
+      "side": 1,
+      "message": "Just so I understand: the goal is to eventually remove this from the public API, but still use a magic value internally?",
+      "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9415ecf6_26cc2b4e",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
