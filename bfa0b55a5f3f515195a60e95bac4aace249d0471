@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b10ce1c6_b5f0e1e5",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-04T11:56:07Z",
+      "side": 1,
+      "message": "This is not exactly correct because dawncpp can work on any implementation that exposes the C webgpu entrypoints. It does show that it is error-prone to require dependants to know about dawn_proc vs. dawncpp though.\n\nI suggest either adding dawn_proc to the target that\u0027s missing it in Chromium, or making a dawncpp_and_procs target in Chromium and replaces all deps that are (dawncpp + dawn_proc) to use that instead.",
+      "revId": "bfa0b55a5f3f515195a60e95bac4aace249d0471",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
