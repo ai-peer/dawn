@@ -22,6 +22,30 @@
       "revId": "76c0dd62dc8f69b670185cdec673968bffcbd0bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9c74775_be0dd689",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "4e4c8ce9_2024a596",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 58
+      },
+      "revId": "76c0dd62dc8f69b670185cdec673968bffcbd0bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9d55700c_9b7cedb8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b475cabc_358b9ad4",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 0
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a317710f_40c1b4a9",
         "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89cb02a4_92a80d1b",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a317710f_40c1b4a9",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bf0ec346_7a92a0ad",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e1f170_5f651328",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00b72045_b8880349",
         "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4bf09e2f_db4fdec9",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Key in unordered_map isn\u0027t accessible AFAIK.",
+      "parentUuid": "00b72045_b8880349",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93c35e13_40c3d5f1",
         "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
         "patchSetId": 5
@@ -114,6 +210,30 @@
       "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10af1afa_1b1b1d61",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-04T16:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93c35e13_40c3d5f1",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
