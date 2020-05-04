@@ -104,6 +104,24 @@
       "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8df69220_3d5afd5d",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T16:26:39Z",
+      "side": 1,
+      "message": "Yes, the allocation doesn\u0027t always happen which is why we should keep the if (!passTextureUsage.subresourceUsages.size()) part\n\nHowever, in the case where we first initialize the vector, we don\u0027t need to create the vector willed with wgpu::TexutreUsage::None and then right after OR in all of the subresourceUsages in the for-loop below.\n\nInstead, we can just set the passTextureUsage.subresourceUsages to be a copy of textureUsage.subresourceUsages and return right away.",
+      "parentUuid": "a542c662_a51bee06",
+      "revId": "733a28141df544956ca46858d8bb90e3a2687a2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
