@@ -119,10 +119,7 @@ config("dawn_internal") {
     }
 
     # Flags for -pedantic warnings that haven't been fixed yet.
-    cflags += [
-      "-Wno-gnu-zero-variadic-macro-arguments",
-      "-Wno-microsoft-enum-value",
-    ]
+    cflags += [ "-Wno-gnu-zero-variadic-macro-arguments" ]
   }
 
   if (!is_clang && is_win) {
