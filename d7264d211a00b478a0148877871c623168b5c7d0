@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35804e7b_1d257932",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "nit: briefly explain how it might influence it. (device lost)",
+      "range": {
+        "startLine": 14,
+        "startChar": 106,
+        "endLine": 14,
+        "endChar": 136
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48e4bb02_d8224cc8",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "nit: extraneous \"it\" ?\nMaybe also add a comma after \"case\"",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c8b28e1_b4e65940",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "nit: ready",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 21
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6878b30_0aa8cf1f",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "nit: forceful",
+      "range": {
+        "startLine": 45,
+        "startChar": 44,
+        "endLine": 45,
+        "endChar": 53
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "388e5385_b8081b7d",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "\"should only\" ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 23,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acdda2a6_6f0925d5",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-04T18:20:36Z",
+      "side": 1,
+      "message": "extraneous?",
+      "range": {
+        "startLine": 84,
+        "startChar": 16,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
