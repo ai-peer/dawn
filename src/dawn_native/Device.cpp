@@ -292,6 +292,45 @@ namespace dawn_native {
         return mFenceSignalTracker.get();
     }
 
+    Serial DeviceBase::GetCompletedCommandSerial() const {
+        return mCompletedSerial;
+    }
+
+    Serial DeviceBase::GetLastSubmittedCommandSerial() const {
+        return mLastSubmittedSerial;
+    }
+
+    void DeviceBase::IncrementLastSubmittedCommandSerial() {
+        mLastSubmittedSerial++;
+    }
+
+    void DeviceBase::ArtificiallyIncrementSerials() {
+        mCompletedSerial++;
+        mLastSubmittedSerial++;
+    }
+
+    void DeviceBase::AssumeCommandsComplete() {
+        mLastSubmittedSerial++;
+        mCompletedSerial = mLastSubmittedSerial;
+    }
+
+    Serial DeviceBase::GetPendingCommandSerial() const {
+        return mLastSubmittedSerial + 1;
+    }
+
+    void DeviceBase::CheckPassedSerials() {
+        Serial completedSerial = CheckCompletedSerial();
+
+        ASSERT(completedSerial <= mLastSubmittedSerial);
+        // completedSerial should not be less than mCompletedSerial unless it is 0.
+        // It can be 0 when there's no fences to check.
+        ASSERT(completedSerial >= mCompletedSerial || completedSerial == 0);
+
+        if (completedSerial > mCompletedSerial) {
+            mCompletedSerial = completedSerial;
+        }
+    }
+
     ResultOrError<const Format*> DeviceBase::GetInternalFormat(wgpu::TextureFormat format) const {
         size_t index = ComputeFormatIndex(format);
         if (index >= mFormatTable.size()) {
@@ -653,6 +692,9 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
+        
+        // CheckPassedSerials();
+
         if (ConsumedError(TickImpl())) {
             return;
         }
