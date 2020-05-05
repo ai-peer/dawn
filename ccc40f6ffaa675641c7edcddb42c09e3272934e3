@@ -16,6 +16,24 @@
       "revId": "ccc40f6ffaa675641c7edcddb42c09e3272934e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13137277_16573251",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-05T06:57:25Z",
+      "side": 1,
+      "message": "Ack. I know that, but the wording of my comment is incorrect. I changed the comment at https://dawn-review.googlesource.com/c/dawn/+/21000 as you suggested.",
+      "parentUuid": "602581f7_53ca14bb",
+      "revId": "ccc40f6ffaa675641c7edcddb42c09e3272934e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
