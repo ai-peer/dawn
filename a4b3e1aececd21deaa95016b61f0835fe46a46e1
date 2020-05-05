@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bac67f7_2adf1071",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T11:48:55Z",
+      "side": 1,
+      "message": "nit: Cannot use GetBindGroupLayout for comparison samplers without ...",
+      "revId": "a4b3e1aececd21deaa95016b61f0835fe46a46e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88c16040_72a5ee5c",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T11:48:55Z",
+      "side": 1,
+      "message": "nit: since the test values are always shared between render and compute, maybe they could be defines as constants outside the tests?",
+      "revId": "a4b3e1aececd21deaa95016b61f0835fe46a46e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
