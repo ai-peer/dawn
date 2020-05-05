@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94598eb2_03263820",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-05T16:42:19Z",
+      "side": 1,
+      "message": "First line is very vague and reading through commits later won\u0027t be very clear that this was a test change and not a functionality change. Perhaps: \"dispatch call in usage tracking tests\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "ecf8a139303d1dbaf921873d48af5c3c87e62920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
