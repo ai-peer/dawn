@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0d52c47_edd7a063",
+        "filename": "src/tests/end2end/ComparisonSamplerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:22:29Z",
+      "side": 1,
+      "message": "nit: for a copy of size 1 you don\u0027t need a whole rowpitch.",
+      "revId": "61a836c4ff18b81dbf77a6b1215b547af0e34ff8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
