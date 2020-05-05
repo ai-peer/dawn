@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "34fbb481_42ed5893",
+        "filename": "src/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "Refcounted::Release is a very very hot call. Can this be split in a separate call like:\n\n  uint64_t RefCounted::GetRefcount();\n\nor (even better?)\n\n  bool RefCounted::HasOnlyStaticRefsRemaining(uin64_t staticRefcount) {\n    uint64_t refcount \u003d ...\n    ASSSERT(refcount \u003e\u003d staticRefCount);\n    return refcount \u003c\u003d staticRefCount;\n  }",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52e691c0_441cabf1",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "Maybe this could be in the layout call to DeallocateBindGroup.",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "848d2d8e_ff9be62d",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
         "patchSetId": 6
@@ -16,6 +50,86 @@
       "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f55c279e_9ac4ac56",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "Or SamplerHeapCacheEntry? It shouldn\u0027t need to be general since we only plan to use it for sampler descriptors.",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 35
+      },
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19acaf38_619ef8a7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "We shouldn\u0027t key only on the hash because a malicious web application could find hash collisions (and get entries that have different number of samplers for example). SamplerHeapCacheEntry should have something like an std::vector\u003cRef\u003cSampler\u003e\u003e and implement comparison and hash operators similarly to what\u0027s done for BindGroupLayoutBase and others. Samplers are already deduplicated so comparing them by pointer is fine.\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/BindGroupLayout.h;l\u003d66?q\u003dBindGroupLayoutBase",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba2387d5_d3eba374",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "In the spirit of d3d12::BindGroup being \"dumb\" maybe it should receive its sampleHeapCacheEntry from the BindGroupLayout in an Initialize call.",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24e11774_1b227df2",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T12:19:09Z",
+      "side": 1,
+      "message": "destroy",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
