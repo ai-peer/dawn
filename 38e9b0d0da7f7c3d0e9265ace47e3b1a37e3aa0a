@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6363d8bc_aee4e3f1",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:48:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "754a6dd2_6cde161f",
+      "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61de78c5_38731fc1",
         "filename": "src/dawn_native/dawn_platform.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2249021f_d3802883",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:48:44Z",
+      "side": 1,
+      "message": "Exactly!",
+      "parentUuid": "61de78c5_38731fc1",
+      "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -80,6 +116,30 @@
       "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c1ae326_af60c708",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:48:44Z",
+      "side": 1,
+      "message": "Updated the comment to quote the spec so it should be more clear.",
+      "parentUuid": "b1a77418_f52c9b93",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 72
+      },
+      "revId": "38e9b0d0da7f7c3d0e9265ace47e3b1a37e3aa0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
