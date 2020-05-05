@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "587e3df9_09a245b4",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35804e7b_1d257932",
+      "range": {
+        "startLine": 14,
+        "startChar": 106,
+        "endLine": 14,
+        "endChar": 136
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48e4bb02_d8224cc8",
         "filename": "docs/device_facilities.md",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d54a85_540c0a66",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48e4bb02_d8224cc8",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9986bfce_059b6539",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c8b28e1_b4e65940",
+      "range": {
+        "startLine": 38,
+        "startChar": 17,
+        "endLine": 38,
+        "endChar": 21
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6878b30_0aa8cf1f",
         "filename": "docs/device_facilities.md",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3244737c_13e83372",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6878b30_0aa8cf1f",
+      "range": {
+        "startLine": 45,
+        "startChar": 44,
+        "endLine": 45,
+        "endChar": 53
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "0bb23d50_b5af5d99",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3c89575_fa68c59e",
+      "range": {
+        "startLine": 58,
+        "startChar": 35,
+        "endLine": 58,
+        "endChar": 47
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00ac4a89_cb590b13",
         "filename": "docs/device_facilities.md",
         "patchSetId": 7
@@ -137,6 +257,30 @@
       "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7176bdd9_d635c6a7",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "It is enabled because it is in the second initializer list.",
+      "parentUuid": "00ac4a89_cb590b13",
+      "range": {
+        "startLine": 69,
+        "startChar": 104,
+        "endLine": 69,
+        "endChar": 112
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +327,54 @@
       "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46d50b0a_20f9c341",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acdda2a6_6f0925d5",
+      "range": {
+        "startLine": 84,
+        "startChar": 16,
+        "endLine": 84,
+        "endChar": 22
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c3a002d_d5f3dc71",
+        "filename": "docs/device_facilities.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-05T08:29:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "388e5385_b8081b7d",
+      "range": {
+        "startLine": 84,
+        "startChar": 23,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "d7264d211a00b478a0148877871c623168b5c7d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
