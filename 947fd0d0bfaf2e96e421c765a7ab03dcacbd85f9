@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e84e8a0_76a14b2b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-05T23:34:05Z",
+      "side": 1,
+      "message": "not sure if this is the best way to do this. \nI didn\u0027t really like setting mCompletedSerial \u003d GetCompletedCommandSerial() after calling AssumeCommandsComplete or ArtificiallyIncreaseSerials, but maybe that would make more sense.\nI could also add new methods that will call assume and increase, and then set mCompleted. Let me know what you guys think!",
+      "revId": "947fd0d0bfaf2e96e421c765a7ab03dcacbd85f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
