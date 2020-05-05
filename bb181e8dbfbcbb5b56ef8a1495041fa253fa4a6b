@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "055f6529_a42c5f7f",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-05T00:37:51Z",
+      "side": 1,
+      "message": "should be: 0x80",
+      "range": {
+        "startLine": 49,
+        "startChar": 69,
+        "endLine": 49,
+        "endChar": 73
+      },
+      "revId": "bb181e8dbfbcbb5b56ef8a1495041fa253fa4a6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4727140_a271bfc7",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-05T00:37:51Z",
+      "side": 1,
+      "message": "whoops, remove this TODO.",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 105
+      },
+      "revId": "bb181e8dbfbcbb5b56ef8a1495041fa253fa4a6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
