@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af7fcb40_a22cd789",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s what we want to test: the usage checks are done only on dispatch (at least that\u0027s the current idea) so what we should test is:\n\n bind readonlySSBO\n dispatch\n bind readWriteSSBO\n dispatch",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f603629_a18dd145",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ba5f315_e7ebc800",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "The tests are good, I\u0027m just worried that they are copy-pasting code a bunch of code that\u0027s similar but subtly different. Dawn end2end tests are good to cover different code paths but do not try to be 100% exhaustive. Eventually we should have CTS tests that do the combinatorial explosion but TBH it feels we have reviewed the same patch 5 times now.",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f32b3131_fd4dd1cd",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "sampled",
+      "range": {
+        "startLine": 984,
+        "startChar": 54,
+        "endLine": 984,
+        "endChar": 61
+      },
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc5810c_05f4bc66",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de299856_07488aa4",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T13:00:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
