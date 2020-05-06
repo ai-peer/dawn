@@ -16,6 +16,24 @@
       "revId": "214b857d5dc4509624537e2aafd3ec38da5eb686",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a50c6c8_0a920957",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:12:09Z",
+      "side": 1,
+      "message": "It is definitely similar, but not the same. 2 differences when I read the code: \n1) In render pass, texture can be used as render target. This is a writeable usage, and it is not set via bind group. While in compute, we can only use writeonly storage texture via bind group, no other choice at all. \n\n2) And resource tracking in render pass is per pass, we must track all resources during pass.EndPass or encoder.Finish (either implementation is OK), no matter we call draw command or not. But resource tracking in compute pass is per dispatch, if dispatch command is not called, there is no need to check resource usage conflict at all (no check !\u003d check and pass/fail). \n\nThese differences are reflected in the test.",
+      "parentUuid": "6b87579a_9e148a94",
+      "revId": "214b857d5dc4509624537e2aafd3ec38da5eb686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
