@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77ffcdec_be9291c9",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T08:24:20Z",
+      "side": 1,
+      "message": "Can we have a small comment explaining that readonly storage is used as SRV so it can be used at the same time as a sampled texture?",
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15681857_33354486",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T08:24:20Z",
+      "side": 1,
+      "message": "nit: this method only uses GetD3D12Format from Texture, the rest is forwarded from TextureView. Maybe it could all be in TextureView::GetUAVDescriptor?",
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33998740_da9293f9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T08:24:20Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need to depend on the texture view dimension?",
+      "range": {
+        "startLine": 616,
+        "startChar": 32,
+        "endLine": 616,
+        "endChar": 66
+      },
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
