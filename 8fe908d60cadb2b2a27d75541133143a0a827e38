@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05c2fc90_ce0f4bff",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T21:27:49Z",
+      "side": 1,
+      "message": "The word \u0027Check\u0027 implies to that the method does not have side-effects, which is not the case here. \n\nI think \u0027UpdatePassedSerials\u0027 would be better method names.",
+      "range": {
+        "startLine": 323,
+        "startChar": 9,
+        "endLine": 323,
+        "endChar": 39
+      },
+      "revId": "8fe908d60cadb2b2a27d75541133143a0a827e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84bfe465_580b2157",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T21:27:49Z",
+      "side": 1,
+      "message": "Please move this method definition to where the other private methods are declared.",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 47
+      },
+      "revId": "8fe908d60cadb2b2a27d75541133143a0a827e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
