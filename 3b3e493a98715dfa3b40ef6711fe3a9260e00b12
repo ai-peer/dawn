@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "458bf1b0_6ddfe9ca",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "This code snippet you listed has already covered in tests for resource tracking between different draw/dispatch calls. \n\nAs I said in another patch, if we don\u0027t call dispatch, we shall not trace resource usage at all in Dawn\u0027s implementation (alternatively, we can tracke, but ignore the conflict for this particular case if dispatch command is not called). So if we have read-write or multiple write usage upon a buffer/texture, it won\u0027t report error. The differences between the code snippet you listed and the test below is: trace and pass vs no trace at all (or trace but ignore conflict).  \n\nThis particular situation is caught by a end2end test by chance when I wrote validation code for resource tracking for compute: https://dawn-review.googlesource.com/c/dawn/+/20322. So I added this test to make sure it can pass for compute in case that test was revised. But it is not common because we always issue dispatch() in compute, so I deleted this test.",
+      "parentUuid": "af7fcb40_a22cd789",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f603629_a18dd145",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c819049f_9c9265f2",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f603629_a18dd145",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ba5f315_e7ebc800",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "877dae73_871653dd",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "Replied in another patch. Again, this is unit test.",
+      "parentUuid": "0ba5f315_e7ebc800",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "87fa56be_37fa3738",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f32b3131_fd4dd1cd",
+      "range": {
+        "startLine": 984,
+        "startChar": 54,
+        "endLine": 984,
+        "endChar": 61
+      },
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbc5810c_05f4bc66",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "820b03a0_d47e5021",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc5810c_05f4bc66",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de299856_07488aa4",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42437612_1dff26f9",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-06T16:28:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de299856_07488aa4",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
