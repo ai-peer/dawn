@@ -15,6 +15,8 @@
 #ifndef DAWNNATIVE_D3D12_STAGINGDESCRIPTORALLOCATOR_H_
 #define DAWNNATIVE_D3D12_STAGINGDESCRIPTORALLOCATOR_H_
 
+#include "common/SerialQueue.h"
+
 #include "dawn_native/Error.h"
 
 #include "dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h"

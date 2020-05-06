@@ -27,7 +27,7 @@ class RefCounted {
 
     // Dawn API
     void Reference();
-    void Release();
+    uint64_t Release();
 
   protected:
     virtual ~RefCounted() = default;

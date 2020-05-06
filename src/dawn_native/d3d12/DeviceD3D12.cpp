@@ -504,4 +504,8 @@ namespace dawn_native { namespace d3d12 {
         return mDepthStencilViewAllocator.get();
     }
 
+    SamplerHeapCache* Device::GetSamplerHeapCache() {
+        return &mSamplerHeapCache;
+    }
+
 }}  // namespace dawn_native::d3d12

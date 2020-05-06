@@ -17,6 +17,7 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/SamplerHeapCacheD3D12.h"
 #include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -147,27 +148,29 @@ namespace dawn_native { namespace d3d12 {
             viewSizeIncrement = mViewAllocator->GetSizeIncrement();
         }
 
+        SamplerHeapCacheEntry* samplerAllocationEntry =
+            device->GetSamplerHeapCache()->Acquire(descriptor);
+
         uint32_t samplerSizeIncrement = 0;
-        CPUDescriptorHeapAllocation samplerAllocation;
-        if (GetSamplerDescriptorCount() > 0) {
-            DAWN_TRY_ASSIGN(samplerAllocation, mSamplerAllocator->AllocateCPUDescriptors());
+        CPUDescriptorHeapAllocation* samplerAllocation = samplerAllocationEntry->GetCPUAllocation();
+        if (!samplerAllocation->IsValid() && GetSamplerDescriptorCount() > 0) {
+            DAWN_TRY_ASSIGN(*samplerAllocation, mSamplerAllocator->AllocateCPUDescriptors());
             samplerSizeIncrement = mSamplerAllocator->GetSizeIncrement();
         }
 
         return mBindGroupAllocator.Allocate(device, descriptor, viewSizeIncrement, viewAllocation,
-                                            samplerSizeIncrement, samplerAllocation);
+                                            samplerSizeIncrement, samplerAllocationEntry);
     }
 
     void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup,
                                               CPUDescriptorHeapAllocation* viewAllocation,
-                                              CPUDescriptorHeapAllocation* samplerAllocation) {
+                                              SamplerHeapCacheEntry* samplerAllocationEntry) {
         if (viewAllocation->IsValid()) {
             mViewAllocator->Deallocate(viewAllocation);
         }
 
-        if (samplerAllocation->IsValid()) {
-            mSamplerAllocator->Deallocate(samplerAllocation);
-        }
+        samplerAllocationEntry->ReleaseEntry(ToBackend(GetDevice())->GetSamplerHeapCache(),
+                                             mSamplerAllocator);
 
         mBindGroupAllocator.Deallocate(bindGroup);
     }
