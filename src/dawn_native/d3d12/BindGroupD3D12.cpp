@@ -133,9 +133,17 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
-                case wgpu::BindingType::StorageTexture:
                 case wgpu::BindingType::ReadonlyStorageTexture:
-                case wgpu::BindingType::WriteonlyStorageTexture:
+                case wgpu::BindingType::WriteonlyStorageTexture: {
+                    TextureView* view = ToBackend(GetBindingAsTextureView(bindingIndex));
+                    D3D12_UNORDERED_ACCESS_VIEW_DESC uav = view->GetUAVDescriptor();
+                    d3d12Device->CreateUnorderedAccessView(
+                        ToBackend(view->GetTexture())->GetD3D12Resource(), nullptr, &uav,
+                        viewAllocation.OffsetFrom(viewSizeIncrement, bindingOffsets[bindingIndex]));
+                    break;
+                }
+
+                case wgpu::BindingType::StorageTexture:
                     UNREACHABLE();
                     break;
 

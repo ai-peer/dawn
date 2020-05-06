@@ -54,6 +54,9 @@ namespace dawn_native { namespace d3d12 {
         D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(uint32_t mipLevel,
                                                        uint32_t baseArrayLayer,
                                                        uint32_t layerCount) const;
+        D3D12_UNORDERED_ACCESS_VIEW_DESC GetUAVDescriptor(uint32_t mipLevel,
+                                                          uint32_t baseArrayLayer,
+                                                          uint32_t layerCount) const;
         void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                  uint32_t baseMipLevel,
                                                  uint32_t levelCount,
@@ -116,6 +119,7 @@ namespace dawn_native { namespace d3d12 {
         const D3D12_SHADER_RESOURCE_VIEW_DESC& GetSRVDescriptor() const;
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor() const;
         D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor() const;
+        D3D12_UNORDERED_ACCESS_VIEW_DESC GetUAVDescriptor() const;
 
       private:
         D3D12_SHADER_RESOURCE_VIEW_DESC mSrvDesc;
