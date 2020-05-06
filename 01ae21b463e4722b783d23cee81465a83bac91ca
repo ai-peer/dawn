@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "41f99bb9_8d910515",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T01:45:19Z",
+      "side": 1,
+      "message": "Ahh, right. I forgot about the erase part.",
+      "parentUuid": "4bf09e2f_db4fdec9",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "01ae21b463e4722b783d23cee81465a83bac91ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93c35e13_40c3d5f1",
         "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
         "patchSetId": 5

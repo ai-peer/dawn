@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3eafdfc6_c0541f70",
+        "filename": "src/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T01:45:19Z",
+      "side": 1,
+      "message": "One advantage of having Release return the previous reference is it is safer in cases where you\u0027ve called Release on the final reference. In this case, Release will return zero and future dereferences will result in use-after-free.  \n\nI bet that incrementing/decrementing the 64-bit reference count using fetch_sub and atomic_thread_fence is costing you more performance than returning the reference count on the stack. Just saying ...",
+      "parentUuid": "34fbb481_42ed5893",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52e691c0_441cabf1",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 6
@@ -93,6 +111,24 @@
     },
     {
       "key": {
+        "uuid": "fe870f50_903d9fd9",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T01:45:19Z",
+      "side": 1,
+      "message": "+1 to storing a vector of collisions if the hash is not unique.\n\nHaving the cache compute its own hash given the descriptor is better for encapsulation.",
+      "parentUuid": "19acaf38_619ef8a7",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba2387d5_d3eba374",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 6
@@ -126,6 +162,29 @@
         "startChar": 33,
         "endLine": 53,
         "endChar": 40
+      },
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "999e7eb3_297517fd",
+        "filename": "src/dawn_native/d3d12/GPUDescriptorHeapCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-06T01:45:19Z",
+      "side": 1,
+      "message": "DeleteThis should be a private method of the cache entry.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 9
       },
       "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
