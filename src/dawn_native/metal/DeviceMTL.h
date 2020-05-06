@@ -46,15 +46,12 @@ namespace dawn_native { namespace metal {
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
 
-        Serial GetCompletedCommandSerial() const final override;
-        Serial GetLastSubmittedCommandSerial() const final override;
         MaybeError TickImpl() override;
 
         id<MTLDevice> GetMTLDevice();
         id<MTLCommandQueue> GetMTLQueue();
 
         CommandRecordingContext* GetPendingCommandContext();
-        Serial GetPendingCommandSerial() const override;
         void SubmitPendingCommandBuffer();
 
         MapRequestTracker* GetMapTracker() const;
@@ -108,12 +105,12 @@ namespace dawn_native { namespace metal {
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
 
-        Serial mLastSubmittedSerial = 0;
         CommandRecordingContext mCommandContext;
 
         // The completed serial is updated in a Metal completion handler that can be fired on a
         // different thread, so it needs to be atomic.
         std::atomic<uint64_t> mCompletedSerial;
+        Serial CheckCompletedSerial() override;
 
         // mLastSubmittedCommands will be accessed in a Metal schedule handler that can be fired on
         // a different thread so we guard access to it with a mutex.
