@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a0b8969_bee5854f",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-06T13:40:20Z",
+      "side": 1,
+      "message": "Nit: render -\u003e compute",
+      "revId": "28c886717b9a976efea9e4c54f85bf56452dc804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
