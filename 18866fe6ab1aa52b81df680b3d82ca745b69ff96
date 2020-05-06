@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c8b2f5c_d75aed00",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-06T13:25:56Z",
+      "side": 1,
+      "message": "Not new to this patch, but I wonder if these constants (here and in the arithmetic below) should be in hex. It would make it clearer that they\u0027re essentially bitmasks.",
+      "revId": "18866fe6ab1aa52b81df680b3d82ca745b69ff96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
