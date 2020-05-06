@@ -108,6 +108,19 @@ TEST(RefCounted, RaceOnReferenceRelease) {
     EXPECT_TRUE(deleted);
 }
 
+// Test releasing the final reference.
+TEST(RefCounted, ReleaseFinal) {
+    bool deleted = false;
+    auto test = new RCTest(&deleted);
+
+    test->Reference();
+    EXPECT_EQ(test->Release(), 1u);
+    EXPECT_FALSE(deleted);
+
+    test->Release();
+    EXPECT_TRUE(deleted);
+}
+
 // Test Ref remove reference when going out of scope
 TEST(Ref, EndOfScopeRemovesRef) {
     bool deleted = false;

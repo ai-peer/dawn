@@ -49,7 +49,7 @@ void RefCounted::Reference() {
     mRefCount.fetch_add(kRefCountIncrement, std::memory_order_relaxed);
 }
 
-void RefCounted::Release() {
+uint64_t RefCounted::Release() {
     ASSERT((mRefCount & ~kPayloadMask) != 0);
 
     // The release fence here is to make sure all accesses to the object on a thread A
@@ -71,6 +71,10 @@ void RefCounted::Release() {
         std::atomic_thread_fence(std::memory_order_acquire);
         DeleteThis();
     }
+
+    // Release() is very hot. Consider moving the returned reference count off of the stack and into
+    // a helper.
+    return mRefCount >> kPayloadBits;
 }
 
 void RefCounted::DeleteThis() {

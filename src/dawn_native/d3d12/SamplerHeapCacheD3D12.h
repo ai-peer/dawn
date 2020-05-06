@@ -1,0 +1,102 @@
+// Copyright 2020 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef DAWNNATIVE_D3D12_SAMPLERHEAPCACHE_H_
+#define DAWNNATIVE_D3D12_SAMPLERHEAPCACHE_H_
+
+#include "common/RefCounted.h"
+#include "dawn_native/BindingInfo.h"
+#include "dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
+#include "dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h"
+
+#include <vector>
+#include <unordered_set>
+
+// |SamplerHeapCacheEntry| maintains a cache of sampler descriptor heap allocations.
+// Each entry represents one or more sampler descriptors that co-exist in a CPU and
+// GPU descriptor heap. The CPU-side allocation is deallocated once the final reference
+// has been released while the GPU-side allocation is deallocated when the GPU is finished.
+//
+// The BindGroupLayout hands out these entries upon constructing the bindgroup. If the entry is not
+// invalid, it will allocate and initialize so it may be reused by another bindgroup.
+//
+// The cache is primary needed for the GPU sampler heap, which is much smaller than the view heap
+// and switches incur expensive pipeline flushes.
+namespace dawn_native { namespace d3d12 {
+
+    class SamplerHeapCache;
+    class StagingDescriptorAllocator;
+    class Sampler;
+
+    // Wraps a GPU descriptor heap allocation in a cache.
+    class SamplerHeapCacheEntry : public RefCounted {
+      public:
+        SamplerHeapCacheEntry(const BindGroupDescriptor* descriptor);
+        ~SamplerHeapCacheEntry() override;
+
+        void ReleaseEntry(SamplerHeapCache* cache, StagingDescriptorAllocator* allocator);
+
+        bool IsValid() const;
+
+        // Functors necessary for the unordered_map<SamplerHeapCacheEntry*>-based cache.
+        struct HashFunc {
+            size_t operator()(const SamplerHeapCacheEntry* entry) const;
+        };
+
+        struct EqualityFunc {
+            bool operator()(const SamplerHeapCacheEntry* a, const SamplerHeapCacheEntry* b) const;
+        };
+
+        CPUDescriptorHeapAllocation* GetCPUAllocation();
+        GPUDescriptorHeapAllocation* GetGPUAllocation();
+
+      private:
+        // Memory is owned by the cache and must no-op.
+        void DeleteThis() override {
+        }
+
+        friend SamplerHeapCache;
+
+        CPUDescriptorHeapAllocation mCPUAllocation;
+        GPUDescriptorHeapAllocation mGPUAllocation;
+
+        struct SamplerBindingInfo {
+            uint32_t binding;
+            Sampler* sampler;
+        };
+
+        std::vector<SamplerBindingInfo> mSamplerInfo;
+    };
+
+    // Caches GPUDescriptorHeapAllocation so that we don't create duplicate ones for every
+    // BindGroup.
+    class SamplerHeapCache {
+      public:
+        SamplerHeapCache() = default;
+        ~SamplerHeapCache();
+
+        SamplerHeapCacheEntry* Acquire(const BindGroupDescriptor* descriptor);
+        void DestroyCacheEntry(SamplerHeapCacheEntry* entry);
+
+      private:
+        using Cache = std::unordered_set<SamplerHeapCacheEntry*,
+                                         SamplerHeapCacheEntry::HashFunc,
+                                         SamplerHeapCacheEntry::EqualityFunc>;
+
+        Cache mCache;
+    };
+
+}}  // namespace dawn_native::d3d12
+
+#endif  // DAWNNATIVE_D3D12_SAMPLERHEAPCACHE_H_
