@@ -116,6 +116,30 @@
       "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02fb9b75_47fe68a3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T08:49:50Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation. It sounds good.\n\nYeah no need to test 2Darrays in this CL.",
+      "parentUuid": "775e3eec_b49710c1",
+      "range": {
+        "startLine": 616,
+        "startChar": 32,
+        "endLine": 616,
+        "endChar": 66
+      },
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
