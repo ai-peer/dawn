@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e920246_6ff77f76",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-06T08:47:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77ffcdec_be9291c9",
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15681857_33354486",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7c124be2_761982f6",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-06T08:47:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15681857_33354486",
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33998740_da9293f9",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -47,6 +83,30 @@
       "writtenOn": "2020-05-06T08:24:20Z",
       "side": 1,
       "message": "Doesn\u0027t this need to depend on the texture view dimension?",
+      "range": {
+        "startLine": 616,
+        "startChar": 32,
+        "endLine": 616,
+        "endChar": 66
+      },
+      "revId": "dfee261bb9796b8615e880d7f7618ad0d8f0cb3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "775e3eec_b49710c1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-06T08:47:52Z",
+      "side": 1,
+      "message": "D3D12_UNORDERED_ACCESS_VIEW_DESC.Texture2D doesn\u0027t have member to set baseArrayLayer and layerCount, so I just always treat a 2D texture view as a 2D texture array view with one layer. This treatment is the same as the one we do on SRV and RTV.\n\nTo make this CL simple enough I don\u0027t test image2DArray. What do you think?\n\nhttps://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_tex2d_uav",
+      "parentUuid": "33998740_da9293f9",
       "range": {
         "startLine": 616,
         "startChar": 32,
