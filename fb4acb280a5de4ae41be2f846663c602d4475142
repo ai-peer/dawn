@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b4c29077_20706b79",
+        "filename": "src/common/RefCounted.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-06T08:27:17Z",
+      "side": 1,
+      "message": "I\u0027m more worried about the shift, but you\u0027re right that it probably doesn\u0027t matter. Can we have 1) a test for it, 2) a comment explaining this could be move out of the hot path if we needed?",
+      "parentUuid": "3eafdfc6_c0541f70",
+      "revId": "fb4acb280a5de4ae41be2f846663c602d4475142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52e691c0_441cabf1",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 6
