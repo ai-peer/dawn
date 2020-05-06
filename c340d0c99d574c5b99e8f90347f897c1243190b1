@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "556fdd17_2d5990e8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-06T18:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a9983f7_991e368e",
+      "revId": "c340d0c99d574c5b99e8f90347f897c1243190b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23a3b22a_5658937c",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 22
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5fb9df4d_8bbf45e4",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-06T18:57:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23a3b22a_5658937c",
+      "revId": "c340d0c99d574c5b99e8f90347f897c1243190b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1700f9d_f8ed4b61",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 22
@@ -50,6 +86,24 @@
       "revId": "c340d0c99d574c5b99e8f90347f897c1243190b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed601efe_60940e7f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-06T18:57:44Z",
+      "side": 1,
+      "message": "Oops added the comment back, accidentally got rid of it. Done.",
+      "parentUuid": "b1700f9d_f8ed4b61",
+      "revId": "c340d0c99d574c5b99e8f90347f897c1243190b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
