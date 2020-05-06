@@ -2,6 +2,121 @@
   "comments": [
     {
       "key": {
+        "uuid": "e0981df1_f2f61710",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-06T23:26:38Z",
+      "side": 1,
+      "message": "Could we do this only if GetSamplerDescriptorCount() \u003e 0?",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f8da52d_9ab20069",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-06T23:26:38Z",
+      "side": 1,
+      "message": "Could you make a microbenchmark in dawn_perf_tests which would stress sampler deduplication? Then we can measure the impact of sorting here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d521738d_28fde7dd",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-06T23:26:38Z",
+      "side": 1,
+      "message": "What do you think about storing the SamplerHeapCache* and StagingDescriptorAllocator* on the SamplerHeapCacheEntry? Or maybe just the SamplerHeapCache* on the entry, and store the StagingDescriptorAllocator* on the SamplerHeapCache.\n\nIf we did that, Release() doesn\u0027t have to return anything, this code would be in DeleteThis(), we could use Ref\u003cSamplerHeapCacheEntry\u003e everywhere and no manual new/delete. We wouldn\u0027t need this ReleaseEntry function",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a693de_b0c95e37",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-06T23:26:38Z",
+      "side": 1,
+      "message": "nit: call this GetOrCreate to match other places in Dawn. In Dawn AcquireRef gets a ref *without* adding a refcount, so this could be confusing.",
+      "range": {
+        "startLine": 66,
+        "startChar": 45,
+        "endLine": 66,
+        "endChar": 52
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "897b7b8e_cd055c4a",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-06T23:26:38Z",
+      "side": 1,
+      "message": "Should this `delete entry` ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ee5eca2_f63b0ca8",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 8
