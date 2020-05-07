@@ -89,6 +89,7 @@ namespace dawn_native {
       protected:
         static MaybeError CheckSpvcSuccess(shaderc_spvc_status status, const char* error_msg);
         shaderc_spvc::CompileOptions GetCompileOptions() const;
+        virtual MaybeError Initialize();
 
         shaderc_spvc::Context mSpvcContext;
 
@@ -103,6 +104,7 @@ namespace dawn_native {
         MaybeError ExtractSpirvInfoWithSpirvCross(const spirv_cross::Compiler& compiler);
 
         std::vector<uint32_t> mSpirv;
+        std::string mWgsl;
 
         ModuleBindingInfo mBindingInfo;
         std::bitset<kMaxVertexAttributes> mUsedVertexAttributes;

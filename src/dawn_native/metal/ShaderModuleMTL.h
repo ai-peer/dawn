@@ -48,10 +48,12 @@ namespace dawn_native { namespace metal {
                                const PipelineLayout* layout,
                                MetalFunctionData* out);
 
+      protected:
+        MaybeError Initialize() override;
+
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
-        MaybeError Initialize();
 
         shaderc_spvc::CompileOptions GetMSLCompileOptions();
     };
