@@ -25,6 +25,7 @@ namespace dawn_native { namespace d3d12 {
 
     class Device;
     class ShaderVisibleDescriptorAllocator;
+    class SamplerHeapCacheEntry;
 
     class BindGroup final : public BindGroupBase, public PlacementAllocated {
       public:
@@ -36,7 +37,7 @@ namespace dawn_native { namespace d3d12 {
                   uint32_t viewSizeIncrement,
                   const CPUDescriptorHeapAllocation& viewAllocation,
                   uint32_t samplerSizeIncrement,
-                  const CPUDescriptorHeapAllocation& samplerAllocation);
+                  SamplerHeapCacheEntry* samplerAllocationEntry);
 
         // Returns true if the BindGroup was successfully populated.
         bool PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator);
@@ -54,10 +55,9 @@ namespace dawn_native { namespace d3d12 {
 
         ~BindGroup() override;
 
-        GPUDescriptorHeapAllocation mGPUSamplerAllocation;
-        GPUDescriptorHeapAllocation mGPUViewAllocation;
+        SamplerHeapCacheEntry* mSamplerAllocationEntry;
 
-        CPUDescriptorHeapAllocation mCPUSamplerAllocation;
+        GPUDescriptorHeapAllocation mGPUViewAllocation;
         CPUDescriptorHeapAllocation mCPUViewAllocation;
     };
 }}  // namespace dawn_native::d3d12
