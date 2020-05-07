@@ -162,22 +162,19 @@ namespace dawn_native { namespace metal {
             // increased.
             mCompletedSerial = GetCompletedCommandSerial();
         }
+
+        
         static_assert(std::is_same<Serial, uint64_t>::value, "");
         return mCompletedSerial.load();
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedSerials();
         Serial completedSerial = GetCompletedCommandSerial();
 
         mMapTracker->Tick(completedSerial);
 
         if (mCommandContext.GetCommands() != nil) {
             SubmitPendingCommandBuffer();
-        } else if (completedSerial == GetLastSubmittedCommandSerial()) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            ArtificiallyIncrementSerials();
         }
 
         return {};
@@ -306,9 +303,6 @@ namespace dawn_native { namespace metal {
             usleep(100);
             CheckPassedSerials();
         }
-
-        // Artificially increase the serials so work that was pending knows it can complete.
-        ArtificiallyIncrementSerials();
 
         DAWN_TRY(TickImpl());
 
