@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "098db0c1_d08ce4c4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T18:33:06Z",
+      "side": 1,
+      "message": "Nit: you look for a substring, but only care if it\u0027s found at the start. Seems like overkill.\n\nCould this be:\n\nconstexpr size_t arglen \u003d sizeof(kExclusiveDevicePreferenceArg) - 1; (or strlen if you must)\nif (strncmp(argv[i], kExclusiveDeviceTypePreferenceArg, arglen) \u003d\u003d 0)\n\ninstead? Then you could reuse arglen below.",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb6b4a1d_5779cffe",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T18:33:06Z",
+      "side": 1,
+      "message": "Naming nit: I\u0027m confused by DawnTestParamInit (and DawnTestParam, for that matter).\n\nWhat does it mean, exactly? An initialized DawnTestParam? (no, becuase it\u0027s a base class). The initializer? The \"initial\" form of a DawnTestParam?\n\nMaybe the base could remain DawnTestParam, and the derived could be DawnTestParamWithAdapter?\n\nWhat is DawnTestParam, though? A parameter to a DawnTest? It seems to be the class that is instantiated for each backend (below)? Should it be DawnTestBackend, instead?]",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
