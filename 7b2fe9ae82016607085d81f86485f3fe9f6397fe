@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bceb9059_9e0abc95",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T14:37:47Z",
+      "side": 1,
+      "message": "Nit: ULL is \"unsigned long long\", which is not necessarily uint64_t. Random Googling suggests the correct way to define a uint64_t constant is UINT64_C(x), although I haven\u0027t tried it.\n\n(Personally I\u0027d just supply 4u and let the compiler insert an implicit widening conversion, but I\u0027m cowboy that way.)",
+      "revId": "7b2fe9ae82016607085d81f86485f3fe9f6397fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd8390fb_3d4427a6",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T14:37:47Z",
+      "side": 1,
+      "message": "Same here. Try UINT64_C(4u)?\n\nAlso a little troubling that it\u0027s truncated to 32 bits, but that looks like it\u0027s Metal\u0027s fault and not new to this patch.",
+      "revId": "7b2fe9ae82016607085d81f86485f3fe9f6397fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d24a2bf7_d92361ce",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T14:37:47Z",
+      "side": 1,
+      "message": "Same.",
+      "revId": "7b2fe9ae82016607085d81f86485f3fe9f6397fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
