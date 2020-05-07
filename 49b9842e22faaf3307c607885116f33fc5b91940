@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9234d05a_403870e8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-07T17:55:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93c9a103_2a85b679",
+      "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc4fa9f7_2166c643",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 19
@@ -33,6 +51,24 @@
       "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3111c5b7_c9db5665",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-07T17:55:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4fa9f7_2166c643",
+      "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a2485ea9_843b26b5",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-07T17:55:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7419a26f_b4a55e9b",
+      "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bea153a9_7f807a77",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 19
@@ -67,6 +121,24 @@
       "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53d81eb8_d8541fea",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-07T17:55:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bea153a9_7f807a77",
+      "revId": "49b9842e22faaf3307c607885116f33fc5b91940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
