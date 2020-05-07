@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "975c0ddb_8b8c41ce",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T22:47:41Z",
+      "side": 1,
+      "message": "good point, we can change our other arg-checking code to be like this too",
+      "parentUuid": "098db0c1_d08ce4c4",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb6b4a1d_5779cffe",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2020-05-07T18:33:06Z",
       "side": 1,
       "message": "Naming nit: I\u0027m confused by DawnTestParamInit (and DawnTestParam, for that matter).\n\nWhat does it mean, exactly? An initialized DawnTestParam? (no, becuase it\u0027s a base class). The initializer? The \"initial\" form of a DawnTestParam?\n\nMaybe the base could remain DawnTestParam, and the derived could be DawnTestParamWithAdapter?\n\nWhat is DawnTestParam, though? A parameter to a DawnTest? It seems to be the class that is instantiated for each backend (below)? Should it be DawnTestBackend, instead?]",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "903869cc_2f5ee382",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T22:47:41Z",
+      "side": 1,
+      "message": "Yea, this probably could have been named better.\n\nSo overall, before this patch, dawn_end2end_tests get parameterized by \"DawnTestParam\" which is the backend type and a list of enabled/disabled backends. It\u0027s a \"Param\" because it\u0027s the param that\u0027s passed to the GoogleTest (::testing::TestWithParam\u003cP\u003e). That way we can run the test for each of: Vulkan, D3D12-with-feature-X, D3D12-without-feature-X, etc.\n\nAfter this patch, the old \"DawnTestParam\" gets transformed into multiple actual \"Params\", one for each adapter matching the backend type. So perhaps I should rename the old struct to \"EnabledBackendForTest\" and the new one to \"AdapterParamForTest\"",
+      "parentUuid": "fb6b4a1d_5779cffe",
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
