@@ -50,6 +50,23 @@
       "revId": "7b2fe9ae82016607085d81f86485f3fe9f6397fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dabdea89_b4008b4e",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T18:16:56Z",
+      "side": 1,
+      "message": "nit: after this, ASSERT that requirements.size is not 0.",
+      "revId": "7b2fe9ae82016607085d81f86485f3fe9f6397fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
