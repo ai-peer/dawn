@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce80c81f_c2e2f010",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-07T17:47:48Z",
+      "side": 1,
+      "message": "That name works for me.",
+      "parentUuid": "abc57392_fc2e46b0",
+      "range": {
+        "startLine": 323,
+        "startChar": 9,
+        "endLine": 323,
+        "endChar": 39
+      },
+      "revId": "8fe908d60cadb2b2a27d75541133143a0a827e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84bfe465_580b2157",
         "filename": "src/dawn_native/metal/DeviceMTL.h",
         "patchSetId": 23
