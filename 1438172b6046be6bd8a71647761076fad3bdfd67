@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "e4161eca_757fd101",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T17:44:49Z",
+      "side": 1,
+      "message": "Hmm.. I feel like we already have that multithreading problem. We call ReleaseEntry in the destructor of d3d12::BindGroup. So if some user of Dawn has a bind group on a separate thread, and releases the last reference there, cache-\u003eDestroyCacheEntry will happen on that thread.\n\nTo be fully thread safe, it\u0027s already necessary for us to have a lock on the cache.\n\nAlso I just realized we have this same problem for our CPU slab allocator, the D3D12 staging descriptor allocator, the Vulkan descriptor set allocator, our memory allocators, residency manager, etc... yikes!",
+      "parentUuid": "85a50046_70030202",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43a693de_b0c95e37",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8
