@@ -19,6 +19,47 @@
     },
     {
       "key": {
+        "uuid": "1dd80002_ed375d2c",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T23:14:45Z",
+      "side": 1,
+      "message": "Sure. @Corentin you said they\u0027re making some changes to the Vulkan loader will make this better. Is there some issue other than https://github.com/KhronosGroup/Vulkan-Loader/issues/287 that I can link to as well?",
+      "parentUuid": "ab36e698_6d3c0d0f",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6b3cbcd_58e6ef8c",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T23:14:45Z",
+      "side": 1,
+      "message": "this else should be an #else for the DAWN_ENABLE_SWIFTSHADER define, not a control-flow else.",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 9
+      },
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "24092a17_69ec7fae",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 5
@@ -30,6 +71,24 @@
       "writtenOn": "2020-05-07T20:47:37Z",
       "side": 1,
       "message": "Log a bug for this?",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e3f5d3_5e54948b",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T23:14:45Z",
+      "side": 1,
+      "message": "Filed crbug.com/dawn/406. Will update the comment the next time I update this patch.",
+      "parentUuid": "24092a17_69ec7fae",
       "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
