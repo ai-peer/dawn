@@ -1,0 +1,294 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1276c8b_33d8a750",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "The initialization of the SamplerHeapCacheEntry\u0027s CPU allocation could be done in [1] instead because all that\u0027s required are the samplers and their order, which is in SamplerCacheHeapEntry already. It would also make all the initialization happen in the same place and close to the destruction logic.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85671727_f7580b33",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "[2] I\u0027d have a very slight preference for having that logic in SamplerHeapCacheEntry instead and call Populate on it directly from CommandBufferD3D12. There would be a getter for SamplerAllocation.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "552c50af_a911e333",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "Same comment, this could be done in [1]",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f3d34b2_dcabaf9d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "This could use the getter introduced in resolving [2]",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd072e9c_bf098a38",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "This could use the getter introduced in [2] also I have a very slight preference for calling samplerHeapCache-\u003eRelease() so that in the future we can pool releases together (when we have multithreaded Dawn guts)",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff79dd5_d728427d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: To avoid include creep, prefer forward declarations and std::unique_ptr.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2bcf4d0_3e30b79c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: empty lines are usually used to separate blocks of related things. A lot of these members are related so they could be in the same block.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65573190_2c251d0a",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "What additional optimization are you thinking about?",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faaa4e71_7f7baffd",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "The CPU allocation would always be valid after the initialization in [1]",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94abded2_6d16150f",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: Move the std::vector\u003cSampler*\u003e from blueprint to this new entry somehow, or add a TODO about it.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9a192ce_eeed0b0c",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c7490c7_decfc0f9",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "The binding shouldn\u0027t matter because the samplers are stored packed. Only the Sampler* matters.\n\nPlease also add a comment explaining why it is ok to keep a naked pointer.",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c48c5a1c_a16c36c9",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: Ref\u003c\u003e so that in cache::Release() we can check if ref is 1, then just lose the last ref that\u0027s in mCache.",
+      "range": {
+        "startLine": 93,
+        "startChar": 41,
+        "endLine": 93,
+        "endChar": 63
+      },
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d68d66f_d3c9bb65",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: these should be in a single block.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 0
+      },
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2be53c6_ac770841",
+        "filename": "src/tests/unittests/RefCountedTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: ESPECT_EQ(..., 0u);",
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1262950_3bad518d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-07T10:43:17Z",
+      "side": 1,
+      "message": "nit: CAPS the NOT as well, otherwise we might miss it, which is the opposite of the intent.",
+      "range": {
+        "startLine": 169,
+        "startChar": 78,
+        "endLine": 169,
+        "endChar": 81
+      },
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
