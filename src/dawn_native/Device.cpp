@@ -124,6 +124,7 @@ namespace dawn_native {
                 // complete before proceeding with destruction.
                 // Assert that errors are device loss so that we can continue with destruction
                 AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+                ASSERT(mCompletedSerial == mLastSubmittedSerial);
                 break;
 
             case State::BeingDisconnected:
@@ -173,6 +174,7 @@ namespace dawn_native {
 
             // Assert that errors are device losses so that we can continue with destruction.
             AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+            ASSERT(mCompletedSerial == mLastSubmittedSerial);
             mState = State::Disconnected;
 
             // Now everything is as if the device was lost.
@@ -224,6 +226,7 @@ namespace dawn_native {
             return;
         }
         mCurrentErrorScope = AcquireRef(new ErrorScope(filter, mCurrentErrorScope.Get()));
+        mHasNewCallback = true;
     }
 
     bool DeviceBase::PopErrorScope(wgpu::ErrorCallback callback, void* userdata) {
@@ -290,6 +293,49 @@ namespace dawn_native {
 
     FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
         return mFenceSignalTracker.get();
+    }
+
+    Serial DeviceBase::GetCompletedCommandSerial() const {
+        return mCompletedSerial;
+    }
+
+    Serial DeviceBase::GetLastSubmittedCommandSerial() const {
+        return mLastSubmittedSerial;
+    }
+
+    void DeviceBase::IncrementLastSubmittedCommandSerial() {
+        mLastSubmittedSerial++;
+    }
+
+    void DeviceBase::ArtificiallyIncrementSerials() {
+        mCompletedSerial++;
+        mLastSubmittedSerial++;
+    }
+
+    void DeviceBase::AssumeCommandsComplete() {
+        mLastSubmittedSerial++;
+        mCompletedSerial = mLastSubmittedSerial;
+    }
+
+    Serial DeviceBase::GetPendingCommandSerial() const {
+        return mLastSubmittedSerial + 1;
+    }
+
+    void DeviceBase::CheckPassedSerials() {
+        Serial completedSerial = CheckAndUpdateCompletedSerials();
+
+        ASSERT(completedSerial <= mLastSubmittedSerial);
+        // completedSerial should not be less than mCompletedSerial unless it is 0.
+        // It can be 0 when there's no fences to check.
+        ASSERT(completedSerial >= mCompletedSerial || completedSerial == 0);
+
+        if (completedSerial > mCompletedSerial) {
+            mCompletedSerial = completedSerial;
+        }
+    }
+
+    void DeviceBase::SetHasNewCallback() {
+        mHasNewCallback = true;
     }
 
     ResultOrError<const Format*> DeviceBase::GetInternalFormat(wgpu::TextureFormat format) const {
@@ -653,16 +699,23 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
-        if (ConsumedError(TickImpl())) {
-            return;
-        }
+        // if current completed serial is the same as before, then we already ticked
+        // return to avoid ticking again
+        CheckPassedSerials();
+        if (mCompletedSerial != mLastProcessedSerial || mHasNewCallback) {
+            mLastProcessedSerial = mCompletedSerial;
+            mHasNewCallback = false;
+            if (ConsumedError(TickImpl())) {
+                return;
+            }
 
-        // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
-        // tick the dynamic uploader before the backend resource allocators. This would allow
-        // reclaiming resources one tick earlier.
-        mDynamicUploader->Deallocate(GetCompletedCommandSerial());
-        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+            // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
+            // tick the dynamic uploader before the backend resource allocators. This would allow
+            // reclaiming resources one tick earlier.
+            mDynamicUploader->Deallocate(GetCompletedCommandSerial());
+            mErrorScopeTracker->Tick(GetCompletedCommandSerial());
+            mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+        }
     }
 
     void DeviceBase::Reference() {
