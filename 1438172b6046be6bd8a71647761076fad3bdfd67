@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "85a50046_70030202",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-07T01:47:23Z",
+      "side": 1,
+      "message": "@Austin, your solution will work but we\u0027ll need to store an additional pointer on every cache entry. Not the end of the world depending on how many cache entries we have in practice. \n\nThe cache will need to store un-addreferenced pointers to the cache entries and which are removed from the cache in the destructor of the cache entry. This will work provided we never, ever make the cache service multiple threads. Then, we\u0027ll need additional locks and fun times with atomic reference count incrementing. Ask me how I know. :-)",
+      "parentUuid": "d521738d_28fde7dd",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43a693de_b0c95e37",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8
