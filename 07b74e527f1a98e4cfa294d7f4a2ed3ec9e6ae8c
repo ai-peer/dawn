@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12e1d46e_550f992c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T22:05:18Z",
+      "side": 1,
+      "message": "Didn\u0027t the first half of the validation already happen in ValidateShaderModuleDescriptor ? Should we generate the spirv sooner or split the spirv generation out of the WGSL validation?",
+      "range": {
+        "startLine": 981,
+        "startChar": 21,
+        "endLine": 981,
+        "endChar": 33
+      },
+      "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
