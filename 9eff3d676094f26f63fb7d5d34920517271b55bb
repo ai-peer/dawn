@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab36e698_6d3c0d0f",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T20:47:37Z",
+      "side": 1,
+      "message": "That would definitely be nicer. Could we log a bug for that?",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24092a17_69ec7fae",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-07T20:47:37Z",
+      "side": 1,
+      "message": "Log a bug for this?",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
