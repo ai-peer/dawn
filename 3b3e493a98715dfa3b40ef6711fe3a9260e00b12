@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4a2f2a3c_bc3e63e9",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-07T18:00:59Z",
+      "side": 1,
+      "message": "OK. Added the tests back, and revised the comment a bit as you suggested, Austin.",
+      "parentUuid": "d0b6c06e_36f69547",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f603629_a18dd145",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
