@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d0b6c06e_36f69547",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-07T01:24:57Z",
+      "side": 1,
+      "message": "I see, so that was the test that without dispatch it is allowed, and then in the following test, with dispatch, it is disallowed. I think it would be okay to have both if the comment were clear about it.",
+      "parentUuid": "458bf1b0_6ddfe9ca",
+      "revId": "3b3e493a98715dfa3b40ef6711fe3a9260e00b12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f603629_a18dd145",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 1
