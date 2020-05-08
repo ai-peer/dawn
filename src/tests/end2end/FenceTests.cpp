@@ -147,6 +147,28 @@ TEST_P(FenceTests, MultipleSignalOnCompletion) {
     WaitForCompletedValue(fence, 4);
 }
 
+// Test device knows there are callbacks when signal multiple times 
+TEST_P(FenceTests, MultipleSignalAndCallbacks) {
+    wgpu::FenceDescriptor descriptor;
+    descriptor.initialValue = 0u;
+    wgpu::Fence fence = queue.CreateFence(&descriptor);
+
+    queue.Signal(fence, 4);
+
+    EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_Success, nullptr))
+        .Times(1);
+    fence.OnCompletion(3u, ToMockFenceOnCompletionCallback, nullptr);
+
+    WaitForCompletedValue(fence, 4);
+
+    queue.Signal(fence, 6);
+    EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_Success, nullptr))
+        .Times(1);
+    fence.OnCompletion(5u, ToMockFenceOnCompletionCallback, nullptr);
+
+    WaitForCompletedValue(fence, 6);
+}
+
 // Test all callbacks are called if they are added for the same fence value
 TEST_P(FenceTests, OnCompletionMultipleCallbacks) {
     wgpu::FenceDescriptor descriptor;
