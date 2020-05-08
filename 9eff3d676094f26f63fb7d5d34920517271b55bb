@@ -102,6 +102,30 @@
     },
     {
       "key": {
+        "uuid": "0f9edb6b_91b77e63",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T18:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8edb5700_e5985a8a",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 9
+      },
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4cec11b5_92f82453",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 5
@@ -113,6 +137,24 @@
       "writtenOn": "2020-05-08T09:29:24Z",
       "side": 1,
       "message": "Optional, maybe we could simplify things where in the swiftshader path we don\u0027t try to load the system libvulkan.",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80dcac42_751b5347",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T18:47:46Z",
+      "side": 1,
+      "message": "I suppose we could but I would think the ICD way is the more \"correct\" way for now.., maybe? I\u0027ll land now and we can always revisit.",
+      "parentUuid": "4cec11b5_92f82453",
       "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -151,6 +193,24 @@
       "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a6e949b_c1ba9bda",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T18:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7e3f5d3_5e54948b",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
