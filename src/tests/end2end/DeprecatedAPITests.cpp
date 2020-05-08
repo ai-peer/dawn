@@ -25,7 +25,8 @@
 
 class DeprecationTests : public DawnTest {
   protected:
-    void TestSetUp() override {
+    void SetUp() override {
+        DawnTest::SetUp();
         // Skip when validation is off because warnings might be emitted during validation calls
         DAWN_SKIP_TEST_IF(IsDawnValidationSkipped());
     }
@@ -35,6 +36,7 @@ class DeprecationTests : public DawnTest {
             EXPECT_EQ(mLastWarningCount,
                       dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
         }
+        DawnTest::TearDown();
     }
 
     size_t mLastWarningCount = 0;
@@ -369,8 +371,8 @@ TEST_P(DeprecationTests, ShaderModuleInlinedCodeStateTracking) {
 
 class BufferCopyViewDeprecationTests : public DeprecationTests {
   protected:
-    void TestSetUp() override {
-        DeprecationTests::TestSetUp();
+    void SetUp() override {
+        DeprecationTests::SetUp();
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
