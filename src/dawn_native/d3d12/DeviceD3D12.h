@@ -35,6 +35,7 @@ namespace dawn_native { namespace d3d12 {
     class PlatformFunctions;
     class ResidencyManager;
     class ResourceAllocatorManager;
+    class SamplerHeapCache;
     class ShaderVisibleDescriptorAllocator;
     class StagingDescriptorAllocator;
 
@@ -109,6 +110,8 @@ namespace dawn_native { namespace d3d12 {
 
         StagingDescriptorAllocator* GetSamplerStagingDescriptorAllocator(
             uint32_t descriptorCount) const;
+
+        SamplerHeapCache* GetSamplerHeapCache();
 
         StagingDescriptorAllocator* GetRenderTargetViewAllocator() const;
 
@@ -198,6 +201,10 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mViewShaderVisibleDescriptorAllocator;
 
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mSamplerShaderVisibleDescriptorAllocator;
+
+        // Sampler cache needs to be destroyed before the CPU sampler allocator to ensure the final
+        // release is called.
+        std::unique_ptr<SamplerHeapCache> mSamplerHeapCache;
     };
 
 }}  // namespace dawn_native::d3d12

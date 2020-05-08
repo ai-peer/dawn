@@ -18,7 +18,7 @@
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/SamplerD3D12.h"
+#include "dawn_native/d3d12/SamplerHeapCacheD3D12.h"
 #include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -34,13 +34,12 @@ namespace dawn_native { namespace d3d12 {
                          const BindGroupDescriptor* descriptor,
                          uint32_t viewSizeIncrement,
                          const CPUDescriptorHeapAllocation& viewAllocation,
-                         uint32_t samplerSizeIncrement,
-                         const CPUDescriptorHeapAllocation& samplerAllocation)
+                         SamplerHeapCacheEntry* samplerAllocationEntry)
         : BindGroupBase(this, device, descriptor) {
         BindGroupLayout* bgl = ToBackend(GetLayout());
 
         mCPUViewAllocation = viewAllocation;
-        mCPUSamplerAllocation = samplerAllocation;
+        mSamplerAllocationEntry = samplerAllocationEntry;
 
         const auto& bindingOffsets = bgl->GetBindingOffsets();
 
@@ -125,11 +124,8 @@ namespace dawn_native { namespace d3d12 {
                 }
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler: {
-                    auto* sampler = ToBackend(GetBindingAsSampler(bindingIndex));
-                    auto& samplerDesc = sampler->GetSamplerDescriptor();
-                    d3d12Device->CreateSampler(
-                        &samplerDesc, samplerAllocation.OffsetFrom(samplerSizeIncrement,
-                                                                   bindingOffsets[bindingIndex]));
+                    // No-op as samplers will be already initialized by the cache.
+                    ASSERT(mSamplerAllocationEntry != nullptr);
                     break;
                 }
 
@@ -146,9 +142,8 @@ namespace dawn_native { namespace d3d12 {
 
     BindGroup::~BindGroup() {
         ToBackend(GetLayout())
-            ->DeallocateBindGroup(this, &mCPUViewAllocation, &mCPUSamplerAllocation);
+            ->DeallocateBindGroup(this, &mCPUViewAllocation, mSamplerAllocationEntry);
         ASSERT(!mCPUViewAllocation.IsValid());
-        ASSERT(!mCPUSamplerAllocation.IsValid());
     }
 
     bool BindGroup::PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator) {
@@ -156,13 +151,6 @@ namespace dawn_native { namespace d3d12 {
         return Populate(viewAllocator, bgl->GetCbvUavSrvDescriptorCount(),
                         D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, mCPUViewAllocation,
                         &mGPUViewAllocation);
-    }
-
-    bool BindGroup::PopulateSamplers(ShaderVisibleDescriptorAllocator* samplerAllocator) {
-        const BindGroupLayout* bgl = ToBackend(GetLayout());
-        return Populate(samplerAllocator, bgl->GetSamplerDescriptorCount(),
-                        D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mCPUSamplerAllocation,
-                        &mGPUSamplerAllocation);
     }
 
     bool BindGroup::Populate(ShaderVisibleDescriptorAllocator* allocator,
@@ -198,6 +186,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     D3D12_GPU_DESCRIPTOR_HANDLE BindGroup::GetBaseSamplerDescriptor() const {
-        return mGPUSamplerAllocation.GetBaseDescriptor();
+        return mSamplerAllocationEntry->GetBaseDescriptor();
+    }
+
+    SamplerHeapCacheEntry* BindGroup::GetSamplerAllocationEntry() {
+        return mSamplerAllocationEntry;
     }
 }}  // namespace dawn_native::d3d12
