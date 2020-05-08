@@ -37,6 +37,63 @@
     },
     {
       "key": {
+        "uuid": "b34877ae_13d76245",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "So the intent is that the test runs would be once set with \"discrete,integrated\" and another time with \"cpu\"?",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03384db2_3a20c618",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "We should choose the adapter (if --adapter-vendor-id or --exclusive-device-type-preference) here, so that in the info printing below we can display [chosen] on the correct adapter. Also it would simplify the flow of this function a bit if device selection was in a single place (in a helper)",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b511390e_b55e4268",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "nit: this is prior to running GTest so it should be a regular ASSERT",
+      "range": {
+        "startLine": 437,
+        "startChar": 4,
+        "endLine": 437,
+        "endChar": 13
+      },
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb6b4a1d_5779cffe",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -66,6 +123,81 @@
       "side": 1,
       "message": "Yea, this probably could have been named better.\n\nSo overall, before this patch, dawn_end2end_tests get parameterized by \"DawnTestParam\" which is the backend type and a list of enabled/disabled backends. It\u0027s a \"Param\" because it\u0027s the param that\u0027s passed to the GoogleTest (::testing::TestWithParam\u003cP\u003e). That way we can run the test for each of: Vulkan, D3D12-with-feature-X, D3D12-without-feature-X, etc.\n\nAfter this patch, the old \"DawnTestParam\" gets transformed into multiple actual \"Params\", one for each adapter matching the backend type. So perhaps I should rename the old struct to \"EnabledBackendForTest\" and the new one to \"AdapterParamForTest\"",
       "parentUuid": "fb6b4a1d_5779cffe",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84d6ff5c_2c855ef7",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "How about BackendTestConfig and AdapterParamForTest?",
+      "parentUuid": "903869cc_2f5ee382",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dda17837_0b9a4b13",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "Yeah that\u0027d be a nice cleanup",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "656b8694_4fc12141",
+        "filename": "src/tests/End2EndTestsMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "The same change will likely be needed in Chromium\u0027s gpu/dawn_end2end_tests_main.cc and gpu/dawn_perftests_main.cc",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7909cced_f87dde68",
+        "filename": "src/tests/ParamGenerator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:00:24Z",
+      "side": 1,
+      "message": "nit: be",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 32
+      },
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
