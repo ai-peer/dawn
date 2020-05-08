@@ -203,7 +203,6 @@ namespace {
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             DummyRenderPass dummyRenderPass(device);
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&dummyRenderPass);
-            pass.SetIndexBuffer(buffer);
             pass.SetBindGroup(0, bg);
             pass.EndPass();
             ASSERT_DEVICE_ERROR(encoder.Finish());
