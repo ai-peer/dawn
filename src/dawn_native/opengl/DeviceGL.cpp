@@ -152,7 +152,6 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedSerials();
         return {};
     }
 
