@@ -331,8 +331,16 @@ namespace dawn_wire { namespace client {
 
         Fence* fence = reinterpret_cast<Fence*>(cFence);
         fence->queue = queue;
-        fence->signaledValue = descriptor->initialValue;
-        fence->completedValue = descriptor->initialValue;
+
+        uint64_t initialValue;
+        if (descriptor == nullptr) {
+            initialValue = 0u;
+        } else {
+            initialValue = descriptor->initialValue;
+        }
+
+        fence->signaledValue = initialValue;
+        fence->completedValue = initialValue;
         return cFence;
     }
 
