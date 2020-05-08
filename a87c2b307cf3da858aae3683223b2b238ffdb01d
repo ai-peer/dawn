@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "182e72c3_82609740",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T17:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "975c0ddb_8b8c41ce",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b34877ae_13d76245",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 4
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Hm not really, we still need to run on both OpenGL and Vulkan, discrete and integrated. So it really is a preference filter and not an explicit selection.",
       "parentUuid": "03384db2_3a20c618",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a3f3c7_e20f1486",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T17:55:43Z",
+      "side": 1,
+      "message": "Okay I changed this code a bit so it prints [Selected] on all adapters the tests run on, even if there are more than one.",
+      "parentUuid": "2ff35edf_b5650d8b",
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -207,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "9e2c396e_d0755433",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T17:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d6ff5c_2c855ef7",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dda17837_0b9a4b13",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -221,6 +275,24 @@
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a705b92b_9d263c2f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T17:55:43Z",
+      "side": 1,
+      "message": "I did this in a follow-up",
+      "parentUuid": "dda17837_0b9a4b13",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -279,6 +351,30 @@
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00af8386_46459060",
+        "filename": "src/tests/ParamGenerator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T17:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7909cced_f87dde68",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
