@@ -16,7 +16,9 @@
 #include "dawn_native/d3d12/BufferD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
+#include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
 #include <vector>
@@ -325,6 +327,80 @@ TEST_P(D3D12ResidencyTests, SetExternalReservation) {
             device.Get(), kRestrictedBudgetSize * .2, dawn_native::d3d12::MemorySegment::NonLocal);
         EXPECT_EQ(amountReserved, kRestrictedBudgetSize * .2);
     }
+}
+
+// Checks that when a descriptor heap is bound, it is locked resident. Also checks that when a
+// previous descriptor heap becomes unbound, it is unlocked, placed in the LRU and can be evicted.
+TEST_P(D3D12ResidencyTests, SwitchedViewHeapResidency) {
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
+
+    // Fill in a view heap with "view only" bindgroups (1x view per group) by creating a
+    // view bindgroup each draw. After HEAP_SIZE + 1 draws, the heaps must switch over.
+    renderPipelineDescriptor.vertexStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+            #version 450
+            void main() {
+                gl_Position = vec4(0.f, 0.f, 0.f, 1.f);
+            })");
+
+    renderPipelineDescriptor.cFragmentStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(#version 450
+            layout(set = 0, binding = 0) uniform sampler sampler0;
+            layout(location = 0) out vec4 fragColor;
+            void main() {
+               fragColor = vec4(0.0, 0.0, 0.0, 0.0);
+            })");
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+    constexpr uint32_t kSize = 512;
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kSize, kSize);
+
+    wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+    wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
+
+    dawn_native::d3d12::Device* d3dDevice =
+        reinterpret_cast<dawn_native::d3d12::Device*>(device.Get());
+
+    dawn_native::d3d12::ShaderVisibleDescriptorAllocator* allocator =
+        d3dDevice->GetViewShaderVisibleDescriptorAllocator();
+    const uint64_t heapSize = allocator->GetShaderVisibleHeapSizeForTesting();
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+
+        pass.SetPipeline(renderPipeline);
+
+        std::array<float, 4> redColor = {1, 0, 0, 1};
+        wgpu::Buffer uniformBuffer = utils::CreateBufferFromData(
+            device, &redColor, sizeof(redColor), wgpu::BufferUsage::Uniform);
+
+        for (uint32_t i = 0; i < heapSize + 1; ++i) {
+            pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                      {{0, uniformBuffer, 0, sizeof(redColor)}}));
+            pass.Draw(3);
+        }
+
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    // Check that currrently bound ShaderVisibleHeap is locked resident.
+    EXPECT_TRUE(allocator->IsShaderVisibleHeapLockedResidentForTesting());
+    // Check that the previously bound ShaderVisibleHeap was unlocked and was placed in the LRU
+    // cache.
+    EXPECT_TRUE(allocator->IsLastShaderVisibleHeapInLRUForTesting());
+    // Allocate enough buffers to exceed the budget, which will purge everything from the Residency
+    // LRU.
+    AllocateBuffers(kDirectlyAllocatedResourceSize,
+                    kRestrictedBudgetSize / kDirectlyAllocatedResourceSize,
+                    kNonMappableBufferUsage);
+    // Check that currrently bound ShaderVisibleHeap remained locked resident.
+    EXPECT_TRUE(allocator->IsShaderVisibleHeapLockedResidentForTesting());
+    // Check that the previously bound ShaderVisibleHeap has been evicted from the LRU cache.
+    EXPECT_FALSE(allocator->IsLastShaderVisibleHeapInLRUForTesting());
 }
 
 DAWN_INSTANTIATE_TEST(D3D12ResidencyTests, D3D12Backend());
