@@ -22,6 +22,47 @@
       "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f40a7e68_9d673d0e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:23:18Z",
+      "side": 1,
+      "message": "Given how much redundant work is going to be made between validation and creation for ShaderModule, I wonder if a flow like below could be worthwhile:\n\n - DeviceBase calls ValidateOrPreparseShaderModule(Device, ShaderModuleDescriptor)\n   - This might call the backend to create backend-specific Tint objects or SPVC / spirv-cross contexts\n   - Load module and do computations necessary in all cases (with or without validation)\n   - if (EnabledBackendValidation) Validate stuff\n   - more stuff if needed, for example this could contain the WGSL-\u003eSPIRV translation while Tint doesn\u0027t superset spirv-cross.\n   - return objects that contain the pre-parsed data (the AST?)\n - DeviceBase calls CreateShaderModuleImpl(pre-parsed data).\n\nWDYT?",
+      "parentUuid": "12e1d46e_550f992c",
+      "range": {
+        "startLine": 981,
+        "startChar": 21,
+        "endLine": 981,
+        "endChar": 33
+      },
+      "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca13111_f9222609",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T10:23:18Z",
+      "side": 1,
+      "message": "nit: This makes ShaderModule a tagged union essentially. Could we have a ShaderModule::Type enum?",
+      "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
