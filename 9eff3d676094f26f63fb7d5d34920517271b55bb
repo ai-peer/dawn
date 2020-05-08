@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6c08ff55_0df2a653",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T09:29:24Z",
+      "side": 1,
+      "message": "No public ones that I know of.",
+      "parentUuid": "1dd80002_ed375d2c",
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6b3cbcd_58e6ef8c",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 5
@@ -54,6 +72,47 @@
         "endLine": 104,
         "endChar": 9
       },
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8edb5700_e5985a8a",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T09:29:24Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "a6b3cbcd_58e6ef8c",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 9
+      },
+      "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cec11b5_92f82453",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T09:29:24Z",
+      "side": 1,
+      "message": "Optional, maybe we could simplify things where in the swiftshader path we don\u0027t try to load the system libvulkan.",
       "revId": "9eff3d676094f26f63fb7d5d34920517271b55bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
