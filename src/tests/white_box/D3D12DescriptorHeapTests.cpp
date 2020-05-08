@@ -117,9 +117,9 @@ class DummyStagingDescriptorAllocator {
 
 // Verify the shader visible view heaps switch over within a single submit.
 TEST_P(D3D12DescriptorHeapTests, SwitchOverViewHeap) {
-    DAWN_SKIP_TEST_IF(!mD3DDevice->IsToggleEnabled(
-        dawn_native::Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
-
+    /*  DAWN_SKIP_TEST_IF(!mD3DDevice->IsToggleEnabled(
+          dawn_native::Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
+          */
     utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
 
     // Fill in a view heap with "view only" bindgroups (1x view per group) by creating a
