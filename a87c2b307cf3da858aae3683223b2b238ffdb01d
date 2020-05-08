@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d3c22c9e_2eaaee5c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T14:56:59Z",
+      "side": 1,
+      "message": "yup",
+      "parentUuid": "b34877ae_13d76245",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "03384db2_3a20c618",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 4
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ff35edf_b5650d8b",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T14:56:59Z",
+      "side": 1,
+      "message": "Hm not really, we still need to run on both OpenGL and Vulkan, discrete and integrated. So it really is a preference filter and not an explicit selection.",
+      "parentUuid": "03384db2_3a20c618",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b511390e_b55e4268",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 4
@@ -82,6 +118,30 @@
       "writtenOn": "2020-05-08T10:00:24Z",
       "side": 1,
       "message": "nit: this is prior to running GTest so it should be a regular ASSERT",
+      "range": {
+        "startLine": 437,
+        "startChar": 4,
+        "endLine": 437,
+        "endChar": 13
+      },
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72929f95_02b4aae4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T14:56:59Z",
+      "side": 1,
+      "message": "This does in fact hit GTest\u0027s usual \"test environment SetUp failed because..\" messages and log a test failure which I like more.",
+      "parentUuid": "b511390e_b55e4268",
       "range": {
         "startLine": 437,
         "startChar": 4,
@@ -175,6 +235,24 @@
       "writtenOn": "2020-05-08T10:00:24Z",
       "side": 1,
       "message": "The same change will likely be needed in Chromium\u0027s gpu/dawn_end2end_tests_main.cc and gpu/dawn_perftests_main.cc",
+      "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2a156c5_6c34182f",
+        "filename": "src/tests/End2EndTestsMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-08T14:56:59Z",
+      "side": 1,
+      "message": "perf tests is already this way. I have the CL for gpu/dawn_end2end_tests_main.cc up somewhere",
+      "parentUuid": "656b8694_4fc12141",
       "revId": "a87c2b307cf3da858aae3683223b2b238ffdb01d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
