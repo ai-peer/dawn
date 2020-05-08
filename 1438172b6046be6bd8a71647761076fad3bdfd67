@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6db87af4_7f6546f2",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-08T17:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0981df1_f2f61710",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f8da52d_9ab20069",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-06T23:26:38Z",
       "side": 1,
       "message": "Could you make a microbenchmark in dawn_perf_tests which would stress sampler deduplication? Then we can measure the impact of sorting here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06db0655_176c0784",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-08T17:27:48Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027ll impact much if workloads cache or re-use bindgroups. Also, the cache would need to get large enough which I don\u0027t see happening in practice [2]. If it does, we can always revisit per the TODO. WDYT?",
+      "parentUuid": "3f8da52d_9ab20069",
       "range": {
         "startLine": 26,
         "startChar": 8,
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "99a5e50a_6593dc2f",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-08T17:27:48Z",
+      "side": 1,
+      "message": "@AE, SGTM.\n\nI think the storage costs will be negligible, maybe 3 samplers for a \"complex shader\" which is at-most ~\u003d 30 entries [2].\n\nHowever, Ref\u003c\u003e + unordered_set was proving problematic, so I left it as a naked pointer.",
+      "parentUuid": "e4161eca_757fd101",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43a693de_b0c95e37",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8
@@ -139,6 +211,30 @@
       "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37f7dfa6_f1827c99",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-08T17:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a693de_b0c95e37",
+      "range": {
+        "startLine": 66,
+        "startChar": 45,
+        "endLine": 66,
+        "endChar": 52
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
