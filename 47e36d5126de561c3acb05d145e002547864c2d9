@@ -65,6 +65,54 @@
     },
     {
       "key": {
+        "uuid": "b4aa2c17_2c4fbc6b",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6749eab6_fba3223c",
+      "range": {
+        "startLine": 132,
+        "startChar": 71,
+        "endLine": 132,
+        "endChar": 95
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06dd40e8_19913812",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66cdc991_98404cce",
+      "range": {
+        "startLine": 132,
+        "startChar": 15,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f088db9d_3e25380c",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 2
@@ -88,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "baed420b_1804d70f",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f088db9d_3e25380c",
+      "range": {
+        "startLine": 133,
+        "startChar": 13,
+        "endLine": 133,
+        "endChar": 16
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0823f5b3_eb82f641",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 2
@@ -102,6 +174,24 @@
       "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55d18533_aab4037f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0823f5b3_eb82f641",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "5ee975df_556aa22b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d37984b_bee2f42c",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39204011_63d33f1b",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 2
@@ -136,6 +244,24 @@
       "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e212c2c9_ef97c868",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "This was a typo, thanks for spotting :)",
+      "parentUuid": "39204011_63d33f1b",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "15c1904d_d47b3110",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81f69ec4_c246078e",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d55dfde_c4bbd966",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 2
@@ -167,6 +311,24 @@
       "writtenOn": "2020-05-09T13:29:58Z",
       "side": 1,
       "message": "It seems to be basically the same as GetExecutableDirectory(): https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/common/SystemUtils.h;l\u003d25",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2edd5132_63f2f629",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Unfortunately no, I just tried using GetExecutableDirectory() with node, it returns me the path where node.exe lives, not the path to dawn\u0027s dll.",
+      "parentUuid": "3d55dfde_c4bbd966",
       "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -190,6 +352,24 @@
     },
     {
       "key": {
+        "uuid": "c81be770_7109bfca",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7f249ea7_7d5de4cf",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a559da1_375ce7b3",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 2
@@ -204,6 +384,24 @@
       "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf386a4c_017f9e15",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-09T16:33:32Z",
+      "side": 1,
+      "message": "All right",
+      "parentUuid": "3a559da1_375ce7b3",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
