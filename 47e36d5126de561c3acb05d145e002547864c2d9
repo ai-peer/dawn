@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16958b68_ea1d2021",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "The commit message title should be descriptive of what the commit does. For example this could be \"D3D12: Add a toggle to use DXC for HLSL compilation\"",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6749eab6_fba3223c",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t necessarily the system\u0027s copy of FXC, for example Chromium bundles its own copy. So this could be \"Use DXC instead of FXC for compiling HLSL\"",
+      "range": {
+        "startLine": 132,
+        "startChar": 71,
+        "endLine": 132,
+        "endChar": 95
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66cdc991_98404cce",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "nit: use_dxc/Toggle::UseDXC ?",
+      "range": {
+        "startLine": 132,
+        "startChar": 15,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f088db9d_3e25380c",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "please put a link to the relevant issue.",
+      "range": {
+        "startLine": 133,
+        "startChar": 13,
+        "endLine": 133,
+        "endChar": 16
+      },
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0823f5b3_eb82f641",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "nit: stry include",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d37984b_bee2f42c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "I\u0027d rather avoid this, because it means that DXC will be the default. Instead the application should pass in the toggle when creating the device (the application can be node / Chromium)",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39204011_63d33f1b",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "This could be a temporary DynamicLib used just in this function, instead of reusing mDXCompiler for multiple purpose.",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81f69ec4_c246078e",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "Since DXC is optional, maybe these could not return errors on misconfigurations, but instead have a boolean which is isDXCAvailable that\u0027s true only if everything worked correctly. Otherwise a bad DXC can make a Dawn application fail, even when it won\u0027t use DXC.",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d55dfde_c4bbd966",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "It seems to be basically the same as GetExecutableDirectory(): https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/common/SystemUtils.h;l\u003d25",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f249ea7_7d5de4cf",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "these two wouldn\u0027t be needed.",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a559da1_375ce7b3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-09T13:29:58Z",
+      "side": 1,
+      "message": "Let\u0027s add these helper functions when they are used, right now the CL lacks context for why they are needed.",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
