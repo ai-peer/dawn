@@ -22,6 +22,9 @@
 
 #include <spirv_hlsl.hpp>
 
+#include <d3dcompiler.h>
+#include <dxcapi.h>
+
 namespace dawn_native { namespace d3d12 {
 
     // static
