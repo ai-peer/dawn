@@ -22,7 +22,38 @@
 
 #include <spirv_hlsl.hpp>
 
+#include <d3dcompiler.h>
+#include <dxcapi.h>
+
 namespace dawn_native { namespace d3d12 {
+
+    namespace {
+
+        std::string ConvertEncodingBlobToString(IDxcBlobEncoding* pBlob) {
+            std::vector<char> infoLog(pBlob->GetBufferSize() + 1);
+            memcpy(infoLog.data(), pBlob->GetBufferPointer(), pBlob->GetBufferSize());
+            infoLog[pBlob->GetBufferSize()] = 0;
+            return std::string(infoLog.data());
+        }
+
+        bool IsValidDirectXByteCode(void* buffer) {
+            if (buffer == NULL)
+                return false;
+            uint32_t offset = 0x0;
+            uint32_t* dataU32 = (uint32_t*)buffer;
+            uint32_t DXBC_MAGIC = (('D' << 0) + ('X' << 8) + ('B' << 16) + ('C' << 24));
+            bool out = false;
+            // validate header
+            out |= dataU32[offset++] != DXBC_MAGIC;
+            // check for zero-filled appendencies
+            out |= dataU32[offset++] != 0x0;
+            out |= dataU32[offset++] != 0x0;
+            out |= dataU32[offset++] != 0x0;
+            out |= dataU32[offset++] != 0x0;
+            return out;
+        }
+
+    }  // namespace
 
     // static
     ResultOrError<ShaderModule*> ShaderModule::Create(Device* device,
