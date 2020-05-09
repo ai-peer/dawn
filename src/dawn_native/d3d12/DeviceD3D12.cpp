@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 #include "common/Assert.h"
+#include "common/Log.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
@@ -432,6 +433,7 @@ namespace dawn_native { namespace d3d12 {
         SetToggle(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
         SetToggle(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
         SetToggle(Toggle::UseD3D12ResidencyManagement, true);
+        SetToggle(Toggle::UseD3D12DXCompiler, GetFunctions()->dxcCreateInstance != nullptr);
 
         // By default use the maximum shader-visible heap size allowed.
         SetToggle(Toggle::UseD3D12SmallShaderVisibleHeapForTesting, false);
