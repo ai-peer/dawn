@@ -335,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "8e2dcf0d_550c90e8",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-10T09:05:01Z",
+      "side": 1,
+      "message": "Gotcha, the \"kernel32.dll\" here is a bit confusing because it looks like we are loading that module. Instead make a static char kTagForGetModuleHandleEx[] \u003d \"\"; and have a comment to explain that we ask Windows to retrieve the module handle from its address, so we just need something that\u0027s compiled in our module.\n\nAlso all this could be in a helper function that return ResultOrError\u003cstd::string\u003e instead of storing members.",
+      "parentUuid": "2edd5132_63f2f629",
+      "revId": "47e36d5126de561c3acb05d145e002547864c2d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7f249ea7_7d5de4cf",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
         "patchSetId": 2

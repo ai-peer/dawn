@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "887701df_597c5729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-10T09:05:01Z",
+      "side": 1,
+      "message": "nit: this is no longer the case.",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c1a150_2c6077bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-10T09:05:01Z",
+      "side": 1,
+      "message": "Maybe explain that this is to work when compiled in an executable or when compiled in a dll.",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9138dbcd_cf747aae",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-10T09:05:01Z",
+      "side": 1,
+      "message": "nit: this hasn\u0027t been addressed",
+      "range": {
+        "startLine": 131,
+        "startChar": 86,
+        "endLine": 131,
+        "endChar": 88
+      },
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7182644_413c9910",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-10T09:05:01Z",
+      "side": 1,
+      "message": "nit: Doesn\u0027t need to be MaybeError anymore.",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
