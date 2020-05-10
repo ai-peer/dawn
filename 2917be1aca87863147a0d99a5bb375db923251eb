@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "130aa64d_f9e58aef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-10T10:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "887701df_597c5729",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10c1a150_2c6077bc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35ae46c3_00328f2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-10T10:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10c1a150_2c6077bc",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "9739848e_74e7a139",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-10T10:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9138dbcd_cf747aae",
+      "range": {
+        "startLine": 131,
+        "startChar": 86,
+        "endLine": 131,
+        "endChar": 88
+      },
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7182644_413c9910",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 4
@@ -73,6 +133,24 @@
       "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "390a798d_5b3e4f75",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-10T10:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7182644_413c9910",
+      "revId": "2917be1aca87863147a0d99a5bb375db923251eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
