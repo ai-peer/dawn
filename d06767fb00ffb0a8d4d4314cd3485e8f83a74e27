@@ -22,6 +22,30 @@
       "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a21fc064_12c50e84",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T07:48:52Z",
+      "side": 1,
+      "message": "Seems a bit overkill, but in general 0-initialization is the same as default constructing so maybe it\u0027s ok?",
+      "parentUuid": "983489f2_c4839d11",
+      "range": {
+        "startLine": 335,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 9
+      },
+      "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
