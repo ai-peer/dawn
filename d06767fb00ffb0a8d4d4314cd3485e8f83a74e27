@@ -46,6 +46,30 @@
       "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dc4d0f6_33d1468e",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T07:49:52Z",
+      "side": 1,
+      "message": "Sorry what I meant is the including webgpu_cpp is overkill. But since default construction is usually the same as zero-initialization, maybe it\u0027s ok to have duplicate code that does it between webgpu_cpp and dawn_wire.",
+      "parentUuid": "a21fc064_12c50e84",
+      "range": {
+        "startLine": 335,
+        "startChar": 8,
+        "endLine": 340,
+        "endChar": 9
+      },
+      "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
