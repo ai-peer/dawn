@@ -16,6 +16,23 @@
       "revId": "e20997207095ed5ed09eab659e44ff13baaccf75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d064409c_c49597c4",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-11T13:15:45Z",
+      "side": 1,
+      "message": "Out of curiosity, why the sleep? Isn\u0027t it valid to hard-spin on the Tick()? Asking because I hard-spin in Skia-Dawn, and assumed it wouldn\u0027t poll and gobble CPU. If a wrong assumption, shouldn\u0027t we have a proper blocking primitive?",
+      "revId": "e20997207095ed5ed09eab659e44ff13baaccf75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
