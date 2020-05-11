@@ -162,14 +162,18 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
 
-        mState = BufferState::Mapped;
-
         if (IsMapWritable()) {
+            mState = BufferState::Mapped;
             DAWN_TRY(MapAtCreationImpl(mappedPointer));
             ASSERT(*mappedPointer != nullptr);
             return {};
         }
 
+        mState = BufferState::MappedAtCreation;
+        if (mSize == 0) {
+            *mappedPointer = nullptr;
+            return {};
+        }
         // If any of these fail, the buffer will be deleted and replaced with an
         // error buffer.
         // TODO(enga): Suballocate and reuse memory from a larger staging buffer so we don't create
@@ -189,6 +193,7 @@ namespace dawn_native {
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Destroyed buffer used in a submit");
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 return DAWN_VALIDATION_ERROR("Buffer used in a submit while mapped");
             case BufferState::Unmapped:
                 return {};
@@ -319,11 +324,10 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (mState == BufferState::Mapped) {
-            if (mStagingBuffer == nullptr) {
-                Unmap();
-            }
+        if (mState == BufferState::MappedAtCreation) {
             mStagingBuffer.reset();
+        } else if (mState == BufferState::Mapped) {
+            Unmap();
         }
         DestroyInternal();
     }
@@ -349,9 +353,7 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
-        } else {
+        if (mState == BufferState::Mapped) {
             // A map request can only be called once, so this will fire only if the request wasn't
             // completed before the Unmap.
             // Callbacks are not fired if there is no callback registered, so this is correct for
@@ -359,11 +361,16 @@ namespace dawn_native {
             CallMapReadCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown, nullptr, 0u);
             CallMapWriteCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown, nullptr, 0u);
             UnmapImpl();
+
+            mMapReadCallback = nullptr;
+            mMapWriteCallback = nullptr;
+            mMapUserdata = 0;
+        } else if (mStagingBuffer != nullptr) {
+            ASSERT(mState == BufferState::MappedAtCreation);
+            GetDevice()->ConsumedError(CopyFromStagingBuffer());
         }
+
         mState = BufferState::Unmapped;
-        mMapReadCallback = nullptr;
-        mMapWriteCallback = nullptr;
-        mMapUserdata = 0;
     }
 
     MaybeError BufferBase::ValidateSetSubData(uint32_t start, uint32_t count) const {
@@ -372,6 +379,7 @@ namespace dawn_native {
 
         switch (mState) {
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 return DAWN_VALIDATION_ERROR("Buffer is mapped");
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
@@ -415,6 +423,7 @@ namespace dawn_native {
 
         switch (mState) {
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 return DAWN_VALIDATION_ERROR("Buffer already mapped");
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
@@ -436,6 +445,7 @@ namespace dawn_native {
 
         switch (mState) {
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 // A buffer may be in the Mapped state if it was created with CreateBufferMapped
                 // even if it did not have a mappable usage.
                 return {};
@@ -464,7 +474,7 @@ namespace dawn_native {
     }
 
     bool BufferBase::IsMapped() const {
-        return mState == BufferState::Mapped;
+        return mState == BufferState::Mapped || mState == BufferState::MappedAtCreation;
     }
 
 }  // namespace dawn_native
