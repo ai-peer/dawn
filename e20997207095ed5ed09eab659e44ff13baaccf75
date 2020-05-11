@@ -33,6 +33,24 @@
       "revId": "e20997207095ed5ed09eab659e44ff13baaccf75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a7e09fe_fd0a7372",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T13:20:10Z",
+      "side": 1,
+      "message": "It is valid to hard spin when using dawn_native directly. But it\u0027s hard to have a proper blocking primitive when behind dawn_wire or on the Web so it\u0027s generally bad practice to spin.",
+      "parentUuid": "d064409c_c49597c4",
+      "revId": "e20997207095ed5ed09eab659e44ff13baaccf75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
