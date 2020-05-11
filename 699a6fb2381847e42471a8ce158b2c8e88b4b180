@@ -16,6 +16,24 @@
       "revId": "699a6fb2381847e42471a8ce158b2c8e88b4b180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c071c61_a0a14546",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-11T18:28:50Z",
+      "side": 1,
+      "message": "InvalidateAndDelete could be nice, and we could ASSERT inside that the allocation was kDirect.\n\nWe should consider making ResourceHeap refcounted in the future.",
+      "parentUuid": "4a64bcdc_35d65604",
+      "revId": "699a6fb2381847e42471a8ce158b2c8e88b4b180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
