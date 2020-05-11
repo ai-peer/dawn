@@ -50,8 +50,8 @@ namespace dawn_wire { namespace server {
             ~WriteHandleImpl() override = default;
 
             bool DeserializeFlush(const void* deserializePointer, size_t deserializeSize) override {
-                if (deserializeSize != mDataLength || mTargetData == nullptr ||
-                    deserializePointer == nullptr) {
+                if (deserializeSize != mDataLength ||
+                    (mDataLength != 0 && mTargetData == nullptr) || deserializePointer == nullptr) {
                     return false;
                 }
                 memcpy(mTargetData, deserializePointer, mDataLength);
