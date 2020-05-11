@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13ad49d0_cddfa941",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-11T19:14:34Z",
+      "side": 1,
+      "message": "FYI, please avoid returning COM.",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7db796a5_08434243",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-11T19:14:34Z",
+      "side": 1,
+      "message": "I think this going to get confusing to have a d3d::Heap be used as both a resource AND descriptor heap (overloaded) but ONLY inherit a resource heap base which is irreverent for descriptor heaps.\n\nMaybe we can rename ResourceHeapBase \u003d\u003e HeapBase then have both `DescriptorHeap` and `ResourceHeap` be sub-classes of d3d::Heap?",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
