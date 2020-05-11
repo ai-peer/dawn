@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca87ce79_80ad33c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T21:19:19Z",
+      "side": 1,
+      "message": "Please expand what you mean here by \"loading issues\".",
+      "range": {
+        "startLine": 14,
+        "startChar": 40,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ae071e0_002262e7",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T21:19:19Z",
+      "side": 1,
+      "message": "If the desire is to use a user-provided DXC compiler in the same directory as the rest of the Chromium DLLs, we should load it using the flags passed to LoadLibrary in LoadNativeLibraryHelper function in base/native_library_win.cc in the Chromium.src repository.\n\nUnless I am missing something, the code you have here will load it from the system32 directory, which I don\u0027t think is what you\u0027re after.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 0
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f5c1692_c3c57c17",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T21:19:19Z",
+      "side": 1,
+      "message": "Dawn coding convention prefers that lpFilename simply be named filename.",
+      "range": {
+        "startLine": 130,
+        "startChar": 9,
+        "endLine": 130,
+        "endChar": 19
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19a60572_1a3c5380",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T21:19:19Z",
+      "side": 1,
+      "message": "Please use the useDXC flag to avoid loading the two extra DLLs if the flag is false.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
