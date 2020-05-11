@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3132a05d_fe989a5f",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-11T14:35:00Z",
+      "side": 1,
+      "message": "DXC tries to load DXIL if we don\u0027t load it before. The problem here is that DXC possibly loads DXIL from the wrong path (see the reason why GetModuleDirectory was introduced). We can fix this by loading DXIL our self from the correct path before and rely on the library cache.",
+      "revId": "74cd8df94a09f22444e08a344851ae9ca9ceb1fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
