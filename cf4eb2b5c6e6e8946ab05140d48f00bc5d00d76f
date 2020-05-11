@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5073b4b_21c3084b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T19:00:21Z",
+      "side": 1,
+      "message": "nit: add a comment that these use the residency manager and must be initialized after it.",
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a800853_5a5c8e40",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T19:00:21Z",
+      "side": 1,
+      "message": "boolean getters can be \"Is.....\"",
+      "range": {
+        "startLine": 178,
+        "startChar": 43,
+        "endLine": 178,
+        "endChar": 89
+      },
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8807e075_432a9403",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T19:00:21Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 84
+      },
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
