@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca6f8a41_36c58d4c",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T07:50:44Z",
+      "side": 1,
+      "message": "Maybe add a TODO to do this better once we figured out our event model.",
+      "revId": "e20997207095ed5ed09eab659e44ff13baaccf75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
