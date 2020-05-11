@@ -139,6 +139,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd6778d9_77eb2af9",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-11T22:24:12Z",
+      "side": 1,
+      "message": "We could put it on the Instance, but that isn\u0027t really meant for backend-specific toggles. It\u0027s where we have global toggles like EnableBackendValidation.\n\nWhat\u0027s the concern about loading both? In Chromium, we\u0027ll have to load one of them before starting the GPU sandbox anyway, and then after starting the sandbox, these calls in Dawn should do nothing because it\u0027ll either be blocked or already in the library cache.",
+      "parentUuid": "5805e4b0_166ab76d",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
