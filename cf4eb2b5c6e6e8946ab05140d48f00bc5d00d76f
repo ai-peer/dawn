@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "f73e226d_f2867b5a",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-11T19:27:18Z",
+      "side": 1,
+      "message": "nit: please add a comment that sizeIncrement X count is known to be ridiculously inaccurate and could consider using a non-tracking based method instead.",
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a800853_5a5c8e40",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 2
@@ -59,6 +76,23 @@
         "endLine": 182,
         "endChar": 84
       },
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c47f392_0302e7dd",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-11T19:27:18Z",
+      "side": 1,
+      "message": "This test is quite fragile and will fail once sampler de-dupling merges. \u003d( \n\nDo you mind creating views instead? Those will remain uncached.",
       "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
