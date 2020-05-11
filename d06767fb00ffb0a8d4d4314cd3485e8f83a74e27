@@ -94,6 +94,23 @@
       "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e43b275_605c3a5f",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-11T18:25:00Z",
+      "side": 1,
+      "message": "Nit: dunno if it\u0027s against Dawn style or something, but this could also be \n\nuint64_t initialValue \u003d descriptor ? descriptor-\u003einitialValue : 0u;\n\n(maybe \"(uint64_t) 0u\" cast if ternary is being picky.)",
+      "revId": "d06767fb00ffb0a8d4d4314cd3485e8f83a74e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
