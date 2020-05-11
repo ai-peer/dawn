@@ -33,6 +33,24 @@
       "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0553c1d9_aa31a97f",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-11T20:49:18Z",
+      "side": 1,
+      "message": "ResourceHeapBase is used by the Vulkan backend as well, and only for resources, so I don\u0027t think we\u0027d want to rename that one to HeapBase\n\nwould the following suggestion work?\n\n- vulkan::ResourceHeap extends ResourceHeapBase\n- d3d12::PageableHeap extends LinkNode\u003cd3d12::PageableHeap\u003e\n- d3d12::ResourceHeap extends ResourceHeapBase, d3d12::PageableHeap\n- d3d12::DescriptorHeap extends LinkNode\u003cd3d12::PageableHeap\u003e",
+      "parentUuid": "7db796a5_08434243",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
