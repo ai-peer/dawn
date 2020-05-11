@@ -115,6 +115,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5805e4b0_166ab76d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T22:03:03Z",
+      "side": 1,
+      "message": "@Austin, is there another way we can avoid loading these libraries when we don\u0027t need them?",
+      "parentUuid": "2cc92df2_c8befd7f",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
