@@ -163,11 +163,18 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
 
-        mState = BufferState::Mapped;
+        mState = BufferState::MappedAtCreation;
 
+        // Mappable buffers don't use a staging buffer.
         if (IsMapWritable()) {
             DAWN_TRY(MapAtCreationImpl(mappedPointer));
             ASSERT(*mappedPointer != nullptr);
+            return {};
+        }
+
+        // 0-sized buffers are not supposed to be written to, Return back any non-null pointer.
+        if (mSize == 0) {
+            *mappedPointer = reinterpret_cast<uint8_t*>(intptr_t(0xCAFED00D));
             return {};
         }
 
@@ -190,6 +197,7 @@ namespace dawn_native {
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Destroyed buffer used in a submit");
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 return DAWN_VALIDATION_ERROR("Buffer used in a submit while mapped");
             case BufferState::Unmapped:
                 return {};
@@ -309,11 +317,17 @@ namespace dawn_native {
         ASSERT(!IsError());
 
         if (mState == BufferState::Mapped) {
-            if (mStagingBuffer == nullptr) {
-                Unmap();
+            Unmap();
+        } else if (mState == BufferState::MappedAtCreation) {
+            if (mStagingBuffer != nullptr) {
+                mStagingBuffer.reset();
+            } else if (IsMapWritable()) {
+                UnmapImpl();
+            } else {
+                ASSERT(mSize == 0);
             }
-            mStagingBuffer.reset();
         }
+
         DestroyInternal();
     }
 
@@ -342,9 +356,7 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
-        } else {
+        if (mState == BufferState::Mapped) {
             // A map request can only be called once, so this will fire only if the request wasn't
             // completed before the Unmap.
             // Callbacks are not fired if there is no callback registered, so this is correct for
@@ -352,11 +364,22 @@ namespace dawn_native {
             CallMapReadCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown, nullptr, 0u);
             CallMapWriteCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown, nullptr, 0u);
             UnmapImpl();
+
+            mMapReadCallback = nullptr;
+            mMapWriteCallback = nullptr;
+            mMapUserdata = 0;
+
+        } else if (mState == BufferState::MappedAtCreation) {
+            if (mStagingBuffer != nullptr) {
+                GetDevice()->ConsumedError(CopyFromStagingBuffer());
+            } else if (IsMapWritable()) {
+                UnmapImpl();
+            } else {
+                ASSERT(mSize == 0);
+            }
         }
+
         mState = BufferState::Unmapped;
-        mMapReadCallback = nullptr;
-        mMapWriteCallback = nullptr;
-        mMapUserdata = 0;
     }
 
     MaybeError BufferBase::ValidateMap(wgpu::BufferUsage requiredUsage,
@@ -369,6 +392,7 @@ namespace dawn_native {
 
         switch (mState) {
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 return DAWN_VALIDATION_ERROR("Buffer already mapped");
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
@@ -390,6 +414,7 @@ namespace dawn_native {
 
         switch (mState) {
             case BufferState::Mapped:
+            case BufferState::MappedAtCreation:
                 // A buffer may be in the Mapped state if it was created with CreateBufferMapped
                 // even if it did not have a mappable usage.
                 return {};
@@ -418,7 +443,7 @@ namespace dawn_native {
     }
 
     bool BufferBase::IsMapped() const {
-        return mState == BufferState::Mapped;
+        return mState == BufferState::Mapped || mState == BufferState::MappedAtCreation;
     }
 
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
