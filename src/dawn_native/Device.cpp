@@ -579,7 +579,7 @@ namespace dawn_native {
             // |data| may be nullptr if there was an OOM in MakeErrorMapped.
             // Non-zero dataLength and nullptr data is used to indicate there should be
             // mapped data but the allocation failed.
-            ASSERT(buffer->IsError());
+            ASSERT(buffer->IsError() || buffer->GetSize() == 0);
         } else {
             memset(data, 0, size);
         }
