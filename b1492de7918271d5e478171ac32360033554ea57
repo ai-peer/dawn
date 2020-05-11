@@ -486,6 +486,30 @@
     },
     {
       "key": {
+        "uuid": "4d1ddd6f_3c9ee5ac",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "@Bryan: If you want the cache itself to reference the objects it holds, then you should be able declare the cache as std::unordered_set\u003cRef\u003cSamplerHeapCacheEntry\u003e...\u003e. You should be able to assign the iterator you get back from find to an instance of Ref\u003cSampleHeapCacheEntry\u003e. The reference count is stored in the cache entry, not the Ref object. (Hopefully this will work)\n\nHowever, the problem with this approach is you need to remove the objects from the cache when the reference count drops to 1.  The RefCounted destructor and DeleteThis only get called when the reference count drops to 0. So having the cache NOT reference the objects and storing SamplerHeapCacheEntry* is probably the way to go.",
+      "parentUuid": "5c22cbfc_4354544d",
+      "range": {
+        "startLine": 93,
+        "startChar": 41,
+        "endLine": 93,
+        "endChar": 63
+      },
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d68d66f_d3c9bb65",
         "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
         "patchSetId": 9

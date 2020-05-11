@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3a8639d_cf781e79",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "To avoid accidental memory leaks, please use Ref\u003cSamplerHeapCacheEntry\u003e and have the caller std::move it to this parameter.",
+      "range": {
+        "startLine": 37,
+        "startChar": 25,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee14eaf3_b02f6a4e",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "Please use Ref\u003cSamplerHeapCacheEntry\u003e for mSamplerAllocationEntry to avoid accidental memory leaks.  \n\nYou can std::move it to DeallocateBindGroup.",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 30
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa058f7f_fdb8d4ae",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "When, in practice, will the entryCount be less than the number of samplers you end up pushing back to mSamplers? Is there a way we can avoid wasting space via this reserve call?",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a095bdc_61ef21be",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "Since DeleteThis is called when the reference count is 0, you should be able to move the first two lines of DeleteThis into the destructor of ~SamplerHeapCacheEntry and have DeleteThis use the base class implementation.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8255cb03_2afd62a8",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "One alternative to consider when allocating SamplerHeapCacheEntries on the heap is to have the unordered_set be of SamplerHeapCacheEntry instead of SamplerHeapCacheEntry*.  Since items of unordered_set must be const, you\u0027ll need to do const casting when looking up the cache entries and hand out Ref objects of them to caller. We can save one layer of indirection with this approach.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 0
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38e7a227_de8fc3d9",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "Unless I am missing something, the cache itself does not hold a reference count to the objects in the cache. GetOrCreate allocates new objects (with a reference count of 1) and returns those to the caller without calling Reference() for itself.  \n\nIf that\u0027s true, when would we ever end up with mCache being non-empty here?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 9
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e85d39c_4dc7da40",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-11T23:24:43Z",
+      "side": 1,
+      "message": "To prevent accidental memory leaks, please have GetOrCreate return Ref\u003cSamplerHeapCacheEntry\u003e.",
+      "range": {
+        "startLine": 91,
+        "startChar": 22,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
