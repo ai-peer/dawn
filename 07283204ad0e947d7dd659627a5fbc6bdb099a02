@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe3c33b3_6e5a84c8",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-11T13:27:13Z",
+      "side": 1,
+      "message": "Minor naming nit: since this function is a no-op for root scopes, maybe its name should reflect that? E.g., I\u0027d be tempted to call RunCallback() for the one place that root scope callbacks are run too, which would be wrong.",
+      "revId": "07283204ad0e947d7dd659627a5fbc6bdb099a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
