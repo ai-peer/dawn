@@ -263,6 +263,7 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
         mMapSerial++;
         mMapReadCallback = callback;
+        GetDevice()->SetHasNewCallback();
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
@@ -300,6 +301,7 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
         mMapSerial++;
         mMapWriteCallback = callback;
+        GetDevice()->SetHasNewCallback();
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 

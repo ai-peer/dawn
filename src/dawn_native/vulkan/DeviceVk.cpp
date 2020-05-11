@@ -156,7 +156,6 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedSerials();
         RecycleCompletedCommands();
 
         Serial completedSerial = GetCompletedCommandSerial();
@@ -173,10 +172,6 @@ namespace dawn_native { namespace vulkan {
 
         if (mRecordingContext.used) {
             DAWN_TRY(SubmitPendingCommands());
-        } else if (completedSerial == GetLastSubmittedCommandSerial()) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            ArtificiallyIncrementSerials();
         }
 
         return {};
