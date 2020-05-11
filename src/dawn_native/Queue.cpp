@@ -77,13 +77,13 @@ namespace dawn_native {
         device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
             device->GetCurrentErrorScope());
+        device->SetHasNewCallback();
     }
 
     Fence* QueueBase::CreateFence(const FenceDescriptor* descriptor) {
         if (GetDevice()->ConsumedError(ValidateCreateFence(descriptor))) {
             return Fence::MakeError(GetDevice());
         }
-
         return new Fence(this, descriptor);
     }
 
