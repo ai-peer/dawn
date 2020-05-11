@@ -16,6 +16,24 @@
       "revId": "74cd8df94a09f22444e08a344851ae9ca9ceb1fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e9df94_70f56246",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T14:38:18Z",
+      "side": 1,
+      "message": "Sounds good. Please add this to the comment then :)",
+      "parentUuid": "3132a05d_fe989a5f",
+      "revId": "74cd8df94a09f22444e08a344851ae9ca9ceb1fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
