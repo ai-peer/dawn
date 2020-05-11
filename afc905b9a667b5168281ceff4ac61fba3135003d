@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "78efc917_a8b3df6c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-11T12:42:43Z",
+      "side": 1,
+      "message": "nit: not for this CL, but this prints \"Info:\" multiple times. Maybe we could have an argument to InfoLog specifically, that causes it to not print \"Info:\" so that the end2end test initialization log is a bit easier to read.",
+      "revId": "afc905b9a667b5168281ceff4ac61fba3135003d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ff140d3e_eab94ac0",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 5
