@@ -108,6 +108,17 @@ TEST_P(BufferMapReadTests, LargeRead) {
     UnmapBuffer(buffer);
 }
 
+// Test mapping a zero-sized buffer.
+TEST_P(BufferMapReadTests, ZeroSized) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 0;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    MapReadAsyncAndWait(buffer);
+    UnmapBuffer(buffer);
+}
+
 DAWN_INSTANTIATE_TEST(BufferMapReadTests, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
 
 class BufferMapWriteTests : public DawnTest {
@@ -200,6 +211,17 @@ TEST_P(BufferMapWriteTests, LargeWrite) {
     UnmapBuffer(buffer);
 
     EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), buffer, 0, kDataSize);
+}
+
+// Test mapping a zero-sized buffer.
+TEST_P(BufferMapWriteTests, ZeroSized) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 0;
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    MapWriteAsyncAndWait(buffer);
+    UnmapBuffer(buffer);
 }
 
 // Stress test mapping many buffers.
@@ -564,15 +586,17 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
     EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
 }
 
-// Test that creating a very large buffers fails gracefully.
+// Test that creating a zero-sized buffer mapped is allowed.
 TEST_P(CreateBufferMappedTests, LargeBufferFails) {
-    // TODO(http://crbug.com/dawn/27): Missing support.
-    DAWN_SKIP_TEST_IF(IsMetal() || IsOpenGL());
-
     wgpu::BufferDescriptor descriptor;
-    descriptor.size = std::numeric_limits<uint64_t>::max();
-    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+    descriptor.size = 0;
+    descriptor.usage = wgpu::BufferUsage::Vertex;
+    wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+
+    ASSERT_EQ(0u, result.dataLength);
+
+    // Check that unmapping the buffer works too.
+    UnmapBuffer(result.buffer);
 }
 
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
@@ -584,11 +608,23 @@ DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
 
 class BufferTests : public DawnTest {};
 
+// Test that creating a zero-buffer is allowed.
 TEST_P(BufferTests, ZeroSizedBuffer) {
     wgpu::BufferDescriptor desc;
     desc.size = 0;
     desc.usage = wgpu::BufferUsage::CopyDst;
     device.CreateBuffer(&desc);
+}
+
+// Test that creating a very large buffers fails gracefully.
+TEST_P(BufferTests, LargeBufferFails) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsMetal() || IsOpenGL());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }
 
 DAWN_INSTANTIATE_TEST(BufferTests,
