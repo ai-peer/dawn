@@ -42,10 +42,7 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
-
-        gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
-        void* data = gl.MapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        void* data = CallMapBuffer(GL_WRITE_ONLY);
         *mappedPointer = reinterpret_cast<uint8_t*>(data);
         return {};
     }
@@ -59,28 +56,23 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
-
-        // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
-        // version of OpenGL that would let us map the buffer unsynchronized.
-        gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
-        void* data = gl.MapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
+        void* data = CallMapBuffer(GL_READ_ONLY);
         CallMapReadCallback(serial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
         return {};
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
-
-        // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
-        // version of OpenGL that would let us map the buffer unsynchronized.
-        gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
-        void* data = gl.MapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        void* data = CallMapBuffer(GL_WRITE_ONLY);
         CallMapWriteCallback(serial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
         return {};
     }
 
     void Buffer::UnmapImpl() {
+        if (GetSize() == 0) {
+            // In WebGPU it is valid to map a 0-sized buffer but not in OpenGL, so skip it.
+            return;
+        }
+
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
         gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
@@ -90,6 +82,19 @@ namespace dawn_native { namespace opengl {
     void Buffer::DestroyImpl() {
         ToBackend(GetDevice())->gl.DeleteBuffers(1, &mBuffer);
         mBuffer = 0;
+    }
+
+    void* Buffer::CallMapBuffer(GLenum flags) {
+        if (GetSize() == 0) {
+            // In WebGPU it is valid to map a 0-sized buffer but not in OpenGL, so skip it.
+            return nullptr;
+        }
+
+        // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
+        // version of OpenGL that would let us map the buffer unsynchronized.
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+        gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
+        return gl.MapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
 }}  // namespace dawn_native::opengl
