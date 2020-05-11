@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a64bcdc_35d65604",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-11T13:32:52Z",
+      "side": 1,
+      "message": "Seems a little fragile to bare-delete the heap from outside the Allocation. Could Invalidate() free the heap? Or could there be an InvalidateAndDelete() call?",
+      "revId": "699a6fb2381847e42471a8ce158b2c8e88b4b180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
