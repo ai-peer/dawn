@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf322bd7_e7e3f667",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T16:34:12Z",
+      "side": 1,
+      "message": "Whoa that\u0027s cool. I didn\u0027t know call_once was a thing. I would usually just have a static variable |instance| inside the function and return |\u0026instance|. I suppose call_once is better if things are multithreaded?",
+      "range": {
+        "startLine": 67,
+        "startChar": 16,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "bd56a3d50492d7fb1bcf4e30143bb8770a4cf814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
