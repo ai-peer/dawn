@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3c04b23_b61f7158",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T09:08:39Z",
+      "side": 1,
+      "message": "nit: this could be a single if with \u0026\u0026, especially since \u0026\u0026 if short-circuiting when the left side is false.",
+      "range": {
+        "startLine": 180,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "12c9aa2669e1394a6f3971bf01b185d6acc2059a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
