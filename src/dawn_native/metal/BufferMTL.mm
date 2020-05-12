@@ -130,6 +130,9 @@ namespace dawn_native { namespace metal {
             request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.isWrite);
         }
         mInflightRequests.ClearUpTo(finishedSerial);
+        if (!mInflightRequests.Empty()) {
+            mDevice->SetHasNewCallback();
+        }
     }
 
 }}  // namespace dawn_native::metal

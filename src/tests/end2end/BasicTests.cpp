@@ -16,6 +16,8 @@
 
 #include "utils/WGPUHelpers.h"
 
+#include "common/Log.h"
+
 class BasicTests : public DawnTest {
 };
 
@@ -32,12 +34,18 @@ TEST_P(BasicTests, BufferSetSubData) {
     wgpu::BufferDescriptor descriptor;
     descriptor.size = 4;
     descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    DAWN_DEBUG() << "create buffer";
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    DAWN_DEBUG() << "post create buffer";
 
     uint32_t value = 0x01020304;
+    DAWN_DEBUG() << "set sub data";
     buffer.SetSubData(0, sizeof(value), &value);
+    DAWN_DEBUG() << "post set sub data";
 
+    DAWN_DEBUG() << "expect buffer value";
     EXPECT_BUFFER_U32_EQ(value, buffer, 0);
+    DAWN_DEBUG() << "post expect";
 }
 
 // Test a validation error for buffer setSubData, but really this is the most basic test possible
