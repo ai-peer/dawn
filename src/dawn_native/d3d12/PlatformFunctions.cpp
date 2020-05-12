@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/PlatformFunctions.h"
 
 #include "common/DynamicLib.h"
+#include "common/SystemUtils.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -26,7 +27,8 @@ namespace dawn_native { namespace d3d12 {
     MaybeError PlatformFunctions::LoadFunctions() {
         DAWN_TRY(LoadD3D12());
         DAWN_TRY(LoadDXGI());
-        DAWN_TRY(LoadD3DCompiler());
+        LoadDXCompiler();
+        DAWN_TRY(LoadFXCompiler());
         DAWN_TRY(LoadD3D11());
         LoadPIXRuntime();
         return {};
@@ -72,10 +74,25 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    MaybeError PlatformFunctions::LoadD3DCompiler() {
+    void PlatformFunctions::LoadDXCompiler() {
+        std::string moduleDirPath = GetModuleDirectory();
+        DynamicLib dxilCompilerLib;
+        // DXC silently loads DXIL in the background (and possibly from the wrong path)
+        // To fix this, we load DXIL ourself before DXC and rely on library caching
+        if (dxilCompilerLib.Open(moduleDirPath + "dxil.dll", nullptr)) {
+            // Now DXC can be loaded
+            if (mDXCompilerLib.Open(moduleDirPath + "dxcompiler.dll", nullptr)) {
+                if (mDXCompilerLib.GetProc(&dxcCreateInstance, "DxcCreateInstance", nullptr)) {
+                    mIsDXCAvailable = true;
+                }
+            }
+        }
+    }
+
+    MaybeError PlatformFunctions::LoadFXCompiler() {
         std::string error;
-        if (!mD3DCompilerLib.Open("d3dcompiler_47.dll", &error) ||
-            !mD3DCompilerLib.GetProc(&d3dCompile, "D3DCompile", &error)) {
+        if (!mFXCompilerLib.Open("d3dcompiler_47.dll", &error) ||
+            !mFXCompilerLib.GetProc(&d3dCompile, "D3DCompile", &error)) {
             return DAWN_INTERNAL_ERROR(error.c_str());
         }
 
@@ -84,6 +101,10 @@ namespace dawn_native { namespace d3d12 {
 
     bool PlatformFunctions::IsPIXEventRuntimeLoaded() const {
         return mPIXEventRuntimeLib.Valid();
+    }
+
+    bool PlatformFunctions::IsDXCAvailable() const {
+        return mIsDXCAvailable;
     }
 
     void PlatformFunctions::LoadPIXRuntime() {
