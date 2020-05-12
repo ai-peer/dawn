@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "8760ffb3_db3a6051",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T15:15:52Z",
+      "side": 1,
+      "message": "+1 yea I mentioned this to Bryan yesterday that we could add something that tells you where the first/last samplers are.",
+      "parentUuid": "0d477087_d84a13d5",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3b4619b4_648871a3",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 11
