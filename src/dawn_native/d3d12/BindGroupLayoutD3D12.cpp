@@ -17,6 +17,7 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/SamplerHeapCacheD3D12.h"
 #include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -147,26 +148,25 @@ namespace dawn_native { namespace d3d12 {
             viewSizeIncrement = mViewAllocator->GetSizeIncrement();
         }
 
-        uint32_t samplerSizeIncrement = 0;
-        CPUDescriptorHeapAllocation samplerAllocation;
+        BindGroup* bindGroup =
+            mBindGroupAllocator.Allocate(device, descriptor, viewSizeIncrement, viewAllocation);
+
         if (GetSamplerDescriptorCount() > 0) {
-            DAWN_TRY_ASSIGN(samplerAllocation, mSamplerAllocator->AllocateCPUDescriptors());
-            samplerSizeIncrement = mSamplerAllocator->GetSizeIncrement();
+            DAWN_TRY(bindGroup->CreateSamplers(device, mSamplerAllocator));
         }
 
-        return mBindGroupAllocator.Allocate(device, descriptor, viewSizeIncrement, viewAllocation,
-                                            samplerSizeIncrement, samplerAllocation);
+        return bindGroup;
     }
 
     void BindGroupLayout::DeallocateBindGroup(BindGroup* bindGroup,
                                               CPUDescriptorHeapAllocation* viewAllocation,
-                                              CPUDescriptorHeapAllocation* samplerAllocation) {
+                                              SamplerHeapCacheEntry* samplerAllocationEntry) {
         if (viewAllocation->IsValid()) {
             mViewAllocator->Deallocate(viewAllocation);
         }
 
-        if (samplerAllocation->IsValid()) {
-            mSamplerAllocator->Deallocate(samplerAllocation);
+        if (samplerAllocationEntry != nullptr) {
+            samplerAllocationEntry->Release();
         }
 
         mBindGroupAllocator.Deallocate(bindGroup);
