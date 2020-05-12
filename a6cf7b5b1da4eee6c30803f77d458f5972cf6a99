@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d049db22_2e74d0cb",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-12T14:30:33Z",
+      "side": 1,
+      "message": "Out of curiosity, why this change? Is parent !\u003d null no longer equivalent?",
+      "revId": "a6cf7b5b1da4eee6c30803f77d458f5972cf6a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
