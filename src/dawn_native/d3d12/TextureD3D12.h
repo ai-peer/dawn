@@ -27,7 +27,6 @@ namespace dawn_native { namespace d3d12 {
     class CommandRecordingContext;
     class Device;
 
-    DXGI_FORMAT D3D12TextureFormat(wgpu::TextureFormat format);
     MaybeError ValidateD3D12TextureCanBeWrapped(ID3D12Resource* d3d12Resource,
                                                 const TextureDescriptor* descriptor);
     MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor);
@@ -45,7 +44,7 @@ namespace dawn_native { namespace d3d12 {
                 const TextureDescriptor* descriptor,
                 ComPtr<ID3D12Resource> d3d12Texture);
 
-        DXGI_FORMAT GetD3D12Format() const;
+        const D3D12Format& GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
 
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t mipLevel,
@@ -111,7 +110,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor);
 
-        DXGI_FORMAT GetD3D12Format() const;
+        const D3D12Format& GetD3D12Format() const;
 
         const D3D12_SHADER_RESOURCE_VIEW_DESC& GetSRVDescriptor() const;
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor() const;

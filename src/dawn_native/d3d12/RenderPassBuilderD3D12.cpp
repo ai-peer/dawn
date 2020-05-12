@@ -52,7 +52,7 @@ namespace dawn_native { namespace d3d12 {
             TextureView* resolveDestination) {
             D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS resolveParameters;
 
-            resolveParameters.Format = resolveDestination->GetD3D12Format();
+            resolveParameters.Format = resolveDestination->GetD3D12Format().format;
             resolveParameters.pSrcResource =
                 ToBackend(resolveSource->GetTexture())->GetD3D12Resource();
             resolveParameters.pDstResource =

@@ -105,125 +105,8 @@ namespace dawn_native { namespace d3d12 {
                     UNREACHABLE();
             }
         }
+
     }  // namespace
-
-    DXGI_FORMAT D3D12TextureFormat(wgpu::TextureFormat format) {
-        switch (format) {
-            case wgpu::TextureFormat::R8Unorm:
-                return DXGI_FORMAT_R8_UNORM;
-            case wgpu::TextureFormat::R8Snorm:
-                return DXGI_FORMAT_R8_SNORM;
-            case wgpu::TextureFormat::R8Uint:
-                return DXGI_FORMAT_R8_UINT;
-            case wgpu::TextureFormat::R8Sint:
-                return DXGI_FORMAT_R8_SINT;
-
-            case wgpu::TextureFormat::R16Uint:
-                return DXGI_FORMAT_R16_UINT;
-            case wgpu::TextureFormat::R16Sint:
-                return DXGI_FORMAT_R16_SINT;
-            case wgpu::TextureFormat::R16Float:
-                return DXGI_FORMAT_R16_FLOAT;
-            case wgpu::TextureFormat::RG8Unorm:
-                return DXGI_FORMAT_R8G8_UNORM;
-            case wgpu::TextureFormat::RG8Snorm:
-                return DXGI_FORMAT_R8G8_SNORM;
-            case wgpu::TextureFormat::RG8Uint:
-                return DXGI_FORMAT_R8G8_UINT;
-            case wgpu::TextureFormat::RG8Sint:
-                return DXGI_FORMAT_R8G8_SINT;
-
-            case wgpu::TextureFormat::R32Uint:
-                return DXGI_FORMAT_R32_UINT;
-            case wgpu::TextureFormat::R32Sint:
-                return DXGI_FORMAT_R32_SINT;
-            case wgpu::TextureFormat::R32Float:
-                return DXGI_FORMAT_R32_FLOAT;
-            case wgpu::TextureFormat::RG16Uint:
-                return DXGI_FORMAT_R16G16_UINT;
-            case wgpu::TextureFormat::RG16Sint:
-                return DXGI_FORMAT_R16G16_SINT;
-            case wgpu::TextureFormat::RG16Float:
-                return DXGI_FORMAT_R16G16_FLOAT;
-            case wgpu::TextureFormat::RGBA8Unorm:
-                return DXGI_FORMAT_R8G8B8A8_UNORM;
-            case wgpu::TextureFormat::RGBA8UnormSrgb:
-                return DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-            case wgpu::TextureFormat::RGBA8Snorm:
-                return DXGI_FORMAT_R8G8B8A8_SNORM;
-            case wgpu::TextureFormat::RGBA8Uint:
-                return DXGI_FORMAT_R8G8B8A8_UINT;
-            case wgpu::TextureFormat::RGBA8Sint:
-                return DXGI_FORMAT_R8G8B8A8_SINT;
-            case wgpu::TextureFormat::BGRA8Unorm:
-                return DXGI_FORMAT_B8G8R8A8_UNORM;
-            case wgpu::TextureFormat::BGRA8UnormSrgb:
-                return DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
-            case wgpu::TextureFormat::RGB10A2Unorm:
-                return DXGI_FORMAT_R10G10B10A2_UNORM;
-            case wgpu::TextureFormat::RG11B10Float:
-                return DXGI_FORMAT_R11G11B10_FLOAT;
-
-            case wgpu::TextureFormat::RG32Uint:
-                return DXGI_FORMAT_R32G32_UINT;
-            case wgpu::TextureFormat::RG32Sint:
-                return DXGI_FORMAT_R32G32_SINT;
-            case wgpu::TextureFormat::RG32Float:
-                return DXGI_FORMAT_R32G32_FLOAT;
-            case wgpu::TextureFormat::RGBA16Uint:
-                return DXGI_FORMAT_R16G16B16A16_UINT;
-            case wgpu::TextureFormat::RGBA16Sint:
-                return DXGI_FORMAT_R16G16B16A16_SINT;
-            case wgpu::TextureFormat::RGBA16Float:
-                return DXGI_FORMAT_R16G16B16A16_FLOAT;
-
-            case wgpu::TextureFormat::RGBA32Uint:
-                return DXGI_FORMAT_R32G32B32A32_UINT;
-            case wgpu::TextureFormat::RGBA32Sint:
-                return DXGI_FORMAT_R32G32B32A32_SINT;
-            case wgpu::TextureFormat::RGBA32Float:
-                return DXGI_FORMAT_R32G32B32A32_FLOAT;
-
-            case wgpu::TextureFormat::Depth32Float:
-                return DXGI_FORMAT_D32_FLOAT;
-            case wgpu::TextureFormat::Depth24Plus:
-                return DXGI_FORMAT_D32_FLOAT;
-            case wgpu::TextureFormat::Depth24PlusStencil8:
-                return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-
-            case wgpu::TextureFormat::BC1RGBAUnorm:
-                return DXGI_FORMAT_BC1_UNORM;
-            case wgpu::TextureFormat::BC1RGBAUnormSrgb:
-                return DXGI_FORMAT_BC1_UNORM_SRGB;
-            case wgpu::TextureFormat::BC2RGBAUnorm:
-                return DXGI_FORMAT_BC2_UNORM;
-            case wgpu::TextureFormat::BC2RGBAUnormSrgb:
-                return DXGI_FORMAT_BC2_UNORM_SRGB;
-            case wgpu::TextureFormat::BC3RGBAUnorm:
-                return DXGI_FORMAT_BC3_UNORM;
-            case wgpu::TextureFormat::BC3RGBAUnormSrgb:
-                return DXGI_FORMAT_BC3_UNORM_SRGB;
-            case wgpu::TextureFormat::BC4RSnorm:
-                return DXGI_FORMAT_BC4_SNORM;
-            case wgpu::TextureFormat::BC4RUnorm:
-                return DXGI_FORMAT_BC4_UNORM;
-            case wgpu::TextureFormat::BC5RGSnorm:
-                return DXGI_FORMAT_BC5_SNORM;
-            case wgpu::TextureFormat::BC5RGUnorm:
-                return DXGI_FORMAT_BC5_UNORM;
-            case wgpu::TextureFormat::BC6HRGBSfloat:
-                return DXGI_FORMAT_BC6H_SF16;
-            case wgpu::TextureFormat::BC6HRGBUfloat:
-                return DXGI_FORMAT_BC6H_UF16;
-            case wgpu::TextureFormat::BC7RGBAUnorm:
-                return DXGI_FORMAT_BC7_UNORM;
-            case wgpu::TextureFormat::BC7RGBAUnormSrgb:
-                return DXGI_FORMAT_BC7_UNORM_SRGB;
-
-            default:
-                UNREACHABLE();
-        }
-    }
 
     MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor) {
         if (descriptor->dimension != wgpu::TextureDimension::e2D) {
@@ -245,7 +128,8 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    MaybeError ValidateD3D12TextureCanBeWrapped(ID3D12Resource* d3d12Resource,
+    MaybeError ValidateD3D12TextureCanBeWrapped(const Device* device,
+                                                ID3D12Resource* d3d12Resource,
                                                 const TextureDescriptor* dawnDescriptor) {
         const D3D12_RESOURCE_DESC d3dDescriptor = d3d12Resource->GetDesc();
         if ((dawnDescriptor->size.width != d3dDescriptor.Width) ||
@@ -254,8 +138,9 @@ namespace dawn_native { namespace d3d12 {
             return DAWN_VALIDATION_ERROR("D3D12 texture size doesn't match descriptor");
         }
 
-        const DXGI_FORMAT dxgiFormatFromDescriptor = D3D12TextureFormat(dawnDescriptor->format);
-        if (dxgiFormatFromDescriptor != d3dDescriptor.Format) {
+        const DXGI_FORMAT dxgiFormatFromDescriptor =
+            device->GetD3D12Format(device->GetValidInternalFormat(descriptor->format)).format;
+        if (dxgiBaseFormatFromDescriptor != d3dDescriptor.Format) {
             return DAWN_VALIDATION_ERROR(
                 "D3D12 texture format must be compatible with descriptor format.");
         }
@@ -315,7 +200,8 @@ namespace dawn_native { namespace d3d12 {
                                   sharedHandle, IID_PPV_ARGS(&d3d12Resource)),
                               "D3D12 opening shared handle"));
 
-        DAWN_TRY(ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), descriptor));
+        DAWN_TRY(ValidateD3D12TextureCanBeWrapped(ToBackend(GetDevice()), d3d12Resource.Get(),
+                                                  descriptor));
 
         ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
         DAWN_TRY_ASSIGN(dxgiKeyedMutex,
@@ -349,7 +235,7 @@ namespace dawn_native { namespace d3d12 {
 
         resourceDescriptor.DepthOrArraySize = GetDepthOrArraySize();
         resourceDescriptor.MipLevels = static_cast<UINT16>(GetNumMipLevels());
-        resourceDescriptor.Format = D3D12TextureFormat(GetFormat().format);
+        resourceDescriptor.Format = GetD3D12Format().baseFormat;
         resourceDescriptor.SampleDesc.Count = GetSampleCount();
         // TODO(bryan.bernhart@intel.com): investigate how to specify standard MSAA sample pattern.
         resourceDescriptor.SampleDesc.Quality = 0;
@@ -418,8 +304,8 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    DXGI_FORMAT Texture::GetD3D12Format() const {
-        return D3D12TextureFormat(GetFormat().format);
+    const D3D12Format& Texture::GetD3D12Format() const {
+        return ToBackend(GetDevice())->GetD3D12Format(GetFormat());
     }
 
     ID3D12Resource* Texture::GetD3D12Resource() const {
@@ -562,7 +448,7 @@ namespace dawn_native { namespace d3d12 {
                                                             uint32_t layerCount) const {
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
         D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
-        rtvDesc.Format = GetD3D12Format();
+        rtvDesc.Format = GetD3D12Format().format;
         if (IsMultisampledTexture()) {
             ASSERT(GetNumMipLevels() == 1);
             ASSERT(layerCount == 1);
@@ -589,7 +475,7 @@ namespace dawn_native { namespace d3d12 {
                                                             uint32_t baseArrayLayer,
                                                             uint32_t layerCount) const {
         D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;
-        dsvDesc.Format = GetD3D12Format();
+        dsvDesc.Format = GetD3D12Format().format;
         dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
 
         if (IsMultisampledTexture()) {
@@ -771,7 +657,7 @@ namespace dawn_native { namespace d3d12 {
 
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
-        mSrvDesc.Format = D3D12TextureFormat(descriptor->format);
+        mSrvDesc.Format = ToBackend(GetDevice())->GetD3D12Format(descriptor->format).srvFormat;
         mSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
         // Currently we always use D3D12_TEX2D_ARRAY_SRV because we cannot specify base array layer
@@ -809,8 +695,8 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    DXGI_FORMAT TextureView::GetD3D12Format() const {
-        return D3D12TextureFormat(GetFormat().format);
+    const D3D12Format& TextureView::GetD3D12Format() const {
+        return ToBackend(GetDevice())->GetD3D12Format(GetFormat());
     }
 
     const D3D12_SHADER_RESOURCE_VIEW_DESC& TextureView::GetSRVDescriptor() const {
@@ -832,7 +718,7 @@ namespace dawn_native { namespace d3d12 {
 
     D3D12_UNORDERED_ACCESS_VIEW_DESC TextureView::GetUAVDescriptor() const {
         D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc;
-        uavDesc.Format = GetD3D12Format();
+        uavDesc.Format = GetD3D12Format().format;
 
         ASSERT(!GetTexture()->IsMultisampledTexture());
         uavDesc.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2DARRAY;

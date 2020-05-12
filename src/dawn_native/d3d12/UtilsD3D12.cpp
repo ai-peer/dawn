@@ -62,7 +62,7 @@ namespace dawn_native { namespace d3d12 {
         bufferLocation.pResource = bufferResource;
         bufferLocation.Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;
         bufferLocation.PlacedFootprint.Offset = offset;
-        bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format();
+        bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format().format;
         bufferLocation.PlacedFootprint.Footprint.Width = bufferSize.width;
         bufferLocation.PlacedFootprint.Footprint.Height = bufferSize.height;
         bufferLocation.PlacedFootprint.Footprint.Depth = bufferSize.depth;

@@ -85,7 +85,7 @@ namespace dawn_native {
 
     // For the enum for formats are packed but this might change when we have a broader extension
     // mechanism for webgpu.h. Formats start at 1 because 0 is the undefined format.
-    size_t ComputeFormatIndex(wgpu::TextureFormat format) {
+    constexpr size_t ComputeFormatIndex(wgpu::TextureFormat format) {
         // This takes advantage of overflows to make the index of TextureFormat::Undefined outside
         // of the range of the FormatTable.
         static_assert(static_cast<uint32_t>(wgpu::TextureFormat::Undefined) - 1 > kKnownFormatCount,
