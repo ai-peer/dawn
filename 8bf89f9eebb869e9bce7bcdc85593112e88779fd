@@ -16,6 +16,24 @@
       "revId": "8bf89f9eebb869e9bce7bcdc85593112e88779fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0af14b00_79245cef",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T20:25:06Z",
+      "side": 1,
+      "message": "It\u0027s going to be replaced with GPUQueue.writeBuffer(..) which is pretty much the same thing, except it\u0027s more clear that it happens on the queue timeline.",
+      "parentUuid": "7256d9db_9b1cd794",
+      "revId": "8bf89f9eebb869e9bce7bcdc85593112e88779fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
