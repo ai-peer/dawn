@@ -163,6 +163,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b28fd8e4_6972d21b",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-12T00:10:55Z",
+      "side": 1,
+      "message": "@Austin, the desire is to load as few DLLs as possible. We do not need either of these today so we shouldn\u0027t load them unless we have to. We have an existing, similar problem, with loading all of the Vulkan and Warp DLLs on Windows, all of which is completely unnecessary. \n\nToday, Dawn loads in the GPU process long after the sandbox has been applied ... with no issues. Unless I am missing something, I do not see how that is relevant to this discussion.\n\nIf avoiding these needless DLL loads is too much for Felix to tackle as part of this CL, we can do it as a separate work item. DXIL.DLL is one we\u0027ll need eventually so I am not overly concerned with loading that one before we need it.",
+      "parentUuid": "cd6778d9_77eb2af9",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
