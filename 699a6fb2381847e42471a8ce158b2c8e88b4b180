@@ -34,6 +34,24 @@
       "revId": "699a6fb2381847e42471a8ce158b2c8e88b4b180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a02a06d3_d9702151",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T12:05:49Z",
+      "side": 1,
+      "message": "I don\u0027t know about making ResourceHeap Refcounted, because either it is wholly owned by the ResourceAllocation, or it is owned by the suballocator. There\u0027s always a single owner.\n\nHowever ResourceMemoryAllocation should probably be reworked because it is a bit awkward to use  the way it is right now. For example the BuddyMemoryAllocator creates a ResourceMemoryAllocation and making a subclass requires extracting all the arguments and re-wrapping them.\n\nWe should have used a \"has-a\" buddyallocation instead of a \"is-a\" relationship when building the suballocation system. I can\u0027t do the refactor in this patch right now because it will require lots of changes in D3D12 that I wouldn\u0027t be able to test at this moment.\n\nDo you mind if we defer this to when we do the refactor of ResourceMemoryAllocation?",
+      "parentUuid": "0c071c61_a0a14546",
+      "revId": "699a6fb2381847e42471a8ce158b2c8e88b4b180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
