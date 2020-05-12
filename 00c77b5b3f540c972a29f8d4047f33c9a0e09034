@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88b3a494_bdfbca64",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-12T17:35:25Z",
+      "side": 1,
+      "message": "(Apologies for not realizing this earlier)\n\nmIsDXCAvailable can be removed in favor of calling mPIXEventRuntimeLib.Valid() like we do for mPIXEventRuntimeLib.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 5
+      },
+      "revId": "00c77b5b3f540c972a29f8d4047f33c9a0e09034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

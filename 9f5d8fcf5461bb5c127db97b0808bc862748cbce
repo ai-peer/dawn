@@ -259,6 +259,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71bba554_36f81398",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-12T17:35:25Z",
+      "side": 1,
+      "message": "@Felix which of the two DLLs is failing to work in the sandbox? If it is DXIL.dll, we\u0027ll need to address this sooner rather than later because we\u0027ll likely need it to do a SPIRV -\u003e DXIL translator.\n\n@Austin, loading WinPixEventRuntime unconditionally is also suboptimal and something we should address.\n\nI am fine with postponing the optimization to a later point.",
+      "parentUuid": "0a976a78_f878afb1",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
