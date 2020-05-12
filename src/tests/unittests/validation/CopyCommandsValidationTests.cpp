@@ -1153,6 +1153,29 @@ TEST_F(CopyCommandTest_T2T, CopyToMipmapOfNonSquareTexture) {
                 maxMipmapLevel - 2, 0, {0, 0, 0}, {2, 1, 1});
 }
 
+// Test copy within the same texture
+TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
+    wgpu::Texture texture =
+        Create2DTexture(4, 4, 2, 2, wgpu::TextureFormat::RGBA8Unorm,
+                        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst);
+
+    // Copy inside the same subresource is not allowed.
+    TestT2TCopy(utils::Expectation::Failure, texture, 0, 0, {0, 0, 0}, texture, 0, 0, {2, 2, 0},
+                {1, 1, 1});
+
+    // Copy between different array slices is allowed.
+    TestT2TCopy(utils::Expectation::Success, texture, 0, 0, {0, 0, 0}, texture, 0, 1, {2, 2, 0},
+                {1, 1, 1});
+
+    // Copy between different mipmap levels is allowed.
+    TestT2TCopy(utils::Expectation::Success, texture, 0, 0, {0, 0, 0}, texture, 1, 0, {1, 1, 0},
+                {1, 1, 1});
+
+    // Copy between different mipmap levels and array slices is allowed.
+    TestT2TCopy(utils::Expectation::Success, texture, 0, 1, {0, 0, 0}, texture, 1, 0, {1, 1, 0},
+                {1, 1, 1});
+}
+
 class CopyCommandTest_CompressedTextureFormats : public CopyCommandTest {
   public:
     CopyCommandTest_CompressedTextureFormats() : CopyCommandTest() {
