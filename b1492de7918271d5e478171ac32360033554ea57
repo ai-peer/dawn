@@ -510,6 +510,30 @@
     },
     {
       "key": {
+        "uuid": "726cb626_ebad5fa1",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "\u003e\u003e storing SamplerHeapCacheEntry* is probably the way to go.\n\nSGTM + everything else Ref\u003c\u003e\u0027d.",
+      "parentUuid": "4d1ddd6f_3c9ee5ac",
+      "range": {
+        "startLine": 93,
+        "startChar": 41,
+        "endLine": 93,
+        "endChar": 63
+      },
+      "revId": "b1492de7918271d5e478171ac32360033554ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d68d66f_d3c9bb65",
         "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
         "patchSetId": 9

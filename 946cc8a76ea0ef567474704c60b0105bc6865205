@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "19e49ccb_02bde7a3",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb573a53_2ee51796",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ca1eb03_10444f7a",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c001984f_831290b5",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca1eb03_10444f7a",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "fd0a631e_d19dc439",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "WDYT about entry-\u003ePopulate(..,)? Note: Passing Device* is only temporary until we use CopyDescriptor() and store it on the tracker. Updated the CL for consideration.",
+      "parentUuid": "3b4619b4_648871a3",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0e6dc60_ca15aa42",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 11
@@ -102,6 +156,24 @@
       "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47045057_c5416ad1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0e6dc60_ca15aa42",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "70ee74fa_849c25c2",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8332a188_b8479d3b",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccd3a42f_c7a73a76",
         "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
         "patchSetId": 11
@@ -136,6 +226,24 @@
       "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee1522bb_a6c23d7d",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccd3a42f_c7a73a76",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

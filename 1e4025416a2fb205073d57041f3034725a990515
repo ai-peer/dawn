@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "78fd50a7_eeebf7ac",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a3a8639d_cf781e79",
+      "range": {
+        "startLine": 37,
+        "startChar": 25,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee14eaf3_b02f6a4e",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
         "patchSetId": 10
@@ -45,6 +69,30 @@
       "revId": "1e4025416a2fb205073d57041f3034725a990515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b114c1d_1c532ee3",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee14eaf3_b02f6a4e",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 30
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "97d14c2c_56afba16",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "fa058f7f_fdb8d4ae",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 48
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a095bdc_61ef21be",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 10
@@ -91,6 +163,30 @@
       "revId": "1e4025416a2fb205073d57041f3034725a990515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef758e4c_0b518028",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a095bdc_61ef21be",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9d014754_103e4888",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "I have a slight preference for SamplerHeapCacheEntry*, not only to avoid const_casts but it also simplifies destruction by allowing entries to remove themselves from the cache when the refcount goes to 0.",
+      "parentUuid": "8255cb03_2afd62a8",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 0
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38e7a227_de8fc3d9",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 10
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "2241ba1d_0af110b9",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Ops, forgot to remove.",
+      "parentUuid": "38e7a227_de8fc3d9",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 9
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e85d39c_4dc7da40",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 10
@@ -160,6 +304,30 @@
       "revId": "1e4025416a2fb205073d57041f3034725a990515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d09bbb_b95a7260",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-12T19:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e85d39c_4dc7da40",
+      "range": {
+        "startLine": 91,
+        "startChar": 22,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "1e4025416a2fb205073d57041f3034725a990515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
