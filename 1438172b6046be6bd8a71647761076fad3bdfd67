@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "27a14eea_09a3ec9a",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T20:09:49Z",
+      "side": 1,
+      "message": "Comment no longer relevant.\n\nOverall though, it would be great to have perf tests that result in more complex descriptor binding and reuse so that we don\u0027t regress performance of these code paths in the future. We\u0027ve been using the forest demo, but we shouldn\u0027t have to actually run the demo to catch perf issues.",
+      "parentUuid": "06db0655_176c0784",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d521738d_28fde7dd",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8

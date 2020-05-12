@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "459d0cee_816a239a",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T20:09:49Z",
+      "side": 1,
+      "message": "Looks okay to me",
+      "parentUuid": "fd0a631e_d19dc439",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0e6dc60_ca15aa42",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 11

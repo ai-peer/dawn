@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7c1c862_1b1fc68f",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T20:09:49Z",
+      "side": 1,
+      "message": "nit: could you make the other GetBindingAs functions const as well?",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 73
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d2f7356_eb8b1b01",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T20:09:49Z",
+      "side": 1,
+      "message": "nit: Please make this Ref\u003cBindGroup\u003e. If creating the sampler cache entry fails in DAWN_TRY_ASSIGN, we\u0027ll leak this bind group. We can (1) return bindGroup.Detach(), or (2) bubble up the Ref\u003cBindGroup\u003e all the way to the creation.\n\nI believe Rafael is going to do (2) at some point anyway.",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 19
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
