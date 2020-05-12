@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "142c9307_2be84eb9",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T15:26:05Z",
+      "side": 1,
+      "message": "unit: shaderc::Compiler*, same below",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 13
+      },
+      "revId": "8d1cd5e88763a7a505eab16940459b4eb6f31142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
