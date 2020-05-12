@@ -21,6 +21,7 @@
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
+#include "dawn_native/d3d12/D3D12Format.h"
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
@@ -57,6 +58,7 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError TickImpl() override;
 
+        const D3D12Format& GetD3D12Format(const Format& format) const;
         ID3D12Device* GetD3D12Device() const;
         ComPtr<ID3D12CommandQueue> GetCommandQueue() const;
         ID3D12SharingContract* GetSharingContract() const;
@@ -194,6 +196,8 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mViewShaderVisibleDescriptorAllocator;
 
         std::unique_ptr<ShaderVisibleDescriptorAllocator> mSamplerShaderVisibleDescriptorAllocator;
+
+        D3D12FormatTable mFormatTable;
     };
 
 }}  // namespace dawn_native::d3d12

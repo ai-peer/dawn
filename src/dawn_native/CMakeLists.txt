@@ -178,6 +178,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/ComputePipelineD3D12.h"
         "d3d12/D3D12Error.cpp"
         "d3d12/D3D12Error.h"
+        "d3d12/D3D12Format.cpp"
+        "d3d12/D3D12Format.h"
         "d3d12/D3D12Info.cpp"
         "d3d12/D3D12Info.h"
         "d3d12/DeviceD3D12.cpp"
