@@ -57,6 +57,7 @@ namespace dawn_native { namespace d3d12 {
         InitTogglesFromDriver();
 
         mD3d12Device = ToBackend(GetAdapter())->GetDevice();
+        mFormatTable = BuildD3D12FormatTable();
 
         ASSERT(mD3d12Device != nullptr);
 
@@ -144,6 +145,13 @@ namespace dawn_native { namespace d3d12 {
 
     Device::~Device() {
         ShutDownBase();
+    }
+
+    const D3D12Format& Device::GetD3D12Format(const Format& format) const {
+        ASSERT(format.isSupported);
+        ASSERT(format.GetIndex() < mFormatTable.size());
+
+        return mFormatTable[format.GetIndex()];
     }
 
     ID3D12Device* Device::GetD3D12Device() const {

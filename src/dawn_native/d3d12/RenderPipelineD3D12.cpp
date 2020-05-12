@@ -383,11 +383,15 @@ namespace dawn_native { namespace d3d12 {
             D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF;
 
         if (HasDepthStencilAttachment()) {
-            descriptorD3D12.DSVFormat = D3D12TextureFormat(GetDepthStencilFormat());
+            descriptorD3D12.DSVFormat =
+                device->GetD3D12Format(device->GetValidInternalFormat(GetDepthStencilFormat()))
+                    .format;
         }
 
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
-            descriptorD3D12.RTVFormats[i] = D3D12TextureFormat(GetColorAttachmentFormat(i));
+            descriptorD3D12.RTVFormats[i] =
+                device->GetD3D12Format(device->GetValidInternalFormat(GetColorAttachmentFormat(i)))
+                    .format;
             descriptorD3D12.BlendState.RenderTarget[i] =
                 ComputeColorDesc(GetColorStateDescriptor(i));
         }

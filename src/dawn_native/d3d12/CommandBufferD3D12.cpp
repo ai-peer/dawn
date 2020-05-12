@@ -439,7 +439,7 @@ namespace dawn_native { namespace d3d12 {
                 constexpr uint32_t kColorTextureSubresourceIndex = 0;
                 commandContext->GetCommandList()->ResolveSubresource(
                     resolveTextureHandle, resolveTextureSubresourceIndex, colorTextureHandle,
-                    kColorTextureSubresourceIndex, colorTexture->GetD3D12Format());
+                    kColorTextureSubresourceIndex, colorTexture->GetD3D12Format().format);
             }
         }
 
@@ -838,7 +838,7 @@ namespace dawn_native { namespace d3d12 {
 
             // Set color load operation.
             renderPassBuilder->SetRenderTargetBeginningAccess(
-                i, attachmentInfo.loadOp, attachmentInfo.clearColor, view->GetD3D12Format());
+                i, attachmentInfo.loadOp, attachmentInfo.clearColor, view->GetD3D12Format().format);
 
             // Set color store operation.
             if (attachmentInfo.resolveTarget.Get() != nullptr) {
@@ -882,7 +882,7 @@ namespace dawn_native { namespace d3d12 {
             if (hasDepth) {
                 renderPassBuilder->SetDepthAccess(
                     attachmentInfo.depthLoadOp, attachmentInfo.depthStoreOp,
-                    attachmentInfo.clearDepth, view->GetD3D12Format());
+                    attachmentInfo.clearDepth, view->GetD3D12Format().format);
             } else {
                 renderPassBuilder->SetDepthNoAccess();
             }
@@ -890,7 +890,7 @@ namespace dawn_native { namespace d3d12 {
             if (hasStencil) {
                 renderPassBuilder->SetStencilAccess(
                     attachmentInfo.stencilLoadOp, attachmentInfo.stencilStoreOp,
-                    attachmentInfo.clearStencil, view->GetD3D12Format());
+                    attachmentInfo.clearStencil, view->GetD3D12Format().format);
             } else {
                 renderPassBuilder->SetStencilNoAccess();
             }
