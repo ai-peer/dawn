@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb573a53_2ee51796",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "nit: maybe this logic could be in the sampler cache, since it only uses the public API of BindGroupBase.",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca1eb03_10444f7a",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "Can we have a TODO to somehow avoid this allocation when the cache is hit?",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d477087_d84a13d5",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "Austin, what do you think of having the BindGroupLayout be able to return ranges of where descriptors of a certain type are stored in the future?",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b4619b4_648871a3",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "nit: Maybe this could be inlined in PopulateViews and the PopulateSampler logic duplicated in SamplerCache?",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0e6dc60_ca15aa42",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t need to be passed as an argument and could use bindGroup-\u003eGetSamplerAllocationEntry alternatively, since we are keeping the mechanism where the entry reaches into the allocator to deallocate itself, the BindGroup could contain a Ref\u003cSamplerHeapCacheEntry\u003e and just set it to nullptr.",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8332a188_b8479d3b",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "nit: there\u0027s a copy happening here, maybe the vector could be moved into the blueprint, and then be moved out to the real allocation?",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccd3a42f_c7a73a76",
+        "filename": "src/dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-12T08:05:39Z",
+      "side": 1,
+      "message": "nit: stray changes?",
+      "revId": "946cc8a76ea0ef567474704c60b0105bc6865205",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
