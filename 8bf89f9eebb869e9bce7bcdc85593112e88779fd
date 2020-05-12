@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7256d9db_9b1cd794",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-12T20:17:50Z",
+      "side": 1,
+      "message": "OT: out of curiosity, is SetSubData sticking around? I thought it was gonna get axed.",
+      "revId": "8bf89f9eebb869e9bce7bcdc85593112e88779fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
