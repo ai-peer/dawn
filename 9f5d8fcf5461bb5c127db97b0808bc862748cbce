@@ -211,6 +211,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fc37805_7aeef7be",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T01:04:47Z",
+      "side": 1,
+      "message": "But regardless, I do think we can land this CL first before doing DLL loading optimization since that task will encompass a few other places as well. Right now we also always load WinPixEventRuntime.dll even if you\u0027re not debugging with PIX.",
+      "parentUuid": "3f2f23c5_2d6d19d6",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
