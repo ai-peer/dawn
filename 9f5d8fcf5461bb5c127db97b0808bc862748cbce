@@ -235,6 +235,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a976a78_f878afb1",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-12T07:05:11Z",
+      "side": 1,
+      "message": "@Rafael @Austin I\u0027m currently trying to get DXC/DXIL running in Chromium within Dawn and it seems that the sandbox prevents loading them (though loading works when doing --disable-gpu-sandbox).",
+      "parentUuid": "1fc37805_7aeef7be",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
