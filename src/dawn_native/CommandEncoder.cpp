@@ -177,6 +177,13 @@ namespace dawn_native {
                 DAWN_TRY(ValidateEntireSubresourceCopied(src, dst, copySize));
             }
 
+            if (src.texture == dst.texture && src.arrayLayer == dst.arrayLayer &&
+                src.mipLevel == dst.mipLevel) {
+                // D3D12 requires the source and destination must be different subresources in
+                // texture-to-texture copies.
+                return DAWN_VALIDATION_ERROR("Source and destination cannot be same subresources.");
+            }
+
             return {};
         }
 
