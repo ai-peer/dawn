@@ -22,6 +22,30 @@
       "revId": "bd56a3d50492d7fb1bcf4e30143bb8770a4cf814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32fbb806_3fb35fbd",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-05-12T17:25:25Z",
+      "side": 1,
+      "message": "Yeah, it guarantees that even in a multi-threaded environment it will only be called once. Obj-C has a similar call \"dispatch_once\".",
+      "parentUuid": "cf322bd7_e7e3f667",
+      "range": {
+        "startLine": 67,
+        "startChar": 16,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "bd56a3d50492d7fb1bcf4e30143bb8770a4cf814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
