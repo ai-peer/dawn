@@ -187,6 +187,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2f23c5_2d6d19d6",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-12T00:52:09Z",
+      "side": 1,
+      "message": "I see. Perhaps I don\u0027t fully understand how the sandbox on Windows works then. For Vulkan it was necessary for us to load the Vulkan driver before starting the GPU sandbox, but perhaps this is not the case for Windows.\n\nIf we truly can load these DLLs whenever we want, then we could reasonably lazily do so on ShaderModule creation. We should double check that this actually works though. As far as I know, we still have the WebGPU CTS running on CI on Windows using \"--disable-gpu-sandbox\". Maybe that arg is out of date and running with the sandbox on now works.",
+      "parentUuid": "b28fd8e4_6972d21b",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
