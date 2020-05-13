@@ -46,6 +46,30 @@
       "revId": "35e80b352034922b3a97e8b0aa13a0a561a4accd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf25eded_2944410f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T17:24:40Z",
+      "side": 1,
+      "message": "Good catch, I\u0027ll do that in a follow-up.",
+      "parentUuid": "a31a9206_bc0ad7d3",
+      "range": {
+        "startLine": 666,
+        "startChar": 21,
+        "endLine": 666,
+        "endChar": 41
+      },
+      "revId": "35e80b352034922b3a97e8b0aa13a0a561a4accd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
