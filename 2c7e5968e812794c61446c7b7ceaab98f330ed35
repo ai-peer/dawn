@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cb66d858_e9180948",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-13T22:21:09Z",
+      "side": 1,
+      "message": "Wow, thanks for pointing out that this exists!",
+      "parentUuid": "32a2c910_7c754691",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "2c7e5968e812794c61446c7b7ceaab98f330ed35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bec0394_924784aa",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-13T22:11:53Z",
       "side": 1,
       "message": "What did you have in mind for the \"more nuanced\" approach?  Is there a bug tracking this work?  \n\nOne possible solution is to have a const_expr C++ data structure organized by Dawn type that returns an info object. The info object would contain things like the \u0027typeless\u0027 format used for allocation and the format to use for the shader resource view.",
+      "range": {
+        "startLine": 886,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 9
+      },
+      "revId": "2c7e5968e812794c61446c7b7ceaab98f330ed35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6754dc7f_b10798c8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-13T22:21:09Z",
+      "side": 1,
+      "message": "I had such a table in patchset 7, but it can\u0027t be constexpr until C++17, or if we make sure we get the order of the enums in strictly increasing order which is error prone. \n\nThere\u0027s probably other ways to make a constexpr lookup table like this, but I ended up removing the table idea because all of it would be completely unused and untested except for this one case here. I could bring it back if you like though.\n\nI think we should wait until there\u0027s a real and bigger use case for a table before adding it. We don\u0027t have a bug tracking texture view compatibility to my knowledge because we haven\u0027t discussed it very much in the WebGPU community group yet.",
+      "parentUuid": "5bec0394_924784aa",
       "range": {
         "startLine": 886,
         "startChar": 0,
