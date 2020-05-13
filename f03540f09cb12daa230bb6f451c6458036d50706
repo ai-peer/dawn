@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f00c9694_27470e00",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T14:52:02Z",
+      "side": 1,
+      "message": "nit: Stray include",
+      "revId": "f03540f09cb12daa230bb6f451c6458036d50706",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
