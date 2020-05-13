@@ -904,6 +904,8 @@ void DawnTestBase::MapSlotsSynchronously() {
 
     // Busy wait until all map operations are done.
     while (mNumPendingMapOperations != 0) {
+        DAWN_DEBUG() << "waiting for all map operations to be done";
+        DAWN_DEBUG() << "num pending map operations: " << mNumPendingMapOperations;
         WaitABit();
     }
 }
