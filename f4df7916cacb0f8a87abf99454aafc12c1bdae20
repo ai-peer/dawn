@@ -16,6 +16,24 @@
       "revId": "f4df7916cacb0f8a87abf99454aafc12c1bdae20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ec63fa_3e185a64",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T14:54:49Z",
+      "side": 0,
+      "message": "Because while things were deprecated, we needed to be able to allow users to only set one or the other (otherwise we couldn\u0027t know what to use between garbage value and the user\u0027s value). Now that we don\u0027t have a deprecated API, we can do what WebGPU does, which is require bytesPerRow to be defined: https://gpuweb.github.io/gpuweb//#gpu-buffer-copy-view",
+      "parentUuid": "31abd871_f90e24ab",
+      "revId": "f4df7916cacb0f8a87abf99454aafc12c1bdae20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
