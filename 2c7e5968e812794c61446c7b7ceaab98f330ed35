@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32a2c910_7c754691",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-13T22:11:53Z",
+      "side": 1,
+      "message": "Instead of all of this manual math, consider using the decode macros in d3d12.h.\n\n #define D3D12_ENCODE_BASIC_FILTER( min, mag, mip, reduction )\n #define D3D12_ENCODE_ANISOTROPIC_FILTER( reduction )\n\n typedef \n enum D3D12_FILTER_TYPE\n     {\n         D3D12_FILTER_TYPE_POINT\t\u003d 0,\n         D3D12_FILTER_TYPE_LINEAR\t\u003d 1\n     } \tD3D12_FILTER_TYPE;\n\n typedef \n enum D3D12_FILTER_REDUCTION_TYPE\n     {\n         D3D12_FILTER_REDUCTION_TYPE_STANDARD\t\u003d 0,\n         D3D12_FILTER_REDUCTION_TYPE_COMPARISON\t\u003d 1,\n         D3D12_FILTER_REDUCTION_TYPE_MINIMUM\t\u003d 2,\n         D3D12_FILTER_REDUCTION_TYPE_MAXIMUM\t\u003d 3\n     } \tD3D12_FILTER_REDUCTION_TYPE;\n\nIf you use these, you should only need Dawn lookups for the filter and reduction type.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "2c7e5968e812794c61446c7b7ceaab98f330ed35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bec0394_924784aa",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-13T22:11:53Z",
+      "side": 1,
+      "message": "What did you have in mind for the \"more nuanced\" approach?  Is there a bug tracking this work?  \n\nOne possible solution is to have a const_expr C++ data structure organized by Dawn type that returns an info object. The info object would contain things like the \u0027typeless\u0027 format used for allocation and the format to use for the shader resource view.",
+      "range": {
+        "startLine": 886,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 9
+      },
+      "revId": "2c7e5968e812794c61446c7b7ceaab98f330ed35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
