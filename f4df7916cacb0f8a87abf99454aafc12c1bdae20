@@ -52,6 +52,24 @@
       "revId": "f4df7916cacb0f8a87abf99454aafc12c1bdae20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a76d52_4e046e5c",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T17:04:36Z",
+      "side": 0,
+      "message": "Ah yes, but same thing, there was no default prior to the addition of the new API (and deprecation of the other one). See https://dawn-review.googlesource.com/c/dawn/+/19862",
+      "parentUuid": "02d8191a_8b727545",
+      "revId": "f4df7916cacb0f8a87abf99454aafc12c1bdae20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
