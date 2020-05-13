@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "ffc13016_23ef2c4b",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-13T14:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f5c1692_c3c57c17",
+      "range": {
+        "startLine": 130,
+        "startChar": 9,
+        "endLine": 130,
+        "endChar": 19
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19a60572_1a3c5380",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 13
@@ -298,6 +322,30 @@
       "side": 1,
       "message": "Until we need to ship something that relies on dxil.dll I don\u0027t think we should add to the list of things to load before the sandbox is set up. For Felix\u0027s experiment, he can do that in his Chromium fork and for Intel\u0027s prototyping with DXC we can use --disable-gpu-sandbox.\n\nNote that the two DLLs won\u0027t slow down Chrome because the sandbox will prevent them from being seen.",
       "parentUuid": "71bba554_36f81398",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78a28ff0_676d7c02",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000536
+      },
+      "writtenOn": "2020-05-13T14:39:07Z",
+      "side": 1,
+      "message": "@Rafael both are failing to load in sandbox. I think it would be better to remove my GetModuleDirectory method for now. Dawn and chromium can successfully load DXC and DXIL, only the node bindings fail without GetModuleDirectory.",
+      "parentUuid": "8bb2a9e6_115e1097",
       "range": {
         "startLine": 30,
         "startChar": 0,
