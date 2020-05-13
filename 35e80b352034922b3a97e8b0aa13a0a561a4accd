@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6849c5e_956b2422",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-13T15:55:46Z",
+      "side": 1,
+      "message": "is bytePerRow still defaulted now? (like if you manually assign 0 to it). It no longer has a default value in dawn.json",
+      "range": {
+        "startLine": 666,
+        "startChar": 21,
+        "endLine": 666,
+        "endChar": 41
+      },
+      "revId": "35e80b352034922b3a97e8b0aa13a0a561a4accd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
