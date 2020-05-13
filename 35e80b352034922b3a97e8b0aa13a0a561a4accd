@@ -22,6 +22,30 @@
       "revId": "35e80b352034922b3a97e8b0aa13a0a561a4accd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a31a9206_bc0ad7d3",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-13T15:56:48Z",
+      "side": 1,
+      "message": "nvm. I see it\u0027s required now. We should remove the code which computes the default.",
+      "parentUuid": "c6849c5e_956b2422",
+      "range": {
+        "startLine": 666,
+        "startChar": 21,
+        "endLine": 666,
+        "endChar": 41
+      },
+      "revId": "35e80b352034922b3a97e8b0aa13a0a561a4accd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
