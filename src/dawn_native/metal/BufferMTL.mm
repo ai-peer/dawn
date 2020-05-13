@@ -19,6 +19,8 @@
 
 #include <limits>
 
+#include "common/Log.h"
+
 namespace dawn_native { namespace metal {
     // The size of uniform buffer and storage buffer need to be aligned to 16 bytes which is the
     // largest alignment of supported data types
@@ -88,6 +90,7 @@ namespace dawn_native { namespace metal {
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
+        DAWN_DEBUG() << "metal map read async impl";
         tracker->Track(this, serial, false);
         return {};
     }
@@ -121,8 +124,10 @@ namespace dawn_native { namespace metal {
         request.buffer = buffer;
         request.mapSerial = mapSerial;
         request.isWrite = isWrite;
-
+        DAWN_DEBUG() << "map request track, last submitted: " << mDevice->GetLastSubmittedSerial();
         mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
+        DAWN_DEBUG() << "==== map request tracker, track, pending serial: " << mDevice->GetPendingCommandSerial();
+        DAWN_DEBUG() << "mapSerial: " << mapSerial;
     }
 
     void MapRequestTracker::Tick(Serial finishedSerial) {
@@ -130,6 +135,9 @@ namespace dawn_native { namespace metal {
             request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.isWrite);
         }
         mInflightRequests.ClearUpTo(finishedSerial);
+        if (!mInflightRequests.Empty()) {
+            mDevice->SetHasNewCallback();
+        }
     }
 
 }}  // namespace dawn_native::metal
