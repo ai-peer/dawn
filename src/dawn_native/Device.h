@@ -212,6 +212,7 @@ namespace dawn_native {
         size_t GetDeprecationWarningCountForTesting();
         void EmitDeprecationWarning(const char* warning);
         void LoseForTesting();
+        void SetHasNewCallback();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
@@ -302,8 +303,11 @@ namespace dawn_native {
         // to make it appear as if commands have been compeleted. They can also be artificially
         // incremented when no work is being done in the GPU so CPU operations don't have to wait on
         // stale serials.
+        // mLastProcessedSerial tracks the last serial that has been ticked.
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
+        Serial mLastProcessedSerial = -1;
+        bool mHasNewCallback = false;
 
         // ShutDownImpl is used to clean up and release resources used by device, does not wait for
         // GPU or check errors.
