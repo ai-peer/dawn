@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "184da76c_5df7732f",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-13T23:31:02Z",
+      "side": 1,
+      "message": "I am not sure what you mean by \"non-tracking based method\" but using \u0027mSizeIncrement * descriptorCount\u0027 is the best heuristic we have at the moment. The driver can decide to use more memory than the calculated amount and can differ from the size returned in various desc structures. \n\nOne strategy we discussed offline is that if CreateXXXHeap/MakeResident fails, we can try to evict a few more resources and make additional attempts. I\u0027m fine with tackling this as a separate change.",
+      "parentUuid": "f73e226d_f2867b5a",
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a800853_5a5c8e40",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 2
