@@ -379,6 +379,30 @@
       "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffa35262_dadf2a9d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T17:10:47Z",
+      "side": 1,
+      "message": "\u003e @Felix, what do you mean when you say \"only the node bindings fail without GetModuleDirectory\"?  \n\u003e \nThe GetModuleDirectory shenanigans where because the search path for DLLs starts with the executable directory, which is not where the dlls are for node-dawn. In Chromium though the DLLs are next to chromium.exe so there are no issues and we can just load \"dxil.dll\" or \"dxcompiler.dll\" and they will be found.\n\n\u003e @Corentin, the sandbox is more than just about loading modules before it is applied; the module must be well behaved while it is in the sandbox. If it is not, then we\u0027ll need to either get dxil.dll fixed or potentially allow access for the operations it is attempting to do. I had to do a similar thing for https://chromium-review.googlesource.com/c/chromium/src/+/2123028.\n\nOf course, the point was that we shouldn\u0027t start adding holes in the sandbox until we know we are going to need them. We know we are going to ship stuff using D3D12 and 11On12 (?) at some point, but we are not looking at shipping stuff that uses dxcompiler.dll (dxil.dll maybe). So I advised to not upstream modifications to Chrome\u0027s sandbox to enable that.",
+      "parentUuid": "58a8e0a8_0d9d8375",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "9f5d8fcf5461bb5c127db97b0808bc862748cbce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
