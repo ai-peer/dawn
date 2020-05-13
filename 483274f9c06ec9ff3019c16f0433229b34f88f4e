@@ -22,6 +22,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f06edb_d977f4c8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-13T07:10:54Z",
+      "side": 1,
+      "message": "Sorry I am not sure I fully understand your comment.\n\nHere is the definition of CopyTextureRegion(), and it can only support copying between two subresources, not a range of subresources.\n\nvoid CopyTextureRegion(\n  const D3D12_TEXTURE_COPY_LOCATION *pDst,\n  UINT                              DstX,\n  UINT                              DstY,\n  UINT                              DstZ,\n  const D3D12_TEXTURE_COPY_LOCATION *pSrc,\n  const D3D12_BOX                   *pSrcBox\n);\n\n- For D3D12_TEXTURE_COPY_LOCATION, here is the definition. You can see we can only specify one subresource (by SubresourceIndex) in a D3D12_TEXTURE_COPY_LOCATION struct.\n\ntypedef struct D3D12_TEXTURE_COPY_LOCATION {\n  ID3D12Resource          *pResource;\n  D3D12_TEXTURE_COPY_TYPE Type;\n  union {\n    D3D12_PLACED_SUBRESOURCE_FOOTPRINT PlacedFootprint;\n    UINT                               SubresourceIndex;\n  };\n} D3D12_TEXTURE_COPY_LOCATION;\n\n- For D3D12_BOX,here is the definition. The \"front\" and \"back\" refer to the z-position of the box, which is only valid when the texture is a 3D texture.\n\ntypedef struct D3D12_BOX {\n  UINT left;\n  UINT top;\n  UINT front;\n  UINT right;\n  UINT bottom;\n  UINT back;\n} D3D12_BOX;\n\n\nI have also done an experiment on D3D12. Here is my code:\n\nComPtr\u003cID3D12Resource\u003e srcTexture;\nD3D12_RESOURCE_DESC textureDesc \u003d {};\ntextureDesc.MipLevels \u003d 1;\ntextureDesc.Format \u003d DXGI_FORMAT_R8G8B8A8_UNORM;\ntextureDesc.Width \u003d 16;\ntextureDesc.Height \u003d 16;\ntextureDesc.Flags \u003d D3D12_RESOURCE_FLAG_NONE;\ntextureDesc.DepthOrArraySize \u003d 3;\ntextureDesc.SampleDesc.Count \u003d 1;\ntextureDesc.SampleDesc.Quality \u003d 0;\ntextureDesc.Dimension \u003d D3D12_RESOURCE_DIMENSION_TEXTURE2D;\n\nThrowIfFailed(md3dDevice-\u003eCreateCommittedResource(\n\t\u0026CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT),\n\tD3D12_HEAP_FLAG_NONE,\n\t\u0026textureDesc,\n\tD3D12_RESOURCE_STATE_COPY_DEST,\n\tnullptr,\n\tIID_PPV_ARGS(\u0026srcTexture)));\n\nD3D12_TEXTURE_COPY_LOCATION src;\nsrc.pResource \u003d srcTexture.Get();\nsrc.Type \u003d D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;\nsrc.SubresourceIndex \u003d 0;\n\nD3D12_TEXTURE_COPY_LOCATION dst;\ndst.pResource \u003d srcTexture.Get();\ndst.Type \u003d D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;\ndst.SubresourceIndex \u003d 1; // [1]\n\nD3D12_BOX box;\nbox.left \u003d 0;\nbox.top \u003d 0;\nbox.front \u003d 0;\nbox.bottom \u003d 16;\nbox.right \u003d 16;\nbox.front \u003d 0;\nbox.back \u003d 1; // [2]\n\nmCommandList-\u003eResourceBarrier(1, \u0026CD3DX12_RESOURCE_BARRIER::Transition(srcTexture.Get(), D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_COMMON)); // [3]\nmCommandList-\u003eCopyTextureRegion(\u0026dst, 0, 0, 0, \u0026src, \u0026box);\n\n\n- When I specify dst.SubresourceIndex to 0 at [1], I will get the following error message:\nD3D12 ERROR: ID3D12CommandList::CopyTextureRegion: Source and Destination subresources cannot be the same when doing a copy operation. Copies with the same resource are allowed as long as the subresource indices are different Src and Dst subresources are both: 0 [ RESOURCE_MANIPULATION ERROR #998: COPY_ON_SAME_SUBRESOURCE]\n\n- When I specify box.back to 2 at [2], I will get the following error message:\nD3D12 ERROR: ID3D12CommandList::CopyTextureRegion: The destination region extends past, at least, one of the edges of the destination subresource. When the destination format is R8G8B8A8_TYPELESS, the source format is R8G8B8A8_TYPELESS, DstX is 0, DstY is 0, DstZ is 0 and the effective SrcBox width is 16, height is 16, and depth is 2, the operation requires the destination subresource to have 16 width, 16 height, and 2 depth. But the destination subresource only has 16 width, 16 height, and 1 depth. [ RESOURCE_MANIPULATION ERROR #858: COPYTEXTUREREGION_DSTREGIONOUTOFBOUNDS]\n\n- (Not related to this comment) when I specify the \"StateAfter\" of the transition barrier at [3] to (D3D12_RESOURCE_STATE_COPY_DEST | D3D12_RESOURCE_STATE_COPY_SOURCE), I will get the following error message:\nD3D12 ERROR: ID3D12CommandList::ResourceBarrier: D3D12_RESOURCE_STATES has an invalid combination of state bits. [ RESOURCE_MANIPULATION ERROR #526: RESOURCE_BARRIER_INVALID_COMBINATION]",
+      "parentUuid": "f01ca0b3_5ba5e2a5",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
