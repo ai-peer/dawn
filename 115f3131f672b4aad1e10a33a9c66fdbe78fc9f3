@@ -51,6 +51,24 @@
       "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5eb26ff_3a20d62d",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-13T19:46:56Z",
+      "side": 1,
+      "message": "A previous iteration I had of this implemented did what Austin is describing - I\u0027ll rework things to follow that.",
+      "parentUuid": "0553c1d9_aa31a97f",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
