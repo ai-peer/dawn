@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31abd871_f90e24ab",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-13T14:33:58Z",
+      "side": 0,
+      "message": "Curiosity: why the removal of the default here?",
+      "revId": "f4df7916cacb0f8a87abf99454aafc12c1bdae20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
