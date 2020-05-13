@@ -212,6 +212,7 @@ namespace dawn_native {
         size_t GetDeprecationWarningCountForTesting();
         void EmitDeprecationWarning(const char* warning);
         void LoseForTesting();
+        void SetHasNewCallback();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
@@ -222,9 +223,6 @@ namespace dawn_native {
 
         // Incrememt mLastSubmittedSerial when we submit the next serial
         void IncrementLastSubmittedCommandSerial();
-        // If there's no GPU work in flight we still need to artificially increment the serial
-        // so that CPU operations waiting on GPU completion can know they don't have to wait.
-        void ArtificiallyIncrementSerials();
         // During shut down of device, some operations might have been started since the last submit
         // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
         // make all commands look completed.
@@ -302,8 +300,11 @@ namespace dawn_native {
         // to make it appear as if commands have been compeleted. They can also be artificially
         // incremented when no work is being done in the GPU so CPU operations don't have to wait on
         // stale serials.
+        // mLastProcessedSerial tracks the last serial that has been ticked.
         Serial mCompletedSerial = 0;
-        Serial mLastSubmittedSerial = 0;
+        Serial mLastSubmittedSerial =-1;
+        Serial mLastProcessedSerial = 0;
+        bool mHasNewCallback = false;
 
         // ShutDownImpl is used to clean up and release resources used by device, does not wait for
         // GPU or check errors.
