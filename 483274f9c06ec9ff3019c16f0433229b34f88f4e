@@ -46,6 +46,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bf83bcf_5ddd87db",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-13T07:57:52Z",
+      "side": 1,
+      "message": "Ah thank you for the explanation, this is very clear now that D3D12 doesn\u0027t allow copying multiple array layers at the same time. Vulkan does, and the driver does a loop over the subresources to copy them, so maybe we could do the same in Dawn?\n\n+CC Kai, I\u0027d like to raise this to the group again to see if we allow copying 3D box of 2D array layer textures (I think we should)",
+      "parentUuid": "38f06edb_d977f4c8",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
