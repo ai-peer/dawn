@@ -70,6 +70,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8683ac9c_0946a4b0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-13T17:11:24Z",
+      "side": 1,
+      "message": "This came up in the editors meeting recently, probably on #725 or #730. I agree we should allow it and emulate it when needed. I see no reason to force the emulation on users, since I don\u0027t think it\u0027s very expensive to do on our side. However we should discuss it.\n\nJiawei, could you open a new gpuweb issue with the info you found on D3D12, and a quick pointer to Metal and Vulkan? (I seem to remember from that conversation that this might not be supported on Metal either?)",
+      "parentUuid": "0bf83bcf_5ddd87db",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
