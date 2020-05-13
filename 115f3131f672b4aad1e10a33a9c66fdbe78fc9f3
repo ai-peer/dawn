@@ -69,6 +69,29 @@
       "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b045d53_04e295c6",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-13T23:08:53Z",
+      "side": 1,
+      "message": "Since GetD3D12DescriptorHeap returns a ComPtr, you shouldn\u0027t do a Get() on a temporary variable like you\u0027re doing here because you\u0027re dereferencing an interface pointer that has been released out from under you. You happen to get lucky that the implementation of the two interfaces happen to be on the same internal object but if that changes at a later point, now you have use-after-free.\n\nTo solve this, we should either:\n1) Keep the get method on the heap returning a ComPtr and put the ComPtr instance on the stack before dereferencing it\n2) Store the ComPtr in the heap object and return a raw pointer from the get methods.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 85
+      },
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
