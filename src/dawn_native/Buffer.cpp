@@ -24,6 +24,7 @@
 #include <cstring>
 #include <utility>
 
+#include "common/Log.h"
 namespace dawn_native {
 
     namespace {
@@ -253,6 +254,7 @@ namespace dawn_native {
     void BufferBase::MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata) {
         WGPUBufferMapAsyncStatus status;
         if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapRead, &status))) {
+            DAWN_DEBUG() << "map read async validate map failed: " << status;
             callback(status, nullptr, 0, userdata);
             return;
         }
@@ -263,6 +265,7 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
         mMapSerial++;
         mMapReadCallback = callback;
+        GetDevice()->SetHasNewCallback();
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
@@ -300,6 +303,7 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
         mMapSerial++;
         mMapWriteCallback = callback;
+        GetDevice()->SetHasNewCallback();
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
