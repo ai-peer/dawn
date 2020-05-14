@@ -48,10 +48,12 @@ namespace dawn_native { namespace opengl {
         const char* GetSource() const;
         const CombinedSamplerInfo& GetCombinedSamplerInfo() const;
 
+      protected:
+        MaybeError Initialize() override;
+
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
-        MaybeError Initialize();
 
         CombinedSamplerInfo mCombinedInfo;
         std::string mGlslSource;

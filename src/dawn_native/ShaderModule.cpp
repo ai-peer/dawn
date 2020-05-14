@@ -14,16 +14,24 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include <sstream>
+
+#include <spirv-tools/libspirv.hpp>
+#include <spirv_cross.hpp>
+
+// Tint includes must be after spirv_cross.hpp, because spirv-cross has its own
+// version of spirv_headers.
+#include "tint/src/reader/wgsl/parser.h"
+#include "tint/src/type_determiner.h"
+#include "tint/src/validator.h"
+#include "tint/src/writer/spirv/generator.h"
+#include "tint/src/writer/writer.h"
+
 #include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
-
-#include <spirv-tools/libspirv.hpp>
-#include <spirv_cross.hpp>
-
-#include <sstream>
 
 namespace dawn_native {
 
@@ -316,6 +324,72 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateWGSL(const char* source) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        auto module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::TypeDeterminer type_determiner(&context, &module);
+        if (!type_determiner.Determine()) {
+            errorStream << "Type Determination: " << type_determiner.error();
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::Validator validator;
+        if (!validator.Validate(module)) {
+            errorStream << "Validation: " << validator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        return {};
+    }
+
+    MaybeError ConvertWGSLToSPIRV(const char* source, std::vector<uint32_t>* spirv = nullptr) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL->SPIR-V failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        auto module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        if (spirv == nullptr) {
+            errorStream << "No valid destination provided for output" << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::writer::spirv::Generator generator(std::move(module));
+        if (!generator.Generate()) {
+            errorStream << "Generator: " << generator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        *spirv = std::move(generator.result());
+        return {};
+    }
+
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor) {
         if (descriptor->codeSize != 0) {
@@ -341,17 +415,18 @@ namespace dawn_native {
 
         switch (chainedDescriptor->sType) {
             case wgpu::SType::ShaderModuleSPIRVDescriptor: {
-                const ShaderModuleSPIRVDescriptor* spirvDesc =
+                const auto* spirvDesc =
                     static_cast<const ShaderModuleSPIRVDescriptor*>(chainedDescriptor);
                 DAWN_TRY(ValidateSpirv(device, spirvDesc->code, spirvDesc->codeSize));
                 break;
             }
 
             case wgpu::SType::ShaderModuleWGSLDescriptor: {
-                return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
+                const auto* wgslDesc =
+                    static_cast<const ShaderModuleWGSLDescriptor*>(chainedDescriptor);
+                DAWN_TRY(ValidateWGSL(wgslDesc->source));
                 break;
             }
-
             default:
                 return DAWN_VALIDATION_ERROR("Unsupported sType");
         }
@@ -362,17 +437,29 @@ namespace dawn_native {
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
-        : CachedObject(device) {
-        // Extract the correct SPIRV from the descriptor.
+        : CachedObject(device), mType(TypeUndefined) {
+        // Extract the correct shader from the descriptor.
         if (descriptor->codeSize != 0) {
+            mType = TypeSpirv;
             mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         } else {
             ASSERT(descriptor->nextInChain != nullptr);
-            ASSERT(descriptor->nextInChain->sType == wgpu::SType::ShaderModuleSPIRVDescriptor);
-
-            const ShaderModuleSPIRVDescriptor* spirvDesc =
-                static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
-            mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+            switch (descriptor->nextInChain->sType) {
+                case wgpu::SType::ShaderModuleSPIRVDescriptor: {
+                    mType = TypeSpirv;
+                    const auto* spirvDesc =
+                        static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
+                    mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+                } break;
+                case wgpu::SType::ShaderModuleWGSLDescriptor: {
+                    mType = TypeWgsl;
+                    const auto* wgslDesc =
+                        static_cast<const ShaderModuleWGSLDescriptor*>(descriptor->nextInChain);
+                    mWgsl = std::string(wgslDesc->source);
+                } break;
+                default:
+                    UNREACHABLE();
+            }
         }
 
         mFragmentOutputFormatBaseTypes.fill(Format::Other);
@@ -382,7 +469,7 @@ namespace dawn_native {
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag) {
+        : CachedObject(device, tag), mType(TypeUndefined) {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
@@ -920,4 +1007,10 @@ namespace dawn_native {
         return options;
     }
 
+    MaybeError ShaderModuleBase::Initialize() {
+        if (mType == TypeWgsl) {
+            DAWN_TRY(ConvertWGSLToSPIRV(mWgsl.c_str(), &mSpirv));
+        }
+        return {};
+    }
 }  // namespace dawn_native
