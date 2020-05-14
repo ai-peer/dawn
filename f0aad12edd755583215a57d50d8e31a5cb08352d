@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2b18dae9_cbe04699",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-14T21:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40e43f46_cd95934d",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "633fc916_dd670fed",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "41b4c0aa_2a23e718",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-14T21:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "633fc916_dd670fed",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d7caba6_f034414e",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73086cd2_56cc15aa",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-14T21:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d7caba6_f034414e",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
