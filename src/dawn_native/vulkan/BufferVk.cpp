@@ -14,6 +14,7 @@
 
 #include "dawn_native/vulkan/BufferVk.h"
 
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/ResourceHeapVk.h"
@@ -240,8 +241,7 @@ namespace dawn_native { namespace vulkan {
         uint8_t* memory = mMemoryAllocation.GetMappedPointer();
         ASSERT(memory != nullptr);
 
-        MapRequestTracker* tracker = device->GetMapRequestTracker();
-        tracker->Track(this, serial, memory, false);
+        device->GetMapRequestTracker()->Track(this, serial, memory, false);
         return {};
     }
 
@@ -254,8 +254,7 @@ namespace dawn_native { namespace vulkan {
         uint8_t* memory = mMemoryAllocation.GetMappedPointer();
         ASSERT(memory != nullptr);
 
-        MapRequestTracker* tracker = device->GetMapRequestTracker();
-        tracker->Track(this, serial, memory, true);
+        device->GetMapRequestTracker()->Track(this, serial, memory, true);
         return {};
     }
 
@@ -270,36 +269,6 @@ namespace dawn_native { namespace vulkan {
             ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
-    }
-
-    // MapRequestTracker
-
-    MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {
-    }
-
-    MapRequestTracker::~MapRequestTracker() {
-        ASSERT(mInflightRequests.Empty());
-    }
-
-    void MapRequestTracker::Track(Buffer* buffer, uint32_t mapSerial, void* data, bool isWrite) {
-        Request request;
-        request.buffer = buffer;
-        request.mapSerial = mapSerial;
-        request.data = data;
-        request.isWrite = isWrite;
-
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
-    }
-
-    void MapRequestTracker::Tick(Serial finishedSerial) {
-        for (auto& request : mInflightRequests.IterateUpTo(finishedSerial)) {
-            if (request.isWrite) {
-                request.buffer->OnMapWriteCommandSerialFinished(request.mapSerial, request.data);
-            } else {
-                request.buffer->OnMapReadCommandSerialFinished(request.mapSerial, request.data);
-            }
-        }
-        mInflightRequests.ClearUpTo(finishedSerial);
     }
 
 }}  // namespace dawn_native::vulkan
