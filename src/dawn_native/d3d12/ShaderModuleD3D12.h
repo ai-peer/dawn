@@ -29,10 +29,12 @@ namespace dawn_native { namespace d3d12 {
 
         ResultOrError<std::string> GetHLSLSource(PipelineLayout* layout);
 
+      protected:
+        MaybeError Initialize() override;
+
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
-        MaybeError Initialize();
     };
 
 }}  // namespace dawn_native::d3d12
