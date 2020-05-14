@@ -50,6 +50,7 @@ namespace dawn_native {
         wgpu::BufferUsage GetUsage() const;
 
         MaybeError MapAtCreation(uint8_t** mappedPointer);
+        void OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
