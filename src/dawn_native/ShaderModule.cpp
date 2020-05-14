@@ -14,16 +14,26 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include <sstream>
+
+#include <spirv-tools/libspirv.hpp>
+#include <spirv_cross.hpp>
+
+#ifdef DAWN_ENABLE_WGSL
+// Tint includes must be after spirv_cross.hpp, because spirv-cross has its own
+// version of spirv_headers.
+#include "tint/src/reader/wgsl/parser.h"
+#include "tint/src/type_determiner.h"
+#include "tint/src/validator.h"
+#include "tint/src/writer/spirv/generator.h"
+#include "tint/src/writer/writer.h"
+#endif  // DAWN_ENABLE_WGSL
+
 #include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
-
-#include <spirv-tools/libspirv.hpp>
-#include <spirv_cross.hpp>
-
-#include <sstream>
 
 namespace dawn_native {
 
@@ -316,6 +326,73 @@ namespace dawn_native {
         return {};
     }
 
+#ifdef DAWN_ENABLE_WGSL
+    MaybeError ValidateWGSL(const char* source) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        auto module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::TypeDeterminer type_determiner(&context, &module);
+        if (!type_determiner.Determine()) {
+            errorStream << "Type Determination: " << type_determiner.error();
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::Validator validator;
+        if (!validator.Validate(module)) {
+            errorStream << "Validation: " << validator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        return {};
+    }
+
+    MaybeError ConvertWGSLToSPIRV(const char* source, std::vector<uint32_t>* spirv = nullptr) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL->SPIR-V failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        auto module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        if (spirv == nullptr) {
+            errorStream << "No valid destination provided for output" << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::writer::spirv::Generator generator(std::move(module));
+        if (!generator.Generate()) {
+            errorStream << "Generator: " << generator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        *spirv = std::move(generator.result());
+        return {};
+    }
+#endif  // DAWN_ENABLE_WGSL
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor) {
         const ChainedStruct* chainedDescriptor = descriptor->nextInChain;
@@ -330,17 +407,22 @@ namespace dawn_native {
 
         switch (chainedDescriptor->sType) {
             case wgpu::SType::ShaderModuleSPIRVDescriptor: {
-                const ShaderModuleSPIRVDescriptor* spirvDesc =
+                const auto* spirvDesc =
                     static_cast<const ShaderModuleSPIRVDescriptor*>(chainedDescriptor);
                 DAWN_TRY(ValidateSpirv(device, spirvDesc->code, spirvDesc->codeSize));
                 break;
             }
 
             case wgpu::SType::ShaderModuleWGSLDescriptor: {
+#ifdef DAWN_ENABLE_WGSL
+                const auto* wgslDesc =
+                    static_cast<const ShaderModuleWGSLDescriptor*>(chainedDescriptor);
+                DAWN_TRY(ValidateWGSL(wgslDesc->source));
+#else
                 return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
+#endif  // DAWN_ENABLE_WGSL
                 break;
             }
-
             default:
                 return DAWN_VALIDATION_ERROR("Unsupported sType");
         }
@@ -351,13 +433,39 @@ namespace dawn_native {
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
+#ifdef DAWN_ENABLE_WGSL
+        : CachedObject(device), mType(TypeUndefined) {
+#else
         : CachedObject(device) {
+#endif  // DAWN_ENABLE_WGSL
         ASSERT(descriptor->nextInChain != nullptr);
+#ifndef DAWN_ENABLE_WGSL
         ASSERT(descriptor->nextInChain->sType == wgpu::SType::ShaderModuleSPIRVDescriptor);
-
-        const ShaderModuleSPIRVDescriptor* spirvDesc =
-            static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
-        mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+#endif  // DAWN_ENABLE_WGSL
+        switch (descriptor->nextInChain->sType) {
+            case wgpu::SType::ShaderModuleSPIRVDescriptor: {
+#ifdef DAWN_ENABLE_WGSL
+                mType = TypeSpirv;
+#endif  // DAWN_ENABLE_WGSL
+                const auto* spirvDesc =
+                    static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
+                mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+                break;
+            }
+            case wgpu::SType::ShaderModuleWGSLDescriptor: {
+#ifdef DAWN_ENABLE_WGSL
+                mType = TypeWgsl;
+                const auto* wgslDesc =
+                    static_cast<const ShaderModuleWGSLDescriptor*>(descriptor->nextInChain);
+                mWgsl = std::string(wgslDesc->source);
+#else
+                UNREACHABLE();
+#endif  // DAWN_ENABLE_WGSL
+                break;
+            }
+            default:
+                UNREACHABLE();
+        }
 
         mFragmentOutputFormatBaseTypes.fill(Format::Other);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvcParser)) {
@@ -366,7 +474,11 @@ namespace dawn_native {
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag) {
+#ifdef DAWN_ENABLE_WGSL
+        : CachedObject(device, tag), mType(TypeUndefined) {
+#else
+      : CachedObject(device, tag) {
+#endif  // DAWN_ENABLE_WGSL
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
@@ -904,4 +1016,12 @@ namespace dawn_native {
         return options;
     }
 
+    MaybeError ShaderModuleBase::Initialize() {
+#ifdef DAWN_ENABLE_WGSL
+        if (mType == TypeWgsl) {
+            DAWN_TRY(ConvertWGSLToSPIRV(mWgsl.c_str(), &mSpirv));
+        }
+#endif  // DAWN_ENABLE_WGSL
+        return {};
+    }
 }  // namespace dawn_native

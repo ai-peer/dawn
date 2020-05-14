@@ -37,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError ShaderModule::Initialize() {
+        DAWN_TRY(ShaderModuleBase::Initialize());
         const std::vector<uint32_t>& spirv = GetSpirv();
 
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
