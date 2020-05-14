@@ -47,25 +47,6 @@ namespace dawn_native { namespace metal {
         id<MTLBuffer> mMtlBuffer = nil;
     };
 
-    class MapRequestTracker {
-      public:
-        MapRequestTracker(Device* device);
-        ~MapRequestTracker();
-
-        void Track(Buffer* buffer, uint32_t mapSerial, bool isWrite);
-        void Tick(Serial finishedSerial);
-
-      private:
-        Device* mDevice;
-
-        struct Request {
-            Ref<Buffer> buffer;
-            uint32_t mapSerial;
-            bool isWrite;
-        };
-        SerialQueue<Request> mInflightRequests;
-    };
-
 }}  // namespace dawn_native::metal
 
 #endif  // DAWNNATIVE_METAL_BUFFERMTL_H_

@@ -34,7 +34,6 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
-        void OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite);
 
         bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                              D3D12_RESOURCE_BARRIER* barrier,
@@ -65,26 +64,6 @@ namespace dawn_native { namespace d3d12 {
         wgpu::BufferUsage mLastUsage = wgpu::BufferUsage::None;
         Serial mLastUsedSerial = UINT64_MAX;
         D3D12_RANGE mWrittenMappedRange;
-    };
-
-    class MapRequestTracker {
-      public:
-        MapRequestTracker(Device* device);
-        ~MapRequestTracker();
-
-        void Track(Buffer* buffer, uint32_t mapSerial, void* data, bool isWrite);
-        void Tick(Serial finishedSerial);
-
-      private:
-        Device* mDevice;
-
-        struct Request {
-            Ref<Buffer> buffer;
-            uint32_t mapSerial;
-            void* data;
-            bool isWrite;
-        };
-        SerialQueue<Request> mInflightRequests;
     };
 
 }}  // namespace dawn_native::d3d12

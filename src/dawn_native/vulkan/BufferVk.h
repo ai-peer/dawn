@@ -60,26 +60,6 @@ namespace dawn_native { namespace vulkan {
         wgpu::BufferUsage mLastUsage = wgpu::BufferUsage::None;
     };
 
-    class MapRequestTracker {
-      public:
-        MapRequestTracker(Device* device);
-        ~MapRequestTracker();
-
-        void Track(Buffer* buffer, uint32_t mapSerial, void* data, bool isWrite);
-        void Tick(Serial finishedSerial);
-
-      private:
-        Device* mDevice;
-
-        struct Request {
-            Ref<Buffer> buffer;
-            uint32_t mapSerial;
-            void* data;
-            bool isWrite;
-        };
-        SerialQueue<Request> mInflightRequests;
-    };
-
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKAN_BUFFERVK_H_
