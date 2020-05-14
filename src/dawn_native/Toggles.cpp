@@ -131,6 +131,11 @@ namespace dawn_native {
             {Toggle::UseDXC,
              {"use_dxc", "Use DXC instead of FXC for compiling HLSL",
               "https://crbug.com/dawn/402"}},
+            {Toggle::EnableStrictD3D12DebugLayer,
+             {"enable_strict_d3d12_debug_layer",
+              "Enable strict checking against the D3D12 debug layer. Warnings and errors in the "
+              "debug layer will throw device errors.",
+              "https://crbug.com/dawn/363"}},
         }};
 
     }  // anonymous namespace

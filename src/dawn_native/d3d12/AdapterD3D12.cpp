@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/AdapterD3D12.h"
 
 #include "common/Constants.h"
+#include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -64,6 +65,35 @@ namespace dawn_native { namespace d3d12 {
         if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                                 _uuidof(ID3D12Device), &mD3d12Device))) {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
+        }
+
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            ComPtr<ID3D12InfoQueue> infoQueue;
+            if (SUCCEEDED(mD3d12Device->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+                D3D12_MESSAGE_ID denyIds[] = {
+                    D3D12_MESSAGE_ID_HEAP_ADDRESS_RANGE_HAS_NO_RESOURCE,
+                    D3D12_MESSAGE_ID_HEAP_ADDRESS_RANGE_INTERSECTS_MULTIPLE_BUFFERS,
+
+                    // TODO(enrico.galli@intel.com): Remove these after warnings have been addressed
+                    D3D12_MESSAGE_ID_CLEARRENDERTARGETVIEW_MISMATCHINGCLEARVALUE,
+                    D3D12_MESSAGE_ID_UNMAP_RANGE_NOT_EMPTY,
+                };
+                D3D12_INFO_QUEUE_FILTER storageFilter = {};
+                storageFilter.DenyList.NumIDs = ARRAYSIZE(denyIds);
+                storageFilter.DenyList.pIDList = denyIds;
+                infoQueue->PushStorageFilter(&storageFilter);
+
+                // Retriver filter is used during strict validation. We don't error out from INFO
+                // messages.
+                D3D12_INFO_QUEUE_FILTER retriveFilter{};
+                D3D12_MESSAGE_SEVERITY severities[] = {
+                    D3D12_MESSAGE_SEVERITY_ERROR,
+                    D3D12_MESSAGE_SEVERITY_WARNING,
+                };
+                retriveFilter.AllowList.NumSeverities = ARRAYSIZE(severities);
+                retriveFilter.AllowList.pSeverityList = severities;
+                infoQueue->PushRetrievalFilter(&retriveFilter);
+            }
         }
 
         DXGI_ADAPTER_DESC1 adapterDesc;
