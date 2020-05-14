@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb8724db_d6f176a3",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "nit: this is a 300 line function, maybe we could split the parsing of arguments in its own function? Likewise for the device selection. So the function would be:\n\n  ParseArgs(...);\n\n  CreateInstanceAndAdapters();\n  ASSERT(mInstance);\n\n  mSelectedAdapters \u003d FilterAdapters(mAdapters);\n\n  PrintGlobalAndAdapterInfo(mSelectedAdapters);",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20ad562c_e35eb35b",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "nit: For each backend, tests will run ...",
+      "range": {
+        "startLine": 342,
+        "startChar": 26,
+        "endLine": 342,
+        "endChar": 41
+      },
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b93ed81d_576964c6",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a73a146_bbb4e521",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "For clarity it\u0027s probably ok to fold this and [1] together and have a quadratic algorithm (because we expect mDevicePreferences to always be less than 3)",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9c1d356_b7f39be7",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "nit: for",
+      "range": {
+        "startLine": 414,
+        "startChar": 28,
+        "endLine": 414,
+        "endChar": 34
+      },
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0b6275d_5aaf0f44",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "multiple",
+      "range": {
+        "startLine": 455,
+        "startChar": 90,
+        "endLine": 455,
+        "endChar": 97
+      },
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c694098c_fe34c17f",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-14T12:46:57Z",
+      "side": 1,
+      "message": "Instead of doing the matching against known adapters, what do you think of asking the test environment to filter the list every time, and assume we will always get the same one?",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
