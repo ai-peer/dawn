@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40e43f46_cd95934d",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-14T17:14:43Z",
+      "side": 1,
+      "message": "Consider adding a comment on why this is being globally suppressed. For example, \"Resource sub-allocation partially maps pre-allocated heaps. This means the entire physical addresses space may have no resources or have many resources assigned the same heap.\"",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "633fc916_dd670fed",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-14T17:14:43Z",
+      "side": 1,
+      "message": "I went ahead and filed corresponding issues, dawn:418 and dawn:419. Please update the comment.",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d7caba6_f034414e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-14T17:14:43Z",
+      "side": 1,
+      "message": "I slightly prefer having no toggle and comment out the specific denyIds. That way, we don\u0027t need to expose a temporary toggle while we take care of these internal warnings.",
+      "revId": "f0aad12edd755583215a57d50d8e31a5cb08352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
