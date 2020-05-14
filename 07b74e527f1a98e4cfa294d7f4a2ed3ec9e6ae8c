@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2658bd8d_318787ce",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-05-14T17:39:40Z",
+      "side": 1,
+      "message": "I have split up the ValidateWGSL function into Validate + Convert stages to reduce the duplication of functionality. If we are doing to perform a major refactoring of ShaderModule I would prefer it to be in a separate CL.",
+      "parentUuid": "f40a7e68_9d673d0e",
+      "range": {
+        "startLine": 981,
+        "startChar": 21,
+        "endLine": 981,
+        "endChar": 33
+      },
+      "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ca13111_f9222609",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 1
@@ -63,6 +87,24 @@
       "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00fa4559_6fb73fa3",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-05-14T17:39:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca13111_f9222609",
+      "revId": "07b74e527f1a98e4cfa294d7f4a2ed3ec9e6ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
