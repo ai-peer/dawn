@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0062f11b_49ac9773",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "nit: not obvious what type \"auto\" is here",
+      "range": {
+        "startLine": 344,
+        "startChar": 8,
+        "endLine": 344,
+        "endChar": 12
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f70ed6e_f747022a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "unit: maybe put this break in the if-branch after DAWN_TRY",
+      "range": {
+        "startLine": 426,
+        "startChar": 16,
+        "endLine": 426,
+        "endChar": 21
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9dce6c5_d25f0455",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "nit: this is a ton of ifdefs. I think it would be sufficient to simply assign the type enum, and the code / source string always, and then in ShaderModuleBase::Initialize, ASSERT if the type is WGSL and !DAWN_ENABLE_WGSL.",
+      "range": {
+        "startLine": 438,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 9
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6c6bcbf_1d51cb3f",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "nit: prefer enum class",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "539fe3fc_0c92abc0",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "nit: Does this have to be virtual? I think it could be non-virtual and called something else. Then the derived classes can just \"InitializeBase\" or maybe just \"ConvertWGSLToSPIRV\" to be more specific. And we wouldn\u0027t need the ShaderModuleBase:: part.",
+      "range": {
+        "startLine": 94,
+        "startChar": 9,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2078ad59_57752103",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-14T21:29:52Z",
+      "side": 1,
+      "message": "nit: This probably doesn\u0027t need to be behind an ifdef",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
