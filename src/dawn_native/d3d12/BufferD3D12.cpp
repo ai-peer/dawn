@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "common/Math.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
@@ -233,14 +234,6 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetGPUPointer();
     }
 
-    void Buffer::OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite) {
-        if (isWrite) {
-            CallMapWriteCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
-        } else {
-            CallMapReadCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
-        }
-    }
-
     bool Buffer::IsMapWritable() const {
         // TODO(enga): Handle CPU-visible memory on UMA
         return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
@@ -273,7 +266,7 @@ namespace dawn_native { namespace d3d12 {
                          "D3D12 map read async"));
         // There is no need to transition the resource to a new state: D3D12 seems to make the GPU
         // writes available when the fence is passed.
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
         tracker->Track(this, serial, data, false);
         return {};
     }
@@ -291,8 +284,8 @@ namespace dawn_native { namespace d3d12 {
             "D3D12 map write async"));
         // There is no need to transition the resource to a new state: D3D12 seems to make the CPU
         // writes available on queue submission.
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
-        tracker->Track(this, serial, data, true);
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
+        tracker->Track(this, serial, data, false);
         return {};
     }
 
@@ -323,31 +316,6 @@ namespace dawn_native { namespace d3d12 {
 
     bool Buffer::CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const {
         return mResourceAllocation.GetInfo().mMethod == allocationMethod;
-    }
-
-    MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {
-    }
-
-    MapRequestTracker::~MapRequestTracker() {
-        ASSERT(mInflightRequests.Empty());
-    }
-
-    void MapRequestTracker::Track(Buffer* buffer, uint32_t mapSerial, void* data, bool isWrite) {
-        Request request;
-        request.buffer = buffer;
-        request.mapSerial = mapSerial;
-        request.data = data;
-        request.isWrite = isWrite;
-
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
-    }
-
-    void MapRequestTracker::Tick(Serial finishedSerial) {
-        for (auto& request : mInflightRequests.IterateUpTo(finishedSerial)) {
-            request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.data,
-                                                       request.isWrite);
-        }
-        mInflightRequests.ClearUpTo(finishedSerial);
     }
 
 }}  // namespace dawn_native::d3d12

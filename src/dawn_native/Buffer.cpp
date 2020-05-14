@@ -467,4 +467,12 @@ namespace dawn_native {
         return mState == BufferState::Mapped;
     }
 
+    void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite) {
+        if (isWrite) {
+            CallMapWriteCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
+        } else {
+            CallMapReadCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
+        }
+    }
+
 }  // namespace dawn_native
