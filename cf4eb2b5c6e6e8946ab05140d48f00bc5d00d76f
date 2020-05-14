@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "103e7e33_1317bab0",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-14T00:01:23Z",
+      "side": 1,
+      "message": "@RC, the computed size is being tracked for purposes of residency and a TODO also SGTM.",
+      "parentUuid": "184da76c_5df7732f",
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a800853_5a5c8e40",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 2
