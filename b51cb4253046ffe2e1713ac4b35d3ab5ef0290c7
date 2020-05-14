@@ -59,6 +59,40 @@
     },
     {
       "key": {
+        "uuid": "2425ced5_57e91eef",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-14T13:53:10Z",
+      "side": 1,
+      "message": "uNit: I prefer !mDevicePreferences.empty()",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1af889f0_950b0ebb",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-14T13:53:10Z",
+      "side": 1,
+      "message": "uNit: same here.",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a73a146_bbb4e521",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 10
@@ -99,6 +133,23 @@
     },
     {
       "key": {
+        "uuid": "f5d6769a_dc6b87e7",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-14T13:53:10Z",
+      "side": 1,
+      "message": "Nit: just wanted to check that \"few and fast tests\" was intended. (It makes sense, just took me a second to parse.) Maybe \"There are few tests on this backend, and they run quickly\"?\n\nIs it important that they\u0027re fast, or maybe just focus on the sparse testing?",
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f0b6275d_5aaf0f44",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 10
@@ -110,6 +161,30 @@
       "writtenOn": "2020-05-14T12:46:57Z",
       "side": 1,
       "message": "multiple",
+      "range": {
+        "startLine": 455,
+        "startChar": 90,
+        "endLine": 455,
+        "endChar": 97
+      },
+      "revId": "b51cb4253046ffe2e1713ac4b35d3ab5ef0290c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d307b32_6d8184d4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-14T13:53:10Z",
+      "side": 1,
+      "message": "Might be worth checking how other test harnesses handle this (SwiftShader\u0027s regres? Not sure if it enables validation layers.)",
+      "parentUuid": "f0b6275d_5aaf0f44",
       "range": {
         "startLine": 455,
         "startChar": 90,
