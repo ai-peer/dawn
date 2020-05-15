@@ -71,6 +71,8 @@ namespace dawn_native { namespace d3d12 {
 
         const PlatformFunctions* GetFunctions() const;
         ComPtr<IDXGIFactory4> GetFactory() const;
+        ComPtr<IDxcLibrary> GetDxcLibrary() const;
+        ComPtr<IDxcCompiler> GetDxcCompiler() const;
 
         ResultOrError<CommandRecordingContext*> GetPendingCommandContext();
 
