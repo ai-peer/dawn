@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "725a034c_b099b490",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T17:51:19Z",
+      "side": 1,
+      "message": "Don\u0027t want entry-\u003ePopulateSamplers() when nullptr hence we always initialize it here to be empty (or invalid). Alternatively, could check nullptr in PopulateSamplers().",
+      "parentUuid": "5d225181_f04657e3",
+      "revId": "b0bf728a5e636af7f127fd5e87c1bdb233f7033b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1dbb329e_77aa56e2",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 13
