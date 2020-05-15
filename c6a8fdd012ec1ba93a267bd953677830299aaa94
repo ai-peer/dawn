@@ -164,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "3749c8a4_0a15c945",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:30:34Z",
+      "side": 1,
+      "message": "Ideally, we\u0027d store the count and pointer to the first sampler in the BindGroup. These are already in packed range, but the information isn\u0027t available anywhere right now. We could compute this as we\u0027re iterating over the bindings on creation of the BindGroup. That way we don\u0027t iterate twice.\n\nFine with me to do this now or in a follow-up or do Rafael\u0027s suggestion as an intermediate step.",
+      "parentUuid": "ff7f8ebb_00c7fb6b",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb9be8ac_78879c89",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 12
