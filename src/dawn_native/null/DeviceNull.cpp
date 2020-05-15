@@ -19,6 +19,7 @@
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/Surface.h"
+#include "dawn_native/MapRequestTracker.h"
 
 #include <spirv_cross.hpp>
 
@@ -266,7 +267,7 @@ namespace dawn_native { namespace null {
 
     struct BufferMapOperation : PendingOperation {
         virtual void Execute() {
-            buffer->MapOperationCompleted(serial, ptr, isWrite);
+            buffer->OnMapCommandSerialFinished(serial, isWrite);
         }
 
         Ref<Buffer> buffer;
@@ -296,14 +297,6 @@ namespace dawn_native { namespace null {
         return {};
     }
 
-    void Buffer::MapOperationCompleted(uint32_t serial, void* ptr, bool isWrite) {
-        if (isWrite) {
-            CallMapWriteCallback(serial, WGPUBufferMapAsyncStatus_Success, ptr, GetSize());
-        } else {
-            CallMapReadCallback(serial, WGPUBufferMapAsyncStatus_Success, ptr, GetSize());
-        }
-    }
-
     void Buffer::CopyFromStaging(StagingBufferBase* staging,
                                  uint64_t sourceOffset,
                                  uint64_t destinationOffset,
@@ -320,25 +313,15 @@ namespace dawn_native { namespace null {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
-        MapAsyncImplCommon(serial, false);
         return {};
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
-        MapAsyncImplCommon(serial, true);
         return {};
     }
 
-    void Buffer::MapAsyncImplCommon(uint32_t serial, bool isWrite) {
-        ASSERT(mBackingData);
-
-        auto operation = std::make_unique<BufferMapOperation>();
-        operation->buffer = this;
-        operation->ptr = mBackingData.get();
-        operation->serial = serial;
-        operation->isWrite = isWrite;
-
-        ToBackend(GetDevice())->AddPendingOperation(std::move(operation));
+    void* Buffer::GetMappedPointerImpl() {
+        return mBackingData.get();
     }
 
     void Buffer::UnmapImpl() {

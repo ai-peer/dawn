@@ -15,6 +15,7 @@
 #include "dawn_native/metal/BufferMTL.h"
 
 #include "common/Math.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
 #include <limits>
@@ -67,35 +68,26 @@ namespace dawn_native { namespace metal {
         return mMtlBuffer;
     }
 
-    void Buffer::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
-        char* data = reinterpret_cast<char*>([mMtlBuffer contents]);
-        if (isWrite) {
-            CallMapWriteCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
-        } else {
-            CallMapReadCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
-        }
-    }
-
     bool Buffer::IsMapWritable() const {
         // TODO(enga): Handle CPU-visible memory on UMA
         return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
-        *mappedPointer = reinterpret_cast<uint8_t*>([mMtlBuffer contents]);
+        *mappedPointer = GetMappedPointerImpl();
         return {};
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
-        tracker->Track(this, serial, false);
         return {};
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
-        tracker->Track(this, serial, true);
         return {};
+    }
+
+    void* Buffer::GetMappedPointerImpl() {
+        return reinterpret_cast<uint8_t*>([mMtlBuffer contents]);
     }
 
     void Buffer::UnmapImpl() {
@@ -105,31 +97,6 @@ namespace dawn_native { namespace metal {
     void Buffer::DestroyImpl() {
         [mMtlBuffer release];
         mMtlBuffer = nil;
-    }
-
-    MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {
-    }
-
-    MapRequestTracker::~MapRequestTracker() {
-        ASSERT(mInflightRequests.Empty());
-    }
-
-    void MapRequestTracker::Track(Buffer* buffer,
-                                  uint32_t mapSerial,
-                                  bool isWrite) {
-        Request request;
-        request.buffer = buffer;
-        request.mapSerial = mapSerial;
-        request.isWrite = isWrite;
-
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
-    }
-
-    void MapRequestTracker::Tick(Serial finishedSerial) {
-        for (auto& request : mInflightRequests.IterateUpTo(finishedSerial)) {
-            request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.isWrite);
-        }
-        mInflightRequests.ClearUpTo(finishedSerial);
     }
 
 }}  // namespace dawn_native::metal
