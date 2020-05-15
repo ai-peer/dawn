@@ -46,6 +46,30 @@
       "revId": "89246f58dca5ec8e9c994142fbfb4cb7afdba311",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75d61dc5_983fdbc5",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T19:41:17Z",
+      "side": 1,
+      "message": "Ah, sorry I missed that. Please make a stack variable for the RGBA8 values and pass \u0026topRight instead of the vector then.",
+      "parentUuid": "799bcb03_aa9093b8",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 27
+      },
+      "revId": "89246f58dca5ec8e9c994142fbfb4cb7afdba311",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
