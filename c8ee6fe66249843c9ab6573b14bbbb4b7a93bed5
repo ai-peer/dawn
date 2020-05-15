@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19772580_2013025f",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:37:46Z",
+      "side": 1,
+      "message": "these are the defaults",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 72
+      },
+      "revId": "c8ee6fe66249843c9ab6573b14bbbb4b7a93bed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ec40a86_8e2a4dca",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:37:46Z",
+      "side": 1,
+      "message": "typo: bottom",
+      "range": {
+        "startLine": 148,
+        "startChar": 23,
+        "endLine": 148,
+        "endChar": 29
+      },
+      "revId": "c8ee6fe66249843c9ab6573b14bbbb4b7a93bed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "396de37d_b5a4c567",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:37:46Z",
+      "side": 1,
+      "message": "typo: pixels",
+      "range": {
+        "startLine": 148,
+        "startChar": 67,
+        "endLine": 148,
+        "endChar": 73
+      },
+      "revId": "c8ee6fe66249843c9ab6573b14bbbb4b7a93bed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44cbfacd_24d3c88a",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:37:46Z",
+      "side": 1,
+      "message": "typo: background",
+      "range": {
+        "startLine": 148,
+        "startChar": 88,
+        "endLine": 148,
+        "endChar": 97
+      },
+      "revId": "c8ee6fe66249843c9ab6573b14bbbb4b7a93bed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b390339e_836be21a",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T03:37:46Z",
+      "side": 1,
+      "message": "could we instead check 4 rectangles instead of each pixel one-by-one? I know the size is 4, but if someone changes it in the future unknowingly, this will do a ton of copies.",
+      "range": {
+        "startLine": 151,
+        "startChar": 16,
+        "endLine": 151,
+        "endChar": 39
+      },
+      "revId": "c8ee6fe66249843c9ab6573b14bbbb4b7a93bed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
