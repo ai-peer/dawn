@@ -22,6 +22,30 @@
       "revId": "89246f58dca5ec8e9c994142fbfb4cb7afdba311",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799bcb03_aa9093b8",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-15T19:40:23Z",
+      "side": 1,
+      "message": "That\u0027s true, I also noticed that one. But EXPECT_PIXEL_RGBA8_EQ can\u0027t specify non-zero layer or miplevel. It can\u0027t fit the particular needs here.",
+      "parentUuid": "69711eca_ed860192",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 27
+      },
+      "revId": "89246f58dca5ec8e9c994142fbfb4cb7afdba311",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
