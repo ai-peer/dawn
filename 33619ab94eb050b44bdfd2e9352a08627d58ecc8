@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e85d284a_6a93a8df",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T15:15:49Z",
+      "side": 1,
+      "message": "The logic here is a bit complicated, especially for pixels that are on the diagonal of the triangle: it\u0027s not immediately clear that they will be draw vs. not.\n\nWhat about just cheking the bottom left, and top right pixels? VerifyPixels could then be two lines inlined in the tests.",
+      "revId": "33619ab94eb050b44bdfd2e9352a08627d58ecc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86940dfd_6ab67749",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T15:15:49Z",
+      "side": 1,
+      "message": "Can we have TODOs to test what happens where the usage is \"checkerboarded\" between storage and sample across the miplevel and arraylayer dimensions?",
+      "revId": "33619ab94eb050b44bdfd2e9352a08627d58ecc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
