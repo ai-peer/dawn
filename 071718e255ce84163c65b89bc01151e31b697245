@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fcc083a_f47d8211",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T22:29:34Z",
+      "side": 1,
+      "message": "could this and GetDxcCompiler be GetOrCreate ? It could return ResultOrError\u003cComPtr\u003cIDxcLibrary\u003e\u003e",
+      "range": {
+        "startLine": 119,
+        "startChar": 33,
+        "endLine": 119,
+        "endChar": 46
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44dd36bb_8781b931",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T22:29:34Z",
+      "side": 1,
+      "message": "nit: Maybe we could put this in  UtilsD3D12.cpp",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f08d6bf_653c4bcc",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T22:29:34Z",
+      "side": 1,
+      "message": "nit: these branches are large enough that it would be cleaner to factor the DXC and FXC paths into helper functions. It would also deduplicate some of the setting of d3dDesc.CS.pShaderBytecode\n\nAlso, it would be nice to factor out CreateBlobWithEncodingOnHeapCopy, compiling, reporting errors, and getting the result so it can be shared with RenderPipelineD3D12.cpp. I think the only thing different is the |compileTarget| string after we\u0027ve extracted the entrypoint.",
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77a34e6_05a57553",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T22:29:34Z",
+      "side": 1,
+      "message": "why not get the DXCArguments as in RenderPipelineD3D12?",
+      "range": {
+        "startLine": 82,
+        "startChar": 50,
+        "endLine": 82,
+        "endChar": 83
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a3be767_8c1a0616",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T22:29:34Z",
+      "side": 1,
+      "message": "Do these pointers outlive the ComPtr\u003cID3DBlob\u003e compiledShader; ?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 72
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
