@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105ce15f_88ace6fa",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T13:18:58Z",
+      "side": 1,
+      "message": "Instead of duplicating this in all backends, can we do it in BufferBase?",
+      "revId": "cee5d98071483c2d85e25378f55361c0e10cd847",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22898e56_ebecca15",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T13:18:58Z",
+      "side": 1,
+      "message": "I think this should be true",
+      "range": {
+        "startLine": 288,
+        "startChar": 43,
+        "endLine": 288,
+        "endChar": 48
+      },
+      "revId": "cee5d98071483c2d85e25378f55361c0e10cd847",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67ec423e_3d076ae7",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T13:18:58Z",
+      "side": 1,
+      "message": "This will do a synchronous wait. Instead of passing the `data` to the Track call, what about adding a virtual void* GetMappedPointerImpl() to Buffer that\u0027s call just before the callback is going to fire? (it is actually a good step towards the updated mapping proposl too).",
+      "revId": "cee5d98071483c2d85e25378f55361c0e10cd847",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f96c43_04766bf0",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T13:18:58Z",
+      "side": 1,
+      "message": "should be false",
+      "range": {
+        "startLine": 245,
+        "startChar": 45,
+        "endLine": 245,
+        "endChar": 49
+      },
+      "revId": "cee5d98071483c2d85e25378f55361c0e10cd847",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
