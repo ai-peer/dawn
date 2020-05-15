@@ -15,12 +15,31 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "common/Log.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
+
+    namespace {
+        std::wstring ConvertStringToWstring(const char* str) {
+            std::wstring result;
+            size_t len = strlen(str);
+            if (len == 0) {
+                return result;
+            }
+            int numChars = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, NULL, 0);
+            if (numChars) {
+                result.resize(numChars);
+                MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, &result[0], numChars);
+            }
+            return result;
+        };
+
+    }  // anonymous namespace
 
     ResultOrError<ComputePipeline*> ComputePipeline::Create(
         Device* device,
@@ -44,21 +63,72 @@ namespace dawn_native { namespace d3d12 {
         std::string hlslSource;
         DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
 
-        ComPtr<ID3DBlob> compiledShader;
-        ComPtr<ID3DBlob> errors;
-
-        const PlatformFunctions* functions = device->GetFunctions();
-        if (FAILED(functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
-                                         nullptr, descriptor->computeStage.entryPoint, "cs_5_1",
-                                         compileFlags, 0, &compiledShader, &errors))) {
-            printf("%s\n", reinterpret_cast<char*>(errors->GetBufferPointer()));
-            ASSERT(false);
-        }
-
         D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
         d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
-        d3dDesc.CS.pShaderBytecode = compiledShader->GetBufferPointer();
-        d3dDesc.CS.BytecodeLength = compiledShader->GetBufferSize();
+
+        if (device->IsToggleEnabled(Toggle::UseDXC)) {
+            ComPtr<IDxcLibrary> dxcLibrary = ToBackend(GetDevice())->GetDxcLibrary();
+            ComPtr<IDxcCompiler> dxcCompiler = ToBackend(GetDevice())->GetDxcCompiler();
+
+            std::wstring entryPoint = ConvertStringToWstring(descriptor->computeStage.entryPoint);
+            std::wstring compileTarget = L"cs_6_0";
+
+            uint32_t codePage = CP_UTF8;
+            ComPtr<IDxcBlobEncoding> sourceBlob;
+            if (FAILED(dxcLibrary->CreateBlobWithEncodingOnHeapCopy(
+                    hlslSource.c_str(), hlslSource.length(), CP_ACP, &sourceBlob))) {
+            }
+
+            std::vector<LPCWSTR> arguments = {};  // GetDXCArguments(compileFlags);
+
+            ComPtr<IDxcOperationResult> result;
+            if (FAILED(dxcCompiler->Compile(sourceBlob.Get(),       // pSource
+                                            nullptr,                // pSourceName
+                                            entryPoint.c_str(),     // pEntryPoint
+                                            compileTarget.c_str(),  // pTargetProfile
+                                            arguments.data(),
+                                            arguments.size(),  // pArguments, argCount
+                                            nullptr, 0,        // pDefines, defineCount
+                                            nullptr,           // pIncludeHandler
+                                            &result)))         // ppResult
+            {
+            }
+
+            ComPtr<IDxcBlob> compiledShader;
+            ComPtr<IDxcBlobEncoding> errors;
+
+            HRESULT hr;
+            result->GetStatus(&hr);
+            MaybeError error = CheckHRESULT(hr, "D3DCompile");
+            if (error.IsError()) {
+                if (result) {
+                    if (SUCCEEDED(result->GetErrorBuffer(&errors))) {
+                        dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
+                        DAWN_TRY(std::move(error));
+                    }
+                }
+            }
+
+            result->GetResult(&compiledShader);
+
+            d3dDesc.CS.pShaderBytecode = compiledShader->GetBufferPointer();
+            d3dDesc.CS.BytecodeLength = compiledShader->GetBufferSize();
+        } else {
+            ComPtr<ID3DBlob> compiledShader;
+            ComPtr<ID3DBlob> errors;
+
+            const PlatformFunctions* functions = device->GetFunctions();
+            if (FAILED(functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr,
+                                             nullptr, nullptr, descriptor->computeStage.entryPoint,
+                                             "cs_5_1", compileFlags, 0, &compiledShader,
+                                             &errors))) {
+                dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
+                ASSERT(false);
+            }
+
+            d3dDesc.CS.pShaderBytecode = compiledShader->GetBufferPointer();
+            d3dDesc.CS.BytecodeLength = compiledShader->GetBufferSize();
+        }
 
         device->GetD3D12Device()->CreateComputePipelineState(&d3dDesc,
                                                              IID_PPV_ARGS(&mPipelineState));

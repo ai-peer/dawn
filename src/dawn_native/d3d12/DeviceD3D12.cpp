@@ -174,6 +174,14 @@ namespace dawn_native { namespace d3d12 {
         return ToBackend(GetAdapter())->GetBackend()->GetFactory();
     }
 
+    ComPtr<IDxcLibrary> Device::GetDxcLibrary() const {
+        return ToBackend(GetAdapter())->GetBackend()->GetDxcLibrary();
+    }
+
+    ComPtr<IDxcCompiler> Device::GetDxcCompiler() const {
+        return ToBackend(GetAdapter())->GetBackend()->GetDxcCompiler();
+    }
+
     const PlatformFunctions* Device::GetFunctions() const {
         return ToBackend(GetAdapter())->GetBackend()->GetFunctions();
     }

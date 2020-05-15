@@ -288,6 +288,63 @@ namespace dawn_native { namespace d3d12 {
             return mDepthStencilDescriptor;
         }
 
+        std::wstring ConvertStringToWstring(const char* str) {
+            std::wstring result;
+            size_t len = strlen(str);
+            if (len == 0) {
+                return result;
+            }
+            int numChars = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, NULL, 0);
+            if (numChars) {
+                result.resize(numChars);
+                MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, &result[0], numChars);
+            }
+            return result;
+        };
+
+        std::vector<LPCWSTR> GetDXCArguments(uint32_t compileFlags) {
+            std::vector<LPCWSTR> arguments;
+            if (compileFlags & D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY)
+                arguments.push_back(L"/Gec");
+            // /Ges Not implemented:
+            // if(Flags1 & D3DCOMPILE_ENABLE_STRICTNESS) arguments.push_back(L"/Ges");
+            if (compileFlags & D3DCOMPILE_IEEE_STRICTNESS)
+                arguments.push_back(L"/Gis");
+            if (compileFlags & D3DCOMPILE_OPTIMIZATION_LEVEL2) {
+                switch (compileFlags & D3DCOMPILE_OPTIMIZATION_LEVEL2) {
+                    case D3DCOMPILE_OPTIMIZATION_LEVEL0:
+                        arguments.push_back(L"/O0");
+                        break;
+                    case D3DCOMPILE_OPTIMIZATION_LEVEL2:
+                        arguments.push_back(L"/O2");
+                        break;
+                    case D3DCOMPILE_OPTIMIZATION_LEVEL3:
+                        arguments.push_back(L"/O3");
+                        break;
+                }
+            }
+            // Currently, /Od turns off too many optimization passes, causing incorrect DXIL to be
+            // generated. Re-enable once /Od is implemented properly:
+            // if(Flags1 & D3DCOMPILE_SKIP_OPTIMIZATION) arguments.push_back(L"/Od");
+            if (compileFlags & D3DCOMPILE_DEBUG)
+                arguments.push_back(L"/Zi");
+            if (compileFlags & D3DCOMPILE_PACK_MATRIX_ROW_MAJOR)
+                arguments.push_back(L"/Zpr");
+            if (compileFlags & D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR)
+                arguments.push_back(L"/Zpc");
+            if (compileFlags & D3DCOMPILE_AVOID_FLOW_CONTROL)
+                arguments.push_back(L"/Gfa");
+            if (compileFlags & D3DCOMPILE_PREFER_FLOW_CONTROL)
+                arguments.push_back(L"/Gfp");
+            // We don't implement this:
+            // if(Flags1 & D3DCOMPILE_PARTIAL_PRECISION) arguments.push_back(L"/Gpp");
+            if (compileFlags & D3DCOMPILE_RESOURCES_MAY_ALIAS)
+                arguments.push_back(L"/res_may_alias");
+            arguments.push_back(L"-HV");
+            arguments.push_back(L"2016");
+            return arguments;
+        }
+
     }  // anonymous namespace
 
     ResultOrError<RenderPipeline*> RenderPipeline::Create(
@@ -310,50 +367,124 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_GRAPHICS_PIPELINE_STATE_DESC descriptorD3D12 = {};
 
-        PerStage<ComPtr<ID3DBlob>> compiledShader;
-        ComPtr<ID3DBlob> errors;
-
         wgpu::ShaderStage renderStages = wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment;
         for (auto stage : IterateStages(renderStages)) {
             ShaderModule* module = nullptr;
-            const char* entryPoint = nullptr;
-            const char* compileTarget = nullptr;
             D3D12_SHADER_BYTECODE* shader = nullptr;
             switch (stage) {
                 case SingleShaderStage::Vertex:
                     module = ToBackend(descriptor->vertexStage.module);
-                    entryPoint = descriptor->vertexStage.entryPoint;
                     shader = &descriptorD3D12.VS;
-                    compileTarget = "vs_5_1";
                     break;
                 case SingleShaderStage::Fragment:
                     module = ToBackend(descriptor->fragmentStage->module);
-                    entryPoint = descriptor->fragmentStage->entryPoint;
                     shader = &descriptorD3D12.PS;
-                    compileTarget = "ps_5_1";
                     break;
                 default:
                     UNREACHABLE();
                     break;
             }
 
+            if (shader == nullptr) {
+                continue;
+            }
+
             std::string hlslSource;
             DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
 
             const PlatformFunctions* functions = device->GetFunctions();
-            MaybeError error = CheckHRESULT(
-                functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
-                                      nullptr, entryPoint, compileTarget, compileFlags, 0,
-                                      &compiledShader[stage], &errors),
-                "D3DCompile");
-            if (error.IsError()) {
-                dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
-                DAWN_TRY(std::move(error));
-            }
 
-            if (shader != nullptr) {
-                shader->pShaderBytecode = compiledShader[stage]->GetBufferPointer();
-                shader->BytecodeLength = compiledShader[stage]->GetBufferSize();
+            if (device->IsToggleEnabled(Toggle::UseDXC)) {
+                ComPtr<IDxcLibrary> dxcLibrary = ToBackend(GetDevice())->GetDxcLibrary();
+                ComPtr<IDxcCompiler> dxcCompiler = ToBackend(GetDevice())->GetDxcCompiler();
+
+                std::wstring entryPoint;
+                std::wstring compileTarget;
+                switch (stage) {
+                    case SingleShaderStage::Vertex:
+                        entryPoint = ConvertStringToWstring(descriptor->vertexStage.entryPoint);
+                        compileTarget = L"vs_6_0";
+                        break;
+                    case SingleShaderStage::Fragment:
+                        entryPoint = ConvertStringToWstring(descriptor->fragmentStage->entryPoint);
+                        compileTarget = L"ps_6_0";
+                        break;
+                    default:
+                        UNREACHABLE();
+                        break;
+                }
+
+                uint32_t codePage = CP_UTF8;
+                ComPtr<IDxcBlobEncoding> sourceBlob;
+                if (FAILED(dxcLibrary->CreateBlobWithEncodingOnHeapCopy(
+                        hlslSource.c_str(), hlslSource.length(), CP_ACP, &sourceBlob))) {
+                }
+
+                std::vector<LPCWSTR> arguments = GetDXCArguments(compileFlags);
+
+                ComPtr<IDxcOperationResult> result;
+                if (FAILED(dxcCompiler->Compile(sourceBlob.Get(),       // pSource
+                                                nullptr,                // pSourceName
+                                                entryPoint.c_str(),     // pEntryPoint
+                                                compileTarget.c_str(),  // pTargetProfile
+                                                arguments.data(),
+                                                arguments.size(),  // pArguments, argCount
+                                                nullptr, 0,        // pDefines, defineCount
+                                                nullptr,           // pIncludeHandler
+                                                &result)))         // ppResult
+                {
+                }
+
+                HRESULT hr;
+                result->GetStatus(&hr);
+                MaybeError error = CheckHRESULT(hr, "D3DCompile");
+                if (error.IsError()) {
+                    if (result) {
+                        ComPtr<IDxcBlobEncoding> errors;
+                        if (SUCCEEDED(result->GetErrorBuffer(&errors))) {
+                            dawn::WarningLog()
+                                << reinterpret_cast<char*>(errors->GetBufferPointer());
+                            DAWN_TRY(std::move(error));
+                        }
+                    }
+                }
+
+                ComPtr<IDxcBlob> compiledShader;
+                result->GetResult(&compiledShader);
+
+                shader->pShaderBytecode = compiledShader->GetBufferPointer();
+                shader->BytecodeLength = compiledShader->GetBufferSize();
+            } else {
+                const char* entryPoint = nullptr;
+                const char* compileTarget = nullptr;
+                switch (stage) {
+                    case SingleShaderStage::Vertex:
+                        entryPoint = descriptor->vertexStage.entryPoint;
+                        compileTarget = "vs_5_1";
+                        break;
+                    case SingleShaderStage::Fragment:
+                        entryPoint = descriptor->fragmentStage->entryPoint;
+                        compileTarget = "ps_5_1";
+                        break;
+                    default:
+                        UNREACHABLE();
+                        break;
+                }
+
+                ComPtr<ID3DBlob> compiledShader;
+                ComPtr<ID3DBlob> errors;
+                MaybeError error = CheckHRESULT(
+                    functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
+                                          nullptr, entryPoint, compileTarget, compileFlags, 0,
+                                          &compiledShader, &errors),
+                    "D3DCompile");
+                if (error.IsError()) {
+                    dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
+                    DAWN_TRY(std::move(error));
+                }
+
+                shader->pShaderBytecode = compiledShader->GetBufferPointer();
+                shader->BytecodeLength = compiledShader->GetBufferSize();
             }
         }
 
