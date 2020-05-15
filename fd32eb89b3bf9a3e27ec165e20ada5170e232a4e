@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68ca9a3b_0ef6462d",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "For better type safety, instead of manual QueryInterface, please use the \u0027As\u0027 method of ComPtr.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 1
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8eadc6d_bd21e78b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "Please add a comment that briefly describes the difference between the storage filter and retrieval filter and why you chose to put \"deny\" messages into the storage filter and \"allow\" messages in the retrieval filter.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 61
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faee0712_0e64da6b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "What is strict validation and how does it get enabled/disabled?",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 92,
+        "endChar": 67
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5be34c73_17928479",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "Nit: retrive --\u003e retrieve\n\nPlease fix all occurrences of this misspelling.",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 47
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce76b59a_ba836278",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "Please put all of this code into a helper function and call it from Initialize.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5ee6578_855cfb87",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "For better type safety, please use the \u0027As\u0027 method of ComPtr.",
+      "range": {
+        "startLine": 222,
+        "startChar": 1,
+        "endLine": 222,
+        "endChar": 84
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac54e9ae_5a085ea2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "I think this type should be uint8_t instead of char.",
+      "range": {
+        "startLine": 228,
+        "startChar": 36,
+        "endLine": 228,
+        "endChar": 40
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d4b2996_1fb6c674",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T02:39:31Z",
+      "side": 1,
+      "message": "Please put all of this code into a helper function on the device and call it from TickImpl.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 9
+      },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
