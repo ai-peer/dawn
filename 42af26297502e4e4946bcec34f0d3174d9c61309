@@ -16,6 +16,24 @@
       "revId": "42af26297502e4e4946bcec34f0d3174d9c61309",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e066f1_ef02c832",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T16:21:53Z",
+      "side": 0,
+      "message": "fascinating. I wonder how I accidentally removed just this line",
+      "parentUuid": "a8ec6a5b_6e38c6a9",
+      "revId": "42af26297502e4e4946bcec34f0d3174d9c61309",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
