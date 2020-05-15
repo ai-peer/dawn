@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "e9034567_daa7e4b5",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Where is the definition of DxcCreateInstance getting pulled from?  We should be using the dxcCreateInstance pointer in the PlatformFunctions class.",
+      "range": {
+        "startLine": 84,
+        "startChar": 23,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77f60d58_9e5df199",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Since DXC is not going to be installed on most people\u0027s machines, we do not want to DAWN_TRY_ASSIGN here because we will break WebGPU on their machines.  \n\nA better approach would be what Austin suggests and have a GetorCreate method which lazily creates these two only when the toggle is enabled.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fcc083a_f47d8211",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -18,6 +64,29 @@
         "startChar": 33,
         "endLine": 119,
         "endChar": 46
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2837a825_6b589600",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "We\u0027ve been slowly converting get methods which return pointers to member variables to have the return type of a raw pointer.  Fewer needless AddRefs/Releases this way.",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 24
       },
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -65,6 +134,116 @@
     },
     {
       "key": {
+        "uuid": "f9e8ec44_89255602",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "+1. Same goes for RenderPipeline::Initialize",
+      "parentUuid": "5f08d6bf_653c4bcc",
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f5b95c2_3894ab3c",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Please move entryPoint and compileTarget closer to where they\u0027re used.",
+      "range": {
+        "startLine": 73,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ecf5b2a_70635c97",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Since you\u0027re going to be passing \"cs_6_0\" as a raw pointer to the compile method, this should be a raw pointer to avoid a needless string allocation. Better yet, pass it directly as the argument to Compile.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd7723d8_a666743a",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "codePage seems to be an unused variable.",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 40
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8debc2c_f4cac91d",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Please handle errors from CreateBlobWithEncodingOnHeapCopy by using DAWN_INTERNAL_ERROR.",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 80,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b77a34e6_05a57553",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -81,6 +260,121 @@
         "startChar": 50,
         "endLine": 82,
         "endChar": 83
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ab2606a_2653d804",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Please handle errors from Compile using DAWN_INTERNAL_ERROR.",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "266eef78_80b0f668",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Please move compiledShader and errors closer to where they\u0027re used.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 44
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40df5e97_eebbe589",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "GetResult, GetError and GetStatus all return HRESULT.  Please use CheckHRESULT when calling all of these.",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 23
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ca244ff_b3e26a55",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "For handling errors from GetStatus, I think it should be sufficient to explicitly check hr using FAILED(). Upon failure, get the error buffer and use Dawn\u0027s error handling code to pipe it through to the right place.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a77ec25_5f78eefd",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T23:42:58Z",
+      "side": 1,
+      "message": "Don\u0027t we need to ensure that compiledShader stays around long enough to call CreateComputePipelineState. Otherwise, it will be free out from under pShaderByteCode, which is only a pointer.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 72
       },
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
