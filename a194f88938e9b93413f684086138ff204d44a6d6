@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd2ce1c3_aab51c81",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-15T15:25:47Z",
+      "side": 1,
+      "message": "uNit: not that it really matters, but instead of reusing a dynamic local, you could make these separate constexpr vars.",
+      "revId": "a194f88938e9b93413f684086138ff204d44a6d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
