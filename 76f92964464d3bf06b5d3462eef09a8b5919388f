@@ -34,6 +34,24 @@
       "revId": "76f92964464d3bf06b5d3462eef09a8b5919388f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf2ce1e0_a0fe189a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:12:07Z",
+      "side": 1,
+      "message": "+1, my bad.",
+      "parentUuid": "4a687152_a8973c99",
+      "revId": "76f92964464d3bf06b5d3462eef09a8b5919388f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
