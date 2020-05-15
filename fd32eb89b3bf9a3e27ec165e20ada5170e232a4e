@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "af1389ea_b825e72b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T18:11:53Z",
+      "side": 1,
+      "message": "FYI, may also need to add `CREATEDEVICE_DEBUG_LAYER_STARTUP_OPTIONS` to exempt GBV.",
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8eadc6d_bd21e78b",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 3
@@ -42,6 +59,23 @@
         "endLine": 90,
         "endChar": 61
       },
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c75e13a5_83db6b08",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T18:11:53Z",
+      "side": 1,
+      "message": "Don\u0027t we need to call Pop() twice before the device goes away?",
       "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
