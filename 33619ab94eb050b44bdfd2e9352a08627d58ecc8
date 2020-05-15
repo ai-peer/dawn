@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2bd049cd_4b7f1750",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-15T16:10:41Z",
+      "side": 1,
+      "message": "Done\n\nYeah. I was also a little surprised that pixels on the diagonal are not rendered (on level 0 and layer 0 when preparing the sampler\u0027s pixels).",
+      "parentUuid": "e85d284a_6a93a8df",
+      "revId": "33619ab94eb050b44bdfd2e9352a08627d58ecc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86940dfd_6ab67749",
         "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "33619ab94eb050b44bdfd2e9352a08627d58ecc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf303f7_84363677",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-15T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86940dfd_6ab67749",
+      "revId": "33619ab94eb050b44bdfd2e9352a08627d58ecc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
