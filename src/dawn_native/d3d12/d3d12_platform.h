@@ -19,6 +19,7 @@
 #include <d3d11on12.h>
 #include <d3d12.h>
 #include <dxgi1_4.h>
+#include <dxcapi.h>
 #include <wrl.h>
 
 // DXProgrammableCapture.h takes a dependency on other platform header

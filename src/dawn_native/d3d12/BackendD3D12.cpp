@@ -69,6 +69,26 @@ namespace dawn_native { namespace d3d12 {
             return std::move(factory);
         }
 
+        ResultOrError<ComPtr<IDxcLibrary>> CreateDxcLibrary() {
+            ComPtr<IDxcLibrary> library;
+            if (FAILED(DxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&library)))) {
+                return DAWN_INTERNAL_ERROR("Failed to create DXC library");
+            }
+
+            ASSERT(library != nullptr);
+            return std::move(library);
+        }
+
+        ResultOrError<ComPtr<IDxcCompiler>> CreateDxcCompiler() {
+            ComPtr<IDxcCompiler> compiler;
+            if (FAILED(DxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&compiler)))) {
+                return DAWN_INTERNAL_ERROR("Failed to create DXC compiler");
+            }
+
+            ASSERT(compiler != nullptr);
+            return std::move(compiler);
+        }
+
     }  // anonymous namespace
 
     Backend::Backend(InstanceBase* instance)
@@ -85,11 +105,23 @@ namespace dawn_native { namespace d3d12 {
                         CreateFactory(mFunctions.get(), instance->IsBackendValidationEnabled(),
                                       instance->IsBeginCaptureOnStartupEnabled()));
 
+        DAWN_TRY_ASSIGN(mDxcLibrary, CreateDxcLibrary());
+
+        DAWN_TRY_ASSIGN(mDxcCompiler, CreateDxcCompiler());
+
         return {};
     }
 
     ComPtr<IDXGIFactory4> Backend::GetFactory() const {
         return mFactory;
+    }
+
+    ComPtr<IDxcLibrary> Backend::GetDxcLibrary() const {
+        return mDxcLibrary;
+    }
+
+    ComPtr<IDxcCompiler> Backend::GetDxcCompiler() const {
+        return mDxcCompiler;
     }
 
     const PlatformFunctions* Backend::GetFunctions() const {
