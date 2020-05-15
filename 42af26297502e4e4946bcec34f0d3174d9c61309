@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8ec6a5b_6e38c6a9",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T13:10:46Z",
+      "side": 0,
+      "message": "nit: Stray removal?",
+      "revId": "42af26297502e4e4946bcec34f0d3174d9c61309",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
