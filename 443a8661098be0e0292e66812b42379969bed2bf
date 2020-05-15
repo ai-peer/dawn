@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "e20f3c67_aca9685e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "nit: also mention it rolls tint.",
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53c1a0a7_b305d1c4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "nit: I think the order can still be\n\n#include \"dawn_native/ShaderModule.h\"\n\n\u003cDawn includes\u003e\n\n\u003cspirv-cross includes\u003e\n\n\u003ctint includes\u003e\n\n\u003csstream\u003e\n\nI thought we had copied the convention for headers from Chromium but maybe we made a mistake.",
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0062f11b_49ac9773",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 6
@@ -19,6 +53,80 @@
         "endLine": 344,
         "endChar": 12
       },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "311cff03_d69684bb",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "nit: ResultOrError\u003cstd::vector\u003cuint32_t\u003e\u003e",
+      "range": {
+        "startLine": 365,
+        "startChar": 4,
+        "endLine": 365,
+        "endChar": 14
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5608ad76_f3e2aee0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "Maybe add a TODO about their being a double parse so we remember to fix it later?",
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10d13ca1_87ec5b5f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "This can be an assert because it would be a Dawn programming error to pass nullptr to spirv, DAWN_VALIDATION_ERROR is for misuse of the WebGPU API.",
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3fe0709_77a4b0ef",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "Don\u0027t the type need to be determined before generation?",
       "revId": "443a8661098be0e0292e66812b42379969bed2bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -94,6 +202,30 @@
     },
     {
       "key": {
+        "uuid": "2c10fb4a_8ca9d645",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "(this also allows dropping the Type prefix)",
+      "parentUuid": "f6c6bcbf_1d51cb3f",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 12
+      },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "539fe3fc_0c92abc0",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 6
@@ -134,6 +266,23 @@
         "endLine": 110,
         "endChar": 27
       },
+      "revId": "443a8661098be0e0292e66812b42379969bed2bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3da36426_41ed4c57",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T14:15:31Z",
+      "side": 1,
+      "message": "Out of curiosity, is it the declaration of this as an override that requires moving it to protected?",
       "revId": "443a8661098be0e0292e66812b42379969bed2bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
