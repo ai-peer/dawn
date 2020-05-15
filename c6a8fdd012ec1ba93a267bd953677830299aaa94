@@ -332,6 +332,30 @@
     },
     {
       "key": {
+        "uuid": "b841d08f_ad2b8f7b",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T17:41:26Z",
+      "side": 1,
+      "message": "This CL already had too many iterations after reaching a good state. Let\u0027s make forward progress, land what we have now and iterate later (as a follow up, or much later when we find the vector allocation to be a hotspot).",
+      "parentUuid": "87114ff4_eb75c3d8",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb9be8ac_78879c89",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 12

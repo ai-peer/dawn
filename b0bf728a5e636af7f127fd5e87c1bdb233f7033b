@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d225181_f04657e3",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T17:41:26Z",
+      "side": 1,
+      "message": "Why not just leave this nullptr? (and add asserts if needed)",
+      "revId": "b0bf728a5e636af7f127fd5e87c1bdb233f7033b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dbb329e_77aa56e2",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T17:41:26Z",
+      "side": 1,
+      "message": "nit: this wouldn\u0027t be needed.",
+      "revId": "b0bf728a5e636af7f127fd5e87c1bdb233f7033b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
