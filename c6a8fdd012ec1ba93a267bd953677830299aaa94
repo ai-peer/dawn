@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f7b770a3_7a2f10a4",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c1c862_1b1fc68f",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 73
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c415614b_4241b7c4",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 12
@@ -45,6 +69,30 @@
       "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e441aab_b062d371",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Non-const was needed due to group-\u003eentry-\u003ePopulate() but thinking a bit more, group-\u003ePopulateSamplers() makes this more obvious (reverted).",
+      "parentUuid": "c415614b_4241b7c4",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "035fc0e6_72e6dbaa",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d70f1fe4_67a9823f",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 40
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d2f7356_eb8b1b01",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 12
@@ -91,6 +163,30 @@
       "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3c0b8c9_1b144521",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2f7356_eb8b1b01",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 19
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "11222e5a_a467a936",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0110cd7_b8e65e38",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 5
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff7f8ebb_00c7fb6b",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 12
@@ -188,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "87114ff4_eb75c3d8",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "\u003e\u003e we store a pointer to the bindgroup layout\n\nNot enough information. BG1 and BG2 use BGL0 but different samplers (NOT equal). I concur with AE, need to store the pointer to the BG which is the TODO. \n\n@RC, do you want to tackle this now?",
+      "parentUuid": "ff7f8ebb_00c7fb6b",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb9be8ac_78879c89",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 12
@@ -202,6 +346,24 @@
       "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b792d13c_eeed5949",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb9be8ac_78879c89",
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

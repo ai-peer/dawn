@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "0330941b_50887d28",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T16:58:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "27a14eea_09a3ec9a",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 9
+      },
+      "revId": "1438172b6046be6bd8a71647761076fad3bdfd67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d521738d_28fde7dd",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 8
