@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2498c7d1_20b6b065",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-15T15:43:23Z",
+      "side": 1,
+      "message": "uunit: \"Test is not\"",
+      "revId": "76f92964464d3bf06b5d3462eef09a8b5919388f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
