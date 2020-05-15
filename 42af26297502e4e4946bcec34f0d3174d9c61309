@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4572ee10_98bcb40a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T09:50:59Z",
+      "side": 1,
+      "message": "nit: the lines in this commit message seem slightly too long somehow?",
+      "revId": "42af26297502e4e4946bcec34f0d3174d9c61309",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d39dfc7_43bce43f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-15T09:50:59Z",
+      "side": 1,
+      "message": "nit: programatically appears twice",
+      "range": {
+        "startLine": 10,
+        "startChar": 20,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "42af26297502e4e4946bcec34f0d3174d9c61309",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
