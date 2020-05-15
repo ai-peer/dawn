@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "16790873_213f6800",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-15T23:25:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13ad49d0_cddfa941",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7db796a5_08434243",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 3
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "999de8b0_98244baf",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-15T23:25:10Z",
+      "side": 1,
+      "message": "Now: \n- Pageable extends LinkNode\u003cPageable\u003e\n- Heap extends Pageable\n- ShaderVisibleDescriptorHeap extends Pageable\n\nThe type \"Heap\" is meant to refer to a D3D12 \"Heap\", although I would not be opposed to renaming to ResourceHeap.",
+      "parentUuid": "e5eb26ff_3a20d62d",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b045d53_04e295c6",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -83,6 +119,30 @@
       "writtenOn": "2020-05-13T23:08:53Z",
       "side": 1,
       "message": "Since GetD3D12DescriptorHeap returns a ComPtr, you shouldn\u0027t do a Get() on a temporary variable like you\u0027re doing here because you\u0027re dereferencing an interface pointer that has been released out from under you. You happen to get lucky that the implementation of the two interfaces happen to be on the same internal object but if that changes at a later point, now you have use-after-free.\n\nTo solve this, we should either:\n1) Keep the get method on the heap returning a ComPtr and put the ComPtr instance on the stack before dereferencing it\n2) Store the ComPtr in the heap object and return a raw pointer from the get methods.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 85
+      },
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d42d8983_eeea964b",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-15T23:25:10Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I think I\u0027ve fixed it.",
+      "parentUuid": "8b045d53_04e295c6",
       "range": {
         "startLine": 80,
         "startChar": 0,
