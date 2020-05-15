@@ -94,6 +94,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22847d57_5084f883",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-15T00:45:12Z",
+      "side": 1,
+      "message": "Done in https://github.com/gpuweb/gpuweb/issues/783",
+      "parentUuid": "8683ac9c_0946a4b0",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
