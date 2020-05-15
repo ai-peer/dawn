@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "c415614b_4241b7c4",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T01:56:52Z",
+      "side": 1,
+      "message": "GetSamplerAllocationEntry can be a const method.",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d70f1fe4_67a9823f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T01:56:52Z",
+      "side": 1,
+      "message": "Use std::move to transfer entry into mSamplerAllocationEntry.",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 40
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d2f7356_eb8b1b01",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 12
@@ -64,6 +110,53 @@
         "startChar": 0,
         "endLine": 48,
         "endChar": 5
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0110cd7_b8e65e38",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T01:56:52Z",
+      "side": 1,
+      "message": "+1 The name \u0027GetSamplers\u0027 makes it seem like this is a trivial accessor.",
+      "parentUuid": "44ed2b0d_8f106baf",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 5
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff7f8ebb_00c7fb6b",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-15T01:56:52Z",
+      "side": 1,
+      "message": "Thinking about this some more, what if instead of allocating and storing a vector of samplers, we store a pointer to the bindgroup layout. The HashFunc would iterate over the bgl as you have here to calculate the hash. Similarly, EqualityFunc would first compare whether the two bgl pointers are equal. If not, it would iterate over the samplers and do pointer comparison to determine whether they\u0027re equal.\n\nIf you do this, you can scuttle the TODO about reallocating the vector each lookup.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
       },
       "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
