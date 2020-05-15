@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabd85b5_7ff9407f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T16:09:12Z",
+      "side": 0,
+      "message": "unit: we could keep these comments so it\u0027s clear what\u0027s being tested.",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 276,
+        "endChar": 40
+      },
+      "revId": "0b8e3194079e303138838488dcdb3a7403d1ce8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b595969_eea06381",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-15T16:09:12Z",
+      "side": 0,
+      "message": "and change these to \"not allowed\"",
+      "range": {
+        "startLine": 288,
+        "startChar": 74,
+        "endLine": 288,
+        "endChar": 86
+      },
+      "revId": "0b8e3194079e303138838488dcdb3a7403d1ce8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
