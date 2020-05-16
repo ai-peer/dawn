@@ -403,6 +403,9 @@ class CopyTests_T2T : public CopyTests {
 
 // Test that copying within the same buffer works
 TEST_P(CopyTests_B2B, CopyWithinSameBuffer) {
+    // D3D12 does not support copies within the same buffer
+    // https://crbug.com/dawn/420
+    DAWN_SKIP_TEST_IF(IsD3D12());
     // Copy the first 2 uint32_t values to the 4th and 5th uint32_t values.
     {
         // Create a buffer with 6 uint32_t values.
