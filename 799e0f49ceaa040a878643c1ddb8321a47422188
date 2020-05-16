@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bc680ef_e3c54a9c",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-16T01:15:26Z",
+      "side": 1,
+      "message": "Please move the \u0027IsBackendValidationEnabled\u0027 check into InitializeDebugLayerFilters.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4b6fa5_51bb4eb6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-16T01:15:26Z",
+      "side": 1,
+      "message": "Please move the if check into the \u0027CheckDebugLayerAndGenerateErrors\u0027 method.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 9
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f74e85f2_75d7ebb2",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-16T01:15:26Z",
+      "side": 1,
+      "message": "This change seems unrelated to the rest of the CL. We should probably merge as a separate CL.",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 33
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
