@@ -23,6 +23,7 @@
 #include <cstring>
 #include <iomanip>
 #include <sstream>
+#include <mutex>
 
 namespace utils {
 

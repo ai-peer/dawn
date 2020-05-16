@@ -130,7 +130,7 @@ namespace dawn_native {
         };
 
         auto AddDepthStencilFormat = [&AddFormat](wgpu::TextureFormat format, Format::Aspect aspect,
-                                                  uint32_t byteSize) {
+                                                  uint32_t byteSize, Type type) {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = true;
@@ -138,7 +138,7 @@ namespace dawn_native {
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspect = aspect;
-            internalFormat.type = Type::Other;
+            internalFormat.type = type;
             internalFormat.blockByteSize = byteSize;
             internalFormat.blockWidth = 1;
             internalFormat.blockHeight = 1;
@@ -229,10 +229,10 @@ namespace dawn_native {
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, Type::Float);
 
         // Packed depth/depth-stencil formats
-        AddDepthStencilFormat(wgpu::TextureFormat::Depth24Plus, Aspect::Depth, 4);
+        AddDepthStencilFormat(wgpu::TextureFormat::Depth24Plus, Aspect::Depth, 4, Type::Other);
         // TODO(cwallez@chromium.org): It isn't clear if this format should be copyable
         // because its size isn't well defined, is it 4, 5 or 8?
-        AddDepthStencilFormat(wgpu::TextureFormat::Depth24PlusStencil8, Aspect::DepthStencil, 4);
+        AddDepthStencilFormat(wgpu::TextureFormat::Depth24PlusStencil8, Aspect::DepthStencil, 4, Type::Other);
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsExtensionEnabled(Extension::TextureCompressionBC);

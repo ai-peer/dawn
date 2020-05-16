@@ -28,6 +28,7 @@ namespace dawn_native { namespace d3d12 {
                                                    const ShaderModuleDescriptor* descriptor);
 
         ResultOrError<std::string> GetHLSLSource(PipelineLayout* layout);
+        std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);

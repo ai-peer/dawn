@@ -63,9 +63,14 @@ enum class CmdBufType {
     //TODO(cwallez@chromium.org) double terrible cmdbuf
 };
 
+#define DAWN_ENABLE_BACKEND_D3D12
+#undef DAWN_ENABLE_BACKEND_VULKAN
+
 // Default to D3D12, Metal, Vulkan, OpenGL in that order as D3D12 and Metal are the preferred on
 // their respective platforms, and Vulkan is preferred to OpenGL
-#if defined(DAWN_ENABLE_BACKEND_D3D12)
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+static wgpu::BackendType backendType = wgpu::BackendType::Vulkan;
+#elif defined(DAWN_ENABLE_BACKEND_D3D12)
 static wgpu::BackendType backendType = wgpu::BackendType::D3D12;
 #elif defined(DAWN_ENABLE_BACKEND_METAL)
 static wgpu::BackendType backendType = wgpu::BackendType::Metal;

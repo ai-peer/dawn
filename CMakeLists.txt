@@ -27,6 +27,13 @@ project(
     LANGUAGES C CXX
 )
 
+set(DAWN_LIBRARY_DIR "${Dawn_BINARY_DIR}/lib")
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DAWN_LIBRARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DAWN_LIBRARY_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DAWN_LIBRARY_DIR})
+set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY ${DAWN_LIBRARY_DIR})
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -104,9 +111,9 @@ target_include_directories(dawn_internal_config INTERFACE
 target_link_libraries(dawn_internal_config INTERFACE dawn_public_config)
 
 # Compile definitions for the internal config
-if (DAWN_ALWAYS_ASSERT OR $<CONFIG:Debug>)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_ASSERTS")
-endif()
+
+target_compile_definitions(dawn_internal_config INTERFACE $<$<OR:$<CONFIG:Debug>,$<BOOL:${DAWN_ALWAYS_ASSERT}>>:DAWN_ENABLE_ASSERTS>)
+
 if (DAWN_ENABLE_D3D12)
     target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
 endif()

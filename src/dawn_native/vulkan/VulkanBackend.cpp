@@ -33,10 +33,21 @@ namespace dawn_native { namespace vulkan {
         return backendDevice->GetVkInstance();
     }
 
+    VkDevice GetDevice(WGPUDevice device) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        return backendDevice->GetVkDevice();
+    }
+
     DAWN_NATIVE_EXPORT PFN_vkVoidFunction GetInstanceProcAddr(WGPUDevice device,
                                                               const char* pName) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
         return (*backendDevice->fn.GetInstanceProcAddr)(backendDevice->GetVkInstance(), pName);
+    }
+
+    DAWN_NATIVE_EXPORT PFN_vkVoidFunction GetDeviceProcAddr(WGPUDevice device,
+                                                            const char* pName) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        return (*backendDevice->fn.GetDeviceProcAddr)(backendDevice->GetVkDevice(), pName);
     }
 
     // Explicitly export this function because it uses the "native" type for surfaces while the

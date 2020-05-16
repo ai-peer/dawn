@@ -17,6 +17,7 @@
 
 #include <dawn/webgpu_cpp.h>
 
+#include <vector>
 #include <array>
 #include <initializer_list>
 #include <vector>
