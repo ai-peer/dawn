@@ -33,6 +33,29 @@
       "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd3ff07c_d712cc62",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-16T01:05:43Z",
+      "side": 1,
+      "message": "To be on the absolute safe side, I recommend storing a pointer to the ID3D12DescriptorHeap as a member variable and returning a pointer to the member variable.",
+      "range": {
+        "startLine": 186,
+        "startChar": 50,
+        "endLine": 186,
+        "endChar": 64
+      },
+      "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
