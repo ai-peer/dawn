@@ -20,6 +20,8 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 
+#include <d3dcompiler.h>
+
 #include <spirv_hlsl.hpp>
 
 namespace dawn_native { namespace d3d12 {
@@ -133,5 +135,49 @@ namespace dawn_native { namespace d3d12 {
             return compiler->compile();
         }
     }
+
+    std::vector<const wchar_t*> ShaderModule::GetDXCArguments(uint32_t compileFlags) {
+        std::vector<const wchar_t*> arguments;
+        if (compileFlags & D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY)
+            arguments.push_back(L"/Gec");
+        // /Ges Not implemented:
+        // if(Flags1 & D3DCOMPILE_ENABLE_STRICTNESS) arguments.push_back(L"/Ges");
+        if (compileFlags & D3DCOMPILE_IEEE_STRICTNESS)
+            arguments.push_back(L"/Gis");
+        if (compileFlags & D3DCOMPILE_OPTIMIZATION_LEVEL2) {
+            switch (compileFlags & D3DCOMPILE_OPTIMIZATION_LEVEL2) {
+                case D3DCOMPILE_OPTIMIZATION_LEVEL0:
+                    arguments.push_back(L"/O0");
+                    break;
+                case D3DCOMPILE_OPTIMIZATION_LEVEL2:
+                    arguments.push_back(L"/O2");
+                    break;
+                case D3DCOMPILE_OPTIMIZATION_LEVEL3:
+                    arguments.push_back(L"/O3");
+                    break;
+            }
+        }
+        // Currently, /Od turns off too many optimization passes, causing incorrect DXIL to be
+        // generated. Re-enable once /Od is implemented properly:
+        // if(Flags1 & D3DCOMPILE_SKIP_OPTIMIZATION) arguments.push_back(L"/Od");
+        if (compileFlags & D3DCOMPILE_DEBUG)
+            arguments.push_back(L"/Zi");
+        if (compileFlags & D3DCOMPILE_PACK_MATRIX_ROW_MAJOR)
+            arguments.push_back(L"/Zpr");
+        if (compileFlags & D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR)
+            arguments.push_back(L"/Zpc");
+        if (compileFlags & D3DCOMPILE_AVOID_FLOW_CONTROL)
+            arguments.push_back(L"/Gfa");
+        if (compileFlags & D3DCOMPILE_PREFER_FLOW_CONTROL)
+            arguments.push_back(L"/Gfp");
+        // We don't implement this:
+        // if(Flags1 & D3DCOMPILE_PARTIAL_PRECISION) arguments.push_back(L"/Gpp");
+        if (compileFlags & D3DCOMPILE_RESOURCES_MAY_ALIAS)
+            arguments.push_back(L"/res_may_alias");
+        arguments.push_back(L"-HV");
+        arguments.push_back(L"2016");
+        return arguments;
+    }
+
 
 }}  // namespace dawn_native::d3d12

@@ -15,10 +15,13 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "common/Log.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
+#include "dawn_native/d3d12/UtilsD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -44,21 +47,79 @@ namespace dawn_native { namespace d3d12 {
         std::string hlslSource;
         DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
 
-        ComPtr<ID3DBlob> compiledShader;
-        ComPtr<ID3DBlob> errors;
-
-        const PlatformFunctions* functions = device->GetFunctions();
-        if (FAILED(functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
-                                         nullptr, descriptor->computeStage.entryPoint, "cs_5_1",
-                                         compileFlags, 0, &compiledShader, &errors))) {
-            printf("%s\n", reinterpret_cast<char*>(errors->GetBufferPointer()));
-            ASSERT(false);
-        }
-
         D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
         d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
-        d3dDesc.CS.pShaderBytecode = compiledShader->GetBufferPointer();
-        d3dDesc.CS.BytecodeLength = compiledShader->GetBufferSize();
+
+        ComPtr<IDxcBlob> compiledDXCShader;
+        ComPtr<ID3DBlob> compiledFXCShader;
+
+        if (device->IsToggleEnabled(Toggle::UseDXC)) {
+            IDxcLibrary* dxcLibrary;
+            DAWN_TRY_ASSIGN(dxcLibrary, ToBackend(GetDevice())->GetOrCreateDxcLibrary());
+            IDxcCompiler* dxcCompiler;
+            DAWN_TRY_ASSIGN(dxcCompiler, ToBackend(GetDevice())->GetOrCreateDxcCompiler());
+
+            ComPtr<IDxcBlobEncoding> sourceBlob;
+            if (FAILED(dxcLibrary->CreateBlobWithEncodingOnHeapCopy(
+                    hlslSource.c_str(), hlslSource.length(), CP_ACP, &sourceBlob))) {
+                return DAWN_INTERNAL_ERROR("Failed to create DXC shader blob");
+            }
+
+            std::wstring entryPoint = ConvertStringToWstring(descriptor->computeStage.entryPoint);
+            std::vector<LPCWSTR> arguments = module->GetDXCArguments(compileFlags);
+
+            ComPtr<IDxcOperationResult> result;
+            if (FAILED(dxcCompiler->Compile(sourceBlob.Get(),       // pSource
+                                            nullptr,                // pSourceName
+                                            entryPoint.c_str(),     // pEntryPoint
+                                            L"cs_6_0",           // pTargetProfile
+                                            arguments.data(),
+                                            arguments.size(),  // pArguments, argCount
+                                            nullptr, 0,        // pDefines, defineCount
+                                            nullptr,           // pIncludeHandler
+                                            &result)))         // ppResult
+            {
+                return DAWN_INTERNAL_ERROR("Failed to compile shader with DXC compiler");
+            }
+
+            HRESULT hr;
+            if (FAILED(result->GetStatus(&hr))) {
+                return DAWN_INTERNAL_ERROR("Failed to get status of compilation with DXC compiler");
+            }
+
+            if (FAILED(hr)) {
+                ComPtr<IDxcBlobEncoding> errors;
+                if (FAILED(result->GetErrorBuffer(&errors))) {
+                    return DAWN_INTERNAL_ERROR(
+                        "Failed to get error buffer of compilation with DXC compiler");
+                }
+
+                dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
+                ASSERT(false);
+            }
+
+            if (FAILED(result->GetResult(&compiledDXCShader))) {
+                return DAWN_INTERNAL_ERROR(
+                    "Failed to get result from compilation with DXC compiler");
+            }
+
+            d3dDesc.CS.pShaderBytecode = compiledDXCShader->GetBufferPointer();
+            d3dDesc.CS.BytecodeLength = compiledDXCShader->GetBufferSize();
+        } else {
+            ComPtr<ID3DBlob> errors;
+
+            const PlatformFunctions* functions = device->GetFunctions();
+            if (FAILED(functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr,
+                                             nullptr, nullptr, descriptor->computeStage.entryPoint,
+                                             "cs_5_1", compileFlags, 0, &compiledFXCShader,
+                                             &errors))) {
+                dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
+                ASSERT(false);
+            }
+
+            d3dDesc.CS.pShaderBytecode = compiledFXCShader->GetBufferPointer();
+            d3dDesc.CS.BytecodeLength = compiledFXCShader->GetBufferSize();
+        }
 
         device->GetD3D12Device()->CreateComputePipelineState(&d3dDesc,
                                                              IID_PPV_ARGS(&mPipelineState));

@@ -18,6 +18,20 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    std::wstring ConvertStringToWstring(const char* str) {
+        std::wstring result;
+        size_t len = strlen(str);
+        if (len == 0) {
+            return result;
+        }
+        int numChars = MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, NULL, 0);
+        if (numChars) {
+            result.resize(numChars);
+            MultiByteToWideChar(CP_ACP, MB_ERR_INVALID_CHARS, str, len, &result[0], numChars);
+        }
+        return result;
+    };
+
     D3D12_COMPARISON_FUNC ToD3D12ComparisonFunc(wgpu::CompareFunction func) {
         switch (func) {
             case wgpu::CompareFunction::Never:
