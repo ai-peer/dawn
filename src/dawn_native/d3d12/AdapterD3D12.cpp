@@ -14,12 +14,13 @@
 
 #include "dawn_native/d3d12/AdapterD3D12.h"
 
+#include <locale>
+
 #include "common/Constants.h"
+#include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
-
-#include <locale>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -38,6 +39,12 @@ namespace dawn_native { namespace d3d12 {
         : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12),
           mHardwareAdapter(hardwareAdapter),
           mBackend(backend) {
+    }
+
+    Adapter::~Adapter() {
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            CleanUpDebugLayerFilters();
+        }
     }
 
     const D3D12DeviceInfo& Adapter::GetDeviceInfo() const {
@@ -66,6 +73,10 @@ namespace dawn_native { namespace d3d12 {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
         }
 
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            InitializerDebugLayerFilters();
+        }
+
         DXGI_ADAPTER_DESC1 adapterDesc;
         mHardwareAdapter->GetDesc1(&adapterDesc);
 
@@ -92,6 +103,65 @@ namespace dawn_native { namespace d3d12 {
 
     void Adapter::InitializeSupportedExtensions() {
         mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
+    }
+
+    void Adapter::InitializerDebugLayerFilters() {
+        ComPtr<ID3D12InfoQueue> infoQueue;
+        if (SUCCEEDED(mD3d12Device.As(&infoQueue))) {
+            // We create storage filter with a deny list to deny specific messages from getting
+            // written to the queue. The filter will silence them in the debug output.
+            D3D12_INFO_QUEUE_FILTER storageFilter = {};
+            D3D12_MESSAGE_ID denyIds[] = {
+                // Resource sub-allocation partially maps pre-allocated heaps. This means the
+                // entire physical addresses space may have no resources or have many resources
+                // assigned the same heap.
+                D3D12_MESSAGE_ID_HEAP_ADDRESS_RANGE_HAS_NO_RESOURCE,
+                D3D12_MESSAGE_ID_HEAP_ADDRESS_RANGE_INTERSECTS_MULTIPLE_BUFFERS,
+
+                // TODO(enrico.galli@intel.com): Remove after warning have been addressed
+                // https://crbug.com/dawn/418
+                D3D12_MESSAGE_ID_CLEARRENDERTARGETVIEW_MISMATCHINGCLEARVALUE,
+                D3D12_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_MISMATCHINGCLEARVALUE,
+
+                // TODO(enrico.galli@intel.com): Remove after warning have been addressed
+                // https://crbug.com/dawn/419
+                D3D12_MESSAGE_ID_UNMAP_RANGE_NOT_EMPTY,
+
+                // TODO(enrico.galli@intel.com): Remove after warning have been addressed
+                // https://crbug.com/dawn/421
+                D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_INCOMPATIBLE_RESOURCE_STATE,
+
+                // TODO(enrico.galli@intel.com): Remove after warning have been addressed
+                // https://crbug.com/dawn/422
+                D3D12_MESSAGE_ID_EXECUTECOMMANDLISTS_GPU_WRITTEN_READBACK_RESOURCE_MAPPED,
+
+            };
+            storageFilter.DenyList.NumIDs = ARRAYSIZE(denyIds);
+            storageFilter.DenyList.pIDList = denyIds;
+            infoQueue->PushStorageFilter(&storageFilter);
+
+            // We create a retrieval filter with an allow list to select which messages we are
+            // allowed to be read back from the queue. If any messages are read back, they are
+            // converted to Dawn errors.
+            D3D12_INFO_QUEUE_FILTER retrievalFilter{};
+            // We will only create errors from warnings or worse. This ignores info and message.
+            D3D12_MESSAGE_SEVERITY severities[] = {
+                D3D12_MESSAGE_SEVERITY_ERROR,
+                D3D12_MESSAGE_SEVERITY_WARNING,
+                D3D12_MESSAGE_SEVERITY_CORRUPTION,
+            };
+            retrievalFilter.AllowList.NumSeverities = ARRAYSIZE(severities);
+            retrievalFilter.AllowList.pSeverityList = severities;
+            infoQueue->PushRetrievalFilter(&retrievalFilter);
+        }
+    }
+
+    void Adapter::CleanUpDebugLayerFilters() {
+        ComPtr<ID3D12InfoQueue> infoQueue;
+        if (SUCCEEDED(mD3d12Device.As(&infoQueue))) {
+            infoQueue->PopRetrievalFilter();
+            infoQueue->PopStorageFilter();
+        }
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
