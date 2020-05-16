@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cc521f96_15437bf4",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "e9034567_daa7e4b5",
+      "range": {
+        "startLine": 84,
+        "startChar": 23,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77f60d58_9e5df199",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fc79b54_b8ac8e96",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done !",
+      "parentUuid": "77f60d58_9e5df199",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "88a6a07a_ce334d53",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Yes, good idea. Done. (Plus it returns a ResultOrError\u003cIDxcLibrary*\u003e to address Rafael\u0027s comments)",
+      "parentUuid": "0fcc083a_f47d8211",
+      "range": {
+        "startLine": 119,
+        "startChar": 33,
+        "endLine": 119,
+        "endChar": 46
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2837a825_6b589600",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c25ba34a_f0130289",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2837a825_6b589600",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44dd36bb_8781b931",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c220d2e_4199ad01",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44dd36bb_8781b931",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -146,6 +266,24 @@
       "side": 1,
       "message": "+1. Same goes for RenderPipeline::Initialize",
       "parentUuid": "5f08d6bf_653c4bcc",
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c28241_0f9f8a3b",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "I did all the smaller changes except this one yet, since this is a bigger structural change. I suppose all this common code would then go in ShaderModuleD3D12 ?",
+      "parentUuid": "f9e8ec44_89255602",
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -198,6 +336,54 @@
     },
     {
       "key": {
+        "uuid": "7c3d6d9c_2af781e2",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f5b95c2_3894ab3c",
+      "range": {
+        "startLine": 73,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5872331e_ca2f3bdd",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ecf5b2a_70635c97",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd7723d8_a666743a",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -218,6 +404,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "316f78ef_e1e07e87",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd7723d8_a666743a",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 40
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -244,6 +454,30 @@
     },
     {
       "key": {
+        "uuid": "1b734014_573c4798",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8debc2c_f4cac91d",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 80,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b77a34e6_05a57553",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -264,6 +498,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba6d2043_e02fe2d3",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Had to put the code in a shared place. It\u0027s now in ShaderModuleD3D12, so, done",
+      "parentUuid": "b77a34e6_05a57553",
+      "range": {
+        "startLine": 82,
+        "startChar": 50,
+        "endLine": 82,
+        "endChar": 83
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -290,6 +548,30 @@
     },
     {
       "key": {
+        "uuid": "e275181f_c049f743",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab2606a_2653d804",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "266eef78_80b0f668",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -301,6 +583,30 @@
       "writtenOn": "2020-05-15T23:42:58Z",
       "side": 1,
       "message": "Please move compiledShader and errors closer to where they\u0027re used.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 44
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c1ad2c4_b4f2e7d1",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done for errors.\nFor compiledShaders it\u0027s actually even further now, because of the branch.\nThis will be solved once I refactor the common shader compilation code between both types of pipelines.",
+      "parentUuid": "266eef78_80b0f668",
       "range": {
         "startLine": 97,
         "startChar": 0,
@@ -336,6 +642,30 @@
     },
     {
       "key": {
+        "uuid": "4c3da478_df887098",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Actually used FAILED(), but handling those cases now.",
+      "parentUuid": "40df5e97_eebbe589",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 23
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ca244ff_b3e26a55",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -356,6 +686,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29673a1d_cfa47347",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "Done, the FAILED() part.\nI\u0027m using `dawn::WarningLog()` which seems to be the way the handle shader compilation errors in Dawn.",
+      "parentUuid": "8ca244ff_b3e26a55",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -382,6 +736,30 @@
     },
     {
       "key": {
+        "uuid": "4e94c684_6471bd26",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "There was a dangling pointer indeed. It\u0027s now kept outside of the branch.",
+      "parentUuid": "3a77ec25_5f78eefd",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 72
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a3be767_8c1a0616",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
@@ -402,6 +780,30 @@
       "revId": "071718e255ce84163c65b89bc01151e31b697245",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7449112_2f9ff6a5",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-16T12:27:59Z",
+      "side": 1,
+      "message": "There was a dangling pointer indeed for each stage, due to a mess up when reorganizing the code. It\u0027s fixed.",
+      "parentUuid": "3a3be767_8c1a0616",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 72
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
