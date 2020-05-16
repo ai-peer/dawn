@@ -390,6 +390,16 @@ source_set("dawn_white_box_tests_sources") {
 test("dawn_end2end_tests") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
+  if (is_mac && !is_component_build) {
+    # Executable targets that depend on the shared libraries below need to have
+    # the rpath set in non-component build configurations.
+    # The end2end tests may depend on SwiftShader.
+    ldflags = [
+      "-rpath",
+      "@executable_path/",
+    ]
+  }
+
   deps = [
     ":dawn_end2end_tests_sources",
     ":dawn_white_box_tests_sources",
