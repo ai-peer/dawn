@@ -1,0 +1,333 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99c89faf_252df960",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "This helpers are very simple and used once, maybe they could be inlined in GetOrCreate. Unless I\u0027m missing something related to error handling?",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e1c7a6_37b1c46e",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: unused include",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cd3bae7_b2eb8a1e",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d0048a4_65cf0f84",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: could be a const wchar_t* since we only assign static strings to it.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dd23b4f_0ce5b0b0",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "There\u0027s a bit too many switch statements on stage, but this could be addressed in the follow-up where handling of the toggle is moved to SHaderModuleD3D12",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df0bc97f_b8e3a613",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "This should never be the case. I\u0027m not sure why it was in the original code, but it can be safely removed.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ca6435_54e4e40c",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6b25005_0ee063f3",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "dtioo",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "014c1180_4fb42598",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "This function doesn\u0027t use \"this\" at all. It could be a helper function in the anonymous namespace at the top of this file.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc4710c_0fcbdd8d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: Please always add braces for control flow. Same comment in other places in this file.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eed8501_b8207db7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: remove commented out code, if it is important, you can add a TODO commend intead.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c56d282d_dc21c50f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f7860e2_e11f8680",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: comment what -HV 2016 does.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83af1e51_777f5387",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "This could use CheckHRESULT like so:\n\n DAWN_TRY(CheckHRESULT(do stuff));\n\nSame comment for other if(FAILED(...)) below.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b82769c2_e37e78db",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "CP_UTF8 probably",
+      "range": {
+        "startLine": 196,
+        "startChar": 57,
+        "endLine": 196,
+        "endChar": 63
+      },
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "464bc054_a36f338d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "This should return an INTERNAL_ERROR too.",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31e1e4f3_6a0408b3",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: #include \u003cstringapiset.h\u003e",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4564c353_9bd1221f",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "nit: maybe we could preemptively reserve to len since str should almost always be ASCII.\n\nAlso CP_ACP depends on the computer, which could cause very difficult to reproduce issues. WDYT of using CP_UTF8 instead?",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db51989d_296da525",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "Could we check the return value and return a DAWN_INTERNAL_ERROR if it fails?",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

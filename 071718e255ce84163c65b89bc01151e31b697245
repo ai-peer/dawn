@@ -713,6 +713,30 @@
     },
     {
       "key": {
+        "uuid": "69cb7e13_ee48fd6c",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:32:01Z",
+      "side": 1,
+      "message": "But that\u0027s a leftover from before we had good error handling, we shouldn\u0027t do this anymore.",
+      "parentUuid": "29673a1d_cfa47347",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 13
+      },
+      "revId": "071718e255ce84163c65b89bc01151e31b697245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a77ec25_5f78eefd",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 3
