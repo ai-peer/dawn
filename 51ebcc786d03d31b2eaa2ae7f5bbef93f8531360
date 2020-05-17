@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2039362b_8f731c70",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:04:39Z",
+      "side": 1,
+      "message": "u-nit: in MapReadAsync there is an empty newline before this, where this one is attached to the block before. Add an empty line here too?",
+      "revId": "51ebcc786d03d31b2eaa2ae7f5bbef93f8531360",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56ed5065_f3062ca8",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:04:39Z",
+      "side": 1,
+      "message": "nit: mMappedData \u003d nullptr",
+      "revId": "51ebcc786d03d31b2eaa2ae7f5bbef93f8531360",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c5677e4_d45d723e",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T20:04:39Z",
+      "side": 1,
+      "message": "Maybe as a followup you could try removing this, because it should be handled automatically by the frontend now.",
+      "revId": "51ebcc786d03d31b2eaa2ae7f5bbef93f8531360",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
