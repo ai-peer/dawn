@@ -574,6 +574,24 @@
     },
     {
       "key": {
+        "uuid": "c240c8e2_24a7ec9c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:39:25Z",
+      "side": 1,
+      "message": "Saw how it was done in CheckHRESULT and fixed it with similar simple string concatenation in the end",
+      "parentUuid": "60814564_5227bbdd",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31e1e4f3_6a0408b3",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
