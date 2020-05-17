@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fc7421cf_3cf1259c",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "If I\u0027m using DAWN_TRY(CheckHRESULT()), it seems to be equivalent\nSo I inlined them and use that now",
+      "parentUuid": "99c89faf_252df960",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47e1c7a6_37b1c46e",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73fb6995_db71274f",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47e1c7a6_37b1c46e",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7487f207_1086da27",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cd3bae7_b2eb8a1e",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d0048a4_65cf0f84",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 8
@@ -67,6 +121,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a9c741c_2d407121",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "I refactored this to have the targetProfile selected inside of the compile function, but the target is now stored as a static pointer indeed.",
+      "parentUuid": "1d0048a4_65cf0f84",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1de0cdab_ecc1b5b8",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "I found a nice way to simplify all those (using PerStage arrays here and selecting the targetProfile inside the compile function). Let me know if it looks okay now",
+      "parentUuid": "0dd23b4f_0ce5b0b0",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df0bc97f_b8e3a613",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 8
@@ -101,6 +191,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76c28533_f1de389a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df0bc97f_b8e3a613",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "cf7acf21_46970415",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ca6435_54e4e40c",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6b25005_0ee063f3",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 8
@@ -135,6 +261,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11898c83_55688127",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6b25005_0ee063f3",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "c7b96f47_e05a30ec",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "014c1180_4fb42598",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dc4710c_0fcbdd8d",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 8
@@ -169,6 +331,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9976af4d_32ca67e4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dc4710c_0fcbdd8d",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "4e2c0a0a_1e909c59",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done.\nNote: all this function is actually taken from a DXC example I found there: https://github.com/microsoft/DirectXShaderCompiler/blob/master/tools/clang/tools/d3dcomp/d3dcomp.cpp\nConverting FXC arguments to their DXC equivalents is quite handy\nWe could probably thin it down to only some options we would use, or write the DXC options directly since we always use the same three options ?",
+      "parentUuid": "6eed8501_b8207db7",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c56d282d_dc21c50f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 8
@@ -203,6 +401,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddea1bda_34e04d18",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c56d282d_dc21c50f",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "49b15c32_cfeed5c6",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f7860e2_e11f8680",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83af1e51_777f5387",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 8
@@ -237,6 +471,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee6f16a6_fb5f3efc",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83af1e51_777f5387",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -263,6 +515,30 @@
     },
     {
       "key": {
+        "uuid": "2be5eec2_35a51950",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b82769c2_e37e78db",
+      "range": {
+        "startLine": 196,
+        "startChar": 57,
+        "endLine": 196,
+        "endChar": 63
+      },
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "464bc054_a36f338d",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 8
@@ -277,6 +553,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60814564_5227bbdd",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done, although since DAWN_INTERNAL_ERROR only accepts a single message argument, and not knowing how to do the formatting otherwise, I\u0027m putting the compilation output directly in there. What is the proper way to do this ?",
+      "parentUuid": "464bc054_a36f338d",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -297,6 +591,24 @@
     },
     {
       "key": {
+        "uuid": "713825bb_a702582d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31e1e4f3_6a0408b3",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4564c353_9bd1221f",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
@@ -314,6 +626,24 @@
     },
     {
       "key": {
+        "uuid": "08923e58_8bed3b72",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "The only thing we\u0027re converting through here is the shader entry point from the shader descriptor. Isn\u0027t it specified in which encoding it should be provided ? I can also rename this function to something more precise (e.g ConvertASCIIStringToWstring)\nFrankly, I\u0027m not knowledgeable enough about character conversions to take any educated decision here, so I would do whatever you think best ?",
+      "parentUuid": "4564c353_9bd1221f",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db51989d_296da525",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
@@ -328,6 +658,24 @@
       "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c5aadb6_fd37c8b9",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-17T23:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db51989d_296da525",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
