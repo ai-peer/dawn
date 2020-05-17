@@ -56,6 +56,30 @@
       "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2837e7a_f24dcda2",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T19:45:49Z",
+      "side": 1,
+      "message": "Same thing for HeapD3D12",
+      "parentUuid": "cd3ff07c_d712cc62",
+      "range": {
+        "startLine": 186,
+        "startChar": 50,
+        "endLine": 186,
+        "endChar": 64
+      },
+      "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
