@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "96f991ec_23bcf9df",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-17T21:24:51Z",
+      "side": 1,
+      "message": "nit: put this after other Dawn includes. I\u0027m still not sure why your autoformatter does that.",
+      "revId": "fd32eb89b3bf9a3e27ec165e20ada5170e232a4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68ca9a3b_0ef6462d",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 3
