@@ -310,27 +310,21 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_GRAPHICS_PIPELINE_STATE_DESC descriptorD3D12 = {};
 
-        PerStage<ComPtr<ID3DBlob>> compiledShader;
-        ComPtr<ID3DBlob> errors;
-
+        PerStage<ComPtr<ID3DBlob>> compiledFXCShader;
+        PerStage<ComPtr<IDxcBlob>> compiledDXCShader;
+        
         wgpu::ShaderStage renderStages = wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment;
         for (auto stage : IterateStages(renderStages)) {
             ShaderModule* module = nullptr;
-            const char* entryPoint = nullptr;
-            const char* compileTarget = nullptr;
             D3D12_SHADER_BYTECODE* shader = nullptr;
             switch (stage) {
                 case SingleShaderStage::Vertex:
                     module = ToBackend(descriptor->vertexStage.module);
-                    entryPoint = descriptor->vertexStage.entryPoint;
                     shader = &descriptorD3D12.VS;
-                    compileTarget = "vs_5_1";
                     break;
                 case SingleShaderStage::Fragment:
                     module = ToBackend(descriptor->fragmentStage->module);
-                    entryPoint = descriptor->fragmentStage->entryPoint;
                     shader = &descriptorD3D12.PS;
-                    compileTarget = "ps_5_1";
                     break;
                 default:
                     UNREACHABLE();
@@ -341,19 +335,57 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
 
             const PlatformFunctions* functions = device->GetFunctions();
-            MaybeError error = CheckHRESULT(
-                functions->d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
-                                      nullptr, entryPoint, compileTarget, compileFlags, 0,
-                                      &compiledShader[stage], &errors),
-                "D3DCompile");
-            if (error.IsError()) {
-                dawn::WarningLog() << reinterpret_cast<char*>(errors->GetBufferPointer());
-                DAWN_TRY(std::move(error));
-            }
 
-            if (shader != nullptr) {
-                shader->pShaderBytecode = compiledShader[stage]->GetBufferPointer();
-                shader->BytecodeLength = compiledShader[stage]->GetBufferSize();
+            if (device->IsToggleEnabled(Toggle::UseDXC)) {
+                std::wstring entryPoint;
+                std::wstring compileTarget;
+                switch (stage) {
+                    case SingleShaderStage::Vertex:
+                        entryPoint = ConvertStringToWstring(descriptor->vertexStage.entryPoint);
+                        compileTarget = L"vs_6_0";
+                        break;
+                    case SingleShaderStage::Fragment:
+                        entryPoint = ConvertStringToWstring(descriptor->fragmentStage->entryPoint);
+                        compileTarget = L"ps_6_0";
+                        break;
+                    default:
+                        UNREACHABLE();
+                        break;
+                }
+
+                DAWN_TRY_ASSIGN(compiledDXCShader[stage],
+                                module->CompileShaderDXC(hlslSource, entryPoint.c_str(), compileTarget.c_str(),
+                                                         compileFlags));
+
+                if (shader != nullptr) {
+                    shader->pShaderBytecode = compiledDXCShader[stage]->GetBufferPointer();
+                    shader->BytecodeLength = compiledDXCShader[stage]->GetBufferSize();
+                }
+            } else {
+                const char* entryPoint = nullptr;
+                const char* compileTarget = nullptr;
+                switch (stage) {
+                    case SingleShaderStage::Vertex:
+                        entryPoint = descriptor->vertexStage.entryPoint;
+                        compileTarget = "vs_5_1";
+                        break;
+                    case SingleShaderStage::Fragment:
+                        entryPoint = descriptor->fragmentStage->entryPoint;
+                        compileTarget = "ps_5_1";
+                        break;
+                    default:
+                        UNREACHABLE();
+                        break;
+                }
+
+                DAWN_TRY_ASSIGN(
+                    compiledFXCShader[stage],
+                    module->CompileShaderFXC(hlslSource, entryPoint, compileTarget, compileFlags));
+
+                if (shader != nullptr) {
+                    shader->pShaderBytecode = compiledFXCShader[stage]->GetBufferPointer();
+                    shader->BytecodeLength = compiledFXCShader[stage]->GetBufferSize();
+                }
             }
         }
 
