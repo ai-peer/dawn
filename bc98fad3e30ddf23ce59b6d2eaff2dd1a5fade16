@@ -16,6 +16,24 @@
       "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29d5e1e_3f06521e",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-18T21:29:17Z",
+      "side": 1,
+      "message": "\u003e\u003e we don\u0027t know that mD3D12Pageable is the first base class of ID3D12DescriptorHeap\n\nFrom d3d12.h, ID3D12Pageable is the only base class of ID3D12DescriptorHeap. What is the concern here?",
+      "parentUuid": "831d8dc8_1a487c26",
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
