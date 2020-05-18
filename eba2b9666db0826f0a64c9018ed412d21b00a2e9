@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc2b890b_376803e5",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-18T16:26:00Z",
+      "side": 1,
+      "message": "nit: suggest to also check heapSeries + 1 to be on the safe side (aka heaps did switch out).",
+      "revId": "eba2b9666db0826f0a64c9018ed412d21b00a2e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
