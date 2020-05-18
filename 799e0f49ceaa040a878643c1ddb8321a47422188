@@ -133,6 +133,24 @@
     },
     {
       "key": {
+        "uuid": "eba084c7_06b7438b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T20:48:35Z",
+      "side": 1,
+      "message": "Corentin, this can fail if the SDK layers are not enabled or installed on the system. \n\nIf someone turns on backend validation but does not install SDK layers, the assert would be a good indication for a user of Dawn that errors are not being detected properly. \n\nSo +1 for adding the assert.",
+      "parentUuid": "67e53465_ca027a1c",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "91cfa050_e7ee4f21",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 5
