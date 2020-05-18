@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "020f90d3_a72f1fe6",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:55:00Z",
+      "side": 1,
+      "message": "Is it now the case that the parameter passed as d3d12Pageable is always a heap?  If so, consider retyping the parameter to minimize the number of QIs you have to do.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 51
+      },
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f384c852_e324b1b7",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:55:00Z",
+      "side": 1,
+      "message": "The As method calls QI, which AddRefs the pointer. If the QI is implemented as returning a different object, then this code will have use-after-free. I recommend having mD3D12Heap be a ComPtr and then simply not check the return value of the As method.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "831d8dc8_1a487c26",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 7
@@ -31,6 +77,24 @@
       "side": 1,
       "message": "\u003e\u003e we don\u0027t know that mD3D12Pageable is the first base class of ID3D12DescriptorHeap\n\nFrom d3d12.h, ID3D12Pageable is the only base class of ID3D12DescriptorHeap. What is the concern here?",
       "parentUuid": "831d8dc8_1a487c26",
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d57296e8_817dd83d",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:55:00Z",
+      "side": 1,
+      "message": "While it is true that you can use IDerived in places that accept IBase without QI, we should avoid static casting pointers down the class hierarchy.  \n\nInstead of what you have, pass d3d12DescriptorHeap as the first argument to the Pageable constructor without std::move. Then, use std::move for mD3D12DescriptorHeap.  Make mD3D12DescriptorHeap be a ComPtr. Yes, this incurs an extra AddRef but creating shader visible descriptor heaps should be rare enough that it shouldn\u0027t matter.",
+      "parentUuid": "c29d5e1e_3f06521e",
       "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
