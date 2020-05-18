@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c75d71fc_8336656c",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T18:39:40Z",
+      "side": 1,
+      "message": "This should already be added here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/scripts/dawn_component.gni;l\u003d63?q\u003d%22@executable_path%22%20f:dawn so I\u0027m not sure why adding the flag here helps.",
+      "revId": "7a7fcc9c4b920fa57a9c0c823b5d141671b5b208",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
