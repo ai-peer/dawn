@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78f3ceb3_693aa031",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-18T22:38:28Z",
+      "side": 1,
+      "message": "edit this commit message to include \"Bug: dawn:402\"",
+      "revId": "601270af6762c6e59b97a56c18ef0f8f0d2562e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
