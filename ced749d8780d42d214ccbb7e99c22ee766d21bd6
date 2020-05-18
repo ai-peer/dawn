@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "6214a255_3ef48835",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-05-18T22:31:26Z",
+      "side": 1,
+      "message": "This is an error case, though, and I don\u0027t think the perf const of string allocations is important here.",
+      "parentUuid": "d33a3ec3_fb5dca87",
+      "range": {
+        "startLine": 270,
+        "startChar": 34,
+        "endLine": 270,
+        "endChar": 73
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98b6fe9c_18f12716",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 13
