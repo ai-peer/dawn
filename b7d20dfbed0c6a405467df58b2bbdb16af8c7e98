@@ -387,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "8784891c_c0821605",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T11:34:30Z",
+      "side": 1,
+      "message": "Either way is fine, having the more complete function might be helpful later.",
+      "parentUuid": "4e2c0a0a_1e909c59",
+      "revId": "b7d20dfbed0c6a405467df58b2bbdb16af8c7e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c56d282d_dc21c50f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 8

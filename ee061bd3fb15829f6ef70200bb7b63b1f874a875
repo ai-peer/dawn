@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1834bee0_4953583a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T11:34:30Z",
+      "side": 1,
+      "message": "nit: trailing whitespace.",
+      "revId": "ee061bd3fb15829f6ef70200bb7b63b1f874a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40110371_1346c9d3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T11:34:30Z",
+      "side": 1,
+      "message": "Could we have a switch instead? Static initializers introduce locks.",
+      "revId": "ee061bd3fb15829f6ef70200bb7b63b1f874a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "742f1c6b_c891557c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T11:34:30Z",
+      "side": 1,
+      "message": "unit: const wchar_t*. LPCWSTR means Long Pointer Const Word STRing but the notion of long pointer has been dead for a long time now.",
+      "range": {
+        "startLine": 215,
+        "startChar": 20,
+        "endLine": 215,
+        "endChar": 27
+      },
+      "revId": "ee061bd3fb15829f6ef70200bb7b63b1f874a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3594fe29_d02f0f89",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T11:34:30Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ee061bd3fb15829f6ef70200bb7b63b1f874a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
