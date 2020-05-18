@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "153f44c3_f382d382",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-18T18:01:44Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "cbd30d57_ef6d3a70",
+      "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6005ad3_a75dc5a4",
         "filename": "src/dawn_native/d3d12/PageableD3D12.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70323464_64787ad0",
+        "filename": "src/dawn_native/d3d12/PageableD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-18T18:01:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6005ad3_a75dc5a4",
+      "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,30 @@
       "side": 1,
       "message": "Same thing for HeapD3D12",
       "parentUuid": "cd3ff07c_d712cc62",
+      "range": {
+        "startLine": 186,
+        "startChar": 50,
+        "endLine": 186,
+        "endChar": 64
+      },
+      "revId": "d2ec539700ff87520cbc96d8009859711c0d5c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f34a621_9b45873d",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-18T18:01:44Z",
+      "side": 1,
+      "message": "PTAL and let me know if I interpreted correctly.",
+      "parentUuid": "d2837e7a_f24dcda2",
       "range": {
         "startLine": 186,
         "startChar": 50,
