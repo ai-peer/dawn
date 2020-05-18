@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea76baaf_1572ec89",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "Nit: Please move the definition of dxcCompiler closer to where it is used.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 0
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e842193f_1c8e27a2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "Nit: Since GetBufferPointer returns a void*, you can use static_cast\u003cchar*\u003e here instead of reinterpret_cast.",
+      "range": {
+        "startLine": 237,
+        "startChar": 46,
+        "endLine": 237,
+        "endChar": 69
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8445978_3d4080d2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "Nit: Does std::string let you concatenate normal strings?  \n\nIf so, you can rewrite to be:\n string message \u003d \"D3D compile failed with \" + static_cast\u003cchar*\u003e(errors-\u003eGetBufferPointer());",
+      "range": {
+        "startLine": 270,
+        "startChar": 34,
+        "endLine": 270,
+        "endChar": 73
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98b6fe9c_18f12716",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "Why do we call reserve for len and later resize it?  \n\nI think a more efficient path would be:\n1) Declare result closer to where it is used\n2) resize result to be the value returned by the first call to MultiByteToWideChar.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71b4c7e8_dd23ca20",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "Nit: NULL --\u003e nullptr",
+      "range": {
+        "startLine": 30,
+        "startChar": 84,
+        "endLine": 30,
+        "endChar": 88
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b4118f0_5fbe5ff0",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T21:37:10Z",
+      "side": 1,
+      "message": "I think this if statement can be strengthened to test that the integer returned by the second call to MultiByteToWideChar be the same as what was returned on the first call to MultiByteToWideChar.",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
