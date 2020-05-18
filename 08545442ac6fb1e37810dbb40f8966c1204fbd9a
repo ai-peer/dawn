@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "300a63c2_88653735",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-18T23:42:30Z",
+      "side": 1,
+      "message": "I just noticed this pre-existing issue. If this errors, we need to call the callback, probably with the DEVICE_LOST status. Could you add a TODO about it?",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 9
+      },
+      "revId": "08545442ac6fb1e37810dbb40f8966c1204fbd9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
