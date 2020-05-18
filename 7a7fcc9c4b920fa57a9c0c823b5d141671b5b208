@@ -34,6 +34,24 @@
       "revId": "7a7fcc9c4b920fa57a9c0c823b5d141671b5b208",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a35abe98_07180cd4",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T18:44:24Z",
+      "side": 1,
+      "message": "Maybe this should be fixed in Swiftshader\u0027s BUILD.gn, or in dawn_native/BUILD.gn when dawn_use_swiftshader \u003d true.",
+      "parentUuid": "cbd8f32e_934ff8e9",
+      "revId": "7a7fcc9c4b920fa57a9c0c823b5d141671b5b208",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
