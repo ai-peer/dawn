@@ -380,6 +380,30 @@
     },
     {
       "key": {
+        "uuid": "fcd83314_3b71bc69",
+        "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-18T23:23:52Z",
+      "side": 1,
+      "message": "\u003e next thing we tackle\n\nAck but FYI, got other bugs to address first.",
+      "parentUuid": "8a822278_732ee935",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "c6a8fdd012ec1ba93a267bd953677830299aaa94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb9be8ac_78879c89",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.h",
         "patchSetId": 12
