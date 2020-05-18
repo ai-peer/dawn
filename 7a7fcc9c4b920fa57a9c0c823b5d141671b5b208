@@ -16,6 +16,24 @@
       "revId": "7a7fcc9c4b920fa57a9c0c823b5d141671b5b208",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbd8f32e_934ff8e9",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-18T18:42:37Z",
+      "side": 1,
+      "message": "That\u0027s only on the shared version of libdawn_native. The static version doesn\u0027t have it. Maybe we should have dawn_component put these ldflags on both then.",
+      "parentUuid": "c75d71fc_8336656c",
+      "revId": "7a7fcc9c4b920fa57a9c0c823b5d141671b5b208",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
