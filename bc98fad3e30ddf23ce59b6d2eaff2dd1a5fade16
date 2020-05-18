@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "831d8dc8_1a487c26",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-18T18:43:01Z",
+      "side": 1,
+      "message": "This should use .As as well because we don\u0027t know that mD3D12Pageable is the first base class of ID3D12DescriptorHeap. Rafael, is there a page that explains how ComPtr and inheritance works somewhere?",
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
