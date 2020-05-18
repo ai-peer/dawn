@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "a1fb83e9_7523281a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000679
+      },
+      "writtenOn": "2020-05-18T22:39:24Z",
+      "side": 1,
+      "message": "Hmmm actually you\u0027re right, because I somehow remembered that operator+ was only defined for std::string + std::string, but it is indeed defined for std::string + const char* and conversely. So there would indeed be slightly fewer allocations by opting to only explicitly construct one of the operands as std::string.\nThis is also probably not a hot path, but a good rule of thumb anyway.",
+      "parentUuid": "6214a255_3ef48835",
+      "range": {
+        "startLine": 270,
+        "startChar": 34,
+        "endLine": 270,
+        "endChar": 73
+      },
+      "revId": "ced749d8780d42d214ccbb7e99c22ee766d21bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98b6fe9c_18f12716",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 13
