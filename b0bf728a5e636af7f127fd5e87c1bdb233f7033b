@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0590d759_f425cb59",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-18T22:24:40Z",
+      "side": 1,
+      "message": "Checking for nullptr in PopulateSamplers seem preferable to me.",
+      "parentUuid": "725a034c_b099b490",
+      "revId": "b0bf728a5e636af7f127fd5e87c1bdb233f7033b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0a6564e_24e86387",
         "filename": "src/dawn_native/d3d12/SamplerHeapCacheD3D12.cpp",
         "patchSetId": 13
