@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7cd24c96_1bd38822",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-18T23:18:29Z",
+      "side": 1,
+      "message": "It is not. d3d12Pageable can still represent a sub-allocated heap, or can represent a directly allocated resource. This is needed because we need a common method to get to the d3d12::Pageable for a given resource (which could be direct or sub-allocated).",
+      "parentUuid": "020f90d3_a72f1fe6",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 51
+      },
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f384c852_e324b1b7",
         "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
         "patchSetId": 7
