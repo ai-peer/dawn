@@ -76,6 +76,23 @@
     },
     {
       "key": {
+        "uuid": "98d74d10_89ea1b8f",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-18T20:13:20Z",
+      "side": 1,
+      "message": "uunit: \"Initialize\"",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c4b6fa5_51bb4eb6",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 5
@@ -93,6 +110,23 @@
         "endLine": 222,
         "endChar": 9
       },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e53465_ca027a1c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-18T20:13:20Z",
+      "side": 1,
+      "message": "nit: can this ever fail? If not, consider:\n\nHRESULT result \u003d mD3d12Device.As(\u0026infoQueue);\nASSERT(SUCCEEDED(result));",
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -133,6 +167,30 @@
       "writtenOn": "2020-05-16T01:15:26Z",
       "side": 1,
       "message": "This change seems unrelated to the rest of the CL. We should probably merge as a separate CL.",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 33
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed1ad9ee_5aa9ab01",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-18T20:13:20Z",
+      "side": 1,
+      "message": "Required for this CL to pass E2E but once CL#21780 merges, we can revert.",
+      "parentUuid": "f74e85f2_75d7ebb2",
       "range": {
         "startLine": 406,
         "startChar": 0,
