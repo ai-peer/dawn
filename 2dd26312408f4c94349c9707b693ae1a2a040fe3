@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5d6db4d_026edeb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T08:14:16Z",
+      "side": 1,
+      "message": "checks",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "2dd26312408f4c94349c9707b693ae1a2a040fe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcbb5977_a7e18121",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T08:14:16Z",
+      "side": 1,
+      "message": "Support 16bit float arithmetic and declarations in uniform and storage buffers.",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 39,
+        "endChar": 95
+      },
+      "revId": "2dd26312408f4c94349c9707b693ae1a2a040fe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "111d5222_9b868391",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T08:14:16Z",
+      "side": 1,
+      "message": "Can you provide a helper function to convert a float32 number to float16? It will be useful for future use.",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 84
+      },
+      "revId": "2dd26312408f4c94349c9707b693ae1a2a040fe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1426a357_e64b1293",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T08:14:16Z",
+      "side": 1,
+      "message": "bufA can be a readonly buffer.",
+      "range": {
+        "startLine": 68,
+        "startChar": 52,
+        "endLine": 68,
+        "endChar": 56
+      },
+      "revId": "2dd26312408f4c94349c9707b693ae1a2a040fe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
