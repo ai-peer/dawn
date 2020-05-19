@@ -118,6 +118,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc23131e_bd1a5a70",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T00:23:26Z",
+      "side": 1,
+      "message": "Hi Austin, as multi-layer copy will be implemented by multiple one-layer copies in a for-loop, I think it is not necessary to ensure the ranges of subresources are disjoint.\n\nFor example, when we want to copy the 1st and 2nd layers to the 2nd and 3rd layers in a for-loop, we can:\n1. copy the 2nd layer to the 3rd layer\n2. copy the 1st layer to the 2nd layer",
+      "parentUuid": "22847d57_5084f883",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
