@@ -52,6 +52,47 @@
       "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e7cbdd_a2048913",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-19T17:41:40Z",
+      "side": 1,
+      "message": "Are both of these using WARP then and not the Intel driver? If so, maybe we could deduplicate them when we discover adapters.\n\nOtherwise, it\u0027s fine with me to do it here as a workaround. Maybe we could have the vendorID instead if it\u0027s different.",
+      "parentUuid": "67f7f388_378a0ed6",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df58af6_2c40df49",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-19T17:41:40Z",
+      "side": 1,
+      "message": "We don\u0027t need this full regex. Only need to replace spaces with underscores.",
+      "range": {
+        "startLine": 160,
+        "startChar": 43,
+        "endLine": 161,
+        "endChar": 100
+      },
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
