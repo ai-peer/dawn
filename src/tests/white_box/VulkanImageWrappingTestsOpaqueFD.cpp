@@ -33,9 +33,8 @@ namespace dawn_native { namespace vulkan {
           public:
             void SetUp() override {
                 DawnTest::SetUp();
-                if (UsesWire()) {
-                    return;
-                }
+                DAWN_SKIP_TEST_IF(UsesWire());
+                DAWN_SKIP_TEST_IF(IsSwiftshader());
 
                 deviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(device.Get());
             }
