@@ -22,6 +22,30 @@
       "revId": "d6d2b418d222342e460690c6b4e3989a675056a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdbfbaeb_6eae11ec",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-19T17:29:43Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "b8964cc3_a9dc042b",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 28
+      },
+      "revId": "d6d2b418d222342e460690c6b4e3989a675056a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
