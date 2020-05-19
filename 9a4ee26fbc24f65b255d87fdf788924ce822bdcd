@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "0ef5a27f_ccde338c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-19T23:31:41Z",
+      "side": 1,
+      "message": "Sorry, not sure what you mean by \"Warp adapter with outputs\". In the case Jiawei is talking about, is the Intel integrated GPU the \"output\" ? How do you distinguish between Warp with outputs and Warp without outputs ?",
+      "parentUuid": "e9547703_0384b2e4",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9df58af6_2c40df49",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
