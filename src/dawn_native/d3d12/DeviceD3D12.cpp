@@ -112,7 +112,6 @@ namespace dawn_native { namespace d3d12 {
 
         mSamplerHeapCache = std::make_unique<SamplerHeapCache>(this);
 
-        mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
@@ -181,10 +180,6 @@ namespace dawn_native { namespace d3d12 {
         return ToBackend(GetAdapter())->GetBackend()->GetFunctions();
     }
 
-    MapRequestTracker* Device::GetMapRequestTracker() const {
-        return mMapRequestTracker.get();
-    }
-
     CommandAllocatorManager* Device::GetCommandAllocatorManager() const {
         return mCommandAllocatorManager.get();
     }
@@ -214,7 +209,6 @@ namespace dawn_native { namespace d3d12 {
         mSamplerShaderVisibleDescriptorAllocator->Tick(completedSerial);
         mRenderTargetViewAllocator->Tick(completedSerial);
         mDepthStencilViewAllocator->Tick(completedSerial);
-        mMapRequestTracker->Tick(completedSerial);
         mUsedComObjectRefs.ClearUpTo(completedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
