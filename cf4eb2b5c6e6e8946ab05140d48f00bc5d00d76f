@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "b7adcf97_f33ddfe4",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-19T21:42:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e95eaf4d_1e12884d",
+      "revId": "cf4eb2b5c6e6e8946ab05140d48f00bc5d00d76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a800853_5a5c8e40",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 2
