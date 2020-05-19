@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9f605fb5_06ac4e87",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-19T00:05:28Z",
+      "side": 1,
+      "message": "Did this - the .As will fail when a ID3D12Pageable from a directly allocated resource is passed in, but that\u0027s not a problem I guess.",
+      "parentUuid": "f384c852_e324b1b7",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "831d8dc8_1a487c26",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 7
@@ -122,6 +146,24 @@
       "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69cc8e9e_0c4ef3be",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-19T00:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d57296e8_817dd83d",
+      "revId": "bc98fad3e30ddf23ce59b6d2eaff2dd1a5fade16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

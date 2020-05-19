@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "212e24b1_d1c3f375",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-19T00:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "999de8b0_98244baf",
+      "revId": "115f3131f672b4aad1e10a33a9c66fdbe78fc9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b045d53_04e295c6",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 3
