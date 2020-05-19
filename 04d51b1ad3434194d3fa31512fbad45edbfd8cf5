@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "222511a9_1893cc1d",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-19T06:58:24Z",
+      "side": 1,
+      "message": "I copied the code from Texture.cpp[1] to calculate subresource total number, I felt like it was incorrect but I didn\u0027t verify it at that time when I wrote this code a few weeks ago. Today when I was implementing subresource on backend and debug the code, found that the calculation was incorrect. \n\nGetSubresourceIndex function to calculate subresource index is quite easy: GetSubresrouceIndex(level, layer) \u003d GetNumMipLevels() * layer + level. This is correct, but when we use this function to calculate the total number, the input parameters are incorrect. \nNote that the maximum subresource index should be GetSubresourceIndex(GetNumMipLevels() - 1, GetNumArrayLayer() - 1), so the total number should be max index + 1: GetSubresourceIndex(GetNumMipLevels() - 1 + 1, GetNumberArrayLayer() - 1); \n\nThe incorrect calculation asked more elements than what we really need, so it didn\u0027t introduce any failure.",
+      "range": {
+        "startLine": 48,
+        "startChar": 21,
+        "endLine": 48,
+        "endChar": 40
+      },
+      "revId": "04d51b1ad3434194d3fa31512fbad45edbfd8cf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6d94a07_e3440848",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-19T06:58:24Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 354,
+        "startChar": 8,
+        "endLine": 355,
+        "endChar": 92
+      },
+      "revId": "04d51b1ad3434194d3fa31512fbad45edbfd8cf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
