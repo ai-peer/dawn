@@ -1,0 +1,351 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5e755bc_36aac908",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Please add a link here, for example to https://bugs.chromium.org/p/dawn/issues/detail?id\u003d426",
+      "range": {
+        "startLine": 41,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "337358fc_bc70704e",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Just mDeviceInfo.shaderFloat16Int8, it is a boolean.",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c57bd61_94ae17ac",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "This should also check for mDeviceInfo._16BitStorage. It could be set to true if we have Vulkan 1.1 here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/BackendVk.cpp;l\u003d252",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85312038_2078c5e3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "These two should only be done if the extension is enabled, so moved in [2] and the code simplified.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8dcca50_63488154",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ad38dcb_bc27331b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Same comments for the condition as above.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86f7e003_211eeb95",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "We should put the check for getPhysicalDeviceProperties2 along with IsExtensionName otherwise info.shaderFloat16Int8 can be true while info.shaderFloat16Int8Features is still garbage.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2651fc1_6a721f67",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "This could be info.shaderFloat16Int8Features directly (it would need the sType to be set.)",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc548b24_2655e77c",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Ditto, needs to check for GetPhysicalDeviceFeatures2. In addition, the structure and enum values for this are the same as the core version. So instead it could just set info._16BitStorage \u003d true; and let [1] do the querying if (info._16BitStorage || info.properties.apiVersion \u003e\u003d VK_MAKE_VERSION(1, 1, 0))",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbbb09e9_9e70cfb1",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3c9350b_1a521860",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "This should assert globalInfo.getPhysicalDeviceProperties2 after the comment above is addressed.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec2b2afb_6456b05c",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acb847d2_8ec8430a",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Why can\u0027t this just return {\"shader_float16\"} ?",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe71ec4c_2bd81079",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "With the comment above, I think this could be removed, and ShaderFloat16Tests simplified.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "026d9a18_7e7a2c40",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "Please take advantage of Float32ToFloat16 instead of using magic constants https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/common/Math.cpp;l\u003d109\n\nSame comment below",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b32b3dc_e637774b",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "No need to createBufferFromData since it will be overwritten. If the zero for padding is required, please add a TODO() to simplify this once buffer lazy-zero-init is done instead.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ec9df5_6293e452",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "nit: Please spell out simple types. Also this isn\u0027t needed and could use getBindGroupLayout instead.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97c2902d_6c380f4b",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "nit: empty line before bindgroup creation because it is logically separate from the pipeline creation.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3cb5aa1_53929bc3",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:49:02Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 32
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
