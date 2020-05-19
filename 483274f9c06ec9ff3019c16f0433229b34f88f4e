@@ -142,6 +142,30 @@
       "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1c34740_dfea6319",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-19T06:03:53Z",
+      "side": 1,
+      "message": "Hm, this is true, though currently the spec says,\n\n\"The set of subresources for texture copy(source, copySize) and the set of subresources for texture copy(destination, copySize) must be disjoint.\"\n\nNot sure if this is finalized yet @Kai.\n\nThis would be one example where \"implemented as a for-loop\" actually means \"implemented as a for-loop with extra validation\"",
+      "parentUuid": "bc23131e_bd1a5a70",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "483274f9c06ec9ff3019c16f0433229b34f88f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
