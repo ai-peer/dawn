@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "832a2d9b_73d6e244",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-19T17:18:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "573dd358_8225da1a",
+      "revId": "39a79a2e54fefa340dfdf0b171864fa78e21fc10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c4b983b_92ae816c",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "39a79a2e54fefa340dfdf0b171864fa78e21fc10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce704605_52b2a74f",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-19T17:18:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c4b983b_92ae816c",
+      "revId": "39a79a2e54fefa340dfdf0b171864fa78e21fc10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

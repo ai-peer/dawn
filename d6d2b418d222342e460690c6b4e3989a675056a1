@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8964cc3_a9dc042b",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-19T17:18:00Z",
+      "side": 1,
+      "message": "If we have multiple layers and mipmaps at the same time, this change might be a little bit better because of data locality: the indices of subresources are in sequence, instead of jumping here and there back and forth. Although the vast majority of textures are not that complicated (just one single layer, I suppose). But it doesn\u0027t hurt anything for those cases.",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 28
+      },
+      "revId": "d6d2b418d222342e460690c6b4e3989a675056a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
