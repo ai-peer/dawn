@@ -22,6 +22,30 @@
       "revId": "08545442ac6fb1e37810dbb40f8966c1204fbd9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "302321ac_2270d269",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-19T00:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "300a63c2_88653735",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 9
+      },
+      "revId": "08545442ac6fb1e37810dbb40f8966c1204fbd9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
