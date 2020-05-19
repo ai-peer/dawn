@@ -45,7 +45,7 @@ namespace dawn_native {
 
         // Set usages for subresources
         uint32_t subresourceCount =
-            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers());
+            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers() - 1);
         if (!textureUsage.subresourceUsages.size()) {
             textureUsage.subresourceUsages =
                 std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
@@ -65,7 +65,7 @@ namespace dawn_native {
         passTextureUsage.usage |= textureUsage.usage;
 
         uint32_t subresourceCount =
-            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers());
+            texture->GetSubresourceIndex(texture->GetNumMipLevels(), texture->GetArrayLayers() - 1);
         ASSERT(textureUsage.subresourceUsages.size() == subresourceCount);
         if (!passTextureUsage.subresourceUsages.size()) {
             passTextureUsage.subresourceUsages = textureUsage.subresourceUsages;

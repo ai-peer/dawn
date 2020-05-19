@@ -352,7 +352,7 @@ namespace dawn_native {
           mUsage(descriptor->usage),
           mState(state) {
         uint32_t subresourceCount =
-            GetSubresourceIndex(descriptor->mipLevelCount, descriptor->arrayLayerCount);
+            GetSubresourceIndex(descriptor->mipLevelCount, descriptor->arrayLayerCount - 1);
         mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
 
         // Add readonly storage usage if the texture has a storage usage. The validation rules in
