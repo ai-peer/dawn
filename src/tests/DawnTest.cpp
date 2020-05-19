@@ -151,7 +151,17 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param) {
         sanitizedName.back() = '\0';
     }
 
-    os << ParamName(param.adapterProperties.backendType) << "_" << sanitizedName.c_str();
+    os << ParamName(param.adapterProperties.backendType) << "_" << sanitizedName;
+
+    // In a Windows Remote Desktop session there are two adapters named "Microsoft Basic Render
+    // Driver" with different adapter types. We must differentiate them to avoid any tests using the
+    // same name.
+    if (param.adapterProperties.deviceID == 0x008C) {
+        std::string sanitizedAdapterType = std::regex_replace(
+            AdapterTypeName(param.adapterProperties.adapterType), std::regex("[^a-zA-Z0-9]+"), "_");
+        os << "_" << sanitizedAdapterType;
+    }
+
     for (const char* forceEnabledWorkaround : param.forceEnabledWorkarounds) {
         os << "__e_" << forceEnabledWorkaround;
     }
