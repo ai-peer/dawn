@@ -325,6 +325,14 @@ namespace dawn_native { namespace vulkan {
             extensionsToRequest.push_back(kExtensionNameKhrMaintenance1);
             usedKnobs.maintenance1 = true;
         }
+        if (mDeviceInfo.shaderFloat16Int8) {
+            extensionsToRequest.push_back(kExtensionNameKhrShaderFloat16Int8);
+            usedKnobs.shaderFloat16Int8 = true;
+        }
+        if (mDeviceInfo._16BitStorage) {
+            extensionsToRequest.push_back(kExtensionNameKhr16BitStorage);
+            usedKnobs._16BitStorage = true;
+        }
 
         // Always require independentBlend because it is a core Dawn feature
         usedKnobs.features.independentBlend = VK_TRUE;
@@ -337,6 +345,19 @@ namespace dawn_native { namespace vulkan {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionBC ==
                    VK_TRUE);
             usedKnobs.features.textureCompressionBC = VK_TRUE;
+        }
+
+        if (IsExtensionEnabled(Extension::ShaderFloat16)) {
+            const VulkanDeviceInfo& deviceInfo = ToBackend(GetAdapter())->GetDeviceInfo();
+
+            ASSERT(deviceInfo.shaderFloat16Int8 == VK_TRUE &&
+                   deviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
+                   deviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE);
+
+            usedKnobs.shaderFloat16Int8 = VK_TRUE;
+            usedKnobs.shaderFloat16Int8Features.shaderFloat16 = VK_TRUE;
+            usedKnobs._16BitStorage = deviceInfo._16BitStorage;
+            usedKnobs._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess = VK_TRUE;
         }
 
         // Find a universal queue family
