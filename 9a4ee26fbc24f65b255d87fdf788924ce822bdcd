@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "e9547703_0384b2e4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-19T21:38:21Z",
+      "side": 1,
+      "message": "Warp can be determined via the vendor id of 0x1414 and the device id of 0x8C. \n\nYes, Warp sometimes appears twice. For software, you generally want to use the Warp adapter with 1 or more outputs. Since this is the adapter the DWM uses, you will minimize the number of copies between your adapter and the DWM adapter.  The Warp adapter with outputs also has the advantage of becoming removed on driver upgrade.",
+      "parentUuid": "90e7cbdd_a2048913",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9df58af6_2c40df49",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
