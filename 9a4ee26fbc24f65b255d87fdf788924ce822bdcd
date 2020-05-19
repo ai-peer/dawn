@@ -34,6 +34,24 @@
       "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f7f388_378a0ed6",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T12:52:07Z",
+      "side": 1,
+      "message": "Ah ok. I\u0027m not sure what\u0027s the best solution, doing it here as a workaround, or in the D3D12 backend. Austin WDYT?",
+      "parentUuid": "9945dc6d_a335d174",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
