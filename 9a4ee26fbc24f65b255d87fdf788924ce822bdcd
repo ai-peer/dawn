@@ -16,6 +16,24 @@
       "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9945dc6d_a335d174",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-19T12:06:01Z",
+      "side": 1,
+      "message": "The device id of these two adapters named \"Microsoft Basic Render Driver\" are both 0x008C, and the only difference is the adapter type.",
+      "parentUuid": "de1587cb_85f1f85a",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
