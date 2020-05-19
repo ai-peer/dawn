@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "573dd358_8225da1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T09:57:51Z",
+      "side": 1,
+      "message": "No tracking bug? Maybe we could use the subresource frontend tracking issue?",
+      "revId": "39a79a2e54fefa340dfdf0b171864fa78e21fc10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4b983b_92ae816c",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-19T09:57:51Z",
+      "side": 1,
+      "message": "Since there is this bug in multiple places, can we have a helper function on TextureBase that does the computation?",
+      "revId": "39a79a2e54fefa340dfdf0b171864fa78e21fc10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
