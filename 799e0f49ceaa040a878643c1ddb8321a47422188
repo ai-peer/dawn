@@ -336,6 +336,30 @@
     },
     {
       "key": {
+        "uuid": "c557063c_ba2feb99",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:22:15Z",
+      "side": 1,
+      "message": "Whaaaat? The SIZE_T macro is different from size_t. That\u0027s insane.",
+      "parentUuid": "cbea0683_927ab0ab",
+      "range": {
+        "startLine": 467,
+        "startChar": 16,
+        "endLine": 467,
+        "endChar": 22
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f74e85f2_75d7ebb2",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 5
