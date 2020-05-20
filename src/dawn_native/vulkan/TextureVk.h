@@ -63,8 +63,22 @@ namespace dawn_native { namespace vulkan {
         // Transitions the texture to be used as `usage`, recording any necessary barrier in
         // `commands`.
         // TODO(cwallez@chromium.org): coalesce barriers and do them early when possible.
+        VkImageMemoryBarrier BuildMemoryBarrier(wgpu::TextureUsage lastUsage,
+                                                wgpu::TextureUsage usage,
+                                                const Format& format,
+                                                uint32_t mipLevel,
+                                                uint32_t levelCount,
+                                                uint32_t arrayLayer,
+                                                uint32_t layerCount);
         void TransitionUsageNow(CommandRecordingContext* recordingContext,
-                                wgpu::TextureUsage usage);
+                                wgpu::TextureUsage usage,
+                                uint32_t mipLevel = 0,
+                                uint32_t levelCount = 0,
+                                uint32_t arrayLayer = 0,
+                                uint32_t layerCount = 0);
+        void TransitionSubresourceUsageNow(CommandRecordingContext* recordingContext,
+                                           std::vector<wgpu::TextureUsage> subresourceUsages);
+
         void EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
                                                  uint32_t baseMipLevel,
                                                  uint32_t levelCount,
@@ -116,6 +130,8 @@ namespace dawn_native { namespace vulkan {
         // A usage of none will make sure the texture is transitioned before its first use as
         // required by the Vulkan spec.
         wgpu::TextureUsage mLastUsage = wgpu::TextureUsage::None;
+        std::vector<wgpu::TextureUsage> mLastSubresourceUsages =
+            std::vector<wgpu::TextureUsage>(GetSubresourceCount(), wgpu::TextureUsage::None);
     };
 
     class TextureView final : public TextureViewBase {
