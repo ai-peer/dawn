@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "a67412f8_46f862f1",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-20T17:00:19Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc159ae0_2f230708",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-20T17:00:19Z",
+      "side": 1,
+      "message": "nit: could be `ASSERT_SUCCESS(mD3d12Device.As(\u0026infoQueue));` and [1].",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1db5e1c_cfa9d5b1",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
