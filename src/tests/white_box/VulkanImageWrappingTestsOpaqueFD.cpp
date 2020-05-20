@@ -34,7 +34,6 @@ namespace dawn_native { namespace vulkan {
             void SetUp() override {
                 DawnTest::SetUp();
                 DAWN_SKIP_TEST_IF(UsesWire());
-                DAWN_SKIP_TEST_IF(IsSwiftshader());
 
                 deviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(device.Get());
             }
@@ -166,7 +165,7 @@ namespace dawn_native { namespace vulkan {
                 descriptor.isCleared = isCleared;
                 descriptor.allocationSize = allocationSize;
                 descriptor.memoryTypeIndex = memoryTypeIndex;
-                descriptor.memoryFD = memoryFd;
+                descriptor.memoryFD = dup(memoryFd);
                 descriptor.waitFDs = waitFDs;
 
                 WGPUTexture texture =
@@ -202,7 +201,7 @@ namespace dawn_native { namespace vulkan {
       public:
         void SetUp() override {
             VulkanImageWrappingTestBase::SetUp();
-            if (UsesWire() || IsSwiftshader()) {
+            if (UsesWire()) {
                 return;
             }
 
@@ -220,7 +219,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         void TearDown() override {
-            if (UsesWire() || IsSwiftshader()) {
+            if (UsesWire()) {
                 VulkanImageWrappingTestBase::TearDown();
                 return;
             }
@@ -354,7 +353,7 @@ namespace dawn_native { namespace vulkan {
       public:
         void SetUp() override {
             VulkanImageWrappingTestBase::SetUp();
-            if (UsesWire() || IsSwiftshader()) {
+            if (UsesWire()) {
                 return;
             }
 
@@ -382,7 +381,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         void TearDown() override {
-            if (UsesWire() || IsSwiftshader()) {
+            if (UsesWire()) {
                 VulkanImageWrappingTestBase::TearDown();
                 return;
             }
