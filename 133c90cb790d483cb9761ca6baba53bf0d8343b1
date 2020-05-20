@@ -16,6 +16,41 @@
       "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd12f4cd_2e1ad9d0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T12:28:58Z",
+      "side": 1,
+      "message": "Can you take care of adding that to SPVC (and not SPVC\u0027s parser)? It should be a small PR that pipes data around similarly to https://github.com/google/shaderc/commit/ced9c72d005e3002a24683e1b94b7fb978b10144 (but in the other direction)",
+      "parentUuid": "7225d9b8_b34b690b",
+      "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dfc5fc7_62ef3f07",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T12:28:58Z",
+      "side": 1,
+      "message": "Why is this passing? We have test configurations with SPVC on. Maybe something else is causing the compilation to fail?",
+      "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
