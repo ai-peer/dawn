@@ -204,10 +204,14 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
-        // Perform cleanup operations to free unused objects
+    bool Device::IsCompletedSerialProcessed() {
         mCompletedSerial = mFence->GetCompletedValue();
 
+        return mCompletedSerial == mLastProcessedTickSerial;
+    }
+
+    MaybeError Device::TickImpl() {
+        // Perform cleanup operations to free unused objects
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
         mShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
@@ -230,6 +234,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(serial, mFenceEvent),
                                   "D3D12 set event on completion"));
             WaitForSingleObject(mFenceEvent, INFINITE);
+            CheckPassedSerials();
         }
         return {};
     }
@@ -441,6 +446,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(WaitForSerial(mLastSubmittedSerial));
 
         // Call tick one last time so resources are cleaned up.
+        mCompletedSerial = mFence->GetCompletedValue();
         DAWN_TRY(TickImpl());
 
         return {};

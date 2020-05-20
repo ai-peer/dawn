@@ -154,7 +154,14 @@ namespace dawn_native { namespace metal {
         return new TextureView(texture, descriptor);
     }
 
-    Serial Device::GetCompletedCommandSerial() const {
+    Serial Device::CheckAndUpdateCompletedSerials() {
+        if (GetCompletedCommandSerial() > mCompletedSerial) {
+            // sometimes we increase the serials, in which case the completed serial in
+            // the device base will surpass the completed serial we have in the metal backend, so we
+            // must update ours when we see that the completed serial from device base has
+            // increased.
+            mCompletedSerial = GetCompletedCommandSerial();
+        }
         static_assert(std::is_same<Serial, uint64_t>::value, "");
         return mCompletedSerial.load();
     }
@@ -167,19 +174,31 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
-    MaybeError Device::TickImpl() {
-        Serial completedSerial = GetCompletedCommandSerial();
-
-        mMapTracker->Tick(completedSerial);
-
-        if (mCommandContext.GetCommands() != nil) {
-            SubmitPendingCommandBuffer();
-        } else if (completedSerial == mLastSubmittedSerial) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
+    void Device::UpdateSerial() {
+        if (GetCompletedCommandSerial() == mLastSubmittedSerial) {
+            // If there's no GPU work in flight we still need to artificially increment the
+            // serial so that CPU operations waiting on GPU completion can know they don't have
+            // to wait.
             mCompletedSerial++;
             mLastSubmittedSerial++;
         }
+    }
+
+    bool Device::IsCompletedSerialProcessed() {
+        if (mLastProcessedTickSerial == GetCompletedCommandSerial()) {
+            UpdateSerial();
+            return true;
+        }
+        return false;
+    }
+
+    MaybeError Device::TickImpl() {
+        if (mCommandContext.GetCommands() != nil) {
+            SubmitPendingCommandBuffer();
+        } else if (HasNewCallback()) {
+            IncrementLastSubmittedCommandSerial();
+        }
+        UpdateSerial();
 
         return {};
     }
@@ -305,11 +324,12 @@ namespace dawn_native { namespace metal {
             usleep(100);
         }
 
-        // Artificially increase the serials so work that was pending knows it can complete.
-        mCompletedSerial++;
-        mLastSubmittedSerial++;
+        // Force all operations to look as if they were completed
+        AssumeCommandsComplete();
+        CheckPassedSerials();
 
         DAWN_TRY(TickImpl());
+
         return {};
     }
 

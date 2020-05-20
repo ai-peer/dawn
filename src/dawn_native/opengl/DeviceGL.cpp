@@ -151,20 +151,21 @@ namespace dawn_native { namespace opengl {
         mFencesInFlight.emplace(sync, mLastSubmittedSerial);
     }
 
-    Serial Device::GetCompletedCommandSerial() const {
-        return mCompletedSerial;
+    MaybeError Device::TickImpl() {
+        if (HasNewCallback()) {
+            IncrementLastSubmittedCommandSerial();
+        }
     }
 
-    Serial Device::GetLastSubmittedCommandSerial() const {
-        return mLastSubmittedSerial;
-    }
+    bool Device::IsCompletedSerialProcessed() {
+        CheckPassedFences();
 
-    Serial Device::GetPendingCommandSerial() const {
-        return mLastSubmittedSerial + 1;
+        UpdateSerial();
+        return mCompletedSerial == mLastProcessedTickSerial;
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedFences();
+        mLastProcessedTickSerial = mCompletedSerial;
         return {};
     }
 
