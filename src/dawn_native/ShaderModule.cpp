@@ -407,6 +407,15 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Push constants aren't supported.");
         }
 
+        DAWN_TRY(CheckSpvcSuccess(mSpvcContext.BuildCombinedImageSamplers(),
+                                  "Unable to analyze all separate image and samplers for shader."));
+        std::vector<shaderc_spvc_combined_image_sampler> combinedImageSamplers;
+        DAWN_TRY(CheckSpvcSuccess(mSpvcContext.GetCombinedImageSamplers(&combinedImageSamplers),
+                                  "Unable to get combined image samplers for shader."));
+        if (!combinedImageSamplers.empty()) {
+            return DAWN_VALIDATION_ERROR("Combined image samplers aren't supported.");
+        }
+
         // Fill in bindingInfo with the SPIRV bindings
         auto ExtractResourcesBinding =
             [this](std::vector<shaderc_spvc_binding_info> bindings) -> MaybeError {
@@ -570,6 +579,10 @@ namespace dawn_native {
 
         if (resources.push_constant_buffers.size() > 0) {
             return DAWN_VALIDATION_ERROR("Push constants aren't supported.");
+        }
+
+        if (resources.sampled_images.size() > 0) {
+            return DAWN_VALIDATION_ERROR("Combined images and samplers aren't supported.");
         }
 
         // Fill in bindingInfo with the SPIRV bindings

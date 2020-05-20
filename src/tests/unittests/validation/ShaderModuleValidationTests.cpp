@@ -115,3 +115,32 @@ TEST_F(ShaderModuleValidationTest, NoChainedDescriptor) {
   wgpu::ShaderModuleDescriptor desc = {};
   ASSERT_DEVICE_ERROR(device.CreateShaderModule(&desc));
 }
+
+// Test that it is not allowed to use combined texture and sampler.
+TEST_F(ShaderModuleValidationTest, CombinedTextureAndSampler) {
+    const char* shader = R"(
+        #version 450
+        layout (set = 0, binding = 0) uniform sampler2D texture;
+        void main() {
+        })";
+
+    ASSERT_DEVICE_ERROR(
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, shader));
+}
+
+// Test that it is not allowed to use combined texture and sampler when we use spvc.
+// TODO(jiawei.shao@intel.com): re-enable this test when Spvc can correctly extract all combined
+// image samplers.
+TEST_F(ShaderModuleValidationTest, DISABLED_CombinedTextureAndSamplerWithSpvc) {
+    const char* shader = R"(
+        #version 450
+        layout (set = 0, binding = 0) uniform sampler2D texture;
+        void main() {
+        })";
+
+    dawn_native::DeviceDescriptor descriptor;
+    descriptor.forceEnabledToggles.push_back("use_spvc");
+    wgpu::Device deviceWithSpvcParser = adapter.CreateDevice(&descriptor);
+    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(deviceWithSpvcParser,
+                                                  utils::SingleShaderStage::Fragment, shader));
+}
