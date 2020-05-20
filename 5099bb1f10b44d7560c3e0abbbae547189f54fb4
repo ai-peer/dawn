@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3653524e_388551de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:23:32Z",
+      "side": 1,
+      "message": "nit: Bug ID? It could be the same ID as for the change that found the issue.",
+      "revId": "5099bb1f10b44d7560c3e0abbbae547189f54fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
