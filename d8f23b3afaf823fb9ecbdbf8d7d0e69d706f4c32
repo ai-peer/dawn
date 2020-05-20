@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec474691_3ee0f92a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-20T21:39:10Z",
+      "side": 1,
+      "message": "the queue transfer here only applies to the specified subresource range.\n\nThat means if we import an external texture, copy into one subresource (which will do the transfer), and then copy into a second subresource, we\u0027ll miss doing the queue transfer for the second resource because we\u0027ve changed |mExternalState| to Acquired.\n\nThat being said.. I don\u0027t think it\u0027s possible for us to have multi-subresource external images. So we can add a comment about it here and also ASSERT that levelCount and layerCount are 1.",
+      "range": {
+        "startLine": 673,
+        "startChar": 8,
+        "endLine": 676,
+        "endChar": 91
+      },
+      "revId": "d8f23b3afaf823fb9ecbdbf8d7d0e69d706f4c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3336f9e_4dae3aa2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-20T21:39:10Z",
+      "side": 1,
+      "message": "Why do we assign to |mLastUsage| here? It seems like this path happens when the the subresource range is unspecified and those arguments default to 0. If that happens then it looks like we\u0027re setting the entire usage to the usage of the first subresource",
+      "revId": "d8f23b3afaf823fb9ecbdbf8d7d0e69d706f4c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554ee1a4_443174b6",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-20T21:39:10Z",
+      "side": 1,
+      "message": "What do the defaults of 0 mean? Does it mean \"all\" ? I think it would be better to have two overloads. One which does all, and one which does a subresource range. The one that does all can then simply call the subresource range version with all subresources.",
+      "range": {
+        "startLine": 75,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "d8f23b3afaf823fb9ecbdbf8d7d0e69d706f4c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
