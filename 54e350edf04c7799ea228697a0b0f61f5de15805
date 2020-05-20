@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f82d32d7_cb1ed6db",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "Unless I\u0027m missing something, couldn\u0027t this just be:\n\n for (size_t i \u003d 0; i \u003c outputData.size(); i++) {\n   outputData[i] \u003d static_cast\u003cuint32_t\u003e(i + 1u);\n }",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "533e3391_f71bb3fd",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "This is relatively inefficient because it keeps uploading and copying from the same buffer. Instead we should have a buffer that can contain the whole data, call CreateBufferFromData, and schedule several copies.\n\nIIRC texture copy validation rules now allow copying to multiple array layers with a single command, so we can add a TODO to do that once it is implemented in Dawn.",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fbf712e_983a1fe5",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "nit: Encoder begin/end can be outside of the loop, as does the submit.",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44317ef1_f28e1d8e",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "Same comments about having a single big-enough buffer, moving submit outside of the loop, and adding a TODO",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb85472_29e2eb68",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "this would become (1u + x + size.x * (y + size.y * layer))",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9735960f_58fd6df6",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:49:01Z",
+      "side": 1,
+      "message": "nit: instead of magic constants, this could use imageSize now that the spirv-cross bug is fixed. (you can roll spirv-cross TBR if needed)",
+      "revId": "54e350edf04c7799ea228697a0b0f61f5de15805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
