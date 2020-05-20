@@ -39,3 +39,93 @@ TEST(SystemUtilsTests, GetExecutableDirectory) {
     // Test last charecter in path
     ASSERT_EQ(GetExecutableDirectory().back(), *GetPathSeparator());
 }
+
+// Tests for ScopedEnvironmentVar
+TEST(SystemUtilsTests, ScopedEnvironmentVar) {
+    SetEnvironmentVar("ScopedEnvironmentVarForTest", "original");
+
+    // Test that the environment variable can be set, and it is unset at the end of the scope.
+    {
+        ScopedEnvironmentVar var("ScopedEnvironmentVarForTest", "NewEnvironmentVarValue");
+        ASSERT_TRUE(var.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "NewEnvironmentVarValue");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+
+    // Test nested scopes
+    {
+        ScopedEnvironmentVar outer("ScopedEnvironmentVarForTest", "outer");
+        ASSERT_TRUE(outer.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "outer");
+        {
+            ScopedEnvironmentVar inner("ScopedEnvironmentVarForTest", "inner");
+            ASSERT_TRUE(inner.IsSet());
+            ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+        }
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "outer");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+
+    // Test moving out of inner scope
+    {
+        ScopedEnvironmentVar var = []() {
+            ScopedEnvironmentVar inner("ScopedEnvironmentVarForTest", "from function");
+            EXPECT_TRUE(inner.IsSet());
+            EXPECT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "from function");
+            return inner;
+        }();
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "from function");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+
+    // Test assigning out of inner scope.
+    {
+        ScopedEnvironmentVar outer;
+        ASSERT_FALSE(outer.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+        {
+            ScopedEnvironmentVar inner("ScopedEnvironmentVarForTest", "inner");
+            ASSERT_TRUE(inner.IsSet());
+            ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+
+            outer = std::move(inner);
+
+            // Check the |IsSet| flags have swapped.
+            ASSERT_FALSE(inner.IsSet());
+            ASSERT_TRUE(outer.IsSet());
+
+            // Check the variable is still set
+            ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+        }
+        // Check the variable is still set because it was moved to the outer scope
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+
+    // Test constructing into outer scope
+    {
+        ScopedEnvironmentVar outer;
+        ASSERT_FALSE(outer.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+        {
+            outer = ScopedEnvironmentVar("ScopedEnvironmentVarForTest", "inner");
+            ASSERT_TRUE(outer.IsSet());
+            ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+        }
+        // Check the variable is still set because it was constructed into the outer scope
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+
+    // Test redundantly setting scoped variables
+    {
+        ScopedEnvironmentVar var1("ScopedEnvironmentVarForTest", "var1");
+        ASSERT_TRUE(var1.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "var1");
+
+        ScopedEnvironmentVar var2("ScopedEnvironmentVarForTest", "var2");
+        ASSERT_TRUE(var2.IsSet());
+        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "var2");
+    }
+    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+}

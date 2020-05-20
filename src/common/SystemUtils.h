@@ -24,4 +24,24 @@ std::string GetEnvironmentVar(const char* variableName);
 bool SetEnvironmentVar(const char* variableName, const char* value);
 std::string GetExecutableDirectory();
 
+class ScopedEnvironmentVar {
+  public:
+    ScopedEnvironmentVar() = default;
+    ScopedEnvironmentVar(const char* variableName, const char* value);
+    ~ScopedEnvironmentVar();
+
+    ScopedEnvironmentVar(const ScopedEnvironmentVar& rhs) = delete;
+    ScopedEnvironmentVar& operator=(const ScopedEnvironmentVar& rhs) = delete;
+
+    ScopedEnvironmentVar(ScopedEnvironmentVar&& rhs) = default;
+    ScopedEnvironmentVar& operator=(ScopedEnvironmentVar&& rhs);
+
+    bool IsSet() const;
+
+  private:
+    std::string mName;
+    std::string mOriginalValue;
+    bool mIsSet = false;
+};
+
 #endif  // COMMON_SYSTEMUTILS_H_
