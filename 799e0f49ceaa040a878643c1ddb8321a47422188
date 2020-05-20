@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9cd90928_7f701245",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e89d1da5_95264a34",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bc680ef_e3c54a9c",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "1fae1b75_5ee2132c",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bc680ef_e3c54a9c",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4a7e41c_44caf5e5",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "486ac23b_3743cfcb",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Added comment blocks demarcating temporary and permanent ids. Would have preferred to use multiple storage filters/arrays, but API only supports a single active storage filter.",
+      "parentUuid": "e4a7e41c_44caf5e5",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "99560490_c4eb346b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9768c59_3118c922",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98d74d10_89ea1b8f",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.h",
         "patchSetId": 5
@@ -90,6 +168,24 @@
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "902c9ddd_81246369",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98d74d10_89ea1b8f",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -113,6 +209,30 @@
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7fe02b4_e3e0692b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c4b6fa5_51bb4eb6",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 9
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +271,24 @@
     },
     {
       "key": {
+        "uuid": "05a89b9d_7ed6c6b8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eba084c7_06b7438b",
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91cfa050_e7ee4f21",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 5
@@ -171,6 +309,30 @@
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbea0683_927ab0ab",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Ran into a compilation error using size_t under x86.\nhttps://ci.chromium.org/p/chromium/builders/try/dawn-win10-x86-deps-rel/9257",
+      "parentUuid": "91cfa050_e7ee4f21",
+      "range": {
+        "startLine": 467,
+        "startChar": 16,
+        "endLine": 467,
+        "endChar": 22
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -218,6 +380,30 @@
       "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f6138f2_de604ac7",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-20T01:42:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed1ad9ee_5aa9ab01",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 33
+      },
+      "revId": "799e0f49ceaa040a878643c1ddb8321a47422188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
