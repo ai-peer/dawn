@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7225d9b8_b34b690b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-20T12:23:00Z",
+      "side": 1,
+      "message": "Now SPVC only supports:\n1. BuildCombinedImageSamplers(analyzes all separate image and samplers used from the currently selected entry point, and re-routes them all to a combined image sampler instead)\nhttps://github.com/google/shaderc/blob/master/libshaderc_spvc/include/spvc/spvc.hpp#L436\n\n2. GetCombinedImageSamplers(after call to BuildCombinedImageSamplers, fetch the ids associated with the combined image samplers)\nhttps://github.com/google/shaderc/blob/master/libshaderc_spvc/include/spvc/spvc.hpp#L446\n\nWe need \"GetCombinedImageSamplerCount\" to get the number of combined textures and samplers declared in the shader.",
+      "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
