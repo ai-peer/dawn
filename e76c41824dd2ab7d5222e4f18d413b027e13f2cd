@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3679be4c_444da0fa",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:53:30Z",
+      "side": 1,
+      "message": "nit: Maybe add IsD3DWarp to https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/common/GPUInfo.h;l\u003d41 and use that.",
+      "revId": "e76c41824dd2ab7d5222e4f18d413b027e13f2cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

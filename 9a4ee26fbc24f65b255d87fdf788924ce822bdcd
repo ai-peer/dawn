@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "779f2968_42651731",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-20T09:53:30Z",
+      "side": 1,
+      "message": "I don\u0027t think this patch tries to figure out which WARP adapter to use, just unblock end2end tests. If we need to select the correct WARP, let\u0027s do that with a different CL that handles it in D3D12 backend.",
+      "parentUuid": "9c36c75d_adea2907",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9df58af6_2c40df49",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
