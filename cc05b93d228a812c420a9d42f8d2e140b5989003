@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8f571ac_1d3ec40b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-20T02:13:16Z",
+      "side": 1,
+      "message": "Nit: To keep indentation to a minimum, consider returning early if IsBackendValidationEnabled returns false.\n\n(Same goes for other place you\u0027ve done this)",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 58
+      },
+      "revId": "cc05b93d228a812c420a9d42f8d2e140b5989003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
