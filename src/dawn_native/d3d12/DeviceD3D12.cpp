@@ -207,8 +207,6 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedSerials();
-
         // Perform cleanup operations to free unused objects
         Serial completedSerial = GetCompletedCommandSerial();
 
@@ -237,6 +235,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(serial, mFenceEvent),
                                   "D3D12 set event on completion"));
             WaitForSingleObject(mFenceEvent, INFINITE);
+            CheckPassedSerials();
         }
         return {};
     }

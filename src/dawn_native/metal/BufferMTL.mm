@@ -78,10 +78,12 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        device->GetPendingCommandContext();
         return {};
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        device->GetPendingCommandContext();
         return {};
     }
 
