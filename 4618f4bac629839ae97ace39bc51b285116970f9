@@ -68,6 +68,24 @@
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47af5d21_6c55cb94",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-20T20:20:29Z",
+      "side": 1,
+      "message": "\u003e I ran into an assert [1] when using internal. Should I use DAWN_DEVICE_LOST_ERROR instead?\n\nTo do as CW suggests, you\u0027ll likely need to check if the device is being disconnected and if so, return DEVICE_LOSS to tear down the device completely (two steps).\n\n\u003e Also, what would be the best way to handle more than 1 error?\n\nFirst error-out is fine IMHO. Overkill to dump the entire queue to stdout + stderr (twice).",
+      "parentUuid": "a3b1ae7c_fae2c669",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
