@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "9f3a7f03_c75bbfee",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-20T17:21:26Z",
+      "side": 1,
+      "message": "Okay, sounds like these are indeed distinct WARP adapters, so it makes sense to workaround the naming problem in DawnTest since this is just to make googletest happy.",
+      "parentUuid": "779f2968_42651731",
+      "revId": "9a4ee26fbc24f65b255d87fdf788924ce822bdcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9df58af6_2c40df49",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
