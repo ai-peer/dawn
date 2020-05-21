@@ -86,6 +86,24 @@
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c047caf1_01b6795c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T10:03:47Z",
+      "side": 1,
+      "message": "+1 on it being fine to dump only surface the first error, since the goal is to have no errors.\n\nThe issue with the error type is unfortunate, but likewise since the goal is to have no errors, maybe we can use INTERNAL, and get an assert if we ever have an error during WaitForIdleForDestruction. We should fix all such errors anyway.",
+      "parentUuid": "47af5d21_6c55cb94",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
