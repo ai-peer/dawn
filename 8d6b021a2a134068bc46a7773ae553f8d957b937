@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95a0d3c_17e00a04",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-21T03:07:22Z",
+      "side": 0,
+      "message": "This code in Apply() is called during compute pass execution (RecordComputPass). But we have already added barriers for textures at TransitionUsageNow() before render/compute pass when BeginComputePass. It seems that we don\u0027t need to add barriers for compute again. I removed it, all tests can pass. But if I remove the code for buffer barrier (code snippet from line 146 to 148), tests in ComputeStorageBufferBarrierTests.cpp fail. \n\nComputeStorageBufferBarrierTests were added by Austin, do you think we need to add similar tests for textures in order to call into here and make it take effect? Otherwise, I think we can remove the code snippet.",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
