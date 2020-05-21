@@ -118,6 +118,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "517214b4_b1679642",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-21T17:15:05Z",
+      "side": 0,
+      "message": "Maybe you are correct. But I have a local patch which change class PassResourceUsage to PassOrDispatchResourceUsage for frontend tracking, I will revisit that to see what will happen if that information is transferred to backend in future.",
+      "parentUuid": "2c2b4ecc_5f4401f5",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
