@@ -46,6 +46,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f4a8b9a_0a80d25e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-21T16:50:02Z",
+      "side": 0,
+      "message": "Yup, what Corentin said is correct. We still need barriers for Dispatch synchronization.",
+      "parentUuid": "493d1d3e_779a3c5a",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
