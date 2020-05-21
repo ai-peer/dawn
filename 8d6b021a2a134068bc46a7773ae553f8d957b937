@@ -22,6 +22,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd02cdd4_4f485a99",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:18:34Z",
+      "side": 0,
+      "message": "Sorry but this function can\u0027t be removed for now because when running the examples with Vulkan it does the OutputAttachment -\u003e Present transition for the swapchain textures. Without it our swapchain code is invalid and won\u0027t pass the Vulkan validation layers.\n\nOldSwapChain vs. NewSwapChain is because in Dawn we first started with swapchains where the implementation is provided by the application, and that turned out to be a terrible idea. For some time now I\u0027ve tried to move the code to use \"surface-based\" swapchains (see for example ManualSwapchainTest.cpp) but the Vulkan backned is incredibly hard to get right. My WIP is here if you\u0027re curious: https://dawn-review.googlesource.com/c/dawn/+/17966",
+      "parentUuid": "572e114a_3e0ea912",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
