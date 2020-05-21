@@ -1,0 +1,244 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86409a31_bf4b5d55",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "This is always used with levelCount and layerCount \u003d\u003d 1. The arguments could be removed for now. After other comments, `this` won\u0027t be used so this could become a helper method in the anonymous namespace.",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8f7fa0e_320630e8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18471ac2_1697db7b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "There is significant code duplication between the two TransitionSubresourceUsageNow and TransitionUsageNow. I suggest doing the following:\n\n  std::vector\u003cVkImageMemoryBarrier\u003e barriers;\n  // compute the barriers\n\n  DoTransitionSpecialCases(recordingContext, \u0026barriers);\n\n  CmdPipelineBarrier",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28ba871b_3b07d1c1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "nit: allUsages and allLastUsages so that it is clear it is the sum of all of them.",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 0
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15c245c8_76a1bece",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "Instead of checking for this here, I think it could be handled entirely in DoTransitionSpecialCases. Textures with mExternalState !\u003d InternalOnly are only single-subresource texture so in DoTransitionSpecialCases we could do:\n\n if (mExternalState \u003d\u003d ExternalState::PendingRelease) {\n   ASSERT(has a single subresource);\n   if (barriers.empty()) {\n     add dummy barrier\n   }\n   set the queue family indices\n } else if (mExternalState \u003d\u003d ExternalState::PendingRelease) {\n   // same stuff\n }",
+      "range": {
+        "startLine": 700,
+        "startChar": 81,
+        "endLine": 701,
+        "endChar": 52
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d00a2c_2db729c0",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "divisions are way more expansive than other arithmetic, can we do a double for-loop instead and compute and use subresourceIndex?",
+      "range": {
+        "startLine": 706,
+        "startChar": 58,
+        "endLine": 706,
+        "endChar": 79
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06d03944_adff07a7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "Would go in DoTransitionSpecialCases",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 726,
+        "endChar": 0
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e48d08_4194881e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "This too would go in DoTransitionSpecialCases",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f86846b5_defc17dd",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "This does a single barrier even when there are many subresources. It is incorrect because different subresources could be in different layouts and would need separate barriers so that oldLayout is correct.",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a7e9403_96927cf5",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "The default values are never used so they could be removed. If they are used to denote a full resource transition, please make a TransitionFullUsage(usage) that calls TransitionUsageNow with the correct arguments.",
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a431ad56_f83568d0",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "nit: TransitionUsageForPass",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0aa74dd_443ad272",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T12:47:52Z",
+      "side": 1,
+      "message": "const std::vector\u0026 otherwise there is an extra copy.",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "a492c67482ba3346728de1ec105db6e57184f86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
