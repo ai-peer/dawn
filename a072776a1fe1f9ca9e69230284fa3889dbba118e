@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "114abaa5_0229f048",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5e755bc_36aac908",
+      "range": {
+        "startLine": 41,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "337358fc_bc70704e",
         "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "73f3d855_6c31d664",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "337358fc_bc70704e",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c57bd61_94ae17ac",
         "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
         "patchSetId": 2
@@ -62,6 +110,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99eb78d8_3179f818",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c57bd61_94ae17ac",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "50e40123_51f3bb86",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85312038_2078c5e3",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8dcca50_63488154",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -96,6 +180,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5805f369_a674404e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8dcca50_63488154",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "8d89857b_288998a8",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad38dcb_bc27331b",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86f7e003_211eeb95",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 2
@@ -130,6 +250,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abe573de_c6057032",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86f7e003_211eeb95",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "e5599f5c_88555445",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2651fc1_6a721f67",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc548b24_2655e77c",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 2
@@ -164,6 +320,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "111a8ceb_09fdbf2d",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc548b24_2655e77c",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -184,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "91855b58_f549bddb",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbbb09e9_9e70cfb1",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3c9350b_1a521860",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 2
@@ -198,6 +390,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "243054f1_886577dc",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3c9350b_1a521860",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -218,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "dd7c7662_eae0c2e7",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec2b2afb_6456b05c",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acb847d2_8ec8430a",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 2
@@ -235,6 +463,24 @@
     },
     {
       "key": {
+        "uuid": "ec364309_58c2db1f",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "If device does not support this extension and directly return {\"shader_float16\"}, test would  assert in https://dawn-review.googlesource.com/c/dawn/+/21901/2/src/tests/DawnTest.cpp#781, so this case will crash, not be skipped. I refer CompressedTextureFormatTests.cpp and D3D12SmallTextureTests.cpp.",
+      "parentUuid": "acb847d2_8ec8430a",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe71ec4c_2bd81079",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 2
@@ -246,6 +492,24 @@
       "writtenOn": "2020-05-19T12:49:02Z",
       "side": 1,
       "message": "With the comment above, I think this could be removed, and ShaderFloat16Tests simplified.",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32a9c25d_fa15fa8d",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Above comment.",
+      "parentUuid": "fe71ec4c_2bd81079",
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -275,6 +539,30 @@
     },
     {
       "key": {
+        "uuid": "d516b330_31eb66af",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "026d9a18_7e7a2c40",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b32b3dc_e637774b",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 2
@@ -289,6 +577,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60bc9a33_9418b15e",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b32b3dc_e637774b",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -309,6 +615,24 @@
     },
     {
       "key": {
+        "uuid": "12bbab6c_59dd9526",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81ec9df5_6293e452",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97c2902d_6c380f4b",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 2
@@ -323,6 +647,24 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ded00608_ed14606d",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97c2902d_6c380f4b",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -346,6 +688,30 @@
       "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c35e16a2_03eb29bd",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-21T09:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3cb5aa1_53929bc3",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 32
+      },
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
