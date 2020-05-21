@@ -644,34 +644,28 @@ namespace dawn_native { namespace vulkan {
         return VulkanAspectMask(GetFormat());
     }
 
-    void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
-                                     wgpu::TextureUsage usage) {
-        // Avoid encoding barriers when it isn't needed.
-        bool lastReadOnly = (mLastUsage & kReadOnlyTextureUsages) == mLastUsage;
-        if (lastReadOnly && mLastUsage == usage && mLastExternalState == mExternalState) {
-            return;
-        }
-
-        const Format& format = GetFormat();
-
-        VkPipelineStageFlags srcStages = VulkanPipelineStage(mLastUsage, format);
-        VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, format);
-
+    VkImageMemoryBarrier Texture::BuildMemoryBarrier(wgpu::TextureUsage lastUsage,
+                                                     wgpu::TextureUsage usage,
+                                                     const Format& format,
+                                                     uint32_t mipLevel,
+                                                     uint32_t levelCount,
+                                                     uint32_t arrayLayer,
+                                                     uint32_t layerCount) {
         VkImageMemoryBarrier barrier;
         barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
         barrier.pNext = nullptr;
-        barrier.srcAccessMask = VulkanAccessFlags(mLastUsage, format);
+        barrier.srcAccessMask = VulkanAccessFlags(lastUsage, format);
         barrier.dstAccessMask = VulkanAccessFlags(usage, format);
-        barrier.oldLayout = VulkanImageLayout(mLastUsage, format);
+        barrier.oldLayout = VulkanImageLayout(lastUsage, format);
         barrier.newLayout = VulkanImageLayout(usage, format);
         barrier.image = mHandle;
         // This transitions the whole resource but assumes it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
         barrier.subresourceRange.aspectMask = VulkanAspectMask(format);
-        barrier.subresourceRange.baseMipLevel = 0;
-        barrier.subresourceRange.levelCount = GetNumMipLevels();
-        barrier.subresourceRange.baseArrayLayer = 0;
-        barrier.subresourceRange.layerCount = GetArrayLayers();
+        barrier.subresourceRange.baseMipLevel = mipLevel;
+        barrier.subresourceRange.levelCount = levelCount;
+        barrier.subresourceRange.baseArrayLayer = arrayLayer;
+        barrier.subresourceRange.layerCount = layerCount;
 
         barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
         barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
@@ -680,15 +674,48 @@ namespace dawn_native { namespace vulkan {
             // Transfer texture from external queue to graphics queue
             barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
             barrier.dstQueueFamilyIndex = ToBackend(GetDevice())->GetGraphicsQueueFamily();
-            // Don't override oldLayout to leave it as VK_IMAGE_LAYOUT_UNDEFINED
-            // TODO(http://crbug.com/dawn/200)
-            mExternalState = ExternalState::Acquired;
-
         } else if (mExternalState == ExternalState::PendingRelease) {
             // Transfer texture from graphics queue to external queue
             barrier.srcQueueFamilyIndex = ToBackend(GetDevice())->GetGraphicsQueueFamily();
             barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
             barrier.newLayout = VK_IMAGE_LAYOUT_GENERAL;
+        }
+
+        return barrier;
+    }
+
+    void Texture::TransitionSubresourceUsageNow(CommandRecordingContext* recordingContext,
+                                                std::vector<wgpu::TextureUsage> subresourceUsages) {
+        std::vector<VkImageMemoryBarrier> barriers;
+        const Format& format = GetFormat();
+        wgpu::TextureUsage usage = wgpu::TextureUsage::None;
+        wgpu::TextureUsage lastUsage = wgpu::TextureUsage::None;
+        for (uint32_t i = 0; i < subresourceUsages.size(); ++i) {
+            // Avoid encoding barriers when it isn't needed.
+            if (subresourceUsages[i] == wgpu::TextureUsage::None) {
+                continue;
+            }
+            bool lastReadOnly =
+                (mLastSubresourceUsages[i] & kReadOnlyTextureUsages) == mLastSubresourceUsages[i];
+            if (lastReadOnly && mLastSubresourceUsages[i] == subresourceUsages[i] &&
+                mLastExternalState == mExternalState) {
+                continue;
+            }
+
+            barriers.push_back(BuildMemoryBarrier(mLastSubresourceUsages[i], subresourceUsages[i],
+                                                  format, i % GetNumMipLevels(), 1,
+                                                  i / GetNumMipLevels(), 1));
+
+            usage |= subresourceUsages[i];
+            lastUsage |= mLastSubresourceUsages[i];
+            mLastSubresourceUsages[i] = subresourceUsages[i];
+        }
+
+        if (mExternalState == ExternalState::PendingAcquire) {
+            // Don't override oldLayout to leave it as VK_IMAGE_LAYOUT_UNDEFINED
+            // TODO(http://crbug.com/dawn/200)
+            mExternalState = ExternalState::Acquired;
+        } else if (mExternalState == ExternalState::PendingRelease) {
             mExternalState = ExternalState::Released;
         }
 
@@ -697,11 +724,75 @@ namespace dawn_native { namespace vulkan {
                                                 mWaitRequirements.begin(), mWaitRequirements.end());
         mWaitRequirements.clear();
 
+        VkPipelineStageFlags srcStages = VulkanPipelineStage(lastUsage, format);
+        VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, format);
+        ToBackend(GetDevice())
+            ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                    nullptr, 0, nullptr, barriers.size(), barriers.data());
+
+        mLastExternalState = mExternalState;
+    }
+
+    void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
+                                     wgpu::TextureUsage usage,
+                                     uint32_t mipLevel,
+                                     uint32_t levelCount,
+                                     uint32_t arrayLayer,
+                                     uint32_t layerCount) {
+        wgpu::TextureUsage lastUsage = wgpu::TextureUsage::None;
+        for (uint32_t i = 0; i < layerCount; ++i) {
+            for (uint32_t j = 0; j < levelCount; ++j) {
+                lastUsage |= mLastSubresourceUsages[GetSubresourceIndex(mipLevel, arrayLayer)];
+            }
+        }
+
+        // Avoid encoding barriers when it isn't needed.
+        bool lastReadOnly = (lastUsage & kReadOnlyTextureUsages) == lastUsage;
+        if (lastReadOnly && lastUsage == usage && mLastExternalState == mExternalState) {
+            return;
+        }
+
+        const Format& format = GetFormat();
+        VkImageMemoryBarrier barrier;
+        if (levelCount > 0 && layerCount > 0) {
+            barrier = BuildMemoryBarrier(lastUsage, usage, format, mipLevel, levelCount, arrayLayer,
+                                         layerCount);
+        } else {
+            barrier = BuildMemoryBarrier(lastUsage, usage, format, 0, GetNumMipLevels(), 0,
+                                         GetArrayLayers());
+        }
+
+        if (mExternalState == ExternalState::PendingAcquire) {
+            // Don't override oldLayout to leave it as VK_IMAGE_LAYOUT_UNDEFINED
+            // TODO(http://crbug.com/dawn/200)
+            mExternalState = ExternalState::Acquired;
+        } else if (mExternalState == ExternalState::PendingRelease) {
+            mExternalState = ExternalState::Released;
+        }
+
+        // Move required semaphores into waitSemaphores
+        recordingContext->waitSemaphores.insert(recordingContext->waitSemaphores.end(),
+                                                mWaitRequirements.begin(), mWaitRequirements.end());
+        mWaitRequirements.clear();
+
+        VkPipelineStageFlags srcStages = VulkanPipelineStage(lastUsage, format);
+        VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, format);
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 0, nullptr, 1, &barrier);
 
-        mLastUsage = usage;
+        if (levelCount > 0 && layerCount > 0) {
+            for (uint32_t i = 0; i < layerCount; ++i) {
+                for (uint32_t j = 0; j < levelCount; ++j) {
+                    mLastSubresourceUsages[GetSubresourceIndex(mipLevel + j, arrayLayer + i)] =
+                        usage;
+                }
+            }
+        } else {
+            for (uint32_t i = 0; i < mLastSubresourceUsages.size(); ++i) {
+                mLastSubresourceUsages[i] = usage;
+            }
+        }
         mLastExternalState = mExternalState;
     }
 
@@ -716,7 +807,8 @@ namespace dawn_native { namespace vulkan {
         uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
-        TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst);
+        TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, baseMipLevel, levelCount,
+                           baseArrayLayer, layerCount);
         if (GetFormat().isRenderable) {
             VkImageSubresourceRange range = {};
             range.aspectMask = GetVkAspectMask();
