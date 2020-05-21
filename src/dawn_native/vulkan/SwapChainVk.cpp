@@ -53,17 +53,4 @@ namespace dawn_native { namespace vulkan {
             .Detach();
     }
 
-    MaybeError SwapChain::OnBeforePresent(TextureBase* texture) {
-        Device* device = ToBackend(GetDevice());
-
-        // Perform the necessary pipeline barriers for the texture to be used with the usage
-        // requested by the implementation.
-        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-        ToBackend(texture)->TransitionUsageNow(recordingContext, mTextureUsage);
-
-        DAWN_TRY(device->SubmitPendingCommands());
-
-        return {};
-    }
-
 }}  // namespace dawn_native::vulkan

@@ -68,7 +68,6 @@ namespace dawn_native {
         ~OldSwapChainBase() override;
         const DawnSwapChainImplementation& GetImplementation();
         virtual TextureBase* GetNextTextureImpl(const TextureDescriptor*) = 0;
-        virtual MaybeError OnBeforePresent(TextureBase* texture) = 0;
 
       private:
         MaybeError ValidateConfigure(wgpu::TextureFormat format,

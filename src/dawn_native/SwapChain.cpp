@@ -201,10 +201,6 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (GetDevice()->ConsumedError(OnBeforePresent(mCurrentTexture.Get()))) {
-            return;
-        }
-
         mImplementation.Present(mImplementation.userData);
 
         mCurrentTexture = nullptr;

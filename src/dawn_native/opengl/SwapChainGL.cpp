@@ -44,8 +44,4 @@ namespace dawn_native { namespace opengl {
                            TextureBase::TextureState::OwnedExternal);
     }
 
-    MaybeError SwapChain::OnBeforePresent(TextureBase*) {
-        return {};
-    }
-
 }}  // namespace dawn_native::opengl

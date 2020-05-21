@@ -51,10 +51,6 @@ namespace dawn_native { namespace metal {
         return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
     }
 
-    MaybeError OldSwapChain::OnBeforePresent(TextureBase*) {
-        return {};
-    }
-
     // SwapChain
 
     SwapChain::SwapChain(Device* device,

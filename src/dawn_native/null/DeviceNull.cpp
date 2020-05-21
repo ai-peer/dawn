@@ -421,10 +421,6 @@ namespace dawn_native { namespace null {
         return GetDevice()->CreateTexture(descriptor);
     }
 
-    MaybeError OldSwapChain::OnBeforePresent(TextureBase*) {
-        return {};
-    }
-
     // NativeSwapChainImpl
 
     void NativeSwapChainImpl::Init(WSIContext* context) {

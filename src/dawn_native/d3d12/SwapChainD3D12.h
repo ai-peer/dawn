@@ -28,7 +28,6 @@ namespace dawn_native { namespace d3d12 {
       protected:
         ~SwapChain() override;
         TextureBase* GetNextTextureImpl(const TextureDescriptor* descriptor) override;
-        MaybeError OnBeforePresent(TextureBase* texture) override;
 
         wgpu::TextureUsage mTextureUsage;
     };

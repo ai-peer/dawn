@@ -48,18 +48,4 @@ namespace dawn_native { namespace d3d12 {
         return new Texture(ToBackend(GetDevice()), descriptor, std::move(d3d12Texture));
     }
 
-    MaybeError SwapChain::OnBeforePresent(TextureBase* texture) {
-        Device* device = ToBackend(GetDevice());
-
-        CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
-
-        // Perform the necessary transition for the texture to be presented.
-        ToBackend(texture)->TrackUsageAndTransitionNow(commandContext, mTextureUsage);
-
-        DAWN_TRY(device->ExecutePendingCommandContext());
-
-        return {};
-    }
-
 }}  // namespace dawn_native::d3d12

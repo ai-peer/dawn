@@ -32,7 +32,6 @@ namespace dawn_native { namespace metal {
       protected:
         ~OldSwapChain() override;
         TextureBase* GetNextTextureImpl(const TextureDescriptor* descriptor) override;
-        MaybeError OnBeforePresent(TextureBase* texture) override;
     };
 
     class SwapChain final : public NewSwapChainBase {
