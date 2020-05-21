@@ -70,6 +70,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3721d9f6_3b117594",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-21T17:06:37Z",
+      "side": 0,
+      "message": "Hmm, you reminded me that resource usage tracking for compute should be done per dispatch, not per pass. But right now resource usage tracking is done per pass at frontend for compute, so this is like a remedy specific for compute pass after the fact. While the remedy is not necessary for render pass.   \n\nAfter we trace resource usage for compute per dispatch at frontend, maybe we can remove the barriers here. I will re-visit this later.",
+      "parentUuid": "7f4a8b9a_0a80d25e",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
