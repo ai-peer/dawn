@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "2f38f45b_7d90016e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-21T06:51:03Z",
+      "side": 1,
+      "message": "re-think about this. If the usages of texture\u0027s subresource are mixed, mLastUsage will be useless. But the usage of the first level/slice in the coming subresource is not correct either. The coming subresource may have mixed usages too. \n\nThe solution is that mLastUsage for the entire texture is not useful at all, we need to re-calculate it for the particular subresource for each transition. I updated the code. \n\nWe may need to add end2end tests because previous code can pass by chance: if the subresource has mixed usages, the code snippet here should fail.",
+      "parentUuid": "7d7f0d93_60520eb3",
+      "revId": "d8f23b3afaf823fb9ecbdbf8d7d0e69d706f4c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "554ee1a4_443174b6",
         "filename": "src/dawn_native/vulkan/TextureVk.h",
         "patchSetId": 1
