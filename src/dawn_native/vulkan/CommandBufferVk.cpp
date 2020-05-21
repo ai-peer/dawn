@@ -147,16 +147,10 @@ namespace dawn_native { namespace vulkan {
                                     ->TransitionUsageNow(recordingContext,
                                                          wgpu::BufferUsage::Storage);
                                 break;
-
                             case wgpu::BindingType::ReadonlyStorageTexture:
                             case wgpu::BindingType::WriteonlyStorageTexture:
-                                ToBackend(
-                                    static_cast<TextureViewBase*>(mBindings[index][bindingIndex])
-                                        ->GetTexture())
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::TextureUsage::Storage);
+                                // Don't require barriers.
                                 break;
-
                             case wgpu::BindingType::StorageTexture:
                                 // Not implemented.
 
