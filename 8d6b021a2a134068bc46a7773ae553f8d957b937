@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "572e114a_3e0ea912",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-21T03:12:20Z",
+      "side": 0,
+      "message": "When I looked into this TransitionUsageNow() for texture subresource, it turned out that this function is not called at all. Looks like is not useful. \n\nOne further question: Is class \"OldSwapChainBase\" useful (OnBeforePresent resides in OldSwapChainBase)?",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
