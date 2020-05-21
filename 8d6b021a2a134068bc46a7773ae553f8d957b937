@@ -94,6 +94,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c2b4ecc_5f4401f5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T17:09:53Z",
+      "side": 0,
+      "message": "Even when the validation of resource usage per dispatch happens, this logic will need to stay because it takes care of the resource transitions between dispatches.",
+      "parentUuid": "3721d9f6_3b117594",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
