@@ -170,17 +170,8 @@ namespace dawn_native { namespace d3d12 {
                                 break;
 
                             case wgpu::BindingType::ReadonlyStorageTexture:
-                                ToBackend(static_cast<TextureView*>(mBindings[index][binding])
-                                              ->GetTexture())
-                                    ->TrackUsageAndTransitionNow(commandContext,
-                                                                 kReadonlyStorageTexture);
-                                break;
-
                             case wgpu::BindingType::WriteonlyStorageTexture:
-                                ToBackend(static_cast<TextureView*>(mBindings[index][binding])
-                                              ->GetTexture())
-                                    ->TrackUsageAndTransitionNow(commandContext,
-                                                                 wgpu::TextureUsage::Storage);
+                                // Don't require barriers.
                                 break;
 
                             case wgpu::BindingType::StorageTexture:

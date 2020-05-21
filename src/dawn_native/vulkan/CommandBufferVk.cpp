@@ -150,11 +150,7 @@ namespace dawn_native { namespace vulkan {
 
                             case wgpu::BindingType::ReadonlyStorageTexture:
                             case wgpu::BindingType::WriteonlyStorageTexture:
-                                ToBackend(
-                                    static_cast<TextureViewBase*>(mBindings[index][bindingIndex])
-                                        ->GetTexture())
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::TextureUsage::Storage);
+                                // Don't require barriers.
                                 break;
 
                             case wgpu::BindingType::StorageTexture:
