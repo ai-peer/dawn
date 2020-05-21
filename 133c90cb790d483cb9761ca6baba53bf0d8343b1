@@ -51,6 +51,24 @@
       "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1535472c_42e8d4c9",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-21T00:17:30Z",
+      "side": 1,
+      "message": "SPVC is never used in dawn_unittests right now. To test SPVC in dawn_unittests we should create another device with \"use_spvc\" toggle on.",
+      "parentUuid": "7dfc5fc7_62ef3f07",
+      "revId": "133c90cb790d483cb9761ca6baba53bf0d8343b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
