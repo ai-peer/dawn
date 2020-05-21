@@ -481,6 +481,24 @@
     },
     {
       "key": {
+        "uuid": "af0a82f2_b0d8f144",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "I think we should change the place you linked to DAWN_SKIP_TEST_IF(!SupportsExtension(GetRequiredExtensions())) and the logic simplified in this test and the others.\n\nCan be done as a follow up so as to unblock this CL.",
+      "parentUuid": "ec364309_58c2db1f",
+      "revId": "a072776a1fe1f9ca9e69230284fa3889dbba118e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe71ec4c_2bd81079",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 2

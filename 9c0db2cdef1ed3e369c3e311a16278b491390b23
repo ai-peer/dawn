@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "a2287ebe_04f99146",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "nit: only add it if we are not on Vulkan 1.1 since it was promoted there (and I think that technically drivers are allowed to no longer exposed support for it). Also have a comment that explains that briefly.",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c8b68bb_d55a4fe3",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "This if can be removed since we check for it above already.",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f358a4d_d8d583b7",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "nit: this could be after [1] and have a comment that explains that 16BitStorage is promoted in Vulkan 1.1 so we gather information if either is present. (and tag the extension as available.)",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef97c54_23971e43",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0771805d_677e7b8d",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 3
@@ -13,6 +81,29 @@
       "writtenOn": "2020-05-21T09:19:26Z",
       "side": 1,
       "message": "nit: Math.h, that\u0027s the cause of the compilation error.",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "387fd193_78e3b22c",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-21T09:36:02Z",
+      "side": 1,
+      "message": "u-nit: have the two comments be the same, one has 0.0 while the other has 0.",
+      "range": {
+        "startLine": 46,
+        "startChar": 80,
+        "endLine": 46,
+        "endChar": 98
+      },
       "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
