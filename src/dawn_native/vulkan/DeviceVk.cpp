@@ -333,6 +333,22 @@ namespace dawn_native { namespace vulkan {
             usedKnobs.features.textureCompressionBC = VK_TRUE;
         }
 
+        if (IsExtensionEnabled(Extension::ShaderFloat16)) {
+            const VulkanDeviceInfo& deviceInfo = ToBackend(GetAdapter())->GetDeviceInfo();
+            ASSERT(deviceInfo.shaderFloat16Int8 &&
+                   deviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
+                   deviceInfo._16BitStorage &&
+                   deviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE);
+
+            usedKnobs.shaderFloat16Int8 = true;
+            usedKnobs.shaderFloat16Int8Features.shaderFloat16 = VK_TRUE;
+            extensionsToRequest.push_back(kExtensionNameKhrShaderFloat16Int8);
+
+            usedKnobs._16BitStorage = true;
+            usedKnobs._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess = VK_TRUE;
+            extensionsToRequest.push_back(kExtensionNameKhr16BitStorage);
+        }
+
         // Find a universal queue family
         {
             // Note that GRAPHICS and COMPUTE imply TRANSFER so we don't need to check for it.

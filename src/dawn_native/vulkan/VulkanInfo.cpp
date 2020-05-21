@@ -79,6 +79,8 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameKhrXlibSurface[] = "VK_KHR_xlib_surface";
     const char kExtensionNameFuchsiaImagePipeSurface[] = "VK_FUCHSIA_imagepipe_surface";
     const char kExtensionNameKhrMaintenance1[] = "VK_KHR_maintenance1";
+    const char kExtensionNameKhrShaderFloat16Int8[] = "VK_KHR_shader_float16_int8";
+    const char kExtensionNameKhr16BitStorage[] = "VK_KHR_16bit_storage";
 
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
@@ -221,6 +223,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
         VulkanDeviceInfo info = {};
         VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
+        const VulkanGlobalInfo& globalInfo = adapter.GetBackend()->GetGlobalInfo();
         const VulkanFunctions& vkFunctions = adapter.GetBackend()->GetFunctions();
 
         // Gather general info about the device
@@ -311,6 +314,37 @@ namespace dawn_native { namespace vulkan {
                 if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
                     info.maintenance1 = true;
                 }
+                if (IsExtensionName(extension, kExtensionNameKhrShaderFloat16Int8) &&
+                    globalInfo.getPhysicalDeviceProperties2) {
+                    info.shaderFloat16Int8 = true;
+                    if (globalInfo.getPhysicalDeviceProperties2) {
+                        info.shaderFloat16Int8Features.sType =
+                            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR;
+
+                        VkPhysicalDeviceFeatures2KHR physicalDeviceFeatures2 = {};
+                        physicalDeviceFeatures2.sType =
+                            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
+                        physicalDeviceFeatures2.pNext = &info.shaderFloat16Int8Features;
+                        vkFunctions.GetPhysicalDeviceFeatures2(physicalDevice,
+                                                               &physicalDeviceFeatures2);
+                    }
+                }
+                if (IsExtensionName(extension, kExtensionNameKhr16BitStorage) &&
+                    globalInfo.getPhysicalDeviceProperties2) {
+                    info._16BitStorage = true;
+                }
+            }
+
+            if (info._16BitStorage || info.properties.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+                ASSERT(globalInfo.getPhysicalDeviceProperties2);
+                info._16BitStorage = true;
+                info._16BitStorageFeatures.sType =
+                    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
+
+                VkPhysicalDeviceFeatures2 physicalDeviceFeatures2 = {};
+                physicalDeviceFeatures2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+                physicalDeviceFeatures2.pNext = &info._16BitStorageFeatures;
+                vkFunctions.GetPhysicalDeviceFeatures2(physicalDevice, &physicalDeviceFeatures2);
             }
         }
 
