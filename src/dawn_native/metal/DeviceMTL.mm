@@ -23,6 +23,7 @@
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
+#include "dawn_native/metal/QuerySetMTL.h"
 #include "dawn_native/metal/QueueMTL.h"
 #include "dawn_native/metal/RenderPipelineMTL.h"
 #include "dawn_native/metal/SamplerMTL.h"
@@ -122,6 +123,9 @@ namespace dawn_native { namespace metal {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
+    }
+    ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
+        return QuerySet::Create(this, descriptor);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
