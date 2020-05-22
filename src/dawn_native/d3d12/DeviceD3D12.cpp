@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
@@ -221,6 +222,9 @@ namespace dawn_native { namespace d3d12 {
         mUsedComObjectRefs.ClearUpTo(completedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
+
+        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+
         return {};
     }
 
@@ -458,6 +462,34 @@ namespace dawn_native { namespace d3d12 {
         // Force all operations to look as if they were completed
         AssumeCommandsComplete();
         return {};
+    }
+
+    MaybeError Device::CheckDebugLayerAndGenerateErrors() {
+        if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
+            return {};
+        }
+        ComPtr<ID3D12InfoQueue> infoQueue;
+        HRESULT hr = mD3d12Device.As(&infoQueue);
+        ASSERT_SUCCESS(hr);
+        if (infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter() == 0) {
+            return {};
+        }
+
+        SIZE_T messageLength = 0;
+        if (FAILED(infoQueue->GetMessageW(0, nullptr, &messageLength))) {
+            return DAWN_INTERNAL_ERROR("D3D12 Debug layer message occurred");
+        }
+        static std::unique_ptr<uint8_t[]> messageData(new uint8_t[messageLength]);
+
+        D3D12_MESSAGE* message = reinterpret_cast<D3D12_MESSAGE*>(messageData.get());
+        if (FAILED(infoQueue->GetMessageW(0, message, &messageLength))) {
+            return DAWN_INTERNAL_ERROR("D3D12 Debug layer message occurred");
+        }
+
+        // We only care about the first message
+        infoQueue->ClearStoredMessages();
+
+        return DAWN_INTERNAL_ERROR(message->pDescription);
     }
 
     void Device::ShutDownImpl() {
