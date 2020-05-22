@@ -1,0 +1,630 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "398c7f1e_5cfb24d5",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: this is missing the label, and pipelineStatistics members. See https://dawn-review.googlesource.com/c/dawn/+/8683",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e70899_8fbe0081",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Please also update src/dawn_native/CMakeLists.txt (without the trailing commas)",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "819bb2f3_b44f5dfe",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Timestamp",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 62
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e144e0e_317f8242",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "descriptor-\u003etype should also be validated like so: DAWN_TRY(ValidateQueryType(descriptor-\u003etype)) because right now you can put 0x349583 in type and it will work.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2922b124_89769d1a",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: TODO, but I think it can be done now, since the data about statistics will purely be in the frontend.",
+      "range": {
+        "startLine": 42,
+        "startChar": 11,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f6062bf_3add8407",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t matter because the object is an error anyway. Initializers for mState could be removed in favor of setting it to QueryState::Available in the header.",
+      "range": {
+        "startLine": 55,
+        "startChar": 42,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25ad7667_d606b6b5",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "DestroyInternal doesn\u0027t really have a purpose and could be inlined in Destroy(). Ah, I see it is used in the destructor of child classes.\n\nCan we then ASSERT that the state is Destroyed in QuerySetBase::~QuerySetBase?",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8671271b_742d584c",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: Just put this in the private: section.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a839798_2447837c",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: QueryState -\u003e State because it is the state of the QuerySet, not the state of a single query.",
+      "range": {
+        "startLine": 29,
+        "startChar": 19,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "330ed73e_ca334834",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "const",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d070129_396a2dfa",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: \u003d0",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d794781_33a3193d",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: this switch is duplicated, can you make a helper function in an anonymous namespace to factor both uses?",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e41dea6c_69de48b8",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "This is probably incorrect: the query heap needs to be referenced until it is no longer in use by the GPU with Device::ReferenceUntilUnused",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51471cfd_7c830ff5",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: const",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ea9b344_8cc27464",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Note: the residency of this heap might need to be managed similarly to ID3D12DescriptorHeap and ID3D12ResourceHeap when we start to do GPU operations on it. No need to address now though.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff7d7992_cca1d514",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "wow that\u0027s pretty late.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e3ea0c4_8af98195",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: have a comment that explains what we are doing and why it is necessary to loop over the counter sets in the device.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e38771b_f43317a6",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "This could be private",
+      "range": {
+        "startLine": 40,
+        "startChar": 37,
+        "endLine": 40,
+        "endChar": 57
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0592fcf0_dbb51667",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: Add a TODO to properly handle errors, also make the code breath a little by adding an empty line befor the declaration of error.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50fc726_f1638879",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "This is not possible because QueryCount is a uint32_t, but please static_cast it to a uint64_t first so that the * doesn\u0027t overflow, then check the result is less than std::numeric_lints::max\u003cuint32_t\u003e()",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb92a0c4_572465de",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be required for this buffer.",
+      "range": {
+        "startLine": 68,
+        "startChar": 47,
+        "endLine": 68,
+        "endChar": 82
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "939ec909_e09435e3",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "I think it could be private.",
+      "range": {
+        "startLine": 70,
+        "startChar": 64,
+        "endLine": 70,
+        "endChar": 92
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96997f72_baf45e0d",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "ditto about having a #if, and we could have a #else UNREACHABLE() #endif",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29e100ee_452faf18",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df52f341_8b80cb5b",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: needs to be in #if defined(DAWN_PLATFORM_MACOS) otherwise it will break compilation on iOS",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27e36f98_151c18f0",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Please make the implementation now, it should be as easy as adding it in [1] and returning new QuerySet(this, descriptor).",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfaf1812_523d9429",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "336c38d8_052e811c",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fcb056e_f8a57601",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Isn\u0027t there something like a timestamp granularity we need to check?",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b338aee1_6f286eb9",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: this could use the flags given in GPUQuerySetDescriptor.pipelineStatistics",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a527c6b_3a9aeb56",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: Maybe we could have split tests for each query type (could still be in this file). So that each test can enable 0 or 1 extension (and skip the whole test if the extension isn\u0027t present)",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b5e863b_d8a3f11c",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "Looks good, but we should probably clarify with the group if a size of 0 is allowed. I think we are going to allow it for buffers, so it is quite similar here.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77d375a7_0ebb6055",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: Also test with the extensions enabled? And explicitly check that Occlusion is always allowed.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29f947b0_5d37fdbc",
+        "filename": "src/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T17:06:47Z",
+      "side": 1,
+      "message": "nit: have one of them false to make sure that the serialization knows how to do both true and false ;)",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
