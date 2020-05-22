@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "438a08ec_b6dfa7a8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: this is incorrect because the transition should be only done for the subresource range specified by the view. However there is no logic to track the subresources in the BindGroupAndStorageBarrierTrackerBase so we could have a TODO for now.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a1c58ce_3dedd281",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: instead of using mutable references, we usually pass pointers so on the callee side it is clear that the argument will be mutated.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3582df6f_44b61987",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: and assert there is a single subresource.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24a3e360_fab852db",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "I think this structure should still be initialized, otherwise it could contain garbage that will confuse the driver. And right now it doesn\u0027t set the handle member so the driver doesn\u0027t know which image we are talking about.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2bc7306_8f0f1d46",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7afa18f_3a92fef7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "u-nit: allUsages",
+      "range": {
+        "startLine": 710,
+        "startChar": 27,
+        "endLine": 710,
+        "endChar": 35
+      },
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cf5a4d6_5c3c3248",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure doing ++index is better than just computing it. Unless we find it is a hotspot, maybe we could use GetSubresourceIndex to compute it? The division was scary but integer multiplications are relatively cheap.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb62c13e_e287eff0",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: overall it would be nice to have the code breath a bit more with empty lines and some block comments.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e6cf598_e153d92f",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: Should be a private member function.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89c88e75_f53ccc71",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "nit: implementation should be in the .cpp file.",
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94542772_0b611d67",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:31:56Z",
+      "side": 1,
+      "message": "u-u-nit: we usually have backends sorted in alphabetical order.",
+      "range": {
+        "startLine": 199,
+        "startChar": 46,
+        "endLine": 199,
+        "endChar": 61
+      },
+      "revId": "07e985ef47062844ab3c17189b08585c6d9a74e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
