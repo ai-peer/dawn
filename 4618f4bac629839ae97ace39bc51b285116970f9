@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "9d70a68f_61359f0c",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-22T17:33:45Z",
+      "side": 1,
+      "message": "RC checked with DX team, think this one can be moved to permanent. Dawn does not persistently map read back heaps and requires Map/Unmap() but D3D12 only validates upon Submit(), which could be before Unmap() is called.",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc159ae0_2f230708",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 8
@@ -191,6 +208,24 @@
       "side": 1,
       "message": "I would like to pushback on only dumping the first error. \n\nIf one of our tests becomes flaky in TryBots and difficult to repro locally, it is really nice to have the complete output of errors available in the log instead of just the first error. \n\nErrors are related to each and the root cause of the problem might be more obvious by looking at the second or third error not just the first one. This is the reason we encourage people to use EXPECT macros in tests over just ASSERT.",
       "parentUuid": "529815a4_f2fcb823",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a7d1a64_64505dd2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-22T17:33:45Z",
+      "side": 1,
+      "message": "\u003e Errors are related to each \n\nIf the first error leaves execution in a invalid/corrupt state, subsequent errors that do not add debug info, ex. `ExecuteCommandList() failed` flood the logs. Maybe only WARN could be EXPECT and if insufficient, make it more verbose in the future.",
+      "parentUuid": "d5954fdf_6798f1c4",
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
