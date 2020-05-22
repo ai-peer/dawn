@@ -283,6 +283,24 @@
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f5f9dde_645ba7db",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-22T22:18:58Z",
+      "side": 1,
+      "message": "I think the only reason the first error message was being returned here was to inform the developer a debug layer error(s) occurred and to investigate further. There is nothing stopping (you) the developer to modify this code and get more output. We could certainly add a feature to dump debug output but it\u0027s a mere convenience.",
+      "parentUuid": "76d9b4f0_8a7cab67",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
