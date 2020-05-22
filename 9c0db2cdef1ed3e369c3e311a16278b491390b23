@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7f9679fd_d45c2ef8",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2287ebe_04f99146",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c8b68bb_d55a4fe3",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2838c8b0_307cdf2f",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c8b68bb_d55a4fe3",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fb89a5aa_9ec34c82",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f358a4d_d8d583b7",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ef97c54_23971e43",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "3995ee43_9587800f",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef97c54_23971e43",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0771805d_677e7b8d",
         "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
         "patchSetId": 3
@@ -84,6 +156,24 @@
       "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca0e02f_32e6d7fd",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0771805d_677e7b8d",
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -107,6 +197,30 @@
       "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b852a0a_4260e22b",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-05-22T08:54:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "387fd193_78e3b22c",
+      "range": {
+        "startLine": 46,
+        "startChar": 80,
+        "endLine": 46,
+        "endChar": 98
+      },
+      "revId": "9c0db2cdef1ed3e369c3e311a16278b491390b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
