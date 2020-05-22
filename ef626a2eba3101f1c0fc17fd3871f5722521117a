@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8569dc1_297f6d9f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:04:48Z",
+      "side": 1,
+      "message": "nit: DAWN_TRY(CheckHRESULT(...));",
+      "revId": "ef626a2eba3101f1c0fc17fd3871f5722521117a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7575533a_4e71a251",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:04:48Z",
+      "side": 1,
+      "message": "Let\u0027s avoid static variables when possible.\n\nInstead this could be something like:\n\n  std::string message(\u0027\\0\u0027, messageLength); // or + 1?\n  DAWN_TRY(CheckHRESULT(infoQueue-\u003eGetMessageW(0, reinterpret_cast\u003cD3D12_MESSAGE*\u003e(message.data())), messageLength));",
+      "revId": "ef626a2eba3101f1c0fc17fd3871f5722521117a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54197f61_bb9a4ee4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:04:48Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ef626a2eba3101f1c0fc17fd3871f5722521117a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

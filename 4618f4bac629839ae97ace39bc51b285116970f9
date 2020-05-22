@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "d7ce92f8_4c42b3c0",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-22T16:04:48Z",
+      "side": 1,
+      "message": "I think this one hasn\u0027t been done yet.",
+      "parentUuid": "fc0d41e5_e5e70447",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1db5e1c_cfa9d5b1",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
