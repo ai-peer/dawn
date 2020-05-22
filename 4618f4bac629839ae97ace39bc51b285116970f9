@@ -176,6 +176,24 @@
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5954fdf_6798f1c4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-22T16:24:37Z",
+      "side": 1,
+      "message": "I would like to pushback on only dumping the first error. \n\nIf one of our tests becomes flaky in TryBots and difficult to repro locally, it is really nice to have the complete output of errors available in the log instead of just the first error. \n\nErrors are related to each and the root cause of the problem might be more obvious by looking at the second or third error not just the first one. This is the reason we encourage people to use EXPECT macros in tests over just ASSERT.",
+      "parentUuid": "529815a4_f2fcb823",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
