@@ -636,6 +636,13 @@
                     {"name": "callback", "type": "error callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
+            },
+            {
+                "name": "create query set",
+                "returns": "query set",
+                "args": [
+                    {"name": "descriptor", "type": "query set descriptor", "annotation": "const*"}
+                ]
             }
         ]
     },
@@ -650,7 +657,9 @@
         "category": "structure",
         "extensible": false,
         "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"}
+            {"name": "texture compression BC", "type": "bool", "default": "false"},
+            {"name": "pipeline statistics query", "type": "bool", "default": "false"},
+            {"name": "timestamp query", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
@@ -875,6 +884,30 @@
             {"value": 2, "name": "line strip"},
             {"value": 3, "name": "triangle list"},
             {"value": 4, "name": "triangle strip"}
+        ]
+    },
+    "query set": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "destroy"
+            }
+        ]
+    },
+    "query set descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "type", "type": "query type"},
+            {"name": "count", "type": "uint32_t"}
+        ]
+    },
+    "query type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "occlusion"},
+            {"value": 1, "name": "pipeline statistics"},
+            {"value": 2, "name": "timestamp"}
         ]
     },
     "queue": {
