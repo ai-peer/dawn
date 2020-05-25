@@ -34,7 +34,15 @@ namespace dawn_native {
             {{Extension::TextureCompressionBC,
               {"texture_compression_bc", "Support Block Compressed (BC) texture formats",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=42"},
-              &WGPUDeviceProperties::textureCompressionBC}}};
+              &WGPUDeviceProperties::textureCompressionBC},
+             {Extension::PipelineStatisticsQuery,
+              {"pipeline_statistics_query", "Support Pipeline Statistics Query",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=434"},
+              &WGPUDeviceProperties::pipelineStatisticsQuery},
+             {Extension::TimestampQuery,
+              {"timestamp_query", "Support Timestamp Query",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=434"},
+              &WGPUDeviceProperties::timestampQuery}}};
 
     }  // anonymous namespace
 

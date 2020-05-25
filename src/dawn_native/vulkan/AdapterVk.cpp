@@ -73,6 +73,14 @@ namespace dawn_native { namespace vulkan {
         if (mDeviceInfo.features.textureCompressionBC == VK_TRUE) {
             mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
         }
+
+        if (mDeviceInfo.features.pipelineStatisticsQuery == VK_TRUE) {
+            mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
+        }
+
+        if (mDeviceInfo.properties.limits.timestampComputeAndGraphics == VK_TRUE) {
+            mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
+        }
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
