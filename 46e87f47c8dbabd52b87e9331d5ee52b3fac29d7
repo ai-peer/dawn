@@ -543,6 +543,24 @@
     },
     {
       "key": {
+        "uuid": "7a16a033_30d4c2d2",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-05-25T11:32:54Z",
+      "side": 1,
+      "message": "Vulkan spec says that if timestampComputeAndGraphics is VK_TRUE, the queues will support VkQueueFamilyProperties::timestampValidBits of at least 36, so I think we don\u0027t need to check this bit again.\n\nSee https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap39.html#limits-timestampComputeAndGraphics.",
+      "parentUuid": "3fcb056e_f8a57601",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b338aee1_6f286eb9",
         "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
         "patchSetId": 3
@@ -625,6 +643,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4c637b6_2bd9c11c",
+        "filename": "src/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-05-25T11:32:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29f947b0_5d37fdbc",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
