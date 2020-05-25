@@ -549,19 +549,24 @@ namespace dawn_native { namespace d3d12 {
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.
-    bool Texture::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+    /* bool Texture::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                   D3D12_RESOURCE_BARRIER* barrier,
                                                   wgpu::TextureUsage newUsage) {
         return TrackUsageAndGetResourceBarrier(commandContext, barrier,
                                                D3D12TextureUsage(newUsage, GetFormat()));
     }
+    */
 
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.
-    bool Texture::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                  D3D12_RESOURCE_BARRIER* barrier,
-                                                  D3D12_RESOURCE_STATES newState) {
+    /* bool Texture::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+                                                  std::vector<D3D12_RESOURCE_BARRIER>& barrier,
+                                                  D3D12_RESOURCE_STATES newState,
+                                                  uint32_t mipLevel,
+                                                  uint32_t levelCount,
+                                                  uint32_t arrayLayer,
+                                                  uint32_t layerCount) {
         if (mResourceAllocation.GetInfo().mMethod != AllocationMethod::kExternal) {
             // Track the underlying heap to ensure residency.
             Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
@@ -569,33 +574,70 @@ namespace dawn_native { namespace d3d12 {
         }
 
         // Return the resource barrier.
-        return TransitionUsageAndGetResourceBarrier(commandContext, barrier, newState);
-    }
+        return TransitionUsageAndGetResourceBarrier(commandContext, barrier, newState, mipLevel,
+    levelCount, arrayLayer, layerCount);
+    } */
 
-    void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                             wgpu::TextureUsage usage) {
-        D3D12_RESOURCE_BARRIER barrier;
+    /* void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                        wgpu::TextureUsage usage,
+                                        uint32_t mipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t arrayLayer,
+                                        uint32_t layerCount) {
+            std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
-        if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, usage)) {
-            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        if (TrackUsageAndGetResourceBarrier(commandContext, barrier, D3D12TextureUsage(usage,
+    GetFormat(), mipLevel, levelCount, arrayLayer, layerCount)) {
+            commandContext->GetCommandList()->ResourceBarrier(barriers.size(), barriers.data());
+        }
+    } */
+
+    /* void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                        D3D12_RESOURCE_STATES newState,
+                                        uint32_t mipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t arrayLayer,
+                                        uint32_t layerCount) {
+            std::vector<D3D12_RESOURCE_BARRIER> barriers;
+
+        if (TrackUsageAndGetResourceBarrier(commandContext, barriers, newState, mipLevel,
+    levelCount, arrayLayer, layerCount)) {
+            commandContext->GetCommandList()->ResourceBarrier(barriers.size(), barriers.data());
         }
     }
+    */
 
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                             D3D12_RESOURCE_STATES newState) {
-        D3D12_RESOURCE_BARRIER barrier;
+                                             D3D12_RESOURCE_STATES newState,
+                                             uint32_t mipLevel,
+                                             uint32_t levelCount,
+                                             uint32_t arrayLayer,
+                                             uint32_t layerCount) {
+        if (mResourceAllocation.GetInfo().mMethod != AllocationMethod::kExternal) {
+            // Track the underlying heap to ensure residency.
+            Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
+            commandContext->TrackHeapUsage(heap, GetDevice()->GetPendingCommandSerial());
+        }
 
-        if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, newState)) {
-            commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        std::vector<D3D12_RESOURCE_BARRIER> barriers;
+
+        TransitionUsageAndGetResourceBarrier(commandContext, barriers, newState, mipLevel,
+                                             levelCount, arrayLayer,
+                                             layerCount) if (barriers.size()) {
+            commandContext->GetCommandList()->ResourceBarrier(barriers.size(), barriers.data());
         }
     }
 
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.
-    bool Texture::TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                       D3D12_RESOURCE_BARRIER* barrier,
-                                                       D3D12_RESOURCE_STATES newState) {
+    void Texture::TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+                                                       std::vector<D3D12_RESOURCE_BARRIER>& barrier,
+                                                       D3D12_RESOURCE_STATES newState,
+                                                       uint32_t mipLevel,
+                                                       uint32_t levelCount,
+                                                       uint32_t arrayLayer,
+                                                       uint32_t layerCount) {
         // Textures with keyed mutexes can be written from other graphics queues. Hence, they
         // must be acquired before command list submission to ensure work from the other queues
         // has finished. See Device::ExecuteCommandContext.
@@ -603,69 +645,167 @@ namespace dawn_native { namespace d3d12 {
             commandContext->AddToSharedTextureList(this);
         }
 
-        // Avoid transitioning the texture when it isn't needed.
-        // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
-        if (mLastState == newState) {
-            return false;
-        }
-
-        D3D12_RESOURCE_STATES lastState = mLastState;
-
-        // The COMMON state represents a state where no write operations can be pending, and where
-        // all pixels are uncompressed. This makes it possible to transition to and from some states
-        // without synchronization (i.e. without an explicit ResourceBarrier call). Textures can be
-        // implicitly promoted to 1) a single write state, or 2) multiple read states. Textures will
-        // implicitly decay to the COMMON state when all of the following are true: 1) the texture
-        // is accessed on a command list, 2) the ExecuteCommandLists call that uses that command
-        // list has ended, and 3) the texture was promoted implicitly to a read-only state and is
-        // still in that state.
-        // https://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#implicit-state-transitions
-
-        // To track implicit decays, we must record the pending serial on which that transition will
-        // occur. When that texture is used again, the previously recorded serial must be compared
-        // to the last completed serial to determine if the texture has implicity decayed to the
-        // common state.
-        const Serial pendingCommandSerial = ToBackend(GetDevice())->GetPendingCommandSerial();
-        if (mValidToDecay && pendingCommandSerial > mLastUsedSerial) {
-            lastState = D3D12_RESOURCE_STATE_COMMON;
-        }
-
-        // Update the tracked state.
-        mLastState = newState;
-
-        // Destination states that qualify for an implicit promotion for a non-simultaneous-access
-        // texture: NON_PIXEL_SHADER_RESOURCE, PIXEL_SHADER_RESOURCE, COPY_SRC, COPY_DEST.
-        {
-            static constexpr D3D12_RESOURCE_STATES kD3D12TextureReadOnlyStates =
-                D3D12_RESOURCE_STATE_COPY_SOURCE | D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
-                D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
-
-            if (lastState == D3D12_RESOURCE_STATE_COMMON) {
-                if (newState == (newState & kD3D12TextureReadOnlyStates)) {
-                    // Implicit texture state decays can only occur when the texture was implicitly
-                    // transitioned to a read-only state. mValidToDecay is needed to differentiate
-                    // between resources that were implictly or explicitly transitioned to a
-                    // read-only state.
-                    mValidToDecay = true;
-                    mLastUsedSerial = pendingCommandSerial;
-                    return false;
-                } else if (newState == D3D12_RESOURCE_STATE_COPY_DEST) {
-                    mValidToDecay = false;
-                    return false;
+        for (uint32_t i = arrayLayer, i < layerCount; ++i) {
+            for (uint32_t j = mipLevel, j < levelCount; ++j) {
+                uint32_t index = GetSubresourceIndex(mipLevel + j, arrayLayer + i);
+                // Avoid transitioning the texture when it isn't needed.
+                // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
+                if (mLastSubresourceStates[index] == newState) {
+                    continue;
                 }
+
+                D3D12_RESOURCE_STATES lastState = mLastSubresourceStates[index];
+
+                // The COMMON state represents a state where no write operations can be pending, and
+                // where all pixels are uncompressed. This makes it possible to transition to and
+                // from some states without synchronization (i.e. without an explicit
+                // ResourceBarrier call). Textures can be implicitly promoted to 1) a single write
+                // state, or 2) multiple read states. Textures will implicitly decay to the COMMON
+                // state when all of the following are true: 1) the texture is accessed on a command
+                // list, 2) the ExecuteCommandLists call that uses that command list has ended, and
+                // 3) the texture was promoted implicitly to a read-only state and is still in that
+                // state.
+                // https://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#implicit-state-transitions
+
+                // To track implicit decays, we must record the pending serial on which that
+                // transition will occur. When that texture is used again, the previously recorded
+                // serial must be compared to the last completed serial to determine if the texture
+                // has implicity decayed to the common state.
+                const Serial pendingCommandSerial =
+                    ToBackend(GetDevice())->GetPendingCommandSerial();
+                if (mValidToDecay && pendingCommandSerial > mLastUsedSerial) {
+                    lastState = D3D12_RESOURCE_STATE_COMMON;
+                }
+
+                // Update the tracked state.
+                mLastSubresourceStates[index] = newState;
+
+                // Destination states that qualify for an implicit promotion for a
+                // non-simultaneous-access texture: NON_PIXEL_SHADER_RESOURCE,
+                // PIXEL_SHADER_RESOURCE, COPY_SRC, COPY_DEST.
+                {
+                    static constexpr D3D12_RESOURCE_STATES kD3D12TextureReadOnlyStates =
+                        D3D12_RESOURCE_STATE_COPY_SOURCE |
+                        D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
+                        D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+                    if (lastState == D3D12_RESOURCE_STATE_COMMON) {
+                        if (newState == (newState & kD3D12TextureReadOnlyStates)) {
+                            // Implicit texture state decays can only occur when the texture was
+                            // implicitly transitioned to a read-only state. mValidToDecay is needed
+                            // to differentiate between resources that were implictly or explicitly
+                            // transitioned to a read-only state.
+                            mValidToDecay = true;
+                            mLastUsedSerial = pendingCommandSerial;
+                            continue;
+                        } else if (newState == D3D12_RESOURCE_STATE_COPY_DEST) {
+                            mValidToDecay = false;
+                            continue;
+                        }
+                    }
+                }
+
+                D3D12_RESOURCE_BARRIER barrier;
+                barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+                barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+                barrier.Transition.pResource = GetD3D12Resource();
+                barrier.Transition.StateBefore = lastState;
+                barrier.Transition.StateAfter = newState;
+                barrier.Transition.Subresource = index;
+
+                barriers.push_back(barrier);
             }
         }
 
-        barrier->Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-        barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-        barrier->Transition.pResource = GetD3D12Resource();
-        barrier->Transition.StateBefore = lastState;
-        barrier->Transition.StateAfter = newState;
-        barrier->Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+        mValidToDecay = false;
+    }
+
+    void TrackUsageAndGetResourceBarrierForPass(CommandRecordingContext* commandContext,
+                                                std::vector<D3D12_RESOURCE_BARRIER>& barrier,
+                                                std::vector<wgpu::TextureUsage> subresourceUsages) {
+        // Textures with keyed mutexes can be written from other graphics queues. Hence, they
+        // must be acquired before command list submission to ensure work from the other queues
+        // has finished. See Device::ExecuteCommandContext.
+        if (mDxgiKeyedMutex != nullptr) {
+            commandContext->AddToSharedTextureList(this);
+        }
+
+        for (uint32_t i = 0, i < GetArrayLayers(); ++i) {
+            for (uint32_t j = 0, j < GetNumMipLevels(); ++j) {
+                uint32_t index = GetSubresourceIndex(j, i);
+                D3D12_RESOURCE_STATES newState =
+                    D3D12TextureUsage(subresourceUsages[index], GetFormat());
+                // Avoid transitioning the texture when it isn't needed.
+                // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
+                if (newState == D3D12_RESOURCE_STATE_COMMON ||
+                    mLastSubresourceStates[index] == newState) {
+                    continue;
+                }
+
+                D3D12_RESOURCE_STATES lastState = mLastSubresourceStates[index];
+
+                // The COMMON state represents a state where no write operations can be pending, and
+                // where all pixels are uncompressed. This makes it possible to transition to and
+                // from some states without synchronization (i.e. without an explicit
+                // ResourceBarrier call). Textures can be implicitly promoted to 1) a single write
+                // state, or 2) multiple read states. Textures will implicitly decay to the COMMON
+                // state when all of the following are true: 1) the texture is accessed on a command
+                // list, 2) the ExecuteCommandLists call that uses that command list has ended, and
+                // 3) the texture was promoted implicitly to a read-only state and is still in that
+                // state.
+                // https://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#implicit-state-transitions
+
+                // To track implicit decays, we must record the pending serial on which that
+                // transition will occur. When that texture is used again, the previously recorded
+                // serial must be compared to the last completed serial to determine if the texture
+                // has implicity decayed to the common state.
+                const Serial pendingCommandSerial =
+                    ToBackend(GetDevice())->GetPendingCommandSerial();
+                if (mValidToDecay && pendingCommandSerial > mLastUsedSerial) {
+                    lastState = D3D12_RESOURCE_STATE_COMMON;
+                }
+
+                // Update the tracked state.
+                mLastSubresourceStates[index] = newState;
+
+                // Destination states that qualify for an implicit promotion for a
+                // non-simultaneous-access texture: NON_PIXEL_SHADER_RESOURCE,
+                // PIXEL_SHADER_RESOURCE, COPY_SRC, COPY_DEST.
+                {
+                    static constexpr D3D12_RESOURCE_STATES kD3D12TextureReadOnlyStates =
+                        D3D12_RESOURCE_STATE_COPY_SOURCE |
+                        D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
+                        D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+                    if (lastState == D3D12_RESOURCE_STATE_COMMON) {
+                        if (newState == (newState & kD3D12TextureReadOnlyStates)) {
+                            // Implicit texture state decays can only occur when the texture was
+                            // implicitly transitioned to a read-only state. mValidToDecay is needed
+                            // to differentiate between resources that were implictly or explicitly
+                            // transitioned to a read-only state.
+                            mValidToDecay = true;
+                            mLastUsedSerial = pendingCommandSerial;
+                            continue;
+                        } else if (newState == D3D12_RESOURCE_STATE_COPY_DEST) {
+                            mValidToDecay = false;
+                            continue;
+                        }
+                    }
+                }
+
+                D3D12_RESOURCE_BARRIER barrier;
+                barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+                barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+                barrier.Transition.pResource = GetD3D12Resource();
+                barrier.Transition.StateBefore = lastState;
+                barrier.Transition.StateAfter = newState;
+                barrier.Transition.Subresource = index;
+
+                barriers.push_back(barrier);
+            }
+        }
 
         mValidToDecay = false;
-
-        return true;
     }
 
     D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(uint32_t mipLevel,

@@ -502,11 +502,11 @@ namespace dawn_native { namespace d3d12 {
             wgpu::TextureUsage textureUsages = wgpu::TextureUsage::None;
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
-                D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.textures[i])
-                        ->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                          usages.textureUsages[i].usage)) {
-                    barriers.push_back(barrier);
+                // D3D12_RESOURCE_BARRIER barrier;
+                ToBackend(usages.textures[i])
+                    ->TrackUsageAndGetResourceBarrierForPass(
+                        commandContext, barriers, usages.textureUsages[i].subresourceUsages);
+                // barriers.push_back(barrier);
                 }
                 textureUsages |= usages.textureUsages[i].usage;
             }
@@ -852,7 +852,11 @@ namespace dawn_native { namespace d3d12 {
                     ToBackend(resolveDestinationView->GetTexture());
 
                 resolveDestinationTexture->TrackUsageAndTransitionNow(
-                    commandContext, D3D12_RESOURCE_STATE_RESOLVE_DEST);
+                    commandContext, D3D12_RESOURCE_STATE_RESOLVE_DEST,
+                    resolveDestinationView->GetBaseMipLevel,
+                    resolveDestinationView->GetLevelCount(),
+                    resolveDestinationView->GetBaseArrayLayer(),
+                    resolveDestinationView->GetLayerCount());
 
                 renderPassBuilder->SetRenderTargetEndingAccessResolve(i, attachmentInfo.storeOp,
                                                                       view, resolveDestinationView);

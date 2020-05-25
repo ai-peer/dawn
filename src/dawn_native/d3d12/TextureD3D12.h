@@ -60,13 +60,25 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
 
-        bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                             D3D12_RESOURCE_BARRIER* barrier,
-                                             wgpu::TextureUsage newUsage);
+        // bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+        //                                      D3D12_RESOURCE_BARRIER* barrier,
+        //                                      wgpu::TextureUsage newUsage);
+        void TrackUsageAndGetResourceBarrierForPass(
+            CommandRecordingContext* commandContext,
+            std::vector<D3D12_RESOURCE_BARRIER>& barrier,
+            std::vector<wgpu::TextureUsage> subresourceUsages);
+        /* void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                        wgpu::TextureUsage usage,
+                                        uint32_t mipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t arrayLayer,
+                                        uint32_t layerCount); */
         void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                        wgpu::TextureUsage usage);
-        void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                        D3D12_RESOURCE_STATES newState);
+                                        D3D12_RESOURCE_STATES newState,
+                                        uint32_t mipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t arrayLayer,
+                                        uint32_t layerCount);
 
       private:
         ~Texture() override;
@@ -89,15 +101,22 @@ namespace dawn_native { namespace d3d12 {
 
         UINT16 GetDepthOrArraySize();
 
-        bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+        /* bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                              D3D12_RESOURCE_BARRIER* barrier,
-                                             D3D12_RESOURCE_STATES newState);
-        bool TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                  D3D12_RESOURCE_BARRIER* barrier,
-                                                  D3D12_RESOURCE_STATES newState);
+                                             D3D12_RESOURCE_STATES newState);*/
+        void TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+                                                  std::vector<D3D12_RESOURCE_BARRIER>& barrier,
+                                                  D3D12_RESOURCE_STATES newState,
+                                                  uint32_t mipLevel,
+                                                  uint32_t levelCount,
+                                                  uint32_t arrayLayer,
+                                                  uint32_t layerCount);
 
         ResourceHeapAllocation mResourceAllocation;
         D3D12_RESOURCE_STATES mLastState = D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON;
+        std::vector<D3D12_RESOURCE_STATES> mLastSubresourceStates =
+            std::vector<D3D12_RESOURCE_STATES>(GetSubresourceCount(),
+                                               D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON);
 
         Serial mLastUsedSerial = UINT64_MAX;
         bool mValidToDecay = false;
