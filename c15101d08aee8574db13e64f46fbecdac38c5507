@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d9d57c2_1638b9c1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T09:34:24Z",
+      "side": 1,
+      "message": "nit: the ASSERT(barriers.size() \u003c\u003d 1) can be added back since the vector will be reintroduced.",
+      "revId": "c15101d08aee8574db13e64f46fbecdac38c5507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5cbe445_e6239edd",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T09:34:24Z",
+      "side": 1,
+      "message": "This is returning a pointer to stack allocated memory that will get stomped. It is a memory safety issue. What I meant is that DoTransitionSpecialCases should take a std::vector\u003cVkImageMemoryBarrier\u003e* so that in this method we can do barriers-\u003epush_back(...).\n\nThe concern was with passing the vector as a reference which makes it not clear that it will be mutated.",
+      "revId": "c15101d08aee8574db13e64f46fbecdac38c5507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
