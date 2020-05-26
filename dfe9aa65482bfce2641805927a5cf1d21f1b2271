@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daba22a7_16190147",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-26T20:29:18Z",
+      "side": 1,
+      "message": "nit: this could have a more descriptive name like \"TransitionExternalUsage\"\n\nThe \"if (mExternalState !\u003d InternalOnly)\" could be around the callsite so it\u0027s clear nothing happens for internal textures.",
+      "range": {
+        "startLine": 672,
+        "startChar": 18,
+        "endLine": 672,
+        "endChar": 42
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "797a2810_20577507",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-26T20:29:18Z",
+      "side": 1,
+      "message": "nit: use \"arrayLayer\" and \"mipLevel\" instead of \"i\" and \"j\"",
+      "range": {
+        "startLine": 730,
+        "startChar": 22,
+        "endLine": 730,
+        "endChar": 23
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c468a62_a6ad8419",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-26T20:29:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 778,
+        "startChar": 22,
+        "endLine": 778,
+        "endChar": 23
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
