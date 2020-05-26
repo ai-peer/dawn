@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0949af93_d64f06ba",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-26T23:21:01Z",
+      "side": 1,
+      "message": "Yea, I think it should still work as expected because mWaitRequirements is empty for internal textures, and mLastExternalState and mExternalState are always both InternalOnly.",
+      "parentUuid": "37ee5ba2_225aaa7e",
+      "range": {
+        "startLine": 706,
+        "startChar": 8,
+        "endLine": 710,
+        "endChar": 34
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "797a2810_20577507",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 6
