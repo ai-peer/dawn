@@ -22,6 +22,30 @@
       "revId": "9b743312462b96e3c9b9241dc6e56e08b79a51a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16c294ad_28f4918f",
+        "filename": "src/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-05-26T05:42:53Z",
+      "side": 1,
+      "message": "I think the members in WGPUDeviceProperties don\u0027t have default values, they are not initialized.",
+      "parentUuid": "2957e3f7_41b67c40",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 60
+      },
+      "revId": "9b743312462b96e3c9b9241dc6e56e08b79a51a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
