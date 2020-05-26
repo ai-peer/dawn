@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "281becf8_19749195",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T07:41:00Z",
+      "side": 1,
+      "message": "Since there are at least two CLs related to the same thing, can you create a bug for it, so why now how they are linked? Then modify the Bug: here and in the other CL.",
+      "revId": "ab01ae0b347e417a3a0334a531eba277c0d5f302",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
