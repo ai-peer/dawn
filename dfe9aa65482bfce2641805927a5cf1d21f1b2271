@@ -25,6 +25,53 @@
     },
     {
       "key": {
+        "uuid": "7f3b6b72_87e0d227",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:12:13Z",
+      "side": 1,
+      "message": "Done\n\nTransitionExternalUsage sounds like it is a peer to other transition functions, but it just fine-tune some parameters. So I change the name to TweakTransitionForExternalUsage.",
+      "parentUuid": "daba22a7_16190147",
+      "range": {
+        "startLine": 672,
+        "startChar": 18,
+        "endLine": 672,
+        "endChar": 42
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ee5ba2_225aaa7e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:12:13Z",
+      "side": 1,
+      "message": "I thought about call the function when \"if (mExternalState !\u003d InternalOnly)\", but this code snippet is out side of \"if\" in the original logic. However, it looks like it is only useful when the texture is an external one.",
+      "range": {
+        "startLine": 706,
+        "startChar": 8,
+        "endLine": 710,
+        "endChar": 34
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "797a2810_20577507",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 6
@@ -48,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "26e9993e_11b19377",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "797a2810_20577507",
+      "range": {
+        "startLine": 730,
+        "startChar": 22,
+        "endLine": 730,
+        "endChar": 23
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c468a62_a6ad8419",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 6
@@ -68,6 +139,30 @@
       "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c436e73_745544bb",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:12:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c468a62_a6ad8419",
+      "range": {
+        "startLine": 778,
+        "startChar": 22,
+        "endLine": 778,
+        "endChar": 23
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
