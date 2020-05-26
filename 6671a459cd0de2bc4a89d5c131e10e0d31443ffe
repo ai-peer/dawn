@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30d4a2a2_82def925",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T07:40:10Z",
+      "side": 1,
+      "message": "Which higher level DEPS? Chromium\u0027s doesn\u0027t.",
+      "revId": "6671a459cd0de2bc4a89d5c131e10e0d31443ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
