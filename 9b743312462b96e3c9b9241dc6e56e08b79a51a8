@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2957e3f7_41b67c40",
+        "filename": "src/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-26T00:22:26Z",
+      "side": 1,
+      "message": "The default value is false so maybe we should still test \"true\" here?",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 60
+      },
+      "revId": "9b743312462b96e3c9b9241dc6e56e08b79a51a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
