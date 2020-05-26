@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a15afe8_2aa86463",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 1,
+      "message": "ditto, same comment as the Vulkan backend with Yunchao\u0027s CLs to handle subresource tracking.",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5371f3e_7120f598",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 1,
+      "message": "nit: Maybe assert that the dimension is 2D so that we hit the assert when we add the 3D / 1D cases? Ditto in other places with this comment.",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "829afc2a_9d5ec66c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 1,
+      "message": "Note that this will conflict with https://dawn-review.googlesource.com/c/dawn/+/22024 because now TransitionSubresourceUsageNow must take copy-\u003ecopySize.depth too. Please work with Yunchao to make sure this doesn\u0027t get missed.",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04a685f6_c832ed49",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 1,
+      "message": "nit: arrayLayer + depth OOB.",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1a92052_e81137a5",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

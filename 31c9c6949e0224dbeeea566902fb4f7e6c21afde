@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9fbc358_6d79d01c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-26T14:14:26Z",
+      "side": 0,
+      "message": "This is removed because we now have zero-initialization by default right?",
+      "revId": "31c9c6949e0224dbeeea566902fb4f7e6c21afde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
