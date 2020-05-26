@@ -155,9 +155,9 @@ namespace dawn_native { namespace metal {
 
     Serial Device::CheckAndUpdateCompletedSerials() {
         if (GetCompletedCommandSerial() > mCompletedSerial) {
-            // sometimes we artificially increase the serials, in which case the completed serial in
+            // sometimes we increase the serials, in which case the completed serial in
             // the device base will surpass the completed serial we have in the metal backend, so we
-            // must update ours when we see that the completed serial from the frontend has
+            // must update ours when we see that the completed serial from device base has
             // increased.
             mCompletedSerial = GetCompletedCommandSerial();
         }
@@ -166,15 +166,12 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Device::TickImpl() {
-        CheckPassedSerials();
-        Serial completedSerial = GetCompletedCommandSerial();
-
         if (mCommandContext.GetCommands() != nil) {
             SubmitPendingCommandBuffer();
-        } else if (completedSerial == GetLastSubmittedCommandSerial()) {
-            // If there's no GPU work in flight we still need to artificially increment the serial
-            // so that CPU operations waiting on GPU completion can know they don't have to wait.
-            ArtificiallyIncrementSerials();
+        } else if (HasNewCallback()) {
+            // there is a new callback that we need to address or we wait forever
+            GetPendingCommandContext();
+            SubmitPendingCommandBuffer();
         }
 
         return {};
@@ -300,13 +297,11 @@ namespace dawn_native { namespace metal {
             CheckPassedSerials();
         }
 
-        // Artificially increase the serials so work that was pending knows it can complete.
-        ArtificiallyIncrementSerials();
-
         DAWN_TRY(TickImpl());
-
+        
         // Force all operations to look as if they were completed
         AssumeCommandsComplete();
+        CheckPassedSerials();
 
         return {};
     }
