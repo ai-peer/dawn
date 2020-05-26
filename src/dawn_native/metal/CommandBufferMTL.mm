@@ -445,19 +445,19 @@ namespace dawn_native { namespace metal {
         void EnsureSourceTextureInitialized(Texture* texture,
                                             const Extent3D& size,
                                             const TextureCopy& src) {
-            // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
-            texture->EnsureSubresourceContentInitialized(src.mipLevel, 1, src.arrayLayer, 1);
+            texture->EnsureSubresourceContentInitialized(src.mipLevel, 1, src.arrayLayer,
+                                                         size.depth);
         }
 
         void EnsureDestinationTextureInitialized(Texture* texture,
                                                  const Extent3D& size,
                                                  const TextureCopy& dst) {
-            // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
             if (IsCompleteSubresourceCopiedTo(texture, size, dst.mipLevel)) {
                 texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1, dst.arrayLayer,
-                                                            1);
+                                                            size.depth);
             } else {
-                texture->EnsureSubresourceContentInitialized(dst.mipLevel, 1, dst.arrayLayer, 1);
+                texture->EnsureSubresourceContentInitialized(dst.mipLevel, 1, dst.arrayLayer,
+                                                             size.depth);
             }
         }
 
@@ -809,16 +809,22 @@ namespace dawn_native { namespace metal {
                     EnsureDestinationTextureInitialized(dstTexture, copy->copySize,
                                                         copy->destination);
 
-                    [commandContext->EnsureBlit()
-                          copyFromTexture:srcTexture->GetMTLTexture()
-                              sourceSlice:copy->source.arrayLayer
-                              sourceLevel:copy->source.mipLevel
-                             sourceOrigin:MakeMTLOrigin(copy->source.origin)
-                               sourceSize:MakeMTLSize(copy->copySize)
-                                toTexture:dstTexture->GetMTLTexture()
-                         destinationSlice:copy->destination.arrayLayer
-                         destinationLevel:copy->destination.mipLevel
-                        destinationOrigin:MakeMTLOrigin(copy->destination.origin)];
+                    // TODO(jiawei.shao@intel.com): support copies with 1D and 3D textures.
+                    const MTLSize mtlSizeOneLayer =
+                        MTLSizeMake(copy->copySize.weight, copy->copySize.height, 1);
+                    for (uint32_t slice = 0; slice < copy->copySize.depth; ++slice) {
+                        [commandContext->EnsureBlit()
+                              copyFromTexture:srcTexture->GetMTLTexture()
+                                  sourceSlice:copy->source.arrayLayer + slice
+                                  sourceLevel:copy->source.mipLevel
+                                 sourceOrigin:MakeMTLOrigin(copy->source.origin)
+                                   sourceSize:mtlSizeOneLayer
+                                    toTexture:dstTexture->GetMTLTexture()
+                             destinationSlice:copy->destination.arrayLayer + slice
+                             destinationLevel:copy->destination.mipLevel
+                            destinationOrigin:MakeMTLOrigin(copy->destination.origin)];
+                    }
+
                     break;
                 }
 
