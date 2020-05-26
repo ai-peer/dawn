@@ -37,6 +37,8 @@ namespace dawn_native {
 
     namespace {
 
+        // TODO(jiawei.shao@intel.com): add validations on the texture-to-texture copies within the
+        // same texture.
         MaybeError ValidateCopySizeFitsInTexture(const TextureCopyView& textureCopy,
                                                  const Extent3D& copySize) {
             const TextureBase* texture = textureCopy.texture;
@@ -44,7 +46,8 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Copy mipLevel out of range");
             }
 
-            if (textureCopy.arrayLayer >= texture->GetArrayLayers()) {
+            if (uint64_t(textureCopy.arrayLayer) + uint64_t(copySize.depth) >
+                uint64_t(texture->GetArrayLayers())) {
                 return DAWN_VALIDATION_ERROR("Copy arrayLayer out of range");
             }
 
@@ -59,10 +62,9 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Copy would touch outside of the texture");
             }
 
-            // TODO(cwallez@chromium.org): Check the depth bound differently for 2D arrays and 3D
-            // textures
-            if (textureCopy.origin.z != 0 || copySize.depth > 1) {
-                return DAWN_VALIDATION_ERROR("No support for z != 0 and depth > 1 for now");
+            // TODO(cwallez@chromium.org): Check the depth bound differently for 3D textures.
+            if (textureCopy.origin.z != 0) {
+                return DAWN_VALIDATION_ERROR("No support for z != 0 for now");
             }
 
             return {};
