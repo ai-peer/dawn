@@ -319,6 +319,24 @@
       "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d289f5_d80d8b02",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-26T18:39:18Z",
+      "side": 1,
+      "message": "Flaky reproduces \u003c100% but not 0%. It would need to be hard-to-repro AND have relevant debug output to be more than a convenience. Hopefully, this is rare (?!?) but if not, can always improve later.",
+      "parentUuid": "58916998_173d678c",
+      "revId": "4618f4bac629839ae97ace39bc51b285116970f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
