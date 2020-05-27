@@ -68,6 +68,24 @@
       "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d5feef9_0c0c6a92",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:10:54Z",
+      "side": 1,
+      "message": "Ah, thanks for the explanation. For now let\u0027s keep the error at the creation of the PSO but we might have to revisit depending on what we decide the semantics of validation are for WebGPU.",
+      "parentUuid": "973ab4b1_c7af4df4",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
