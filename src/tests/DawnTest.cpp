@@ -24,6 +24,7 @@
 #include "dawn_native/DawnNative.h"
 #include "dawn_wire/WireClient.h"
 #include "dawn_wire/WireServer.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/SystemUtils.h"
 #include "utils/TerribleCommandBuffer.h"
 #include "utils/WGPUHelpers.h"
@@ -847,6 +848,9 @@ void DawnTestBase::TearDown() {
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
         mReadbackSlots[i].buffer.Unmap();
     }
+
+    // Make sure cached created objects are destroyed now, before the device is.
+    mCachedObjects = {};
 }
 
 void DawnTestBase::StartExpectDeviceError() {
@@ -946,6 +950,105 @@ std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
     mDeferredExpectations.push_back(std::move(deferred));
     mDeferredExpectations.back().message = std::make_unique<std::ostringstream>();
     return *(mDeferredExpectations.back().message.get());
+}
+
+std::ostringstream& DawnTestBase::AddTextureStencilExpectation(const char* file,
+                                                               int line,
+                                                               const wgpu::Texture& sourceTexture,
+                                                               wgpu::TextureFormat sourceFormat,
+                                                               uint32_t sourceWidth,
+                                                               uint32_t sourceHeight,
+                                                               uint32_t x,
+                                                               uint32_t y,
+                                                               uint32_t width,
+                                                               uint32_t height,
+                                                               uint32_t level,
+                                                               uint32_t slice,
+                                                               uint8_t expected) {
+    // Create an intermediate texture. We will write success values into it if the source texture's
+    // stencil value is equal to the expected value.
+    wgpu::TextureDescriptor intermediateDesc;
+    intermediateDesc.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
+    intermediateDesc.size = {sourceWidth >> level, sourceHeight >> level, 1};
+    intermediateDesc.format = wgpu::TextureFormat::R8Unorm;
+
+    wgpu::Texture intermediate = device.CreateTexture(&intermediateDesc);
+
+    wgpu::TextureViewDescriptor textureViewDesc;
+    textureViewDesc.baseMipLevel = level;
+    textureViewDesc.baseArrayLayer = slice;
+    textureViewDesc.mipLevelCount = 1;
+    textureViewDesc.arrayLayerCount = 1;
+
+    utils::ComboRenderPassDescriptor renderPass({intermediate.CreateView()},
+                                                sourceTexture.CreateView(&textureViewDesc));
+
+    // Don't change the contents of the source texture.
+    renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+    renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+    renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+    renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder passEncoder = commandEncoder.BeginRenderPass(&renderPass);
+    passEncoder.SetPipeline(GetOrCreateStencilCheckPipeline(sourceFormat));
+    passEncoder.SetStencilReference(expected);
+    passEncoder.Draw(3);
+    passEncoder.EndPass();
+    wgpu::CommandBuffer commands = commandEncoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::vector<uint8_t> success(width * height, 255);
+    auto& ss =
+        AddTextureExpectation(file, line, intermediate, x, y, width, height, 0, 0, sizeof(uint8_t),
+                              new detail::ExpectEq<uint8_t>(success.data(), width * height));
+    ss << "Expected stencil value " << static_cast<uint32_t>(expected) << ".\n";
+    return ss;
+}
+
+wgpu::RenderPipeline DawnTestBase::GetOrCreateStencilCheckPipeline(wgpu::TextureFormat format) {
+    // TODO(enga): Have map of format to pipeline if we have more stencil formats.
+    ASSERT(format == wgpu::TextureFormat::Depth24PlusStencil8);
+
+    if (mCachedObjects.stencilCheckPipeline) {
+        return mCachedObjects.stencilCheckPipeline;
+    }
+
+    utils::ComboRenderPipelineDescriptor renderPipelineDesc(device);
+
+    // Pass the stencil test only if the stencil value is exactly equal to the reference
+    renderPipelineDesc.cDepthStencilState.format = format;
+    renderPipelineDesc.cDepthStencilState.stencilFront.compare = wgpu::CompareFunction::Equal;
+    renderPipelineDesc.cDepthStencilState.stencilBack.compare = wgpu::CompareFunction::Equal;
+    renderPipelineDesc.depthStencilState = &renderPipelineDesc.cDepthStencilState;
+
+    renderPipelineDesc.cColorStates[0].format = wgpu::TextureFormat::R8Unorm;
+    renderPipelineDesc.primitiveTopology = wgpu::PrimitiveTopology::TriangleList;
+
+    renderPipelineDesc.vertexStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        void main() {
+            const vec2 pos[3] = vec2[3](
+                vec2(-3.0f,  1.0f),
+                vec2( 3.0f,  1.0f),
+                vec2( 0.0f, -2.0f)
+            );
+            gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
+        }
+    )");
+
+    renderPipelineDesc.cFragmentStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout(location = 0) out float outputValue;
+        void main() {
+            outputValue = 1.0;
+        }
+    )");
+
+    mCachedObjects.stencilCheckPipeline = device.CreateRenderPipeline(&renderPipelineDesc);
+    return mCachedObjects.stencilCheckPipeline;
 }
 
 void DawnTestBase::WaitABit() {

@@ -57,6 +57,11 @@
                           sizeof(float),                                                  \
                           new ::detail::ExpectEq<float>(expected, (width) * (height)))
 
+#define EXPECT_TEXTURE_STENCIL8_EQ(expected, sourceTexture, sourceFormat, sourceWidth,         \
+                                   sourceHeight, x, y, width, height, level, slice)            \
+    AddTextureStencilExpectation(__FILE__, __LINE__, sourceTexture, sourceFormat, sourceWidth, \
+                                 sourceHeight, x, y, width, height, level, slice, expected)
+
 // Should only be used to test validation of function that can't be tested by regular validation
 // tests;
 #define ASSERT_DEVICE_ERROR(statement)                          \
@@ -268,6 +273,19 @@ class DawnTestBase {
                                               uint32_t slice,
                                               uint32_t pixelSize,
                                               detail::Expectation* expectation);
+    std::ostringstream& AddTextureStencilExpectation(const char* file,
+                                                     int line,
+                                                     const wgpu::Texture& sourceTexture,
+                                                     wgpu::TextureFormat sourceFormat,
+                                                     uint32_t sourceWidth,
+                                                     uint32_t sourceHeight,
+                                                     uint32_t x,
+                                                     uint32_t y,
+                                                     uint32_t width,
+                                                     uint32_t height,
+                                                     uint32_t level,
+                                                     uint32_t slice,
+                                                     uint8_t expected);
 
     void WaitABit();
     void FlushWire();
@@ -292,6 +310,12 @@ class DawnTestBase {
     std::unique_ptr<utils::TerribleCommandBuffer> mS2cBuf;
 
     std::unique_ptr<dawn_wire::CommandHandler> mWireServerTraceLayer;
+
+    // Helpers to implement expectations.
+    wgpu::RenderPipeline GetOrCreateStencilCheckPipeline(wgpu::TextureFormat format);
+    struct CachedObjects {
+        wgpu::RenderPipeline stencilCheckPipeline;
+    } mCachedObjects;
 
     // Tracking for validation errors
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
