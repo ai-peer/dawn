@@ -48,15 +48,17 @@ ValidationTest::ValidationTest() {
 
 wgpu::Device ValidationTest::CreateDeviceFromAdapter(
     dawn_native::Adapter adapterToTest,
-    const std::vector<const char*>& requiredExtensions) {
+    const std::vector<const char*>& requiredExtensions,
+    const std::vector<const char*>& forceEnabledToggles) {
     wgpu::Device deviceToTest;
 
-    // Always keep the code path to test creating a device without a device descriptor.
-    if (requiredExtensions.empty()) {
+    // Always keep this code path to test creating a device without a device descriptor.
+    if (requiredExtensions.empty() && forceEnabledToggles.empty()) {
         deviceToTest = wgpu::Device::Acquire(adapterToTest.CreateDevice());
     } else {
         dawn_native::DeviceDescriptor descriptor;
         descriptor.requiredExtensions = requiredExtensions;
+        descriptor.forceEnabledToggles = forceEnabledToggles;
         deviceToTest = wgpu::Device::Acquire(adapterToTest.CreateDevice(&descriptor));
     }
 

@@ -553,6 +553,7 @@ namespace dawn_native {
                         info->multisampled = binding.multisampled;
                         info->storageTextureFormat = storageTextureFormat;
                         info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
+                        DAWN_TRY(ValidateStorageTextureViewDimension(info->viewDimension));
                         break;
                     }
                     default:
@@ -763,6 +764,7 @@ namespace dawn_native {
                         info->storageTextureFormat = storageTextureFormat;
                         info->viewDimension =
                             SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
+                        DAWN_TRY(ValidateStorageTextureViewDimension(info->viewDimension));
                         break;
                     }
                     default:

@@ -94,6 +94,26 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateStorageTextureViewDimension(wgpu::TextureViewDimension dimension) {
+        switch (dimension) {
+            case wgpu::TextureViewDimension::Cube:
+            case wgpu::TextureViewDimension::CubeArray:
+                return DAWN_VALIDATION_ERROR(
+                    "Cube map and cube map texture views cannot be used as storage textures");
+
+            case wgpu::TextureViewDimension::e1D:
+            case wgpu::TextureViewDimension::e2D:
+            case wgpu::TextureViewDimension::e2DArray:
+            case wgpu::TextureViewDimension::e3D:
+            case wgpu::TextureViewDimension::Undefined:
+                return {};
+
+            default:
+                UNREACHABLE();
+                return {};
+        }
+    }
+
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
@@ -138,12 +158,17 @@ namespace dawn_native {
                 case wgpu::BindingType::SampledTexture:
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
-                case wgpu::BindingType::ReadonlyStorageTexture:
-                case wgpu::BindingType::WriteonlyStorageTexture:
                     if (entry.hasDynamicOffset) {
                         return DAWN_VALIDATION_ERROR("Samplers and textures cannot be dynamic");
                     }
                     break;
+                case wgpu::BindingType::ReadonlyStorageTexture:
+                case wgpu::BindingType::WriteonlyStorageTexture: {
+                    if (entry.hasDynamicOffset) {
+                        return DAWN_VALIDATION_ERROR("Storage textures cannot be dynamic");
+                    }
+                    DAWN_TRY(ValidateStorageTextureViewDimension(entry.viewDimension));
+                } break;
                 case wgpu::BindingType::StorageTexture:
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
             }

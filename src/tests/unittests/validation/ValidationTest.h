@@ -34,7 +34,8 @@ class ValidationTest : public testing::Test {
     ~ValidationTest() override;
 
     wgpu::Device CreateDeviceFromAdapter(dawn_native::Adapter adapter,
-                                         const std::vector<const char*>& requiredExtensions);
+                                         const std::vector<const char*>& requiredExtensions,
+                                         const std::vector<const char*>& forceEnabledToggles = {});
 
     void TearDown() override;
 
