@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "31867bb7_ec38aea9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-27T20:42:18Z",
+      "side": 1,
+      "message": "this has the same problem as the GL backend where we don\u0027t naturally ever get to the pending serial and the callbacks are never fired from the mappings in dawn test tear down. So even with the has new callbacks flag, since we don\u0027t tick to the mapped serial value, we don\u0027t fire the callbacks. maybe we need to rework how we track the map requests instead of using pending serial?",
+      "parentUuid": "326909eb_93daafbc",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d78c944_f7e835a4",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 16
@@ -151,6 +175,30 @@
       "writtenOn": "2020-05-27T19:46:39Z",
       "side": 1,
       "message": "Hm, this wasn\u0027t here before; why do we need it now?",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f23e443_3988d689",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-27T20:42:18Z",
+      "side": 1,
+      "message": "This was a problem I ran into when we stopped increasing the serials because in dawn test tear down we map slots synchronously and then we wait on the callback to be fired, but since the serials never reach the pending serial it hangs forever. I tried to compare what was missing in GL and metal because it seemed to be fine in d3d12 and vulkan, and it seems to be that in vulkan we have to transition states in our map async impls, which add commands and increments the serials naturally. in d3d12, we always get next serial at the end of tickimpl.",
+      "parentUuid": "15886bdd_8e04b58b",
       "range": {
         "startLine": 155,
         "startChar": 8,
