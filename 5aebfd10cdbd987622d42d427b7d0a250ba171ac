@@ -68,6 +68,24 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e50d821_5a0eed3a",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:24:13Z",
+      "side": 1,
+      "message": "Ok. This CL is basically complete but maybe we should wait for the SPIRV-Cross bug to be fixed so that we don\u0027t rely on storage textures always happening to be the 0th one?",
+      "parentUuid": "e574d96b_45d843fb",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
