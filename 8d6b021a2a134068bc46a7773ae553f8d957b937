@@ -142,6 +142,30 @@
       "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd4b2456_e6e5ac70",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T00:44:24Z",
+      "side": 0,
+      "message": "Now we only have very simple tests on storage textures (only one draw or one dispatch in one pass), which is not enough to test the correctness of state transitions about storage textures inside a pass.",
+      "parentUuid": "517214b4_b1679642",
+      "range": {
+        "startLine": 153,
+        "startChar": 32,
+        "endLine": 157,
+        "endChar": 86
+      },
+      "revId": "8d6b021a2a134068bc46a7773ae553f8d957b937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
