@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "535d1a5a_5994c8b7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:14:21Z",
+      "side": 1,
+      "message": "nit: Add a comment why we ASSERT and check the state here.",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d817d06_5b7efd6b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:14:21Z",
+      "side": 1,
+      "message": "Maybe we could concatenate the strings together and return everything in the DAWN_INTERNAL_ERROR at [1] instead of consuming errors repeatedly?",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1498dce3_fb77caef",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:14:21Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
