@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7563c98_85def529",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T18:31:05Z",
+      "side": 1,
+      "message": "nit: prefer static_cast",
+      "range": {
+        "startLine": 49,
+        "startChar": 16,
+        "endLine": 49,
+        "endChar": 24
+      },
+      "revId": "3560ca98a61517248cdfff33e5cb060aec8d08d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
