@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6e59a6ae_6a1deb13",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T18:39:34Z",
+      "side": 1,
+      "message": "Or would it work if we used glTextureView?",
+      "parentUuid": "b9bb3a45_4be650bc",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49a661e2_271845dd",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 1
