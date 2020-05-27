@@ -38,6 +38,9 @@ namespace dawn_native {
             fenceInFlight.fence->SetCompletedValue(fenceInFlight.value);
         }
         mFencesInFlight.ClearUpTo(finishedSerial);
+        if (!mFencesInFlight.Empty()) {
+            mDevice->SetHasNewCallback();
+        }
     }
 
 }  // namespace dawn_native

@@ -237,6 +237,7 @@ namespace dawn_native {
             return;
         }
         mCurrentErrorScope = AcquireRef(new ErrorScope(filter, mCurrentErrorScope.Get()));
+        mHasNewCallback = true;
     }
 
     bool DeviceBase::PopErrorScope(wgpu::ErrorCallback callback, void* userdata) {
@@ -321,11 +322,6 @@ namespace dawn_native {
         mLastSubmittedSerial++;
     }
 
-    void DeviceBase::ArtificiallyIncrementSerials() {
-        mCompletedSerial++;
-        mLastSubmittedSerial++;
-    }
-
     void DeviceBase::AssumeCommandsComplete() {
         mLastSubmittedSerial++;
         mCompletedSerial = mLastSubmittedSerial;
@@ -346,6 +342,14 @@ namespace dawn_native {
         if (completedSerial > mCompletedSerial) {
             mCompletedSerial = completedSerial;
         }
+    }
+
+    void DeviceBase::SetHasNewCallback() {
+        mHasNewCallback = true;
+    }
+
+    bool DeviceBase::HasNewCallback() const {
+        return mHasNewCallback;
     }
 
     ResultOrError<const Format*> DeviceBase::GetInternalFormat(wgpu::TextureFormat format) const {
@@ -709,17 +713,25 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
-        if (ConsumedError(TickImpl())) {
-            return;
+        // to avoid overly ticking, we only want to tick when:
+        // 1. the completed serial has incremented from the last processed serial
+        // 2. or there are new callbacks that need to be addressed
+        CheckPassedSerials();
+        if (mCompletedSerial != mLastProcessedSerial || mHasNewCallback) {
+            if (ConsumedError(TickImpl())) {
+                return;
+            }
+            mLastProcessedSerial = mCompletedSerial;
+            mHasNewCallback = false;
         }
 
         // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
         // tick the dynamic uploader before the backend resource allocators. This would allow
         // reclaiming resources one tick earlier.
-        mDynamicUploader->Deallocate(GetCompletedCommandSerial());
-        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
-        mMapRequestTracker->Tick(GetCompletedCommandSerial());
+        mDynamicUploader->Deallocate(mCompletedSerial);
+        mErrorScopeTracker->Tick(mCompletedSerial);
+        mFenceSignalTracker->Tick(mCompletedSerial);
+        mMapRequestTracker->Tick(mCompletedSerial);
     }
 
     void DeviceBase::Reference() {
