@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
@@ -46,6 +47,8 @@ namespace dawn_native { namespace d3d12 {
     // TODO(dawn:155): Figure out these values.
     static constexpr uint16_t kShaderVisibleDescriptorHeapSize = 1024;
     static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
+
+    static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
     // static
     ResultOrError<Device*> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
@@ -221,6 +224,9 @@ namespace dawn_native { namespace d3d12 {
         mUsedComObjectRefs.ClearUpTo(completedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
+
+        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+
         return {};
     }
 
@@ -458,6 +464,46 @@ namespace dawn_native { namespace d3d12 {
         // Force all operations to look as if they were completed
         AssumeCommandsComplete();
         return {};
+    }
+
+    MaybeError Device::CheckDebugLayerAndGenerateErrors() {
+        if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
+            return {};
+        }
+        ComPtr<ID3D12InfoQueue> infoQueue;
+        ASSERT_SUCCESS(mD3d12Device.As(&infoQueue));
+        if (infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter() == 0) {
+            return {};
+        }
+
+        ASSERT(GetState() != State::BeingDisconnected);
+
+        if (GetState() == State::BeingDisconnected) {
+            return {};
+        }
+
+        uint64_t errorsToPrint = std::min(
+            kMaxDebugMessagesToPrint, infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter());
+        std::array<std::string, kMaxDebugMessagesToPrint> messages;
+        for (uint64_t i = 0; i < errorsToPrint; ++i) {
+            SIZE_T messageLength = 0;
+            DAWN_TRY(CheckHRESULT(infoQueue->GetMessageW(i, nullptr, &messageLength),
+                                  "ID3D12InfoQueue::GetMessageW"));
+
+            std::unique_ptr<uint8_t[]> messageData(new uint8_t[messageLength]);
+            D3D12_MESSAGE* message = reinterpret_cast<D3D12_MESSAGE*>(messageData.get());
+            DAWN_TRY(CheckHRESULT(infoQueue->GetMessageW(i, message, &messageLength),
+                                  "ID3D12InfoQueue::GetMessageW"));
+
+            messages[i] = message->pDescription;
+        }
+        infoQueue->ClearStoredMessages();
+
+        for (uint64_t i = 0; i < errorsToPrint; ++i) {
+            ConsumedError(DAWN_INTERNAL_ERROR(std::move(messages[i])));
+        }
+
+        return DAWN_INTERNAL_ERROR("D3D12 debug layer message occurred");
     }
 
     void Device::ShutDownImpl() {
