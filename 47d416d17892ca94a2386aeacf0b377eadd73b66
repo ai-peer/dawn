@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e964ee1_00ddbe35",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-27T15:39:55Z",
+      "side": 1,
+      "message": "nit: Don\u0027t think this check is correct or needed. If we encounter an internal error during shutdown, it must be in the state of being disconnected.",
+      "parentUuid": "535d1a5a_5994c8b7",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9d817d06_5b7efd6b",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 13
