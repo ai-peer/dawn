@@ -33,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
 
             // Enable the debug layer (requires the Graphics Tools "optional feature").
             {
-                if (enableBackendValidation) {
+                if (true) {
                     ComPtr<ID3D12Debug1> debugController;
                     if (SUCCEEDED(
                             functions->d3d12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
