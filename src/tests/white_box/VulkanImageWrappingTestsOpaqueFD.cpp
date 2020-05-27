@@ -33,9 +33,7 @@ namespace dawn_native { namespace vulkan {
           public:
             void SetUp() override {
                 DawnTest::SetUp();
-                if (UsesWire()) {
-                    return;
-                }
+                DAWN_SKIP_TEST_IF(UsesWire());
 
                 deviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(device.Get());
             }
@@ -489,12 +487,16 @@ namespace dawn_native { namespace vulkan {
     // alias the same memory
     TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevicesAliased) {
         DAWN_SKIP_TEST_IF(UsesWire());
+
+        // WrapVulkanImage consumes the file descriptor so we can't import defaultFd twice.
+        // Duplicate the file descriptor so we can import it twice.
+        int defaultFdCopy = dup(defaultFd);
+        ASSERT(defaultFdCopy != -1);
+
         // Import the image on |device
         wgpu::Texture wrappedTextureAlias =
-            WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
+            WrapVulkanImage(device, &defaultDescriptor, defaultFdCopy, defaultAllocationSize,
                             defaultMemoryTypeIndex, {});
-
-        int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -508,7 +510,7 @@ namespace dawn_native { namespace vulkan {
                                                                           wrappedTexture.Get());
 
         // Import the image to |device|, making sure we wait on signalFd
-        memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
+        int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
                             defaultMemoryTypeIndex, {signalFd});
