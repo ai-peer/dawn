@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74f7b77c_fd4f91f2",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:03:18Z",
+      "side": 1,
+      "message": "After comments below, this can be in the anonymous namespace.",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fd4752f_ce43b80c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:03:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87715d30_8354f6ec",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:03:18Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this is needed because we are correctly going to forward textureDimensionCube to bind group layout creation, which will fail later.",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
