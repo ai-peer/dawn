@@ -16,6 +16,23 @@
       "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39812a1e_729a95b1",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-27T15:49:08Z",
+      "side": 1,
+      "message": "Out of curiosity, did you consider a Set() call rather than using the constructor? e.g.,\n\nScopedEnvironmentVar vkICDFilenames;\nif (!vkICDFilenames.Set(\"VK_ICD_FILENAMES\", fullSwiftshaderICDPath.c_str())) {\n  return DAWN_INTERNAL_ERROR(\"Couldn\u0027t set VK_ICD_FILENAMES\");\n}\n\nSeems a bit clearer at the call site, and you wouldn\u0027t need to expose IsSet() or the assignment operator externally. Just a thought.",
+      "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
