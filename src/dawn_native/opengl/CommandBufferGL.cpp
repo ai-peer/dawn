@@ -790,8 +790,15 @@ namespace dawn_native { namespace opengl {
                         break;
                 }
 
-                GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
-                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture, 0);
+                if (textureView->GetTexture()->GetArrayLayers() == 1) {
+                    GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
+                    gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture,
+                                            textureView->GetBaseMipLevel());
+                } else {
+                    gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, texture,
+                                               textureView->GetBaseMipLevel(),
+                                               textureView->GetBaseArrayLayer());
+                }
             }
         }
 
