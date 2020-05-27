@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2acf7beb_92c28711",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-27T19:06:51Z",
+      "side": 1,
+      "message": "This is just an arbitrary value that seems large enough to get the job done. Another idea is just looping on RemoveSingleEntryFromLRU and calling MakeResident until the LRU is emptied.",
+      "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
