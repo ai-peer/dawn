@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "966bf4c0_1c283c82",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T21:28:00Z",
+      "side": 1,
+      "message": "I took Stephen\u0027s suggestion and just removed the rvalue assignment / construction. It\u0027s unnecessary at this point and let\u0027s you do things that are probably undesirable (like reordering variables in your scope, and then they would unset themselves in unexpected ways on destruction).",
+      "parentUuid": "1d7f623b_7eb08321",
+      "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39812a1e_729a95b1",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02756cba_2cfacf11",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T21:28:00Z",
+      "side": 1,
+      "message": "That\u0027s a good idea. I like this better.",
+      "parentUuid": "39812a1e_729a95b1",
+      "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
