@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "3452eb1e_11b1bc61",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T18:48:06Z",
+      "side": 1,
+      "message": "Ah, right. I wasn\u0027t sure if the plan was to turn this into ES 3.1 or have ES 3.1 in parallel. We\u0027ll need to make changes in quite a few other places as well then. Right now we\u0027re already using glTextureView and I\u0027m sure a bunch of other desktop GL stuff.",
+      "parentUuid": "7af36da8_36de4b75",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49a661e2_271845dd",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 1
