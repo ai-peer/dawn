@@ -22,6 +22,30 @@
       "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b119b574_86e10d7e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-27T02:53:00Z",
+      "side": 1,
+      "message": "An attempt to get around the infinity loop caused by calling ConsumedError() with an internal error without first clearing the info queue. If !\u003d State::Alive is too broad, we could switch to \u003d\u003d State::BeingDisconnected.\n\nAlternatively, we could read all messages and clear the queue before calling ConsumedError(). This would guard against the messages being generated during shutdown. That said, any message generated during shutdown might get silenced by AssertAndIgnoreDeviceLossError anyways.",
+      "parentUuid": "b37190e7_6d1e67ce",
+      "range": {
+        "startLine": 471,
+        "startChar": 12,
+        "endLine": 471,
+        "endChar": 38
+      },
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
