@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7af36da8_36de4b75",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T18:42:22Z",
+      "side": 1,
+      "message": "I think it would, but they aren\u0027t available on ES 3.1 which is what we\u0027re going to turn the GL backend into.",
+      "parentUuid": "6e59a6ae_6a1deb13",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49a661e2_271845dd",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 1
