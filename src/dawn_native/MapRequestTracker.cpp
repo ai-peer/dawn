@@ -41,5 +41,8 @@ namespace dawn_native {
             request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.isWrite);
         }
         mInflightRequests.ClearUpTo(finishedSerial);
+        if (!mInflightRequests.Empty()) {
+            mDevice->SetHasNewCallback();
+        }
     }
 }  // namespace dawn_native
