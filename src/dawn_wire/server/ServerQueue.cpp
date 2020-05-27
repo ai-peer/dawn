@@ -38,4 +38,26 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
+    bool Server::DoQueueWriteBufferInternal(ObjectId queueId,
+                                            ObjectId bufferId,
+                                            uint64_t bufferOffset,
+                                            const uint8_t* data,
+                                            size_t size) {
+        // The null object isn't valid as `self` or `buffer`
+        if (queueId == 0 || bufferId == 0) {
+            return false;
+        }
+
+        // The null object isn't valid as `buffer`
+
+        auto* queue = QueueObjects().Get(queueId);
+        auto* buffer = BufferObjects().Get(bufferId);
+        if (queue == nullptr || buffer == nullptr) {
+            return false;
+        }
+
+        mProcs.queueWriteBuffer(queue->handle, buffer->handle, bufferOffset, data, size);
+        return true;
+    }
+
 }}  // namespace dawn_wire::server

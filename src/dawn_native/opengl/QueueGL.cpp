@@ -37,4 +37,15 @@ namespace dawn_native { namespace opengl {
         return {};
     }
 
+    MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
+                                      uint64_t bufferOffset,
+                                      const void* data,
+                                      size_t size) {
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+
+        gl.BindBuffer(GL_ARRAY_BUFFER, ToBackend(buffer)->GetHandle());
+        gl.BufferSubData(GL_ARRAY_BUFFER, bufferOffset, size, data);
+        return {};
+    }
+
 }}  // namespace dawn_native::opengl

@@ -161,10 +161,11 @@ namespace utils {
         wgpu::BufferDescriptor descriptor;
         descriptor.size = size;
         descriptor.usage = usage | wgpu::BufferUsage::CopyDst;
+        wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
 
-        wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
-        buffer.SetSubData(0, size, data);
-        return buffer;
+        memcpy(result.data, data, result.dataLength);
+        result.buffer.Unmap();
+        return std::move(result.buffer);
     }
 
     ComboRenderPassDescriptor::ComboRenderPassDescriptor(
