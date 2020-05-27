@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "eeee51fc_b939ecc4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-27T00:08:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0949af93_d64f06ba",
+      "range": {
+        "startLine": 706,
+        "startChar": 8,
+        "endLine": 710,
+        "endChar": 34
+      },
+      "revId": "dfe9aa65482bfce2641805927a5cf1d21f1b2271",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "797a2810_20577507",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 6
