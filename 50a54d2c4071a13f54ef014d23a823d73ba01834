@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53748907_9785099d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "nit: We can do this after we\u0027ve caught the error on MapReadAsyncImpl, after tracker-\u003eTrack. Only after tracking the buffer do we care about the new callback.\n\nEven better, maybe the map tracker and the other trackers could call SetHasPendingCallback inside the Track function.",
+      "range": {
+        "startLine": 270,
+        "startChar": 8,
+        "endLine": 270,
+        "endChar": 41
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aacaf0a3_996cc665",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "Can this be inside the \"if (mCompletedSerial !\u003d mLastProcessedSerial || mHasNewCallback)\" ?",
+      "range": {
+        "startLine": 719,
+        "startChar": 8,
+        "endLine": 719,
+        "endChar": 29
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd1957c_51108af5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "This could use a comment that it will be reset to true by the trackers if there are still pending callbacks remaining. Maybe it should be called \"mHasPendingCallback\".",
+      "range": {
+        "startLine": 725,
+        "startChar": 12,
+        "endLine": 725,
+        "endChar": 36
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3acfd7c4_9f0ccedb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "could we avoid ticking these as well if nothing has changed?",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 734,
+        "endChar": 51
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "326909eb_93daafbc",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "You removed this branch in DeviceVk. Could it be removed here as well?",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d78c944_f7e835a4",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "This comment isn\u0027t what the code is doing. We want to be sure all callbacks fire, if I understand correctly. Maybe it would be better to call SetHasNewCallback() instead?",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15886bdd_8e04b58b",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "Hm, this wasn\u0027t here before; why do we need it now?",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86c029b4_8ed69195",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T19:46:39Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have the wait in the middle, because that means the fences in flight are empty after the wait. That doesn\u0027t really test the idea that there are multiple callbacks.\n\nMaybe we can have\n 1) A test that does: Signal, Signal, OnCompletion, OnCompletion, Wait\n 2) A test that does: Signal, OnCompletion, Signal, OnCompletion, Wait",
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
