@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b37190e7_6d1e67ce",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-27T02:01:39Z",
+      "side": 1,
+      "message": "Why is \"GetState() !\u003d State::Alive\" added to the list of conditions? \n\nI think the kMaxDebugMessagesToPrint limit should work well enough to avoid outputting too many messages.",
+      "range": {
+        "startLine": 471,
+        "startChar": 12,
+        "endLine": 471,
+        "endChar": 38
+      },
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
