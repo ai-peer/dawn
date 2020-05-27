@@ -120,6 +120,24 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f27c3aa_f5f05d31",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T12:14:14Z",
+      "side": 1,
+      "message": "Yes I\u0027ve verified using info.id instead of info.base_type_id is the fix. \n\nThanks for your help and sorry that I\u0027ve missed this bug.",
+      "parentUuid": "8fb42430_44ed9b72",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
