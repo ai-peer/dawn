@@ -50,6 +50,24 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e574d96b_45d843fb",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T08:15:06Z",
+      "side": 1,
+      "message": "It is because currently we only declare one image inside the shader in all our end2end tests, which is above the declaration of the storage buffer, so indices[group][bindingIndex] is always 0 and the uniform location in the program happpens to be 0.",
+      "parentUuid": "49a661e2_271845dd",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
