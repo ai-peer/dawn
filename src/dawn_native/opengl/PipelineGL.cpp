@@ -142,9 +142,19 @@ namespace dawn_native { namespace opengl {
                         // emulation
                         break;
 
-                    case wgpu::BindingType::StorageTexture:
                     case wgpu::BindingType::ReadonlyStorageTexture:
-                    case wgpu::BindingType::WriteonlyStorageTexture:
+                    case wgpu::BindingType::WriteonlyStorageTexture: {
+                        // Note that currently this will always return -1 because in SPIRV-Cross
+                        // compiler->set_name(info.base_type_id, GetBindingName(group,
+                        // bindingNumber)) does not take effect on storage textures.
+                        GLint location = gl.GetUniformLocation(mProgram, name.c_str());
+                        if (location != -1) {
+                            gl.Uniform1i(location, indices[group][bindingIndex]);
+                        }
+                        break;
+                    }
+
+                    case wgpu::BindingType::StorageTexture:
                         UNREACHABLE();
                         break;
 

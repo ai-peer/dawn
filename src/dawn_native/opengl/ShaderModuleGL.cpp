@@ -176,6 +176,8 @@ namespace dawn_native { namespace opengl {
                 BindingNumber bindingNumber = it.first;
                 const auto& info = it.second;
 
+                // TODO(jiawei.shao@intel.com): investigate why compiler->set_name() doesn't take
+                // effect on storage textures.
                 if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
                     mSpvcContext.SetName(info.base_type_id, GetBindingName(group, bindingNumber));
                     mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_binding);
