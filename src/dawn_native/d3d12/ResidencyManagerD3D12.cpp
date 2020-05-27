@@ -37,11 +37,13 @@ namespace dawn_native { namespace d3d12 {
 
         // If the heap isn't already resident, make it resident.
         if (!pageable->IsInResidencyLRUCache() && !pageable->IsResidencyLocked()) {
-            DAWN_TRY(EnsureCanMakeResident(pageable->GetSize(),
-                                           GetMemorySegmentInfo(pageable->GetMemorySegment())));
             ID3D12Pageable* d3d12Pageable = pageable->GetD3D12Pageable();
-            DAWN_TRY(CheckHRESULT(mDevice->GetD3D12Device()->MakeResident(1, &d3d12Pageable),
-                                  "Making a scheduled-to-be-used resource resident"));
+            uint64_t size = pageable->GetSize();
+            if (pageable->GetMemorySegment() == MemorySegment::Local) {
+                DAWN_TRY(MakeAllocationsResident(1, &d3d12Pageable, size, 0));
+            } else {
+                DAWN_TRY(MakeAllocationsResident(1, &d3d12Pageable, 0, size));
+            }
         }
 
         // Since we can't evict the heap, it's unnecessary to track the heap in the LRU Cache.
@@ -181,14 +183,19 @@ namespace dawn_native { namespace d3d12 {
             return {};
         }
 
-        return EnsureCanMakeResident(allocationSize, GetMemorySegmentInfo(memorySegment));
+        bool allocationsEvicted;
+        DAWN_TRY_ASSIGN(allocationsEvicted,
+                        EnsureCanMakeResident(allocationSize, GetMemorySegmentInfo(memorySegment)));
+
+        return {};
     }
 
     // Any time we need to make something resident, we must check that we have enough free memory to
     // make the new object resident while also staying within budget. If there isn't enough
-    // memory, we should evict until there is.
-    MaybeError ResidencyManager::EnsureCanMakeResident(uint64_t sizeToMakeResident,
-                                                       MemorySegmentInfo* memorySegment) {
+    // memory, we should evict until there is. Returns false when the segment is over budget, but
+    // nothing can be evicted.
+    ResultOrError<bool> ResidencyManager::EnsureCanMakeResident(uint64_t sizeToMakeResident,
+                                                                MemorySegmentInfo* memorySegment) {
         ASSERT(mResidencyManagementEnabled);
 
         UpdateMemorySegmentInfo(memorySegment);
@@ -197,7 +204,7 @@ namespace dawn_native { namespace d3d12 {
 
         // Return when we can call MakeResident and remain under budget.
         if (memoryUsageAfterMakeResident < memorySegment->budget) {
-            return {};
+            return true;
         }
 
         std::vector<ID3D12Pageable*> resourcesToEvict;
@@ -216,13 +223,17 @@ namespace dawn_native { namespace d3d12 {
             resourcesToEvict.push_back(pageable->GetD3D12Pageable());
         }
 
+        if (resourcesToEvict.size() == 0) {
+            return false;
+        }
+
         if (resourcesToEvict.size() > 0) {
             DAWN_TRY(CheckHRESULT(
                 mDevice->GetD3D12Device()->Evict(resourcesToEvict.size(), resourcesToEvict.data()),
                 "Evicting resident heaps to free memory"));
         }
 
-        return {};
+        return true;
     }
 
     // Given a list of heaps that are pending usage, this function will estimate memory needed,
@@ -269,26 +280,71 @@ namespace dawn_native { namespace d3d12 {
             TrackResidentAllocation(heap);
         }
 
+        DAWN_TRY(MakeAllocationsResident(heapsToMakeResident.size(), heapsToMakeResident.data(),
+                                         localSizeToMakeResident, nonLocalSizeToMakeResident));
+
+        return {};
+    }
+
+    MaybeError ResidencyManager::MakeAllocationsResident(uint32_t numberOfObjects,
+                                                         ID3D12Pageable** allocations,
+                                                         uint64_t localSizeToMakeResident,
+                                                         uint64_t nonLocalSizeToMakeResident) {
+        if (numberOfObjects == 0) {
+            return {};
+        }
+
         if (localSizeToMakeResident > 0) {
-            DAWN_TRY(EnsureCanMakeResident(localSizeToMakeResident, &mVideoMemoryInfo.local));
+            bool resourcesWereEvicted;
+            DAWN_TRY_ASSIGN(resourcesWereEvicted, EnsureCanMakeResident(localSizeToMakeResident,
+                                                                        &mVideoMemoryInfo.local));
         }
 
         if (nonLocalSizeToMakeResident > 0) {
             ASSERT(!mDevice->GetDeviceInfo().isUMA);
-            DAWN_TRY(EnsureCanMakeResident(nonLocalSizeToMakeResident, &mVideoMemoryInfo.nonLocal));
+            bool resourcesWereEvicted;
+            DAWN_TRY_ASSIGN(
+                resourcesWereEvicted,
+                EnsureCanMakeResident(nonLocalSizeToMakeResident, &mVideoMemoryInfo.nonLocal));
         }
 
-        if (heapsToMakeResident.size() != 0) {
-            // Note that MakeResident is a synchronous function and can add a significant
-            // overhead to command recording. In the future, it may be possible to decrease this
-            // overhead by using MakeResident on a secondary thread, or by instead making use of
-            // the EnqueueMakeResident function (which is not available on all Windows 10
-            // platforms).
-            // TODO(brandon1.jones@intel.com): If MakeResident fails, try evicting some more and
-            // call MakeResident again.
-            DAWN_TRY(CheckHRESULT(mDevice->GetD3D12Device()->MakeResident(
-                                      heapsToMakeResident.size(), heapsToMakeResident.data()),
-                                  "Making scheduled-to-be-used resources resident"));
+        // Note that MakeResident is a synchronous function and can add a significant
+        // overhead to command recording. In the future, it may be possible to decrease this
+        // overhead by using MakeResident on a secondary thread, or by instead making use of
+        // the EnqueueMakeResident function (which is not available on all Windows 10
+        // platforms).
+        HRESULT hr = mDevice->GetD3D12Device()->MakeResident(numberOfObjects, allocations);
+
+        // A MakeResident call can fail if there's not enough available memory. This
+        // could occur when there's significant fragmentation or if the allocation size
+        // estimates are incorrect. We may be able to continue execution by evicting some
+        // more memory and calling MakeResident again.
+        while (FAILED(hr)) {
+            constexpr uint32_t kAdditonalSizeToEvict = 50000000;  // 50MB
+
+            bool localAllocationsEvicted = false;
+            if (localSizeToMakeResident > 0) {
+                DAWN_TRY_ASSIGN(
+                    localAllocationsEvicted,
+                    EnsureCanMakeResident(kAdditonalSizeToEvict, &mVideoMemoryInfo.local));
+            }
+
+            bool nonLocalAllocationsEvicted = false;
+            if (nonLocalSizeToMakeResident > 0) {
+                ASSERT(!mDevice->GetDeviceInfo().isUMA);
+                DAWN_TRY_ASSIGN(
+                    nonLocalAllocationsEvicted,
+                    EnsureCanMakeResident(kAdditonalSizeToEvict, &mVideoMemoryInfo.nonLocal));
+            }
+
+            // If nothing can be evicted after MakeResident has failed, we cannot continue
+            // execution and must throw a fatal error.
+            if (!localAllocationsEvicted && !nonLocalAllocationsEvicted) {
+                return DAWN_OUT_OF_MEMORY_ERROR(
+                    "MakeResident has failed due to excessive video memory usage.");
+            }
+
+            hr = mDevice->GetD3D12Device()->MakeResident(numberOfObjects, allocations);
         }
 
         return {};
