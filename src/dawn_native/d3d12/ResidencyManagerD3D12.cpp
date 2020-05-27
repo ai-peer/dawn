@@ -277,19 +277,38 @@ namespace dawn_native { namespace d3d12 {
             ASSERT(!mDevice->GetDeviceInfo().isUMA);
             DAWN_TRY(EnsureCanMakeResident(nonLocalSizeToMakeResident, &mVideoMemoryInfo.nonLocal));
         }
-
+        HRESULT hr = S_OK;
         if (heapsToMakeResident.size() != 0) {
             // Note that MakeResident is a synchronous function and can add a significant
             // overhead to command recording. In the future, it may be possible to decrease this
             // overhead by using MakeResident on a secondary thread, or by instead making use of
             // the EnqueueMakeResident function (which is not available on all Windows 10
             // platforms).
-            // TODO(brandon1.jones@intel.com): If MakeResident fails, try evicting some more and
-            // call MakeResident again.
-            DAWN_TRY(CheckHRESULT(mDevice->GetD3D12Device()->MakeResident(
-                                      heapsToMakeResident.size(), heapsToMakeResident.data()),
-                                  "Making scheduled-to-be-used resources resident"));
+            hr = mDevice->GetD3D12Device()->MakeResident(heapsToMakeResident.size(),
+                                                         heapsToMakeResident.data());
+
+            // The previous MakeResident call can fail if there's not enough available memory. This
+            // could occur when there's significant fragmentation or if the allocation size
+            // estimates are incorrect. We may be able to continue execution by evicting some
+            // more memory and calling MakeResident again.
+            while (FAILED(hr) && (!mVideoMemoryInfo.local.lruCache.empty() &&
+                                  !mVideoMemoryInfo.nonLocal.lruCache.empty())) {
+                constexpr uint32_t kAdditonalSizeToEvict = 50000000;  // 50MB
+                if (localSizeToMakeResident > 0) {
+                    DAWN_TRY(EnsureCanMakeResident(kAdditonalSizeToEvict, &mVideoMemoryInfo.local));
+                }
+
+                if (nonLocalSizeToMakeResident > 0) {
+                    DAWN_TRY(
+                        EnsureCanMakeResident(kAdditonalSizeToEvict, &mVideoMemoryInfo.nonLocal));
+                }
+
+                hr = mDevice->GetD3D12Device()->MakeResident(heapsToMakeResident.size(),
+                                                             heapsToMakeResident.data());
+            }
         }
+
+        DAWN_TRY(CheckHRESULT(hr, "Making scheduled-to-be-used resources resident"));
 
         return {};
     }
