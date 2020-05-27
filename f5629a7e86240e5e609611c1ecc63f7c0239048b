@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b0c6d3e5_a8ebe8b2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:38:10Z",
+      "side": 1,
+      "message": "We should really be able to do copies from stencil formats in WebGPU. I think it is a mistake that it\u0027s not allowed in Vulkan: https://github.com/KhronosGroup/Vulkan-Docs/issues/1283 (SAMPLED implies TRANSFER).",
+      "revId": "f5629a7e86240e5e609611c1ecc63f7c0239048b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa92b232_0779d81d",
         "filename": "src/tests/end2end/SubresourceOutputAttachmentTests.cpp",
         "patchSetId": 2
@@ -19,6 +36,23 @@
         "endLine": 29,
         "endChar": 0
       },
+      "revId": "f5629a7e86240e5e609611c1ecc63f7c0239048b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc1270a_2fc45a88",
+        "filename": "src/tests/end2end/SubresourceOutputAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:38:10Z",
+      "side": 1,
+      "message": "Maybe instead of the EXPECT_STENCIL magic we could just DISABLE this test for now, until we work out that we can copy stencil to textures.",
       "revId": "f5629a7e86240e5e609611c1ecc63f7c0239048b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
