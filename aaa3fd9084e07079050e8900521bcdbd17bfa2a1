@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d7f623b_7eb08321",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-27T08:06:35Z",
+      "side": 1,
+      "message": "Instead of this ASSERT maybe we could run the unset in this case.",
+      "revId": "aaa3fd9084e07079050e8900521bcdbd17bfa2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
