@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acba8010_1fbf1536",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T00:53:55Z",
+      "side": 1,
+      "message": "Hi Yunchao, I am implementing copying multiple texture array layers in one copy call, so there can be multiple array layers that need barriers and may have conflict with your work here. (https://dawn-review.googlesource.com/c/dawn/+/22140)\n\nCould you help me change the layer here to \"copy-\u003ecopySize.depth\"? It is safe because even without my CL, copy-\u003ecopySize.depth should always be equal to 1 here.",
+      "revId": "9607cb8606d8ac56f7ed960716ec3fcb71c1d36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
