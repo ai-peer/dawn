@@ -46,6 +46,30 @@
       "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cd0a38_0a71ea7f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-27T03:03:48Z",
+      "side": 1,
+      "message": "Decided to create an array.",
+      "parentUuid": "b119b574_86e10d7e",
+      "range": {
+        "startLine": 471,
+        "startChar": 12,
+        "endLine": 471,
+        "endChar": 38
+      },
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
