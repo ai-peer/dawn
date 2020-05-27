@@ -50,6 +50,24 @@
       "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "973ab4b1_c7af4df4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T08:08:40Z",
+      "side": 1,
+      "message": "This is needed if we want to generate an error when creating the shader module with image cube. Do you prefer not reporting the error until the creation of PSO?",
+      "parentUuid": "87715d30_8354f6ec",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
