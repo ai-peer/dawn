@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "6de992d9_66d36124",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-27T04:48:04Z",
+      "side": 1,
+      "message": "nit: use DAWN_TRY(CheckHResult(..)) like elsewhere and return MaybeError. If the D3D call fails, better to handle it immediately vs allowing adapter to continue initializing under error.",
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc26ce7d_8ce5f165",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-27T04:48:04Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b37190e7_6d1e67ce",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 11
