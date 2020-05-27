@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa92b232_0779d81d",
+        "filename": "src/tests/end2end/SubresourceOutputAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T01:18:22Z",
+      "side": 1,
+      "message": "extraneous",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 0
+      },
+      "revId": "f5629a7e86240e5e609611c1ecc63f7c0239048b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "888dca2a_e9d3dc0e",
+        "filename": "src/tests/end2end/SubresourceOutputAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-27T01:18:22Z",
+      "side": 1,
+      "message": "Don\u0027t need to test with this toggle I think. Copied it accidentally from multisampled tests were it\u0027s relevant.",
+      "range": {
+        "startLine": 168,
+        "startChar": 22,
+        "endLine": 168,
+        "endChar": 74
+      },
+      "revId": "f5629a7e86240e5e609611c1ecc63f7c0239048b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
