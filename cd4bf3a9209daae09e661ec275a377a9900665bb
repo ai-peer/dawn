@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f473412c_ad8bc09e",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T08:40:41Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "cd4bf3a9209daae09e661ec275a377a9900665bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a49a554c_e304b1e6",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T08:40:41Z",
+      "side": 1,
+      "message": "No we can\u0027t because this function should also be used in PipelineLayout.cpp or we will meet an assert_failure at [1].",
+      "parentUuid": "74f7b77c_fd4f91f2",
+      "revId": "9cca3e2de8e4f537243956a3f932a87b21777d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fd4752f_ce43b80c",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
