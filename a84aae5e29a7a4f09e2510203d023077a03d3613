@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c6768e61_7f9e3c24",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T02:52:50Z",
+      "side": 1,
+      "message": "Done\n\nWe are discussing how to handle the conflict in https://dawn-review.googlesource.com/c/dawn/+/22101.",
+      "parentUuid": "6a15afe8_2aa86463",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5371f3e_7120f598",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87568d56_a942c1af",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T02:52:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5371f3e_7120f598",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "86ea5219_36fd4882",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T02:52:50Z",
+      "side": 1,
+      "message": "Ack\n\nYunchao\u0027s CL has been merged so rebasing my CL to the latest is enough for me.",
+      "parentUuid": "829afc2a_9d5ec66c",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04a685f6_c832ed49",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "aa0fd7ba_87532e04",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T02:52:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04a685f6_c832ed49",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1a92052_e81137a5",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 4
@@ -84,6 +156,24 @@
       "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30188529_683b2b36",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-27T02:52:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a92052_e81137a5",
+      "revId": "a84aae5e29a7a4f09e2510203d023077a03d3613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
