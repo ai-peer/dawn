@@ -104,6 +104,30 @@
       "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a85a3bee_01e92650",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-27T05:02:18Z",
+      "side": 1,
+      "message": "I think this may never terminate if an error occurs during shutdown. The termination condition cannot be met if an error is inserted back into the queue upon being disconnected.\n\nIt would be safer to check `if State::BeingDisconnected` or better yet, ASSERT(\u003cno errors\u003e) before returning early.",
+      "parentUuid": "36cd0a38_0a71ea7f",
+      "range": {
+        "startLine": 471,
+        "startChar": 12,
+        "endLine": 471,
+        "endChar": 38
+      },
+      "revId": "4c51cc00aa53a165598a47eceba248737cb84e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
