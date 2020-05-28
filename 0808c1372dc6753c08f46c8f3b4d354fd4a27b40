@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "442462ed_2d79f329",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-28T01:37:05Z",
+      "side": 1,
+      "message": "Why do we check GetNumStoredMessagesAllowedByRetrievalFilter for zero here when we already check it below as part of the loop? Please add a comment describing why this code is necessary.",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 9
+      },
+      "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "642e8b53_dae97bf3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-28T01:37:05Z",
+      "side": 1,
+      "message": "Apologies for being dense but I still do not understand why this if statement is here. Please expand on the comment \"to prevent getting called again by HandleError\".  What is the sequence of calls that perpetuates this loop?  \n\nIs the problem that CheckDebugLayerAndGenerateErrors returns early before calling ClearStoredMessages?  If so, we can solve that by changing the body of the loop so that it does NOT call DAWN_TRY or CheckHRESULT. Instead, it should use the SUCCEEDED macros directly with GetMessageW. With this approach, the function is always guaranteed call ClearStoredMessages before returning. All of the errors are accumulated into one string (as it currently does) and returned together as part of one call to DAWN_INTERNAL_ERROR.",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 0
+      },
+      "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
