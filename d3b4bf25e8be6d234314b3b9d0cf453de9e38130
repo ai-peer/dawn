@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b540d878_71d0f5e0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T18:09:41Z",
+      "side": 1,
+      "message": "What prevents us from doing this now with |TrackUsageAndTransitionNow|?",
+      "range": {
+        "startLine": 173,
+        "startChar": 32,
+        "endLine": 174,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8da71745_6dedad3a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T18:09:41Z",
+      "side": 1,
+      "message": "What do you think about calling this \"DidImplicitDecay\" ? I think whether or not it decayed is the important piece of information, not necessarily if it\u0027s readonly/uncompressed.",
+      "range": {
+        "startLine": 592,
+        "startChar": 18,
+        "endLine": 592,
+        "endChar": 65
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc0781b4_111cd7c3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T18:09:41Z",
+      "side": 1,
+      "message": "similarly, this could be called \"SetValidToDecay\"",
+      "range": {
+        "startLine": 614,
+        "startChar": 18,
+        "endLine": 614,
+        "endChar": 59
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cd2269a_3a56e66b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T18:09:41Z",
+      "side": 1,
+      "message": "We may only implicitly promote to the new state if the new state is readonly or has a single write usage. Is this always true in this case? If it is, we should ASSERT that condition.",
+      "range": {
+        "startLine": 667,
+        "startChar": 16,
+        "endLine": 671,
+        "endChar": 0
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34903cf3_52c3d505",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T18:09:41Z",
+      "side": 1,
+      "message": "It seems like we\u0027re accumulating all of the usages and setting it as invalid to decay if there\u0027s mixed read/write usage. Have we confirmed that the implicit promotion/decay is per-texture and not per-texture subresource? I read the docs but didn\u0027t find if subresources may decay/promote independently.",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
