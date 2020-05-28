@@ -28,6 +28,10 @@ namespace dawn_native {
 
     struct BeginRenderPassCmd;
 
+    bool IsTextureToTextureCopySliceOverlapped(uint32_t sourceBaseArrayLayer,
+                                               uint32_t destinationBaseArrayLayer,
+                                               uint32_t copySlices);
+
     class CommandEncoder final : public ObjectBase {
       public:
         CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);

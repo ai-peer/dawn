@@ -507,12 +507,38 @@ namespace dawn_native { namespace vulkan {
                                                                   copy->copySize.depth);
                     }
 
-                    ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
-                                             src.mipLevel, 1, src.arrayLayer, copy->copySize.depth);
-                    ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst,
-                                             dst.mipLevel, 1, dst.arrayLayer, copy->copySize.depth);
+                    enum VkImageLayout dstImageLayout;
+                    if (src.texture == dst.texture && src.mipLevel == dst.mipLevel &&
+                        IsTextureToTextureCopySliceOverlapped(src.arrayLayer, dst.arrayLayer,
+                                                              copy->copySize.depth)) {
+                        const uint32_t maxBaseArrayLayer = std::max(src.arrayLayer, dst.arrayLayer);
+                        const uint32_t minBaseArrayLayer = std::min(src.arrayLayer, dst.arrayLayer);
+
+                        // The layouts of source and destination region must be both
+                        // VK_IMAGE_LAYOUT_GENERAL because we want to complete this copy in one
+                        // vkCmdCopyImage() call and the layouts of the overlapped region must be
+                        // VK_IMAGE_LAYOUT_GENERAL.
+                        // |---minBaseArrayLayer---|---copy->copySize.depth---|
+                        // |--------maxBaseArrayLayer--------|---copy->copySize.depth---|
+                        //                         |----slices involved in the copy-----|
+                        ToBackend(src.texture)
+                            ->TransitionUsageNow(
+                                recordingContext,
+                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst,
+                                src.mipLevel, 1, minBaseArrayLayer,
+                                maxBaseArrayLayer + copy->copySize.depth);
+                        dstImageLayout = VK_IMAGE_LAYOUT_GENERAL;
+                    } else {
+                        ToBackend(src.texture)
+                            ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
+                                                 src.mipLevel, 1, src.arrayLayer,
+                                                 copy->copySize.depth);
+                        ToBackend(dst.texture)
+                            ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst,
+                                                 dst.mipLevel, 1, dst.arrayLayer,
+                                                 copy->copySize.depth);
+                        dstImageLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+                    }
 
                     // In some situations we cannot do texture-to-texture copies with vkCmdCopyImage
                     // because as Vulkan SPEC always validates image copies with the virtual size of
@@ -536,11 +562,8 @@ namespace dawn_native { namespace vulkan {
                         VkImage dstImage = ToBackend(dst.texture)->GetHandle();
                         VkImageCopy region = ComputeImageCopyRegion(src, dst, copy->copySize);
 
-                        // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after the
-                        // copy command.
                         device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
-                                                dstImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
-                                                &region);
+                                                dstImage, dstImageLayout, 1, &region);
                     } else {
                         RecordCopyImageWithTemporaryBuffer(recordingContext, src, dst,
                                                            copy->copySize);

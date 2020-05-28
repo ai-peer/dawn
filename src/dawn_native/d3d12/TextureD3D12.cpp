@@ -631,17 +631,45 @@ namespace dawn_native { namespace d3d12 {
         }
 
         // Update the tracked state.
-        mLastState = newState;
+        // When we do texture-to-texture within the same texture,
+        // 1. the state of the texture in the transition barrier should be
+        //    D3D12_RESOURCE_STATE_COMMON because D3D12_RESOURCE_STATE_COPY_SOURCE |
+        //    D3D12_RESOURCE_STATE_COPY_DEST is an invalid combination of state bits for D3D12
+        //    debug layer.
+        // 2. the true state of the texture will be promoted to D3D12_RESOURCE_STATE_COPY_DEST
+        //    instead of D3D12_RESOURCE_STATE_COMMON after the execution of the texture-to-texture
+        //    copy. For example, when we do a texture-to-buffer copy after finishing the texture-to
+        //    -texture copy within the same texture, we must insert an transition barrier from
+        //    D3D12_RESOURCE_STATE_COPY_DEST to D3D12_RESOURCE_STATE_COPY_SOURCE.
+        //    - If we don't insert the barrier, we will get the following error message from D3D12
+        //      debug layer: Resource state (0x400: D3D12_RESOURCE_STATE_COPY_DEST) (promoted from
+        //      COMMON state) of resource (xxx) is invalid for use as a source resource.  Expected
+        //      State Bits (all): 0x800: D3D12_RESOURCE_STATE_COPY_SOURCE, Assumed Actual State:
+        //      0x400: D3D12_RESOURCE_STATE_COPY_DEST, Missing State: 0x800:
+        //      D3D12_RESOURCE_STATE_COPY_SOURCE.
+        //    - If we insert the transition barrier from D3D12_RESOURCE_STATE_COMMON to
+        //      D3D12_RESOURCE_STATE_COPY_SOURCE, we will get the following error message from
+        //      D3D12 debug layer: Before state (0x0: D3D12_RESOURCE_STATE_[COMMON|PRESENT]) of
+        //      resource (xxx) specified by transition barrier does not match with the current
+        //      resource state (0x400: D3D12_RESOURCE_STATE_COPY_DEST) (promoted from COMMON state)
+        D3D12_RESOURCE_STATES appliedNewState;
+        if (newState == (D3D12_RESOURCE_STATE_COPY_SOURCE | D3D12_RESOURCE_STATE_COPY_DEST)) {
+            mLastState = D3D12_RESOURCE_STATE_COPY_DEST;
+            appliedNewState = D3D12_RESOURCE_STATE_COMMON;
+        } else {
+            mLastState = newState;
+            appliedNewState = newState;
+        }
 
         // Destination states that qualify for an implicit promotion for a non-simultaneous-access
         // texture: NON_PIXEL_SHADER_RESOURCE, PIXEL_SHADER_RESOURCE, COPY_SRC, COPY_DEST.
         {
             static constexpr D3D12_RESOURCE_STATES kD3D12TextureReadOnlyStates =
-                D3D12_RESOURCE_STATE_COPY_SOURCE | D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
+                D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
                 D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
 
             if (lastState == D3D12_RESOURCE_STATE_COMMON) {
-                if (newState == (newState & kD3D12TextureReadOnlyStates)) {
+                if (appliedNewState == (appliedNewState & kD3D12TextureReadOnlyStates)) {
                     // Implicit texture state decays can only occur when the texture was implicitly
                     // transitioned to a read-only state. mValidToDecay is needed to differentiate
                     // between resources that were implictly or explicitly transitioned to a
@@ -649,7 +677,7 @@ namespace dawn_native { namespace d3d12 {
                     mValidToDecay = true;
                     mLastUsedSerial = pendingCommandSerial;
                     return false;
-                } else if (newState == D3D12_RESOURCE_STATE_COPY_DEST) {
+                } else if (appliedNewState == D3D12_RESOURCE_STATE_COPY_DEST) {
                     mValidToDecay = false;
                     return false;
                 }
@@ -660,7 +688,7 @@ namespace dawn_native { namespace d3d12 {
         barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier->Transition.pResource = GetD3D12Resource();
         barrier->Transition.StateBefore = lastState;
-        barrier->Transition.StateAfter = newState;
+        barrier->Transition.StateAfter = appliedNewState;
         barrier->Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
 
         mValidToDecay = false;
