@@ -70,6 +70,24 @@
       "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc81c51_148df0a1",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-28T16:42:35Z",
+      "side": 1,
+      "message": "I like that solution a lot. I was trying to come up with something more incremental, but it is awkward since a MakeResident failure doesn\u0027t tell which memory segment needs cleaned out. Just evicting everything immediately is simple and to-the-point. \n\nRafael - WDYT?",
+      "parentUuid": "b8cc3fd7_34992c7c",
+      "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
