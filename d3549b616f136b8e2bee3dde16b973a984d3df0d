@@ -106,6 +106,24 @@
       "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "359f3b95_72e92c6d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-28T17:47:45Z",
+      "side": 1,
+      "message": "Evicting just a little is what is recommended on the MSDN page - but I like the evicting everything approach because it doesn\u0027t guess at what the increment needs to be. We know there\u0027s a non-trivial cost to calling MakeResident, so by looping on Evict/MakeResident until it succeeds, I worry we could end up with worse performance than the scorch-the-earth approach if our increment is too small.\n\nJust for some numbers - the situation where we found a large discrepancy in tracked vs. real size estimates was for sampler descriptor heaps on my Nvidia 1070. The estimate using the recommended method was 64k vs the actual size 131k. Any other object types I\u0027ve looked at have been pretty spot on.\n\nSince our estimate vs. actual isn\u0027t too far off, I think just picking an arbitrary size is okay for most situations, but I can\u0027t be certain it\u0027s best for all situations.\n\nWDYT the size should be? I chose 100MB initially, but it seems a little big now. Maybe 50MB? Alternatively, we could evict something like 5 resources.",
+      "parentUuid": "8cec9443_e8eab967",
+      "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
