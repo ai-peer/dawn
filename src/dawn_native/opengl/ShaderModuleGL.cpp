@@ -177,11 +177,11 @@ namespace dawn_native { namespace opengl {
                 const auto& info = it.second;
 
                 if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-                    mSpvcContext.SetName(info.base_type_id, GetBindingName(group, bindingNumber));
+                    mSpvcContext.SetName(info.id, GetBindingName(group, bindingNumber));
                     mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_binding);
                     mSpvcContext.UnsetDecoration(info.id, shaderc_spvc_decoration_descriptorset);
                 } else {
-                    compiler->set_name(info.base_type_id, GetBindingName(group, bindingNumber));
+                    compiler->set_name(info.id, GetBindingName(group, bindingNumber));
                     compiler->unset_decoration(info.id, spv::DecorationBinding);
                     compiler->unset_decoration(info.id, spv::DecorationDescriptorSet);
                 }

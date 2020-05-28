@@ -312,9 +312,36 @@ namespace dawn_native { namespace opengl {
                             break;
                         }
 
-                        case wgpu::BindingType::StorageTexture:
                         case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture:
+                        case wgpu::BindingType::WriteonlyStorageTexture: {
+                            TextureView* view =
+                                ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                            const GLuint handle = view->GetHandle();
+                            const GLuint imageIndex = indices[bindingIndex];
+
+                            GLenum access;
+                            switch (bindingInfo.type) {
+                                case wgpu::BindingType::ReadonlyStorageTexture:
+                                    access = GL_READ_ONLY;
+                                    break;
+                                case wgpu::BindingType::WriteonlyStorageTexture:
+                                    access = GL_WRITE_ONLY;
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                                    break;
+                            }
+
+                            const GLboolean isLayered =
+                                (view->GetLayerCount() != 1) ? GL_TRUE : GL_FALSE;
+                            gl.BindImageTexture(
+                                imageIndex, handle, view->GetBaseMipLevel(), isLayered,
+                                view->GetLayerCount(), access,
+                                ToBackend(view->GetTexture())->GetGLFormat().internalFormat);
+                            break;
+                        }
+
+                        case wgpu::BindingType::StorageTexture:
                             UNREACHABLE();
                             break;
 
