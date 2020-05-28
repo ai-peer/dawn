@@ -227,23 +227,25 @@ namespace dawn_native { namespace vulkan {
 
         VkImageMemoryBarrier BuildMemoryBarrier(const Format& format,
                                                 const VkImage& image,
-                                                wgpu::TextureUsage lastUsage,
+                                                wgpu::TextureUsage srcUsage,
                                                 wgpu::TextureUsage usage,
-                                                uint32_t mipLevel,
-                                                uint32_t arrayLayer) {
+                                                uint32_t baseMipLevel,
+                                                uint32_t levelCount,
+                                                uint32_t baseArrayLayer,
+                                                uint32_t layerCount) {
             VkImageMemoryBarrier barrier;
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
             barrier.pNext = nullptr;
-            barrier.srcAccessMask = VulkanAccessFlags(lastUsage, format);
+            barrier.srcAccessMask = VulkanAccessFlags(srcUsage, format);
             barrier.dstAccessMask = VulkanAccessFlags(usage, format);
-            barrier.oldLayout = VulkanImageLayout(lastUsage, format);
+            barrier.oldLayout = VulkanImageLayout(srcUsage, format);
             barrier.newLayout = VulkanImageLayout(usage, format);
             barrier.image = image;
             barrier.subresourceRange.aspectMask = VulkanAspectMask(format);
-            barrier.subresourceRange.baseMipLevel = mipLevel;
-            barrier.subresourceRange.levelCount = 1;
-            barrier.subresourceRange.baseArrayLayer = arrayLayer;
-            barrier.subresourceRange.layerCount = 1;
+            barrier.subresourceRange.baseMipLevel = baseMipLevel;
+            barrier.subresourceRange.levelCount = levelCount;
+            barrier.subresourceRange.baseArrayLayer = baseArrayLayer;
+            barrier.subresourceRange.layerCount = layerCount;
 
             barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
             barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
@@ -678,7 +680,7 @@ namespace dawn_native { namespace vulkan {
             if (!barriers->size()) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
-                                                       wgpu::TextureUsage::None, 0, 0));
+                                                       wgpu::TextureUsage::None, 0, 1, 0, 1));
             }
 
             // Transfer texture from external queue to graphics queue
@@ -691,7 +693,7 @@ namespace dawn_native { namespace vulkan {
             if (!barriers->size()) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
-                                                       wgpu::TextureUsage::None, 0, 0));
+                                                       wgpu::TextureUsage::None, 0, 1, 0, 1));
             }
 
             // Transfer texture from graphics queue to external queue
@@ -742,7 +744,7 @@ namespace dawn_native { namespace vulkan {
 
                 barriers.push_back(
                     BuildMemoryBarrier(format, mHandle, mLastSubresourceUsages[index],
-                                       subresourceUsages[index], mipLevel, arrayLayer));
+                                       subresourceUsages[index], mipLevel, 1, arrayLayer, 1));
 
                 allUsages |= subresourceUsages[index];
                 allLastUsages |= mLastSubresourceUsages[index];
@@ -775,24 +777,107 @@ namespace dawn_native { namespace vulkan {
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
-        for (uint32_t arrayLayer = 0; arrayLayer < layerCount; ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < levelCount; ++mipLevel) {
+        for (uint32_t arrayLayer = 0; arrayLayer < layerCount;) {
+            for (uint32_t mipLevel = 0; mipLevel < levelCount;) {
                 uint32_t index =
                     GetSubresourceIndex(baseMipLevel + mipLevel, baseArrayLayer + arrayLayer);
-                wgpu::TextureUsage lastUsage = mLastSubresourceUsages[index];
+                wgpu::TextureUsage srcUsage = mLastSubresourceUsages[index];
 
                 // Avoid encoding barriers when it isn't needed.
-                bool lastReadOnly = (lastUsage & kReadOnlyTextureUsages) == lastUsage;
-                if (lastReadOnly && lastUsage == usage && mLastExternalState == mExternalState) {
+                bool srcReadOnly = (srcUsage & kReadOnlyTextureUsages) == srcUsage;
+                if (srcReadOnly && srcUsage == usage && mLastExternalState == mExternalState) {
                     return;
                 }
 
-                barriers.push_back(BuildMemoryBarrier(format, mHandle, lastUsage, usage,
-                                                      baseMipLevel + mipLevel,
-                                                      baseArrayLayer + arrayLayer));
-                allLastUsages |= lastUsage;
-                mLastSubresourceUsages[index] = usage;
+                // Coalesce barriers together if we have at least one more mip level or array layer
+                // left and the following consecutive mip level(s) and/or array layer(s) have the
+                // same src-usage.
+                wgpu::TextureUsage curSrcUsage;
+                if (mipLevel < levelCount - 1 || arrayLayer < layerCount - 1) {
+                    mLastSubresourceUsages[index] = usage;
+                    uint32_t startLevel = mipLevel;
+                    uint32_t startLayer = arrayLayer;
+
+                    // Do-while loop stops either when we have already inspected all levels/layers
+                    // and reached the end of the texture, or the src-usage differs and break the
+                    // loop.
+                    do {
+                        ++mipLevel;
+                        if (mipLevel >= levelCount) {
+                            mipLevel = 0;
+                            ++arrayLayer;
+                        }
+                        index = GetSubresourceIndex(baseMipLevel + mipLevel,
+                                                    baseArrayLayer + arrayLayer);
+                        curSrcUsage = mLastSubresourceUsages[index];
+                        if (curSrcUsage == srcUsage) {
+                            mLastSubresourceUsages[index] = usage;
+                        } else {
+                            break;
+                        }
+                    } while (mipLevel < levelCount - 1 || arrayLayer < layerCount - 1);
+
+                    // After do-while loop stop, we build memory barriers.
+                    // If mipLevel or arrayLayer equals 1, they are special situations.
+                    // Otherwise, we divide the barriers into 3 pieces:
+                    // 1) the head: a few mip levels from starting point,
+                    // 2) the middle: a few layers with complete mip maps,
+                    // 3) the tail: a few mip levels till the end where we stop the do-while loop.
+                    if (levelCount == 1) {
+                        uint32_t totalLayers = (curSrcUsage == srcUsage)
+                                                   ? (arrayLayer - startLayer + 1)
+                                                   : (arrayLayer - startLayer);
+                        barriers.push_back(BuildMemoryBarrier(format, mHandle, srcUsage, usage, 0,
+                                                              1, baseArrayLayer + startLayer,
+                                                              totalLayers));
+                    } else if (layerCount == 1 || arrayLayer == startLayer) {
+                        uint32_t totalLevels = (curSrcUsage == srcUsage)
+                                                   ? (mipLevel - startLevel + 1)
+                                                   : (mipLevel - startLevel);
+                        barriers.push_back(BuildMemoryBarrier(
+                            format, mHandle, srcUsage, usage, baseMipLevel + startLevel,
+                            totalLevels, baseArrayLayer + startLayer, 1));
+                    } else {
+                        // Build memory barrier for the head if we start from the middle
+                        uint32_t fullLayers = arrayLayer - startLayer - 1;
+                        if (!startLevel) {
+                            ++fullLayers;
+                        } else {
+                            barriers.push_back(BuildMemoryBarrier(
+                                format, mHandle, srcUsage, usage, baseMipLevel + startLevel,
+                                levelCount - startLevel, baseArrayLayer + startLayer, 1));
+                        }
+                        // Build memory barrier for the tail if needed
+                        if (curSrcUsage == srcUsage) {
+                            ++fullLayers;
+                        } else {
+                            if (mipLevel > 0) {
+                                barriers.push_back(BuildMemoryBarrier(
+                                    format, mHandle, srcUsage, usage, baseMipLevel, mipLevel,
+                                    baseArrayLayer + arrayLayer, 1));
+                            }
+                        }
+                        // Build memory barrier for the middle if needed
+                        if (fullLayers >= 1) {
+                            barriers.push_back(BuildMemoryBarrier(
+                                format, mHandle, srcUsage, usage, baseMipLevel, levelCount,
+                                baseArrayLayer + startLayer, fullLayers));
+                        }
+                    }
+                    allLastUsages |= srcUsage;
+                    if (curSrcUsage == srcUsage) {
+                        break;
+                    }
+                } else {
+                    barriers.push_back(BuildMemoryBarrier(format, mHandle, srcUsage, usage,
+                                                          baseMipLevel + mipLevel, 1,
+                                                          baseArrayLayer + arrayLayer, 1));
+                    allLastUsages |= srcUsage;
+                    mLastSubresourceUsages[index] = usage;
+                    ++mipLevel;
+                }
             }
+            ++arrayLayer;
         }
 
         if (mExternalState != ExternalState::InternalOnly) {
