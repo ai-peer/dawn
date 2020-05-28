@@ -1016,7 +1016,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         device, {
                     {3, wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageBuffer, true},
                     {0, wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageBuffer, true},
-                    {2, wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageBuffer, true},
+                    {2, wgpu::ShaderStage::Compute, wgpu::BindingType::UniformBuffer, true},
                 });
 
     // Create buffers which are 3x, 2x, and 1x the size of the minimum buffer offset, plus 4 bytes
@@ -1028,7 +1028,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
     wgpu::Buffer buffer2x =
         CreateBuffer(2 * kMinDynamicBufferOffsetAlignment + 4, wgpu::BufferUsage::Storage);
     wgpu::Buffer buffer1x =
-        CreateBuffer(1 * kMinDynamicBufferOffsetAlignment + 4, wgpu::BufferUsage::Storage);
+        CreateBuffer(1 * kMinDynamicBufferOffsetAlignment + 4, wgpu::BufferUsage::Uniform);
     wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl,
                                                      {
                                                          {0, buffer3x, 0, 4},
