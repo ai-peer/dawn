@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33c57bcc_123fd15d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-05-28T22:53:28Z",
+      "side": 1,
+      "message": "It may be the case that EnsureCanMakeResident is not able to evict anything but there are still things in the LRU cache -- such as when the resource is going to be used soon.  \n\nIn this instance, I think your current code will loop forever.  \n\nYou can fix by adding a return value to EnsureCanMakeResident that tells the caller nothing could be evicted. If true, then failures from MakeResident have no choice but to result in context lost.",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 17
+      },
+      "revId": "b312954810bbd68daf2969cb0d05460be3cad995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
