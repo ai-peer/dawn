@@ -165,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "99ddcc8a_ca1bd819",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T02:29:39Z",
+      "side": 1,
+      "message": "Probably not rename completely, but instead have a separate function. The simple getter is probably still sufficient in other parts of Dawn.",
+      "parentUuid": "295f1c5f_fc44e912",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d78c944_f7e835a4",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 16
