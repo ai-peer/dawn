@@ -141,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "295f1c5f_fc44e912",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T02:26:37Z",
+      "side": 1,
+      "message": "Ah, that\u0027s unfortunate. Do you think the following would work?\n\n(rename GetPendingCommandSerial to imply it\u0027s not a simple getter)\nwhen you call GetPendingCommandSerial, the DeviceBase stores off the serial so it remembers it must Tick() until it reaches that future serial. Then, we may not need SetHasNewCallback() because the future serial is the signal that we need to keep ticking until we reach it.\n\nThe |if| condition in DeviceBase::Tick would then become\n\nmCompletedSerial !\u003d std::max(mLastProcessedSerial, mFutureSerial)",
+      "parentUuid": "31867bb7_ec38aea9",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d78c944_f7e835a4",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 16
