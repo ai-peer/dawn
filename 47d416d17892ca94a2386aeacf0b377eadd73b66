@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dafd82c3_5558a5c0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-28T00:45:46Z",
+      "side": 1,
+      "message": "Removing confusing ASSERT and added comment to if statement.",
+      "parentUuid": "4e964ee1_00ddbe35",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d817d06_5b7efd6b",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 13
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "da944b79_26e95c75",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-28T00:45:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d817d06_5b7efd6b",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1498dce3_fb77caef",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 13
@@ -68,6 +104,24 @@
       "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a379f5_9d8da0b7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-28T00:45:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1498dce3_fb77caef",
+      "revId": "47d416d17892ca94a2386aeacf0b377eadd73b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
