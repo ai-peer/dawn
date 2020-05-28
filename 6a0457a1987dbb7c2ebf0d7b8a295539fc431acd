@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10477eb8_6d9a727b",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-28T08:38:35Z",
+      "side": 1,
+      "message": "This seems to break linux-dawn-rel. Maybe we can do info.id or info.base_type_id depending on the bindingType and figure out later.",
+      "revId": "6a0457a1987dbb7c2ebf0d7b8a295539fc431acd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
