@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bd5457c_c8101f47",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-28T17:38:17Z",
+      "side": 1,
+      "message": "Can we have a comment that explains why the test was modified this way?",
+      "revId": "5779a1e42d6430e403640d6d93f8b3bd9e7c5c24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
