@@ -124,6 +124,24 @@
       "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2658805_e8ede494",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-28T17:53:32Z",
+      "side": 1,
+      "message": "Maybe we could evict some fixed amount, try to MakeResident, and repeat on failure until empty?",
+      "parentUuid": "359f3b95_72e92c6d",
+      "revId": "d3549b616f136b8e2bee3dde16b973a984d3df0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
