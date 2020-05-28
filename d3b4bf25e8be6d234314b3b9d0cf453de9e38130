@@ -114,6 +114,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e611ede_503556bd",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-28T18:27:35Z",
+      "side": 1,
+      "message": "That\u0027s true. Per my understanding, it is per-texture-subresources. But we don\u0027t know when the subresources are set readonly. Considering that we may have a few miplevels and arraylayers, and we can set different levels/layers as readonly here and there. So we don\u0027t know when can we set mLastUsedSerial, and it is also incorrect to set mLastUsedSerial because it is for the entire texture. \n\nper-texture decay/promote will decrease the opportunity to decay/promote. But unnecessary barriers should be OK. BTW, the original logic is not good enough. If we have barrier, it always set mDecay to false, even though the dstUsage(aka newState) is readonly, then it will not decay/promote for next transition barrier. However, just as I said, unnecessary barriers should be OK. So it didn\u0027t fail the tests. \n\nAlternatively, we can change mLastSerial (per texture) to mLastSubresourceSerial(per subresource). But that parameter is used to determine whether a texture is compressed or not. I support that should be per texture, not per-texture-subresource. WDYT?",
+      "parentUuid": "34903cf3_52c3d505",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
