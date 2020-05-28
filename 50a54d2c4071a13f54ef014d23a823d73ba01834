@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7874de5_00c343ce",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-28T23:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53748907_9785099d",
+      "range": {
+        "startLine": 270,
+        "startChar": 8,
+        "endLine": 270,
+        "endChar": 41
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aacaf0a3_996cc665",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 16
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-27T19:46:39Z",
       "side": 1,
       "message": "Can this be inside the \"if (mCompletedSerial !\u003d mLastProcessedSerial || mHasNewCallback)\" ?",
+      "range": {
+        "startLine": 719,
+        "startChar": 8,
+        "endLine": 719,
+        "endChar": 29
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8553043_b45b482a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-28T23:41:32Z",
+      "side": 1,
+      "message": "This needs to be outside because it will update the completed serial, which we need for the if check.",
+      "parentUuid": "aacaf0a3_996cc665",
       "range": {
         "startLine": 719,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fe2d76bb_565d4f5e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-28T23:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fd1957c_51108af5",
+      "range": {
+        "startLine": 725,
+        "startChar": 12,
+        "endLine": 725,
+        "endChar": 36
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3acfd7c4_9f0ccedb",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 16
@@ -91,6 +163,30 @@
       "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4ead48c_c1c11922",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-28T23:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3acfd7c4_9f0ccedb",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 734,
+        "endChar": 51
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -177,6 +273,30 @@
       "side": 1,
       "message": "Probably not rename completely, but instead have a separate function. The simple getter is probably still sufficient in other parts of Dawn.",
       "parentUuid": "295f1c5f_fc44e912",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc5e0b6a_19bda618",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-05-28T23:41:32Z",
+      "side": 1,
+      "message": "do we only want to tick to future serial during shut down? when would it be appropriate to go from completed serial to future?",
+      "parentUuid": "99ddcc8a_ca1bd819",
       "range": {
         "startLine": 171,
         "startChar": 10,
