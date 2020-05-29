@@ -93,6 +93,30 @@
       "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39dc6175_a7ef4987",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T08:06:26Z",
+      "side": 1,
+      "message": "That\u0027s probably fine, someone that wants to debug that assert will just look into what\u0027s in the error with printf debug or similar.",
+      "parentUuid": "35ea9db5_66d7648d",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 0
+      },
+      "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
