@@ -182,6 +182,24 @@ namespace dawn_native {
                 DAWN_TRY(ValidateEntireSubresourceCopied(src, dst, copySize));
             }
 
+            if (src.texture == dst.texture && src.mipLevel == dst.mipLevel) {
+                if (src.arrayLayer == dst.arrayLayer) {
+                    // D3D12 requires the source and destination must be different subresources in
+                    // texture-to-texture copies.
+                    return DAWN_VALIDATION_ERROR(
+                        "Source and destination cannot be same subresources.");
+                }
+
+                ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D &&
+                       dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
+                if (IsRangeOverlapped(src.arrayLayer, dst.arrayLayer, copySize.depth) &&
+                    IsRangeOverlapped(src.origin.x, dst.origin.x, copySize.width) &&
+                    IsRangeOverlapped(src.origin.y, dst.origin.y, copySize.height)) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Copy region cannot be overlapped when copying within the same texture.");
+                }
+            }
+
             return {};
         }
 
@@ -491,6 +509,13 @@ namespace dawn_native {
         }
 
     }  // namespace
+
+    bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length) {
+        uint32_t maxStart = std::max(startA, startB);
+        uint32_t minStart = std::min(startA, startB);
+        return static_cast<uint64_t>(minStart) + static_cast<uint64_t>(length) >
+               static_cast<uint64_t>(maxStart);
+    }
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
         : ObjectBase(device), mEncodingContext(device, this) {

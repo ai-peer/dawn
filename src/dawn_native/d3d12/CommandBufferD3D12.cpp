@@ -672,9 +672,17 @@ namespace dawn_native { namespace d3d12 {
                             commandContext, copy->destination.mipLevel, 1,
                             copy->destination.arrayLayer, copy->copySize.depth);
                     }
-                    source->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopySrc);
-                    destination->TrackUsageAndTransitionNow(commandContext,
-                                                            wgpu::TextureUsage::CopyDst);
+
+                    if (source == destination) {
+                        source->TrackUsageAndTransitionNow(
+                            commandContext,
+                            wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst);
+                    } else {
+                        source->TrackUsageAndTransitionNow(commandContext,
+                                                           wgpu::TextureUsage::CopySrc);
+                        destination->TrackUsageAndTransitionNow(commandContext,
+                                                                wgpu::TextureUsage::CopyDst);
+                    }
 
                     if (CanUseCopyResource(source, destination, copy->copySize)) {
                         commandList->CopyResource(destination->GetD3D12Resource(),
