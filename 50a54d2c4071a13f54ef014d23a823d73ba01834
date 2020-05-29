@@ -309,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "87a261c1_9faabaa5",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-29T16:28:15Z",
+      "side": 1,
+      "message": "I think putting it as part of AssumeCommandsComplete() would make sense. Hard to say though because in the past we\u0027ve had edge cases around serials and when callbacks happen.\n\nThe more I think about it though, the more it seems like it would be rather similar to your current patch, except with a Serial instead of boolean. It could be something like SetFutureCallbackSerial(Serial serial) instead of SetHasNewCallback",
+      "parentUuid": "bc5e0b6a_19bda618",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d78c944_f7e835a4",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 16
