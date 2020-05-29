@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "deb92478_22d3c407",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T17:52:35Z",
+      "side": 1,
+      "message": "Had to make these throwaway variables to work with the ResultOrError now returned by EnsureCanMakeResident. Unsure if there\u0027s a way to avoid this.",
+      "revId": "828c8bb4342192a0a52ffe102347ad21f1f59fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

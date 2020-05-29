@@ -22,6 +22,30 @@
       "revId": "b312954810bbd68daf2969cb0d05460be3cad995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b2d548_9f44b9c6",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T17:52:35Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "33c57bcc_123fd15d",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 17
+      },
+      "revId": "b312954810bbd68daf2969cb0d05460be3cad995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
