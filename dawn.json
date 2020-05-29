@@ -650,8 +650,7 @@
         "category": "structure",
         "extensible": false,
         "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"},
-            {"name": "shader float16", "type": "bool", "default": "false"}
+            {"name": "texture compression BC", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
