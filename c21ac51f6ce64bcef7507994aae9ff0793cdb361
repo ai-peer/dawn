@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1f4f4c0_d38a51a5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "[1] The implicit promotion and decaying is per subresource thing so it should be handled inside the loops in TransitionUsageAndGetResourceBarrier and TrackUsageAndGetResourceBarrierForPass. It could be renamed \"TransitionOneSubresource\" and take the vector and new usage as argument (and maybe the current serial too) so that even more of the logic is shared between the two transition functions.",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab0f5724_f0feee92",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "Everything in the loop below this could be folded in [1]",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6690ebcd_dc4e95df",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "This is per-subresource and could be folded in [1]",
+      "range": {
+        "startLine": 697,
+        "startChar": 0,
+        "endLine": 705,
+        "endChar": 0
+      },
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f6b2966_cc345506",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a85ba6fa_52d4daf3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "nit: could we do this in Texture::Texture? Same comment for mLastSubresourceUsedSerial",
+      "range": {
+        "startLine": 121,
+        "startChar": 46,
+        "endLine": 122,
+        "endChar": 98
+      },
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

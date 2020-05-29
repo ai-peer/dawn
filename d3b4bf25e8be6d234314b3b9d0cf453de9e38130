@@ -25,6 +25,57 @@
     },
     {
       "key": {
+        "uuid": "cba3ab30_fbb95d08",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "Resolve reads from only on a single subresource so it should use TrackUsageAndTransitionNow",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1edd11c3_75586da5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "ditto (but for resolve writes)",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d76144_7aa38c84",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "ditto, this should be for a single subresource.",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8da71745_6dedad3a",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6
@@ -153,6 +204,30 @@
       "side": 1,
       "message": "Adding Rafael to CC because he would know more about the barriers and implicit decay/promotion.\n\n\u003e BTW, the original logic is not good enough.\n\nIt sounds like we\u0027re not always taking advantage of implicit promotion when we should be. We should fix this at some point.\n\n\u003e unnecessary barriers should be OK\n\nIt may be okay, but it would be less performant. If I understand correctly it could cause unnecessary cache flushes in the driver\n\n\u003e Alternatively, we can change mLastSerial (per texture) to mLastSubresourceSerial(per subresource). But that parameter is used to determine whether a texture is compressed or not. I support that should be per texture, not per-texture-subresource. WDYT?\n\nThis sounds like a good idea, if that\u0027s how the compression works. My suspicion is that different subresources are allowed to be in different compression states, and it should be okay to track when each subresource was last used separately.",
       "parentUuid": "7e611ede_503556bd",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efda5307_acc535c8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 1,
+      "message": "\u003e Adding Rafael to CC because he would know more about the barriers and implicit decay/promotion.\n\u003e \n\u003e \u003e BTW, the original logic is not good enough.\n\u003e \n\u003e It sounds like we\u0027re not always taking advantage of implicit promotion when we should be. We should fix this at some point.\n\u003e \n\nWe need to check with Rafael or the D3D12 team what the exact rules are. The MSDN page linked in the comment isn\u0027t very clear but make it seem that only the first promotion is valid, not further promotions (even if it would make sense from a HW perspective).",
+      "parentUuid": "deb91355_322cda3a",
       "range": {
         "startLine": 687,
         "startChar": 8,

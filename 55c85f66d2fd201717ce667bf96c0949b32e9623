@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c847a05d_dac422db",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T12:24:24Z",
+      "side": 0,
+      "message": "We need to keep such a flag for each subresource. mLastSubresourceUsedSerial could be mLastSubresourceDecaySerial and serial 0 used to say that it is invalid to decay.",
+      "revId": "55c85f66d2fd201717ce667bf96c0949b32e9623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
