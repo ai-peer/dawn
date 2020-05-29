@@ -34,6 +34,7 @@ namespace dawn_native {
         request.isWrite = isWrite;
 
         mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
+        mDevice->SetHasPendingCallback();
     }
 
     void MapRequestTracker::Tick(Serial finishedSerial) {
@@ -41,5 +42,8 @@ namespace dawn_native {
             request.buffer->OnMapCommandSerialFinished(request.mapSerial, request.isWrite);
         }
         mInflightRequests.ClearUpTo(finishedSerial);
+        if (!mInflightRequests.Empty()) {
+            mDevice->SetHasPendingCallback();
+        }
     }
 }  // namespace dawn_native
