@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a6dc833d_f4a028f5",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b83942_fe99b3f5",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9bb3a45_4be650bc",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
@@ -90,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "ca6b0651_e96c5e99",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3452eb1e_11b1bc61",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49a661e2_271845dd",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 1
@@ -140,6 +176,24 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b90da1b_eaf0395c",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e50d821_5a0eed3a",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -210,6 +264,42 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35193bec_18aa8c80",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ad69269_e010fa18",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2a15660_f2934a8a",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Done\n\nI find when the resource is a uniform or shader storage block, we should change the block name instead of the instance name (you can see [2] for more details)\n\nPTAL, thanks!",
+      "parentUuid": "6bd30320_56a6df08",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

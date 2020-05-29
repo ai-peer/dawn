@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e12e624_8ab20509",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "[2]\nFor example, considering the following declarations:\nlayout (set \u003d 0, binding \u003d 0, r32ui) uniform readonly uimage2D srcImage;\nlayout (set \u003d 0, binding \u003d 1, std430) buffer DstBuffer {\n    uint result;\n} dstBuffer;\n\n\n1. always use info.id (gl.GetProgramResourceIndex(mProgram, GL_SHADER_STORAGE_BLOCK, \"dawn_binding_0_1\") will return -1):\n\nlayout(std430) buffer DstBuffer\n{\n    uint result;\n} dawn_binding_0_1;\nlayout(r32ui) uniform readonly uimage2D dawn_binding_0_0;\n\n\n2. always use info.base_type_id (gl.GetUniformLocation(mProgram, \"dawn_binding_0_0\") will return -1):\n\nlayout(std430) buffer dawn_binding_0_1\n{\n    uint result;\n} dstBuffer;\nlayout(r32ui) uniform readonly uimage2D srcImage;\n\n\n3. Current implementation (the result is correct):\n\nlayout(std430) buffer dawn_binding_0_1\n{\n    uint result;\n} dstBuffer;\nlayout(r32ui) uniform readonly uimage2D dawn_binding_0_0;",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 30
+      },
+      "revId": "fba68ea818fcdbbf556cf8c7a722c364a0c1e93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

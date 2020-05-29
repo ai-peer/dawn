@@ -16,6 +16,24 @@
       "revId": "6a0457a1987dbb7c2ebf0d7b8a295539fc431acd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1067c96_84cdd988",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:04:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "10477eb8_6d9a727b",
+      "revId": "6a0457a1987dbb7c2ebf0d7b8a295539fc431acd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
