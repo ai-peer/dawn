@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "e625fcaa_f3b9470e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T22:27:34Z",
+      "side": 1,
+      "message": "This logic does not strictly follow the rules for an implicit decay. In the context of a Dawn texture, an implicit decay can only occur when the last (read-only) state was achieved through implicit promotion. Just because the last state was read-only does not mean it was achieved through implicit promotion.",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "430b111d_cd1da6b9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T22:27:34Z",
+      "side": 1,
+      "message": "This is not the criteria required for an implicit promotion.\n\nImplicit promotion requires that the last state is COMMON and the new state is read-only or a single uncompressed write-state (which is only COPY_DEST in Dawn).",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab0f5724_f0feee92",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
@@ -47,6 +81,23 @@
       "writtenOn": "2020-05-29T18:58:34Z",
       "side": 1,
       "message": "Implicit state promotions/decay only apply to/from COMMON. If a texture was previously transitioned to say, SrcCopy (read-only) but is also used as OutputAttachment (write-only) for the pass, you cannot skip this transition, it is illegal.",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de424a3d_5ea4751e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T22:27:34Z",
+      "side": 1,
+      "message": "It is not valid to implicitly transition to RENDER_TARGET or DEPTH_WRITE, even if it\u0027s a single write state.",
       "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

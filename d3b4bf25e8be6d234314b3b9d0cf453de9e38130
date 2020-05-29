@@ -237,6 +237,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc3d6ba_95b14971",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-05-29T22:27:34Z",
+      "side": 1,
+      "message": "\u003e BTW, the original logic is not good enough. If we have barrier, it always set mDecay to false, even though the dstUsage(aka newState) is readonly, then it will not decay/promote for next transition barrier. \n\nIn the original logic - if the destination usage is read-only, an implicit promotion will occur and the barrier creation code will never be hit. mValidToDecay is set to true in this case.",
+      "parentUuid": "efda5307_acc535c8",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
