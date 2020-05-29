@@ -156,6 +156,17 @@ namespace dawn_native {
             return {};
         }
 
+        bool Is2DCopyRegionOverlapped(const Origin3D& srcOrigin,
+                                      const Origin3D& dstOrigin,
+                                      const Extent3D& copySize) {
+            const uint32_t maxX = std::max(srcOrigin.x, dstOrigin.x);
+            const uint32_t minX = std::min(srcOrigin.x, dstOrigin.x);
+            const uint32_t maxY = std::max(srcOrigin.y, dstOrigin.y);
+            const uint32_t minY = std::min(srcOrigin.y, dstOrigin.y);
+
+            return (minX + copySize.width > maxX) && (minY + copySize.height > maxY);
+        }
+
         MaybeError ValidateTextureToTextureCopyRestrictions(const TextureCopyView& src,
                                                             const TextureCopyView& dst,
                                                             const Extent3D& copySize) {
@@ -180,6 +191,22 @@ namespace dawn_native {
                 // D3D12 requires entire subresource to be copied when using CopyTextureRegion is
                 // used with depth/stencil.
                 DAWN_TRY(ValidateEntireSubresourceCopied(src, dst, copySize));
+            }
+
+            if (src.texture == dst.texture && src.mipLevel == dst.mipLevel) {
+                if (src.arrayLayer == dst.arrayLayer) {
+                    // D3D12 requires the source and destination must be different subresources in
+                    // texture-to-texture copies.
+                    return DAWN_VALIDATION_ERROR(
+                        "Source and destination cannot be same subresources.");
+                }
+
+                if (IsTextureToTextureCopySliceOverlapped(src.arrayLayer, dst.arrayLayer,
+                                                          copySize.depth) &&
+                    (Is2DCopyRegionOverlapped(src.origin, dst.origin, copySize))) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Copy region cannot be overlapped when copying within the same texture.");
+                }
             }
 
             return {};
@@ -491,6 +518,15 @@ namespace dawn_native {
         }
 
     }  // namespace
+
+    bool IsTextureToTextureCopySliceOverlapped(uint32_t sourceBaseArrayLayer,
+                                               uint32_t destinationBaseArrayLayer,
+                                               uint32_t copySlices) {
+        uint32_t maxBaseArrayLayer = std::max(sourceBaseArrayLayer, destinationBaseArrayLayer);
+        uint32_t minBaseArrayLayer = std::min(sourceBaseArrayLayer, destinationBaseArrayLayer);
+        return static_cast<uint64_t>(minBaseArrayLayer) + static_cast<uint64_t>(copySlices) >
+               static_cast<uint64_t>(maxBaseArrayLayer);
+    }
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
         : ObjectBase(device), mEncodingContext(device, this) {
