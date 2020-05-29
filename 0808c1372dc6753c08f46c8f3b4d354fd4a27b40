@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3a08b8be_93906fdf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-29T04:53:04Z",
+      "side": 1,
+      "message": "Added a comment. Basically, we need this check because a DAWN_INTERNAL_ERROR(\u003cempty string\u003e) is still an error.",
+      "parentUuid": "442462ed_2d79f329",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 9
+      },
+      "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "642e8b53_dae97bf3",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 14
@@ -45,6 +69,30 @@
       "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35ea9db5_66d7648d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-05-29T04:53:04Z",
+      "side": 1,
+      "message": "Done.\n\nIt should be noted that an debug layer message during BeingDisconnected will still trigger AssertAndIgnoreDeviceLossError before it can be displayed.",
+      "parentUuid": "642e8b53_dae97bf3",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 0
+      },
+      "revId": "0808c1372dc6753c08f46c8f3b4d354fd4a27b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
