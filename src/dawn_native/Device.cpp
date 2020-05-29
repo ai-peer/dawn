@@ -317,22 +317,26 @@ namespace dawn_native {
         return mLastSubmittedSerial;
     }
 
+    Serial DeviceBase::GetFutureCallbackSerial() const {
+        return mFutureCallbackSerial;
+    }
+
     void DeviceBase::IncrementLastSubmittedCommandSerial() {
         mLastSubmittedSerial++;
     }
 
-    void DeviceBase::ArtificiallyIncrementSerials() {
-        mCompletedSerial++;
-        mLastSubmittedSerial++;
-    }
-
     void DeviceBase::AssumeCommandsComplete() {
-        mLastSubmittedSerial++;
-        mCompletedSerial = mLastSubmittedSerial;
+        Serial maxSerial = std::max(mLastSubmittedSerial + 1, mFutureCallbackSerial);
+        mLastSubmittedSerial = maxSerial;
+        mCompletedSerial = maxSerial;
     }
 
     Serial DeviceBase::GetPendingCommandSerial() const {
         return mLastSubmittedSerial + 1;
+    }
+
+    void DeviceBase::SetFutureCallbackSerial(Serial serial) {
+        mFutureCallbackSerial = serial;
     }
 
     void DeviceBase::CheckPassedSerials() {
@@ -709,17 +713,24 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
-        if (ConsumedError(TickImpl())) {
-            return;
-        }
+        // to avoid overly ticking, we only want to tick when:
+        // 1. the completed serial has incremented from the last processed serial
+        // 2. or the completed serial has not reached the future serial set by the trackers
+        CheckPassedSerials();
+        if (mCompletedSerial != mLastProcessedSerial || mCompletedSerial < mFutureCallbackSerial) {
+            if (ConsumedError(TickImpl())) {
+                return;
+            }
+            mLastProcessedSerial = mCompletedSerial;
 
-        // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
-        // tick the dynamic uploader before the backend resource allocators. This would allow
-        // reclaiming resources one tick earlier.
-        mDynamicUploader->Deallocate(GetCompletedCommandSerial());
-        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
-        mMapRequestTracker->Tick(GetCompletedCommandSerial());
+            // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
+            // tick the dynamic uploader before the backend resource allocators. This would allow
+            // reclaiming resources one tick earlier.
+            mDynamicUploader->Deallocate(mCompletedSerial);
+            mErrorScopeTracker->Tick(mCompletedSerial);
+            mFenceSignalTracker->Tick(mCompletedSerial);
+            mMapRequestTracker->Tick(mCompletedSerial);
+        }
     }
 
     void DeviceBase::Reference() {
