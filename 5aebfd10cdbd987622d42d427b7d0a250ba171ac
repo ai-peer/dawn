@@ -300,6 +300,24 @@
       "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a47b6fe9_eb522c81",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-29T07:31:56Z",
+      "side": 1,
+      "message": "Good find!",
+      "parentUuid": "b2a15660_f2934a8a",
+      "revId": "5aebfd10cdbd987622d42d427b7d0a250ba171ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
