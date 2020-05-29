@@ -507,12 +507,43 @@ namespace dawn_native { namespace vulkan {
                                                                   copy->copySize.depth);
                     }
 
-                    ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
-                                             src.mipLevel, 1, src.arrayLayer, copy->copySize.depth);
-                    ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst,
-                                             dst.mipLevel, 1, dst.arrayLayer, copy->copySize.depth);
+                    enum VkImageLayout dstImageLayout;
+                    if (src.texture.Get() == dst.texture.Get() && src.mipLevel == dst.mipLevel &&
+                        IsRangeOverlapped(src.arrayLayer, dst.arrayLayer, copy->copySize.depth)) {
+                        const uint32_t maxBaseArrayLayer = std::max(src.arrayLayer, dst.arrayLayer);
+                        const uint32_t minBaseArrayLayer = std::min(src.arrayLayer, dst.arrayLayer);
+
+                        // The layouts of source and destination region must be both
+                        // VK_IMAGE_LAYOUT_GENERAL because:
+                        // 1. we want to complete this copy in one vkCmdCopyImage() call
+                        // 2. the layouts of the overlapped region can only be
+                        // VK_IMAGE_LAYOUT_GENERAL.
+                        // 3. the layouts of all the subresources as the copy source must be the
+                        // same one (srcImageLayout).
+                        // 4. the layouts of all the subresources as the copy destination must be
+                        // the same one (dstImageLayout).
+                        // |---minBaseArrayLayer---|---copy->copySize.depth---|
+                        // |--------maxBaseArrayLayer--------|---copy->copySize.depth---|
+                        //                         |----slices involved in the copy-----|
+                        const uint32_t numSlicesInCopy =
+                            maxBaseArrayLayer - minBaseArrayLayer + copy->copySize.depth;
+                        ToBackend(src.texture)
+                            ->TransitionUsageNow(
+                                recordingContext,
+                                wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst,
+                                src.mipLevel, 1, minBaseArrayLayer, numSlicesInCopy);
+                        dstImageLayout = VK_IMAGE_LAYOUT_GENERAL;
+                    } else {
+                        ToBackend(src.texture)
+                            ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
+                                                 src.mipLevel, 1, src.arrayLayer,
+                                                 copy->copySize.depth);
+                        ToBackend(dst.texture)
+                            ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst,
+                                                 dst.mipLevel, 1, dst.arrayLayer,
+                                                 copy->copySize.depth);
+                        dstImageLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+                    }
 
                     // In some situations we cannot do texture-to-texture copies with vkCmdCopyImage
                     // because as Vulkan SPEC always validates image copies with the virtual size of
@@ -536,11 +567,8 @@ namespace dawn_native { namespace vulkan {
                         VkImage dstImage = ToBackend(dst.texture)->GetHandle();
                         VkImageCopy region = ComputeImageCopyRegion(src, dst, copy->copySize);
 
-                        // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after the
-                        // copy command.
                         device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
-                                                dstImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
-                                                &region);
+                                                dstImage, dstImageLayout, 1, &region);
                     } else {
                         RecordCopyImageWithTemporaryBuffer(recordingContext, src, dst,
                                                            copy->copySize);
