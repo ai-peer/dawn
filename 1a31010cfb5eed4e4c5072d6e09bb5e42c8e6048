@@ -33,6 +33,29 @@
       "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5771ed4_4fe138aa",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-05-29T20:43:29Z",
+      "side": 1,
+      "message": "Can you coordinate with Yunchao to make sure this doing the D3D12 barriers in this way will still work with his subresource tracking changes?\n\nAlso, would all of the subresources need to be in the COMMON state, or only the overlapping subresources?",
+      "range": {
+        "startLine": 655,
+        "startChar": 8,
+        "endLine": 662,
+        "endChar": 9
+      },
+      "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
