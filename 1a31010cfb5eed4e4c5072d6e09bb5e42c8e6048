@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d73cd20_4d21e24a",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:22:24Z",
+      "side": 1,
+      "message": "Refer to https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/master/layers/buffer_validation.cpp#L2019",
+      "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc82f572_cba85603",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-29T07:22:24Z",
+      "side": 1,
+      "message": "Refer to https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/master/layers/buffer_validation.cpp#L2007",
+      "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
