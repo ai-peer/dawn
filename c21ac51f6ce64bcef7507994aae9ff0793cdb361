@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "0c68aa26_e14ae1ad",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-05-29T18:58:34Z",
+      "side": 1,
+      "message": "Implicit state promotions/decay only apply to/from COMMON. If a texture was previously transitioned to say, SrcCopy (read-only) but is also used as OutputAttachment (write-only) for the pass, you cannot skip this transition, it is illegal.",
+      "revId": "c21ac51f6ce64bcef7507994aae9ff0793cdb361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6690ebcd_dc4e95df",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
