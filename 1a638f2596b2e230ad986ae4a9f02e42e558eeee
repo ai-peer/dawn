@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f418249_1ba368e9",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-05-29T13:38:13Z",
+      "side": 1,
+      "message": "Nit (and not new to this patch): I think this could be:\n\n    return a.hasDynamicOffset;\n\nRelational operators on bools look a bit weird to me, but maybe that\u0027s just me. OTOH, I\u0027m not sure if it\u0027s actually any clearer this way.",
+      "revId": "1a638f2596b2e230ad986ae4a9f02e42e558eeee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
