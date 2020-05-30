@@ -136,6 +136,11 @@ namespace dawn_native { namespace d3d12 {
                 const BindingInfo& bindingInfo =
                     bindGroupLayout->GetBindingInfo(dynamicBindingIndex);
 
+                if (bindingInfo.visibility == wgpu::ShaderStage::None) {
+                    // Skip dynamic buffers that are not visible.
+                    continue;
+                }
+
                 D3D12_ROOT_PARAMETER* rootParameter = &rootParameters[parameterIndex];
 
                 // Setup root descriptor.
@@ -195,6 +200,7 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(group < kMaxBindGroups);
         ASSERT(bindingIndex < kMaxBindingsPerGroup);
         ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).hasDynamicOffset);
+        ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).visibility != wgpu::ShaderStage::None);
         return mDynamicRootParameterIndices[group][bindingIndex];
     }
 }}  // namespace dawn_native::d3d12
