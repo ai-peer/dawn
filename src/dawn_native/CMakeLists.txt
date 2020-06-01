@@ -102,6 +102,8 @@ target_sources(dawn_native PRIVATE
     "PipelineLayout.h"
     "ProgrammablePassEncoder.cpp"
     "ProgrammablePassEncoder.h"
+    "QuerySet.cpp"
+    "QuerySet.h"
     "Queue.cpp"
     "Queue.h"
     "RenderBundle.cpp"
