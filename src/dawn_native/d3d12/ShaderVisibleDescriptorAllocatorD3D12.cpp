@@ -69,10 +69,10 @@ namespace dawn_native { namespace d3d12 {
 
     bool ShaderVisibleDescriptorAllocator::AllocateGPUDescriptors(
         uint32_t descriptorCount,
-        Serial pendingSerial,
         D3D12_CPU_DESCRIPTOR_HANDLE* baseCPUDescriptor,
         GPUDescriptorHeapAllocation* allocation) {
         ASSERT(mHeap != nullptr);
+        const Serial pendingSerial = mDevice->GetPendingCommandSerial();
         const uint64_t startOffset = mAllocator.Allocate(descriptorCount, pendingSerial);
         if (startOffset == RingBufferAllocator::kInvalidOffset) {
             return false;

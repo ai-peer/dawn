@@ -153,7 +153,8 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mCPUViewAllocation.IsValid());
     }
 
-    bool BindGroup::PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator) {
+    bool BindGroup::AllocateViews(ShaderVisibleDescriptorAllocator* viewAllocator,
+                                  CopyDescriptorHeapInfo* viewCopyInfo) {
         const BindGroupLayout* bgl = ToBackend(GetLayout());
 
         const uint32_t descriptorCount = bgl->GetCbvUavSrvDescriptorCount();
@@ -163,22 +164,16 @@ namespace dawn_native { namespace d3d12 {
 
         // Attempt to allocate descriptors for the currently bound shader-visible heaps.
         // If either failed, return early to re-allocate and switch the heaps.
-        Device* device = ToBackend(GetDevice());
-
         D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor;
-        if (!viewAllocator->AllocateGPUDescriptors(descriptorCount,
-                                                   device->GetPendingCommandSerial(),
-                                                   &baseCPUDescriptor, &mGPUViewAllocation)) {
+        if (!viewAllocator->AllocateGPUDescriptors(descriptorCount, &baseCPUDescriptor,
+                                                   &mGPUViewAllocation)) {
             return false;
         }
 
-        // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
-        // simple copies per bindgroup, a single non-simple copy could be issued.
-        // TODO(dawn:155): Consider doing this optimization.
-        device->GetD3D12Device()->CopyDescriptorsSimple(descriptorCount, baseCPUDescriptor,
-                                                        mCPUViewAllocation.GetBaseDescriptor(),
-                                                        D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-
+        viewCopyInfo->srcHandles.push_back(mCPUViewAllocation.GetBaseDescriptor());
+        viewCopyInfo->dstHandles.push_back(baseCPUDescriptor);
+        viewCopyInfo->rangeSizes.push_back(descriptorCount);
+    
         return true;
     }
 
@@ -191,12 +186,12 @@ namespace dawn_native { namespace d3d12 {
         return mSamplerAllocationEntry->GetBaseDescriptor();
     }
 
-    bool BindGroup::PopulateSamplers(Device* device,
-                                     ShaderVisibleDescriptorAllocator* samplerAllocator) {
+    bool BindGroup::AllocateSamplers(ShaderVisibleDescriptorAllocator* samplerAllocator,
+                                     CopyDescriptorHeapInfo* samplerCopyInfo) {
         if (mSamplerAllocationEntry.Get() == nullptr) {
             return true;
         }
-        return mSamplerAllocationEntry->Populate(device, samplerAllocator);
+        return mSamplerAllocationEntry->Allocate(samplerAllocator, samplerCopyInfo);
     }
 
     void BindGroup::SetSamplerAllocationEntry(Ref<SamplerHeapCacheEntry> entry) {

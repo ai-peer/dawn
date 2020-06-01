@@ -14,6 +14,8 @@
 
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 
+#include <deque>
+
 #include "common/Assert.h"
 #include "dawn_native/BindGroupAndStorageBarrierTracker.h"
 #include "dawn_native/CommandEncoder.h"
@@ -36,8 +38,6 @@
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
-
-#include <deque>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -96,7 +96,6 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroupStateTracker(Device* device)
             : BindGroupAndStorageBarrierTrackerBase(),
-              mDevice(device),
               mViewAllocator(device->GetViewShaderVisibleDescriptorAllocator()),
               mSamplerAllocator(device->GetSamplerShaderVisibleDescriptorAllocator()) {
         }
@@ -118,8 +117,9 @@ namespace dawn_native { namespace d3d12 {
             bool didCreateBindGroupSamplers = true;
             for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
                 BindGroup* group = ToBackend(mBindGroups[index]);
-                didCreateBindGroupViews = group->PopulateViews(mViewAllocator);
-                didCreateBindGroupSamplers = group->PopulateSamplers(mDevice, mSamplerAllocator);
+                didCreateBindGroupViews = group->AllocateViews(mViewAllocator, &mViewCopyInfo);
+                didCreateBindGroupSamplers =
+                    group->AllocateSamplers(mSamplerAllocator, &mSampleCopyInfo);
                 if (!didCreateBindGroupViews && !didCreateBindGroupSamplers) {
                     break;
                 }
@@ -144,9 +144,9 @@ namespace dawn_native { namespace d3d12 {
 
                 for (uint32_t index : IterateBitSet(mBindGroupLayoutsMask)) {
                     BindGroup* group = ToBackend(mBindGroups[index]);
-                    didCreateBindGroupViews = group->PopulateViews(mViewAllocator);
+                    didCreateBindGroupViews = group->AllocateViews(mViewAllocator, &mViewCopyInfo);
                     didCreateBindGroupSamplers =
-                        group->PopulateSamplers(mDevice, mSamplerAllocator);
+                        group->AllocateSamplers(mSamplerAllocator, &mSampleCopyInfo);
                     ASSERT(didCreateBindGroupViews);
                     ASSERT(didCreateBindGroupSamplers);
                 }
@@ -212,6 +212,14 @@ namespace dawn_native { namespace d3d12 {
             ASSERT(descriptorHeaps[0] != nullptr);
             ASSERT(descriptorHeaps[1] != nullptr);
             commandList->SetDescriptorHeaps(descriptorHeaps.size(), descriptorHeaps.data());
+        }
+
+        const CopyDescriptorHeapInfo& GetViewCopyInfo() const {
+            return mViewCopyInfo;
+        }
+
+        const CopyDescriptorHeapInfo& GetSampleCopyInfo() const {
+            return mSampleCopyInfo;
         }
 
       private:
@@ -313,12 +321,13 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        Device* mDevice;
-
         bool mInCompute = false;
 
         ShaderVisibleDescriptorAllocator* mViewAllocator;
         ShaderVisibleDescriptorAllocator* mSamplerAllocator;
+
+        CopyDescriptorHeapInfo mViewCopyInfo = {};
+        CopyDescriptorHeapInfo mSampleCopyInfo = {};
     };
 
     namespace {
@@ -712,6 +721,17 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
             }
+        }
+
+        // Perform the copies deferred
+        const CopyDescriptorHeapInfo& viewCopyInfo = bindingTracker.GetViewCopyInfo();
+        if (viewCopyInfo.dstHandles.size() > 0) {
+            device->CopyDescriptorHeaps(viewCopyInfo, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+        }
+
+        const CopyDescriptorHeapInfo& samplerCopyInfo = bindingTracker.GetSampleCopyInfo();
+        if (samplerCopyInfo.dstHandles.size() > 0) {
+            device->CopyDescriptorHeaps(samplerCopyInfo, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
         }
 
         return {};

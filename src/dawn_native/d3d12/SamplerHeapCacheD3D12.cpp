@@ -57,8 +57,8 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mCPUAllocation.IsValid());
     }
 
-    bool SamplerHeapCacheEntry::Populate(Device* device,
-                                         ShaderVisibleDescriptorAllocator* allocator) {
+    bool SamplerHeapCacheEntry::Allocate(ShaderVisibleDescriptorAllocator* allocator,
+                                         CopyDescriptorHeapInfo* copyInfo) {
         if (allocator->IsAllocationStillValid(mGPUAllocation)) {
             return true;
         }
@@ -69,17 +69,14 @@ namespace dawn_native { namespace d3d12 {
         // If either failed, return early to re-allocate and switch the heaps.
         const uint32_t descriptorCount = mSamplers.size();
         D3D12_CPU_DESCRIPTOR_HANDLE baseCPUDescriptor;
-        if (!allocator->AllocateGPUDescriptors(descriptorCount, device->GetPendingCommandSerial(),
-                                               &baseCPUDescriptor, &mGPUAllocation)) {
+        if (!allocator->AllocateGPUDescriptors(descriptorCount, &baseCPUDescriptor,
+                                               &mGPUAllocation)) {
             return false;
         }
 
-        // CPU bindgroups are sparsely allocated across CPU heaps. Instead of doing
-        // simple copies per bindgroup, a single non-simple copy could be issued.
-        // TODO(dawn:155): Consider doing this optimization.
-        device->GetD3D12Device()->CopyDescriptorsSimple(descriptorCount, baseCPUDescriptor,
-                                                        mCPUAllocation.GetBaseDescriptor(),
-                                                        D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        copyInfo->srcHandles.push_back(mCPUAllocation.GetBaseDescriptor());
+        copyInfo->dstHandles.push_back(baseCPUDescriptor);
+        copyInfo->rangeSizes.push_back(descriptorCount);
 
         return true;
     }

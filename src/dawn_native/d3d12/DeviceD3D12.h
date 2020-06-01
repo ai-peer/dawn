@@ -37,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
     class SamplerHeapCache;
     class ShaderVisibleDescriptorAllocator;
     class StagingDescriptorAllocator;
+    struct CopyDescriptorHeapInfo;
 
 #define ASSERT_SUCCESS(hr)            \
     do {                              \
@@ -113,6 +114,9 @@ namespace dawn_native { namespace d3d12 {
         StagingDescriptorAllocator* GetRenderTargetViewAllocator() const;
 
         StagingDescriptorAllocator* GetDepthStencilViewAllocator() const;
+
+        void CopyDescriptorHeaps(const CopyDescriptorHeapInfo& copyInfo,
+                                 D3D12_DESCRIPTOR_HEAP_TYPE heapType);
 
         Ref<TextureBase> WrapSharedHandle(const ExternalImageDescriptor* descriptor,
                                           HANDLE sharedHandle,

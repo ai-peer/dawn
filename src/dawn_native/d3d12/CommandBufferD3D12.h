@@ -35,6 +35,7 @@ namespace dawn_native { namespace d3d12 {
     class RenderPassDescriptorHeapTracker;
     class RenderPassBuilder;
     class RenderPipeline;
+    struct CopyDescriptorHeapInfo;
 
     class CommandBuffer final : public CommandBufferBase {
       public:
