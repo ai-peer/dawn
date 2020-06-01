@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbb30d07_5ad161d1",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:15:56Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc55def5_53dce64f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:15:56Z",
+      "side": 1,
+      "message": "It might be marginal simpler to have MakeAllocationsResident take a MemorySegmentInfo* and handle a single one. Code in [1] could just call it twice, once for local and once for nonLocal. WDYT?",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a4648d0_d9f3fd06",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:15:56Z",
+      "side": 1,
+      "message": "uint64_t",
+      "range": {
+        "startLine": 320,
+        "startChar": 12,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19d53cd6_7f45c22f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:15:56Z",
+      "side": 1,
+      "message": "uint64_t",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 16
+      },
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7d991df_91c7ce43",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:15:56Z",
+      "side": 1,
+      "message": "This condition seems incorrect because it will be triggered when one of the memory types doesn\u0027t need to be evicted at all. (nonLocalSizeEvicted will start at 0, then it is not assigned to because there is non nonLocal memory to make resident, and the condition here fails because it is still 0).",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
