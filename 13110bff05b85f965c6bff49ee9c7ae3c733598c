@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2114026d_8ac36a5f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T16:07:39Z",
+      "side": 1,
+      "message": "nit: space between Message and failed",
+      "range": {
+        "startLine": 493,
+        "startChar": 47,
+        "endLine": 493,
+        "endChar": 63
+      },
+      "revId": "13110bff05b85f965c6bff49ee9c7ae3c733598c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
