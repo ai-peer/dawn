@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "835206f5_9953c9e7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "As a follow-up, we could have something like:\n\n  struct SubresourceRange {\n    uint32_t baseMipLevel, mipLevelCount, baseArrayLayer, arrayLayerCount;\n  };\n\nThen TrackUsageAndTranstionNow (here, in Vulkan and in the frontend tracking) can take one as a const\u0026 argument, and TextureView contains a SubresourceRange that you can get as const\u0026 with GetSubresourceRange. This way this call you become TrackUsageAndTransitionNow(commandContext, kReadonlyStorageTexture, view-\u003eGetSubresourceRange()).",
+      "range": {
+        "startLine": 178,
+        "startChar": 40,
+        "endLine": 179,
+        "endChar": 88
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2523a05_98dd52c4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "This constructor is only used when building a d3d12::Texture from an existing D3D12 texture (such as for swapchains). The approach should probably be:\n\n  Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)\n     : TextureBase(device, descriptor, state),\n       mSubresourceLastStates(GetSubresourceCount(), D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON),\n       mSubresourceLastDecaySerial(GetSubresourceCount(), UINT64_MAX)\n       mSubresourceValidToDecay(GetSubresourceCount(), false) {\n  }\n\n   Texture::Texture(Device* device,\n                     const TextureDescriptor* descriptor,\n                     ComPtr\u003cID3D12Resource\u003e nativeTexture)\n        : Texture(device, descriptor, TextureState::OwnedExternal) {\n\n ...\n\n   }\n\nNote that in the second constructor we call the first constructor that will do the proper initialization of the vectors.",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d3a4d8_49db0f59",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "nit: This function could just take the subresource index and do the indexing itself instead of taking in-out arguments (that should be pointer instead of mutable references).",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 72
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7750a3b0_b2356944",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "nit: Maybe this could be moved out of the function, outside of the loops so that it is queried a single time.",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef0bfcd_170c7898",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "This line is present before each return. Like in the original logic we could instead set subresourceLastState unconditionally, but do a copy of it in a temporary variable before we do so.",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bd8c45b_bbdcd229",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "nit: The DXGIKeyedMutex could be factored in a helper like \"HandleTranstitionSpecialCases\" like in Vulkan.",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b4beed5_3bd208c5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "nit: could be folded in TransitionOneSubresource too.",
+      "range": {
+        "startLine": 680,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 17
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae3e58e_a14fbd63",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "Where does this condition come from? It wasn\u0027t in original logic.",
+      "range": {
+        "startLine": 713,
+        "startChar": 20,
+        "endLine": 713,
+        "endChar": 62
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e984e68d_c8cc14b3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-01T09:08:51Z",
+      "side": 1,
+      "message": "This can be set directly in TransitionOneSubresource",
+      "range": {
+        "startLine": 718,
+        "startChar": 16,
+        "endLine": 718,
+        "endChar": 47
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
