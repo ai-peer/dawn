@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6db39893_b637e47c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T17:10:17Z",
+      "side": 1,
+      "message": "Hm, we still need to validate OOB for dynamic offsets even if they\u0027re not visible. so sorting by visibility would make them out of order in that code path. I think it\u0027s better to skip the bindings here because handling the validation if they\u0027re out of order would be more complex.",
+      "parentUuid": "ca51716b_3395c285",
+      "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a592bfb_9773ce3e",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 2
