@@ -31,6 +31,7 @@ namespace dawn_native {
         // the fence completed value once the last submitted serial has passed.
         mFencesInFlight.Enqueue(FenceInFlight{fence, value},
                                 mDevice->GetLastSubmittedCommandSerial());
+        mDevice->SetFutureCallbackSerial(mDevice->GetPendingCommandSerial());
     }
 
     void FenceSignalTracker::Tick(Serial finishedSerial) {
