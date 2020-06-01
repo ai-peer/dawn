@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcfb7436_4582f9b5",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T17:48:56Z",
+      "side": 1,
+      "message": "We could add a helper function and return early if it\u0027s not valid. That would be more readable than breaking early out of nested loops.",
+      "range": {
+        "startLine": 135,
+        "startChar": 32,
+        "endLine": 150,
+        "endChar": 17
+      },
+      "revId": "4628551ab45166de58f5eac195f29af55c130ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
