@@ -54,7 +54,6 @@ namespace dawn_native { namespace d3d12 {
         // Returns true if the allocation was successful, when false is returned the current heap is
         // full and AllocateAndSwitchShaderVisibleHeap() must be called.
         bool AllocateGPUDescriptors(uint32_t descriptorCount,
-                                    Serial pendingSerial,
                                     D3D12_CPU_DESCRIPTOR_HANDLE* baseCPUDescriptor,
                                     GPUDescriptorHeapAllocation* allocation);
 

@@ -566,4 +566,13 @@ namespace dawn_native { namespace d3d12 {
         return mSamplerHeapCache.get();
     }
 
+    void Device::CopyDescriptorHeaps(const CopyDescriptorHeapInfo& copyInfo,
+                                     D3D12_DESCRIPTOR_HEAP_TYPE heapType) {
+        ASSERT(heapType == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV ||
+               heapType == D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+        mD3d12Device->CopyDescriptors(
+            copyInfo.dstHandles.size(), copyInfo.dstHandles.data(), copyInfo.rangeSizes.data(),
+            copyInfo.srcHandles.size(), copyInfo.srcHandles.data(), copyInfo.rangeSizes.data(), heapType);
+    }
+
 }}  // namespace dawn_native::d3d12

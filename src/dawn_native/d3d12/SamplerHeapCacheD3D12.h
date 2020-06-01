@@ -15,13 +15,13 @@
 #ifndef DAWNNATIVE_D3D12_SAMPLERHEAPCACHE_H_
 #define DAWNNATIVE_D3D12_SAMPLERHEAPCACHE_H_
 
+#include <unordered_set>
+#include <vector>
+
 #include "common/RefCounted.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
 #include "dawn_native/d3d12/GPUDescriptorHeapAllocationD3D12.h"
-
-#include <unordered_set>
-#include <vector>
 
 // |SamplerHeapCacheEntry| maintains a cache of sampler descriptor heap allocations.
 // Each entry represents one or more sampler descriptors that co-exist in a CPU and
@@ -36,6 +36,7 @@
 namespace dawn_native { namespace d3d12 {
 
     class BindGroup;
+    struct CopyDescriptorHeapInfo;
     class Device;
     class Sampler;
     class SamplerHeapCache;
@@ -57,7 +58,8 @@ namespace dawn_native { namespace d3d12 {
 
         std::vector<Sampler*>&& AcquireSamplers();
 
-        bool Populate(Device* device, ShaderVisibleDescriptorAllocator* allocator);
+        bool Allocate(ShaderVisibleDescriptorAllocator* allocator,
+                      CopyDescriptorHeapInfo* copyInfo);
 
         // Functors necessary for the unordered_map<SamplerHeapCacheEntry*>-based cache.
         struct HashFunc {

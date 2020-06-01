@@ -28,6 +28,12 @@ namespace dawn_native { namespace d3d12 {
     class ShaderVisibleDescriptorAllocator;
     class StagingDescriptorAllocator;
 
+    struct CopyDescriptorHeapInfo {
+        std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> srcHandles;
+        std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> dstHandles;
+        std::vector<uint32_t> rangeSizes;
+    };
+
     class BindGroup final : public BindGroupBase, public PlacementAllocated {
       public:
         static ResultOrError<BindGroup*> Create(Device* device,
@@ -39,8 +45,10 @@ namespace dawn_native { namespace d3d12 {
                   const CPUDescriptorHeapAllocation& viewAllocation);
 
         // Returns true if the BindGroup was successfully populated.
-        bool PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator);
-        bool PopulateSamplers(Device* device, ShaderVisibleDescriptorAllocator* samplerAllocator);
+        bool AllocateViews(ShaderVisibleDescriptorAllocator* viewAllocator,
+                           CopyDescriptorHeapInfo* viewCopyInfo);
+        bool AllocateSamplers(ShaderVisibleDescriptorAllocator* samplerAllocator,
+                              CopyDescriptorHeapInfo* samplerCopyInfo);
 
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseViewDescriptor() const;
         D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;
