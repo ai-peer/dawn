@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "9f8511a7_cfbdd945",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T22:39:11Z",
+      "side": 1,
+      "message": "I\u0027ll keep it this way as I think it\u0027s a bit cheaper.\nCurrent SetBindGroup validation validates a tightly packed vector of offsets with a tightly packed vector of dynamic bindings. If we shifted none-visibility bindings to the end, they wouldn\u0027t be in the same order anymore and we\u0027d have an extra level of indirection through a map.",
+      "parentUuid": "6a443cf3_126329b5",
+      "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a592bfb_9773ce3e",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 2
@@ -87,6 +105,24 @@
       "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42a2c890_52bf4207",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T22:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5153f461_9890c539",
+      "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
