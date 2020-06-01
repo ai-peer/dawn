@@ -80,6 +80,30 @@
       "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5cd180f_40862a67",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T15:47:24Z",
+      "side": 1,
+      "message": "Ok. Makes sense to do non-overlapped copies first. We should also clarify in the WebGPU group that same-texture but disjoint regions and different base array layers, is allowed.",
+      "parentUuid": "86e1bd7d_12f7f480",
+      "range": {
+        "startLine": 655,
+        "startChar": 8,
+        "endLine": 662,
+        "endChar": 9
+      },
+      "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
