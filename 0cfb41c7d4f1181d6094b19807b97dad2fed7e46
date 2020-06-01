@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0b7db657_3ec6cc60",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:58:21Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s worth it. We\u0027d have to do additional work to sort local and nonLocal heaps into separate vectors. Then we\u0027d be calling MakeResident twice - which adds a context switch onto an already slow synchronous function.\n\nYou can see in my other comment [1], a MakeResident failure making mixed local/nonLocal resources resident will fail without telling us which segment needs emptied. Your idea does improve our ability to handle a MakeResident failure, however in my opinion a MakeResident failure is going to be a very rare occurrence and not worth optimizing for.",
+      "parentUuid": "fc55def5_53dce64f",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a4648d0_d9f3fd06",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 5
@@ -56,6 +74,30 @@
       "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5da864c5_10ceb26d",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:58:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a4648d0_d9f3fd06",
+      "range": {
+        "startLine": 320,
+        "startChar": 12,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "67c915a0_1dddab3f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:58:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d53cd6_7f45c22f",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 16
+      },
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7d991df_91c7ce43",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 5
@@ -93,6 +159,24 @@
       "writtenOn": "2020-06-01T09:15:56Z",
       "side": 1,
       "message": "This condition seems incorrect because it will be triggered when one of the memory types doesn\u0027t need to be evicted at all. (nonLocalSizeEvicted will start at 0, then it is not assigned to because there is non nonLocal memory to make resident, and the condition here fails because it is still 0).",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff804ea_aa097d93",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:58:21Z",
+      "side": 1,
+      "message": "[1]\n\nI think the logic is correct, but maybe non-intuitive. Whenever MakeResident fails it does not provide information about which memory segment needs evicted - so we just have to evict both. If we\u0027re at the point where nonLocal cannot be evicted any further and MakeResident still fails, we must continue evicting in hopes that MakeResident will succeed by evicting more from local.",
+      "parentUuid": "e7d991df_91c7ce43",
       "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
