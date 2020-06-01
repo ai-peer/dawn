@@ -56,6 +56,30 @@
       "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86e1bd7d_12f7f480",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-01T08:20:25Z",
+      "side": 1,
+      "message": "Oh I found it is wrong here. Because we do texture-to-texture copies per subresource, the state of each subresource can be definite:\n1. all the destination subresources are in TRANSFER_DEST state.\n2. the source subresources are in TRANSFER_SRC state except for the overlapped part (they belong to the destination and should be in TRANSFER_DEST state).\n\nActually I cannot make it correct without the support of subresource tracking. Note that on Vulkan it is a different story as Vulkan allows doing such copy in one copy command.\n\nMaybe we can first support non-overlapped t2t copy within the same texture first?",
+      "parentUuid": "b5771ed4_4fe138aa",
+      "range": {
+        "startLine": 655,
+        "startChar": 8,
+        "endLine": 662,
+        "endChar": 9
+      },
+      "revId": "1a31010cfb5eed4e4c5072d6e09bb5e42c8e6048",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
