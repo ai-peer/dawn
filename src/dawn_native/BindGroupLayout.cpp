@@ -277,6 +277,7 @@ namespace dawn_native {
             mBindingInfo[i].textureComponentType =
                 Format::TextureComponentTypeToFormatType(binding.textureComponentType);
             mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
+            mBindingInfo[i].minimumBufferSize = binding.minimumBufferSize;
 
             switch (binding.type) {
                 case wgpu::BindingType::UniformBuffer:

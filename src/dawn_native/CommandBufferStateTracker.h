@@ -40,7 +40,7 @@ namespace dawn_native {
         void SetIndexBuffer();
         void SetVertexBuffer(uint32_t slot);
 
-        static constexpr size_t kNumAspects = 4;
+        static constexpr size_t kNumAspects = 5;
         using ValidationAspects = std::bitset<kNumAspects>;
 
       private:
