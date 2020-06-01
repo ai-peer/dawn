@@ -162,6 +162,47 @@
     },
     {
       "key": {
+        "uuid": "268fb5a2_51bebeab",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:09:12Z",
+      "side": 1,
+      "message": "This statement is incorrect. You cannot implicitly transition from COMMON to RENDER_TARGET or DEPTH_WRITE states.",
+      "parentUuid": "0ae3e58e_a14fbd63",
+      "range": {
+        "startLine": 713,
+        "startChar": 20,
+        "endLine": 713,
+        "endChar": 62
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3588ef03_25288594",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-01T17:09:12Z",
+      "side": 1,
+      "message": "This condition feels like it should be in TransitionOneResource with the rest of the barrier logic.",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e984e68d_c8cc14b3",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
