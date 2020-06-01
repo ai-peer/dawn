@@ -60,15 +60,30 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
 
-        bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                             D3D12_RESOURCE_BARRIER* barrier,
-                                             wgpu::TextureUsage newUsage);
+        void TrackUsageAndGetResourceBarrierForPass(
+            CommandRecordingContext* commandContext,
+            std::vector<D3D12_RESOURCE_BARRIER>* barrier,
+            wgpu::TextureUsage allUsages,
+            std::vector<wgpu::TextureUsage> subresourceUsages);
         void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                        wgpu::TextureUsage usage);
+                                        wgpu::TextureUsage usage,
+                                        uint32_t baseMipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t baseArrayLayer,
+                                        uint32_t layerCount);
         void TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
-                                        D3D12_RESOURCE_STATES newState);
+                                        D3D12_RESOURCE_STATES newState,
+                                        uint32_t baseMipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t baseArrayLayer,
+                                        uint32_t layerCount);
+        void TrackFullUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                            wgpu::TextureUsage usage);
+        void TrackFullUsageAndTransitionNow(CommandRecordingContext* commandContext,
+                                            D3D12_RESOURCE_STATES newState);
 
       private:
+        Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
         ~Texture() override;
         using TextureBase::TextureBase;
 
@@ -79,6 +94,7 @@ namespace dawn_native { namespace d3d12 {
                                                bool isSwapChainTexture);
 
         // Dawn API
+
         void DestroyImpl() override;
         MaybeError ClearTexture(CommandRecordingContext* commandContext,
                                 uint32_t baseMipLevel,
@@ -89,18 +105,23 @@ namespace dawn_native { namespace d3d12 {
 
         UINT16 GetDepthOrArraySize();
 
-        bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                             D3D12_RESOURCE_BARRIER* barrier,
-                                             D3D12_RESOURCE_STATES newState);
-        bool TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
-                                                  D3D12_RESOURCE_BARRIER* barrier,
-                                                  D3D12_RESOURCE_STATES newState);
+        void TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+                                                  std::vector<D3D12_RESOURCE_BARRIER>* barrier,
+                                                  D3D12_RESOURCE_STATES newState,
+                                                  uint32_t baseMipLevel,
+                                                  uint32_t levelCount,
+                                                  uint32_t baseArrayLayer,
+                                                  uint32_t layerCount);
+
+        void TransitionOneSubresource(std::vector<D3D12_RESOURCE_BARRIER>* barriers,
+                                      D3D12_RESOURCE_STATES subresourceNewState,
+                                      uint32_t subresourceIndex);
+        void HandleTransitionSpecialCases(CommandRecordingContext* commandContext);
 
         ResourceHeapAllocation mResourceAllocation;
-        D3D12_RESOURCE_STATES mLastState = D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON;
-
-        Serial mLastUsedSerial = UINT64_MAX;
-        bool mValidToDecay = false;
+        std::vector<D3D12_RESOURCE_STATES> mSubresourceLastStates;
+        std::vector<Serial> mSubresourceLastDecaySerial;
+        std::vector<bool> mSubresourceValidToDecay;
         bool mSwapChainTexture = false;
 
         Serial mAcquireMutexKey = 0;
