@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ca51716b_3395c285",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-01T16:59:52Z",
+      "side": 1,
+      "message": "Thoughts on having GetDynamicBufferCount() skip non-visible bindings (ie. pack them in front)?",
+      "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a592bfb_9773ce3e",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 2
