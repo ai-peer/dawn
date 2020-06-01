@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d1db53c_09c6d077",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T23:22:53Z",
+      "side": 1,
+      "message": "nit: declared\nMaybe also say this is a regression test for crbug.com/dawn/410 and briefly what the issue is.",
+      "range": {
+        "startLine": 1009,
+        "startChar": 57,
+        "endLine": 1009,
+        "endChar": 65
+      },
+      "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d850c6d3_06628c65",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-01T23:22:53Z",
+      "side": 1,
+      "message": "nit: Could use a single compute shader",
+      "range": {
+        "startLine": 1013,
+        "startChar": 4,
+        "endLine": 1030,
+        "endChar": 17
+      },
+      "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
