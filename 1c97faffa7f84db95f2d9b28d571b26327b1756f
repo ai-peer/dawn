@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "0c563a2e_63fb41ec",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-01T17:34:12Z",
+      "side": 1,
+      "message": "+1. This will not correctly initialize the texture if internal (probably why the bots fail).",
+      "parentUuid": "a2523a05_98dd52c4",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17d3a4d8_49db0f59",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
