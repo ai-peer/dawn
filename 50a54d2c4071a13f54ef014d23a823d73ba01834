@@ -333,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "811aebb7_66d7bb14",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-01T20:37:07Z",
+      "side": 1,
+      "message": "even though they\u0027re similar, I think I like future callback serial more because it caps the serial so we don\u0027t need to unnecessarily up command serial any larger.",
+      "parentUuid": "87a261c1_9faabaa5",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 177,
+        "endChar": 9
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d78c944_f7e835a4",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 16
@@ -353,6 +377,30 @@
       "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a557815_325d89cf",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-01T20:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d78c944_f7e835a4",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -417,6 +465,24 @@
       "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bd4b8f4_b02bc0de",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-01T20:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86c029b4_8ed69195",
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

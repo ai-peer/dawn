@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10df4a70_26227d26",
+        "filename": "src/dawn_native/FenceSignalTracker.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-01T20:37:07Z",
+      "side": 1,
+      "message": "not quite sure why but when setting future serial here (and error scope tracker\u0027s TrackUntilLastSubmitComplete) to be the last submitted command serial, we were getting fence tests hanging.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
