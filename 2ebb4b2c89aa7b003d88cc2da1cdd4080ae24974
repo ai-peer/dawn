@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6a443cf3_126329b5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-01T18:06:07Z",
+      "side": 1,
+      "message": "If we have GetD3D12DynamicBufferCount() then the validation remains as-is I think. Might be preferable since it eliminates checks and makes it impossible to even use them even accidentally. Either way, SGTM.",
+      "parentUuid": "6db39893_b637e47c",
+      "revId": "2ebb4b2c89aa7b003d88cc2da1cdd4080ae24974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a592bfb_9773ce3e",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 2
