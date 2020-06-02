@@ -230,6 +230,8 @@ source_set("dawn_native_sources") {
     "PipelineLayout.h",
     "ProgrammablePassEncoder.cpp",
     "ProgrammablePassEncoder.h",
+    "QuerySet.cpp",
+    "QuerySet.h",
     "Queue.cpp",
     "Queue.h",
     "RenderBundle.cpp",
