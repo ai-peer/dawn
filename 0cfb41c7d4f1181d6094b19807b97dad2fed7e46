@@ -180,6 +180,24 @@
       "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "918cea42_6847e1d3",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-02T00:49:23Z",
+      "side": 1,
+      "message": "Brandon, I agree that MakeResident does not tell you which of category of the caused the failure. However, I anticipate that most hardware will be local memory constrained instead of non-local constrained. Hence, evicting non-local memory when we don\u0027t need to could prove costly. \n\nIf we switch to calling MakeResident with non-local heaps separate from local heaps, it is true we\u0027ll have two separate vectors. However, the number of overall items across both vectors will be the same. For UMA, the non-local vector will be empty anyways.",
+      "parentUuid": "8ff804ea_aa097d93",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
