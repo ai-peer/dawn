@@ -16,6 +16,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ec0235c_8303ca2d",
+        "filename": "src/dawn_native/FenceSignalTracker.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-02T00:16:06Z",
+      "side": 1,
+      "message": "This is because say there\u0027s nothing in flight:\n\nmCompletedSerial \u003d\u003d 2\nmLastSubmittedSerial \u003d\u003d 2\nmLastProcessedSerial \u003d\u003d 2\nmFutureCallbackSerial \u003d\u003d 2\n\nThen we call Queue.Signal which will call this,\n\nWe\u0027ll add a future serial which is the same as the currently completed one, and then nothing will happen.\n\nI think what you have here is okay though.",
+      "parentUuid": "10df4a70_26227d26",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
