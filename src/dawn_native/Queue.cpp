@@ -111,6 +111,10 @@ namespace dawn_native {
                                           uint64_t bufferOffset,
                                           const void* data,
                                           size_t size) {
+        if (size == 0) {
+            return {};
+        }
+
         DeviceBase* device = GetDevice();
 
         UploadHandle uploadHandle;
@@ -120,10 +124,8 @@ namespace dawn_native {
 
         memcpy(uploadHandle.mappedBuffer, data, size);
 
-        DAWN_TRY(device->CopyFromStagingToBuffer(
-            uploadHandle.stagingBuffer, uploadHandle.startOffset, buffer, bufferOffset, size));
-
-        return {};
+        return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                               buffer, bufferOffset, size);
     }
 
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
