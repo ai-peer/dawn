@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "717094a4_8e607053",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "In this CL I think AssumeCommandsComplete can be move to be frontend-only before ShutdownImpl is called.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29b6f027_df36b875",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "I think here we should detect if mLastSubmittedSerial hasn\u0027t changed, and if it didn\u0027t change the artificially increment serials.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fb9bad4_b5f27b56",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "nit: Set is a bit misleading because we\u0027re doing a max. Maybe AddFutureCallbackSerial?",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5969f5be_aabb85a8",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Serial is a uint64_t so it cannot be -1. Why can\u0027t it start at 0?",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "10df4a70_26227d26",
         "filename": "src/dawn_native/FenceSignalTracker.cpp",
         "patchSetId": 18
@@ -31,6 +99,239 @@
       "side": 1,
       "message": "This is because say there\u0027s nothing in flight:\n\nmCompletedSerial \u003d\u003d 2\nmLastSubmittedSerial \u003d\u003d 2\nmLastProcessedSerial \u003d\u003d 2\nmFutureCallbackSerial \u003d\u003d 2\n\nThen we call Queue.Signal which will call this,\n\nWe\u0027ll add a future serial which is the same as the currently completed one, and then nothing will happen.\n\nI think what you have here is okay though.",
       "parentUuid": "10df4a70_26227d26",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c527a7e_3a73f9ec",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Should be in ShutdownImpl",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc53fd3e_5f84802e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Should be in the frontend.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5150975_87dd57e2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be needed.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb356343_2c921e5b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "I think this should be atomic_max so that the logic is correct even when we race with the block at [1]. It can be done in a follow-up.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f85d7979_52607ab3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "This logic could be done in the frontend.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acabbf84_22628256",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "[1] and should be a an atomic max too.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f4ceed1_d79bdc04",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Why is this needed? I think it can get removed.",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 29
+      },
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20d77c80_e84eace9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Should be handled by the frontend.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f3ff90e_8bfe78bd",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be handled by the frontend?",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "336e81d5_64ae67e3",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be needed anymore.",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 33
+      },
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97dfc9a_e4af78f3",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Should be possible to remove.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b304fd4_d746c011",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "Should be in the frontend.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cea4fab_6c5060ae",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T10:34:25Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed anymore.",
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
