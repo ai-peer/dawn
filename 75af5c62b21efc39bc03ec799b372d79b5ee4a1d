@@ -16,6 +16,24 @@
       "revId": "75af5c62b21efc39bc03ec799b372d79b5ee4a1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba10d2df_0606b03f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T17:05:01Z",
+      "side": 1,
+      "message": "It is not true, Corentin. As I said, if the newState comes from bindings from a pass, it is possible that the usage is None (and the state is COMMON). Because if we just use a small part of texture\u0027s subresources in a pass, we only set these subresources\u0027 usages, the other subresources usages are initialized to TextureUsage::None. See the code at https://dawn.googlesource.com/dawn/+/refs/heads/master/src/dawn_native/PassResourceUsageTracker.cpp#50. Actually, this is a very common situation. Imaging you have an array texture, but you just sample from or draw into a single slice. We don\u0027t need to have barriers for other slices which we don\u0027t touch at all in this pass. \n\nI debugged the code again, it was hit in quite a few end2end tests.",
+      "parentUuid": "10adb358_e97238d2",
+      "revId": "75af5c62b21efc39bc03ec799b372d79b5ee4a1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

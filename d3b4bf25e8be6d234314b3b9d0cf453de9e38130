@@ -459,6 +459,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "340d8747_460d0b96",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T17:05:01Z",
+      "side": 1,
+      "message": "I am not familiar with internal/external texture. But I guess that if a texture is from an external texture with has data and we don\u0027t need to draw/write/clear/copy data into it, we can read from it. Then it might be useful. \n\nFor an internal texture which we create by ourselves, we do need to draw/write/copy/clear the texture at first in order to do some meaningful things like reading/sampling from it later, which will break \"COMMON\" state and we can\u0027t use implicit promotion at all, just as you said. The only one exception of your saying is: it is still valid to capture the implicit promotion from COMMON to COPY_DEST for copy (just one time, Then it can\u0027t use implicit promotion any more either). \n\nI debugged the code and it works as what I said.\n\nDo you think that we still need to remove the code, Corentin? I will do that if so.",
+      "parentUuid": "f8b48a68_deeafdd8",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
