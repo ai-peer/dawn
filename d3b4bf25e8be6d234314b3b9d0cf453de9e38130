@@ -435,6 +435,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8b48a68_deeafdd8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T16:30:23Z",
+      "side": 1,
+      "message": "Looking at the logic in TextureD3D12.cpp, I think the implicit promotion never happens. It is because the first operation on the texture is always a write (if only for lazy-clearing) which moves it out of common, and then to have mValidToDecay \u003d true you need to have started in the common state.\n\nThis is dead code. We should remove it and replace it with a new TODO and until we clarify better how it can be used, if it applies per subresource and find a good heuristic to now when a readonly state can instead use COMMON for the transition (sorry for Brandon\u0027s hard work).",
+      "parentUuid": "abf56d0b_135f9ae2",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
