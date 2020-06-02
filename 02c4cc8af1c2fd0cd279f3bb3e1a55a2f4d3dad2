@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8cabc8ed_6047baef",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-02T18:30:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d1db53c_09c6d077",
+      "range": {
+        "startLine": 1009,
+        "startChar": 57,
+        "endLine": 1009,
+        "endChar": 65
+      },
+      "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d850c6d3_06628c65",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2020-06-01T23:22:53Z",
       "side": 1,
       "message": "nit: Could use a single compute shader",
+      "range": {
+        "startLine": 1013,
+        "startChar": 4,
+        "endLine": 1030,
+        "endChar": 17
+      },
+      "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e421157_d4e408bc",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-02T18:30:28Z",
+      "side": 1,
+      "message": "Wasn\u0027t able to repro with CS for some reason. Maybe the PS validation is stricter.",
+      "parentUuid": "d850c6d3_06628c65",
       "range": {
         "startLine": 1013,
         "startChar": 4,
