@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "442f779f_2a5f4f3f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "This looks like a bug in driver. If the texture has only one subresource, the transition barrier\u0027s subresource could be either the only subresource (index 0), or D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES, according to common sense. However, the driver (both Intel and NV) doesn\u0027t handle it in this way I presumably to be, it only accepts D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES. Otherwise, it will report that the other subresources need a transition barrier for state transition. For example, the error message would be \"index 1 should be transitioned from COMMON to xxxx before we use it\" in validation layer, even though this texture doesn\u0027t have subresource at index 1 at all. I debugged this bug for a long time, and finally guessed that this could be the only reason. Shit. \n\nThe subtle failure info (index 1 need a transition barrier, but the texture doesn\u0027t have subresource at index 1) from bot actually indicated this possible root cause, but I missed it at the beginning, :(",
+      "range": {
+        "startLine": 657,
+        "startChar": 8,
+        "endLine": 661,
+        "endChar": 9
+      },
+      "revId": "71902081ff55a9ed672aa71814a4b6ae8e6dd034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

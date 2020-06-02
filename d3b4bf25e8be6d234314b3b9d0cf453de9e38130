@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "adba3ad4_6acaa7dc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b540d878_71d0f5e0",
+      "range": {
+        "startLine": 173,
+        "startChar": 32,
+        "endLine": 174,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cba3ab30_fbb95d08",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d32eec0_ee92e41c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cba3ab30_fbb95d08",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "3ad8461a_4490ae63",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1edd11c3_75586da5",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9d76144_7aa38c84",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -73,6 +133,24 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8599c3da_861d4f8d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9d76144_7aa38c84",
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "648dbf53_857579e2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Thank you Austin, did this in previous patch set, but this comment is not valid in the lasted patch set now.",
+      "parentUuid": "8da71745_6dedad3a",
+      "range": {
+        "startLine": 592,
+        "startChar": 18,
+        "endLine": 592,
+        "endChar": 65
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc0781b4_111cd7c3",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "b55670b0_6954fcaa",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "not valid in latest patch set.",
+      "parentUuid": "bc0781b4_111cd7c3",
+      "range": {
+        "startLine": 614,
+        "startChar": 18,
+        "endLine": 614,
+        "endChar": 59
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2cd2269a_3a56e66b",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6
@@ -142,6 +268,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ee1f77b_66678a09",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "not valid in the latest patch set.",
+      "parentUuid": "2cd2269a_3a56e66b",
+      "range": {
+        "startLine": 667,
+        "startChar": 16,
+        "endLine": 671,
+        "endChar": 0
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -261,6 +411,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf56d0b_135f9ae2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "The MSDN page is saying the texture, not the texture\u0027s subresource. So I presumed that it should be worked upon the entire texture. However, all of you suggested that it might be worked upon each subresource instead. \n\nI re-read the MSDN page. the implicit promotion will happen if:\n1) the src state is common or IMPLICT promoted to common, and\n2) the dst state is readonly or dest copy. \nThe state can be implicit promote to common only if its src state is COMMON in one command list, and the dst state is readonly in another command list. \nSo the implicit promotion only works when it keeps accessing as readonly one time (or not accessed) in a single command buffer. Otherwise, it will break implicit promotion and can not used as implicit promotion any longer since then. For example, a write usage happened, or different readonly usages happened multiple times in multiple draws/dispatches/passes/copy/clear in one single command list: only the first readonly to readonly transition in one command list can be implicit promoted, the other readonly to readonly transition in one single command list need an explicit barrier.",
+      "parentUuid": "8cc3d6ba_95b14971",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

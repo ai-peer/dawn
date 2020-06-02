@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2f3ee08f_daa3169a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Ack\n\nWill do this code refactoring soon. Actually we discussed this during a biweekly sync before.",
+      "parentUuid": "835206f5_9953c9e7",
+      "range": {
+        "startLine": 178,
+        "startChar": 40,
+        "endLine": 179,
+        "endChar": 88
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2523a05_98dd52c4",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "6d88f62c_cb94cf9b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c563a2e_63fb41ec",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17d3a4d8_49db0f59",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -83,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "2a582e7e_992dd5f4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17d3a4d8_49db0f59",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 72
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7750a3b0_b2356944",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -97,6 +163,24 @@
       "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "687dc806_d70bf2a3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7750a3b0_b2356944",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +201,24 @@
     },
     {
       "key": {
+        "uuid": "954dc7ab_b4a3c05f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef0bfcd_170c7898",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bd8c45b_bbdcd229",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -131,6 +233,24 @@
       "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f5094a8_98ff34c1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd8c45b_bbdcd229",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -154,6 +274,30 @@
       "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4252733a_a223e9f8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "TransitionUsageAndGetResourceBarrier and TrackUsageAndGetResourceBarrierForPass differs here[1], so it might be better to keep this code snippet here.",
+      "parentUuid": "8b4beed5_3bd208c5",
+      "range": {
+        "startLine": 680,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 17
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -204,6 +348,30 @@
     },
     {
       "key": {
+        "uuid": "5124a867_9e5a5a9a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "[1]If the state transition is from a pass (not from a operation outside of a pass, like copy/clear), the dst usage of some subresources might be none(and the dst states might be COMMON) if we just use a part of the texture\u0027s subresource(s). See the similar logic in Vulkan: https://dawn.googlesource.com/dawn/+/refs/heads/master/src/dawn_native/vulkan/TextureVk.cpp#733. Note that the dst state will never be common in any other situations, although the src usage might be change to COMMON during implicit promotion(decay).",
+      "parentUuid": "268fb5a2_51bebeab",
+      "range": {
+        "startLine": 713,
+        "startChar": 20,
+        "endLine": 713,
+        "endChar": 62
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3588ef03_25288594",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -218,6 +386,24 @@
       "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78c06ba7_ee9cde5a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "See the explanation above.",
+      "parentUuid": "3588ef03_25288594",
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -241,6 +427,30 @@
       "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef354940_b1e660bc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T14:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e984e68d_c8cc14b3",
+      "range": {
+        "startLine": 718,
+        "startChar": 16,
+        "endLine": 718,
+        "endChar": 47
+      },
+      "revId": "1c97faffa7f84db95f2d9b28d571b26327b1756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
