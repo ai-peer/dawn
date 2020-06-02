@@ -39,8 +39,13 @@ namespace dawn_native { namespace metal {
             storageMode = MTLResourceStorageModePrivate;
         }
 
-        if (GetSize() >
-            std::numeric_limits<uint64_t>::max() - kMinUniformOrStorageBufferAlignment) {
+        uint64_t maxBufferSize = std::numeric_limits<uint64_t>::max();
+        if (@available(iOS 12, macOS 10.14, *)) {
+            maxBufferSize =
+                static_cast<uint64_t>([ToBackend(GetDevice())->GetMTLDevice() maxBufferLength]);
+        }
+
+        if (GetSize() > maxBufferSize - kMinUniformOrStorageBufferAlignment) {
             return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
         }
 
@@ -56,6 +61,13 @@ namespace dawn_native { namespace metal {
 
         mMtlBuffer = [ToBackend(GetDevice())->GetMTLDevice() newBufferWithLength:currentSize
                                                                          options:storageMode];
+
+        // This isn't documented, but experimentally it seems that zero size means the allocation
+        // failed.
+        if ([mMtlBuffer length] == 0) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation failed");
+        }
+
         return {};
     }
 

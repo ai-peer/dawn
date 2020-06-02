@@ -567,12 +567,23 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
 // Test that creating a very large buffers fails gracefully.
 TEST_P(CreateBufferMappedTests, LargeBufferFails) {
     // TODO(http://crbug.com/dawn/27): Missing support.
-    DAWN_SKIP_TEST_IF(IsMetal() || IsOpenGL());
+    DAWN_SKIP_TEST_IF(IsOpenGL());
 
-    wgpu::BufferDescriptor descriptor;
-    descriptor.size = std::numeric_limits<uint64_t>::max();
-    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = std::numeric_limits<uint64_t>::max();
+        descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+        ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+    }
+
+    {
+        // Some backends may add some padding to the buffer allocation. Check that slightly smaller
+        // buffers also error.
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = std::numeric_limits<uint64_t>::max() - 256u;
+        descriptor.usage = wgpu::BufferUsage::CopyDst;
+        ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+    }
 }
 
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
