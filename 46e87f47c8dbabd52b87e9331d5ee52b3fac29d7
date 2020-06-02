@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "07bade31_5bc97af2",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "398c7f1e_5cfb24d5",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07e70899_8fbe0081",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f002e1ed_98300236",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07e70899_8fbe0081",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "26b6c28f_6a34e350",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done in https://dawn-review.googlesource.com/c/dawn/+/22100",
+      "parentUuid": "819bb2f3_b44f5dfe",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 62
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e144e0e_317f8242",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 3
@@ -73,6 +133,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "670abb2b_3be47915",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e144e0e_317f8242",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "df67c9d6_b8742971",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2922b124_89769d1a",
+      "range": {
+        "startLine": 42,
+        "startChar": 11,
+        "endLine": 42,
+        "endChar": 15
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f6062bf_3add8407",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 3
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "40a43c65_42c43855",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f6062bf_3add8407",
+      "range": {
+        "startLine": 55,
+        "startChar": 42,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25ad7667_d606b6b5",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 3
@@ -136,6 +262,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c8039e5_f744ba38",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25ad7667_d606b6b5",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -179,6 +323,48 @@
     },
     {
       "key": {
+        "uuid": "2fbfa99c_0c671c62",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8671271b_742d584c",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74574022_2b272400",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a839798_2447837c",
+      "range": {
+        "startLine": 29,
+        "startChar": 19,
+        "endLine": 29,
+        "endChar": 29
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "330ed73e_ca334834",
         "filename": "src/dawn_native/QuerySet.h",
         "patchSetId": 3
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "a97bc814_370ea80a",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "330ed73e_ca334834",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d070129_396a2dfa",
         "filename": "src/dawn_native/QuerySet.h",
         "patchSetId": 3
@@ -216,6 +426,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0278d3dc_488ea5d2",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d070129_396a2dfa",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -492,6 +720,24 @@
     },
     {
       "key": {
+        "uuid": "2dcb6e78_bcd406ad",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27e36f98_151c18f0",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfaf1812_523d9429",
         "filename": "src/dawn_native/null/DeviceNull.h",
         "patchSetId": 3
@@ -509,6 +755,24 @@
     },
     {
       "key": {
+        "uuid": "b98a7103_542cc9fc",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfaf1812_523d9429",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "336c38d8_052e811c",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 3
@@ -523,6 +787,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c5516a1_4ec26dad",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "336c38d8_052e811c",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -612,6 +894,24 @@
     },
     {
       "key": {
+        "uuid": "113b4e08_2528a216",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "OK, I put a TODO here.",
+      "parentUuid": "7b5e863b_d8a3f11c",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77d375a7_0ebb6055",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 3
@@ -626,6 +926,24 @@
       "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa8555e_7c56581c",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-02T02:55:19Z",
+      "side": 1,
+      "message": "The tests for extensions enabled will be added in end2end tests, which need to check the queryset creation on devices. Occlusion tests will also be in end2end tests。",
+      "parentUuid": "77d375a7_0ebb6055",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
