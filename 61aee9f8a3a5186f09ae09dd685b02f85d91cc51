@@ -1,0 +1,311 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c893dae7_3f5319c0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "u-u-nit: add empty lines like in other similar functions?",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "964dbc3b_4de50532",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: validation. Also zero-sized buffer are basically agreed to at this point so I think we should do the same for QuerySet.",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de670fc5_d57b0f90",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "Note: seems fine for now, we\u0027ll see what the group things when we add the validation text for queries.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "072fbb39_059ff944",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: empty line after the break and same for timestamp to separate logical blocks.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ef9e24f_14da2eeb",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: already destroyed",
+      "range": {
+        "startLine": 81,
+        "startChar": 27,
+        "endLine": 81,
+        "endChar": 28
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b428d231_1d8b4609",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "Maybe add the getter to get the pipeline statistics name too?",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b287bff_192eed2d",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "This is reached when using the Null backend. Instead you can make [1] an \u003d 0 so child classes are forced to implement it, and add a dummy Query implementation in DeviceNull.cpp",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32410591_ce177d06",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "450d5885_df6a9447",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: also modify Forward.h like in other backends.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ee03804_0043a9af",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "Can we have control cases in the tests, or maybe start the file with a control case?",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0b1e826_56b1b7c1",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "This will use garbage data as query type, but maybe that garbage data is a valid query type (garbage data is often 0) and the test will be flaky. Instead you can static_cast(0xFFFFFFFF) maybe?",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d00063c_85b23ad4",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: Test that creating query sets fails if the extension is not enabled.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f980534_ee11e34b",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: comment that the basic device we have doesn\u0027t have any optional features enabled.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce8b47da_1c95de66",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "This could be failing because pipelineStatisticsCount contains garbage. It could be better to restructure the test as:\n\n  Build a descriptor\n  Assert error on a device that doesn\u0027t have the feature.\n  Create a device that has the feature.\n  Check no error when using the same descriptor on that device.\n\n[1]",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb1ee640_dc449d84",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "nit: DAWN_SKIP_TEST_IF(!SupportsExtensions({\"pipeline_statistics_query\"})). But see comment at [1]",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3148307_4186a60a",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "You don\u0027t need to make an array and can do:\n\n        wgpu::PipelineStatisticsName name \u003d something; (right now it is garbage)\n        descriptor.pipelineStatistics \u003d \u0026name;\n        descriptor.pipelineStatisticsCount \u003d 1;",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8758b2f_bd53c0ab",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T08:27:37Z",
+      "side": 1,
+      "message": "We also need to check the validation for Destroy() (and that it is allowed even when already called).",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
