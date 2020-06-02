@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10adb358_e97238d2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T16:40:25Z",
+      "side": 1,
+      "message": "I don\u0027t think newState can ever be D3D12_RESOURCE_STATE_COMMON because it would only match wgpu::TextureUsage::None which can never happen?",
+      "revId": "75af5c62b21efc39bc03ec799b372d79b5ee4a1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
