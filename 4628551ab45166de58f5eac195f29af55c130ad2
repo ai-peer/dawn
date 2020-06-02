@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "eb55fc27_1d5bae52",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T15:22:54Z",
+      "side": 1,
+      "message": "Here the size of the bind group entry is checked against the minBufferSize in the bind group layout. It should be checking against the pipeline\u0027s static usage instead.\n\nAlso I think we could do the optimization where at least on the pipeline, the minimum required sizes are laid out in a vector (and maybe the same for bind groups) and are then checked in a tight loop on drawcall. Here we seem to be branching a lot vs. the amount of computation.",
+      "parentUuid": "c2b9760d_2303342e",
+      "revId": "4628551ab45166de58f5eac195f29af55c130ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bcfb7436_4582f9b5",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 1
