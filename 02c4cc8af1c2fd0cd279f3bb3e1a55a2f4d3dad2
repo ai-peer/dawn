@@ -93,6 +93,30 @@
       "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "779ac5dd_bc5aa427",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-02T18:33:05Z",
+      "side": 1,
+      "message": "Okay, sounds fine.",
+      "parentUuid": "3e421157_d4e408bc",
+      "range": {
+        "startLine": 1013,
+        "startChar": 4,
+        "endLine": 1030,
+        "endChar": 17
+      },
+      "revId": "02c4cc8af1c2fd0cd279f3bb3e1a55a2f4d3dad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
