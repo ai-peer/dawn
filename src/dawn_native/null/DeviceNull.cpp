@@ -116,6 +116,9 @@ namespace dawn_native { namespace null {
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
     }
+    ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
+        return new QuerySet(this, descriptor);
+    }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
         return new RenderPipeline(this, descriptor);
