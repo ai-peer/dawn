@@ -252,6 +252,24 @@
       "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd5d33a0_4cde9fe6",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-02T19:35:13Z",
+      "side": 1,
+      "message": "I did an experiment to test the performance of calling MakeResident once vs twice with the same resources and found there was no measureable difference. I\u0027m going to go ahead and refactor then call per segment as suggested.",
+      "parentUuid": "788ffc52_53b8bd87",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
