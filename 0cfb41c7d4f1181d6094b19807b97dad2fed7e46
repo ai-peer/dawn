@@ -234,6 +234,24 @@
       "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788ffc52_53b8bd87",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-02T18:36:22Z",
+      "side": 1,
+      "message": "Rafael, that\u0027s a good point, but do you think it\u0027s worth the cost of calling MakeResident twice ?\n\nMaybe if there\u0027s a significant issue with either approach we could one day have a fancy double-ended vector where non-local heaps get pushed to the front and local heaps get pushed to the back (where there\u0027s extra reserved space on both the front AND back to amortize resizes).\nThat way we\u0027re able to call MakeResident on both the entire thing or just local/non-local. Anyway.. that\u0027s may not be worth it right now.",
+      "parentUuid": "ff4e83e7_04716521",
+      "revId": "0cfb41c7d4f1181d6094b19807b97dad2fed7e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
