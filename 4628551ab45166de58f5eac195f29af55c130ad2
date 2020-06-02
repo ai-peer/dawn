@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c2b9760d_2303342e",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-02T15:14:02Z",
+      "side": 1,
+      "message": "Isn\u0027t this the last draw call check (except it always happens)? Implementing the other checks and correct deduction shouldn\u0027t change the draw call validation (except perhaps skipping it). So I would think having this validation here vs. deleting it would be good enough to get a rough idea of the per-draw cost of not specifiying minimumBufferSize.",
+      "parentUuid": "e0ee64d7_894059c7",
+      "revId": "4628551ab45166de58f5eac195f29af55c130ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bcfb7436_4582f9b5",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 1
