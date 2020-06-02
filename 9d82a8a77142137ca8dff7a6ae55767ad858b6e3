@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed07da37_ba5b395a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T15:30:06Z",
+      "side": 1,
+      "message": "u-nit you should be able to use the initializer style that\u0027s slightly more idiomatic (and avoids the default constructors from running for std::vector)\n\n  Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)\n     :TextureBase(device, descriptor, state),\n        mSubresourceLastStates \u003d std::vector\u003cD3D12_RESOURCE_STATES\u003e(\n            GetSubresourceCount(), D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON),\n        mSubresourceLastDecaySerial \u003d std::vector\u003cSerial\u003e(GetSubresourceCount(), UINT64_MAX),\n        mSubresourceValidToDecay \u003d std::vector\u003cbool\u003e(GetSubresourceCount(), false) { }",
+      "revId": "9d82a8a77142137ca8dff7a6ae55767ad858b6e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

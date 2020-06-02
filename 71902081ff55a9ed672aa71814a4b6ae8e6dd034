@@ -22,6 +22,30 @@
       "revId": "71902081ff55a9ed672aa71814a4b6ae8e6dd034",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2fe12e3_fee407bb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T15:30:06Z",
+      "side": 1,
+      "message": "I wonder if maybe it could be that D3D12 has different subresources for the depth and stencil aspects of depth-stencil textures. Actually this shows a larger problem in Dawn where we don\u0027t handle depth and stencil separately ever. And if one is written, then the other is considered written to. I\u0027m not sure what to do about it.\n\nIf depth-stencil is the problem, let\u0027s find a workable fix for correctness and we can deal with separating depth and stencil later.",
+      "parentUuid": "442f779f_2a5f4f3f",
+      "range": {
+        "startLine": 657,
+        "startChar": 8,
+        "endLine": 661,
+        "endChar": 9
+      },
+      "revId": "71902081ff55a9ed672aa71814a4b6ae8e6dd034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
