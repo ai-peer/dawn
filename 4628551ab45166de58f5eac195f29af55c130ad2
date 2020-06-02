@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e0ee64d7_894059c7",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-02T13:00:20Z",
+      "side": 1,
+      "message": "That\u0027s not what we want to check with minBufferSize. The intent is to check the two following things:\n\n - On BindGroup creation, for bindings with a minBufferSize, check that the binding is at least minBufferSize.\n - On Pipeline creation, for bindings with a minBufferSize in the layout, check that the size needed by the pipeline is at most minBufferSize. (minBufferSize would be deduced when defaulting the pipeline layout).\n\nThen on draw call, if minBufferSize is not set for a binding, we\u0027d check that the size set is at least what\u0027s required by the pipeline.",
+      "revId": "4628551ab45166de58f5eac195f29af55c130ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bcfb7436_4582f9b5",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 1
