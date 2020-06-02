@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d71a569d_3faaf845",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-02T17:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9e55057_619aa05a",
+      "revId": "d77d955dd6e264fe34b1eac64c58bbd8fd16869f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dfb62844_a673f6cb",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 2
