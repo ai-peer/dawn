@@ -39,23 +39,37 @@ namespace dawn_native { namespace metal {
             storageMode = MTLResourceStorageModePrivate;
         }
 
-        if (GetSize() >
-            std::numeric_limits<uint64_t>::max() - kMinUniformOrStorageBufferAlignment) {
-            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
-        }
-
         // TODO(cwallez@chromium.org): Have a global "zero" buffer that can do everything instead
         // of creating a new 4-byte buffer?
-        uint32_t currentSize = std::max(GetSize(), uint64_t(4u));
+        uint64_t currentSize = std::max(GetSize(), uint64_t(4u));
         // Metal validation layer requires the size of uniform buffer and storage buffer to be no
         // less than the size of the buffer block defined in shader, and the overall size of the
         // buffer must be aligned to the largest alignment of its members.
         if (GetUsage() & (wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage)) {
+            if (currentSize >
+                std::numeric_limits<uint64_t>::max() - kMinUniformOrStorageBufferAlignment) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
+            }
             currentSize = Align(currentSize, kMinUniformOrStorageBufferAlignment);
+        }
+
+        if (@available(iOS 12, macOS 10.14, *)) {
+            uint64_t maxBufferSize =
+                static_cast<uint64_t>([ToBackend(GetDevice())->GetMTLDevice() maxBufferLength]);
+            if (currentSize > maxBufferSize) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
+            }
         }
 
         mMtlBuffer = [ToBackend(GetDevice())->GetMTLDevice() newBufferWithLength:currentSize
                                                                          options:storageMode];
+
+        // This isn't documented, but experimentally it seems that zero size means the allocation
+        // failed.
+        if ([mMtlBuffer length] == 0) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation failed");
+        }
+
         return {};
     }
 
