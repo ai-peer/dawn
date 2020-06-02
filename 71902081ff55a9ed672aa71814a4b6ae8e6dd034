@@ -46,6 +46,30 @@
       "revId": "71902081ff55a9ed672aa71814a4b6ae8e6dd034",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e27bba8_5f6515ae",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-02T18:38:08Z",
+      "side": 1,
+      "message": "Good catch. The root cause is depth/stencil aspects (plane slices) is not supported in Dawn. Indeed, this is a larger problem for texture, we need support from frontend to backend. \n\nI revised the comment in the latest patch set accordingly.",
+      "parentUuid": "f2fe12e3_fee407bb",
+      "range": {
+        "startLine": 657,
+        "startChar": 8,
+        "endLine": 661,
+        "endChar": 9
+      },
+      "revId": "71902081ff55a9ed672aa71814a4b6ae8e6dd034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
