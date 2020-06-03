@@ -44,8 +44,17 @@ class BitSetIterator final {
 
         bool operator==(const Iterator& other) const;
         bool operator!=(const Iterator& other) const;
-        T operator*() const {
+
+        template <typename U = T>
+        typename std::enable_if_t<std::is_integral<T>::value || std::is_enum<T>::value, U>
+        operator*() const {
             return static_cast<T>(mCurrentBit);
+        }
+
+        template <typename U = T>
+        typename std::enable_if_t<!std::is_integral<T>::value && !std::is_enum<T>::value, U>
+        operator*() const {
+            return static_cast<T>(static_cast<std::underlying_type_t<T>>(mCurrentBit));
         }
 
       private:
