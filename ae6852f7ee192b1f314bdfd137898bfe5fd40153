@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "85e5642a_51095fe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-03T22:46:23Z",
+      "side": 1,
+      "message": "Please add a description with details on the code you\u0027re adding.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddc9b0a7_50411053",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14

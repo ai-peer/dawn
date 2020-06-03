@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "585274d9_c777dde3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-03T22:46:23Z",
+      "side": 1,
+      "message": "The word \"full\" confused me at first because I thought it meant that you were going to set all of the usage bits on every subresource. Perhaps a better name would be TrackAllResourceUsageAndTransitionNow.",
+      "range": {
+        "startLine": 572,
+        "startChar": 23,
+        "endLine": 572,
+        "endChar": 27
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2bdf65a_7027b919",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-03T22:46:23Z",
+      "side": 1,
+      "message": "Please use the formula documented in MSDN for going from miplevel/arrayslice/planeslice to subresource index and incorporate it into GetSubResourceIndex itself so that it\u0027s all in one place. \n\nFrom: https://docs.microsoft.com/en-us/windows/win32/direct3d12/subresources\n inline UINT D3D12CalcSubresource( UINT MipSlice, UINT ArraySlice, UINT PlaneSlice, UINT \nMipLevels, UINT ArraySize )\n { \n     return MipSlice + (ArraySlice * MipLevels) + (PlaneSlice * MipLevels * ArraySize); \n }\n\nSince TransitionSingleSubResource needs to do offsetting on account of the stencil/depth issue, you should pass the mipslice/arrayslice/miplevels/arraysize to TransitionSingleSubResource and let it call D3D12CalcSubResourceDirectly.",
+      "range": {
+        "startLine": 706,
+        "startChar": 20,
+        "endLine": 706,
+        "endChar": 93
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97fb5b30_8884b869",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-03T22:46:23Z",
+      "side": 1,
+      "message": "Please either use std::move in the caller of TrackUsageAndGetResourceBarrierForPass or pass this parameter by const reference.",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 61
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
