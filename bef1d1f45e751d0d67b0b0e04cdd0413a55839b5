@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "accf7c60_a9f7f74c",
+        "filename": "src/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-03T21:36:32Z",
+      "side": 1,
+      "message": "Nit: \"it is allowed\" feels awkward. Might be clearer as:\n\n\"Test that overlapping vertex attributes are [valid|allowed|permitted]\".",
+      "revId": "bef1d1f45e751d0d67b0b0e04cdd0413a55839b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
