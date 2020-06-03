@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_BINDINGINFO_H_
 #define DAWNNATIVE_BINDINGINFO_H_
 
+#include "common/TypedInteger.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/dawn_platform.h"
 
@@ -22,14 +23,11 @@
 
 namespace dawn_native {
 
-    // TODO(enga): Can we have strongly typed integers so you can't convert between them
-    // by accident? And also range-assertions (ex. kMaxBindingsPerGroup) in Debug?
-
     // Binding numbers in the shader and BindGroup/BindGroupLayoutDescriptors
-    using BindingNumber = uint32_t;
+    using BindingNumber = TypedInteger<struct BindingNumberT, uint32_t>;
 
     // Binding numbers get mapped to a packed range of indices
-    using BindingIndex = uint32_t;
+    using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;
 
     struct BindingInfo {
         wgpu::ShaderStage visibility;
