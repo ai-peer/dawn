@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "c72a9138_6daba0fc",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4512e24d_a5677a50",
+      "range": {
+        "startLine": 719,
+        "startChar": 8,
+        "endLine": 719,
+        "endChar": 29
+      },
+      "revId": "50a54d2c4071a13f54ef014d23a823d73ba01834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fd1957c_51108af5",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 16

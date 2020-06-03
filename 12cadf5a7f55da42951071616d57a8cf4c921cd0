@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "09ca73d5_9d217426",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "717094a4_8e607053",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29b6f027_df36b875",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 18
@@ -33,6 +51,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d6b63a8_f21baf26",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b6f027_df36b875",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ee698fa6_ce5e71f0",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fb9bad4_b5f27b56",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5969f5be_aabb85a8",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 18
@@ -67,6 +121,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b460889_4337fef4",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "I think I can remove this now actually.",
+      "parentUuid": "5969f5be_aabb85a8",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "c0707d64_dff34d72",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc53fd3e_5f84802e",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5150975_87dd57e2",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 18
@@ -153,6 +243,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db5618fe_ab9f65d0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5150975_87dd57e2",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -187,6 +295,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38ec21b2_5ec8d09b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f85d7979_52607ab3",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -247,6 +373,24 @@
     },
     {
       "key": {
+        "uuid": "f43f4591_2747bd2e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20d77c80_e84eace9",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f3ff90e_8bfe78bd",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 18
@@ -261,6 +405,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f07ff153_7db51b45",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f3ff90e_8bfe78bd",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -284,6 +446,30 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b59629af_d86d4dc9",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "336e81d5_64ae67e3",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 33
+      },
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -321,6 +507,24 @@
     },
     {
       "key": {
+        "uuid": "4782ee38_08d553cb",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b304fd4_d746c011",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cea4fab_6c5060ae",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 18
@@ -335,6 +539,24 @@
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d852252_0fb4caa3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-03T00:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cea4fab_6c5060ae",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
