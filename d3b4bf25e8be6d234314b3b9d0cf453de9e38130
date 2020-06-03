@@ -483,6 +483,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0af4b59a_976d665c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T13:10:15Z",
+      "side": 1,
+      "message": "No concerns if we keep it per-subresource as it makes the change relatively simple (makes tracking from a scalar to a vector with an element per subresource). If validation layers don\u0027t complain I think it is safe to land (and we can ask Rafael for confirmation that the promotion and decaying is per subresource).",
+      "parentUuid": "340d8747_460d0b96",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

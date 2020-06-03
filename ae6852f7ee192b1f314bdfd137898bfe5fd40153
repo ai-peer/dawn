@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3138169c_db08096c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T13:10:15Z",
+      "side": 1,
+      "message": "This does proper handling only in the case of single-subresource depth-stencil textures. I suggest replacing the code with:\n\n        D3D12_RESOURCE_BARRIER barrier;\n        barrier.Type \u003d D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;\n        barrier.Flags \u003d D3D12_RESOURCE_BARRIER_FLAG_NONE;\n        barrier.Transition.pResource \u003d GetD3D12Resource();\n        barrier.Transition.StateBefore \u003d lastState;\n        barrier.Transition.StateAfter \u003d newState;\n        barrier.Transition.Subresource \u003d index;\n\n        // TODO(...) This is a hack because Dawn doesn\u0027t handle subresource of multiplanar resources correctly. We force the transition to be the same for all planes to match what the frontend validation checks for.\n        uint32_t planeCount \u003d IsDepthOrStencil ? 2 : 1\n        for (i \u003d 0 .. planeCount) {\n             barriers-\u003epush_back(barrier);\n             barrier.Transition.Subresource +\u003d GetArrayLayerCount() * GetMipLevelCount();\n        }",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8425a13c_1a17f5c0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T13:10:15Z",
+      "side": 1,
+      "message": "This and [1] can be moved in TransitionOneSubresource.",
+      "range": {
+        "startLine": 697,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 0
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28cab948_27437e77",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T13:10:15Z",
+      "side": 1,
+      "message": "u-nit: this could check for wgpu::TextureUsage::None and be done before the call to D3D12TextureUsage, along with a comment explaining that it is for subresources not used during a pass.",
+      "range": {
+        "startLine": 726,
+        "startChar": 20,
+        "endLine": 726,
+        "endChar": 59
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f57b452_019654ac",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T13:10:15Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 727,
+        "startChar": 20,
+        "endLine": 727,
+        "endChar": 61
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
