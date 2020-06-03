@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "614cf9d1_d7637f0d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "The ASSERT was checking the backend does the correct thing, but since now the frontend calls AssumeCommandsComplete, the ASSERT is no longer necessary. Maybe it could be moved at [1] so that we check that in all code paths after the switch we correctly marked all commands as finished?\n\nAlso shouldn\u0027t the assert check that the completed serial is at least the future serial?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 65
+      },
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61626775_6cdc136c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfada6b1_dcdb1c0a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "nit: Same thing about this ASSERT. Also add to the comment above WaitForIdleForDestruction to explain why we do AssumeCommandsComplete.",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7baf15f5_b473558c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "nit: maybe this could be moved in a code block with CheckPassedSerials (just before TickImpl). Also please add a comment explaining why we do this.",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

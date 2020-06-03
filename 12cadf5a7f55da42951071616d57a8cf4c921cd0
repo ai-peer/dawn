@@ -194,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "563b3845_43f8f076",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "Ok to do as a follow-up.",
+      "parentUuid": "9c527a7e_3a73f9ec",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc53fd3e_5f84802e",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 18
@@ -356,6 +374,30 @@
     },
     {
       "key": {
+        "uuid": "2842729a_a1a33caf",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "Ok to do as a follow up.",
+      "parentUuid": "4f4ceed1_d79bdc04",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 29
+      },
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20d77c80_e84eace9",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 18
@@ -484,6 +526,24 @@
       "writtenOn": "2020-06-02T10:34:25Z",
       "side": 1,
       "message": "Should be possible to remove.",
+      "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea37722a_1c6f0083",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T09:36:50Z",
+      "side": 1,
+      "message": "Ok to do as a follow-up.",
+      "parentUuid": "b97dfc9a_e4af78f3",
       "revId": "12cadf5a7f55da42951071616d57a8cf4c921cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
