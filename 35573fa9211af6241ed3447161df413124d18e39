@@ -73,6 +73,29 @@
       "revId": "35573fa9211af6241ed3447161df413124d18e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a51e09a_faac4d14",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-03T16:33:56Z",
+      "side": 1,
+      "message": "Still a bit confused as to why we need this. It doesn\u0027t seem like TickImpl cares about what the future callback serial is.",
+      "range": {
+        "startLine": 296,
+        "startChar": 8,
+        "endLine": 298,
+        "endChar": 0
+      },
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
