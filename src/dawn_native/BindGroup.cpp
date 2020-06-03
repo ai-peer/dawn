@@ -153,7 +153,8 @@ namespace dawn_native {
         }
 
         DAWN_TRY(device->ValidateObject(descriptor->layout));
-        if (descriptor->entryCount != descriptor->layout->GetBindingCount()) {
+
+        if (BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount()) {
             return DAWN_VALIDATION_ERROR("numBindings mismatch");
         }
 
@@ -170,10 +171,10 @@ namespace dawn_native {
             BindingIndex bindingIndex = it->second;
             ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
-            if (bindingsSet[bindingIndex]) {
+            if (bindingsSet[static_cast<uint32_t>(bindingIndex)]) {
                 return DAWN_VALIDATION_ERROR("binding set twice");
             }
-            bindingsSet.set(bindingIndex);
+            bindingsSet.set(static_cast<uint32_t>(bindingIndex));
 
             const BindingInfo& bindingInfo = descriptor->layout->GetBindingInfo(bindingIndex);
 
@@ -223,7 +224,7 @@ namespace dawn_native {
         : ObjectBase(device),
           mLayout(descriptor->layout),
           mBindingData(mLayout->ComputeBindingDataPointers(bindingDataStart)) {
-        for (BindingIndex i = 0; i < mLayout->GetBindingCount(); ++i) {
+        for (BindingIndex i{0}; i < mLayout->GetBindingCount(); ++i) {
             // TODO(enga): Shouldn't be needed when bindings are tightly packed.
             // This is to fill Ref<ObjectBase> holes with nullptrs.
             new (&mBindingData.bindings[i]) Ref<ObjectBase>();
@@ -267,7 +268,7 @@ namespace dawn_native {
     BindGroupBase::~BindGroupBase() {
         if (mLayout) {
             ASSERT(!IsError());
-            for (BindingIndex i = 0; i < mLayout->GetBindingCount(); ++i) {
+            for (BindingIndex i{0}; i < mLayout->GetBindingCount(); ++i) {
                 mBindingData.bindings[i].~Ref<ObjectBase>();
             }
         }

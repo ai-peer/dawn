@@ -44,7 +44,8 @@ namespace dawn_native { namespace d3d12 {
             Count,
         };
 
-        const std::array<uint32_t, kMaxBindingsPerGroup>& GetBindingOffsets() const;
+        const TypeIndexedArray<BindingIndex, uint32_t, kMaxBindingsPerGroup>& GetBindingOffsets()
+            const;
         uint32_t GetCbvUavSrvDescriptorTableSize() const;
         uint32_t GetSamplerDescriptorTableSize() const;
         uint32_t GetCbvUavSrvDescriptorCount() const;
@@ -54,7 +55,7 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         ~BindGroupLayout() override = default;
-        std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
+        TypeIndexedArray<BindingIndex, uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
         std::array<uint32_t, DescriptorType::Count> mDescriptorCounts;
         D3D12_DESCRIPTOR_RANGE mRanges[DescriptorType::Count];
 

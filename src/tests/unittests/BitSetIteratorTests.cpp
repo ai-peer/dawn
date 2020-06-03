@@ -15,12 +15,19 @@
 #include <gtest/gtest.h>
 
 #include "common/BitSetIterator.h"
+#include "common/TypedBitset.h"
 
 // This is ANGLE's BitSetIterator_unittests.cpp file.
 
 class BitSetIteratorTest : public testing::Test {
     protected:
         std::bitset<40> mStateBits;
+};
+
+enum class ASDF {
+    A,
+    B,
+    C,
 };
 
 // Simple iterator test.

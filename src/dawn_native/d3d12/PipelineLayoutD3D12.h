@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_D3D12_PIPELINELAYOUTD3D12_H_
 #define DAWNNATIVE_D3D12_PIPELINELAYOUTD3D12_H_
 
+#include "common/TypeIndexedArray.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
@@ -42,7 +43,7 @@ namespace dawn_native { namespace d3d12 {
         MaybeError Initialize();
         std::array<uint32_t, kMaxBindGroups> mCbvUavSrvRootParameterInfo;
         std::array<uint32_t, kMaxBindGroups> mSamplerRootParameterInfo;
-        std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups>
+        std::array<TypeIndexedArray<BindingIndex, uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups>
             mDynamicRootParameterIndices;
         ComPtr<ID3D12RootSignature> mRootSignature;
     };
