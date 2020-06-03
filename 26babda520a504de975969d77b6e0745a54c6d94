@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8acf37a_90b726e9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-03T21:05:02Z",
+      "side": 1,
+      "message": "I may have missed this in previous conversation, but why do we transition the full texture for writeonly, and the subresources for readonly ?",
+      "range": {
+        "startLine": 172,
+        "startChar": 28,
+        "endLine": 186,
+        "endChar": 98
+      },
+      "revId": "26babda520a504de975969d77b6e0745a54c6d94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
