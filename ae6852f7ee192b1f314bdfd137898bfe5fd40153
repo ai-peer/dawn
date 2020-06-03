@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "75f8c007_f92e57e1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "I tried, but it failed to compile if I added a std::move in front of std::vector\u003c\u003e(). Is this suggestion valid? Any idea to do this?",
+      "parentUuid": "ddc9b0a7_50411053",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2262042e_9c1a6632",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -33,6 +51,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886cd2bd_d82d3d18",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done, but moved to the struct.",
+      "parentUuid": "2262042e_9c1a6632",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c7989233_5b78b5ff",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd1a47be_3c1ad4a3",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68992a81_bc365f18",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -67,6 +121,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f64f0d8_2762529e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68992a81_bc365f18",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1088d521_20f6eb0b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "It\u0027s not correct to move to the end, this function may return in the middle.",
+      "parentUuid": "ca2029ce_d498951a",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6ca920b_b15edefc",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -101,6 +191,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b40b84a2_ed6408a3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ca920b_b15edefc",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "20c0b468_2581a217",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "700657a3_bea689d9",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3138169c_db08096c",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -135,6 +261,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40f5d909_69e57d2f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done.\n\nHmm, the current end2end tests can\u0027t distinguish the hacks we did here. The corresponding tests are DepthStencilTests and ClipSpaceTests which have only one mipmap and one layer for a depth/stencil attachment, and SubresourceOutputAttachmentTests which don\u0027t have stencil-only-enabled, so either way of implementations can pass all tests. The current one might be the one which is close to the final solution. let\u0027s revisit this when we add more tests and implement depthonly/stencilonly feature (Dawn:439) and added plane slices for texture.",
+      "parentUuid": "3138169c_db08096c",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +305,30 @@
     },
     {
       "key": {
+        "uuid": "356d2091_46f6e509",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8425a13c_1a17f5c0",
+      "range": {
+        "startLine": 697,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 0
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28cab948_27437e77",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -181,6 +349,30 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d16f411d_e59c2c8a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28cab948_27437e77",
+      "range": {
+        "startLine": 726,
+        "startChar": 20,
+        "endLine": 726,
+        "endChar": 59
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +399,30 @@
     },
     {
       "key": {
+        "uuid": "25b523bd_d1a17abb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f57b452_019654ac",
+      "range": {
+        "startLine": 727,
+        "startChar": 20,
+        "endLine": 727,
+        "endChar": 61
+      },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d51a6379_8bfdc18e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 14
@@ -224,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "36eba82e_8a2f157a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d51a6379_8bfdc18e",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab5b86ce_d0c26686",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 14
@@ -238,6 +472,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "036e3e1b_a915bbec",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab5b86ce_d0c26686",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

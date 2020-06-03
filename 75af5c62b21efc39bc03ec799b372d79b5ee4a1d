@@ -52,6 +52,24 @@
       "revId": "75af5c62b21efc39bc03ec799b372d79b5ee4a1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9742197f_31670346",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "Never mind. 😊",
+      "parentUuid": "82992d3e_d70089d3",
+      "revId": "75af5c62b21efc39bc03ec799b372d79b5ee4a1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -507,6 +507,30 @@
       "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbe02851_94a3360e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-03T20:27:43Z",
+      "side": 1,
+      "message": "OK. And the tests can pass validation layers with this patch.",
+      "parentUuid": "0af4b59a_976d665c",
+      "range": {
+        "startLine": 687,
+        "startChar": 8,
+        "endLine": 692,
+        "endChar": 60
+      },
+      "revId": "d3b4bf25e8be6d234314b3b9d0cf453de9e38130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
