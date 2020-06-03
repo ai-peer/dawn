@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d98317b7_2d6b8e35",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-03T22:58:17Z",
+      "side": 0,
+      "message": "I anticipate transitions for all of the subresources at once to be more common than transitioning ones with different states. With your new code, we now submit a barrier for each and every subresource instead of submitting one barrier for all of them at once.\n\nWhat is the performance impact of this change on a site like ForestDemo? If we see a regression, we should keep D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES as a special case.",
+      "range": {
+        "startLine": 664,
+        "startChar": 42,
+        "endLine": 664,
+        "endChar": 81
+      },
+      "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
