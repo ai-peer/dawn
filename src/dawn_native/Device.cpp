@@ -126,7 +126,7 @@ namespace dawn_native {
                 // complete before proceeding with destruction.
                 // Assert that errors are device loss so that we can continue with destruction
                 AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
-                ASSERT(mCompletedSerial == mLastSubmittedSerial);
+                AssumeCommandsComplete();
                 break;
 
             case State::BeingDisconnected:
@@ -139,6 +139,8 @@ namespace dawn_native {
             case State::Disconnected:
                 break;
         }
+        ASSERT(mCompletedSerial == mLastSubmittedSerial);
+        ASSERT(mFutureCallbackSerial <= mCompletedSerial);
 
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
@@ -160,6 +162,7 @@ namespace dawn_native {
         mDynamicUploader = nullptr;
         mMapRequestTracker = nullptr;
 
+        AssumeCommandsComplete();
         // Tell the backend that it can free all the objects now that the GPU timeline is empty.
         ShutDownImpl();
 
@@ -179,6 +182,7 @@ namespace dawn_native {
 
             // Assert that errors are device losses so that we can continue with destruction.
             AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+            AssumeCommandsComplete();
             ASSERT(mCompletedSerial == mLastSubmittedSerial);
             mState = State::Disconnected;
 
@@ -317,22 +321,28 @@ namespace dawn_native {
         return mLastSubmittedSerial;
     }
 
+    Serial DeviceBase::GetFutureCallbackSerial() const {
+        return mFutureCallbackSerial;
+    }
+
     void DeviceBase::IncrementLastSubmittedCommandSerial() {
         mLastSubmittedSerial++;
     }
 
-    void DeviceBase::ArtificiallyIncrementSerials() {
-        mCompletedSerial++;
-        mLastSubmittedSerial++;
-    }
-
     void DeviceBase::AssumeCommandsComplete() {
-        mLastSubmittedSerial++;
-        mCompletedSerial = mLastSubmittedSerial;
+        Serial maxSerial = std::max(mLastSubmittedSerial + 1, mFutureCallbackSerial);
+        mLastSubmittedSerial = maxSerial;
+        mCompletedSerial = maxSerial;
     }
 
     Serial DeviceBase::GetPendingCommandSerial() const {
         return mLastSubmittedSerial + 1;
+    }
+
+    void DeviceBase::AddFutureCallbackSerial(Serial serial) {
+        if (serial > mFutureCallbackSerial) {
+            mFutureCallbackSerial = serial;
+        }
     }
 
     void DeviceBase::CheckPassedSerials() {
@@ -709,17 +719,28 @@ namespace dawn_native {
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
-        if (ConsumedError(TickImpl())) {
-            return;
-        }
+        // to avoid overly ticking, we only want to tick when:
+        // 1. the last submitted serial has moved beyond the completed serial
+        // 2. or the completed serial has not reached the future serial set by the trackers
+        if (mLastSubmittedSerial > mCompletedSerial || mCompletedSerial < mFutureCallbackSerial) {
+            CheckPassedSerials();
+            if (mCompletedSerial == mLastSubmittedSerial) {
+                AssumeCommandsComplete();
+            }
+            
+            if (ConsumedError(TickImpl())) {
+                return;
+            }
 
-        // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
-        // tick the dynamic uploader before the backend resource allocators. This would allow
-        // reclaiming resources one tick earlier.
-        mDynamicUploader->Deallocate(GetCompletedCommandSerial());
-        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
-        mMapRequestTracker->Tick(GetCompletedCommandSerial());
+            // TODO(cwallez@chromium.org): decouple TickImpl from updating the serial so that we can
+            // tick the dynamic uploader before the backend resource allocators. This would allow
+            // reclaiming resources one tick earlier.
+            mDynamicUploader->Deallocate(mCompletedSerial);
+            mErrorScopeTracker->Tick(mCompletedSerial);
+            mFenceSignalTracker->Tick(mCompletedSerial);
+            mMapRequestTracker->Tick(mCompletedSerial);
+            
+        }
     }
 
     void DeviceBase::Reference() {
