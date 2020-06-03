@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e190ed2a_41a967a5",
+        "filename": "src/dawn_native/d3d12/PageableD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-03T14:50:40Z",
+      "side": 1,
+      "message": "uNit: extra whitespace intentional?",
+      "revId": "47a3341e07d60d9f72850c6143141601174be242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
