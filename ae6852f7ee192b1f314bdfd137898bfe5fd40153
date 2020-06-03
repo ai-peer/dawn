@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "ddc9b0a7_50411053",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "nit: consider std::move to init vectors (vs copy)",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2262042e_9c1a6632",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "unit: consider renaming \"mIsSubResourceValidToDecay\"",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd1a47be_3c1ad4a3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "nit: call reserve(GetSubresourceCount()) to ensure it has capacity",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68992a81_bc365f18",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "uuunit: \"one\" could also mean one array/mip/plane slice or one set of multiple subresources etc, consider \"TransitionSingleSubresource\" to make this clearer",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca2029ce_d498951a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "unit: store is never used, consider moving to the end.",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ca920b_b15edefc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "uunit: rename \"PromotableReadOnlyStates\"",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "700657a3_bea689d9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "nit: comment needs updating",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3138169c_db08096c",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -82,6 +201,40 @@
         "endLine": 727,
         "endChar": 61
       },
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d51a6379_8bfdc18e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "uunit: newline",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab5b86ce_d0c26686",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-03T17:14:15Z",
+      "side": 1,
+      "message": "nit: consider moving these into a \"state\" struct. It 1) avoids the unnecessary creation of multiple vectors and 2) having to index into them repeatedly.",
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
