@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f0036494_a91b9dac",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-03T22:32:21Z",
+      "side": 1,
+      "message": "I believe the current code will do a move.",
+      "parentUuid": "75f8c007_f92e57e1",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2262042e_9c1a6632",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -104,6 +122,24 @@
       "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c4fa3b4_59f8be6c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-03T22:32:21Z",
+      "side": 1,
+      "message": "We should only have to reserve enough for the region specified by the mip level and array layer count arguments. This would reserve much more than necessary for transitioning one subresource.",
+      "parentUuid": "c7989233_5b78b5ff",
+      "revId": "ae6852f7ee192b1f314bdfd137898bfe5fd40153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
