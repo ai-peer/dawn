@@ -16,6 +16,24 @@
       "revId": "47a3341e07d60d9f72850c6143141601174be242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "876b265f_df754e84",
+        "filename": "src/dawn_native/d3d12/PageableD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-03T14:57:04Z",
+      "side": 1,
+      "message": "Kinda, it\u0027s inserted automatically by my editor because the C preprocessor at least until some version of C / C++ required the file to finish with a newline.\n\n(implementing a GLSL preprocessor I figured out why: it is so that if the file finishes with a preprocessor directive, it has an end, and takes effect)",
+      "parentUuid": "e190ed2a_41a967a5",
+      "revId": "47a3341e07d60d9f72850c6143141601174be242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
