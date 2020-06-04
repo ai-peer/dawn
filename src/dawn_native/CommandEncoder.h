@@ -28,6 +28,8 @@ namespace dawn_native {
 
     struct BeginRenderPassCmd;
 
+    bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length);
+
     class CommandEncoder final : public ObjectBase {
       public:
         CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
