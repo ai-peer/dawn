@@ -680,6 +680,7 @@ namespace dawn_native { namespace d3d12 {
                             commandContext, copy->destination.mipLevel, 1,
                             copy->destination.arrayLayer, copy->copySize.depth);
                     }
+
                     source->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopySrc);
                     destination->TrackUsageAndTransitionNow(commandContext,
                                                             wgpu::TextureUsage::CopyDst);
