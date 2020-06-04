@@ -474,10 +474,9 @@ TEST_F(WireMemoryTransferServiceTests, BufferMapReadHandleCreationFailure) {
     // Mock a ReadHandle creation failure
     MockReadHandleCreationFailure();
 
-    // Failed creation of a ReadHandle is a fatal failure and the client synchronously receives a
-    // DEVICE_LOST callback.
-    EXPECT_CALL(*mockBufferMapReadCallback,
-                Call(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, _))
+    // Failed creation of a ReadHandle is a fatal failure and the client synchronously receives an
+    // error callback.
+    EXPECT_CALL(*mockBufferMapReadCallback, Call(WGPUBufferMapAsyncStatus_Error, nullptr, 0, _))
         .Times(1);
 
     wgpuBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, nullptr);
@@ -540,10 +539,9 @@ TEST_F(WireMemoryTransferServiceTests, BufferMapReadDeserializeInitialDataFailur
     // Mock a deserialization failure.
     MockClientReadHandleDeserializeInitializeFailure(clientHandle);
 
-    // Failed deserialization is a fatal failure and the client synchronously receives a
-    // DEVICE_LOST callback.
-    EXPECT_CALL(*mockBufferMapReadCallback,
-                Call(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, _))
+    // Failed deserialization is a fatal failure and the client synchronously receives an
+    // error callback.
+    EXPECT_CALL(*mockBufferMapReadCallback, Call(WGPUBufferMapAsyncStatus_Error, nullptr, 0, _))
         .Times(1);
 
     // The handle will be destroyed since deserializing failed.
@@ -716,10 +714,9 @@ TEST_F(WireMemoryTransferServiceTests, BufferMapWriteHandleCreationFailure) {
     // Mock a WriteHandle creation failure
     MockWriteHandleCreationFailure();
 
-    // Failed creation of a WriteHandle is a fatal failure and the client synchronously receives a
-    // DEVICE_LOST callback.
-    EXPECT_CALL(*mockBufferMapWriteCallback,
-                Call(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, _))
+    // Failed creation of a WriteHandle is a fatal failure and the client synchronously receives an
+    // error callback.
+    EXPECT_CALL(*mockBufferMapWriteCallback, Call(WGPUBufferMapAsyncStatus_Error, nullptr, 0, _))
         .Times(1);
 
     wgpuBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, nullptr);
@@ -779,9 +776,8 @@ TEST_F(WireMemoryTransferServiceTests, BufferMapWriteHandleOpenFailure) {
     // Mock a failure.
     MockClientWriteHandleOpenFailure(clientHandle);
 
-    // Failing to open a handle is a fatal failure and the client receives a DEVICE_LOST callback.
-    EXPECT_CALL(*mockBufferMapWriteCallback,
-                Call(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, _))
+    // Failing to open a handle is a fatal failure and the client receives an error callback.
+    EXPECT_CALL(*mockBufferMapWriteCallback, Call(WGPUBufferMapAsyncStatus_Error, nullptr, 0, _))
         .Times(1);
 
     // Since opening the handle fails, it gets destroyed immediately.
