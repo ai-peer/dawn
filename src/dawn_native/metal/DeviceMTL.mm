@@ -154,13 +154,13 @@ namespace dawn_native { namespace metal {
     }
 
     Serial Device::CheckAndUpdateCompletedSerials() {
-        if (GetCompletedCommandSerial() > mCompletedSerial) {
-            // sometimes we increase the serials, in which case the completed serial in
-            // the device base will surpass the completed serial we have in the metal backend, so we
-            // must update ours when we see that the completed serial from device base has
-            // increased.
-            mCompletedSerial = GetCompletedCommandSerial();
-        }
+        // if (GetCompletedCommandSerial() > mCompletedSerial) {
+        //     // sometimes we increase the serials, in which case the completed serial in
+        //     // the device base will surpass the completed serial we have in the metal backend, so we
+        //     // must update ours when we see that the completed serial from device base has
+        //     // increased.
+        //     mCompletedSerial = std::atomic<uint64_t>(GetCompletedCommandSerial());
+        // }
         static_assert(std::is_same<Serial, uint64_t>::value, "");
         return mCompletedSerial.load();
     }
@@ -292,8 +292,6 @@ namespace dawn_native { namespace metal {
             usleep(100);
             CheckPassedSerials();
         }
-
-        DAWN_TRY(TickImpl());
 
         return {};
     }
