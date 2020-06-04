@@ -48,6 +48,7 @@ namespace dawn_native {
         BufferBinding GetBindingAsBufferBinding(BindingIndex bindingIndex);
         SamplerBase* GetBindingAsSampler(BindingIndex bindingIndex) const;
         TextureViewBase* GetBindingAsTextureView(BindingIndex bindingIndex);
+        const std::vector<uint64_t>* GetBufferSizes() const;
 
       protected:
         // To save memory, the size of a bind group is dynamically determined and the bind group is
@@ -78,6 +79,8 @@ namespace dawn_native {
 
         Ref<BindGroupLayoutBase> mLayout;
         BindGroupLayoutBase::BindingDataPointers mBindingData;
+
+        std::vector<uint64_t> mBufferSizes;
     };
 
 }  // namespace dawn_native
