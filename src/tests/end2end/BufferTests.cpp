@@ -426,17 +426,6 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
     EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
 }
 
-// Test that creating a very large buffers fails gracefully.
-TEST_P(CreateBufferMappedTests, LargeBufferFails) {
-    // TODO(http://crbug.com/dawn/27): Missing support.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
-    wgpu::BufferDescriptor descriptor;
-    descriptor.size = std::numeric_limits<uint64_t>::max();
-    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
-}
-
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
@@ -451,6 +440,97 @@ TEST_P(BufferTests, ZeroSizedBuffer) {
     desc.size = 0;
     desc.usage = wgpu::BufferUsage::CopyDst;
     device.CreateBuffer(&desc);
+}
+
+// Test that creating a very large buffers fails gracefully.
+TEST_P(BufferTests, CreateBufferOOM) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    descriptor.usage = wgpu::BufferUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+}
+
+// Test that a very large CreateBufferMapped fails gracefully.
+TEST_P(BufferTests, CreateBufferMappedOOM) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    // Test non-mappable buffer
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = std::numeric_limits<uint64_t>::max();
+        descriptor.usage = wgpu::BufferUsage::CopyDst;
+
+        wgpu::CreateBufferMappedResult result;
+        ASSERT_DEVICE_ERROR([&]() { result = device.CreateBufferMapped(&descriptor); }());
+    }
+
+    // Test mappable buffer
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = std::numeric_limits<uint64_t>::max();
+        descriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapWrite;
+
+        wgpu::CreateBufferMappedResult result;
+        ASSERT_DEVICE_ERROR([&]() { result = device.CreateBufferMapped(&descriptor); }());
+    }
+}
+
+// Test that mapaping an OOM buffer for reading fails gracefully
+TEST_P(BufferTests, CreateBufferOOMMapReadAsync) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    descriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+
+    wgpu::Buffer buffer;
+    ASSERT_DEVICE_ERROR([&]() { buffer = device.CreateBuffer(&descriptor); }());
+
+    bool done = false;
+    ASSERT_DEVICE_ERROR(buffer.MapReadAsync(
+        [](WGPUBufferMapAsyncStatus status, const void* ptr, uint64_t dataLength, void* userdata) {
+            EXPECT_EQ(status, WGPUBufferMapAsyncStatus_Error);
+            EXPECT_EQ(ptr, nullptr);
+            EXPECT_EQ(dataLength, 0u);
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done));
+
+    while (!done) {
+        WaitABit();
+    }
+}
+
+// Test that mapaping an OOM buffer for reading fails gracefully
+TEST_P(BufferTests, CreateBufferOOMMapWriteAsync) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    descriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapWrite;
+
+    wgpu::Buffer buffer;
+    ASSERT_DEVICE_ERROR([&]() { buffer = device.CreateBuffer(&descriptor); }());
+
+    bool done = false;
+    ASSERT_DEVICE_ERROR(buffer.MapWriteAsync(
+        [](WGPUBufferMapAsyncStatus status, void* ptr, uint64_t dataLength, void* userdata) {
+            EXPECT_EQ(status, WGPUBufferMapAsyncStatus_Error);
+            EXPECT_EQ(ptr, nullptr);
+            EXPECT_EQ(dataLength, 0u);
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done));
+
+    while (!done) {
+        WaitABit();
+    }
 }
 
 DAWN_INSTANTIATE_TEST(BufferTests,

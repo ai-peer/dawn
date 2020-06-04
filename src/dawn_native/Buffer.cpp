@@ -163,6 +163,10 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
 
+        if (GetSize() > std::numeric_limits<size_t>::max()) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer is too large for mapping");
+        }
+
         mState = BufferState::Mapped;
 
         if (IsMapWritable()) {
@@ -201,7 +205,7 @@ namespace dawn_native {
     void BufferBase::CallMapReadCallback(uint32_t serial,
                                          WGPUBufferMapAsyncStatus status,
                                          const void* pointer,
-                                         uint32_t dataLength) {
+                                         uint64_t dataLength) {
         ASSERT(!IsError());
         if (mMapReadCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapWriteCallback == nullptr);
@@ -222,7 +226,7 @@ namespace dawn_native {
     void BufferBase::CallMapWriteCallback(uint32_t serial,
                                           WGPUBufferMapAsyncStatus status,
                                           void* pointer,
-                                          uint32_t dataLength) {
+                                          uint64_t dataLength) {
         ASSERT(!IsError());
         if (mMapWriteCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapReadCallback == nullptr);
