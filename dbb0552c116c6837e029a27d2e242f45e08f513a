@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc184e00_8e314a9f",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-04T08:50:19Z",
+      "side": 1,
+      "message": "nit: testing a single format like for readonly is probably fine.",
+      "revId": "dbb0552c116c6837e029a27d2e242f45e08f513a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "153d52a4_0967da50",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-04T08:50:19Z",
+      "side": 1,
+      "message": "It\u0027s probably to test a single format, zero-init code will already be tested for all formats and the combinatorial explosion of tests can be done in the CTS. Ditto for all other TODOs below",
+      "revId": "dbb0552c116c6837e029a27d2e242f45e08f513a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "932e685a_e7497e2c",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-04T08:50:19Z",
+      "side": 1,
+      "message": "u-nit: Maybe data format that are similar could be regrouped. For example all 32UInt then all 32Int then all 32Float etc. It could marginally improve readability and make sure code is consistent between similar formats.",
+      "revId": "0a71b33e1340346af603237ea4ca0315f6e49d53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e01ac01_3a383ec5",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-04T08:50:19Z",
+      "side": 1,
+      "message": "nit: valuePtr[0] \u003d ... valuePtr[1] \u003d ...\n\nDitto for other code blocks that assign to valuePtr more than once.",
+      "range": {
+        "startLine": 102,
+        "startChar": 16,
+        "endLine": 102,
+        "endChar": 25
+      },
+      "revId": "0a71b33e1340346af603237ea4ca0315f6e49d53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0a9fbd4_9d1f6be0",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-04T08:50:19Z",
+      "side": 1,
+      "message": "This is the same as just \"default:\", ditto in other similar function. Maybe CASE_UNSUPPORTED_STORAGE_TEXTURE_FORMATS could be removed?",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 20
+      },
+      "revId": "0a71b33e1340346af603237ea4ca0315f6e49d53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
