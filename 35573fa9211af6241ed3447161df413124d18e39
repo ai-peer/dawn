@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "154f7440_fe319474",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-04T00:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614cf9d1_d7637f0d",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 65
+      },
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61626775_6cdc136c",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 21
@@ -39,6 +63,24 @@
       "revId": "35573fa9211af6241ed3447161df413124d18e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0ecb755_70348517",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-04T00:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61626775_6cdc136c",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "d947d0b3_3cef1adb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-04T00:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfada6b1_dcdb1c0a",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7baf15f5_b473558c",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 21
@@ -70,6 +130,24 @@
       "writtenOn": "2020-06-03T09:36:50Z",
       "side": 1,
       "message": "nit: maybe this could be moved in a code block with CheckPassedSerials (just before TickImpl). Also please add a comment explaining why we do this.",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e7ffd19_cec3e5c3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-04T00:35:01Z",
+      "side": 1,
+      "message": "I think it needs to come after TickImpl, there\u0027s test failing in D3D12 BasicTests.BufferSetSubData Device Lost during test: D3D12 reset command allocator failed. I think it might set the serial too far before its ready since the first conditional should only pass when we are ready to tick anyways. So I think it\u0027s safe to tick first, like we would before, and then check if there is no work happening in the GPU before we increment the serial.",
+      "parentUuid": "7baf15f5_b473558c",
       "revId": "35573fa9211af6241ed3447161df413124d18e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -96,6 +174,30 @@
       "revId": "35573fa9211af6241ed3447161df413124d18e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a7d96e0_a013e982",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-04T00:35:01Z",
+      "side": 1,
+      "message": "you\u0027re right, this isn\u0027t needed. Done.",
+      "parentUuid": "9a51e09a_faac4d14",
+      "range": {
+        "startLine": 296,
+        "startChar": 8,
+        "endLine": 298,
+        "endChar": 0
+      },
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
