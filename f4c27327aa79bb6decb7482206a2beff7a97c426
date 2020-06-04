@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c97c8da2_e8d3294f",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "Here\u0027s a suggestion:\n\nIn the BindGroupLayout constructor, there\u0027s a few things we count like buffer count, dynamic buffer count, etc. We could count as well the number of buffers bindings *without* minBufferSize. let\u0027s call these \"unverified buffer sizes\" or maybe a better name if you can think of one.\n\nSo then we know BGL::mUnverifiedBufferSizeCount;\n\nNow, this is new since you last worked on Dawn. The BindGroupLayout *is* an allocator for BindGroups. When we allocate a bind group, we ask the layout to reserve some memory, and then placement-allocate the Bind Group into that memory. This means that BindGroups can be variable size and we can allocate exactly how much memory we need. Check out BGL::GetBindingDataSize() and BGL::ComputeBindingDataPointers().\n\nIn short, we can include sizeof(uint64_t) * mUnverifiedBufferSizeCount in the binding data size. And update ComputeBindingDataPointers to set the pointer to the first |uint64_t* unverifiedBufferSize|\n\nThen... here, we can iterate from { bindingIndex \u003d 0..BGL::GetBufferCount() }, and for the bindings that don\u0027t have a minBufferSize, copy the sizes from mBindingData into the packed buffer sizes.\n\nThis is kinda complicated so maybe I can explain it over GVC.",
+      "range": {
+        "startLine": 284,
+        "startChar": 7,
+        "endLine": 289,
+        "endChar": 9
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51af8dca_3b4730a7",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "Is it legal to have different size bindings from the vertex vs. fragment stage?",
+      "range": {
+        "startLine": 190,
+        "startChar": 11,
+        "endLine": 190,
+        "endChar": 92
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1adbe76a_bbf145e0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "I think |mBindingInfo[group]| should be passed into this function, instead of just |group|",
+      "range": {
+        "startLine": 902,
+        "startChar": 30,
+        "endLine": 902,
+        "endChar": 49
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a35b7a73_f53af855",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 911,
+        "startChar": 12,
+        "endLine": 924,
+        "endChar": 13
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cfe0f2f_1b764539",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "Instead of building up the array above in [1], and then removing the sizes the BGL has specified, we can instead only query the ShaderModule for sizes that the BGL does not have. |it.first| should be the BindingNumber.",
+      "range": {
+        "startLine": 938,
+        "startChar": 19,
+        "endLine": 941,
+        "endChar": 21
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ee1c71e_343a24f0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T23:03:57Z",
+      "side": 1,
+      "message": "Somewhere in this function we need to validate that the shader minBufferSizes are compatible with the BGL minBufferSizes.",
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
