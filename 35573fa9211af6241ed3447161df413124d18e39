@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "cc1423e1_35ebecce",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-04T01:30:45Z",
+      "side": 1,
+      "message": "Yea, I think what\u0027s here makes sense to me. TickImpl will rely on the completed serial, and AssumeCommandsComplete will change it so that all of the callbacks and other events in TickImpl happen.",
+      "parentUuid": "4e7ffd19_cec3e5c3",
+      "revId": "35573fa9211af6241ed3447161df413124d18e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a51e09a_faac4d14",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 21
