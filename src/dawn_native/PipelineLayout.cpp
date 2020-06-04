@@ -29,7 +29,8 @@ namespace dawn_native {
             return lhs.binding == rhs.binding && lhs.visibility == rhs.visibility &&
                    lhs.type == rhs.type && lhs.hasDynamicOffset == rhs.hasDynamicOffset &&
                    lhs.multisampled == rhs.multisampled && lhs.viewDimension == rhs.viewDimension &&
-                   lhs.textureComponentType == rhs.textureComponentType;
+                   lhs.textureComponentType == rhs.textureComponentType &&
+                   lhs.minimumBufferSize == rhs.minimumBufferSize;
         }
 
         wgpu::ShaderStage GetShaderStageVisibilityWithBindingType(wgpu::BindingType bindingType) {
@@ -166,6 +167,7 @@ namespace dawn_native {
                     bindingSlot.textureComponentType =
                         Format::FormatTypeToTextureComponentType(bindingInfo.textureComponentType);
                     bindingSlot.storageTextureFormat = bindingInfo.storageTextureFormat;
+                    bindingSlot.minimumBufferSize = bindingInfo.minimumBufferSize;
 
                     {
                         const auto& it = usedBindingsMap[group].find(bindingNumber);

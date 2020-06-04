@@ -709,6 +709,14 @@ namespace dawn_native {
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
 
+                if (bindingType == wgpu::BindingType::UniformBuffer ||
+                    bindingType == wgpu::BindingType::StorageBuffer) {
+                    // Determine buffer size, with a minimum of 1 element in the runtime array
+                    spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
+                    info->minimumBufferSize =
+                        compiler.get_declared_struct_size_runtime_array(type, 1);
+                }
+
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
                         spirv_cross::SPIRType::ImageType imageType =
@@ -864,6 +872,77 @@ namespace dawn_native {
         return mExecutionModel;
     }
 
+    std::array<std::vector<uint64_t>, kMaxBindGroups> ShaderModuleBase::GetPipelineBufferSizes(
+        const PipelineLayoutBase* layout) const {
+        std::array<std::vector<uint64_t>, kMaxBindGroups> bufferSizes;
+        for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            bufferSizes[group] =
+                GetBindGroupLayoutBufferSizes(group, layout->GetBindGroupLayout(group));
+        }
+
+        return bufferSizes;
+    }
+
+    std::vector<uint64_t> ShaderModuleBase::GetBindGroupLayoutBufferSizes(
+        size_t group,
+        const BindGroupLayoutBase* layout) const {
+        std::map<BindingIndex, uint64_t> indexToSize;
+
+        const BindGroupLayoutBase::BindingMap& bindingMap = layout->GetBindingMap();
+
+        // Iterate over all bindings used by this group in the shader, and find the
+        // corresponding binding in the BindGroupLayout, if it exists.
+        // Grab the minimumBufferSize for required buffers
+        for (const auto& it : mBindingInfo[group]) {
+            BindingNumber bindingNumber = it.first;
+            const ShaderBindingInfo& moduleInfo = it.second;
+
+            const auto& bindingIt = bindingMap.find(bindingNumber);
+            ASSERT(bindingIt != bindingMap.end());
+            BindingIndex bindingIndex(bindingIt->second);
+
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
+            ASSERT(bindingIndex < layout->GetBindingCount());
+
+            if (bindingInfo.minimumBufferSize == 0) {
+                indexToSize[bindingIndex] = moduleInfo.minimumBufferSize;
+            }
+        }
+
+        // Grab the minimumBufferSize for buffers that are unspecified in the layout
+        // Otherwise, packed vectors won't match (BGL may contain bindings unused in this shader)
+        for (const auto& it : layout->GetBindingMap()) {
+            BindingIndex bindingIndex = it.second;
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
+
+            switch (bindingInfo.type) {
+                case wgpu::BindingType::UniformBuffer:
+                case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageBuffer: {
+                    // Shader does not require this buffer, but it also lacks a size in the
+                    // BindGroup, so to match packed form we need to include it
+                    if (bindingInfo.minimumBufferSize == 0 &&
+                        indexToSize.find(bindingIndex) == indexToSize.end()) {
+                        indexToSize[bindingIndex] = 0;
+                    }
+                    break;
+                }
+                default:
+                    continue;
+            }
+        }
+
+        // Since map is sorted on BindingIndex, we should match the BindGroup's packed order
+        std::vector<uint64_t> bufferSizesPacked;
+        bufferSizesPacked.reserve(indexToSize.size());
+
+        for (const auto& it : indexToSize) {
+            bufferSizesPacked.push_back(it.second);
+        }
+
+        return bufferSizesPacked;
+    }
+
     bool ShaderModuleBase::IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const {
         ASSERT(!IsError());
 
@@ -957,7 +1036,13 @@ namespace dawn_native {
 
                 case wgpu::BindingType::UniformBuffer:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
-                case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::StorageBuffer: {
+                    if (bindingInfo.minimumBufferSize != 0 &&
+                        moduleInfo.minimumBufferSize > bindingInfo.minimumBufferSize) {
+                        return false;
+                    }
+                    break;
+                }
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
                     break;

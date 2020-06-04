@@ -19,6 +19,13 @@
 
 namespace dawn_native {
 
+    namespace {
+        std::array<std::vector<uint64_t>, kMaxBindGroups> ComputeBufferSizes(
+            const ComputePipelineDescriptor* descriptor) {
+            return descriptor->computeStage.module->GetPipelineBufferSizes(descriptor->layout);
+        }
+    }  // anonymous namespace
+
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
@@ -38,7 +45,10 @@ namespace dawn_native {
 
     ComputePipelineBase::ComputePipelineBase(DeviceBase* device,
                                              const ComputePipelineDescriptor* descriptor)
-        : PipelineBase(device, descriptor->layout, wgpu::ShaderStage::Compute),
+        : PipelineBase(device,
+                       descriptor->layout,
+                       wgpu::ShaderStage::Compute,
+                       ComputeBufferSizes(descriptor)),
           mModule(descriptor->computeStage.module),
           mEntryPoint(descriptor->computeStage.entryPoint) {
     }
