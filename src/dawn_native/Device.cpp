@@ -717,6 +717,12 @@ namespace dawn_native {
         return result;
     }
 
+    // For Dawn Wire
+
+    BufferBase* DeviceBase::CreateErrorBuffer() {
+        return BufferBase::MakeError(this);
+    }
+
     // Other Device API methods
 
     void DeviceBase::Tick() {
@@ -840,6 +846,10 @@ namespace dawn_native {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
+        }
+        if ((descriptor->usage & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0 &&
+            descriptor->size > std::numeric_limits<size_t>::max()) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer is too large for mapping");
         }
         return CreateBufferImpl(descriptor);
     }
