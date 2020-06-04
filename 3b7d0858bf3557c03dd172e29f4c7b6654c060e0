@@ -70,6 +70,30 @@
       "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5290758_1e299a81",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-04T06:27:44Z",
+      "side": 0,
+      "message": "@Rafael, Sure. I will work with Bryan to measure the performance impact of my optimizations. Because I will do optimization (and I have been doing optimization) to combine transition barriers if they can be combined.   \n\nPersonally, I think this patch attempts to resolve a correctness issue. I don\u0027t think performance advantage of incorrect/incomplete implementation for a feature make any sense. Maybe this is a bias.\n\nHere comes my analysis from the code itself, you can try to understand it if you want to. You know, workloads/benchmarks are not that useful because they can\u0027t cover all situations, or they can\u0027t tell which one is common and which one is corner cases.\n\nPer my understanding the majority of texture access is that either 1) the src and dst textures have only one single subresource or 2) the src and dst texture have multiple subresource, but the src texture and dst texture are different textures and we only access one subresource from them respectively(say sampling from one texture and rendering to another texture). For the former situation, tracking per subresource and tracking per texture are equivalent. For the latter situation, tracking per subresource and tracking per texture are also equivalent because we can skip the subresources which are not used in current pass/copy/etc: this patch skips the subresources if their TextureUsages are None in current pass/copy/etc.\n\nHowever, this patch does impact these situations:\n3) 3.1 The src/dst textures have multiple subresources, and the texture access in current pass/copy is upon multiple but partial subresources of src/dst textures, or 3.2 the src/dst texture is the same texture, and we need to handle one or multiple subresources in one single pass/copy/etc. In these situations, we have no choice but use mulitple transition barriers. The previous implementation is incorrect/incomplete for this situation.\n4) The src/dst texture have multiple subresources, and the texture access in current pass/copy is upon ALL subresources of src and dst textures. This is the only situation in which we can combine multiple transition barriers into a single one with barrier\u0027s subresource parameter set to D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES. You see, what a corner case it is! \n\nCorentin, Austin and other reviewers, please correct me if my analysis ignored some situations.",
+      "parentUuid": "02795d95_dc01b8a8",
+      "range": {
+        "startLine": 664,
+        "startChar": 42,
+        "endLine": 664,
+        "endChar": 81
+      },
+      "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
