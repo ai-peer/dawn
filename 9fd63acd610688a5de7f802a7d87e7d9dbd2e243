@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "694976c4_28ed8f60",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-04T01:54:25Z",
+      "side": 1,
+      "message": "OK.",
+      "parentUuid": "de2176b4_c2a324bb",
+      "range": {
+        "startLine": 706,
+        "startChar": 20,
+        "endLine": 706,
+        "endChar": 93
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97fb5b30_8884b869",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 17

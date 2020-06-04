@@ -46,6 +46,30 @@
       "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02795d95_dc01b8a8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-04T01:54:25Z",
+      "side": 0,
+      "message": "@Yunchao, your patch introduces a performance regression for existing, working content. \n\nI am currently trying to get resources at Microsoft to help us analyze the performance of Dawn and see if there are any areas for improvement. Having known performance debt makes it difficult to ascertain the true performance of the code. It also makes us look bad when they look at traces and see unnecessary state transitions.\n\nIf you\u0027re unwilling to fix this with this CL, can you at least work with Bryan to measure the performance impact of your change and get a sense for how much you\u0027ve made things worse? That will help me determine whether we should postpone the analysis for move forward.",
+      "parentUuid": "bb514f8f_425f86ce",
+      "range": {
+        "startLine": 664,
+        "startChar": 42,
+        "endLine": 664,
+        "endChar": 81
+      },
+      "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
