@@ -24,29 +24,48 @@
 
 namespace dawn_native {
 
+    namespace {
+        bool BufferSizesAtLeastAsBig(const std::vector<uint64_t>& boundBufferSizes,
+                                     const std::vector<uint64_t>& pipelineMinimumBufferSizes) {
+            ASSERT(boundBufferSizes.size() == pipelineMinimumBufferSizes.size());
+
+            for (size_t i = 0; i < boundBufferSizes.size(); ++i) {
+                if (boundBufferSizes[i] < pipelineMinimumBufferSizes[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }  // namespace
+
     enum ValidationAspect {
         VALIDATION_ASPECT_PIPELINE,
         VALIDATION_ASPECT_BIND_GROUPS,
         VALIDATION_ASPECT_VERTEX_BUFFERS,
         VALIDATION_ASPECT_INDEX_BUFFER,
+        VALIDATION_ASPECT_MIN_BUFFER_SIZE,
 
         VALIDATION_ASPECT_COUNT
     };
     static_assert(VALIDATION_ASPECT_COUNT == CommandBufferStateTracker::kNumAspects, "");
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDispatchAspects =
-        1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS;
+        1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZE;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDrawAspects =
         1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
-        1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
+        1 << VALIDATION_ASPECT_VERTEX_BUFFERS | 1 << VALIDATION_ASPECT_MIN_BUFFER_SIZE;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDrawIndexedAspects =
         1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
-        1 << VALIDATION_ASPECT_VERTEX_BUFFERS | 1 << VALIDATION_ASPECT_INDEX_BUFFER;
+        1 << VALIDATION_ASPECT_VERTEX_BUFFERS | 1 << VALIDATION_ASPECT_INDEX_BUFFER |
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZE;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kLazyAspects =
-        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
+        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS |
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZE;
 
     MaybeError CommandBufferStateTracker::ValidateCanDispatch() {
         return ValidateOperation(kDispatchAspects);
@@ -107,6 +126,22 @@ namespace dawn_native {
                 mAspects.set(VALIDATION_ASPECT_VERTEX_BUFFERS);
             }
         }
+
+        if (mAspects[VALIDATION_ASPECT_BIND_GROUPS] && aspects[VALIDATION_ASPECT_MIN_BUFFER_SIZE]) {
+            bool valid = true;
+
+            for (uint32_t group : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+                if (!BufferSizesAtLeastAsBig(*(mBindgroups[group]->GetBufferSizes()),
+                                             (*mMinimumBufferSizes)[group])) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid) {
+                mAspects.set(VALIDATION_ASPECT_MIN_BUFFER_SIZE);
+            }
+        }
     }
 
     MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspects) {
@@ -130,6 +165,10 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Missing pipeline");
         }
 
+        if (aspects[VALIDATION_ASPECT_MIN_BUFFER_SIZE]) {
+            return DAWN_VALIDATION_ERROR("Bound buffers too small");
+        }
+
         UNREACHABLE();
     }
 
@@ -144,6 +183,7 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetBindGroup(uint32_t index, BindGroupBase* bindgroup) {
         mBindgroups[index] = bindgroup;
+        mAspects.reset(VALIDATION_ASPECT_MIN_BUFFER_SIZE);
     }
 
     void CommandBufferStateTracker::SetIndexBuffer() {
@@ -156,6 +196,7 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
         mLastPipelineLayout = pipeline->GetLayout();
+        mMinimumBufferSizes = pipeline->GetMinimumBufferSizes();
 
         mAspects.set(VALIDATION_ASPECT_PIPELINE);
 
