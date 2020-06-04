@@ -183,6 +183,16 @@ namespace dawn_native {
                 DAWN_TRY(ValidateEntireSubresourceCopied(src, dst, copySize));
             }
 
+            if (src.texture == dst.texture && src.mipLevel == dst.mipLevel) {
+                ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D &&
+                       dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
+                if (IsRangeOverlapped(src.arrayLayer, dst.arrayLayer, copySize.depth)) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Copy subresources cannot be overlapped when copying within the same "
+                        "texture.");
+                }
+            }
+
             return {};
         }
 
@@ -488,6 +498,13 @@ namespace dawn_native {
         }
 
     }  // namespace
+
+    bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length) {
+        uint32_t maxStart = std::max(startA, startB);
+        uint32_t minStart = std::min(startA, startB);
+        return static_cast<uint64_t>(minStart) + static_cast<uint64_t>(length) >
+               static_cast<uint64_t>(maxStart);
+    }
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
         : ObjectBase(device), mEncodingContext(device, this) {

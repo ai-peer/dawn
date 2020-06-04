@@ -507,6 +507,11 @@ namespace dawn_native { namespace vulkan {
                                                                   copy->copySize.depth);
                     }
 
+                    if (src.texture.Get() == dst.texture.Get() && src.mipLevel == dst.mipLevel) {
+                        ASSERT(!IsRangeOverlapped(src.arrayLayer, dst.arrayLayer,
+                                                  copy->copySize.depth));
+                    }
+
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
                                              src.mipLevel, 1, src.arrayLayer, copy->copySize.depth);
