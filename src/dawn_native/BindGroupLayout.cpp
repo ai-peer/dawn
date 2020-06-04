@@ -177,7 +177,8 @@ namespace dawn_native {
 
         void HashCombineBindingInfo(size_t* hash, const BindingInfo& info) {
             HashCombine(hash, info.hasDynamicOffset, info.multisampled, info.visibility, info.type,
-                        info.textureComponentType, info.viewDimension, info.storageTextureFormat);
+                        info.textureComponentType, info.viewDimension, info.storageTextureFormat,
+                        info.minimumBufferSize);
         }
 
         bool operator!=(const BindingInfo& a, const BindingInfo& b) {
@@ -187,7 +188,8 @@ namespace dawn_native {
                    a.type != b.type ||                                  //
                    a.textureComponentType != b.textureComponentType ||  //
                    a.viewDimension != b.viewDimension ||                //
-                   a.storageTextureFormat != b.storageTextureFormat;
+                   a.storageTextureFormat != b.storageTextureFormat ||  //
+                   a.minimumBufferSize != b.minimumBufferSize;
         }
 
         bool SortBindingsCompare(const BindGroupLayoutEntry& a, const BindGroupLayoutEntry& b) {
@@ -221,6 +223,9 @@ namespace dawn_native {
             }
             if (a.storageTextureFormat != b.storageTextureFormat) {
                 return a.storageTextureFormat < b.storageTextureFormat;
+            }
+            if (a.minimumBufferSize != b.minimumBufferSize) {
+                return a.minimumBufferSize < b.minimumBufferSize;
             }
             return false;
         }
@@ -277,6 +282,7 @@ namespace dawn_native {
             mBindingInfo[i].textureComponentType =
                 Format::TextureComponentTypeToFormatType(binding.textureComponentType);
             mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
+            mBindingInfo[i].minimumBufferSize = binding.minimumBufferSize;
 
             switch (binding.type) {
                 case wgpu::BindingType::UniformBuffer:

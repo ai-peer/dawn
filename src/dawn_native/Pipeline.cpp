@@ -43,8 +43,9 @@ namespace dawn_native {
 
     PipelineBase::PipelineBase(DeviceBase* device,
                                PipelineLayoutBase* layout,
-                               wgpu::ShaderStage stages)
-        : CachedObject(device), mStageMask(stages), mLayout(layout) {
+                               wgpu::ShaderStage stages,
+                               BufferSizesArray bufferSizes)
+        : CachedObject(device), mStageMask(stages), mLayout(layout), mBufferSizes(bufferSizes) {
     }
 
     PipelineBase::PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -102,6 +103,11 @@ namespace dawn_native {
         BindGroupLayoutBase* bgl = mLayout->GetBindGroupLayout(groupIndex);
         bgl->Reference();
         return bgl;
+    }
+
+    const BufferSizesArray* PipelineBase::GetMinimumBufferSizes() const {
+        ASSERT(!IsError());
+        return &mBufferSizes;
     }
 
 }  // namespace dawn_native
