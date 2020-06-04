@@ -448,17 +448,6 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
     EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
 }
 
-// Test that creating a very large buffers fails gracefully.
-TEST_P(CreateBufferMappedTests, LargeBufferFails) {
-    // TODO(http://crbug.com/dawn/27): Missing support.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
-    wgpu::BufferDescriptor descriptor;
-    descriptor.size = std::numeric_limits<uint64_t>::max();
-    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
-}
-
 // Test that creating a zero-sized buffer mapped is allowed.
 TEST_P(CreateBufferMappedTests, ZeroSized) {
     wgpu::BufferDescriptor descriptor;
@@ -519,14 +508,148 @@ TEST_P(BufferTests, ZeroSizedBuffer) {
 }
 
 // Test that creating a very large buffers fails gracefully.
-TEST_P(BufferTests, LargeBufferFails) {
+TEST_P(BufferTests, CreateBufferOOM) {
     // TODO(http://crbug.com/dawn/27): Missing support.
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
     wgpu::BufferDescriptor descriptor;
     descriptor.size = std::numeric_limits<uint64_t>::max();
-    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    descriptor.usage = wgpu::BufferUsage::CopyDst;
     ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+}
+
+// Test that a very large CreateBufferMapped fails gracefully.
+TEST_P(BufferTests, CreateBufferMappedOOM) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    // Test non-mappable buffer
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+        descriptor.usage = wgpu::BufferUsage::CopyDst;
+
+        // Control: test a small buffer works.
+        {
+            device.CreateBufferMapped(&descriptor);
+        }
+
+        // Test an enormous buffer fails
+        descriptor.size = std::numeric_limits<uint64_t>::max();
+        {
+            ASSERT_DEVICE_ERROR(device.CreateBufferMapped(&descriptor));
+        }
+
+        // Test a really large buffer also fails
+        // TODO(enga): The D3D12 driver throws a divide-by-zero exception.
+        descriptor.size = 1ull << 36;
+        {
+            ASSERT_DEVICE_ERROR(device.CreateBufferMapped(&descriptor));
+        }
+    }
+
+    // Test mappable buffer
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+        descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+
+        // Control: test a small buffer works.
+        {
+            device.CreateBufferMapped(&descriptor);
+        }
+
+        // Test an enormous buffer fails
+        descriptor.size = std::numeric_limits<uint64_t>::max();
+        {
+            ASSERT_DEVICE_ERROR(device.CreateBufferMapped(&descriptor));
+        }
+
+        // Test a really large buffer also fails
+        // TODO(enga): The D3D12 driver throws a divide-by-zero exception.
+        descriptor.size = 1ull << 36;
+        {
+            ASSERT_DEVICE_ERROR(device.CreateBufferMapped(&descriptor));
+        }
+    }
+}
+
+// Test that mapping an OOM buffer for reading fails gracefully
+TEST_P(BufferTests, CreateBufferOOMMapReadAsync) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    auto RunTest = [&](const wgpu::BufferDescriptor& descriptor) {
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR([&]() { buffer = device.CreateBuffer(&descriptor); }());
+
+        bool done = false;
+        ASSERT_DEVICE_ERROR(buffer.MapReadAsync(
+            [](WGPUBufferMapAsyncStatus status, const void* ptr, uint64_t dataLength, void* userdata) {
+                EXPECT_EQ(status, WGPUBufferMapAsyncStatus_Error);
+                EXPECT_EQ(ptr, nullptr);
+                EXPECT_EQ(dataLength, 0u);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &done));
+
+        while (!done) {
+            WaitABit();
+        }
+    };
+
+    // Test an enormous buffer
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    RunTest(descriptor);
+
+    // Test a really large buffer also fails
+    // TODO(enga): The D3D12 driver throws a divide-by-zero exception.
+    if (!IsD3D12()) {
+        descriptor.size = 1ull << 36;
+        RunTest(descriptor);
+    }
+}
+
+// Test that mapping an OOM buffer for reading fails gracefully
+TEST_P(BufferTests, CreateBufferOOMMapWriteAsync) {
+    // TODO(http://crbug.com/dawn/27): Missing support.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    auto RunTest = [&](const wgpu::BufferDescriptor& descriptor) {
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR([&]() { buffer = device.CreateBuffer(&descriptor); }());
+
+        bool done = false;
+        ASSERT_DEVICE_ERROR(buffer.MapWriteAsync(
+            [](WGPUBufferMapAsyncStatus status, void* ptr, uint64_t dataLength, void* userdata) {
+                EXPECT_EQ(status, WGPUBufferMapAsyncStatus_Error);
+                EXPECT_EQ(ptr, nullptr);
+                EXPECT_EQ(dataLength, 0u);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &done));
+
+        while (!done) {
+            WaitABit();
+        }
+    };
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+
+    // Test an enormous buffer
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    RunTest(descriptor);
+
+    // Test a really large buffer also fails
+    // TODO(enga): The D3D12 driver throws a divide-by-zero exception.
+    if (!IsD3D12()) {
+        descriptor.size = 1ull << 36;
+        RunTest(descriptor);
+    }
 }
 
 DAWN_INSTANTIATE_TEST(BufferTests,
