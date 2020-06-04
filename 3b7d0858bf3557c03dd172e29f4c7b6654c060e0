@@ -22,6 +22,30 @@
       "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb514f8f_425f86ce",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-04T00:02:48Z",
+      "side": 0,
+      "message": "This is a correctness problem, we should do (or should have the ability to do) transition barrier per each subresource. You can refer to the updated description of this patch for details.\n\nHowever, what you are saying could be the next step: optimization. We can combine the barriers into a single one if the usages of all src subresources are the same and the usages of all dst subresources are the same too. I will do this soon.",
+      "parentUuid": "d98317b7_2d6b8e35",
+      "range": {
+        "startLine": 664,
+        "startChar": 42,
+        "endLine": 664,
+        "endChar": 81
+      },
+      "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

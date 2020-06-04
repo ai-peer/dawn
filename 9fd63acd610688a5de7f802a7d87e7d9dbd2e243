@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e1bc0398_d1dc2fb4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-04T00:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "585274d9_c777dde3",
+      "range": {
+        "startLine": 572,
+        "startChar": 23,
+        "endLine": 572,
+        "endChar": 27
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2bdf65a_7027b919",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 17
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "de2176b4_c2a324bb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-04T00:02:48Z",
+      "side": 1,
+      "message": "Yeah, you are correct. However, as the discussion in previous patch set, we haven\u0027t handle the planar slice stuff. And that is a broader problem in Dawn implementation. Let\u0027s revisit this later with a standalone patch (like correct the function of GetSubresourceIndex()) when we implement depth/stencil planes, and don\u0027t make this patch more complex. :)",
+      "parentUuid": "e2bdf65a_7027b919",
+      "range": {
+        "startLine": 706,
+        "startChar": 20,
+        "endLine": 706,
+        "endChar": 93
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97fb5b30_8884b869",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 17
@@ -68,6 +116,30 @@
       "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b55bfed9_90d57519",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-04T00:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97fb5b30_8884b869",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 61
+      },
+      "revId": "9fd63acd610688a5de7f802a7d87e7d9dbd2e243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
