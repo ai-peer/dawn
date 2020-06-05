@@ -670,34 +670,38 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recordingContext,
-                                                  std::vector<VkImageMemoryBarrier>* barriers) {
+                                                  std::vector<VkImageMemoryBarrier>* barriers,
+                                                  uint32_t index,
+                                                  uint32_t nextIndex) {
         ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
-        ASSERT(barriers->size() <= 1);
+        ASSERT(nextIndex - index <= 1);
 
         if (mExternalState == ExternalState::PendingAcquire) {
-            if (!barriers->size()) {
+            if (nextIndex == index) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
                                                        wgpu::TextureUsage::None, 0, 0));
             }
 
             // Transfer texture from external queue to graphics queue
-            (*barriers)[0].srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
-            (*barriers)[0].dstQueueFamilyIndex = ToBackend(GetDevice())->GetGraphicsQueueFamily();
+            (*barriers)[index].srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+            (*barriers)[index].dstQueueFamilyIndex =
+                ToBackend(GetDevice())->GetGraphicsQueueFamily();
             // Don't override oldLayout to leave it as VK_IMAGE_LAYOUT_UNDEFINED
             // TODO(http://crbug.com/dawn/200)
             mExternalState = ExternalState::Acquired;
         } else if (mExternalState == ExternalState::PendingRelease) {
-            if (!barriers->size()) {
+            if (nextIndex == index) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
                                                        wgpu::TextureUsage::None, 0, 0));
             }
 
             // Transfer texture from graphics queue to external queue
-            (*barriers)[0].srcQueueFamilyIndex = ToBackend(GetDevice())->GetGraphicsQueueFamily();
-            (*barriers)[0].dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
-            (*barriers)[0].newLayout = VK_IMAGE_LAYOUT_GENERAL;
+            (*barriers)[index].srcQueueFamilyIndex =
+                ToBackend(GetDevice())->GetGraphicsQueueFamily();
+            (*barriers)[index].dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+            (*barriers)[index].newLayout = VK_IMAGE_LAYOUT_GENERAL;
             mExternalState = ExternalState::Released;
         }
 
@@ -714,8 +718,11 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Texture::TransitionUsageForPass(CommandRecordingContext* recordingContext,
-                                         const std::vector<wgpu::TextureUsage>& subresourceUsages) {
-        std::vector<VkImageMemoryBarrier> barriers;
+                                         const std::vector<wgpu::TextureUsage>& subresourceUsages,
+                                         std::vector<VkImageMemoryBarrier>* imageBarriers,
+                                         VkPipelineStageFlags* srcStages,
+                                         VkPipelineStageFlags* dstStages) {
+        uint32_t index = imageBarriers->size();
         const Format& format = GetFormat();
 
         wgpu::TextureUsage allUsages = wgpu::TextureUsage::None;
@@ -740,7 +747,7 @@ namespace dawn_native { namespace vulkan {
                     continue;
                 }
 
-                barriers.push_back(
+                imageBarriers->push_back(
                     BuildMemoryBarrier(format, mHandle, mLastSubresourceUsages[index],
                                        subresourceUsages[index], mipLevel, arrayLayer));
 
@@ -751,14 +758,12 @@ namespace dawn_native { namespace vulkan {
         }
 
         if (mExternalState != ExternalState::InternalOnly) {
-            TweakTransitionForExternalUsage(recordingContext, &barriers);
+            uint32_t nextIndex = imageBarriers->size();
+            TweakTransitionForExternalUsage(recordingContext, imageBarriers, index, nextIndex);
         }
 
-        VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format);
-        VkPipelineStageFlags dstStages = VulkanPipelineStage(allUsages, format);
-        ToBackend(GetDevice())
-            ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                    nullptr, 0, nullptr, barriers.size(), barriers.data());
+        *srcStages |= VulkanPipelineStage(allLastUsages, format);
+        *dstStages |= VulkanPipelineStage(allUsages, format);
     }
 
     void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
@@ -796,7 +801,8 @@ namespace dawn_native { namespace vulkan {
         }
 
         if (mExternalState != ExternalState::InternalOnly) {
-            TweakTransitionForExternalUsage(recordingContext, &barriers);
+            uint32_t nextIndex = barriers.size();
+            TweakTransitionForExternalUsage(recordingContext, &barriers, 0, nextIndex);
         }
 
         VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format);
