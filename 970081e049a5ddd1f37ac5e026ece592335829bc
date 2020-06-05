@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e917ee6_41f48c31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T09:22:34Z",
+      "side": 1,
+      "message": "nit: Vulkan: Combine all pass barriers in a single call ?",
+      "revId": "970081e049a5ddd1f37ac5e026ece592335829bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6adef6cd_7320b297",
+        "filename": "src/dawn_native/vulkan/BufferVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T09:22:34Z",
+      "side": 1,
+      "message": "nit: VkPipelineStageFlags*, same for dstStages.",
+      "range": {
+        "startLine": 45,
+        "startChar": 32,
+        "endLine": 45,
+        "endChar": 53
+      },
+      "revId": "970081e049a5ddd1f37ac5e026ece592335829bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21d4c182_d21143a5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T09:22:34Z",
+      "side": 1,
+      "message": "Instead of making a copy later, we could compute whether we added any barriers (by setting a boolean to true next to BuildMemoryBarrier) and pass it to TweakTransitionForExternalUsage. This way we don\u0027t build a temporary vector that\u0027s just copied into imageBarriers at the end.",
+      "revId": "970081e049a5ddd1f37ac5e026ece592335829bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298bcb90_06e97b7d",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T09:22:34Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 78,
+        "startChar": 36,
+        "endLine": 78,
+        "endChar": 56
+      },
+      "revId": "970081e049a5ddd1f37ac5e026ece592335829bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
