@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ffb2bf_b2c87466",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:24:07Z",
+      "side": 1,
+      "message": "Note: It\u0027s a bit weird that this is \"just\" an error, because while the call passes validation, the OOM makes a nullptr returned. I don\u0027t know what the behaviour should be in the spec to allow failures because of OOM.",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d719b3bb_1fa16b06",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:24:07Z",
+      "side": 1,
+      "message": "Would creating a buffer with a garbage usage (like 0xFFFFFFFF) result in the same thing but without requiring dawn_native changes?",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3fa270f_2d1b8f02",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:24:07Z",
+      "side": 1,
+      "message": "ditto here and below.",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4f0d220_3e679e96",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:24:07Z",
+      "side": 1,
+      "message": "Doesn\u0027t ASSERT_DEVICE_ERROR(device.CreateBufferMapped(\u0026descriptor)); work? ditto below.",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05ecbe91_3bda9813",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:24:07Z",
+      "side": 1,
+      "message": "nit: mapping",
+      "range": {
+        "startLine": 482,
+        "startChar": 13,
+        "endLine": 482,
+        "endChar": 21
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
