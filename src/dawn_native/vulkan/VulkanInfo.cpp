@@ -19,6 +19,8 @@
 #include "dawn_native/vulkan/BackendVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
+#include "common/Log.h"
+
 #include <cstring>
 
 namespace dawn_native { namespace vulkan {
@@ -81,10 +83,24 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameKhrMaintenance1[] = "VK_KHR_maintenance1";
     const char kExtensionNameKhrShaderFloat16Int8[] = "VK_KHR_shader_float16_int8";
     const char kExtensionNameKhr16BitStorage[] = "VK_KHR_16bit_storage";
+    const char kExtensionNameKhrStorageBufferStorageClass[] = "VK_KHR_storage_buffer_storage_class";
 
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
         const VulkanFunctions& vkFunctions = backend.GetFunctions();
+
+        // Gather info on available API version
+        {
+            uint32_t supportedAPIVersion = VK_MAKE_VERSION(1, 0, 0);
+            if (vkFunctions.EnumerateInstanceVersion) {
+                vkFunctions.EnumerateInstanceVersion(&supportedAPIVersion);
+            }
+
+            // Use Vulkan 1.1 if it's available.
+            info.apiVersion = (supportedAPIVersion >= VK_MAKE_VERSION(1, 1, 0))
+                                  ? VK_MAKE_VERSION(1, 1, 0)
+                                  : VK_MAKE_VERSION(1, 0, 0);
+        }
 
         // Gather the info about the instance layers
         {
@@ -136,13 +152,13 @@ namespace dawn_native { namespace vulkan {
                     info.metalSurface = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryCapabilities)) {
-                    info.externalMemoryCapabilities = true;
+                    info.physicalDeviceExts.externalMemoryCapabilities = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalSemaphoreCapabilities)) {
-                    info.externalSemaphoreCapabilities = true;
+                    info.physicalDeviceExts.externalSemaphoreCapabilities = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrGetPhysicalDeviceProperties2)) {
-                    info.getPhysicalDeviceProperties2 = true;
+                    info.physicalDeviceExts.getPhysicalDeviceProperties2 = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrSurface)) {
                     info.surface = true;
@@ -165,8 +181,14 @@ namespace dawn_native { namespace vulkan {
             }
         }
 
-        // Specific handling for the Fuchsia swapchain surface creation extension
-        // which is normally part of the Fuchsia-specific swapchain layer.
+        // Mark the extensions promoted to Vulkan 1.1 as available.
+        if (info.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            info.physicalDeviceExts.getPhysicalDeviceProperties2 = true;
+            info.physicalDeviceExts.externalMemoryCapabilities = true;
+            info.physicalDeviceExts.externalSemaphoreCapabilities = true;
+        }
+
+        // Specific handling for the Fuchsia swapchain surface creation extension which is normally part of the Fuchsia-specific swapchain layer.
         if (info.fuchsiaImagePipeSwapchain && !info.fuchsiaImagePipeSurface) {
             std::vector<VkExtensionProperties> layer_extensions;
             if (!EnumerateInstanceExtensions(kLayerNameFuchsiaImagePipeSwapchain, vkFunctions,
@@ -183,17 +205,17 @@ namespace dawn_native { namespace vulkan {
             }
         }
 
-        // Gather info on available API version
+        // Un-mark extensions if the extensions they depend on aren't present (in the order of the dependency graph)
         {
-            uint32_t supportedAPIVersion = VK_MAKE_VERSION(1, 0, 0);
-            if (vkFunctions.EnumerateInstanceVersion) {
-                vkFunctions.EnumerateInstanceVersion(&supportedAPIVersion);
-            }
+            info.metalSurface &= info.surface;
+            info.waylandSurface &= info.surface;
+            info.win32Surface &= info.surface;
+            info.xcbSurface &= info.surface;
+            info.xlibSurface &= info.surface;
+            info.fuchsiaImagePipeSurface &= info.surface;
 
-            // Use Vulkan 1.1 if it's available.
-            info.apiVersion = (supportedAPIVersion >= VK_MAKE_VERSION(1, 1, 0))
-                                  ? VK_MAKE_VERSION(1, 1, 0)
-                                  : VK_MAKE_VERSION(1, 0, 0);
+            info.physicalDeviceExts.externalMemoryCapabilities &= info.physicalDeviceExts.getPhysicalDeviceProperties2;
+            info.physicalDeviceExts.externalSemaphoreCapabilities &= info.physicalDeviceExts.getPhysicalDeviceProperties2;
         }
 
         // TODO(cwallez@chromium:org): Each layer can expose additional extensions, query them?
@@ -308,28 +330,36 @@ namespace dawn_native { namespace vulkan {
                 if (IsExtensionName(extension, kExtensionNameFuchsiaExternalSemaphore)) {
                     info.externalSemaphoreZirconHandle = true;
                 }
-                if (IsExtensionName(extension, kExtensionNameKhrSwapchain)) {
-                    info.swapchain = true;
-                }
                 if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
                     info.maintenance1 = true;
                 }
-                if (IsExtensionName(extension, kExtensionNameKhrShaderFloat16Int8) &&
-                    globalInfo.getPhysicalDeviceProperties2) {
-                    info.shaderFloat16Int8 = true;
-                    info.shaderFloat16Int8Features.sType =
-                        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR;
-
-                    VkPhysicalDeviceFeatures2KHR physicalDeviceFeatures2 = {};
-                    physicalDeviceFeatures2.sType =
-                        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
-                    physicalDeviceFeatures2.pNext = &info.shaderFloat16Int8Features;
-                    vkFunctions.GetPhysicalDeviceFeatures2(physicalDevice,
-                                                           &physicalDeviceFeatures2);
+                if (IsExtensionName(extension, kExtensionNameKhrSwapchain)) {
+                    info.swapchain = true;
                 }
-                if (IsExtensionName(extension, kExtensionNameKhr16BitStorage) &&
-                    globalInfo.getPhysicalDeviceProperties2) {
+                if (IsExtensionName(extension, kExtensionNameKhrShaderFloat16Int8)) {
+                    info.shaderFloat16Int8 = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhr16BitStorage)) {
                     info._16BitStorage = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhrStorageBufferStorageClass)) {
+                    info.storageBufferStorageClass = true;
+                }
+
+                // Extensions for queries on the external device still need support on the instance
+                // because the entry points are queried using vkGetInstanceProcAddress and left to
+                // nullptr if the instance doesn't have the extension.
+                if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryCapabilities) &&
+                    globalInfo.physicalDeviceExts.externalMemoryCapabilities) {
+                    info.externalMemoryCapabilities = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhrExternalSemaphoreCapabilities) &&
+                    globalInfo.physicalDeviceExts.externalSemaphoreCapabilities) {
+                    info.externalSemaphoreCapabilities = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhrGetPhysicalDeviceProperties2) &&
+                    globalInfo.physicalDeviceExts.getPhysicalDeviceProperties2) {
+                    info.getPhysicalDeviceProperties2 = true;
                 }
             }
         }
@@ -337,13 +367,64 @@ namespace dawn_native { namespace vulkan {
         // Mark the extensions promoted to Vulkan 1.1 as available.
         if (info.properties.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
             info.maintenance1 = true;
+            info.storageBufferStorageClass = true;
+            info._16BitStorage = true;
+
+            // Extensions for queries on the external device still need support on the instance
+            // because the entry points are queried using vkGetInstanceProcAddress and left to
+            // nullptr if the instance doesn't have the extension.
+            {
+                info.externalMemoryCapabilities =
+                    globalInfo.physicalDeviceExts.externalMemoryCapabilities;
+                info.externalSemaphoreCapabilities =
+                    globalInfo.physicalDeviceExts.externalSemaphoreCapabilities;
+                info.getPhysicalDeviceProperties2 =
+                    globalInfo.physicalDeviceExts.getPhysicalDeviceProperties2;
+            }
         }
 
-        // VK_KHR_16bit_storage is promoted to Vulkan 1.1, so gather information if either is
-        // present, and mark the extension as available.
-        if (info._16BitStorage || info.properties.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
-            ASSERT(globalInfo.getPhysicalDeviceProperties2);
-            info._16BitStorage = true;
+        // Un-mark extensions if the extensions they depend on aren't present (in the order of the dependency graph)
+        {
+            info._16BitStorage &= info.getPhysicalDeviceProperties2;
+            info.shaderFloat16Int8 &= info.getPhysicalDeviceProperties2;
+            info.externalMemoryCapabilities &= info.getPhysicalDeviceProperties2;
+            info.externalSemaphoreCapabilities &= info.getPhysicalDeviceProperties2;
+
+            info.externalMemory &= info.externalMemoryCapabilities;
+
+            info.externalSemaphore &= info.externalSemaphoreCapabilities;
+
+            info.externalMemoryDmaBuf &= info.externalMemory;
+            info.externalMemoryFD &= info.externalMemory;
+            info.externalMemoryZirconHandle &= info.externalMemory;
+
+            info.externalSemaphoreFD &= info.externalSemaphore;
+            info.externalSemaphoreZirconHandle &= info.externalSemaphore;
+
+            info._16BitStorage &= info.storageBufferStorageClass;
+
+            // TODO(cwallez@chromium.org): VK_EXT_debug_report is deprecated use VK_EXT_debug_utils instead.
+            info.debugMarker &= globalInfo.debugReport;
+
+            // TODO(cwallez@chromium.org): handle dependencies of VK_EXT_image_drm_format_modifier
+            
+            info.swapchain &= globalInfo.surface;
+        }
+
+        // TODO(cwallez@chromium.org): Call vkGetPhysicalDeviceFeatures2 a single time with all the
+        // structures we're interested in chained.
+
+        if (info.shaderFloat16Int8) {
+            info.shaderFloat16Int8Features.sType =
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR;
+
+            VkPhysicalDeviceFeatures2KHR physicalDeviceFeatures2 = {};
+            physicalDeviceFeatures2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2_KHR;
+            physicalDeviceFeatures2.pNext = &info.shaderFloat16Int8Features;
+            vkFunctions.GetPhysicalDeviceFeatures2(physicalDevice, &physicalDeviceFeatures2);
+        }
+
+        if (info._16BitStorage) {
             info._16BitStorageFeatures.sType =
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
 

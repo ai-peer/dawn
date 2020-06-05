@@ -310,9 +310,27 @@ namespace dawn_native { namespace vulkan {
             extensionsToRequest.push_back(kExtensionNameKhrSwapchain);
             usedKnobs.swapchain = true;
         }
-        if (mDeviceInfo.maintenance1) {
-            extensionsToRequest.push_back(kExtensionNameKhrMaintenance1);
+
+        // Mark the promoted extensions as present if the core version in which they were promoted
+        // is used. This allows having a single boolean that checks if the functionality from that
+        // extension is available (instead of checking extension || coreVersion).
+        if (mDeviceInfo.properties.apiVersion.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
             usedKnobs.maintenance1 = true;
+            usedKnobs.storageBufferStorageClass = true;
+            usedKnobs._16BitStorage = true;
+        } else {
+            if (mDeviceInfo.maintenance1) {
+                extensionsToRequest.push_back(kExtensionNameKhrMaintenance1);
+                usedKnobs.maintenance1 = true;
+            }
+            if (mDeviceInfo.storageBufferStorageClass) {
+                extensionsToRequest.push_back(kExtensionNameKhrStorageBufferStorageClass);
+                usedKnobs.storageBufferStorageClass = true;
+            }
+            if (mDeviceInfo._16BitStorage) {
+                extensionsToRequest.push_back(kExtensionNameKhr16BitStorage);
+                usedKnobs._16BitStorage = true;
+            }
         }
 
         // Always require independentBlend because it is a core Dawn feature
@@ -334,17 +352,10 @@ namespace dawn_native { namespace vulkan {
                    deviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
                    deviceInfo._16BitStorage &&
                    deviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE);
-
             usedKnobs.shaderFloat16Int8 = true;
             usedKnobs.shaderFloat16Int8Features.shaderFloat16 = VK_TRUE;
-            extensionsToRequest.push_back(kExtensionNameKhrShaderFloat16Int8);
-
             usedKnobs._16BitStorage = true;
             usedKnobs._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess = VK_TRUE;
-            // VK_KHR_16bit_storage is promoted to Vulkan 1.1.
-            if (deviceInfo.properties.apiVersion < VK_MAKE_VERSION(1, 1, 0)) {
-                extensionsToRequest.push_back(kExtensionNameKhr16BitStorage);
-            }
         }
 
         // Find a universal queue family

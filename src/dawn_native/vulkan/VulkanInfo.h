@@ -53,6 +53,7 @@ namespace dawn_native { namespace vulkan {
     extern const char kExtensionNameFuchsiaImagePipeSurface[];
     extern const char kExtensionNameKhrMaintenance1[];
     extern const char kExtensionNameKhrShaderFloat16Int8[];
+    extern const char kExtensionNameKhrStorageBufferStorageClass[];
     extern const char kExtensionNameKhr16BitStorage[];
 
     // Global information - gathered before the instance is created
@@ -65,9 +66,6 @@ namespace dawn_native { namespace vulkan {
 
         // Extensions
         bool debugReport = false;
-        bool externalMemoryCapabilities = false;
-        bool externalSemaphoreCapabilities = false;
-        bool getPhysicalDeviceProperties2 = false;
         bool metalSurface = false;
         bool surface = false;
         bool waylandSurface = false;
@@ -75,6 +73,17 @@ namespace dawn_native { namespace vulkan {
         bool xcbSurface = false;
         bool xlibSurface = false;
         bool fuchsiaImagePipeSurface = false;
+
+        // Extensions that act on physical devices need to be present on the VkInstance to get the
+        // entry-point. However the extension needs to be present for a physical device to be
+        // allowed to be called on it. These bits are nested in a structure because in most cases
+        // they should be checked on VulkanDeviceKnobs instead.
+        struct PhysicalDeviceEntryPointExtensions {
+            bool externalMemoryCapabilities = false;
+            bool externalSemaphoreCapabilities = false;
+            bool getPhysicalDeviceProperties2 = false;
+        };
+        PhysicalDeviceEntryPointExtensions physicalDeviceExts;
     };
 
     struct VulkanGlobalInfo : VulkanGlobalKnobs {
@@ -93,17 +102,21 @@ namespace dawn_native { namespace vulkan {
         // Extensions, promoted extensions are set to true if their core version is supported.
         bool debugMarker = false;
         bool externalMemory = false;
+        bool externalMemoryCapabilities = false;
         bool externalMemoryFD = false;
         bool externalMemoryDmaBuf = false;
-        bool imageDrmFormatModifier = false;
         bool externalMemoryZirconHandle = false;
         bool externalSemaphore = false;
+        bool externalSemaphoreCapabilities = false;
         bool externalSemaphoreFD = false;
         bool externalSemaphoreZirconHandle = false;
-        bool swapchain = false;
+        bool getPhysicalDeviceProperties2 = false;
+        bool imageDrmFormatModifier = false;
         bool maintenance1 = false;
         bool shaderFloat16Int8 = false;
         bool _16BitStorage = false;
+        bool storageBufferStorageClass = false;
+        bool swapchain = false;
     };
 
     struct VulkanDeviceInfo : VulkanDeviceKnobs {

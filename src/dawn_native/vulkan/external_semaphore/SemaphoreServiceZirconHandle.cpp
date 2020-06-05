@@ -22,11 +22,9 @@ namespace dawn_native { namespace vulkan { namespace external_semaphore {
 
     Service::Service(Device* device) : mDevice(device) {
         const VulkanDeviceInfo& deviceInfo = mDevice->GetDeviceInfo();
-        const VulkanGlobalInfo& globalInfo =
-            ToBackend(mDevice->GetAdapter())->GetBackend()->GetGlobalInfo();
 
-        mSupported = globalInfo.getPhysicalDeviceProperties2 &&
-                     globalInfo.externalSemaphoreCapabilities && deviceInfo.externalSemaphore &&
+        mSupported = deviceInfo.getPhysicalDeviceProperties2 &&
+                     deviceInfo.externalSemaphoreCapabilities && deviceInfo.externalSemaphore &&
                      deviceInfo.externalSemaphoreFD;
 
         // Early out before we try using extension functions
