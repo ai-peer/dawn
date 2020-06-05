@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "92c0cd0a_64376e00",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c893dae7_3f5319c0",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "964dbc3b_4de50532",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "d03bd83c_f1a82d37",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "964dbc3b_4de50532",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de670fc5_d57b0f90",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 4
@@ -53,6 +95,24 @@
       "writtenOn": "2020-06-02T08:27:37Z",
       "side": 1,
       "message": "Note: seems fine for now, we\u0027ll see what the group things when we add the validation text for queries.",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8301e774_225dac1e",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "I will also add the maximum checking for the pipelineStatisticsCount and duplication check for PipelineStatisticsName.",
+      "parentUuid": "de670fc5_d57b0f90",
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -73,6 +133,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab909c37_9bcf162b",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "072fbb39_059ff944",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "413bcdba_171a923a",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ef9e24f_14da2eeb",
+      "range": {
+        "startLine": 81,
+        "startChar": 27,
+        "endLine": 81,
+        "endChar": 28
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b428d231_1d8b4609",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 4
@@ -113,6 +215,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f92ba30b_d42bdc6e",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b428d231_1d8b4609",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "515f443b_980833af",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b287bff_192eed2d",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32410591_ce177d06",
         "filename": "src/dawn_native/QuerySet.h",
         "patchSetId": 4
@@ -147,6 +285,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04176fa2_2920aff6",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32410591_ce177d06",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "26429e32_3c1d45aa",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Oh, forget to commit this Forward.h, added it back.",
+      "parentUuid": "450d5885_df6a9447",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ee03804_0043a9af",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 4
@@ -181,6 +355,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e9ce08_98b13cb5",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ee03804_0043a9af",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -201,6 +393,24 @@
     },
     {
       "key": {
+        "uuid": "ea95f64d_2de1a2e8",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Thanks, I notice that Occlusion \u003d 0x00000000",
+      "parentUuid": "f0b1e826_56b1b7c1",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d00063c_85b23ad4",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 4
@@ -215,6 +425,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed53f55e_6eb7552c",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d00063c_85b23ad4",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -235,6 +463,24 @@
     },
     {
       "key": {
+        "uuid": "802efc05_343c08fe",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f980534_ee11e34b",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce8b47da_1c95de66",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 4
@@ -249,6 +495,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55df89f3_11494cdd",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8b47da_1c95de66",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -275,6 +539,30 @@
     },
     {
       "key": {
+        "uuid": "0a68d83b_4b8148cf",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb1ee640_dc449d84",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3148307_4186a60a",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 4
@@ -292,6 +580,24 @@
     },
     {
       "key": {
+        "uuid": "74cf3f11_c180b4b7",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s same with the QueryType above.\n\nI also add two tests for checking duplicate name and name count mismatch the sepcified pipeline statistics count, so it need to make an arrary for them.",
+      "parentUuid": "d3148307_4186a60a",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8758b2f_bd53c0ab",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 4
@@ -306,6 +612,24 @@
       "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bbaab23_2abd6461",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-05T11:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8758b2f_bd53c0ab",
+      "revId": "61aee9f8a3a5186f09ae09dd685b02f85d91cc51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
