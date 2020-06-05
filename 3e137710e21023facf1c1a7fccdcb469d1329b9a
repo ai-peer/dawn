@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9482329_20077ac6",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T13:46:37Z",
+      "side": 1,
+      "message": "nit: This could be mSubresourceStateAndDecay(GetSubresourceCount(),\n              {D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON, UINT64_MAX, false}",
+      "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84d763bd_0d77bf06",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T13:46:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f8bfcd_58c51d7d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T13:46:37Z",
+      "side": 1,
+      "message": "This line never takes effect because [1] overwrites it. Did you mean to put [1] right after this block?",
+      "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
