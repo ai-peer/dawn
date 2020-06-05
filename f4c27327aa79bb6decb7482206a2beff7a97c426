@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16ee61b8_c76d5de5",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-05T20:29:51Z",
+      "side": 1,
+      "message": "Your explanation was great, thanks! I added this in the latest change, does it look right?",
+      "parentUuid": "c97c8da2_e8d3294f",
+      "range": {
+        "startLine": 284,
+        "startChar": 7,
+        "endLine": 289,
+        "endChar": 9
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "51af8dca_3b4730a7",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 12
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9b7aa19b_8f7540b4",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-05T20:29:51Z",
+      "side": 1,
+      "message": "My understanding is that since they use the same pipeline, we iterate the same bindgroups in ShaderModuleBase::GetBindGroupMinBufferSizes, and if some group isn\u0027t used this is handled by leaving its min size as 0 in the packed vector. So the resulting vectors should be the same order \u0026 size.",
+      "parentUuid": "51af8dca_3b4730a7",
+      "range": {
+        "startLine": 190,
+        "startChar": 11,
+        "endLine": 190,
+        "endChar": 92
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1adbe76a_bbf145e0",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 12
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-04T23:03:57Z",
       "side": 1,
       "message": "I think |mBindingInfo[group]| should be passed into this function, instead of just |group|",
+      "range": {
+        "startLine": 902,
+        "startChar": 30,
+        "endLine": 902,
+        "endChar": 49
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a6daddb_3b5aa65c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-05T20:29:51Z",
+      "side": 1,
+      "message": "Maybe, right now it\u0027s matching ShaderModuleBase::IsCompatibleWithBindGroupLayout. I think maybe because the type of mBindingInfo[group] is a map\u003c...\u003e passing the group is cleaner? Or should we update both funcs?",
+      "parentUuid": "1adbe76a_bbf145e0",
       "range": {
         "startLine": 902,
         "startChar": 30,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "333f1a98_3b1ed985",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-05T20:29:51Z",
+      "side": 1,
+      "message": "Cleaned it up. You mentioned \"removing the sizes the BGL has specified\" but this chunk only adds entries. The cleaned up version makes more sense I think, this function is looking at unverified buffers, adding either the required size or 0 if the shader doesn\u0027t have a requirement.",
+      "parentUuid": "8cfe0f2f_1b764539",
+      "range": {
+        "startLine": 938,
+        "startChar": 19,
+        "endLine": 941,
+        "endChar": 21
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ee1c71e_343a24f0",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 12
@@ -128,6 +224,24 @@
       "writtenOn": "2020-06-04T23:03:57Z",
       "side": 1,
       "message": "Somewhere in this function we need to validate that the shader minBufferSizes are compatible with the BGL minBufferSizes.",
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49d99628_c9d8e788",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-05T20:29:51Z",
+      "side": 1,
+      "message": "Does the chunk below comparing moduleInfo.minimumBufferSize \u003e bindingInfo.minimumBufferSize do this, or is there another thing we should check?",
+      "parentUuid": "8ee1c71e_343a24f0",
       "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
