@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d40256d_7cad6a24",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T19:23:04Z",
+      "side": 1,
+      "message": "can remove arrayLayerCount, sampleCount, mipLevelCount, and dimension defaults.",
+      "revId": "e217aa17e2b3fcd64ce58495d1851a7991776a36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
