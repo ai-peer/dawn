@@ -250,21 +250,21 @@ namespace dawn_native { namespace vulkan {
         // is used. This allows having a single boolean that checks if the functionality from that
         // extension is available (instead of checking extension || coreVersion).
         if (mGlobalInfo.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
-            usedKnobs.getPhysicalDeviceProperties2 = true;
-            usedKnobs.externalMemoryCapabilities = true;
-            usedKnobs.externalSemaphoreCapabilities = true;
+            usedKnobs.physicalDeviceExts.getPhysicalDeviceProperties2 = true;
+            usedKnobs.physicalDeviceExts.externalMemoryCapabilities = true;
+            usedKnobs.physicalDeviceExts.externalSemaphoreCapabilities = true;
         } else {
-            if (mGlobalInfo.externalMemoryCapabilities) {
+            if (mGlobalInfo.physicalDeviceExts.externalMemoryCapabilities) {
                 extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
-                usedKnobs.externalMemoryCapabilities = true;
+                usedKnobs.physicalDeviceExts.externalMemoryCapabilities = true;
             }
-            if (mGlobalInfo.externalSemaphoreCapabilities) {
+            if (mGlobalInfo.physicalDeviceExts.externalSemaphoreCapabilities) {
                 extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
-                usedKnobs.externalSemaphoreCapabilities = true;
+                usedKnobs.physicalDeviceExts.externalSemaphoreCapabilities = true;
             }
-            if (mGlobalInfo.getPhysicalDeviceProperties2) {
+            if (mGlobalInfo.physicalDeviceExts.getPhysicalDeviceProperties2) {
                 extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
-                usedKnobs.getPhysicalDeviceProperties2 = true;
+                usedKnobs.physicalDeviceExts.getPhysicalDeviceProperties2 = true;
             }
         }
 

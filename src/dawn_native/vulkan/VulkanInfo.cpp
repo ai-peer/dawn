@@ -134,13 +134,13 @@ namespace dawn_native { namespace vulkan {
                     info.metalSurface = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryCapabilities)) {
-                    info.externalMemoryCapabilities = true;
+                    info.physicalDeviceExts.externalMemoryCapabilities = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalSemaphoreCapabilities)) {
-                    info.externalSemaphoreCapabilities = true;
+                    info.physicalDeviceExts.externalSemaphoreCapabilities = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrGetPhysicalDeviceProperties2)) {
-                    info.getPhysicalDeviceProperties2 = true;
+                    info.physicalDeviceExts.getPhysicalDeviceProperties2 = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrSurface)) {
                     info.surface = true;
@@ -221,6 +221,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
         VulkanDeviceInfo info = {};
         VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
+        const VulkanGlobalInfo& globalInfo = adapter.GetBackend()->GetGlobalInfo();
         const VulkanFunctions& vkFunctions = adapter.GetBackend()->GetFunctions();
 
         // Gather general info about the device
@@ -305,11 +306,23 @@ namespace dawn_native { namespace vulkan {
                 if (IsExtensionName(extension, kExtensionNameFuchsiaExternalSemaphore)) {
                     info.externalSemaphoreZirconHandle = true;
                 }
+                if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
+                    info.maintenance1 = true;
+                }
                 if (IsExtensionName(extension, kExtensionNameKhrSwapchain)) {
                     info.swapchain = true;
                 }
-                if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
-                    info.maintenance1 = true;
+                if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryCapabilities) &&
+                    globalInfo.physicalDeviceExts.externalMemoryCapabilities) {
+                    info.externalMemoryCapabilities = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhrExternalSemaphoreCapabilities) &&
+                    globalInfo.physicalDeviceExts.externalSemaphoreCapabilities) {
+                    info.externalSemaphoreCapabilities = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameKhrGetPhysicalDeviceProperties2) &&
+                    globalInfo.physicalDeviceExts.getPhysicalDeviceProperties2) {
+                    info.getPhysicalDeviceProperties2 = true;
                 }
             }
         }

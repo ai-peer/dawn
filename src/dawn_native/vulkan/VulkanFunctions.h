@@ -49,6 +49,14 @@ namespace dawn_native { namespace vulkan {
         PFN_vkEnumerateInstanceVersion EnumerateInstanceVersion = nullptr;
 
         // ---------- Instance procs
+        //
+        // Note that VkInstance procs with a VkPhysicalDevice as first argument require the
+        // corresponding API version or extension to be supported on the device in addition to
+        // being supported on the VkInstance. Support on the VkInstance is necessary to get the
+        // entry-point, but support on the physical device is required to be able to call that
+        // entry-point on it.  For example GetPhysicalDeviceProperties2 requires Vulkan 1.1 or
+        // VK_KHR_get_physical_device_properties2 to be supported on both the instance and that
+        // physical device.
 
         // Core Vulkan 1.0
         PFN_vkCreateDevice CreateDevice = nullptr;

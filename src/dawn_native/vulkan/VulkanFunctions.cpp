@@ -84,13 +84,13 @@ namespace dawn_native { namespace vulkan {
         // support the vendor entrypoint in GetProcAddress.
         if (globalInfo.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
             GET_INSTANCE_PROC(GetPhysicalDeviceExternalBufferProperties);
-        } else if (globalInfo.externalMemoryCapabilities) {
+        } else if (globalInfo.physicalDeviceExts.externalMemoryCapabilities) {
             GET_INSTANCE_PROC_VENDOR(GetPhysicalDeviceExternalBufferProperties, KHR);
         }
 
         if (globalInfo.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
             GET_INSTANCE_PROC(GetPhysicalDeviceExternalSemaphoreProperties);
-        } else if (globalInfo.externalSemaphoreCapabilities) {
+        } else if (globalInfo.physicalDeviceExts.externalSemaphoreCapabilities) {
             GET_INSTANCE_PROC_VENDOR(GetPhysicalDeviceExternalSemaphoreProperties, KHR);
         }
 
@@ -102,7 +102,7 @@ namespace dawn_native { namespace vulkan {
             GET_INSTANCE_PROC(GetPhysicalDeviceQueueFamilyProperties2);
             GET_INSTANCE_PROC(GetPhysicalDeviceMemoryProperties2);
             GET_INSTANCE_PROC(GetPhysicalDeviceSparseImageFormatProperties2);
-        } else if (globalInfo.getPhysicalDeviceProperties2) {
+        } else if (globalInfo.physicalDeviceExts.getPhysicalDeviceProperties2) {
             GET_INSTANCE_PROC_VENDOR(GetPhysicalDeviceFeatures2, KHR);
             GET_INSTANCE_PROC_VENDOR(GetPhysicalDeviceProperties2, KHR);
             GET_INSTANCE_PROC_VENDOR(GetPhysicalDeviceFormatProperties2, KHR);
