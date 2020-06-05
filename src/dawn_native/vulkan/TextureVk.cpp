@@ -714,7 +714,10 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Texture::TransitionUsageForPass(CommandRecordingContext* recordingContext,
-                                         const std::vector<wgpu::TextureUsage>& subresourceUsages) {
+                                         const std::vector<wgpu::TextureUsage>& subresourceUsages,
+                                         std::vector<VkImageMemoryBarrier>* imageBarriers,
+                                         VkPipelineStageFlags& srcStages,
+                                         VkPipelineStageFlags& dstStages) {
         std::vector<VkImageMemoryBarrier> barriers;
         const Format& format = GetFormat();
 
@@ -754,11 +757,11 @@ namespace dawn_native { namespace vulkan {
             TweakTransitionForExternalUsage(recordingContext, &barriers);
         }
 
-        VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format);
-        VkPipelineStageFlags dstStages = VulkanPipelineStage(allUsages, format);
-        ToBackend(GetDevice())
-            ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                    nullptr, 0, nullptr, barriers.size(), barriers.data());
+        srcStages |= VulkanPipelineStage(allLastUsages, format);
+        dstStages |= VulkanPipelineStage(allUsages, format);
+        for (auto& it : barriers) {
+            imageBarriers->push_back(it);
+        }
     }
 
     void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
