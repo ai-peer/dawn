@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d253b406_09050e5c",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T08:47:15Z",
+      "side": 1,
+      "message": "Maybe move to CommandValidation.h/.cpp if you decide to keep the ASSERT in the Vulkan backend. (otherwise it can be purely in CommandEncoder.cpp)",
+      "revId": "f5a6f9bcc2b4f2f51c7f89afd0af178c18e1f1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adf7fcee_31313bbd",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T08:47:15Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure why this assert is needed, given it\u0027s not a Vulkan limitation. Maybe it could be removed? (or rephrased as a single ASSERT and a comment explaining that without it our barriers are wrong?)",
+      "revId": "f5a6f9bcc2b4f2f51c7f89afd0af178c18e1f1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e700c33_052a5c5b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T08:47:15Z",
+      "side": 1,
+      "message": "These tests seem to have been repurposed from the previous version of the patch but aren\u0027t really needed anymore because the logic is simpler. Maybe we could have a single test for when array layers overlap but the regions are different and check it still errors?",
+      "revId": "f5a6f9bcc2b4f2f51c7f89afd0af178c18e1f1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
