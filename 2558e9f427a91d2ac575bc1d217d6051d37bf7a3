@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bb7d1dda_a5c9359d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T17:13:03Z",
+      "side": 1,
+      "message": "I think this code will work as is. Can we have a test for 0-sized mapped error buffers?",
+      "parentUuid": "7d8748b2_e515ee4f",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 81
+      },
+      "revId": "2558e9f427a91d2ac575bc1d217d6051d37bf7a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "953798b3_7fe9e08d",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 9

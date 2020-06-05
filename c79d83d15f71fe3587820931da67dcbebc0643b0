@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60127a5a_97da78db",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T17:13:03Z",
+      "side": 1,
+      "message": "Why do we copy the data if it\u0027s going to be destroyed?",
+      "range": {
+        "startLine": 323,
+        "startChar": 17,
+        "endLine": 323,
+        "endChar": 68
+      },
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d2ba65a_b649087d",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T17:13:03Z",
+      "side": 1,
+      "message": "I believe Metal is fixed",
+      "range": {
+        "startLine": 508,
+        "startChar": 22,
+        "endLine": 508,
+        "endChar": 32
+      },
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
