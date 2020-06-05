@@ -1070,6 +1070,67 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
 }
 
+// TODO
+TEST_P(TextureZeroInitTest, asdf) {
+    wgpu::TextureDescriptor descriptor =
+        CreateTextureDescriptor(5, 7, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst,
+                                wgpu::TextureFormat::R32Float);
+    descriptor.size = {kUnalignedSize, kUnalignedSize, 1};
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+        for (uint32_t mipLevel = 0; mipLevel < 5; ++mipLevel) {
+            if (mipLevel == 0 || mipLevel == 1 || mipLevel == 3) {
+                continue;
+            }
+
+            uint32_t mipSize = kUnalignedSize >> mipLevel;
+            uint32_t bytesPerRow = Align(kUnalignedSize, kTextureBytesPerRowAlignment);
+
+            wgpu::BufferDescriptor bufferDesc;
+            bufferDesc.size = kUnalignedSize * bytesPerRow;
+            bufferDesc.usage = wgpu::BufferUsage::CopySrc;
+            wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&bufferDesc);
+            memset(result.data, 'x', result.dataLength);
+            result.buffer.Unmap();
+
+            wgpu::BufferCopyView bufferCopyView =
+                utils::CreateBufferCopyView(result.buffer, 0, bytesPerRow, 0);
+            wgpu::Extent3D copySize = {mipSize, mipSize, 1};
+
+            for (uint32_t arrayLayer = 0; arrayLayer < 7; ++arrayLayer) {
+                if (arrayLayer == 2 || arrayLayer == 3 || arrayLayer == 6) {
+                    continue;
+                }
+
+                wgpu::TextureCopyView textureCopyView =
+                    utils::CreateTextureCopyView(texture, 0, arrayLayer, {0, 0, 0});
+                encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+            }
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        EXPECT_LAZY_CLEAR(4u, queue.Submit(1, &commands));
+    }
+
+    for (uint32_t mipLevel : {0, 1, 3}) {
+        for (uint32_t arrayLayer : {2, 3, 6}) {
+            uint32_t mipSize = kUnalignedSize >> mipLevel;
+            std::vector<float> expectedData(mipSize * mipSize, 0.f);
+
+            // Texture's first usage is in EXPECT_PIXEL_RGBA8_EQ's call to CopyTextureToBuffer
+            EXPECT_LAZY_CLEAR(1u, EXPECT_TEXTURE_FLOAT_EQ(expectedData.data(), texture, 0, 0,
+                                                          mipSize, mipSize, mipLevel, arrayLayer));
+
+            // Expect texture subresource initialized to be true
+            EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), mipLevel, 1,
+                                                                         arrayLayer, 1));
+        }
+    }
+}
+
 DAWN_INSTANTIATE_TEST(
     TextureZeroInitTest,
     D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
