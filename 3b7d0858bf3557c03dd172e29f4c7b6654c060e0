@@ -94,6 +94,30 @@
       "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1cf156a_80dd05ff",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-05T00:17:14Z",
+      "side": 0,
+      "message": "I mixed the src/dst (old/new) texture usages (or states in DX12) in a transition barrier with src/dst textures.\n\nBut the situations I listed above are basically correct. I put the comment above with some changes and examples, and extend it with more content in this document: https://docs.google.com/document/d/1cx1Dcos5qSWU_naHcozqSh25d1IQ-zx3M9eLa3H2D90/edit. Comments are welcome. Hope that can clarify what we did and its impact, and guide us to do optimizations for subresource.",
+      "parentUuid": "f5290758_1e299a81",
+      "range": {
+        "startLine": 664,
+        "startChar": 42,
+        "endLine": 664,
+        "endChar": 81
+      },
+      "revId": "3b7d0858bf3557c03dd172e29f4c7b6654c060e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
