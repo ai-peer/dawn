@@ -39,6 +39,7 @@ namespace dawn_native {
         wgpu::TextureFormat storageTextureFormat = wgpu::TextureFormat::Undefined;
         bool hasDynamicOffset = false;
         bool multisampled = false;
+        uint64_t minimumBufferSize = 0;
     };
 
 }  // namespace dawn_native
