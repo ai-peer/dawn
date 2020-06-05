@@ -48,6 +48,7 @@ namespace dawn_native {
         BufferBinding GetBindingAsBufferBinding(BindingIndex bindingIndex);
         SamplerBase* GetBindingAsSampler(BindingIndex bindingIndex) const;
         TextureViewBase* GetBindingAsTextureView(BindingIndex bindingIndex);
+        const uint64_t* GetBufferSizes() const;
 
       protected:
         // To save memory, the size of a bind group is dynamically determined and the bind group is

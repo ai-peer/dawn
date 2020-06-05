@@ -57,6 +57,10 @@ namespace dawn_native {
 
         PipelineLayoutBase* mLastPipelineLayout = nullptr;
         RenderPipelineBase* mLastRenderPipeline = nullptr;
+
+        using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
+        const BufferSizesArray* mMinimumBufferSizes = nullptr;
+        std::bitset<kMaxBindGroups> mVerifiedGroups;
     };
 
 }  // namespace dawn_native

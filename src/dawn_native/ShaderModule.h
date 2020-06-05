@@ -77,6 +77,11 @@ namespace dawn_native {
 
         bool IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const;
 
+        using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
+        BufferSizesArray GetPipelineMinBufferSizes(const PipelineLayoutBase* layout) const;
+        std::vector<uint64_t> GetBindGroupMinBufferSizes(size_t group,
+                                                         const BindGroupLayoutBase* layout) const;
+
         // Functors necessary for the unordered_set<ShaderModuleBase*>-based cache.
         struct HashFunc {
             size_t operator()(const ShaderModuleBase* module) const;
