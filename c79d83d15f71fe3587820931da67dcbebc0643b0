@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "821c3fff_7bc1ebe7",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-05T17:19:39Z",
+      "side": 1,
+      "message": "Nit: comma splice.",
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60127a5a_97da78db",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 12
