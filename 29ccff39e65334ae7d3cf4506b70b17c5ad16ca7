@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1065ee55_db5043b8",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T19:41:56Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45ffb2bf_b2c87466",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -97,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "7bc2be2c_453dbd95",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T19:41:56Z",
+      "side": 1,
+      "message": "Actually, I guess this should be okay and less likely to be hit now that there\u0027s a check at [2] and [3] to prevent mapping enormous buffers.",
+      "parentUuid": "bee81294_c1927a54",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -126,6 +167,24 @@
       "side": 1,
       "message": "It would, but I\u0027m concerned about the validation error message. We could make an error scope to catch it but that seems like a more complex workaround.",
       "parentUuid": "d719b3bb_1fa16b06",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dab22fb8_38f81fe2",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T19:41:56Z",
+      "side": 1,
+      "message": "[2]",
+      "parentUuid": "c228d776_25f68c29",
       "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
