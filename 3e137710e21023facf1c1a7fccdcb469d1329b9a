@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4e4cd417_e66c8c4f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-05T18:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9482329_20077ac6",
+      "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d763bd_0d77bf06",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 22
@@ -50,6 +68,24 @@
       "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf6b96a3_8cd2ef80",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-05T18:38:12Z",
+      "side": 1,
+      "message": "Done.\n\nWhoops, my bad... It should update lastState, not state-\u003elastState.",
+      "parentUuid": "66f8bfcd_58c51d7d",
+      "revId": "3e137710e21023facf1c1a7fccdcb469d1329b9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
