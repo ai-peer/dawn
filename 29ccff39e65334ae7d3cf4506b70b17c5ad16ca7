@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "bee81294_c1927a54",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-05T19:24:16Z",
+      "side": 1,
+      "message": "By allowed to OOM, do you mean return an error vs crash the whole renderer?\n\nIf we have some reasonable expectation that this isn\u0027t very common (e.g. only happens in real system-OOM situations), I think we should take down the whole renderer, at least for now.",
+      "parentUuid": "dd53b87e_0a165573",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
