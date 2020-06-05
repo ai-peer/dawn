@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "519fb7d1_6576e3bf",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T17:20:17Z",
+      "side": 1,
+      "message": "nit: prefer \"sourceData\" as we\u0027re not actually using this to count anything",
+      "range": {
+        "startLine": 401,
+        "startChar": 30,
+        "endLine": 401,
+        "endChar": 36
+      },
+      "revId": "62ac20fe5bbaf5d891ff695dcfdd5495f7af43ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
