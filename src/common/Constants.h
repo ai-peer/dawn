@@ -58,4 +58,7 @@ static constexpr uint32_t kMaxTexture2DMipLevels = 14u;
 static_assert(1 << (kMaxTexture2DMipLevels - 1) == kMaxTextureSize,
               "kMaxTexture2DMipLevels and kMaxTextureSize size mismatch");
 
+// Max pipeline statistics constants
+static constexpr uint32_t kMaxPipelineStatisticsCount = 5u;
+
 #endif  // COMMON_CONSTANTS_H_

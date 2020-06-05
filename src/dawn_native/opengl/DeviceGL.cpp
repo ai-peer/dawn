@@ -116,6 +116,9 @@ namespace dawn_native { namespace opengl {
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
     }
+    ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
+        return new QuerySet(this, descriptor);
+    }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
         return new RenderPipeline(this, descriptor);
@@ -203,6 +206,15 @@ namespace dawn_native { namespace opengl {
         Tick();
 
         return {};
+    }
+
+    // QuerySet
+
+    QuerySet::QuerySet(Device* device, const QuerySetDescriptor* descriptor)
+        : QuerySetBase(device, descriptor) {
+    }
+
+    void QuerySet::DestroyImpl() {
     }
 
 }}  // namespace dawn_native::opengl

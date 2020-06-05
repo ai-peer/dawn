@@ -19,6 +19,7 @@
 
 #include "common/Platform.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/QuerySet.h"
 #include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/GLFormat.h"
 #include "dawn_native/opengl/OpenGLFunctions.h"
@@ -75,6 +76,8 @@ namespace dawn_native { namespace opengl {
             const ComputePipelineDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
+        ResultOrError<QuerySetBase*> CreateQuerySetImpl(
+            const QuerySetDescriptor* descriptor) override;
         ResultOrError<RenderPipelineBase*> CreateRenderPipelineImpl(
             const RenderPipelineDescriptor* descriptor) override;
         ResultOrError<SamplerBase*> CreateSamplerImpl(const SamplerDescriptor* descriptor) override;
@@ -100,6 +103,14 @@ namespace dawn_native { namespace opengl {
         std::queue<std::pair<GLsync, Serial>> mFencesInFlight;
 
         GLFormatTable mFormatTable;
+    };
+
+    class QuerySet final : public QuerySetBase {
+      public:
+        QuerySet(Device* device, const QuerySetDescriptor* descriptor);
+
+      private:
+        void DestroyImpl() override;
     };
 
 }}  // namespace dawn_native::opengl
