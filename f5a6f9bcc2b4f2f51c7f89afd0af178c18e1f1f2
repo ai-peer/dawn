@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f510ae82_ef4093ef",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-05T08:55:52Z",
+      "side": 1,
+      "message": "Yes, it is because when there are overlapped subresources, the layout of the overlapped subresources should be GENERAL instead of what it is done in the following TransitionUsageNow().",
+      "parentUuid": "adf7fcee_31313bbd",
+      "revId": "f5a6f9bcc2b4f2f51c7f89afd0af178c18e1f1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e700c33_052a5c5b",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 12
