@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34e8764b_0b420cb0",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "this could be\n\nfor (BindingIndex bindingIndex \u003d 0; bindingIndex \u003c layout-\u003eGetBufferCount(); ++indingIndex) {\n  if (layout-\u003eGetBindingInfo(bindingIndex).minimumBufferSize \u003d\u003d 0) {\n    mBindingData.bufferSizes[curr] \u003d mBindingData.bufferData[bindingIndex].size;\n    ++curr;\n  }\n\nBuffers are sorted to the beginning of the range.\n\nAlso, I think we should rename to be |mBindingData.unverifiedBufferSizes| so it doesn\u0027t get confused with mBindingData.bufferData[i].size",
+      "range": {
+        "startLine": 286,
+        "startChar": 13,
+        "endLine": 286,
+        "endChar": 41
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27a4018f_aa53c653",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "This should be uint32_t because it isn\u0027t actually an index. We can\u0027t iterate up to GetUnverifiedBufferCount() and be in a range that is all unverified buffers.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "260d586c_2d8fb893",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "I think we can probably merge these two aspects, and we should fix the fact that we don\u0027t dirty bind groups on SetBindGroup at [3].",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 97
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c69054bc_befd31d3",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "It makes me sad that we have to make this map and then turn it back into a packed vector.\nAlso, I\u0027m not sure this will always do what we want. Bindings are sorted as:\n\nall buffers first, then:\n\n|---dynamic buffers sorted by binding #----|---- non-dynamic buffers sorted by type (not #)--|\n\nMaybe we should instead add the binding number to the BGL bindingInfo.\n\nThat way we can just do\n\nstd::vector bufferSizesPacked(GetUnverifiedBufferCount());\n\nfor (bindingIndex : 0..GetBufferCount()) {\n   if (bindingInfo[bindingIndex].minimumBufferSize \u003d\u003d 0) {\n     shaderInfo \u003d shaderBindingInfo[group].find(bindingInfo[bindingIndex].bindingNumber]);\n     // stuff\n\n     bufferSizesPacked[curr++] \u003d minimumBufferSize;\n   }\n}",
+      "range": {
+        "startLine": 895,
+        "startChar": 8,
+        "endLine": 898,
+        "endChar": 51
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5987514e_dab0686d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Maybe also comment that we don\u0027t actually need to check these bindings at draw time, and we could consider optimizing this in the future if it\u0027s a performance problem.",
+      "range": {
+        "startLine": 911,
+        "startChar": 28,
+        "endLine": 913,
+        "endChar": 58
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

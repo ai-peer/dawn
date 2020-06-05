@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d72768a4_ac7bea56",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Looks good!",
+      "parentUuid": "16ee61b8_c76d5de5",
+      "range": {
+        "startLine": 284,
+        "startChar": 7,
+        "endLine": 289,
+        "endChar": 9
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51af8dca_3b4730a7",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 12
@@ -93,6 +117,30 @@
       "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "270e575a_0cfffd34",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Oh I see, and if there\u0027s two stages then after the first stage is processed, we\u0027ll have zeros there.",
+      "parentUuid": "9b7aa19b_8f7540b4",
+      "range": {
+        "startLine": 190,
+        "startChar": 11,
+        "endLine": 190,
+        "endChar": 92
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -143,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "c071bb49_66d3eea9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Yea, I think we should update both. We\u0027re asking of A and B are compatible, where A is an index to an object, and B is an object. They should both be objects.\n\nI think if we did that ShaderModuleBase::IsCompatibleWithBindGroupLayout could also be a free anonymous function, and not a member function.",
+      "parentUuid": "8a6daddb_3b5aa65c",
+      "range": {
+        "startLine": 902,
+        "startChar": 30,
+        "endLine": 902,
+        "endChar": 49
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a35b7a73_f53af855",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 12
@@ -163,6 +235,30 @@
       "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9319dc61_f3fdd9d7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a35b7a73_f53af855",
+      "range": {
+        "startLine": 911,
+        "startChar": 12,
+        "endLine": 924,
+        "endChar": 13
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -213,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "e8964d7d_6e6a5a74",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Ah, okay I see now. The zeros are for bindings that are in the BGL but not the shader.",
+      "parentUuid": "333f1a98_3b1ed985",
+      "range": {
+        "startLine": 938,
+        "startChar": 19,
+        "endLine": 941,
+        "endChar": 21
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ee1c71e_343a24f0",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 12
@@ -245,6 +365,24 @@
       "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b65dc4_2ddaed8c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T21:58:08Z",
+      "side": 1,
+      "message": "Oh, that looks right; I must have missed it / not scrolled that far.",
+      "parentUuid": "49d99628_c9d8e788",
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
