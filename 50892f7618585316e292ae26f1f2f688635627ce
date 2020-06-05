@@ -16,6 +16,257 @@
       "revId": "50892f7618585316e292ae26f1f2f688635627ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aa06c75_0eae07b0",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "Usually pointers with \"length\" don\u0027t need to default to nullptr if the length defaults to 0. Dereferencing 0 elements (i.e. doing nothing) of a garbage pointer is ok.",
+      "parentUuid": "7e1c41d2_6f36cd4f",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10126f80_067dbdd9",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "I don\u0027t think we need an explicit maximum (and constant), because what matters is that no wgpu::PipelineStatisticsName is duplicated, which naturally enforces a maximum number of entries.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82cb1f2a_5932cc07",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "We shouldn\u0027t check for this, it is an application error to pass a nullptr with a count !\u003d 0",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "117af355_980edd72",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "nit: validate that pipelineStatisticsCount is zero, and add a test for it.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25250fa_08e79a31",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "ditto for wgpu::QueryType::Occlusion, add a check for pipelineStatisticsCount being zero and a test for it",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fec6183_a90c2499",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "(with std::vector this will need to change, for example with a resize prior to the loop)",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "096e273c_8d932ae0",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "nit: this would be const\u0026 to avoid making a copy.",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 27
+      },
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4857e2d4_e74d71ae",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "If we use an std::array, we don\u0027t know how many elements are set. This should just be an std::vector.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "496b2968_f9776777",
+        "filename": "src/dawn_native/opengl/DeviceGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "It\u0027s fine to have it here for now, but as soon as there is more implementation it should move to its own file.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb44fb0_72805a4b",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "nit: Helper function that are as much code to call as what\u0027s inside them just make the code have more indirection. I don\u0027t think we need AssertCreateQuerySetSuccess and AssertCreateQuerySetError",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e94e4b3_0826ffb8",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "No need for the destroy because that\u0027s done implicitly when the query destructor is called.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce17243d_a61bbf8d",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "This test isn\u0027t respecting the contract that pipelineStatistics always have pipelineStatisticsCount elements and results in an out of bounds access. Such a thing is an application error and shouldn\u0027t be tested (plus the test would be flaky because the third element would contain garbage.)",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "357b4d4f_bf66dbe1",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "Can we have a test with all names, maybe some order that\u0027s not the one in dawn.json to make sure it works?",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbac9f2f_bb5da8ca",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-05T12:16:16Z",
+      "side": 1,
+      "message": "nit: destroying",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 15
+      },
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
