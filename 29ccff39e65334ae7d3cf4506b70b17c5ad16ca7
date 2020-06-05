@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ed05c94e_a0797a23",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T15:58:04Z",
+      "side": 1,
+      "message": "hm well technically there hasn\u0027t been any validation yet. I guess we could actually inject an OOM error too",
+      "parentUuid": "45ffb2bf_b2c87466",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -36,6 +60,24 @@
       "writtenOn": "2020-06-05T12:24:07Z",
       "side": 1,
       "message": "Would creating a buffer with a garbage usage (like 0xFFFFFFFF) result in the same thing but without requiring dawn_native changes?",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c228d776_25f68c29",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-05T15:58:04Z",
+      "side": 1,
+      "message": "It would, but I\u0027m concerned about the validation error message. We could make an error scope to catch it but that seems like a more complex workaround.",
+      "parentUuid": "d719b3bb_1fa16b06",
       "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
