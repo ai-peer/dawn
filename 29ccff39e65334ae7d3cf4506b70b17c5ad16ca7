@@ -138,6 +138,30 @@
     },
     {
       "key": {
+        "uuid": "67b8f097_04c86546",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-06T00:34:17Z",
+      "side": 1,
+      "message": "Okay to crash?\n\nUnfortunately I don\u0027t know how to crash with the right code (I think we want this for correct reporting on the sad tab page)",
+      "parentUuid": "7bc2be2c_453dbd95",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
