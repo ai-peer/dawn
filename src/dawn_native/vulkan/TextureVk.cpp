@@ -229,8 +229,10 @@ namespace dawn_native { namespace vulkan {
                                                 const VkImage& image,
                                                 wgpu::TextureUsage lastUsage,
                                                 wgpu::TextureUsage usage,
-                                                uint32_t mipLevel,
-                                                uint32_t arrayLayer) {
+                                                uint32_t baseMipLevel,
+                                                uint32_t levelCount,
+                                                uint32_t baseArrayLayer,
+                                                uint32_t layerCount) {
             VkImageMemoryBarrier barrier;
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
             barrier.pNext = nullptr;
@@ -240,10 +242,10 @@ namespace dawn_native { namespace vulkan {
             barrier.newLayout = VulkanImageLayout(usage, format);
             barrier.image = image;
             barrier.subresourceRange.aspectMask = VulkanAspectMask(format);
-            barrier.subresourceRange.baseMipLevel = mipLevel;
-            barrier.subresourceRange.levelCount = 1;
-            barrier.subresourceRange.baseArrayLayer = arrayLayer;
-            barrier.subresourceRange.layerCount = 1;
+            barrier.subresourceRange.baseMipLevel = baseMipLevel;
+            barrier.subresourceRange.levelCount = levelCount;
+            barrier.subresourceRange.baseArrayLayer = baseArrayLayer;
+            barrier.subresourceRange.layerCount = layerCount;
 
             barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
             barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
@@ -678,7 +680,7 @@ namespace dawn_native { namespace vulkan {
             if (!barriers->size()) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
-                                                       wgpu::TextureUsage::None, 0, 0));
+                                                       wgpu::TextureUsage::None, 0, 1, 0, 1));
             }
 
             // Transfer texture from external queue to graphics queue
@@ -691,7 +693,7 @@ namespace dawn_native { namespace vulkan {
             if (!barriers->size()) {
                 barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle,
                                                        wgpu::TextureUsage::None,
-                                                       wgpu::TextureUsage::None, 0, 0));
+                                                       wgpu::TextureUsage::None, 0, 1, 0, 1));
             }
 
             // Transfer texture from graphics queue to external queue
@@ -708,6 +710,27 @@ namespace dawn_native { namespace vulkan {
         mWaitRequirements.clear();
     }
 
+    bool Texture::BuildOneMemoryBarrier(std::vector<VkImageMemoryBarrier>* barriers,
+                                        wgpu::TextureUsage* allLastUsages,
+                                        wgpu::TextureUsage lastUsage,
+                                        wgpu::TextureUsage usage,
+                                        uint32_t baseMipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t baseArrayLayer,
+                                        uint32_t layerCount) {
+        // Avoid encoding barriers when it isn't needed.
+        bool lastReadOnly = (lastUsage & kReadOnlyTextureUsages) == lastUsage;
+        if (lastReadOnly && lastUsage == usage && mLastExternalState == mExternalState) {
+            return false;
+        }
+
+        barriers->push_back(BuildMemoryBarrier(GetFormat(), mHandle, lastUsage, usage, baseMipLevel,
+                                               levelCount, baseArrayLayer, layerCount));
+        *allLastUsages |= lastUsage;
+
+        return true;
+    }
+
     void Texture::TransitionFullUsage(CommandRecordingContext* recordingContext,
                                       wgpu::TextureUsage usage) {
         TransitionUsageNow(recordingContext, usage, 0, GetNumMipLevels(), 0, GetArrayLayers());
@@ -721,37 +744,65 @@ namespace dawn_native { namespace vulkan {
         wgpu::TextureUsage allUsages = wgpu::TextureUsage::None;
         wgpu::TextureUsage allLastUsages = wgpu::TextureUsage::None;
 
-        ASSERT(subresourceUsages.size() == GetSubresourceCount());
+        uint32_t subresourceCount = GetSubresourceCount();
+        ASSERT(subresourceUsages.size() == subresourceCount);
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
-        for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
-                uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer);
+        // If new usages of all subresources are the same and old usages of all subresources are
+        // the same too, we can use one barrier to do state transition for all subresources.
+        // Note that if the texture has only one mip level and one array slice, it will fall into
+        // this category.
+        bool validToUseOneBarrierForAllSubresources = false;
+        uint32_t i = 1;
+        while (i < subresourceCount && subresourceUsages[i] == subresourceUsages[0]) {
+            ++i;
+        }
+        if (i == subresourceCount) {
+            i = 1;
+            while (i < subresourceCount && mSubresourceLastUsages[i] == mSubresourceLastUsages[0]) {
+                ++i;
+            }
+            if (i == subresourceCount) {
+                ASSERT(subresourceUsages[0] != wgpu::TextureUsage::None);
 
-                // Avoid encoding barriers when it isn't needed.
-                if (subresourceUsages[index] == wgpu::TextureUsage::None) {
-                    continue;
+                validToUseOneBarrierForAllSubresources = true;
+
+                if (BuildOneMemoryBarrier(&barriers, &allLastUsages, mSubresourceLastUsages[0],
+                                          subresourceUsages[0], 0, GetNumMipLevels(), 0,
+                                          GetArrayLayers())) {
+                    allUsages = subresourceUsages[0];
+                    for (i = 0; i < subresourceCount; ++i) {
+                        mSubresourceLastUsages[i] = subresourceUsages[i];
+                    }
+
+                    if (mExternalState != ExternalState::InternalOnly) {
+                        TweakTransitionForExternalUsage(recordingContext, &barriers);
+                    }
+                } else {
+                    return;
                 }
-                bool lastReadOnly = (mLastSubresourceUsages[index] & kReadOnlyTextureUsages) ==
-                                    mLastSubresourceUsages[index];
-                if (lastReadOnly && mLastSubresourceUsages[index] == subresourceUsages[index] &&
-                    mLastExternalState == mExternalState) {
-                    continue;
-                }
-
-                barriers.push_back(
-                    BuildMemoryBarrier(format, mHandle, mLastSubresourceUsages[index],
-                                       subresourceUsages[index], mipLevel, arrayLayer));
-
-                allUsages |= subresourceUsages[index];
-                allLastUsages |= mLastSubresourceUsages[index];
-                mLastSubresourceUsages[index] = subresourceUsages[index];
             }
         }
 
-        if (mExternalState != ExternalState::InternalOnly) {
-            TweakTransitionForExternalUsage(recordingContext, &barriers);
+        if (!validToUseOneBarrierForAllSubresources) {
+            for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
+                for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
+                    uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer);
+
+                    // Avoid encoding barriers when it isn't needed.
+                    if (subresourceUsages[index] == wgpu::TextureUsage::None) {
+                        continue;
+                    }
+
+                    if (BuildOneMemoryBarrier(
+                            &barriers, &allLastUsages, mSubresourceLastUsages[index],
+                            subresourceUsages[index], mipLevel, 1, arrayLayer, 1)) {
+                        allUsages |= subresourceUsages[index];
+                        mSubresourceLastUsages[index] = subresourceUsages[index];
+                    }
+                }
+            }
         }
 
         VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format);
@@ -779,19 +830,12 @@ namespace dawn_native { namespace vulkan {
             for (uint32_t mipLevel = 0; mipLevel < levelCount; ++mipLevel) {
                 uint32_t index =
                     GetSubresourceIndex(baseMipLevel + mipLevel, baseArrayLayer + arrayLayer);
-                wgpu::TextureUsage lastUsage = mLastSubresourceUsages[index];
 
-                // Avoid encoding barriers when it isn't needed.
-                bool lastReadOnly = (lastUsage & kReadOnlyTextureUsages) == lastUsage;
-                if (lastReadOnly && lastUsage == usage && mLastExternalState == mExternalState) {
-                    return;
+                if (BuildOneMemoryBarrier(&barriers, &allLastUsages, mSubresourceLastUsages[index],
+                                          usage, baseMipLevel + mipLevel, 1,
+                                          baseArrayLayer + arrayLayer, 1)) {
+                    mSubresourceLastUsages[index] = usage;
                 }
-
-                barriers.push_back(BuildMemoryBarrier(format, mHandle, lastUsage, usage,
-                                                      baseMipLevel + mipLevel,
-                                                      baseArrayLayer + arrayLayer));
-                allLastUsages |= lastUsage;
-                mLastSubresourceUsages[index] = usage;
             }
         }
 
