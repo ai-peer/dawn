@@ -108,6 +108,14 @@ namespace dawn_native { namespace vulkan {
 
         void TweakTransitionForExternalUsage(CommandRecordingContext* recordingContext,
                                              std::vector<VkImageMemoryBarrier>* barriers);
+        bool BuildOneMemoryBarrier(std::vector<VkImageMemoryBarrier>* barriers,
+                                   wgpu::TextureUsage* allLastUsages,
+                                   wgpu::TextureUsage lastUsage,
+                                   wgpu::TextureUsage usage,
+                                   uint32_t baseMipLevel,
+                                   uint32_t levelCount,
+                                   uint32_t baseArrayLayer,
+                                   uint32_t layerCount);
 
         VkImage mHandle = VK_NULL_HANDLE;
         ResourceMemoryAllocation mMemoryAllocation;
@@ -128,7 +136,7 @@ namespace dawn_native { namespace vulkan {
 
         // A usage of none will make sure the texture is transitioned before its first use as
         // required by the Vulkan spec.
-        std::vector<wgpu::TextureUsage> mLastSubresourceUsages =
+        std::vector<wgpu::TextureUsage> mSubresourceLastUsages =
             std::vector<wgpu::TextureUsage>(GetSubresourceCount(), wgpu::TextureUsage::None);
     };
 

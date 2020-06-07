@@ -45,6 +45,14 @@ namespace dawn_native {
       public:
         enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
         enum class ClearValue { Zero, NonZero };
+
+        struct SubresourceRange {
+            uint32_t baseMipLevel;
+            uint32_t levelCount;
+            uint32_t baseArrayLayer;
+            uint32_t layerCount;
+        };
+
         TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
 
         static TextureBase* MakeError(DeviceBase* device);
