@@ -22,6 +22,30 @@
       "revId": "0aa55f8689295a697acac74bdb5b88bed85c447d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bfb48ad_5034617d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-08T20:41:47Z",
+      "side": 1,
+      "message": "Does the Basic Test above count as a base case? My test does the same except I had to copy the insides of TestComputePassBindGroup to add the invalid group in the middle. Or we could also call TestComputePassBindGroup inside this test to be sure?",
+      "parentUuid": "7cee0f46_3cdfae7c",
+      "range": {
+        "startLine": 914,
+        "startChar": 8,
+        "endLine": 915,
+        "endChar": 39
+      },
+      "revId": "0aa55f8689295a697acac74bdb5b88bed85c447d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
