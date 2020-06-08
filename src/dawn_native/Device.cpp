@@ -139,7 +139,6 @@ namespace dawn_native {
             case State::Disconnected:
                 break;
         }
-        ASSERT(mCompletedSerial == mLastSubmittedSerial);
         ASSERT(mFutureCallbackSerial <= mCompletedSerial);
 
         // Skip handling device facilities if they haven't even been created (or failed doing so)
