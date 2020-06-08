@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50cc7257_0038d9b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T08:37:19Z",
+      "side": 1,
+      "message": "nit: Usually for releand we just to \n\nReland: \u003cTitle\u003e\n\n\u003cReason for the reland and changes made\u003e\n\n\u003cOriginal commit description\u003e\n\n\u003cOriginal BUG\u003e\n\u003cBUG for where we revert the commit\u003e",
+      "revId": "c1c37ee1fe372b0157c5d8260c221af08a323d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1adc82f6_aaf6937e",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T08:37:19Z",
+      "side": 1,
+      "message": "This comment could be a bit more detailed. The issue title had to be a single sentence and couldn\u0027t be descriptive enough. How about the following:\n\nThe Vulkan-Loader has emulation of VkPhysicalDevices functions such as vkGetPhysicalDeviceProperties2 when the ICD doesn\u0027t support the extension. However the loader has a bug where if the instance is created with Vulkan 1.1 and not the promoted extensions, it will skip emulation and if the ICD doesn\u0027t support Vulkan 1.1 nor the extensions, we will crash on nullptr function pointer when the loader tries to call the ICD\u0027s vkGetPhysicalDeviceProperties2. See https://github.com/KhronosGroup/Vulkan-Loader/issues/412. We work around this by specifying we want to enable the promoted extensions, even when we create a Vulkan 1.1 instance.",
+      "revId": "c1c37ee1fe372b0157c5d8260c221af08a323d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
