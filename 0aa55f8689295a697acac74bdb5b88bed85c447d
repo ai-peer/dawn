@@ -46,6 +46,30 @@
       "revId": "0aa55f8689295a697acac74bdb5b88bed85c447d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e8c99bb_ba28b66d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-08T20:42:39Z",
+      "side": 1,
+      "message": "Ah, I see. Fine with me then.",
+      "parentUuid": "1bfb48ad_5034617d",
+      "range": {
+        "startLine": 914,
+        "startChar": 8,
+        "endLine": 915,
+        "endChar": 39
+      },
+      "revId": "0aa55f8689295a697acac74bdb5b88bed85c447d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
