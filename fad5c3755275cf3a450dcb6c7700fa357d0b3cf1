@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36b5432a_fe30ea35",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T11:44:49Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this later today, but I\u0027m not sure this is the correct approach: here the complexity is about the same as when we create all the barriers because we look at every single subresource. If we were creating larger barriers, the driver would do roughly the same amount of work because if you look at open source drivers, either they do simple operations per barrier struct (ORing access flags) or they do operations for each subresource (queuing layout transitions).\n\nOur goal should be to reduce the algorithmic complexity in Dawn by skipping all subresource checks when we know that the whole resource is used. This will require more detailed tracking in the frontend first, then adapting the backends.",
+      "revId": "fad5c3755275cf3a450dcb6c7700fa357d0b3cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
