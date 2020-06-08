@@ -24,6 +24,23 @@
 
 namespace dawn_native {
 
+    namespace {
+        bool BufferSizesAtLeastAsBig(dawn_native::BindGroupBase* bindGroup,
+                                     const std::vector<uint64_t>& pipelineMinimumBufferSizes) {
+            const uint64_t* boundBufferSizes = bindGroup->GetBufferSizes();
+            uint32_t unverifiedBufferCount = bindGroup->GetLayout()->GetUnverifiedBufferCount();
+            ASSERT(unverifiedBufferCount == pipelineMinimumBufferSizes.size());
+
+            for (size_t i = 0; i < unverifiedBufferCount; ++i) {
+                if (boundBufferSizes[i] < pipelineMinimumBufferSizes[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }  // namespace
+
     enum ValidationAspect {
         VALIDATION_ASPECT_PIPELINE,
         VALIDATION_ASPECT_BIND_GROUPS,
@@ -85,11 +102,15 @@ namespace dawn_native {
         if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
             bool matches = true;
 
-            for (uint32_t i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+            for (uint32_t i :
+                 IterateBitSet(~mVerifiedGroups & mLastPipelineLayout->GetBindGroupLayoutsMask())) {
                 if (mBindgroups[i] == nullptr ||
-                    mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout()) {
+                    mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout() ||
+                    !BufferSizesAtLeastAsBig(mBindgroups[i], (*mMinimumBufferSizes)[i])) {
                     matches = false;
                     break;
+                } else {
+                    mVerifiedGroups.set(i);
                 }
             }
 
@@ -123,7 +144,7 @@ namespace dawn_native {
         }
 
         if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
-            return DAWN_VALIDATION_ERROR("Missing bind group");
+            return DAWN_VALIDATION_ERROR("Missing or invalid bind group");
         }
 
         if (aspects[VALIDATION_ASPECT_PIPELINE]) {
@@ -144,6 +165,8 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetBindGroup(uint32_t index, BindGroupBase* bindgroup) {
         mBindgroups[index] = bindgroup;
+        mAspects.reset(VALIDATION_ASPECT_BIND_GROUPS);
+        mVerifiedGroups.reset(index);
     }
 
     void CommandBufferStateTracker::SetIndexBuffer() {
@@ -156,6 +179,7 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
         mLastPipelineLayout = pipeline->GetLayout();
+        mMinimumBufferSizes = pipeline->GetMinimumBufferSizes();
 
         mAspects.set(VALIDATION_ASPECT_PIPELINE);
 
