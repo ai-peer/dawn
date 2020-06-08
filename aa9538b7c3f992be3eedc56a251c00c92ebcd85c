@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1f7f821_ebc0e68e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:32:17Z",
+      "side": 1,
+      "message": "Unify TickImpl called during Device shutdown.",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "306ff47c_60d941d7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:32:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dcb22e7_418ab5c0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:32:17Z",
+      "side": 1,
+      "message": "nit: explain that this is needed for the case where the device is lost on its own and \"WaitForIdleForDestruction\" isn\u0027t called.",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3272d6c_4221aa68",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:32:17Z",
+      "side": 1,
+      "message": "I think this could be moved in the frontend right at the and of the State::Alive case of DeviceBase::ShutDownBase",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69a8515b_7f9b1a16",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:32:17Z",
+      "side": 1,
+      "message": "This might not be needed anymore after the change suggested for TickImpl().",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
