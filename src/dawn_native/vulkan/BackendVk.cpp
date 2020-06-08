@@ -253,19 +253,22 @@ namespace dawn_native { namespace vulkan {
             usedKnobs.getPhysicalDeviceProperties2 = true;
             usedKnobs.externalMemoryCapabilities = true;
             usedKnobs.externalSemaphoreCapabilities = true;
-        } else {
-            if (mGlobalInfo.externalMemoryCapabilities) {
-                extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
-                usedKnobs.externalMemoryCapabilities = true;
-            }
-            if (mGlobalInfo.externalSemaphoreCapabilities) {
-                extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
-                usedKnobs.externalSemaphoreCapabilities = true;
-            }
-            if (mGlobalInfo.getPhysicalDeviceProperties2) {
-                extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
-                usedKnobs.getPhysicalDeviceProperties2 = true;
-            }
+        }
+
+        // Work around the bug that Vulkan-Loader misses emulation of promoted extensions when
+        // instance and ICD version mismatch.
+        // https://github.com/KhronosGroup/Vulkan-Loader/issues/412.
+        if (mGlobalInfo.externalMemoryCapabilities) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
+            usedKnobs.externalMemoryCapabilities = true;
+        }
+        if (mGlobalInfo.externalSemaphoreCapabilities) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
+            usedKnobs.externalSemaphoreCapabilities = true;
+        }
+        if (mGlobalInfo.getPhysicalDeviceProperties2) {
+            extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
+            usedKnobs.getPhysicalDeviceProperties2 = true;
         }
 
         VkApplicationInfo appInfo;
