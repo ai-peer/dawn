@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88b9dbdb_85f6501b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T09:21:34Z",
+      "side": 1,
+      "message": "nit: We could have a single \"size_t transitionBarrierStart\" and a comment in the header that explains that transitionBarrierStart should be the index where barriers for this transition start in the vector.\n\nThen all computations in this can be done using transitionBarrierStart and barriers-\u003esize() instead of index / nextIndex (the concern was that they don\u0027t have very descriptive names, and nextIndex is redundant with barriers-\u003esize()).",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 675,
+        "endChar": 68
+      },
+      "revId": "cac888d8c63712c7241ea5411f634e77c6ffff3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
