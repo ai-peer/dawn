@@ -20,6 +20,9 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    constexpr HRESULT E_FAKE_ERROR_FOR_TESTING = 0x87FFFFFF;
+    constexpr HRESULT E_FAKE_OUT_OF_MEMORY_ERROR_FOR_TESTING = E_FAKE_ERROR_FOR_TESTING - 1;
+
     // Returns a success only if result of HResult is success
     MaybeError CheckHRESULT(HRESULT result, const char* context);
 

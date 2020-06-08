@@ -13,12 +13,13 @@
 // limitations under the License.
 
 #include "dawn_native/d3d12/D3D12Error.h"
+#include "dawn_native/ErrorInjector.h"
 
 #include <string>
 
 namespace dawn_native { namespace d3d12 {
     MaybeError CheckHRESULT(HRESULT result, const char* context) {
-        if (DAWN_LIKELY(SUCCEEDED(result))) {
+        if (DAWN_LIKELY(SUCCEEDED(INJECT_ERROR_OR_RUN(result, E_FAKE_ERROR_FOR_TESTING)))) {
             return {};
         }
 
@@ -32,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError CheckOutOfMemoryHRESULT(HRESULT result, const char* context) {
-        if (result == E_OUTOFMEMORY) {
+        if (result == (E_OUTOFMEMORY, E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING)) {
             return DAWN_OUT_OF_MEMORY_ERROR(context);
         }
         return CheckHRESULT(result, context);
