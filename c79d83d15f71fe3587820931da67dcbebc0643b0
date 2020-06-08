@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "42a215de_060ee4a4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T10:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "821c3fff_7bc1ebe7",
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60127a5a_97da78db",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 12
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "0b953808_8656b258",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T10:05:28Z",
+      "side": 1,
+      "message": "Uh, sorry that\u0027s a bad copy paste. Done.",
+      "parentUuid": "60127a5a_97da78db",
+      "range": {
+        "startLine": 323,
+        "startChar": 17,
+        "endLine": 323,
+        "endChar": 68
+      },
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d2ba65a_b649087d",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 12
@@ -62,6 +104,30 @@
       "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21418de8_413fa80d",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T10:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2ba65a_b649087d",
+      "range": {
+        "startLine": 508,
+        "startChar": 22,
+        "endLine": 508,
+        "endChar": 32
+      },
+      "revId": "c79d83d15f71fe3587820931da67dcbebc0643b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
