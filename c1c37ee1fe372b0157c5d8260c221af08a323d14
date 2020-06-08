@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "906bf33e_7d9e3ef5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-08T12:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50cc7257_0038d9b8",
+      "revId": "c1c37ee1fe372b0157c5d8260c221af08a323d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1adc82f6_aaf6937e",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "c1c37ee1fe372b0157c5d8260c221af08a323d14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fe76e34_90f4ba10",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-08T12:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1adc82f6_aaf6937e",
+      "revId": "c1c37ee1fe372b0157c5d8260c221af08a323d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
