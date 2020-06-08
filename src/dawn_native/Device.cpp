@@ -127,6 +127,7 @@ namespace dawn_native {
                 // Assert that errors are device loss so that we can continue with destruction
                 AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
                 AssumeCommandsComplete();
+                AssertAndIgnoreDeviceLossError(TickImpl());
                 break;
 
             case State::BeingDisconnected:
@@ -139,7 +140,6 @@ namespace dawn_native {
             case State::Disconnected:
                 break;
         }
-        ASSERT(mCompletedSerial == mLastSubmittedSerial);
         ASSERT(mFutureCallbackSerial <= mCompletedSerial);
 
         // Skip handling device facilities if they haven't even been created (or failed doing so)
