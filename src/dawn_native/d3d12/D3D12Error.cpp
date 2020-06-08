@@ -13,11 +13,10 @@
 // limitations under the License.
 
 #include "dawn_native/d3d12/D3D12Error.h"
-
 #include <string>
 
 namespace dawn_native { namespace d3d12 {
-    MaybeError CheckHRESULT(HRESULT result, const char* context) {
+    MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
         if (DAWN_LIKELY(SUCCEEDED(result))) {
             return {};
         }
@@ -31,11 +30,12 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    MaybeError CheckOutOfMemoryHRESULT(HRESULT result, const char* context) {
+    MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context) {
         if (result == E_OUTOFMEMORY) {
             return DAWN_OUT_OF_MEMORY_ERROR(context);
         }
-        return CheckHRESULT(result, context);
+
+        return CheckHRESULTImpl(result, context);
     }
 
 }}  // namespace dawn_native::d3d12
