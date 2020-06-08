@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "22bdcf38_8b7817eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1f7f821_ebc0e68e",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "306ff47c_60d941d7",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-08T09:32:17Z",
       "side": 1,
       "message": "[1]",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "382e8819_c601a36c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 1,
+      "message": "Is this comment referring to the nit: explain on line 513?",
+      "parentUuid": "306ff47c_60d941d7",
       "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3b4f79af_7e00118c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dcb22e7_418ab5c0",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3272d6c_4221aa68",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "3f11020a_39f1f8ff",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3272d6c_4221aa68",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69a8515b_7f9b1a16",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -84,6 +156,24 @@
       "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04235241_1096d246",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69a8515b_7f9b1a16",
+      "revId": "aa9538b7c3f992be3eedc56a251c00c92ebcd85c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

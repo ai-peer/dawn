@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8bc4736_ce092d60",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-08T20:48:43Z",
+      "side": 0,
+      "message": "since we call tickimpl in the alive case, this assert is no longer true because tickimpl could increment last submitted serial (in d3d12, NextSerial() is called which increments last submitted serial, in vulkan could happen if there are pending commands to be submitted)",
+      "revId": "783cd5a79c8ada83622c327ec054f6cc990c2825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
