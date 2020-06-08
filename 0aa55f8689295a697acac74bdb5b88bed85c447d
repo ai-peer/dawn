@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cee0f46_3cdfae7c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-08T20:33:09Z",
+      "side": 1,
+      "message": "nit: First have a base case without this invalid part, to check that it is valid, then have a second case which adds these commands, to check that the addition is invalid.",
+      "range": {
+        "startLine": 914,
+        "startChar": 8,
+        "endLine": 915,
+        "endChar": 39
+      },
+      "revId": "0aa55f8689295a697acac74bdb5b88bed85c447d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
