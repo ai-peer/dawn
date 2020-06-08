@@ -37,6 +37,29 @@
     },
     {
       "key": {
+        "uuid": "1ee45e32_00f71d2a",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-08T18:24:50Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this class. It should be sufficient to just return new QuerySetBase(device, ObjectBase::kError) in the error case instead of this wrapper.",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "10126f80_067dbdd9",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 5
@@ -179,6 +202,29 @@
     },
     {
       "key": {
+        "uuid": "7881da8d_946ed9f4",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-08T18:24:50Z",
+      "side": 1,
+      "message": "This could just place the existing |device| member on ValidationTest.\n\nAlso, I think CreateDeviceWithExtension could be inlined here. This is the only callsite and this SetUp function is very small.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2eb44fb0_72805a4b",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 5
@@ -207,6 +253,29 @@
       "writtenOn": "2020-06-05T12:16:16Z",
       "side": 1,
       "message": "No need for the destroy because that\u0027s done implicitly when the query destructor is called.",
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4b5a251_096f32e9",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-08T18:24:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure how much value there is in having this helper if the argument types are the same as the descriptor member types. Perhaps instead of the pointer to wgpu::PipelineStatisticsName and count, this could take in an std::vector.\n\nThat way we could say:\nCreateQuerySetDescriptor(wgpu::QueryType::PipelineStatistics, 1, {wgpu::PipelineStatisticsName::VertexShaderInvocations});",
+      "range": {
+        "startLine": 38,
+        "startChar": 29,
+        "endLine": 38,
+        "endChar": 53
+      },
       "revId": "50892f7618585316e292ae26f1f2f688635627ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
