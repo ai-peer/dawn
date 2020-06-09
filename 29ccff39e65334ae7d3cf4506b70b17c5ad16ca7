@@ -210,6 +210,30 @@
     },
     {
       "key": {
+        "uuid": "e034b88c_36de0777",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T05:23:11Z",
+      "side": 1,
+      "message": "I think it\u0027s safer to lose device as I don\u0027t want to expose too many distinct error cases to applications when we can\u0027t have a reasonable expectation they\u0027ll be able to gracefully recover from every single one. I\u0027m worried this case is too gritty and uncommon and most apps will completely ignore the possibility. But at least it is conglomerated with other mapping errors (don\u0027t remember what other cases can happen), so it wouldn\u0027t be too bad, so I guess what we ultimately need is metrics on how often it actually happens.",
+      "parentUuid": "af6e3765_49c0618d",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
