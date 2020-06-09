@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fd715fa_609c328c",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:33:17Z",
+      "side": 1,
+      "message": "nit: GetUnverifiedBufferSizes()",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 38
+      },
+      "revId": "e02b22e1499127c95c040a2d3b508a0229f7943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ddb5c75_d441485e",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:33:17Z",
+      "side": 1,
+      "message": "I\u0027m concerned that this message doesn\u0027t clearly tell the user what was wrong. Do you think we could have two validation aspects, but check/set them both in the same IterateBitset(..) ?",
+      "range": {
+        "startLine": 147,
+        "startChar": 42,
+        "endLine": 147,
+        "endChar": 70
+      },
+      "revId": "e02b22e1499127c95c040a2d3b508a0229f7943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a62155cc_9a8bc79f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:33:17Z",
+      "side": 1,
+      "message": "nit: We can probably typedef this in ShaderModule.h",
+      "range": {
+        "startLine": 955,
+        "startChar": 8,
+        "endLine": 955,
+        "endChar": 57
+      },
+      "revId": "e02b22e1499127c95c040a2d3b508a0229f7943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
