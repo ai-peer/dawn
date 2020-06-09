@@ -29,10 +29,20 @@ namespace dawn_native {
 
     // Describe the usage of the whole texture and its subresources.
     // subresourceUsages vector is used to track every subresource's usage within a texture.
+    //
     // usage variable is used the track the whole texture even though it can be deduced from
-    // subresources' usages. This is designed deliberately to track texture usage in a fast path.
+    // subresources' usages. This is designed deliberately to track texture usage in a fast path
+    // at frontend.
+    //
+    // sameUsagesAcrossSubresources is used for optimization at backend. If the texture view we
+    // are using covers all subresources, then the texture's usages of all subresources are the
+    // same. Otherwise the texture's usages of all subresources are thought as different, although
+    // we can deliberately design some particular cases in which we have a few texture views and
+    // all of them have the same usages and they cover all subresources of the texture altogether.
+
     struct PassTextureUsage {
         wgpu::TextureUsage usage;
+        bool sameUsagesAcrossSubresources;
         std::vector<wgpu::TextureUsage> subresourceUsages;
     };
 

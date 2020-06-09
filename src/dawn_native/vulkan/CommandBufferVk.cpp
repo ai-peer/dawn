@@ -399,9 +399,10 @@ namespace dawn_native { namespace vulkan {
                                                                  texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
                 }
-                texture->TransitionUsageForPass(recordingContext,
-                                                usages.textureUsages[i].subresourceUsages,
-                                                &imageBarriers, &srcStages, &dstStages);
+                texture->TransitionUsageForPass(
+                    recordingContext, usages.textureUsages[i].sameUsagesAcrossSubresources,
+                    usages.textureUsages[i].subresourceUsages, &imageBarriers, &srcStages,
+                    &dstStages);
             }
 
             if (bufferBarriers.size() || imageBarriers.size()) {
