@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ca4ba612_f927f33b",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T11:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bcba7e4_6fa74d8c",
+      "range": {
+        "startLine": 37,
+        "startChar": 66,
+        "endLine": 37,
+        "endChar": 75
+      },
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef6031c4_106926c9",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a753f078_452ffc5b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T11:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef6031c4_106926c9",
+      "range": {
+        "startLine": 936,
+        "startChar": 73,
+        "endLine": 936,
+        "endChar": 83
+      },
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a6c29a6_e609f196",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -62,6 +110,24 @@
       "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e15a1f_3049dd51",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T11:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a6c29a6_e609f196",
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
