@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bcba7e4_6fa74d8c",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T09:41:11Z",
+      "side": 1,
+      "message": "nit: Pipeline",
+      "range": {
+        "startLine": 37,
+        "startChar": 66,
+        "endLine": 37,
+        "endChar": 75
+      },
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6031c4_106926c9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T09:41:11Z",
+      "side": 1,
+      "message": "nit: conflicts?",
+      "range": {
+        "startLine": 936,
+        "startChar": 73,
+        "endLine": 936,
+        "endChar": 83
+      },
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a6c29a6_e609f196",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T09:41:11Z",
+      "side": 1,
+      "message": "nit: The BGL entry for \u003cGetShaderDeclarationString\u003e is not visible for the shader stage.",
+      "revId": "83bd4da82a326ba96be04d5bf842a574229d45ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
