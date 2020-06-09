@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "608cdd23_79caa35c",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:25:25Z",
+      "side": 1,
+      "message": "nit: It would be more correct to name this \"definitelySame..\" or \"definitelySingleUsage\" because if we use subresources individually with all the same usage, the flag will be |false| even though they all actually have the same usage.\n\nside note: In the future, we may want to have a wrapper around this tracking bit and std::vector\u003cT\u003e. It will help encapsulate some of the logic here, and it\u0027ll be useful for tracking lazy clear status on textures as well.\n\nSuch a wrapper class could encapsulate some optimization logic as well. Right now, it seems like the current implementation will still do individual barriers for the following, very common, use case:\n\n1. CreateTexture\n2. For each mip level, copy to initialize the contents. TransitionUsageNow is called for each mip.\n3. Sample the texture in a render pass. We\u0027ll do one barrier for each mip level.",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e2e9f53_fcbd1b80",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:25:25Z",
+      "side": 1,
+      "message": "This could be outside of its parent if-statement, and we don\u0027t need to else-if branch below",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e343a358_00fc484a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:25:25Z",
+      "side": 1,
+      "message": "ASSERT that mExternalState \u003d\u003d ExternalState::InternalOnly. We should never have to tweak for external usage because multi-subresource textures can\u0027t be external",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "384405ee_cca9578e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:25:25Z",
+      "side": 1,
+      "message": "Couldn\u0027t we set this to true if the subresource range is the whole texture? Is that what this comment refers to?",
+      "range": {
+        "startLine": 844,
+        "startChar": 9,
+        "endLine": 846,
+        "endChar": 50
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f92bc50_e36d03a8",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:25:25Z",
+      "side": 1,
+      "message": "Note: These functions are all getting the have a lot of parameters, and it\u0027s easy to mix up arrayLayers and mipLevels since they\u0027re the same type. (Although my typed integer patch may help this).\n\nWe could consider adding a SubresourceRange struct in the future.",
+      "range": {
+        "startLine": 120,
+        "startChar": 35,
+        "endLine": 123,
+        "endChar": 54
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
