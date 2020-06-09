@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70b8675d_104ae44f",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T21:09:20Z",
+      "side": 1,
+      "message": "nit: Or fake OOM",
+      "range": {
+        "startLine": 35,
+        "startChar": 22,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f17a31cd_69792200",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T21:09:20Z",
+      "side": 1,
+      "message": "nit: I think we should inject E_FAKE_ERROR_FOR_TESTING as well",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
