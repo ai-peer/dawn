@@ -80,6 +80,30 @@
       "revId": "48de4f3ec9115618814f60e07132000166faf187",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e8ee21_8258e35d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T17:24:42Z",
+      "side": 1,
+      "message": "Ah, makes sense. Thanks for explaining. Please comment about that then.",
+      "parentUuid": "31e6e672_4af516f3",
+      "range": {
+        "startLine": 521,
+        "startChar": 8,
+        "endLine": 523,
+        "endChar": 42
+      },
+      "revId": "48de4f3ec9115618814f60e07132000166faf187",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
