@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7456e26c_623d948c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T08:22:21Z",
+      "side": 1,
+      "message": "Metal",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "08593ff4ea4e1997746bff23eafd758761915787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93dad7d4_3dcb3045",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T08:22:21Z",
+      "side": 1,
+      "message": "so we can unconditionally enable this extension on Metal backend.",
+      "range": {
+        "startLine": 9,
+        "startChar": 43,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "08593ff4ea4e1997746bff23eafd758761915787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "274e387d_355d4a27",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-09T08:22:21Z",
+      "side": 1,
+      "message": "Add a newline at the end of this file?",
+      "range": {
+        "startLine": 111,
+        "startChar": 74,
+        "endLine": 111,
+        "endChar": 75
+      },
+      "revId": "08593ff4ea4e1997746bff23eafd758761915787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
