@@ -333,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "a2151209_4699f9a7",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:53:03Z",
+      "side": 1,
+      "message": "unless we have mocks though, it\u0027ll be hard to test all the paths unless we make assumptions about the machines we\u0027re running on. There could be OOM because of\n - too big for rounding\n - size larger than the biggest heap\n - driver fails because of fragmentation maybe\nand we can\u0027t actually know in this test how to hit each one.",
+      "parentUuid": "b65ad9c6_d46936ab",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4f0d220_3e679e96",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 5
