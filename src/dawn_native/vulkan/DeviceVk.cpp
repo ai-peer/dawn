@@ -782,8 +782,15 @@ namespace dawn_native { namespace vulkan {
         }
         mRecordingContext.signalSemaphores.clear();
 
-        // Assert that errors are device loss so that we can continue with destruction
-        AssertAndIgnoreDeviceLossError(TickImpl());
+        RecycleCompletedCommands();
+
+        for (Ref<BindGroupLayout>& bgl :
+             mBindGroupLayoutsPendingDeallocation.IterateUpTo(GetCompletedCommandSerial())) {
+            bgl->FinishDeallocation(GetCompletedCommandSerial());
+        }
+        mBindGroupLayoutsPendingDeallocation.ClearUpTo(GetCompletedCommandSerial());
+
+        mResourceMemoryAllocator->Tick(GetCompletedCommandSerial());
 
         ASSERT(mCommandsInFlight.Empty());
         for (const CommandPoolAndBuffer& commands : mUnusedCommands) {
