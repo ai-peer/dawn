@@ -38,6 +38,8 @@ namespace dawn_native {
             Destroyed,
         };
 
+        enum class ClearValue { Zero, NonZero };
+
       public:
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
 
