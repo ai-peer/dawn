@@ -48,6 +48,14 @@ namespace dawn_native {
         if (!textureUsage.subresourceUsages.size()) {
             textureUsage.subresourceUsages =
                 std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
+            if (levelCount * layerCount == subresourceCount) {
+                textureUsage.sameUsagesAcrossSubresources = true;
+            } else {
+                textureUsage.sameUsagesAcrossSubresources = false;
+            }
+        } else if (textureUsage.sameUsagesAcrossSubresources &&
+                   levelCount * layerCount < subresourceCount) {
+            textureUsage.sameUsagesAcrossSubresources = false;
         }
         for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
              ++arrayLayer) {
@@ -63,6 +71,10 @@ namespace dawn_native {
                                                    const PassTextureUsage& textureUsage) {
         PassTextureUsage& passTextureUsage = mTextureUsages[texture];
         passTextureUsage.usage |= textureUsage.usage;
+        if (passTextureUsage.sameUsagesAcrossSubresources !=
+            textureUsage.sameUsagesAcrossSubresources) {
+            passTextureUsage.sameUsagesAcrossSubresources = false;
+        }
 
         uint32_t subresourceCount = texture->GetSubresourceCount();
         ASSERT(textureUsage.subresourceUsages.size() == subresourceCount);
