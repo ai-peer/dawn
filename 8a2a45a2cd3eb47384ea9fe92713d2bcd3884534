@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "5b180b22_8082f021",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T20:40:18Z",
+      "side": 1,
+      "message": "Maybe this is fragile, and would be better done after we compress the vector to a single usage state if it\u0027s all the same,\n\nBut here, we really only need to store mSubresourceLastUsages[0].\nThen, instead of passing mSubresourceLastUsages[index] to BuildOneMemoryBarrier,\nwe can always pass index 0 if mDefinitelySameLastUsagesAcrossSubresources. We\u0027d do the same in the loop in TransitionUsageNow.\n\nOk with me though to defer this until after we have a better way of encapsulating the state.",
+      "range": {
+        "startLine": 772,
+        "startChar": 16,
+        "endLine": 774,
+        "endChar": 17
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9f7c6ab_2a35bc3d",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 9
