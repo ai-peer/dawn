@@ -16,6 +16,24 @@
       "revId": "783cd5a79c8ada83622c327ec054f6cc990c2825",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66566159_d01cc2ba",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-09T00:23:18Z",
+      "side": 0,
+      "message": "actually, moved TickImpl call above AssumeCommandsComplete so this is ok now.",
+      "parentUuid": "c8bc4736_ce092d60",
+      "revId": "783cd5a79c8ada83622c327ec054f6cc990c2825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
