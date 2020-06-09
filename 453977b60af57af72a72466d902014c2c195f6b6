@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0089c83_999ad2fb",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "nit: use camelCase. Also think we should declare this as uint32_t outside of the for-loop. What you have is nice and concise, but a little harder to read",
+      "range": {
+        "startLine": 273,
+        "startChar": 44,
+        "endLine": 273,
+        "endChar": 52
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57fcd818_b5e3f54a",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "nit: Can this be BindingNumber ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b298b78b_743fe487",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "uint32_t",
+      "range": {
+        "startLine": 196,
+        "startChar": 21,
+        "endLine": 196,
+        "endChar": 27
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c90cf5ff_8f6d5ee0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "uint32_t, and camelCase",
+      "range": {
+        "startLine": 902,
+        "startChar": 8,
+        "endLine": 902,
+        "endChar": 14
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e36eb2d8_14883481",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "BindingIndex",
+      "range": {
+        "startLine": 904,
+        "startChar": 13,
+        "endLine": 904,
+        "endChar": 19
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59cf9b9c_f0c82c48",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "uint32_t",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 18
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

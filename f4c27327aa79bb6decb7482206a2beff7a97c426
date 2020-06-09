@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "d850be4b_64d719a9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:25:06Z",
+      "side": 1,
+      "message": "Sounds fine then",
+      "parentUuid": "fef422a0_cd5d3f2b",
+      "range": {
+        "startLine": 902,
+        "startChar": 30,
+        "endLine": 902,
+        "endChar": 49
+      },
+      "revId": "f4c27327aa79bb6decb7482206a2beff7a97c426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a35b7a73_f53af855",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 12
