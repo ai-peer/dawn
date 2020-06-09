@@ -782,9 +782,6 @@ namespace dawn_native { namespace vulkan {
         }
         mRecordingContext.signalSemaphores.clear();
 
-        // Assert that errors are device loss so that we can continue with destruction
-        AssertAndIgnoreDeviceLossError(TickImpl());
-
         ASSERT(mCommandsInFlight.Empty());
         for (const CommandPoolAndBuffer& commands : mUnusedCommands) {
             fn.DestroyCommandPool(mVkDevice, commands.pool, nullptr);
