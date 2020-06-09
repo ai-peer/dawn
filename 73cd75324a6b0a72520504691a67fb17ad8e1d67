@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1da94550_54ce8b7c",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-09T20:57:34Z",
+      "side": 1,
+      "message": "I think creating the macros as you suggest is the most similar to a real error scenario, so I agree it\u0027s the right way to go.",
+      "parentUuid": "6a9a4a87_0d949d02",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c97335e_39d6e18e",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5707421b_bfad270e",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-09T20:57:34Z",
+      "side": 1,
+      "message": "Yes. Sloppy mistake.",
+      "parentUuid": "8c97335e_39d6e18e",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebc4e3bc_66d74819",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-09T01:42:07Z",
       "side": 1,
       "message": "If we inject at [1], we probably shouldn\u0027t double inject here",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b11b3455_662fd016",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-09T20:57:34Z",
+      "side": 1,
+      "message": "If E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING is injected, DAWN_OUT_OF_MEMORY_ERROR is returned and there won\u0027t be double injection.",
+      "parentUuid": "ebc4e3bc_66d74819",
       "range": {
         "startLine": 39,
         "startChar": 15,
