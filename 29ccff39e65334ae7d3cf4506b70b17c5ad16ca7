@@ -234,6 +234,30 @@
     },
     {
       "key": {
+        "uuid": "6893252b_d2bcc8f0",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T16:24:19Z",
+      "side": 1,
+      "message": "For now, I\u0027m going to keep this as a normal Error status because I think it should be similar to other OOM errors and an application can handle it gracefully if they choose to. FWIW, it\u0027ll still reset the GPU process in Chrome because we don\u0027t have a gracefully way to fallibly allocate shmem right now.",
+      "parentUuid": "e034b88c_36de0777",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
