@@ -63,8 +63,8 @@ namespace dawn_native {
             using BindingInfo::visibility;
         };
 
-        using ModuleBindingInfo =
-            std::array<std::map<BindingNumber, ShaderBindingInfo>, kMaxBindGroups>;
+        using BindingInfoMap = std::map<BindingNumber, ShaderBindingInfo>;
+        using ModuleBindingInfo = std::array<BindingInfoMap, kMaxBindGroups>;
 
         const ModuleBindingInfo& GetBindingInfo() const;
         const std::bitset<kMaxVertexAttributes>& GetUsedVertexAttributes() const;
@@ -76,6 +76,11 @@ namespace dawn_native {
         const FragmentOutputBaseTypes& GetFragmentOutputBaseTypes() const;
 
         MaybeError ValidateCompatibilityWithPipelineLayout(const PipelineLayoutBase* layout) const;
+
+        using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
+        BufferSizesArray GetPipelineMinBufferSizes(const PipelineLayoutBase* layout) const;
+        std::vector<uint64_t> GetBindGroupMinBufferSizes(const BindingInfoMap& shaderMap,
+                                                         const BindGroupLayoutBase* layout) const;
 
         // Functors necessary for the unordered_set<ShaderModuleBase*>-based cache.
         struct HashFunc {

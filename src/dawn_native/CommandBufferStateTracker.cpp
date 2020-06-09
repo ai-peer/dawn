@@ -24,29 +24,50 @@
 
 namespace dawn_native {
 
+    namespace {
+        bool BufferSizesAtLeastAsBig(dawn_native::BindGroupBase* bindGroup,
+                                     const std::vector<uint64_t>& pipelineMinimumBufferSizes) {
+            const uint64_t* boundBufferSizes = bindGroup->GetUnverifiedBufferSizes();
+            uint32_t unverifiedBufferCount = bindGroup->GetLayout()->GetUnverifiedBufferCount();
+            ASSERT(unverifiedBufferCount == pipelineMinimumBufferSizes.size());
+
+            for (size_t i = 0; i < unverifiedBufferCount; ++i) {
+                if (boundBufferSizes[i] < pipelineMinimumBufferSizes[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }  // namespace
+
     enum ValidationAspect {
         VALIDATION_ASPECT_PIPELINE,
         VALIDATION_ASPECT_BIND_GROUPS,
         VALIDATION_ASPECT_VERTEX_BUFFERS,
         VALIDATION_ASPECT_INDEX_BUFFER,
+        VALIDATION_ASPECT_MIN_BUFFER_SIZES,
 
         VALIDATION_ASPECT_COUNT
     };
     static_assert(VALIDATION_ASPECT_COUNT == CommandBufferStateTracker::kNumAspects, "");
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDispatchAspects =
-        1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS;
+        1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZES;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDrawAspects =
         1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
-        1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZES | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kDrawIndexedAspects =
         1 << VALIDATION_ASPECT_PIPELINE | 1 << VALIDATION_ASPECT_BIND_GROUPS |
-        1 << VALIDATION_ASPECT_VERTEX_BUFFERS | 1 << VALIDATION_ASPECT_INDEX_BUFFER;
+        1 << VALIDATION_ASPECT_MIN_BUFFER_SIZES | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS |
+        1 << VALIDATION_ASPECT_INDEX_BUFFER;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kLazyAspects =
-        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
+        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_MIN_BUFFER_SIZES |
+        1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
 
     MaybeError CommandBufferStateTracker::ValidateCanDispatch() {
         return ValidateOperation(kDispatchAspects);
@@ -83,18 +104,29 @@ namespace dawn_native {
         ASSERT((aspects & ~kLazyAspects).none());
 
         if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
-            bool matches = true;
+            bool matchesLayout = true;
+            bool matchesMinBufferSizes = true;
 
-            for (uint32_t i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+            for (uint32_t i :
+                 IterateBitSet(~mVerifiedGroups & mLastPipelineLayout->GetBindGroupLayoutsMask())) {
                 if (mBindgroups[i] == nullptr ||
                     mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout()) {
-                    matches = false;
+                    matchesLayout = false;
                     break;
+                } else if (!BufferSizesAtLeastAsBig(mBindgroups[i], (*mMinimumBufferSizes)[i])) {
+                    matchesMinBufferSizes = false;
+                    break;
+                } else {
+                    mVerifiedGroups.set(i);
                 }
             }
 
-            if (matches) {
+            if (matchesLayout) {
                 mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
+            }
+
+            if (matchesMinBufferSizes) {
+                mAspects.set(VALIDATION_ASPECT_MIN_BUFFER_SIZES);
             }
         }
 
@@ -126,6 +158,10 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Missing bind group");
         }
 
+        if (aspects[VALIDATION_ASPECT_MIN_BUFFER_SIZES]) {
+            return DAWN_VALIDATION_ERROR("Bound buffer too small");
+        }
+
         if (aspects[VALIDATION_ASPECT_PIPELINE]) {
             return DAWN_VALIDATION_ERROR("Missing pipeline");
         }
@@ -145,6 +181,8 @@ namespace dawn_native {
     void CommandBufferStateTracker::SetBindGroup(uint32_t index, BindGroupBase* bindgroup) {
         mBindgroups[index] = bindgroup;
         mAspects.reset(VALIDATION_ASPECT_BIND_GROUPS);
+        mAspects.reset(VALIDATION_ASPECT_MIN_BUFFER_SIZES);
+        mVerifiedGroups.reset(index);
     }
 
     void CommandBufferStateTracker::SetIndexBuffer() {
@@ -157,11 +195,13 @@ namespace dawn_native {
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
         mLastPipelineLayout = pipeline->GetLayout();
+        mMinimumBufferSizes = pipeline->GetMinimumBufferSizes();
 
         mAspects.set(VALIDATION_ASPECT_PIPELINE);
 
         // Reset lazy aspects so they get recomputed on the next operation.
         mAspects &= ~kLazyAspects;
+        mVerifiedGroups.reset();
     }
 
 }  // namespace dawn_native

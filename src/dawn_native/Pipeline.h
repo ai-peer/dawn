@@ -33,15 +33,21 @@ namespace dawn_native {
                                                    const PipelineLayoutBase* layout,
                                                    SingleShaderStage stage);
 
+    using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
+
     class PipelineBase : public CachedObject {
       public:
         wgpu::ShaderStage GetStageMask() const;
         PipelineLayoutBase* GetLayout();
         const PipelineLayoutBase* GetLayout() const;
         BindGroupLayoutBase* GetBindGroupLayout(uint32_t groupIndex);
+        const BufferSizesArray* GetMinimumBufferSizes() const;
 
       protected:
-        PipelineBase(DeviceBase* device, PipelineLayoutBase* layout, wgpu::ShaderStage stages);
+        PipelineBase(DeviceBase* device,
+                     PipelineLayoutBase* layout,
+                     wgpu::ShaderStage stages,
+                     BufferSizesArray bufferSizes);
         PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
       private:
@@ -49,6 +55,7 @@ namespace dawn_native {
 
         wgpu::ShaderStage mStageMask;
         Ref<PipelineLayoutBase> mLayout;
+        BufferSizesArray mMinimumBufferSizes;
     };
 
 }  // namespace dawn_native
