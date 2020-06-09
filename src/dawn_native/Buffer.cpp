@@ -163,14 +163,15 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
 
-        mState = BufferState::MappedAtCreation;
-
         // Mappable buffers don't use a staging buffer.
         if (IsMapWritable()) {
+            mState = BufferState::Mapped;
             DAWN_TRY(MapAtCreationImpl(mappedPointer));
             ASSERT(*mappedPointer != nullptr);
             return {};
         }
+
+        mState = BufferState::MappedAtCreation;
 
         // 0-sized buffers are not supposed to be written to, Return back any non-null pointer.
         if (mSize == 0) {
@@ -209,7 +210,7 @@ namespace dawn_native {
     void BufferBase::CallMapReadCallback(uint32_t serial,
                                          WGPUBufferMapAsyncStatus status,
                                          const void* pointer,
-                                         uint32_t dataLength) {
+                                         uint64_t dataLength) {
         ASSERT(!IsError());
         if (mMapReadCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapWriteCallback == nullptr);
@@ -230,7 +231,7 @@ namespace dawn_native {
     void BufferBase::CallMapWriteCallback(uint32_t serial,
                                           WGPUBufferMapAsyncStatus status,
                                           void* pointer,
-                                          uint32_t dataLength) {
+                                          uint64_t dataLength) {
         ASSERT(!IsError());
         if (mMapWriteCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapReadCallback == nullptr);
@@ -443,7 +444,7 @@ namespace dawn_native {
     }
 
     bool BufferBase::IsMapped() const {
-        return mState == BufferState::Mapped || mState == BufferState::MappedAtCreation;
+        return mState == BufferState::Mapped;
     }
 
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
