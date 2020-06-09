@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d16bf33_27d8cd3b",
+        "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:34:48Z",
+      "side": 1,
+      "message": "typo: successful",
+      "range": {
+        "startLine": 24,
+        "startChar": 48,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "e207d57d62c31c3f8decd4e3e5c507f299fa18cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30e043c3_d50e02c6",
+        "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T22:34:48Z",
+      "side": 1,
+      "message": "The code in PipelineLayout is okay, but would this test have hit the overflow with the original code? It looks like we need at least 21 bindings to overflow. There could be 16 in the first layout, and 5 more in the next.",
+      "revId": "e207d57d62c31c3f8decd4e3e5c507f299fa18cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
