@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a9a4a87_0d949d02",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:42:07Z",
+      "side": 1,
+      "message": "In the Vulkan backend, we had these defined as macros because the call to the Vulkan function could allocate something. If there were actually an error, the allocation would never have happened, so our fuzzing would be inconsistent with errors in real life.\n\nVkBuffer handle \u003d VK_NULL_HANDLE;\nCheckVkSuccess(fn.CreateBuffer(... \u0026handle));\n\nshould leave handle as null if an error happened.\n\nPerhaps this is less of a concern because many (all?) of D3D12\u0027s APIs write out their results into a ComPtr. There\u0027s less that we have to worry about with regards to destruction and lifetimes.\n\nWhat do you think? Maybe there are some state-setting APIs that we need to be concerned about",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c97335e_39d6e18e",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:42:07Z",
+      "side": 1,
+      "message": "was this intended to call INJECT_ERROR_OR_RUN as well? [1]",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebc4e3bc_66d74819",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:42:07Z",
+      "side": 1,
+      "message": "If we inject at [1], we probably shouldn\u0027t double inject here",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
