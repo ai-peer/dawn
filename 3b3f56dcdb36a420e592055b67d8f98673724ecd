@@ -25,6 +25,46 @@
     },
     {
       "key": {
+        "uuid": "18907354_8daeabf5",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "If sameUsagesAcrossSubresources is true, it would be good to only store a single element in the vector, and only \"decompress\" if needed.\n\nWe could have some helper function to help decompress and merge that handle the different cases. Basically it would be good to have a template datastructure that\u0027s maybe \"CompressedSubresourceInformation\u003cT\u003e\" and that can be unit-tested separately. Right now the code looks correct but it\u0027s hard to be 100% sure about it and it\u0027s unclear if everything is covered by tests.",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6591ee41_8be746b8",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "nit: textureUsage.sameUsagesAcrossSubresources \u003d levelCount * layerCount \u003d\u003d subresourceCount",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 66
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e2e9f53_fcbd1b80",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
@@ -48,6 +88,57 @@
     },
     {
       "key": {
+        "uuid": "a7f1b1c9_1ce00663",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "IMHO this helper function doesn\u0027t really improve the readability of TransitionUsageForPass.",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efa731de_dc473698",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "ditto, here mSameLastUsagesAcrossSubresources is going to be true, so we can keep mSubresourceLastUsages compressed and only modify the first element.",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a274ae2b_7c8900ce",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "This could be outside of this if: it\u0027s not 100% clear that this branch will always be used when the resource has an external state. (and while it is the case today, it is brittle and risks breaking in subtle ways later).",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e343a358_00fc484a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -59,6 +150,52 @@
       "writtenOn": "2020-06-09T17:25:25Z",
       "side": 1,
       "message": "ASSERT that mExternalState \u003d\u003d ExternalState::InternalOnly. We should never have to tweak for external usage because multi-subresource textures can\u0027t be external",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9b8e30a_2cd3d5e4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "nit: We avoid the use of \"I\" in code comments because code is a group effort, has collective ocwnership, and TODO are everyone\u0027s responsibility. (The name inside the TODO() is more to know who would have context on the TODO).",
+      "range": {
+        "startLine": 844,
+        "startChar": 40,
+        "endLine": 844,
+        "endChar": 66
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae08cb8_62228bb9",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "nit: extra space.",
+      "range": {
+        "startLine": 844,
+        "startChar": 15,
+        "endLine": 844,
+        "endChar": 16
+      },
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -81,6 +218,29 @@
         "startChar": 9,
         "endLine": 846,
         "endChar": 50
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e8c05ac_923910c1",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T17:29:00Z",
+      "side": 1,
+      "message": "nit: This could just take the whole PassTextureUsage as const\u0026 we might even be able to do something with \"textureUsage\"",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 77,
+        "endChar": 92
       },
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
