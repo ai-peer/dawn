@@ -718,6 +718,13 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
+        // Immediately tag the recording context as unused so we don't try to submit it in Tick.
+        // Immediately tag the recording context as unused so we don't try to submit it in Tick.
+        if (mRecordingContext.used) {
+            mRecordingContext.used = false;
+            fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
+        }
+
         VkResult waitIdleResult = VkResult::WrapUnsafe(fn.QueueWaitIdle(mQueue));
         // Ignore the result of QueueWaitIdle: it can return OOM which we can't really do anything
         // about, Device lost, which means workloads running on the GPU are no longer accessible
@@ -769,8 +776,10 @@ namespace dawn_native { namespace vulkan {
         // deinitialization.
 
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
-        mRecordingContext.used = false;
-        fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
+        if (mRecordingContext.used) {
+            mRecordingContext.used = false;
+            fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
+        }
 
         for (VkSemaphore semaphore : mRecordingContext.waitSemaphores) {
             fn.DestroySemaphore(mVkDevice, semaphore, nullptr);
@@ -782,8 +791,15 @@ namespace dawn_native { namespace vulkan {
         }
         mRecordingContext.signalSemaphores.clear();
 
-        // Assert that errors are device loss so that we can continue with destruction
-        AssertAndIgnoreDeviceLossError(TickImpl());
+        RecycleCompletedCommands();
+
+        for (Ref<BindGroupLayout>& bgl :
+             mBindGroupLayoutsPendingDeallocation.IterateUpTo(GetCompletedCommandSerial())) {
+            bgl->FinishDeallocation(GetCompletedCommandSerial());
+        }
+        mBindGroupLayoutsPendingDeallocation.ClearUpTo(GetCompletedCommandSerial());
+
+        mResourceMemoryAllocator->Tick(GetCompletedCommandSerial());
 
         ASSERT(mCommandsInFlight.Empty());
         for (const CommandPoolAndBuffer& commands : mUnusedCommands) {
