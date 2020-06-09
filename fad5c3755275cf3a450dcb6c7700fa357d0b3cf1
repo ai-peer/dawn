@@ -16,6 +16,24 @@
       "revId": "fad5c3755275cf3a450dcb6c7700fa357d0b3cf1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96609299_8f24830c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T04:37:11Z",
+      "side": 1,
+      "message": "Re-think about this today. Found that we do have a solution to combine barriers into one single barrier without looping over each subresource. This solution can\u0027t capture all situations at the front-end, but it is probably a good balance between the perf improvement it can achieve and the overhead it will introduce. PTAL.",
+      "parentUuid": "36b5432a_fe30ea35",
+      "revId": "fad5c3755275cf3a450dcb6c7700fa357d0b3cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
