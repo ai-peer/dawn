@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "a743f913_12d96a26",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Ack\n\nAdded a TODO at [1].",
+      "parentUuid": "18907354_8daeabf5",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdb83a04_6736e046",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done. \n\nYes. the new name is better. And I have already added a comment that we can deliberately use several texture views to cover the whole texture, and each view might have same texture usage(s) across all subresources. But we can\u0027t capture that situation. However, I suppose devs woun\u0027t use that a lot. \n\nThe case you said that we still use multiple barriers is true. Right now this patch is for pass. I will do the similar optimization for operations outside a pass like copy and clear and initialization. I have already added a TODO at [2]",
+      "parentUuid": "608cdd23_79caa35c",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6591ee41_8be746b8",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 8
@@ -62,6 +104,30 @@
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48d2aae9_c41624d0",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done. Perfect!",
+      "parentUuid": "6591ee41_8be746b8",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 66
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "7e8e9788_128e0ea5",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Ack. \n\nMy original intention was to do a tiny optimization, in which we don\u0027t need to do the multiplication in if-else a lot (maybe only one time during the first time). But Corentin\u0027s suggestion is so simple, which overshadow the tiny optimization.",
+      "parentUuid": "2e2e9f53_fcbd1b80",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f1b1c9_1ce00663",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -102,6 +192,47 @@
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d51f72b0_edcf288d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Hmm. The only upside of this function is that we don\u0027t need to replicate code snippet [3] for a few times (3 times right now).",
+      "parentUuid": "a7f1b1c9_1ce00663",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5676a417_a153ea39",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 732,
+        "endChar": 9
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "bec56ca2_e259514e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Ack\n\nLet\u0027s do this when we do the compression/decompression optimization at TODO[1]",
+      "parentUuid": "efa731de_dc473698",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a274ae2b_7c8900ce",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -139,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "a8de09b8_4c6baeaf",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a274ae2b_7c8900ce",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e343a358_00fc484a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -153,6 +320,24 @@
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c8ddb9b_f52810d1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Now that we moved the external texture stuff outside of this big if-else. And we have already had an ASSERT in TweakTransitionForExternalUsage. Looks like we don\u0027t need this ASSERT? And Corentin mentioned that this ASSERT is not 100% correct.",
+      "parentUuid": "e343a358_00fc484a",
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -202,6 +387,54 @@
     },
     {
       "key": {
+        "uuid": "02633a3d_1dd5b7ec",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done\n\nGood to know this.",
+      "parentUuid": "f9b8e30a_2cd3d5e4",
+      "range": {
+        "startLine": 844,
+        "startChar": 40,
+        "endLine": 844,
+        "endChar": 66
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50c4e182_a38919a1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae08cb8_62228bb9",
+      "range": {
+        "startLine": 844,
+        "startChar": 15,
+        "endLine": 844,
+        "endChar": 16
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "384405ee_cca9578e",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -222,6 +455,30 @@
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fa85d70_f649db95",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done\n\nGood catch. This tiny change can benefit the upcoming texture usage in a pass. The comment intent to do optimization for operations outside a pass (like copy, clear, initialization, etc.).",
+      "parentUuid": "384405ee_cca9578e",
+      "range": {
+        "startLine": 844,
+        "startChar": 9,
+        "endLine": 846,
+        "endChar": 50
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -248,6 +505,30 @@
     },
     {
       "key": {
+        "uuid": "eda206e4_634d7da1",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e8c05ac_923910c1",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 77,
+        "endChar": 92
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f92bc50_e36d03a8",
         "filename": "src/dawn_native/vulkan/TextureVk.h",
         "patchSetId": 8
@@ -268,6 +549,30 @@
       "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5878c9ad_8f72f6b7",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T19:06:51Z",
+      "side": 1,
+      "message": "Ack. Actually I am doing this in another patch. We have these parameters in front-end too.",
+      "parentUuid": "4f92bc50_e36d03a8",
+      "range": {
+        "startLine": 120,
+        "startChar": 35,
+        "endLine": 123,
+        "endChar": 54
+      },
+      "revId": "3b3f56dcdb36a420e592055b67d8f98673724ecd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
