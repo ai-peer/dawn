@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "c0a0641d_a23bb33a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-09T21:23:22Z",
+      "side": 1,
+      "message": "Ack\n\nThat\u0027s true. It is absolutely OK to assign mSubresourceLastUsages[0] only for the current pass. And we can either use mSubresourceLastUsages[0] afterwards if mDefinitelySameLastUsagesAcrossSubresources is true or spread mSubresourceLastUsages[0] to other subresources once mDefinitelySameLastUsagesAcrossSubresource switches to false. That\u0027s not a tiny change. Let\u0027s revisit this when we compress/decompress the vector, as the TODO I added in PassResourceUsage.h.",
+      "parentUuid": "5b180b22_8082f021",
+      "range": {
+        "startLine": 772,
+        "startChar": 16,
+        "endLine": 774,
+        "endChar": 17
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9f7c6ab_2a35bc3d",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 9
