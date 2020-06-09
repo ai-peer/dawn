@@ -39,6 +39,24 @@
       "revId": "e207d57d62c31c3f8decd4e3e5c507f299fa18cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "830fea84_c77049f5",
+        "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-09T23:36:44Z",
+      "side": 1,
+      "message": "Only N\u003d8 dynamic offsets is needed to overflow the array of root table parameters. So, this case of N\u003d12 easily go OOB, if not fixed (note: same as CTS test-case).",
+      "parentUuid": "30e043c3_d50e02c6",
+      "revId": "e207d57d62c31c3f8decd4e3e5c507f299fa18cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
