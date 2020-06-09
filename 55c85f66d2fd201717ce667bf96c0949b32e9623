@@ -22,6 +22,30 @@
       "revId": "55c85f66d2fd201717ce667bf96c0949b32e9623",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d94be81a_45b7a71f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 0,
+      "message": "Added in via another CL",
+      "parentUuid": "b05fe308_b04e4508",
+      "range": {
+        "startLine": 146,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 39
+      },
+      "revId": "55c85f66d2fd201717ce667bf96c0949b32e9623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e34ac7b2_32cc6f93",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e8764b_0b420cb0",
+      "range": {
+        "startLine": 286,
+        "startChar": 13,
+        "endLine": 286,
+        "endChar": 41
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27a4018f_aa53c653",
         "filename": "src/dawn_native/BindGroupLayout.h",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8d142c7_9e84fb5c",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27a4018f_aa53c653",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c196d8a5_53e4c0ba",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "260d586c_2d8fb893",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 97
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c69054bc_befd31d3",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2020-06-05T21:58:08Z",
       "side": 1,
       "message": "It makes me sad that we have to make this map and then turn it back into a packed vector.\nAlso, I\u0027m not sure this will always do what we want. Bindings are sorted as:\n\nall buffers first, then:\n\n|---dynamic buffers sorted by binding #----|---- non-dynamic buffers sorted by type (not #)--|\n\nMaybe we should instead add the binding number to the BGL bindingInfo.\n\nThat way we can just do\n\nstd::vector bufferSizesPacked(GetUnverifiedBufferCount());\n\nfor (bindingIndex : 0..GetBufferCount()) {\n   if (bindingInfo[bindingIndex].minimumBufferSize \u003d\u003d 0) {\n     shaderInfo \u003d shaderBindingInfo[group].find(bindingInfo[bindingIndex].bindingNumber]);\n     // stuff\n\n     bufferSizesPacked[curr++] \u003d minimumBufferSize;\n   }\n}",
+      "range": {
+        "startLine": 895,
+        "startChar": 8,
+        "endLine": 898,
+        "endChar": 51
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa279da_51004025",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 1,
+      "message": "I added \"binding\" to the info, matching the descriptor on the spec. This seems to work!",
+      "parentUuid": "c69054bc_befd31d3",
       "range": {
         "startLine": 895,
         "startChar": 8,
@@ -114,6 +210,30 @@
       "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83e84f51_b6ebc27c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-09T21:06:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5987514e_dab0686d",
+      "range": {
+        "startLine": 911,
+        "startChar": 28,
+        "endLine": 913,
+        "endChar": 58
+      },
+      "revId": "8871f62cd38ebae8054e14f00fbeb24e36ea8775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
