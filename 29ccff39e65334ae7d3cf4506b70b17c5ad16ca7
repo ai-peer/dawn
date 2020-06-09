@@ -162,6 +162,30 @@
     },
     {
       "key": {
+        "uuid": "76699edf_5680c28b",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "Since this isn\u0027t chromium code we can\u0027t just CHECK here; maybe we want a WGPUBufferMapAsyncStatus that says \"crash now\"? Or maybe just \"lose device now\".\n\n(Philosophically \"Unknown\" probably should mean \"crash now\", but I think we are currently using it for cases where we shouldn\u0027t crash.)",
+      "parentUuid": "67b8f097_04c86546",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -215,6 +239,24 @@
     },
     {
       "key": {
+        "uuid": "fb18866a_e1bdc97d",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "I prefer ClientDeviceCreateErrorBuffer personally",
+      "parentUuid": "dab22fb8_38f81fe2",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3fa270f_2d1b8f02",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -226,6 +268,23 @@
       "writtenOn": "2020-06-05T12:24:07Z",
       "side": 1,
       "message": "ditto here and below.",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11ae32fb_ddff7c0c",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "What\u0027s the lower bound for failing gracefully? If we\u0027re passing 2**64-1 into the driver it might be failing early since that\u0027s too extremely large. Maybe we can (also) test a value that\u0027s technically reasonable, but definitely going to OOM, like 64GiB (2**36)?\n\nAlso, does size need to be aligned? (2**64-1 is not, and if we round it up in any backend we\u0027ll get 0)\n\nSame concerns below.",
       "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -249,6 +308,23 @@
     },
     {
       "key": {
+        "uuid": "2635e3f0_1301339c",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "MapWrite can only be used with CopySrc.\n\nPerhaps these tests should have control cases?",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05ecbe91_3bda9813",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 5
@@ -266,6 +342,46 @@
         "endLine": 482,
         "endChar": 21
       },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56601176_8c7c5161",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "nit: mapping",
+      "range": {
+        "startLine": 509,
+        "startChar": 13,
+        "endLine": 509,
+        "endChar": 21
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "173994a2_adde8161",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-09T00:20:22Z",
+      "side": 1,
+      "message": "same",
       "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
