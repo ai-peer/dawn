@@ -126,6 +126,7 @@ namespace dawn_native {
                 // complete before proceeding with destruction.
                 // Assert that errors are device loss so that we can continue with destruction
                 AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+                AssertAndIgnoreDeviceLossError(TickImpl());
                 AssumeCommandsComplete();
                 break;
 
@@ -186,6 +187,7 @@ namespace dawn_native {
             // Assert that errors are device losses so that we can continue with destruction.
             // Assume all commands are complete after WaitForIdleForDestruction (because they were)
             AssertAndIgnoreDeviceLossError(WaitForIdleForDestruction());
+            AssertAndIgnoreDeviceLossError(TickImpl());
             AssumeCommandsComplete();
             ASSERT(mFutureCallbackSerial <= mCompletedSerial);
             mState = State::Disconnected;
