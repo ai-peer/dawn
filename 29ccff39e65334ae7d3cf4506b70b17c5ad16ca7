@@ -186,6 +186,30 @@
     },
     {
       "key": {
+        "uuid": "af6e3765_49c0618d",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:50:25Z",
+      "side": 1,
+      "message": "Well actually, I\u0027m not so sure. I think it\u0027s very possible to hit this condition trying to allocate a bunch of shared memory. I don\u0027t think we should just throw device lost. It\u0027s not only giant allocations we have to worry about. An app that has a ton of normalize-size allocations, or is managing their own really big upload ring buffer could hit this.\n\nThat being said, I don\u0027t think Chrome has the ability to gracefully fail a shmem allocation right now, but I think we should make it so that\u0027s possible.",
+      "parentUuid": "76699edf_5680c28b",
+      "range": {
+        "startLine": 73,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d719b3bb_1fa16b06",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -285,6 +309,24 @@
       "writtenOn": "2020-06-09T00:20:22Z",
       "side": 1,
       "message": "What\u0027s the lower bound for failing gracefully? If we\u0027re passing 2**64-1 into the driver it might be failing early since that\u0027s too extremely large. Maybe we can (also) test a value that\u0027s technically reasonable, but definitely going to OOM, like 64GiB (2**36)?\n\nAlso, does size need to be aligned? (2**64-1 is not, and if we round it up in any backend we\u0027ll get 0)\n\nSame concerns below.",
+      "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65ad9c6_d46936ab",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-09T01:50:25Z",
+      "side": 1,
+      "message": "Backends that do alignment check the size first and will OOM if something doesn\u0027t work out. So yea I guess we should test with a smaller value too.",
+      "parentUuid": "11ae32fb_ddff7c0c",
       "revId": "29ccff39e65334ae7d3cf4506b70b17c5ad16ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
