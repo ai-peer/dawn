@@ -77,6 +77,12 @@ namespace dawn_native {
 
         bool IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const;
 
+        using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
+        BufferSizesArray GetPipelineMinBufferSizes(const PipelineLayoutBase* layout) const;
+        std::vector<uint64_t> GetBindGroupMinBufferSizes(
+            const std::map<BindingNumber, ShaderBindingInfo>& shaderMap,
+            const BindGroupLayoutBase* layout) const;
+
         // Functors necessary for the unordered_set<ShaderModuleBase*>-based cache.
         struct HashFunc {
             size_t operator()(const ShaderModuleBase* module) const;
@@ -98,7 +104,9 @@ namespace dawn_native {
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
-        bool IsCompatibleWithBindGroupLayout(size_t group, const BindGroupLayoutBase* layout) const;
+        bool IsCompatibleWithBindGroupLayout(
+            const std::map<BindingNumber, ShaderBindingInfo>& shaderMap,
+            const BindGroupLayoutBase* layout) const;
 
         // Different implementations reflection into the shader depending on
         // whether using spvc, or directly accessing spirv-cross.

@@ -555,6 +555,12 @@ namespace dawn_native {
                         info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         break;
                     }
+                    case wgpu::BindingType::UniformBuffer:
+                    case wgpu::BindingType::StorageBuffer:
+                    case wgpu::BindingType::ReadonlyStorageBuffer:
+                        // TODO(idanr): add minimumBufferSize to spvc
+                        info->minimumBufferSize = 0;
+                        break;
                     default:
                         break;
                 }
@@ -708,6 +714,14 @@ namespace dawn_native {
                 ShaderBindingInfo* info = &it.first->second;
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
+
+                if (bindingType == wgpu::BindingType::UniformBuffer ||
+                    bindingType == wgpu::BindingType::StorageBuffer) {
+                    // Determine buffer size, with a minimum of 1 element in the runtime array
+                    spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
+                    info->minimumBufferSize =
+                        compiler.get_declared_struct_size_runtime_array(type, 1);
+                }
 
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
@@ -864,11 +878,45 @@ namespace dawn_native {
         return mExecutionModel;
     }
 
+    BufferSizesArray ShaderModuleBase::GetPipelineMinBufferSizes(
+        const PipelineLayoutBase* layout) const {
+        BufferSizesArray bufferSizes;
+        for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            bufferSizes[group] =
+                GetBindGroupMinBufferSizes(mBindingInfo[group], layout->GetBindGroupLayout(group));
+        }
+
+        return bufferSizes;
+    }
+
+    std::vector<uint64_t> ShaderModuleBase::GetBindGroupMinBufferSizes(
+        const std::map<BindingNumber, ShaderBindingInfo>& shaderMap,
+        const BindGroupLayoutBase* layout) const {
+        std::vector<uint64_t> bufferSizesPacked(layout->GetUnverifiedBufferCount());
+        size_t packed_i = 0;
+
+        for (size_t bindingIndex = 0; bindingIndex < layout->GetBufferCount(); ++bindingIndex) {
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
+            if (bindingInfo.minimumBufferSize == 0) {
+                const auto& shaderInfo = shaderMap.find(bindingInfo.binding);
+                if (shaderInfo != shaderMap.end()) {
+                    bufferSizesPacked[packed_i] = shaderInfo->second.minimumBufferSize;
+                } else {
+                    bufferSizesPacked[packed_i] = 0;
+                }
+                ++packed_i;
+            }
+        }
+
+        return bufferSizesPacked;
+    }
+
     bool ShaderModuleBase::IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const {
         ASSERT(!IsError());
 
         for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-            if (!IsCompatibleWithBindGroupLayout(group, layout->GetBindGroupLayout(group))) {
+            if (!IsCompatibleWithBindGroupLayout(mBindingInfo[group],
+                                                 layout->GetBindGroupLayout(group))) {
                 return false;
             }
         }
@@ -883,7 +931,7 @@ namespace dawn_native {
     }
 
     bool ShaderModuleBase::IsCompatibleWithBindGroupLayout(
-        size_t group,
+        const std::map<BindingNumber, ShaderBindingInfo>& shaderMap,
         const BindGroupLayoutBase* layout) const {
         ASSERT(!IsError());
 
@@ -891,7 +939,7 @@ namespace dawn_native {
 
         // Iterate over all bindings used by this group in the shader, and find the
         // corresponding binding in the BindGroupLayout, if it exists.
-        for (const auto& it : mBindingInfo[group]) {
+        for (const auto& it : shaderMap) {
             BindingNumber bindingNumber = it.first;
             const ShaderBindingInfo& moduleInfo = it.second;
 
@@ -957,7 +1005,13 @@ namespace dawn_native {
 
                 case wgpu::BindingType::UniformBuffer:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
-                case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::StorageBuffer: {
+                    if (bindingInfo.minimumBufferSize != 0 &&
+                        moduleInfo.minimumBufferSize > bindingInfo.minimumBufferSize) {
+                        return false;
+                    }
+                    break;
+                }
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
                     break;
