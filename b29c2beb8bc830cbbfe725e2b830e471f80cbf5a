@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad3f3f6e_256c3cdd",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-10T19:21:12Z",
+      "side": 1,
+      "message": "Perhaps I\u0027m misunderstanding, but do we actually need to support a 1.0 ICD? Could we not simply require 1.1 at launch? What\u0027s the proportion of 1.0-only devices/drivers out there?",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "540aaf21_48cfb7da",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-10T19:21:12Z",
+      "side": 1,
+      "message": "Nit: function could be const?",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f53c7438_a4bcba8c",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-10T19:21:12Z",
+      "side": 1,
+      "message": "Nit: the were -\u003e they were\n\nAlthough I\u0027d actually phrase this in the singular: \"if the were promoted\" -\u003e \"if that entry was promoted\"",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
