@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d095e0a9_1d8bd84b",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T21:35:58Z",
+      "side": 1,
+      "message": "nit: 4MiB",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c01bacbc_88b736ea",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T21:35:58Z",
+      "side": 1,
+      "message": "This is not quite right, I think it\u0027s rounding down to the nearest power of 2 less than mMemoryHeapSize, then rounding that down again to the nearest multiple of kBuddyHeapsSize.\n\nAny power of 2 is always going to be a multiple of kBuddyHeapsSize, unless it\u0027s smaller than kBuddyHeapsSize, in which case this expression would come out to 0.",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec31d22a_14992fc2",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T21:35:58Z",
+      "side": 1,
+      "message": "for later: Perhaps for stability we could early-out in Dawn if the requested allocation is larger than the system\u0027s entire VRAM?",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
