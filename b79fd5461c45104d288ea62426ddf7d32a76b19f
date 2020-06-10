@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "f68c8d8a_92d4df56",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-10T17:17:31Z",
+      "side": 1,
+      "message": "To make E_FAKE_ERROR_FOR_TESTING HRESULT, I did use the link provided. 0x87FFFFFF corresponds to:\nSeverity \u003d 1 (error)\nReserved bits \u003d 0\nFacility \u003d all 1s (To ensure no overlap with existing or future facilities)\nCode \u003d all 1s (To ensure no overlap with existing or future error codes)\n\nBut yeah, I wasn\u0027t aware of the MAKE_HRESULT macro and using it would demystify this.",
+      "parentUuid": "3733bff7_bb8d86f5",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 90
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f17a31cd_69792200",
         "filename": "src/dawn_native/d3d12/D3D12Error.h",
         "patchSetId": 4
