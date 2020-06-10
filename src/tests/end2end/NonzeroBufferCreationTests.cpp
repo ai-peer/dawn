@@ -21,6 +21,10 @@ class NonzeroBufferCreationTests : public DawnTest {};
 // Verify that each byte of the buffer has all been initialized to 1 with the toggle enabled when it
 // is created with CopyDst usage.
 TEST_P(NonzeroBufferCreationTests, BufferCreationWithCopyDstUsage) {
+    // Calling CmdFillBuffer() causes timeouts on the try bot (with older Windows Intel Vulkan
+    // drivers) This issue cannot be reproduced on the latest Windows Intel driver.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
     constexpr uint32_t kSize = 32u;
 
     wgpu::BufferDescriptor descriptor;
@@ -37,6 +41,11 @@ TEST_P(NonzeroBufferCreationTests, BufferCreationWithCopyDstUsage) {
 // Verify that each byte of the buffer has all been initialized to 1 with the toggle enabled when it
 // is created without CopyDst usage.
 TEST_P(NonzeroBufferCreationTests, BufferCreationWithoutCopyDstUsage) {
+    // Calling CmdFillBuffer() causes timeouts on the try bot (with older Windows Intel Vulkan
+    // drivers)
+    // This issue cannot be reproduced on the latest Windows Intel driver.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
     constexpr uint32_t kSize = 32u;
 
     wgpu::BufferDescriptor descriptor;
@@ -51,4 +60,5 @@ TEST_P(NonzeroBufferCreationTests, BufferCreationWithoutCopyDstUsage) {
 }
 
 DAWN_INSTANTIATE_TEST(NonzeroBufferCreationTests,
-                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}));
+                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
