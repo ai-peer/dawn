@@ -16,6 +16,7 @@
 #define DAWNNATIVE_COMMANDBUFFERSTATETRACKER_H
 
 #include "common/Constants.h"
+#include "dawn_native/BindingInfo.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 
@@ -40,7 +41,7 @@ namespace dawn_native {
         void SetIndexBuffer();
         void SetVertexBuffer(uint32_t slot);
 
-        static constexpr size_t kNumAspects = 4;
+        static constexpr size_t kNumAspects = 5;
         using ValidationAspects = std::bitset<kNumAspects>;
 
       private:
@@ -57,6 +58,9 @@ namespace dawn_native {
 
         PipelineLayoutBase* mLastPipelineLayout = nullptr;
         RenderPipelineBase* mLastRenderPipeline = nullptr;
+
+        const BufferSizesArray* mMinimumBufferSizes = nullptr;
+        std::bitset<kMaxBindGroups> mVerifiedGroups;
     };
 
 }  // namespace dawn_native
