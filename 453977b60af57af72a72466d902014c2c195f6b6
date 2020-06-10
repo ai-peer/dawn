@@ -48,6 +48,120 @@
     },
     {
       "key": {
+        "uuid": "6fe85782_5ab6d82c",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "This seems to be used in exactly the same way as VALIDATION_ASPECT_BIND_GROUPS so maybe they could be merged.",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c402cf0_88cbe2b1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "Maybe this verified groups optimization could be done in a follow-up and merged with the validation aspects (so they start with BG0 to BG3, then the other aspects? WDYT?)",
+      "range": {
+        "startLine": 111,
+        "startChar": 32,
+        "endLine": 111,
+        "endChar": 47
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96ae8f66_f624164d",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "nit: Maybe this could further explore why the aspect is not set and produce different errors.",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51c62841_19aaac1a",
+        "filename": "src/dawn_native/ComputePipeline.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "Maybe this could use std::move()",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef276cf4_1db4b2a7",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e300c52f_39a41bef",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b298b78b_743fe487",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 20
@@ -65,6 +179,23 @@
         "endLine": 196,
         "endChar": 27
       },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "161ae70e_500def4e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "nit: Maybe this could use std::move()",
       "revId": "453977b60af57af72a72466d902014c2c195f6b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -111,6 +242,74 @@
         "endLine": 904,
         "endChar": 19
       },
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85cd4c31_32af6ccb",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "nit: ASSERT(packed_i \u003c bufferSizesPacked.size());",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e34b4cb4_2b6f8afa",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "+1, that\u0027s probably fine.",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97aa25df_90f4783d",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "This is the same as [1]. Maybe the two definitions could be merged and put in BindingInfo.h.",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ec6bde9_986d9704",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T14:51:44Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this is ever called outside of ShaderModule.cpp so it could be private method.",
       "revId": "453977b60af57af72a72466d902014c2c195f6b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
