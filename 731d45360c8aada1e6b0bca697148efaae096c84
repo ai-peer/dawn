@@ -101,6 +101,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "924c1784_fc805b3b",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T23:58:24Z",
+      "side": 1,
+      "message": "Actually, inline might still be allowed even if it\u0027s passed by reference. I thought it wasn\u0027t but I just did this in some other code.",
+      "parentUuid": "4c6f6e6e_88cd43b6",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
