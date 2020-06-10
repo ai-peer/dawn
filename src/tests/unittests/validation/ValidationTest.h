@@ -28,6 +28,14 @@
     do {                                                        \
     } while (0)
 
+// Skip a test when the given condition is satisfied.
+#define DAWN_SKIP_TEST_IF(condition)                         \
+    do {                                                     \
+        if (condition) {                                     \
+            GTEST_SKIP() << "Test skipped: " #condition "."; \
+        }                                                    \
+    } while (0)
+
 class ValidationTest : public testing::Test {
   public:
     ValidationTest();
