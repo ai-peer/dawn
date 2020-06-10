@@ -16,6 +16,24 @@
       "revId": "e9c3a07b41f926e7a4867cb4f00ed2bd80fa47e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2bfcf98_97919ca2",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-10T01:11:02Z",
+      "side": 1,
+      "message": "although getting rid of the TickImpl call here does match the other backends.",
+      "parentUuid": "a81d5611_d3f39b46",
+      "revId": "e9c3a07b41f926e7a4867cb4f00ed2bd80fa47e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
