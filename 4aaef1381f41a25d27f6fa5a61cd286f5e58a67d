@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8848919e_a50c4cdc",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T00:30:15Z",
+      "side": 1,
+      "message": "typo: Vulkan",
+      "range": {
+        "startLine": 213,
+        "startChar": 91,
+        "endLine": 213,
+        "endChar": 96
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "945a55d4_61899770",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T00:30:15Z",
+      "side": 1,
+      "message": "uunit: extra newline",
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd10368d_05482027",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T00:30:15Z",
+      "side": 1,
+      "message": "May as well make this max uint32_t",
+      "range": {
+        "startLine": 26,
+        "startChar": 35,
+        "endLine": 26,
+        "endChar": 61
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed3fc00a_0e11539c",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T00:30:15Z",
+      "side": 1,
+      "message": "Why extern? Also, you only ever use these in VulkanExtensions.cpp, so they could be local to that file. Unless you were planning to use these in other places where we have VK_MAKE_VERSION",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
