@@ -136,11 +136,22 @@ namespace dawn_native { namespace vulkan {
     static constexpr size_t kDeviceExtCount = static_cast<size_t>(DeviceExt::EnumCount);
     static constexpr std::array<DeviceExtInfo, kDeviceExtCount> sDeviceExtInfos{{
         //
+        {DeviceExt::BindMemory2, "VK_KHR_bind_memory2", VulkanVersion_1_1},
         {DeviceExt::Maintenance1, "VK_KHR_maintenance1", VulkanVersion_1_1},
+        {DeviceExt::StorageBufferStorageClass, "VK_KHR_storage_buffer_storage_class", VulkanVersion_1_1},
+        {DeviceExt::GetPhysicalDeviceProperties2, "VK_KHR_get_physical_device_properties2",
+         VulkanVersion_1_1},
+        {DeviceExt::GetMemoryRequirements2, "VK_KHR_get_memory_requirements2", VulkanVersion_1_1},
+        {DeviceExt::ExternalMemoryCapabilities, "VK_KHR_external_memory_capabilities",
+         VulkanVersion_1_1},
+        {DeviceExt::ExternalSemaphoreCapabilities, "VK_KHR_external_semaphore_capabilities",
+         VulkanVersion_1_1},
         {DeviceExt::ExternalMemory, "VK_KHR_external_memory", VulkanVersion_1_1},
         {DeviceExt::ExternalSemaphore, "VK_KHR_external_semaphore", VulkanVersion_1_1},
         {DeviceExt::_16BitStorage, "VK_KHR_16bit_storage", VulkanVersion_1_1},
+        {DeviceExt::SamplerYCbCrConversion, "VK_KHR_sampler_ycbcr_conversion", VulkanVersion_1_1},
 
+        {DeviceExt::ImageFormatList, "VK_KHR_image_format_list", VulkanVersion_1_2},
         {DeviceExt::ShaderFloat16Int8, "VK_KHR_shader_float16_int8", VulkanVersion_1_2},
 
         {DeviceExt::ExternalMemoryFD, "VK_KHR_external_memory_fd", NeverPromoted},
@@ -195,6 +206,29 @@ namespace dawn_native { namespace vulkan {
 
             bool hasDependencies = false;
             switch (ext) {
+                // Happy extensions don't need anybody else!
+                case DeviceExt::BindMemory2:
+                case DeviceExt::GetMemoryRequirements2:
+                case DeviceExt::Maintenance1:
+                case DeviceExt::ImageFormatList:
+                case DeviceExt::StorageBufferStorageClass:
+                    hasDependencies = true;
+                    break;
+
+                // Physical devices extensions technically don't require the instance to support
+                // them but VulkanFunctions only loads the function pointers if the instance
+                // advertises the extension. So if we didn't have this check, we'd risk a calling
+                // a nullptr.
+                case DeviceExt::GetPhysicalDeviceProperties2:
+                    hasDependencies = instanceExts.Has(InstanceExt::GetPhysicalDeviceProperties2);
+                    break;
+                case DeviceExt::ExternalMemoryCapabilities:
+                    hasDependencies = instanceExts.Has(InstanceExt::ExternalMemoryCapabilities);
+                    break;
+                case DeviceExt::ExternalSemaphoreCapabilities:
+                    hasDependencies = instanceExts.Has(InstanceExt::ExternalSemaphoreCapabilities);
+                    break;
+
                 case DeviceExt::DebugMarker:
                     // TODO(cwallez@chromium.org): VK_KHR_debug_report is deprecated, switch to
                     // using VK_KHR_debug_utils instead.
@@ -202,51 +236,38 @@ namespace dawn_native { namespace vulkan {
                     break;
 
                 case DeviceExt::ImageDrmFormatModifier:
-                    // TODO(cwallez@chromium.org): ImageDrmFormatModifier actually requires:
-                    //  - VK_KHR_bind_memory2
-                    //  - VK_KHR_image_format_list
-                    //  - VK_KHR_sampler_ycbcr_conversion
-                    //
-                    // Also switch to using DeviceExt::GetPhysicalDeviceProperties2 when we decouple
-                    // Instance / Device physical device extensions.
-                    hasDependencies = instanceExts.Has(InstanceExt::GetPhysicalDeviceProperties2);
+                    hasDependencies = HasDep(DeviceExt::GetPhysicalDeviceProperties2) &&
+                                      HasDep(DeviceExt::BindMemory2) &&
+                                      HasDep(DeviceExt::ImageFormatList) &&
+                                      HasDep(DeviceExt::SamplerYCbCrConversion);
                     break;
 
                 case DeviceExt::Swapchain:
                     hasDependencies = instanceExts.Has(InstanceExt::Surface);
                     break;
 
-                case DeviceExt::Maintenance1:
-                    hasDependencies = true;
+                case DeviceExt::SamplerYCbCrConversion:
+                    hasDependencies = HasDep(DeviceExt::GetPhysicalDeviceProperties2) &&
+                                      HasDep(DeviceExt::BindMemory2) &&
+                                      HasDep(DeviceExt::GetMemoryRequirements2) &&
+                                      HasDep(DeviceExt::Maintenance1);
                     break;
 
                 case DeviceExt::ShaderFloat16Int8:
-                    // TODO(cwallez@chromium.org): switch to using
-                    // DeviceExt::GetPhysicalDeviceProperties2 when we decouple Instance / Device
-                    // physical device extensions.
-                    hasDependencies = instanceExts.Has(InstanceExt::GetPhysicalDeviceProperties2);
+                    hasDependencies = HasDep(DeviceExt::GetPhysicalDeviceProperties2);
                     break;
 
                 case DeviceExt::ExternalMemory:
-                    // TODO(cwallez@chromium.org): switch to using
-                    // DeviceExt::ExternalMemoryCapabilities when we decouple Instance / Device
-                    // physical device extensions.
-                    hasDependencies = instanceExts.Has(InstanceExt::ExternalMemoryCapabilities);
+                    hasDependencies = HasDep(DeviceExt::ExternalMemoryCapabilities);
                     break;
 
                 case DeviceExt::ExternalSemaphore:
-                    // TODO(cwallez@chromium.org): switch to using
-                    // DeviceExt::ExternalSemaphoreCapabilities when we decouple Instance / Device
-                    // physical device extensions.
-                    hasDependencies = instanceExts.Has(InstanceExt::ExternalSemaphoreCapabilities);
+                    hasDependencies = HasDep(DeviceExt::ExternalSemaphoreCapabilities);
                     break;
 
                 case DeviceExt::_16BitStorage:
-                    // TODO(cwallez@chromium.org): switch to using
-                    // DeviceExt::GetPhysicalDeviceProperties2 when we decouple Instance / Device
-                    // physical device extensions.
-                    // Also depends on VK_KHR_storage_buffer_storage_class
-                    hasDependencies = instanceExts.Has(InstanceExt::GetPhysicalDeviceProperties2);
+                    hasDependencies = HasDep(DeviceExt::GetPhysicalDeviceProperties2) &&
+                                      HasDep(DeviceExt::StorageBufferStorageClass);
                     break;
 
                 case DeviceExt::ExternalMemoryFD:
