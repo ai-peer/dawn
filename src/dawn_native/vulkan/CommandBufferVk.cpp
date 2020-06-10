@@ -446,11 +446,12 @@ namespace dawn_native { namespace vulkan {
                         ComputeBufferImageCopyRegion(src, dst, copy->copySize);
                     VkImageSubresourceLayers subresource = region.imageSubresource;
 
+                    SubresourceRange range = {subresource.mipLevel, 1, subresource.baseArrayLayer,
+                                              1};
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       subresource.mipLevel)) {
                         // Since texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(
-                            true, subresource.mipLevel, 1, subresource.baseArrayLayer, 1);
+                        dst.texture->SetIsSubresourceContentInitialized(true, range);
                     } else {
                         ToBackend(dst.texture)
                             ->EnsureSubresourceContentInitialized(recordingContext,
@@ -512,11 +513,12 @@ namespace dawn_native { namespace vulkan {
                     ToBackend(src.texture)
                         ->EnsureSubresourceContentInitialized(recordingContext, src.mipLevel, 1,
                                                               src.arrayLayer, 1);
+                    SubresourceRange dstRange = {dst.mipLevel, 1, dst.arrayLayer,
+                                                 copy->copySize.depth};
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       dst.mipLevel)) {
                         // Since destination texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(
-                            true, dst.mipLevel, 1, dst.arrayLayer, copy->copySize.depth);
+                        dst.texture->SetIsSubresourceContentInitialized(true, dstRange);
                     } else {
                         ToBackend(dst.texture)
                             ->EnsureSubresourceContentInitialized(recordingContext, dst.mipLevel, 1,
