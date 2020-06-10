@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cb79ab8_1e72bdad",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T07:24:29Z",
+      "side": 1,
+      "message": "nit: this is not that big a name and I think it is fine to not have the typdef. Especially this it is not longer an array (but a vector) and contains pipeline statistics names (and not pipeline statistics which implicitly mean values).",
+      "revId": "04688dd22b1ae2e844cd45710aedad61a138bb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dde99fcd_8f8c8609",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T07:24:29Z",
+      "side": 1,
+      "message": "That makes the qualifier of the method const\u0026 which is a very rare thing to need to do. I think what you meant is:\n\n  const std::vector\u003cwgpu::PipelineStatisticsName\u003e\u0026 GetPipelineStatistics() const;",
+      "revId": "04688dd22b1ae2e844cd45710aedad61a138bb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1ad5f4b_32a66d92",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T07:24:29Z",
+      "side": 1,
+      "message": "nit: maybe have deviceWithTimestamp and deviceWithPipelineStatistics so we can be sure that the pipeline statistics validation doesn\u0027t check for timestamp for example.",
+      "revId": "04688dd22b1ae2e844cd45710aedad61a138bb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83c04b64_b0f2fa84",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T07:24:29Z",
+      "side": 1,
+      "message": "no need to call destroy(), it is should be implicit in the destructor. This CL is missing calls to DestroyInternal in opengl::QuerySet::~QuerySet and null::QuerySet::~QuerySet.\n\nDitto for almost all the other destroy calls in this file.",
+      "revId": "04688dd22b1ae2e844cd45710aedad61a138bb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3387e120_175c3142",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T07:24:29Z",
+      "side": 1,
+      "message": "nit: also comment that they aren\u0027t in the same order as the header, and it\u0027s ok.",
+      "revId": "04688dd22b1ae2e844cd45710aedad61a138bb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
