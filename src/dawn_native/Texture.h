@@ -41,6 +41,13 @@ namespace dawn_native {
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Storage |
         wgpu::TextureUsage::OutputAttachment;
 
+    struct SubresourceRange {
+        uint32_t baseMipLevel;
+        uint32_t levelCount;
+        uint32_t baseArrayLayer;
+        uint32_t layerCount;
+    };
+
     class TextureBase : public ObjectBase {
       public:
         enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
@@ -59,15 +66,8 @@ namespace dawn_native {
         wgpu::TextureUsage GetUsage() const;
         TextureState GetTextureState() const;
         uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice) const;
-        bool IsSubresourceContentInitialized(uint32_t baseMipLevel,
-                                             uint32_t levelCount,
-                                             uint32_t baseArrayLayer,
-                                             uint32_t layerCount) const;
-        void SetIsSubresourceContentInitialized(bool isInitialized,
-                                                uint32_t baseMipLevel,
-                                                uint32_t levelCount,
-                                                uint32_t baseArrayLayer,
-                                                uint32_t layerCount);
+        bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
+        void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
