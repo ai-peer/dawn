@@ -642,6 +642,30 @@
     },
     {
       "key": {
+        "uuid": "30be0fbf_46b79189",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T09:15:15Z",
+      "side": 1,
+      "message": "Yep that works",
+      "parentUuid": "8f8e7d33_b9cbd846",
+      "range": {
+        "startLine": 38,
+        "startChar": 29,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "50892f7618585316e292ae26f1f2f688635627ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce17243d_a61bbf8d",
         "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 5
