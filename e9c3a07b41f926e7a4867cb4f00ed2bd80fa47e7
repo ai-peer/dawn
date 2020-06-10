@@ -34,6 +34,24 @@
       "revId": "e9c3a07b41f926e7a4867cb4f00ed2bd80fa47e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f1c8744_65493b4f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-06-10T03:28:10Z",
+      "side": 1,
+      "message": "To avoid this I moved the last TickImpl call to be right before calling ShutDownImpl instead of right at the end of the Alive case",
+      "parentUuid": "a2bfcf98_97919ca2",
+      "revId": "e9c3a07b41f926e7a4867cb4f00ed2bd80fa47e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
