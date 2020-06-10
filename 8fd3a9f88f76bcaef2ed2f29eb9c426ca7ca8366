@@ -16,6 +16,24 @@
       "revId": "8fd3a9f88f76bcaef2ed2f29eb9c426ca7ca8366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8dc2fd1_4d6a6295",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-10T07:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "609bf880_a366c49e",
+      "revId": "8fd3a9f88f76bcaef2ed2f29eb9c426ca7ca8366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
