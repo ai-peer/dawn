@@ -36,10 +36,7 @@ namespace dawn_native { namespace opengl {
         GLenum GetGLTarget() const;
         const GLFormat& GetGLFormat() const;
 
-        void EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                 uint32_t levelCount,
-                                                 uint32_t baseArrayLayer,
-                                                 uint32_t layerCount);
+        void EnsureSubresourceContentInitialized(const SubresourceRange& range);
 
       private:
         ~Texture() override;

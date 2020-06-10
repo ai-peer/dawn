@@ -351,7 +351,8 @@ namespace dawn_native { namespace metal {
                                                                  plane:plane];
         [mtlDesc release];
 
-        SetIsSubresourceContentInitialized(descriptor->isCleared, 0, 1, 0, 1);
+        SubresourceRange range = {0, 1, 0, 1};
+        SetIsSubresourceContentInitialized(descriptor->isCleared, range);
     }
 
     Texture::~Texture() {
@@ -392,8 +393,9 @@ namespace dawn_native { namespace metal {
                 for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
                     for (uint32_t arrayLayer = baseArrayLayer;
                          arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        SubresourceRange range = {level, 1, arrayLayer, 1};
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            IsSubresourceContentInitialized(range)) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -430,8 +432,9 @@ namespace dawn_native { namespace metal {
 
                     for (uint32_t arrayLayer = baseArrayLayer;
                          arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        SubresourceRange range = {level, 1, arrayLayer, 1};
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            IsSubresourceContentInitialized(range)) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -501,8 +504,9 @@ namespace dawn_native { namespace metal {
 
                 for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
                      ++arrayLayer) {
+                    SubresourceRange range = {level, 1, arrayLayer, 1};
                     if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                        IsSubresourceContentInitialized(range)) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
@@ -539,26 +543,23 @@ namespace dawn_native { namespace metal {
         }
 
         if (clearValue == TextureBase::ClearValue::Zero) {
-            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+            SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+            SetIsSubresourceContentInitialized(true, range);
             device->IncrementLazyClearCountForTesting();
         }
         return {};
     }
 
-    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) {
+    void Texture::EnsureSubresourceContentInitialized(const SubresourceRange& range) {
         if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
+        if (!IsSubresourceContentInitialized(range)) {
             // If subresource has not been initialized, clear it to black as it could
             // contain dirty bits from recycled memory
-            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
-                                                    layerCount, TextureBase::ClearValue::Zero));
+            GetDevice()->ConsumedError(ClearTexture(range.baseMipLevel, range.levelCount,
+                                                    range.baseArrayLayer, range.layerCount,
+                                                    TextureBase::ClearValue::Zero));
         }
     }
 

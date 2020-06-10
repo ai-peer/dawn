@@ -228,8 +228,9 @@ namespace dawn_native { namespace opengl {
                     switch (GetDimension()) {
                         case wgpu::TextureDimension::e2D:
                             if (GetArrayLayers() == 1) {
+                                SubresourceRange range = {static_cast<uint32_t>(level), 1, 0, 1};
                                 if (clearValue == TextureBase::ClearValue::Zero &&
-                                    IsSubresourceContentInitialized(level, 1, 0, 1)) {
+                                    IsSubresourceContentInitialized(range)) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }
@@ -240,8 +241,10 @@ namespace dawn_native { namespace opengl {
                             } else {
                                 for (GLint layer = baseArrayLayer;
                                      layer < baseArrayLayer + layerCount; ++layer) {
+                                    SubresourceRange range = {static_cast<uint32_t>(level), 1,
+                                                              static_cast<uint32_t>(layer), 1};
                                     if (clearValue == TextureBase::ClearValue::Zero &&
-                                        IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                                        IsSubresourceContentInitialized(range)) {
                                         // Skip lazy clears if already initialized.
                                         continue;
                                     }
@@ -272,8 +275,10 @@ namespace dawn_native { namespace opengl {
                     Extent3D mipSize = GetMipLevelPhysicalSize(level);
                     for (GLint layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                          ++layer) {
+                        SubresourceRange range = {static_cast<uint32_t>(level), 1,
+                                                  static_cast<uint32_t>(layer), 1};
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                            IsSubresourceContentInitialized(range)) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -328,8 +333,9 @@ namespace dawn_native { namespace opengl {
                 switch (GetDimension()) {
                     case wgpu::TextureDimension::e2D:
                         if (GetArrayLayers() == 1) {
+                            SubresourceRange range = {static_cast<uint32_t>(level), 1, 0, 1};
                             if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(level, 1, 0, 1)) {
+                                IsSubresourceContentInitialized(range)) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -338,8 +344,10 @@ namespace dawn_native { namespace opengl {
                         } else {
                             for (GLint layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                                  ++layer) {
+                                SubresourceRange range = {static_cast<uint32_t>(level), 1,
+                                                          static_cast<uint32_t>(layer), 1};
                                 if (clearValue == TextureBase::ClearValue::Zero &&
-                                    IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                                    IsSubresourceContentInitialized(range)) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }
@@ -360,24 +368,23 @@ namespace dawn_native { namespace opengl {
             gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
         }
         if (clearValue == TextureBase::ClearValue::Zero) {
-            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+            SubresourceRange range = {
+                static_cast<uint32_t>(baseMipLevel), static_cast<uint32_t>(levelCount),
+                static_cast<uint32_t>(baseArrayLayer), static_cast<uint32_t>(layerCount)};
+            SetIsSubresourceContentInitialized(true, range);
             device->IncrementLazyClearCountForTesting();
         }
         return {};
     }
 
-    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) {
+    void Texture::EnsureSubresourceContentInitialized(const SubresourceRange& range) {
         if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
-                                                    layerCount, TextureBase::ClearValue::Zero));
+        if (!IsSubresourceContentInitialized(range)) {
+            GetDevice()->ConsumedError(ClearTexture(range.baseMipLevel, range.levelCount,
+                                                    range.baseArrayLayer, range.layerCount,
+                                                    TextureBase::ClearValue::Zero));
         }
     }
 

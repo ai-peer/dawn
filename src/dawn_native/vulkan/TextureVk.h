@@ -79,10 +79,7 @@ namespace dawn_native { namespace vulkan {
                                     VkPipelineStageFlags* dstStages);
 
         void EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
-                                                 uint32_t baseMipLevel,
-                                                 uint32_t levelCount,
-                                                 uint32_t baseArrayLayer,
-                                                 uint32_t layerCount);
+                                                 const SubresourceRange& range);
 
         MaybeError SignalAndDestroy(VkSemaphore* outSignalSemaphore);
         // Binds externally allocated memory to the VkImage and on success, takes ownership of
