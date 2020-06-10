@@ -451,9 +451,9 @@ namespace dawn_native { namespace metal {
         void EnsureDestinationTextureInitialized(Texture* texture,
                                                  const Extent3D& size,
                                                  const TextureCopy& dst) {
+            SubresourceRange range = {dst.mipLevel, 1, dst.arrayLayer, size.depth};
             if (IsCompleteSubresourceCopiedTo(texture, size, dst.mipLevel)) {
-                texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1, dst.arrayLayer,
-                                                            size.depth);
+                texture->SetIsSubresourceContentInitialized(true, range);
             } else {
                 texture->EnsureSubresourceContentInitialized(dst.mipLevel, 1, dst.arrayLayer,
                                                              size.depth);

@@ -513,9 +513,9 @@ namespace dawn_native { namespace opengl {
                     Texture* texture = ToBackend(dst.texture.Get());
                     GLenum target = texture->GetGLTarget();
                     const GLFormat& format = texture->GetGLFormat();
+                    SubresourceRange range = {dst.mipLevel, 1, dst.arrayLayer, 1};
                     if (IsCompleteSubresourceCopiedTo(texture, copySize, dst.mipLevel)) {
-                        texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1,
-                                                                    dst.arrayLayer, 1);
+                        texture->SetIsSubresourceContentInitialized(true, range);
                     } else {
                         texture->EnsureSubresourceContentInitialized(dst.mipLevel, 1,
                                                                      dst.arrayLayer, 1);
@@ -675,11 +675,12 @@ namespace dawn_native { namespace opengl {
                     Extent3D copySize = ComputeTextureCopyExtent(dst, copy->copySize);
                     Texture* srcTexture = ToBackend(src.texture.Get());
                     Texture* dstTexture = ToBackend(dst.texture.Get());
+                    SubresourceRange dstRange = {dst.mipLevel, 1, dst.arrayLayer,
+                                                 copy->copySize.depth};
                     srcTexture->EnsureSubresourceContentInitialized(src.mipLevel, 1, src.arrayLayer,
                                                                     1);
                     if (IsCompleteSubresourceCopiedTo(dstTexture, copySize, dst.mipLevel)) {
-                        dstTexture->SetIsSubresourceContentInitialized(
-                            true, dst.mipLevel, 1, dst.arrayLayer, copy->copySize.depth);
+                        dstTexture->SetIsSubresourceContentInitialized(true, dstRange);
                     } else {
                         dstTexture->EnsureSubresourceContentInitialized(
                             dst.mipLevel, 1, dst.arrayLayer, copy->copySize.depth);
