@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1ca5d183_1a0e44cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T16:47:42Z",
+      "side": 1,
+      "message": "Idan, could you also create a bug on crbug.com/dawn briefly describing the min buffer size feature, and in the bug, link to the Github issue where it was discussed and resolved?\n\nThen, reference the Dawn bug in this commit message.",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0089c83_999ad2fb",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 20
