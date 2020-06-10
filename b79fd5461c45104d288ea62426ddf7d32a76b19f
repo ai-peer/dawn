@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bb7be0fd_ecd0fb51",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-10T17:39:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b8675d_104ae44f",
+      "range": {
+        "startLine": 35,
+        "startChar": 22,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3733bff7_bb8d86f5",
         "filename": "src/dawn_native/d3d12/D3D12Error.h",
         "patchSetId": 4
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "e7b7dafa_ef63ac45",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-10T17:39:00Z",
+      "side": 1,
+      "message": "Done, however I used error code 0xFF instead of 1 as suggested. Picking a high error code makes it the most dissimilar from existing codes. MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 1) would actually create the existing error E_NOTIMPL.",
+      "parentUuid": "f68c8d8a_92d4df56",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 90
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f17a31cd_69792200",
         "filename": "src/dawn_native/d3d12/D3D12Error.h",
         "patchSetId": 4
@@ -92,6 +140,30 @@
       "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d13a873_272f6166",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-10T17:39:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f17a31cd_69792200",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
