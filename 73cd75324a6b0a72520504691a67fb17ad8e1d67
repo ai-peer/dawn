@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "87f05029_08c5e794",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-10T14:45:49Z",
+      "side": 1,
+      "message": "Apologies but I am not quite following the logic here.  \n\nMacros should only be used for cases where you we want to emit line numbers at the true source of the error. Here, the macros just resolve to a plain function call.  How is that any better than just calling the original function at the callsite?",
+      "parentUuid": "1da94550_54ce8b7c",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c97335e_39d6e18e",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
