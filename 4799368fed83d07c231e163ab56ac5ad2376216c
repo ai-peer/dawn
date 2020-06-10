@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "477a6d5e_5a5bc033",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:59:51Z",
+      "side": 1,
+      "message": "nit: the default is now never used and can be removed.",
+      "revId": "4799368fed83d07c231e163ab56ac5ad2376216c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

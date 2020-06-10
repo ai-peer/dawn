@@ -257,6 +257,30 @@
       "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d603e837_670cff66",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:59:51Z",
+      "side": 1,
+      "message": "I guess it is not clear what we want to test here. Is it reading and writing to two different textures in the same dispatch, or is it reading in a dispatch, then writing to the same texture in a different dispatch?\n\nEither is fine, and please clarify the comment and the test name so it is clear which one we are testing.",
+      "parentUuid": "18f355e0_da439ded",
+      "range": {
+        "startLine": 883,
+        "startChar": 65,
+        "endLine": 883,
+        "endChar": 92
+      },
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
