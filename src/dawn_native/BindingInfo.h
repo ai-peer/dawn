@@ -32,6 +32,7 @@ namespace dawn_native {
     using BindingIndex = uint32_t;
 
     struct BindingInfo {
+        BindingNumber binding;
         wgpu::ShaderStage visibility;
         wgpu::BindingType type;
         Format::Type textureComponentType = Format::Type::Float;
@@ -39,7 +40,11 @@ namespace dawn_native {
         wgpu::TextureFormat storageTextureFormat = wgpu::TextureFormat::Undefined;
         bool hasDynamicOffset = false;
         bool multisampled = false;
+        uint64_t minimumBufferSize = 0;
     };
+
+    // For buffer size validation
+    using BufferSizesArray = std::array<std::vector<uint64_t>, kMaxBindGroups>;
 
 }  // namespace dawn_native
 
