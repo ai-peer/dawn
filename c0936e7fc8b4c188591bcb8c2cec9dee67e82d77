@@ -46,6 +46,30 @@
       "revId": "c0936e7fc8b4c188591bcb8c2cec9dee67e82d77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "701e5b3a_3629c5ae",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T18:21:19Z",
+      "side": 1,
+      "message": "I think we should put the check in BuddyMemoryAllocator. I\u0027m not so sure we can trust that all Vulkan drivers will behave the same way.",
+      "parentUuid": "9c7aa296_03b11c98",
+      "range": {
+        "startLine": 280,
+        "startChar": 24,
+        "endLine": 280,
+        "endChar": 68
+      },
+      "revId": "c0936e7fc8b4c188591bcb8c2cec9dee67e82d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
