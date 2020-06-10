@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95948222_31ac5d54",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "nit: this should be directly after the two asserts below this.",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb211bb_0be0e16d",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "nit: old code, probably shouldn\u0027t do this in this CL, but: maybe it would be best to do the same thing here: assert the level/layer counts are 1 and then use 1 in the SubresourceRange literal. In theory the compiler could optimize to eliminate the loops inside SetIsSubresourceContentInitialized.",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eada7ab_6553dd9b",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "same nit",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "557ecb2f_efc43047",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "old code nit: should assert dimension is 2d and depth is 1.",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "011da422_1c48e69c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "old code nit: should assert dimension is 2d and depth is 1.",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c6f6e6e_88cd43b6",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-10T22:23:19Z",
+      "side": 1,
+      "message": "nit: Passing SubresourceRange by value instead of by reference should allow it to be inline here (if we want that?)",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
