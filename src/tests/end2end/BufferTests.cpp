@@ -370,6 +370,21 @@ TEST_P(CreateBufferMappedTests, NonMappableUsageLarge) {
     EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), result.buffer, 0, kDataSize);
 }
 
+// Test destroying a non-mappable buffer mapped at creation.
+// This is a regression test for an issue where the D3D12 backend thought the buffer was actually
+// mapped and tried to unlock the heap residency (when actually the buffer was using a staging
+// buffer)
+TEST_P(CreateBufferMappedTests, DestroyNonMappableWhileMappedForCreation) {
+    wgpu::CreateBufferMappedResult result = CreateBufferMapped(wgpu::BufferUsage::CopySrc, 4);
+    result.buffer.Destroy();
+}
+
+// Test destroying a mappable buffer mapped at creation.
+TEST_P(CreateBufferMappedTests, DestroyMappableWhileMappedForCreation) {
+    wgpu::CreateBufferMappedResult result = CreateBufferMapped(wgpu::BufferUsage::MapRead, 4);
+    result.buffer.Destroy();
+}
+
 // Test that mapping a buffer is valid after CreateBufferMapped and Unmap
 TEST_P(CreateBufferMappedTests, CreateThenMapSuccess) {
     static uint32_t myData = 230502;
