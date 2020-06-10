@@ -25,6 +25,70 @@
     },
     {
       "key": {
+        "uuid": "058bf882_7f3645e4",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:50:37Z",
+      "side": 1,
+      "message": "It\u0027s a bit unfortunate that the container + unittests isn\u0027t done before this patch. I don\u0027t want to block things further but we shouldn\u0027t leave the code in this state for too long.",
+      "parentUuid": "0e77fb6d_a3af7d40",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 61
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "014e4044_ad36476e",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:50:37Z",
+      "side": 1,
+      "message": "nit: passTextureUsage.definitelySameUsagesAcrossSubresources \u0026\u003d textureUsage.definitelySameUsagesAcrossSubresources",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 9
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4204c3d0_aab786ca",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:50:37Z",
+      "side": 1,
+      "message": "This function still feels like it make the code more complicated to read. What about having the following:\n\n bool CanReuseWithoutBarrier(lastUsage, usage);\n\n\nThen in [1] do:\n\n bool sameExternalState \u003d mLastExternalState \u003d\u003d mExternalState;\n\n if (same usage for subresources) {\n   if (CanReuseWithoutBarrier(lastUsage[0], textureUsages.usage[0]) \u0026\u0026 sameExternalState) {\n     return;\n   }\n\n   barriers-\u003epush_back(BuildMemoryBarrier(..));\n   allUsages \u003d textureUsages.usage;\n   for (all subresource) {\n     ...\n   }\n }",
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b180b22_8082f021",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 9
@@ -69,6 +133,46 @@
       "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f44bc2b3_ae2936f2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:50:37Z",
+      "side": 1,
+      "message": "Why did we go with \"definitely\" instead of just mSameSubresourceLastUsages? Booleans aren\u0027t probabilities ;)",
+      "range": {
+        "startLine": 805,
+        "startChar": 9,
+        "endLine": 805,
+        "endChar": 19
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2dd9f2d_6ae732d4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T15:50:37Z",
+      "side": 1,
+      "message": "u-nit: empty newline to separate the pipeline barrier command from mDefinitelySameLastUsagesAcrossSubresources ?",
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
