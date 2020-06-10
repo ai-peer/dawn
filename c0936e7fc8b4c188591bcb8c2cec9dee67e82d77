@@ -22,6 +22,30 @@
       "revId": "c0936e7fc8b4c188591bcb8c2cec9dee67e82d77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c7aa296_03b11c98",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-10T17:18:38Z",
+      "side": 1,
+      "message": "It can be checked there instead but I haven\u0027t seen this behavior with vkGetBufferMemoryRequirements.",
+      "parentUuid": "9265b309_4cfb2816",
+      "range": {
+        "startLine": 280,
+        "startChar": 24,
+        "endLine": 280,
+        "endChar": 68
+      },
+      "revId": "c0936e7fc8b4c188591bcb8c2cec9dee67e82d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
