@@ -65,6 +65,24 @@
     },
     {
       "key": {
+        "uuid": "898259ce_e76c391d",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-10T16:46:29Z",
+      "side": 1,
+      "message": "ah, they were originally split, but I thought it would be good to have more specific errors. You have a good point in another comment that if there\u0027s an error, we can go look at the state again to check what exactly was wrong.",
+      "parentUuid": "6fe85782_5ab6d82c",
+      "revId": "453977b60af57af72a72466d902014c2c195f6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c402cf0_88cbe2b1",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 20
