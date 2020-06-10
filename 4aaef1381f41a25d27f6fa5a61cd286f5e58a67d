@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a35be759_b39899f3",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T09:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8848919e_a50c4cdc",
+      "range": {
+        "startLine": 213,
+        "startChar": 91,
+        "endLine": 213,
+        "endChar": 96
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "945a55d4_61899770",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6caf3df9_d68a2d35",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T09:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "945a55d4_61899770",
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "4ad0d626_a538ddb6",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T09:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd10368d_05482027",
+      "range": {
+        "startLine": 26,
+        "startChar": 35,
+        "endLine": 26,
+        "endChar": 61
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed3fc00a_0e11539c",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
         "patchSetId": 5
@@ -85,6 +151,30 @@
       "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb9217a_5590fd17",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-10T09:33:46Z",
+      "side": 1,
+      "message": "The extern is to declare that this variable is defined in another compilation unit. I did this instead of constexpr to avoid including vulkan.h.\n\nThough like you said, this isn\u0027t used outside of VulkanExtensions.cpp (and it\u0027s not clear if it will ever be), so I\u0027ll move it there.",
+      "parentUuid": "ed3fc00a_0e11539c",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "4aaef1381f41a25d27f6fa5a61cd286f5e58a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
