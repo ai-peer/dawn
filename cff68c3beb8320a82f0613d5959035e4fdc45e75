@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ce9e1809_a2b1a4c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Filed it here: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d458",
+      "parentUuid": "42ad35c6_dd20a73f",
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eaea0df4_efb3037c",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d56fc0b7_741bbb68",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eaea0df4_efb3037c",
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e6a7196_0bbbaea8",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52163d4a_7939e897",
+      "range": {
+        "startLine": 362,
+        "startChar": 68,
+        "endLine": 362,
+        "endChar": 69
+      },
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +181,78 @@
         "startChar": 54,
         "endLine": 883,
         "endChar": 59
+      },
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bd60691_3197c518",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8dd34da3_9212888e",
+      "range": {
+        "startLine": 883,
+        "startChar": 54,
+        "endLine": 883,
+        "endChar": 59
+      },
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "522a1340_0c4aa92a",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90f4c03b_dca56e59",
+      "range": {
+        "startLine": 883,
+        "startChar": 13,
+        "endLine": 883,
+        "endChar": 17
+      },
+      "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18f355e0_da439ded",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-06-10T15:15:09Z",
+      "side": 1,
+      "message": "Reading from readonly storage texture 0, then writing into another writeonly storage texture 1, not the same. This scenatio is more common. Currently read and write the same texture is not supported.",
+      "parentUuid": "bd515db6_a4b0179b",
+      "range": {
+        "startLine": 883,
+        "startChar": 65,
+        "endLine": 883,
+        "endChar": 92
       },
       "revId": "cff68c3beb8320a82f0613d5959035e4fdc45e75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
