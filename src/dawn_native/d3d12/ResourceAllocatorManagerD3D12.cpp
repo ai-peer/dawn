@@ -268,6 +268,10 @@ namespace dawn_native { namespace d3d12 {
             return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
         }
 
+        if (resourceInfo.SizeInBytes > kMaxHeapSize) {
+            return ResourceHeapAllocation{};  // Invalid
+        }
+
         BuddyMemoryAllocator* allocator =
             mSubAllocatedResourceAllocators[static_cast<size_t>(resourceHeapKind)].get();
 
