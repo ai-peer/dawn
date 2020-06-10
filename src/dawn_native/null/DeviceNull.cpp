@@ -116,6 +116,9 @@ namespace dawn_native { namespace null {
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
     }
+    ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
+        return new QuerySet(this, descriptor);
+    }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
         return new RenderPipeline(this, descriptor);
@@ -348,6 +351,19 @@ namespace dawn_native { namespace null {
 
     CommandBuffer::~CommandBuffer() {
         FreeCommands(&mCommands);
+    }
+
+    // QuerySet
+
+    QuerySet::QuerySet(Device* device, const QuerySetDescriptor* descriptor)
+        : QuerySetBase(device, descriptor) {
+    }
+
+    QuerySet::~QuerySet() {
+        DestroyInternal();
+    }
+
+    void QuerySet::DestroyImpl() {
     }
 
     // Queue
