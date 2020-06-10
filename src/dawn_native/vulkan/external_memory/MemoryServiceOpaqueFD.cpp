@@ -27,9 +27,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         const VulkanGlobalInfo& globalInfo =
             ToBackend(mDevice->GetAdapter())->GetBackend()->GetGlobalInfo();
 
-        mSupported = globalInfo.HasExt(InstanceExt::GetPhysicalDeviceProperties2) &&
-                     globalInfo.HasExt(InstanceExt::ExternalMemoryCapabilities) &&
-                     deviceInfo.externalMemory && deviceInfo.externalMemoryFD;
+        mSupported = deviceInfo.HasExt(DeviceExt::ExternalMemoryFD);
     }
 
     Service::~Service() = default;

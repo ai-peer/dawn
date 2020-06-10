@@ -25,9 +25,7 @@ namespace dawn_native { namespace vulkan { namespace external_semaphore {
         const VulkanGlobalInfo& globalInfo =
             ToBackend(mDevice->GetAdapter())->GetBackend()->GetGlobalInfo();
 
-        mSupported = globalInfo.HasExt(InstanceExt::GetPhysicalDeviceProperties2) &&
-                     globalInfo.HasExt(InstanceExt::ExternalSemaphoreCapabilities) &&
-                     deviceInfo.externalSemaphore && deviceInfo.externalSemaphoreFD;
+        mSupported = deviceInfo.hasExt(DeviceExt::ExternalSemaphoreZirconHandle);
 
         // Early out before we try using extension functions
         if (!mSupported) {
