@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "3733bff7_bb8d86f5",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-10T17:04:55Z",
+      "side": 1,
+      "message": "Out of curiosity, where did you come up with the E_FAKE_ERROR_FOR_TESTING HRESULT?  Did you use an already existing one from somewhere? \n\nIf the goal is to have a unique error result specific for testing, I suggest using the MAKE_HRESULT macro with the FACILITY_ITF. So instead of what you have above, you would instead do:\n\n constexptr HRESULT E_FAKE_ERROR_FOR_TESTING \u003d MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 1);\n\nhttps://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes provides a breakdown of how all of the fields are divided up.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 90
+      },
+      "revId": "b79fd5461c45104d288ea62426ddf7d32a76b19f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f17a31cd_69792200",
         "filename": "src/dawn_native/d3d12/D3D12Error.h",
         "patchSetId": 4

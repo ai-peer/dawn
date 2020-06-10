@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "6c092612_17f62f22",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-10T17:04:55Z",
+      "side": 1,
+      "message": "Thank you for the explanation. That makes sense.",
+      "parentUuid": "e0971d4b_2fe15c3e",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "73cd75324a6b0a72520504691a67fb17ad8e1d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c97335e_39d6e18e",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
