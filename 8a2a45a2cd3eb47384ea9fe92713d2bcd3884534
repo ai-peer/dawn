@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "efa5bea7_2b36be47",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-10T16:13:43Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e77fb6d_a3af7d40",
         "filename": "src/dawn_native/PassResourceUsage.h",
         "patchSetId": 9
@@ -147,6 +170,30 @@
       "writtenOn": "2020-06-10T15:50:37Z",
       "side": 1,
       "message": "Why did we go with \"definitely\" instead of just mSameSubresourceLastUsages? Booleans aren\u0027t probabilities ;)",
+      "range": {
+        "startLine": 805,
+        "startChar": 9,
+        "endLine": 805,
+        "endChar": 19
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8f4c526_9c7fe009",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-10T16:13:43Z",
+      "side": 1,
+      "message": "See comment at [3]. \nAustin also had a comment about this in previous review. \n\nThe reason is that: the usages across subresources can be the same, but we may think they are not in this variable. Because we don\u0027t want to loop over all subresources. \n\nA simple summary; \n- if this variable is true, the usages across all subresource are definitely the same. \n- if this variable is false, the usages across all subresource are unlikely the same, but it\u0027s possible that the usages are the same. We are not 100% sure about this. And we don\u0027t want to loop over every single subresource to check the usages. \n\nIs this reasonable? Otherwise, I can change the name back to mSameLast....",
+      "parentUuid": "f44bc2b3_ae2936f2",
       "range": {
         "startLine": 805,
         "startChar": 9,
