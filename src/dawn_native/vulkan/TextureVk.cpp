@@ -593,7 +593,8 @@ namespace dawn_native { namespace vulkan {
 
         // Don't clear imported texture if already cleared
         if (descriptor->isCleared) {
-            SetIsSubresourceContentInitialized(true, 0, 1, 0, 1);
+            SubresourceRange range = {0, 1, 0, 1};
+            SetIsSubresourceContentInitialized(true, range);
         }
 
         // Success, acquire all the external objects.
@@ -837,8 +838,9 @@ namespace dawn_native { namespace vulkan {
                 range.baseMipLevel = level;
                 for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                      ++layer) {
+                    SubresourceRange initRange = {level, 1, layer, 1};
                     if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                        IsSubresourceContentInitialized(initRange)) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
@@ -890,8 +892,9 @@ namespace dawn_native { namespace vulkan {
 
                 for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                      ++layer) {
+                    SubresourceRange range = {level, 1, layer, 1};
                     if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                        IsSubresourceContentInitialized(range)) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
@@ -914,8 +917,8 @@ namespace dawn_native { namespace vulkan {
             }
         }
         if (clearValue == TextureBase::ClearValue::Zero) {
-            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+            SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+            SetIsSubresourceContentInitialized(true, range);
             device->IncrementLazyClearCountForTesting();
         }
         return {};
@@ -929,8 +932,8 @@ namespace dawn_native { namespace vulkan {
         if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
+        SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+        if (!IsSubresourceContentInitialized(range)) {
             // TODO(jiawei.shao@intel.com): initialize textures in BC formats with Buffer-to-Texture
             // copies.
             if (GetFormat().isCompressed) {

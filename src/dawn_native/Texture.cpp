@@ -421,15 +421,12 @@ namespace dawn_native {
         return GetNumMipLevels() * arraySlice + mipLevel;
     }
 
-    bool TextureBase::IsSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) const {
+    bool TextureBase::IsSubresourceContentInitialized(const SubresourceRange& range) const {
         ASSERT(!IsError());
-        for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
-             ++arrayLayer) {
-            for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
-                 ++mipLevel) {
+        for (uint32_t arrayLayer = range.baseArrayLayer;
+             arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+            for (uint32_t mipLevel = range.baseMipLevel;
+                 mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
                 uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
                 ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
                 if (!mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
@@ -441,15 +438,12 @@ namespace dawn_native {
     }
 
     void TextureBase::SetIsSubresourceContentInitialized(bool isInitialized,
-                                                         uint32_t baseMipLevel,
-                                                         uint32_t levelCount,
-                                                         uint32_t baseArrayLayer,
-                                                         uint32_t layerCount) {
+                                                         const SubresourceRange& range) {
         ASSERT(!IsError());
-        for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
-             ++arrayLayer) {
-            for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
-                 ++mipLevel) {
+        for (uint32_t arrayLayer = range.baseArrayLayer;
+             arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+            for (uint32_t mipLevel = range.baseMipLevel;
+                 mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
                 uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
                 ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
                 mIsSubresourceContentInitializedAtIndex[subresourceIndex] = isInitialized;

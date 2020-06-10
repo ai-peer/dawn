@@ -397,10 +397,9 @@ namespace dawn_native { namespace d3d12 {
             AcquireRef(new Texture(device, textureDescriptor, TextureState::OwnedExternal));
         DAWN_TRY(dawnTexture->InitializeAsExternalTexture(textureDescriptor, sharedHandle,
                                                           acquireMutexKey, isSwapChainTexture));
-
-        dawnTexture->SetIsSubresourceContentInitialized(descriptor->isCleared, 0,
-                                                        textureDescriptor->mipLevelCount, 0,
-                                                        textureDescriptor->arrayLayerCount);
+        SubresourceRange range = {0, textureDescriptor->mipLevelCount, 0,
+                                  textureDescriptor->arrayLayerCount};
+        dawnTexture->SetIsSubresourceContentInitialized(descriptor->isCleared, range);
         return std::move(dawnTexture);
     }
 
@@ -504,8 +503,9 @@ namespace dawn_native { namespace d3d12 {
         // memory management.
         mResourceAllocation = {info, 0, std::move(nativeTexture), nullptr};
 
-        SetIsSubresourceContentInitialized(true, 0, descriptor->mipLevelCount, 0,
-                                           descriptor->arrayLayerCount);
+        SubresourceRange range = {0, textureDescriptor->mipLevelCount, 0,
+                                  textureDescriptor->arrayLayerCount};
+        SetIsSubresourceContentInitialized(true, range);
     }
 
     Texture::~Texture() {
@@ -793,8 +793,8 @@ namespace dawn_native { namespace d3d12 {
                                      TextureBase::ClearValue clearValue) {
         // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with copies.
         if (GetFormat().isCompressed) {
-            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+            SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+            SetIsSubresourceContentInitialized(true, range);
             return {};
         }
 
@@ -815,8 +815,9 @@ namespace dawn_native { namespace d3d12 {
                 for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
                     for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                          ++layer) {
+                        SubresourceRange range = {level, 1, layer, 1};
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                            IsSubresourceContentInitialized(range)) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -851,8 +852,9 @@ namespace dawn_native { namespace d3d12 {
                 for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
                     for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                          ++layer) {
+                        SubresourceRange range = {level, 1, layer, 1};
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                            IsSubresourceContentInitialized(range)) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -900,8 +902,9 @@ namespace dawn_native { namespace d3d12 {
 
                 for (uint32_t layer = baseArrayLayer; layer < baseArrayLayer + layerCount;
                      ++layer) {
+                    SubresourceRange range = {level, 1, layer, 1};
                     if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(level, 1, layer, 1)) {
+                        IsSubresourceContentInitialized(range)) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
@@ -927,8 +930,8 @@ namespace dawn_native { namespace d3d12 {
             }
         }
         if (clearValue == TextureBase::ClearValue::Zero) {
-            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+            SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+            SetIsSubresourceContentInitialized(true, range);
             GetDevice()->IncrementLazyClearCountForTesting();
         }
         return {};
@@ -942,8 +945,8 @@ namespace dawn_native { namespace d3d12 {
         if (!ToBackend(GetDevice())->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
+        SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+        if (!IsSubresourceContentInitialized(range)) {
             // If subresource has not been initialized, clear it to black as it could contain
             // dirty bits from recycled memory
             GetDevice()->ConsumedError(ClearTexture(commandContext, baseMipLevel, levelCount,

@@ -591,8 +591,9 @@ namespace dawn_native { namespace d3d12 {
 
                     if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
                                                       copy->destination.mipLevel)) {
-                        texture->SetIsSubresourceContentInitialized(
-                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
+                        SubresourceRange range = {copy->destination.mipLevel, 1,
+                                                  copy->destination.arrayLayer, 1};
+                        texture->SetIsSubresourceContentInitialized(true, range);
                     } else {
                         texture->EnsureSubresourceContentInitialized(
                             commandContext, copy->destination.mipLevel, 1,
@@ -681,9 +682,10 @@ namespace dawn_native { namespace d3d12 {
                         copy->copySize.depth);
                     if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
                                                       copy->destination.mipLevel)) {
-                        destination->SetIsSubresourceContentInitialized(
-                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer,
-                            copy->copySize.depth);
+                        SubresourceRange range = {copy->destination.mipLevel, 1,
+                                                  copy->destination.arrayLayer,
+                                                  copy->copySize.depth};
+                        destination->SetIsSubresourceContentInitialized(range);
                     } else {
                         destination->EnsureSubresourceContentInitialized(
                             commandContext, copy->destination.mipLevel, 1,
