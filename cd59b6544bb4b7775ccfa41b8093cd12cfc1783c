@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "256aeff6_f40d8896",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Nit: log a bug for this TODO (if it\u0027s standard practice in Dawn)",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e10f564b_33611e78",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Nit: this looks unused?",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa941091_1c474307",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Nit: log a bug?",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaf98442_cc3e3c5f",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Seems like some of this could be refactored with the instance flavour. Probably not worth it yet though.",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eea3abad_33c535e8",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Nit: instance extensions -\u003e device extensions?",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae477044_038cbec1",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Incidentally, we could potentially autogenerate the strings from the enums, or vice versa. Probably not worth it now, but if it grows a lot, might be worth considering.",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec88dafa_504f64ff",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T16:04:09Z",
+      "side": 1,
+      "message": "Nit: this looks like the correct comment, but in the wrong place? :)",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
