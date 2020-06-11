@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3f8b24c8_faf41546",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T11:14:38Z",
+      "side": 1,
+      "message": "We probably don\u0027t ~need~ to support Vulkan 1.0 ICD, but Vulkan 1.1 and 1.2 are basically collections of promoted extensions. So if a Vulkan 1.0 ICD supports all the extensions we care about, then we can use it.\n\nNote that the problem in this comment is stated for a 1.0 vs 1.1 mismatch but could happen for other mismatches too. Finally it is removed at the top of this patch stack.",
+      "parentUuid": "ad3f3f6e_256c3cdd",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "540aaf21_48cfb7da",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2c43b9fd_d570d673",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T11:14:38Z",
+      "side": 1,
+      "message": "This is a regular function not a member function so it cannot be tagged with const. Or if you\u0027re mentioning `ext`, then it\u0027s just a enum value so we usually don\u0027t tag them as const in the arguments.",
+      "parentUuid": "540aaf21_48cfb7da",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f53c7438_a4bcba8c",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
         "patchSetId": 7
@@ -50,6 +86,24 @@
       "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54e14c3e_51cfd6e7",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T11:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f53c7438_a4bcba8c",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
