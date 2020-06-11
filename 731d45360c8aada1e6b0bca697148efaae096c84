@@ -312,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "73e0aa88_362f78b6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T21:36:24Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem like this was addressed",
+      "parentUuid": "937a249e_8b045b92",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fd6b2ae_f6134259",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 10

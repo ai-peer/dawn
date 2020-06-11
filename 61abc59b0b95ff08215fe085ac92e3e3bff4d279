@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cf3ab39_ebf59bed",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T21:36:24Z",
+      "side": 1,
+      "message": "nit: return const reference",
+      "range": {
+        "startLine": 579,
+        "startChar": 4,
+        "endLine": 579,
+        "endChar": 20
+      },
+      "revId": "61abc59b0b95ff08215fe085ac92e3e3bff4d279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
