@@ -168,7 +168,11 @@ namespace dawn_native { namespace vulkan {
         }
         mBindGroupLayoutsPendingDeallocation.ClearUpTo(completedSerial);
 
-        mResourceMemoryAllocator->Tick(completedSerial);
+        // During the case where we must shutdown before device was initialized, the
+        // ResourceMemoryAllocator hasn't been created so it can't be ticked.
+        if (mResourceMemoryAllocator) {
+            mResourceMemoryAllocator->Tick(completedSerial);
+        }
         mDeleter->Tick(completedSerial);
 
         if (mRecordingContext.used) {
