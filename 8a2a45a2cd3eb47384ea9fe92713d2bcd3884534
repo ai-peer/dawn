@@ -272,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "087797db_2f1799e6",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T11:58:48Z",
+      "side": 1,
+      "message": "IMHO mSameLast... is just as clear, but we don\u0027t need to bikeshed too much about this given it will be replaced by the \"compression data-structure\".",
+      "parentUuid": "f8f4c526_9c7fe009",
+      "range": {
+        "startLine": 805,
+        "startChar": 9,
+        "endLine": 805,
+        "endChar": 19
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2dd9f2d_6ae732d4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 9
