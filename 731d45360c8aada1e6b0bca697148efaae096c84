@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2d7b5711_dc73fa87",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done. Good suggestion, Corentin!",
+      "parentUuid": "f52a6ddb_41a93a4d",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0eb211bb_0be0e16d",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 10
@@ -51,6 +69,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52322689_e15a56a4",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eb211bb_0be0e16d",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "5437852f_9719f368",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eada7ab_6553dd9b",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "557ecb2f_efc43047",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 10
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "4e5634a6_b3b1a0dd",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done. And I did the same thing on other backend.",
+      "parentUuid": "557ecb2f_efc43047",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "011da422_1c48e69c",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 10
@@ -102,6 +174,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d23b88ef_4a2ed48c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "011da422_1c48e69c",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +218,30 @@
     },
     {
       "key": {
+        "uuid": "5dd52a38_f23ed7a1",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d0bb043_1436966a",
+      "range": {
+        "startLine": 330,
+        "startChar": 47,
+        "endLine": 330,
+        "endChar": 52
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ebdd613_45bb1b53",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 10
@@ -148,6 +262,30 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4df4e82b_2d7de036",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ebdd613_45bb1b53",
+      "range": {
+        "startLine": 355,
+        "startChar": 66,
+        "endLine": 355,
+        "endChar": 71
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +321,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af9756f5_0c1b9eb5",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done. In the latest patch set, I embedded the SubresourceRange variable into the caller directly if it is not reused. Otherwise, I define an instance for it before the first call site.",
+      "parentUuid": "924c1784_fc805b3b",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -232,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "80ed2afd_0ce739f9",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a9f5d5_1555bd46",
+      "range": {
+        "startLine": 231,
+        "startChar": 68,
+        "endLine": 231,
+        "endChar": 79
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b1c8c8f_33261f15",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 10
@@ -252,6 +432,30 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90d266ac_47f6b7f0",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b1c8c8f_33261f15",
+      "range": {
+        "startLine": 244,
+        "startChar": 72,
+        "endLine": 244,
+        "endChar": 83
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -278,6 +482,30 @@
     },
     {
       "key": {
+        "uuid": "79125288_6e89dbf0",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92340baa_4ffd3d14",
+      "range": {
+        "startLine": 279,
+        "startChar": 60,
+        "endLine": 279,
+        "endChar": 71
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a47ec267_fed9c689",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 10
@@ -292,6 +520,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81262d6f_35496ab2",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47ec267_fed9c689",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -330,6 +576,24 @@
     },
     {
       "key": {
+        "uuid": "ac3ed667_418b2876",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done in the latest patch set now!",
+      "parentUuid": "73e0aa88_362f78b6",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fd6b2ae_f6134259",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 10
@@ -350,6 +614,30 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a420dba5_61f7b668",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done. The original code was incorrect. I just copied the original code. Have revised it now.",
+      "parentUuid": "9fd6b2ae_f6134259",
+      "range": {
+        "startLine": 510,
+        "startChar": 82,
+        "endLine": 510,
+        "endChar": 83
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -376,6 +664,30 @@
     },
     {
       "key": {
+        "uuid": "be6f2b0e_c7f9e315",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fdce920_eaf69ba1",
+      "range": {
+        "startLine": 597,
+        "startChar": 53,
+        "endLine": 597,
+        "endChar": 58
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4eb98bf1_0107fdf4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 10
@@ -399,6 +711,30 @@
     },
     {
       "key": {
+        "uuid": "e0625c8b_31f57dc8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb98bf1_0107fdf4",
+      "range": {
+        "startLine": 839,
+        "startChar": 51,
+        "endLine": 839,
+        "endChar": 71
+      },
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eac565e2_a561dc96",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 10
@@ -413,6 +749,24 @@
       "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1598f10_4b4972f6",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T23:38:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eac565e2_a561dc96",
+      "revId": "731d45360c8aada1e6b0bca697148efaae096c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
