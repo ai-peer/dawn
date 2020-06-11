@@ -50,6 +50,8 @@ namespace {
     std::string sInjectedErrorTestcaseOutDir;
     uint64_t sOutputFileNumber = 0;
 
+    bool sIsDeviceLost = false;
+
     WGPUSwapChain ErrorDeviceCreateSwapChain(WGPUDevice device,
                                              WGPUSurface surface,
                                              const WGPUSwapChainDescriptor*) {
@@ -57,6 +59,10 @@ namespace {
         // A 0 implementation will trigger a swapchain creation error.
         desc.implementation = 0;
         return sOriginalDeviceCreateSwapChain(device, surface, &desc);
+    }
+
+    void OnDeviceLost(const char* message, void* userdata) {
+        sIsDeviceLost = true;
     }
 
 }  // namespace
@@ -148,6 +154,8 @@ int DawnWireServerFuzzer::Run(const uint8_t* data,
 
     std::unique_ptr<dawn_wire::WireServer> wireServer(new dawn_wire::WireServer(serverDesc));
 
+    device.SetDeviceLostCallback(OnDeviceLost, nullptr);
+
     wireServer->HandleCommands(reinterpret_cast<const char*>(data), size);
 
     // Wait for all previous commands before destroying the server.
@@ -156,7 +164,7 @@ int DawnWireServerFuzzer::Run(const uint8_t* data,
         wgpu::Queue queue = device.GetDefaultQueue();
         wgpu::Fence fence = queue.CreateFence();
         queue.Signal(fence, 1u);
-        while (fence.GetCompletedValue() != 1u) {
+        while (fence.GetCompletedValue() != 1u && !sIsDeviceLost) {
             device.Tick();
             utils::USleep(100);
         }
