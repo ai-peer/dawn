@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ae06b11_92dba7b6",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T17:46:44Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 104,
+        "startChar": 11,
+        "endLine": 112,
+        "endChar": 84
+      },
+      "revId": "482edc0e3b8a7c10efb52f7e4eee974f85b49174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56437054_7fcc9b5e",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T17:46:44Z",
+      "side": 1,
+      "message": "nit: texelCountLastLayer\n\nThis code, and a lot of the math in this CL is duplicated with [1] and other places. Could we factor this out into helpers in utils? It would really help writing and simplifying other tests in the future.\n\nIn the WebGPU CTS, I wrote a getTextureCopyLayout helper. Example usage: https://github.com/gpuweb/cts/blob/163676cc9c9a187b1382f8307c7798e0e9146e17/src/webgpu/gpu_test.ts#L205",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 41
+      },
+      "revId": "482edc0e3b8a7c10efb52f7e4eee974f85b49174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa78f300_b020a580",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T17:46:44Z",
+      "side": 1,
+      "message": "this is duplicated too",
+      "range": {
+        "startLine": 330,
+        "startChar": 6,
+        "endLine": 341,
+        "endChar": 0
+      },
+      "revId": "482edc0e3b8a7c10efb52f7e4eee974f85b49174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
