@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f647c106_af2cc4e2",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-11T16:38:44Z",
+      "side": 1,
+      "message": "Nit: So as not to take a dependency on the way the MAKE_HRESULT macro works, you should have the out of memory one also use MAKE_HRESULT, but with 0xFE as the last parameter, or 0xFF-1.",
+      "range": {
+        "startLine": 25,
+        "startChar": 61,
+        "endLine": 25,
+        "endChar": 90
+      },
+      "revId": "7a8c76b6434cbe769b850ca90f16fc9481d2ae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
