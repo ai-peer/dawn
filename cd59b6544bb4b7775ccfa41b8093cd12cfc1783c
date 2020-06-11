@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29f8be4b_964c332f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "In Dawn either is fine although we\u0027re moving more and more towards filing bug. Looking at this TODO again, I think it\u0027s fine because most Vulkan extensions don\u0027t enable something on their own, they expose the capability to enable something. So I removed the TODO.",
+      "parentUuid": "256aeff6_f40d8896",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e10f564b_33611e78",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 7
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "275a971c_a5341bd4",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "And it needs to outlive the scope since it is used in the CreateDevice at the very bottom.",
+      "parentUuid": "f0d5d5f5_f2b2d47f",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa941091_1c474307",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
         "patchSetId": 7
@@ -68,6 +104,24 @@
       "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "face31f5_afa9edca",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "The next CL in the patch fixes it so I\u0027ll skip this.",
+      "parentUuid": "fa941091_1c474307",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "239e5198_797d8b09",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eaf98442_cc3e3c5f",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eea3abad_33c535e8",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
         "patchSetId": 7
@@ -102,6 +174,24 @@
       "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd8a6e24_fe38c4d3",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eea3abad_33c535e8",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "5844694e_2f6905d3",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "Maybe, although the string is used only once, in the static table so there isn\u0027t that much redundancy.",
+      "parentUuid": "ae477044_038cbec1",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec88dafa_504f64ff",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
         "patchSetId": 7
@@ -136,6 +244,24 @@
       "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8f5181b_d5fc6a51",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec88dafa_504f64ff",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
