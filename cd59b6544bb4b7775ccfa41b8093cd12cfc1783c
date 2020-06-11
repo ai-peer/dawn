@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "dbbc1955_0c85cf5f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T19:08:46Z",
+      "side": 1,
+      "message": "Ah yes, I see now it was rescoped. Sorry.",
+      "parentUuid": "275a971c_a5341bd4",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa941091_1c474307",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
         "patchSetId": 7
