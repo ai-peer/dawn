@@ -201,7 +201,7 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (GetDevice()->ConsumedError(OnBeforePresent(mCurrentTexture.Get()))) {
+        if (GetDevice()->ConsumedError(OnBeforePresent(mCurrentTextureView.Get()))) {
             return;
         }
 
