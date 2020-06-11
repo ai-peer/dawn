@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "685d6fb9_cd87610e",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T20:11:02Z",
+      "side": 1,
+      "message": "It was probably wrong of me to originally write this by looking at the completed value. We should instead use fence.OnCompletion(1u, callback)\n\nWhether the device is lost or the fence actually completes, the callback will still be called.",
+      "range": {
+        "startLine": 167,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "eabb59b8a618c8f3208fcd11031713d582570b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
