@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fac58fe8_cc3a9295",
+        "filename": "src/common/TypedBitset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-11T22:09:13Z",
+      "side": 1,
+      "message": "idea: maybe put these into a namespace that sort of mirrors std::, e.g. ityped::bitset, ityped::array, ityped::integer, ityped::span, ityped::underlying_type_t?\n\nI think it would be nice because I like that std:: types have a different visual style from our own classes (identifies it as a non-domain-specific type)",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b006397f_cf5eca07",
+        "filename": "src/common/UnderlyingType.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-11T22:09:13Z",
+      "side": 1,
+      "message": "nit:\n\n  underlying_type_t\n        ^        ^^",
+      "range": {
+        "startLine": 20,
+        "startChar": 37,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a81b00f_6c9d3057",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-11T22:09:13Z",
+      "side": 1,
+      "message": "Use TypedBitset?",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "914c6646_0001b3dc",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-11T22:09:13Z",
+      "side": 1,
+      "message": "nit: probably should just write an overload for this",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
