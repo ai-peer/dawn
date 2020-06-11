@@ -22,6 +22,30 @@
       "revId": "e174235b86b91e89988d495b32266c3d8101ba7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a560474f_fbdfabdc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T17:26:41Z",
+      "side": 1,
+      "message": "Done. Good catch!",
+      "parentUuid": "2ffd2a1c_682e67c5",
+      "range": {
+        "startLine": 720,
+        "startChar": 18,
+        "endLine": 720,
+        "endChar": 37
+      },
+      "revId": "e174235b86b91e89988d495b32266c3d8101ba7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -296,6 +296,30 @@
     },
     {
       "key": {
+        "uuid": "d11d73c2_6bbc2c80",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-11T17:26:41Z",
+      "side": 1,
+      "message": "Done. OK. This is not a big deal. And the upside is that the name is shorter now. :)",
+      "parentUuid": "087797db_2f1799e6",
+      "range": {
+        "startLine": 805,
+        "startChar": 9,
+        "endLine": 805,
+        "endChar": 19
+      },
+      "revId": "8a2a45a2cd3eb47384ea9fe92713d2bcd3884534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2dd9f2d_6ae732d4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 9
