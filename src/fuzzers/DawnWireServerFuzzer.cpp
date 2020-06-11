@@ -50,6 +50,8 @@ namespace {
     std::string sInjectedErrorTestcaseOutDir;
     uint64_t sOutputFileNumber = 0;
 
+    bool sCommandsFinished = false;
+
     WGPUSwapChain ErrorDeviceCreateSwapChain(WGPUDevice device,
                                              WGPUSurface surface,
                                              const WGPUSwapChainDescriptor*) {
@@ -57,6 +59,10 @@ namespace {
         // A 0 implementation will trigger a swapchain creation error.
         desc.implementation = 0;
         return sOriginalDeviceCreateSwapChain(device, surface, &desc);
+    }
+
+    void OnFenceCompletionCallback(WGPUFenceCompletionStatus status, void* userdata) {
+        sCommandsFinished = true;
     }
 
 }  // namespace
@@ -156,7 +162,8 @@ int DawnWireServerFuzzer::Run(const uint8_t* data,
         wgpu::Queue queue = device.GetDefaultQueue();
         wgpu::Fence fence = queue.CreateFence();
         queue.Signal(fence, 1u);
-        while (fence.GetCompletedValue() != 1u) {
+        fence.OnCompletion(1u, OnFenceCompletionCallback, 0);
+        while (!sCommandsFinished) {
             device.Tick();
             utils::USleep(100);
         }
