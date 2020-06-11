@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f0d5d5f5_f2b2d47f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-11T16:24:19Z",
+      "side": 1,
+      "message": "it\u0027s used a few lines below inside the other {   } scope",
+      "parentUuid": "e10f564b_33611e78",
+      "revId": "cd59b6544bb4b7775ccfa41b8093cd12cfc1783c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa941091_1c474307",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
         "patchSetId": 7
