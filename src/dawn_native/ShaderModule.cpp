@@ -561,6 +561,12 @@ namespace dawn_native {
                         info->viewDimension = ToWGPUTextureViewDimension(binding.texture_dimension);
                         break;
                     }
+                    case wgpu::BindingType::UniformBuffer:
+                    case wgpu::BindingType::StorageBuffer:
+                    case wgpu::BindingType::ReadonlyStorageBuffer:
+                        // TODO(idanr): add minimumBufferSize to spvc
+                        info->minimumBufferSize = 0;
+                        break;
                     default:
                         break;
                 }
@@ -714,6 +720,14 @@ namespace dawn_native {
                 ShaderBindingInfo* info = &it.first->second;
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
+
+                if (bindingType == wgpu::BindingType::UniformBuffer ||
+                    bindingType == wgpu::BindingType::StorageBuffer) {
+                    // Determine buffer size, with a minimum of 1 element in the runtime array
+                    spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
+                    info->minimumBufferSize =
+                        compiler.get_declared_struct_size_runtime_array(type, 1);
+                }
 
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
@@ -870,6 +884,44 @@ namespace dawn_native {
         return mExecutionModel;
     }
 
+    BufferSizesArray ShaderModuleBase::GetPipelineMinBufferSizes(
+        const PipelineLayoutBase* layout) const {
+        BufferSizesArray bufferSizes;
+        for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            bufferSizes[group] =
+                GetBindGroupMinBufferSizes(mBindingInfo[group], layout->GetBindGroupLayout(group));
+        }
+
+        return bufferSizes;
+    }
+
+    std::vector<uint64_t> ShaderModuleBase::GetBindGroupMinBufferSizes(
+        const BindingInfoMap& shaderMap,
+        const BindGroupLayoutBase* layout) const {
+        std::vector<uint64_t> bufferSizesPacked(layout->GetUnverifiedBufferCount());
+        uint32_t packedIdx = 0;
+
+        for (BindingIndex bindingIndex = 0; bindingIndex < layout->GetBufferCount();
+             ++bindingIndex) {
+            const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
+            if (bindingInfo.minimumBufferSize == 0) {
+                ASSERT(packedIdx < bufferSizesPacked.size());
+                const auto& shaderInfo = shaderMap.find(bindingInfo.binding);
+                if (shaderInfo != shaderMap.end()) {
+                    bufferSizesPacked[packedIdx] = shaderInfo->second.minimumBufferSize;
+                } else {
+                    // We have to include buffers if they are included in the bind group's
+                    // packed vector. We don't actually need to check these at draw time, so
+                    // if this is a problem in the future we can optimize it further.
+                    bufferSizesPacked[packedIdx] = 0;
+                }
+                ++packedIdx;
+            }
+        }
+
+        return bufferSizesPacked;
+    }
+
     MaybeError ShaderModuleBase::ValidateCompatibilityWithPipelineLayout(
         const PipelineLayoutBase* layout) const {
         ASSERT(!IsError());
@@ -892,7 +944,7 @@ namespace dawn_native {
     }
 
     MaybeError ShaderModuleBase::ValidateCompatibilityWithBindGroupLayout(
-        size_t group,
+        uint32_t group,
         const BindGroupLayoutBase* layout) const {
         ASSERT(!IsError());
 
@@ -983,7 +1035,16 @@ namespace dawn_native {
 
                 case wgpu::BindingType::UniformBuffer:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
-                case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::StorageBuffer: {
+                    if (bindingInfo.minimumBufferSize != 0 &&
+                        moduleInfo.minimumBufferSize > bindingInfo.minimumBufferSize) {
+                        return DAWN_VALIDATION_ERROR(
+                            "The minimum buffer size of the bind group layout entry is smaller "
+                            "than " +
+                            GetShaderDeclarationString(group, bindingNumber));
+                    }
+                    break;
+                }
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
                     break;
