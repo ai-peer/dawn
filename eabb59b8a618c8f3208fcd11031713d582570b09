@@ -22,6 +22,30 @@
       "revId": "eabb59b8a618c8f3208fcd11031713d582570b09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77bc4fcd_54688805",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-11T21:54:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "685d6fb9_cd87610e",
+      "range": {
+        "startLine": 167,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "eabb59b8a618c8f3208fcd11031713d582570b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
