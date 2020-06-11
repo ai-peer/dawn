@@ -16,6 +16,24 @@
       "revId": "46d450d3fce6679b62bc59ed699742656da67fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e1344d9_1540d181",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-11T17:12:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9fe7719_fc0d5089",
+      "revId": "46d450d3fce6679b62bc59ed699742656da67fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
