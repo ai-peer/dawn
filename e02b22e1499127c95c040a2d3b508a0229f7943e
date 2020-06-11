@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "b341c155_237122db",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-11T22:32:45Z",
+      "side": 1,
+      "message": "Resolved later to keep it merged but find error again",
+      "parentUuid": "17ad665f_3f378705",
+      "range": {
+        "startLine": 147,
+        "startChar": 42,
+        "endLine": 147,
+        "endChar": 70
+      },
+      "revId": "e02b22e1499127c95c040a2d3b508a0229f7943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a62155cc_9a8bc79f",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 15
