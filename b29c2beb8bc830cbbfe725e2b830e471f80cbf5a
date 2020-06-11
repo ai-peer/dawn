@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0b361ab4_83129949",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-11T15:33:08Z",
+      "side": 1,
+      "message": "My bad; I thought it was a member fn.",
+      "parentUuid": "2c43b9fd_d570d673",
+      "revId": "b29c2beb8bc830cbbfe725e2b830e471f80cbf5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f53c7438_a4bcba8c",
         "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
         "patchSetId": 7
