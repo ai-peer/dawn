@@ -150,6 +150,167 @@
     },
     {
       "key": {
+        "uuid": "09fbf988_6306335a",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "nit: Could we make this easier to read somehow?",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d94c4a32_17285b5e",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "All the layouts are std140. We should use std430 for some of the storage buffers to check we\u0027re getting the right thing. 430 hasn\u0027t different packing rules\n\nplease also test like mat2 and structs, etc. -- things with different width\n\n\nAlso test with non-contiguous and out-of-order binding numbers to check that our packing doesn\u0027t mess things up",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65bc3b1b_e8a34639",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "nit: probably don\u0027t need these",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7269d32f_65e4d584",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need the fullness of std::function. Instead we can do:\n\ntemplate \u003ctypename F\u003e\nvoid ForEachSmallerSize(originalSizes, F func)\n\nMaybe a better name would be WithEachSizeOffsetBy(..)\nand then we can do both positive and negative offsets to test larger and smaller bindings.",
+      "range": {
+        "startLine": 156,
+        "startChar": 9,
+        "endLine": 157,
+        "endChar": 89
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c2bea42_1ac2c929",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "nit: also have some cases where there is other data before the unsized array",
+      "range": {
+        "startLine": 280,
+        "startChar": 12,
+        "endLine": 292,
+        "endChar": 24
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32de50f8_e849e706",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "We should also check the buffers that are larger than the minimum size are allowed",
+      "range": {
+        "startLine": 306,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 52
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d38b71f0_c219191a",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T17:59:23Z",
+      "side": 1,
+      "message": "nit: have these lambdas be capital: MakeGroup",
+      "range": {
+        "startLine": 311,
+        "startChar": 9,
+        "endLine": 311,
+        "endChar": 18
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "446ff34d_71634efd",
         "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
         "patchSetId": 26
