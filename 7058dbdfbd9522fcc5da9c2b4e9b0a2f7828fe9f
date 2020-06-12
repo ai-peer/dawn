@@ -133,6 +133,24 @@
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc75ab80_4d687cce",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-12T00:51:06Z",
+      "side": 1,
+      "message": "fair point, this is fine then",
+      "parentUuid": "da185072_bdde613b",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
