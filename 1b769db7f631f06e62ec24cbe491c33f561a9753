@@ -104,6 +104,24 @@
       "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63b13007_b22ab1d0",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-12T22:28:05Z",
+      "side": 1,
+      "message": "recommendedMaxWorkingSetSize sounds like it would be good enough for us, but we should see what kinds of values we actually get from the drivers.",
+      "parentUuid": "63bf31b8_d97c3750",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
