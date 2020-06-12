@@ -46,12 +46,6 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Copy mipLevel out of range");
             }
 
-            if (static_cast<uint64_t>(textureCopy.arrayLayer) +
-                    static_cast<uint64_t>(copySize.depth) >
-                static_cast<uint64_t>(texture->GetArrayLayers())) {
-                return DAWN_VALIDATION_ERROR("Copy arrayLayer out of range");
-            }
-
             Extent3D extent = texture->GetMipLevelPhysicalSize(textureCopy.mipLevel);
 
             // All texture dimensions are in uint32_t so by doing checks in uint64_t we avoid
@@ -61,7 +55,10 @@ namespace dawn_native {
                     static_cast<uint64_t>(extent.width) ||
                 static_cast<uint64_t>(textureCopy.origin.y) +
                         static_cast<uint64_t>(copySize.height) >
-                    static_cast<uint64_t>(extent.height)) {
+                    static_cast<uint64_t>(extent.height) ||
+                static_cast<uint64_t>(textureCopy.origin.z) +
+                        static_cast<uint64_t>(copySize.depth) >
+                    static_cast<uint64_t>(extent.depth)) {
                 return DAWN_VALIDATION_ERROR("Copy would touch outside of the texture");
             }
 
@@ -186,7 +183,7 @@ namespace dawn_native {
             if (src.texture == dst.texture && src.mipLevel == dst.mipLevel) {
                 ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D &&
                        dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
-                if (IsRangeOverlapped(src.arrayLayer, dst.arrayLayer, copySize.depth)) {
+                if (IsRangeOverlapped(src.origin.z, dst.origin.z, copySize.depth)) {
                     return DAWN_VALIDATION_ERROR(
                         "Copy subresources cannot be overlapped when copying within the same "
                         "texture.");
@@ -497,6 +494,25 @@ namespace dawn_native {
             return {};
         }
 
+        ResultOrError<TextureCopyView> FixTextureCopyView(DeviceBase* device,
+                                                          const TextureCopyView* view) {
+            TextureCopyView fixedView = *view;
+
+            if (view->arrayLayer != 0) {
+                if (view->origin.z != 0) {
+                    return DAWN_VALIDATION_ERROR("arrayLayer and origin.z cannot both be != 0");
+                } else {
+                    fixedView.origin.z = fixedView.arrayLayer;
+                    fixedView.arrayLayer = 1;
+                    device->EmitDeprecationWarning(
+                        "wgpu::TextureCopyView::arrayLayer is deprecated in favor of "
+                        "::origin::z");
+                }
+            }
+
+            return fixedView;
+        }
+
     }  // namespace
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
@@ -657,6 +673,12 @@ namespace dawn_native {
                                              const TextureCopyView* destination,
                                              const Extent3D* copySize) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            // TODO(dawn:22): Remove once migration from GPUTextureCopyView.arrayLayer to
+            // GPUTextureCopyView.origin.z is done.
+            TextureCopyView fixedDest;
+            DAWN_TRY_ASSIGN(fixedDest, FixTextureCopyView(GetDevice(), destination));
+            destination = &fixedDest;
+
             // Validate objects before doing the defaulting.
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->buffer));
@@ -711,6 +733,10 @@ namespace dawn_native {
             copy->destination.mipLevel = destination->mipLevel;
             copy->destination.arrayLayer = destination->arrayLayer;
 
+            // TODO(cwallez@chromium.org): Make backends use origin.z instead of arrayLayer
+            copy->destination.arrayLayer = copy->destination.origin.z;
+            copy->destination.origin.z = 1;
+
             return {};
         });
     }
@@ -719,6 +745,12 @@ namespace dawn_native {
                                              const BufferCopyView* destination,
                                              const Extent3D* copySize) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            // TODO(dawn:22): Remove once migration from GPUTextureCopyView.arrayLayer to
+            // GPUTextureCopyView.origin.z is done.
+            TextureCopyView fixedSrc;
+            DAWN_TRY_ASSIGN(fixedSrc, FixTextureCopyView(GetDevice(), source));
+            source = &fixedSrc;
+
             // Validate objects before doing the defaulting.
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
@@ -771,6 +803,10 @@ namespace dawn_native {
             copy->destination.bytesPerRow = destination->bytesPerRow;
             copy->destination.rowsPerImage = defaultedRowsPerImage;
 
+            // TODO(cwallez@chromium.org): Make backends use origin.z instead of arrayLayer
+            copy->source.arrayLayer = copy->source.origin.z;
+            copy->source.origin.z = 1;
+
             return {};
         });
     }
@@ -779,6 +815,15 @@ namespace dawn_native {
                                               const TextureCopyView* destination,
                                               const Extent3D* copySize) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            // TODO(dawn:22): Remove once migration from GPUTextureCopyView.arrayLayer to
+            // GPUTextureCopyView.origin.z is done.
+            TextureCopyView fixedSrc;
+            DAWN_TRY_ASSIGN(fixedSrc, FixTextureCopyView(GetDevice(), source));
+            source = &fixedSrc;
+            TextureCopyView fixedDest;
+            DAWN_TRY_ASSIGN(fixedDest, FixTextureCopyView(GetDevice(), destination));
+            destination = &fixedDest;
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
                 DAWN_TRY(GetDevice()->ValidateObject(destination->texture));
@@ -813,6 +858,12 @@ namespace dawn_native {
             copy->destination.mipLevel = destination->mipLevel;
             copy->destination.arrayLayer = destination->arrayLayer;
             copy->copySize = *copySize;
+
+            // TODO(cwallez@chromium.org): Make backends use origin.z instead of arrayLayer
+            copy->source.arrayLayer = copy->source.origin.z;
+            copy->source.origin.z = 1;
+            copy->destination.arrayLayer = copy->destination.origin.z;
+            copy->destination.origin.z = 1;
 
             return {};
         });
