@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "afc3b2a4_a9ac733b",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T16:58:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d095e0a9_1d8bd84b",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c01bacbc_88b736ea",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a34943ef_1e1f3e48",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T16:58:43Z",
+      "side": 1,
+      "message": "Updated this",
+      "parentUuid": "c01bacbc_88b736ea",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec31d22a_14992fc2",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2020-06-10T21:35:58Z",
       "side": 1,
       "message": "for later: Perhaps for stability we could early-out in Dawn if the requested allocation is larger than the system\u0027s entire VRAM?",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63bf31b8_d97c3750",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T16:58:43Z",
+      "side": 1,
+      "message": "That\u0027s a good idea. Looking briefly at the docs, there\u0027s also \n[MTLDevice recommendedMaxWorkingSetSize] and [MTLDevice maxTransferRate] so maybe we could look at those too. Either because the allocation is larger than the recommended working set, or we determine the allocation would take way too long.",
+      "parentUuid": "ec31d22a_14992fc2",
       "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
