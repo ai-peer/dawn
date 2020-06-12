@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f42b6f4f_cc64651b",
+        "filename": "src/common/TypedBitset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T00:18:09Z",
+      "side": 1,
+      "message": "I think this is a pretty good idea; Corentin WDYT?",
+      "parentUuid": "fac58fe8_cc3a9295",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b006397f_cf5eca07",
         "filename": "src/common/UnderlyingType.h",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2020-06-11T22:09:13Z",
       "side": 1,
       "message": "nit:\n\n  underlying_type_t\n        ^        ^^",
+      "range": {
+        "startLine": 20,
+        "startChar": 37,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34a4374a_ac065243",
+        "filename": "src/common/UnderlyingType.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T00:18:09Z",
+      "side": 1,
+      "message": "not the _t suffix because that\u0027s a little different\n\ntemplate \u003ctypename T\u003e\nusing underlying_type_t \u003d typename underlying_type\u003cT\u003e::type;\n\nBut I should add something like that for our version of it.",
+      "parentUuid": "b006397f_cf5eca07",
       "range": {
         "startLine": 20,
         "startChar": 37,
@@ -70,6 +112,24 @@
       "writtenOn": "2020-06-11T22:09:13Z",
       "side": 1,
       "message": "nit: probably should just write an overload for this",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da185072_bdde613b",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-12T00:18:09Z",
+      "side": 1,
+      "message": "don\u0027t really want to include sstream in TypedInteger.h though..",
+      "parentUuid": "914c6646_0001b3dc",
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
