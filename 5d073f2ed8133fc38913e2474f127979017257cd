@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "892610f8_190d2f61",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T11:29:32Z",
+      "side": 1,
+      "message": "Maybe TextureSpec could contain one Extent3D and one Origin3D, one for the texture size, one for the copy size? This would match the API better after a couple deprecations that are incoming (arrayLayerCount in TextureDescriptor and arrayLayer in TextureCopyView are both going to be replace by size.depth).",
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cadc1d46_e8474a1f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T11:29:32Z",
+      "side": 1,
+      "message": "Maybe this argument could be a Extent3D?",
+      "range": {
+        "startLine": 103,
+        "startChar": 34,
+        "endLine": 103,
+        "endChar": 94
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0002f36_1cd50dda",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T11:29:32Z",
+      "side": 1,
+      "message": "nit: utils/TextureFormatUtils.h",
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d838fae_e005dc67",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T11:29:32Z",
+      "side": 1,
+      "message": "GetBufferTextureCopyLayoutForTexture2DAtLevel the 2D is important because the layout is different for 3D because the mipSize depth is different.",
+      "range": {
+        "startLine": 396,
+        "startChar": 28,
+        "endLine": 396,
+        "endChar": 71
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1e77e58_bb17034e",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T11:29:32Z",
+      "side": 1,
+      "message": "I think rowsPerImage is always heightAtLevel0 \u003e\u003e mipmapLevel so maybe we don\u0027t need it as an argument?",
+      "range": {
+        "startLine": 155,
+        "startChar": 17,
+        "endLine": 155,
+        "endChar": 29
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
