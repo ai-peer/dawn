@@ -171,14 +171,9 @@ namespace dawn_native {
         return deviceBase->GetDeprecationWarningCountForTesting();
     }
 
-    bool IsTextureSubresourceInitialized(WGPUTexture texture,
-                                         uint32_t baseMipLevel,
-                                         uint32_t levelCount,
-                                         uint32_t baseArrayLayer,
-                                         uint32_t layerCount) {
+    bool IsTextureSubresourceInitialized(WGPUTexture texture, const SubresourceRange& range) {
         dawn_native::TextureBase* textureBase =
             reinterpret_cast<dawn_native::TextureBase*>(texture);
-        SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
         return textureBase->IsSubresourceContentInitialized(range);
     }
 

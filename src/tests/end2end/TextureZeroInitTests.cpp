@@ -128,7 +128,8 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferSource) {
     EXPECT_LAZY_CLEAR(1u, EXPECT_PIXEL_RGBA8_EQ(filledWithZeros, texture, 0, 0));
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // Test that non-zero mip level clears subresource to Zero after first use
@@ -173,7 +174,8 @@ TEST_P(TextureZeroInitTest, RenderingMipMapClearsToZero) {
 
     // Expect texture subresource initialized to be true
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
-                        renderPass.color.Get(), baseMipLevel, 1, baseArrayLayer, 1));
+                        renderPass.color.Get(), dawn_native::SubresourceRange::SingleSubresource(
+                                                    baseMipLevel, baseArrayLayer)));
 }
 
 // Test that non-zero array layers clears subresource to Zero after first use.
@@ -216,7 +218,8 @@ TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
 
     // Expect texture subresource initialized to be true
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
-                        renderPass.color.Get(), baseMipLevel, 1, baseArrayLayer, 1));
+                        renderPass.color.Get(), dawn_native::SubresourceRange::SingleSubresource(
+                                                    baseMipLevel, baseArrayLayer)));
 }
 
 // This tests CopyBufferToTexture fully overwrites copy so lazy init is not needed.
@@ -246,7 +249,8 @@ TEST_P(TextureZeroInitTest, CopyBufferToTexture) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // Test for a copy only to a subset of the subresource, lazy init is necessary to clear the other
@@ -280,7 +284,8 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureHalf) {
     EXPECT_TEXTURE_RGBA8_EQ(expectedZeros.data(), texture, kSize / 2, 0, kSize / 2, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests CopyTextureToTexture fully overwrites copy so lazy init is not needed.
@@ -315,8 +320,10 @@ TEST_P(TextureZeroInitTest, CopyTextureToTexture) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), dstTexture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(dstTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        srcTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        dstTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This Tests the CopyTextureToTexture's copy only to a subset of the subresource, lazy init is
@@ -372,8 +379,10 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
                             0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(dstTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        srcTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        dstTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the texture with depth attachment and load op load will init depth stencil texture to
@@ -415,7 +424,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        srcTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the texture with stencil attachment and load op load will init depth stencil texture
@@ -457,7 +467,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        srcTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the texture with depth stencil attachment and load op load will init depth stencil
@@ -496,7 +507,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        srcTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the color attachments clear to 0s
@@ -519,7 +531,8 @@ TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
 
     // Expect texture subresource initialized to be true
     EXPECT_EQ(true,
-              dawn_native::IsTextureSubresourceInitialized(renderPass.color.Get(), 0, 1, 0, 1));
+              dawn_native::IsTextureSubresourceInitialized(
+                  renderPass.color.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the clearing of sampled textures in render pass
@@ -566,7 +579,9 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
     EXPECT_TEXTURE_RGBA8_EQ(expectedWithZeros.data(), renderTexture, 0, 0, kSize, kSize, 0, 0);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(renderTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true,
+              dawn_native::IsTextureSubresourceInitialized(
+                  renderTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests the clearing of sampled textures during compute pass
@@ -631,7 +646,8 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferTex, 0, kFormatBlockByteSize);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
@@ -660,7 +676,8 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, kSize);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
@@ -691,7 +708,8 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClearUnalignedSize) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, kUnalignedSize);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
@@ -721,7 +739,8 @@ TEST_P(TextureZeroInitTest, NonRenderableTextureClearWithMultiArrayLayers) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, 8);
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 1, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 1)));
 }
 
 // This tests that storeOp clear resets resource state to uninitialized.
@@ -788,8 +807,11 @@ TEST_P(TextureZeroInitTest, RenderPassStoreOpClear) {
                                                   kSize, kSize, 0, 0));
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(renderTexture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
+    EXPECT_EQ(true,
+              dawn_native::IsTextureSubresourceInitialized(
+                  renderTexture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 // This tests storeOp Clear on depth and stencil textures.
@@ -842,8 +864,9 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
 
         // Expect texture subresource initialized to be false since storeop is clear, sets
         // subresource as uninitialized
-        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(depthStencilTexture.Get(), 0,
-                                                                      1, 0, 1));
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(),
+                             dawn_native::SubresourceRange::SingleSubresource(0, 0)));
     }
 
     // Now we put the depth stencil texture back into renderpass, it should be cleared by loadop
@@ -867,8 +890,9 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
 
         // Expect texture subresource initialized to be false since storeop is clear, sets
         // subresource as uninitialized
-        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(depthStencilTexture.Get(), 0,
-                                                                      1, 0, 1));
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(),
+                             dawn_native::SubresourceRange::SingleSubresource(0, 0)));
     }
 }
 
@@ -948,7 +972,8 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
                                                   mipSize, mipSize, 1, 0));
 
     // Expect the whole texture to be initialized
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(sampleTexture.Get(), 0, 2, 0, 1));
+    EXPECT_EQ(true,
+              dawn_native::IsTextureSubresourceInitialized(sampleTexture.Get(), {0, 2, 0, 1}));
 }
 
 // Test that if one layer of a texture is initialized and another is uninitialized, lazy clearing
@@ -1031,7 +1056,8 @@ TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
                                                   kSize, kSize, 0, 1));
 
     // Expect the whole texture to be initialized
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(sampleTexture.Get(), 0, 1, 0, 2));
+    EXPECT_EQ(true,
+              dawn_native::IsTextureSubresourceInitialized(sampleTexture.Get(), {0, 1, 0, 2}));
 }
 
 // This is a regression test for crbug.com/dawn/451 where the lazy texture
@@ -1067,7 +1093,8 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
     }
 
     // Expect texture subresource initialized to be true
-    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                        texture.Get(), dawn_native::SubresourceRange::SingleSubresource(0, 0)));
 }
 
 DAWN_INSTANTIATE_TEST(
