@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a4723a9_10dda373",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "RequiredBufferSizes?",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc4de656_5797fb66",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "nit: else {UNREACHABLE()}",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77f7a62f_49e5aaef",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "We\u0027ll have to see with the group if we require it to be \u003d\u003d between stages or if we take the max if what\u0027s required between stages.",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b43819_d1f6ac79",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "I think we should add the minBufferSize before this CL so we don\u0027t have gaps in testing and don\u0027t need to check for IsSPVC in tests.",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9288c99_bb6dfd95",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "Also readonly storage buffer. Can we have a test for that?",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5d435ab_b041dc74",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "nit: requiredBufferSizes maybe? I\u0027m not sure.",
+      "range": {
+        "startLine": 901,
+        "startChar": 30,
+        "endLine": 901,
+        "endChar": 47
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fa044c9_c93f9828",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "nit: could be if(!\u003d0) continue with a comment that we skip buffer bindings that have the minBufferSize set in the layout.",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e76845_a7f4556b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "nit: RequiredBufferSizes ComputeRequiredBufferSizesForLayout?",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "446ff34d_71634efd",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-12T17:07:18Z",
+      "side": 1,
+      "message": "Hey we found a bug! :D",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
