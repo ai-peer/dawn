@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5bf3d537_965a95df",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-12T22:34:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a34943ef_1e1f3e48",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec31d22a_14992fc2",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 9
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "recommendedMaxWorkingSetSize sounds like it would be good enough for us, but we should see what kinds of values we actually get from the drivers.",
       "parentUuid": "63bf31b8_d97c3750",
+      "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91207fc7_e7a1a1aa",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-12T22:34:34Z",
+      "side": 1,
+      "message": "And I guess we should have a toggle to control whether we enforce that limit.",
+      "parentUuid": "63b13007_b22ab1d0",
       "revId": "1b769db7f631f06e62ec24cbe491c33f561a9753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
