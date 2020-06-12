@@ -41,6 +41,9 @@ namespace dawn_native { namespace opengl {
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
         void* GetMappedPointerImpl() override;
 
+        uint64_t GetAllocatedSize() const;
+        void ClearBuffer(ClearValue clearValue);
+
         GLuint mBuffer = 0;
         void* mMappedData = nullptr;
     };

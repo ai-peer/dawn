@@ -22,13 +22,14 @@ namespace dawn_native { namespace opengl {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
-        // TODO(cwallez@chromium.org): Have a global "zero" buffer instead of creating a new 4-byte
-        // buffer?
-        uint64_t size = std::max(GetSize(), uint64_t(4u));
-
         device->gl.GenBuffers(1, &mBuffer);
         device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
-        device->gl.BufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STATIC_DRAW);
+
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            ClearBuffer(BufferBase::ClearValue::NonZero);
+        } else {
+            device->gl.BufferData(GL_ARRAY_BUFFER, GetAllocatedSize(), nullptr, GL_STATIC_DRAW);
+        }
     }
 
     Buffer::~Buffer() {
@@ -89,6 +90,23 @@ namespace dawn_native { namespace opengl {
     void Buffer::DestroyImpl() {
         ToBackend(GetDevice())->gl.DeleteBuffers(1, &mBuffer);
         mBuffer = 0;
+    }
+
+    uint64_t Buffer::GetAllocatedSize() const {
+        // TODO(cwallez@chromium.org): Have a global "zero" buffer instead of creating a new
+        // 4-byte buffer?
+        return std::max(GetSize(), uint64_t(4u));
+    }
+
+    void Buffer::ClearBuffer(ClearValue clearValue) {
+        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
+        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
+        constexpr uint8_t kClearBufferValue = 1u;
+
+        uint64_t size = GetAllocatedSize();
+        std::vector<uint8_t> clearValues(size, kClearBufferValue);
+        ToBackend(GetDevice())
+            ->gl.BufferData(GL_ARRAY_BUFFER, size, clearValues.data(), GL_STATIC_DRAW);
     }
 
 }}  // namespace dawn_native::opengl

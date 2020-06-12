@@ -52,4 +52,5 @@ TEST_P(NonzeroBufferCreationTests, BufferCreationWithoutCopyDstUsage) {
 
 DAWN_INSTANTIATE_TEST(NonzeroBufferCreationTests,
                       MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
                       VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
