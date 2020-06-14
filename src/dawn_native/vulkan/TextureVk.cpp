@@ -816,8 +816,8 @@ namespace dawn_native { namespace vulkan {
         // are the same, then we can use one barrier to do state transition for all subresources.
         // Note that if the texture has only one mip level and one array slice, it will fall into
         // this category.
-        bool isAllSubresourcesCovered = levelCount * layerCount == subresourceCount;
-        if (mSameLastUsagesAcrossSubresources && isAllSubresourcesCovered) {
+        bool areAllSubresourcesCovered = levelCount * layerCount == subresourceCount;
+        if (mSameLastUsagesAcrossSubresources && areAllSubresourcesCovered) {
             ASSERT(baseMipLevel == 0 && baseArrayLayer == 0);
             if (CanReuseWithoutBarrier(mSubresourceLastUsages[0], usage)) {
                 return;
@@ -855,7 +855,7 @@ namespace dawn_native { namespace vulkan {
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 0, nullptr, barriers.size(), barriers.data());
 
-        mSameLastUsagesAcrossSubresources = isAllSubresourcesCovered;
+        mSameLastUsagesAcrossSubresources = areAllSubresourcesCovered;
     }
 
     MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
