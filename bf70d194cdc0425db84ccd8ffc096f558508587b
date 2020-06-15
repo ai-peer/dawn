@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a35c79b_a71bee23",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-15T20:58:40Z",
+      "side": 1,
+      "message": "Nit: everytime -\u003e every time\n\nNit: maybe Add(vk_struct) -\u003e Add(\u0026vk_struct) or Add(vk_struct_ptr) to indicate that it\u0027s by reference, not by value.",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e014eab5_d320d566",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-15T20:58:40Z",
+      "side": 1,
+      "message": "Nit: VkStructeType -\u003e VkStructureType?",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "034a6a4a_453c2d02",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-15T20:58:40Z",
+      "side": 1,
+      "message": "Nit: VK_STRUCT_TYPE -\u003e VK_STRUCT_TYPEs?\n\nAlso, why not just cast the pNext itself, rather than the containing struct? It looks a little less dubious IMHO. Might be able to do a static_cast rather than a reinterpret_cast too.",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
