@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd70f574_655ba5bc",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:46:52Z",
+      "side": 1,
+      "message": "Depending on ordering with https://dawn-review.googlesource.com/c/dawn/+/23101, this could be descriptor.size \u003d textureSpec.textureSize (if this lands first I\u0027ll update that CL to do it)",
+      "revId": "144b39eea373da8dfe381c82aea4b8e427a41ba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17a317c1_f6fe062a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:46:52Z",
+      "side": 1,
+      "message": "This is a bit weird, maybe the copySize should be a separate argument and not in the TextureSpec. This would make each DoTest match the arguments in the respective CopyX2Y closely.",
+      "revId": "144b39eea373da8dfe381c82aea4b8e427a41ba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ea4f078_94ea3994",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:46:52Z",
+      "side": 1,
+      "message": "TextureSpec is so small now, that it could be initialized as:\n\n  TextureSpec tSpec \u003d {{kWidth, kHeight, 1}, {0, 0, 0}, 0};\n  DoTest(tSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 1});\n\nBut given the number of such changes to do, feel free to skip this comment.",
+      "revId": "144b39eea373da8dfe381c82aea4b8e427a41ba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
