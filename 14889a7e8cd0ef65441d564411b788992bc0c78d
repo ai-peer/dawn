@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cec6429f_a174fe6e",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "Overall I feel like this file misses coverage (it\u0027s hard to point out exactly), or has accidental coverage. There are four things we need to check:\n\n - The correctness of minBufferSize for the defaulted layout for a pipeline.\n - The check between BGL and pipeline at pipeline creation time.\n - The check between the BGL and the bindings at bindgroup creation time.\n - The check between the bindgroup binding sizes and the required pipeline sizes at draw time.\n\nIt would help if the test file was structured to follow these aspects that need testing, and explicitly called them out.\n\nWe could even have subtest fixture classes for them like:\n\n - MinBufferSizeDefaultLayoutTests\n - MinBufferSizePipelineCreationTests\n - MinBufferSizeBindGroupCreationTests\n - MinBufferSizeDrawTimeValidationTests",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54855eb1_cdd16c52",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "nit: static_cast",
+      "range": {
+        "startLine": 36,
+        "startChar": 43,
+        "endLine": 36,
+        "endChar": 53
+      },
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59b8e577_b7cc2817",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "I think this could have Vertex too",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a10178a2_7d2ede83",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "mZeroMinSizeLayout?",
+      "range": {
+        "startLine": 113,
+        "startChar": 26,
+        "endLine": 113,
+        "endChar": 42
+      },
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b087cc22_11561258",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "nit: extra whitespace",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f910c5c8_b13efae6",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "nit: CheckLayoutBindingSizeValidation?",
+      "range": {
+        "startLine": 277,
+        "startChar": 9,
+        "endLine": 277,
+        "endChar": 39
+      },
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d76a9a64_4dcb76d2",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "nit: CheckShaderBindingSizeReflection?",
+      "range": {
+        "startLine": 297,
+        "startChar": 9,
+        "endLine": 297,
+        "endChar": 29
+      },
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ec51301_e275417a",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "This isn\u0027t checking the buffer size, the validation that fails is the buffer binding size \u003c-\u003e BGL minimumBufferSize validation that fails. The buffer could be of size 8 and the test would still fail. (and we should update it with a big enough buffer so it\u0027s clear)",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92a6e0f2_059c5861",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "This should be predicated on !UseWire() because the wire always creates a new object.",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f19a1ce_82ded6ae",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "Likewise, here the problem isn\u0027t that the buffer is too small, it is that the buffer binding is too small.",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a577d77_7f5c3cde",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "That\u0027s not the problem, here the Bindgroup\u0027s BGL and the pipeline\u0027s BGL are different so that\u0027s what causes the validation error. It doesn\u0027t matter that the rest is equal.",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc1d4e31_7c9ebcfa",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T13:40:27Z",
+      "side": 1,
+      "message": "nit: Comment as to what these tests do.",
+      "revId": "14889a7e8cd0ef65441d564411b788992bc0c78d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
