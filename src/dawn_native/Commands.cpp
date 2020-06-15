@@ -24,6 +24,16 @@
 
 namespace dawn_native {
 
+    SubresourceRange TextureCopy::GetAffectedSubresources(const Extent3D& copySize) const {
+        switch (texture->GetDimension()) {
+            case wgpu::TextureDimension::e2D:
+                return {mipLevel, 1, origin.z, copySize.depth};
+            default:
+                UNREACHABLE();
+                return {};
+        }
+    }
+
     void FreeCommands(CommandIterator* commands) {
         commands->Reset();
 
