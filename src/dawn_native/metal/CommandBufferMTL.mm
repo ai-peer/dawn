@@ -441,18 +441,12 @@ namespace dawn_native { namespace metal {
             return copy;
         }
 
-        void EnsureSourceTextureInitialized(Texture* texture,
-                                            const Extent3D& size,
-                                            const TextureCopy& src) {
-            texture->EnsureSubresourceContentInitialized(
-                {src.mipLevel, 1, src.arrayLayer, size.depth});
-        }
-
         void EnsureDestinationTextureInitialized(Texture* texture,
-                                                 const Extent3D& size,
-                                                 const TextureCopy& dst) {
-            SubresourceRange range = {dst.mipLevel, 1, dst.arrayLayer, size.depth};
-            if (IsCompleteSubresourceCopiedTo(texture, size, dst.mipLevel)) {
+                                                 const TextureCopy& dst,
+                                                 const Extent3D& size) {
+            ASSERT(texture == dst.texture.Get());
+            SubresourceRange range = dst.GetAffectedSubresources(size);
+            if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), size, dst.mipLevel)) {
                 texture->SetIsSubresourceContentInitialized(true, range);
             } else {
                 texture->EnsureSubresourceContentInitialized(range);
@@ -744,24 +738,34 @@ namespace dawn_native { namespace metal {
                     Buffer* buffer = ToBackend(src.buffer.Get());
                     Texture* texture = ToBackend(dst.texture.Get());
 
-                    EnsureDestinationTextureInitialized(texture, copy->copySize, copy->destination);
+                    EnsureDestinationTextureInitialized(texture, copy->destination, copy->copySize);
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(dst.mipLevel);
-                    TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
+                    TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                         dst.origin, copySize, texture->GetFormat(), virtualSizeAtLevel,
                         buffer->GetSize(), src.offset, src.bytesPerRow, src.rowsPerImage);
 
-                    for (uint32_t i = 0; i < splittedCopies.count; ++i) {
-                        const TextureBufferCopySplit::CopyInfo& copyInfo = splittedCopies.copies[i];
+                    for (uint32_t i = 0; i < splitCopies.count; ++i) {
+                        const TextureBufferCopySplit::CopyInfo& copyInfo = splitCopies.copies[i];
+
+                        // Translate from WebGPU origin to Metal origin + slice
+                        // TODO(cwallez@chromium.org): The logic will need to be updated when
+                        // adding support for 1D / 3D texture or multi-array-layer copies.
+                        ASSERT(copyInfo.copyExtent.depth == 1 &&
+                               texture->GetDimension() == wgpu::TextureDimension::e2D);
+                        MTLOrigin textureOrigin = copyInfo.textureOrigin;
+                        NSUInteger textureSlice = textureOrigin.z;
+                        textureOrigin.z = 0;
+
                         [commandContext->EnsureBlit() copyFromBuffer:buffer->GetMTLBuffer()
                                                         sourceOffset:copyInfo.bufferOffset
                                                    sourceBytesPerRow:copyInfo.bytesPerRow
                                                  sourceBytesPerImage:copyInfo.bytesPerImage
                                                           sourceSize:copyInfo.copyExtent
                                                            toTexture:texture->GetMTLTexture()
-                                                    destinationSlice:dst.arrayLayer
+                                                    destinationSlice:textureSlice
                                                     destinationLevel:dst.mipLevel
-                                                   destinationOrigin:copyInfo.textureOrigin];
+                                                   destinationOrigin:textureOrigin];
                     }
                     break;
                 }
@@ -774,19 +778,30 @@ namespace dawn_native { namespace metal {
                     Texture* texture = ToBackend(src.texture.Get());
                     Buffer* buffer = ToBackend(dst.buffer.Get());
 
-                    EnsureSourceTextureInitialized(texture, copy->copySize, copy->source);
+                    texture->EnsureSubresourceContentInitialized(
+                        src.GetAffectedSubresources(copySize));
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(src.mipLevel);
-                    TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
+                    TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                         src.origin, copySize, texture->GetFormat(), virtualSizeAtLevel,
                         buffer->GetSize(), dst.offset, dst.bytesPerRow, dst.rowsPerImage);
 
-                    for (uint32_t i = 0; i < splittedCopies.count; ++i) {
-                        const TextureBufferCopySplit::CopyInfo& copyInfo = splittedCopies.copies[i];
+                    for (uint32_t i = 0; i < splitCopies.count; ++i) {
+                        const TextureBufferCopySplit::CopyInfo& copyInfo = splitCopies.copies[i];
+
+                        // Translate from WebGPU origin to Metal origin + slice
+                        // TODO(cwallez@chromium.org): The logic will need to be updated when
+                        // adding support for 1D / 3D texture or multi-array-layer copies.
+                        ASSERT(copyInfo.copyExtent.depth == 1 &&
+                               texture->GetDimension() == wgpu::TextureDimension::e2D);
+                        MTLOrigin textureOrigin = copyInfo.textureOrigin;
+                        NSUInteger textureSlice = textureOrigin.z;
+                        textureOrigin.z = 0;
+
                         [commandContext->EnsureBlit() copyFromTexture:texture->GetMTLTexture()
-                                                          sourceSlice:src.arrayLayer
+                                                          sourceSlice:textureSlice
                                                           sourceLevel:src.mipLevel
-                                                         sourceOrigin:copyInfo.textureOrigin
+                                                         sourceOrigin:textureOrigin
                                                            sourceSize:copyInfo.copyExtent
                                                              toBuffer:buffer->GetMTLBuffer()
                                                     destinationOffset:copyInfo.bufferOffset
@@ -802,26 +817,32 @@ namespace dawn_native { namespace metal {
                     Texture* srcTexture = ToBackend(copy->source.texture.Get());
                     Texture* dstTexture = ToBackend(copy->destination.texture.Get());
 
-                    EnsureSourceTextureInitialized(srcTexture, copy->copySize, copy->source);
-                    EnsureDestinationTextureInitialized(dstTexture, copy->copySize,
-                                                        copy->destination);
+                    srcTexture->EnsureSubresourceContentInitialized(
+                        copy->source.GetAffectedSubresources(copy->copySize));
+                    EnsureDestinationTextureInitialized(dstTexture, copy->destination,
+                                                        copy->copySize);
 
                     // TODO(jiawei.shao@intel.com): support copies with 1D and 3D textures.
                     ASSERT(srcTexture->GetDimension() == wgpu::TextureDimension::e2D &&
                            dstTexture->GetDimension() == wgpu::TextureDimension::e2D);
-                    const MTLSize mtlSizeOneLayer =
+                    const MTLSize sizeOneLayer =
                         MTLSizeMake(copy->copySize.width, copy->copySize.height, 1);
+                    const MTLOrigin sourceOriginNoLayer =
+                        MTLOriginMake(copy->source.origin.x, copy->source.origin.y, 0);
+                    const MTLOrigin destinationOriginNoLayer =
+                        MTLOriginMake(copy->destination.origin.x, copy->destination.origin.y, 0);
+
                     for (uint32_t slice = 0; slice < copy->copySize.depth; ++slice) {
                         [commandContext->EnsureBlit()
                               copyFromTexture:srcTexture->GetMTLTexture()
-                                  sourceSlice:copy->source.arrayLayer + slice
+                                  sourceSlice:copy->source.origin.z + slice
                                   sourceLevel:copy->source.mipLevel
-                                 sourceOrigin:MakeMTLOrigin(copy->source.origin)
-                                   sourceSize:mtlSizeOneLayer
+                                 sourceOrigin:sourceOriginNoLayer
+                                   sourceSize:sizeOneLayer
                                     toTexture:dstTexture->GetMTLTexture()
-                             destinationSlice:copy->destination.arrayLayer + slice
+                             destinationSlice:copy->destination.origin.z + slice
                              destinationLevel:copy->destination.mipLevel
-                            destinationOrigin:MakeMTLOrigin(copy->destination.origin)];
+                            destinationOrigin:destinationOriginNoLayer];
                     }
 
                     break;

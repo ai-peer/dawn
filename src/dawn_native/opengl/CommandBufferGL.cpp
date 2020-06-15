@@ -516,7 +516,7 @@ namespace dawn_native { namespace opengl {
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
                     ASSERT(copy->copySize.depth == 1);
                     SubresourceRange subresource =
-                        SubresourceRange::SingleSubresource(dst.mipLevel, dst.arrayLayer);
+                        SubresourceRange::SingleSubresource(dst.mipLevel, dst.origin.z);
                     if (IsCompleteSubresourceCopiedTo(texture, copySize, dst.mipLevel)) {
                         texture->SetIsSubresourceContentInitialized(true, subresource);
                     } else {
@@ -547,7 +547,7 @@ namespace dawn_native { namespace opengl {
 
                         if (texture->GetArrayLayers() > 1) {
                             gl.CompressedTexSubImage3D(
-                                target, dst.mipLevel, dst.origin.x, dst.origin.y, dst.arrayLayer,
+                                target, dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
                                 copyExtent.width, copyExtent.height, 1, format.internalFormat,
                                 copyDataSize,
                                 reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
@@ -562,7 +562,7 @@ namespace dawn_native { namespace opengl {
                             case wgpu::TextureDimension::e2D:
                                 if (texture->GetArrayLayers() > 1) {
                                     gl.TexSubImage3D(target, dst.mipLevel, dst.origin.x,
-                                                     dst.origin.y, dst.arrayLayer, copySize.width,
+                                                     dst.origin.y, dst.origin.z, copySize.width,
                                                      copySize.height, 1, format.format, format.type,
                                                      reinterpret_cast<void*>(
                                                          static_cast<uintptr_t>(src.offset)));
@@ -607,7 +607,7 @@ namespace dawn_native { namespace opengl {
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
                     ASSERT(copy->copySize.depth == 1);
                     texture->EnsureSubresourceContentInitialized(
-                        SubresourceRange::SingleSubresource(src.mipLevel, src.arrayLayer));
+                        SubresourceRange::SingleSubresource(src.mipLevel, src.origin.z));
                     // The only way to move data from a texture to a buffer in GL is via
                     // glReadPixels with a pack buffer. Create a temporary FBO for the copy.
                     gl.BindTexture(target, texture->GetHandle());
@@ -640,7 +640,7 @@ namespace dawn_native { namespace opengl {
                             if (texture->GetArrayLayers() > 1) {
                                 gl.FramebufferTextureLayer(GL_READ_FRAMEBUFFER, glAttachment,
                                                            texture->GetHandle(), src.mipLevel,
-                                                           src.arrayLayer);
+                                                           src.origin.z);
                             } else {
                                 gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, glAttachment, target,
                                                         texture->GetHandle(), src.mipLevel);
@@ -679,9 +679,9 @@ namespace dawn_native { namespace opengl {
                     Extent3D copySize = ComputeTextureCopyExtent(dst, copy->copySize);
                     Texture* srcTexture = ToBackend(src.texture.Get());
                     Texture* dstTexture = ToBackend(dst.texture.Get());
-                    SubresourceRange srcRange = {src.mipLevel, 1, src.arrayLayer,
+                    SubresourceRange srcRange = {src.mipLevel, 1, src.origin.z,
                                                  copy->copySize.depth};
-                    SubresourceRange dstRange = {dst.mipLevel, 1, dst.arrayLayer,
+                    SubresourceRange dstRange = {dst.mipLevel, 1, dst.origin.z,
                                                  copy->copySize.depth};
 
                     srcTexture->EnsureSubresourceContentInitialized(srcRange);
@@ -691,9 +691,9 @@ namespace dawn_native { namespace opengl {
                         dstTexture->EnsureSubresourceContentInitialized(dstRange);
                     }
                     gl.CopyImageSubData(srcTexture->GetHandle(), srcTexture->GetGLTarget(),
-                                        src.mipLevel, src.origin.x, src.origin.y, src.arrayLayer,
+                                        src.mipLevel, src.origin.x, src.origin.y, src.origin.z,
                                         dstTexture->GetHandle(), dstTexture->GetGLTarget(),
-                                        dst.mipLevel, dst.origin.x, dst.origin.y, dst.arrayLayer,
+                                        dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
                                         copySize.width, copySize.height, copy->copySize.depth);
                     break;
                 }
