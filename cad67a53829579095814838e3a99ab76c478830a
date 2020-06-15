@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0906678f_610930f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8d82882_00649cc3",
+      "range": {
+        "startLine": 12,
+        "startChar": 20,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c32d7e0_f2a38186",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "cad67a53829579095814838e3a99ab76c478830a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4f5a3c_acf45af1",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c32d7e0_f2a38186",
+      "range": {
+        "startLine": 419,
+        "startChar": 7,
+        "endLine": 420,
+        "endChar": 28
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e1ae7490_02474e82",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b1e2ed9_209f69ae",
+      "range": {
+        "startLine": 423,
+        "startChar": 8,
+        "endLine": 423,
+        "endChar": 26
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ce2fa22_128e45e7",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 5
@@ -82,6 +154,30 @@
       "writtenOn": "2020-06-12T17:21:44Z",
       "side": 1,
       "message": "maybe.. this could return 1 if it\u0027s 3D, and .height if it\u0027s 1D (if we even have 1D arrays)",
+      "range": {
+        "startLine": 428,
+        "startChar": 7,
+        "endLine": 429,
+        "endChar": 27
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c05104b5_0560c394",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "I don\u0027t remember exactly what we decided was going to be the array layer size for 1D (or maybe we don\u0027t even have 1D array textures). If you don\u0027t mind we could leave this as is (with an additional comment) and modify it when we implement 3d / 1d textures.",
+      "parentUuid": "7ce2fa22_128e45e7",
       "range": {
         "startLine": 428,
         "startChar": 7,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "f99da8a2_bedee171",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea115169_b5de6e3d",
+      "range": {
+        "startLine": 437,
+        "startChar": 38,
+        "endLine": 437,
+        "endChar": 49
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a00dc08_bd47dd71",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 5
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "54810bd6_88c6a5e7",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a00dc08_bd47dd71",
+      "range": {
+        "startLine": 293,
+        "startChar": 8,
+        "endLine": 293,
+        "endChar": 32
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5181e5ba_0fb09de2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 5
@@ -151,6 +295,30 @@
       "writtenOn": "2020-06-12T17:21:44Z",
       "side": 1,
       "message": "nit: This arguably isn\u0027t a \"size\" or \"type\"",
+      "range": {
+        "startLine": 243,
+        "startChar": 12,
+        "endLine": 243,
+        "endChar": 72
+      },
+      "revId": "cad67a53829579095814838e3a99ab76c478830a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e3c4ce6_abc1019b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T08:37:12Z",
+      "side": 1,
+      "message": "It\u0027s kind of the depth of the multisample texture in term of samples. I didn\u0027t find a better name for the functions :/",
+      "parentUuid": "5181e5ba_0fb09de2",
       "range": {
         "startLine": 243,
         "startChar": 12,
