@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0debed76_603a39d6",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T09:06:10Z",
+      "side": 1,
+      "message": "This could be view-\u003eGetSubresourceRange() after the cleanup CL.",
+      "range": {
+        "startLine": 59,
+        "startChar": 72,
+        "endLine": 61,
+        "endChar": 62
+      },
+      "revId": "e45db3873aebbd4cf3c140c991920b8c5ddfe972",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cea392e_38cdede1",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T09:06:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e45db3873aebbd4cf3c140c991920b8c5ddfe972",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6c7339e_e92432cf",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T09:06:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e45db3873aebbd4cf3c140c991920b8c5ddfe972",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
