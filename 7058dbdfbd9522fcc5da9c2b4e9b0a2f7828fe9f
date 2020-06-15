@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e38b2e9b_a9dd10b5",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "nit: also modify CMakeLists.txt (without commas) please!",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fac58fe8_cc3a9295",
         "filename": "src/common/TypedBitset.h",
         "patchSetId": 6
@@ -31,6 +48,64 @@
       "side": 1,
       "message": "I think this is a pretty good idea; Corentin WDYT?",
       "parentUuid": "fac58fe8_cc3a9295",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ca4a1e_678b5c30",
+        "filename": "src/common/TypedBitset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "Sound good!",
+      "parentUuid": "f42b6f4f_cc64651b",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5055ef5b_ea72e3db",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "nit: range assertion was removed.\n\nCan we also have an example in the comment, and also an explicit callout that the type is purely the integral type in release?\n\nI think a lot of people are going to run into compilation issues when using TypedIntegers and will end up in this header, so it would help if there was documentation here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79f0b2f4_529d9f9c",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "Was there a reason for removing more general arithmetic expressions?",
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -84,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "96ff7686_a3bdcbf8",
+        "filename": "src/common/UnderlyingType.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "IMHO we could just go directly to the _t variant. C++ should have done that from the start but didn\u0027t have templated type aliases in C++11.",
+      "parentUuid": "34a4374a_ac065243",
+      "range": {
+        "startLine": 20,
+        "startChar": 37,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a81b00f_6c9d3057",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 6
@@ -95,6 +194,75 @@
       "writtenOn": "2020-06-11T22:09:13Z",
       "side": 1,
       "message": "Use TypedBitset?",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940a0cf4_5427e25d",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "nit: or {mBindingInfo.data(), mBindingCount} ?",
+      "range": {
+        "startLine": 389,
+        "startChar": 12,
+        "endLine": 389,
+        "endChar": 97
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32522672_e9df9ec6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "I think this could be reorderd: \n\n            TypeIndexedSpan\u003cBindingIndex, const uint64_t\u003e dynamicOffsets(\n                dynamicOffsetsIn, BindingIndex(dynamicOffsetCountIn));\n            ASSERT(dynamicOffsets.size() \u003d\u003d group-\u003eGetLayout()-\u003eGetDynamicBufferCount());",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 70
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d022ba57_629014b7",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-15T14:25:59Z",
+      "side": 1,
+      "message": "We should probably have dawn_native internal versions of these constants.",
+      "range": {
+        "startLine": 197,
+        "startChar": 43,
+        "endLine": 197,
+        "endChar": 63
+      },
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
