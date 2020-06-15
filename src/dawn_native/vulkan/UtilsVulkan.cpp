@@ -81,17 +81,27 @@ namespace dawn_native { namespace vulkan {
 
         region.imageSubresource.aspectMask = texture->GetVkAspectMask();
         region.imageSubresource.mipLevel = textureCopy.mipLevel;
-        region.imageSubresource.baseArrayLayer = textureCopy.arrayLayer;
-        region.imageSubresource.layerCount = 1;
 
-        region.imageOffset.x = textureCopy.origin.x;
-        region.imageOffset.y = textureCopy.origin.y;
-        region.imageOffset.z = textureCopy.origin.z;
+        switch (textureCopy.texture->GetDimension()) {
+            case wgpu::TextureDimension::e2D: {
+                region.imageOffset.x = textureCopy.origin.x;
+                region.imageOffset.y = textureCopy.origin.y;
+                region.imageOffset.z = 0;
 
-        Extent3D imageExtent = ComputeTextureCopyExtent(textureCopy, copySize);
-        region.imageExtent.width = imageExtent.width;
-        region.imageExtent.height = imageExtent.height;
-        region.imageExtent.depth = copySize.depth;
+                region.imageSubresource.baseArrayLayer = textureCopy.origin.z;
+                region.imageSubresource.layerCount = copySize.depth;
+
+                Extent3D imageExtent = ComputeTextureCopyExtent(textureCopy, copySize);
+                region.imageExtent.width = imageExtent.width;
+                region.imageExtent.height = imageExtent.height;
+                region.imageExtent.depth = 1;
+                break;
+            }
+
+            default:
+                UNREACHABLE();
+                break;
+        }
 
         return region;
     }
