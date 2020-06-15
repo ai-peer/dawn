@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "90241f92_ae53e2f4",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-15T05:03:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "892610f8_190d2f61",
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cadc1d46_e8474a1f",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "1ce264b4_90248486",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-15T05:03:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cadc1d46_e8474a1f",
+      "range": {
+        "startLine": 103,
+        "startChar": 34,
+        "endLine": 103,
+        "endChar": 94
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0002f36_1cd50dda",
         "filename": "src/utils/WGPUHelpers.cpp",
         "patchSetId": 4
@@ -56,6 +98,24 @@
       "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae98492b_63f0c781",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-15T05:03:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0002f36_1cd50dda",
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "4a8e83cd_ca6d6878",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-15T05:03:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d838fae_e005dc67",
+      "range": {
+        "startLine": 396,
+        "startChar": 28,
+        "endLine": 396,
+        "endChar": 71
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1e77e58_bb17034e",
         "filename": "src/utils/WGPUHelpers.h",
         "patchSetId": 4
@@ -93,6 +177,30 @@
       "writtenOn": "2020-06-12T11:29:32Z",
       "side": 1,
       "message": "I think rowsPerImage is always heightAtLevel0 \u003e\u003e mipmapLevel so maybe we don\u0027t need it as an argument?",
+      "range": {
+        "startLine": 155,
+        "startChar": 17,
+        "endLine": 155,
+        "endChar": 29
+      },
+      "revId": "5d073f2ed8133fc38913e2474f127979017257cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74a54668_28cc9c79",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-15T05:03:20Z",
+      "side": 1,
+      "message": "I\u0027d like to keep it now because this argument is useful when we add tests for copies with multiple layers (rowsPerImage indicates where we can find the beginning of the next array layer in the buffer when we want to copy multiple layers in one b2t or t2b copy). What do you think?",
+      "parentUuid": "a1e77e58_bb17034e",
       "range": {
         "startLine": 155,
         "startChar": 17,
