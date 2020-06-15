@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f9b9c7d_76f9f803",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-15T22:08:25Z",
+      "side": 1,
+      "message": "This would also happen in real life when we get bad HRESULTs that aren\u0027t DEVICE_REMOVED. Generally this shouldn\u0027t happen at all unless there\u0027s a programming error in Dawn. However, I think it makes sense to allow these other unexpected errors on shut down because if we did get an error like this, we would treat it as \"device lost\" and shut down.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 85
+      },
+      "revId": "70a77c6b4a2a2b60aeaa05249ca105dcea7e6f31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
