@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9eea3984_19821eb7",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-15T17:00:20Z",
+      "side": 1,
+      "message": "EnsureDependencies doesn\u0027t check for GetPhysicalDeviceProperties2, probably because GetPhysicalDeviceProperties2 was promoted in 1.1? Maybe we should still check or add a comment to be clear.",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
