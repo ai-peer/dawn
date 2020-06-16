@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bc399e0_073e8170",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T17:03:34Z",
+      "side": 1,
+      "message": "nit: This validation is redundant with the one in RenderPassEncoder.cpp and could be removed.",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec66b5e8_9284fb89",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T17:03:34Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "837978e9_413e8fde",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T17:03:34Z",
+      "side": 1,
+      "message": "Since QuerySets are destroyable, we should track the set of all QuerySets used in a command buffer similarly to texture / buffers and validate on Queue::Submit that they can be used (i.e. they are not destroyed). https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Queue.cpp;l\u003d133\n\nWe should also have tests for it.",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ddde28_436deec9",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T17:03:34Z",
+      "side": 1,
+      "message": "Can you add the same empty switches in the backends along with a return DAWN_UNIMPLEMENTED_ERROR()? This way fuzzer won\u0027t be able to crash backends by doing calls to WriteTimestamp.",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
