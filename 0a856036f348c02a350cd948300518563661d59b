@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ee8c5f3_438eeade",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T21:59:53Z",
+      "side": 1,
+      "message": "If NextSerial needs to be called after DeviceBase::Initialize, please call it after this line of code and include a comment about why the ordering is important. You\u0027ll have to put the call to DeviceBase::Initialize inside of DAWN_TRY. \n\nWith this approach, the code will be easier to follow because all of the initialization code happens in one method and its dependents.",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 55
+      },
+      "revId": "0a856036f348c02a350cd948300518563661d59b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
