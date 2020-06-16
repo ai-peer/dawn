@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e39951e2_d11f869d",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T09:51:38Z",
+      "side": 1,
+      "message": "Erhm, that\u0027s unfortunate because the goal was to assert there was no Internal errors due to coding errors in the backend.\n\nThis CL might as well remove the AssertAndIgnoreDeviceLossError and just rename it to IgnoreError :/",
+      "revId": "013bd8e77691a2f4cbabb8b88a2e9f5e4440ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3313a28_462dba44",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 6
