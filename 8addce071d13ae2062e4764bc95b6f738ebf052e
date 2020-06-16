@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "404db052_ac9b8e7a",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T00:41:26Z",
+      "side": 1,
+      "message": "Please provide a better name than \u0027ss\u0027. Since you already have message, below, consider messageStream.",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2d76799_050b263e",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T00:41:26Z",
+      "side": 1,
+      "message": "Both of these lines should be able to be combined into one.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 30
+      },
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15062108_a39b7abb",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T00:41:26Z",
+      "side": 1,
+      "message": "If we\u0027re just outputting a number as hex, why can\u0027t this simply be:\n ss \u003c\u003c std::hex \u003c\u003c result;",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 69
+      },
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "426e8314_7b40348e",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T00:41:26Z",
+      "side": 1,
+      "message": "This line of code makes an unnecessary copy of the message. Please either std::move the string into DAWN_DEVICE_LOST_ERROR and DAWN_INTERNAL_ERROR or pass ss.str() directly into them.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
