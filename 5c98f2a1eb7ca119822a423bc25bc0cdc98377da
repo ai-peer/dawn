@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5b6cdefb_588da7ee",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-16T23:08:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930489ff_7c9de301",
+      "range": {
+        "startLine": 155,
+        "startChar": 11,
+        "endLine": 155,
+        "endChar": 15
+      },
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53118d57_3690c29a",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 7
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "213a792d_60363f5f",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-16T23:08:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53118d57_3690c29a",
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "451c24b6_9e7741cd",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 7
@@ -56,6 +98,24 @@
       "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e56352c_1d360cd5",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-16T23:08:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "451c24b6_9e7741cd",
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
