@@ -63,6 +63,30 @@
       "revId": "013bd8e77691a2f4cbabb8b88a2e9f5e4440ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8891e89f_9f3e3168",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-16T17:04:11Z",
+      "side": 1,
+      "message": "Derp! Yes, you\u0027re, of course, right Kai.",
+      "parentUuid": "b2501796_26c31b6f",
+      "range": {
+        "startLine": 32,
+        "startChar": 37,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "013bd8e77691a2f4cbabb8b88a2e9f5e4440ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
