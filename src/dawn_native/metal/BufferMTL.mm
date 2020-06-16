@@ -63,6 +63,18 @@ namespace dawn_native { namespace metal {
             if (currentSize > maxBufferSize) {
                 return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
             }
+        } else if (@available(macOS 10.12, *)) {
+            // |maxBufferLength| isn't always available on older systems. If available, use
+            // |recommendedMaxWorkingSetSize| instead. We can probably allocate more than this,
+            // but don't have a way to discover a better limit. MoltenVK also uses this heuristic.
+            uint64_t maxWorkingSetSize =
+                [ToBackend(GetDevice())->GetMTLDevice() recommendedMaxWorkingSetSize];
+            if (currentSize > maxWorkingSetSize) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
+            }
+        } else if (currentSize > 1024 * 1024 * 1024) {
+            // Otherwise, use arbitrary limit of 1 GB
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
         }
 
         mMtlBuffer = [ToBackend(GetDevice())->GetMTLDevice() newBufferWithLength:currentSize
