@@ -29,7 +29,8 @@ namespace dawn_native {
             return lhs.binding == rhs.binding && lhs.visibility == rhs.visibility &&
                    lhs.type == rhs.type && lhs.hasDynamicOffset == rhs.hasDynamicOffset &&
                    lhs.multisampled == rhs.multisampled && lhs.viewDimension == rhs.viewDimension &&
-                   lhs.textureComponentType == rhs.textureComponentType;
+                   lhs.textureComponentType == rhs.textureComponentType &&
+                   lhs.minimumBufferSize == rhs.minimumBufferSize;
         }
 
         wgpu::ShaderStage GetShaderStageVisibilityWithBindingType(wgpu::BindingType bindingType) {
@@ -168,6 +169,7 @@ namespace dawn_native {
                     bindingSlot.textureComponentType =
                         Format::FormatTypeToTextureComponentType(bindingInfo.textureComponentType);
                     bindingSlot.storageTextureFormat = bindingInfo.storageTextureFormat;
+                    bindingSlot.minimumBufferSize = bindingInfo.minimumBufferSize;
 
                     {
                         const auto& it = usedBindingsMap[group].find(bindingNumber);
@@ -175,11 +177,25 @@ namespace dawn_native {
                             if (bindingSlot == entryData[group][it->second]) {
                                 // Already used and the data is the same. Continue.
                                 continue;
-                            } else {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Duplicate binding in default pipeline layout initialization "
-                                    "not compatible with previous declaration");
                             }
+
+                            // Check if |minimumBufferSize| is the reason for inequality
+                            // This can happen if a pass has a larger entry in one of the shaders
+                            BindGroupLayoutEntry& existingEntry = entryData[group][it->second];
+                            BindGroupLayoutEntry bindingSlotWithMinBufEqual = bindingSlot;
+                            bindingSlotWithMinBufEqual.minimumBufferSize =
+                                existingEntry.minimumBufferSize;
+
+                            if (bindingSlotWithMinBufEqual == existingEntry) {
+                                // Update entry to have largest minimum size
+                                existingEntry.minimumBufferSize = std::max(
+                                    existingEntry.minimumBufferSize, bindingSlot.minimumBufferSize);
+                                continue;
+                            }
+
+                            return DAWN_VALIDATION_ERROR(
+                                "Duplicate binding in default pipeline layout initialization "
+                                "not compatible with previous declaration");
                         }
                     }
 
