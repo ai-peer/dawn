@@ -58,6 +58,8 @@ namespace dawn_native {
         void PopDebugGroup();
         void PushDebugGroup(const char* groupLabel);
 
+        void WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex);
+
         CommandBufferBase* Finish(const CommandBufferDescriptor* descriptor);
 
       private:
