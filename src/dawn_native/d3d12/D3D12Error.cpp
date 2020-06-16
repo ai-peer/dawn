@@ -22,7 +22,9 @@ namespace dawn_native { namespace d3d12 {
             return {};
         }
 
-        std::string message = std::string(context) + " failed with " + std::to_string(result);
+        char buf[24];
+        sprintf(buf, " failed with 0x%08lX", result);
+        std::string message = std::string(context) + buf;
 
         if (result == DXGI_ERROR_DEVICE_REMOVED) {
             return DAWN_DEVICE_LOST_ERROR(message);

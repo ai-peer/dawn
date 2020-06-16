@@ -155,6 +155,8 @@ namespace dawn_native { namespace d3d12 {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        void OnDeviceLost(const char* message) override;
+
         void ShutDownImpl() override;
         MaybeError WaitForIdleForDestruction() override;
 
