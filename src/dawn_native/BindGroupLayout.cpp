@@ -138,6 +138,51 @@ namespace dawn_native {
         }
     }
 
+    MaybeError ValidateBindingCanBeMultisampled(wgpu::BindingType bindingType,
+                                                wgpu::TextureViewDimension viewDimension) {
+        switch (bindingType) {
+            case wgpu::BindingType::ReadonlyStorageTexture:
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                return DAWN_VALIDATION_ERROR("Storage textures may not be multisampled");
+
+            case wgpu::BindingType::SampledTexture:
+                break;
+
+            case wgpu::BindingType::StorageBuffer:
+            case wgpu::BindingType::UniformBuffer:
+            case wgpu::BindingType::ReadonlyStorageBuffer:
+            case wgpu::BindingType::Sampler:
+            case wgpu::BindingType::ComparisonSampler:
+            case wgpu::BindingType::StorageTexture:
+            default:
+                UNREACHABLE();
+                return {};
+        }
+
+        switch (viewDimension) {
+            case wgpu::TextureViewDimension::e2D:
+                break;
+
+            case wgpu::TextureViewDimension::e2DArray:
+                return DAWN_VALIDATION_ERROR("2D array textures may not be multisampled");
+
+            case wgpu::TextureViewDimension::Cube:
+            case wgpu::TextureViewDimension::CubeArray:
+                return DAWN_VALIDATION_ERROR("Cube textures may not be multisampled");
+
+            case wgpu::TextureViewDimension::e3D:
+                return DAWN_VALIDATION_ERROR("3D textures may not be multisampled");
+
+            case wgpu::TextureViewDimension::e1D:
+            case wgpu::TextureViewDimension::Undefined:
+            default:
+                UNREACHABLE();
+                return {};
+        }
+
+        return {};
+    }
+
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
@@ -155,8 +200,10 @@ namespace dawn_native {
             DAWN_TRY(ValidateBindingType(entry.type));
             DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
 
+            wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::e2D;
             if (entry.viewDimension != wgpu::TextureViewDimension::Undefined) {
                 DAWN_TRY(ValidateTextureViewDimension(entry.viewDimension));
+                viewDimension = entry.viewDimension;
             }
 
             if (bindingsSet.count(bindingNumber) != 0) {
@@ -167,7 +214,11 @@ namespace dawn_native {
 
             DAWN_TRY(ValidateStorageTextureFormat(device, entry.type, entry.storageTextureFormat));
 
-            DAWN_TRY(ValidateStorageTextureViewDimension(entry.type, entry.viewDimension));
+            DAWN_TRY(ValidateStorageTextureViewDimension(entry.type, viewDimension));
+
+            if (entry.multisampled) {
+                DAWN_TRY(ValidateBindingCanBeMultisampled(entry.type, viewDimension));
+            }
 
             switch (entry.type) {
                 case wgpu::BindingType::UniformBuffer:
@@ -192,11 +243,6 @@ namespace dawn_native {
                     break;
                 case wgpu::BindingType::StorageTexture:
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
-            }
-
-            if (entry.multisampled) {
-                return DAWN_VALIDATION_ERROR(
-                    "BindGroupLayoutEntry::multisampled must be false (for now)");
             }
 
             bindingsSet.insert(bindingNumber);
