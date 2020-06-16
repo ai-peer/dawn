@@ -19,6 +19,7 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/QuerySet.h"
 
 namespace dawn_native {
 
@@ -91,6 +92,19 @@ namespace dawn_native {
             SetComputePipelineCmd* cmd =
                 allocator->Allocate<SetComputePipelineCmd>(Command::SetComputePipeline);
             cmd->pipeline = pipeline;
+
+            return {};
+        });
+    }
+
+    void ComputePassEncoder::WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateObject(querySet));
+
+            WriteTimestampCmd* cmd =
+                allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
+            cmd->querySet = querySet;
+            cmd->queryIndex = queryIndex;
 
             return {};
         });
