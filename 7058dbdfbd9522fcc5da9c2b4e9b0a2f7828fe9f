@@ -190,6 +190,24 @@
     },
     {
       "key": {
+        "uuid": "49fac709_f78a6dc9",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-16T19:32:40Z",
+      "side": 1,
+      "message": "I don\u0027t think other operators are likely to come up. I\u0027m not even totally sure whether we will need addition and subtraction. Generally these types are indices, and it doesn\u0027t make sense to add them (and only barely makes sense to subtract them) - though I guess they can also represent sizes, for which addition does make sense. (if we wanted to be super strict it could be like affine transformations: [x,y,z,0]+[x,y,z,0] and [x,y,z,1]+[x,y,z,0] and [x,y,z,1]-[x,y,z,1] make sense but [x,y,z,1]+[x,y,z,1] and [x,y,z,0]-[x,y,z,1] don\u0027t)",
+      "parentUuid": "281a0a57_fd5435ad",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b006397f_cf5eca07",
         "filename": "src/common/UnderlyingType.h",
         "patchSetId": 6
@@ -317,6 +335,24 @@
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55514923_00bbb060",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-16T19:32:40Z",
+      "side": 1,
+      "message": "no change?",
+      "parentUuid": "a3169b7b_ff13bd95",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
