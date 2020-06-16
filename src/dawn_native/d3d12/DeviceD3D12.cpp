@@ -56,6 +56,7 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<Device*> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
         Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
         DAWN_TRY(device->Initialize());
+        DAWN_TRY(device->NextSerial());
         return device.Detach();
     }
 
@@ -120,8 +121,6 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY_ASSIGN(
             mViewShaderVisibleDescriptorAllocator,
             ShaderVisibleDescriptorAllocator::Create(this, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
-
-        DAWN_TRY(NextSerial());
 
         // Initialize indirect commands
         D3D12_INDIRECT_ARGUMENT_DESC argumentDesc = {};
