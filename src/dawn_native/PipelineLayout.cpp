@@ -144,10 +144,6 @@ namespace dawn_native {
                     BindingNumber bindingNumber = it.first;
                     const ShaderModuleBase::ShaderBindingInfo& bindingInfo = it.second;
 
-                    if (bindingInfo.multisampled) {
-                        return DAWN_VALIDATION_ERROR("Multisampled textures not supported (yet)");
-                    }
-
                     BindGroupLayoutEntry bindingSlot;
                     bindingSlot.binding = bindingNumber;
 
@@ -157,6 +153,10 @@ namespace dawn_native {
                                                           bindingInfo.storageTextureFormat));
                     DAWN_TRY(ValidateStorageTextureViewDimension(bindingInfo.type,
                                                                  bindingInfo.viewDimension));
+
+                    if (bindingInfo.multisampled) {
+                        DAWN_TRY(ValidateTextureMultisampling(bindingInfo.type));
+                    }
 
                     bindingSlot.visibility =
                         GetShaderStageVisibilityWithBindingType(bindingInfo.type);

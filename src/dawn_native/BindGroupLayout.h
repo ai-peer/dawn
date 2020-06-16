@@ -45,6 +45,8 @@ namespace dawn_native {
     MaybeError ValidateStorageTextureViewDimension(wgpu::BindingType bindingType,
                                                    wgpu::TextureViewDimension dimension);
 
+    MaybeError ValidateTextureMultisampling(wgpu::BindingType bindingType);
+
     // Bindings are specified as a |BindingNumber| in the BindGroupLayoutDescriptor.
     // These numbers may be arbitrary and sparse. Internally, Dawn packs these numbers
     // into a packed range of |BindingIndex| integers.

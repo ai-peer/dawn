@@ -200,9 +200,12 @@ namespace dawn_native {
         }
 
         // The device was lost, call the application callback.
-        if (type == InternalErrorType::DeviceLost && mDeviceLostCallback != nullptr) {
-            mDeviceLostCallback(message, mDeviceLostUserdata);
-            mDeviceLostCallback = nullptr;
+        if (type == InternalErrorType::DeviceLost) {
+            OnDeviceLost(message);
+            if (mDeviceLostCallback != nullptr) {
+                mDeviceLostCallback(message, mDeviceLostUserdata);
+                mDeviceLostCallback = nullptr;
+            }
         }
 
         // Still forward device loss and internal errors to the error scopes so they all reject.
@@ -234,6 +237,10 @@ namespace dawn_native {
                << ")";
         }
         HandleError(error->GetType(), ss.str().c_str());
+    }
+
+    void DeviceBase::OnDeviceLost(const char* message) {
+        dawn::ErrorLog() << "Dawn device lost:\n" << message;
     }
 
     void DeviceBase::SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {

@@ -297,6 +297,7 @@ namespace dawn_native {
         void SetDefaultToggles();
 
         void ConsumeError(std::unique_ptr<ErrorData> error);
+        virtual void OnDeviceLost(const char* message);
 
         // Each backend should implement to check their passed fences if there are any and return a
         // completed serial. Return 0 should indicate no fences to check.

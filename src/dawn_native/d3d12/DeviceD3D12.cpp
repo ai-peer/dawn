@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 #include "common/Assert.h"
+#include "common/Log.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/Instance.h"
@@ -508,6 +509,34 @@ namespace dawn_native { namespace d3d12 {
         infoQueue->ClearStoredMessages();
 
         return DAWN_INTERNAL_ERROR(messages.str());
+    }
+
+    void Device::OnDeviceLost(const char* message) {
+        auto err = dawn::ErrorLog();
+        err << "Dawn D3D12 device lost with ";
+        switch (mD3d12Device->GetDeviceRemovedReason()) {
+            case DXGI_ERROR_DEVICE_HUNG:
+                err << "DXGI_ERROR_DEVICE_HUNG\n";
+                break;
+            case DXGI_ERROR_DEVICE_REMOVED:
+                err << "DXGI_ERROR_DEVICE_REMOVED\n";
+                break;
+            case DXGI_ERROR_DEVICE_RESET:
+                err << "DXGI_ERROR_DEVICE_RESET\n";
+                break;
+            case DXGI_ERROR_DRIVER_INTERNAL_ERROR:
+                err << "DXGI_ERROR_DRIVER_INTERNAL_ERROR\n";
+                break;
+            case DXGI_ERROR_INVALID_CALL:
+                err << "DXGI_ERROR_INVALID_CALL\n";
+                break;
+            case S_OK:
+                err << "S_OK\n";
+                break;
+            default:
+                UNREACHABLE();
+        }
+        err << message;
     }
 
     void Device::ShutDownImpl() {
