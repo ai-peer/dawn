@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "32520952_24487058",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "751ba0ad_b5cb3c09",
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32893993_c034baf7",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 3
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "da1e449e_c5f88f5d",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Not relevant anymore",
+      "parentUuid": "32893993_c034baf7",
+      "range": {
+        "startLine": 216,
+        "startChar": 31,
+        "endLine": 216,
+        "endChar": 35
+      },
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9bdfa9a_0740e819",
         "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
         "patchSetId": 3
@@ -62,6 +104,30 @@
       "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcd2cbc1_bfd92200",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Not relavant anymore.",
+      "parentUuid": "c9bdfa9a_0740e819",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "4370e1abe6fe00ac7ae37fc4e50a6b49a4880e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

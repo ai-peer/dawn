@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ab26ca7a_69ce4c32",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e38b2e9b_a9dd10b5",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fac58fe8_cc3a9295",
         "filename": "src/common/TypedBitset.h",
         "patchSetId": 6
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "ea3821a0_d34bc463",
+        "filename": "src/common/TypedBitset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ca4a1e_678b5c30",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5055ef5b_ea72e3db",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 6
@@ -95,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "af7cf8a6_11195097",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5055ef5b_ea72e3db",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79f0b2f4_529d9f9c",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 6
@@ -106,6 +166,24 @@
       "writtenOn": "2020-06-15T14:25:59Z",
       "side": 1,
       "message": "Was there a reason for removing more general arithmetic expressions?",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "281a0a57_fd5435ad",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "I don\u0027t think I ever had them. I added addition and subtraction in the latest patchset. They\u0027re not used yet, but I can see it being helpful. Not sure if other general arithmetic is useful yet.",
+      "parentUuid": "79f0b2f4_529d9f9c",
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -183,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "472169f3_5d88a820",
+        "filename": "src/common/UnderlyingType.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96ff7686_a3bdcbf8",
+      "range": {
+        "startLine": 20,
+        "startChar": 37,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a81b00f_6c9d3057",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 6
@@ -197,6 +299,24 @@
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3169b7b_ff13bd95",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a81b00f_6c9d3057",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +343,30 @@
     },
     {
       "key": {
+        "uuid": "8b6aa306_3c73ab45",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "940a0cf4_5427e25d",
+      "range": {
+        "startLine": 389,
+        "startChar": 12,
+        "endLine": 389,
+        "endChar": 97
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32522672_e9df9ec6",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -246,6 +390,30 @@
     },
     {
       "key": {
+        "uuid": "82849b94_493ce5b8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32522672_e9df9ec6",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 70
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d022ba57_629014b7",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 6
@@ -266,6 +434,30 @@
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dff165d7_1dcbf12d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "I added one. Although this one is actually going away soon-ish hopefully. But yea, we\u0027ll probably have other internal versions in the future.",
+      "parentUuid": "d022ba57_629014b7",
+      "range": {
+        "startLine": 197,
+        "startChar": 43,
+        "endLine": 197,
+        "endChar": 63
+      },
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -319,6 +511,24 @@
       "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6070351_9701ffd2",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fc75ab80_4d687cce",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

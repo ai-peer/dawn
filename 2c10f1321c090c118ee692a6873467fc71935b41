@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0b069929_0d13dfa2",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8a2173fc_572ee85c",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c348bcfa_25e7b8e6",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d2ab62e_996080a9",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c348bcfa_25e7b8e6",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -83,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3ba69b91_2b2dabad",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ada72630_d587ac75",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 58
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a88a1f86_10bc819d",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 4
@@ -97,6 +157,24 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db67661_bc606864",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88a1f86_10bc819d",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "422d1ad3_fad2886b",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf72afb8_dfef8c29",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f86bde9_af21b526",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 4
@@ -131,6 +227,24 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49567c8e_2475006d",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Old comment. Yes.",
+      "parentUuid": "8f86bde9_af21b526",
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -202,6 +316,30 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be2bc5fb_70a33ca6",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "ityp::bitset has a typed accessor now :)",
+      "parentUuid": "57d4cf05_e2797cf4",
+      "range": {
+        "startLine": 173,
+        "startChar": 28,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -300,6 +438,30 @@
     },
     {
       "key": {
+        "uuid": "0ef30663_60d13fc1",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb4998dc_26a224ba",
+      "range": {
+        "startLine": 228,
+        "startChar": 26,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "645d4748_4a62f1f5",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 4
@@ -323,6 +485,30 @@
     },
     {
       "key": {
+        "uuid": "0fffd272_ea2e1ca6",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "IterateBitSet now has a specialization for ityp::bitset",
+      "parentUuid": "645d4748_4a62f1f5",
+      "range": {
+        "startLine": 94,
+        "startChar": 17,
+        "endLine": 94,
+        "endChar": 46
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d39a50d_5a6f4216",
         "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
         "patchSetId": 4
@@ -343,6 +529,30 @@
       "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be1495a8_de059796",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:02:33Z",
+      "side": 1,
+      "message": "Yes, but not relevant anymore.",
+      "parentUuid": "6d39a50d_5a6f4216",
+      "range": {
+        "startLine": 40,
+        "startChar": 13,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "2c10f1321c090c118ee692a6873467fc71935b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
