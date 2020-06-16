@@ -194,11 +194,6 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
             }
 
-            if (entry.multisampled) {
-                return DAWN_VALIDATION_ERROR(
-                    "BindGroupLayoutEntry::multisampled must be false (for now)");
-            }
-
             bindingsSet.insert(bindingNumber);
         }
 
