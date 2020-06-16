@@ -356,6 +356,24 @@
     },
     {
       "key": {
+        "uuid": "6859c2ea_eb1bd0e4",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T20:55:47Z",
+      "side": 1,
+      "message": "Whoops. Now it\u0027s done.",
+      "parentUuid": "55514923_00bbb060",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "940a0cf4_5427e25d",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 6

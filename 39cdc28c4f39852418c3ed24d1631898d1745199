@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bd169fec_2cb56d3a",
+        "filename": "src/common/CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T20:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9da8aff5_b837a450",
+      "range": {
+        "startLine": 50,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1c38d05_b4620d69",
         "filename": "src/common/TypedInteger.h",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4a3b7f00_a78911dd",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T20:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1c38d05_b4620d69",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 41
+      },
+      "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edac5181_a763174e",
         "filename": "src/tests/unittests/ITypArrayTests.cpp",
         "patchSetId": 8
@@ -62,6 +110,24 @@
       "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceeccd4b_557a0e34",
+        "filename": "src/tests/unittests/ITypArrayTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T20:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edac5181_a763174e",
+      "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -85,6 +151,30 @@
       "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54d8745_7313bfef",
+        "filename": "src/tests/unittests/ITypArrayTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T20:55:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "040b5ee9_cdff4720",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
