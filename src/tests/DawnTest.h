@@ -242,6 +242,14 @@ class DawnTestBase {
     bool IsSpvcBeingUsed() const;
     bool IsSpvcParserBeingUsed() const;
 
+    bool IsAsan() const {
+#if defined(ADDRESS_SANITIZER)
+        return true;
+#else
+        return false;
+#endif
+    }
+
     void StartExpectDeviceError();
     bool EndExpectDeviceError();
 
