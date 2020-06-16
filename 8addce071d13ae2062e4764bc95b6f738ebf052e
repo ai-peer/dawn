@@ -71,6 +71,47 @@
     },
     {
       "key": {
+        "uuid": "c060b1de_0ae83e70",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-16T00:51:13Z",
+      "side": 1,
+      "message": "Would be nice to print with \"0x\" at the beginning",
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16abddf9_8f473713",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-16T00:51:13Z",
+      "side": 1,
+      "message": "Because we want to format it e.g. as 0x000123AB rather than 0x123ab.",
+      "parentUuid": "15062108_a39b7abb",
+      "range": {
+        "startLine": 33,
+        "startChar": 18,
+        "endLine": 33,
+        "endChar": 69
+      },
+      "revId": "8addce071d13ae2062e4764bc95b6f738ebf052e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "426e8314_7b40348e",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 4
