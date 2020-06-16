@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9da8aff5_b837a450",
+        "filename": "src/common/CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T19:03:03Z",
+      "side": 1,
+      "message": "whoops this one needs sorting",
+      "range": {
+        "startLine": 50,
+        "startChar": 3,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "39cdc28c4f39852418c3ed24d1631898d1745199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
