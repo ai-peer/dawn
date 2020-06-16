@@ -109,3 +109,4 @@ TEST_P(ShaderFloat16Tests, Basic16BitFloatFeaturesTest) {
 }
 
 DAWN_INSTANTIATE_TEST(ShaderFloat16Tests, MetalBackend(), VulkanBackend());
+
