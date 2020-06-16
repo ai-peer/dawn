@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "930489ff_7c9de301",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-16T16:35:00Z",
+      "side": 1,
+      "message": "\"Filter out info/message and only..\"",
+      "range": {
+        "startLine": 155,
+        "startChar": 11,
+        "endLine": 155,
+        "endChar": 15
+      },
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53118d57_3690c29a",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 7
