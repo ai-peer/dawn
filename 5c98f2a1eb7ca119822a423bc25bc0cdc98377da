@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53118d57_3690c29a",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T16:29:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "451c24b6_9e7741cd",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-16T16:29:27Z",
+      "side": 1,
+      "message": "nit: \u0026\u0026 IsBackendValidationEnabled.",
+      "revId": "5c98f2a1eb7ca119822a423bc25bc0cdc98377da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
