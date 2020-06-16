@@ -22,7 +22,11 @@ namespace dawn_native {
     void AssertAndIgnoreDeviceLossError(MaybeError maybeError) {
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> errorData = maybeError.AcquireError();
-            ASSERT(errorData->GetType() == InternalErrorType::DeviceLost);
+            // During shutdown and destruction, device lost errors can be ignored.
+            // We can also ignore other unexpected internal errors on shut down and treat it as
+            // device lost so that we can continue with destruction.
+            ASSERT(errorData->GetType() == InternalErrorType::DeviceLost ||
+                   errorData->GetType() == InternalErrorType::Internal);
         }
     }
 
