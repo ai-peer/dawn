@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "a1d67cfa_2ec77b26",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:45:06Z",
+      "side": 1,
+      "message": "I think this fix could be in a different CL. The spec language was written after I first implemented this and it was slightly different from what we originally expected.",
+      "parentUuid": "d11282e0_38f99846",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a775bf42_ad796349",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 29
@@ -183,6 +201,24 @@
       "side": 1,
       "message": "I reordered some of this, how\u0027s it look now?",
       "parentUuid": "a775bf42_ad796349",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23e15bef_e004ca48",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:45:06Z",
+      "side": 1,
+      "message": "Looks good to me.\n\nActually, see other comment.",
+      "parentUuid": "78174ed0_17bfa759",
       "revId": "53878593357ee71116311007baec9b14410104a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

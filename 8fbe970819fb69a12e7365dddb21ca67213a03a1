@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0ecb772_58c84237",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:45:06Z",
+      "side": 1,
+      "message": "Actually hm, this is a manually written comparison operator at the top of this file. We may as well name it something that\u0027s not \"\u003d\u003d\" or \"!\u003d\" like \"InferredBindGroupLayoutEntriesCompatible\" and explicitly exclude |minimumBufferSize| instead of doing the dance to assign it to be the same before comparing.\n\nTo my knowledge, this callsite is the only reason we have the !\u003d and \u003d\u003d so we could remove them.",
+      "range": {
+        "startLine": 183,
+        "startChar": 27,
+        "endLine": 186,
+        "endChar": 61
+      },
+      "revId": "8fbe970819fb69a12e7365dddb21ca67213a03a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
