@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "84eca5aa_6f7d340e",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a4723a9_10dda373",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc4de656_5797fb66",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 26
@@ -39,6 +63,24 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79271680_5d6ad042",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4de656_5797fb66",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "1e06996c_8b396eec",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Added to SPVC!",
+      "parentUuid": "21b43819_d1f6ac79",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9288c99_bb6dfd95",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 26
@@ -90,6 +150,24 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acd0d490_5b2d9bd8",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9288c99_bb6dfd95",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +194,30 @@
     },
     {
       "key": {
+        "uuid": "e3ce71d9_a2e25c91",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5d435ab_b041dc74",
+      "range": {
+        "startLine": 901,
+        "startChar": 30,
+        "endLine": 901,
+        "endChar": 47
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fa044c9_c93f9828",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 26
@@ -130,6 +232,24 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30deaad5_8d9d10f7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fa044c9_c93f9828",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -150,6 +270,24 @@
     },
     {
       "key": {
+        "uuid": "2056b918_20a6d55d",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17e76845_a7f4556b",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09fbf988_6306335a",
         "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
         "patchSetId": 26
@@ -161,6 +299,30 @@
       "writtenOn": "2020-06-12T17:59:23Z",
       "side": 1,
       "message": "nit: Could we make this easier to read somehow?",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ee8252d_1525c167",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "How\u0027s this?",
+      "parentUuid": "09fbf988_6306335a",
       "range": {
         "startLine": 32,
         "startChar": 12,
@@ -196,6 +358,30 @@
     },
     {
       "key": {
+        "uuid": "99ec4a9e_700004ac",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "How\u0027s it look now?",
+      "parentUuid": "d94c4a32_17285b5e",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 29
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65bc3b1b_e8a34639",
         "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
         "patchSetId": 26
@@ -216,6 +402,30 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd1f2fb5_4abdf785",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65bc3b1b_e8a34639",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -242,6 +452,30 @@
     },
     {
       "key": {
+        "uuid": "9af91e56_49b13d2e",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7269d32f_65e4d584",
+      "range": {
+        "startLine": 156,
+        "startChar": 9,
+        "endLine": 157,
+        "endChar": 89
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c2bea42_1ac2c929",
         "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
         "patchSetId": 26
@@ -262,6 +496,30 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91598480_d3276ae3",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c2bea42_1ac2c929",
+      "range": {
+        "startLine": 280,
+        "startChar": 12,
+        "endLine": 292,
+        "endChar": 24
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -288,6 +546,30 @@
     },
     {
       "key": {
+        "uuid": "b05263f3_b66fbc98",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32de50f8_e849e706",
+      "range": {
+        "startLine": 306,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 52
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d38b71f0_c219191a",
         "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
         "patchSetId": 26
@@ -308,6 +590,30 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6626aa03_eb936432",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d38b71f0_c219191a",
+      "range": {
+        "startLine": 311,
+        "startChar": 9,
+        "endLine": 311,
+        "endChar": 18
+      },
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -343,6 +649,24 @@
       "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97dd36ce_4d43611b",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": ":)",
+      "parentUuid": "cebae4c6_5754bc95",
+      "revId": "4ad48d2adcd4a3f813c1b00c56ed28346ebbe446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

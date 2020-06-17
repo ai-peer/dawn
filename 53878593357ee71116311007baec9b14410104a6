@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "777f0ce9_ccf89570",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-17T05:47:07Z",
+      "side": 1,
+      "message": "What do you think about this? I found the equality check fails since minimum buffer size can be different between vertex and fragment stage. Specifically, when vertex and fragment both point to the same binding, and specify different contents (so like two floats vs one float), bindingInfo.minimumBufferSize will be different between them. This takes the max across stages.",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
