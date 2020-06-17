@@ -16,6 +16,24 @@
       "revId": "4c99c442782f9a89bac55fc8c2325531cce22237",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "179c6d37_511438d4",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T17:31:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea79c3f_fac4d24b",
+      "revId": "4c99c442782f9a89bac55fc8c2325531cce22237",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
