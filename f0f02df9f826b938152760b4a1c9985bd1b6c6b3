@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0319373_8a8fa168",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T17:16:42Z",
+      "side": 1,
+      "message": "This should be wgpu::TextureUsage::None.",
+      "revId": "f0f02df9f826b938152760b4a1c9985bd1b6c6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2508eff_1955390b",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T17:16:42Z",
+      "side": 1,
+      "message": "Handling this TODO should allow for making the fix more clear, instead of relying on the default constructor to do the correct thing.",
+      "revId": "f0f02df9f826b938152760b4a1c9985bd1b6c6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
