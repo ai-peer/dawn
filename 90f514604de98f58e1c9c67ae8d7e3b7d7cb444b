@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7624d5b8_fe9de1f3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done. Slightly different; added viewDimension",
+      "parentUuid": "a10baaa7_a2b92c34",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 141,
+        "endChar": 43
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a165463e_06d0a125",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74e33898_d3148768",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a165463e_06d0a125",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "e193125d_2a9203f3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b3b8a1d_0cb9d4b2",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18c8c770_fa33cd2f",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "66caf0af_9f63f4a1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c8c770_fa33cd2f",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0301af7_5336c0db",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -93,6 +177,24 @@
       "writtenOn": "2020-06-17T11:51:27Z",
       "side": 1,
       "message": "I think it\u0027s technically possible to create a 2D array multisample texture view with a single array layer at the moment. Can we either have validation that prevents that, or an end2end test for it?",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5500e613_35fef21b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done. Added a variant to multisampled rendering tests.\n\nIt\u0027s not possible for sampling though. We cannot create a pipeline with texture2DMSArray in it because that\u0027s not supported in Metal until 10.14. The shader reflects that it is an arrayed multisample texture. Right now, I added BGL validation that you can\u0027t have 2DMSArray bindings. Maybe it should fail ShaderModule creation as well?\n\nRight now though we don\u0027t check these things (like storage textures can\u0027t be cube, or storage buffers aren\u0027t allowed in vertex shader) on SM creation. We do it on BGL creation and then you can\u0027t use the SM anyway because its layout is incompatible.",
+      "parentUuid": "f0301af7_5336c0db",
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "794f6ac6_0adf1e45",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af976962_729e2615",
+      "range": {
+        "startLine": 36,
+        "startChar": 25,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaeb2b51_4cc953b5",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 4
@@ -136,6 +262,24 @@
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c2d27a4_f24d378a",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "I changed this to 0.7 anyway so that the color and depth values are different to check we don\u0027t accidentally switch them somehow.",
+      "parentUuid": "aaeb2b51_4cc953b5",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "bc7d443d_630f1562",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81c80c50_f2de75ba",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61efa8e7_36628860",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 4
@@ -173,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "04011d31_a61fce36",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61efa8e7_36628860",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9760eec2_d4cc4968",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 4
@@ -184,6 +364,30 @@
       "writtenOn": "2020-06-17T11:51:27Z",
       "side": 1,
       "message": "nit: Can we do even smaller? What\u0027s the guaranteed precision of the rasterizer?",
+      "range": {
+        "startLine": 160,
+        "startChar": 40,
+        "endLine": 160,
+        "endChar": 45
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054b772c_76d59fea",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "with SwiftShader, 0.1 works and 0.05 fails, so I picked the middle of that",
+      "parentUuid": "9760eec2_d4cc4968",
       "range": {
         "startLine": 160,
         "startChar": 40,
@@ -213,6 +417,24 @@
     },
     {
       "key": {
+        "uuid": "c6d36522_dee24bb9",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Added a description in the comment above the test.",
+      "parentUuid": "7ab0e8ed_cdd2fdaa",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f88d6b95_c524f082",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 4
@@ -233,6 +455,30 @@
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86e47bd4_72f6fe7b",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T20:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f88d6b95_c524f082",
+      "range": {
+        "startLine": 226,
+        "startChar": 30,
+        "endLine": 226,
+        "endChar": 41
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
