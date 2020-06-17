@@ -30,7 +30,10 @@ namespace dawn_native {
     // Binding numbers get mapped to a packed range of indices
     using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;
 
+    using BindGroupIndex = TypedInteger<struct BindGroupIndexT, uint32_t>;
+
     static constexpr BindingIndex kMaxBindingsPerGroupTyped = BindingIndex(kMaxBindingsPerGroup);
+    static constexpr BindGroupIndex kMaxBindGroupsTyped = BindGroupIndex(kMaxBindGroups);
 
     struct BindingInfo {
         wgpu::ShaderStage visibility;

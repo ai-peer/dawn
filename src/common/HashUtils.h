@@ -16,6 +16,7 @@
 #define COMMON_HASHUTILS_H_
 
 #include "common/Platform.h"
+#include "common/ityp_bitset.h"
 
 #include <bitset>
 #include <functional>
@@ -79,5 +80,10 @@ size_t Hash(const std::bitset<N>& value) {
     return hash;
 }
 #endif
+
+template <typename Index, size_t N>
+size_t Hash(const ityp::bitset<Index, N>& value) {
+    return Hash(value.AsUntyped());
+}
 
 #endif  // COMMON_HASHUTILS_H_

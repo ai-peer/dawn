@@ -37,6 +37,9 @@ namespace ityp {
         constexpr bitset() noexcept : Base() {
         }
 
+        constexpr bitset(unsigned long long val) noexcept : Base(val) {
+        }
+
         constexpr bool operator[](Index i) const {
             return Base::operator[](static_cast<I>(i));
         }
@@ -54,6 +57,14 @@ namespace ityp {
         using Base::count;
         using Base::none;
         using Base::size;
+
+        bool operator==(const bitset& other) const noexcept {
+            return Base::operator==(static_cast<const Base&>(other));
+        }
+
+        bool operator!=(const bitset& other) const noexcept {
+            return Base::operator!=(static_cast<const Base&>(other));
+        }
 
         bitset& operator&=(const bitset& other) noexcept {
             return static_cast<bitset&>(Base::operator&=(static_cast<const Base&>(other)));
@@ -129,6 +140,12 @@ namespace ityp {
 
         friend BitSetIterator<N, Index> IterateBitSet(const bitset& bitset) {
             return BitSetIterator<N, Index>(static_cast<const Base&>(bitset));
+        }
+
+        // Should be used sparingly. This is needed to cast to the base type to
+        // implement std::hash.
+        const Base& AsUntyped() const {
+            return static_cast<const Base&>(*this);
         }
     };
 
