@@ -747,22 +747,38 @@ namespace dawn_native { namespace metal {
                     EnsureDestinationTextureInitialized(texture, copy->copySize, copy->destination);
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(dst.mipLevel);
-                    TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
-                        dst.origin, copySize, texture->GetFormat(), virtualSizeAtLevel,
-                        buffer->GetSize(), src.offset, src.bytesPerRow, src.rowsPerImage);
 
-                    for (uint32_t i = 0; i < splittedCopies.count; ++i) {
-                        const TextureBufferCopySplit::CopyInfo& copyInfo = splittedCopies.copies[i];
-                        [commandContext->EnsureBlit() copyFromBuffer:buffer->GetMTLBuffer()
-                                                        sourceOffset:copyInfo.bufferOffset
-                                                   sourceBytesPerRow:copyInfo.bytesPerRow
-                                                 sourceBytesPerImage:copyInfo.bytesPerImage
-                                                          sourceSize:copyInfo.copyExtent
-                                                           toTexture:texture->GetMTLTexture()
-                                                    destinationSlice:dst.arrayLayer
-                                                    destinationLevel:dst.mipLevel
-                                                   destinationOrigin:copyInfo.textureOrigin];
+                    uint64_t bufferOffsetForNextSlice = 0;
+                    const uint64_t bytesPerSlice = src.bytesPerRow * src.rowsPerImage;
+
+                    const dawn_native::Extent3D copyOneLayerSize = {copySize.width, copySize.height,
+                                                                    1};
+                    // TODO(jiawei.shao@intel.com): use dst.origin.z instead of dst.arrayLayer once
+                    // GPUTextureCopyView.arrayLayer to GPUTextureCopyView.origin.z is done.
+                    for (uint32_t copySlice = dst.arrayLayer;
+                         copySlice < dst.arrayLayer + copySize.depth; ++copySlice) {
+                        TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
+                            dst.origin, copyOneLayerSize, texture->GetFormat(), virtualSizeAtLevel,
+                            buffer->GetSize(), bufferOffsetForNextSlice + src.offset,
+                            src.bytesPerRow, src.rowsPerImage);
+
+                        for (uint32_t i = 0; i < splittedCopies.count; ++i) {
+                            const TextureBufferCopySplit::CopyInfo& copyInfo =
+                                splittedCopies.copies[i];
+                            [commandContext->EnsureBlit() copyFromBuffer:buffer->GetMTLBuffer()
+                                                            sourceOffset:copyInfo.bufferOffset
+                                                       sourceBytesPerRow:copyInfo.bytesPerRow
+                                                     sourceBytesPerImage:copyInfo.bytesPerImage
+                                                              sourceSize:copyInfo.copyExtent
+                                                               toTexture:texture->GetMTLTexture()
+                                                        destinationSlice:copySlice
+                                                        destinationLevel:dst.mipLevel
+                                                       destinationOrigin:copyInfo.textureOrigin];
+                        }
+
+                        bufferOffsetForNextSlice += bytesPerSlice;
                     }
+
                     break;
                 }
 
