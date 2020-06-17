@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4ae37bd8_9f1271c3",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T23:20:44Z",
+      "side": 1,
+      "message": "not sure I\u0027m following this conversation thread, but I don\u0027t see this validation in Render/ComputePassEncoder currently.\n\nOn a separate note, @Corentin, I\u0027m a bit confused that most of the validation is in these functions, which happens on Finish(), except for a couple random bits like [1] [2] [3]. I feel like all of the pass validation should be moved to CommandValidation.cpp. Maybe I missed doing this in the past.\n 1) This makes it easier for the skip validation toggle to turn everything off\n 2) better supports the future where I hope the wire format can be the same as this command format, and we can just copy the transfer buffer, convert ids to Ref\u003c\u003es, and run it through validation",
+      "parentUuid": "0393a781_b4f97186",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec66b5e8_9284fb89",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 2
@@ -82,6 +100,57 @@
       "writtenOn": "2020-06-16T17:03:34Z",
       "side": 1,
       "message": "Can you add the same empty switches in the backends along with a return DAWN_UNIMPLEMENTED_ERROR()? This way fuzzer won\u0027t be able to crash backends by doing calls to WriteTimestamp.",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3792d2c4_dd38e528",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T23:20:44Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42c743b0_fe86d500",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T23:20:44Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8464e150_591dcccb",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T23:20:44Z",
+      "side": 1,
+      "message": "[3]",
       "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
