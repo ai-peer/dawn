@@ -208,6 +208,24 @@
     },
     {
       "key": {
+        "uuid": "a6297821_7f8b22b2",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:32:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49fac709_f78a6dc9",
+      "revId": "7058dbdfbd9522fcc5da9c2b4e9b0a2f7828fe9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b006397f_cf5eca07",
         "filename": "src/common/UnderlyingType.h",
         "patchSetId": 6

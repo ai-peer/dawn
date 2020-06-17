@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6a76ed08_e9ac898f",
+        "filename": "src/common/TypedInteger.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:32:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91de36c4_0fc071f9",
+      "revId": "61ba2b8191a3d3848c32b248c2220deb9b8f31ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc9c0c7d_385e7cf3",
         "filename": "src/tests/unittests/ITypBitsetTests.cpp",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "61ba2b8191a3d3848c32b248c2220deb9b8f31ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5e79282_fb049381",
+        "filename": "src/tests/unittests/ITypBitsetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-17T22:32:44Z",
+      "side": 1,
+      "message": "Whoops :P added it",
+      "parentUuid": "cc9c0c7d_385e7cf3",
+      "revId": "61ba2b8191a3d3848c32b248c2220deb9b8f31ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
