@@ -44,7 +44,8 @@ namespace dawn_native {
                                        const uint32_t mipLevel) {
         Extent3D extent = texture->GetMipLevelPhysicalSize(mipLevel);
 
-        if (extent.depth == copySize.depth && extent.width == copySize.width &&
+        ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+        if (texture->GetArrayLayers() == copySize.depth && extent.width == copySize.width &&
             extent.height == copySize.height) {
             return true;
         }
