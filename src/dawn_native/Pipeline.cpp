@@ -66,17 +66,18 @@ namespace dawn_native {
         return mLayout.Get();
     }
 
-    MaybeError PipelineBase::ValidateGetBindGroupLayout(uint32_t groupIndex) {
+    MaybeError PipelineBase::ValidateGetBindGroupLayout(BindGroupIndex groupIndex) {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         DAWN_TRY(GetDevice()->ValidateObject(mLayout.Get()));
-        if (groupIndex >= kMaxBindGroups) {
+        if (groupIndex >= kMaxBindGroupsTyped) {
             return DAWN_VALIDATION_ERROR("Bind group layout index out of bounds");
         }
         return {};
     }
 
-    BindGroupLayoutBase* PipelineBase::GetBindGroupLayout(uint32_t groupIndex) {
+    BindGroupLayoutBase* PipelineBase::GetBindGroupLayout(uint32_t groupIndexIn) {
+        BindGroupIndex groupIndex(groupIndexIn);
         if (GetDevice()->ConsumedError(ValidateGetBindGroupLayout(groupIndex))) {
             return BindGroupLayoutBase::MakeError(GetDevice());
         }
