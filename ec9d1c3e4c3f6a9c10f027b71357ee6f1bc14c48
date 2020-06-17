@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0393a781_b4f97186",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-17T01:16:09Z",
+      "side": 1,
+      "message": "In RenderPassEncoder and ComputePassEncoder, there is only Object validation. I saw these validations are checked when command encoder finish, so put it here. It should be added to RenderPassEncoder and ComputePassEncoder, right?",
+      "parentUuid": "0bc399e0_073e8170",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec66b5e8_9284fb89",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 2
