@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "83411fcf_d0c0be2f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: explain why it is unreachable, I think it would be good to have a generic error here, just in case we forget to update the block of code above. In general we should figure out how we want to make nice error messages, while still being robust.",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc8fbcbe_ee92c4ed",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "777f0ce9_ccf89570",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 29
@@ -13,6 +47,213 @@
       "writtenOn": "2020-06-17T05:47:07Z",
       "side": 1,
       "message": "What do you think about this? I found the equality check fails since minimum buffer size can be different between vertex and fragment stage. Specifically, when vertex and fragment both point to the same binding, and specify different contents (so like two floats vs one float), bindingInfo.minimumBufferSize will be different between them. This takes the max across stages.",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a1a20e8_566bff97",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "Look like a good idea, and I even think we could modify existingEntry directly then check again. That\u0027s ok because if the modification doesn\u0027t work we return an error directly.\n\nLet\u0027s assume that\u0027s how default pipeline layout creation works, but can you make a PR to the WebGPU spec that adds this mechanism so we\u0027re sure the group agrees? Likewise we might want to promote readonly-storage-buffer to storage-buffer if there\u0027s a conflict.",
+      "parentUuid": "777f0ce9_ccf89570",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a775bf42_ad796349",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: this can be moved before [1]",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b39106_bddc42dc",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: BindGroupLayoutEntry* existingEntry \u003d \u0026 ...?",
+      "range": {
+        "startLine": 184,
+        "startChar": 28,
+        "endLine": 184,
+        "endChar": 49
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6019bad3_bdf4a29b",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: CreateComputePipelineWithDefaultLayout?",
+      "range": {
+        "startLine": 162,
+        "startChar": 26,
+        "endLine": 162,
+        "endChar": 54
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5cab1f3_79757ee2",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "ditto?",
+      "range": {
+        "startLine": 191,
+        "startChar": 25,
+        "endLine": 191,
+        "endChar": 52
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd25d687_a07261c4",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: GetBGLFromComputeShader?",
+      "range": {
+        "startLine": 219,
+        "startChar": 36,
+        "endLine": 219,
+        "endChar": 47
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c99a3ce_cec44cb1",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: GetBGLFromRenderShaders?",
+      "range": {
+        "startLine": 225,
+        "startChar": 26,
+        "endLine": 225,
+        "endChar": 46
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26d33ed1_d45b386f",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "Can we also have small tests that check that more than one bindgorup layout is checked?",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92f9aac6_b74df006",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "nit: in general since we\u0027re using s lambda, it could probably be inlined here. like so:\n\n    CheckSizeBounds({8, 4}, [\u0026](const std::vector\u003cuint64_t\u003e\u0026 sizes, bool expectation) {\n        if (expectation) {\n            CreateBindGroup(layout, bindings, sizes);\n        } else {\n            ASSERT_DEVICE_ERROR(CreateBindGroup(layout, bindings, sizes));\n        }\n    };",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 355,
+        "endChar": 41
+      },
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12d9994e_2f4da935",
+        "filename": "src/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-17T10:27:14Z",
+      "side": 1,
+      "message": "Can we also have a simple test for the defaulting of a pipeline layout with multiple bind group layouts?",
       "revId": "53878593357ee71116311007baec9b14410104a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
