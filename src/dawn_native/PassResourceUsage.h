@@ -46,7 +46,7 @@ namespace dawn_native {
     // can decompress texture usage to a vector if necessary.
     struct PassTextureUsage {
         wgpu::TextureUsage usage;
-        bool sameUsagesAcrossSubresources;
+        bool sameUsagesAcrossSubresources = true;
         std::vector<wgpu::TextureUsage> subresourceUsages;
     };
 
