@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "3410e22a_060319cc",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-18T20:04:41Z",
+      "side": 1,
+      "message": "Maybe I misunderstood. Are you saying that pNext is sometimes a const void*, and sometimes a void**? If so, yeah, that\u0027s ugly and will need an ugly cast.\n\nBut if it\u0027s either a const void* or Foo*, then \u0026const_cast\u003cvoid*\u003e(head-\u003epNext) should work, no? Or failing that, \u0026const_cast\u003cvoid*\u003e(static_cast\u003cconst void*\u003e(head-\u003epNext)) ?\n\n(Ugly, but I\u0027m of the \"don\u0027t use reinterpret_cast unless absolutely necessary\" school.)",
+      "parentUuid": "709f9bed_37289582",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
