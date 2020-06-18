@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18b4b850_f6833657",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:38:33Z",
+      "side": 1,
+      "message": "Can we have a test for this change somehow?",
+      "revId": "a99cd5c60bbd8ca6cd684239c411b337de141f9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b3f4e14_2fd9cad2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:38:33Z",
+      "side": 1,
+      "message": "I think this should have a // fallthrough comment to make compiler warnings happy.",
+      "revId": "a99cd5c60bbd8ca6cd684239c411b337de141f9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
