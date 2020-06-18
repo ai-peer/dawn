@@ -38,11 +38,15 @@ namespace dawn_native { namespace vulkan {
           mDescriptorSetAllocation(descriptorSetAllocation) {
         // Now do a write of a single descriptor set with all possible chained data allocated on the
         // stack.
-        uint32_t numWrites = 0;
-        std::array<VkWriteDescriptorSet, kMaxBindingsPerGroup> writes;
-        std::array<VkDescriptorBufferInfo, kMaxBindingsPerGroup> writeBufferInfo;
-        std::array<VkDescriptorImageInfo, kMaxBindingsPerGroup> writeImageInfo;
+        const uint32_t bindingCount = static_cast<uint32_t>((GetLayout()->GetBindingCount()));
+        ityp::stack_vec<uint32_t, VkWriteDescriptorSet, kMaxOptimalBindingsPerGroup> writes(
+            bindingCount);
+        ityp::stack_vec<uint32_t, VkDescriptorBufferInfo, kMaxOptimalBindingsPerGroup>
+            writeBufferInfo(bindingCount);
+        ityp::stack_vec<uint32_t, VkDescriptorImageInfo, kMaxOptimalBindingsPerGroup>
+            writeImageInfo(bindingCount);
 
+        uint32_t numWrites = 0;
         for (const auto& it : GetLayout()->GetBindingMap()) {
             BindingNumber bindingNumber = it.first;
             BindingIndex bindingIndex = it.second;

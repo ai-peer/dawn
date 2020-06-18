@@ -110,8 +110,8 @@ TEST_F(BindGroupValidationTest, WrongBindings) {
     // Check that binding must be present in the layout
     ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{1, mSampler}}));
 
-    // Check that binding >= kMaxBindingsPerGroup fails.
-    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{kMaxBindingsPerGroup, mSampler}}));
+    // Check that a very large binding fails.
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{390, mSampler}}));
 }
 
 // Check that the same binding cannot be set twice
@@ -510,22 +510,25 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutStorageBindingsInVertexShad
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer}});
 }
 
-// Tests setting that bind group layout bindings numbers may be >= kMaxBindingsPerGroup.
+// Tests setting that bind group layout bindings numbers may be very large.
 TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutEntryUnbounded) {
-    // Checks that kMaxBindingsPerGroup is valid.
-    utils::MakeBindGroupLayout(device, {{kMaxBindingsPerGroup, wgpu::ShaderStage::Vertex,
-                                         wgpu::BindingType::UniformBuffer}});
+    // Checks that a large binding number is valid.
+    utils::MakeBindGroupLayout(
+        device, {{298, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer}});
 
-    // Checks that kMaxBindingsPerGroup + 1 is valid.
-    utils::MakeBindGroupLayout(device, {{kMaxBindingsPerGroup + 1, wgpu::ShaderStage::Vertex,
-                                         wgpu::BindingType::UniformBuffer}});
+    // Checks that uint32_t max is valid.
+    utils::MakeBindGroupLayout(device,
+                               {{std::numeric_limits<uint32_t>::max(), wgpu::ShaderStage::Vertex,
+                                 wgpu::BindingType::UniformBuffer}});
 }
 
-// Test that there can't be more than kMaxBindingPerGroup bindings per group
-TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutMaxBindings) {
-    wgpu::BindGroupLayoutEntry entries[kMaxBindingsPerGroup + 1];
+// Test that there can be an unbounded number of bindings per group.
+TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutManyBindings) {
+    static constexpr uint32_t kNumBindings = 302;
 
-    for (uint32_t i = 0; i < kMaxBindingsPerGroup + 1; i++) {
+    wgpu::BindGroupLayoutEntry entries[kNumBindings + 1];
+
+    for (uint32_t i = 0; i < kNumBindings + 1; i++) {
         entries[i].type = wgpu::BindingType::UniformBuffer;
         entries[i].binding = i;
         entries[i].visibility = wgpu::ShaderStage::Compute;
@@ -534,13 +537,8 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutMaxBindings) {
     wgpu::BindGroupLayoutDescriptor desc;
     desc.entries = entries;
 
-    // Control case: kMaxBindingsPerGroup bindings is allowed.
-    desc.entryCount = kMaxBindingsPerGroup;
+    desc.entryCount = kNumBindings;
     device.CreateBindGroupLayout(&desc);
-
-    // Error case: kMaxBindingsPerGroup + 1 bindings is not allowed.
-    desc.entryCount = kMaxBindingsPerGroup + 1;
-    ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
 }
 
 // This test verifies that the BindGroupLayout bindings are correctly validated, even if the
@@ -621,17 +619,17 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     std::vector<wgpu::BindGroupLayoutEntry> maxStorageDB;
     std::vector<wgpu::BindGroupLayoutEntry> maxReadonlyStorageDB;
 
-    for (uint32_t i = 0; i < kMaxDynamicUniformBufferCount; ++i) {
+    for (uint32_t i = 0; i < kMaxDynamicUniformBuffersPerPipelineLayout; ++i) {
         maxUniformDB.push_back(
             {i, wgpu::ShaderStage::Compute, wgpu::BindingType::UniformBuffer, true});
     }
 
-    for (uint32_t i = 0; i < kMaxDynamicStorageBufferCount; ++i) {
+    for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; ++i) {
         maxStorageDB.push_back(
             {i, wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer, true});
     }
 
-    for (uint32_t i = 0; i < kMaxDynamicStorageBufferCount; ++i) {
+    for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; ++i) {
         maxReadonlyStorageDB.push_back(
             {i, wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageBuffer, true});
     }
@@ -707,21 +705,24 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
 
     // Check dynamic uniform buffers exceed maximum in bind group layout.
     {
-        maxUniformDB.push_back({kMaxDynamicUniformBufferCount, wgpu::ShaderStage::Compute,
-                                wgpu::BindingType::UniformBuffer, true});
+        maxUniformDB.push_back({kMaxDynamicUniformBuffersPerPipelineLayout,
+                                wgpu::ShaderStage::Compute, wgpu::BindingType::UniformBuffer,
+                                true});
         TestCreateBindGroupLayout(maxUniformDB.data(), maxUniformDB.size(), false);
     }
 
     // Check dynamic storage buffers exceed maximum in bind group layout.
     {
-        maxStorageDB.push_back({kMaxDynamicStorageBufferCount, wgpu::ShaderStage::Compute,
-                                wgpu::BindingType::StorageBuffer, true});
+        maxStorageDB.push_back({kMaxDynamicStorageBuffersPerPipelineLayout,
+                                wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer,
+                                true});
         TestCreateBindGroupLayout(maxStorageDB.data(), maxStorageDB.size(), false);
     }
 
     // Check dynamic readonly storage buffers exceed maximum in bind group layout.
     {
-        maxReadonlyStorageDB.push_back({kMaxDynamicStorageBufferCount, wgpu::ShaderStage::Compute,
+        maxReadonlyStorageDB.push_back({kMaxDynamicStorageBuffersPerPipelineLayout,
+                                        wgpu::ShaderStage::Compute,
                                         wgpu::BindingType::ReadonlyStorageBuffer, true});
         TestCreateBindGroupLayout(maxReadonlyStorageDB.data(), maxReadonlyStorageDB.size(), false);
     }

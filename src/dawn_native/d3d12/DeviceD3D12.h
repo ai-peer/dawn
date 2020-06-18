@@ -184,8 +184,14 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ResidencyManager> mResidencyManager;
 
-        // Index corresponds to the descriptor count in the range [0, kMaxBindingsPerGroup].
-        static constexpr uint32_t kNumOfStagingDescriptorAllocators = kMaxBindingsPerGroup + 1;
+        // Index corresponds to the descriptor count in the range [0, kMaxOptimalBindingsPerGroup].
+        // TODO(enga): Support BGLs with an unbounded number of bindings. Very large BGLS would be
+        // invalid, but it is not an error until pipeline layout validation. We can probably skip
+        // descriptor allocation for BGLs that will never be able to make a valid pipeline alyout.
+        // That way, we don't need to have a general descriptor allocator for bind groups that can't
+        // actually be used.
+        static constexpr uint32_t kNumOfStagingDescriptorAllocators =
+            kMaxOptimalBindingsPerGroup + 1;
 
         std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
             mViewAllocators;

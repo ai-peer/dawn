@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 #include "common/ityp_bitset.h"
+#include "common/ityp_stack_vec.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/Device.h"
@@ -170,7 +171,22 @@ namespace dawn_native {
 
         const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
 
-        ityp::bitset<BindingIndex, kMaxBindingsPerGroup> bindingsSet;
+        // Round up the max per pipeline to a multiple of 64 because our bitset stores 64-bit
+        // integers. There really can't be this many bindings, but it's not an error until pipeline
+        // layout validation.
+        static constexpr uint32_t kMaxBindingsInBitset =
+            (kMaxBindingsPerPipelineLayout + 64 - 1) / 64;
+
+        uint32_t bindingsSetCount = 0;
+        ityp::bitset<BindingIndex, kMaxBindingsInBitset> bindingsSet;
+        // uint8_t because std::vector<bool> is specialized and doesn't compile with ityp::stack_vec
+        ityp::stack_vec<BindingIndex, uint8_t> bindingsSetVector;
+
+        const bool useVector = descriptor->entryCount > kMaxBindingsInBitset;
+        if (DAWN_UNLIKELY(useVector)) {
+            bindingsSetVector.resize(BindingIndex(descriptor->entryCount));
+        }
+
         for (uint32_t i = 0; i < descriptor->entryCount; ++i) {
             const BindGroupEntry& entry = descriptor->entries[i];
 
@@ -181,10 +197,19 @@ namespace dawn_native {
             BindingIndex bindingIndex = it->second;
             ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
-            if (bindingsSet[bindingIndex]) {
-                return DAWN_VALIDATION_ERROR("binding set twice");
+            if (DAWN_UNLIKELY(useVector)) {
+                if (bindingsSetVector[bindingIndex]) {
+                    return DAWN_VALIDATION_ERROR("binding set twice");
+                }
+                bindingsSetVector[bindingIndex] = 1;
+                bindingsSetCount++;
+            } else {
+                if (bindingsSet[bindingIndex]) {
+                    return DAWN_VALIDATION_ERROR("binding set twice");
+                }
+                bindingsSet.set(bindingIndex);
+                bindingsSetCount++;
             }
-            bindingsSet.set(bindingIndex);
 
             const BindingInfo& bindingInfo = descriptor->layout->GetBindingInfo(bindingIndex);
 
@@ -223,7 +248,7 @@ namespace dawn_native {
         //  - Each binding must be set at most once
         //
         // We don't validate the equality because it wouldn't be possible to cover it with a test.
-        ASSERT(bindingsSet.count() == bindingMap.size());
+        ASSERT(bindingsSetCount == bindingMap.size());
 
         return {};
     }  // anonymous namespace
