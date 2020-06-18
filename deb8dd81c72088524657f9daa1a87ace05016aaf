@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9f303c2_e3902ddb",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-18T21:39:36Z",
+      "side": 1,
+      "message": "Nit: put this magic number in a constant at the top of the file?",
+      "revId": "deb8dd81c72088524657f9daa1a87ace05016aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
