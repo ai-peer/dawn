@@ -80,11 +80,11 @@ namespace dawn_native {
                 descriptor->bindGroupLayouts[i]->GetDynamicStorageBufferCount();
         }
 
-        if (totalDynamicUniformBufferCount > kMaxDynamicUniformBufferCount) {
+        if (totalDynamicUniformBufferCount > kMaxDynamicUniformBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR("too many dynamic uniform buffers in pipeline layout");
         }
 
-        if (totalDynamicStorageBufferCount > kMaxDynamicStorageBufferCount) {
+        if (totalDynamicStorageBufferCount > kMaxDynamicStorageBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR("too many dynamic storage buffers in pipeline layout");
         }
 
@@ -128,9 +128,10 @@ namespace dawn_native {
         ASSERT(count > 0);
 
         // Data which BindGroupLayoutDescriptor will point to for creation
-        ityp::array<BindGroupIndex,
-                    ityp::array<BindingIndex, BindGroupLayoutEntry, kMaxBindingsPerGroup>,
-                    kMaxBindGroups>
+        ityp::array<
+            BindGroupIndex,
+            ityp::array_vec<BindingIndex, BindGroupLayoutEntry, kMaxOptimalBindingsPerGroup>,
+            kMaxBindGroups>
             entryData = {};
 
         // A map of bindings to the index in |entryData|
@@ -202,6 +203,7 @@ namespace dawn_native {
                     }
 
                     BindingIndex currentBindingCount = entryCounts[group];
+                    entryData[group].resize(currentBindingCount + BindingIndex(1));
                     entryData[group][currentBindingCount] = bindingSlot;
 
                     usedBindingsMap[group][bindingNumber] = currentBindingCount;

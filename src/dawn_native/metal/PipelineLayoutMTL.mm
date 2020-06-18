@@ -29,6 +29,9 @@ namespace dawn_native { namespace metal {
             uint32_t textureIndex = 0;
 
             for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
+                mIndexInfo[stage][group] = ityp::array_vec<BindingIndex, uint32_t>(
+                    GetBindGroupLayout(group)->GetBindingCount());
+
                 for (BindingIndex bindingIndex{0};
                      bindingIndex < GetBindGroupLayout(group)->GetBindingCount(); ++bindingIndex) {
                     const BindingInfo& bindingInfo =

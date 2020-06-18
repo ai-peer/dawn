@@ -38,7 +38,7 @@ namespace dawn_native { namespace vulkan {
             totalDescriptorCount += it.second;
             mPoolSizes.push_back(VkDescriptorPoolSize{it.first, it.second});
         }
-        ASSERT(totalDescriptorCount <= kMaxBindingsPerGroup);
+        ASSERT(totalDescriptorCount <= kMaxOptimalBindingsPerGroup);
 
         if (totalDescriptorCount == 0) {
             // Vulkan requires that valid usage of vkCreateDescriptorPool must have a non-zero
