@@ -202,16 +202,12 @@ namespace dawn_native {
             bindingsSet.insert(bindingNumber);
         }
 
-        if (bindingsSet.size() > kMaxBindingsPerGroup) {
-            return DAWN_VALIDATION_ERROR("The number of bindings exceeds kMaxBindingsPerGroup.");
-        }
-
-        if (dynamicUniformBufferCount > kMaxDynamicUniformBufferCount) {
+        if (dynamicUniformBufferCount > kMaxDynamicUniformBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR(
                 "The number of dynamic uniform buffer exceeds the maximum value");
         }
 
-        if (dynamicStorageBufferCount > kMaxDynamicStorageBufferCount) {
+        if (dynamicStorageBufferCount > kMaxDynamicStorageBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR(
                 "The number of dynamic storage buffer exceeds the maximum value");
         }
@@ -305,8 +301,6 @@ namespace dawn_native {
         // This is a utility function to help ASSERT that the BGL-binding comparator places buffers
         // first.
         bool CheckBufferBindingsFirst(ityp::span<BindingIndex, const BindingInfo> bindings) {
-            ASSERT(bindings.size() <= BindingIndex(kMaxBindingsPerGroup));
-
             BindingIndex lastBufferIndex{0};
             BindingIndex firstNonBufferIndex = std::numeric_limits<BindingIndex>::max();
             for (BindingIndex i{0}; i < bindings.size(); ++i) {
@@ -328,13 +322,12 @@ namespace dawn_native {
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor)
-        : CachedObject(device), mBindingCount(descriptor->entryCount) {
+        : CachedObject(device), mBindingInfo(BindingIndex(descriptor->entryCount)) {
         std::vector<BindGroupLayoutEntry> sortedBindings(
             descriptor->entries, descriptor->entries + descriptor->entryCount);
-
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
-        for (BindingIndex i{0}; i < mBindingCount; ++i) {
+        for (BindingIndex i{0}; i < mBindingInfo.size(); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
             mBindingInfo[i].type = binding.type;
             mBindingInfo[i].visibility = binding.visibility;
@@ -385,7 +378,7 @@ namespace dawn_native {
             const auto& it = mBindingMap.emplace(BindingNumber(binding.binding), i);
             ASSERT(it.second);
         }
-        ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), mBindingCount}));
+        ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), mBindingInfo.size()}));
     }
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -441,7 +434,7 @@ namespace dawn_native {
     }
 
     BindingIndex BindGroupLayoutBase::GetBindingCount() const {
-        return mBindingCount;
+        return mBindingInfo.size();
     }
 
     BindingIndex BindGroupLayoutBase::GetDynamicBufferCount() const {
@@ -463,7 +456,8 @@ namespace dawn_native {
         // | --- offsets + sizes -------------| --------------- Ref<ObjectBase> ----------|
         size_t objectPointerStart = static_cast<uint32_t>(mBufferCount) * sizeof(BufferBindingData);
         ASSERT(IsAligned(objectPointerStart, alignof(Ref<ObjectBase>)));
-        return objectPointerStart + static_cast<uint32_t>(mBindingCount) * sizeof(Ref<ObjectBase>);
+        return objectPointerStart +
+               static_cast<uint32_t>(mBindingInfo.size()) * sizeof(Ref<ObjectBase>);
     }
 
     BindGroupLayoutBase::BindingDataPointers BindGroupLayoutBase::ComputeBindingDataPointers(
@@ -475,7 +469,7 @@ namespace dawn_native {
         ASSERT(IsPtrAligned(bufferData, alignof(BufferBindingData)));
         ASSERT(IsPtrAligned(bindings, alignof(Ref<ObjectBase>)));
 
-        return {{bufferData, mBufferCount}, {bindings, mBindingCount}};
+        return {{bufferData, mBufferCount}, {bindings, mBindingInfo.size()}};
     }
 
 }  // namespace dawn_native

@@ -36,6 +36,11 @@ namespace ityp {
         constexpr span(Value* data, Index size) : mData(data), mSize(size) {
         }
 
+        Value& operator[](Index i) {
+            ASSERT(i < mSize);
+            return mData[static_cast<I>(i)];
+        }
+
         constexpr Value& operator[](Index i) const {
             ASSERT(i < mSize);
             return mData[static_cast<I>(i)];

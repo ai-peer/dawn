@@ -32,8 +32,22 @@ namespace dawn_native {
 
     using BindGroupIndex = TypedInteger<struct BindGroupIndexT, uint32_t>;
 
-    static constexpr BindingIndex kMaxBindingsPerGroupTyped = BindingIndex(kMaxBindingsPerGroup);
     static constexpr BindGroupIndex kMaxBindGroupsTyped = BindGroupIndex(kMaxBindGroups);
+
+    // Not a real WebGPU limit, but the sum of the two limits is useful for internal optimizations.
+    static constexpr uint32_t kMaxDynamicBuffersPerPipelineLayout =
+        kMaxDynamicUniformBuffersPerPipelineLayout + kMaxDynamicStorageBuffersPerPipelineLayout;
+
+    // Not a real WebGPU limit, but used to optimize parts of Dawn which are optimistic for
+    // valid usage of the API.
+    // There should never be more bindings than the max per stage, for each stage.
+    static constexpr uint32_t kMaxBindingsPerPipelineLayout =
+        2 * (kMaxSampledTexturesPerShaderStage + kMaxSamplersPerShaderStage +
+             kMaxStorageBuffersPerShaderStage + kMaxStorageTexturesPerShaderStage +
+             kMaxUniformBuffersPerShaderStage);
+
+    // TODO(enga): Figure out a good number for this.
+    static constexpr uint32_t kMaxOptimalBindingsPerGroup = 32;
 
     struct BindingInfo {
         wgpu::ShaderStage visibility;
