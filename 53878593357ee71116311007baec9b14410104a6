@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "596bac12_f88150e0",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8fbcbe_ee92c4ed",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "777f0ce9_ccf89570",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 29
@@ -222,6 +240,24 @@
       "revId": "53878593357ee71116311007baec9b14410104a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8e88b7c_9e4bb56c",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:54:23Z",
+      "side": 1,
+      "message": "Looks good to me too.",
+      "parentUuid": "23e15bef_e004ca48",
+      "revId": "53878593357ee71116311007baec9b14410104a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

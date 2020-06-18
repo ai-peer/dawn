@@ -22,6 +22,30 @@
       "revId": "8fbe970819fb69a12e7365dddb21ca67213a03a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65ec01a1_c5a090da",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:54:23Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "d0ecb772_58c84237",
+      "range": {
+        "startLine": 183,
+        "startChar": 27,
+        "endLine": 186,
+        "endChar": 61
+      },
+      "revId": "8fbe970819fb69a12e7365dddb21ca67213a03a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
