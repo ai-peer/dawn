@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f213c5ed_136aaec1",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T08:59:09Z",
+      "side": 1,
+      "message": "Out of host memory should probably be added to this list: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/VulkanError.cpp;l\u003d93?q\u003dVulkanError.cpp\n\nIt would make sense that on UMA OOM can happen as an out of host memory.",
+      "parentUuid": "f453b6d2_c3551bb2",
+      "range": {
+        "startLine": 545,
+        "startChar": 20,
+        "endLine": 545,
+        "endChar": 41
+      },
+      "revId": "cf1fdf413cba44667db8206466b265510b05f47a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0dbc311a_a7d62a3e",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 16
