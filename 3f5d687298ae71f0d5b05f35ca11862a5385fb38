@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d850a8b9_1bca6e89",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "And even when it isn\u0027t, we should compute copies a single time as much as possible.",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b19fc4e9_01733a52",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "nit: splitCopies",
+      "range": {
+        "startLine": 760,
+        "startChar": 47,
+        "endLine": 760,
+        "endChar": 61
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f1df51_e2a0316b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "ComputeTextureBufferCopySplit should handle 3D copies correctly already so I think the loops could be inverted:\n\n splitCopies \u003d ComputeTextureBufferCopySplit;\n for (const TextureBufferCopySplit::CopyInfo\u0026 copyInfo : splitCopies) {\n   for (array layer) {\n      ...\n   }\n }\n\nThis would avoid repeated calls to ComputeTextureBufferCopySplit",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f721687_c4ac85b8",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "nit: splitCopies",
+      "range": {
+        "startLine": 806,
+        "startChar": 47,
+        "endLine": 806,
+        "endChar": 61
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3706f5ad_eb8a4094",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "635dbc3e_5867bc71",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "That\u0027s already done, and I\u0027ll probably do that refactor, I have a WIP here https://dawn-review.googlesource.com/c/dawn/+/23200 but it will have massive conflicts with this CL, so I\u0027ll wait until this one is landed, then rebase and keep working on it. That is, unless you want to take over that CL.",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b0cdb70_65d81fb1",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "Can we have a simple zero-init test for multi array layer copies B-\u003eT and T-\u003eB?",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9297e5ab_22425ccb",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "if offset were declared as char*, then this line could be offset +\u003d bytesPerImage",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3aadf38_96399894",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "Instead of having an extra function for only two tests, maybe they could call MinimumBufferSpec and override rowsPerImage locally?",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f4b6c3_9a4ff46f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T11:24:20Z",
+      "side": 1,
+      "message": "In which ways does it fail? Is it a crash?",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
