@@ -46,6 +46,30 @@
       "revId": "8fbe970819fb69a12e7365dddb21ca67213a03a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11f8b91d_c7fd41ae",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-06-18T20:58:21Z",
+      "side": 1,
+      "message": "Good idea, how\u0027s this?",
+      "parentUuid": "65ec01a1_c5a090da",
+      "range": {
+        "startLine": 183,
+        "startChar": 27,
+        "endLine": 186,
+        "endChar": 61
+      },
+      "revId": "8fbe970819fb69a12e7365dddb21ca67213a03a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
