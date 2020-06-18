@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7fc8c5c0_f94088bb",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-18T07:29:55Z",
+      "side": 1,
+      "message": "Oh yeah, we talked offline with Hao and my comment was wrong, it should have said that this validation can be moved to RenderPassEncoder/ComputePassEncoder.cpp\n\nIn my mind I thought we wanted to move everything in the encoders so that we could get rid of this validation pass. The decision of what passes are required, where validation happens, etc, has far reaching consequences and we should figure out what we want to do in the long term. There\u0027s many different aspects to consider so I think either is fine in this CL and we should make a design doc that investigates what the different possibilities are, and what the resulting tradeoffs are.",
+      "parentUuid": "4ae37bd8_9f1271c3",
+      "revId": "ec9d1c3e4c3f6a9c10f027b71357ee6f1bc14c48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec66b5e8_9284fb89",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 2
