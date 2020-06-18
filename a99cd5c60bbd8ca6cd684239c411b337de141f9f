@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2b8c7ee3_d33bbd39",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T17:22:32Z",
+      "side": 1,
+      "message": "There isn\u0027t a super certain way to test because it\u0027s only happening on validation so we have to check the default is correct as a side-effect of other validation. Anyway, I added a test that creating a BGL with multisampled and undefined view dimension is valid (because it defaults to 2d)",
+      "parentUuid": "18b4b850_f6833657",
+      "revId": "a99cd5c60bbd8ca6cd684239c411b337de141f9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b3f4e14_2fd9cad2",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "a99cd5c60bbd8ca6cd684239c411b337de141f9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "108a7362_a187e355",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T17:22:32Z",
+      "side": 1,
+      "message": "I added both the compiler warning and the clang annotation (when using clang)",
+      "parentUuid": "2b3f4e14_2fd9cad2",
+      "revId": "a99cd5c60bbd8ca6cd684239c411b337de141f9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

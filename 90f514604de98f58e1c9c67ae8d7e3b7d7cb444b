@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "fb1ffef0_c29eb59d",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T17:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7624d5b8_fe9de1f3",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 141,
+        "endChar": 43
+      },
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a165463e_06d0a125",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 4
@@ -198,6 +222,24 @@
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9eec6985_b6bf455c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T17:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5500e613_35fef21b",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -474,6 +516,24 @@
       "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a8cce08_d4ce6187",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T17:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bff3c3bd_96d3e2d1",
+      "revId": "90f514604de98f58e1c9c67ae8d7e3b7d7cb444b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
