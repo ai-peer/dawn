@@ -401,11 +401,13 @@ namespace utils {
                           textureSizeAtLevel0.height >> mipmapLevel, textureSizeAtLevel0.depth};
 
         layout.bytesPerRow = GetMinimumBytesPerRow(format, layout.mipSize.width);
-        layout.bytesPerImage = layout.bytesPerRow * rowsPerImage;
+
+        uint32_t appliedRowsPerImage = rowsPerImage > 0 ? rowsPerImage : layout.mipSize.height;
+        layout.bytesPerImage = layout.bytesPerRow * appliedRowsPerImage;
 
         layout.byteLength =
             GetBytesInBufferTextureCopy(format, layout.mipSize.width, layout.bytesPerRow,
-                                        layout.mipSize.height, textureSizeAtLevel0.depth);
+                                        appliedRowsPerImage, textureSizeAtLevel0.depth);
 
         const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(format);
         layout.texelBlocksPerRow = layout.bytesPerRow / bytesPerTexel;
