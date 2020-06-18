@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "201b13fa_f9b0c7a5",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-18T23:22:07Z",
+      "side": 1,
+      "message": "nit: add a comment about why we exclude minimumBufferSize",
+      "revId": "fb868c4ab2884ee1391b3995f21eecacb85151be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
