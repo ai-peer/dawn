@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "1d48a9bc_7fbbe449",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-18T20:10:29Z",
+      "side": 1,
+      "message": "(I\u0027m assuming that every VK_STRUCT_TYPE has a pNext in it, but maybe that\u0027s an incorrect assumption.)",
+      "parentUuid": "3410e22a_060319cc",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
