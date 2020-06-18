@@ -514,13 +514,15 @@ namespace dawn_native { namespace opengl {
                     const GLFormat& format = texture->GetGLFormat();
 
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
-                    ASSERT(copy->copySize.depth == 1);
-                    SubresourceRange subresource =
-                        SubresourceRange::SingleSubresource(dst.mipLevel, dst.arrayLayer);
+                    // TODO(jiawei.shao@intel.com): use copy->destination.origin.z instead of
+                    // copy->destination.arrayLayer once GPUTextureCopyView.arrayLayer to
+                    // GPUTextureCopyView.origin.z is done.
+                    SubresourceRange subresources = {dst.mipLevel, 1, dst.arrayLayer,
+                                                     copy->copySize.depth};
                     if (IsCompleteSubresourceCopiedTo(texture, copySize, dst.mipLevel)) {
-                        texture->SetIsSubresourceContentInitialized(true, subresource);
+                        texture->SetIsSubresourceContentInitialized(true, subresources);
                     } else {
-                        texture->EnsureSubresourceContentInitialized(subresource);
+                        texture->EnsureSubresourceContentInitialized(subresources);
                     }
 
                     gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, buffer->GetHandle());
@@ -548,8 +550,8 @@ namespace dawn_native { namespace opengl {
                         if (texture->GetArrayLayers() > 1) {
                             gl.CompressedTexSubImage3D(
                                 target, dst.mipLevel, dst.origin.x, dst.origin.y, dst.arrayLayer,
-                                copyExtent.width, copyExtent.height, 1, format.internalFormat,
-                                copyDataSize,
+                                copyExtent.width, copyExtent.height, copyExtent.depth,
+                                format.internalFormat, copyDataSize,
                                 reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
                         } else {
                             gl.CompressedTexSubImage2D(
@@ -563,7 +565,8 @@ namespace dawn_native { namespace opengl {
                                 if (texture->GetArrayLayers() > 1) {
                                     gl.TexSubImage3D(target, dst.mipLevel, dst.origin.x,
                                                      dst.origin.y, dst.arrayLayer, copySize.width,
-                                                     copySize.height, 1, format.format, format.type,
+                                                     copySize.height, copySize.depth, format.format,
+                                                     format.type,
                                                      reinterpret_cast<void*>(
                                                          static_cast<uintptr_t>(src.offset)));
                                 } else {
