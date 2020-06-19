@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d647b34b_45e6464b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T07:56:46Z",
+      "side": 1,
+      "message": "Sounds good, an we can even defer it more.",
+      "parentUuid": "a3753c44_93e73480",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "145e2572_13e96776",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 9
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Like D3D12 backend, I plan to make ComputeTextureBufferCopySplit truly support multiple 2D texture arrays in another patch. What do you think?",
       "parentUuid": "69f1df51_e2a0316b",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aedee65c_44466ddd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T07:56:46Z",
+      "side": 1,
+      "message": "Contrary to the D3D12 backend, I think ComputeTextureBufferCopySplit already know how to split copies in at most 3 chunks. So the pseudo-code above should work without any additional modifications.",
+      "parentUuid": "21448b76_c9588835",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -464,6 +500,24 @@
       "side": 1,
       "message": "With swiftshader only the first array layer will be copied in a t2b and b2t copy with multiple texture array layers. \n\nFor example the failures for PatchSet 4:\nhttps://ci.chromium.org/p/dawn/builders/try/linux-clang-dbg-x86/b8877196257650610544?",
       "parentUuid": "a7f4b6c3_9a4ff46f",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "031b7563_df67c56c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T07:56:46Z",
+      "side": 1,
+      "message": "Weird, it should be doing it correctly: https://source.chromium.org/chromium/chromium/src/+/master:third_party/swiftshader/src/Vulkan/VkImage.cpp;l\u003d514;drc\u003d151d835e9f1cdd57ca46e372bf127f74316dd4c8",
+      "parentUuid": "b69b76c4_90919112",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
