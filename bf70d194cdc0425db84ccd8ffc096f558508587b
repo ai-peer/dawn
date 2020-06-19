@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "1b1328d7_df054e74",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T11:53:28Z",
+      "side": 1,
+      "message": "The problem is that the cast makes the thing an rvalue:\n\n../../src/dawn_native/vulkan/UtilsVulkan.h:56:24: error: cannot take the address of an rvalue of type \u0027void *\u0027\n            : mTailPtr(\u0026const_cast\u003cvoid*\u003e(head-\u003epNext)) {\n                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      "parentUuid": "1d48a9bc_7fbbe449",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
