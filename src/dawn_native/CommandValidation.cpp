@@ -325,6 +325,13 @@ namespace dawn_native {
             if (pass.passType != PassType::Render || readOnly || singleUse) {
                 continue;
             }
+
+            // If all subresources' usages are the same, report error directly.
+            if (textureUsage.sameUsagesAcrossSubresources) {
+                return DAWN_VALIDATION_ERROR(
+                    "Texture used as writable usage and another usage in render pass");
+            }
+
             // Inspect the subresources if the usage of the whole texture violates usage validation.
             // Every single subresource can only be used as single-write or multiple read.
             for (wgpu::TextureUsage subresourceUsage : textureUsage.subresourceUsages) {
