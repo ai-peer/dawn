@@ -16,6 +16,24 @@
       "revId": "55cb4423c97bdc310360306341a6a3ab9db4288d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa61cd72_103e3766",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-19T17:20:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07db5160_89eea685",
+      "revId": "55cb4423c97bdc310360306341a6a3ab9db4288d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
