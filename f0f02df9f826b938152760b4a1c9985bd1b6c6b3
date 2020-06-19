@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c577ab52_69de2b19",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-19T06:45:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0319373_8a8fa168",
+      "revId": "f0f02df9f826b938152760b4a1c9985bd1b6c6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2508eff_1955390b",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "f0f02df9f826b938152760b4a1c9985bd1b6c6b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdfc88c2_731e6645",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-19T06:45:57Z",
+      "side": 1,
+      "message": "Ack\n\nThe patch is ready for Vulkan: https://dawn-review.googlesource.com/c/dawn/+/23503. I will write code for D3D12 tomorrow. It should be quite similar to Vulkan. With this patch, the frontend info \"textureUsage.subresourceUsages\" vector might be null because I compressed it into textureUsage.usage, which lead to the failures on D3D12 backend. So D3D12 backend implementation is a must-to-resolve issue in the same patch and I can\u0027t separate it into another patch.",
+      "parentUuid": "c2508eff_1955390b",
+      "revId": "f0f02df9f826b938152760b4a1c9985bd1b6c6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
