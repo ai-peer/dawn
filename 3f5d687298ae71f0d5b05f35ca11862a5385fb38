@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3753c44_93e73480",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done\n\nIt will add a bit more complexity here and needs more tests to cover, and with the naive changes in this CL it is enough for me to write WebGPU CTS about copy commands, so I decide to leave a TODO here and in Metal backend and resolve them in another patch. What do you think?",
+      "parentUuid": "d850a8b9_1bca6e89",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "145e2572_13e96776",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 9
@@ -39,6 +57,30 @@
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84b53519_96f97a35",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "145e2572_13e96776",
+      "range": {
+        "startLine": 619,
+        "startChar": 28,
+        "endLine": 619,
+        "endChar": 60
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "1f804560_e72e53d7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa5ff1da_9ed12854",
+      "range": {
+        "startLine": 677,
+        "startChar": 28,
+        "endLine": 677,
+        "endChar": 60
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b19fc4e9_01733a52",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "f56819b2_70c0e0a5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19fc4e9_01733a52",
+      "range": {
+        "startLine": 760,
+        "startChar": 47,
+        "endLine": 760,
+        "endChar": 61
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69f1df51_e2a0316b",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -99,6 +189,24 @@
       "writtenOn": "2020-06-18T11:24:20Z",
       "side": 1,
       "message": "ComputeTextureBufferCopySplit should handle 3D copies correctly already so I think the loops could be inverted:\n\n splitCopies \u003d ComputeTextureBufferCopySplit;\n for (const TextureBufferCopySplit::CopyInfo\u0026 copyInfo : splitCopies) {\n   for (array layer) {\n      ...\n   }\n }\n\nThis would avoid repeated calls to ComputeTextureBufferCopySplit",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21448b76_c9588835",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Like D3D12 backend, I plan to make ComputeTextureBufferCopySplit truly support multiple 2D texture arrays in another patch. What do you think?",
+      "parentUuid": "69f1df51_e2a0316b",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "d351010a_1ed31b18",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f721687_c4ac85b8",
+      "range": {
+        "startLine": 806,
+        "startChar": 47,
+        "endLine": 806,
+        "endChar": 61
+      },
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3706f5ad_eb8a4094",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -139,6 +271,24 @@
       "writtenOn": "2020-06-18T11:24:20Z",
       "side": 1,
       "message": "ditto",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0560c1e9_3dbf1817",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Like D3D12 backend, I plan to make ComputeTextureBufferCopySplit truly support multiple 2D texture arrays in another patch. What do you think?",
+      "parentUuid": "3706f5ad_eb8a4094",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -162,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "a49a229e_89e09712",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "635dbc3e_5867bc71",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b0cdb70_65d81fb1",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 9
@@ -176,6 +344,24 @@
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3070b44e_37d8f8d8",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b0cdb70_65d81fb1",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -196,6 +382,24 @@
     },
     {
       "key": {
+        "uuid": "8ed2047d_4e92f9bd",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9297e5ab_22425ccb",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3aadf38_96399894",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 9
@@ -213,6 +417,24 @@
     },
     {
       "key": {
+        "uuid": "1a745194_ff10c25f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3aadf38_96399894",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f4b6c3_9a4ff46f",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 9
@@ -224,6 +446,24 @@
       "writtenOn": "2020-06-18T11:24:20Z",
       "side": 1,
       "message": "In which ways does it fail? Is it a crash?",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b69b76c4_90919112",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T07:04:43Z",
+      "side": 1,
+      "message": "With swiftshader only the first array layer will be copied in a t2b and b2t copy with multiple texture array layers. \n\nFor example the failures for PatchSet 4:\nhttps://ci.chromium.org/p/dawn/builders/try/linux-clang-dbg-x86/b8877196257650610544?",
+      "parentUuid": "a7f4b6c3_9a4ff46f",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
