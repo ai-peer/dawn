@@ -197,6 +197,24 @@
     },
     {
       "key": {
+        "uuid": "7dcb3f36_be68d7a8",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-19T12:34:57Z",
+      "side": 1,
+      "message": "Oh weird. I guess that\u0027s another thing that reinterpret_cast\u003c\u003e lets you get away with.\n\nHow about\n\n: mTailPtr(const_cast\u003cvoid**\u003e(\u0026foo-\u003epNext))\n\n?",
+      "parentUuid": "1b1328d7_df054e74",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
