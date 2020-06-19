@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "39800c97_cbd0beac",
+        "filename": "dawn.json",
+        "patchSetId": 34
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T11:42:16Z",
+      "side": 1,
+      "message": "The name should reflect the name in the WebGPU spec, so \"min buffer binding size\"",
+      "revId": "fb868c4ab2884ee1391b3995f21eecacb85151be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "201b13fa_f9b0c7a5",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 34
