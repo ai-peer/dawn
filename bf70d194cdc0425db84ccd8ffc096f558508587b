@@ -215,6 +215,24 @@
     },
     {
       "key": {
+        "uuid": "42fad513_5fc0dc4b",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T12:37:12Z",
+      "side": 1,
+      "message": "../../src/dawn_native/vulkan/UtilsVulkan.h:56:15: error: cannot initialize a member subobject of type \u0027VkBaseOutStructure **\u0027 with an rvalue of type \u0027void **\u0027\n            : mTailPtr(const_cast\u003cvoid**\u003e(\u0026head-\u003epNext)) {\n              ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nThat\u0027s because of tricky type system rules in C++ where A explicitly converts to B (with A and B pointer types) doesn\u0027t mean that A* converts to B*",
+      "parentUuid": "7dcb3f36_be68d7a8",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
