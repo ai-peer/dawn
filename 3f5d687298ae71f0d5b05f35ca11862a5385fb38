@@ -285,6 +285,24 @@
     },
     {
       "key": {
+        "uuid": "11c48dc2_9a76f30d",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T08:59:03Z",
+      "side": 1,
+      "message": "I just planned to refactor ComputeTextureBufferCopySplit to make it return the splitCopies we can directly iterate on a for-loop. What do you think?",
+      "parentUuid": "88269c13_615eda31",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f721687_c4ac85b8",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
