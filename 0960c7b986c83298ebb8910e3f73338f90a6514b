@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7fb3556_dbd43c1f",
+        "filename": "src/common/HashUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-19T16:34:45Z",
+      "side": 1,
+      "message": "friend stuff wasn\u0027t working if I put \"friend size_t Hash(....)\" in ityp_bitset.h and then defined it here. Got a linking error. Maybe because it\u0027s a different namespace, or idk how to do the template magic right?\n\nfriend std::hash works though. maybe something to do with partial function template specialization vs class template specialization?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 0
+      },
+      "revId": "0960c7b986c83298ebb8910e3f73338f90a6514b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
