@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ba77fc1_c62783f4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T07:44:22Z",
+      "side": 1,
+      "message": "nit: if width, height, or depth are 0, then we can set bufferSize to 0 and return {} because the copy will be empty.",
+      "revId": "e0f3c39488ced54f79d81c4b386fabf0f6a45bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
