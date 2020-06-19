@@ -249,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "1ec174a8_b0b3affd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T08:39:54Z",
+      "side": 1,
+      "message": "ComputeTextureBufferCopySplit is correct for 3D textures, but it isn\u0027t right now for 2d array textures. The \"depth\" of the parameter \"sourceSize\" of Metal function \"copyFromBuffer\" must be 1 for 2d textures:\n\nhttps://developer.apple.com/documentation/metal/mtlblitcommandencoder/1400773-copyfromtexture?language\u003dobjc\n\nIf I am passing copySize directly into ComputeTextureBufferCopySplit, then I will get the following error message from Metal Validation Layer:\nfailed assersion `(destinationOrigin.z + sourceSize.depth)(6) must be \u003c\u003d depth (1).\n\nSo the size of splitCopies should be related to copySize.depth, rather than \"at most 3 chunks\", and the depth of \"sourceSize\" must be 1 for 2D and 2D array textures.",
+      "parentUuid": "aedee65c_44466ddd",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f721687_c4ac85b8",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -518,6 +536,24 @@
       "side": 1,
       "message": "Weird, it should be doing it correctly: https://source.chromium.org/chromium/chromium/src/+/master:third_party/swiftshader/src/Vulkan/VkImage.cpp;l\u003d514;drc\u003d151d835e9f1cdd57ca46e372bf127f74316dd4c8",
       "parentUuid": "b69b76c4_90919112",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dc1d8fe_e95623ff",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-19T08:39:54Z",
+      "side": 1,
+      "message": "Now all the tests where there are copy commands with multiple texture array layers all fail with Swiftshader but passes on native Vulkan driver (Windows and Linux, with and without validation layer) so I\u0027d like to skip them first and revisit them afterwards.",
+      "parentUuid": "031b7563_df67c56c",
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
