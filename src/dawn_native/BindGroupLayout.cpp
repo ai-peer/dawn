@@ -223,7 +223,8 @@ namespace dawn_native {
 
         void HashCombineBindingInfo(size_t* hash, const BindingInfo& info) {
             HashCombine(hash, info.hasDynamicOffset, info.multisampled, info.visibility, info.type,
-                        info.textureComponentType, info.viewDimension, info.storageTextureFormat);
+                        info.textureComponentType, info.viewDimension, info.storageTextureFormat,
+                        info.minBufferBindingSize);
         }
 
         bool operator!=(const BindingInfo& a, const BindingInfo& b) {
@@ -233,7 +234,8 @@ namespace dawn_native {
                    a.type != b.type ||                                  //
                    a.textureComponentType != b.textureComponentType ||  //
                    a.viewDimension != b.viewDimension ||                //
-                   a.storageTextureFormat != b.storageTextureFormat;
+                   a.storageTextureFormat != b.storageTextureFormat ||  //
+                   a.minBufferBindingSize != b.minBufferBindingSize;
         }
 
         bool IsBufferBinding(wgpu::BindingType bindingType) {
@@ -299,6 +301,9 @@ namespace dawn_native {
             if (a.storageTextureFormat != b.storageTextureFormat) {
                 return a.storageTextureFormat < b.storageTextureFormat;
             }
+            if (a.minBufferBindingSize != b.minBufferBindingSize) {
+                return a.minBufferBindingSize < b.minBufferBindingSize;
+            }
             return false;
         }
 
@@ -336,11 +341,13 @@ namespace dawn_native {
 
         for (BindingIndex i{0}; i < mBindingCount; ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
+            mBindingInfo[i].binding = BindingNumber(binding.binding);
             mBindingInfo[i].type = binding.type;
             mBindingInfo[i].visibility = binding.visibility;
             mBindingInfo[i].textureComponentType =
                 Format::TextureComponentTypeToFormatType(binding.textureComponentType);
             mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
+            mBindingInfo[i].minBufferBindingSize = binding.minBufferBindingSize;
 
             switch (binding.type) {
                 case wgpu::BindingType::UniformBuffer:
@@ -349,6 +356,9 @@ namespace dawn_native {
                     // Buffers must be contiguously packed at the start of the binding info.
                     ASSERT(mBufferCount == i);
                     ++mBufferCount;
+                    if (binding.minBufferBindingSize == 0) {
+                        ++mUnverifiedBufferCount;
+                    }
                     break;
                 default:
                     break;
@@ -444,6 +454,10 @@ namespace dawn_native {
         return mBindingCount;
     }
 
+    BindingIndex BindGroupLayoutBase::GetBufferCount() const {
+        return mBufferCount;
+    }
+
     BindingIndex BindGroupLayoutBase::GetDynamicBufferCount() const {
         // This is a binding index because dynamic buffers are packed at the front of the binding
         // info.
@@ -458,12 +472,22 @@ namespace dawn_native {
         return mDynamicStorageBufferCount;
     }
 
+    uint32_t BindGroupLayoutBase::GetUnverifiedBufferCount() const {
+        return mUnverifiedBufferCount;
+    }
+
     size_t BindGroupLayoutBase::GetBindingDataSize() const {
         // | ------ buffer-specific ----------| ------------ object pointers -------------|
         // | --- offsets + sizes -------------| --------------- Ref<ObjectBase> ----------|
+        // Followed by:
+        // |---------buffer size array--------|
+        // |-uint64_t[mUnverifiedBufferCount]-|
         size_t objectPointerStart = static_cast<uint32_t>(mBufferCount) * sizeof(BufferBindingData);
         ASSERT(IsAligned(objectPointerStart, alignof(Ref<ObjectBase>)));
-        return objectPointerStart + static_cast<uint32_t>(mBindingCount) * sizeof(Ref<ObjectBase>);
+        size_t bufferSizeArrayStart =
+            objectPointerStart + static_cast<uint32_t>(mBindingCount) * sizeof(Ref<ObjectBase>);
+        ASSERT(IsAligned(bufferSizeArrayStart, alignof(uint64_t)));
+        return bufferSizeArrayStart + mUnverifiedBufferCount * sizeof(uint64_t);
     }
 
     BindGroupLayoutBase::BindingDataPointers BindGroupLayoutBase::ComputeBindingDataPointers(
@@ -471,11 +495,16 @@ namespace dawn_native {
         BufferBindingData* bufferData = reinterpret_cast<BufferBindingData*>(dataStart);
         auto bindings =
             reinterpret_cast<Ref<ObjectBase>*>(bufferData + static_cast<uint32_t>(mBufferCount));
+        uint64_t* unverifiedBufferSizes =
+            reinterpret_cast<uint64_t*>(bindings + static_cast<uint32_t>(mBindingCount));
 
         ASSERT(IsPtrAligned(bufferData, alignof(BufferBindingData)));
         ASSERT(IsPtrAligned(bindings, alignof(Ref<ObjectBase>)));
+        ASSERT(IsPtrAligned(unverifiedBufferSizes, alignof(uint64_t)));
 
-        return {{bufferData, mBufferCount}, {bindings, mBindingCount}};
+        return {{bufferData, mBufferCount},
+                {bindings, mBindingCount},
+                {unverifiedBufferSizes, mUnverifiedBufferCount}};
     }
 
 }  // namespace dawn_native
