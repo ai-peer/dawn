@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4fa9845_42efa866",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T07:42:28Z",
+      "side": 1,
+      "message": "nit: sort alphabetically",
+      "revId": "22a8ca1d2b7767978e82d861aaaf7bbe53fc0ad4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
