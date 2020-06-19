@@ -303,6 +303,24 @@
     },
     {
       "key": {
+        "uuid": "8be65c87_6b654bf9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T11:03:19Z",
+      "side": 1,
+      "message": "IDK, it feels like it\u0027s just moving a for loop from one place to the other, and adds a dynamic allocation of a bigger vector.\n\nMaybe it doesn\u0027t matter, we can do whichever you think is best.",
+      "parentUuid": "11c48dc2_9a76f30d",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f721687_c4ac85b8",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
