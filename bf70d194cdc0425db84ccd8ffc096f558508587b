@@ -233,6 +233,24 @@
     },
     {
       "key": {
+        "uuid": "45506edd_31be9b31",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-19T13:38:19Z",
+      "side": 1,
+      "message": "I admit defeat. Seems like a reinterpret_cast\u003c\u003e is unavoidable.\n\nHowever, why traverse through double pointers at all? Why not traverse through the current VkBaseOutStructure instead? e.g.,\n\nVkBaseOutStructure* mCurrent;\n\n...\n\n        template \u003ctypename VK_STRUCT_TYPE\u003e\n        explicit PNextChainBuilder(VK_STRUCT_TYPE* head)\n            : mCurrent(reinterpret_cast\u003cVkBaseOutStructure*\u003e(head)) {\n            // Find the end of the current chain.\n            while (mCurrent-\u003epNext) {\n                mCurrent \u003d mCurrent-\u003epNext;\n            }\n        }\n\nAt least it gets rid of the \u0026 in the initializer, and pointer indirection in the traversal. Am I being stupid in a brand new way here? :)",
+      "parentUuid": "42fad513_5fc0dc4b",
+      "revId": "bf70d194cdc0425db84ccd8ffc096f558508587b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eea3984_19821eb7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
