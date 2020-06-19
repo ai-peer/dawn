@@ -267,6 +267,24 @@
     },
     {
       "key": {
+        "uuid": "88269c13_615eda31",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T08:49:21Z",
+      "side": 1,
+      "message": "The pseudo-code above compute the copies, then iterates over the array layers in each of the split, so that should be ok no?\n\nAnyways, if that still doesn\u0027t work feel free to skip this comment and we\u0027ll revisit later.",
+      "parentUuid": "1ec174a8_b0b3affd",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f721687_c4ac85b8",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -557,6 +575,24 @@
       "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28e40d22_49a44263",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-19T08:49:21Z",
+      "side": 1,
+      "message": "Oh yeah this didn\u0027t mean we should lift the suppression. I was just surprised.\n\nAnyways, I diagnosed the T2T bug that swiftshader has: https://bugs.chromium.org/p/swiftshader/issues/detail?id\u003d152 but couldn\u0027t figure out the one for B2T yet.",
+      "parentUuid": "6dc1d8fe_e95623ff",
+      "revId": "3f5d687298ae71f0d5b05f35ca11862a5385fb38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
