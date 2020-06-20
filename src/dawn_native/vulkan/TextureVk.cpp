@@ -739,7 +739,6 @@ namespace dawn_native { namespace vulkan {
         wgpu::TextureUsage allLastUsages = wgpu::TextureUsage::None;
 
         uint32_t subresourceCount = GetSubresourceCount();
-        ASSERT(textureUsages.subresourceUsages.size() == subresourceCount);
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
@@ -756,34 +755,52 @@ namespace dawn_native { namespace vulkan {
                                                         textureUsages.usage, GetAllSubresources()));
             allLastUsages = mSubresourceLastUsages[0];
             allUsages = textureUsages.usage;
-            for (uint32_t i = 0; i < subresourceCount; ++i) {
-                mSubresourceLastUsages[i] = textureUsages.usage;
-            }
+
+            // Compress subresources' usages to mSubresourceLastUsages[0] if all subresources'
+            // usages are the same
+            mSubresourceLastUsages[0] = textureUsages.usage;
         } else {
+            // Decompress and spread subresources' usages from mSubresourceLastUsages[0] if the
+            // upcoming subresources' usages are not the same. But we don't need to duplicate the
+            // usages if they are just initialization info.
+            if (mSameLastUsagesAcrossSubresources &&
+                mSubresourceLastUsages[0] != wgpu::TextureUsage::None) {
+                for (uint32_t i = 1; i < subresourceCount; ++i) {
+                    mSubresourceLastUsages[i] = mSubresourceLastUsages[0];
+                }
+            }
+
+            if (!textureUsages.sameUsagesAcrossSubresources) {
+                ASSERT(textureUsages.subresourceUsages.size() == subresourceCount);
+            }
+
+            wgpu::TextureUsage newUsage = textureUsages.usage;
+
             for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
                 for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
                     uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer);
 
-                    // Avoid encoding barriers when it isn't needed.
-                    if (textureUsages.subresourceUsages[index] == wgpu::TextureUsage::None) {
-                        continue;
+                    wgpu::TextureUsage oldUsage = mSubresourceLastUsages[index];
+                    if (!textureUsages.sameUsagesAcrossSubresources) {
+                        newUsage = textureUsages.subresourceUsages[index];
                     }
 
-                    if (CanReuseWithoutBarrier(mSubresourceLastUsages[index],
-                                               textureUsages.subresourceUsages[index])) {
+                    // Avoid encoding barriers when it isn't needed.
+                    if (newUsage == wgpu::TextureUsage::None) {
+                        continue;
+                    }
+                    if (CanReuseWithoutBarrier(oldUsage, newUsage)) {
                         continue;
                     }
                     imageBarriers->push_back(BuildMemoryBarrier(
-                        format, mHandle, mSubresourceLastUsages[index],
-                        textureUsages.subresourceUsages[index],
+                        format, mHandle, oldUsage, newUsage,
                         SubresourceRange::SingleSubresource(mipLevel, arrayLayer)));
-                    allLastUsages |= mSubresourceLastUsages[index];
-                    allUsages |= textureUsages.subresourceUsages[index];
-                    mSubresourceLastUsages[index] = textureUsages.subresourceUsages[index];
+                    allLastUsages |= oldUsage;
+                    allUsages |= newUsage;
+                    mSubresourceLastUsages[index] = newUsage;
                 }
             }
         }
-
         if (mExternalState != ExternalState::InternalOnly) {
             TweakTransitionForExternalUsage(recordingContext, imageBarriers,
                                             transitionBarrierStart);
@@ -819,24 +836,36 @@ namespace dawn_native { namespace vulkan {
             barriers.push_back(
                 BuildMemoryBarrier(format, mHandle, mSubresourceLastUsages[0], usage, range));
             allLastUsages = mSubresourceLastUsages[0];
-            for (uint32_t i = 0; i < subresourceCount; ++i) {
-                mSubresourceLastUsages[i] = usage;
-            }
+
+            // Compress subresources' usages to mSubresourceLastUsages[0] if all subresources'
+            // usages are the same
+            mSubresourceLastUsages[0] = usage;
         } else {
+            // Decompress and spread subresources' usages from mSubresourceLastUsages[0] if the
+            // upcoming subresources' usages are not the same. But we don't need to duplicate the
+            // usages if they are just initialization info.
+            if (mSameLastUsagesAcrossSubresources &&
+                mSubresourceLastUsages[0] != wgpu::TextureUsage::None) {
+                for (uint32_t i = 1; i < subresourceCount; ++i) {
+                    mSubresourceLastUsages[i] = mSubresourceLastUsages[0];
+                }
+            }
+
             for (uint32_t layer = range.baseArrayLayer;
                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     uint32_t index = GetSubresourceIndex(level, layer);
+                    wgpu::TextureUsage oldUsage = mSubresourceLastUsages[index];
 
-                    if (CanReuseWithoutBarrier(mSubresourceLastUsages[index], usage)) {
+                    if (CanReuseWithoutBarrier(oldUsage, usage)) {
                         continue;
                     }
 
                     barriers.push_back(
-                        BuildMemoryBarrier(format, mHandle, mSubresourceLastUsages[index], usage,
+                        BuildMemoryBarrier(format, mHandle, oldUsage, usage,
                                            SubresourceRange::SingleSubresource(level, layer)));
-                    allLastUsages |= mSubresourceLastUsages[index];
+                    allLastUsages |= oldUsage;
                     mSubresourceLastUsages[index] = usage;
                 }
             }
