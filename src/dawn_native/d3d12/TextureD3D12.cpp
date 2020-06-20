@@ -699,14 +699,20 @@ namespace dawn_native { namespace d3d12 {
         if (mSameLastUsagesAcrossSubresources && areAllSubresourcesCovered) {
             TransitionSingleOrAllSubresources(barriers, 0, newState, pendingCommandSerial, true);
 
-            // TODO(yunchao.he@intel.com): compress and decompress if all subresources have the
-            // same states. We may need to retain mSubresourceStateAndDecay[0] only.
-            for (uint32_t i = 1; i < subresourceCount; ++i) {
-                mSubresourceStateAndDecay[i] = mSubresourceStateAndDecay[0];
-            }
+            // Compress subresources' state and decay information to mSubresourceStateAndDecay[0]
+            // because all subresources' usages are the same
 
             return;
         }
+
+        // Decompress and spread subresources' state and decay information from
+        // mSubresourceStateAndDecay[0] if the upcoming subresources' usages are not the same
+        if (mSameLastUsagesAcrossSubresources) {
+            for (uint32_t i = 1; i < subresourceCount; ++i) {
+                mSubresourceStateAndDecay[i] = mSubresourceStateAndDecay[0];
+            }
+        }
+
         for (uint32_t arrayLayer = 0; arrayLayer < range.layerCount; ++arrayLayer) {
             for (uint32_t mipLevel = 0; mipLevel < range.levelCount; ++mipLevel) {
                 uint32_t index = GetSubresourceIndex(range.baseMipLevel + mipLevel,
@@ -727,7 +733,6 @@ namespace dawn_native { namespace d3d12 {
 
         const Serial pendingCommandSerial = ToBackend(GetDevice())->GetPendingCommandSerial();
         uint32_t subresourceCount = GetSubresourceCount();
-        ASSERT(textureUsages.subresourceUsages.size() == subresourceCount);
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
@@ -739,14 +744,25 @@ namespace dawn_native { namespace d3d12 {
             D3D12_RESOURCE_STATES newState = D3D12TextureUsage(textureUsages.usage, GetFormat());
             TransitionSingleOrAllSubresources(barriers, 0, newState, pendingCommandSerial, true);
 
-            // TODO(yunchao.he@intel.com): compress and decompress if all subresources have the
-            // same states. We may need to retain mSubresourceStateAndDecay[0] only.
-            for (uint32_t i = 1; i < subresourceCount; ++i) {
-                mSubresourceStateAndDecay[i] = mSubresourceStateAndDecay[0];
-            }
+            // Compress subresources' state and decay information to mSubresourceStateAndDecay[0]
+            // because all subresources' usages are the same
 
             return;
         }
+
+        // Decompress and spread subresources' state and decay information from
+        // mSubresourceStateAndDecay[0] if the upcoming subresources' usages are not the same
+        if (mSameLastUsagesAcrossSubresources) {
+            for (uint32_t i = 1; i < subresourceCount; ++i) {
+                mSubresourceStateAndDecay[i] = mSubresourceStateAndDecay[0];
+            }
+        }
+
+        if (!textureUsages.sameUsagesAcrossSubresources) {
+            ASSERT(textureUsages.subresourceUsages.size() == subresourceCount);
+        }
+
+        D3D12_RESOURCE_STATES newState = D3D12TextureUsage(textureUsages.usage, GetFormat());
 
         for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
             for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
@@ -757,8 +773,10 @@ namespace dawn_native { namespace d3d12 {
                     continue;
                 }
 
-                D3D12_RESOURCE_STATES newState =
-                    D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
+                if (!textureUsages.sameUsagesAcrossSubresources) {
+                    newState =
+                        D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
+                }
 
                 TransitionSingleOrAllSubresources(barriers, index, newState, pendingCommandSerial,
                                                   false);

@@ -41,21 +41,26 @@ namespace dawn_native {
         PassTextureUsage& textureUsage = mTextureUsages[texture];
 
         // Set parameters for the whole texture
+        wgpu::TextureUsage lastUsage = textureUsage.usage;
         textureUsage.usage |= usage;
-        uint32_t subresourceCount = texture->GetSubresourceCount();
-        textureUsage.sameUsagesAcrossSubresources = levelCount * layerCount == subresourceCount;
 
-        // Set usages for subresources
-        if (!textureUsage.subresourceUsages.size()) {
-            textureUsage.subresourceUsages =
-                std::vector<wgpu::TextureUsage>(subresourceCount, wgpu::TextureUsage::None);
-        }
-        for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
-             ++arrayLayer) {
-            for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
-                 ++mipLevel) {
-                uint32_t subresourceIndex = texture->GetSubresourceIndex(mipLevel, arrayLayer);
-                textureUsage.subresourceUsages[subresourceIndex] |= usage;
+        uint32_t subresourceCount = texture->GetSubresourceCount();
+        textureUsage.sameUsagesAcrossSubresources &= levelCount * layerCount == subresourceCount;
+
+        // Set usages for subresources. If every texture view till now contains all subresources
+        // of its corresponding texture, we don't need to store the usages into each subresource.
+        if (!textureUsage.sameUsagesAcrossSubresources) {
+            if (!textureUsage.subresourceUsages.size()) {
+                textureUsage.subresourceUsages =
+                    std::vector<wgpu::TextureUsage>(subresourceCount, lastUsage);
+            }
+            for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                 ++arrayLayer) {
+                for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
+                     ++mipLevel) {
+                    uint32_t subresourceIndex = texture->GetSubresourceIndex(mipLevel, arrayLayer);
+                    textureUsage.subresourceUsages[subresourceIndex] |= usage;
+                }
             }
         }
     }
@@ -68,12 +73,17 @@ namespace dawn_native {
 
         uint32_t subresourceCount = texture->GetSubresourceCount();
         ASSERT(textureUsage.subresourceUsages.size() == subresourceCount);
-        if (!passTextureUsage.subresourceUsages.size()) {
-            passTextureUsage.subresourceUsages = textureUsage.subresourceUsages;
-            return;
-        }
-        for (uint32_t i = 0; i < subresourceCount; ++i) {
-            passTextureUsage.subresourceUsages[i] |= textureUsage.subresourceUsages[i];
+
+        // If every texture view in the pass and in the bundle till now contains all subresources
+        // of its corresponding texture, we don't need to store the usages into each subresource.
+        if (!passTextureUsage.sameUsagesAcrossSubresources) {
+            if (!passTextureUsage.subresourceUsages.size()) {
+                passTextureUsage.subresourceUsages = textureUsage.subresourceUsages;
+                return;
+            }
+            for (uint32_t i = 0; i < subresourceCount; ++i) {
+                passTextureUsage.subresourceUsages[i] |= textureUsage.subresourceUsages[i];
+            }
         }
     }
 
