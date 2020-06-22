@@ -35,26 +35,29 @@ namespace dawn_native {
                                                       const char* disallowedMessage) {
             switch (type) {
                 case Command::Draw: {
-                    commands->NextCommand<DrawCmd>();
-                    DAWN_TRY(commandBufferState->ValidateCanDraw());
+                    DrawCmd* cmd = commands->NextCommand<DrawCmd>();
+                    DAWN_TRY(
+                        commandBufferState->ValidateCanDraw(cmd->vertexCount, cmd->instanceCount,
+                                                            cmd->firstVertex, cmd->firstInstance));
                     break;
                 }
 
                 case Command::DrawIndexed: {
-                    commands->NextCommand<DrawIndexedCmd>();
-                    DAWN_TRY(commandBufferState->ValidateCanDrawIndexed());
+                    DrawIndexedCmd* cmd = commands->NextCommand<DrawIndexedCmd>();
+                    DAWN_TRY(commandBufferState->ValidateCanDrawIndexed(
+                        cmd->indexCount, cmd->instanceCount, cmd->firstIndex, cmd->firstInstance));
                     break;
                 }
 
                 case Command::DrawIndirect: {
                     commands->NextCommand<DrawIndirectCmd>();
-                    DAWN_TRY(commandBufferState->ValidateCanDraw());
+                    DAWN_TRY(commandBufferState->ValidateCanDrawIndirect());
                     break;
                 }
 
                 case Command::DrawIndexedIndirect: {
                     commands->NextCommand<DrawIndexedIndirectCmd>();
-                    DAWN_TRY(commandBufferState->ValidateCanDrawIndexed());
+                    DAWN_TRY(commandBufferState->ValidateCanDrawIndexedIndirect());
                     break;
                 }
 
@@ -100,14 +103,14 @@ namespace dawn_native {
                 }
 
                 case Command::SetIndexBuffer: {
-                    commands->NextCommand<SetIndexBufferCmd>();
-                    commandBufferState->SetIndexBuffer();
+                    SetIndexBufferCmd* cmd = commands->NextCommand<SetIndexBufferCmd>();
+                    commandBufferState->SetIndexBuffer(cmd->size);
                     break;
                 }
 
                 case Command::SetVertexBuffer: {
                     SetVertexBufferCmd* cmd = commands->NextCommand<SetVertexBufferCmd>();
-                    commandBufferState->SetVertexBuffer(cmd->slot);
+                    commandBufferState->SetVertexBuffer(cmd->slot, cmd->size);
                     break;
                 }
 
