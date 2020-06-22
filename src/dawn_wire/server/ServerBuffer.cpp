@@ -123,8 +123,12 @@ namespace dawn_wire { namespace server {
         resultData->generation = bufferResult.generation;
 
         WGPUCreateBufferMappedResult result = mProcs.deviceCreateBufferMapped(device, descriptor);
-        ASSERT(result.buffer != nullptr);
-        if (result.data == nullptr && result.dataLength != 0) {
+        if (result.buffer == nullptr) {
+            // The returned buffer is nullptr when buffer creation failed.
+            ASSERT(result.data == nullptr);
+            ASSERT(result.dataLength == 0);
+            return false;
+        } else if (result.data == nullptr && result.dataLength != 0) {
             // Non-zero dataLength but null data is used to indicate an allocation error.
             // Don't return false because this is not fatal. result.buffer is an ErrorBuffer
             // and subsequent operations will be errors.
