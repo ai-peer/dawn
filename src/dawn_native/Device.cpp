@@ -601,8 +601,12 @@ namespace dawn_native {
         uint64_t size = descriptor->size;
         if (ConsumedError(CreateBufferInternal(descriptor), &buffer) ||
             ConsumedError(buffer->MapAtCreation(&data))) {
-            // Map failed. Replace the buffer with an error buffer.
-            if (buffer != nullptr) {
+            if (buffer == nullptr && size > 0) {
+                // Buffer creation failed. Return a nullptr buffer when this occurs.
+                WGPUCreateBufferMappedResult result = {nullptr, 0, nullptr};
+                return result;
+            } else if (buffer != nullptr) {
+                // Map failed. Replace the buffer with an error buffer.
                 buffer->Release();
             }
             buffer = BufferBase::MakeErrorMapped(this, size, &data);
