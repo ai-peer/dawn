@@ -31,15 +31,23 @@ namespace dawn_native {
       public:
         // Non-state-modifying validation functions
         MaybeError ValidateCanDispatch();
-        MaybeError ValidateCanDraw();
-        MaybeError ValidateCanDrawIndexed();
+        MaybeError ValidateCanDraw(uint32_t vertexCount,
+                                   uint32_t instanceCount,
+                                   uint32_t firstVertex,
+                                   uint32_t firstInstance);
+        MaybeError ValidateCanDrawIndexed(uint32_t indexCount,
+                                          uint32_t instanceCount,
+                                          uint32_t firstIndex,
+                                          uint32_t firstInstance);
+        MaybeError ValidateCanDrawIndirect();
+        MaybeError ValidateCanDrawIndexedIndirect();
 
         // State-modifying methods
         void SetComputePipeline(ComputePipelineBase* pipeline);
         void SetRenderPipeline(RenderPipelineBase* pipeline);
         void SetBindGroup(BindGroupIndex index, BindGroupBase* bindgroup);
-        void SetIndexBuffer();
-        void SetVertexBuffer(uint32_t slot);
+        void SetIndexBuffer(uint64_t size);
+        void SetVertexBuffer(uint32_t slot, uint64_t size);
 
         static constexpr size_t kNumAspects = 4;
         using ValidationAspects = std::bitset<kNumAspects>;
@@ -51,10 +59,16 @@ namespace dawn_native {
 
         void SetPipelineCommon(PipelineBase* pipeline);
 
+        MaybeError ValidateVertexBufferSizes(uint64_t minElementsVertex,
+                                             uint64_t minElementsInstance);
+
         ValidationAspects mAspects;
 
         ityp::array<BindGroupIndex, BindGroupBase*, kMaxBindGroups> mBindgroups = {};
         std::bitset<kMaxVertexBuffers> mVertexBufferSlotsUsed;
+
+        std::array<uint64_t, kMaxVertexBuffers> mVertexBufferSizes;
+        uint64_t mIndexBufferSize;
 
         PipelineLayoutBase* mLastPipelineLayout = nullptr;
         RenderPipelineBase* mLastRenderPipeline = nullptr;

@@ -37,6 +37,11 @@ namespace dawn_native {
 
             return true;
         }
+
+        std::string BufferSizeErrorString(uint64_t givenSize, uint64_t requiredSize) {
+            return "(given " + std::to_string(givenSize) + " bytes, required " +
+                   std::to_string(requiredSize) + " bytes)";
+        }
     }  // namespace
 
     enum ValidationAspect {
@@ -67,11 +72,47 @@ namespace dawn_native {
         return ValidateOperation(kDispatchAspects);
     }
 
-    MaybeError CommandBufferStateTracker::ValidateCanDraw() {
+    MaybeError CommandBufferStateTracker::ValidateCanDraw(uint32_t vertexCount,
+                                                          uint32_t instanceCount,
+                                                          uint32_t firstVertex,
+                                                          uint32_t firstInstance) {
+        DAWN_TRY(ValidateOperation(kDrawAspects));
+
+        uint64_t minElementsVertex = firstVertex + vertexCount;
+        uint64_t minElementsInstance = firstInstance + instanceCount;
+
+        return ValidateVertexBufferSizes(minElementsVertex, minElementsInstance);
+    }
+
+    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexed(uint32_t indexCount,
+                                                                 uint32_t instanceCount,
+                                                                 uint32_t firstIndex,
+                                                                 uint32_t firstInstance) {
+        DAWN_TRY(ValidateOperation(kDrawIndexedAspects));
+
+        wgpu::IndexFormat indexFormat =
+            mLastRenderPipeline->GetVertexStateDescriptor()->indexFormat;
+        size_t formatSize = IndexFormatSize(indexFormat);
+
+        uint64_t minIndexBufferSize = (firstIndex + indexCount) * formatSize;
+        uint64_t minElementsInstance = firstInstance + instanceCount;
+
+        if (mIndexBufferSize < minIndexBufferSize) {
+            return DAWN_VALIDATION_ERROR(
+                "Bound index buffer too small " +
+                BufferSizeErrorString(mIndexBufferSize, minIndexBufferSize));
+        }
+
+        // 0 vertex elements to only check instance buffers (until we add further validation for
+        // indexes)
+        return ValidateVertexBufferSizes(0, minElementsInstance);
+    }
+
+    MaybeError CommandBufferStateTracker::ValidateCanDrawIndirect() {
         return ValidateOperation(kDrawAspects);
     }
 
-    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexed() {
+    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexedIndirect() {
         return ValidateOperation(kDrawIndexedAspects);
     }
 
@@ -185,12 +226,14 @@ namespace dawn_native {
         mAspects.reset(VALIDATION_ASPECT_BIND_GROUPS);
     }
 
-    void CommandBufferStateTracker::SetIndexBuffer() {
+    void CommandBufferStateTracker::SetIndexBuffer(uint64_t size) {
         mAspects.set(VALIDATION_ASPECT_INDEX_BUFFER);
+        mIndexBufferSize = size;
     }
 
-    void CommandBufferStateTracker::SetVertexBuffer(uint32_t slot) {
+    void CommandBufferStateTracker::SetVertexBuffer(uint32_t slot, uint64_t size) {
         mVertexBufferSlotsUsed.set(slot);
+        mVertexBufferSizes[slot] = size;
     }
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
@@ -201,6 +244,33 @@ namespace dawn_native {
 
         // Reset lazy aspects so they get recomputed on the next operation.
         mAspects &= ~kLazyAspects;
+    }
+
+    MaybeError CommandBufferStateTracker::ValidateVertexBufferSizes(uint64_t minElementsVertex,
+                                                                    uint64_t minElementsInstance) {
+        for (uint32_t i : IterateBitSet(mLastRenderPipeline->GetVertexBufferSlotsUsed())) {
+            const VertexBufferInfo& bufferInfo = mLastRenderPipeline->GetVertexBuffer(i);
+            uint64_t minSize;
+
+            switch (bufferInfo.stepMode) {
+                case wgpu::InputStepMode::Vertex:
+                    minSize = minElementsVertex * bufferInfo.arrayStride;
+                    break;
+                case wgpu::InputStepMode::Instance:
+                    minSize = minElementsInstance * bufferInfo.arrayStride;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            if (mVertexBufferSizes[i] < minSize) {
+                return DAWN_VALIDATION_ERROR("Bound vertex buffer at slot " + std::to_string(i) +
+                                             " too small " +
+                                             BufferSizeErrorString(mVertexBufferSizes[i], minSize));
+            }
+        }
+
+        return {};
     }
 
 }  // namespace dawn_native
