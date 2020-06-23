@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8792d84_4de7de23",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-23T13:23:22Z",
+      "side": 1,
+      "message": "Maybe this for loop, and the one at [1] could be moved the caller of ComputeTextureBufferCopySplit, so that ComputeTextureBufferCopySplit always returns a vector of at most three elements. In the future we could imagine using a StackVector or SmallVector\u003c3\u003e.\n\ncopySlice would disappear and be passed through the origin.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 17
+      },
+      "revId": "a0605d848647212120db29203ece705c024a465b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e2a166c_d3be9b7c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-23T13:23:22Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a0605d848647212120db29203ece705c024a465b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
