@@ -16,6 +16,24 @@
       "revId": "038fa949824a94895fbfcaef9c210ce4322fda6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "065a8ebc_e6b03139",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-06-24T17:39:16Z",
+      "side": 1,
+      "message": "Probably should have asked some questions before trying to fix this...\n\n(Note the OOM error below is due to the fuzzer\u0027s low artificial limit, like 2048B or so - not an actual OOM error).\n\nI\u0027m seeing a fuzzer test failure due to OOM upon CreateBufferMapped. The fuzzer injects an error such that CreateBufferInternal fails. After CreateBufferInternal fails - Dawn will attempt to allocate an ErrorBuffer to return that is the same size as the MappedBuffer. Because the fuzzer feeds garbage data, this size could be very large - which caused the fuzzer to throw the OOM error.\n\nWhat should Dawn do when this happens? If Dawn error\u0027d on CreateBufferInternal it seems reasonable to return nullptr (which denotes no buffer was created). Or the solution may be to limit the size of the ErrorBuffer.",
+      "parentUuid": "7c0aaa7b_5bcd691a",
+      "revId": "038fa949824a94895fbfcaef9c210ce4322fda6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
