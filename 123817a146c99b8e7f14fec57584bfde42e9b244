@@ -45,6 +45,29 @@
       "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea5baddd_ea128ca6",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-24T05:19:02Z",
+      "side": 1,
+      "message": "Looks like without Toggle::UseSM62 we actually cannot use this extension on D3D12 backend because we need DXC to compile HLSL Shader Model 6.2 shaders?",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 75
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
