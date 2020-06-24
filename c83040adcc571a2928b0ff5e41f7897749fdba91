@@ -2,6 +2,97 @@
   "comments": [
     {
       "key": {
+        "uuid": "dfc33200_87e559bf",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "modified",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 18
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d68b177_45cfa977",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "u-nit: cstddef",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "825e44eb_0da19327",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "Please use the Platform.h defines here.",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a34b81ec_9267697d",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "Do we expect move contructor / assignment to work? I think they should be explictly deleted too.",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d22e42a0_90e8562a",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "ditto move / copy constructor and assignment operators should be deleted.",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3c09eb2_44e3c393",
         "filename": "src/common/ityp_stack_vec.h",
         "patchSetId": 1
@@ -36,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "2e46c59f_0fc39e73",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "I think that\u0027s supposed to be conveyed in ityp::",
+      "parentUuid": "6db2ee94_5482a803",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7c6d261_9e093934",
         "filename": "src/common/ityp_stack_vec.h",
         "patchSetId": 1
@@ -47,6 +156,98 @@
       "writtenOn": "2020-06-24T03:25:25Z",
       "side": 1,
       "message": "nit: expected `size_t` (or size_type) to match the type of StaticCapacity (not Index).",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e69f40e0_bca3f908",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "modified",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 19
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "040cfda0_9d2d094e",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "what?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d070c7_2d7eed15",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "nit: mAlive",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "523e07fc_1a79df89",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T17:17:14Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 130,
+        "startChar": 34,
+        "endLine": 130,
+        "endChar": 53
+      },
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
