@@ -131,6 +131,9 @@ namespace dawn_native {
             {Toggle::UseDXC,
              {"use_dxc", "Use DXC instead of FXC for compiling HLSL",
               "https://crbug.com/dawn/402"}},
+            {Toggle::UseSM62,
+             {"use_16_bit_float_operation", "Use true 16-bit float on shader model 6.2 or newer.",
+              "https://crbug.com/dawn/426"}},
         }};
 
     }  // anonymous namespace
