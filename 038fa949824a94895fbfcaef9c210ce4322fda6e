@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c0aaa7b_5bcd691a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:24:07Z",
+      "side": 1,
+      "message": "Why is this needed? In general Dawn should never ever return nullptr objects (it breaks assumptions in the wire server).",
+      "revId": "038fa949824a94895fbfcaef9c210ce4322fda6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
