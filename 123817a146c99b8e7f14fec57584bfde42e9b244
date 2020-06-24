@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a87a4ef3_37681d00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-24T09:18:18Z",
+      "side": 1,
+      "message": "This case could pass on my local machine. It would not run on bot, so I remove it.",
+      "parentUuid": "bf5c78d7_42d05dfe",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc083dfe_486c82e1",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9853cf88_ceb63093",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-24T09:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc083dfe_486c82e1",
+      "range": {
+        "startLine": 135,
+        "startChar": 15,
+        "endLine": 135,
+        "endChar": 35
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea5baddd_ea128ca6",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-24T05:19:02Z",
       "side": 1,
       "message": "Looks like without Toggle::UseSM62 we actually cannot use this extension on D3D12 backend because we need DXC to compile HLSL Shader Model 6.2 shaders?",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 75
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ece5bb5_639a04e2",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-24T09:18:18Z",
+      "side": 1,
+      "message": "Yes. It is good if we could get DXC toggle and SM62 toggle here.",
+      "parentUuid": "ea5baddd_ea128ca6",
       "range": {
         "startLine": 106,
         "startChar": 12,
