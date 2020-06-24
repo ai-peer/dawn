@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d55e2b94_a7b62fe3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be a toggle, and instead the DXC shader model to use could be computed from the list of enabled extensions on device creation.",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d186cb80_2da64729",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "Can this argument be \"enable16BitTypes\" instead? Also why does it disable FXC compatibility?",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2789ed64_2cb2825f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "Can you add the same code changes for the SPVC path? The direct to SPIR-V cross path will disappear eventually.",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee254fff_bfff3540",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "ditto, this should be computed once on device creation on the device and then subsequently queried.",
+      "range": {
+        "startLine": 147,
+        "startChar": 44,
+        "endLine": 147,
+        "endChar": 46
+      },
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34929417_a90a6894",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "This could be gated on IsExtensionEnabled.",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6f7edd9_9427a507",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-24T13:21:29Z",
+      "side": 1,
+      "message": "These strings could be computed on device creation.",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
