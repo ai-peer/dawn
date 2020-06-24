@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf5c78d7_42d05dfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-24T04:28:04Z",
+      "side": 1,
+      "message": "Will ShaderFloat16Tests pass on D3D12 backends with this CL?",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc083dfe_486c82e1",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-24T04:28:04Z",
+      "side": 1,
+      "message": "Maybe we should call it \"use_16_bit_float_operation\" instead of the whole SM6.2.",
+      "range": {
+        "startLine": 135,
+        "startChar": 15,
+        "endLine": 135,
+        "endChar": 35
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
