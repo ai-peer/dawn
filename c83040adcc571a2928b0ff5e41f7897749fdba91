@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3c09eb2_44e3c393",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-24T03:25:25Z",
+      "side": 1,
+      "message": "nit: leftover?",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6db2ee94_5482a803",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-24T03:25:25Z",
+      "side": 1,
+      "message": "uuuuunit: consider something like `StackVectorUnderlyingType` to convey this also adds type checking.",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c6d261_9e093934",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-06-24T03:25:25Z",
+      "side": 1,
+      "message": "nit: expected `size_t` (or size_type) to match the type of StaticCapacity (not Index).",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
