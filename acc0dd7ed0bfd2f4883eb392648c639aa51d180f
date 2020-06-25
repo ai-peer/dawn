@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3db9e858_9f57757e",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-25T21:45:47Z",
+      "side": 1,
+      "message": "For the per-array-layer compression/decompression, I think if we need to decompress, then we need to decompress the entire subresource (all array layer), not only decompress a single array layer. It is possible to compress/decompress a mip chain of a single array layer, but that will require a \"Compression enum\" on every array layer, not upon the entire resource (But that will make the design even more complicated). If we only has one single enum upon the entire resource like the current design, then every time we need to decompress, then we need to decompress all subresources (all layers), not a single array layer. So I pointed out that it might not be useful to do per-array-layer compression like this because it is really fragile (it might be decompressed for all subresources quite often).",
+      "parentUuid": "d087244c_21a22731",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "476e0d9d_a3bc0152",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
