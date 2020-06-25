@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a4d1588_789f8e81",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-25T16:36:08Z",
+      "side": 1,
+      "message": "nit: Would prefer a free function. Everything in this file is a dumb struct",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 81
+      },
+      "revId": "381f91408ecca34172f2bbefe857563795a03b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
