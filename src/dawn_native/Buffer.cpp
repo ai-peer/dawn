@@ -306,6 +306,20 @@ namespace dawn_native {
         tracker->Track(this, mMapSerial, true);
     }
 
+    void* BufferBase::GetMappedRange() {
+        if (GetDevice()->ConsumedError(ValidateGetMappedRange(true))) {
+            return nullptr;
+        }
+        return GetMappedPointerImpl();
+    }
+
+    const void* BufferBase::GetConstMappedRange() {
+        if (GetDevice()->ConsumedError(ValidateGetMappedRange(false))) {
+            return nullptr;
+        }
+        return GetMappedPointerImpl();
+    }
+
     void BufferBase::Destroy() {
         if (IsError()) {
             // It is an error to call Destroy() on an ErrorBuffer, but we still need to reclaim the
@@ -403,6 +417,29 @@ namespace dawn_native {
 
         *status = WGPUBufferMapAsyncStatus_Success;
         return {};
+    }
+
+    MaybeError BufferBase::ValidateGetMappedRange(bool writable) const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+
+        switch (mState) {
+            // Writeable is GetMappedRange is always allowed for mapping at creation.
+            case BufferState::MappedAtCreation:
+                return {};
+
+            case BufferState::Mapped:
+                if (writable && !(mUsage & wgpu::BufferUsage::MapWrite)) {
+                    return DAWN_VALIDATION_ERROR("GetMappedRange requires the MapWrite usage");
+                }
+                return {};
+
+            case BufferState::Unmapped:
+            case BufferState::Destroyed:
+                return DAWN_VALIDATION_ERROR("Buffer is not mapped");
+            default:
+                UNREACHABLE();
+        }
     }
 
     MaybeError BufferBase::ValidateUnmap() const {
