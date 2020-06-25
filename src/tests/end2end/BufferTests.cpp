@@ -119,6 +119,22 @@ TEST_P(BufferMapReadTests, ZeroSized) {
     UnmapBuffer(buffer);
 }
 
+// Test the result of GetMappedRange when mapped for reading.
+TEST_P(BufferMapReadTests, GetMappedRange) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetMappedRange()));
+    ASSERT_EQ(mappedData, buffer.GetConstMappedRange());
+
+    UnmapBuffer(buffer);
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetMappedRange()));
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetConstMappedRange()));
+}
+
 DAWN_INSTANTIATE_TEST(BufferMapReadTests, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
 
 class BufferMapWriteTests : public DawnTest {
@@ -251,6 +267,22 @@ TEST_P(BufferMapWriteTests, ManyWrites) {
     for (uint32_t i = 0; i < kBuffers; ++i) {
         EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), buffers[i], 0, kDataSize);
     }
+}
+
+// Test the result of GetMappedRange when mapped for writing.
+TEST_P(BufferMapWriteTests, GetMappedRange) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_EQ(mappedData, buffer.GetMappedRange());
+    ASSERT_EQ(mappedData, buffer.GetConstMappedRange());
+
+    UnmapBuffer(buffer);
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetMappedRange()));
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetConstMappedRange()));
 }
 
 DAWN_INSTANTIATE_TEST(BufferMapWriteTests, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
@@ -505,6 +537,22 @@ TEST_P(CreateBufferMappedTests, ZeroSizedErrorBuffer) {
     ASSERT_NE(nullptr, result.data);
 }
 
+// Test the result of GetMappedRange when mapped at creation.
+TEST_P(CreateBufferMappedTests, GetMappedRange) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::CopyDst;
+    wgpu::CreateBufferMappedResult result;
+    result = device.CreateBufferMapped(&descriptor);
+
+    ASSERT_EQ(result.data, result.buffer.GetMappedRange());
+    ASSERT_EQ(result.data, result.buffer.GetConstMappedRange());
+
+    result.buffer.Unmap();
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, result.buffer.GetMappedRange()));
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, result.buffer.GetConstMappedRange()));
+}
+
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
@@ -655,6 +703,29 @@ TEST_P(BufferTests, CreateBufferOOMMapWriteAsync) {
     // UINT64_MAX may be special cased. Test a smaller, but really large buffer also fails
     descriptor.size = 1ull << 50;
     RunTest(descriptor);
+}
+
+// Test the result of GetMappedRange for an unmapped buffer at creation.
+TEST_P(BufferTests, GetMappedRangeUnmapped) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    descriptor.size = 4;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetMappedRange()));
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetConstMappedRange()));
+}
+
+// Test the result of GetMappedRange for a destroyed buffer.
+TEST_P(BufferTests, GetMappedRangeDestroyed) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    descriptor.size = 4;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    buffer.Destroy();
+
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetMappedRange()));
+    ASSERT_DEVICE_ERROR(ASSERT_EQ(nullptr, buffer.GetConstMappedRange()));
 }
 
 DAWN_INSTANTIATE_TEST(BufferTests,
