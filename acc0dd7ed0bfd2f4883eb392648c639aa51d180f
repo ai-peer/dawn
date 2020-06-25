@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "64951842_b8b72634",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-25T19:17:43Z",
+      "side": 1,
+      "message": "I wonder what situations you want to optimize. My patch at https://dawn-review.googlesource.com/c/dawn/+/23503 only optimizes the situation in which all of subresources\u0027 usages are the same. It seems that you tend to optimize more than that. For example, per array layer compresseion, per plane compression, and per entire resource compression (this is what I did at https://dawn-review.googlesource.com/c/dawn/+/23503). \n\nI don\u0027t want to do per plane compression at this moment. I don\u0027t think that it is necessary to do optimization for depth/stencil planes, which make the compress-or-not decision more complicated. And there are only two subresources. It is absolutely acceptable to iterate each subresources one by one (only two in total). If I missed other common cases of per plane situations, please let me know. For example, multiple arrays of depth/stencil textures (I don\u0027t think this is common in real world)? support Y, U, V planes for video and you need an array of Y, U, V planes (Again, a single video texture with Y, U, V planes only has 3 subresources, iteration over 3 subresources is acceptable)? Even if we do have some common cases for per plane situation, we can do this later, considering that you have no separated depth/stencil plane at all in Dawn\u0027s implementation (I think this is a clear sign that per plane situation is not important). \n\nFor per array layer compression, are these requirements common? 1) we need a big array of mipmap textures, and 2) Each time we have access to these mipmap textures per entire mipmap chains, we rarely access a single (or a part of) mip level(s). If anyone of these two assumptions is not common. Then it\u0027s not necessary to do such an optimization. For example, if we broke 1), say web devs typically don\u0027t need a lot of mipmap textures in one shot (they just need a few mipmap textures), or web devs create mipmap textures one by one. They don\u0027t need a big array to store a lot of mipmap textures. Then A big array of mipmap textures might be an uncommon case. we don\u0027t need to optimize this corner case with a lot of complexity. If we broke 2), even web devs need a big array of mipmap textures, but they access to the entire mipmap chains sometimes, then they access to a single mip level (or a part of mip levels) frequently, which means that web devs need to break the so-called per-array-layer assumption very often. Then it\u0027s not necessary to do this optimization either (we will compress and then decompress soon). You know, we can optimize the performance only if decompression is rare. So, I want to know your assessment about the situations (common or uncommon) in real world applications before we dive deep to optimize the per-array-layer situation. Well, I may misunderstood per array layer compression, please correct me if so. \n\nPer-(entire-)resource compression is needed, we have consensus on this point.",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "476e0d9d_a3bc0152",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
