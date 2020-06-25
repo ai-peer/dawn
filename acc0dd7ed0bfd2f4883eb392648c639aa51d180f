@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d087244c_21a22731",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-25T20:48:11Z",
+      "side": 1,
+      "message": "You make good points that the number of planes is usually pretty small. I don\u0027t think we need to compress them independently right now, and overall, I don\u0027t think that we really need to track array layers independently *yet*.\n\nHowever, I do think we should keep it in mind when designing the interface so that it might be possible in the future. I think it would be reasonable for an app to have a big array of textures and use different slices at different times. Even if we \"compress and decompress soon\" we want to compress and decompress the mip chain of a single array layer instead of the entire subresource. If it were the entire subresource we could be churning alloc/dealloc of memory a lot.",
+      "parentUuid": "64951842_b8b72634",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "476e0d9d_a3bc0152",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
