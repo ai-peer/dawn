@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "71d10848_a8beab56",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T09:24:52Z",
+      "side": 1,
+      "message": "Yeah that would work. Although for this specific function it would first need to go on the client::Device that would then call Buffer::CreateMapped.",
+      "parentUuid": "73fe652e_8d84648d",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 56
+      },
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5090e6a8_02008dd3",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "eb751e28_5ea8cf95",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T09:24:52Z",
+      "side": 1,
+      "message": "It just moved + renames, or changing buffer-\u003esize to mSize.\n\nI\u0027m not sure about the filename conflict. Do you remember on which configuration it was? I didn\u0027t have trouble on Windows.",
+      "parentUuid": "5090e6a8_02008dd3",
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8104cfd_9d3c8653",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2020-06-25T16:23:25Z",
       "side": 1,
       "message": "q: What is the trailing underscore meant to mean? This might be the first time in Dawn we have this.",
+      "range": {
+        "startLine": 50,
+        "startChar": 44,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a34b7cb0_ad308c94",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T09:24:52Z",
+      "side": 1,
+      "message": "Ah yes, this one was weird. Clang was complaining that an argument called `device` would shadow the `ObjectBase::device` member, even though we are in a static member function. So I worked around it by adding an extra _. I\u0027m not 100% what the proper fix would be, maybe making device a private member of ObjectBase and adding a GetDevice method?",
+      "parentUuid": "c8104cfd_9d3c8653",
       "range": {
         "startLine": 50,
         "startChar": 44,
