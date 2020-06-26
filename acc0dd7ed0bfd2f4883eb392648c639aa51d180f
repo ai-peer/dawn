@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d001ad0c_c60662b8",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T15:30:00Z",
+      "side": 1,
+      "message": "## Per plane.\n\n\u003e For example, multiple arrays of depth/stencil textures (I don\u0027t think this is common in real world)?\n\n2d array depth textures are incredibly useful when doing depth cubemaps arrays for point light shadow maps. Stencil would be more rare.\n\n\u003e Even if we do have some common cases for per plane situation, we can do this later, considering that you have no separated depth/stencil plane at all in Dawn\u0027s implementation (I think this is a clear sign that per plane situation is not important). \n\nActually that\u0027s a big deficiency in Dawn that we need to fix to be WebGPU conformant. Austin has it as a task this sprint: \"Support depth-only / stencil-only aspect\" this will be important for copies, but also for depthReadOnly and stencilReadOnly https://gpuweb.github.io/gpuweb/#dom-gpurenderpassdepthstencilattachmentdescriptor-depthreadonly\n\nI think it is ok to treat each plane separately and iterator from 0 to 2 in some cases (and in most cases, iterate from 0 to 0 ^^). That matches the PerPlane compression level in this example, and maybe PerResource isn\u0027t really useful.\n\n## Per layer\n\nI think per layer compression will be important in the cases that Austin outlined, for example when there is a 2D array texture atlas that\u0027s sometimes updated with a copy. But you\u0027re right that in most cases it wouldn\u0027t be all miplevels of an array layer that are changed, but just a couple. The solution outlined here doesn\u0027t allow handling this case efficiently. We\u0027d probably need a bitset of per-arraylayer compression etc. That makes the interface more complicated so let\u0027s first design something for per-plane vs. per-subresource that forces safety of the compression, see what idioms it introduces, and then thing about per-arraylayer later.",
+      "parentUuid": "3db9e858_9f57757e",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "476e0d9d_a3bc0152",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "902d1e38_f6c15a00",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T15:30:00Z",
+      "side": 1,
+      "message": "That\u0027s a good point, maybe we could have Get(plane, layer, mip) and Set(plane, layer, mip, value) that do what you said? And similarly GetPlane(plane) that ASSERTS we are in the right compression level, and SetPlane(plane) that modifies the compression level for that plane. (then we have an std::bitset or std::vector\u003cbool\u003e to track the compression per plane)",
+      "parentUuid": "476e0d9d_a3bc0152",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e9e9bf1_04d13877",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
@@ -107,6 +155,30 @@
       "writtenOn": "2020-06-25T16:16:32Z",
       "side": 1,
       "message": "side note: I am happy about this being only 8-bits. I wanted to change it in a few other places as well.",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 11
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a3d46df_6e323a6e",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T15:30:00Z",
+      "side": 1,
+      "message": "Should probably have a typedef for it though :)",
+      "parentUuid": "9e9e9bf1_04d13877",
       "range": {
         "startLine": 42,
         "startChar": 4,
