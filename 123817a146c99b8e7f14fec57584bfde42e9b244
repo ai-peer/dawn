@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5f0bea01_ab56f684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-26T02:10:40Z",
+      "side": 1,
+      "message": "Then I think we still need to enable these tests when the extension is available because at least we can test it locally now. \nThere have already been such features whose end2end tests cannot run on try bots, for example the tests using D3D12 render pass.",
+      "parentUuid": "a87a4ef3_37681d00",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "123817a146c99b8e7f14fec57584bfde42e9b244",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc083dfe_486c82e1",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 3
