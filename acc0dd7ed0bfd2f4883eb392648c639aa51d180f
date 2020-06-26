@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "1c6e0db6_0ae0d909",
+        "filename": "src/common/CompressedPerSubresource.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-26T16:18:12Z",
+      "side": 1,
+      "message": "Hmm, if the only common situation for per plane case is 2D array depth textures for point light shadow maps. Then web devs can use Depth32Float texture format. Per my understanding, for experienced developers, it is not necessary to introduce redundant stencil plane if they only want an array of depth textures as shadow textures. They can use a real depth/stencil combined format for rendertaget\u0027s depth/stencil attachment though. If this assuption is correct, there is no stencil plane at all for this common situation. Then the only common per-plane situation falls into per-resource.",
+      "parentUuid": "d001ad0c_c60662b8",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "acc0dd7ed0bfd2f4883eb392648c639aa51d180f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "476e0d9d_a3bc0152",
         "filename": "src/common/CompressedPerSubresource.h",
         "patchSetId": 1
