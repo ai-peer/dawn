@@ -22,6 +22,30 @@
       "revId": "d106fbef456de2c99a0f26330adbf291216733ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "932f7177_37b41eac",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T14:33:06Z",
+      "side": 1,
+      "message": "No because there would still have been a narrowing happening in the call to IncrementMemoryUsage.",
+      "parentUuid": "a07eea54_84dbed3f",
+      "range": {
+        "startLine": 214,
+        "startChar": 39,
+        "endLine": 214,
+        "endChar": 77
+      },
+      "revId": "d106fbef456de2c99a0f26330adbf291216733ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
