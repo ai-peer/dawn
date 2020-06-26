@@ -411,6 +411,25 @@ namespace dawn_native {
         ASSERT(removedCount == 1);
     }
 
+    ResultOrError<BindGroupLayoutBase*> DeviceBase::GetOrCreateEmptyBindGroupLayout() {
+        if (!mEmptyBindGroupLayout) {
+            BindGroupLayoutDescriptor desc = {};
+            desc.entryCount = 0;
+            desc.entries = nullptr;
+
+            BindGroupLayoutBase* bgl = nullptr; 
+            if (ConsumedError(GetOrCreateBindGroupLayout(&desc), &bgl)) {
+                return BindGroupLayoutBase::MakeError(this);
+            }
+            mEmptyBindGroupLayout = AcquireRef(bgl);
+            return bgl;
+        }
+        else {
+            mEmptyBindGroupLayout->Reference();
+            return mEmptyBindGroupLayout.Get();        
+        }
+    }
+
     ResultOrError<ComputePipelineBase*> DeviceBase::GetOrCreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
         ComputePipelineBase blueprint(this, descriptor);
