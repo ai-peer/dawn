@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "95975e4d_4b96b006",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T15:01:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8171108d_f0955802",
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8104cfd_9d3c8653",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 2
@@ -161,6 +179,30 @@
       "side": 1,
       "message": "Or rename ObjectBase\u0027s to mDevice. Either sounds fine.",
       "parentUuid": "a34b7cb0_ad308c94",
+      "range": {
+        "startLine": 50,
+        "startChar": 44,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37944008_7903e380",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-26T15:01:38Z",
+      "side": 1,
+      "message": "As discussed offline, I\u0027ll handle this and a bunch of other refactors in follow-up CLs.",
+      "parentUuid": "40759016_9379bd1e",
       "range": {
         "startLine": 50,
         "startChar": 44,
