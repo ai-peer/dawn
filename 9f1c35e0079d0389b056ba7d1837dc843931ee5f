@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2337e934_d5efcc62",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000395
+      },
+      "writtenOn": "2020-06-26T20:03:34Z",
+      "side": 1,
+      "message": "D3D12 checks this via the IsMapped method to handle residency, so I think this would cause the residency manager to not properly lock/unlock this allocation. probably D3D12 should have it\u0027s own bit in the back end instead of checking this one, especially since it\u0027s related to the residency implementation.\n\ncould also be some state issues if the state is set in the frontend but there\u0027s an OOM error in the backend.",
+      "revId": "9f1c35e0079d0389b056ba7d1837dc843931ee5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
