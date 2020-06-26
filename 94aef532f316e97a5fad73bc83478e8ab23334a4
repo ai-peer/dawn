@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "8171108d_f0955802",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-26T14:07:01Z",
+      "side": 1,
+      "message": "Huh, I thought it was Windows. if it\u0027s not broken then I wouldn\u0027t bother fixing it now. did you use is_component_build\u003dtrue/false?",
+      "parentUuid": "eb751e28_5ea8cf95",
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8104cfd_9d3c8653",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 2
@@ -119,6 +137,30 @@
       "side": 1,
       "message": "Ah yes, this one was weird. Clang was complaining that an argument called `device` would shadow the `ObjectBase::device` member, even though we are in a static member function. So I worked around it by adding an extra _. I\u0027m not 100% what the proper fix would be, maybe making device a private member of ObjectBase and adding a GetDevice method?",
       "parentUuid": "c8104cfd_9d3c8653",
+      "range": {
+        "startLine": 50,
+        "startChar": 44,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "94aef532f316e97a5fad73bc83478e8ab23334a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40759016_9379bd1e",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-26T14:07:01Z",
+      "side": 1,
+      "message": "Or rename ObjectBase\u0027s to mDevice. Either sounds fine.",
+      "parentUuid": "a34b7cb0_ad308c94",
       "range": {
         "startLine": 50,
         "startChar": 44,
