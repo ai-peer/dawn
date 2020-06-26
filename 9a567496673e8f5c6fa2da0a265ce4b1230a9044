@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b755300_3af10e9f",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-26T21:01:30Z",
+      "side": 1,
+      "message": "in JS, this throws an exception so I don\u0027t think there would be a validation error. I think it could still be nice to have in native, but Blink bindings would need to do their own state tracking to throw the exception before calling the client procs.",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05805e35_8624a2ac",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-26T21:01:30Z",
+      "side": 1,
+      "message": "nit: also check that the pointers are the same",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
