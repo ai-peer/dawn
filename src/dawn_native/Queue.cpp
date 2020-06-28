@@ -117,6 +117,14 @@ namespace dawn_native {
             return {};
         }
 
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            if (buffer->IsFullRangeOverWrittenInto(bufferOffset, size)) {
+                buffer->SetIsInitialized();
+            } else {
+                DAWN_TRY(buffer->EnsureBufferInitializedToZero());
+            }
+        }
+
         DeviceBase* device = GetDevice();
 
         UploadHandle uploadHandle;

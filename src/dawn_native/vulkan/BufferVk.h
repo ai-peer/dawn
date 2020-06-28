@@ -45,6 +45,8 @@ namespace dawn_native { namespace vulkan {
                                 VkPipelineStageFlags* srcStages,
                                 VkPipelineStageFlags* dstStages);
 
+        MaybeError EnsureBufferInitializedToZero() override;
+
       private:
         ~Buffer() override;
         using BufferBase::BufferBase;
