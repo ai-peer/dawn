@@ -700,10 +700,6 @@ TEST_P(CopyTests_T2B, Texture2DArraySubRegion) {
 
 // Test that copying texture 2D array mips with 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, Texture2DArrayMip) {
-    // TODO(jiawei.shao@intel.com): investigate why copies with multiple texture array layers fail
-    // with swiftshader.
-    DAWN_SKIP_TEST_IF(IsSwiftshader());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kLayers = 6u;
