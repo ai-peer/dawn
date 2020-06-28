@@ -132,10 +132,31 @@ namespace dawn_native { namespace metal {
         mMtlBuffer = nil;
     }
 
-    void Buffer::ClearBuffer(BufferBase::ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
-        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
-        const uint8_t clearBufferValue = 1;
+    MaybeError Buffer::EnsureBufferInitializedToZero() {
+        if (!IsInitialized()) {
+            ClearBuffer(ClearValue::Zero);
+
+            SetIsInitialized();
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+
+        return {};
+    }
+
+    void Buffer::ClearBuffer(ClearValue clearValue) {
+        uint8_t clearBufferValue;
+        switch (clearValue) {
+            case ClearValue::Zero:
+                clearBufferValue = 0u;
+                break;
+            case ClearValue::NonZero:
+                clearBufferValue = 1u;
+                break;
+            default:
+                UNREACHABLE();
+                clearBufferValue = 0u;
+                break;
+        }
 
         Device* device = ToBackend(GetDevice());
         CommandRecordingContext* commandContext = device->GetPendingCommandContext();

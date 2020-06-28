@@ -44,6 +44,8 @@ namespace dawn_native { namespace d3d12 {
         bool CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const;
         bool CheckIsResidentForTesting() const;
 
+        MaybeError EnsureBufferInitializedToZero() override;
+
       private:
         ~Buffer() override;
         // Dawn API

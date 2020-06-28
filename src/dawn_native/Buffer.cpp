@@ -52,6 +52,11 @@ namespace dawn_native {
                 mFakeMappedData.reset();
             }
 
+            MaybeError EnsureBufferInitializedToZero() override {
+                SetIsInitialized();
+                return {};
+            }
+
           private:
             bool IsMapWritable() const override {
                 UNREACHABLE();
@@ -441,6 +446,18 @@ namespace dawn_native {
 
     bool BufferBase::IsMapped() const {
         return mState == BufferState::Mapped;
+    }
+
+    bool BufferBase::IsInitialized() const {
+        return mIsInitialized;
+    }
+
+    void BufferBase::SetIsInitialized() {
+        mIsInitialized = true;
+    }
+
+    bool BufferBase::IsFullRangeOverWrittenInto(uint64_t offset, uint64_t size) const {
+        return offset == 0 && size == GetSize();
     }
 
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
