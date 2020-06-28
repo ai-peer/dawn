@@ -57,6 +57,11 @@ namespace dawn_native {
 
         MaybeError ValidateCanUseOnQueueNow() const;
 
+        bool IsFullRangeOverWrittenInto(uint64_t offset, uint64_t size) const;
+        void SetIsInitialized();
+
+        virtual MaybeError InitializeBufferToZero() = 0;
+
         // Dawn API
         void SetSubData(uint32_t start, uint32_t count, const void* data);
         void MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata);
@@ -80,6 +85,8 @@ namespace dawn_native {
         void DestroyInternal();
 
         bool IsMapped() const;
+
+        bool IsInitialized() const;
 
       private:
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) = 0;
@@ -108,6 +115,8 @@ namespace dawn_native {
         std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         BufferState mState;
+
+        bool mIsInitialized = false;
     };
 
 }  // namespace dawn_native

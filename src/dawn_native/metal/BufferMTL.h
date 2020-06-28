@@ -29,6 +29,8 @@ namespace dawn_native { namespace metal {
         static ResultOrError<Buffer*> Create(Device* device, const BufferDescriptor* descriptor);
         id<MTLBuffer> GetMTLBuffer() const;
 
+        MaybeError InitializeBufferToZero() override;
+
       private:
         using BufferBase::BufferBase;
         MaybeError Initialize();

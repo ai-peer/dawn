@@ -193,6 +193,7 @@ namespace dawn_native { namespace null {
                              uint64_t size);
 
         void DoWriteBuffer(uint64_t bufferOffset, const void* data, size_t size);
+        MaybeError InitializeBufferToZero() override;
 
       private:
         ~Buffer() override;
