@@ -326,10 +326,30 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetInfo().mMethod == allocationMethod;
     }
 
+    MaybeError Buffer::EnsureBufferInitializedToZero() {
+        if (!IsInitialized()) {
+            DAWN_TRY(ClearBuffer(ClearValue::Zero));
+            SetIsInitialized();
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+
+        return {};
+    }
+
     MaybeError Buffer::ClearBuffer(ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
-        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
-        constexpr uint8_t kClearBufferValue = 1u;
+        uint8_t clearBufferValue;
+        switch (clearValue) {
+            case ClearValue::Zero:
+                clearBufferValue = 0u;
+                break;
+            case ClearValue::NonZero:
+                clearBufferValue = 1u;
+                break;
+            default:
+                UNREACHABLE();
+                clearBufferValue = 0u;
+                break;
+        }
 
         Device* device = ToBackend(GetDevice());
 
@@ -341,7 +361,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(MapBufferInternal(writeRange, reinterpret_cast<void**>(&mappedData),
                                        "D3D12 map at clear buffer"));
 
-            memset(mappedData, kClearBufferValue, GetSize());
+            memset(mappedData, clearBufferValue, GetSize());
 
             UnmapBufferInternal(writeRange);
             mappedData = nullptr;
@@ -353,7 +373,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(GetSize(), device->GetPendingCommandSerial()));
 
-            memset(uploadHandle.mappedBuffer, kClearBufferValue, GetSize());
+            memset(uploadHandle.mappedBuffer, clearBufferValue, GetSize());
 
             DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer,
                                                      uploadHandle.startOffset, this, 0, GetSize()));
