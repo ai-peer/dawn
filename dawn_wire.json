@@ -120,7 +120,8 @@
         "client_special_objects": [
             "Buffer",
             "Device",
-            "Fence"
+            "Fence",
+            "Queue"
         ],
         "server_custom_pre_handler_commands": [
             "BufferDestroy",
