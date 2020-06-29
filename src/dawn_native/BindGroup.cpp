@@ -79,6 +79,16 @@ namespace dawn_native {
                     " bytes");
             }
 
+            if (bindingInfo.type == wgpu::BindingType::UniformBuffer) {
+                if (bindingSize > kMaxUniformBufferBindingSize) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Binding size bigger than maximum uniform buffer binding size: binding " +
+                        std::to_string(entry.binding) + " given " + std::to_string(bindingSize) +
+                        " bytes, maximum is " + std::to_string(kMaxUniformBufferBindingSize) +
+                        " bytes");
+                }
+            }
+
             return {};
         }
 
