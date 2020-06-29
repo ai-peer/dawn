@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a705cfd_b613be5d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "This can be moved inside IsValidationEnabled() similarly to textures and buffers. Same comment for other encoders.",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7c0092e_b8aaf838",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "nit: TrackUsedQuerySet",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adb34176_47a59633",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "nit: mUsedQuerySets",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fde2014_e6ec8d40",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "ditto, same as CommandBufferGL",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cadb458_cba37ade",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "Maybe put an UNREACHABLE if OpenGL never advertises support for timestamps. Ditto in other places in this file.",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6cf8a7b_7d7e07a8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T11:07:11Z",
+      "side": 1,
+      "message": "This should be return DAWN_UNIMPLEMENTED_ERROR(\"Waiting for implementation.\");\n\nWe can make RecordComputePass return a MaybeError",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
