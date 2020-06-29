@@ -33,6 +33,24 @@
       "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99b8731b_33ff1891",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T08:51:40Z",
+      "side": 1,
+      "message": "This part wasn\u0027t symmetric even in the version without caching. That\u0027s because Device::GetOrCreateBindGroup is increasing refcount on its own, while PipelineLayoutBase::GetBindGroupLayout is not, so the two cases need to be handled differently. The new function Device::GetOrCreateEmptyBindGroup is using Device::GetOrCreateBindGroup when run for the first time, so this is still the case.\n\nI could modify it to create the empty bind group layout during initialization and then remove the refcount at [1], so that could then be written in the way you proposed, but that would make Device::GetOrCreateBindGroup and Device::GetOrCreateEmptyBindGroup produce different behaviour when it comes to increasing refcount.",
+      "parentUuid": "8c92ba23_2a8cafdf",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
