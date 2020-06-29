@@ -827,6 +827,11 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    // TODO(hao.x.li@intel.com): Complete implementation
+                    return;
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -926,6 +931,11 @@ namespace dawn_native { namespace metal {
                     [encoder pushDebugGroup:mtlLabel];
                     [mtlLabel release];
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    // TODO(hao.x.li@intel.com): Complete implementation
+                    return;
                 }
 
                 default: {
@@ -1289,6 +1299,11 @@ namespace dawn_native { namespace metal {
                         }
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    // TODO(hao.x.li@intel.com): Complete implementation
+                    return;
                 }
 
                 default: {

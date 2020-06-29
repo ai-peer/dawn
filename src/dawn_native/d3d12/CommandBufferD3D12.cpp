@@ -722,6 +722,10 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -831,6 +835,10 @@ namespace dawn_native { namespace d3d12 {
                             ->pixBeginEventOnCommandList(commandList, kPIXBlackColor, label);
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {
@@ -1249,6 +1257,10 @@ namespace dawn_native { namespace d3d12 {
                         }
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {

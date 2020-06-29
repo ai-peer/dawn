@@ -594,6 +594,10 @@ namespace dawn_native { namespace vulkan {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -709,6 +713,11 @@ namespace dawn_native { namespace vulkan {
                         SkipCommand(&mCommands, Command::PushDebugGroup);
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    // TODO(hao.x.li@intel.com): Complete implementation
+                    return;
                 }
 
                 default: {
@@ -978,6 +987,10 @@ namespace dawn_native { namespace vulkan {
                         }
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {
