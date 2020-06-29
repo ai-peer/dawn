@@ -31,7 +31,7 @@
 namespace dawn_native { namespace d3d12 {
 
     namespace {
-        std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags) {
+        std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16BitTypes) {
             std::vector<const wchar_t*> arguments;
             if (compileFlags & D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY) {
                 arguments.push_back(L"/Gec");
@@ -70,9 +70,14 @@ namespace dawn_native { namespace d3d12 {
             if (compileFlags & D3DCOMPILE_RESOURCES_MAY_ALIAS) {
                 arguments.push_back(L"/res_may_alias");
             }
-            // Enable FXC backward compatibility by setting the language version to 2016
-            arguments.push_back(L"-HV");
-            arguments.push_back(L"2016");
+
+            if (enable16BitTypes) {
+                arguments.push_back(L"/enable-16bit-types");
+            } else {
+                // Enable FXC backward compatibility by setting the language version to 2016
+                arguments.push_back(L"-HV");
+                arguments.push_back(L"2016");
+            }
             return arguments;
         }
 
@@ -138,7 +143,12 @@ namespace dawn_native { namespace d3d12 {
             options_glsl.force_zero_initialized_variables = true;
 
             spirv_cross::CompilerHLSL::Options options_hlsl;
-            options_hlsl.shader_model = 51;
+            if (GetDevice()->IsExtensionEnabled(Extension::ShaderFloat16)) {
+                options_hlsl.shader_model = 62;
+                options_hlsl.enable_16bit_types = true;
+            } else {
+                options_hlsl.shader_model = 51;
+            }
             // PointCoord and PointSize are not supported in HLSL
             // TODO (hao.x.li@intel.com): The point_coord_compat and point_size_compat are
             // required temporarily for https://bugs.chromium.org/p/dawn/issues/detail?id=146,
@@ -210,17 +220,33 @@ namespace dawn_native { namespace d3d12 {
                                                                    const std::string& hlslSource,
                                                                    const char* entryPoint,
                                                                    uint32_t compileFlags) {
-        const wchar_t* targetProfile = nullptr;
+        wchar_t targetProfile[10];
         switch (stage) {
             case SingleShaderStage::Vertex:
-                targetProfile = L"vs_6_0";
+                wcscpy(targetProfile, L"vs");
                 break;
             case SingleShaderStage::Fragment:
-                targetProfile = L"ps_6_0";
+                wcscpy(targetProfile, L"ps");
                 break;
             case SingleShaderStage::Compute:
-                targetProfile = L"cs_6_0";
+                wcscpy(targetProfile, L"cs");
                 break;
+            default:
+                UNREACHABLE();
+        }
+        wcscat(targetProfile, L"_");
+        switch (ToBackend(GetDevice())->GetDeviceInfo().shader_model) {
+            case D3D_SHADER_MODEL_6_2:
+                wcscpy(targetProfile, L"6_2");
+                break;
+            case D3D_SHADER_MODEL_6_1:
+                wcscpy(targetProfile, L"6_1");
+                break;
+            case D3D_SHADER_MODEL_6_0:
+                wcscpy(targetProfile, L"6_0");
+                break;
+            default:
+                UNREACHABLE();
         }
 
         IDxcLibrary* dxcLibrary;
@@ -237,7 +263,8 @@ namespace dawn_native { namespace d3d12 {
         std::wstring entryPointW;
         DAWN_TRY_ASSIGN(entryPointW, ConvertStringToWstring(entryPoint));
 
-        std::vector<const wchar_t*> arguments = GetDXCArguments(compileFlags);
+        std::vector<const wchar_t*> arguments = GetDXCArguments(
+            compileFlags, GetDevice()->IsExtensionEnabled(Extension::ShaderFloat16));
 
         ComPtr<IDxcOperationResult> result;
         DAWN_TRY(CheckHRESULT(
