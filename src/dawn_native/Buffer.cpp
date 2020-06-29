@@ -483,10 +483,6 @@ namespace dawn_native {
         mState = BufferState::Destroyed;
     }
 
-    bool BufferBase::IsMapped() const {
-        return mState == BufferState::Mapped;
-    }
-
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
         void* data = GetMappedPointerImpl();
         if (isWrite) {
