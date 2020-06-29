@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e1346ce3_062711e4",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "One question: D3D_SHADER_MODEL_6_2 is in d3d12.h header, if Window Kits version is old, for example, 10.0.14393.0, it defines D3D_SHADER_MODEL as below, Would compiling error happen?\ntypedef \nenum D3D_SHADER_MODEL\n    {\n        D3D_SHADER_MODEL_5_1\t\u003d 0x51,\n        D3D_SHADER_MODEL_6_0\t\u003d 0x60\n    } \tD3D_SHADER_MODEL;",
+      "range": {
+        "startLine": 62,
+        "startChar": 55,
+        "endLine": 62,
+        "endChar": 75
+      },
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d55e2b94_a7b62fe3",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -16,6 +39,24 @@
       "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ca263b_e62e52a7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d55e2b94_a7b62fe3",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -36,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "959acb11_c2bdc368",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "From https://github.com/microsoft/DirectXShaderCompiler/wiki/16-Bit-Scalar-Types,\nenable-16bit-types are only allowed in -HV 2018 (default).",
+      "parentUuid": "d186cb80_2da64729",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2789ed64_2cb2825f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
@@ -47,6 +106,24 @@
       "writtenOn": "2020-06-24T13:21:29Z",
       "side": 1,
       "message": "Can you add the same code changes for the SPVC path? The direct to SPIR-V cross path will disappear eventually.",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c69460e_f659d8d9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "It seems that shaderc does not export an function to set \"enable_16bit_types\" option.",
+      "parentUuid": "2789ed64_2cb2825f",
       "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "6874c036_71846bcb",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "We strict the HighestShaderModel to shader6.2, and only shader 6.2 and higher support FP16, so does not need to compute the model here.",
+      "parentUuid": "ee254fff_bfff3540",
+      "range": {
+        "startLine": 147,
+        "startChar": 44,
+        "endLine": 147,
+        "endChar": 46
+      },
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34929417_a90a6894",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
@@ -93,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "306c2c75_b2d02bb4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34929417_a90a6894",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6f7edd9_9427a507",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
@@ -107,6 +226,24 @@
       "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beea9031_68fe9c37",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-06-29T09:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6f7edd9_9427a507",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
