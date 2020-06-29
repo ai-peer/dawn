@@ -51,6 +51,24 @@
       "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23554979_b7f1778d",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T10:06:54Z",
+      "side": 1,
+      "message": "Gotcha, I\u0027m not sure if there\u0027s a better way to name GetOrCreateBGL to express it is more like creation in that it returns a new Ref. Maybe it could return ResultOrError\u003cRef\u003cBindGroupLayoutBase\u003e\u003e. We recently had an optimization that will make this the same cost as ResultOrError\u003cBindGroupLayoutBase*\u003e. It doesn\u0027t need to be done in this CL and could be a follow-up.\n\nEither option, keeping the code as is + follow-up or creating the empty bind group on device initialization (+ follow-up) would work.",
+      "parentUuid": "99b8731b_33ff1891",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
