@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38877544_ac5399d9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-29T19:53:41Z",
+      "side": 1,
+      "message": "nit: can\u0027t parse this sentence",
+      "range": {
+        "startLine": 434,
+        "startChar": 25,
+        "endLine": 434,
+        "endChar": 27
+      },
+      "revId": "27969e7169d1ed23dc5e8dc10dc6f83a7988c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf1d902_ca04f2d5",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-06-29T19:53:41Z",
+      "side": 1,
+      "message": "no op?",
+      "range": {
+        "startLine": 360,
+        "startChar": 26,
+        "endLine": 360,
+        "endChar": 43
+      },
+      "revId": "27969e7169d1ed23dc5e8dc10dc6f83a7988c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
