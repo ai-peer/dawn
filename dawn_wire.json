@@ -112,6 +112,7 @@
             "DeviceCreateBuffer",
             "DeviceCreateBufferMapped",
             "DeviceGetDefaultQueue",
+            "DeviceInjectError",
             "DevicePushErrorScope",
             "QueueCreateFence",
             "QueueSignal"
