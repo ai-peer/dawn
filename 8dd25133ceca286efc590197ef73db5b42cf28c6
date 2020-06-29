@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac242716_01861372",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "nit: Add validation the max ...\n\nCommit message titles are usually a sentence that describes succintly what the commit does.",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb1c1721_7b5a10cb",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 65,
+        "startChar": 41,
+        "endLine": 65,
+        "endChar": 44
+      },
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "267eda59_a707ad0e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "nit: we already know binding type in the caller at [1] so we could just pass in the maximum size as an argument to this function. This matters slightly because this is extremely hot code. (storage buffers can pass std::numeric_limits\u003cuint64_t\u003e::max())",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40a36915_85ff7900",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58fedaf5_11c985c0",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "nit: this buffer could be used for both storage and uniform so you don\u0027t need to create another one below.",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e54fe44_6456592f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "nit: This should use kMaxUniformBufferBindingSize + kBufferBindingSizeAlignment (and introduce the constant, and use it at [2]). This is because otherwise we don\u0027t check the condition you introduced but hit validation at [2].\n\nOr we can have both and a comment that explains why we do the versions with kBufferBindingSizeAlignment.",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13d6f352_f3da0c03",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T15:26:17Z",
+      "side": 1,
+      "message": "nit: can we also test StorageBuffer with the same BGL?",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
