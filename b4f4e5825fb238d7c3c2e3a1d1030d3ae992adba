@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c25d7b81_2ad42938",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T10:51:50Z",
+      "side": 1,
+      "message": "Yes, a compiling error would happen, but then people will need to upgrade their WDK. That\u0027s ok.",
+      "parentUuid": "e1346ce3_062711e4",
+      "range": {
+        "startLine": 62,
+        "startChar": 55,
+        "endLine": 62,
+        "endChar": 75
+      },
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d55e2b94_a7b62fe3",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -95,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "100788e0_455e37f3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T10:51:50Z",
+      "side": 1,
+      "message": "Ack, please add this comment in the CL.",
+      "parentUuid": "959acb11_c2bdc368",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2789ed64_2cb2825f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 4
@@ -124,6 +166,24 @@
       "side": 1,
       "message": "It seems that shaderc does not export an function to set \"enable_16bit_types\" option.",
       "parentUuid": "2789ed64_2cb2825f",
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0185fc6_afac840c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T10:51:50Z",
+      "side": 1,
+      "message": "Yes, you\u0027ll have to add it to SPVC and roll the dependency forward.",
+      "parentUuid": "7c69460e_f659d8d9",
       "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -165,6 +225,30 @@
       "side": 1,
       "message": "We strict the HighestShaderModel to shader6.2, and only shader 6.2 and higher support FP16, so does not need to compute the model here.",
       "parentUuid": "ee254fff_bfff3540",
+      "range": {
+        "startLine": 147,
+        "startChar": 44,
+        "endLine": 147,
+        "endChar": 46
+      },
+      "revId": "b4f4e5825fb238d7c3c2e3a1d1030d3ae992adba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98fa1d80_31702f33",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T10:51:50Z",
+      "side": 1,
+      "message": "What I meant is that we should always be using the highest shader model that both the device and Dawn support. This shader model is computed at device creation time and we can just set it to the correct value here.",
+      "parentUuid": "6874c036_71846bcb",
       "range": {
         "startLine": 147,
         "startChar": 44,
