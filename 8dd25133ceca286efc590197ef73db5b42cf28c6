@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "22f44a71_e4d1a558",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac242716_01861372",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb1c1721_7b5a10cb",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "877bd08f_86ef3a5e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "267eda59_a707ad0e",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40a36915_85ff7900",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
@@ -73,6 +109,24 @@
       "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dee0926_71aa0488",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40a36915_85ff7900",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +147,24 @@
     },
     {
       "key": {
+        "uuid": "884af3f0_36adf65b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58fedaf5_11c985c0",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e54fe44_6456592f",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -110,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "39349986_7ed822d4",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "The condition at [2] only checks if offset is aligned, it seems that size can be arbitrary. I have removed the new if from ValidateTextureBinding and this part didn\u0027t produce an error, which means the bind group was successfully created.",
+      "parentUuid": "7e54fe44_6456592f",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13d6f352_f3da0c03",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -121,6 +211,24 @@
       "writtenOn": "2020-06-29T15:26:17Z",
       "side": 1,
       "message": "nit: can we also test StorageBuffer with the same BGL?",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3c126a4_da75c9b2",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T17:13:22Z",
+      "side": 1,
+      "message": "I can make one BGL with both uniform and storage buffer, if it\u0027s more efficient, but it will probably make the code a bit less clear.",
+      "parentUuid": "13d6f352_f3da0c03",
       "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
