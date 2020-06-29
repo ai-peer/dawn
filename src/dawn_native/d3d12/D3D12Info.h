@@ -26,6 +26,8 @@ namespace dawn_native { namespace d3d12 {
         bool isUMA;
         uint32_t resourceHeapTier;
         bool supportsRenderPass;
+        bool supportsShaderFloat16;
+        D3D_SHADER_MODEL shader_model;
     };
 
     ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);
