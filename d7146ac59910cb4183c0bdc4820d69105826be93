@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "966618f8_9e560fe0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T08:25:47Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c92ba23_2a8cafdf",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T08:25:47Z",
+      "side": 1,
+      "message": "I have some concern that the refcounting is not symmetric between the two paths. Things would be clearer like the following:\n\n  BindGroupLayout* bgl \u003d nullptr\n  if (mLayout-\u003eGetBindGroupLayoutsMask()[..]) {\n    bgl \u003d mLayout-\u003e ...\n  } else {\n     if (GetDevice()-\u003eConsumedError(GetDevice()-\u003eGetOrCreateEmptyBindGroupLayout(), \u0026bgl) {\n       return ..\n     }\n  }\n\n  // Semantically a new object is returned so increase the reference count.\n  bgl-\u003eReference();\n  return bgl;\n\nThen the refcount at [1] disappears.\n\nAlso what do you think of creating the empty bindgroup in all cases in DeviceBase::Initialize?",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
