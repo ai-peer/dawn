@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc12765d_1e79923c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-29T18:22:29Z",
+      "side": 1,
+      "message": "I believe you are correct when it comes to state transitions. \n\nHowever, your second statement \"D3D12 seems to make the GPU writes available when the fence is passed\", is not true for readback heaps. You need to call Unmap for data to become available on certain architectures. \n\nSee https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12resource-map, in particular the following paragraph.  \n\n\u003e Resources on D3D12_HEAP_TYPE_READBACK heaps do not support persistent map. Map and Unmap must be called between CPU and GPU accesses to the same memory address on some system architectures, when the page caching behavior is write-back. Map and Unmap invalidate and flush the last level CPU cache on some ARM systems, to marshal data between the CPU and GPU through memory addresses with write-back behavior.\n\n\nProbably best to delete this comment so readers do not get confused.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 53
+      },
+      "revId": "a66359eda3a4c23cf8db53440523bfc7e426824c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e491e986_26e2743e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-06-29T18:22:29Z",
+      "side": 1,
+      "message": "Nit: UnmapImpl already clears out mWrittenMapRange so we don\u0027t need to also do it here.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 41
+      },
+      "revId": "a66359eda3a4c23cf8db53440523bfc7e426824c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
