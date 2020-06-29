@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8d40eb73_782d583c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T10:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966618f8_9e560fe0",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c92ba23_2a8cafdf",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 5
@@ -69,6 +87,24 @@
       "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f4957a5_35585583",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-29T10:24:03Z",
+      "side": 1,
+      "message": "OK, I\u0027ll leave it as it is and do a follow-up in a new CL.",
+      "parentUuid": "23554979_b7f1778d",
+      "revId": "d7146ac59910cb4183c0bdc4820d69105826be93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
