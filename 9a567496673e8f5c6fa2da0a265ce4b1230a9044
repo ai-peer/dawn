@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fbcfd4be_391257cb",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T12:31:51Z",
+      "side": 1,
+      "message": "What do you think of having special toggles in dawn_wire::WireClientDescriptor that would enable a special code path here that just returns nullptr and doesn\u0027t produce an error?",
+      "parentUuid": "8b755300_3af10e9f",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05805e35_8624a2ac",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "751efa48_a9490793",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-29T12:31:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05805e35_8624a2ac",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
