@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38691b45_90194b4d",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-30T16:19:17Z",
+      "side": 1,
+      "message": "Out of curiosity, where is this command generated? I see DeviceInjectError in client_handwritten_commands, but I can\u0027t figure out where in the templates it is actually\ngenerated. In particular, I was trying to figure out how the member vars get generated.",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
