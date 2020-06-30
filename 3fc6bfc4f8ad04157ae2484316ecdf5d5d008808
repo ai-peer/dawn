@@ -202,6 +202,24 @@
     },
     {
       "key": {
+        "uuid": "50ea4951_2ddd174f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T09:25:06Z",
+      "side": 1,
+      "message": "Ah I thought we didn\u0027t add it, but BackendMTL.mm has support for it. Sorry for the confusion.",
+      "parentUuid": "bbe0e0ed_30ada078",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cadb458_cba37ade",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
