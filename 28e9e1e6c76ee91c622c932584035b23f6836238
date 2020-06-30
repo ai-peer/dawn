@@ -16,6 +16,24 @@
       "revId": "28e9e1e6c76ee91c622c932584035b23f6836238",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14831373_ad6a9f18",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T17:50:56Z",
+      "side": 1,
+      "message": "Using placement new would prevent the ObjectAllocator from putting the id, generation and device in the object. The templated constructor is a good idea, maybe we could do that in the future.",
+      "parentUuid": "00c35c7e_60d403ce",
+      "revId": "28e9e1e6c76ee91c622c932584035b23f6836238",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
