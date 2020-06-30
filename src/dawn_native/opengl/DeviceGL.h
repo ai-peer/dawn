@@ -57,6 +57,7 @@ namespace dawn_native { namespace opengl {
 
         ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;
         MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
+                                           bool ensureDestinationBufferInitialized,
                                            uint64_t sourceOffset,
                                            BufferBase* destination,
                                            uint64_t destinationOffset,

@@ -24,7 +24,7 @@ namespace dawn_native { namespace opengl {
         : BufferBase(device, descriptor) {
         // TODO(cwallez@chromium.org): Have a global "zero" buffer instead of creating a new 4-byte
         // buffer?
-        uint64_t size = std::max(GetSize(), uint64_t(4u));
+        uint64_t size = GetAppliedSize();
 
         device->gl.GenBuffers(1, &mBuffer);
         device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
@@ -43,6 +43,30 @@ namespace dawn_native { namespace opengl {
 
     GLuint Buffer::GetHandle() const {
         return mBuffer;
+    }
+
+    uint64_t Buffer::GetAppliedSize() const {
+        // TODO(cwallez@chromium.org): Have a global "zero" buffer instead of creating a new 4-byte
+        // buffer?
+        return std::max(GetSize(), uint64_t(4u));
+    }
+
+    MaybeError Buffer::EnsureBufferInitializedToZero() {
+        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse));
+
+        if (!IsLazyInitialized()) {
+            const uint64_t size = GetAppliedSize();
+            Device* device = ToBackend(GetDevice());
+
+            const std::vector<uint8_t> clearValues(size, 0u);
+            device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
+            device->gl.BufferSubData(GL_ARRAY_BUFFER, 0, size, clearValues.data());
+
+            SetIsLazyInitialized();
+            device->IncrementLazyClearCountForTesting();
+        }
+
+        return {};
     }
 
     bool Buffer::IsMapWritable() const {

@@ -183,6 +183,7 @@ namespace dawn_native {
         virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
             size_t size) = 0;
         virtual MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
+                                                   bool ensureDestinationBufferInitialized,
                                                    uint64_t sourceOffset,
                                                    BufferBase* destination,
                                                    uint64_t destinationOffset,

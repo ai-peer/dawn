@@ -44,6 +44,14 @@ namespace dawn_native { namespace opengl {
                                       size_t size) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            if (buffer->IsFullBufferRange(bufferOffset, size)) {
+                buffer->SetIsLazyInitialized();
+            } else {
+                DAWN_TRY(ToBackend(buffer)->EnsureBufferInitializedToZero());
+            }
+        }
+
         gl.BindBuffer(GL_ARRAY_BUFFER, ToBackend(buffer)->GetHandle());
         gl.BufferSubData(GL_ARRAY_BUFFER, bufferOffset, size, data);
         return {};

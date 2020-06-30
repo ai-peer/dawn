@@ -193,10 +193,15 @@ namespace dawn_native { namespace null {
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               bool ensureDestinationBufferInitialized,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
+        if (ensureDestinationBufferInitialized) {
+            destination->SetIsLazyInitialized();
+        }
+
         auto operation = std::make_unique<CopyFromStagingToBufferOperation>();
         operation->staging = source;
         operation->destination = ToBackend(destination);

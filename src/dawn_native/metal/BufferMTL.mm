@@ -15,6 +15,7 @@
 #include "dawn_native/metal/BufferMTL.h"
 
 #include "common/Math.h"
+#include "dawn_native/metal/CommandRecordingContext.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
 #include <limits>
@@ -87,7 +88,9 @@ namespace dawn_native { namespace metal {
         }
 
         if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            ClearBuffer(BufferBase::ClearValue::NonZero);
+            CommandRecordingContext* commandContext =
+                ToBackend(GetDevice())->GetPendingCommandContext();
+            ClearBuffer(commandContext, static_cast<uint8_t>(1u));
         }
 
         return {};
@@ -132,16 +135,20 @@ namespace dawn_native { namespace metal {
         mMtlBuffer = nil;
     }
 
-    void Buffer::ClearBuffer(BufferBase::ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
-        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
-        const uint8_t clearBufferValue = 1;
+    void Buffer::EnsureBufferInitializedToZero(CommandRecordingContext* commandContext) {
+        if (!IsLazyInitialized()) {
+            ClearBuffer(commandContext, static_cast<uint8_t>(0u));
 
-        Device* device = ToBackend(GetDevice());
-        CommandRecordingContext* commandContext = device->GetPendingCommandContext();
+            SetIsLazyInitialized();
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+    }
+
+    void Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {
+        ASSERT(commandContext != nullptr);
         [commandContext->EnsureBlit() fillBuffer:mMtlBuffer
                                            range:NSMakeRange(0, GetSize())
-                                           value:clearBufferValue];
+                                           value:clearValue];
     }
 
 }}  // namespace dawn_native::metal

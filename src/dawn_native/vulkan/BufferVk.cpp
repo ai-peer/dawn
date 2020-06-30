@@ -166,7 +166,7 @@ namespace dawn_native { namespace vulkan {
             "vkBindBufferMemory"));
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            ClearBuffer(device->GetPendingRecordingContext(), ClearValue::NonZero);
+            ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
         }
 
         return {};
@@ -287,13 +287,17 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext, ClearValue clearValue) {
+    void Buffer::EnsureBufferInitializedToZero(CommandRecordingContext* recordingContext) {
+        if (!IsLazyInitialized()) {
+            ClearBuffer(recordingContext, 0u);
+
+            SetIsLazyInitialized();
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+    }
+
+    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext, uint32_t clearValue) {
         ASSERT(recordingContext != nullptr);
-
-        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
-        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
-
-        constexpr uint32_t kClearBufferValue = 0x01010101;
 
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
@@ -301,6 +305,6 @@ namespace dawn_native { namespace vulkan {
         // TODO(jiawei.shao@intel.com): find out why VK_WHOLE_SIZE doesn't work on old Windows Intel
         // Vulkan drivers.
         device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, 0, GetSize(),
-                                 kClearBufferValue);
+                                 clearValue);
     }
 }}  // namespace dawn_native::vulkan
