@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e2a2d692_23ce797c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a705cfd_b613be5d",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7c0092e_b8aaf838",
         "filename": "src/dawn_native/CommandEncoder.h",
         "patchSetId": 3
@@ -39,6 +57,30 @@
       "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0173d61f_bf2e13e8",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7c0092e_b8aaf838",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "0d504579_65efd4ea",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adb34176_47a59633",
+      "range": {
+        "startLine": 74,
+        "startChar": 32,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fde2014_e6ec8d40",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 3
@@ -79,6 +145,24 @@
       "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec78be5f_eac839ac",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "OK, do I need to remove these return value of MaybeError after we implement WriteTimestamp?",
+      "parentUuid": "7fde2014_e6ec8d40",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "b2530e79_bfa77abe",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cadb458_cba37ade",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6cf8a7b_7d7e07a8",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 3
@@ -113,6 +215,24 @@
       "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aa6fe41_4c122c00",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6cf8a7b_7d7e07a8",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
