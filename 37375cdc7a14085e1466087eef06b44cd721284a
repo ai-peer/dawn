@@ -120,6 +120,24 @@
       "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de84fd56_7cfa257b",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T17:35:09Z",
+      "side": 1,
+      "message": "The definition of the struct is here: https://source.chromium.org/chromium/chromium/src/+/master:out/android-Debug/gen/third_party/dawn/src/dawn_wire/WireCmd_autogen.h;l\u003d838;drc\u003df1f80505b7ff8597efde4e587d495cf5eeee5596\n\nThe dictionaries used in the template are computed (for the wire) here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/generator/dawn_json_generator.py;l\u003d333?q\u003ddawn_json",
+      "parentUuid": "27157f07_dbd15e88",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
