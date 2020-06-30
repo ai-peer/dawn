@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53944791_b971e73d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-30T13:44:51Z",
+      "side": 1,
+      "message": "Ref\u003cBindGroupLayoutBase\u003e doesn\u0027t have a MakeError function.\n\nPreviously we used BindGroupLayoutBase::MakeError.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6d4ee4e_df02d7a8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-30T13:44:51Z",
+      "side": 1,
+      "message": "Returning mEmptyBindGroupLayout directly causes problems: the constructor Result(Ref\u003cU\u003e\u0026\u0026 success) cannot be used there, because there is no known conversion from \u0027Ref\u003cdawn_native::BindGroupLayoutBase\u003e\u0027 to \u0027Ref\u003cdawn_native::BindGroupLayoutBase\u003e \u0026\u0026\u0027 - that\u0027s the compilation message.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b2832c8_7b06960c",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-30T13:44:51Z",
+      "side": 1,
+      "message": "This makes GetOrCreateBGL have different type than all the other similar functions like GetOrCreateComputePipeline, GetOrCreatePipelineLayout etc.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
