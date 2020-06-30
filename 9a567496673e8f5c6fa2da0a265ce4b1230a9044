@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "375b1990_6e250767",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T17:36:32Z",
+      "side": 1,
+      "message": "Ah I see, if the buffer isn\u0027t in the correct state, you suggest that it returns nullptr without a validation error as the nullptr is enough to say that it isn\u0027t in a mapped state. I can change the logic in a follow-up if that\u0027s what you meant.",
+      "parentUuid": "974632bb_dd494d97",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05805e35_8624a2ac",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
