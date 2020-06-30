@@ -310,18 +310,22 @@ namespace dawn_native {
         if (GetDevice()->ConsumedError(ValidateGetMappedRange(true))) {
             return nullptr;
         }
-        if (mStagingBuffer != nullptr) {
-            return mStagingBuffer->GetMappedPointer();
-        }
-        return GetMappedPointerImpl();
+        return GetMappedRangeInternal();
     }
 
     const void* BufferBase::GetConstMappedRange() {
         if (GetDevice()->ConsumedError(ValidateGetMappedRange(false))) {
             return nullptr;
         }
+        return GetMappedRangeInternal();
+    }
+
+    void* BufferBase::GetMappedRangeInternal() {
         if (mStagingBuffer != nullptr) {
             return mStagingBuffer->GetMappedPointer();
+        }
+        if (mSize == 0) {
+            return reinterpret_cast<uint8_t*>(intptr_t(0xCAFED00D));
         }
         return GetMappedPointerImpl();
     }
@@ -428,8 +432,13 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateGetMappedRange(bool writable) const {
-        DAWN_TRY(GetDevice()->ValidateIsAlive());
-        DAWN_TRY(GetDevice()->ValidateObject(this));
+        // Note that:
+        //
+        //   - We don't validate that the device is alive because the application can ask for the
+        //     mapped pointer before it knows, and even Dawn knows, that the device was lost, and
+        //     still needs to work properly.
+        //   - We don't validate that the object is alive because we need to return mapped pointers
+        //     for error buffers too.
 
         switch (mState) {
             // Writeable Buffer::GetMappedRange is always allowed when mapped at creation.
@@ -485,7 +494,7 @@ namespace dawn_native {
     }
 
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
-        void* data = GetMappedPointerImpl();
+        void* data = GetMappedRangeInternal();
         if (isWrite) {
             CallMapWriteCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
         } else {

@@ -825,3 +825,32 @@ TEST_F(BufferValidationTest, GetMappedRangeValidCases) {
         ASSERT_EQ(buf.GetConstMappedRange(), mappedPointer);
     }
 }
+
+// Test valid cases to call GetMappedRange on an error buffer.
+TEST_F(BufferValidationTest, GetMappedRangeOnErrorBuffer) {
+    wgpu::BufferDescriptor desc;
+    desc.size = 4;
+    desc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead;
+
+    // GetMappedRange after CreateBufferMapped non-OOM returns a non-nullptr.
+    {
+        wgpu::CreateBufferMappedResult result;
+        ASSERT_DEVICE_ERROR(result = CreateBufferMapped(
+                                4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
+
+        ASSERT_NE(result.buffer.GetConstMappedRange(), nullptr);
+        ASSERT_EQ(result.buffer.GetConstMappedRange(), result.buffer.GetMappedRange());
+        ASSERT_EQ(result.buffer.GetConstMappedRange(), result.data);
+    }
+
+    // GetMappedRange after CreateBufferMapped OOM case returns nullptr.
+    {
+        wgpu::CreateBufferMappedResult result;
+        ASSERT_DEVICE_ERROR(result = CreateBufferMapped(
+                                1 << 31, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
+
+        ASSERT_EQ(result.buffer.GetConstMappedRange(), nullptr);
+        ASSERT_EQ(result.buffer.GetConstMappedRange(), result.buffer.GetMappedRange());
+        ASSERT_EQ(result.buffer.GetConstMappedRange(), result.data);
+    }
+}
