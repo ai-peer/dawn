@@ -92,17 +92,18 @@ namespace dawn_native {
 
         BindGroupIndex groupIndex(groupIndexIn);
 
+        Ref<BindGroupLayoutBase> bgl = nullptr;
         if (!mLayout->GetBindGroupLayoutsMask()[groupIndex]) {
-            BindGroupLayoutBase* bgl = nullptr;
             if (GetDevice()->ConsumedError(GetDevice()->GetOrCreateEmptyBindGroupLayout(), &bgl)) {
                 return BindGroupLayoutBase::MakeError(GetDevice());
             }
-            return bgl;
+        } else {
+            bgl = mLayout->GetBindGroupLayout(groupIndex);
         }
 
-        BindGroupLayoutBase* bgl = mLayout->GetBindGroupLayout(groupIndex);
         bgl->Reference();
-        return bgl;
+        return bgl.Get();
     }
 
 }  // namespace dawn_native
+

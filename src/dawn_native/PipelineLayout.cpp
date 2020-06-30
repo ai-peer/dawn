@@ -222,7 +222,11 @@ namespace dawn_native {
 
             // We should never produce a bad descriptor.
             ASSERT(!ValidateBindGroupLayoutDescriptor(device, &desc).IsError());
-            DAWN_TRY_ASSIGN(bindGroupLayouts[group], device->GetOrCreateBindGroupLayout(&desc));
+
+            Ref<BindGroupLayoutBase> bgl;
+            DAWN_TRY_ASSIGN(bgl, device->GetOrCreateBindGroupLayout(&desc));
+            bgl->Reference();
+            bindGroupLayouts[group] = bgl.Get();
         }
 
         PipelineLayoutDescriptor desc = {};
