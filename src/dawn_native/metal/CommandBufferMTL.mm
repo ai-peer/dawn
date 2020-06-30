@@ -679,7 +679,7 @@ namespace dawn_native { namespace metal {
         FreeCommands(&mCommands);
     }
 
-    void CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
+    MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
         const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
         size_t nextPassNumber = 0;
 
@@ -704,7 +704,7 @@ namespace dawn_native { namespace metal {
                     LazyClearForPass(passResourceUsages[nextPassNumber]);
                     commandContext->EndBlit();
 
-                    EncodeComputePass(commandContext);
+                    DAWN_TRY(EncodeComputePass(commandContext));
 
                     nextPassNumber++;
                     break;
@@ -718,7 +718,7 @@ namespace dawn_native { namespace metal {
 
                     LazyClearRenderPassAttachments(cmd);
                     MTLRenderPassDescriptor* descriptor = CreateMTLRenderPassDescriptor(cmd);
-                    EncodeRenderPass(commandContext, descriptor, cmd->width, cmd->height);
+                    DAWN_TRY(EncodeRenderPass(commandContext, descriptor, cmd->width, cmd->height));
 
                     nextPassNumber++;
                     break;
@@ -827,6 +827,10 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -835,9 +839,10 @@ namespace dawn_native { namespace metal {
         }
 
         commandContext->EndBlit();
+        return {};
     }
 
-    void CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext) {
+    MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext) {
         ComputePipeline* lastPipeline = nullptr;
         StorageBufferLengthTracker storageBufferLengths = {};
         BindGroupTracker bindGroups(&storageBufferLengths);
@@ -850,7 +855,7 @@ namespace dawn_native { namespace metal {
                 case Command::EndComputePass: {
                     mCommands.NextCommand<EndComputePassCmd>();
                     commandContext->EndCompute();
-                    return;
+                    return {};
                 }
 
                 case Command::Dispatch: {
@@ -928,6 +933,10 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -939,10 +948,10 @@ namespace dawn_native { namespace metal {
         UNREACHABLE();
     }
 
-    void CommandBuffer::EncodeRenderPass(CommandRecordingContext* commandContext,
-                                         MTLRenderPassDescriptor* mtlRenderPass,
-                                         uint32_t width,
-                                         uint32_t height) {
+    MaybeError CommandBuffer::EncodeRenderPass(CommandRecordingContext* commandContext,
+                                               MTLRenderPassDescriptor* mtlRenderPass,
+                                               uint32_t width,
+                                               uint32_t height) {
         ASSERT(mtlRenderPass);
 
         Device* device = ToBackend(GetDevice());
@@ -986,7 +995,7 @@ namespace dawn_native { namespace metal {
             // If we need to use a temporary resolve texture we need to copy the result of MSAA
             // resolve back to the true resolve targets.
             if (useTemporaryResolveTexture) {
-                EncodeRenderPass(commandContext, mtlRenderPass, width, height);
+                DAWN_TRY(EncodeRenderPass(commandContext, mtlRenderPass, width, height));
                 for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
                     if (trueResolveTextures[i] == nil) {
                         continue;
@@ -999,7 +1008,7 @@ namespace dawn_native { namespace metal {
                     [temporaryResolveTextures[i] release];
                     temporaryResolveTextures[i] = nil;
                 }
-                return;
+                return {};
             }
         }
 
@@ -1022,19 +1031,20 @@ namespace dawn_native { namespace metal {
 
             // If we found a store + MSAA resolve we need to resolve in a different render pass.
             if (hasStoreAndMSAAResolve) {
-                EncodeRenderPass(commandContext, mtlRenderPass, width, height);
+                DAWN_TRY(EncodeRenderPass(commandContext, mtlRenderPass, width, height));
                 ResolveInAnotherRenderPass(commandContext, mtlRenderPass, resolveTextures);
-                return;
+                return {};
             }
         }
 
-        EncodeRenderPassInternal(commandContext, mtlRenderPass, width, height);
+        DAWN_TRY(EncodeRenderPassInternal(commandContext, mtlRenderPass, width, height));
+        return {};
     }
 
-    void CommandBuffer::EncodeRenderPassInternal(CommandRecordingContext* commandContext,
-                                                 MTLRenderPassDescriptor* mtlRenderPass,
-                                                 uint32_t width,
-                                                 uint32_t height) {
+    MaybeError CommandBuffer::EncodeRenderPassInternal(CommandRecordingContext* commandContext,
+                                                       MTLRenderPassDescriptor* mtlRenderPass,
+                                                       uint32_t width,
+                                                       uint32_t height) {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
@@ -1224,7 +1234,7 @@ namespace dawn_native { namespace metal {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
                     commandContext->EndRender();
-                    return;
+                    return {};
                 }
 
                 case Command::SetStencilReference: {
@@ -1289,6 +1299,10 @@ namespace dawn_native { namespace metal {
                         }
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {
