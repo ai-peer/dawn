@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "3552c8cc_96cbb0d1",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T09:06:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb1c1721_7b5a10cb",
+      "range": {
+        "startLine": 65,
+        "startChar": 41,
+        "endLine": 65,
+        "endChar": 44
+      },
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "267eda59_a707ad0e",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
@@ -200,6 +224,24 @@
     },
     {
       "key": {
+        "uuid": "b97d7280_42d54935",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T09:06:10Z",
+      "side": 1,
+      "message": "Oh I thought we also checked the size. Nevermind :)",
+      "parentUuid": "39349986_7ed822d4",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13d6f352_f3da0c03",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -229,6 +271,24 @@
       "side": 1,
       "message": "I can make one BGL with both uniform and storage buffer, if it\u0027s more efficient, but it will probably make the code a bit less clear.",
       "parentUuid": "13d6f352_f3da0c03",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29cdc8ea_7d715d9b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T09:06:10Z",
+      "side": 1,
+      "message": "Sorry what I meant is that we should test both ReadonlyStorageBuffer and StorageBuffer since they are different wgpu::BindingType and could take different code paths in the BindGroupDescriptor validation.",
+      "parentUuid": "f3c126a4_da75c9b2",
       "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
