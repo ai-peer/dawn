@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "08392a43_21cbf267",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T09:02:09Z",
+      "side": 1,
+      "message": "Oh sorry I meant we could use UNREACHABLE like in OpenGL because Metal never advertises support for timestamps I think?\n\nBut this change LGTM and we can keep it, it will be needed in the future anyway.",
+      "parentUuid": "ec78be5f_eac839ac",
+      "revId": "3fc6bfc4f8ad04157ae2484316ecdf5d5d008808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cadb458_cba37ade",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
