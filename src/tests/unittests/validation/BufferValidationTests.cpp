@@ -851,7 +851,7 @@ TEST_F(BufferValidationTest, DISABLED_GetMappedRangeOnErrorBuffer) {
         ASSERT_DEVICE_ERROR(result = CreateBufferMapped(
                                 1 << 31, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-        ASSERT_EQ(result.buffer.GetConstMappedRange(), nullptr);
+        ASSERT_NE(result.buffer.GetConstMappedRange(), nullptr);
         ASSERT_EQ(result.buffer.GetConstMappedRange(), result.buffer.GetMappedRange());
         ASSERT_EQ(result.buffer.GetConstMappedRange(), result.data);
     }
