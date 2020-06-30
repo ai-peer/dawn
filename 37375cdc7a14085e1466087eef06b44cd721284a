@@ -102,6 +102,24 @@
       "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27157f07_dbd15e88",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-30T17:30:51Z",
+      "side": 1,
+      "message": "Actually I meant the members of the command struct (DeviceInjectErrorCmd). I\u0027m guessing it\u0027s write_command_struct in WireCmd.h, but I can\u0027t figure out how the members dictionary gets populated (e.g., the \"type\" member in this case). Not important to this CL, just trying to further my understanding.",
+      "parentUuid": "ffe56e45_d6635f2b",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
