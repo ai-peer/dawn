@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9974def9_05fb5315",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "nit: spell out simple types. We usually use auto for horrible things like unordered_map iterators and similar complex types.\n\nBut here this could simply be\n\n  DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, GetOrCreateBindGroupLayout(\u0026desc);\n\nThere\u0027s no need to handle errors as it can be done by callers. So the rest of the function could be:\n\n  return {mEmptyBindGroupLayout.Clone()}; // Although we don\u0027t have Clone yet.\n\nBut in general it seems that empty bindgroup creation should never fail so maybe we could do it at creation time.",
+      "range": {
+        "startLine": 423,
+        "startChar": 12,
+        "endLine": 423,
+        "endChar": 16
+      },
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53944791_b971e73d",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2020-06-30T13:44:51Z",
       "side": 1,
       "message": "Ref\u003cBindGroupLayoutBase\u003e doesn\u0027t have a MakeError function.\n\nPreviously we used BindGroupLayoutBase::MakeError.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4246444_1d50de84",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "See comment above, this shouldn\u0027t be needed.",
+      "parentUuid": "53944791_b971e73d",
       "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -36,6 +77,41 @@
     },
     {
       "key": {
+        "uuid": "6c01d220_fac144b5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "This requires an rvalue reference, so passing a reference doesn\u0027t work. If we had Clone(), the following would work:\n\n  return {mEmptyBindGroupLayout.Clone()};",
+      "parentUuid": "d6d4ee4e_df02d7a8",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35b51fe3_a3bae705",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "This is an extra reference that shouldn\u0027t be needed. Instead use bgl-\u003eDetach to extract the pointer from bgl while keeping the reference.\n\nNot that CreateBindGroupLayoutInternal could also return a ResultOrError\u003cRef\u003e and CreateBindGroup would be the one that extracts the reference.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b2832c8_7b06960c",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 1
@@ -47,6 +123,41 @@
       "writtenOn": "2020-06-30T13:44:51Z",
       "side": 1,
       "message": "This makes GetOrCreateBGL have different type than all the other similar functions like GetOrCreateComputePipeline, GetOrCreatePipelineLayout etc.",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58fcad8f_01c3eba7",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "We should change all other functions to have the similar types.",
+      "parentUuid": "9b2832c8_7b06960c",
+      "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e940e30b_dc1207d4",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T14:22:38Z",
+      "side": 1,
+      "message": "ditto: use Detach()",
       "revId": "abc5caf1c9662014716cdd5a4263134661be2fad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
