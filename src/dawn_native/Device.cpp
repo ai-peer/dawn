@@ -207,6 +207,7 @@ namespace dawn_native {
             mDeviceLostCallback = nullptr;
         }
 
+        DAWN_DEBUG() << message;
         // Still forward device loss and internal errors to the error scopes so they all reject.
         mCurrentErrorScope->HandleError(ToWGPUErrorType(type), message);
     }
