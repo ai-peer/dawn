@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "936b72b2_af55647c",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T16:24:27Z",
+      "side": 1,
+      "message": "This static should be removed and all commands put in an anonymous namespace.",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "726b58a0_3271115e",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T16:24:27Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2786f03_79df2043",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T16:24:27Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d722a9e4_547a4e7d",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T16:24:27Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "38691b45_90194b4d",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 6
@@ -16,6 +84,24 @@
       "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffe56e45_d6635f2b",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T16:24:27Z",
+      "side": 1,
+      "message": "I\u0027m not sure which member vars you\u0027re referring to. ClientDeviceInjectError is generated at [1], put in the proctable at [2] and calls Device::InjectError at [3].",
+      "parentUuid": "38691b45_90194b4d",
+      "revId": "37375cdc7a14085e1466087eef06b44cd721284a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
