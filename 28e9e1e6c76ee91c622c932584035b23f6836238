@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00c35c7e_60d403ce",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-06-30T14:12:41Z",
+      "side": 1,
+      "message": "Would it be possible / make sense to move the contents of Fence::Initialize into the constructor, and use placement new?\n\nAlternatively (and not new to this patch), FenceAllocator().New() could even be templated a la make_unique() and call the allocator and placement new with the args in a single call. Assuming that the call to Fence::Initialize isn\u0027t dependent on the Cmd creation in some way. Just a thought.",
+      "revId": "28e9e1e6c76ee91c622c932584035b23f6836238",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
