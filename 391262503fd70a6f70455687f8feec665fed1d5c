@@ -16,6 +16,24 @@
       "revId": "391262503fd70a6f70455687f8feec665fed1d5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e455e27_964bf4de",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-30T17:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04250c4b_1723c0a7",
+      "revId": "391262503fd70a6f70455687f8feec665fed1d5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
