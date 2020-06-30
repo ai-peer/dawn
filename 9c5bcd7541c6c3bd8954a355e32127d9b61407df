@@ -19,6 +19,47 @@
     },
     {
       "key": {
+        "uuid": "c36f55de_30f0bf50",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T19:21:11Z",
+      "side": 1,
+      "message": "I think I agree it could be entirely inside CopyFromStagingBuffer. And I don\u0027t think we need the ensureDestinationBufferInitialized argument. We only ever pass |false| here when WriteBuffer does not cover the whole buffer, and in Buffer::CopyFromStagingBuffer where the full range is always used.",
+      "parentUuid": "f73d3a59_666da76c",
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2da36e4_92dfe89c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T19:21:11Z",
+      "side": 1,
+      "message": "nit: I think this would be better named \"IsInitialized()\" and \"SetIsInitialized()\"",
+      "range": {
+        "startLine": 336,
+        "startChar": 13,
+        "endLine": 336,
+        "endChar": 30
+      },
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "725a820c_833db460",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 9
@@ -34,6 +75,29 @@
         "startLine": 93,
         "startChar": 40,
         "endLine": 93,
+        "endChar": 64
+      },
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef3aa73_d3ebeb0c",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T19:21:11Z",
+      "side": 1,
+      "message": "nit: also uint8_t(0u)",
+      "range": {
+        "startLine": 142,
+        "startChar": 40,
+        "endLine": 142,
         "endChar": 64
       },
       "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
