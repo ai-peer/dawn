@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "3d203105_18ecd624",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T18:17:08Z",
+      "side": 1,
+      "message": "Yea, I think that would be best for 1:1 mapping with the JS API. Maybe in the future, we\u0027ll need to have some consistent way of mapping JS exceptions to some kind of error for webgpu-native. Right now, these cases are relatively few though.",
+      "parentUuid": "375b1990_6e250767",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05805e35_8624a2ac",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
