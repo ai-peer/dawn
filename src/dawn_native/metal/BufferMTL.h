@@ -41,7 +41,7 @@ namespace dawn_native { namespace metal {
         void* GetMappedPointerImpl() override;
 
         bool IsMapWritable() const override;
-        MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
+        MaybeError MapAtCreationImpl() override;
 
         void ClearBuffer(BufferBase::ClearValue clearValue);
 
