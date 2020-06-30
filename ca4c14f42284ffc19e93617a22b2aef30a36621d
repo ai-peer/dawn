@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d942d6f7_647145ab",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-30T06:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47bc8455_dabe07da",
+      "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5b8e0d1_b0491bff",
         "filename": "src/dawn_native/Buffer.h",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-29T16:04:44Z",
       "side": 1,
       "message": "nit: this would become protected.",
+      "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08948c55_78529ca9",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-30T06:52:59Z",
+      "side": 1,
+      "message": "No. When writeBuffer or the copy covers the whole buffer, we need to call this function outside  class Buffer to label the buffer as initialized without calling EnsureBufferInitializedToZero().\n\nFor example, this function is called in Queue::WriteBufferImpl().",
+      "parentUuid": "d5b8e0d1_b0491bff",
       "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c9f2c9_cc3fdc72",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-30T06:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c729535_323083ea",
+      "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "fb00455e_99ec1369",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-30T06:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff28b879_a29d0c43",
+      "range": {
+        "startLine": 339,
+        "startChar": 35,
+        "endLine": 339,
+        "endChar": 56
+      },
+      "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74204745_cfe3c632",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 6
@@ -96,6 +174,30 @@
       "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09db5d7d_0654b6a5",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-30T06:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74204745_cfe3c632",
+      "range": {
+        "startLine": 56,
+        "startChar": 79,
+        "endLine": 56,
+        "endChar": 88
+      },
+      "revId": "ca4c14f42284ffc19e93617a22b2aef30a36621d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
