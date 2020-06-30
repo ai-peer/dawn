@@ -336,7 +336,8 @@ namespace dawn_native {
             return {};
         }
 
-        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0, GetSize()));
+        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), false, 0, this, 0,
+                                                      GetSize()));
 
         DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
         uploader->ReleaseStagingBuffer(std::move(mStagingBuffer));
@@ -441,6 +442,18 @@ namespace dawn_native {
 
     bool BufferBase::IsMapped() const {
         return mState == BufferState::Mapped;
+    }
+
+    bool BufferBase::IsLazyInitialized() const {
+        return mIsLazyInitialized;
+    }
+
+    void BufferBase::SetIsLazyInitialized() {
+        mIsLazyInitialized = true;
+    }
+
+    bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
+        return offset == 0 && size == GetSize();
     }
 
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {

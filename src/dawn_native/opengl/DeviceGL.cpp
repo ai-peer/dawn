@@ -189,6 +189,7 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               bool ensureDestinationBufferInitialized,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,

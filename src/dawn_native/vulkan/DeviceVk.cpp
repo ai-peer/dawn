@@ -578,6 +578,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               bool ensureDestinationBufferInitialized,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
@@ -596,6 +597,10 @@ namespace dawn_native { namespace vulkan {
         // Insert pipeline barrier to ensure correct ordering with previous memory operations on the
         // buffer.
         CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+        if (ensureDestinationBufferInitialized) {
+            ToBackend(destination)->EnsureBufferInitializedToZero(recordingContext);
+        }
+
         ToBackend(destination)->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
         VkBufferCopy copy;

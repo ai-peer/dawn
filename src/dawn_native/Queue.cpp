@@ -117,6 +117,15 @@ namespace dawn_native {
             return {};
         }
 
+        bool ensureDestinationBufferInitialized = false;
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            if (!buffer->IsFullBufferRange(bufferOffset, size)) {
+                ensureDestinationBufferInitialized = true;
+            } else {
+                buffer->SetIsLazyInitialized();
+            }
+        }
+
         DeviceBase* device = GetDevice();
 
         UploadHandle uploadHandle;
@@ -126,8 +135,9 @@ namespace dawn_native {
 
         memcpy(uploadHandle.mappedBuffer, data, size);
 
-        return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
-                                               buffer, bufferOffset, size);
+        return device->CopyFromStagingToBuffer(
+            uploadHandle.stagingBuffer, ensureDestinationBufferInitialized,
+            uploadHandle.startOffset, buffer, bufferOffset, size);
     }
 
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,

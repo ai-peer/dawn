@@ -246,6 +246,7 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               bool ensureDestinationBufferInitialized,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
@@ -253,6 +254,10 @@ namespace dawn_native { namespace metal {
         // Metal validation layers forbid  0-sized copies, assert it is skipped prior to calling
         // this function.
         ASSERT(size != 0);
+
+        if (ensureDestinationBufferInitialized) {
+            ToBackend(destination)->EnsureBufferInitializedToZero(GetPendingCommandContext());
+        }
 
         id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
         id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();

@@ -328,6 +328,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               bool ensureDestinationBufferInitialized,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
@@ -336,14 +337,30 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext());
 
         Buffer* dstBuffer = ToBackend(destination);
-        StagingBuffer* srcBuffer = ToBackend(source);
-        dstBuffer->TrackUsageAndTransitionNow(commandRecordingContext, wgpu::BufferUsage::CopyDst);
+        if (ensureDestinationBufferInitialized) {
+            DAWN_TRY(dstBuffer->EnsureBufferInitializedToZero(commandRecordingContext));
+        }
 
-        commandRecordingContext->GetCommandList()->CopyBufferRegion(
-            dstBuffer->GetD3D12Resource(), destinationOffset, srcBuffer->GetResource(),
-            sourceOffset, size);
+        CopyFromStagingToBufferImpl(commandRecordingContext, source, sourceOffset, destination,
+                                    destinationOffset, size);
 
         return {};
+    }
+
+    void Device::CopyFromStagingToBufferImpl(CommandRecordingContext* commandContext,
+                                             StagingBufferBase* source,
+                                             uint64_t sourceOffset,
+                                             BufferBase* destination,
+                                             uint64_t destinationOffset,
+                                             uint64_t size) {
+        ASSERT(commandContext != nullptr);
+        Buffer* dstBuffer = ToBackend(destination);
+        StagingBuffer* srcBuffer = ToBackend(source);
+        dstBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
+
+        commandContext->GetCommandList()->CopyBufferRegion(
+            dstBuffer->GetD3D12Resource(), destinationOffset, srcBuffer->GetResource(),
+            sourceOffset, size);
     }
 
     void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {
