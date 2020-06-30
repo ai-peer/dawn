@@ -292,6 +292,24 @@
       "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3452c713_e1a9b3b3",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-06-30T09:29:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29cdc8ea_7d715d9b",
+      "revId": "8dd25133ceca286efc590197ef73db5b42cf28c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
