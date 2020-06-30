@@ -679,7 +679,7 @@ namespace dawn_native { namespace metal {
         FreeCommands(&mCommands);
     }
 
-    void CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
+    MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
         const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
         size_t nextPassNumber = 0;
 
@@ -827,6 +827,10 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 default: {
                     UNREACHABLE();
                     break;
@@ -837,7 +841,7 @@ namespace dawn_native { namespace metal {
         commandContext->EndBlit();
     }
 
-    void CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext) {
+    MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext) {
         ComputePipeline* lastPipeline = nullptr;
         StorageBufferLengthTracker storageBufferLengths = {};
         BindGroupTracker bindGroups(&storageBufferLengths);
@@ -926,6 +930,10 @@ namespace dawn_native { namespace metal {
                     [encoder pushDebugGroup:mtlLabel];
                     [mtlLabel release];
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {
@@ -1031,10 +1039,10 @@ namespace dawn_native { namespace metal {
         EncodeRenderPassInternal(commandContext, mtlRenderPass, width, height);
     }
 
-    void CommandBuffer::EncodeRenderPassInternal(CommandRecordingContext* commandContext,
-                                                 MTLRenderPassDescriptor* mtlRenderPass,
-                                                 uint32_t width,
-                                                 uint32_t height) {
+    MaybeError CommandBuffer::EncodeRenderPassInternal(CommandRecordingContext* commandContext,
+                                                       MTLRenderPassDescriptor* mtlRenderPass,
+                                                       uint32_t width,
+                                                       uint32_t height) {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
@@ -1289,6 +1297,10 @@ namespace dawn_native { namespace metal {
                         }
                     }
                     break;
+                }
+
+                case Command::WriteTimestamp: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
                 default: {
