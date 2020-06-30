@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c456569d_75645b64",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T17:09:26Z",
+      "side": 1,
+      "message": "nit: This can return a plain BindGroupLayoutBase* now. Also ASSERT mEmptyBindGroupLayout is non-null",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 428,
+        "endChar": 39
+      },
+      "revId": "deb55da38e79504c16a3db139a5a3d9a15d7e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
