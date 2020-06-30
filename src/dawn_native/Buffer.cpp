@@ -32,20 +32,12 @@ namespace dawn_native {
 
         class ErrorBuffer final : public BufferBase {
           public:
-            ErrorBuffer(DeviceBase* device) : BufferBase(device, ObjectBase::kError) {
-            }
-
-            static ErrorBuffer* MakeMapped(DeviceBase* device,
-                                           uint64_t size,
-                                           uint8_t** mappedPointer) {
-                ASSERT(mappedPointer != nullptr);
-
-                ErrorBuffer* buffer = new ErrorBuffer(device);
-                buffer->mFakeMappedData =
-                    std::unique_ptr<uint8_t[]>(new (std::nothrow) uint8_t[size]);
-                *mappedPointer = buffer->mFakeMappedData.get();
-
-                return buffer;
+            ErrorBuffer(DeviceBase* device, const BufferDescriptor* descriptor)
+                : BufferBase(device, descriptor, ObjectBase::kError) {
+                if (descriptor->mappedAtCreation) {
+                    mFakeMappedData =
+                        std::unique_ptr<uint8_t[]>(new (std::nothrow) uint8_t[descriptor->size]);
+                }
             }
 
             void ClearMappedData() {
@@ -58,7 +50,7 @@ namespace dawn_native {
                 return false;
             }
 
-            MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override {
+            MaybeError MapAtCreationImpl() override {
                 UNREACHABLE();
                 return {};
             }
@@ -125,8 +117,13 @@ namespace dawn_native {
         }
     }
 
-    BufferBase::BufferBase(DeviceBase* device, ObjectBase::ErrorTag tag)
+    BufferBase::BufferBase(DeviceBase* device,
+                           const BufferDescriptor* descriptor,
+                           ObjectBase::ErrorTag tag)
         : ObjectBase(device, tag), mState(BufferState::Unmapped) {
+        if (descriptor->mappedAtCreation) {
+            mState = BufferState::MappedAtCreation;
+        }
     }
 
     BufferBase::~BufferBase() {
@@ -138,15 +135,8 @@ namespace dawn_native {
     }
 
     // static
-    BufferBase* BufferBase::MakeError(DeviceBase* device) {
-        return new ErrorBuffer(device);
-    }
-
-    // static
-    BufferBase* BufferBase::MakeErrorMapped(DeviceBase* device,
-                                            uint64_t size,
-                                            uint8_t** mappedPointer) {
-        return ErrorBuffer::MakeMapped(device, size, mappedPointer);
+    BufferBase* BufferBase::MakeError(DeviceBase* device, const BufferDescriptor* descriptor) {
+        return new ErrorBuffer(device, descriptor);
     }
 
     uint64_t BufferBase::GetSize() const {
@@ -159,23 +149,19 @@ namespace dawn_native {
         return mUsage;
     }
 
-    MaybeError BufferBase::MapAtCreation(uint8_t** mappedPointer) {
+    MaybeError BufferBase::MapAtCreation() {
         ASSERT(!IsError());
-        ASSERT(mappedPointer != nullptr);
-
         mState = BufferState::MappedAtCreation;
 
         // 0-sized buffers are not supposed to be written to, Return back any non-null pointer.
         // Handle 0-sized buffers first so we don't try to map them in the backend.
         if (mSize == 0) {
-            *mappedPointer = reinterpret_cast<uint8_t*>(intptr_t(0xCAFED00D));
             return {};
         }
 
         // Mappable buffers don't use a staging buffer and are just as if mapped through MapAsync.
         if (IsMapWritable()) {
-            DAWN_TRY(MapAtCreationImpl(mappedPointer));
-            ASSERT(*mappedPointer != nullptr);
+            DAWN_TRY(MapAtCreationImpl());
             return {};
         }
 
@@ -185,8 +171,7 @@ namespace dawn_native {
         // many small buffers.
         DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
 
-        ASSERT(mStagingBuffer->GetMappedPointer() != nullptr);
-        *mappedPointer = reinterpret_cast<uint8_t*>(mStagingBuffer->GetMappedPointer());
+        // XXX memset 0?
 
         return {};
     }
@@ -340,7 +325,8 @@ namespace dawn_native {
         if (IsError()) {
             // It is an error to call Destroy() on an ErrorBuffer, but we still need to reclaim the
             // fake mapped staging data.
-            reinterpret_cast<ErrorBuffer*>(this)->ClearMappedData();
+            static_cast<ErrorBuffer*>(this)->ClearMappedData();
+            mState = BufferState::Destroyed;
         }
         if (GetDevice()->ConsumedError(ValidateDestroy())) {
             return;
@@ -379,7 +365,8 @@ namespace dawn_native {
         if (IsError()) {
             // It is an error to call Unmap() on an ErrorBuffer, but we still need to reclaim the
             // fake mapped staging data.
-            reinterpret_cast<ErrorBuffer*>(this)->ClearMappedData();
+            static_cast<ErrorBuffer*>(this)->ClearMappedData();
+            mState = BufferState::Unmapped;
         }
         if (GetDevice()->ConsumedError(ValidateUnmap())) {
             return;
