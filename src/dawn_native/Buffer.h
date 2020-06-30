@@ -70,15 +70,6 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         ~BufferBase() override;
 
-        void CallMapReadCallback(uint32_t serial,
-                                 WGPUBufferMapAsyncStatus status,
-                                 const void* pointer,
-                                 uint64_t dataLength);
-        void CallMapWriteCallback(uint32_t serial,
-                                  WGPUBufferMapAsyncStatus status,
-                                  void* pointer,
-                                  uint64_t dataLength);
-
         void DestroyInternal();
 
       private:
@@ -91,6 +82,15 @@ namespace dawn_native {
 
         virtual bool IsMapWritable() const = 0;
         MaybeError CopyFromStagingBuffer();
+        void* GetMappedRangeInternal();
+        void CallMapReadCallback(uint32_t serial,
+                                 WGPUBufferMapAsyncStatus status,
+                                 const void* pointer,
+                                 uint64_t dataLength);
+        void CallMapWriteCallback(uint32_t serial,
+                                  WGPUBufferMapAsyncStatus status,
+                                  void* pointer,
+                                  uint64_t dataLength);
 
         MaybeError ValidateMap(wgpu::BufferUsage requiredUsage,
                                WGPUBufferMapAsyncStatus* status) const;
