@@ -312,6 +312,11 @@ namespace dawn_native { namespace null {
         memcpy(mBackingData.get() + bufferOffset, data, size);
     }
 
+    MaybeError Buffer::EnsureBufferInitializedToZero() {
+        SetIsInitialized();
+        return {};
+    }
+
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         MapAsyncImplCommon(serial, false);
         return {};

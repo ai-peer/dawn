@@ -44,6 +44,8 @@ namespace dawn_native { namespace d3d12 {
         bool CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const;
         bool CheckIsResidentForTesting() const;
 
+        MaybeError EnsureBufferInitializedToZero() override;
+
       private:
         ~Buffer() override;
         // Dawn API
@@ -64,7 +66,7 @@ namespace dawn_native { namespace d3d12 {
                                                   D3D12_RESOURCE_BARRIER* barrier,
                                                   wgpu::BufferUsage newUsage);
 
-        MaybeError ClearBuffer(ClearValue clearValue);
+        MaybeError ClearBuffer(uint8_t clearValue);
 
         ResourceHeapAllocation mResourceAllocation;
         bool mFixedResourceState = false;

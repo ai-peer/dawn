@@ -29,6 +29,8 @@ namespace dawn_native { namespace metal {
         static ResultOrError<Buffer*> Create(Device* device, const BufferDescriptor* descriptor);
         id<MTLBuffer> GetMTLBuffer() const;
 
+        MaybeError EnsureBufferInitializedToZero() override;
+
       private:
         using BufferBase::BufferBase;
         MaybeError Initialize();
@@ -43,7 +45,7 @@ namespace dawn_native { namespace metal {
         bool IsMapWritable() const override;
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
-        void ClearBuffer(BufferBase::ClearValue clearValue);
+        void ClearBuffer(uint8_t clearValue);
 
         id<MTLBuffer> mMtlBuffer = nil;
     };

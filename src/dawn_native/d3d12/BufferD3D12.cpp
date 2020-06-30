@@ -123,7 +123,7 @@ namespace dawn_native { namespace d3d12 {
             ToBackend(GetDevice())->AllocateMemory(heapType, resourceDescriptor, bufferUsage));
 
         if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            DAWN_TRY(ClearBuffer(ClearValue::NonZero));
+            DAWN_TRY(ClearBuffer(static_cast<uint8_t>(1u)));
         }
 
         return {};
@@ -326,11 +326,17 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetInfo().mMethod == allocationMethod;
     }
 
-    MaybeError Buffer::ClearBuffer(ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): support buffer lazy-initialization to 0.
-        ASSERT(clearValue == BufferBase::ClearValue::NonZero);
-        constexpr uint8_t kClearBufferValue = 1u;
+    MaybeError Buffer::EnsureBufferInitializedToZero() {
+        if (!IsInitialized()) {
+            DAWN_TRY(ClearBuffer(0u));
+            SetIsInitialized();
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
 
+        return {};
+    }
+
+    MaybeError Buffer::ClearBuffer(uint8_t clearValue) {
         Device* device = ToBackend(GetDevice());
 
         // The state of the buffers on UPLOAD heap must always be GENERIC_READ and cannot be
@@ -341,7 +347,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(MapBufferInternal(writeRange, reinterpret_cast<void**>(&mappedData),
                                        "D3D12 map at clear buffer"));
 
-            memset(mappedData, kClearBufferValue, GetSize());
+            memset(mappedData, clearValue, GetSize());
 
             UnmapBufferInternal(writeRange);
             mappedData = nullptr;
@@ -353,7 +359,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(GetSize(), device->GetPendingCommandSerial()));
 
-            memset(uploadHandle.mappedBuffer, kClearBufferValue, GetSize());
+            memset(uploadHandle.mappedBuffer, clearValue, GetSize());
 
             DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer,
                                                      uploadHandle.startOffset, this, 0, GetSize()));

@@ -40,8 +40,6 @@ namespace dawn_native {
         };
 
       public:
-        enum class ClearValue { Zero, NonZero };
-
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
 
         static BufferBase* MakeError(DeviceBase* device);
@@ -56,6 +54,11 @@ namespace dawn_native {
         void OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite);
 
         MaybeError ValidateCanUseOnQueueNow() const;
+
+        bool IsFullBufferRange(uint64_t offset, uint64_t size) const;
+        void SetIsInitialized();
+
+        virtual MaybeError EnsureBufferInitializedToZero() = 0;
 
         // Dawn API
         void SetSubData(uint32_t start, uint32_t count, const void* data);
@@ -80,6 +83,8 @@ namespace dawn_native {
         void DestroyInternal();
 
         bool IsMapped() const;
+
+        bool IsInitialized() const;
 
       private:
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) = 0;
@@ -108,6 +113,8 @@ namespace dawn_native {
         std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         BufferState mState;
+
+        bool mIsInitialized = false;
     };
 
 }  // namespace dawn_native
