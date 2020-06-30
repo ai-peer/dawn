@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e4ffd272_0344fa96",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T11:30:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc12765d_1e79923c",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 53
+      },
+      "revId": "a66359eda3a4c23cf8db53440523bfc7e426824c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e491e986_26e2743e",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2020-06-29T18:22:29Z",
       "side": 1,
       "message": "Nit: UnmapImpl already clears out mWrittenMapRange so we don\u0027t need to also do it here.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 41
+      },
+      "revId": "a66359eda3a4c23cf8db53440523bfc7e426824c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5fc620f_d4069e44",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-30T11:30:22Z",
+      "side": 1,
+      "message": "This is to avoid unnecessary flushes in UnmapImpl. I modified the comment to make it more clear.",
+      "parentUuid": "e491e986_26e2743e",
       "range": {
         "startLine": 298,
         "startChar": 0,
