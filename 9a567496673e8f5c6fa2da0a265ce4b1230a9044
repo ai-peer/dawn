@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "974632bb_dd494d97",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-06-30T16:18:39Z",
+      "side": 1,
+      "message": "I\u0027m still not sure I see a really strong reason of having a validation error here and making the native API diverge from the JS API.\n\nIt still returns nullptr and whoever is using Dawn that wants to be safe will need to check it anyway. If they don\u0027t, then it\u0027ll be crashy. Either need to check the pointer or put a tiny error scope around it (or both I guess), but checking the pointer can be done synchronously, just like in JS land w/ exceptions.",
+      "parentUuid": "fbcfd4be_391257cb",
+      "revId": "9a567496673e8f5c6fa2da0a265ce4b1230a9044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05805e35_8624a2ac",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
