@@ -55,7 +55,9 @@ namespace dawn_native {
                                                    const Extent3D& copySize) {
         switch (copy.texture->GetDimension()) {
             case wgpu::TextureDimension::e2D:
-                return {copy.mipLevel, 1, copy.origin.z, copySize.depth};
+                // TODO(enga): This should use the copy aspect when we have it.
+                return {copy.mipLevel, 1, copy.origin.z, copySize.depth,
+                        copy.texture->GetFormat().aspectMask};
             default:
                 UNREACHABLE();
                 return {};
@@ -71,6 +73,7 @@ namespace dawn_native {
             ASSERT(view->GetLayerCount() == 1);
             ASSERT(view->GetLevelCount() == 1);
             SubresourceRange range = view->GetSubresourceRange();
+            ASSERT(IsColor(range.aspectMask));
 
             // If the loadOp is Load, but the subresource is not initialized, use Clear instead.
             if (attachmentInfo.loadOp == wgpu::LoadOp::Load &&
@@ -86,6 +89,7 @@ namespace dawn_native {
                 TextureViewBase* resolveView = attachmentInfo.resolveTarget.Get();
                 ASSERT(resolveView->GetLayerCount() == 1);
                 ASSERT(resolveView->GetLevelCount() == 1);
+                ASSERT(IsColor(resolveView->GetAspectMask()));
                 resolveView->GetTexture()->SetIsSubresourceContentInitialized(
                     true, resolveView->GetSubresourceRange());
             }
@@ -112,35 +116,67 @@ namespace dawn_native {
             ASSERT(view->GetLevelCount() == 1);
             SubresourceRange range = view->GetSubresourceRange();
 
-            // If the depth stencil texture has not been initialized, we want to use loadop
-            // clear to init the contents to 0's
-            if (!view->GetTexture()->IsSubresourceContentInitialized(range)) {
-                if (view->GetTexture()->GetFormat().HasDepth() &&
-                    attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearDepth = 0.0f;
-                    attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
-                }
-                if (view->GetTexture()->GetFormat().HasStencil() &&
-                    attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearStencil = 0u;
-                    attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
-                }
-            }
+            for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
+                SubresourceRange singleAspectRange = range;
+                singleAspectRange.aspectMask = SingleAspect(aspect);
+                bool loadInitialized =
+                    view->GetTexture()->IsSubresourceContentInitialized(singleAspectRange);
 
-            // If these have different store ops, make them both Store because we can't track
-            // initialized state separately yet. TODO(crbug.com/dawn/145)
-            if (attachmentInfo.depthStoreOp != attachmentInfo.stencilStoreOp) {
-                attachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
-                attachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
-            }
+                bool storeInitialized;
+                switch (aspect) {
+                    case TextureAspect::Depth:
+                        // If the depth stencil texture has not been initialized, we want to use
+                        // loadop clear to init the contents to 0's
+                        if (!loadInitialized && attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
+                            attachmentInfo.clearDepth = 0.0f;
+                            attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+                        }
+                        switch (attachmentInfo.depthStoreOp) {
+                            case wgpu::StoreOp::Store:
+                                storeInitialized = true;
+                                break;
 
-            if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Store &&
-                attachmentInfo.stencilStoreOp == wgpu::StoreOp::Store) {
-                view->GetTexture()->SetIsSubresourceContentInitialized(true, range);
-            } else {
-                ASSERT(attachmentInfo.depthStoreOp == wgpu::StoreOp::Clear &&
-                       attachmentInfo.stencilStoreOp == wgpu::StoreOp::Clear);
-                view->GetTexture()->SetIsSubresourceContentInitialized(false, range);
+                            case wgpu::StoreOp::Clear:
+                                storeInitialized = false;
+                                break;
+
+                            default:
+                                UNREACHABLE();
+                                break;
+                        }
+                        break;
+
+                    case TextureAspect::Stencil:
+                        // If the depth stencil texture has not been initialized, we want to use
+                        // loadop clear to init the contents to 0's
+                        if (!loadInitialized &&
+                            attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
+                            attachmentInfo.clearStencil = 0u;
+                            attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+                        }
+
+                        switch (attachmentInfo.stencilStoreOp) {
+                            case wgpu::StoreOp::Store:
+                                storeInitialized = true;
+                                break;
+
+                            case wgpu::StoreOp::Clear:
+                                storeInitialized = false;
+                                break;
+
+                            default:
+                                UNREACHABLE();
+                                break;
+                        }
+                        break;
+
+                    default:
+                        UNREACHABLE();
+                        break;
+                }
+
+                view->GetTexture()->SetIsSubresourceContentInitialized(storeInitialized,
+                                                                       singleAspectRange);
             }
         }
     }

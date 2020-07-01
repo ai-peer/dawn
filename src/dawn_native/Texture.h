@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_TEXTURE_H_
 #define DAWNNATIVE_TEXTURE_H_
 
+#include "common/ityp_array.h"
 #include "common/ityp_bitset.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
@@ -27,7 +28,8 @@
 namespace dawn_native {
     MaybeError ValidateTextureDescriptor(const DeviceBase* device,
                                          const TextureDescriptor* descriptor);
-    MaybeError ValidateTextureViewDescriptor(const TextureBase* texture,
+    MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
+                                             const TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
     TextureViewDescriptor GetTextureViewDescriptorWithDefaults(
         const TextureBase* texture,
@@ -49,6 +51,10 @@ namespace dawn_native {
 
     enum class TextureAspect : uint8_t {
         Color,
+
+        // On D3D12, the aspect bit indices map directly to the plane indices. The order is
+        // important because if both depth and stencil are present, Depth is index 0 and Stencil is
+        // index 1. When Dawn has YUV planes, the order of the enums must match D3D12 as well.
         Depth,
         Stencil,
     };
@@ -63,8 +69,11 @@ namespace dawn_native {
         uint32_t levelCount;
         uint32_t baseArrayLayer;
         uint32_t layerCount;
+        AspectMask aspectMask;
 
-        static SubresourceRange SingleSubresource(uint32_t baseMipLevel, uint32_t baseArrayLayer);
+        static SubresourceRange SingleSubresource(uint32_t baseMipLevel,
+                                                  uint32_t baseArrayLayer,
+                                                  TextureAspect aspect);
     };
 
     class TextureBase : public ObjectBase {
@@ -88,7 +97,9 @@ namespace dawn_native {
         uint32_t GetSubresourceCount() const;
         wgpu::TextureUsage GetUsage() const;
         TextureState GetTextureState() const;
-        uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice) const;
+        uint32_t GetSubresourceIndex(uint32_t mipLevel,
+                                     uint32_t arraySlice,
+                                     TextureAspect aspect) const;
         bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
         void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
 
@@ -127,6 +138,7 @@ namespace dawn_native {
 
         // TODO(natlee@microsoft.com): Use a more optimized data structure to save space
         std::vector<bool> mIsSubresourceContentInitializedAtIndex;
+        ityp::array<TextureAspect, uint8_t, kTextureAspectCount> mPlaneIndices;
     };
 
     class TextureViewBase : public ObjectBase {
@@ -140,6 +152,7 @@ namespace dawn_native {
 
         const Format& GetFormat() const;
         wgpu::TextureViewDimension GetDimension() const;
+        const AspectMask& GetAspectMask() const;
         uint32_t GetBaseMipLevel() const;
         uint32_t GetLevelCount() const;
         uint32_t GetBaseArrayLayer() const;

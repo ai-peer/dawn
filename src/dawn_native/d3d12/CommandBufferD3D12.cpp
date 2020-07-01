@@ -975,8 +975,8 @@ namespace dawn_native { namespace d3d12 {
 
             renderPassBuilder->SetDepthStencilView(baseDescriptor);
 
-            const bool hasDepth = view->GetTexture()->GetFormat().HasDepth();
-            const bool hasStencil = view->GetTexture()->GetFormat().HasStencil();
+            const bool hasDepth = HasDepth(view->GetAspectMask());
+            const bool hasStencil = HasStencil(view->GetAspectMask());
 
             // Set depth/stencil load operations.
             if (hasDepth) {
@@ -1054,7 +1054,7 @@ namespace dawn_native { namespace d3d12 {
         commandList->OMSetRenderTargets(
             renderPassBuilder->GetColorAttachmentCount(), renderPassBuilder->GetRenderTargetViews(),
             FALSE,
-            renderPassBuilder->HasDepth()
+            renderPassBuilder->HasDepthOrStencil()
                 ? &renderPassBuilder->GetRenderPassDepthStencilDescriptor()->cpuDescriptor
                 : nullptr);
     }

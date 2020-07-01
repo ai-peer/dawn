@@ -124,8 +124,8 @@ namespace dawn_native { namespace d3d12 {
         return mColorAttachmentCount;
     }
 
-    bool RenderPassBuilder::HasDepth() const {
-        return mHasDepth;
+    bool RenderPassBuilder::HasDepthOrStencil() const {
+        return mHasDepthOrStencil;
     }
 
     const D3D12_RENDER_PASS_RENDER_TARGET_DESC*
@@ -192,7 +192,7 @@ namespace dawn_native { namespace d3d12 {
                                            wgpu::StoreOp storeOp,
                                            float clearDepth,
                                            DXGI_FORMAT format) {
-        mHasDepth = true;
+        mHasDepthOrStencil = true;
         mRenderPassDepthStencilDesc.DepthBeginningAccess.Type = D3D12BeginningAccessType(loadOp);
         if (loadOp == wgpu::LoadOp::Clear) {
             mRenderPassDepthStencilDesc.DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth =
@@ -206,6 +206,7 @@ namespace dawn_native { namespace d3d12 {
                                              wgpu::StoreOp storeOp,
                                              uint8_t clearStencil,
                                              DXGI_FORMAT format) {
+        mHasDepthOrStencil = true;
         mRenderPassDepthStencilDesc.StencilBeginningAccess.Type = D3D12BeginningAccessType(loadOp);
         if (loadOp == wgpu::LoadOp::Clear) {
             mRenderPassDepthStencilDesc.StencilBeginningAccess.Clear.ClearValue.DepthStencil
