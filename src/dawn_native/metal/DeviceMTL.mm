@@ -254,6 +254,14 @@ namespace dawn_native { namespace metal {
         // this function.
         ASSERT(size != 0);
 
+        if (IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            if (destination->IsFullBufferRange(destinationOffset, size)) {
+                destination->SetIsLazyInitialized();
+            } else {
+                ToBackend(destination)->EnsureBufferInitializedToZero(GetPendingCommandContext());
+            }
+        }
+
         id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
         id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
         [GetPendingCommandContext()->EnsureBlit() copyFromBuffer:uploadBuffer

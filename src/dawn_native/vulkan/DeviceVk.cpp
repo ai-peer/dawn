@@ -586,6 +586,15 @@ namespace dawn_native { namespace vulkan {
         // calling this function.
         ASSERT(size != 0);
 
+        CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+        if (IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            if (destination->IsFullBufferRange(destinationOffset, size)) {
+                destination->SetIsLazyInitialized();
+            } else {
+                ToBackend(destination)->EnsureBufferInitializedToZero(recordingContext);
+            }
+        }
+
         // Insert memory barrier to ensure host write operations are made visible before
         // copying from the staging buffer. However, this barrier can be removed (see note below).
         //
@@ -595,7 +604,6 @@ namespace dawn_native { namespace vulkan {
 
         // Insert pipeline barrier to ensure correct ordering with previous memory operations on the
         // buffer.
-        CommandRecordingContext* recordingContext = GetPendingRecordingContext();
         ToBackend(destination)->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
         VkBufferCopy copy;
