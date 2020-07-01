@@ -233,7 +233,8 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError ValidateTextureViewDescriptor(const TextureBase* texture,
+    MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
+                                             const TextureBase* texture,
                                              const TextureViewDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
@@ -255,8 +256,27 @@ namespace dawn_native {
         DAWN_TRY(ValidateTextureFormat(descriptor->format));
 
         DAWN_TRY(ValidateTextureAspect(descriptor->aspect));
-        if (descriptor->aspect != wgpu::TextureAspect::All) {
-            return DAWN_VALIDATION_ERROR("Texture aspect must be 'all'");
+
+        const Format& format = device->GetValidInternalFormat(descriptor->format);
+        switch (descriptor->aspect) {
+            case wgpu::TextureAspect::All:
+                break;
+            case wgpu::TextureAspect::DepthOnly:
+                if (!format.HasDepth()) {
+                    return DAWN_VALIDATION_ERROR(
+                        "depth-only aspect selected for texture format without depth component");
+                }
+                break;
+            case wgpu::TextureAspect::StencilOnly:
+                if (!format.HasStencil()) {
+                    return DAWN_VALIDATION_ERROR(
+                        "stencil-only aspect selected for texture format without stencil "
+                        "component");
+                }
+                break;
+            default:
+                UNREACHABLE();
+                break;
         }
 
         // TODO(jiawei.shao@intel.com): check stuff based on resource limits
@@ -690,6 +710,11 @@ namespace dawn_native {
     wgpu::TextureViewDimension TextureViewBase::GetDimension() const {
         ASSERT(!IsError());
         return mDimension;
+    }
+
+    const AspectMask& TextureViewBase::GetAspectMask() const {
+        ASSERT(!IsError());
+        return mRange.aspectMask;
     }
 
     uint32_t TextureViewBase::GetBaseMipLevel() const {

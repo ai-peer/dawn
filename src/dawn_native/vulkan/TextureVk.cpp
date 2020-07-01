@@ -138,7 +138,8 @@ namespace dawn_native { namespace vulkan {
         }
 
         // Computes which Vulkan pipeline stage can access a texture in the given Dawn usage
-        VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage, const Format& format) {
+        VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage,
+                                                 const AspectMask& aspectMask) {
             VkPipelineStageFlags flags = 0;
 
             if (usage == wgpu::TextureUsage::None) {
@@ -159,7 +160,7 @@ namespace dawn_native { namespace vulkan {
                     VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
             }
             if (usage & wgpu::TextureUsage::OutputAttachment) {
-                if (format.HasDepthOrStencil()) {
+                if (HasDepthOrStencil(aspectMask)) {
                     flags |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT |
                              VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
                     // TODO(cwallez@chromium.org): This is missing the stage where the depth and
@@ -709,6 +710,7 @@ namespace dawn_native { namespace vulkan {
                                                   std::vector<VkImageMemoryBarrier>* barriers,
                                                   size_t transitionBarrierStart) {
         ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
+        ASSERT(GetFormat().IsColor());
 
         // transitionBarrierStart specify the index where barriers for current transition start in
         // the vector. barriers->size() - transitionBarrierStart is the number of barriers that we
@@ -829,8 +831,8 @@ namespace dawn_native { namespace vulkan {
                                             transitionBarrierStart);
         }
 
-        *srcStages |= VulkanPipelineStage(allLastUsages, format);
-        *dstStages |= VulkanPipelineStage(allUsages, format);
+        *srcStages |= VulkanPipelineStage(allLastUsages, format.aspectMask);
+        *dstStages |= VulkanPipelineStage(allUsages, format.aspectMask);
         mSameLastUsagesAcrossSubresources = textureUsages.sameUsagesAcrossSubresources;
     }
 
@@ -888,8 +890,8 @@ namespace dawn_native { namespace vulkan {
             TweakTransitionForExternalUsage(recordingContext, &barriers, 0);
         }
 
-        VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format);
-        VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, format);
+        VkPipelineStageFlags srcStages = VulkanPipelineStage(allLastUsages, format.aspectMask);
+        VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, format.aspectMask);
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 0, nullptr, barriers.size(), barriers.data());
@@ -911,38 +913,45 @@ namespace dawn_native { namespace vulkan {
             imageRange.levelCount = 1;
             imageRange.layerCount = 1;
 
-            for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
-                imageRange.aspectMask = VulkanAspectMask(SingleAspectMask(aspect));
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    imageRange.baseMipLevel = level;
-                    for (uint32_t layer = range.baseArrayLayer;
-                         layer < range.baseArrayLayer + range.layerCount; ++layer) {
+            for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
+                 ++level) {
+                imageRange.baseMipLevel = level;
+                for (uint32_t layer = range.baseArrayLayer;
+                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                    imageRange.baseArrayLayer = layer;
+                    AspectMask aspectMask = {};
+                    for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
                                 SubresourceRange::SingleSubresource(level, layer, aspect))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
+                        aspectMask.set(aspect);
+                    }
 
-                        imageRange.baseArrayLayer = layer;
+                    if (aspectMask.none()) {
+                        continue;
+                    }
 
-                        if (GetFormat().HasDepthOrStencil()) {
-                            VkClearDepthStencilValue clearDepthStencilValue[1];
-                            clearDepthStencilValue[0].depth = fClearColor;
-                            clearDepthStencilValue[0].stencil = clearColor;
-                            device->fn.CmdClearDepthStencilImage(
-                                recordingContext->commandBuffer, GetHandle(),
-                                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, clearDepthStencilValue, 1,
-                                &imageRange);
-                        } else {
-                            VkClearColorValue clearColorValue = {
-                                {fClearColor, fClearColor, fClearColor, fClearColor}};
-                            device->fn.CmdClearColorImage(recordingContext->commandBuffer,
-                                                          GetHandle(),
-                                                          VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                                          &clearColorValue, 1, &imageRange);
-                        }
+                    imageRange.aspectMask == VulkanAspectMask(aspectMask);
+
+                    if (HasDepthOrStencil(range.aspectMask)) {
+                        VkClearDepthStencilValue clearDepthStencilValue[1];
+                        clearDepthStencilValue[0].depth = fClearColor;
+                        clearDepthStencilValue[0].stencil = clearColor;
+                        device->fn.CmdClearDepthStencilImage(
+                            recordingContext->commandBuffer, GetHandle(),
+                            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, clearDepthStencilValue, 1,
+                            &imageRange);
+                    } else {
+                        ASSERT(IsColor(range.aspectMask));
+
+                        VkClearColorValue clearColorValue = {
+                            {fClearColor, fClearColor, fClearColor, fClearColor}};
+                        device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
+                                                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                                      &clearColorValue, 1, &imageRange);
                     }
                 }
             }
@@ -976,6 +985,7 @@ namespace dawn_native { namespace vulkan {
 
                 for (uint32_t layer = range.baseArrayLayer;
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                    ASSERT(IsColor(range.aspectMask));
                     if (clearValue == TextureBase::ClearValue::Zero &&
                         IsSubresourceContentInitialized(SubresourceRange::SingleSubresource(
                             level, layer, TextureAspect::Color))) {

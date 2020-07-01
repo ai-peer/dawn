@@ -1050,7 +1050,7 @@ namespace dawn_native {
         DAWN_TRY(ValidateObject(texture));
         TextureViewDescriptor desc = GetTextureViewDescriptorWithDefaults(texture, descriptor);
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateTextureViewDescriptor(texture, &desc));
+            DAWN_TRY(ValidateTextureViewDescriptor(this, texture, &desc));
         }
         DAWN_TRY_ASSIGN(*result, CreateTextureViewImpl(texture, &desc));
         return {};

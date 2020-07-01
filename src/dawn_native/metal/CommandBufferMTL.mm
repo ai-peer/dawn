@@ -105,9 +105,8 @@ namespace dawn_native { namespace metal {
 
                 id<MTLTexture> texture =
                     ToBackend(attachmentInfo.view->GetTexture())->GetMTLTexture();
-                const Format& format = attachmentInfo.view->GetTexture()->GetFormat();
 
-                if (format.HasDepth()) {
+                if (HasDepth(attachmentInfo.view->GetAspectMask())) {
                     descriptor.depthAttachment.texture = texture;
                     descriptor.depthAttachment.level = attachmentInfo.view->GetBaseMipLevel();
                     descriptor.depthAttachment.slice = attachmentInfo.view->GetBaseArrayLayer();
@@ -142,7 +141,7 @@ namespace dawn_native { namespace metal {
                     }
                 }
 
-                if (format.HasStencil()) {
+                if (HasStencil(attachmentInfo.view->GetAspectMask())) {
                     descriptor.stencilAttachment.texture = texture;
                     descriptor.stencilAttachment.level = attachmentInfo.view->GetBaseMipLevel();
                     descriptor.stencilAttachment.slice = attachmentInfo.view->GetBaseArrayLayer();

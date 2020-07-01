@@ -360,4 +360,95 @@ namespace {
         ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor));
     }
 
+    // Test it is invalid to ask for the depth or stencil aspect of a color texture
+    TEST_F(TextureViewValidationTest, DepthOnlyStencilOnlyOnColor) {
+        wgpu::TextureDescriptor descriptor = {};
+        descriptor.size = {1, 1, 1};
+        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        wgpu::TextureViewDescriptor viewDescriptor = {};
+        viewDescriptor.aspect = wgpu::TextureAspect::All;
+        texture.CreateView(&viewDescriptor);
+
+        viewDescriptor.aspect = wgpu::TextureAspect::DepthOnly;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor));
+
+        viewDescriptor.aspect = wgpu::TextureAspect::StencilOnly;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor));
+    }
+
+    // Test it is valid to ask for the depth aspect only on depth textures
+    TEST_F(TextureViewValidationTest, DepthOnlyAspect) {
+        // Test Depth32Float (only has a depth aspect)
+        {
+            wgpu::TextureDescriptor descriptor = {};
+            descriptor.size = {1, 1, 1};
+            descriptor.format = wgpu::TextureFormat::Depth32Float;
+            descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+
+            wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+            wgpu::TextureViewDescriptor viewDescriptor = {};
+            viewDescriptor.aspect = wgpu::TextureAspect::All;
+            texture.CreateView(&viewDescriptor);
+
+            viewDescriptor.aspect = wgpu::TextureAspect::DepthOnly;
+            texture.CreateView(&viewDescriptor);
+        }
+
+        // Test Depth24PlusStencil8 (has both depth and stencil aspect)
+        {
+            wgpu::TextureDescriptor descriptor = {};
+            descriptor.size = {1, 1, 1};
+            descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
+            descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+
+            wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+            wgpu::TextureViewDescriptor viewDescriptor = {};
+            viewDescriptor.aspect = wgpu::TextureAspect::All;
+            texture.CreateView(&viewDescriptor);
+
+            viewDescriptor.aspect = wgpu::TextureAspect::DepthOnly;
+            texture.CreateView(&viewDescriptor);
+        }
+    }
+
+    // Test it is valid to ask for the stencil aspect only on stencil textures
+    TEST_F(TextureViewValidationTest, StencilOnlyAspect) {
+        // Test Depth32Float (no stencil aspect)
+        {
+            wgpu::TextureDescriptor descriptor = {};
+            descriptor.size = {1, 1, 1};
+            descriptor.format = wgpu::TextureFormat::Depth32Float;
+            descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+
+            wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+            wgpu::TextureViewDescriptor viewDescriptor = {};
+            viewDescriptor.aspect = wgpu::TextureAspect::StencilOnly;
+            ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor));
+        }
+
+        // Test Depth24PlusStencil8 (has both depth and stencil aspect)
+        {
+            wgpu::TextureDescriptor descriptor = {};
+            descriptor.size = {1, 1, 1};
+            descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
+            descriptor.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::OutputAttachment;
+
+            wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+            wgpu::TextureViewDescriptor viewDescriptor = {};
+            viewDescriptor.aspect = wgpu::TextureAspect::All;
+            texture.CreateView(&viewDescriptor);
+
+            viewDescriptor.aspect = wgpu::TextureAspect::StencilOnly;
+            texture.CreateView(&viewDescriptor);
+        }
+    }
+
 }  // anonymous namespace

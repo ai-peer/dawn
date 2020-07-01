@@ -28,7 +28,8 @@
 namespace dawn_native {
     MaybeError ValidateTextureDescriptor(const DeviceBase* device,
                                          const TextureDescriptor* descriptor);
-    MaybeError ValidateTextureViewDescriptor(const TextureBase* texture,
+    MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
+                                             const TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
     TextureViewDescriptor GetTextureViewDescriptorWithDefaults(
         const TextureBase* texture,
@@ -50,6 +51,10 @@ namespace dawn_native {
 
     enum class TextureAspect : uint8_t {
         Color,
+
+        // On D3D12, the aspect bit indices map directly to the plane indices. The order is
+        // important because if both depth and stencil are present, Depth is index 0 and Stencil is
+        // index 1. When Dawn has YUV planes, the order of the enums must match D3D12 as well.
         Depth,
         Stencil,
     };
@@ -154,6 +159,7 @@ namespace dawn_native {
         wgpu::TextureAspect GetAspect() const;
         const Format& GetFormat() const;
         wgpu::TextureViewDimension GetDimension() const;
+        const AspectMask& GetAspectMask() const;
         uint32_t GetBaseMipLevel() const;
         uint32_t GetLevelCount() const;
         uint32_t GetBaseArrayLayer() const;
