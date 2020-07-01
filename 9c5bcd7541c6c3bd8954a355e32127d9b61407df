@@ -78,6 +78,30 @@
     },
     {
       "key": {
+        "uuid": "fb70876e_ba652ab0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-01T00:39:33Z",
+      "side": 1,
+      "message": "I don\u0027t use \"IsInitialized()\" because I find in D3D12, Metal and Vulkan backends there have already been functions called \"initialize()\", and maybe it may cause some misunderstandings between \"IsInitialized()\" and \"initialize()\".",
+      "parentUuid": "f2da36e4_92dfe89c",
+      "range": {
+        "startLine": 336,
+        "startChar": 13,
+        "endLine": 336,
+        "endChar": 30
+      },
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "725a820c_833db460",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 9
