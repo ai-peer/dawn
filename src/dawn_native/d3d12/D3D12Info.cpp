@@ -59,6 +59,38 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        return info;
+        D3D12_FEATURE_DATA_SHADER_MODEL shaderModel = {D3D_SHADER_MODEL_6_2};
+        if (adapter.GetDevice()->CheckFeatureSupport(D3D12_FEATURE_SHADER_MODEL, &shaderModel,
+                                                     sizeof(D3D12_FEATURE_DATA_SHADER_MODEL)) ==
+            S_OK) {
+            switch (shaderModel.HighestShaderModel) {
+                case D3D_SHADER_MODEL_6_2:
+                    info.dxcShaderModel = 62;
+                    info.dxcShaderProfiles[SingleShaderStage::Vertex] = L"vs_6_2";
+                    info.dxcShaderProfiles[SingleShaderStage::Fragment] = L"ps_6_2";
+                    info.dxcShaderProfiles[SingleShaderStage::Compute] = L"cs_6_2";
+                    break;
+                case D3D_SHADER_MODEL_6_1:
+                    info.dxcShaderModel = 61;
+                    info.dxcShaderProfiles[SingleShaderStage::Vertex] = L"vs_6_1";
+                    info.dxcShaderProfiles[SingleShaderStage::Fragment] = L"ps_6_1";
+                    info.dxcShaderProfiles[SingleShaderStage::Compute] = L"cs_6_1";
+                    break;
+                default:
+                    info.dxcShaderModel = 60;
+                    info.dxcShaderProfiles[SingleShaderStage::Vertex] = L"vs_6_0";
+                    info.dxcShaderProfiles[SingleShaderStage::Fragment] = L"ps_6_0";
+                    info.dxcShaderProfiles[SingleShaderStage::Compute] = L"cs_6_0";
+            }
+        }
+
+        D3D12_FEATURE_DATA_D3D12_OPTIONS4 featureData4 = {};
+        if (adapter.GetDevice()->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS4, &featureData4,
+                                                     sizeof(featureData4)) == S_OK) {
+            info.supportsShaderFloat16 = shaderModel.HighestShaderModel >= D3D_SHADER_MODEL_6_2 &&
+                                         featureData4.Native16BitShaderOpsSupported;
+        }
+
+        return std::move(info);
     }
 }}  // namespace dawn_native::d3d12

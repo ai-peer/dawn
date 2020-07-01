@@ -16,6 +16,7 @@
 #define DAWNNATIVE_D3D12_D3D12INFO_H_
 
 #include "dawn_native/Error.h"
+#include "dawn_native/PerStage.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -26,6 +27,9 @@ namespace dawn_native { namespace d3d12 {
         bool isUMA;
         uint32_t resourceHeapTier;
         bool supportsRenderPass;
+        bool supportsShaderFloat16;
+        uint32_t dxcShaderModel;
+        PerStage<std::wstring> dxcShaderProfiles;
     };
 
     ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);
