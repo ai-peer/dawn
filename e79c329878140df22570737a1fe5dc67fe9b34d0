@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af279d2c_ceeac6a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-01T09:35:02Z",
+      "side": 1,
+      "message": "nit: Add a Bug: dawn:...\n\nThis can be the same one as for the empty BGL CL since it is follow-up work.",
+      "revId": "e79c329878140df22570737a1fe5dc67fe9b34d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
