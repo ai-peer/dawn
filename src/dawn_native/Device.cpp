@@ -833,6 +833,10 @@ namespace dawn_native {
         return !IsToggleEnabled(Toggle::SkipValidation);
     }
 
+    bool DeviceBase::IsRobustnessEnabled() const {
+        return !IsToggleEnabled(Toggle::DisableRobustness);
+    }
+
     size_t DeviceBase::GetLazyClearCountForTesting() {
         return mLazyClearCountForTesting;
     }
