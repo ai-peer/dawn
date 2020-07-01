@@ -353,7 +353,8 @@ namespace dawn_native { namespace metal {
                                                                  plane:plane];
         [mtlDesc release];
 
-        SetIsSubresourceContentInitialized(descriptor->isCleared, {0, 1, 0, 1});
+        SetIsSubresourceContentInitialized(descriptor->isCleared,
+                                           {0, 1, 0, 1, GetFormat().aspectMask});
     }
 
     Texture::~Texture() {
@@ -386,42 +387,57 @@ namespace dawn_native { namespace metal {
             // End the blit encoder if it is open.
             commandContext->EndBlit();
 
-            if (GetFormat().HasDepthOrStencil()) {
+            if (range.aspectMask[TextureAspect::Depth] ||
+                range.aspectMask[TextureAspect::Stencil]) {
+                ASSERT(!range.aspectMask[TextureAspect::Color]);
+
                 // Create a render pass to clear each subresource.
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t arrayLayer = range.baseArrayLayer;
                          arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, arrayLayer))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
+                        MTLRenderPassDescriptor* descriptor = nullptr;
+                        for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
+                            if (clearValue == TextureBase::ClearValue::Zero &&
+                                IsSubresourceContentInitialized(SubresourceRange::SingleSubresource(
+                                    level, arrayLayer, aspect))) {
+                                // Skip lazy clears if already initialized.
+                                continue;
+                            }
+
+                            if (descriptor == nullptr) {
+                                descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+                            }
+
+                            switch (aspect) {
+                                case TextureAspect::Depth:
+                                    descriptor.depthAttachment.texture = GetMTLTexture();
+                                    descriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                                    descriptor.depthAttachment.storeAction = MTLStoreActionStore;
+                                    descriptor.depthAttachment.clearDepth = dClearColor;
+                                    break;
+                                case TextureAspect::Stencil:
+                                    descriptor.stencilAttachment.texture = GetMTLTexture();
+                                    descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
+                                    descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
+                                    descriptor.stencilAttachment.clearStencil =
+                                        static_cast<uint32_t>(clearColor);
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                                    break;
+                            }
                         }
 
-                        MTLRenderPassDescriptor* descriptor =
-                            [MTLRenderPassDescriptor renderPassDescriptor];
-
-                        if (GetFormat().HasDepth()) {
-                            descriptor.depthAttachment.texture = GetMTLTexture();
-                            descriptor.depthAttachment.loadAction = MTLLoadActionClear;
-                            descriptor.depthAttachment.storeAction = MTLStoreActionStore;
-                            descriptor.depthAttachment.clearDepth = dClearColor;
+                        if (descriptor != nullptr) {
+                            commandContext->BeginRender(descriptor);
+                            commandContext->EndRender();
                         }
-                        if (GetFormat().HasStencil()) {
-                            descriptor.stencilAttachment.texture = GetMTLTexture();
-                            descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
-                            descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
-                            descriptor.stencilAttachment.clearStencil =
-                                static_cast<uint32_t>(clearColor);
-                        }
-
-                        commandContext->BeginRender(descriptor);
-                        commandContext->EndRender();
                     }
                 }
             } else {
-                ASSERT(GetFormat().IsColor());
+                ASSERT(range.aspectMask.count() == 1);
+                ASSERT(range.aspectMask[TextureAspect::Color]);
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     // Create multiple render passes with each subresource as a color attachment to
@@ -433,8 +449,8 @@ namespace dawn_native { namespace metal {
                     for (uint32_t arrayLayer = range.baseArrayLayer;
                          arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, arrayLayer))) {
+                            IsSubresourceContentInitialized(SubresourceRange::SingleSubresource(
+                                level, arrayLayer, TextureAspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -505,28 +521,32 @@ namespace dawn_native { namespace metal {
 
                 for (uint32_t arrayLayer = range.baseArrayLayer;
                      arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
-                    if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(
-                            SubresourceRange::SingleSubresource(level, arrayLayer))) {
-                        // Skip lazy clears if already initialized.
-                        continue;
-                    }
+                    for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(
+                                SubresourceRange::SingleSubresource(level, arrayLayer, aspect))) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
 
-                    // If the texture’s pixel format is a combined depth/stencil format, then
-                    // options must be set to either blit the depth attachment portion or blit the
-                    // stencil attachment portion.
-                    std::array<MTLBlitOption, 3> blitOptions = {
-                        MTLBlitOptionNone, MTLBlitOptionDepthFromDepthStencil,
-                        MTLBlitOptionStencilFromDepthStencil};
+                        MTLBlitOption blitOptions = MTLBlitOptionNone;
+                        if (GetFormat().aspectMask[TextureAspect::Depth] &&
+                            GetFormat().aspectMask[TextureAspect::Stencil]) {
+                            switch (aspect) {
+                                case TextureAspect::Depth:
+                                    blitOptions = MTLBlitOptionDepthFromDepthStencil;
+                                    break;
+                                case TextureAspect::Stencil:
+                                    blitOptions = MTLBlitOptionStencilFromDepthStencil;
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                                    break;
+                            }
+                        } else {
+                            ASSERT(GetFormat().aspectMask.count() == 1);
+                        }
 
-                    auto blitOptionStart = blitOptions.begin();
-                    auto blitOptionEnd = blitOptionStart + 1;
-                    if (GetFormat().format == wgpu::TextureFormat::Depth24PlusStencil8) {
-                        blitOptionStart = blitOptions.begin() + 1;
-                        blitOptionEnd = blitOptionStart + 2;
-                    }
-
-                    for (auto it = blitOptionStart; it != blitOptionEnd; ++it) {
                         [encoder copyFromBuffer:uploadBuffer
                                    sourceOffset:uploadHandle.startOffset
                               sourceBytesPerRow:largestMipBytesPerRow
@@ -537,7 +557,7 @@ namespace dawn_native { namespace metal {
                                destinationSlice:arrayLayer
                                destinationLevel:level
                               destinationOrigin:MTLOriginMake(0, 0, 0)
-                                        options:(*it)];
+                                        options:blitOptions];
                     }
                 }
             }

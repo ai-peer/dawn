@@ -200,8 +200,8 @@ namespace dawn_native { namespace opengl {
 
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
-                bool doDepthClear = GetFormat().HasDepth();
-                bool doStencilClear = GetFormat().HasStencil();
+                bool doDepthClear = GetFormat().aspectMask[TextureAspect::Depth];
+                bool doStencilClear = GetFormat().aspectMask[TextureAspect::Stencil];
                 GLfloat depth = fClearColor;
                 GLint stencil = clearColor;
                 if (doDepthClear) {
@@ -230,31 +230,67 @@ namespace dawn_native { namespace opengl {
                     switch (GetDimension()) {
                         case wgpu::TextureDimension::e2D:
                             if (GetArrayLayers() == 1) {
-                                if (clearValue == TextureBase::ClearValue::Zero &&
-                                    IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, 0))) {
-                                    // Skip lazy clears if already initialized.
-                                    continue;
-                                }
-                                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
-                                                        GL_DEPTH_STENCIL_ATTACHMENT, GetGLTarget(),
-                                                        GetHandle(), static_cast<GLint>(level));
-                                DoClear();
-                            } else {
-                                for (uint32_t layer = range.baseArrayLayer;
-                                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                                GLenum attachment = 0;
+                                for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
                                     if (clearValue == TextureBase::ClearValue::Zero &&
                                         IsSubresourceContentInitialized(
-                                            SubresourceRange::SingleSubresource(level, layer))) {
+                                            SubresourceRange::SingleSubresource(level, 0,
+                                                                                aspect))) {
                                         // Skip lazy clears if already initialized.
                                         continue;
                                     }
 
-                                    gl.FramebufferTextureLayer(
-                                        GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
-                                        GetHandle(), static_cast<GLint>(level),
-                                        static_cast<GLint>(layer));
+                                    switch (aspect) {
+                                        case TextureAspect::Depth:
+                                            attachment = GL_DEPTH_ATTACHMENT;
+                                            break;
+                                        case TextureAspect::Stencil:
+                                            attachment = GL_STENCIL_ATTACHMENT;
+                                            break;
+                                        default:
+                                            UNREACHABLE();
+                                            break;
+                                    }
+
+                                    gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment,
+                                                            GetGLTarget(), GetHandle(),
+                                                            static_cast<GLint>(level));
+                                }
+                                if (attachment != 0) {
                                     DoClear();
+                                }
+                            } else {
+                                for (uint32_t layer = range.baseArrayLayer;
+                                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                                    GLenum attachment = 0;
+                                    for (TextureAspect aspect : IterateBitSet(range.aspectMask)) {
+                                        if (clearValue == TextureBase::ClearValue::Zero &&
+                                            IsSubresourceContentInitialized(
+                                                SubresourceRange::SingleSubresource(level, layer,
+                                                                                    aspect))) {
+                                            // Skip lazy clears if already initialized.
+                                            continue;
+                                        }
+
+                                        switch (aspect) {
+                                            case TextureAspect::Depth:
+                                                attachment = GL_DEPTH_ATTACHMENT;
+                                                break;
+                                            case TextureAspect::Stencil:
+                                                attachment = GL_STENCIL_ATTACHMENT;
+                                                break;
+                                            default:
+                                                UNREACHABLE();
+                                                break;
+                                        }
+
+                                        gl.FramebufferTextureLayer(
+                                            GL_DRAW_FRAMEBUFFER, attachment, GetHandle(),
+                                            static_cast<GLint>(level), static_cast<GLint>(layer));
+                                    }
+                                    if (attachment != 0) {
+                                        DoClear();
+                                    }
                                 }
                             }
                             break;
@@ -278,9 +314,11 @@ namespace dawn_native { namespace opengl {
                     Extent3D mipSize = GetMipLevelPhysicalSize(level);
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                        ASSERT(range.aspectMask.count() == 1);
+                        ASSERT(range.aspectMask[TextureAspect::Color]);
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
+                            IsSubresourceContentInitialized(SubresourceRange::SingleSubresource(
+                                level, layer, TextureAspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -337,9 +375,11 @@ namespace dawn_native { namespace opengl {
                 switch (GetDimension()) {
                     case wgpu::TextureDimension::e2D:
                         if (GetArrayLayers() == 1) {
+                            ASSERT(range.aspectMask.count() == 1);
+                            ASSERT(range.aspectMask[TextureAspect::Color]);
                             if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleSubresource(level, 0))) {
+                                IsSubresourceContentInitialized(SubresourceRange::SingleSubresource(
+                                    level, 0, TextureAspect::Color))) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -349,9 +389,12 @@ namespace dawn_native { namespace opengl {
                         } else {
                             for (uint32_t layer = range.baseArrayLayer;
                                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                                ASSERT(range.aspectMask.count() == 1);
+                                ASSERT(range.aspectMask[TextureAspect::Color]);
                                 if (clearValue == TextureBase::ClearValue::Zero &&
                                     IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, layer))) {
+                                        SubresourceRange::SingleSubresource(
+                                            level, layer, TextureAspect::Color))) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }

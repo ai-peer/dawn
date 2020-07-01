@@ -515,8 +515,11 @@ namespace dawn_native { namespace opengl {
                     const GLFormat& format = texture->GetGLFormat();
 
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+
+                    // TODO(enga): This should use the copy aspect when we have it.
                     SubresourceRange subresources = {dst.mipLevel, 1, dst.origin.z,
-                                                     copy->copySize.depth};
+                                                     copy->copySize.depth,
+                                                     dst.texture->GetFormat().aspectMask};
                     if (IsCompleteSubresourceCopiedTo(texture, copySize, dst.mipLevel)) {
                         texture->SetIsSubresourceContentInitialized(true, subresources);
                     } else {
@@ -606,8 +609,12 @@ namespace dawn_native { namespace opengl {
                     }
 
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+
+                    // TODO(enga): This should use the copy aspect when we have it.
                     SubresourceRange subresources = {src.mipLevel, 1, src.origin.z,
-                                                     copy->copySize.depth};
+                                                     copy->copySize.depth,
+                                                     src.texture->GetFormat().aspectMask};
+
                     texture->EnsureSubresourceContentInitialized(subresources);
                     // The only way to move data from a texture to a buffer in GL is via
                     // glReadPixels with a pack buffer. Create a temporary FBO for the copy.
@@ -618,17 +625,18 @@ namespace dawn_native { namespace opengl {
                     gl.BindFramebuffer(GL_READ_FRAMEBUFFER, readFBO);
 
                     GLenum glAttachment = 0;
-                    switch (format.aspect) {
-                        case Format::Aspect::Color:
+                    switch (format.aspectMask.to_ullong()) {
+                        case 1u << static_cast<uint8_t>(TextureAspect::Color):
                             glAttachment = GL_COLOR_ATTACHMENT0;
                             break;
-                        case Format::Aspect::Depth:
+                        case 1u << static_cast<uint8_t>(TextureAspect::Depth):
                             glAttachment = GL_DEPTH_ATTACHMENT;
                             break;
-                        case Format::Aspect::Stencil:
+                        case 1u << static_cast<uint8_t>(TextureAspect::Stencil):
                             glAttachment = GL_STENCIL_ATTACHMENT;
                             break;
-                        case Format::Aspect::DepthStencil:
+                        case ((1u << static_cast<uint8_t>(TextureAspect::Depth)) |
+                              (1u << static_cast<uint8_t>(TextureAspect::Stencil))):
                             glAttachment = GL_DEPTH_STENCIL_ATTACHMENT;
                             break;
                         default:
@@ -693,10 +701,14 @@ namespace dawn_native { namespace opengl {
                     Extent3D copySize = ComputeTextureCopyExtent(dst, copy->copySize);
                     Texture* srcTexture = ToBackend(src.texture.Get());
                     Texture* dstTexture = ToBackend(dst.texture.Get());
+
+                    // TODO(enga): This should use the texture copy aspect when we have it.
                     SubresourceRange srcRange = {src.mipLevel, 1, src.origin.z,
-                                                 copy->copySize.depth};
+                                                 copy->copySize.depth,
+                                                 src.texture->GetFormat().aspectMask};
                     SubresourceRange dstRange = {dst.mipLevel, 1, dst.origin.z,
-                                                 copy->copySize.depth};
+                                                 copy->copySize.depth,
+                                                 dst.texture->GetFormat().aspectMask};
 
                     srcTexture->EnsureSubresourceContentInitialized(srcRange);
                     if (IsCompleteSubresourceCopiedTo(dstTexture, copySize, dst.mipLevel)) {
@@ -850,14 +862,15 @@ namespace dawn_native { namespace opengl {
                 GLenum glAttachment = 0;
                 // TODO(kainino@chromium.org): it may be valid to just always use
                 // GL_DEPTH_STENCIL_ATTACHMENT here.
-                switch (format.aspect) {
-                    case Format::Aspect::Depth:
+                switch (format.aspectMask.to_ullong()) {
+                    case 1u << static_cast<uint8_t>(TextureAspect::Depth):
                         glAttachment = GL_DEPTH_ATTACHMENT;
                         break;
-                    case Format::Aspect::Stencil:
+                    case 1u << static_cast<uint8_t>(TextureAspect::Stencil):
                         glAttachment = GL_STENCIL_ATTACHMENT;
                         break;
-                    case Format::Aspect::DepthStencil:
+                    case ((1u << static_cast<uint8_t>(TextureAspect::Depth)) |
+                          (1u << static_cast<uint8_t>(TextureAspect::Stencil))):
                         glAttachment = GL_DEPTH_STENCIL_ATTACHMENT;
                         break;
                     default:

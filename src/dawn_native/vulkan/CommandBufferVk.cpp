@@ -68,7 +68,9 @@ namespace dawn_native { namespace vulkan {
             // TODO(jiawei.shao@intel.com): support 1D and 3D textures
             ASSERT(srcTexture->GetDimension() == wgpu::TextureDimension::e2D &&
                    dstTexture->GetDimension() == wgpu::TextureDimension::e2D);
-            region.srcSubresource.aspectMask = srcTexture->GetVkAspectMask();
+            // TODO(enga): This should be updated with copies support the depth/stencil aspect.
+            region.srcSubresource.aspectMask =
+                srcTexture->GetVkAspectMask(wgpu::TextureAspect::All);
             region.srcSubresource.mipLevel = srcCopy.mipLevel;
             region.srcSubresource.baseArrayLayer = srcCopy.origin.z;
             region.srcSubresource.layerCount = copySize.depth;
@@ -77,7 +79,9 @@ namespace dawn_native { namespace vulkan {
             region.srcOffset.y = srcCopy.origin.y;
             region.srcOffset.z = 0;
 
-            region.dstSubresource.aspectMask = dstTexture->GetVkAspectMask();
+            // TODO(enga): This should be updated with copies support the depth/stencil aspect.
+            region.dstSubresource.aspectMask =
+                dstTexture->GetVkAspectMask(wgpu::TextureAspect::All);
             region.dstSubresource.mipLevel = dstCopy.mipLevel;
             region.dstSubresource.baseArrayLayer = dstCopy.origin.z;
             region.dstSubresource.layerCount = copySize.depth;
@@ -449,7 +453,8 @@ namespace dawn_native { namespace vulkan {
 
                     ASSERT(dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
                     SubresourceRange range = {subresource.mipLevel, 1, subresource.baseArrayLayer,
-                                              subresource.layerCount};
+                                              subresource.layerCount,
+                                              dst.texture->GetFormat().aspectMask};
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       subresource.mipLevel)) {
                         // Since texture has been overwritten, it has been "initialized"
@@ -483,9 +488,9 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers subresource = region.imageSubresource;
 
                     ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D);
-                    const SubresourceRange range = {subresource.mipLevel, 1,
-                                                    subresource.baseArrayLayer,
-                                                    subresource.layerCount};
+                    const SubresourceRange range = {
+                        subresource.mipLevel, 1, subresource.baseArrayLayer, subresource.layerCount,
+                        src.texture->GetFormat().aspectMask};
                     ToBackend(src.texture)
                         ->EnsureSubresourceContentInitialized(recordingContext, range);
 

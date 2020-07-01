@@ -17,6 +17,7 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "common/ityp_bitset.h"
 #include "dawn_native/Error.h"
 
 #include <array>
@@ -29,16 +30,11 @@ namespace dawn_native {
     // exact number of known format.
     static constexpr size_t kKnownFormatCount = 52;
 
+    enum class TextureAspect : uint8_t;
+
     // A wgpu::TextureFormat along with all the information about it necessary for validation.
     struct Format {
-        enum Aspect {
-            Color,
-            Depth,
-            Stencil,
-            DepthStencil,
-        };
-
-        enum Type {
+        enum class Type {
             Float,
             Sint,
             Uint,
@@ -51,8 +47,8 @@ namespace dawn_native {
         // A format can be known but not supported because it is part of a disabled extension.
         bool isSupported;
         bool supportsStorageUsage;
-        Aspect aspect;
         Type type;
+        ityp::bitset<TextureAspect, 3> aspectMask;
 
         uint32_t blockByteSize;
         uint32_t blockWidth;
