@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "34b2dc5a_0e6a0015",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-01T04:59:52Z",
+      "side": 1,
+      "message": "Thanks for finding this, I miss updating this one.",
+      "parentUuid": "37d8d549_6f06785c",
+      "range": {
+        "startLine": 72,
+        "startChar": 32,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "4ba578434da06392cd9d47db93a11bc8eef852bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a999a96d_1e3ae2f7",
         "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "4ba578434da06392cd9d47db93a11bc8eef852bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c658244_ee1394f0",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-01T04:59:52Z",
+      "side": 1,
+      "message": "Yes, it\u0027s valid to write the same index twice, so we don\u0027t  check the same index.",
+      "parentUuid": "a999a96d_1e3ae2f7",
+      "revId": "4ba578434da06392cd9d47db93a11bc8eef852bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
