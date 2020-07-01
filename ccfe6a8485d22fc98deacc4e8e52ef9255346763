@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b42d5ad2_4a9d7b5d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-01T03:15:09Z",
+      "side": 1,
+      "message": "nit: Maybe this shouldn\u0027t be called \"EnsureBufferInitializedToZero\", and should be called \"ClearBufferContentsToZero\". Then, we would pull the IsInitialized check to the callsite here:\n\nif (IsToggledEnabled \u0026\u0026 !IsInitialized() {\n  // stuff.\n}\n\nAs it is now, we always check IsFullBufferRange, and if not, call Ensure which calls IsInitialized. It\u0027s minor, but it\u0027s more checks and function calls than necessary. In the common case, the buffer should already be initialized and we could early-out here.",
+      "range": {
+        "startLine": 339,
+        "startChar": 8,
+        "endLine": 345,
+        "endChar": 9
+      },
+      "revId": "ccfe6a8485d22fc98deacc4e8e52ef9255346763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

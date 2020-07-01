@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "a8d44791_aa9da5f1",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-01T03:15:09Z",
+      "side": 1,
+      "message": "How about, \"IsDataInitialized\" ?",
+      "parentUuid": "f4d6ef07_5cf2bc39",
+      "range": {
+        "startLine": 336,
+        "startChar": 13,
+        "endLine": 336,
+        "endChar": 30
+      },
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "725a820c_833db460",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 9
