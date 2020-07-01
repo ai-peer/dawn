@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "98b0902e_e85e7286",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-01T00:11:02Z",
+      "side": 1,
+      "message": "My previous thought was that CopyFromStagingToBuffer is an internal function and when it is used internally we don\u0027t need to care about lazy initialization on the destination buffers.",
+      "parentUuid": "c36f55de_30f0bf50",
+      "revId": "9c5bcd7541c6c3bd8954a355e32127d9b61407df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f2da36e4_92dfe89c",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 9
