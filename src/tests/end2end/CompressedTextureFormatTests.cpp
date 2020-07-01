@@ -27,7 +27,7 @@ struct CopyConfig {
     wgpu::Extent3D copyExtent3D;
     wgpu::Origin3D copyOrigin3D = {0, 0, 0};
     uint32_t viewMipmapLevel = 0;
-    uint32_t viewArrayLayer = 0;
+    uint32_t viewBaseArrayLayer = 0;
     uint32_t bufferOffset = 0;
     uint32_t bytesPerRowAlignment = kTextureBytesPerRowAlignment;
     uint32_t rowsPerImage = 0;
@@ -69,19 +69,24 @@ class CompressedTextureBCFormatTest : public DawnTest {
                 copyWidthInBlockAtLevel *
                 utils::GetTexelBlockSizeInBytes(copyConfig.textureDescriptor.format);
         }
+        uint32_t copyBytesPerImage = bufferRowPitchInBytes * copyHeightInBlockAtLevel;
         uint32_t uploadBufferSize =
-            copyConfig.bufferOffset + bufferRowPitchInBytes * copyHeightInBlockAtLevel;
+            copyConfig.bufferOffset + copyBytesPerImage * copyConfig.copyExtent3D.depth;
 
         // Fill uploadData with the pre-prepared one-block compressed texture data.
         std::vector<uint8_t> uploadData(uploadBufferSize, 0);
         std::vector<uint8_t> oneBlockCompressedTextureData =
             GetOneBlockBCFormatTextureData(copyConfig.textureDescriptor.format);
-        for (uint32_t h = 0; h < copyHeightInBlockAtLevel; ++h) {
-            for (uint32_t w = 0; w < copyWidthInBlockAtLevel; ++w) {
-                uint32_t uploadBufferOffset = copyConfig.bufferOffset + bufferRowPitchInBytes * h +
-                                              oneBlockCompressedTextureData.size() * w;
-                std::memcpy(&uploadData[uploadBufferOffset], oneBlockCompressedTextureData.data(),
-                            oneBlockCompressedTextureData.size() * sizeof(uint8_t));
+        for (uint32_t layer = 0; layer < copyConfig.copyExtent3D.depth; ++layer) {
+            for (uint32_t h = 0; h < copyHeightInBlockAtLevel; ++h) {
+                for (uint32_t w = 0; w < copyWidthInBlockAtLevel; ++w) {
+                    uint32_t uploadBufferOffset =
+                        copyConfig.bufferOffset + copyBytesPerImage * layer +
+                        bufferRowPitchInBytes * h + oneBlockCompressedTextureData.size() * w;
+                    std::memcpy(&uploadData[uploadBufferOffset],
+                                oneBlockCompressedTextureData.data(),
+                                oneBlockCompressedTextureData.size() * sizeof(uint8_t));
+                }
             }
         }
 
@@ -94,7 +99,7 @@ class CompressedTextureBCFormatTest : public DawnTest {
 
         ASSERT(copyConfig.copyOrigin3D.z == 0);
         wgpu::Origin3D copyOrigin = copyConfig.copyOrigin3D;
-        copyOrigin.z = copyConfig.viewArrayLayer;
+        copyOrigin.z = copyConfig.viewBaseArrayLayer;
         wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
             bcCompressedTexture, copyConfig.viewMipmapLevel, copyOrigin);
 
@@ -204,9 +209,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
         wgpu::Texture bcTexture = CreateTextureWithCompressedData(config);
 
         wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
-        wgpu::BindGroup bindGroup = CreateBindGroupForTest(
-            renderPipeline.GetBindGroupLayout(0), bcTexture, config.textureDescriptor.format,
-            config.viewArrayLayer, config.viewMipmapLevel);
 
         wgpu::Extent3D virtualSizeAtLevel = GetVirtualSizeAtLevel(config);
 
@@ -220,11 +222,20 @@ class CompressedTextureBCFormatTest : public DawnTest {
         if (config.copyOrigin3D.y + config.copyExtent3D.height > virtualSizeAtLevel.height) {
             noPaddingExtent3D.height = virtualSizeAtLevel.height - config.copyOrigin3D.y;
         }
+        noPaddingExtent3D.depth = 1u;
 
         std::vector<RGBA8> expectedData =
             GetExpectedData(config.textureDescriptor.format, virtualSizeAtLevel);
-        VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, virtualSizeAtLevel,
-                                           config.copyOrigin3D, noPaddingExtent3D, expectedData);
+
+        for (uint32_t layer = config.viewBaseArrayLayer;
+             layer < config.viewBaseArrayLayer + config.copyExtent3D.depth; ++layer) {
+            wgpu::BindGroup bindGroup = CreateBindGroupForTest(
+                renderPipeline.GetBindGroupLayout(0), bcTexture, config.textureDescriptor.format,
+                layer, config.viewMipmapLevel);
+            VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, virtualSizeAtLevel,
+                                               config.copyOrigin3D, noPaddingExtent3D,
+                                               expectedData);
+        }
     }
 
     // Create a texture and initialize it with the pre-prepared compressed texture data.
@@ -242,13 +253,13 @@ class CompressedTextureBCFormatTest : public DawnTest {
                                     CopyConfig dstConfig) {
         ASSERT(srcConfig.copyOrigin3D.z == 0);
         wgpu::Origin3D srcCopyOrigin = srcConfig.copyOrigin3D;
-        srcCopyOrigin.z = srcConfig.viewArrayLayer;
+        srcCopyOrigin.z = srcConfig.viewBaseArrayLayer;
         wgpu::TextureCopyView textureCopyViewSrc =
             utils::CreateTextureCopyView(srcTexture, srcConfig.viewMipmapLevel, srcCopyOrigin);
 
         ASSERT(dstConfig.copyOrigin3D.z == 0);
         wgpu::Origin3D dstCopyOrigin = dstConfig.copyOrigin3D;
-        dstCopyOrigin.z = dstConfig.viewArrayLayer;
+        dstCopyOrigin.z = dstConfig.viewBaseArrayLayer;
         wgpu::TextureCopyView textureCopyViewDst =
             utils::CreateTextureCopyView(dstTexture, dstConfig.viewMipmapLevel, dstCopyOrigin);
         encoder.CopyTextureToTexture(&textureCopyViewSrc, &textureCopyViewDst,
@@ -490,7 +501,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoNonZeroArrayLayer) {
 
     constexpr uint32_t kArrayLayerCount = 3;
     config.textureDescriptor.size.depth = kArrayLayerCount;
-    config.viewArrayLayer = kArrayLayerCount - 1;
+    config.viewBaseArrayLayer = kArrayLayerCount - 1;
 
     for (wgpu::TextureFormat format : kBCFormats) {
         config.textureDescriptor.format = format;
@@ -587,7 +598,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyWholeTextureSubResourceIntoNonZeroMipm
         wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup =
             CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), bcTextureDst, format,
-                                   config.viewArrayLayer, config.viewMipmapLevel);
+                                   config.viewBaseArrayLayer, config.viewMipmapLevel);
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kVirtualSize,
@@ -651,7 +662,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqua
         wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup =
             CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), bcTextureDst, format,
-                                   dstConfig.viewArrayLayer, dstConfig.viewMipmapLevel);
+                                   dstConfig.viewBaseArrayLayer, dstConfig.viewMipmapLevel);
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kDstVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
@@ -711,7 +722,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyFromSubresourceWithPhysicalSizeNotEqua
         wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup =
             CreateBindGroupForTest(renderPipeline.GetBindGroupLayout(0), bcTextureDst, format,
-                                   dstConfig.viewArrayLayer, dstConfig.viewMipmapLevel);
+                                   dstConfig.viewBaseArrayLayer, dstConfig.viewMipmapLevel);
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kDstVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
@@ -792,7 +803,7 @@ TEST_P(CompressedTextureBCFormatTest, MultipleCopiesWithPhysicalSizeNotEqualToVi
             // Verify if we can use bcDstTextures as sampled textures correctly.
             wgpu::BindGroup bindGroup0 = CreateBindGroupForTest(
                 renderPipeline.GetBindGroupLayout(0), bcDstTextures[i], format,
-                dstConfigs[i].viewArrayLayer, dstConfigs[i].viewMipmapLevel);
+                dstConfigs[i].viewBaseArrayLayer, dstConfigs[i].viewMipmapLevel);
 
             std::vector<RGBA8> expectedData = GetExpectedData(format, dstVirtualSizes[i]);
             VerifyCompressedTexturePixelValues(renderPipeline, bindGroup0, dstVirtualSizes[i],
@@ -996,6 +1007,32 @@ TEST_P(CompressedTextureBCFormatTest, LargeImageHeightAndClampedCopyExtent) {
     config.copyExtent3D = {kCopyWidthAtLevel, kCopyHeightAtLevel, 1};
 
     config.rowsPerImage = kCopyHeightAtLevel * 2;
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTextures(config);
+    }
+}
+
+// Test copying multiple texture array layers in one copy command works with BC formats.
+TEST_P(CompressedTextureBCFormatTest, CopyMultipleArrayLayers) {
+    // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan
+    // bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
+
+    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
+
+    constexpr uint32_t kArrayLayerCount = 3;
+
+    CopyConfig config;
+    config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
+    config.textureDescriptor.size = {8, 8, kArrayLayerCount};
+
+    config.copyExtent3D = config.textureDescriptor.size;
+    config.copyExtent3D.depth = kArrayLayerCount;
 
     for (wgpu::TextureFormat format : kBCFormats) {
         config.textureDescriptor.format = format;
