@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2ae4bb1_2fc0b825",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-01T08:37:47Z",
+      "side": 1,
+      "message": "Hi Corentin and Xinghua, I think here we also need to check if DXIL and DXC libraries are loaded successfully before we can claim we support FP16 on D3D12 backends.\n\nThe check of DXC is as follows:\nGetBackend()-\u003eGetFunctions()-\u003eIsDXCAvailable() (PlatformFunctions is initialized in the initialization of Backends, so DXC should have already been loaded at this point).",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 45
+      },
+      "revId": "0a61441924c5d7ff70498daff1395d44d72e756c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
