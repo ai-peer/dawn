@@ -99,6 +99,24 @@
       "revId": "4ba578434da06392cd9d47db93a11bc8eef852bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df76cc77_ad1f7341",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-01T10:45:35Z",
+      "side": 1,
+      "message": "Yes, this case is suittable for testing in end2end tests.",
+      "parentUuid": "9ae6161a_3be042ee",
+      "revId": "4ba578434da06392cd9d47db93a11bc8eef852bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
