@@ -79,7 +79,8 @@ namespace dawn_native { namespace vulkan {
         region.bufferRowLength = bufferCopy.bytesPerRow / format.blockByteSize * format.blockWidth;
         region.bufferImageHeight = bufferCopy.rowsPerImage;
 
-        region.imageSubresource.aspectMask = texture->GetVkAspectMask();
+        // TODO(enga): This should be updated when texture copies support depth/stencil
+        region.imageSubresource.aspectMask = texture->GetVkAspectMask(wgpu::TextureAspect::All);
         region.imageSubresource.mipLevel = textureCopy.mipLevel;
 
         switch (textureCopy.texture->GetDimension()) {
