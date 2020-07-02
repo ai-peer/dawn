@@ -484,10 +484,22 @@ namespace dawn_native { namespace d3d12 {
             wgpu::BufferUsage bufferUsages = wgpu::BufferUsage::None;
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
+                Buffer* buffer = ToBackend(usages.buffers[i]);
+
+                // The implementation of buffer lazy initialization is still WIP, so before we
+                // support buffer lazy initialization on storage buffers, we temporarily always set
+                // the buffer to be "initialized" so that the buffer, with valid data after its
+                // first use as the writable storage buffer, will not be unexepctedly cleared. For
+                // simplicity here we temporarily set all the buffers as "initialized".
+                // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules on the
+                // buffers attached in the bind groups.
+                if (buffer->GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                    buffer->SetIsDataInitialized();
+                }
+
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.buffers[i])
-                        ->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                          usages.bufferUsages[i])) {
+                if (buffer->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                            usages.bufferUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 bufferUsages |= usages.bufferUsages[i];

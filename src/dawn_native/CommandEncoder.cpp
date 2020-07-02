@@ -676,6 +676,17 @@ namespace dawn_native {
                 copy->destination = destination;
                 copy->destinationOffset = destinationOffset;
                 copy->size = size;
+
+                // The implementation of buffer lazy initialization is still WIP, so before we
+                // support buffer lazy initialization in CopyBufferToBuffer() we temporarily always
+                // set the destination buffer to be "initialized" so that the buffer, with valid
+                // data after its first use as the destination buffer in a CopyBufferToBuffer()
+                // call, will not be unexepctedly cleared.
+                // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules
+                // on both source and destination buffers.
+                if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                    destination->SetIsDataInitialized();
+                }
             }
 
             return {};
@@ -809,6 +820,17 @@ namespace dawn_native {
             copy->destination.bytesPerRow = destination->bytesPerRow;
             copy->destination.rowsPerImage = defaultedRowsPerImage;
             copy->copySize = *copySize;
+
+            // The implementation of buffer lazy initialization is still WIP, so before we support
+            // buffer lazy initialization in CopyTextureToBuffer() we temporarily always set the
+            // destination buffer to be "initialized" so that the buffer, with valid data after its
+            // first use as the destination buffer in a CopyTextureToBuffer() call, will not be
+            // unexepctedly cleared.
+            // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules on the
+            // destination buffer.
+            if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                destination->buffer->SetIsDataInitialized();
+            }
 
             return {};
         });

@@ -687,6 +687,20 @@ namespace dawn_native { namespace metal {
                     texture->EnsureSubresourceContentInitialized(texture->GetAllSubresources());
                 }
             }
+
+            for (size_t i = 0; i < usages.buffers.size(); ++i) {
+                // The implementation of buffer lazy initialization is still WIP, so before we
+                // support buffer lazy initialization on storage buffers, we temporarily always set
+                // the buffer to be "initialized" so that the buffer, with valid data after its
+                // first use as the writable storage buffer, will not be unexepctedly cleared. For
+                // simplicity here we temporarily set all the buffers as "initialized".
+                // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules on the
+                // buffers attached in the bind groups.
+                Buffer* buffer = ToBackend(usages.buffers[i]);
+                if (buffer->GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                    buffer->SetIsDataInitialized();
+                }
+            }
         };
 
         Command type;

@@ -268,6 +268,20 @@ namespace dawn_native { namespace opengl {
                         case wgpu::BindingType::ReadonlyStorageBuffer: {
                             BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                             GLuint buffer = ToBackend(binding.buffer)->GetHandle();
+
+                            // The implementation of buffer lazy initialization is still WIP, so
+                            // before we support buffer lazy initialization on storage buffers, we
+                            // temporarily always set the buffer to be "initialized" so that the
+                            // buffer, with valid data after its first use as the writable storage
+                            // buffer, will not be unexepctedly cleared. For simplicity here we
+                            // also temporarily set the read-only storage buffer as "initialized".
+                            // TODO(jiawei.shao@intel.com): implement buffer lazy initialization
+                            // rules on the buffers attached in the bind groups.
+                            if (binding.buffer->GetDevice()->IsToggleEnabled(
+                                    Toggle::LazyClearResourceOnFirstUse)) {
+                                binding.buffer->SetIsDataInitialized();
+                            }
+
                             GLuint ssboIndex = indices[bindingIndex];
                             GLuint offset = binding.offset;
 

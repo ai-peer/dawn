@@ -174,6 +174,16 @@ namespace dawn_native {
 
         // Mappable buffers don't use a staging buffer and are just as if mapped through MapAsync.
         if (IsMapWritable()) {
+            // The implementation of buffer lazy initialization is still WIP, so before we support
+            // buffer lazy initialization in CreateBufferMapped() we temporarily always set the
+            // buffer to be "initialized" so that the buffer, with valid data after its first use
+            // as the writable mapped buffer, will not be unexepctedly cleared.
+            // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules in the call
+            // of CreateBufferMapped().
+            if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                SetIsDataInitialized();
+            }
+
             DAWN_TRY(MapAtCreationImpl(mappedPointer));
             ASSERT(*mappedPointer != nullptr);
             return {};
@@ -294,6 +304,16 @@ namespace dawn_native {
         ASSERT(!IsError());
 
         ASSERT(mMapReadCallback == nullptr);
+
+        // The implementation of buffer lazy initialization is still WIP, so before we support
+        // buffer lazy initialization in MapWriteAsync() we temporarily always set the buffer to be
+        // "initialized" so that the buffer, with valid data after its first use as the writable
+        // mapped buffer, will not be unexepctedly cleared.
+        // TODO(jiawei.shao@intel.com): implement buffer lazy initialization rules in the call
+        // of CreateBufferMapped().
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            SetIsDataInitialized();
+        }
 
         // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
         mMapSerial++;
@@ -488,6 +508,10 @@ namespace dawn_native {
         mState = BufferState::Destroyed;
     }
 
+    bool BufferBase::IsMapped() const {
+        return mState == BufferState::Mapped;
+    }
+
     void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
         void* data = GetMappedPointerImpl();
         if (isWrite) {
@@ -495,6 +519,18 @@ namespace dawn_native {
         } else {
             CallMapReadCallback(mapSerial, WGPUBufferMapAsyncStatus_Success, data, GetSize());
         }
+    }
+
+    bool BufferBase::IsDataInitialized() const {
+        return mIsDataInitialized;
+    }
+
+    void BufferBase::SetIsDataInitialized() {
+        mIsDataInitialized = true;
+    }
+
+    bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
+        return offset == 0 && size == GetSize();
     }
 
 }  // namespace dawn_native
