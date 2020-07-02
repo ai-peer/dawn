@@ -8,24 +8,33 @@ vars = {
   'swiftshader_git': 'https://swiftshader.googlesource.com',
 
   'dawn_standalone': True,
+
+  # Variables used by chromium's //build GN files.
+  'mac_xcode_version': 'default',
 }
+
+# Export variables used by chromium's //build GN files.
+gclient_gn_args_file='build/config/gclient_args.gni'
+gclient_gn_args = [
+  'mac_xcode_version',
+]
 
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@896323eeda1bd1b01156b70625d5e14de225ebc3',
+    'url': '{chromium_git}/chromium/src/build@7017c9a39b526f701d40679632b1008ccf6762ca',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@2c41dfb19abe40908834803b6fed797b0f341fe1',
+    'url': '{chromium_git}/chromium/src/buildtools@6b2a302b65baf729e0dc026bf2f0bfdb593a2366',
     'condition': 'dawn_standalone',
   },
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@698732d5db36040c07d5cc5f9137fcc943494c11',
+    'url': '{chromium_git}/chromium/src/tools/clang@b49c12a8f3fb25181855d0ea641bbcc2b2e95213',
     'condition': 'dawn_standalone',
   },
   'third_party/binutils': {
-    'url': '{chromium_git}/chromium/src/third_party/binutils@f9ce777698a819dff4d6a033b31122d91a49b62e',
+    'url': '{chromium_git}/chromium/src/third_party/binutils@2566778206fdacdff455b2d96df3d52a18d439d4',
     'condition': 'dawn_standalone',
   },
   'tools/clang/dsymutil': {
