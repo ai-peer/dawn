@@ -275,6 +275,12 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Buffer::UnmapImpl() {
+        // Readback heaps are stuck in COPY_DEST state such that the GPU can never use what the CPU
+        // is writing.
+        // https://crbug.com/dawn/419
+        if (D3D12HeapType(GetUsage()) == D3D12_HEAP_TYPE_READBACK) {
+            mWrittenMappedRange = {0, 0};
+        }
         GetD3D12Resource()->Unmap(0, &mWrittenMappedRange);
         mMappedData = nullptr;
         mWrittenMappedRange = {0, 0};
