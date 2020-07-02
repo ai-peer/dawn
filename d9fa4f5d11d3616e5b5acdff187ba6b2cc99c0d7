@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "695c4f00_b75bccbf",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-02T19:29:15Z",
+      "side": 1,
+      "message": "Alternatively, could be static/fixed to 64 entries to avoid check/realloc.",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
