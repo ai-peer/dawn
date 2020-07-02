@@ -201,12 +201,13 @@ namespace dawn_native { namespace null {
         // Dawn API
         MaybeError MapReadAsyncImpl() override;
         MaybeError MapWriteAsyncImpl() override;
+        MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
 
         bool IsMapWritable() const override;
         MaybeError MapAtCreationImpl() override;
-        void* GetMappedPointerImpl() override;
+        void* GetMappedPointerImpl(size_t offset) override;
 
         std::unique_ptr<uint8_t[]> mBackingData;
     };

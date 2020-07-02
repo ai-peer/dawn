@@ -312,8 +312,12 @@ namespace dawn_native { namespace null {
         return {};
     }
 
-    void* Buffer::GetMappedPointerImpl() {
-        return mBackingData.get();
+    MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+        return {};
+    }
+
+    void* Buffer::GetMappedPointerImpl(size_t offset) {
+        return mBackingData.get() + offset;
     }
 
     void Buffer::UnmapImpl() {
