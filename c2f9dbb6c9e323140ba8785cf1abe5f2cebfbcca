@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ff743a6_b84033e8",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-02T16:01:37Z",
+      "side": 1,
+      "message": "ERROR at //src/dawn_native/BUILD.gn:73:23: Assignment had no effect.\n    weak_frameworks \u003d [ \"Metal.framework\" ]\n                      ^-------------------\nYou set the variable \"weak_frameworks\" here and it was unused before it went\nout of scope.",
+      "revId": "c2f9dbb6c9e323140ba8785cf1abe5f2cebfbcca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
