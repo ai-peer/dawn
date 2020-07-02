@@ -174,6 +174,11 @@ namespace dawn_native { namespace d3d12 {
                                   0, signature->GetBufferPointer(), signature->GetBufferSize(),
                                   IID_PPV_ARGS(&mRootSignature)),
                               "D3D12 create root signature"));
+
+        // Remember the size of the pipeline layout so we can keep track of which parameter slots
+        // were set.
+        mNumOfParameters = rootSignatureDescriptor.NumParameters;
+
         return {};
     }
 
@@ -189,6 +194,10 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12RootSignature* PipelineLayout::GetRootSignature() const {
         return mRootSignature.Get();
+    }
+
+    uint32_t PipelineLayout::GetNumOfParameters() const {
+        return mNumOfParameters;
     }
 
     uint32_t PipelineLayout::GetDynamicRootParameterIndex(BindGroupIndex group,
