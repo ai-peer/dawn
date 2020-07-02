@@ -148,6 +148,38 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
+        bool IsNotTypeless(DXGI_FORMAT format) {
+            switch (format) {
+                case DXGI_FORMAT_R32G32B32A32_TYPELESS:
+                case DXGI_FORMAT_R32G32B32_TYPELESS:
+                case DXGI_FORMAT_R16G16B16A16_TYPELESS:
+                case DXGI_FORMAT_R32G32_TYPELESS:
+                case DXGI_FORMAT_R32G8X24_TYPELESS:
+                case DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS:
+                case DXGI_FORMAT_R10G10B10A2_TYPELESS:
+                case DXGI_FORMAT_R8G8B8A8_TYPELESS:
+                case DXGI_FORMAT_R16G16_TYPELESS:
+                case DXGI_FORMAT_R32_TYPELESS:
+                case DXGI_FORMAT_R24G8_TYPELESS:
+                case DXGI_FORMAT_R24_UNORM_X8_TYPELESS:
+                case DXGI_FORMAT_R8G8_TYPELESS:
+                case DXGI_FORMAT_R16_TYPELESS:
+                case DXGI_FORMAT_R8_TYPELESS:
+                case DXGI_FORMAT_BC1_TYPELESS:
+                case DXGI_FORMAT_BC2_TYPELESS:
+                case DXGI_FORMAT_BC3_TYPELESS:
+                case DXGI_FORMAT_BC4_TYPELESS:
+                case DXGI_FORMAT_BC5_TYPELESS:
+                case DXGI_FORMAT_B8G8R8A8_TYPELESS:
+                case DXGI_FORMAT_B8G8R8X8_TYPELESS:
+                case DXGI_FORMAT_BC6H_TYPELESS:
+                case DXGI_FORMAT_BC7_TYPELESS:
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
     }  // namespace
 
     ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -288,6 +320,21 @@ namespace dawn_native { namespace d3d12 {
         // CreatePlacedResource will fail if it is not.
         DAWN_TRY(mDevice->GetResidencyManager()->LockAllocation(heap));
 
+        // As there are no negative consequences when picking a mismatched clear color, we use zero
+        // as the optimized clear color. This enables fast clears on some architectures.
+        // https://crbug.com/dawn/418
+        D3D12_CLEAR_VALUE zero{};
+        D3D12_CLEAR_VALUE* optimizedClearColor = nullptr;
+        // Optimized clear color cannot to be set on buffer, non-render-target/depth-stencil
+        // textures, or typeless resources
+        if (IsNotTypeless(resourceDescriptor.Format) &&
+            resourceDescriptor.Dimension != D3D12_RESOURCE_DIMENSION_BUFFER &&
+            (resourceDescriptor.Flags & (D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET |
+                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0) {
+            zero.Format = resourceDescriptor.Format;
+            optimizedClearColor = &zero;
+        }
+
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed
         // upon Tick or after the last command list using the resource has completed
@@ -299,7 +346,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(CheckOutOfMemoryHRESULT(
             mDevice->GetD3D12Device()->CreatePlacedResource(
                 heap->GetD3D12Heap(), allocation.GetOffset(), &resourceDescriptor, initialUsage,
-                nullptr, IID_PPV_ARGS(&placedResource)),
+                optimizedClearColor, IID_PPV_ARGS(&placedResource)),
             "ID3D12Device::CreatePlacedResource"));
 
         // After CreatePlacedResource has finished, the heap can be unlocked from residency. This
@@ -342,14 +389,29 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
             resourceInfo.SizeInBytes, GetMemorySegment(mDevice, heapType)));
 
+        // As there are no negative consequences when picking a mismatched clear color, we use zero
+        // as the optimized clear color. This enables fast clears on some architectures.
+        // https://crbug.com/dawn/418
+        D3D12_CLEAR_VALUE zero{};
+        D3D12_CLEAR_VALUE* optimizedClearColor = nullptr;
+        // Optimized clear color cannot to be set on buffer, non-render-target/depth-stencil
+        // textures, or typeless resources
+        if (IsNotTypeless(resourceDescriptor.Format) &&
+            resourceDescriptor.Dimension != D3D12_RESOURCE_DIMENSION_BUFFER &&
+            (resourceDescriptor.Flags & (D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET |
+                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0) {
+            zero.Format = resourceDescriptor.Format;
+            optimizedClearColor = &zero;
+        }
+
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
         ComPtr<ID3D12Resource> committedResource;
-        DAWN_TRY(
-            CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreateCommittedResource(
-                                        &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor,
-                                        initialUsage, nullptr, IID_PPV_ARGS(&committedResource)),
-                                    "ID3D12Device::CreateCommittedResource"));
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            mDevice->GetD3D12Device()->CreateCommittedResource(
+                &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
+                optimizedClearColor, IID_PPV_ARGS(&committedResource)),
+            "ID3D12Device::CreateCommittedResource"));
 
         // When using CreateCommittedResource, D3D12 creates an implicit heap that contains the
         // resource allocation. Because Dawn's memory residency management occurs at the resource
