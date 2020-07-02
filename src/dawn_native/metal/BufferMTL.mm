@@ -121,8 +121,12 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    void* Buffer::GetMappedPointerImpl() {
-        return [mMtlBuffer contents];
+    MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+        return {};
+    }
+
+    void* Buffer::GetMappedPointerImpl(size_t offset) {
+        return reinterpret_cast<uint8_t*>([mMtlBuffer contents]) + offset;
     }
 
     void Buffer::UnmapImpl() {
