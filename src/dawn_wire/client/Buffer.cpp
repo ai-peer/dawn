@@ -239,6 +239,18 @@ namespace dawn_wire { namespace client {
         SerializeBufferMapAsync(this, serial, writeHandle);
     }
 
+    void Buffer::MapAsync(WGPUMapModeFlags mode,
+                          size_t offset,
+                          size_t size,
+                          WGPUBufferMapCallback callback,
+                          void* userdata) {
+        (void)mode;
+        (void)offset;
+        (void)size;
+        (void)callback;
+        (void)userdata;
+    }
+
     bool Buffer::OnMapReadAsyncCallback(uint32_t requestSerial,
                                         uint32_t status,
                                         uint64_t initialDataInfoLength,
