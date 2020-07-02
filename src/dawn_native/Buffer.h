@@ -58,6 +58,7 @@ namespace dawn_native {
         void SetSubData(uint64_t start, uint64_t count, const void* data);
         void MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata);
         void MapWriteAsync(WGPUBufferMapWriteCallback callback, void* userdata);
+        void MapAsync(wgpu::MapMode mode, size_t offset, size_t size, WGPUBufferMapCallback callback, void* userdata);
         void* GetMappedRange();
         const void* GetConstMappedRange();
         void Unmap();
