@@ -125,6 +125,21 @@ namespace dawn_native { namespace opengl {
         return {};
     }
 
+    MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+
+        // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
+        // version of OpenGL that would let us map the buffer unsynchronized.
+        gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
+        if (mode & wgpu::MapMode::Read) {
+            mMappedData = gl.MapBufferRange(GL_ARRAY_BUFFER, offset, size, GL_MAP_READ_BIT);
+        } else {
+            ASSERT(mode & wgpu::MapMode::Write);
+            mMappedData = gl.MapBufferRange(GL_ARRAY_BUFFER, offset, size, GL_MAP_WRITE_BIT);
+        }
+        return {};
+    }
+
     void* Buffer::GetMappedPointerImpl() {
         return mMappedData;
     }
