@@ -293,6 +293,14 @@ namespace dawn_native {
         tracker->Track(this, mMapSerial, true);
     }
 
+    void BufferBase::MapAsync(wgpu::MapMode mode, size_t offset, size_t size, WGPUBufferMapCallback callback, void* userdata) {
+        (void)mode;
+        (void)offset;
+        (void)size;
+        (void)callback;
+        (void)userdata;
+    }
+
     void* BufferBase::GetMappedRange() {
         return GetMappedRangeInternal(true);
     }
