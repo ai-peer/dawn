@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "bc71002a_19e7192a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-07-02T11:22:14Z",
+      "side": 1,
+      "message": "Hi, Corentin, Does my current modification follow your comment? But an E_INVALIDARG error happens in bots when calling CheckFeatureSupport. Do you have any idea about the cause?",
+      "parentUuid": "3ad71583_feaef7f5",
+      "revId": "66fdc03f94a97c5583f4e97826b21aef273b64a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86092418_43a621e3",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 6
