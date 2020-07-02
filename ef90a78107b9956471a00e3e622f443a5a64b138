@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6315f051_3b6a6ff0",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-02T17:58:36Z",
+      "side": 1,
+      "message": "An old enough version of Windows may not understand the D3D_SHADER_MODEL_6_2 enum. If CheckFeatureSupport below fails with E_INVALID arg, you will need to call CheckFeatureSupport multiple times to get the lowest one.",
+      "range": {
+        "startLine": 62,
+        "startChar": 55,
+        "endLine": 62,
+        "endChar": 75
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5298a533_572afc6c",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 9
@@ -18,6 +41,98 @@
         "startChar": 60,
         "endLine": 65,
         "endChar": 91
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "461ed4d8_ba16d91f",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-02T17:58:36Z",
+      "side": 1,
+      "message": "If the returned shader model is 5_1, the lowest enum value, we need to handle that.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 79
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16adf82_0e23c09d",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-02T17:58:36Z",
+      "side": 1,
+      "message": "Please add a comment describing how the values of dxcShaderModel are encoded so I do not have to hunt for them in the code.",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c75cb12_da03fecc",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-02T17:58:36Z",
+      "side": 1,
+      "message": "Given that dxcShaderModel is passed to shaderc_spvc, I think we should simply call it shaderModel. This way, we can use it for non-DXC cases in the future.",
+      "range": {
+        "startLine": 31,
+        "startChar": 17,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d4c7c7a_f70e5590",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-02T17:58:36Z",
+      "side": 1,
+      "message": "The information in dxcShaderProfiles and dxcShaderModel seem redundant with each other. With just dxcShaderModel, we should be able to write a helper function which returns the string for the shader profile if given a shader stage. The calling code has to know the shader stage to index into PerStage anyways.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 49
       },
       "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
