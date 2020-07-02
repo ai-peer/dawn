@@ -43,6 +43,11 @@ namespace dawn_wire { namespace client {
                                     uint64_t initialDataInfoLength,
                                     const uint8_t* initialDataInfo);
         bool OnMapWriteAsyncCallback(uint32_t requestSerial, uint32_t status);
+        void MapAsync(WGPUMapModeFlags mode,
+                      size_t offset,
+                      size_t size,
+                      WGPUBufferMapCallback callback,
+                      void* userdata);
         void* GetMappedRange();
         const void* GetConstMappedRange();
         void Unmap();
