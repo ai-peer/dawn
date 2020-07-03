@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "af4a0449_a5e0afca",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T06:10:40Z",
+      "side": 1,
+      "message": "Ah, so we\u0027ll need to do a loop that does decreasing shader model versions, and fails if none of the CheckFeatureSupport worked.\n\n  D3D12_SHADER_MODEL knownShaderModels[] \u003d {{D3D_SHADER_MODEL_6_2}, ...}\n  D3D12_SHADER_MODEL driverShaderModel \u003d 0;\n\n  for (D3D12_SHADER_MODEL model : knownShaderModels) {\n    D3D12_FEATURE_DATA_SHADER_MODEL featureData \u003d {model};\n    if (SUCCEEDED(...)) {\n      driverShaderModel \u003d model;\n      break;\n    }\n  }\n\n  if (driverShaderModel \u003d\u003d 0) {\n    return DAWN_INTERNAL_ERROR(...);\n  }",
+      "parentUuid": "6315f051_3b6a6ff0",
+      "range": {
+        "startLine": 62,
+        "startChar": 55,
+        "endLine": 62,
+        "endChar": 75
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5298a533_572afc6c",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 9
@@ -59,6 +83,30 @@
       "writtenOn": "2020-07-02T17:58:36Z",
       "side": 1,
       "message": "If the returned shader model is 5_1, the lowest enum value, we need to handle that.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 79
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78f857f1_6664a6b3",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T06:10:40Z",
+      "side": 1,
+      "message": "It\u0027s probably best to handle this programmatically, by building the string with code instead of hardcoding all possibilities. No strong opinion on where the building happens though.",
+      "parentUuid": "461ed4d8_ba16d91f",
       "range": {
         "startLine": 80,
         "startChar": 0,
