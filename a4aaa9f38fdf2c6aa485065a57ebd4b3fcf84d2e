@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a11e529c_38398141",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-03T01:16:09Z",
+      "side": 1,
+      "message": "Instead of ignoring mWrittenMappedRange in UnmapImpl, consider modifying this code to leave mWrittenMappedRange alone for readback heaps. Then UnMapImpl can stay how it is.  \n\n@Austin and @Corentin, does WebGPU allow developers to map readback buffers for write?  If not,  is the real bug in the validation layer?",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 9
+      },
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
