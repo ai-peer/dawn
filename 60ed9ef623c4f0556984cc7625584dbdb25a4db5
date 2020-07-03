@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d40adb4_9ab4524d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T16:34:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "60ed9ef623c4f0556984cc7625584dbdb25a4db5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "106cf567_0dfee84b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T16:34:30Z",
+      "side": 1,
+      "message": "Can we order in the same order as the spec with the same block comments like:\n\n // Validation for the copy being in-bounds.\n\nAnd add TODOs for the things in which this implementation differs from the spec.",
+      "revId": "60ed9ef623c4f0556984cc7625584dbdb25a4db5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd89ad88_61e46080",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T16:34:30Z",
+      "side": 1,
+      "message": "u-nit: newline before this block for consistency?",
+      "revId": "60ed9ef623c4f0556984cc7625584dbdb25a4db5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2601ec5c_993dd528",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T16:34:30Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "60ed9ef623c4f0556984cc7625584dbdb25a4db5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
