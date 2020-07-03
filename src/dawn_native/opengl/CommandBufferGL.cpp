@@ -712,8 +712,14 @@ namespace dawn_native { namespace opengl {
                     break;
                 }
 
+                case Command::ResolveQuerySet: {
+                    // Query API is not supported on OpenGL
+                    UNREACHABLE();
+                    break;
+                }
+
                 case Command::WriteTimestamp: {
-                    // WriteTimestamp is not supported on OpenGL
+                    // Query API is not supported on OpenGL
                     UNREACHABLE();
                     break;
                 }
