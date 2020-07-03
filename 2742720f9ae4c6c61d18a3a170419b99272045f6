@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66780e1b_df414996",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-03T01:26:12Z",
+      "side": 1,
+      "message": "For better readability, please rename to IsTypeless and do the ! in the callsite.",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 46
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7a69185_a2723a61",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-03T01:26:12Z",
+      "side": 1,
+      "message": "Please rename to optimizedClearValue since we\u0027re not always clearing colors.",
+      "range": {
+        "startLine": 328,
+        "startChar": 27,
+        "endLine": 328,
+        "endChar": 46
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9ecf3f4_7feebfdd",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-03T01:26:12Z",
+      "side": 1,
+      "message": "Please put this code into a helper function instead of copy-pasting it in two places.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
