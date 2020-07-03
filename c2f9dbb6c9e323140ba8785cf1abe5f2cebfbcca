@@ -16,6 +16,24 @@
       "revId": "c2f9dbb6c9e323140ba8785cf1abe5f2cebfbcca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffe97804_6e54db31",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000996
+      },
+      "writtenOn": "2020-07-03T08:33:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1ff743a6_b84033e8",
+      "revId": "c2f9dbb6c9e323140ba8785cf1abe5f2cebfbcca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
