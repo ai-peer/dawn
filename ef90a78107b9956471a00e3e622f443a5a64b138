@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "84a2a26c_54e9902b",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T09:46:31Z",
+      "side": 1,
+      "message": "Yep",
+      "parentUuid": "f23175ac_380859de",
+      "range": {
+        "startLine": 62,
+        "startChar": 55,
+        "endLine": 62,
+        "endChar": 75
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5298a533_572afc6c",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 9
@@ -224,6 +248,30 @@
       "side": 1,
       "message": "@Corentin, Do I need merge dxcShaderProfiles and dxcShaderModel to one variable, and write a helper function? you advised to generate a shader profiles when creating device.",
       "parentUuid": "0d4c7c7a_f70e5590",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "ef90a78107b9956471a00e3e622f443a5a64b138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66588ffa_76dae03a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T09:46:31Z",
+      "side": 1,
+      "message": "Either way, whichever you prefer, the goal is to reduce the amount of code duplication.",
+      "parentUuid": "b437c410_6f43e219",
       "range": {
         "startLine": 32,
         "startChar": 0,
