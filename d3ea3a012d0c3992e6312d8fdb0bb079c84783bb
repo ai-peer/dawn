@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86de004_ac7d8f4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:31:14Z",
+      "side": 1,
+      "message": "LGTM overall. +CC Jiawei.",
+      "revId": "d3ea3a012d0c3992e6312d8fdb0bb079c84783bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a762bf8f_efe4f580",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:31:14Z",
+      "side": 1,
+      "message": "IMHO both of these functions are simple enough that they could be inlined here and ordered to match the spec.\n\nDitto for ValidateTextureCopyView and ValidateLinearTextureData. ComputeRequiredBytesInCopy could stay separate though.",
+      "revId": "d3ea3a012d0c3992e6312d8fdb0bb079c84783bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c58daeaa_f7bbd31b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:31:14Z",
+      "side": 1,
+      "message": "nit: Validate XXXX returns a MaybeErrror so the last one in a function can just be return ValidateXXX",
+      "revId": "d3ea3a012d0c3992e6312d8fdb0bb079c84783bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6b6fd0d_fc9518cc",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:31:14Z",
+      "side": 1,
+      "message": "Sub-validation functions like this one aren\u0027t needed outside of CommandValidation.cpp so they can be put in an anonymous namespace at the top of CommandValidation.cpp and not exposed in this header.",
+      "revId": "d3ea3a012d0c3992e6312d8fdb0bb079c84783bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
