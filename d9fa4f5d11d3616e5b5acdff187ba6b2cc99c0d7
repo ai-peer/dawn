@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "895ad98c_05645a6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:39:01Z",
+      "side": 1,
+      "message": "Approach LGTM overall.",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "695c4f00_b75bccbf",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -13,6 +30,80 @@
       "writtenOn": "2020-07-02T19:29:15Z",
       "side": 1,
       "message": "Alternatively, could be static/fixed to 64 entries to avoid check/realloc.",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce393856_cfecf443",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:39:01Z",
+      "side": 1,
+      "message": "If the layout is not the same, the array should be completely invalidated (with a bunch of nullptr) because the previous content of the root signature was invalidated and we don\u0027t want to reuse a descriptor table that has been invalidated since it was set.",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3505a29_ba53451a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:39:01Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 321,
+        "startChar": 87,
+        "endLine": 321,
+        "endChar": 92
+      },
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "309f5d03_2ba44be2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:39:01Z",
+      "side": 1,
+      "message": "Instead of indexing with parameterIndex, which requires a vector here, what do you think of using index [1] instead so we know there can be at most kMaxBindGroupsTyped entries?",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba3838e3_19f51615",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-03T15:39:01Z",
+      "side": 1,
+      "message": "This would be unused so it could be removed.",
       "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
