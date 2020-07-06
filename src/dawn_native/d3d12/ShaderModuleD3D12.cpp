@@ -82,6 +82,44 @@ namespace dawn_native { namespace d3d12 {
             return arguments;
         }
 
+        uint32_t ComputeBase10ShaderModel(D3D_SHADER_MODEL shaderModel) {
+            // D3D_SHADER_MODEL is encoded as 0xMm with M the major version and m the minor version
+            uint32_t major = (shaderModel & 0xF0) >> 4;
+            uint32_t minor = (shaderModel & 0xF);
+
+            ASSERT(major < 10);
+            ASSERT(minor < 10);
+            return 10 * major + minor;
+        }
+
+        std::wstring ComputeShaderProfile(D3D_SHADER_MODEL shaderModel, SingleShaderStage stage) {
+            // D3D_SHADER_MODEL is encoded as 0xMm with M the major version and m the minor version
+            uint32_t major = (shaderModel & 0xF0) >> 4;
+            uint32_t minor = (shaderModel & 0xF);
+
+            // Profiles are always <stage>s_<minor>_<major> so we build the s_<minor>_major and add
+            // it to each of the stage's suffix.
+            std::wstring profile = L"Ss_M_n";
+            profile[3] = wchar_t('0' + major);
+            profile[5] = wchar_t('0' + minor);
+
+            switch (stage) {
+                case SingleShaderStage::Compute:
+                    profile[0] = L'c';
+                    break;
+                case SingleShaderStage::Fragment:
+                    profile[0] = L'p';
+                    break;
+                case SingleShaderStage::Vertex:
+                    profile[0] = L'v';
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            return profile;
+        }
+
     }  // anonymous namespace
 
     // static
@@ -105,7 +143,8 @@ namespace dawn_native { namespace d3d12 {
 
             options.SetForceZeroInitializedVariables(true);
             if (GetDevice()->IsExtensionEnabled(Extension::ShaderFloat16)) {
-                options.SetHLSLShaderModel(ToBackend(GetDevice())->GetDeviceInfo().shaderModel);
+                D3D_SHADER_MODEL shaderModel = ToBackend(GetDevice())->GetDeviceInfo().shaderModel;
+                options.SetHLSLShaderModel(ComputeBase10ShaderModel(shaderModel));
                 options.SetHLSLEnable16BitTypes(true);
             } else {
                 options.SetHLSLShaderModel(51);
@@ -150,7 +189,8 @@ namespace dawn_native { namespace d3d12 {
 
             spirv_cross::CompilerHLSL::Options options_hlsl;
             if (GetDevice()->IsExtensionEnabled(Extension::ShaderFloat16)) {
-                options_hlsl.shader_model = ToBackend(GetDevice())->GetDeviceInfo().shaderModel;
+                D3D_SHADER_MODEL shaderModel = ToBackend(GetDevice())->GetDeviceInfo().shaderModel;
+                options_hlsl.shader_model = ComputeBase10ShaderModel(shaderModel);
                 options_hlsl.enable_16bit_types = true;
             } else {
                 options_hlsl.shader_model = 51;
@@ -226,8 +266,10 @@ namespace dawn_native { namespace d3d12 {
                                                                    const std::string& hlslSource,
                                                                    const char* entryPoint,
                                                                    uint32_t compileFlags) {
+        Device* device = ToBackend(GetDevice());
+
         IDxcLibrary* dxcLibrary;
-        DAWN_TRY_ASSIGN(dxcLibrary, ToBackend(GetDevice())->GetOrCreateDxcLibrary());
+        DAWN_TRY_ASSIGN(dxcLibrary, device->GetOrCreateDxcLibrary());
 
         ComPtr<IDxcBlobEncoding> sourceBlob;
         DAWN_TRY(CheckHRESULT(dxcLibrary->CreateBlobWithEncodingOnHeapCopy(
@@ -235,21 +277,22 @@ namespace dawn_native { namespace d3d12 {
                               "DXC create blob"));
 
         IDxcCompiler* dxcCompiler;
-        DAWN_TRY_ASSIGN(dxcCompiler, ToBackend(GetDevice())->GetOrCreateDxcCompiler());
+        DAWN_TRY_ASSIGN(dxcCompiler, device->GetOrCreateDxcCompiler());
 
         std::wstring entryPointW;
         DAWN_TRY_ASSIGN(entryPointW, ConvertStringToWstring(entryPoint));
 
-        std::vector<const wchar_t*> arguments = GetDXCArguments(
-            compileFlags, GetDevice()->IsExtensionEnabled(Extension::ShaderFloat16));
+        std::vector<const wchar_t*> arguments =
+            GetDXCArguments(compileFlags, device->IsExtensionEnabled(Extension::ShaderFloat16));
+
+        std::wstring shaderProfile =
+            ComputeShaderProfile(device->GetDeviceInfo().shaderModel, stage);
 
         ComPtr<IDxcOperationResult> result;
-        DAWN_TRY(
-            CheckHRESULT(dxcCompiler->Compile(
-                             sourceBlob.Get(), nullptr, entryPointW.c_str(),
-                             ToBackend(GetDevice())->GetDeviceInfo().shaderProfiles[stage].c_str(),
-                             arguments.data(), arguments.size(), nullptr, 0, nullptr, &result),
-                         "DXC compile"));
+        DAWN_TRY(CheckHRESULT(dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
+                                                   shaderProfile.c_str(), arguments.data(),
+                                                   arguments.size(), nullptr, 0, nullptr, &result),
+                              "DXC compile"));
 
         HRESULT hr;
         DAWN_TRY(CheckHRESULT(result->GetStatus(&hr), "DXC get status"));

@@ -28,10 +28,8 @@ namespace dawn_native { namespace d3d12 {
         uint32_t resourceHeapTier;
         bool supportsRenderPass;
         bool supportsShaderFloat16;
-        // shaderModel indicates the maximum supported shader model, for example, the value 62
-        // indicates that current driver supports the maximum shader model is D3D_SHADER_MODEL_6_2.
-        uint32_t shaderModel;
-        PerStage<std::wstring> shaderProfiles;
+        // The maximum shader model supported by the driver.
+        D3D_SHADER_MODEL shaderModel;
     };
 
     ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);
