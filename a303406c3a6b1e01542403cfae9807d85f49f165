@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "904e2c5f_554e2602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:04:34Z",
+      "side": 1,
+      "message": "I don\u0027t want this blocked any further. In the future please reply \"Done\" to all comments that you handled. LGTM and I\u0027ll do a small change later.",
+      "revId": "a303406c3a6b1e01542403cfae9807d85f49f165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
