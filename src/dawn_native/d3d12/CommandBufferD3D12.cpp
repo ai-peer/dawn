@@ -309,10 +309,16 @@ namespace dawn_native { namespace d3d12 {
                 uint32_t parameterIndex = pipelineLayout->GetSamplerRootParameterIndex(index);
                 const D3D12_GPU_DESCRIPTOR_HANDLE baseDescriptor =
                     group->GetBaseSamplerDescriptor();
-                if (mInCompute) {
-                    commandList->SetComputeRootDescriptorTable(parameterIndex, baseDescriptor);
-                } else {
-                    commandList->SetGraphicsRootDescriptorTable(parameterIndex, baseDescriptor);
+                // Check if the group requires its sampler table to be set in the pipeline.
+                // This because sampler heap allocations could be cached and use the same table.
+                if (mBoundRootSamplerTables[index].ptr != baseDescriptor.ptr) {
+                    if (mInCompute) {
+                        commandList->SetComputeRootDescriptorTable(parameterIndex, baseDescriptor);
+                    } else {
+                        commandList->SetGraphicsRootDescriptorTable(parameterIndex, baseDescriptor);
+                    }
+
+                    mBoundRootSamplerTables[index] = baseDescriptor;
                 }
             }
         }
@@ -320,6 +326,9 @@ namespace dawn_native { namespace d3d12 {
         Device* mDevice;
 
         bool mInCompute = false;
+
+        ityp::array<BindGroupIndex, D3D12_GPU_DESCRIPTOR_HANDLE, kMaxBindGroups>
+            mBoundRootSamplerTables = {};
 
         ShaderVisibleDescriptorAllocator* mViewAllocator;
         ShaderVisibleDescriptorAllocator* mSamplerAllocator;
