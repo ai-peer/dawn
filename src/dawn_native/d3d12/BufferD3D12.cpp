@@ -245,7 +245,7 @@ namespace dawn_native { namespace d3d12 {
 
     bool Buffer::IsMapWritable() const {
         // TODO(enga): Handle CPU-visible memory on UMA
-        return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
+        return (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
     }
 
     MaybeError Buffer::MapInternal(bool isWrite, const char* contextInfo) {
