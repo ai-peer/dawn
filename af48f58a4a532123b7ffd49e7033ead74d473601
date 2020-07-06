@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e2b5314_a0a71a0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-06T02:37:05Z",
+      "side": 1,
+      "message": "\u003e Patch Set 13:\n\u003e \n\u003e Oh, this grew to be quite complicated. Instead of handling all the cases that require initialization now, what do you think of taking patchset 10 / 11 again then:\n\u003e \n\u003e  - Introduce a temporary toggle for buffer lazy zero init.\n\u003e  - Change the code and the test to use that.\n\u003e \n\u003e Then in follow-up CLs we can use the toggle in tests, but now we won\u0027t run into weird cases with buffer being marked as initialized only on some calls. And finally when everything is implemented we remove the temporary toggle.\n\nDone. Thanks for your suggestion!",
+      "revId": "af48f58a4a532123b7ffd49e7033ead74d473601",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
