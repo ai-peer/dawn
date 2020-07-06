@@ -33,6 +33,24 @@
       "revId": "d0aa7d37cba9cb5da14e72e2508cfaf58d0aa621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9409a65d_b6b9b24f",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-06T13:33:08Z",
+      "side": 1,
+      "message": "Ah okay, it makes sense.",
+      "parentUuid": "5bec3eda_6167a98e",
+      "revId": "d0aa7d37cba9cb5da14e72e2508cfaf58d0aa621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
