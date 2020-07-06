@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e214d40b_4e029c9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "330ffec5_aab942ac",
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eccead39_a5880109",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -76,6 +94,48 @@
     },
     {
       "key": {
+        "uuid": "19b68a74_13c53300",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66780e1b_df414996",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 46
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1474b6d7_44c5a634",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac8218e4_176ea4ab",
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d2838ef_3090275a",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -90,6 +150,24 @@
       "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92f20631_42ef0604",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d2838ef_3090275a",
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -113,6 +191,30 @@
       "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a9b541f_38c71747",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a69185_a2723a61",
+      "range": {
+        "startLine": 328,
+        "startChar": 27,
+        "endLine": 328,
+        "endChar": 46
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +253,30 @@
       "side": 1,
       "message": "Also the helper function could return a const D3D12_CLEAR_VALUE* that\u0027s either a nullptr or a pointer to a `static D3D12_CLEAR_VALUE kZeroClearValue`",
       "parentUuid": "c9ecf3f4_7feebfdd",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6f6f3d1_4ed4ff03",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-06T23:39:45Z",
+      "side": 1,
+      "message": "Unfortunately, we cannot return a pointer to a \"static const D3D12_CLEAR_VALUE\" as the Format of the clear value is dependent on the resource being created.\n\nI created a function for the if logic. Should I refactor more of the logic into the helper function?",
+      "parentUuid": "436c5281_44ab5396",
       "range": {
         "startLine": 324,
         "startChar": 0,
