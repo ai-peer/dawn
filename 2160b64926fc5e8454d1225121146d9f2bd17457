@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3db6de7_b2400ebd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T15:29:49Z",
+      "side": 1,
+      "message": "LGTM ",
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42f739b3_0e3720d6",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T15:29:49Z",
+      "side": 1,
+      "message": "nit: maybe we could also ASSERT it has either MapWrite or MapRead usage",
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
