@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70d2774b_5b832597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "Looks good overall. We need to test these overflow cases.",
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e55e9611_67d8f640",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "nit: this should probably be \u003e so that it is allowed to resolve 0 queries if queryCount \u003d\u003d GetQueryCount().",
+      "range": {
+        "startLine": 530,
+        "startChar": 27,
+        "endLine": 530,
+        "endChar": 29
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30485c5d_7f0e61c0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "This can overflow for example is firstQuery is 1 and queryCount is 0xFFFFFFFF. Can you add a test for this?\n\nThe check should be queryCount \u003e querySet-\u003eGetQueryCount() - firstQuery, with a comment that it can\u0027t overflow because we checked that GetQueryCount - firstQuery is non-negative because we checked it above.",
+      "range": {
+        "startLine": 534,
+        "startChar": 16,
+        "endLine": 534,
+        "endChar": 67
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cee1c9cf_15b6ddc3",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "ditto: comment about the overflow (it is checked properly here)",
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b90229d_c6298ba1",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "This should be cast to a uint64_t so that we know the multiplication can\u0027t overflow. Can we have a test for the case where the overflow would have allowed bypassing that validation? (it would only work when compiling for 32 bit mode)",
+      "range": {
+        "startLine": 549,
+        "startChar": 33,
+        "endLine": 549,
+        "endChar": 62
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d969e79_4e1af27f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "It is reachable via non-precise occlusion queries. Can this have a call to SkipCommands() and a TODO instead of the UNREACHABLE()?",
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeef227d_387d7fa3",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "nit constexpr ... kQueryCount",
+      "range": {
+        "startLine": 334,
+        "startChar": 4,
+        "endLine": 334,
+        "endChar": 23
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d88adeb_e214485e",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:31:01Z",
+      "side": 1,
+      "message": "This should check at 4, because that\u0027s the next smaller alignment after 8.",
+      "range": {
+        "startLine": 412,
+        "startChar": 70,
+        "endLine": 412,
+        "endChar": 71
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
