@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "eccead39_a5880109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T18:13:16Z",
+      "side": 1,
+      "message": "No additional concerns after Corentin and Rafael\u0027s comments",
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66780e1b_df414996",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
