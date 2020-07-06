@@ -21,13 +21,6 @@ namespace {
 class QueueSubmitValidationTest : public ValidationTest {
 };
 
-static void StoreTrueMapWriteCallback(WGPUBufferMapAsyncStatus status,
-                                      void*,
-                                      uint64_t,
-                                      void* userdata) {
-    *static_cast<bool*>(userdata) = true;
-}
-
 // Test submitting with a mapped buffer is disallowed
 TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
     // Create a map-write buffer.
@@ -54,10 +47,7 @@ TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
     queue.Submit(1, &commands);
 
     // Map the buffer, submitting when the buffer is mapped should fail
-    bool mapWriteFinished = false;
-    buffer.MapWriteAsync(StoreTrueMapWriteCallback, &mapWriteFinished);
-    queue.Submit(0, nullptr);
-    ASSERT_TRUE(mapWriteFinished);
+    buffer.MapWriteAsync(nullptr, nullptr);
 
     ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
 

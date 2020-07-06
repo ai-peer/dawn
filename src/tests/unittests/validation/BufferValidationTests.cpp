@@ -60,6 +60,11 @@ static void ToMockBufferMapWriteCallback(WGPUBufferMapAsyncStatus status,
 
 class BufferValidationTest : public ValidationTest {
     protected:
+      void FlushMappingOperations() {
+          device.Tick();
+          device.Tick();
+      }
+
       wgpu::Buffer CreateMapReadBuffer(uint64_t size) {
           wgpu::BufferDescriptor descriptor;
           descriptor.size = size;
@@ -172,7 +177,7 @@ TEST_F(BufferValidationTest, MapReadSuccess) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .Times(1);
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 
     buf.Unmap();
 }
@@ -186,7 +191,7 @@ TEST_F(BufferValidationTest, MapWriteSuccess) {
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .Times(1);
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 
     buf.Unmap();
 }
@@ -259,7 +264,7 @@ TEST_F(BufferValidationTest, MapReadAlreadyMapped) {
         .Times(1);
     ASSERT_DEVICE_ERROR(buf.MapReadAsync(ToMockBufferMapReadCallback, this + 1));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test map writing a buffer that is already mapped
@@ -276,7 +281,7 @@ TEST_F(BufferValidationTest, MapWriteAlreadyMapped) {
         .Times(1);
     ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, this + 1));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 // TODO(cwallez@chromium.org) Test a MapWrite and already MapRead and vice-versa
 
@@ -290,9 +295,8 @@ TEST_F(BufferValidationTest, MapReadUnmapBeforeResult) {
         .Times(1);
     buf.Unmap();
 
-    // Submitting the queue makes the null backend process map request, but the callback shouldn't
-    // be called again
-    queue.Submit(0, nullptr);
+    // The callback shouldn't be called again.
+    FlushMappingOperations();
 }
 
 // Test unmapping before having the result gives UNKNOWN - for writing
@@ -305,9 +309,8 @@ TEST_F(BufferValidationTest, MapWriteUnmapBeforeResult) {
         .Times(1);
     buf.Unmap();
 
-    // Submitting the queue makes the null backend process map request, but the callback shouldn't
-    // be called again
-    queue.Submit(0, nullptr);
+    // The callback shouldn't be called again.
+    FlushMappingOperations();
 }
 
 // Test destroying the buffer before having the result gives UNKNOWN - for reading
@@ -324,9 +327,8 @@ TEST_F(BufferValidationTest, DISABLED_MapReadDestroyBeforeResult) {
             .Times(1);
     }
 
-    // Submitting the queue makes the null backend process map request, but the callback shouldn't
-    // be called again
-    queue.Submit(0, nullptr);
+    // The callback shouldn't be called again.
+    FlushMappingOperations();
 }
 
 // Test destroying the buffer before having the result gives UNKNOWN - for writing
@@ -343,9 +345,8 @@ TEST_F(BufferValidationTest, DISABLED_MapWriteDestroyBeforeResult) {
             .Times(1);
     }
 
-    // Submitting the queue makes the null backend process map request, but the callback shouldn't
-    // be called again
-    queue.Submit(0, nullptr);
+    // The callback shouldn't be called again.
+    FlushMappingOperations();
 }
 
 // When a MapRead is cancelled with Unmap it might still be in flight, test doing a new request
@@ -365,7 +366,7 @@ TEST_F(BufferValidationTest, MapReadUnmapBeforeResultThenMapAgain) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, this + 1))
         .Times(1);
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 // TODO(cwallez@chromium.org) Test a MapWrite and already MapRead and vice-versa
 
@@ -386,7 +387,7 @@ TEST_F(BufferValidationTest, MapWriteUnmapBeforeResultThenMapAgain) {
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, this + 1))
         .Times(1);
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test that the MapReadCallback isn't fired twice when unmap() is called inside the callback
@@ -399,7 +400,7 @@ TEST_F(BufferValidationTest, UnmapInsideMapReadCallback) {
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .WillOnce(InvokeWithoutArgs([&]() { buf.Unmap(); }));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test that the MapWriteCallback isn't fired twice when unmap() is called inside the callback
@@ -412,7 +413,7 @@ TEST_F(BufferValidationTest, UnmapInsideMapWriteCallback) {
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .WillOnce(InvokeWithoutArgs([&]() { buf.Unmap(); }));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test that the MapReadCallback isn't fired twice the buffer external refcount reaches 0 in the callback
@@ -425,7 +426,7 @@ TEST_F(BufferValidationTest, DestroyInsideMapReadCallback) {
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .WillOnce(InvokeWithoutArgs([&]() { buf = wgpu::Buffer(); }));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test that the MapWriteCallback isn't fired twice the buffer external refcount reaches 0 in the callback
@@ -438,7 +439,7 @@ TEST_F(BufferValidationTest, DestroyInsideMapWriteCallback) {
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .WillOnce(InvokeWithoutArgs([&]() { buf = wgpu::Buffer(); }));
 
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 }
 
 // Test that it is valid to destroy an unmapped buffer
@@ -477,7 +478,7 @@ TEST_F(BufferValidationTest, DestroyMappedBufferCausesImplicitUnmap) {
                     Call(WGPUBufferMapAsyncStatus_Unknown, nullptr, 0, this + 0))
             .Times(1);
         buf.Destroy();
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer buf = CreateMapWriteBuffer(4);
@@ -487,7 +488,7 @@ TEST_F(BufferValidationTest, DestroyMappedBufferCausesImplicitUnmap) {
                     Call(WGPUBufferMapAsyncStatus_Unknown, nullptr, 0, this + 1))
             .Times(1);
         buf.Destroy();
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
 }
 
@@ -532,13 +533,13 @@ TEST_F(BufferValidationTest, MapMappedBuffer) {
         wgpu::Buffer buf = CreateMapReadBuffer(4);
         buf.MapReadAsync(ToMockBufferMapReadCallback, nullptr);
         ASSERT_DEVICE_ERROR(buf.MapReadAsync(ToMockBufferMapReadCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer buf = CreateMapWriteBuffer(4);
         buf.MapWriteAsync(ToMockBufferMapWriteCallback, nullptr);
         ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
 }
 
@@ -547,12 +548,12 @@ TEST_F(BufferValidationTest, MapCreateBufferMappedBuffer) {
     {
         wgpu::Buffer buf = CreateBufferMapped(4, wgpu::BufferUsage::MapRead).buffer;
         ASSERT_DEVICE_ERROR(buf.MapReadAsync(ToMockBufferMapReadCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer buf = CreateBufferMapped(4, wgpu::BufferUsage::MapWrite).buffer;
         ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
 }
 
@@ -561,12 +562,12 @@ TEST_F(BufferValidationTest, MapBufferMappedAtCreation) {
     {
         wgpu::Buffer buf = BufferMappedAtCreation(4, wgpu::BufferUsage::MapRead);
         ASSERT_DEVICE_ERROR(buf.MapReadAsync(ToMockBufferMapReadCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer buf = BufferMappedAtCreation(4, wgpu::BufferUsage::MapWrite);
         ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, nullptr));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
 }
 
@@ -608,7 +609,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer bufA = device.CreateBuffer(&descriptorA);
@@ -620,7 +621,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer bufA = device.CreateBufferMapped(&descriptorA).buffer;
@@ -630,7 +631,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::Buffer bufA = device.CreateBuffer(&descriptorA);
@@ -640,7 +641,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::BufferDescriptor mappedBufferDesc = descriptorA;
@@ -652,7 +653,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
     {
         wgpu::BufferDescriptor mappedBufferDesc = descriptorB;
@@ -664,7 +665,7 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
     }
 }
 
@@ -759,7 +760,7 @@ TEST_F(BufferValidationTest, GetMappedRangeOnUnmappedBuffer) {
         EXPECT_CALL(*mockBufferMapReadCallback,
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .Times(1);
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
         buf.Unmap();
 
         ASSERT_EQ(nullptr, buf.GetMappedRange());
@@ -773,7 +774,7 @@ TEST_F(BufferValidationTest, GetMappedRangeOnUnmappedBuffer) {
         EXPECT_CALL(*mockBufferMapWriteCallback,
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .Times(1);
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
         buf.Unmap();
 
         ASSERT_EQ(nullptr, buf.GetMappedRange());
@@ -821,7 +822,7 @@ TEST_F(BufferValidationTest, GetMappedRangeOnDestroyedBuffer) {
         EXPECT_CALL(*mockBufferMapReadCallback,
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .Times(1);
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
         buf.Destroy();
 
         ASSERT_EQ(nullptr, buf.GetMappedRange());
@@ -835,7 +836,7 @@ TEST_F(BufferValidationTest, GetMappedRangeOnDestroyedBuffer) {
         EXPECT_CALL(*mockBufferMapWriteCallback,
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .Times(1);
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
         buf.Destroy();
 
         ASSERT_EQ(nullptr, buf.GetMappedRange());
@@ -851,7 +852,7 @@ TEST_F(BufferValidationTest, GetMappedRangeOnMappedForReading) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
         .Times(1);
-    queue.Submit(0, nullptr);
+    FlushMappingOperations();
 
     ASSERT_EQ(nullptr, buf.GetMappedRange());
 }
@@ -884,7 +885,7 @@ TEST_F(BufferValidationTest, GetMappedRangeValidCases) {
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .WillOnce(SaveArg<1>(&mappedPointer));
 
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
 
         ASSERT_NE(buf.GetConstMappedRange(), nullptr);
         ASSERT_EQ(buf.GetConstMappedRange(), mappedPointer);
@@ -900,7 +901,7 @@ TEST_F(BufferValidationTest, GetMappedRangeValidCases) {
                     Call(WGPUBufferMapAsyncStatus_Success, Ne(nullptr), 4u, _))
             .WillOnce(SaveArg<1>(&mappedPointer));
 
-        queue.Submit(0, nullptr);
+        FlushMappingOperations();
 
         ASSERT_NE(buf.GetConstMappedRange(), nullptr);
         ASSERT_EQ(buf.GetConstMappedRange(), buf.GetMappedRange());
