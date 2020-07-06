@@ -16,6 +16,74 @@
       "revId": "4fcec583e52ee38638f9c6bfee8fb65a5260fa1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e45ce34_c1c02682",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:51:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4fcec583e52ee38638f9c6bfee8fb65a5260fa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3894b3ed_1b58898a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:51:51Z",
+      "side": 1,
+      "message": "For textures this toggle isn\u0027t checked everytime. Could be have something similar so we don\u0027t need to check the toggle everywhere in the backends but just in a couple places? Could be in a follow-up.",
+      "revId": "4fcec583e52ee38638f9c6bfee8fb65a5260fa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2d9d804_6f2b5d69",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:51:51Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "4fcec583e52ee38638f9c6bfee8fb65a5260fa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee3ca361_f69548f3",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:51:51Z",
+      "side": 1,
+      "message": "Isn\u0027t that handled by [1] and friends?",
+      "revId": "4fcec583e52ee38638f9c6bfee8fb65a5260fa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
