@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0e35999_6e60a785",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T16:45:01Z",
+      "side": 0,
+      "message": "We\u0027ve lost this admittedly hacky thing also referenced here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_wire/server/ServerBuffer.cpp;l\u003d128;drc\u003d5ba77dad98cf94506cf3700f9e12fcdc65fadfb6?q\u003dServerBuffer%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nthough I think this is okay and we can do away with the hack. GetMappedRange() should only return nullptr when the buffer is an error, in which case we can discard any writes.\n\njust fyi we might get some fuzzer bugs until we remove CreateBufferMapped and update the various places",
+      "range": {
+        "startLine": 632,
+        "startChar": 11,
+        "endLine": 634,
+        "endChar": 53
+      },
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
