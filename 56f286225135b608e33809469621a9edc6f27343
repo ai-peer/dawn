@@ -22,6 +22,30 @@
       "revId": "56f286225135b608e33809469621a9edc6f27343",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "634fd5d1_ba04f596",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-06T02:15:35Z",
+      "side": 1,
+      "message": "Vulkan and D3D12 require that the alignemnt offset of destination buffer must be a multiple of 8 bytes.",
+      "parentUuid": "7f556609_e41e04c6",
+      "range": {
+        "startLine": 540,
+        "startChar": 36,
+        "endLine": 540,
+        "endChar": 37
+      },
+      "revId": "56f286225135b608e33809469621a9edc6f27343",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
