@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "42901278_425fbb76",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-06T21:39:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8a6f481e_6178f24f",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce393856_cfecf443",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -65,6 +83,24 @@
       "writtenOn": "2020-07-03T15:39:01Z",
       "side": 1,
       "message": "If the layout is not the same, the array should be completely invalidated (with a bunch of nullptr) because the previous content of the root signature was invalidated and we don\u0027t want to reuse a descriptor table that has been invalidated since it was set.",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56b06e5f_f46c641f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-06T21:39:30Z",
+      "side": 1,
+      "message": "I thought groups between pipeline layouts can re-use bindings. Is this to be on the safe side?",
+      "parentUuid": "ce393856_cfecf443",
       "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -91,6 +127,30 @@
       "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd9d03f8_c2064a98",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-06T21:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3505a29_ba53451a",
+      "range": {
+        "startLine": 321,
+        "startChar": 87,
+        "endLine": 321,
+        "endChar": 92
+      },
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -129,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "c169c860_a4044652",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-06T21:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e0e43ce_0c1ed60b",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3838e3_19f51615",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
         "patchSetId": 3
@@ -143,6 +221,24 @@
       "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a5d5475_4ca48c5b",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-06T21:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba3838e3_19f51615",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
