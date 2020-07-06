@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2fb9684_e6c7e647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:37:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d0aa7d37cba9cb5da14e72e2508cfaf58d0aa621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5bec3eda_6167a98e",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T12:37:45Z",
+      "side": 1,
+      "message": "nit: or TODO(dawn:453) (that\u0027s what I meant in chat instead of adding the TODO as a comment to the issue itself ^^)",
+      "revId": "d0aa7d37cba9cb5da14e72e2508cfaf58d0aa621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
