@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "c0f2e35b_2246ae13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-06T15:33:01Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7db385e_dda4b822",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-06T15:33:01Z",
+      "side": 1,
+      "message": "Nit: not new to this patch, but Google C++ style suggests replacing a bool function parameter with an enum.",
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42f739b3_0e3720d6",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 13
