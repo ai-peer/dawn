@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7d0ea02d_99136060",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T18:19:42Z",
+      "side": 1,
+      "message": "typo: COPY_DEST",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2033cc9_0c60d90a",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 1
