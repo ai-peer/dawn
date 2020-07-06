@@ -424,6 +424,21 @@ namespace dawn_native { namespace vulkan {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
+                    // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+                    // instead when buffer lazy initialization is completely supported.
+                    if (device->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+                        if (!srcBuffer->IsDataInitialized()) {
+                            srcBuffer->ClearBufferContentsToZero(recordingContext);
+                        }
+                        if (!dstBuffer->IsDataInitialized()) {
+                            if (dstBuffer->IsFullBufferRange(copy->destinationOffset, copy->size)) {
+                                dstBuffer->SetIsDataInitialized();
+                            } else {
+                                dstBuffer->ClearBufferContentsToZero(recordingContext);
+                            }
+                        }
+                    }
+
                     srcBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
                     dstBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 

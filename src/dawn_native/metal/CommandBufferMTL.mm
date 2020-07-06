@@ -721,6 +721,23 @@ namespace dawn_native { namespace metal {
                 case Command::CopyBufferToBuffer: {
                     CopyBufferToBufferCmd* copy = mCommands.NextCommand<CopyBufferToBufferCmd>();
 
+                    // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+                    // instead when buffer lazy initialization is completely supported.
+                    if (GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+                        if (!copy->source->IsDataInitialized()) {
+                            ToBackend(copy->source)->ClearBufferContentsToZero(commandContext);
+                        }
+                        if (!copy->destination->IsDataInitialized()) {
+                            if (copy->destination->IsFullBufferRange(copy->destinationOffset,
+                                                                     copy->size)) {
+                                copy->destination->SetIsDataInitialized();
+                            } else {
+                                ToBackend(copy->destination)
+                                    ->ClearBufferContentsToZero(commandContext);
+                            }
+                        }
+                    }
+
                     [commandContext->EnsureBlit()
                            copyFromBuffer:ToBackend(copy->source)->GetMTLBuffer()
                              sourceOffset:copy->sourceOffset

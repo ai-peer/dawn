@@ -560,6 +560,21 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
+                    // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+                    // instead when buffer lazy initialization is completely supported.
+                    if (device->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+                        if (!srcBuffer->IsDataInitialized()) {
+                            DAWN_TRY(srcBuffer->ClearBufferContentsToZero(commandContext));
+                        }
+                        if (!dstBuffer->IsDataInitialized()) {
+                            if (dstBuffer->IsFullBufferRange(copy->destinationOffset, copy->size)) {
+                                dstBuffer->SetIsDataInitialized();
+                            } else {
+                                DAWN_TRY(dstBuffer->ClearBufferContentsToZero(commandContext));
+                            }
+                        }
+                    }
+
                     srcBuffer->TrackUsageAndTransitionNow(commandContext,
                                                           wgpu::BufferUsage::CopySrc);
                     dstBuffer->TrackUsageAndTransitionNow(commandContext,
