@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "efe46027_7d1e4395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-06T19:59:56Z",
+      "side": 1,
+      "message": "fyi: Today I learned Metal let\u0027s you write CPU data directly into a texture. Will be useful for implementing WriteTexture, and we can use it for lazy clears too maybe\n\nhttps://developer.apple.com/documentation/metal/mtltexture/1515679-replace",
+      "revId": "d0aa7d37cba9cb5da14e72e2508cfaf58d0aa621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e00cd509_729be648",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 6
