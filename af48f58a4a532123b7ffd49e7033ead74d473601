@@ -16,6 +16,23 @@
       "revId": "af48f58a4a532123b7ffd49e7033ead74d473601",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad543dc0_1b42e1c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T08:06:38Z",
+      "side": 1,
+      "message": "LGTM! I think this is ready to land.",
+      "revId": "af48f58a4a532123b7ffd49e7033ead74d473601",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
