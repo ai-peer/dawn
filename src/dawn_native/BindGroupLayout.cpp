@@ -17,6 +17,7 @@
 #include "common/BitSetIterator.h"
 #include "common/HashUtils.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/PerStage.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <algorithm>
@@ -194,8 +195,7 @@ namespace dawn_native {
         }
 
         std::set<BindingNumber> bindingsSet;
-        uint32_t dynamicUniformBufferCount = 0;
-        uint32_t dynamicStorageBufferCount = 0;
+        BindingCounts bindingCounts = {};
         for (uint32_t i = 0; i < descriptor->entryCount; ++i) {
             const BindGroupLayoutEntry& entry = descriptor->entries[i];
             BindingNumber bindingNumber = BindingNumber(entry.binding);
@@ -226,28 +226,34 @@ namespace dawn_native {
 
             switch (entry.type) {
                 case wgpu::BindingType::UniformBuffer:
-                    if (entry.hasDynamicOffset) {
-                        ++dynamicUniformBufferCount;
-                    }
-                    break;
                 case wgpu::BindingType::StorageBuffer:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
-                    if (entry.hasDynamicOffset) {
-                        ++dynamicStorageBufferCount;
-                    }
                     break;
                 case wgpu::BindingType::SampledTexture:
+                    if (entry.hasDynamicOffset) {
+                        return DAWN_VALIDATION_ERROR("Sampled textures cannot be dynamic");
+                    }
+                    break;
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
+                    if (entry.hasDynamicOffset) {
+                        return DAWN_VALIDATION_ERROR("Samplers cannot be dynamic");
+                    }
+                    break;
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
                     if (entry.hasDynamicOffset) {
-                        return DAWN_VALIDATION_ERROR("Samplers and textures cannot be dynamic");
+                        return DAWN_VALIDATION_ERROR("Storage textures cannot be dynamic");
                     }
                     break;
                 case wgpu::BindingType::StorageTexture:
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
+                default:
+                    UNREACHABLE();
+                    break;
             }
+
+            IncrementBindingCounts(&bindingCounts, entry);
 
             bindingsSet.insert(bindingNumber);
         }
@@ -256,14 +262,104 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("The number of bindings exceeds kMaxBindingsPerGroup.");
         }
 
-        if (dynamicUniformBufferCount > kMaxDynamicUniformBufferCount) {
-            return DAWN_VALIDATION_ERROR(
-                "The number of dynamic uniform buffer exceeds the maximum value");
+        DAWN_TRY(ValidateBindingCounts(bindingCounts));
+
+        return {};
+    }
+
+    void IncrementBindingCounts(BindingCounts* bindingCounts, const BindGroupLayoutEntry& entry) {
+        bindingCounts->totalCount += 1;
+
+        uint32_t PerStageBindingCounts::*perStageBindingCountMember = nullptr;
+        switch (entry.type) {
+            case wgpu::BindingType::UniformBuffer:
+                bindingCounts->bufferCount += 1;
+                if (entry.hasDynamicOffset) {
+                    bindingCounts->dynamicUniformBufferCount += 1;
+                }
+                if (entry.minBufferBindingSize == 0) {
+                    bindingCounts->unverifiedBufferCount += 1;
+                }
+                perStageBindingCountMember = &PerStageBindingCounts::uniformBufferCount;
+                break;
+
+            case wgpu::BindingType::StorageBuffer:
+            case wgpu::BindingType::ReadonlyStorageBuffer:
+                bindingCounts->bufferCount += 1;
+                if (entry.hasDynamicOffset) {
+                    bindingCounts->dynamicStorageBufferCount += 1;
+                }
+                if (entry.minBufferBindingSize == 0) {
+                    bindingCounts->unverifiedBufferCount += 1;
+                }
+                perStageBindingCountMember = &PerStageBindingCounts::storageBufferCount;
+                break;
+
+            case wgpu::BindingType::SampledTexture:
+                perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
+                break;
+
+            case wgpu::BindingType::Sampler:
+            case wgpu::BindingType::ComparisonSampler:
+                perStageBindingCountMember = &PerStageBindingCounts::samplerCount;
+                break;
+
+            case wgpu::BindingType::ReadonlyStorageTexture:
+            case wgpu::BindingType::WriteonlyStorageTexture:
+                perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+                break;
+
+            case wgpu::BindingType::StorageTexture:
+            default:
+                UNREACHABLE();
+                break;
         }
 
-        if (dynamicStorageBufferCount > kMaxDynamicStorageBufferCount) {
+        ASSERT(perStageBindingCountMember != nullptr);
+        for (SingleShaderStage stage : IterateStages(entry.visibility)) {
+            bindingCounts->perStage[stage].*perStageBindingCountMember += 1;
+        }
+    }
+
+    MaybeError ValidateBindingCounts(const BindingCounts& bindingCounts) {
+        if (bindingCounts.dynamicUniformBufferCount > kMaxDynamicUniformBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR(
-                "The number of dynamic storage buffer exceeds the maximum value");
+                "The number of dynamic uniform buffers exceeds the maximum per-pipeline-layout "
+                "limit");
+        }
+
+        if (bindingCounts.dynamicStorageBufferCount > kMaxDynamicStorageBuffersPerPipelineLayout) {
+            return DAWN_VALIDATION_ERROR(
+                "The number of dynamic storage buffers exceeds the maximum per-pipeline-layout "
+                "limit");
+        }
+
+        for (SingleShaderStage stage : IterateStages(kAllStages)) {
+            if (bindingCounts.perStage[stage].sampledTextureCount >
+                kMaxSampledTexturesPerShaderStage) {
+                return DAWN_VALIDATION_ERROR(
+                    "The number of sampled textures exceeds the maximum "
+                    "per-stage limit.");
+            }
+            if (bindingCounts.perStage[stage].samplerCount > kMaxSamplersPerShaderStage) {
+                return DAWN_VALIDATION_ERROR(
+                    "The number of samplers exceeds the maximum per-stage limit.");
+            }
+            if (bindingCounts.perStage[stage].storageBufferCount >
+                kMaxStorageBuffersPerShaderStage) {
+                return DAWN_VALIDATION_ERROR(
+                    "The number of storage buffers exceeds the maximum per-stage limit.");
+            }
+            if (bindingCounts.perStage[stage].storageTextureCount >
+                kMaxStorageTexturesPerShaderStage) {
+                return DAWN_VALIDATION_ERROR(
+                    "The number of storage textures exceeds the maximum per-stage limit.");
+            }
+            if (bindingCounts.perStage[stage].uniformBufferCount >
+                kMaxUniformBuffersPerShaderStage) {
+                return DAWN_VALIDATION_ERROR(
+                    "The number of uniform buffers exceeds the maximum per-stage limit.");
+            }
         }
 
         return {};
@@ -383,13 +479,13 @@ namespace dawn_native {
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor)
-        : CachedObject(device), mBindingCount(descriptor->entryCount) {
+        : CachedObject(device) {
         std::vector<BindGroupLayoutEntry> sortedBindings(
             descriptor->entries, descriptor->entries + descriptor->entryCount);
 
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
-        for (BindingIndex i{0}; i < mBindingCount; ++i) {
+        for (BindingIndex i{0}; i < BindingIndex(descriptor->entryCount); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
             mBindingInfo[i].binding = BindingNumber(binding.binding);
             mBindingInfo[i].type = binding.type;
@@ -399,21 +495,6 @@ namespace dawn_native {
             mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
             mBindingInfo[i].minBufferBindingSize = binding.minBufferBindingSize;
 
-            switch (binding.type) {
-                case wgpu::BindingType::UniformBuffer:
-                case wgpu::BindingType::StorageBuffer:
-                case wgpu::BindingType::ReadonlyStorageBuffer:
-                    // Buffers must be contiguously packed at the start of the binding info.
-                    ASSERT(mBufferCount == i);
-                    ++mBufferCount;
-                    if (binding.minBufferBindingSize == 0) {
-                        ++mUnverifiedBufferCount;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
             if (binding.viewDimension == wgpu::TextureViewDimension::Undefined) {
                     mBindingInfo[i].viewDimension = wgpu::TextureViewDimension::e2D;
             } else {
@@ -422,30 +503,17 @@ namespace dawn_native {
 
             mBindingInfo[i].multisampled = binding.multisampled;
             mBindingInfo[i].hasDynamicOffset = binding.hasDynamicOffset;
-            if (binding.hasDynamicOffset) {
-                switch (binding.type) {
-                    case wgpu::BindingType::UniformBuffer:
-                        ++mDynamicUniformBufferCount;
-                        break;
-                    case wgpu::BindingType::StorageBuffer:
-                    case wgpu::BindingType::ReadonlyStorageBuffer:
-                        ++mDynamicStorageBufferCount;
-                        break;
-                    case wgpu::BindingType::SampledTexture:
-                    case wgpu::BindingType::Sampler:
-                    case wgpu::BindingType::ComparisonSampler:
-                    case wgpu::BindingType::StorageTexture:
-                    case wgpu::BindingType::ReadonlyStorageTexture:
-                    case wgpu::BindingType::WriteonlyStorageTexture:
-                        UNREACHABLE();
-                        break;
-                }
+
+            if (IsBufferBinding(binding.type)) {
+                // Buffers must be contiguously packed at the start of the binding info.
+                ASSERT(GetBufferCount() == i);
             }
+            IncrementBindingCounts(&mBindingCounts, binding);
 
             const auto& it = mBindingMap.emplace(BindingNumber(binding.binding), i);
             ASSERT(it.second);
         }
-        ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), mBindingCount}));
+        ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), GetBindingCount()}));
     }
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -501,29 +569,34 @@ namespace dawn_native {
     }
 
     BindingIndex BindGroupLayoutBase::GetBindingCount() const {
-        return mBindingCount;
+        return BindingIndex(mBindingCounts.totalCount);
     }
 
     BindingIndex BindGroupLayoutBase::GetBufferCount() const {
-        return mBufferCount;
+        return BindingIndex(mBindingCounts.bufferCount);
     }
 
     BindingIndex BindGroupLayoutBase::GetDynamicBufferCount() const {
         // This is a binding index because dynamic buffers are packed at the front of the binding
         // info.
-        return static_cast<BindingIndex>(mDynamicStorageBufferCount + mDynamicUniformBufferCount);
+        return static_cast<BindingIndex>(mBindingCounts.dynamicStorageBufferCount +
+                                         mBindingCounts.dynamicUniformBufferCount);
     }
 
     uint32_t BindGroupLayoutBase::GetDynamicUniformBufferCount() const {
-        return mDynamicUniformBufferCount;
+        return mBindingCounts.dynamicUniformBufferCount;
     }
 
     uint32_t BindGroupLayoutBase::GetDynamicStorageBufferCount() const {
-        return mDynamicStorageBufferCount;
+        return mBindingCounts.dynamicStorageBufferCount;
     }
 
     uint32_t BindGroupLayoutBase::GetUnverifiedBufferCount() const {
-        return mUnverifiedBufferCount;
+        return mBindingCounts.unverifiedBufferCount;
+    }
+
+    const PerStage<PerStageBindingCounts>& BindGroupLayoutBase::GetPerStageBindingCounts() const {
+        return mBindingCounts.perStage;
     }
 
     size_t BindGroupLayoutBase::GetBindingDataSize() const {
@@ -532,31 +605,29 @@ namespace dawn_native {
         // Followed by:
         // |---------buffer size array--------|
         // |-uint64_t[mUnverifiedBufferCount]-|
-        size_t objectPointerStart = static_cast<uint32_t>(mBufferCount) * sizeof(BufferBindingData);
+        size_t objectPointerStart = mBindingCounts.bufferCount * sizeof(BufferBindingData);
         ASSERT(IsAligned(objectPointerStart, alignof(Ref<ObjectBase>)));
-        size_t bufferSizeArrayStart = Align(
-            objectPointerStart + static_cast<uint32_t>(mBindingCount) * sizeof(Ref<ObjectBase>),
-            sizeof(uint64_t));
+        size_t bufferSizeArrayStart =
+            Align(objectPointerStart + mBindingCounts.totalCount * sizeof(Ref<ObjectBase>),
+                  sizeof(uint64_t));
         ASSERT(IsAligned(bufferSizeArrayStart, alignof(uint64_t)));
-        return bufferSizeArrayStart + mUnverifiedBufferCount * sizeof(uint64_t);
+        return bufferSizeArrayStart + mBindingCounts.unverifiedBufferCount * sizeof(uint64_t);
     }
 
     BindGroupLayoutBase::BindingDataPointers BindGroupLayoutBase::ComputeBindingDataPointers(
         void* dataStart) const {
         BufferBindingData* bufferData = reinterpret_cast<BufferBindingData*>(dataStart);
-        auto bindings =
-            reinterpret_cast<Ref<ObjectBase>*>(bufferData + static_cast<uint32_t>(mBufferCount));
-        uint64_t* unverifiedBufferSizes =
-            AlignPtr(reinterpret_cast<uint64_t*>(bindings + static_cast<uint32_t>(mBindingCount)),
-                     sizeof(uint64_t));
+        auto bindings = reinterpret_cast<Ref<ObjectBase>*>(bufferData + mBindingCounts.bufferCount);
+        uint64_t* unverifiedBufferSizes = AlignPtr(
+            reinterpret_cast<uint64_t*>(bindings + mBindingCounts.totalCount), sizeof(uint64_t));
 
         ASSERT(IsPtrAligned(bufferData, alignof(BufferBindingData)));
         ASSERT(IsPtrAligned(bindings, alignof(Ref<ObjectBase>)));
         ASSERT(IsPtrAligned(unverifiedBufferSizes, alignof(uint64_t)));
 
-        return {{bufferData, mBufferCount},
-                {bindings, mBindingCount},
-                {unverifiedBufferSizes, mUnverifiedBufferCount}};
+        return {{bufferData, GetBufferCount()},
+                {bindings, GetBindingCount()},
+                {unverifiedBufferSizes, mBindingCounts.unverifiedBufferCount}};
     }
 
 }  // namespace dawn_native
