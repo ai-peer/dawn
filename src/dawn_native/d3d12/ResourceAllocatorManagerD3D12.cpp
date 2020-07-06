@@ -19,6 +19,7 @@
 #include "dawn_native/d3d12/HeapAllocatorD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
+#include "dawn_native/d3d12/UtilsD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
     namespace {
@@ -146,6 +147,15 @@ namespace dawn_native { namespace d3d12 {
                 default:
                     return requestedAlignment;
             }
+        }
+
+        bool IsClearValueOptimizable(const D3D12_RESOURCE_DESC& resourceDescriptor) {
+            // Optimized clear color cannot to be set on buffer, non-render-target/depth-stencil
+            // textures, or typeless resources
+            return !IsTypeless(resourceDescriptor.Format) &&
+                   resourceDescriptor.Dimension != D3D12_RESOURCE_DIMENSION_BUFFER &&
+                   (resourceDescriptor.Flags & (D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET |
+                                                D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
         }
 
     }  // namespace
@@ -288,6 +298,17 @@ namespace dawn_native { namespace d3d12 {
         // CreatePlacedResource will fail if it is not.
         DAWN_TRY(mDevice->GetResidencyManager()->LockAllocation(heap));
 
+        // In order to suppresses a warning in the D3D12 debug layer, we need to specify an
+        // optimized clear value. As there are no negative consequences when picking a mismatched
+        // clear value, we use zero as the optimized clear value. This also enables fast clears on
+        // some architectures. https://crbug.com/dawn/418
+        D3D12_CLEAR_VALUE zero{};
+        D3D12_CLEAR_VALUE* optimizedClearValue = nullptr;
+        if (IsClearValueOptimizable(resourceDescriptor)) {
+            zero.Format = resourceDescriptor.Format;
+            optimizedClearValue = &zero;
+        }
+
         // With placed resources, a single heap can be reused.
         // The resource placed at an offset is only reclaimed
         // upon Tick or after the last command list using the resource has completed
@@ -299,7 +320,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(CheckOutOfMemoryHRESULT(
             mDevice->GetD3D12Device()->CreatePlacedResource(
                 heap->GetD3D12Heap(), allocation.GetOffset(), &resourceDescriptor, initialUsage,
-                nullptr, IID_PPV_ARGS(&placedResource)),
+                optimizedClearValue, IID_PPV_ARGS(&placedResource)),
             "ID3D12Device::CreatePlacedResource"));
 
         // After CreatePlacedResource has finished, the heap can be unlocked from residency. This
@@ -342,14 +363,25 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(
             resourceInfo.SizeInBytes, GetMemorySegment(mDevice, heapType)));
 
+        // In order to suppresses a warning in the D3D12 debug layer, we need to specify an
+        // optimized clear value. As there are no negative consequences when picking a mismatched
+        // clear value, we use zero as the optimized clear value. This also enables fast clears on
+        // some architectures. https://crbug.com/dawn/418
+        D3D12_CLEAR_VALUE zero{};
+        D3D12_CLEAR_VALUE* optimizedClearValue = nullptr;
+        if (IsClearValueOptimizable(resourceDescriptor)) {
+            zero.Format = resourceDescriptor.Format;
+            optimizedClearValue = &zero;
+        }
+
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
         ComPtr<ID3D12Resource> committedResource;
-        DAWN_TRY(
-            CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreateCommittedResource(
-                                        &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor,
-                                        initialUsage, nullptr, IID_PPV_ARGS(&committedResource)),
-                                    "ID3D12Device::CreateCommittedResource"));
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            mDevice->GetD3D12Device()->CreateCommittedResource(
+                &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
+                optimizedClearValue, IID_PPV_ARGS(&committedResource)),
+            "ID3D12Device::CreateCommittedResource"));
 
         // When using CreateCommittedResource, D3D12 creates an implicit heap that contains the
         // resource allocation. Because Dawn's memory residency management occurs at the resource
