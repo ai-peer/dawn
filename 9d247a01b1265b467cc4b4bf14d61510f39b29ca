@@ -90,6 +90,30 @@
     },
     {
       "key": {
+        "uuid": "6bea626a_ba059fd2",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-06T21:26:20Z",
+      "side": 1,
+      "message": "In ShaderModule::Create, shaderModel is passed directly to SPIRV and ShaderC \"options\" data structures. Whatever encoding you decide for shaderModel needs to be compatible with what they those accept if you\u0027re going to keep passing it directly.",
+      "parentUuid": "b7a7930a_b4738914",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "725c28be_e42f2a2f",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 1
