@@ -16,6 +16,52 @@
       "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1b2d822_da90adb4",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-06T18:29:01Z",
+      "side": 1,
+      "message": "Consider changing the datatype of info.shaderModel to be D3D_SHADER_MODEL instead of uint32. That makes it more clear what the data represents when stepping through code in the debugger.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725c28be_e42f2a2f",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-06T18:29:01Z",
+      "side": 1,
+      "message": "The information in D3D12DeviceInfo.shaderModel and D3D12DeviceInfo.shaderProfiles is redundant with one another. Consider removing the shaderProfiles member and have code generate the string on the fly with a helper function. We should only need to do this when we compile shaders, which should be an infrequent operation.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
