@@ -28,7 +28,7 @@ TEST_P(PipelineLayoutTests, DynamicBuffersOverflow) {
     wgpu::BindGroupLayout bglA;
     {
         std::vector<wgpu::BindGroupLayoutEntry> entries;
-        for (uint32_t i = 0; i < kMaxDynamicStorageBufferCount; i++) {
+        for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; i++) {
             entries.push_back(
                 {i, wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer, true});
         }
