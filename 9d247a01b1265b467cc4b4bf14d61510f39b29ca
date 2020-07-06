@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "163feac4_10502f7a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-06T18:59:09Z",
+      "side": 1,
+      "message": "Oh actually it should be 10*major + minor, I need to fix this. So it can\u0027t be a D3D_SHADER_MODEL.",
+      "parentUuid": "e1b2d822_da90adb4",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "725c28be_e42f2a2f",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 1
