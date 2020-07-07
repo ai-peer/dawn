@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92c4f4b8_0b987437",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-07T10:11:21Z",
+      "side": 1,
+      "message": "The WebGPU spec only mentions validating destination-\u003etexture, but here we validate the whole texture copy view.",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2300ce66_6d53a08a",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-07T10:11:21Z",
+      "side": 1,
+      "message": "Tests were taken from CopyCommandsValidationTests.cpp.\n\nDifferences between validation tests for CopyB2T and WriteTexture:\n- Added WriteTextureTest_CompressedTextureFormats::ImageWidth\n- Added QueueWriteTextureValidationTest::BytesPerRowNotDivisibleBy256\n- Fixed the four things mentioned here: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d482#c6\n- Changed QueueWriteTextureValidationTest::WriteToMultisampledTexture\n- Changed the second part of WriteTextureTest_CompressedTextureFormats::BytesPerRow\n- Changed the second part of QueueWriteTextureValidationTest::IncorrectBytesPerRow",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
