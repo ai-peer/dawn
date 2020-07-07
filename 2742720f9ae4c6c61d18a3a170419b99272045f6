@@ -286,6 +286,30 @@
       "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "692e2557_b3c21e6a",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-07T01:26:17Z",
+      "side": 1,
+      "message": "If you want to cut down the code size a little bit more, you can replace IsClearValueOptimizable with:\n\n D3D12_CLEAR_VALUE GetOptimizedClearValue(descriptor, bool* isClearValueValid) \n\nHere, you would return a D3D12_CLEAR_VALUE straight up; no pointers. The isClearValueValid would tell you whether you pass the returned D3D12_CLEAR_VALUE to the resource creation function or nullptr.",
+      "parentUuid": "d6f6f3d1_4ed4ff03",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
