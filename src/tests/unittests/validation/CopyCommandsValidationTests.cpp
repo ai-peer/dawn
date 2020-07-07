@@ -1574,3 +1574,108 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, ImageExtent) {
         }
     }
 }
+
+class CopyCommandTest_MultipleArrayLayers : public CopyCommandTest_CompressedTextureFormats {
+  protected:
+    uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                                 uint64_t rowsPerImage,
+                                 wgpu::Extent3D copyExtent,
+                                 uint64_t blockSize,
+                                 uint64_t blockWidth,
+                                 uint64_t blockHeight) {
+        if (copyExtent.width == 0 || copyExtent.height == 0 || copyExtent.depth == 0) {
+            return 0;
+        } else {
+            uint64_t texelBlockRowsPerImage = rowsPerImage / blockHeight;
+            uint64_t bytesPerImage = bytesPerRow * texelBlockRowsPerImage;
+            uint64_t bytesInLastSlice =
+                bytesPerRow * (copyExtent.height / blockHeight - 1) + (copyExtent.width / blockWidth * blockSize);
+            return  bytesPerImage * (copyExtent.depth - 1) + bytesInLastSlice;
+        }
+    }
+
+    void TestBothTBCopiesToMultipleArrayLayers(uint32_t bufferBytesPerRow,
+                                               uint32_t rowsPerImage,
+                                               wgpu::Texture texture,
+                                               uint64_t blockSize,
+                                               uint64_t blockWidth,
+                                               uint64_t blockHeight,
+                                               wgpu::Origin3D origin,
+                                               wgpu::Extent3D extent3D) {
+        // Check the minimal valid bufferSize.
+        uint64_t bufferSize = RequiredBytesInCopy(bufferBytesPerRow,
+                                                  rowsPerImage,
+                                                  extent3D,
+                                                  blockSize,
+                                                  blockWidth,
+                                                  blockHeight);
+        wgpu::Buffer source = CreateBuffer(bufferSize,
+                                wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+        TestB2TCopy(utils::Expectation::Success, source, 0, bufferBytesPerRow,
+                    rowsPerImage, texture, 0, origin, extent3D);
+        TestT2BCopy(utils::Expectation::Success, texture, 0, origin, source, 0,
+                    bufferBytesPerRow, rowsPerImage, extent3D);
+
+        // Check bufferSize was indeed minimal.
+        uint64_t invalidSize = bufferSize - 1;
+        wgpu::Buffer invalidSource = CreateBuffer(invalidSize,
+                                       wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+        TestB2TCopy(utils::Expectation::Failure, invalidSource, 0, bufferBytesPerRow,
+                    rowsPerImage, texture, 0, origin, extent3D);
+        TestT2BCopy(utils::Expectation::Failure, texture, 0, origin, invalidSource, 0,
+                    bufferBytesPerRow, rowsPerImage, extent3D);
+    }
+};
+
+// Test copies between buffer and multiple array layers of an uncompressed texture
+TEST_F(CopyCommandTest_MultipleArrayLayers, UncompressedTextures) {
+    wgpu::Texture destination = CopyCommandTest::Create2DTexture(
+        4, 2, 1, 5, wgpu::TextureFormat::RGBA8Unorm,
+        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc);
+
+    // Copy to all array layers
+    TestBothTBCopiesToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 0}, {4, 2, 5});
+
+    // Copy to the highest array layer
+    TestBothTBCopiesToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 4}, {4, 2, 1});
+
+    // Copy to array layers in the middle
+    TestBothTBCopiesToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 1}, {4, 2, 3});
+
+    // Copy with rowsPerImage alignment
+    TestBothTBCopiesToMultipleArrayLayers(256, 3, destination, 4, 1, 1,
+                                          {0, 0, 0}, {4, 2, 5});
+
+    // Copy with rowsPerImage alignment
+    TestBothTBCopiesToMultipleArrayLayers(256, 4, destination, 4, 1, 1,
+                                          {0, 0, 1}, {4, 2, 3});
+}
+
+// Test copies between buffer and multiple array layers of a compressed texture
+TEST_F(CopyCommandTest_MultipleArrayLayers, CompressedTextures) {
+    for (wgpu::TextureFormat bcFormat : utils::kBCFormats) {
+        wgpu::Texture texture = CopyCommandTest::Create2DTexture(
+            16, 16, 1, 16, bcFormat,
+            wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc);
+
+        // Small copy with rowsPerImage alignment
+        TestBothTBCopiesToMultipleArrayLayers(256, 8, texture,
+                    utils::CompressedFormatBlockSizeInBytes(bcFormat), 4, 4,
+                    {0, 0, 0}, {4, 4, 4});
+
+        // Copy touching the texture corners with rowsPerImage alingment
+        TestBothTBCopiesToMultipleArrayLayers(256, 20, texture,
+                    utils::CompressedFormatBlockSizeInBytes(bcFormat), 4, 4,
+                    {4, 4, 4}, {12, 12, 12});
+
+        // rowsPerImage must be a multiple of blockHeight even with an empty copy
+        wgpu::Buffer source = CreateBuffer(0, wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1,
+                    texture, 0, {0, 0, 0}, {0, 0, 0});
+        TestT2BCopy(utils::Expectation::Failure, texture, 0, {0, 0, 0},
+                    source, 0, 256, 1, {0, 0, 0});
+    }
+}

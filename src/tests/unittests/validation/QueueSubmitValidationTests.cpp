@@ -817,4 +817,101 @@ TEST_F(WriteTextureTest_CompressedTextureFormats, ImageExtent) {
     }
 }
 
+class WriteTextureTest_MultipleArrayLayers : public WriteTextureTest_CompressedTextureFormats {
+  protected:
+    uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                                 uint64_t rowsPerImage,
+                                 wgpu::Extent3D copyExtent,
+                                 uint64_t blockSize,
+                                 uint64_t blockWidth,
+                                 uint64_t blockHeight) {
+        if (copyExtent.width == 0 || copyExtent.height == 0 || copyExtent.depth == 0) {
+            return 0;
+        } else {
+            uint64_t texelBlockRowsPerImage = rowsPerImage / blockHeight;
+            uint64_t bytesPerImage = bytesPerRow * texelBlockRowsPerImage;
+            uint64_t bytesInLastSlice =
+                bytesPerRow * (copyExtent.height / blockHeight - 1) + (copyExtent.width / blockWidth * blockSize);
+            return  bytesPerImage * (copyExtent.depth - 1) + bytesInLastSlice;
+        }
+    }
+
+    void TestWriteTextureToMultipleArrayLayers(uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage,
+                                               wgpu::Texture texture,
+                                               uint64_t blockSize,
+                                               uint64_t blockWidth,
+                                               uint64_t blockHeight,
+                                               wgpu::Origin3D origin,
+                                               wgpu::Extent3D extent3D) {
+        // Check the minimal valid dataSize.
+        uint64_t dataSize = RequiredBytesInCopy(bytesPerRow,
+                                                rowsPerImage,
+                                                extent3D,
+                                                blockSize,
+                                                blockWidth,
+                                                blockHeight);
+        const void* data = malloc(dataSize);
+        TestWriteTexture(data, dataSize, 0, bytesPerRow,
+                         rowsPerImage, texture, 0, origin, extent3D);
+
+        // Check dataSize was indeed minimal.
+        uint64_t invalidSize = dataSize - 1;
+        const void* invalidData = malloc(invalidSize);
+        ASSERT_DEVICE_ERROR(TestWriteTexture(invalidData, invalidSize, 0, bytesPerRow,
+                                             rowsPerImage, texture, 0, origin, extent3D));
+    }
+};
+
+// Test writes to multiple array layers of an uncompressed texture
+TEST_F(WriteTextureTest_MultipleArrayLayers, UncompressedTextures) {
+    wgpu::Texture destination = QueueWriteTextureValidationTest::Create2DTexture(
+        4, 2, 1, 5, wgpu::TextureFormat::RGBA8Unorm,
+        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc);
+
+    // Write to all array layers
+    TestWriteTextureToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 0}, {4, 2, 5});
+
+    // Write to the highest array layer
+    TestWriteTextureToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 4}, {4, 2, 1});
+
+    // Write to array layers in the middle
+    TestWriteTextureToMultipleArrayLayers(256, 2, destination, 4, 1, 1,
+                                          {0, 0, 1}, {4, 2, 3});
+
+    // Write with rowsPerImage alignment
+    TestWriteTextureToMultipleArrayLayers(256, 3, destination, 4, 1, 1,
+                                          {0, 0, 0}, {4, 2, 5});
+
+    // Write with rowsPerImage alignment
+    TestWriteTextureToMultipleArrayLayers(256, 4, destination, 4, 1, 1,
+                                          {0, 0, 1}, {4, 2, 3});
+}
+
+// Test writes to multiple array layers of a compressed texture
+TEST_F(WriteTextureTest_MultipleArrayLayers, CompressedTextures) {
+    for (wgpu::TextureFormat bcFormat : utils::kBCFormats) {
+        wgpu::Texture texture = QueueWriteTextureValidationTest::Create2DTexture(
+            16, 16, 1, 16, bcFormat,
+            wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc);
+
+        // Small write with rowsPerImage alignment
+        TestWriteTextureToMultipleArrayLayers(256, 8, texture,
+                    utils::CompressedFormatBlockSizeInBytes(bcFormat), 4, 4,
+                    {0, 0, 0}, {4, 4, 4});
+
+        // Write touching the texture corners with rowsPerImage alingment
+        TestWriteTextureToMultipleArrayLayers(256, 20, texture,
+                    utils::CompressedFormatBlockSizeInBytes(bcFormat), 4, 4,
+                    {4, 4, 0}, {12, 12, 16});
+
+        // rowsPerImage must be a multiple of blockHeight even with an empty write
+        const void* data = malloc(0);
+        ASSERT_DEVICE_ERROR(TestWriteTexture(data, 0, 0, 256, 1,
+                    texture, 0, {0, 0, 0}, {0, 0, 0}));
+    }
+}
+
 }  // anonymous namespace
