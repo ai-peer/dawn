@@ -2,6 +2,86 @@
   "comments": [
     {
       "key": {
+        "uuid": "3efd7201_2e863984",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "Looks good overall.",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eca522ce_d4323bfb",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "nit: this is called \"data size\" in webgpu.h",
+      "range": {
+        "startLine": 993,
+        "startChar": 30,
+        "endLine": 993,
+        "endChar": 34
+      },
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "228715d6_0c073efd",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 62,
+        "startChar": 22,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e5d089_dd8b25c9",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "Can you add a TODO to implement this?",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92c4f4b8_0b987437",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 5
@@ -13,6 +93,41 @@
       "writtenOn": "2020-07-07T10:11:21Z",
       "side": 1,
       "message": "The WebGPU spec only mentions validating destination-\u003etexture, but here we validate the whole texture copy view.",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f830b90_afd6c5b7",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "Good catch, can you make a spec PR for it?",
+      "parentUuid": "92c4f4b8_0b987437",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fe153fd_e089327b",
+        "filename": "src/dawn_wire/server/ServerQueue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "Can you duplicate the comment in DoQueueWriteBufferInternal about it being enough to check for nullptr?",
       "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -33,6 +148,103 @@
       "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68ac2240_178af7e2",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "This is a large amount of code and could get its own file, can you move it to a new file called QueueWriteTextureValidationTests.cpp?",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec64bf1b_57176489",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "nit: these and arrayLayerCount could be a single Extent3D.",
+      "range": {
+        "startLine": 199,
+        "startChar": 34,
+        "endLine": 200,
+        "endChar": 50
+      },
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d32cabf9_cb810970",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "nit: tex",
+      "range": {
+        "startLine": 241,
+        "startChar": 41,
+        "endLine": 241,
+        "endChar": 45
+      },
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57c0cfeb_f171cf89",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "I wish the tests were clearly grouped by parts of the validation in the spec they test, and that different parts of these lines were better grouped, like so:\n\n  DoTest(\u0026data, dataSize, {0, 256, 0}, {destination, 0, {0, 0, 0}}, {4, 4, 1})\n\nThis should be doable by introducing structures equivalent to GPUTextureDataLayout and GPUTextureCopyView without the sType.\n\nBut maybe this is a lot of work for not much gains given the tests were mostly copy-pasted.\n\nAustin WDYT?\n\nTomasz, can you add a CL comment for the tests that differ from CopyB2T so we know to focus on them?",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280c1dcb_60e4c9a5",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T17:55:33Z",
+      "side": 1,
+      "message": "nit: Can this be\n\n  extern std::array\u003c....\u003e kBCFormats\n\nand then defined in WGPUHelpers.cpp? It would avoid putting the implementation details in the header.",
+      "revId": "c1253c043d970dbdad2fd2c7363f25a29c88a64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
