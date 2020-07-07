@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "c6a2349f_aef798ae",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fecea1e0_b2d79289",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 83
+      },
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "054b2ec4_b715fc8e",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 5
@@ -79,6 +103,30 @@
       "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ee2064d_1f0d13a0",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "054b2ec4_b715fc8e",
+      "range": {
+        "startLine": 153,
+        "startChar": 37,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "d75d3064_bdd077f7",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a856f35_aa00b513",
+      "range": {
+        "startLine": 301,
+        "startChar": 23,
+        "endLine": 301,
+        "endChar": 33
+      },
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e06d5cda_5c99bf4c",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 5
@@ -122,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "36507e39_7d9e64f4",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e06d5cda_5c99bf4c",
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10005e82_227f7284",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 5
@@ -136,6 +226,24 @@
       "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef0b126e_97b84158",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Done, good call.",
+      "parentUuid": "10005e82_227f7284",
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -310,6 +310,30 @@
       "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "babf42e4_81ab8d5b",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-07T23:26:46Z",
+      "side": 1,
+      "message": "Since I hoisted the code to AllocateMemory, I decided against creating GetOptimizedClearValue. Thanks for the suggestion though.",
+      "parentUuid": "692e2557_b3c21e6a",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "2742720f9ae4c6c61d18a3a170419b99272045f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
