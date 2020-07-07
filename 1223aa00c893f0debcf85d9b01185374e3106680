@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "504dbaba_6e98d082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T00:51:30Z",
+      "side": 1,
+      "message": "Looks good w/ nits.",
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e06d5cda_5c99bf4c",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T00:51:30Z",
+      "side": 1,
+      "message": "uunit: remove the crbug?",
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10005e82_227f7284",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T00:51:30Z",
+      "side": 1,
+      "message": "nit: I think we can hoist it outside of the function since optimizedClearValue isn\u0027t specific to committed or placed resources (code the same).",
+      "revId": "1223aa00c893f0debcf85d9b01185374e3106680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
