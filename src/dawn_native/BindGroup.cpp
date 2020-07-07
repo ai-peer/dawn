@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 #include "common/ityp_bitset.h"
+#include "common/ityp_stack_vec.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/Device.h"
@@ -178,8 +179,9 @@ namespace dawn_native {
         }
 
         const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
+        ASSERT(bindingMap.size() <= kMaxBindingsPerPipelineLayout);
 
-        ityp::bitset<BindingIndex, kMaxBindingsPerGroup> bindingsSet;
+        ityp::bitset<BindingIndex, kMaxBindingsPerPipelineLayout> bindingsSet;
         for (uint32_t i = 0; i < descriptor->entryCount; ++i) {
             const BindGroupEntry& entry = descriptor->entries[i];
 
