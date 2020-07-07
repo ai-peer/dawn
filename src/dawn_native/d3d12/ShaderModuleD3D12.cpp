@@ -216,9 +216,16 @@ namespace dawn_native { namespace d3d12 {
             std::string result_string;
             DAWN_TRY(CheckSpvcSuccess(result.GetStringOutput(&result_string),
                                       "Unable to get HLSL shader text"));
+            if (moduleBindingInfo[0].size() > 30) {
+                printf("%s\n", result_string.c_str());
+            }
             return std::move(result_string);
         } else {
-            return compiler->compile();
+            std::string result_string = compiler->compile();
+            if (moduleBindingInfo[0].size() > 30) {
+                printf("%s\n", result_string.c_str());
+            }
+            return std::move(result_string);
         }
     }
 
