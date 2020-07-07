@@ -55,4 +55,19 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
+    bool Server::DoQueueWriteTextureInternal(ObjectId queueId,
+                                             const WGPUTextureCopyView* destination,
+                                             const uint8_t* data,
+                                             size_t dataSize,
+                                             const WGPUTextureDataLayout* dataLayout,
+                                             const WGPUExtent3D* writeSize) {
+        auto* queue = QueueObjects().Get(queueId);
+        if (queue == nullptr) {
+            return false;
+        }
+
+        mProcs.queueWriteTexture(queue->handle, destination, data, dataSize, dataLayout, writeSize);
+        return true;
+    }
+
 }}  // namespace dawn_wire::server
