@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "897c35e6_e79c7f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7050524a_24b0db66",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "nit: common comes before utils, alphabetically\n\nalthough it looks like this change isn\u0027t needed anymore",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f79195c6_cae6cabc",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "nit: 2020",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2bdb3bbe_5b321b09",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -13,6 +76,29 @@
       "writtenOn": "2020-07-07T18:53:01Z",
       "side": 1,
       "message": "I\u0027m using a different function than in CopyB2T tests.",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae78744d_87c510c9",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "here and in the rest of the tests, the data you `malloc` is never freed! Use `std::vector\u003cuint8_t\u003e(dataSize);` instead so the lifetime is automatically managed.\n\nHowever, it seems like we don\u0027t actually do anything with the |data| in the test. You could probably remove it from all the tests, and just create it inside TestWriteTexture instead of passing it in.",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 29
+      },
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -87,6 +173,75 @@
     },
     {
       "key": {
+        "uuid": "d6b40cff_792817ce",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "nit: missing a comment that 11 is below the minimum of 12",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 23
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea3eaa4e_ec065b31",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "nit: Comment before the test name, describing what it tests",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 6
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e1dd12a_cc9197b4",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "nit: I think this should be 4",
+      "range": {
+        "startLine": 273,
+        "startChar": 45,
+        "endLine": 273,
+        "endChar": 46
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7cc145c1_ba94ac79",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -115,6 +270,24 @@
       "writtenOn": "2020-07-07T18:53:01Z",
       "side": 1,
       "message": "This is changed.",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeb449b5_c11a1f00",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T19:26:30Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be allowed. for Buffer to Texture copies, we validate that the texture is not multisampled. Right now, you can\u0027t upload multisampled data in WebGPU\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/CommandEncoder.cpp;l\u003d776",
+      "parentUuid": "ac8d300d_d293e0eb",
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
