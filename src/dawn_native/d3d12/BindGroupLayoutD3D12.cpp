@@ -47,7 +47,8 @@ namespace dawn_native { namespace d3d12 {
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
           mDescriptorCounts{},
-          mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
+          mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)),
+          mBindingOffsets(GetDynamicBufferCount()) {
         for (BindingIndex bindingIndex = GetDynamicBufferCount(); bindingIndex < GetBindingCount();
              ++bindingIndex) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
@@ -170,9 +171,8 @@ namespace dawn_native { namespace d3d12 {
         mBindGroupAllocator.Deallocate(bindGroup);
     }
 
-    const ityp::array<BindingIndex, uint32_t, kMaxBindingsPerGroup>&
-    BindGroupLayout::GetBindingOffsets() const {
-        return mBindingOffsets;
+    ityp::span<BindingIndex, const uint32_t> BindGroupLayout::GetBindingOffsets() const {
+        return {mBindingOffsets.data(), mBindingOffsets.size()};
     }
 
     uint32_t BindGroupLayout::GetCbvUavSrvDescriptorTableSize() const {
