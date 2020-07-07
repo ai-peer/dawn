@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "bbf18e38_bc80c582",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T16:55:08Z",
+      "side": 1,
+      "message": "Ah, thanks.",
+      "parentUuid": "c3210c1d_055b55d6",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3505a29_ba53451a",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
