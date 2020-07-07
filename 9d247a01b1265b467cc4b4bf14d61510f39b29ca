@@ -114,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "31066562_4a36adb5",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T15:39:58Z",
+      "side": 1,
+      "message": "This is for SPIRV-Cross and the comment in D3D12Info.h explains how shaderModel is encoded so it\u0027s probably ok?",
+      "parentUuid": "6bea626a_ba059fd2",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "725c28be_e42f2a2f",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 1
@@ -125,6 +149,30 @@
       "writtenOn": "2020-07-06T18:29:01Z",
       "side": 1,
       "message": "The information in D3D12DeviceInfo.shaderModel and D3D12DeviceInfo.shaderProfiles is redundant with one another. Consider removing the shaderProfiles member and have code generate the string on the fly with a helper function. We should only need to do this when we compile shaders, which should be an infrequent operation.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd1c6fbc_4482a19a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T15:39:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure how doing things ,any times with a helper function is better than a cheap preprocess (memory and cycle wise). If you want the information could be nested in info.dxc so that it\u0027s clear it\u0027s only used by the DXC-related code.",
+      "parentUuid": "725c28be_e42f2a2f",
       "range": {
         "startLine": 84,
         "startChar": 0,
