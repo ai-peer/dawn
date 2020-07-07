@@ -15,6 +15,7 @@
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "utils/WGPUHelpers.h"
+#include "common/Math.h"
 
 namespace {
 
