@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a75be463_c712719d",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 6
+      },
+      "revId": "c406f8e699079f3059c67b1a5f6d797eac3da89b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "847e3eaa_9ef05d2e",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "whoops. remove this. The copy constructors are defined above.",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 63
+      },
+      "revId": "c406f8e699079f3059c67b1a5f6d797eac3da89b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

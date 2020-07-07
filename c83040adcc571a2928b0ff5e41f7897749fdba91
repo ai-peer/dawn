@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c7ddd8c3_5622512c",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc33200_87e559bf",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 18
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d68b177_45cfa977",
         "filename": "src/common/StackContainer.h",
         "patchSetId": 1
@@ -36,6 +60,47 @@
       "writtenOn": "2020-06-24T17:17:14Z",
       "side": 1,
       "message": "u-nit: cstddef",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "303d0abf_5166cb7f",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d68b177_45cfa977",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb89c8d0_3a4e5a12",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "this was removed because I was hackily making it work for zero-sized vecs. That was temporary as I\u0027ve now made a CL for normal ityp::vector. The code is now reverted back to Chromium\u0027s original source",
+      "range": {
+        "startLine": 34,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 6
+      },
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -59,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "43a218ad_9a55c4ec",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825e44eb_0da19327",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34b81ec_9267697d",
         "filename": "src/common/StackContainer.h",
         "patchSetId": 1
@@ -73,6 +156,24 @@
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50fd9350_b166026c",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34b81ec_9267697d",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4e1583c4_c307d729",
+        "filename": "src/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d22e42a0_90e8562a",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3c09eb2_44e3c393",
         "filename": "src/common/ityp_stack_vec.h",
         "patchSetId": 1
@@ -107,6 +226,24 @@
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a398221_f18f6d01",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Using it now",
+      "parentUuid": "b3c09eb2_44e3c393",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "a7b978ab_aa3caa1c",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2e46c59f_0fc39e73",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7c6d261_9e093934",
         "filename": "src/common/ityp_stack_vec.h",
         "patchSetId": 1
@@ -156,6 +311,24 @@
       "writtenOn": "2020-06-24T03:25:25Z",
       "side": 1,
       "message": "nit: expected `size_t` (or size_type) to match the type of StaticCapacity (not Index).",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d80b6cac_93ec57ce",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "I think it should be Index. StaticCapcity is size_t because you cannot have a struct as a template paramter.",
+      "parentUuid": "e7c6d261_9e093934",
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -185,6 +358,30 @@
     },
     {
       "key": {
+        "uuid": "c572792d_e4b2cb75",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e69f40e0_bca3f908",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 19
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "040cfda0_9d2d094e",
         "filename": "src/tests/unittests/StackContainerTests.cpp",
         "patchSetId": 1
@@ -196,6 +393,30 @@
       "writtenOn": "2020-06-24T17:17:14Z",
       "side": 1,
       "message": "what?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcd482e3_a5522c5c",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "See [1]. I can change this to match other methods in Dawn: GetStackDataForTesting() ?\n\nOne day we should probably have a way to exclude these from non-test builds though.",
+      "parentUuid": "040cfda0_9d2d094e",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -231,6 +452,30 @@
     },
     {
       "key": {
+        "uuid": "4e769a1f_34bbfb24",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d070c7_2d7eed15",
+      "range": {
+        "startLine": 30,
+        "startChar": 19,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "523e07fc_1a79df89",
         "filename": "src/tests/unittests/StackContainerTests.cpp",
         "patchSetId": 1
@@ -251,6 +496,30 @@
       "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dcf0925_1429e208",
+        "filename": "src/tests/unittests/StackContainerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T23:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "523e07fc_1a79df89",
+      "range": {
+        "startLine": 130,
+        "startChar": 34,
+        "endLine": 130,
+        "endChar": 53
+      },
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
