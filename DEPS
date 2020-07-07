@@ -13,19 +13,15 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@896323eeda1bd1b01156b70625d5e14de225ebc3',
+    'url': '{chromium_git}/chromium/src/build@5553901595066592f61f6cbdd7c16b73817f5d54',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@2c41dfb19abe40908834803b6fed797b0f341fe1',
+    'url': '{chromium_git}/chromium/src/buildtools@eb3987ec709b39469423100c1e77f0446890e059',
     'condition': 'dawn_standalone',
   },
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@698732d5db36040c07d5cc5f9137fcc943494c11',
-    'condition': 'dawn_standalone',
-  },
-  'third_party/binutils': {
-    'url': '{chromium_git}/chromium/src/third_party/binutils@f9ce777698a819dff4d6a033b31122d91a49b62e',
+    'url': '{chromium_git}/chromium/src/tools/clang@faaecadde650b09ecb98519530fa181ad80e9bc5',
     'condition': 'dawn_standalone',
   },
   'tools/clang/dsymutil': {
@@ -206,16 +202,6 @@ hooks = [
                 '--no_auth',
                 '--bucket', 'chromium-browser-clang/rc',
                 '-s', 'build/toolchain/win/rc/win/rc.exe.sha1',
-    ],
-  },
-  # Pull binutils for linux hermetic builds
-  {
-    'name': 'binutils',
-    'pattern': 'src/third_party/binutils',
-    'condition': 'host_os == "linux" and dawn_standalone',
-    'action': [
-        'python',
-        'third_party/binutils/download.py',
     ],
   },
   # Update build/util/LASTCHANGE.
