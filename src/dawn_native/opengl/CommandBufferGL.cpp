@@ -493,6 +493,22 @@ namespace dawn_native { namespace opengl {
                 case Command::CopyBufferToBuffer: {
                     CopyBufferToBufferCmd* copy = mCommands.NextCommand<CopyBufferToBufferCmd>();
 
+                    // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+                    // instead when buffer lazy initialization is completely supported.
+                    if (GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+                        if (!copy->source->IsDataInitialized()) {
+                            ToBackend(copy->source)->ClearBufferContentsToZero();
+                        }
+                        if (!copy->destination->IsDataInitialized()) {
+                            if (copy->destination->IsFullBufferRange(copy->destinationOffset,
+                                                                     copy->size)) {
+                                copy->destination->SetIsDataInitialized();
+                            } else {
+                                ToBackend(copy->destination)->ClearBufferContentsToZero();
+                            }
+                        }
+                    }
+
                     gl.BindBuffer(GL_PIXEL_PACK_BUFFER, ToBackend(copy->source)->GetHandle());
                     gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER,
                                   ToBackend(copy->destination)->GetHandle());
