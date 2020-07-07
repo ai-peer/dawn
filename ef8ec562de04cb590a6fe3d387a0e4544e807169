@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36409088_fd8ee83d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-07T03:52:25Z",
+      "side": 1,
+      "message": "nit: Bug may need to be in the last paragraph to be picked up properly",
+      "revId": "ef8ec562de04cb590a6fe3d387a0e4544e807169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f39cebe_34a59a09",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-07T03:52:25Z",
+      "side": 1,
+      "message": "Probably shouldn\u0027t do this: https://stackoverflow.com/a/8597124",
+      "revId": "ef8ec562de04cb590a6fe3d387a0e4544e807169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50aa9cd_7d57e40c",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-07T03:52:25Z",
+      "side": 1,
+      "message": "nit: Shouldn\u0027t be needed if this is only mapped once (though I don\u0027t think it makes any difference here)",
+      "range": {
+        "startLine": 308,
+        "startChar": 57,
+        "endLine": 308,
+        "endChar": 87
+      },
+      "revId": "ef8ec562de04cb590a6fe3d387a0e4544e807169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
