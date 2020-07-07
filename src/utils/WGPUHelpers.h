@@ -151,6 +151,17 @@ namespace utils {
         uint32_t mipmapLevel,
         uint32_t rowsPerImage);
 
+    uint32_t TextureFormatPixelSize(wgpu::TextureFormat format);
+    const std::array<wgpu::TextureFormat, 14> kBCFormats = {
+        wgpu::TextureFormat::BC1RGBAUnorm,  wgpu::TextureFormat::BC1RGBAUnormSrgb,
+        wgpu::TextureFormat::BC2RGBAUnorm,  wgpu::TextureFormat::BC2RGBAUnormSrgb,
+        wgpu::TextureFormat::BC3RGBAUnorm,  wgpu::TextureFormat::BC3RGBAUnormSrgb,
+        wgpu::TextureFormat::BC4RUnorm,     wgpu::TextureFormat::BC4RSnorm,
+        wgpu::TextureFormat::BC5RGUnorm,    wgpu::TextureFormat::BC5RGSnorm,
+        wgpu::TextureFormat::BC6HRGBUfloat, wgpu::TextureFormat::BC6HRGBSfloat,
+        wgpu::TextureFormat::BC7RGBAUnorm,  wgpu::TextureFormat::BC7RGBAUnormSrgb};
+    uint32_t CompressedFormatBlockSizeInBytes(wgpu::TextureFormat format);
+
 }  // namespace utils
 
 #endif  // UTILS_DAWNHELPERS_H_

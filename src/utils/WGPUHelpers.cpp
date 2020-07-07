@@ -417,4 +417,42 @@ namespace utils {
 
         return layout;
     }
+
+    // TODO(jiawei.shao@intel.com): support more pixel formats
+    uint32_t TextureFormatPixelSize(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::RG8Unorm:
+                return 2;
+            case wgpu::TextureFormat::RGBA8Unorm:
+                return 4;
+            default:
+                UNREACHABLE();
+                return 0;
+        }
+    }
+
+    uint32_t CompressedFormatBlockSizeInBytes(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::BC1RGBAUnorm:
+            case wgpu::TextureFormat::BC1RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC4RSnorm:
+            case wgpu::TextureFormat::BC4RUnorm:
+                return 8;
+            case wgpu::TextureFormat::BC2RGBAUnorm:
+            case wgpu::TextureFormat::BC2RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC3RGBAUnorm:
+            case wgpu::TextureFormat::BC3RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC5RGSnorm:
+            case wgpu::TextureFormat::BC5RGUnorm:
+            case wgpu::TextureFormat::BC6HRGBSfloat:
+            case wgpu::TextureFormat::BC6HRGBUfloat:
+            case wgpu::TextureFormat::BC7RGBAUnorm:
+            case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+                return 16;
+            default:
+                UNREACHABLE();
+                return 0;
+        }
+    }
+
 }  // namespace utils
