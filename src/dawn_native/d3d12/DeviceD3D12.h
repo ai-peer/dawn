@@ -184,13 +184,16 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
         std::unique_ptr<ResidencyManager> mResidencyManager;
 
-        // Index corresponds to the descriptor count in the range [0, kMaxBindingsPerGroup].
-        static constexpr uint32_t kNumOfStagingDescriptorAllocators = kMaxBindingsPerGroup + 1;
+        // TODO(enga): Consider bucketing these if the count is too many.
+        static constexpr uint32_t kMaxSamplerDescriptorsPerBindGroup = 3 * kMaxSamplersPerShaderStage;
+        static constexpr uint32_t kMaxViewDescriptorsPerBindGroup = kMaxBindingsPerPipelineLayout - kMaxSamplerDescriptorsPerBindGroup;
 
-        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
+        // Index corresponds to the descriptor count in the range [0, kMaxSamplerDescriptorsPerBindGroup].
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kMaxSamplerDescriptorsPerBindGroup + 1>
             mViewAllocators;
 
-        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumOfStagingDescriptorAllocators>
+        // Index corresponds to the descriptor count in the range [0, kMaxViewDescriptorsPerBindGroup].
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kMaxViewDescriptorsPerBindGroup + 1>
             mSamplerAllocators;
 
         std::unique_ptr<StagingDescriptorAllocator> mRenderTargetViewAllocator;
