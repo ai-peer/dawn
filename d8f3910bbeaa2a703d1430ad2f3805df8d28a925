@@ -39,6 +39,30 @@
       "revId": "d8f3910bbeaa2a703d1430ad2f3805df8d28a925",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8075cc41_ea557d71",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T10:24:10Z",
+      "side": 1,
+      "message": "It\u0027s true that it\u0027s a bit weird, but at the same time it\u0027s weird for backends to call a frontend methods that will potentially allocate a StagingBuffer. I think things are ok-ish right now, but if you want in a follow-up I could make the ErrorBuffer also go through MapAtCreation, it will require gross error handling that catches failures and rethrows them.",
+      "parentUuid": "8b4359fb_cd42c236",
+      "range": {
+        "startLine": 881,
+        "startChar": 8,
+        "endLine": 883,
+        "endChar": 9
+      },
+      "revId": "d8f3910bbeaa2a703d1430ad2f3805df8d28a925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

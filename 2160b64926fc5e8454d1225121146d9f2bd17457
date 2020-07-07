@@ -22,6 +22,30 @@
       "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c640470d_8263e5d0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T10:24:10Z",
+      "side": 0,
+      "message": "I didn\u0027t mean to change the semantics so added back dataLength being set unconditionally.",
+      "parentUuid": "c0e35999_6e60a785",
+      "range": {
+        "startLine": 632,
+        "startChar": 11,
+        "endLine": 634,
+        "endChar": 53
+      },
+      "revId": "2160b64926fc5e8454d1225121146d9f2bd17457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
