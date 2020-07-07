@@ -30,33 +30,34 @@ namespace dawn_native { namespace opengl {
 
         for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
             const BindGroupLayoutBase* bgl = GetBindGroupLayout(group);
+            mIndexInfo[group].reserve(bgl->GetBindingCount());
 
             for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount();
                  ++bindingIndex) {
                 switch (bgl->GetBindingInfo(bindingIndex).type) {
                     case wgpu::BindingType::UniformBuffer:
-                        mIndexInfo[group][bindingIndex] = uboIndex;
+                        mIndexInfo[group].push_back(uboIndex);
                         uboIndex++;
                         break;
                     case wgpu::BindingType::Sampler:
                     case wgpu::BindingType::ComparisonSampler:
-                        mIndexInfo[group][bindingIndex] = samplerIndex;
+                        mIndexInfo[group].push_back(samplerIndex);
                         samplerIndex++;
                         break;
                     case wgpu::BindingType::SampledTexture:
-                        mIndexInfo[group][bindingIndex] = sampledTextureIndex;
+                        mIndexInfo[group].push_back(sampledTextureIndex);
                         sampledTextureIndex++;
                         break;
 
                     case wgpu::BindingType::StorageBuffer:
                     case wgpu::BindingType::ReadonlyStorageBuffer:
-                        mIndexInfo[group][bindingIndex] = ssboIndex;
+                        mIndexInfo[group].push_back(ssboIndex);
                         ssboIndex++;
                         break;
 
                     case wgpu::BindingType::ReadonlyStorageTexture:
                     case wgpu::BindingType::WriteonlyStorageTexture:
-                        mIndexInfo[group][bindingIndex] = storageTextureIndex;
+                        mIndexInfo[group].push_back(storageTextureIndex);
                         storageTextureIndex++;
                         break;
 
