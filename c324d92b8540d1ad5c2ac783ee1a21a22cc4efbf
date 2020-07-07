@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cf317be_c37f246f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T18:46:52Z",
+      "side": 1,
+      "message": "Thanks! LGTM + minor nits.",
+      "revId": "c324d92b8540d1ad5c2ac783ee1a21a22cc4efbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1036ede_2e054f69",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T18:46:52Z",
+      "side": 1,
+      "message": "nit: thoughts on moving the logic into BufferD3D? I see this \"if !Init { ...}\" pattern a lot and the code looks reusable, ie. Buffer::EnsureDataToZero(context, range).",
+      "revId": "c324d92b8540d1ad5c2ac783ee1a21a22cc4efbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d26516d4_0001df64",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T18:46:52Z",
+      "side": 1,
+      "message": "nit: consider adding a test of copying a partial buffer from the middle or [offset \u003e 0, end).",
+      "revId": "c324d92b8540d1ad5c2ac783ee1a21a22cc4efbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
