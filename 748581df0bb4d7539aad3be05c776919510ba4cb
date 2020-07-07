@@ -16,6 +16,46 @@
       "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe27d411_a9129f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T18:40:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abcf720c_bca34517",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-07T18:40:24Z",
+      "side": 1,
+      "message": "looks like this changed so that it doesn\u0027t wait for the callback to complete. That\u0027s okay but we should probably test both",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
