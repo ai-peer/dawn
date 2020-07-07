@@ -182,6 +182,30 @@
       "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63b10334_5a70c2e0",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-07T16:51:10Z",
+      "side": 1,
+      "message": "Eliminating the shaderProfiles variable is good because shaderModel already conveys the information you need.  \n\nIn general, I am in favor using as little memory as possible for things. We\u0027ve gotten consistent feedback from many users and partners that Chromium uses too much memory and needs to go on a diet. I know that in the grand scheme of things, this instance is relatively small but the more we can eliminate the better.",
+      "parentUuid": "cd1c6fbc_4482a19a",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
