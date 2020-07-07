@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b77f2bbc_5f8fb323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T09:20:09Z",
+      "side": 1,
+      "message": "LGTM, but we need to invalidate the descriptor handles when the pipeline layout changes.",
+      "revId": "bca0bf186a5a9130fae5a00754b6c274e9f47e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

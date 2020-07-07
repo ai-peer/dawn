@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "c3210c1d_055b55d6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T09:20:09Z",
+      "side": 1,
+      "message": "On the frontend groups can be reused between pipeline layouts. However in D3D12 changing pipeline layouts changes the root signature in almost all cases, and in turns changing the root signature invalidates all the content of the root signature. This means that when the pipeline layout changes, we should re-set all the content of the root signature because it was invalidated.",
+      "parentUuid": "56b06e5f_f46c641f",
+      "revId": "d9fa4f5d11d3616e5b5acdff187ba6b2cc99c0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3505a29_ba53451a",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
