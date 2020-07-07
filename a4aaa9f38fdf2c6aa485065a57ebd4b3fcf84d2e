@@ -187,6 +187,24 @@
       "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "225beb0b_9e20e78d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-07T00:40:46Z",
+      "side": 1,
+      "message": "If we remove MapRead from MapWritable() as-is, it\u0027ll use the UPLOAD heap for read-back which is not desirable for MapRead (UPLOAD is write-through).\n\nI think the issue is that MapAtCreationImpl only deals with writes (notice isWrite is always true) even when the usage is MapRead so it probably needs to unset the range in that case (but doesn\u0027t).",
+      "parentUuid": "5495c53a_2af5b0f5",
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
