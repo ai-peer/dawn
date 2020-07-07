@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43259370_8199393c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-07T10:28:17Z",
+      "side": 1,
+      "message": "I also added the new check for size % 4 \u003d\u003d 0 when mappedAtCreation. This is trivial so I\u0027ll put the CL in the CQ now.",
+      "revId": "c5380335b7e7e2d13f6c798259c63a93cb33ee4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
