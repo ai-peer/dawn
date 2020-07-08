@@ -156,6 +156,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0160eec_5c67d24f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T19:56:04Z",
+      "side": 1,
+      "message": "It\u0027s not buffer creation that uses IsMapWritable() but MapAtCreation() which if removed, creates an UPLOAD heap too (error buffer) which does not look correct.",
+      "parentUuid": "fc83fccf_65f652b3",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
