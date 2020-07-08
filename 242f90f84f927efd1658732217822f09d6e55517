@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "740eff4a_9f5f3303",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T00:16:28Z",
+      "side": 1,
+      "message": "16 to 24",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e8d9245_ef102aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T00:16:28Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
