@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "1fe59e17_e0884b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T19:42:26Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "c406f8e699079f3059c67b1a5f6d797eac3da89b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a75be463_c712719d",
         "filename": "src/common/StackContainer.h",
         "patchSetId": 2

@@ -359,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "7f7fd076_16a401a4",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T19:42:26Z",
+      "side": 1,
+      "message": "Oh, sorry (should of been a question vs nit). I was a bit thrown off from the type name Index since normally these functions use size_type and wasn\u0027t sure if it has to assume Index (looks generic).",
+      "parentUuid": "d80b6cac_93ec57ce",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e69f40e0_bca3f908",
         "filename": "src/tests/unittests/StackContainerTests.cpp",
         "patchSetId": 1
