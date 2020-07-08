@@ -230,6 +230,30 @@
       "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21a5f470_fcbe1592",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-08T15:07:28Z",
+      "side": 1,
+      "message": "Patchset 4 is better in some ways. When I first suggested we store shaderModel in D3D12DeviceInfo as D3D_SHADER_MODEL, I didn\u0027t realize it was also going to be used as a \"base 10\" version for the compiler options.  \n\nAs a middle ground, what do you think of storing the major and minor versions as separate fields in D3D12DeviceInfo? Since we do not need D3D_SHADER_MODEL after we gather the device info, it should be straightforward to convert the major and minor fields into two forms we need at compile time.",
+      "parentUuid": "d310502c_95b2c44b",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
