@@ -138,6 +138,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc83fccf_65f652b3",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:14:07Z",
+      "side": 1,
+      "message": "Why does it create an UPLOAD heap given the condition at [1] ? The D3D12HeapType(..) helper used in buffer creation does not check IsMapWritable(). If the usage has MapRead usage, it will be created on D3D12_HEAP_TYPE_READBACK",
+      "parentUuid": "36cad753_9d30adbd",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
