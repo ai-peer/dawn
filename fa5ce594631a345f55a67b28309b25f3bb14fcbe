@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "5b4e124d_73531db4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T17:48:27Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47589758_b3ca22d9",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -33,6 +50,23 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b31bdae_a0bcd7f2",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T17:48:27Z",
+      "side": 1,
+      "message": "nit: the written range DOES need to be passed to Unmap but MUST be kept empty (upon init). Although not GPU readable, the empty written range must be specified because the CPU doesn\u0027t need to write. Consider clarifying and the link to MSDN [1].\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12resource-unmap",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
