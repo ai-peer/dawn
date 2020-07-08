@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "3bb4d456_adbe1bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T12:03:02Z",
+      "side": 1,
+      "message": "Switching reviewers because of vacations.\n\nKai PTAL!",
+      "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abcf720c_bca34517",
         "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
         "patchSetId": 4
