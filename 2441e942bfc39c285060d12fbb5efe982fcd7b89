@@ -895,6 +895,24 @@
     },
     {
       "key": {
+        "uuid": "74edaf5e_6022d2cc",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T17:19:46Z",
+      "side": 1,
+      "message": "fyi: to my current knowledge, this isn\u0027t a restriction for CopyBufferToTexture either in the spec. It\u0027s simply unspecified. If I remember correctly, we never did an investigation of whether it should be possible to copy into multisampled textures from a buffer (what is the layout of the texture data? and is it the same for all backends?)\n\nIn short, we probably need an investigation before adding the validation to the spec. For now, we should have the validation in Dawn because we can\u0027t actually support it.",
+      "parentUuid": "efecccbb_6ad687b1",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "495a6a08_12405e6e",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
