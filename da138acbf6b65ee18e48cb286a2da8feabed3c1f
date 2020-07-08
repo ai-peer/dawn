@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "e78ff571_f049f589",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-08T10:34:01Z",
+      "side": 1,
+      "message": "The firstQuery is query index, it must less than the queries number in query set in Vulkan spec. \nBut I don\u0027t understand what the \"resolve 0 queries\" mean, queryCount is 0 (it\u0027s allowed) or the QuerySet size is 0 (maybe we need add checking)?\n\nThere is another finding we missed, each queries in queryset must be written before calling resolve on Vulkan, we also need tracking their status and check it between [firstQuery, firstQuery + queryCount].",
+      "parentUuid": "e55e9611_67d8f640",
+      "range": {
+        "startLine": 530,
+        "startChar": 27,
+        "endLine": 530,
+        "endChar": 29
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30485c5d_7f0e61c0",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 3
@@ -70,6 +94,30 @@
       "writtenOn": "2020-07-06T08:31:01Z",
       "side": 1,
       "message": "This can overflow for example is firstQuery is 1 and queryCount is 0xFFFFFFFF. Can you add a test for this?\n\nThe check should be queryCount \u003e querySet-\u003eGetQueryCount() - firstQuery, with a comment that it can\u0027t overflow because we checked that GetQueryCount - firstQuery is non-negative because we checked it above.",
+      "range": {
+        "startLine": 534,
+        "startChar": 16,
+        "endLine": 534,
+        "endChar": 67
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d319fe5_7af01ccc",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-08T10:34:01Z",
+      "side": 1,
+      "message": "Yes, queryCount \u003e querySet-\u003eGetQueryCount() - firstQuery is better.",
+      "parentUuid": "30485c5d_7f0e61c0",
       "range": {
         "startLine": 534,
         "startChar": 16,
