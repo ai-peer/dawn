@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b8c085c_57f9b7cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T17:00:05Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "600e56585067d3c3c6705db60aa4be41d992535d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96745df3_e7099d5b",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T17:00:05Z",
+      "side": 1,
+      "message": "If I were to guess, it\u0027s probably crbug.com/dawn/404",
+      "range": {
+        "startLine": 100,
+        "startChar": 34,
+        "endLine": 100,
+        "endChar": 82
+      },
+      "revId": "600e56585067d3c3c6705db60aa4be41d992535d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
