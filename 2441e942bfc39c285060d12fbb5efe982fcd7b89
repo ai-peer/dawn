@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "96f1f543_1dc41097",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "I don\u0027t quite get that comment. If you mean that data is not passed to ValidateWriteTexture, it\u0027s the same as for ValidateWriteBuffer.",
+      "parentUuid": "6e6baef3_178c0538",
+      "range": {
+        "startLine": 154,
+        "startChar": 55,
+        "endLine": 154,
+        "endChar": 59
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "340c561f_247b007c",
         "filename": "src/dawn_wire/server/ServerQueue.cpp",
         "patchSetId": 9
@@ -62,6 +86,30 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2079775_75357b81",
+        "filename": "src/dawn_wire/server/ServerQueue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "340c561f_247b007c",
+      "range": {
+        "startLine": 64,
+        "startChar": 48,
+        "endLine": 64,
+        "endChar": 61
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -112,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "13f38b20_d3334281",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7050524a_24b0db66",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f79195c6_cae6cabc",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -135,6 +207,30 @@
     },
     {
       "key": {
+        "uuid": "9c6a10fe_49754511",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f79195c6_cae6cabc",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a7b91b1_a215acf6",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -149,6 +245,24 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "398073fd_186cb7a8",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a7b91b1_a215acf6",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +321,30 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cec5280c_9a2c556d",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae78744d_87c510c9",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 29
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -297,6 +435,24 @@
     },
     {
       "key": {
+        "uuid": "c40f1fd8_ab0d04c6",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4728a013_20118a4d",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5afe8d31_7fa79615",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -367,6 +523,24 @@
     },
     {
       "key": {
+        "uuid": "f9e376bd_680ba44a",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c329148_aaab687f",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6b40cff_792817ce",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -414,6 +588,30 @@
     },
     {
       "key": {
+        "uuid": "eef689fc_08ac730a",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6b40cff_792817ce",
+      "range": {
+        "startLine": 258,
+        "startChar": 4,
+        "endLine": 258,
+        "endChar": 23
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea3eaa4e_ec065b31",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -434,6 +632,30 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3bc32d2_5052451e",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done, this should be changed in CopyB2T tests too.",
+      "parentUuid": "ea3eaa4e_ec065b31",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 6
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -481,6 +703,30 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68e1de36_e3aa8e2c",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Yes, this should be changed in CopyB2T tests too.",
+      "parentUuid": "2e1dd12a_cc9197b4",
+      "range": {
+        "startLine": 273,
+        "startChar": 45,
+        "endLine": 273,
+        "endChar": 46
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -536,6 +782,24 @@
     },
     {
       "key": {
+        "uuid": "55e699d7_70abd779",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done. CopyB2T tests include all of them though.",
+      "parentUuid": "51c165ef_8acb2acd",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac8d300d_d293e0eb",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -582,6 +846,24 @@
       "writtenOn": "2020-07-08T10:09:25Z",
       "side": 1,
       "message": "If it is allowed by the spec, then it is a spec bug.",
+      "parentUuid": "eeb449b5_c11a1f00",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efecccbb_6ad687b1",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "I have changed this and the actual validation for that in Queue.cpp, but it needs to be added in WebGPU spec.",
       "parentUuid": "eeb449b5_c11a1f00",
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -641,6 +923,24 @@
     },
     {
       "key": {
+        "uuid": "23921944_31735a49",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "450443cc_7c08d345",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ad1a6eb_7cc3df5c",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -658,6 +958,24 @@
     },
     {
       "key": {
+        "uuid": "f0f2aba4_3c7ff9d7",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ad1a6eb_7cc3df5c",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59a6d05e_8a5b690d",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -672,6 +990,24 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f683bf95_e40b093c",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59a6d05e_8a5b690d",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -733,6 +1069,30 @@
     },
     {
       "key": {
+        "uuid": "705c836a_e9a740b8",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "I have merged this with the previous test.\n\nThe names ImageHeight and ImageWidth are used in CopyB2T tests, I\u0027ve changed them to rowsPerImage and bytesPerRow now.",
+      "parentUuid": "9196fee6_c5120d63",
+      "range": {
+        "startLine": 517,
+        "startChar": 50,
+        "endLine": 517,
+        "endChar": 60
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87a0910d_18a42052",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -753,6 +1113,30 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06382486_be95af24",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87a0910d_18a42052",
+      "range": {
+        "startLine": 525,
+        "startChar": 31,
+        "endLine": 525,
+        "endChar": 47
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -779,6 +1163,30 @@
     },
     {
       "key": {
+        "uuid": "c8e6bf90_7abc6463",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41ecd3fd_ada4b39e",
+      "range": {
+        "startLine": 541,
+        "startChar": 50,
+        "endLine": 541,
+        "endChar": 61
+      },
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9295f257_9b575417",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
@@ -793,6 +1201,24 @@
       "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f940019_eaa60179",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T10:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9295f257_9b575417",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
