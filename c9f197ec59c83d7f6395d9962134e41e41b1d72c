@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "501d9658_99469f3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:03:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c9f197ec59c83d7f6395d9962134e41e41b1d72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64702236_7c911453",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:03:21Z",
+      "side": 1,
+      "message": "I think we should just pass in the texture format here. Then we can compute the blockSize using utils::GetTexelBlockSizeInBytes. I think this is the same as utils::TextureFormatPixelSize but supports more formats.\n\nWe should add another helper which gets the blockWidth and blockHeight from the format.\n\nAlso since this is now a general helper in utils::, I don\u0027t think we should keep the default argument",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 164,
+        "endChar": 32
+      },
+      "revId": "c9f197ec59c83d7f6395d9962134e41e41b1d72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
