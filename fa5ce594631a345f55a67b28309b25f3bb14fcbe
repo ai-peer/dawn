@@ -102,6 +102,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa51f79d_f3a9de3a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T18:49:20Z",
+      "side": 1,
+      "message": "Maybe I\u0027m not following the discussion. But isn\u0027t the ASSERT happening because we\u0027ve added MapRead back to Buffer::IsMapWritable() ? I\u0027m not sure why that was added back. I thought in another thread Corentin mentioned that this function is NOT used to determine which heap we use. It happens at [1].",
+      "parentUuid": "f73c24d6_0df33554",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
