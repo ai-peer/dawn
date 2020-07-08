@@ -257,7 +257,9 @@ namespace dawn_native { namespace d3d12 {
         D3D12_RANGE range = {0, size_t(GetSize())};
         DAWN_TRY(CheckHRESULT(GetD3D12Resource()->Map(0, &range, &mMappedData), contextInfo));
 
-        if (isWrite) {
+        // As READBACK resources are not GPU readable, there is no need to pass the written range to
+        // Unmap(). This change silences a warning in the D3D12 debug layer.
+        if (isWrite && D3D12HeapType(GetUsage()) != D3D12_HEAP_TYPE_READBACK) {
             mWrittenMappedRange = range;
         }
 
