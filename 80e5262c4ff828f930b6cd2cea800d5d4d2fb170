@@ -50,6 +50,24 @@
       "revId": "80e5262c4ff828f930b6cd2cea800d5d4d2fb170",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2349bd_323688c5",
+        "filename": "src/common/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:46:09Z",
+      "side": 1,
+      "message": "I think our version of it is different from Chromium\u0027s somehow (maybe at a different revision or we modified it somehow) and peoples\u0027 git cl format does different things if you\u0027re in standalone or inside a Chromium checkout. Maybe idk,",
+      "parentUuid": "dcfa5fd2_b7af635f",
+      "revId": "80e5262c4ff828f930b6cd2cea800d5d4d2fb170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
