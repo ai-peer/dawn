@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e62208f_c01df683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-08T20:40:31Z",
+      "side": 1,
+      "message": "whoa, I was just thinking a few weeks ago that it would be really cool to have a vector with customizable-stack-optimization-size. Awesome it already existed!",
+      "revId": "d761d5a5758c3a432364b7435f487df25ee799ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
