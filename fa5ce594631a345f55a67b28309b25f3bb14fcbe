@@ -210,6 +210,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fa4d557_b57d98c8",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T20:33:20Z",
+      "side": 1,
+      "message": "Hm so the READBACK heap isn\u0027t being mapped (or shouldn\u0027t be). A separate staging buffer in the UPLOAD heap is mapped.\n\nExample:\n\n// Internally, this allocates BOTH a readbackBuffer and mapped uploadBuffer (staging)\nwgpu::Buffer buffer \u003d device.CreateBuffer(\n    wgpu::BufferUsage::MapRead, mappedAtCreation \u003d true);\n\n// This returns a pointer to mapped data for |uploadBuffer|\nvoid* data \u003d buffer.GetMappedRange();\nmemcpy(data, myData, sizeof(myData));\n\n// This flushes a copy from |uploadBuffer| into |readbackBuffer|\nbuffer.Unmap();\n\n\n^^ Note that the READBACK heap is never mapped. We use a staging buffer in the UPLOAD heap to copy data in.\n\n\nNow, it should be possible to do\n\n\nawait buffer.MapAsync();\n\nvoid* readbackData \u003d buffer.GetMappedRange();\n\nAnd see that readbackData has |myData|.\n\nAll that being said, idk why someone would have a MapRead buffer and do mappedAtCreation \u003d true, but it should work.\n\n----\n\n\nThe comment in Buffer.cpp:182 could probably be more specific. GetDevice()-\u003eCreateStagingBuffer() is what\u0027s making the staging uploadBuffet, but that\u0027s not the error buffer. The comment means that if any of the DAWN_TRYs in the function (MapAtCreationImpl or CreateStagingBuffer) fail, THEN the buffer will be replaced with an error buffer. See https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Device.cpp;l\u003d608;drc\u003dcf75366215a81fe70bb3cbe8a4685ba6cdc06276;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "2549b1ff_6084386d",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
