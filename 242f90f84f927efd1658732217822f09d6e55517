@@ -110,6 +110,29 @@
     },
     {
       "key": {
+        "uuid": "0247df65_d4db64f8",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T17:07:12Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 793,
+        "startChar": 4,
+        "endLine": 794,
+        "endChar": 47
+      },
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d19c555c_81a286b1",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -121,6 +144,24 @@
       "writtenOn": "2020-07-08T14:51:41Z",
       "side": 1,
       "message": "Any reason why these switched to Fragment?",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "155a1b33_94ba8bb7",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T17:07:12Z",
+      "side": 1,
+      "message": "See the comment above at [1]\n\"\"\"\n// The following tests exceed the per-pipeline layout limits. We use the Fragment stage to\n// ensure we don\u0027t hit the per-stage limit.\n\"\"\"",
+      "parentUuid": "d19c555c_81a286b1",
       "revId": "242f90f84f927efd1658732217822f09d6e55517",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
