@@ -56,6 +56,74 @@
       "revId": "242f90f84f927efd1658732217822f09d6e55517",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47296833_9b9fb6a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T14:51:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a3eb38c_1b3b2fd3",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T14:51:41Z",
+      "side": 1,
+      "message": "Maybe these two methods could go next to BindingCounts in BindingInfo?",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36c6e8b5_2869b171",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T14:51:41Z",
+      "side": 1,
+      "message": "Maybe this could be handled by an \"add\" function next to the definition of the BindingCounts so that when they are modified we don\u0027t forget to update the add function?",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d19c555c_81a286b1",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T14:51:41Z",
+      "side": 1,
+      "message": "Any reason why these switched to Fragment?",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
