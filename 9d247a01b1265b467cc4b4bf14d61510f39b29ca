@@ -206,6 +206,30 @@
       "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d310502c_95b2c44b",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T13:44:37Z",
+      "side": 1,
+      "message": "I appreciate the concern for using as little memory as possible but this is insignificant, and what we should be trying to optimize is more the number of resources we pre-create.\n\nI did what you suggested in patchset 4 for comparison. I think it\u0027s worse than patchset 3.",
+      "parentUuid": "63b10334_5a70c2e0",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "9d247a01b1265b467cc4b4bf14d61510f39b29ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
