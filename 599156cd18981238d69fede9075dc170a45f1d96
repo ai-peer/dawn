@@ -16,6 +16,40 @@
       "revId": "599156cd18981238d69fede9075dc170a45f1d96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6843e65_9e2a5895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T01:05:55Z",
+      "side": 1,
+      "message": "LGTM, thanks Enrico.",
+      "revId": "599156cd18981238d69fede9075dc170a45f1d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae71bb6d_9ed160b1",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T01:05:55Z",
+      "side": 1,
+      "message": "nit: fyi, also for perf too - could remove this sentence",
+      "revId": "599156cd18981238d69fede9075dc170a45f1d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
