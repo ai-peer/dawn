@@ -67,6 +67,23 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8af7a65_0e585b75",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T18:03:48Z",
+      "side": 1,
+      "message": "Instead of adding !\u003d readback to the condition, it could be an assert, because it should never happen.",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
