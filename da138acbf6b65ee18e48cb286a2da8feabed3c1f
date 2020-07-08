@@ -83,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "9e86ebbd_99336e18",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T12:34:12Z",
+      "side": 1,
+      "message": "Ok, it\u0027s not that important, we\u0027ll see what the exact validation rules end up being in the WebGPU spec.",
+      "parentUuid": "e78ff571_f049f589",
+      "range": {
+        "startLine": 530,
+        "startChar": 27,
+        "endLine": 530,
+        "endChar": 29
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30485c5d_7f0e61c0",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 3
