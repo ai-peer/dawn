@@ -39,6 +39,23 @@
       "revId": "242f90f84f927efd1658732217822f09d6e55517",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8254abd8_55d494e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T00:40:57Z",
+      "side": 1,
+      "message": "Failures are because we decided to enforce per stage and per pipeline layout limits in the BGL, but we haven\u0027t updated the CTS yet. I will have to do that (or suppress) and roll before this can land.",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
