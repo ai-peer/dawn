@@ -246,6 +246,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b664771_4b74c16c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T21:48:51Z",
+      "side": 1,
+      "message": "Ok, sorry I realize now we were on the same page. I thought that somehow the MapRead buffer was being created in the UPLOAD heap and didn\u0027t think that was the case.\n\nAs long as writing the data in the READBACK heap without setting mWrittenRange, and then reading it back works, then it is makes sense to not create the extra buffer in the UPLOAD heap. I think either the current code or your suggestion to change the |isWrite| parameter to be false is ok.",
+      "parentUuid": "296f0e29_21f178f4",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
