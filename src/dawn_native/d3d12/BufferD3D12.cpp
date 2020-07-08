@@ -265,7 +265,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        DAWN_TRY(MapInternal(true, "D3D12 map at creation"));
+        // MapRead (READBACK heap) buffers require an empty written range during Unmap(). This
+        // change silences a warning in the D3D12 debug layer.
+        // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12resource-unmap
+        bool isMapWrite = (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
+        DAWN_TRY(MapInternal(isMapWrite, "D3D12 map at creation"));
         return {};
     }
 
