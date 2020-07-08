@@ -84,6 +84,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f73c24d6_0df33554",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T18:23:27Z",
+      "side": 1,
+      "message": "@CW, WDYT of isWrite \u003d \u003ccondition\u003e in Buffer::MapAtCreationImpl?\n\nOtherwise, looks like removing it would trigger the ASSERT (but it\u0027s still valid to map a read-back heap).",
+      "parentUuid": "d8af7a65_0e585b75",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
