@@ -134,7 +134,35 @@ namespace dawn_native { namespace metal {
         mMtlBuffer = nil;
     }
 
-    void Buffer::ClearBufferContentsToZero(CommandRecordingContext* commandContext) {
+    void Buffer::EnsureDataInitialized(CommandRecordingContext* commandContext) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
+
+        InitializeToZero(commandContext);
+    }
+
+    void Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
+                                                    uint64_t offset,
+                                                    uint64_t size) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
+
+        if (IsFullBufferRange(offset, size)) {
+            SetIsDataInitialized();
+        } else {
+            InitializeToZero(commandContext);
+        }
+    }
+
+    void Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
         ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
         ASSERT(!IsDataInitialized());
 
