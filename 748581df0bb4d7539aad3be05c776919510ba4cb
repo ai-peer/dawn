@@ -73,6 +73,30 @@
       "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1d302b6_75eb08d5",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T14:28:59Z",
+      "side": 1,
+      "message": "Reverted to the previous behavior.",
+      "parentUuid": "abcf720c_bca34517",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
