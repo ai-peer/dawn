@@ -913,6 +913,24 @@
     },
     {
       "key": {
+        "uuid": "7a1c8424_59b3f5d0",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-08T17:35:00Z",
+      "side": 1,
+      "message": "In fact copyBufferToTexture does have a sampleCount \u003d 1 restriction now. I\u0027ve already created a PR for that, so I\u0027ll just wait for some comments there.",
+      "parentUuid": "74edaf5e_6022d2cc",
+      "revId": "2441e942bfc39c285060d12fbb5efe982fcd7b89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "495a6a08_12405e6e",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 9
