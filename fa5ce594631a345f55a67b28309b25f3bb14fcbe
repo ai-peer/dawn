@@ -120,6 +120,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cad753_9d30adbd",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T19:11:45Z",
+      "side": 1,
+      "message": "Correct. It was \"added back\" (really, untouched) because if we remove it, we will now create a UPLOAD heap (surprise!) which seems wrong to me since mapping a read-back heap is allowed and worked as such previously.",
+      "parentUuid": "fa51f79d_f3a9de3a",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
