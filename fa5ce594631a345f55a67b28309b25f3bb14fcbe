@@ -228,6 +228,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "296f0e29_21f178f4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T21:35:16Z",
+      "side": 1,
+      "message": "\u003e ^^ Note that the READBACK heap is never mapped. We use a staging buffer in the UPLOAD heap to copy data in.\n\nOK but I still don\u0027t understand why we should do so now (it didn\u0027t before, right?). If usage is MapRead, a READBACK heap is already mappable and Unmap becomes a no-op (what D3D expects). None of this staging + copy is needed for reading which is why PS5 works.\n\n\u003e All that being said, idk why someone would have a MapRead buffer and do mappedAtCreation \u003d true, but it should work.\n\nYup, maybe \"IsMapWritable\" really means \"IsMappable\" since a READBACK heap can be mapped as if mapped through MapAsync.",
+      "parentUuid": "9fa4d557_b57d98c8",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
