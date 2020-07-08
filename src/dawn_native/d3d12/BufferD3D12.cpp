@@ -245,7 +245,7 @@ namespace dawn_native { namespace d3d12 {
 
     bool Buffer::IsMapWritable() const {
         // TODO(enga): Handle CPU-visible memory on UMA
-        return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
+        return (GetUsage() & (wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::MapRead)) != 0;
     }
 
     MaybeError Buffer::MapInternal(bool isWrite, const char* contextInfo) {
@@ -257,7 +257,9 @@ namespace dawn_native { namespace d3d12 {
         D3D12_RANGE range = {0, size_t(GetSize())};
         DAWN_TRY(CheckHRESULT(GetD3D12Resource()->Map(0, &range, &mMappedData), contextInfo));
 
-        if (isWrite) {
+        // As READBACK resources are not GPU readable, there is no pass the range back to Unmap().
+        // This change silences a warning in the D3D12 debug layer.
+        if (isWrite && D3D12HeapType(GetUsage()) != D3D12_HEAP_TYPE_READBACK) {
             mWrittenMappedRange = range;
         }
 
