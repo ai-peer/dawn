@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "be94d040_d8750703",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-08T18:48:33Z",
+      "side": 1,
+      "message": "nit: reinterpret",
+      "revId": "22fb146afe25bf3c0b5fcf8df8eb5acb7d9e059e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23db2433_19f5880c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-08T18:48:33Z",
+      "side": 1,
+      "message": "uNit: same paragraph and no indentation (or just omit Bug: I guess)",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "22fb146afe25bf3c0b5fcf8df8eb5acb7d9e059e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12e6dfd4_18087192",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
