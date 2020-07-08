@@ -121,6 +121,30 @@
       "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aefade0a_2ade50b2",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T15:30:47Z",
+      "side": 1,
+      "message": "Whoops, fixed. I\u0027ll add the test in a follow-up.",
+      "parentUuid": "23531274_fd297d03",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "748581df0bb4d7539aad3be05c776919510ba4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
