@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94825d87_34663832",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T12:02:26Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05875570_40b0467b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T12:02:26Z",
+      "side": 1,
+      "message": "Now this can be removed since it is handled at [1]. Sorry the previous comment wasn\u0027t 100% clear about this.",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 9
+      },
+      "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
