@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f76fc960_c354879e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T08:33:53Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "7e60643e906a2a6edd81ab06a5836dae9e8c30ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e33f4fd0_8d70d080",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T08:33:53Z",
+      "side": 1,
+      "message": "nit: EnsureDataInitialized? same for otehr backends.",
+      "range": {
+        "startLine": 281,
+        "startChar": 17,
+        "endLine": 281,
+        "endChar": 33
+      },
+      "revId": "7e60643e906a2a6edd81ab06a5836dae9e8c30ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554dd229_99be42b7",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T08:33:53Z",
+      "side": 1,
+      "message": "Maybe this whole function could be\n\n  if (IsFullBufferRange()) {\n    SetIsDataInitialized\n  } else {\n    EnsureDataToZero\n  }\n\nsame for other backends.",
+      "revId": "7e60643e906a2a6edd81ab06a5836dae9e8c30ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
