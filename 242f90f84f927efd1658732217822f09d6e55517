@@ -165,6 +165,24 @@
       "revId": "242f90f84f927efd1658732217822f09d6e55517",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "052c079b_a83e3f14",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T17:08:04Z",
+      "side": 1,
+      "message": "Ah, we need two stages, gotcha!",
+      "parentUuid": "155a1b33_94ba8bb7",
+      "revId": "242f90f84f927efd1658732217822f09d6e55517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
