@@ -192,6 +192,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2549b1ff_6084386d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T20:13:41Z",
+      "side": 1,
+      "message": "If the usage is MapRead, we shouldn\u0027t need to be writing and mapping a READBACK heap for reading doesn\u0027t require an UPLOAD heap.\n\nI say \"error buffer\" because the comment says so (is it wrong?), Buffer.cpp:182. Note: previously, this didn\u0027t happen so it wasn\u0027t required even before the change. \n\nAm I missing something?",
+      "parentUuid": "c90e5f15_cddf9a6e",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
