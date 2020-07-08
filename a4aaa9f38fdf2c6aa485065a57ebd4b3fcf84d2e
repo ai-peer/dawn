@@ -223,6 +223,24 @@
       "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ad82b31_44fd576c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-08T07:09:31Z",
+      "side": 1,
+      "message": "The heap type is chosen at [1] and independent of IsMapWritable(), so MapRead will keep using READBACK heaps. What happens when creating buffer mapped is the following:\n\nBufferBase::MapAtCreation is called, it checks IsMapWritable (in which case it calls MapAtCreationImpl), otherwise it creates a StagingBuffer and on Unmap will schedule a copy from staging to this buffer. The latter path is what happens for MapRead so this CL should be correct.",
+      "parentUuid": "cfa72a15_8c57e2cc",
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
