@@ -464,4 +464,21 @@ namespace utils {
         }
     }
 
+    uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                                 uint64_t rowsPerImage,
+                                 wgpu::Extent3D copyExtent,
+                                 uint64_t blockSize,
+                                 uint64_t blockWidth,
+                                 uint64_t blockHeight) {
+        if (copyExtent.width == 0 || copyExtent.height == 0 || copyExtent.depth == 0) {
+            return 0;
+        } else {
+            uint64_t texelBlockRowsPerImage = rowsPerImage / blockHeight;
+            uint64_t bytesPerImage = bytesPerRow * texelBlockRowsPerImage;
+            uint64_t bytesInLastSlice = bytesPerRow * (copyExtent.height / blockHeight - 1) +
+                                        (copyExtent.width / blockWidth * blockSize);
+            return bytesPerImage * (copyExtent.depth - 1) + bytesInLastSlice;
+        }
+    }
+
 }  // namespace utils

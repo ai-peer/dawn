@@ -155,6 +155,14 @@ namespace utils {
     extern const std::array<wgpu::TextureFormat, 14> kBCFormats;
     uint32_t CompressedFormatBlockSizeInBytes(wgpu::TextureFormat format);
 
+    uint64_t RequiredBytesInCopy(
+        uint64_t bytesPerRow,
+        uint64_t rowsPerImage,
+        wgpu::Extent3D copyExtent,
+        uint64_t blockSize = utils::TextureFormatPixelSize(wgpu::TextureFormat::RGBA8Unorm),
+        uint64_t blockWidth = 1,
+        uint64_t blockHeight = 1);
+
 }  // namespace utils
 
 #endif  // UTILS_DAWNHELPERS_H_
