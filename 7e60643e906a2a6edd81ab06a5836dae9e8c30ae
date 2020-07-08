@@ -74,6 +74,24 @@
       "revId": "7e60643e906a2a6edd81ab06a5836dae9e8c30ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b63c5ce6_f4f949ea",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-08T08:41:17Z",
+      "side": 1,
+      "message": "Oh sorry I think I have misunderstood your comment. Please ignore my previous comment.",
+      "parentUuid": "7e44e3e1_b5103fb5",
+      "revId": "7e60643e906a2a6edd81ab06a5836dae9e8c30ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
