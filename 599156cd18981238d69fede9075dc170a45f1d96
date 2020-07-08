@@ -50,6 +50,24 @@
       "revId": "599156cd18981238d69fede9075dc170a45f1d96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea9e1b3_12cea539",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-08T01:15:08Z",
+      "side": 1,
+      "message": "Corentin asked for the silencing warning line\nhttps://dawn-review.googlesource.com/c/dawn/+/24300/2/src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp#324\n\nAs for perf, is \"This also enables fast clears on some architectures.\" at the end of the comment clear enough?",
+      "parentUuid": "ae71bb6d_9ed160b1",
+      "revId": "599156cd18981238d69fede9075dc170a45f1d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
