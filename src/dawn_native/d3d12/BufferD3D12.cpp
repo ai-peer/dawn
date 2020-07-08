@@ -313,13 +313,41 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetInfo().mMethod == allocationMethod;
     }
 
-    MaybeError Buffer::ClearBufferContentsToZero(CommandRecordingContext* commandContext) {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
-        ASSERT(!IsDataInitialized());
+    MaybeError Buffer::EnsureDataToZero(CommandRecordingContext* commandContext) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return {};
+        }
 
+        // TODO(jiawei.shao@intel.com): skip initializing the buffer when it is created on a heap
+        // that has already been zero initialized.
         DAWN_TRY(ClearBuffer(commandContext, uint8_t(0u)));
         SetIsDataInitialized();
         GetDevice()->IncrementLazyClearCountForTesting();
+
+        return {};
+    }
+
+    MaybeError Buffer::EnsureDataToZeroAsDestination(CommandRecordingContext* commandContext,
+                                                     uint64_t offset,
+                                                     uint64_t size) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return {};
+        }
+
+        if (!IsFullBufferRange(offset, size)) {
+            // TODO(jiawei.shao@intel.com): skip initializing the buffer when it is created on a
+            // heap that has already been zero initialized.
+            DAWN_TRY(ClearBuffer(commandContext, uint8_t(0u)));
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+
+        SetIsDataInitialized();
 
         return {};
     }

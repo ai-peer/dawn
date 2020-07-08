@@ -51,9 +51,13 @@ namespace dawn_native { namespace opengl {
         return std::max(GetSize(), uint64_t(4u));
     }
 
-    void Buffer::ClearBufferContentsToZero() {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
-        ASSERT(!IsDataInitialized());
+    void Buffer::EnsureDataToZero() {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
 
         const uint64_t size = GetAppliedSize();
         Device* device = ToBackend(GetDevice());
@@ -64,6 +68,27 @@ namespace dawn_native { namespace opengl {
 
         SetIsDataInitialized();
         device->IncrementLazyClearCountForTesting();
+    }
+
+    void Buffer::EnsureDataToZeroAsDestination(uint64_t offset, uint64_t size) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
+
+        if (!IsFullBufferRange(offset, size)) {
+            const uint64_t size = GetAppliedSize();
+            Device* device = ToBackend(GetDevice());
+
+            const std::vector<uint8_t> clearValues(size, 0u);
+            device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
+            device->gl.BufferSubData(GL_ARRAY_BUFFER, 0, size, clearValues.data());
+            device->IncrementLazyClearCountForTesting();
+        }
+
+        SetIsDataInitialized();
     }
 
     bool Buffer::IsMapWritable() const {

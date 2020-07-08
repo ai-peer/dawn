@@ -44,7 +44,10 @@ namespace dawn_native { namespace d3d12 {
         bool CheckAllocationMethodForTesting(AllocationMethod allocationMethod) const;
         bool CheckIsResidentForTesting() const;
 
-        MaybeError ClearBufferContentsToZero(CommandRecordingContext* commandContext);
+        MaybeError EnsureDataToZero(CommandRecordingContext* commandContext);
+        MaybeError EnsureDataToZeroAsDestination(CommandRecordingContext* commandContext,
+                                                 uint64_t offset,
+                                                 uint64_t size);
 
       private:
         ~Buffer() override;

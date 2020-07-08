@@ -30,7 +30,10 @@ namespace dawn_native { namespace metal {
         static ResultOrError<Buffer*> Create(Device* device, const BufferDescriptor* descriptor);
         id<MTLBuffer> GetMTLBuffer() const;
 
-        void ClearBufferContentsToZero(CommandRecordingContext* commandContext);
+        void EnsureDataToZero(CommandRecordingContext* commandContext);
+        void EnsureDataToZeroAsDestination(CommandRecordingContext* commandContext,
+                                           uint64_t offset,
+                                           uint64_t size);
 
       private:
         using BufferBase::BufferBase;
