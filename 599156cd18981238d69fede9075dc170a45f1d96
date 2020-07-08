@@ -68,6 +68,24 @@
       "revId": "599156cd18981238d69fede9075dc170a45f1d96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b579c79_9c0c2acc",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-08T01:24:29Z",
+      "side": 1,
+      "message": "Ah, missed that. SGTM as-is.",
+      "parentUuid": "cea9e1b3_12cea539",
+      "revId": "599156cd18981238d69fede9075dc170a45f1d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
