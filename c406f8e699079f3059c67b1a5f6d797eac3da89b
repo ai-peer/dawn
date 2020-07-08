@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "bc6a9959_e5c0c239",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:51:33Z",
+      "side": 1,
+      "message": "Thanks for the reviews!",
+      "revId": "c406f8e699079f3059c67b1a5f6d797eac3da89b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a75be463_c712719d",
         "filename": "src/common/StackContainer.h",
         "patchSetId": 2

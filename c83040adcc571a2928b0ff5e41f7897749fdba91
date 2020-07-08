@@ -377,6 +377,24 @@
     },
     {
       "key": {
+        "uuid": "2fa0e4e3_49d9494f",
+        "filename": "src/common/ityp_stack_vec.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:51:33Z",
+      "side": 1,
+      "message": "mm.. Maybe I should have named the template parameter SizeType then.  If it\u0027s confusing I\u0027ll change it in this file, and the other ityp:: files all together once I\u0027m doing adding ityp stuff",
+      "parentUuid": "7f7fd076_16a401a4",
+      "revId": "c83040adcc571a2928b0ff5e41f7897749fdba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e69f40e0_bca3f908",
         "filename": "src/tests/unittests/StackContainerTests.cpp",
         "patchSetId": 1
