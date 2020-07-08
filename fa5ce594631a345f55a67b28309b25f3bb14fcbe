@@ -174,6 +174,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c90e5f15_cddf9a6e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-08T19:59:16Z",
+      "side": 1,
+      "message": "It does create an UPLOAD buffer, though it isn\u0027t an error buffer.\n\nIt creates an UPLOAD buffer, which the user can populate with data by calling GetMappedRange(). and then on Unmap(), Dawn will enqueue a copy from that UPLOAD buffer into the READBACK buffer. This sounds correct to me.",
+      "parentUuid": "c0160eec_5c67d24f",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
