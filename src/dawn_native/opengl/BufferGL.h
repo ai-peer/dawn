@@ -29,7 +29,8 @@ namespace dawn_native { namespace opengl {
 
         GLuint GetHandle() const;
 
-        void ClearBufferContentsToZero();
+        void EnsureDataToZero();
+        void EnsureDataToZeroAsDestination(uint64_t offset, uint64_t size);
 
       private:
         ~Buffer() override;

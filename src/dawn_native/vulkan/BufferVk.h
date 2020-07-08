@@ -42,7 +42,10 @@ namespace dawn_native { namespace vulkan {
                                 VkPipelineStageFlags* srcStages,
                                 VkPipelineStageFlags* dstStages);
 
-        void ClearBufferContentsToZero(CommandRecordingContext* recordingContext);
+        void EnsureDataToZero(CommandRecordingContext* recordingContext);
+        void EnsureDataToZeroAsDestination(CommandRecordingContext* recordingContext,
+                                           uint64_t offset,
+                                           uint64_t size);
 
       private:
         ~Buffer() override;

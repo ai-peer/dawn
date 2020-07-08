@@ -134,14 +134,36 @@ namespace dawn_native { namespace metal {
         mMtlBuffer = nil;
     }
 
-    void Buffer::ClearBufferContentsToZero(CommandRecordingContext* commandContext) {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
-        ASSERT(!IsDataInitialized());
+    void Buffer::EnsureDataToZero(CommandRecordingContext* commandContext) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
 
         ClearBuffer(commandContext, uint8_t(0u));
 
         SetIsDataInitialized();
         GetDevice()->IncrementLazyClearCountForTesting();
+    }
+
+    void Buffer::EnsureDataToZeroAsDestination(CommandRecordingContext* commandContext,
+                                               uint64_t offset,
+                                               uint64_t size) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) ||
+            IsDataInitialized()) {
+            return;
+        }
+
+        if (!IsFullBufferRange(offset, size)) {
+            ClearBuffer(commandContext, uint8_t(0u));
+            GetDevice()->IncrementLazyClearCountForTesting();
+        }
+
+        SetIsDataInitialized();
     }
 
     void Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {

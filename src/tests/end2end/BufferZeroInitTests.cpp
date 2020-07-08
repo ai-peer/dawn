@@ -87,6 +87,134 @@ TEST_P(BufferZeroInitTest, WriteBufferToSubBuffer) {
     }
 }
 
+// Test that the code path of CopyBufferToBuffer clears the source buffer correctly when it is the
+// first use of the source buffer.
+TEST_P(BufferZeroInitTest, CopyBufferToBufferSource) {
+    constexpr uint64_t kBufferSize = 8u;
+    constexpr wgpu::BufferUsage kBufferUsage =
+        wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = kBufferSize;
+    bufferDescriptor.usage = kBufferUsage;
+
+    constexpr std::array<uint8_t, 8> kInitialData = {{1, 2, 3, 4, 5, 6, 7, 8}};
+
+    wgpu::Buffer dstBuffer =
+        utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
+
+    constexpr std::array<uint32_t, 2> kExpectedData = {{0, 0}};
+
+    // Full copy from the source buffer
+    {
+        wgpu::Buffer srcBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, 0, dstBuffer, 0, kBufferSize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+        EXPECT_BUFFER_U32_RANGE_EQ(kExpectedData.data(), srcBuffer, 0,
+                                   kBufferSize / sizeof(uint32_t));
+    }
+
+    // Partial copy from the source buffer
+    // offset == 0
+    {
+        wgpu::Buffer srcBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, 0, dstBuffer, 0, kBufferSize / 2);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+        EXPECT_BUFFER_U32_RANGE_EQ(kExpectedData.data(), srcBuffer, 0,
+                                   kBufferSize / sizeof(uint32_t));
+    }
+
+    // offset > 0
+    {
+        wgpu::Buffer srcBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, kBufferSize / 2, dstBuffer, 0, kBufferSize / 2);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+        EXPECT_BUFFER_U32_RANGE_EQ(kExpectedData.data(), srcBuffer, 0,
+                                   kBufferSize / sizeof(uint32_t));
+    }
+}
+
+// Test that the code path of CopyBufferToBuffer clears the destination buffer correctly when it is
+// the first use of the destination buffer.
+TEST_P(BufferZeroInitTest, CopyBufferToBufferDestination) {
+    constexpr uint64_t kBufferSize = 8u;
+    constexpr wgpu::BufferUsage kBufferUsage =
+        wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = kBufferSize;
+    bufferDescriptor.usage = kBufferUsage;
+
+    const std::array<uint8_t, kBufferSize> kInitialData = {{1, 2, 3, 4, 5, 6, 7, 8}};
+    wgpu::Buffer srcBuffer =
+        utils::CreateBufferFromData(device, kInitialData.data(), kBufferSize, kBufferUsage);
+
+    // Full copy from the source buffer doesn't need lazy initialization at all.
+    {
+        wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, 0, dstBuffer, 0, kBufferSize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
+
+        EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<const uint32_t*>(kInitialData.data()),
+                                   dstBuffer, 0, kBufferSize / sizeof(uint32_t));
+    }
+
+    // Partial copy from the source buffer needs lazy initialization.
+    // offset == 0
+    {
+        constexpr uint32_t kOffset = 0;
+        constexpr uint32_t kCopySize = kBufferSize / 2;
+
+        wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, 0, dstBuffer, kOffset, kCopySize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+
+        std::array<uint8_t, kBufferSize> expectedData;
+        expectedData.fill(0);
+        for (uint32_t index = kOffset; index < kOffset + kCopySize; ++index) {
+            expectedData[index] = kInitialData[index - kOffset];
+        }
+
+        EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(expectedData.data()), dstBuffer, 0,
+                                   kBufferSize / sizeof(uint32_t));
+    }
+
+    // offset > 0
+    {
+        constexpr uint32_t kOffset = kBufferSize / 2;
+        constexpr uint32_t kCopySize = kBufferSize / 2;
+
+        wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(srcBuffer, 0, dstBuffer, kOffset, kCopySize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+
+        std::array<uint8_t, kBufferSize> expectedData;
+        expectedData.fill(0);
+        for (uint32_t index = kOffset; index < kOffset + kCopySize; ++index) {
+            expectedData[index] = kInitialData[index - kOffset];
+        }
+
+        EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(expectedData.data()), dstBuffer, 0,
+                                   kBufferSize / sizeof(uint32_t));
+    }
+}
+
 DAWN_INSTANTIATE_TEST(BufferZeroInitTest,
                       D3D12Backend({"nonzero_clear_resources_on_creation_for_testing",
                                     "lazy_clear_buffer_on_first_use"}),
