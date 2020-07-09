@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c168bcda_407532c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T19:31:21Z",
+      "side": 1,
+      "message": "nit: Bug: none",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec769832_f1344e98",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -16,6 +33,40 @@
       "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6faf8d2_2abd33fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T19:31:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92d90acb_1dce53d1",
+        "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T19:31:21Z",
+      "side": 1,
+      "message": "nit: formating previously was nicer I think\n\nthis is another cause where something is weird about presubmit ignoring test file formating, but git cl format still cares",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
