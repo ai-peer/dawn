@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "c2fb8c27_e14ec7cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-09T16:44:34Z",
+      "side": 1,
+      "message": "LGTM and +1 CW nits.",
+      "revId": "d77daccd89dfba7b46c6ae240eac37ffe1f56511",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a59d3186_513534cf",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
@@ -39,6 +56,30 @@
       "revId": "d77daccd89dfba7b46c6ae240eac37ffe1f56511",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5908b48d_8ca94365",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-09T16:44:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "a59d3186_513534cf",
+      "range": {
+        "startLine": 246,
+        "startChar": 17,
+        "endLine": 246,
+        "endChar": 30
+      },
+      "revId": "d77daccd89dfba7b46c6ae240eac37ffe1f56511",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
