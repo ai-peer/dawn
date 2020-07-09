@@ -259,6 +259,24 @@
       "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a16a258e_3beae8ca",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:05:33Z",
+      "side": 1,
+      "message": "Gotcha. In a sense how we do this doesn\u0027t matter because applications should never map MapRead buffers at creation.",
+      "parentUuid": "8d32a84f_bbeb2344",
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
