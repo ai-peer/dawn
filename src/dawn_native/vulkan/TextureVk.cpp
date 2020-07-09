@@ -668,8 +668,20 @@ namespace dawn_native { namespace vulkan {
         return mHandle;
     }
 
-    VkImageAspectFlags Texture::GetVkAspectMask() const {
-        return VulkanAspectMask(GetFormat().aspectMask);
+    VkImageAspectFlags Texture::GetVkAspectMask(wgpu::TextureAspect aspect) const {
+        switch (aspect) {
+            case wgpu::TextureAspect::All:
+                return VulkanAspectMask(GetFormat().aspectMask);
+            case wgpu::TextureAspect::DepthOnly:
+                ASSERT(GetFormat().aspectMask[Aspect::Depth]);
+                return VulkanAspectMask(SingleAspect(Aspect::Depth));
+            case wgpu::TextureAspect::StencilOnly:
+                ASSERT(GetFormat().aspectMask[Aspect::Stencil]);
+                return VulkanAspectMask(SingleAspect(Aspect::Stencil));
+            default:
+                UNREACHABLE();
+                return 0;
+        }
     }
 
     void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recordingContext,
@@ -871,7 +883,7 @@ namespace dawn_native { namespace vulkan {
         TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, range);
         if (GetFormat().isRenderable) {
             VkImageSubresourceRange imageRange = {};
-            imageRange.aspectMask = GetVkAspectMask();
+            imageRange.aspectMask = GetVkAspectMask(wgpu::TextureAspect::All);
             imageRange.levelCount = 1;
             imageRange.layerCount = 1;
 
@@ -942,10 +954,12 @@ namespace dawn_native { namespace vulkan {
                         continue;
                     }
 
+                    ASSERT(IsColor(GetFormat().aspectMask));
                     dawn_native::TextureCopy textureCopy;
                     textureCopy.texture = this;
                     textureCopy.origin = {0, 0, layer};
                     textureCopy.mipLevel = level;
+                    textureCopy.aspect = wgpu::TextureAspect::All;
 
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(bufferCopy, textureCopy, copySize);
