@@ -298,6 +298,13 @@ namespace dawn_native {
             DAWN_TRY(ValidateStoreOp(depthStencilAttachment->depthStoreOp));
             DAWN_TRY(ValidateStoreOp(depthStencilAttachment->stencilStoreOp));
 
+            if (depthStencilAttachment->depthReadOnly) {
+                return DAWN_VALIDATION_ERROR("depthReadOnly flag not implemented");
+            }
+            if (depthStencilAttachment->stencilReadOnly) {
+                return DAWN_VALIDATION_ERROR("stencilReadOnly flag not implemented");
+            }
+
             if (depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
                 std::isnan(depthStencilAttachment->clearDepth)) {
                 return DAWN_VALIDATION_ERROR("Depth clear value cannot be NaN");
@@ -343,6 +350,10 @@ namespace dawn_native {
             if (descriptor->depthStencilAttachment != nullptr) {
                 DAWN_TRY(ValidateRenderPassDepthStencilAttachment(
                     device, descriptor->depthStencilAttachment, width, height, sampleCount));
+            }
+
+            if (descriptor->occlusionQuerySet != nullptr) {
+                return DAWN_VALIDATION_ERROR("occlusionQuerySet not implemented");
             }
 
             if (descriptor->colorAttachmentCount == 0 &&
