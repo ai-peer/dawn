@@ -276,9 +276,10 @@ namespace dawn_native { namespace metal {
 
         // This function assumes data is perfectly aligned. Otherwise, it might be necessary
         // to split copying to several stages: see ComputeTextureBufferCopySplit.
-        uint32_t blockSize = dst->texture->GetFormat().blockByteSize;
-        uint32_t blockWidth = dst->texture->GetFormat().blockWidth;
-        uint32_t blockHeight = dst->texture->GetFormat().blockHeight;
+        const TexelBlockInfo& blockInfo = texture->GetFormat().GetTexelBlockInfo(dst->aspect);
+        uint32_t blockSize = blockInfo.blockByteSize;
+        uint32_t blockWidth = blockInfo.blockWidth;
+        uint32_t blockHeight = blockInfo.blockHeight;
         ASSERT(dataLayout.rowsPerImage == (copySize.height));
         ASSERT(dataLayout.bytesPerRow == (copySize.width) / blockWidth * blockSize);
 
@@ -296,6 +297,21 @@ namespace dawn_native { namespace metal {
         const uint64_t bytesPerImage =
             dataLayout.rowsPerImage * dataLayout.bytesPerRow / blockHeight;
 
+        MTLBlitOption blitOption = MTLBlitOptionNone;
+        const AspectMask& aspectMask = texture->GetFormat().aspectMask;
+        if (HasDepth(aspectMask) && HasStencil(aspectMask)) {
+            switch (dst->aspect) {
+                case wgpu::TextureAspect::DepthOnly:
+                    blitOption = MTLBlitOptionDepthFromDepthStencil;
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    blitOption = MTLBlitOptionStencilFromDepthStencil;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
         uint64_t bufferOffset = dataLayout.offset;
         for (uint32_t copyLayer = copyBaseLayer; copyLayer < copyBaseLayer + copyLayerCount;
              ++copyLayer) {
@@ -308,7 +324,8 @@ namespace dawn_native { namespace metal {
                           toTexture:texture->GetMTLTexture()
                    destinationSlice:copyLayer
                    destinationLevel:dst->mipLevel
-                  destinationOrigin:MTLOriginMake(dst->origin.x, dst->origin.y, 0)];
+                  destinationOrigin:MTLOriginMake(dst->origin.x, dst->origin.y, 0)
+                            options:blitOption];
 
             bufferOffset += bytesPerImage;
         }

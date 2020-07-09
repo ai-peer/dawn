@@ -618,6 +618,21 @@ namespace dawn_native { namespace metal {
                         const MTLSize copyExtent =
                             MTLSizeMake(copyInfo.copyExtent.width, copyInfo.copyExtent.height, 1);
 
+                        MTLBlitOption blitOption = MTLBlitOptionNone;
+                        const AspectMask& aspectMask = texture->GetFormat().aspectMask;
+                        if (HasDepth(aspectMask) && HasStencil(aspectMask)) {
+                            switch (dst.aspect) {
+                                case wgpu::TextureAspect::DepthOnly:
+                                    blitOption = MTLBlitOptionDepthFromDepthStencil;
+                                    break;
+                                case wgpu::TextureAspect::StencilOnly:
+                                    blitOption = MTLBlitOptionStencilFromDepthStencil;
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                            }
+                        }
+
                         uint64_t bufferOffset = copyInfo.bufferOffset;
                         for (uint32_t copyLayer = copyBaseLayer;
                              copyLayer < copyBaseLayer + copyLayerCount; ++copyLayer) {
@@ -629,7 +644,8 @@ namespace dawn_native { namespace metal {
                                                                toTexture:texture->GetMTLTexture()
                                                         destinationSlice:copyLayer
                                                         destinationLevel:dst.mipLevel
-                                                       destinationOrigin:textureOrigin];
+                                                       destinationOrigin:textureOrigin
+                                                                 options:blitOption];
                             bufferOffset += copyInfo.bytesPerImage;
                         }
                     }
@@ -662,6 +678,21 @@ namespace dawn_native { namespace metal {
                         const MTLSize copyExtent =
                             MTLSizeMake(copyInfo.copyExtent.width, copyInfo.copyExtent.height, 1);
 
+                        MTLBlitOption blitOption = MTLBlitOptionNone;
+                        const AspectMask& aspectMask = texture->GetFormat().aspectMask;
+                        if (HasDepth(aspectMask) && HasStencil(aspectMask)) {
+                            switch (src.aspect) {
+                                case wgpu::TextureAspect::DepthOnly:
+                                    blitOption = MTLBlitOptionDepthFromDepthStencil;
+                                    break;
+                                case wgpu::TextureAspect::StencilOnly:
+                                    blitOption = MTLBlitOptionStencilFromDepthStencil;
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                            }
+                        }
+
                         uint64_t bufferOffset = copyInfo.bufferOffset;
                         for (uint32_t copyLayer = copyBaseLayer;
                              copyLayer < copyBaseLayer + copyLayerCount; ++copyLayer) {
@@ -673,7 +704,8 @@ namespace dawn_native { namespace metal {
                                                                  toBuffer:buffer->GetMTLBuffer()
                                                         destinationOffset:bufferOffset
                                                    destinationBytesPerRow:copyInfo.bytesPerRow
-                                                 destinationBytesPerImage:copyInfo.bytesPerImage];
+                                                 destinationBytesPerImage:copyInfo.bytesPerImage
+                                                                  options:blitOption];
                             bufferOffset += copyInfo.bytesPerImage;
                         }
                     }
