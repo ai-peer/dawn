@@ -292,7 +292,8 @@ namespace dawn_native { namespace metal {
         mtlDesc.usage = MetalTextureUsage(descriptor->usage);
         mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
         mtlDesc.mipmapLevelCount = descriptor->mipLevelCount;
-        mtlDesc.storageMode = MTLStorageModePrivate;
+        // Metal will complain about this for depth/stencil textures
+        mtlDesc.storageMode = MTLStorageModeManaged;
 
         // Choose the correct MTLTextureType and paper over differences in how the array layer count
         // is specified.
