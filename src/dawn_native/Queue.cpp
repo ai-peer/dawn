@@ -17,6 +17,7 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/CommandValidation.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorScope.h"
@@ -155,7 +156,6 @@ namespace dawn_native {
                                            size_t dataSize,
                                            const TextureDataLayout* dataLayout,
                                            const Extent3D* writeSize) {
-        // TODO(tommek@google.com): This should be implemented.
         return {};
     }
 

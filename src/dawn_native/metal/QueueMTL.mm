@@ -39,4 +39,64 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
+    MaybeError Queue::WriteTextureImpl(const TextureCopyView* destination,
+                                       const void* data,
+                                       size_t dataSize,
+                                       const TextureDataLayout* dataLayout,
+                                       const Extent3D* writeSize) {
+        TextureCopy textureCopy;
+        textureCopy.texture = destination->texture;
+        textureCopy.mipLevel = destination->mipLevel;
+        textureCopy.origin = destination->origin;
+
+        Texture* texture = ToBackend(destination->texture);
+        EnsureDestinationTextureInitialized(texture, textureCopy, *writeSize);
+
+        const Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(destination->mipLevel);
+
+        TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
+            texture->GetDimension(), textureCopy.origin, *writeSize, texture->GetFormat(),
+            virtualSizeAtLevel, dataSize, dataLayout->offset, dataLayout->bytesPerRow,
+            dataLayout->rowsPerImage);
+
+        for (uint32_t i = 0; i < splitCopies.count; ++i) {
+            const TextureBufferCopySplit::CopyInfo& copyInfo = splitCopies.copies[i];
+
+            const uint32_t copyBaseLayer = copyInfo.textureOrigin.z;
+            const uint32_t copyLayerCount = copyInfo.copyExtent.depth;
+
+            uint64_t bufferOffset = copyInfo.bufferOffset;
+            for (uint32_t copyLayer = copyBaseLayer; copyLayer < copyBaseLayer + copyLayerCount;
+                 ++copyLayer) {
+                //const char* newData = static_cast<const char*>(data) + bufferOffset;
+
+            data = malloc(10000000);
+
+            /*printf("Will be writing to the texture: \n");
+            printf("region = %d %d %d %d\n", copyInfo.textureOrigin.x, copyInfo.textureOrigin.y,
+                                             copyInfo.copyExtent.width, copyInfo.copyExtent.height);
+            printf("mipmapLevel = %d\n", destination->mipLevel);
+            printf("slice = %d\n", copyLayer);
+            printf("bytesPerRow = %d\n", (int)copyInfo.bytesPerRow);
+            printf("bytesPerImage = %d\n", (int)copyInfo.bytesPerImage);
+
+            printf("dataSize = %d\n", (int)dataSize);*/
+
+
+                [texture->GetMTLTexture()
+                    replaceRegion:MTLRegionMake2D(
+                                      copyInfo.textureOrigin.x, copyInfo.textureOrigin.y,
+                                      copyInfo.copyExtent.width, copyInfo.copyExtent.height)
+                      mipmapLevel:destination->mipLevel
+                            slice:copyLayer
+                        withBytes:data
+                      bytesPerRow:copyInfo.bytesPerRow
+                    bytesPerImage:copyInfo.bytesPerImage];
+
+                bufferOffset += copyInfo.bytesPerImage;
+            }
+        }
+
+        return {};
+    }
 }}  // namespace dawn_native::metal
