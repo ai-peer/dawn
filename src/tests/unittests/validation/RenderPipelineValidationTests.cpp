@@ -22,26 +22,26 @@
 #include <sstream>
 
 class RenderPipelineValidationTest : public ValidationTest {
-    protected:
-        void SetUp() override {
-            ValidationTest::SetUp();
+  protected:
+    void SetUp() override {
+        ValidationTest::SetUp();
 
-            vsModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        vsModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
                 #version 450
                 void main() {
                     gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
                 })");
 
-            fsModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        fsModule = utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
                 #version 450
                 layout(location = 0) out vec4 fragColor;
                 void main() {
                     fragColor = vec4(0.0, 1.0, 0.0, 1.0);
                 })");
-        }
+    }
 
-        wgpu::ShaderModule vsModule;
-        wgpu::ShaderModule fsModule;
+    wgpu::ShaderModule vsModule;
+    wgpu::ShaderModule fsModule;
 };
 
 // Test cases where creation should succeed
@@ -258,113 +258,104 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         device.CreateRenderPipeline(&multisampledPipelineDescriptor);
 
     // It is not allowed to use multisampled render pass and non-multisampled render pipeline.
+    {{wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+    textureDescriptor.format = kColorFormat;
+    textureDescriptor.sampleCount = kMultisampledCount;
+    wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
+    utils::ComboRenderPassDescriptor renderPassDescriptor({multisampledColorTexture.CreateView()});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+    renderPass.SetPipeline(nonMultisampledPipeline);
+    renderPass.EndPass();
+
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+{
+    wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+    textureDescriptor.sampleCount = kMultisampledCount;
+    textureDescriptor.format = kDepthStencilFormat;
+    wgpu::Texture multisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
+    utils::ComboRenderPassDescriptor renderPassDescriptor(
+        {}, multisampledDepthStencilTexture.CreateView());
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+    renderPass.SetPipeline(nonMultisampledPipelineWithDepthStencilOnly);
+    renderPass.EndPass();
+
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+}
+
+// It is allowed to use multisampled render pass and multisampled render pipeline.
+{{wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+textureDescriptor.format = kColorFormat;
+textureDescriptor.sampleCount = kMultisampledCount;
+wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
+utils::ComboRenderPassDescriptor renderPassDescriptor({multisampledColorTexture.CreateView()});
+
+wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+renderPass.SetPipeline(multisampledPipeline);
+renderPass.EndPass();
+
+encoder.Finish();
+}
+
+{
+    wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+    textureDescriptor.sampleCount = kMultisampledCount;
+    textureDescriptor.format = kDepthStencilFormat;
+    wgpu::Texture multisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
+    utils::ComboRenderPassDescriptor renderPassDescriptor(
+        {}, multisampledDepthStencilTexture.CreateView());
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+    renderPass.SetPipeline(multisampledPipelineWithDepthStencilOnly);
+    renderPass.EndPass();
+
+    encoder.Finish();
+}
+}
+
+// It is not allowed to use non-multisampled render pass and multisampled render pipeline.
+{
     {
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.format = kColorFormat;
-            textureDescriptor.sampleCount = kMultisampledCount;
-            wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
-                {multisampledColorTexture.CreateView()});
+        wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+        textureDescriptor.format = kColorFormat;
+        textureDescriptor.sampleCount = 1;
+        wgpu::Texture nonMultisampledColorTexture = device.CreateTexture(&textureDescriptor);
+        utils::ComboRenderPassDescriptor nonMultisampledRenderPassDescriptor(
+            {nonMultisampledColorTexture.CreateView()});
 
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
-            renderPass.SetPipeline(nonMultisampledPipeline);
-            renderPass.EndPass();
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPass =
+            encoder.BeginRenderPass(&nonMultisampledRenderPassDescriptor);
+        renderPass.SetPipeline(multisampledPipeline);
+        renderPass.EndPass();
 
-            ASSERT_DEVICE_ERROR(encoder.Finish());
-        }
-
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.sampleCount = kMultisampledCount;
-            textureDescriptor.format = kDepthStencilFormat;
-            wgpu::Texture multisampledDepthStencilTexture =
-                device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
-                {}, multisampledDepthStencilTexture.CreateView());
-
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
-            renderPass.SetPipeline(nonMultisampledPipelineWithDepthStencilOnly);
-            renderPass.EndPass();
-
-            ASSERT_DEVICE_ERROR(encoder.Finish());
-        }
+        ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    // It is allowed to use multisampled render pass and multisampled render pipeline.
     {
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.format = kColorFormat;
-            textureDescriptor.sampleCount = kMultisampledCount;
-            wgpu::Texture multisampledColorTexture = device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
-                {multisampledColorTexture.CreateView()});
+        wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
+        textureDescriptor.sampleCount = 1;
+        textureDescriptor.format = kDepthStencilFormat;
+        wgpu::Texture multisampledDepthStencilTexture = device.CreateTexture(&textureDescriptor);
+        utils::ComboRenderPassDescriptor renderPassDescriptor(
+            {}, multisampledDepthStencilTexture.CreateView());
 
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
-            renderPass.SetPipeline(multisampledPipeline);
-            renderPass.EndPass();
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+        renderPass.SetPipeline(multisampledPipelineWithDepthStencilOnly);
+        renderPass.EndPass();
 
-            encoder.Finish();
-        }
-
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.sampleCount = kMultisampledCount;
-            textureDescriptor.format = kDepthStencilFormat;
-            wgpu::Texture multisampledDepthStencilTexture =
-                device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
-                {}, multisampledDepthStencilTexture.CreateView());
-
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
-            renderPass.SetPipeline(multisampledPipelineWithDepthStencilOnly);
-            renderPass.EndPass();
-
-            encoder.Finish();
-        }
+        ASSERT_DEVICE_ERROR(encoder.Finish());
     }
-
-    // It is not allowed to use non-multisampled render pass and multisampled render pipeline.
-    {
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.format = kColorFormat;
-            textureDescriptor.sampleCount = 1;
-            wgpu::Texture nonMultisampledColorTexture = device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor nonMultisampledRenderPassDescriptor(
-                {nonMultisampledColorTexture.CreateView()});
-
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass =
-                encoder.BeginRenderPass(&nonMultisampledRenderPassDescriptor);
-            renderPass.SetPipeline(multisampledPipeline);
-            renderPass.EndPass();
-
-            ASSERT_DEVICE_ERROR(encoder.Finish());
-        }
-
-        {
-            wgpu::TextureDescriptor textureDescriptor = baseTextureDescriptor;
-            textureDescriptor.sampleCount = 1;
-            textureDescriptor.format = kDepthStencilFormat;
-            wgpu::Texture multisampledDepthStencilTexture =
-                device.CreateTexture(&textureDescriptor);
-            utils::ComboRenderPassDescriptor renderPassDescriptor(
-                {}, multisampledDepthStencilTexture.CreateView());
-
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
-            renderPass.SetPipeline(multisampledPipelineWithDepthStencilOnly);
-            renderPass.EndPass();
-
-            ASSERT_DEVICE_ERROR(encoder.Finish());
-        }
-    }
+}
 }
 
 // Tests that the texture component type in shader must match the bind group layout.
