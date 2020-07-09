@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_METAL_QUEUEMTL_H_
 #define DAWNNATIVE_METAL_QUEUEMTL_H_
 
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/Queue.h"
 
 namespace dawn_native { namespace metal {
@@ -28,6 +29,18 @@ namespace dawn_native { namespace metal {
 
       private:
         MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+        MaybeError WriteTextureImpl(const TextureCopyView* destination,
+                                    const void* data,
+                                    size_t dataSize,
+                                    const TextureDataLayout* dataLayout,
+                                    const Extent3D* writeSize) override;
+        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
+            const void* data,
+            size_t dataSize,
+            uint32_t alignedBytesPerRow,
+            const TextureDataLayout* dataLayout,
+            const Format& textureFormat,
+            const Extent3D* writeSize);
     };
 
 }}  // namespace dawn_native::metal
