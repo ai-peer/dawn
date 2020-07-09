@@ -209,6 +209,14 @@ namespace dawn_native { namespace null {
         return {};
     }
 
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                BufferCopy& src,
+                                                TextureCopy& dst,
+                                                const Extent3D copySize) {
+        printf("I'm in Null\n");
+        return {};
+    }
+
     MaybeError Device::IncrementMemoryUsage(uint64_t bytes) {
         static_assert(kMaxMemoryUsage <= std::numeric_limits<size_t>::max(), "");
         if (bytes > kMaxMemoryUsage || mMemoryUsage + bytes > kMaxMemoryUsage) {

@@ -614,6 +614,45 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                BufferCopy& src,
+                                                TextureCopy& dst,
+                                                const Extent3D copySize) {
+        // Insert memory barrier to ensure host write operations are made visible before
+        // copying from the staging buffer. However, this barrier can be removed (see note below).
+        //
+        // Note: Depending on the spec understanding, an explicit barrier may not be required when
+        // used with HOST_COHERENT as vkQueueSubmit does an implicit barrier between host and
+        // device. See "Availability, Visibility, and Domain Operations" in Vulkan spec for details.
+
+        // Insert pipeline barrier to ensure correct ordering with previous memory operations on the
+        // buffer.
+        CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+
+        VkBufferImageCopy region = ComputeBufferImageCopyRegion(src, dst, copySize);
+        VkImageSubresourceLayers subresource = region.imageSubresource;
+
+        ASSERT(dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
+        SubresourceRange range = {subresource.mipLevel, 1, subresource.baseArrayLayer,
+                                  subresource.layerCount};
+        if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copySize, subresource.mipLevel)) {
+            // Since texture has been overwritten, it has been "initialized"
+            dst.texture->SetIsSubresourceContentInitialized(true, range);
+        } else {
+            ToBackend(dst.texture)->EnsureSubresourceContentInitialized(recordingContext, range);
+        }
+        ToBackend(dst.texture)
+            ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, range);
+        VkImage dstImage = ToBackend(dst.texture)->GetHandle();
+
+        // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after the
+        // copy command.
+        this->fn.CmdCopyBufferToImage(recordingContext->commandBuffer,
+                                      ToBackend(source)->GetBufferHandle(), dstImage,
+                                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+        return {};
+    }
+
     MaybeError Device::ImportExternalImage(const ExternalImageDescriptor* descriptor,
                                            ExternalMemoryHandle memoryHandle,
                                            VkImage image,
