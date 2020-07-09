@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9cb98e81_92d915c7",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T11:20:17Z",
+      "side": 1,
+      "message": "I think you forgot the part where CopyCommandTest_CompressedTextureFormats::TestBothTBCopies could be moved in CopyCommandTest test and used in TestBothTBCopiesExactBufferSize",
+      "parentUuid": "7926e7cf_859440a4",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09d5adda_acfd73c6",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 4
