@@ -357,6 +357,10 @@ namespace dawn_native {
         }
     }
 
+    AspectMask SingleAspect(Aspect aspect) {
+        return AspectMask(1u << static_cast<uint8_t>(aspect));
+    }
+
     // static
     SubresourceRange SubresourceRange::SingleSubresource(uint32_t baseMipLevel,
                                                          uint32_t baseArrayLayer) {
