@@ -73,6 +73,30 @@
       "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc4128ee_cdcee605",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T00:22:15Z",
+      "side": 1,
+      "message": "That would be true if we called EnsureDataInitialized in this function, but below we\u0027re calling SetIsDataInitialized. I think the code currently is slightly better because it allows exiting early if the buffer is already initialized by checking a single boolean. This would be the common case.\n(actually we should switch IsDataInitialized() and the toggle check to short-circuit the toggle check).\n\nIsFullBufferRange() followed by Ensure() would check two numbers and a boolean. This is pretty minor though, so if you feel the code is more readable with just one Toggle check, then we can do that.",
+      "parentUuid": "05875570_40b0467b",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 9
+      },
+      "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
