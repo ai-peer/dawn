@@ -120,36 +120,6 @@ namespace dawn_native {
             return {};
         }
 
-        void ComputeRequiredBytesInCopy(const Format& textureFormat,
-                                        const Extent3D& copySize,
-                                        uint32_t bytesPerRow,
-                                        uint32_t rowsPerImage,
-                                        uint32_t* result) {
-            // Default value for rowsPerImage
-            if (rowsPerImage == 0) {
-                rowsPerImage = copySize.height;
-            }
-            ASSERT(rowsPerImage >= copySize.height);
-            if (copySize.width == 0 || copySize.height == 0 || copySize.depth == 0) {
-                *result = 0;
-                return;
-            }
-
-            uint32_t blockByteSize = textureFormat.blockByteSize;
-            uint32_t blockWidth = textureFormat.blockWidth;
-            uint32_t blockHeight = textureFormat.blockHeight;
-
-            // TODO(cwallez@chromium.org): check for overflows
-            uint32_t slicePitch = bytesPerRow * rowsPerImage / blockWidth;
-
-            ASSERT(copySize.height >= 1);
-            uint32_t sliceSize = bytesPerRow * (copySize.height / blockHeight - 1) +
-                                 (copySize.width / blockWidth) * blockByteSize;
-
-            ASSERT(copySize.depth >= 1);
-            *result = (slicePitch * (copySize.depth - 1)) + sliceSize;
-        }
-
     }  // namespace
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize) {
@@ -398,6 +368,32 @@ namespace dawn_native {
         uint32_t minStart = std::min(startA, startB);
         return static_cast<uint64_t>(minStart) + static_cast<uint64_t>(length) >
                static_cast<uint64_t>(maxStart);
+    }
+
+    void ComputeRequiredBytesInCopy(const Format& textureFormat,
+                                    const Extent3D& copySize,
+                                    uint32_t bytesPerRow,
+                                    uint32_t rowsPerImage,
+                                    uint32_t* result) {
+        // Default value for rowsPerImage
+        if (rowsPerImage == 0) {
+            rowsPerImage = copySize.height;
+        }
+        ASSERT(rowsPerImage >= copySize.height);
+        if (copySize.width == 0 || copySize.height == 0 || copySize.depth == 0) {
+            *result = 0;
+            return;
+        }
+
+        ASSERT(copySize.height >= 1);
+        ASSERT(copySize.depth >= 1);
+
+        uint64_t texelBlockRowsPerImage = rowsPerImage / textureFormat.blockHeight;
+        uint64_t bytesPerImage = bytesPerRow * texelBlockRowsPerImage;
+        uint64_t bytesInLastSlice =
+            bytesPerRow * (copySize.height / textureFormat.blockHeight - 1) +
+            (copySize.width / textureFormat.blockWidth * textureFormat.blockByteSize);
+        *result = bytesPerImage * (copySize.depth - 1) + bytesInLastSlice;
     }
 
     MaybeError ValidateCopySizeFitsInBuffer(const Ref<BufferBase>& buffer,
