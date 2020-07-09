@@ -23,6 +23,7 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
 
+#include "dawn_native/Commands.h"
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
@@ -187,6 +188,10 @@ namespace dawn_native {
                                                    BufferBase* destination,
                                                    uint64_t destinationOffset,
                                                    uint64_t size) = 0;
+        virtual MaybeError CopyFromStagingToTexture(StagingBufferBase* source,
+                                                    BufferCopy& src,
+                                                    TextureCopy& dst,
+                                                    const Extent3D copySize) = 0;
 
         DynamicUploader* GetDynamicUploader() const;
 

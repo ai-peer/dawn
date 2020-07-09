@@ -268,6 +268,21 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                BufferCopy& src,
+                                                TextureCopy& dst,
+                                                const Extent3D copySize) {
+        printf("I'm in Metal\n");
+
+        //id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
+
+
+        //EnsureDestinationTextureInitialized(texture, copy->destination, copy->copySize);
+
+
+        return {};
+    }
+
     TextureBase* Device::CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
                                                         IOSurfaceRef ioSurface,
                                                         uint32_t plane) {
