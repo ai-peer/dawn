@@ -121,6 +121,30 @@
       "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2149a67_35d152b4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:12:06Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "db90917e_4af1cddd",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 9
+      },
+      "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
