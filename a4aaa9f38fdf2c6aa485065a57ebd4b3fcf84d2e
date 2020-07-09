@@ -241,6 +241,24 @@
       "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d32a84f_bbeb2344",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-09T03:34:28Z",
+      "side": 1,
+      "message": "I believe that Bryan is saying that MapRead buffers do not need that extra StagingBuffer. MapRead (READBACK) buffers are CPU accessible.",
+      "parentUuid": "8ad82b31_44fd576c",
+      "revId": "a4aaa9f38fdf2c6aa485065a57ebd4b3fcf84d2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

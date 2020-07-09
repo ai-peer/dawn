@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "58a30954_a89a3780",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-09T03:34:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b31bdae_a0bcd7f2",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d8af7a65_0e585b75",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -264,6 +282,24 @@
       "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cd56379_052b2e84",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-07-09T03:34:28Z",
+      "side": 1,
+      "message": "I have removed the check and just updated MapAtCreationImpl to correctly call MapInternal with isWrite set to false on MapRead buffers. I don\u0027t think that an assert is needed any more.",
+      "parentUuid": "4b664771_4b74c16c",
+      "revId": "fa5ce594631a345f55a67b28309b25f3bb14fcbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
