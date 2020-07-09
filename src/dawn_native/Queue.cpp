@@ -17,6 +17,7 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/CommandValidation.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorScope.h"
@@ -155,8 +156,38 @@ namespace dawn_native {
                                            size_t dataSize,
                                            const TextureDataLayout* dataLayout,
                                            const Extent3D* writeSize) {
-        // TODO(tommek@google.com): This should be implemented.
-        return {};
+        if (dataSize == 0) {
+            return {};
+        }
+
+        DeviceBase* device = GetDevice();
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
+                                          dataSize, device->GetPendingCommandSerial()));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, dataSize);
+
+        uint32_t defaultedRowsPerImage = dataLayout->rowsPerImage;
+        if (defaultedRowsPerImage == 0) {
+            defaultedRowsPerImage = writeSize->height;
+        }
+
+        // TODO: It would be better to pass a TextureData object.
+        // We're leaving bufferCopy.buffer empty
+        BufferCopy bufferCopy;
+        bufferCopy.offset = dataLayout->offset;
+        bufferCopy.bytesPerRow = dataLayout->bytesPerRow;
+        bufferCopy.rowsPerImage = defaultedRowsPerImage;
+
+        TextureCopy textureCopy;
+        textureCopy.texture = destination->texture;
+        textureCopy.mipLevel = destination->mipLevel;
+        textureCopy.origin = destination->origin;
+
+        return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, bufferCopy, textureCopy,
+                                                *writeSize);
     }
 
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,

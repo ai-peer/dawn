@@ -385,6 +385,7 @@ namespace utils {
                                          uint32_t rowsPerImage,
                                          uint32_t copyArrayLayerCount) {
         ASSERT(rowsPerImage > 0);
+        ASSERT(copyArrayLayerCount > 0);
         const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(format);
         const uint32_t bytesAtLastImage = bytesPerRow * (rowsPerImage - 1) + bytesPerTexel * width;
         return bytesPerRow * rowsPerImage * (copyArrayLayerCount - 1) + bytesAtLastImage;
