@@ -21,7 +21,7 @@
 
 namespace dawn_native {
 
-    struct Format;
+    struct TexelBlockInfo;
 
 }  // namespace dawn_native
 
@@ -45,7 +45,7 @@ namespace dawn_native { namespace d3d12 {
 
     TextureCopySplit ComputeTextureCopySplit(Origin3D origin,
                                              Extent3D copySize,
-                                             const Format& format,
+                                             const TexelBlockInfo& blockInfo,
                                              uint64_t offset,
                                              uint32_t bytesPerRow,
                                              uint32_t rowsPerImage);

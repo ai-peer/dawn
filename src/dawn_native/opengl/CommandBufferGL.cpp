@@ -561,6 +561,57 @@ namespace dawn_native { namespace opengl {
                                 copyExtent.height, format.internalFormat, copyDataSize,
                                 reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
                         }
+                    } else if (formatInfo.HasDepthOrStencil()) {
+                        const TexelBlockInfo& blockInfo =
+                            formatInfo.GetTexelBlockInfo(copy->destination.aspect);
+
+                        gl.PixelStorei(
+                            GL_UNPACK_ROW_LENGTH,
+                            src.bytesPerRow / blockInfo.blockByteSize * blockInfo.blockWidth);
+
+                        GLenum glFormat;
+                        GLenum glType;
+                        switch (dst.aspect) {
+                            case wgpu::TextureAspect::All:
+                                glFormat = format.format;
+                                glType = format.type;
+                                break;
+                            case wgpu::TextureAspect::DepthOnly:
+                                ASSERT(format.internalFormat == GL_DEPTH_COMPONENT32F);
+                                glFormat = GL_DEPTH_COMPONENT;
+                                glType = GL_FLOAT;
+                                break;
+                            case wgpu::TextureAspect::StencilOnly:
+                                glFormat = GL_STENCIL_INDEX;
+                                glType = GL_UNSIGNED_BYTE;
+                                break;
+                            default:
+                                UNREACHABLE();
+                                break;
+                        }
+
+                        switch (texture->GetDimension()) {
+                            case wgpu::TextureDimension::e2D:
+                                ASSERT(dst.origin.x == 0 && dst.origin.y == 0);
+                                ASSERT(dst.texture->GetSize().width == copySize.width);
+                                ASSERT(dst.texture->GetSize().height == copySize.height);
+                                if (texture->GetArrayLayers() > 1) {
+                                    gl.TexImage3D(target, dst.mipLevel, format.internalFormat,
+                                                  copySize.width, copySize.height, copySize.depth,
+                                                  0, glFormat, glType,
+                                                  reinterpret_cast<void*>(
+                                                      static_cast<uintptr_t>(src.offset)));
+                                } else {
+                                    gl.TexImage2D(target, dst.mipLevel, format.internalFormat,
+                                                  copySize.width, copySize.height, 0, glFormat,
+                                                  glType,
+                                                  reinterpret_cast<void*>(
+                                                      static_cast<uintptr_t>(src.offset)));
+                                }
+                                break;
+                            default:
+                                UNREACHABLE();
+                        }
                     } else {
                         switch (texture->GetDimension()) {
                             case wgpu::TextureDimension::e2D:

@@ -632,7 +632,8 @@ namespace dawn_native { namespace d3d12 {
                         Origin3D destinationOriginInSubresource = copy->destination.origin;
                         destinationOriginInSubresource.z = 0;
                         auto copySplit = ComputeTextureCopySplit(
-                            destinationOriginInSubresource, copyOneLayerSize, texture->GetFormat(),
+                            destinationOriginInSubresource, copyOneLayerSize,
+                            texture->GetFormat().GetTexelBlockInfo(copy->destination.aspect),
                             bufferOffsetForNextSlice + copy->source.offset,
                             copy->source.bytesPerRow, copy->source.rowsPerImage);
 
@@ -688,7 +689,8 @@ namespace dawn_native { namespace d3d12 {
                         Origin3D sourceOriginInSubresource = copy->source.origin;
                         sourceOriginInSubresource.z = 0;
                         TextureCopySplit copySplit = ComputeTextureCopySplit(
-                            sourceOriginInSubresource, copyOneLayerSize, texture->GetFormat(),
+                            sourceOriginInSubresource, copyOneLayerSize,
+                            texture->GetFormat().GetTexelBlockInfo(copy->source.aspect),
                             bufferOffsetForNextSlice + copy->destination.offset,
                             copy->destination.bytesPerRow, copy->destination.rowsPerImage);
 
