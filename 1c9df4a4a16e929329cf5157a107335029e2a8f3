@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c1a6f50_dde62096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Looks good overall!",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "365b3cd2_5a3fcc26",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "This helper could be moved to CopyCommandTest so CopyCommandTest_MultipleArrayLayers doesn\u0027t need to inherit from CopyCommandTest_CompressedTextureFormats. Even better we could have \n\n  TestBothTBCopiesExactBufferSize(uint32_t bufferBytesPerRow,\n                                               uint32_t rowsPerImage,\n                                               wgpu::Texture texture,\n                                               wgpu::TextureFormat textureFormat,\n                                               wgpu::Origin3D origin,\n                                               wgpu::Extent3D extent3D)\n\nin CopyCommandTest so that we don\u0027t need a new CopyCommandTest_MultipleArrayLayers test fixture.",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09d5adda_acfd73c6",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1626,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "nit: Copy with a non-packed rowsPerImage",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad416513_a0e9596e",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Did you mean to test a bigger bytesPerRow (rowsPerImage can stay at 2)",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "441627c7_095277a0",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Instead of this, can we have tests for copying all, the highest array layer and layers in the middle like for uncompressed formats?",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bc1c332_9178350b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Can we have a check that rowsPerImage needs to be a multiple of blockheight even if it is larger than the number of blocks in the image too?",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cf22391_f156e0ca",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "nit: TestBothBTCopies",
+      "range": {
+        "startLine": 1650,
+        "startChar": 8,
+        "endLine": 1650,
+        "endChar": 19
+      },
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26c14b36_8a9db841",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Same comments as for CopyTests.",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f77a7b_e51e2eef",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Depth32Float has a texel block size of 4",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "015d237c_7b5c9442",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T09:46:54Z",
+      "side": 1,
+      "message": "Depth stencil formats have a block width and height of 1",
+      "revId": "1c9df4a4a16e929329cf5157a107335029e2a8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
