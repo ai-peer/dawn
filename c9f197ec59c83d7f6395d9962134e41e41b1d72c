@@ -39,6 +39,30 @@
       "revId": "c9f197ec59c83d7f6395d9962134e41e41b1d72c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac1896c9_563b81ae",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-09T09:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64702236_7c911453",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 164,
+        "endChar": 32
+      },
+      "revId": "c9f197ec59c83d7f6395d9962134e41e41b1d72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
