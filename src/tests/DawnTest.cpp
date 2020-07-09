@@ -925,26 +925,34 @@ std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
-std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
-                                                        int line,
-                                                        const wgpu::Texture& texture,
-                                                        uint32_t x,
-                                                        uint32_t y,
-                                                        uint32_t width,
-                                                        uint32_t height,
-                                                        uint32_t level,
-                                                        uint32_t slice,
-                                                        uint32_t pixelSize,
-                                                        detail::Expectation* expectation) {
-    uint32_t bytesPerRow = Align(width * pixelSize, kTextureBytesPerRowAlignment);
-    uint32_t size = bytesPerRow * (height - 1) + width * pixelSize;
+std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
+                                                            int line,
+                                                            detail::Expectation* expectation,
+                                                            const wgpu::Texture& texture,
+                                                            uint32_t x,
+                                                            uint32_t y,
+                                                            uint32_t width,
+                                                            uint32_t height,
+                                                            uint32_t level,
+                                                            uint32_t slice,
+                                                            wgpu::TextureAspect aspect,
+                                                            uint32_t dataSize,
+                                                            uint32_t bytesPerRow) {
+    if (bytesPerRow == 0) {
+        bytesPerRow = Align(width * dataSize, kTextureBytesPerRowAlignment);
+    } else {
+        ASSERT(bytesPerRow >= width * dataSize);
+        ASSERT(bytesPerRow == Align(bytesPerRow, kTextureBytesPerRowAlignment));
+    }
+
+    uint32_t size = bytesPerRow * (height - 1) + width * dataSize;
 
     auto readback = ReserveReadback(size);
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
     // the texture might have been modified.
     wgpu::TextureCopyView textureCopyView =
-        utils::CreateTextureCopyView(texture, level, {x, y, slice});
+        utils::CreateTextureCopyView(texture, level, {x, y, slice}, aspect);
     wgpu::BufferCopyView bufferCopyView =
         utils::CreateBufferCopyView(readback.buffer, readback.offset, bytesPerRow, 0);
     wgpu::Extent3D copySize = {width, height, 1};
@@ -961,7 +969,7 @@ std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
     deferred.readbackSlot = readback.slot;
     deferred.readbackOffset = readback.offset;
     deferred.size = size;
-    deferred.rowBytes = width * pixelSize;
+    deferred.rowBytes = width * dataSize;
     deferred.bytesPerRow = bytesPerRow;
     deferred.expectation.reset(expectation);
 
