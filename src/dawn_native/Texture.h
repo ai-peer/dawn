@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_TEXTURE_H_
 #define DAWNNATIVE_TEXTURE_H_
 
+#include "common/ityp_bitset.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
@@ -45,6 +46,17 @@ namespace dawn_native {
     static constexpr wgpu::TextureUsage kWritableTextureUsages =
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Storage |
         wgpu::TextureUsage::OutputAttachment;
+
+    enum class TextureAspect : uint8_t {
+        Color,
+        Depth,
+        Stencil,
+    };
+
+    constexpr size_t kTextureAspectCount = 3;
+    using AspectMask = ityp::bitset<TextureAspect, kTextureAspectCount>;
+
+    AspectMask SingleAspect(TextureAspect aspect);
 
     struct SubresourceRange {
         uint32_t baseMipLevel;
