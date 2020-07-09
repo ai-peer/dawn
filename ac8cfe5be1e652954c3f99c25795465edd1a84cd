@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8054cd27_ccfaea05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T19:56:56Z",
+      "side": 1,
+      "message": "Bug: dawn:22 actually",
+      "parentUuid": "c168bcda_407532c8",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec769832_f1344e98",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -53,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "09dd1b42_6ed10655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T19:56:56Z",
+      "side": 1,
+      "message": "LGTM too, I meant to do this as a follow-up to https://dawn-review.googlesource.com/c/dawn/+/24280 but forgot.",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92d90acb_1dce53d1",
         "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
         "patchSetId": 1
@@ -64,6 +99,24 @@
       "writtenOn": "2020-07-09T19:31:21Z",
       "side": 1,
       "message": "nit: formating previously was nicer I think\n\nthis is another cause where something is weird about presubmit ignoring test file formating, but git cl format still cares",
+      "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6eb3448_972a3f03",
+        "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-09T19:56:56Z",
+      "side": 1,
+      "message": "Our presubmit explicitly ignores tests because back then they were using the builder pattern and clang-format messed it up. We should remove that limitation now.",
+      "parentUuid": "92d90acb_1dce53d1",
       "revId": "ac8cfe5be1e652954c3f99c25795465edd1a84cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
