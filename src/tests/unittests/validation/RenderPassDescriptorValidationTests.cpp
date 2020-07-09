@@ -736,6 +736,84 @@ TEST_F(RenderPassDescriptorValidationTest, UseNaNOrINFINITYAsColorOrDepthClearVa
     }
 }
 
+TEST_F(RenderPassDescriptorValidationTest, ValidateDepthReadOnly) {
+    wgpu::TextureView colorView = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+    wgpu::TextureView depthStencilView =
+        Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8);
+
+    // Tests that a read-only pass with depthReadOnly set to true succeeds.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // Tests that a pass with depthLoadOp set to clear and depthReadOnly set to true fails.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // Tests that a pass with depthStoreOp set to clear and depthReadOnly set to true fails.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.depthReadOnly = true;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        AssertBeginRenderPassError(&renderPass);
+    }
+}
+
+TEST_F(RenderPassDescriptorValidationTest, ValidateStencilReadOnly) {
+    wgpu::TextureView colorView = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+    wgpu::TextureView depthStencilView =
+        Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8);
+
+    // Tests that a read-only pass with stencilReadOnly set to true succeeds.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilReadOnly = true;
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // Tests that a pass with stencilLoadOp set to clear and stencilReadOnly set to true fails.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilReadOnly = true;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // Tests that a pass with stencilStoreOp set to clear and stencilReadOnly set to true fails.
+    {
+        utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilView);
+        renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+        renderPass.cDepthStencilAttachmentInfo.stencilReadOnly = true;
+        AssertBeginRenderPassError(&renderPass);
+    }
+}
+
 // TODO(cwallez@chromium.org): Constraints on attachment aliasing?
 
 } // anonymous namespace
