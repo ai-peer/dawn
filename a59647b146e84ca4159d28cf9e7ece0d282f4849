@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0fa0871b_8607d1ed",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T15:12:17Z",
+      "side": 1,
+      "message": "I guess. It can\u0027t really overflow though because there are at most UINT32_MAX entries and we only increment by one.\n\nAnd the other function which I\u0027ll rename to AccumulateBindingCounts can\u0027t overflow either because we first validate the bindGroupLayoutCount \u003c\u003d 4, so we\u0027ll get at most maxBindings * 4 which is something like 624 I think",
+      "parentUuid": "32b5c60a_3bb68d54",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f692cce_8456a438",
         "filename": "src/dawn_native/BindingInfo.h",
         "patchSetId": 4
