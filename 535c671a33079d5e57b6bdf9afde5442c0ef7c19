@@ -97,6 +97,30 @@
       "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db90917e_4af1cddd",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-09T00:24:44Z",
+      "side": 1,
+      "message": "@Jiawei, if this is blocking you, you can choose what you think is better and land this. If Corentin is unhappy I can take the blame :P",
+      "parentUuid": "fc4128ee_cdcee605",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 9
+      },
+      "revId": "535c671a33079d5e57b6bdf9afde5442c0ef7c19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
