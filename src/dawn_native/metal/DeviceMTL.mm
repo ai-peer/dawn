@@ -16,6 +16,7 @@
 
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/BindGroupLayout.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/metal/BindGroupLayoutMTL.h"
 #include "dawn_native/metal/BindGroupMTL.h"
@@ -30,6 +31,7 @@
 #include "dawn_native/metal/StagingBufferMTL.h"
 #include "dawn_native/metal/SwapChainMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
+#include "dawn_native/metal/UtilsMetal.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 
@@ -263,6 +265,46 @@ namespace dawn_native { namespace metal {
                                                         toBuffer:buffer
                                                destinationOffset:destinationOffset
                                                             size:size];
+        return {};
+    }
+
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                const TextureDataLayout& dataLayout,
+                                                TextureCopy* dst,
+                                                const Extent3D copySize) {
+        Texture* texture = ToBackend(dst->texture.Get());
+
+        // This function assumes data is perfectly aligned. Otherwise, it might be necessary
+        // to split copying to several stages: see ComputeTextureBufferCopySplit.
+        uint32_t blockSize = dst->texture->GetFormat().blockByteSize;
+        uint32_t blockWidth = dst->texture->GetFormat().blockWidth;
+        ASSERT(dataLayout.rowsPerImage == (copySize.height));
+        ASSERT(dataLayout.bytesPerRow == (copySize.width) / blockWidth * blockSize);
+
+        // TODO(tommek@google.com): Add tests for this in TextureZeroInitTests.
+        EnsureDestinationTextureInitialized(texture, *dst, copySize);
+
+        const uint32_t copyBaseLayer = dst->origin.z;
+        const uint32_t copyLayerCount = copySize.depth;
+        const uint64_t bytesPerImage = dataLayout.rowsPerImage * dataLayout.bytesPerRow;
+
+        uint64_t bufferOffset = dataLayout.offset;
+        for (uint32_t copyLayer = copyBaseLayer; copyLayer < copyBaseLayer + copyLayerCount;
+             ++copyLayer) {
+            [GetPendingCommandContext()->EnsureBlit()
+                     copyFromBuffer:ToBackend(source)->GetBufferHandle()
+                       sourceOffset:bufferOffset
+                  sourceBytesPerRow:dataLayout.bytesPerRow
+                sourceBytesPerImage:bytesPerImage
+                         sourceSize:MTLSizeMake(copySize.width, copySize.height, 1)
+                          toTexture:texture->GetMTLTexture()
+                   destinationSlice:copyLayer
+                   destinationLevel:dst->mipLevel
+                  destinationOrigin:MTLOriginMake(dst->origin.x, dst->origin.y, 0)];
+
+            bufferOffset += bytesPerImage;
+        }
+
         return {};
     }
 
