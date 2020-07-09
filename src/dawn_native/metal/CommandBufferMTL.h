@@ -18,6 +18,8 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/metal/DeviceMTL.h"
+#include "dawn_native/metal/TextureMTL.h"
 
 #import <Metal/Metal.h>
 
@@ -51,6 +53,35 @@ namespace dawn_native { namespace metal {
 
         CommandIterator mCommands;
     };
+
+    struct TextureBufferCopySplit {
+        static constexpr uint32_t kMaxTextureBufferCopyRegions = 3;
+
+        struct CopyInfo {
+            NSUInteger bufferOffset;
+            NSUInteger bytesPerRow;
+            NSUInteger bytesPerImage;
+            Origin3D textureOrigin;
+            Extent3D copyExtent;
+        };
+
+        uint32_t count = 0;
+        std::array<CopyInfo, kMaxTextureBufferCopyRegions> copies;
+    };
+
+    TextureBufferCopySplit ComputeTextureBufferCopySplit(wgpu::TextureDimension dimension,
+                                                         Origin3D origin,
+                                                         Extent3D copyExtent,
+                                                         Format textureFormat,
+                                                         Extent3D virtualSizeAtLevel,
+                                                         uint64_t bufferSize,
+                                                         uint64_t bufferOffset,
+                                                         uint32_t bytesPerRow,
+                                                         uint32_t rowsPerImage);
+
+    void EnsureDestinationTextureInitialized(Texture* texture,
+                                             const TextureCopy& dst,
+                                             const Extent3D& size);
 
 }}  // namespace dawn_native::metal
 
