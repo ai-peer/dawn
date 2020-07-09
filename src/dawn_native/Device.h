@@ -23,6 +23,7 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
 
+#include "dawn_native/Commands.h"
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 

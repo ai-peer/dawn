@@ -268,6 +268,50 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                BufferCopy& src,
+                                                TextureCopy& dst,
+                                                const Extent3D copySize) {
+        Texture* texture = ToBackend(dst.texture.Get());
+
+        EnsureDestinationTextureInitialized(texture, dst, copySize);
+
+        const Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(dst.mipLevel);
+
+        TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
+            texture->GetDimension(), dst.origin, copySize, texture->GetFormat(), virtualSizeAtLevel,
+            source->GetSize(), src.offset, src.bytesPerRow, src.rowsPerImage);
+
+        for (uint32_t i = 0; i < splitCopies.count; ++i) {
+            const TextureBufferCopySplit::CopyInfo& copyInfo = splitCopies.copies[i];
+
+            const uint32_t copyBaseLayer = copyInfo.textureOrigin.z;
+            const uint32_t copyLayerCount = copyInfo.copyExtent.depth;
+            const MTLOrigin textureOrigin =
+                MTLOriginMake(copyInfo.textureOrigin.x, copyInfo.textureOrigin.y, 0);
+            const MTLSize copyExtent =
+                MTLSizeMake(copyInfo.copyExtent.width, copyInfo.copyExtent.height, 1);
+
+            uint64_t bufferOffset = copyInfo.bufferOffset;
+            for (uint32_t copyLayer = copyBaseLayer; copyLayer < copyBaseLayer + copyLayerCount;
+                 ++copyLayer) {
+                [GetPendingCommandContext()->EnsureBlit()
+                         copyFromBuffer:ToBackend(source)->GetBufferHandle()
+                           sourceOffset:bufferOffset
+                      sourceBytesPerRow:copyInfo.bytesPerRow
+                    sourceBytesPerImage:copyInfo.bytesPerImage
+                             sourceSize:copyExtent
+                              toTexture:texture->GetMTLTexture()
+                       destinationSlice:copyLayer
+                       destinationLevel:dst.mipLevel
+                      destinationOrigin:textureOrigin];
+                bufferOffset += copyInfo.bytesPerImage;
+            }
+        }
+
+        return {};
+    }
+
     TextureBase* Device::CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
                                                         IOSurfaceRef ioSurface,
                                                         uint32_t plane) {

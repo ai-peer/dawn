@@ -14,6 +14,8 @@
 
 #include "dawn_native/metal/QueueMTL.h"
 
+#include "dawn_native/Buffer.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -37,6 +39,48 @@ namespace dawn_native { namespace metal {
 
         device->SubmitPendingCommandBuffer();
         return {};
+    }
+
+    // We don't write from CPU to texture directly which can be done in Metal using
+    // replaceRegion function, because the function requires a non-private storage mode and Dawn
+    // sets a private storage mode by default for all textures except IOSurfaces on macOS.
+    MaybeError Queue::WriteTextureImpl(const TextureCopyView* destination,
+                                       const void* data,
+                                       size_t dataSize,
+                                       const TextureDataLayout* dataLayout,
+                                       const Extent3D* writeSize) {
+        if (dataSize == 0) {
+            return {};
+        }
+
+        DeviceBase* device = GetDevice();
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
+                                          dataSize, device->GetPendingCommandSerial()));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, dataSize);
+
+        uint32_t defaultedRowsPerImage = dataLayout->rowsPerImage;
+        if (defaultedRowsPerImage == 0) {
+            defaultedRowsPerImage = writeSize->height;
+        }
+
+        // TODO: It would be better to pass a TextureData object.
+        // We're leaving bufferCopy.buffer empty
+        BufferCopy bufferCopy;
+        bufferCopy.offset = uploadHandle.startOffset + dataLayout->offset;
+        bufferCopy.bytesPerRow = dataLayout->bytesPerRow;
+        bufferCopy.rowsPerImage = defaultedRowsPerImage;
+
+        TextureCopy textureCopy;
+        textureCopy.texture = destination->texture;
+        textureCopy.mipLevel = destination->mipLevel;
+        textureCopy.origin = destination->origin;
+
+        return ToBackend(device)->CopyFromStagingToTexture(uploadHandle.stagingBuffer, bufferCopy,
+                                                           textureCopy, *writeSize);
     }
 
 }}  // namespace dawn_native::metal
