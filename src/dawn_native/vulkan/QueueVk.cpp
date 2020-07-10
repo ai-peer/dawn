@@ -14,6 +14,7 @@
 
 #include "dawn_native/vulkan/QueueVk.h"
 
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/DeviceVk.h"
@@ -46,6 +47,48 @@ namespace dawn_native { namespace vulkan {
         DAWN_TRY(device->SubmitPendingCommands());
 
         return {};
+    }
+
+    MaybeError Queue::WriteTextureImpl(const TextureCopyView* destination,
+                                       const void* data,
+                                       size_t dataSize,
+                                       const TextureDataLayout* dataLayout,
+                                       const Extent3D* writeSize) {
+        if (dataSize == 0) {
+            return {};
+        }
+
+        if (dataLayout->bytesPerRow % destination->texture->GetFormat().blockByteSize != 0) {
+            return DAWN_VALIDATION_ERROR(
+                "In Vulkan bytesPerRow must be a multiple of texel block size");
+        }
+
+        DeviceBase* device = GetDevice();
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
+                                          dataSize, device->GetPendingCommandSerial()));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, dataSize);
+
+        uint32_t defaultedRowsPerImage = dataLayout->rowsPerImage;
+        if (defaultedRowsPerImage == 0) {
+            defaultedRowsPerImage = writeSize->height;
+        }
+
+        BufferCopy passDataLayout;
+        passDataLayout.offset = dataLayout->offset + uploadHandle.startOffset;
+        passDataLayout.rowsPerImage = defaultedRowsPerImage;
+        passDataLayout.bytesPerRow = dataLayout->bytesPerRow;
+
+        TextureCopy textureCopy;
+        textureCopy.texture = destination->texture;
+        textureCopy.mipLevel = destination->mipLevel;
+        textureCopy.origin = destination->origin;
+
+        return ToBackend(device)->CopyFromStagingToTexture(uploadHandle.stagingBuffer,
+                                                           passDataLayout, textureCopy, *writeSize);
     }
 
 }}  // namespace dawn_native::vulkan
