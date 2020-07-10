@@ -33,6 +33,41 @@
       "revId": "c6eaca4988345e72c40d463034ab77d18e403bc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99b07845_39ee3fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T16:31:20Z",
+      "side": 1,
+      "message": "Hm, anything new that lands will have to autoformat in this way to pass presubmit though, right? So it should work to have the conflict, take your own version, and autoformat again.",
+      "parentUuid": "8b558e45_a9384a48",
+      "revId": "c6eaca4988345e72c40d463034ab77d18e403bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee3f1b6_7de92c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T16:31:20Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c6eaca4988345e72c40d463034ab77d18e403bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
