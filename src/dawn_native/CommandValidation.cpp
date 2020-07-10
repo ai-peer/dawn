@@ -456,12 +456,37 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError FixUpBufferCopyView(DeviceBase* device,
+                                   BufferCopyView* bufferCopyView) {
+        TextureDataLayout& layout = bufferCopyView->layout;
+        if (layout.offset != 0 || layout.bytesPerRow != 0 || layout.rowsPerImage != 0) {
+            // Using non-deprecated path
+            if (bufferCopyView->offset != 0 || bufferCopyView->bytesPerRow != 0 || bufferCopyView->rowsPerImage != 0) {
+                return DAWN_VALIDATION_ERROR("WGPUBufferCopyView.offset/bytesPerRow/rowsPerImage is deprecated, use only WGPUBufferCopyView.layout");
+            }
+        } else {
+            device->EmitDeprecationWarning("WGPUBufferCopyView.offset/bytesPerRow/rowsPerImage is deprecated, use WGPUBufferCopyView.layout");
+            layout.offset = bufferCopyView->offset;
+            layout.bytesPerRow = bufferCopyView->bytesPerRow;
+            layout.rowsPerImage = bufferCopyView->rowsPerImage;
+            bufferCopyView->offset = 0;
+            bufferCopyView->bytesPerRow = 0;
+            bufferCopyView->rowsPerImage = 0;
+        }
+        return {};
+    }
+
     MaybeError ValidateBufferCopyView(DeviceBase const* device,
-                                      const BufferCopyView& bufferCopyView) {
+                                      const BufferCopyView& bufferCopyView, const Format& format, const Extent3D& copyExtent) {
+        // Should have already been fixed up to not use deprecated fields.
+        ASSERT(bufferCopyView.offset == 0 && bufferCopyView.bytesPerRow == 0 && bufferCopyView.rowsPerImage == 0);
+
         DAWN_TRY(device->ValidateObject(bufferCopyView.buffer));
-        if (bufferCopyView.bytesPerRow % kTextureBytesPerRowAlignment != 0) {
+        DAWN_TRY(ValidateLinearTextureData(bufferCopyView.layout, bufferCopyView.buffer->GetSize(), format, copyExtent));
+        if (bufferCopyView.layout.bytesPerRow % kTextureBytesPerRowAlignment != 0) {
             return DAWN_VALIDATION_ERROR("bytesPerRow must be a multiple of 256");
         }
+
         return {};
     }
 
