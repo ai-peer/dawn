@@ -271,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "a1d3ed2a_c29a49dd",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T16:19:41Z",
+      "side": 1,
+      "message": "okay, makes sense. so Emscripten will have to translate this by doing GetMappedRange(\u003cwhole buffer\u003e)? I\u0027m a little concerned this could be more shmem than we want on some platforms",
+      "parentUuid": "806d7745_fe4f39f8",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 310,
+        "endChar": 27
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44da41e7_9af36c58",
         "filename": "src/dawn_native/opengl/BufferGL.cpp",
         "patchSetId": 16
