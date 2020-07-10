@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ed30e93_ef9c2416",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T13:02:38Z",
+      "side": 1,
+      "message": "We should discuss this in the group. Maybe we could say that the queries sets start initialized with zeroes so it is valid to resolve unused queries.",
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca76016e_d6bdf510",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T13:02:38Z",
+      "side": 1,
+      "message": "sorry I mean that queryCount should be a uint64_t so it would be static_cast\u003cuint64_t\u003e(queryCount) * sizeof(uint64_t) \u003c\u003d ...",
+      "range": {
+        "startLine": 554,
+        "startChar": 33,
+        "endLine": 554,
+        "endChar": 65
+      },
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc5f5914_4bad7c4b",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T13:02:38Z",
+      "side": 1,
+      "message": "The test code is good but the goal is to prevent overflows so that even on 32bit we get a validation error. Otherwise for Dawn / Chromium compiled in 32bit it would be possible to bypass the validation and cause security issues.\n\nThe comment would be:\n\n Check that in 32bit mode the computation of queryCount * sizeof(uint64_t) doesn\u0027t overflow (which would skip validation).\n\nAnd then the ASSERT_DEVICE_ERROR() would be unconditional.\n\nThe good thing is that we know the test checks the correct thing.",
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
