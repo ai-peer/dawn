@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "e3fd473b_ff928c98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T16:25:26Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32b5c60a_3bb68d54",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 4
@@ -54,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "3f7f8974_d70d6080",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T16:25:26Z",
+      "side": 1,
+      "message": "Out of curiosity, why \"foo +\u003d 1\" and not \"++foo\"?",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f692cce_8456a438",
         "filename": "src/dawn_native/BindingInfo.h",
         "patchSetId": 4
@@ -71,6 +105,23 @@
         "endLine": 72,
         "endChar": 18
       },
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efa260c6_9c794e41",
+        "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T16:25:26Z",
+      "side": 1,
+      "message": "uNit \"per stage\" -\u003e \"per-stage\"",
       "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
