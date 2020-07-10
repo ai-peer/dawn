@@ -27,6 +27,7 @@ namespace dawn_native {
     class QuerySetBase;
     struct BeginRenderPassCmd;
     struct PassResourceUsage;
+    struct TexelBlockInfo;
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize);
     MaybeError ValidateFinalDebugGroupStackSize(uint64_t debugGroupStackSize);
@@ -42,7 +43,7 @@ namespace dawn_native {
 
     MaybeError ValidateLinearTextureData(const TextureDataLayout& layout,
                                          uint64_t byteSize,
-                                         const Format& format,
+                                         const TexelBlockInfo& blockInfo,
                                          const Extent3D& copyExtent);
     MaybeError ValidateTextureCopyRange(const TextureCopyView& textureCopyView,
                                         const Extent3D& copySize);

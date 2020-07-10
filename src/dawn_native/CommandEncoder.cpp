@@ -100,6 +100,12 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Source and destination texture formats must match.");
             }
 
+            if (src.aspect != wgpu::TextureAspect::All || dst.aspect != wgpu::TextureAspect::All) {
+                // Metal cannot select a single aspect for texture-to-texture copies
+                return DAWN_VALIDATION_ERROR(
+                    "Texture aspect must be \"all\" for texture to texture copies");
+            }
+
             if (src.texture->GetFormat().HasDepthOrStencil()) {
                 // D3D12 requires entire subresource to be copied when using CopyTextureRegion is
                 // used with depth/stencil.
@@ -116,6 +122,68 @@ namespace dawn_native {
                 }
             }
 
+            return {};
+        }
+
+        MaybeError ValidateTextureToBufferCopyRestrictions(const TextureCopyView& src,
+                                                           const BufferCopyView& dst) {
+            const Format& format = src.texture->GetFormat();
+            switch (src.aspect) {
+                case wgpu::TextureAspect::All:
+                    if (format.aspectMask.count() > 1) {
+                        return DAWN_VALIDATION_ERROR(
+                            "A single aspect must be selected for multi planar formats in texture "
+                            "to buffer copies");
+                    }
+                    break;
+                case wgpu::TextureAspect::DepthOnly:
+                    ASSERT(HasDepth(format.aspectMask));
+                    switch (format.format) {
+                        case wgpu::TextureFormat::Depth24Plus:
+                        case wgpu::TextureFormat::Depth24PlusStencil8:
+                            return DAWN_VALIDATION_ERROR(
+                                "The depth aspect of depth24plus texture cannot be selected in a "
+                                "texture to buffer copy");
+                            break;
+                        case wgpu::TextureFormat::Depth32Float:
+                            break;
+                        default:
+                            UNREACHABLE();
+                            break;
+                    }
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    ASSERT(HasStencil(format.aspectMask));
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateBufferToTextureCopyRestrictions(const BufferCopyView& src,
+                                                           const TextureCopyView& dst) {
+            const Format& format = dst.texture->GetFormat();
+            switch (dst.aspect) {
+                case wgpu::TextureAspect::All:
+                    if (format.aspectMask.count() > 1) {
+                        return DAWN_VALIDATION_ERROR(
+                            "A single aspect must be selected for multi planar formats in buffer "
+                            "to texture copies");
+                    }
+                    if (!HasDepth(format.aspectMask)) {
+                        break;
+                    }
+                    DAWN_FALLTHROUGH;
+                case wgpu::TextureAspect::DepthOnly:
+                    ASSERT(HasDepth(format.aspectMask));
+                    return DAWN_VALIDATION_ERROR("Cannot copy into the depth aspect of a texture");
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    ASSERT(HasStencil(format.aspectMask));
+                    break;
+            }
             return {};
         }
 
@@ -560,9 +628,12 @@ namespace dawn_native {
                 sourceAsTextureDataLayout.bytesPerRow = source->bytesPerRow;
                 sourceAsTextureDataLayout.rowsPerImage = source->rowsPerImage;
 
-                DAWN_TRY(ValidateLinearTextureData(sourceAsTextureDataLayout,
-                                                   source->buffer->GetSize(),
-                                                   destination->texture->GetFormat(), *copySize));
+                DAWN_TRY(ValidateBufferToTextureCopyRestrictions(*source, *destination));
+
+                DAWN_TRY(ValidateLinearTextureData(
+                    sourceAsTextureDataLayout, source->buffer->GetSize(),
+                    destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect),
+                    *copySize));
                 DAWN_TRY(ValidateTextureCopyRange(*destination, *copySize));
 
                 mTopLevelBuffers.insert(source->buffer);
@@ -614,9 +685,11 @@ namespace dawn_native {
                 dstAsTextureDataLayout.bytesPerRow = destination->bytesPerRow;
                 dstAsTextureDataLayout.rowsPerImage = destination->rowsPerImage;
 
-                DAWN_TRY(ValidateLinearTextureData(dstAsTextureDataLayout,
-                                                   destination->buffer->GetSize(),
-                                                   source->texture->GetFormat(), *copySize));
+                DAWN_TRY(ValidateTextureToBufferCopyRestrictions(*source, *destination));
+
+                DAWN_TRY(ValidateLinearTextureData(
+                    dstAsTextureDataLayout, destination->buffer->GetSize(),
+                    source->texture->GetFormat().GetTexelBlockInfo(source->aspect), *copySize));
                 DAWN_TRY(ValidateTextureCopyRange(*source, *copySize));
 
                 mTopLevelTextures.insert(source->texture);
