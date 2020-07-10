@@ -36,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "484721e3_c2a4e94c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T20:42:27Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d9bfc0_b0ba0bfe",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T20:42:27Z",
+      "side": 1,
+      "message": "Nit: Suggest \"Buffer is already mapped\", to match \"Buffer is destroyed\" below.",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08a4bd1e_47baabf2",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 16
@@ -316,6 +350,23 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3f3cee_b7019ef5",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T20:42:27Z",
+      "side": 1,
+      "message": "Is static_cast\u003c\u003e not sufficient here?",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
