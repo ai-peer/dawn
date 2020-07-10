@@ -39,6 +39,30 @@
       "revId": "2b334d690ead41de8343eb7302bad8df1b97b02d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14c07a18_a5cf698c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T02:04:29Z",
+      "side": 1,
+      "message": "thanks, looks like that\u0027s almost done so I\u0027ll wait for it to land",
+      "parentUuid": "103163fe_456d5967",
+      "range": {
+        "startLine": 301,
+        "startChar": 12,
+        "endLine": 307,
+        "endChar": 0
+      },
+      "revId": "2b334d690ead41de8343eb7302bad8df1b97b02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
