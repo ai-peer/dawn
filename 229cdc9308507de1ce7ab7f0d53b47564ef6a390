@@ -16,6 +16,23 @@
       "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3566fe_363d3188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T22:58:49Z",
+      "side": 1,
+      "message": "Right now, Dawn has a lot of static sized arrays which rely on kMaxBindingsPerGroup.\n\nI think the intent of the test is that using a value this large doesn\u0027t overflow and result in passing validation because (kMaxBindingsPerGroup % kMaxBindingsPerGroup \u003d\u003d 0)\n\nSo for now, I think we should keep it. I\u0027ll be removing kMaxBindingsPerGroup soon though",
+      "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
