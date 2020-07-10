@@ -154,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "8aca9570_a5fa4ef7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d319fe5_7af01ccc",
+      "range": {
+        "startLine": 534,
+        "startChar": 16,
+        "endLine": 534,
+        "endChar": 67
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee1c9cf_15b6ddc3",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 3
@@ -168,6 +192,24 @@
       "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a8db2b5_bc95e5ba",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cee1c9cf_15b6ddc3",
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -194,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "66b5a66e_bb0e1b73",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b90229d_c6298ba1",
+      "range": {
+        "startLine": 549,
+        "startChar": 33,
+        "endLine": 549,
+        "endChar": 62
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d969e79_4e1af27f",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
@@ -208,6 +274,24 @@
       "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2edcd282_aaf0c71c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d969e79_4e1af27f",
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +318,30 @@
     },
     {
       "key": {
+        "uuid": "31bd1df1_a9105601",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeef227d_387d7fa3",
+      "range": {
+        "startLine": 334,
+        "startChar": 4,
+        "endLine": 334,
+        "endChar": 23
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d88adeb_e214485e",
         "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
         "patchSetId": 3
@@ -254,6 +362,30 @@
       "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34669300_5709334b",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-10T12:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d88adeb_e214485e",
+      "range": {
+        "startLine": 412,
+        "startChar": 70,
+        "endLine": 412,
+        "endChar": 71
+      },
+      "revId": "da138acbf6b65ee18e48cb286a2da8feabed3c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
