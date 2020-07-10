@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7e664d9_4412a45c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T22:57:20Z",
+      "side": 1,
+      "message": "Blocked on https://chromium-review.googlesource.com/c/chromium/src/+/2292833",
+      "revId": "aa9dcb1b99eb93862ad062ca4f6453e0839b14bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
