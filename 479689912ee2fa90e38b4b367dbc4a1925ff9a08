@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90196154_064b269e",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T00:15:49Z",
+      "side": 0,
+      "message": "So do we not need this and our own version of clang-format anymore because the bots have newer libraries now?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "479689912ee2fa90e38b4b367dbc4a1925ff9a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
