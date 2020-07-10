@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69a4c7ac_668dc51d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T21:25:27Z",
+      "side": 1,
+      "message": "Thanks Kai for fixing these formatting issues!",
+      "revId": "2afea0c6712e311cc8f825a9f0dab8eb284a98ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
