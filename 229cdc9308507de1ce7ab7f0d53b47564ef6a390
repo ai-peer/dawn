@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e4509b1_69dae581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T22:38:31Z",
+      "side": 1,
+      "message": "A tiny change, PTAL. Recently I am ramping up WebGPU CTS and looking into bind group and bind group layout related tests to learn the code. I didn\u0027t find such a test in cts, I didn\u0027t find any statement about this in spec, and I didn\u0027t find any validation code about this in Dawn: binding index \u003e\u003d kMaxBindingsPerGroup is invalid. \n\nThe error reported is actually triggered by binding index mismatch between bindGroup and bindGroupLayout. If we set the binding index to kMaxBindingsPerGroup in BGL, it can pass (see patch set 1).",
+      "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
