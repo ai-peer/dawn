@@ -652,6 +652,8 @@ TEST_P(QueueWriteTextureTests, Texture2DArrayRegionNonzeroRowsPerImage) {
 
 // Test with bytesPerRow not divisible by 256.
 TEST_P(QueueWriteTextureTests, BytesPerRowNotDivisibleBy256) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     constexpr uint32_t kWidth = 257;
     constexpr uint32_t kHeight = 129;
     constexpr uint32_t kLayers = 65;
@@ -680,5 +682,5 @@ DAWN_INSTANTIATE_TEST(QueueWriteTextureTests,
                       // D3D12Backend(),
                       MetalBackend(),
                       // OpenGLBackend(),
-                      // VulkanBackend()
+                      VulkanBackend()
 );
