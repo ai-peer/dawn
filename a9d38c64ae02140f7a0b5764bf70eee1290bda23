@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cda11c61_f781e9a8",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T16:03:31Z",
+      "side": 1,
+      "message": "What should I do with that?",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36307300_927f7a91",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T16:03:31Z",
+      "side": 1,
+      "message": "It might be more efficient to copy only the part of the data we\u0027re interested in. Currently I\u0027m doing the same thing as writeBuffer.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c86a352_0bf59eb7",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T16:03:31Z",
+      "side": 1,
+      "message": "This is a new test.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
