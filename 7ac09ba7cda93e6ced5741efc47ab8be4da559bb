@@ -39,6 +39,40 @@
       "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c6496c8_6d92e527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:01:26Z",
+      "side": 1,
+      "message": "Looks good.",
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74ee957e_13632eb5",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:01:26Z",
+      "side": 1,
+      "message": "We also need validation that the two match if the two planes are present in the texture. That\u0027s because of a Vulkan limitation on barriers on depth-stencil. We forgot about it when reviewing the test plan.",
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
