@@ -16,6 +16,137 @@
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06ee4eac_b1037d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0e67dc5_7134a6be",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "This box could likely be precomputed for each split since it only depend on i. In general many more things could be precomputed in the D3D12_TEXTURE_COPY_LOCATIONs but it\u0027s probably not worth optimizing it more at this point.",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "162be4fa_19b9cdd9",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "This comment is quite exhaustive but it makes it a bit hard to read. For example it could explain things like:\n\n  The ComputeTextureCopySplit function decides how to split the copy based on:\n\n    - the alignment of the buffer offset with D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT (aka 512)\n    - the alignment of the offset in 256 (D3D12 bytesPerRow constraint)\n\n  Each slice of a 3D copy might need to be split, but because of the WebGPU constraint\n  that bytesPerRow must b 256, all odd (resp. all even) slices will be at an offset\n  multiple of 512 of each other. This means that they will all result in the same 2D split.\n\n  It means that we need to compute a 2D split only for the first and second slices, and if\n  rowsPerImage is even, then they both have the same split, so we reuse it.\n\nWDYT?",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd983b79_22401230",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "What about always having two splits, (but sometimes they are equal), this would allow simplifying the logic at [1]",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e41bd3f_397e88f4",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "ComputeTextureCopySplit is now an implementation detail and can be removed from the header.",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "676a2051_c0575beb",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "nit: when\n\nditto below",
+      "range": {
+        "startLine": 749,
+        "startChar": 50,
+        "endLine": 749,
+        "endChar": 54
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf63ba76_963b9683",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T12:56:41Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 776,
+        "startChar": 50,
+        "endLine": 776,
+        "endChar": 54
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
