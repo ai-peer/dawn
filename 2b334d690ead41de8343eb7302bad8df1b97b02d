@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41bf1207_ed24907b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T01:04:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2b334d690ead41de8343eb7302bad8df1b97b02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "103163fe_456d5967",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T01:04:01Z",
+      "side": 1,
+      "message": "fyi: https://dawn-review.googlesource.com/c/dawn/+/24602",
+      "range": {
+        "startLine": 301,
+        "startChar": 12,
+        "endLine": 307,
+        "endChar": 0
+      },
+      "revId": "2b334d690ead41de8343eb7302bad8df1b97b02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
