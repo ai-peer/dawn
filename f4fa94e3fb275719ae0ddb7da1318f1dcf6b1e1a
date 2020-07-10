@@ -16,6 +16,40 @@
       "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ed7fcc5_04462a42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:39:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d48a510_3c65df78",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:39:25Z",
+      "side": 1,
+      "message": "This doesn\u0027t follow the algorithm in the spec: validate GPUBufferCopyView only validates the object and the bytesPerRow and ValidateLinearTextureData is separate in the validation blocks for copyB2T T2B and writeTexture. For now (until we need to optimize more) it would be nice to follow the structure of the spec so WDYT of keeping ValidateBufferCopyView vs. ValidateBufferCopyView separate or fixing up the spec?",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
