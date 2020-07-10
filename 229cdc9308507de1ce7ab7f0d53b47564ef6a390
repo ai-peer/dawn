@@ -103,6 +103,23 @@
       "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aefe9b77_b9f32fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T23:25:32Z",
+      "side": 1,
+      "message": "Okay, thanks for the clarification. LGTM then",
+      "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
