@@ -22,6 +22,30 @@
       "revId": "479689912ee2fa90e38b4b367dbc4a1925ff9a08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87f141de_1a14a4bf",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:06:26Z",
+      "side": 0,
+      "message": "Yes, previously clang-format was stuck on 6.0 in buildtools but about a year and a half ago thakis@ rolled it.",
+      "parentUuid": "90196154_064b269e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "479689912ee2fa90e38b4b367dbc4a1925ff9a08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
