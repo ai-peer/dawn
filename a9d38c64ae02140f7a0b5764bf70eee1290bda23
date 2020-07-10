@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "1aa2f99e_9444cd70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "Looks good overall. The tests are testing a lot around the 256 bytes per row restriction which isn\u0027t present for WriteTexture. We have that restriction for D3D12, so I guess it\u0027s still good to have them.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69300382_812f6b3a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "this can be a const reference because it\u0027s not mutated in this function.",
+      "range": {
+        "startLine": 273,
+        "startChar": 48,
+        "endLine": 273,
+        "endChar": 67
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bc13ea1_76931f35",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "nit: in Dawn, if an argument is mutable, we prefer to pass it by pointer instead of reference",
+      "range": {
+        "startLine": 274,
+        "startChar": 48,
+        "endLine": 274,
+        "endChar": 64
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cda11c61_f781e9a8",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 19
@@ -19,6 +82,24 @@
     },
     {
       "key": {
+        "uuid": "abcb1584_f7a99014",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "If this is a Metal restriction that we can\u0027t work around then it should be part of the linear texture data validation rules",
+      "parentUuid": "cda11c61_f781e9a8",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "36307300_927f7a91",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 19
@@ -30,6 +111,116 @@
       "writtenOn": "2020-07-10T16:03:31Z",
       "side": 1,
       "message": "It might be more efficient to copy only the part of the data we\u0027re interested in. Currently I\u0027m doing the same thing as writeBuffer.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1945005_d2551412",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "This would be a good idea if bytesPerRow is much larger than bytesInACompleteRow. I expect this to be fairly rare though.\n\nFine with me to try this now or in a follow-up after WriteTexture is implemented on all the backends.\n\nWe can do a similar optimization in dawn_wire where we allocate less data and compact it if bytesPerRow much greater than bytesInACompleteRow",
+      "parentUuid": "36307300_927f7a91",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf3d8a8_181f05a1",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "nit: here we could copy the entire TextureDataLayout (passDataLayout \u003d *dataLayout), and then override the .offset and .rowsPerImage",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d760019f_40ff2cf3",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "writing",
+      "range": {
+        "startLine": 337,
+        "startChar": 13,
+        "endLine": 337,
+        "endChar": 20
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ae4971_0fee127b",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "PixelWrite...",
+      "range": {
+        "startLine": 387,
+        "startChar": 31,
+        "endLine": 387,
+        "endChar": 49
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a4d381f_76bedc12",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T17:31:52Z",
+      "side": 1,
+      "message": "nit: here and below, |dataSpec| for the variable name",
+      "range": {
+        "startLine": 513,
+        "startChar": 8,
+        "endLine": 513,
+        "endChar": 26
+      },
       "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
