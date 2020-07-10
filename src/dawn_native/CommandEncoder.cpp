@@ -558,41 +558,35 @@ namespace dawn_native {
             DAWN_TRY_ASSIGN(fixedDest, FixTextureCopyView(GetDevice(), destination));
             destination = &fixedDest;
 
-            if (GetDevice()->IsValidationEnabled()) {
-                DAWN_TRY(ValidateBufferCopyView(GetDevice(), *source));
-                DAWN_TRY(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc));
+            BufferCopyView fixedSource = *source;
+            DAWN_TRY(FixUpBufferCopyView(GetDevice(), &fixedSource));
+            // Compute default value for rowsPerImage
+            if (fixedSource.layout.rowsPerImage == 0) {
+                fixedSource.layout.rowsPerImage = copySize->height;
+            }
 
+            if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateTextureCopyView(GetDevice(), *destination));
                 DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst));
                 DAWN_TRY(ValidateTextureSampleCountInCopyCommands(destination->texture));
 
-                TextureDataLayout sourceAsTextureDataLayout;
-                sourceAsTextureDataLayout.offset = source->offset;
-                sourceAsTextureDataLayout.bytesPerRow = source->bytesPerRow;
-                sourceAsTextureDataLayout.rowsPerImage = source->rowsPerImage;
+                DAWN_TRY(ValidateBufferCopyView(GetDevice(), fixedSource,
+                                                destination->texture->GetFormat(), *copySize));
+                DAWN_TRY(ValidateCanUseAs(fixedSource.buffer, wgpu::BufferUsage::CopySrc));
 
-                DAWN_TRY(ValidateLinearTextureData(sourceAsTextureDataLayout,
-                                                   source->buffer->GetSize(),
-                                                   destination->texture->GetFormat(), *copySize));
                 DAWN_TRY(ValidateTextureCopyRange(*destination, *copySize));
 
-                mTopLevelBuffers.insert(source->buffer);
+                mTopLevelBuffers.insert(fixedSource.buffer);
                 mTopLevelTextures.insert(destination->texture);
-            }
-
-            // Compute default value for rowsPerImage
-            uint32_t defaultedRowsPerImage = source->rowsPerImage;
-            if (defaultedRowsPerImage == 0) {
-                defaultedRowsPerImage = copySize->height;
             }
 
             // Record the copy command.
             CopyBufferToTextureCmd* copy =
                 allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
-            copy->source.buffer = source->buffer;
-            copy->source.offset = source->offset;
-            copy->source.bytesPerRow = source->bytesPerRow;
-            copy->source.rowsPerImage = defaultedRowsPerImage;
+            copy->source.buffer = fixedSource.buffer;
+            copy->source.offset = fixedSource.layout.offset;
+            copy->source.bytesPerRow = fixedSource.layout.bytesPerRow;
+            copy->source.rowsPerImage = fixedSource.layout.rowsPerImage;
             copy->destination.texture = destination->texture;
             copy->destination.origin = destination->origin;
             copy->destination.mipLevel = destination->mipLevel;
@@ -612,32 +606,26 @@ namespace dawn_native {
             DAWN_TRY_ASSIGN(fixedSrc, FixTextureCopyView(GetDevice(), source));
             source = &fixedSrc;
 
+            BufferCopyView fixedDestination = *destination;
+            DAWN_TRY(FixUpBufferCopyView(GetDevice(), &fixedDestination));
+            // Compute default value for rowsPerImage
+            if (fixedDestination.layout.rowsPerImage == 0) {
+                fixedDestination.layout.rowsPerImage = copySize->height;
+            }
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateTextureCopyView(GetDevice(), *source));
                 DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc));
                 DAWN_TRY(ValidateTextureSampleCountInCopyCommands(source->texture));
 
-                DAWN_TRY(ValidateBufferCopyView(GetDevice(), *destination));
-                DAWN_TRY(ValidateCanUseAs(destination->buffer, wgpu::BufferUsage::CopyDst));
+                DAWN_TRY(ValidateBufferCopyView(GetDevice(), fixedDestination,
+                                                source->texture->GetFormat(), *copySize));
+                DAWN_TRY(ValidateCanUseAs(fixedDestination.buffer, wgpu::BufferUsage::CopyDst));
 
-                TextureDataLayout dstAsTextureDataLayout;
-                dstAsTextureDataLayout.offset = destination->offset;
-                dstAsTextureDataLayout.bytesPerRow = destination->bytesPerRow;
-                dstAsTextureDataLayout.rowsPerImage = destination->rowsPerImage;
-
-                DAWN_TRY(ValidateLinearTextureData(dstAsTextureDataLayout,
-                                                   destination->buffer->GetSize(),
-                                                   source->texture->GetFormat(), *copySize));
                 DAWN_TRY(ValidateTextureCopyRange(*source, *copySize));
 
                 mTopLevelTextures.insert(source->texture);
-                mTopLevelBuffers.insert(destination->buffer);
-            }
-
-            // Compute default value for rowsPerImage
-            uint32_t defaultedRowsPerImage = destination->rowsPerImage;
-            if (defaultedRowsPerImage == 0) {
-                defaultedRowsPerImage = copySize->height;
+                mTopLevelBuffers.insert(fixedDestination.buffer);
             }
 
             // Record the copy command.
@@ -646,10 +634,10 @@ namespace dawn_native {
             copy->source.texture = source->texture;
             copy->source.origin = source->origin;
             copy->source.mipLevel = source->mipLevel;
-            copy->destination.buffer = destination->buffer;
-            copy->destination.offset = destination->offset;
-            copy->destination.bytesPerRow = destination->bytesPerRow;
-            copy->destination.rowsPerImage = defaultedRowsPerImage;
+            copy->destination.buffer = fixedDestination.buffer;
+            copy->destination.offset = fixedDestination.layout.offset;
+            copy->destination.bytesPerRow = fixedDestination.layout.bytesPerRow;
+            copy->destination.rowsPerImage = fixedDestination.layout.rowsPerImage;
             copy->copySize = *copySize;
 
             return {};
