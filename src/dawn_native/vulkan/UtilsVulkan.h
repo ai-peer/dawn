@@ -92,6 +92,9 @@ namespace dawn_native { namespace vulkan {
     VkBufferImageCopy ComputeBufferImageCopyRegion(const BufferCopy& bufferCopy,
                                                    const TextureCopy& textureCopy,
                                                    const Extent3D& copySize);
+    VkBufferImageCopy ComputeBufferImageCopyRegion(TextureDataLayout& dataLayout,
+                                                   const TextureCopy& textureCopy,
+                                                   const Extent3D& copySize);
 
 }}  // namespace dawn_native::vulkan
 
