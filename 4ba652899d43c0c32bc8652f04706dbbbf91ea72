@@ -295,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "ef8fbcfd_f3a420be",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T16:22:25Z",
+      "side": 1,
+      "message": "Buffer mapping has to be a shim in emscripten because it can\u0027t address the ArrayBuffer returned by buffer.getMappedRange() (only the ArrayBuffer that\u0027s its heap)",
+      "parentUuid": "a1d3ed2a_c29a49dd",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 310,
+        "endChar": 27
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44da41e7_9af36c58",
         "filename": "src/dawn_native/opengl/BufferGL.cpp",
         "patchSetId": 16
