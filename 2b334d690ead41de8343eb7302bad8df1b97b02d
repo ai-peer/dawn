@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "f2e3e091_fa556b32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T07:01:57Z",
+      "side": 1,
+      "message": "LGTM too. We can land before https://dawn-review.googlesource.com/c/dawn/+/24602 or after, either is fine.",
+      "revId": "2b334d690ead41de8343eb7302bad8df1b97b02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103163fe_456d5967",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 1
