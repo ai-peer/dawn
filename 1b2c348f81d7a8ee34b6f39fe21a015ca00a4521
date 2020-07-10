@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8932daf3_5cff532f",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T20:49:11Z",
+      "side": 1,
+      "message": "nit: Ordering should be consistent (right now have depthReadOnly,clearDepth and clearStencil,stencilReadOnly).",
+      "revId": "1b2c348f81d7a8ee34b6f39fe21a015ca00a4521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3e38c4dd_0b2a8b92",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
