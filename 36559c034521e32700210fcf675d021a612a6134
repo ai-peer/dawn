@@ -16,6 +16,125 @@
       "revId": "36559c034521e32700210fcf675d021a612a6134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5f499d4_25e20702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "LGTM, nice test!",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8cf9a1a_da080a9b",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "nit: stray include?",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1ca7c6_53298067",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "Uh that\u0027s a lot. Maybe we could bucket sizes a bit (with, IDK powers of two or fibonnacci numbers?) could be a follow-up.",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c776a7_f2a96dca",
+        "filename": "src/dawn_native/opengl/PipelineLayoutGL.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "nit: resize and index with bindingIndex directly below?",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f93181a1_ecbd24f6",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "Hasn\u0027t this issue been fixed?",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d9e4d6_4088ed21",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "if only we had WriteTexture :)",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c6174e4_71212306",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T14:24:12Z",
+      "side": 1,
+      "message": "nit: all of these could just return; and we set result \u003d 1 at the end.",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
