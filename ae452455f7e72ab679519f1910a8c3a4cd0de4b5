@@ -16,6 +16,40 @@
       "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0e4950d_bc37f05b",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T21:00:54Z",
+      "side": 1,
+      "message": "I\u0027m kinda surprised this works. I must be missing something.\n\nI would\u0027ve thought you\u0027d need \n\n((mode \u0026 WGPUMapMode_Read) !\u003d 0) ^ ((mode \u0026 WGPUMapMode_Write) !\u003d 0)\n\nto put them in the same bit position. Otherwise you\u0027d be doing 1 ^ 2 \u003d 3, which is still \"ok\" (non-zero).",
+      "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a323928d_be48d653",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T21:00:54Z",
+      "side": 1,
+      "message": "Any reason to avoid unique_ptr here (to avoid the explicit deletes)?",
+      "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
