@@ -36,6 +36,74 @@
     },
     {
       "key": {
+        "uuid": "436d7db9_0dc2c3ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T09:23:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01765e94_9ba9ff70",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T09:23:50Z",
+      "side": 1,
+      "message": "I think the default value for rowsPerImage should be computed after the validation. There\u0027s a condition in validating linear texture data saying if copySize.depth \u003e 1, then rowsPerImage \u003e\u003d copySize.height, so we shouldn\u0027t just pass the default value to validation. Anyway we don\u0027t check this condition in Dawn yet, so this doesn\u0027t make a difference right now.",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e88aeeb1_81c98673",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T09:23:50Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "392717f9_c5d20960",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-10T09:23:50Z",
+      "side": 1,
+      "message": "To avoid throwing a warning for a zero buffer copy view we should also check:\n\n  if (bufferCopyView-\u003eoffset !\u003d 0 || bufferCopyView-\u003ebytesPerRow !\u003d 0 || \n      bufferCopyView-\u003erowsPerImage !\u003d 0) {\n     emit warning;\n  }",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d48a510_3c65df78",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 1
