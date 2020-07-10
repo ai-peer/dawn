@@ -370,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "d1ef7fae_c40b6739",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-10T20:47:47Z",
+      "side": 1,
+      "message": "Never mind; this comment is obsolete.",
+      "parentUuid": "bf3f3cee_b7019ef5",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44da41e7_9af36c58",
         "filename": "src/dawn_native/opengl/BufferGL.cpp",
         "patchSetId": 16
