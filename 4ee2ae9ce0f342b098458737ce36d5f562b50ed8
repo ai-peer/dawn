@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d54eea74_3e5e5bcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T21:40:46Z",
+      "side": 1,
+      "message": "Split to just add occlusionQuerySet.",
+      "revId": "4ee2ae9ce0f342b098458737ce36d5f562b50ed8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
