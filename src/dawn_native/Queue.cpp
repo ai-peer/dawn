@@ -270,8 +270,9 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("The sample count of textures must be 1");
         }
 
-        DAWN_TRY(ValidateLinearTextureData(*dataLayout, dataSize, destination->texture->GetFormat(),
-                                           *writeSize));
+        DAWN_TRY(ValidateLinearTextureData(
+            *dataLayout, dataSize,
+            destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect), *writeSize));
         DAWN_TRY(ValidateTextureCopyRange(*destination, *writeSize));
 
         return {};
