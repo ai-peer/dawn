@@ -38,8 +38,14 @@ namespace dawn_native {
     bool HasStencil(const AspectMask& aspectMask);
     bool HasDepthOrStencil(const AspectMask& aspectMask);
 
+    struct TexelBlockInfo {
+        uint32_t blockByteSize;
+        uint32_t blockWidth;
+        uint32_t blockHeight;
+    };
+
     // A wgpu::TextureFormat along with all the information about it necessary for validation.
-    struct Format {
+    struct Format : TexelBlockInfo {
         enum class Type {
             Float,
             Sint,
@@ -56,10 +62,6 @@ namespace dawn_native {
         Type type;
         AspectMask aspectMask;
 
-        uint32_t blockByteSize;
-        uint32_t blockWidth;
-        uint32_t blockHeight;
-
         static Type TextureComponentTypeToFormatType(wgpu::TextureComponentType componentType);
         static wgpu::TextureComponentType FormatTypeToTextureComponentType(Type type);
 
@@ -68,6 +70,8 @@ namespace dawn_native {
         bool HasStencil() const;
         bool HasDepthOrStencil() const;
         bool HasComponentType(Type componentType) const;
+
+        TexelBlockInfo GetTexelBlockInfo(wgpu::TextureAspect aspect) const;
 
         // The index of the format in the list of all known formats: a unique number for each format
         // in [0, kKnownFormatCount)
