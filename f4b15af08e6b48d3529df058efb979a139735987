@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "fded3722_b0425fbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T20:41:35Z",
+      "side": 1,
+      "message": "Sorry for the merge conflict; see: https://dawn-review.googlesource.com/c/dawn/+/24642",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0e67dc5_7134a6be",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
