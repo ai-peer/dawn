@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cedaefd4_5337c03e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T23:17:47Z",
+      "side": 0,
+      "message": "[3], binding index mismatch between bind group and bind group layout has been covered.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 79
+      },
+      "revId": "2afea0c6712e311cc8f825a9f0dab8eb284a98ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07f47eb7_a03f7c45",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T23:17:47Z",
+      "side": 0,
+      "message": "[2] binding index \u003e kMaxBindingsPerGroup is valid.",
+      "range": {
+        "startLine": 536,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 1
+      },
+      "revId": "2afea0c6712e311cc8f825a9f0dab8eb284a98ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b8cb0ac_f25e5274",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T23:17:47Z",
+      "side": 0,
+      "message": "[1] Total binding number \u003e kMaxBindingsPerGroup has been covered here, so it is safe to remove that test.",
+      "range": {
+        "startLine": 547,
+        "startChar": 0,
+        "endLine": 549,
+        "endChar": 65
+      },
+      "revId": "2afea0c6712e311cc8f825a9f0dab8eb284a98ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

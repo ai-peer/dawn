@@ -33,6 +33,41 @@
       "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c1d64ad_e4d2daf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T23:17:47Z",
+      "side": 1,
+      "message": "Hey Austin, thanks for your quick reply. But I may have different opinions about this:\n1) If the total binding number exceeds kMaxBindingsPerGroup, the validation code can catch that. And we do have tests to cover that. So don\u0027t worry. it is safe. And you can proceed your kMaxBindingsPerGroup work whenever you have time. See [1].\n2) Regarding the binding index itself, we do have the test for bind group layout which says that binding \u003e\u003d kMaxBindingsPerGroup is OK. see [2].\n3) As I said, this test fail because the binding number mismatch. It is not triggered by what the comment said at all (and the comment itself is incorrect). And we have already have test for binding number mismatch between bind group and bind group layout, see [3].",
+      "parentUuid": "5a3566fe_363d3188",
+      "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d22cb1a_595a2b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-07-10T23:17:47Z",
+      "side": 1,
+      "message": "Appreciate your quick reply, Austin. But I have different opinions even though it is a tiny patch.",
+      "revId": "229cdc9308507de1ce7ab7f0d53b47564ef6a390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
