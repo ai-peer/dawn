@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b48983f9_741f5152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T18:19:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1b2c348f81d7a8ee34b6f39fe21a015ca00a4521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e38c4dd_0b2a8b92",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T18:19:21Z",
+      "side": 1,
+      "message": "This should also check the format of the texture. For example, you should be able to use the All aspect on a Depth32Float texture and specify depthReadOnly but not stencilReadOnly.\n\nI\u0027m working on aspect stuff right now because Dawn currently doesn\u0027t do anything with it. Feel free to do my suggestion, or just omit the aspect check until we have more support.\n\nWe can\u0027t actually test non-All aspect since we prevent it in TextureView validation",
+      "range": {
+        "startLine": 301,
+        "startChar": 16,
+        "endLine": 301,
+        "endChar": 67
+      },
+      "revId": "1b2c348f81d7a8ee34b6f39fe21a015ca00a4521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
