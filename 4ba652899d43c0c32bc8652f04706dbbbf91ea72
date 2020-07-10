@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "7e587038_47ba8dc0",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08a4bd1e_47baabf2",
+      "range": {
+        "startLine": 542,
+        "startChar": 12,
+        "endLine": 544,
+        "endChar": 13
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b57be830_a5e18e38",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 16
@@ -79,6 +103,30 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e1cb363_711003c9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57be830_a5e18e38",
+      "range": {
+        "startLine": 620,
+        "startChar": 44,
+        "endLine": 620,
+        "endChar": 49
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "b8865806_deaa94cf",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44732bc2_897ed69f",
+      "range": {
+        "startLine": 252,
+        "startChar": 35,
+        "endLine": 253,
+        "endChar": 46
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6710d12_18c5dbd6",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 16
@@ -125,6 +197,30 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd366b0e_875f0ef8",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6710d12_18c5dbd6",
+      "range": {
+        "startLine": 268,
+        "startChar": 50,
+        "endLine": 268,
+        "endChar": 53
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "806d7745_fe4f39f8",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "The offset being handled by the frontend was what I had previously but it didn\u0027t work well for the glMapBufferRange. The suggestion to substract it before storing it is good. I\u0027ll change the code to do that.\n\nwebgpu.h differs from the JS API on purpose here, we agreed about it with Dzmitry because in native it is easy to do pointer arithmetic. It will be handled by Blink.",
+      "parentUuid": "cd7ef48b_85b880df",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 310,
+        "endChar": 27
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44da41e7_9af36c58",
         "filename": "src/dawn_native/opengl/BufferGL.cpp",
         "patchSetId": 16
@@ -162,6 +282,30 @@
       "writtenOn": "2020-07-10T05:15:53Z",
       "side": 1,
       "message": "I\u0027ve been a big fan of these hex values lately",
+      "range": {
+        "startLine": 133,
+        "startChar": 62,
+        "endLine": 133,
+        "endChar": 72
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d944771b_cd850d75",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Sadly I have to remove this one :(",
+      "parentUuid": "44da41e7_9af36c58",
       "range": {
         "startLine": 133,
         "startChar": 62,
@@ -197,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "45518930_22a4d32e",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Oh good point, I\u0027ll add a call to InjectError. The mapping validation tests check for errors but they never run with the wire.",
+      "parentUuid": "9dcfb68e_88ba8b0b",
+      "range": {
+        "startLine": 255,
+        "startChar": 8,
+        "endLine": 260,
+        "endChar": 9
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d01c935a_c19317f3",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 16
@@ -220,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "de0adfb8_0e0ebbf4",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d01c935a_c19317f3",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 0
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "110b620e_2836b13c",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 16
@@ -234,6 +426,24 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46805498_23b87146",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "110b620e_2836b13c",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -257,6 +467,30 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "976a28b6_0af3b63e",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-10T15:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51a1aa8c_42493ac2",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 5
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
