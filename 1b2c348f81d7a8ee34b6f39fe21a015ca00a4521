@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "af1efc4c_a57f8ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T20:40:12Z",
+      "side": 1,
+      "message": "Sorry for the merge conflict; see: https://dawn-review.googlesource.com/c/dawn/+/24642",
+      "revId": "1b2c348f81d7a8ee34b6f39fe21a015ca00a4521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e38c4dd_0b2a8b92",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
