@@ -183,4 +183,63 @@ namespace dawn_native { namespace d3d12 {
         return copy;
     }
 
+    TextureCopySplits ComputeTextureCopySplits(Origin3D origin,
+                                               Extent3D copySize,
+                                               const Format& format,
+                                               uint64_t offset,
+                                               uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage) {
+        TextureCopySplits copies;
+
+        const uint64_t bytesPerSlice = bytesPerRow * (rowsPerImage / format.blockHeight);
+
+        // For copies with each texture copy layer, they share almost the same parameters as the
+        // copies of the first texture copy layer except "bufferOffset" and copyOrigin.z. The
+        // "bufferOffset" of copies at i-th layer is (offset + i * bytesPerRow * rowsPerImage) (the
+        // first layer is the 0-th one). In WebGPU, "bytesPerRow" must be a multiple of 256, so we
+        // can divide all B2T and T2B copies into two situations:
+        // 1. bytesPerSlice = 2 * n * 256 (n is an integer, n >= 1):
+        //    offsetForLayerI % 512 == (offsetForLayerI + bytesPerSlice) % 512, so in function
+        //    ComputeTextureCopySplitPerLayer():
+        //    - the results of "offset == alignedOffset" are the same at every layer
+        //    (alignedOffset = offset - offset % 512).
+        //    - the value of "offset - alignedOffset" are the same at every layer
+        //    (offset - alignedOffset = offset % 512).
+        //    Given other paramters are the same for all the layers, we can conclude that the
+        //    result of ComputeTextureCopySplitPerLayer() are the same for all the layers except
+        //    offsetAtCopyLayeri = offset + bytesPerSlice * i.
+        // 2. bytesPerSlice = (2 * n + 1) * 256:
+        //    offsetForLayerI % 512 == (offsetForLayerI + bytesPerSlice * 2) % 512, so in function
+        //    ComputeTextureCopySplitPerLayer():
+        //    - the result of "offset == alignedOffset" at the i-th layer is equal to the one at
+        //    the (i + 2)-th layer.
+        //    - the value of "offset - alignedOffset" at the i-th layer is equal to the one at
+        //    the (i + 2)-th layer.
+        //    Given other paramters are the same for all the layers, we can conclude that:
+        //    - the result of ComputeTextureCopySplitPerLayer() at layer 0 are the same for all
+        //      (2 * n)-th layer except (offsetAtCopyLayeri = offsetAtCopyLayer0 + bytesPerSlice
+        //      * i).
+        //    - the result of ComputeTextureCopySplitPerLayer() at layer 1 are the same for all
+        //      (2 * n + 1)-th layer except (offsetAtCopyLayeri = offsetAtCopyLayer1 + (i - 1)
+        //      * bytesPerSlice).
+
+        const dawn_native::Extent3D copyOneLayerSize = {copySize.width, copySize.height, 1};
+        const dawn_native::Origin3D copyFirstLayerOrigin = {origin.x, origin.y, 0};
+
+        copies.copiesPerLayer[0] = ComputeTextureCopySplit(
+            copyFirstLayerOrigin, copyOneLayerSize, format, offset, bytesPerRow, rowsPerImage);
+
+        if (copySize.depth == 1 || bytesPerSlice % D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT == 0) {
+            copies.count = 1;
+        } else {
+            copies.count = 2;
+            const uint64_t bufferOffsetNextLayer = offset + bytesPerSlice;
+            copies.copiesPerLayer[1] =
+                ComputeTextureCopySplit(copyFirstLayerOrigin, copyOneLayerSize, format,
+                                        bufferOffsetNextLayer, bytesPerRow, rowsPerImage);
+        }
+
+        return copies;
+    }
+
 }}  // namespace dawn_native::d3d12

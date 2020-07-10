@@ -43,12 +43,26 @@ namespace dawn_native { namespace d3d12 {
         std::array<CopyInfo, kMaxTextureCopyRegions> copies;
     };
 
+    struct TextureCopySplits {
+        static constexpr uint32_t kMaxTextureCopySplits = 2;
+
+        uint32_t count = 0;
+        std::array<TextureCopySplit, kMaxTextureCopySplits> copiesPerLayer;
+    };
+
     TextureCopySplit ComputeTextureCopySplit(Origin3D origin,
                                              Extent3D copySize,
                                              const Format& format,
                                              uint64_t offset,
                                              uint32_t bytesPerRow,
                                              uint32_t rowsPerImage);
+
+    TextureCopySplits ComputeTextureCopySplits(Origin3D origin,
+                                               Extent3D copySize,
+                                               const Format& format,
+                                               uint64_t offset,
+                                               uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage);
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_TEXTURECOPYSPLITTER_H_
