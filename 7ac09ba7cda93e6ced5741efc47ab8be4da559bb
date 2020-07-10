@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "be8487d1_80224729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-07-10T17:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf29dc80_5fbaec61",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aba6523_0f76d2f7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -73,6 +97,24 @@
       "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8328c16c_6ea99fc7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-07-10T17:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ee957e_13632eb5",
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
