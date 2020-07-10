@@ -16,6 +16,247 @@
       "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "637b2c07_dedaddf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08a4bd1e_47baabf2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "nit: would prefer a single check before the branches that mode is not both Read | Write",
+      "range": {
+        "startLine": 542,
+        "startChar": 12,
+        "endLine": 544,
+        "endChar": 13
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b57be830_a5e18e38",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "nit: should this be false / true in the read / write cases?",
+      "range": {
+        "startLine": 620,
+        "startChar": 44,
+        "endLine": 620,
+        "endChar": 49
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44732bc2_897ed69f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "uuunit: is there a particular reason this function uses (start, end) and the others use (offset, size) ?",
+      "range": {
+        "startLine": 252,
+        "startChar": 35,
+        "endLine": 253,
+        "endChar": 46
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6710d12_18c5dbd6",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "typo: \"note\"\n\nit is certainly quite interesting that the API does this",
+      "range": {
+        "startLine": 268,
+        "startChar": 50,
+        "endLine": 268,
+        "endChar": 53
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd7ef48b_85b880df",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "That\u0027s odd, why don\u0027t we add the offset here ?\n\nI think we should have all the backends work in the same way w.r.t. this |offset| argument. For D3D12, we can store the un-offset mMappedData and add it here. For OpenGL, we could artificially shift the \"mMappedData\" pointer after mapping, or store a \"baseOffset\"\n\nAlso because the JS API has offset and size args for GetMappedRange(..). Shouldn\u0027t webgpu.h match? i.e. you can do\n\nawait buffer.MapAsync(Write, 4, 16);\nbuffer.GetMappedRange(8, 12);",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 310,
+        "endChar": 27
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44da41e7_9af36c58",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "I\u0027ve been a big fan of these hex values lately",
+      "range": {
+        "startLine": 133,
+        "startChar": 62,
+        "endLine": 133,
+        "endChar": 72
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9dcfb68e_88ba8b0b",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "to clarify: this is ok for now (no validation error) because our mapping validation tests don\u0027t have tests for this yet. seems fine to not test that until the old mapping is removed.",
+      "range": {
+        "startLine": 255,
+        "startChar": 8,
+        "endLine": 260,
+        "endChar": 9
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d01c935a_c19317f3",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "Perhaps this should be set after successful resolution of the callback. Otherwise you can:\n\nawait buffer.MapAsync(offset\u003d0, ...);\nawait buffer.MapAsync(offset\u003d4, ...);\n\nThe second callback would reject b.c. already mapped\n\nbuffer.GetMappedRange() now returns the pointer offset by 4",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 0
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "110b620e_2836b13c",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "can also test mapping a buffer with neither read nor write usage",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a1aa8c_42493ac2",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T05:15:53Z",
+      "side": 1,
+      "message": "actually unmap is called inside the callback and destroy is called before it happens",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 5
+      },
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
