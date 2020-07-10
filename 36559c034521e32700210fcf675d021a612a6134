@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "7c18b40f_68a12c6a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T16:27:01Z",
+      "side": 1,
+      "message": "yea I think I\u0027ll do a follow-up. I\u0027ve had trouble with CRD into my Windows workstation lately so I need to fix that first, hopefully today. I\u0027d rather not write the bucketing blind",
+      "parentUuid": "db1ca7c6_53298067",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73c776a7_f2a96dca",
         "filename": "src/dawn_native/opengl/PipelineLayoutGL.cpp",
         "patchSetId": 14
@@ -98,6 +116,24 @@
       "writtenOn": "2020-07-10T14:24:12Z",
       "side": 1,
       "message": "Hasn\u0027t this issue been fixed?",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "177110fe_3beb348c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T16:27:01Z",
+      "side": 1,
+      "message": "I don\u0027t think so? It failed in Patchset 12, and the other test where this comment is is still skipped.",
+      "parentUuid": "f93181a1_ecbd24f6",
       "revId": "36559c034521e32700210fcf675d021a612a6134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
