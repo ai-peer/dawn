@@ -68,6 +68,24 @@
       "revId": "c6eaca4988345e72c40d463034ab77d18e403bc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4d36abe_d01bfa11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T17:20:20Z",
+      "side": 1,
+      "message": "Yes, I think so. Added a note to the commit message about this.",
+      "parentUuid": "99b07845_39ee3fca",
+      "revId": "c6eaca4988345e72c40d463034ab77d18e403bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
