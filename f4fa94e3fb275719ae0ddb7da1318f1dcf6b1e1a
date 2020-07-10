@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "3529c558_81e03feb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T19:18:01Z",
+      "side": 1,
+      "message": "Good call, I\u0027ll just leave this as it was.\n\nI believe we agreed in the spec that there would be no default for either bytesPerRow or rowsPerImage (0 is only allowed if the copy has one row, or one image, respectively), so this should get deleted at some point anyway.",
+      "parentUuid": "01765e94_9ba9ff70",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e88aeeb1_81c98673",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "761ca24b_790ff3db",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T19:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e88aeeb1_81c98673",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "9198dfdd_0fbaae6b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T19:18:01Z",
+      "side": 1,
+      "message": "Great catch!",
+      "parentUuid": "392717f9_c5d20960",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d48a510_3c65df78",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 1
@@ -118,6 +172,24 @@
       "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38516378_c8bb9d1e",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T19:18:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d48a510_3c65df78",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
