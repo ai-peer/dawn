@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "956303be_64460868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-10T00:58:28Z",
+      "side": 1,
+      "message": "Trying to get us as close as possible to webgpu.h since I\u0027m doing an Emscripten update. PTAL - hopefully I didn\u0027t collide with Tomek with this change (sorry if I did!)",
+      "revId": "f4fa94e3fb275719ae0ddb7da1318f1dcf6b1e1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
