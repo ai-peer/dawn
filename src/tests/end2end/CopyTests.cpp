@@ -98,7 +98,7 @@ class CopyTests_T2B : public CopyTests {
                   kTextureFormat, textureSpec.textureSize, textureSpec.level,
                   bufferSpec.rowsPerImage);
 
-          wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+          wgpu::CommandEncoder encoder1 = device.CreateCommandEncoder();
 
           // Initialize the source texture
           std::vector<RGBA8> textureArrayData = GetExpectedTextureData(copyLayout);
@@ -110,9 +110,13 @@ class CopyTests_T2B : public CopyTests {
                   uploadBuffer, 0, copyLayout.bytesPerRow, bufferSpec.rowsPerImage);
               wgpu::TextureCopyView textureCopyView =
                   utils::CreateTextureCopyView(texture, textureSpec.level, {0, 0, 0});
-              encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyLayout.mipSize);
+              encoder1.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyLayout.mipSize);
           }
 
+          wgpu::CommandBuffer commands1 = encoder1.Finish();
+          queue.Submit(1, &commands1);
+
+          wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
           // Create a buffer of `size` and populate it with empty data (0,0,0,0) Note:
           // Prepopulating the buffer with empty data ensures that there is not random data in the
           // expectation and helps ensure that the padding due to the bytes per row is not modified
@@ -746,6 +750,60 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionNonzeroRowsPerImage) {
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
 
+// Test a special code path in the D3D12 backends that (BytesPerRow * RowsPerImage) is not a
+// multiple of 512.
+TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetOddRowsPerImage) {
+    // TODO(jiawei.shao@intel.com): investigate why copies with multiple texture array layers fail
+    // with swiftshader.
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
+    constexpr uint32_t kWidth = 64;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kLayers = 8u;
+    constexpr uint32_t kBaseLayer = 2u;
+    constexpr uint32_t kCopyLayers = 5u;
+
+    constexpr uint32_t kRowsPerImage = kHeight + 1;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, kBaseLayer};
+    textureSpec.textureSize = {kWidth, kHeight, kLayers};
+    textureSpec.level = 0;
+
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    bufferSpec.offset += 128u;
+    bufferSpec.size += 128u;
+    bufferSpec.rowsPerImage = kRowsPerImage;
+    DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
+}
+
+// Test a special code path in the D3D12 backends that (BytesPerRow * RowsPerImage) is a multiple
+// of 512.
+TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
+    // TODO(jiawei.shao@intel.com): investigate why copies with multiple texture array layers fail
+    // with swiftshader.
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
+    constexpr uint32_t kWidth = 64;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kLayers = 8u;
+    constexpr uint32_t kBaseLayer = 2u;
+    constexpr uint32_t kCopyLayers = 4u;
+
+    constexpr uint32_t kRowsPerImage = kHeight + 2;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, kBaseLayer};
+    textureSpec.textureSize = {kWidth, kHeight, kLayers};
+    textureSpec.level = 0;
+
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    bufferSpec.offset += 128u;
+    bufferSpec.size += 128u;
+    bufferSpec.rowsPerImage = kRowsPerImage;
+    DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
+}
+
 DAWN_INSTANTIATE_TEST(CopyTests_T2B, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
 
 // Test that copying an entire texture with 256-byte aligned dimensions works
@@ -1086,6 +1144,60 @@ TEST_P(CopyTests_B2T, Texture2DArrayRegionNonzeroRowsPerImage) {
     textureSpec.level = 0;
 
     BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    bufferSpec.rowsPerImage = kRowsPerImage;
+    DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
+}
+
+// Test a special code path in the D3D12 backends that (BytesPerRow * RowsPerImage) is not a
+// multiple of 512.
+TEST_P(CopyTests_B2T, Texture2DArrayRegionWithOffsetOddRowsPerImage) {
+    // TODO(jiawei.shao@intel.com): investigate why copies with multiple texture array layers fail
+    // with swiftshader.
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
+    constexpr uint32_t kWidth = 64;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kLayers = 8u;
+    constexpr uint32_t kBaseLayer = 2u;
+    constexpr uint32_t kCopyLayers = 5u;
+
+    constexpr uint32_t kRowsPerImage = kHeight + 1;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, kBaseLayer};
+    textureSpec.textureSize = {kWidth, kHeight, kLayers};
+    textureSpec.level = 0;
+
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    bufferSpec.offset += 128u;
+    bufferSpec.size += 128u;
+    bufferSpec.rowsPerImage = kRowsPerImage;
+    DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
+}
+
+// Test a special code path in the D3D12 backends that (BytesPerRow * RowsPerImage) is a multiple
+// of 512.
+TEST_P(CopyTests_B2T, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
+    // TODO(jiawei.shao@intel.com): investigate why copies with multiple texture array layers fail
+    // with swiftshader.
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
+    constexpr uint32_t kWidth = 64;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kLayers = 8u;
+    constexpr uint32_t kBaseLayer = 2u;
+    constexpr uint32_t kCopyLayers = 5u;
+
+    constexpr uint32_t kRowsPerImage = kHeight + 2;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, kBaseLayer};
+    textureSpec.textureSize = {kWidth, kHeight, kLayers};
+    textureSpec.level = 0;
+
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    bufferSpec.offset += 128u;
+    bufferSpec.size += 128u;
     bufferSpec.rowsPerImage = kRowsPerImage;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
