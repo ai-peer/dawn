@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf29dc80_5fbaec61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T00:10:38Z",
+      "side": 1,
+      "message": "nit: I might make this more clear to say it only implements validation for the flags. That way it\u0027s clear we don\u0027t take advantage of them in the backend yet.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aba6523_0f76d2f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-10T00:10:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7ac09ba7cda93e6ced5741efc47ab8be4da559bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
