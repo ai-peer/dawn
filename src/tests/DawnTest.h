@@ -16,6 +16,7 @@
 #define TESTS_DAWNTEST_H_
 
 #include "common/Log.h"
+#include "common/Platform.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
@@ -157,6 +158,11 @@ BackendTestConfig VulkanBackend(std::initializer_list<const char*> forceEnabledW
 
 namespace utils {
     class TerribleCommandBuffer;
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    class WindowsDebugLogger;
+#endif
+
 }  // namespace utils
 
 namespace detail {
@@ -220,6 +226,10 @@ class DawnTestEnvironment : public testing::Environment {
     std::string mWireTraceDir;
     std::vector<dawn_native::DeviceType> mDevicePreferences;
     std::vector<TestAdapterProperties> mAdapterProperties;
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    std::unique_ptr<utils::WindowsDebugLogger> mWindowsDebugLogger;
+#endif
 };
 
 class DawnTestBase {

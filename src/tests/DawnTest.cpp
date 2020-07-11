@@ -35,10 +35,14 @@
 #include <sstream>
 #include <unordered_map>
 
-#ifdef DAWN_ENABLE_BACKEND_OPENGL
+#if defined(DAWN_PLATFORM_WINDOWS)
 #    include "GLFW/glfw3.h"
 #    include "dawn_native/OpenGLBackend.h"
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    include "utils/WindowsDebugLogger.h"
+#endif  // DAWN_PLATFORM_WINDOWS
 
 namespace {
 
@@ -81,7 +85,7 @@ namespace {
 
     DawnTestEnvironment* gTestEnv = nullptr;
 
-}  // namespace
+}  // anonymous namespace
 
 const RGBA8 RGBA8::kZero = RGBA8(0, 0, 0, 0);
 const RGBA8 RGBA8::kBlack = RGBA8(0, 0, 0, 255);
@@ -185,6 +189,12 @@ void DawnTestEnvironment::SetEnvironment(DawnTestEnvironment* env) {
 
 DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
     ParseArgs(argc, argv);
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    if (mEnableBackendValidation) {
+        mWindowsDebugLogger = std::make_unique<utils::WindowsDebugLogger>();
+    }
+#endif  // DAWN_PLATFORM_WINDOWS
 
     // Create a temporary instance to select available and preferred adapters. This is done before
     // test instantiation so GetAvailableAdapterTestParamsForBackends can generate test
