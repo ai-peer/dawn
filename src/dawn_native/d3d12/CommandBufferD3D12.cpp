@@ -104,7 +104,7 @@ namespace dawn_native { namespace d3d12 {
                 const D3D12_TEXTURE_COPY_LOCATION bufferLocation =
                     ComputeBufferLocationForCopyTextureRegion(texture, buffer->GetD3D12Resource(),
                                                               info.bufferSize, offset,
-                                                              bufferBytesPerRow);
+                                                              bufferBytesPerRow, aspect);
                 const D3D12_BOX sourceRegion =
                     ComputeD3D12BoxFromOffsetAndSize(info.bufferOffset, info.copySize);
 
@@ -137,7 +137,7 @@ namespace dawn_native { namespace d3d12 {
                 const D3D12_TEXTURE_COPY_LOCATION bufferLocation =
                     ComputeBufferLocationForCopyTextureRegion(texture, buffer->GetD3D12Resource(),
                                                               info.bufferSize, offset,
-                                                              bufferBytesPerRow);
+                                                              bufferBytesPerRow, aspect);
                 const D3D12_BOX sourceRegion =
                     ComputeD3D12BoxFromOffsetAndSize(info.textureOffset, info.copySize);
 
@@ -521,6 +521,7 @@ namespace dawn_native { namespace d3d12 {
                 TextureViewBase* colorView = renderPass->colorAttachments[i].view.Get();
                 Texture* colorTexture = ToBackend(colorView->GetTexture());
                 Texture* resolveTexture = ToBackend(resolveTarget->GetTexture());
+                ASSERT(resolveTexture->GetFormat() == Aspect::Color);
 
                 // Transition the usages of the color attachment and resolve target.
                 colorTexture->TrackUsageAndTransitionNow(commandContext,
@@ -691,14 +692,17 @@ namespace dawn_native { namespace d3d12 {
                     texture->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopyDst,
                                                         subresources);
 
+                    const TexelBlockInfo& blockInfo =
+                        texture->GetFormat().GetTexelBlockInfo(copy->destination.aspect);
+
                     // See comments in ComputeTextureCopySplits() for more details.
                     const TextureCopySplits copySplits = ComputeTextureCopySplits(
-                        copy->destination.origin, copy->copySize, texture->GetFormat(),
-                        copy->source.offset, copy->source.bytesPerRow, copy->source.rowsPerImage);
+                        copy->destination.origin, copy->copySize, blockInfo, copy->source.offset,
+                        copy->source.bytesPerRow, copy->source.rowsPerImage);
 
                     const uint64_t bytesPerSlice =
                         copy->source.bytesPerRow *
-                        (copy->source.rowsPerImage / texture->GetFormat().blockHeight);
+                        (copy->source.rowsPerImage / blockInfo.blockHeight);
 
                     // copySplits.copies2D[1] is always calculated for the second copy slice with
                     // extra "bytesPerSlice" copy offset compared with the first copy slice. So
@@ -747,15 +751,17 @@ namespace dawn_native { namespace d3d12 {
                                                         subresources);
                     buffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
 
+                    const TexelBlockInfo& blockInfo =
+                        texture->GetFormat().GetTexelBlockInfo(copy->source.aspect);
+
                     // See comments around ComputeTextureCopySplits() for more details.
                     const TextureCopySplits copySplits = ComputeTextureCopySplits(
-                        copy->source.origin, copy->copySize, texture->GetFormat(),
-                        copy->destination.offset, copy->destination.bytesPerRow,
-                        copy->destination.rowsPerImage);
+                        copy->source.origin, copy->copySize, blockInfo, copy->destination.offset,
+                        copy->destination.bytesPerRow, copy->destination.rowsPerImage);
 
                     const uint64_t bytesPerSlice =
                         copy->destination.bytesPerRow *
-                        (copy->destination.rowsPerImage / texture->GetFormat().blockHeight);
+                        (copy->destination.rowsPerImage / blockInfo.blockHeight);
 
                     // copySplits.copies2D[1] is always calculated for the second copy slice with
                     // extra "bytesPerSlice" copy offset compared with the first copy slice. So

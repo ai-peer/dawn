@@ -548,6 +548,26 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetD3D12Resource();
     }
 
+    DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
+        ASSERT(GetFormat().aspects & aspect);
+
+        switch (GetFormat().format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                switch (aspect) {
+                    case Aspect::Depth:
+                        return DXGI_FORMAT_R32_FLOAT;
+                    case Aspect::Stencil:
+                        return DXGI_FORMAT_R8_UINT;
+                    default:
+                        UNREACHABLE();
+                        return GetD3D12Format();
+                }
+            default:
+                ASSERT(HasOneBit(GetFormat().aspects));
+                return GetD3D12Format();
+        }
+    }
+
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
                                              wgpu::TextureUsage usage,
                                              const SubresourceRange& range) {
@@ -575,7 +595,15 @@ namespace dawn_native { namespace d3d12 {
         }
 
         std::vector<D3D12_RESOURCE_BARRIER> barriers;
-        barriers.reserve(range.levelCount * range.layerCount);
+
+        // TODO(enga): Consider adding a Count helper.
+        uint32_t aspectCount = 0;
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            aspectCount++;
+            DAWN_UNUSED(aspect);
+        }
+
+        barriers.reserve(range.levelCount * range.layerCount * aspectCount);
 
         TransitionUsageAndGetResourceBarrier(commandContext, &barriers, newState, range);
         if (barriers.size()) {
@@ -653,19 +681,6 @@ namespace dawn_native { namespace d3d12 {
         barrier.Transition.Subresource =
             allSubresources ? D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES : index;
         barriers->push_back(barrier);
-        // TODO(yunchao.he@intel.com): support subresource for depth/stencil. Depth stencil
-        // texture has different plane slices. While the current implementation only has differernt
-        // mip slices and array slices for subresources.
-        // This is a hack because Dawn doesn't handle subresource of multiplanar resources
-        // correctly. We force the transition to be the same for all planes to match what the
-        // frontend validation checks for. This hack might be incorrect for stencil-only texture
-        // because we always set transition barrier for depth plane.
-        if (!allSubresources && newState == D3D12_RESOURCE_STATE_DEPTH_WRITE &&
-            GetFormat().HasStencil()) {
-            D3D12_RESOURCE_BARRIER barrierStencil = barrier;
-            barrierStencil.Transition.Subresource += GetArrayLayers() * GetNumMipLevels();
-            barriers->push_back(barrierStencil);
-        }
 
         state->isValidToDecay = false;
     }
@@ -687,7 +702,6 @@ namespace dawn_native { namespace d3d12 {
         HandleTransitionSpecialCases(commandContext);
 
         const Serial pendingCommandSerial = ToBackend(GetDevice())->GetPendingCommandSerial();
-        uint32_t subresourceCount = GetSubresourceCount();
 
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
@@ -696,13 +710,15 @@ namespace dawn_native { namespace d3d12 {
         // are the same, then we can use one barrier to do state transition for all subresources.
         // Note that if the texture has only one mip level and one array slice, it will fall into
         // this category.
-        bool areAllSubresourcesCovered = range.levelCount * range.layerCount == subresourceCount;
+        bool areAllSubresourcesCovered = (range.levelCount == GetNumMipLevels() &&  //
+                                          range.layerCount == GetArrayLayers() &&   //
+                                          range.aspects == GetFormat().aspects);
         if (mSameLastUsagesAcrossSubresources && areAllSubresourcesCovered) {
             TransitionSingleOrAllSubresources(barriers, 0, newState, pendingCommandSerial, true);
 
             // TODO(yunchao.he@intel.com): compress and decompress if all subresources have the
             // same states. We may need to retain mSubresourceStateAndDecay[0] only.
-            for (uint32_t i = 1; i < subresourceCount; ++i) {
+            for (uint32_t i = 1; i < GetSubresourceCount(); ++i) {
                 mSubresourceStateAndDecay[i] = mSubresourceStateAndDecay[0];
             }
 
@@ -843,8 +859,6 @@ namespace dawn_native { namespace d3d12 {
             if (GetFormat().HasDepthOrStencil()) {
                 TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
 
-                D3D12_CLEAR_FLAGS clearFlags = {};
-
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t layer = range.baseArrayLayer;
@@ -970,7 +984,7 @@ namespace dawn_native { namespace d3d12 {
                         D3D12_TEXTURE_COPY_LOCATION bufferLocation =
                             ComputeBufferLocationForCopyTextureRegion(
                                 this, ToBackend(uploadHandle.stagingBuffer)->GetResource(),
-                                info.bufferSize, copySplit.offset, bytesPerRow);
+                                info.bufferSize, copySplit.offset, bytesPerRow, Aspect::Color);
                         D3D12_BOX sourceRegion =
                             ComputeD3D12BoxFromOffsetAndSize(info.bufferOffset, info.copySize);
 
