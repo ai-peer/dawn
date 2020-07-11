@@ -547,6 +547,26 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetD3D12Resource();
     }
 
+    DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
+        ASSERT(GetFormat().aspectMask[aspect]);
+
+        switch (GetFormat().format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                switch (aspect) {
+                    case Aspect::Depth:
+                        return DXGI_FORMAT_R32_FLOAT;
+                    case Aspect::Stencil:
+                        return DXGI_FORMAT_R8_UINT;
+                    default:
+                        UNREACHABLE();
+                        return GetD3D12Format();
+                }
+            default:
+                ASSERT(GetFormat().aspectMask.count() == 1);
+                return GetD3D12Format();
+        }
+    }
+
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
                                              wgpu::TextureUsage usage,
                                              const SubresourceRange& range) {
@@ -574,7 +594,7 @@ namespace dawn_native { namespace d3d12 {
         }
 
         std::vector<D3D12_RESOURCE_BARRIER> barriers;
-        barriers.reserve(range.levelCount * range.layerCount);
+        barriers.reserve(range.levelCount * range.layerCount * range.aspectMask.count());
 
         TransitionUsageAndGetResourceBarrier(commandContext, &barriers, newState, range);
         if (barriers.size()) {
@@ -652,19 +672,6 @@ namespace dawn_native { namespace d3d12 {
         barrier.Transition.Subresource =
             allSubresources ? D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES : index;
         barriers->push_back(barrier);
-        // TODO(yunchao.he@intel.com): support subresource for depth/stencil. Depth stencil
-        // texture has different plane slices. While the current implementation only has differernt
-        // mip slices and array slices for subresources.
-        // This is a hack because Dawn doesn't handle subresource of multiplanar resources
-        // correctly. We force the transition to be the same for all planes to match what the
-        // frontend validation checks for. This hack might be incorrect for stencil-only texture
-        // because we always set transition barrier for depth plane.
-        if (!allSubresources && newState == D3D12_RESOURCE_STATE_DEPTH_WRITE &&
-            GetFormat().HasStencil()) {
-            D3D12_RESOURCE_BARRIER barrierStencil = barrier;
-            barrierStencil.Transition.Subresource += GetArrayLayers() * GetNumMipLevels();
-            barriers->push_back(barrierStencil);
-        }
 
         state->isValidToDecay = false;
     }
@@ -695,7 +702,8 @@ namespace dawn_native { namespace d3d12 {
         // are the same, then we can use one barrier to do state transition for all subresources.
         // Note that if the texture has only one mip level and one array slice, it will fall into
         // this category.
-        bool areAllSubresourcesCovered = range.levelCount * range.layerCount == subresourceCount;
+        bool areAllSubresourcesCovered =
+            range.levelCount * range.layerCount * range.aspectMask.count() == subresourceCount;
         if (mSameLastUsagesAcrossSubresources && areAllSubresourcesCovered) {
             TransitionSingleOrAllSubresources(barriers, 0, newState, pendingCommandSerial, true);
 
@@ -707,13 +715,15 @@ namespace dawn_native { namespace d3d12 {
 
             return;
         }
-        for (uint32_t arrayLayer = 0; arrayLayer < range.layerCount; ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < range.levelCount; ++mipLevel) {
-                uint32_t index = GetSubresourceIndex(range.baseMipLevel + mipLevel,
-                                                     range.baseArrayLayer + arrayLayer);
+        for (Aspect aspect : IterateBitSet(range.aspectMask)) {
+            for (uint32_t arrayLayer = 0; arrayLayer < range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = 0; mipLevel < range.levelCount; ++mipLevel) {
+                    uint32_t index = GetSubresourceIndex(range.baseMipLevel + mipLevel,
+                                                         range.baseArrayLayer + arrayLayer, aspect);
 
-                TransitionSingleOrAllSubresources(barriers, index, newState, pendingCommandSerial,
-                                                  false);
+                    TransitionSingleOrAllSubresources(barriers, index, newState,
+                                                      pendingCommandSerial, false);
+                }
             }
         }
         mSameLastUsagesAcrossSubresources = areAllSubresourcesCovered;
@@ -748,20 +758,22 @@ namespace dawn_native { namespace d3d12 {
             return;
         }
 
-        for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
-                uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer);
+        for (Aspect aspect : IterateBitSet(GetFormat().aspectMask)) {
+            for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
+                for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
+                    uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
 
-                // Skip if this subresource is not used during the current pass
-                if (textureUsages.subresourceUsages[index] == wgpu::TextureUsage::None) {
-                    continue;
+                    // Skip if this subresource is not used during the current pass
+                    if (textureUsages.subresourceUsages[index] == wgpu::TextureUsage::None) {
+                        continue;
+                    }
+
+                    D3D12_RESOURCE_STATES newState =
+                        D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
+
+                    TransitionSingleOrAllSubresources(barriers, index, newState,
+                                                      pendingCommandSerial, false);
                 }
-
-                D3D12_RESOURCE_STATES newState =
-                    D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
-
-                TransitionSingleOrAllSubresources(barriers, index, newState, pendingCommandSerial,
-                                                  false);
             }
         }
         mSameLastUsagesAcrossSubresources = textureUsages.sameUsagesAcrossSubresources;
@@ -838,17 +850,19 @@ namespace dawn_native { namespace d3d12 {
             if (GetFormat().HasDepthOrStencil()) {
                 TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
 
-                D3D12_CLEAR_FLAGS clearFlags = {};
-
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
+                        AspectMask aspectMask = {};
+                        for (Aspect aspect : IterateBitSet(range.aspectMask)) {
+                            if (clearValue == TextureBase::ClearValue::Zero &&
+                                IsSubresourceContentInitialized(
+                                    SubresourceRange::SingleSubresource(level, layer, aspect))) {
+                                // Skip lazy clears if already initialized.
+                                continue;
+                            }
+                            aspectMask.set(aspect);
                         }
 
                         CPUDescriptorHeapAllocation dsvHandle;
@@ -860,10 +874,11 @@ namespace dawn_native { namespace d3d12 {
                         device->GetD3D12Device()->CreateDepthStencilView(GetD3D12Resource(),
                                                                          &dsvDesc, baseDescriptor);
 
-                        if (GetFormat().HasDepth()) {
+                        D3D12_CLEAR_FLAGS clearFlags = {};
+                        if (HasDepth(aspectMask)) {
                             clearFlags |= D3D12_CLEAR_FLAG_DEPTH;
                         }
-                        if (GetFormat().HasStencil()) {
+                        if (HasStencil(aspectMask)) {
                             clearFlags |= D3D12_CLEAR_FLAG_STENCIL;
                         }
 
@@ -878,13 +893,14 @@ namespace dawn_native { namespace d3d12 {
                 const float clearColorRGBA[4] = {fClearColor, fClearColor, fClearColor,
                                                  fClearColor};
 
+                ASSERT(IsColor(range.aspectMask));
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
+                                SubresourceRange::SingleSubresource(level, layer, Aspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -920,6 +936,7 @@ namespace dawn_native { namespace d3d12 {
 
             TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
 
+            ASSERT(IsColor(range.aspectMask));
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
                 // compute d3d12 texture copy locations for texture and buffer
@@ -934,20 +951,20 @@ namespace dawn_native { namespace d3d12 {
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                     if (clearValue == TextureBase::ClearValue::Zero &&
                         IsSubresourceContentInitialized(
-                            SubresourceRange::SingleSubresource(level, layer))) {
+                            SubresourceRange::SingleSubresource(level, layer, Aspect::Color))) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
 
                     D3D12_TEXTURE_COPY_LOCATION textureLocation =
-                        ComputeTextureCopyLocationForTexture(this, level, layer);
+                        ComputeTextureCopyLocationForTexture(this, level, layer, Aspect::Color);
                     for (uint32_t i = 0; i < copySplit.count; ++i) {
                         Texture2DCopySplit::CopyInfo& info = copySplit.copies[i];
 
                         D3D12_TEXTURE_COPY_LOCATION bufferLocation =
                             ComputeBufferLocationForCopyTextureRegion(
                                 this, ToBackend(uploadHandle.stagingBuffer)->GetResource(),
-                                info.bufferSize, copySplit.offset, bytesPerRow);
+                                info.bufferSize, copySplit.offset, bytesPerRow, Aspect::Color);
                         D3D12_BOX sourceRegion =
                             ComputeD3D12BoxFromOffsetAndSize(info.bufferOffset, info.copySize);
 

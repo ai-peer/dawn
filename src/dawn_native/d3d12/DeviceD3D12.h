@@ -164,6 +164,9 @@ namespace dawn_native { namespace d3d12 {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        uint8_t GetSubresourcePlaneCount(const Format& format) const override;
+        uint8_t GetSubresourcePlaneIndex(const Format& format, TextureAspect aspect) const override;
+
         void ShutDownImpl() override;
         MaybeError WaitForIdleForDestruction() override;
 

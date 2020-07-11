@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/Format.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
@@ -320,6 +321,32 @@ namespace dawn_native { namespace d3d12 {
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {
         return new TextureView(texture, descriptor);
+    }
+
+    uint8_t Device::GetSubresourcePlaneCount(const Format& format) const {
+        switch (format.format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                return 2;
+            default:
+                return 1;
+        }
+    }
+
+    uint8_t Device::GetSubresourcePlaneIndex(const Format& format, Aspect aspect) const {
+        switch (format.format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                switch (aspect) {
+                    case Aspect::Depth:
+                        return 0;
+                    case Aspect::Stencil:
+                        return 1;
+                    default:
+                        UNREACHABLE();
+                        return 0;
+                }
+            default:
+                return 0;
+        }
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
