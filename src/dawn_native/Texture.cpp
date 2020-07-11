@@ -357,14 +357,48 @@ namespace dawn_native {
         }
     }
 
-    AspectMask SingleAspect(Aspect aspect) {
+    Aspect SingleAspect(const Format& format, wgpu::TextureAspect aspect) {
+        switch (aspect) {
+            case wgpu::TextureAspect::All: {
+                ASSERT(format.aspectMask.count() == 1);
+                if (format.aspectMask[Aspect::Color]) {
+                    return Aspect::Color;
+                } else if (format.aspectMask[Aspect::Depth]) {
+                    return Aspect::Depth;
+                } else if (format.aspectMask[Aspect::Stencil]) {
+                    return Aspect::Stencil;
+                } else {
+                    UNREACHABLE();
+                }
+                break;
+            }
+            case wgpu::TextureAspect::DepthOnly:
+                ASSERT(format.aspectMask[Aspect::Depth]);
+                return Aspect::Depth;
+                break;
+            case wgpu::TextureAspect::StencilOnly:
+                ASSERT(format.aspectMask[Aspect::Stencil]);
+                return Aspect::Stencil;
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+    }
+
+    AspectMask SingleAspectMask(const Format& format, wgpu::TextureAspect aspect) {
+        return SingleAspectMask(SingleAspect(format, aspect));
+    }
+
+    AspectMask SingleAspectMask(Aspect aspect) {
         return AspectMask(1u << static_cast<uint8_t>(aspect));
     }
 
     // static
     SubresourceRange SubresourceRange::SingleSubresource(uint32_t baseMipLevel,
-                                                         uint32_t baseArrayLayer) {
-        return {baseMipLevel, 1, baseArrayLayer, 1};
+                                                         uint32_t baseArrayLayer,
+                                                         Aspect aspect) {
+        return {baseMipLevel, 1, baseArrayLayer, 1, SingleAspectMask(aspect)};
     }
 
     // TextureBase
@@ -380,6 +414,11 @@ namespace dawn_native {
           mSampleCount(descriptor->sampleCount),
           mUsage(descriptor->usage),
           mState(state) {
+        uint8_t planeIndex = 0;
+        for (Aspect aspect : IterateBitSet(mFormat.aspectMask)) {
+            mPlaneIndices[aspect] = planeIndex++;
+        }
+
         uint32_t subresourceCount = GetSubresourceCount();
         mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
 
@@ -442,7 +481,7 @@ namespace dawn_native {
     }
     SubresourceRange TextureBase::GetAllSubresources() const {
         ASSERT(!IsError());
-        return {0, mMipLevelCount, 0, GetArrayLayers()};
+        return {0, mMipLevelCount, 0, GetArrayLayers(), mFormat.aspectMask};
     }
     uint32_t TextureBase::GetSampleCount() const {
         ASSERT(!IsError());
@@ -450,7 +489,7 @@ namespace dawn_native {
     }
     uint32_t TextureBase::GetSubresourceCount() const {
         ASSERT(!IsError());
-        return mMipLevelCount * mSize.depth;
+        return mMipLevelCount * mSize.depth * mFormat.aspectMask.count();
     }
     wgpu::TextureUsage TextureBase::GetUsage() const {
         ASSERT(!IsError());
@@ -462,25 +501,31 @@ namespace dawn_native {
         return mState;
     }
 
-    uint32_t TextureBase::GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice) const {
+    uint32_t TextureBase::GetSubresourceIndex(uint32_t mipLevel,
+                                              uint32_t arraySlice,
+                                              Aspect aspect) const {
         ASSERT(arraySlice <= kMaxTexture2DArrayLayers);
         ASSERT(mipLevel <= kMaxTexture2DMipLevels);
+        ASSERT(mFormat.aspectMask[aspect]);
         static_assert(kMaxTexture2DMipLevels <=
                           std::numeric_limits<uint32_t>::max() / kMaxTexture2DArrayLayers,
                       "texture size overflows uint32_t");
-        return GetNumMipLevels() * arraySlice + mipLevel;
+        return mipLevel + arraySlice * GetNumMipLevels() +
+               mPlaneIndices[aspect] * GetNumMipLevels() * GetArrayLayers();
     }
 
     bool TextureBase::IsSubresourceContentInitialized(const SubresourceRange& range) const {
         ASSERT(!IsError());
-        for (uint32_t arrayLayer = range.baseArrayLayer;
-             arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
-            for (uint32_t mipLevel = range.baseMipLevel;
-                 mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
-                uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
-                ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
-                if (!mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
-                    return false;
+        for (Aspect aspect : IterateBitSet(range.aspectMask)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
+                    ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+                    if (!mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
+                        return false;
+                    }
                 }
             }
         }
@@ -490,13 +535,15 @@ namespace dawn_native {
     void TextureBase::SetIsSubresourceContentInitialized(bool isInitialized,
                                                          const SubresourceRange& range) {
         ASSERT(!IsError());
-        for (uint32_t arrayLayer = range.baseArrayLayer;
-             arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
-            for (uint32_t mipLevel = range.baseMipLevel;
-                 mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
-                uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
-                ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
-                mIsSubresourceContentInitializedAtIndex[subresourceIndex] = isInitialized;
+        for (Aspect aspect : IterateBitSet(range.aspectMask)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
+                    ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+                    mIsSubresourceContentInitializedAtIndex[subresourceIndex] = isInitialized;
+                }
             }
         }
     }
@@ -592,7 +639,23 @@ namespace dawn_native {
           mFormat(GetDevice()->GetValidInternalFormat(descriptor->format)),
           mDimension(descriptor->dimension),
           mRange({descriptor->baseMipLevel, descriptor->mipLevelCount, descriptor->baseArrayLayer,
-                  descriptor->arrayLayerCount}) {
+                  descriptor->arrayLayerCount, 0}) {
+        switch (descriptor->aspect) {
+            case wgpu::TextureAspect::All:
+                mRange.aspectMask = GetFormat().aspectMask;
+                break;
+            case wgpu::TextureAspect::DepthOnly:
+                ASSERT(mFormat.aspectMask[Aspect::Depth]);
+                mRange.aspectMask = SingleAspectMask(Aspect::Depth);
+                break;
+            case wgpu::TextureAspect::StencilOnly:
+                ASSERT(mFormat.aspectMask[Aspect::Stencil]);
+                mRange.aspectMask = SingleAspectMask(Aspect::Stencil);
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
     }
 
     TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)

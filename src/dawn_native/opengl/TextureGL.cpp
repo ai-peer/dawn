@@ -232,8 +232,10 @@ namespace dawn_native { namespace opengl {
                             if (GetArrayLayers() == 1) {
                                 if (clearValue == TextureBase::ClearValue::Zero &&
                                     IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, 0))) {
+                                        {level, 1, 0, 1, GetFormat().aspectMask})) {
                                     // Skip lazy clears if already initialized.
+                                    // We don't check aspects individually because OpenGL has
+                                    // depth/stencil as the same subresource.
                                     continue;
                                 }
                                 gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
@@ -245,8 +247,10 @@ namespace dawn_native { namespace opengl {
                                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                                     if (clearValue == TextureBase::ClearValue::Zero &&
                                         IsSubresourceContentInitialized(
-                                            SubresourceRange::SingleSubresource(level, layer))) {
+                                            {level, 1, layer, 1, GetFormat().aspectMask})) {
                                         // Skip lazy clears if already initialized.
+                                        // We don't check aspects individually because OpenGL has
+                                        // depth/stencil as the same subresource.
                                         continue;
                                     }
 
@@ -268,6 +272,8 @@ namespace dawn_native { namespace opengl {
             } else {
                 static constexpr uint32_t MAX_TEXEL_SIZE = 16;
                 ASSERT(GetFormat().blockByteSize <= MAX_TEXEL_SIZE);
+                ASSERT(IsColor(range.aspectMask));
+
                 std::array<GLbyte, MAX_TEXEL_SIZE> clearColorData;
                 clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 255;
                 clearColorData.fill(clearColor);
@@ -280,7 +286,7 @@ namespace dawn_native { namespace opengl {
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
+                                SubresourceRange::SingleSubresource(level, layer, Aspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -302,6 +308,7 @@ namespace dawn_native { namespace opengl {
             // Make sure that we are not rounding
             ASSERT(bytesPerRow % GetFormat().blockByteSize == 0);
             ASSERT(GetHeight() % GetFormat().blockHeight == 0);
+            ASSERT(IsColor(range.aspectMask));
 
             dawn_native::BufferDescriptor descriptor = {};
             descriptor.mappedAtCreation = true;
@@ -334,7 +341,7 @@ namespace dawn_native { namespace opengl {
                         if (GetArrayLayers() == 1) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
                                 IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleSubresource(level, 0))) {
+                                    SubresourceRange::SingleSubresource(level, 0, Aspect::Color))) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -346,7 +353,8 @@ namespace dawn_native { namespace opengl {
                                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
                                 if (clearValue == TextureBase::ClearValue::Zero &&
                                     IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, layer))) {
+                                        SubresourceRange::SingleSubresource(level, layer,
+                                                                            Aspect::Color))) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }

@@ -29,14 +29,16 @@ namespace dawn_native { namespace d3d12 {
 
     D3D12_TEXTURE_COPY_LOCATION ComputeTextureCopyLocationForTexture(const Texture* texture,
                                                                      uint32_t level,
-                                                                     uint32_t slice);
+                                                                     uint32_t slice,
+                                                                     Aspect aspect);
 
     D3D12_TEXTURE_COPY_LOCATION ComputeBufferLocationForCopyTextureRegion(
         const Texture* texture,
         ID3D12Resource* bufferResource,
         const Extent3D& bufferSize,
         const uint64_t offset,
-        const uint32_t rowPitch);
+        const uint32_t rowPitch,
+        Aspect aspect);
     D3D12_BOX ComputeD3D12BoxFromOffsetAndSize(const Origin3D& offset, const Extent3D& copySize);
 
     bool IsTypeless(DXGI_FORMAT format);

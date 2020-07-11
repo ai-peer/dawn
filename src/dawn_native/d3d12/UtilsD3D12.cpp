@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/UtilsD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/Format.h"
 
 #include <stringapiset.h>
 
@@ -64,11 +65,12 @@ namespace dawn_native { namespace d3d12 {
 
     D3D12_TEXTURE_COPY_LOCATION ComputeTextureCopyLocationForTexture(const Texture* texture,
                                                                      uint32_t level,
-                                                                     uint32_t slice) {
+                                                                     uint32_t slice,
+                                                                     Aspect aspect) {
         D3D12_TEXTURE_COPY_LOCATION copyLocation;
         copyLocation.pResource = texture->GetD3D12Resource();
         copyLocation.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
-        copyLocation.SubresourceIndex = texture->GetSubresourceIndex(level, slice);
+        copyLocation.SubresourceIndex = texture->GetSubresourceIndex(level, slice, aspect);
 
         return copyLocation;
     }
@@ -78,12 +80,14 @@ namespace dawn_native { namespace d3d12 {
         ID3D12Resource* bufferResource,
         const Extent3D& bufferSize,
         const uint64_t offset,
-        const uint32_t rowPitch) {
+        const uint32_t rowPitch,
+        Aspect aspect) {
         D3D12_TEXTURE_COPY_LOCATION bufferLocation;
         bufferLocation.pResource = bufferResource;
         bufferLocation.Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;
         bufferLocation.PlacedFootprint.Offset = offset;
-        bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format();
+        bufferLocation.PlacedFootprint.Footprint.Format =
+            texture->GetD3D12CopyableSubresourceFormat(aspect);
         bufferLocation.PlacedFootprint.Footprint.Width = bufferSize.width;
         bufferLocation.PlacedFootprint.Footprint.Height = bufferSize.height;
         bufferLocation.PlacedFootprint.Footprint.Depth = bufferSize.depth;
