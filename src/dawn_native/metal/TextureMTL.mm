@@ -353,7 +353,8 @@ namespace dawn_native { namespace metal {
                                                                  plane:plane];
         [mtlDesc release];
 
-        SetIsSubresourceContentInitialized(descriptor->isCleared, {0, 1, 0, 1});
+        SetIsSubresourceContentInitialized(descriptor->isCleared,
+                                           {0, 1, 0, 1, GetFormat().aspectMask});
     }
 
     Texture::~Texture() {

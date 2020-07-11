@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_TEXTURE_H_
 #define DAWNNATIVE_TEXTURE_H_
 
+#include "common/ityp_array.h"
 #include "common/ityp_bitset.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
@@ -56,15 +57,20 @@ namespace dawn_native {
     constexpr size_t kTextureAspectCount = 3;
     using AspectMask = ityp::bitset<TextureAspect, kTextureAspectCount>;
 
-    AspectMask SingleAspect(TextureAspect aspect);
+    TextureAspect SingleAspect(const Format& format, wgpu::TextureAspect aspect);
+    AspectMask SingleAspectMask(const Format& format, wgpu::TextureAspect aspect);
+    AspectMask SingleAspectMask(TextureAspect aspect);
 
     struct SubresourceRange {
         uint32_t baseMipLevel;
         uint32_t levelCount;
         uint32_t baseArrayLayer;
         uint32_t layerCount;
+        AspectMask aspectMask;
 
-        static SubresourceRange SingleSubresource(uint32_t baseMipLevel, uint32_t baseArrayLayer);
+        static SubresourceRange SingleSubresource(uint32_t baseMipLevel,
+                                                  uint32_t baseArrayLayer,
+                                                  TextureAspect aspect);
     };
 
     class TextureBase : public ObjectBase {
@@ -88,7 +94,9 @@ namespace dawn_native {
         uint32_t GetSubresourceCount() const;
         wgpu::TextureUsage GetUsage() const;
         TextureState GetTextureState() const;
-        uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice) const;
+        uint32_t GetSubresourceIndex(uint32_t mipLevel,
+                                     uint32_t arraySlice,
+                                     TextureAspect aspect) const;
         bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
         void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
 
@@ -122,6 +130,7 @@ namespace dawn_native {
         wgpu::TextureDimension mDimension;
         // TODO(cwallez@chromium.org): This should be deduplicated in the Device
         const Format& mFormat;
+        uint8_t mSubresourcePlaneCount;
         Extent3D mSize;
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
@@ -130,6 +139,7 @@ namespace dawn_native {
 
         // TODO(natlee@microsoft.com): Use a more optimized data structure to save space
         std::vector<bool> mIsSubresourceContentInitializedAtIndex;
+        ityp::array<TextureAspect, uint8_t, kTextureAspectCount> mPlaneIndices;
     };
 
     class TextureViewBase : public ObjectBase {
