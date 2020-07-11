@@ -101,6 +101,9 @@ namespace dawn_native { namespace metal {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        uint8_t GetSubresourcePlaneCount(const Format& format) const override;
+        uint8_t GetSubresourcePlaneIndex(const Format& format, Aspect aspect) const override;
+
         void InitTogglesFromDriver();
         void ShutDownImpl() override;
         MaybeError WaitForIdleForDestruction() override;
