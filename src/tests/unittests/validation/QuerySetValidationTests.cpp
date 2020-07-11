@@ -31,7 +31,7 @@ class QuerySetValidationTest : public ValidationTest {
         wgpu::Device cDevice,
         wgpu::QueryType queryType,
         uint32_t queryCount,
-        std::vector<wgpu::PipelineStatisticsName> pipelineStatistics = {}) {
+        std::vector<wgpu::PipelineStatisticName> pipelineStatistics = {}) {
         wgpu::QuerySetDescriptor descriptor;
         descriptor.type = queryType;
         descriptor.count = queryCount;
@@ -66,11 +66,11 @@ TEST_F(QuerySetValidationTest, Creation) {
         // Fail on default device without any extension enabled
         ASSERT_DEVICE_ERROR(
             CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
-                           {wgpu::PipelineStatisticsName::VertexShaderInvocations}));
+                           {wgpu::PipelineStatisticName::VertexShaderInvocations}));
 
         // Success on the device if the extension is enabled.
         CreateQuerySet(deviceWithPipelineStatistics, wgpu::QueryType::PipelineStatistics, 1,
-                       {wgpu::PipelineStatisticsName::VertexShaderInvocations});
+                       {wgpu::PipelineStatisticName::VertexShaderInvocations});
     }
 
     // Create query set for Timestamp query
@@ -94,14 +94,14 @@ TEST_F(QuerySetValidationTest, UnnecessaryPipelineStatistics) {
     {
         ASSERT_DEVICE_ERROR(
             CreateQuerySet(device, wgpu::QueryType::Occlusion, 1,
-                           {wgpu::PipelineStatisticsName::VertexShaderInvocations}));
+                           {wgpu::PipelineStatisticName::VertexShaderInvocations}));
     }
 
     // Fail to create with pipeline statistics for Timestamp query
     {
         ASSERT_DEVICE_ERROR(
             CreateQuerySet(deviceWithTimestamp, wgpu::QueryType::Timestamp, 1,
-                           {wgpu::PipelineStatisticsName::VertexShaderInvocations}));
+                           {wgpu::PipelineStatisticName::VertexShaderInvocations}));
     }
 }
 
@@ -111,11 +111,11 @@ TEST_F(QuerySetValidationTest, InvalidPipelineStatistics) {
     // defined in webgpu header file
     {
         CreateQuerySet(deviceWithPipelineStatistics, wgpu::QueryType::PipelineStatistics, 1,
-                       {wgpu::PipelineStatisticsName::ClipperInvocations,
-                        wgpu::PipelineStatisticsName::ClipperPrimitivesOut,
-                        wgpu::PipelineStatisticsName::ComputeShaderInvocations,
-                        wgpu::PipelineStatisticsName::FragmentShaderInvocations,
-                        wgpu::PipelineStatisticsName::VertexShaderInvocations});
+                       {wgpu::PipelineStatisticName::ClipperInvocations,
+                        wgpu::PipelineStatisticName::ClipperPrimitivesOut,
+                        wgpu::PipelineStatisticName::ComputeShaderInvocations,
+                        wgpu::PipelineStatisticName::FragmentShaderInvocations,
+                        wgpu::PipelineStatisticName::VertexShaderInvocations});
     }
 
     // Fail to create with empty pipeline statistics
@@ -128,15 +128,15 @@ TEST_F(QuerySetValidationTest, InvalidPipelineStatistics) {
     {
         ASSERT_DEVICE_ERROR(
             CreateQuerySet(deviceWithPipelineStatistics, wgpu::QueryType::PipelineStatistics, 1,
-                           {static_cast<wgpu::PipelineStatisticsName>(0xFFFFFFFF)}));
+                           {static_cast<wgpu::PipelineStatisticName>(0xFFFFFFFF)}));
     }
 
     // Fail to create with duplicate pipeline statistics
     {
         ASSERT_DEVICE_ERROR(
             CreateQuerySet(deviceWithPipelineStatistics, wgpu::QueryType::PipelineStatistics, 1,
-                           {wgpu::PipelineStatisticsName::VertexShaderInvocations,
-                            wgpu::PipelineStatisticsName::VertexShaderInvocations}));
+                           {wgpu::PipelineStatisticName::VertexShaderInvocations,
+                            wgpu::PipelineStatisticName::VertexShaderInvocations}));
     }
 }
 
