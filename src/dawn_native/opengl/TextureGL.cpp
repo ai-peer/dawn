@@ -232,7 +232,7 @@ namespace dawn_native { namespace opengl {
                             if (GetArrayLayers() == 1) {
                                 if (clearValue == TextureBase::ClearValue::Zero &&
                                     IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, 0))) {
+                                        {level, 1, 0, 1, GetFormat().aspectMask})) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }
@@ -245,7 +245,7 @@ namespace dawn_native { namespace opengl {
                                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                                     if (clearValue == TextureBase::ClearValue::Zero &&
                                         IsSubresourceContentInitialized(
-                                            SubresourceRange::SingleSubresource(level, layer))) {
+                                            {level, 1, layer, 1, GetFormat().aspectMask})) {
                                         // Skip lazy clears if already initialized.
                                         continue;
                                     }
@@ -280,7 +280,7 @@ namespace dawn_native { namespace opengl {
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
+                                {level, 1, layer, 1, GetFormat().aspectMask})) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -334,7 +334,7 @@ namespace dawn_native { namespace opengl {
                         if (GetArrayLayers() == 1) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
                                 IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleSubresource(level, 0))) {
+                                    {level, 1, 0, 1, GetFormat().aspectMask})) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -346,7 +346,7 @@ namespace dawn_native { namespace opengl {
                                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
                                 if (clearValue == TextureBase::ClearValue::Zero &&
                                     IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleSubresource(level, layer))) {
+                                        {level, 1, layer, 1, GetFormat().aspectMask})) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }

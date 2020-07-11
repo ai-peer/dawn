@@ -84,6 +84,14 @@ namespace dawn_native {
         // The reference returned has the same lifetime as the device.
         const Format& GetValidInternalFormat(wgpu::TextureFormat format) const;
 
+        // Override to enable independent tracking for texture subresource planes (depth/stencil)
+        virtual uint8_t GetSubresourcePlaneCount(const Format& format) const {
+            return 1;
+        }
+        virtual uint8_t GetSubresourcePlaneIndex(const Format& format, TextureAspect aspect) const {
+            return 0;
+        }
+
         virtual CommandBufferBase* CreateCommandBuffer(
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) = 0;
