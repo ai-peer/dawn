@@ -90,7 +90,11 @@ static_library("dawn_utils") {
   frameworks = []
 
   if (is_win) {
-    sources += [ "WindowsTimer.cpp" ]
+    sources += [
+      "WindowsDebugLogger.cpp",
+      "WindowsDebugLogger.h",
+      "WindowsTimer.cpp",
+    ]
   } else if (is_mac) {
     sources += [
       "OSXTimer.cpp",

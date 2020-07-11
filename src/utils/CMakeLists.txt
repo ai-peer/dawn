@@ -43,7 +43,11 @@ target_link_libraries(dawn_utils
 )
 
 if(WIN32)
-    target_sources(dawn_utils PRIVATE "WindowsTimer.cpp")
+    target_sources(dawn_utils PRIVATE
+        "WindowsTimer.cpp"
+        "WindowsDebugLogger.h"
+        "WindowsDebugLogger.cpp"
+    )
 elseif(APPLE)
     target_sources(dawn_utils PRIVATE
         "OSXTimer.cpp"
