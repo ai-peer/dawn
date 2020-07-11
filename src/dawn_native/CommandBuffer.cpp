@@ -55,7 +55,8 @@ namespace dawn_native {
                                                    const Extent3D& copySize) {
         switch (copy.texture->GetDimension()) {
             case wgpu::TextureDimension::e2D:
-                return {copy.mipLevel, 1, copy.origin.z, copySize.depth};
+                return {copy.mipLevel, 1, copy.origin.z, copySize.depth,
+                        SingleAspectMask(copy.texture->GetFormat(), copy.aspect)};
             default:
                 UNREACHABLE();
                 return {};

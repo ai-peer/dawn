@@ -175,10 +175,29 @@ namespace dawn_native {
                                          uint32_t baseMipLevel,
                                          uint32_t levelCount,
                                          uint32_t baseArrayLayer,
-                                         uint32_t layerCount) {
+                                         uint32_t layerCount,
+                                         WGPUTextureAspect aspect) {
         dawn_native::TextureBase* textureBase =
             reinterpret_cast<dawn_native::TextureBase*>(texture);
-        SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount};
+
+        AspectMask aspectMask;
+        switch (aspect) {
+            case WGPUTextureAspect_All:
+                aspectMask = textureBase->GetFormat().aspectMask;
+                break;
+            case WGPUTextureAspect_DepthOnly:
+                ASSERT(textureBase->GetFormat().aspectMask[Aspect::Depth]);
+                aspectMask = SingleAspectMask(Aspect::Depth);
+                break;
+            case WGPUTextureAspect_StencilOnly:
+                ASSERT(textureBase->GetFormat().aspectMask[Aspect::Stencil]);
+                aspectMask = SingleAspectMask(Aspect::Stencil);
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+        SubresourceRange range = {baseMipLevel, levelCount, baseArrayLayer, layerCount, aspectMask};
         return textureBase->IsSubresourceContentInitialized(range);
     }
 

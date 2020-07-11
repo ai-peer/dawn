@@ -23,7 +23,7 @@
 namespace dawn_native {
 
     bool IsColor(const AspectMask& aspectMask) {
-        return aspectMask == SingleAspect(Aspect::Color);
+        return aspectMask == SingleAspectMask(Aspect::Color);
     }
 
     bool HasDepth(const AspectMask& aspectMask) {
@@ -175,7 +175,7 @@ namespace dawn_native {
             internalFormat.isCompressed = false;
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = supportsStorageUsage;
-            internalFormat.aspectMask = SingleAspect(Aspect::Color);
+            internalFormat.aspectMask = SingleAspectMask(Aspect::Color);
             internalFormat.type = type;
             internalFormat.blockByteSize = byteSize;
             internalFormat.blockWidth = 1;
@@ -207,7 +207,7 @@ namespace dawn_native {
             internalFormat.isCompressed = false;
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = false;
-            internalFormat.aspectMask = SingleAspect(Aspect::Depth);
+            internalFormat.aspectMask = SingleAspectMask(Aspect::Depth);
             internalFormat.type = type;
             internalFormat.blockByteSize = byteSize;
             internalFormat.blockWidth = 1;
@@ -223,7 +223,7 @@ namespace dawn_native {
             internalFormat.isCompressed = true;
             internalFormat.isSupported = isSupported;
             internalFormat.supportsStorageUsage = false;
-            internalFormat.aspectMask = SingleAspect(Aspect::Color);
+            internalFormat.aspectMask = SingleAspectMask(Aspect::Color);
             internalFormat.type = Type::Float;
             internalFormat.blockByteSize = byteSize;
             internalFormat.blockWidth = width;
@@ -283,11 +283,11 @@ namespace dawn_native {
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, Type::Float);
 
         // Packed depth/depth-stencil formats
-        AddDepthStencilFormat(wgpu::TextureFormat::Depth24Plus, SingleAspect(Aspect::Depth), 4);
+        AddDepthStencilFormat(wgpu::TextureFormat::Depth24Plus, SingleAspectMask(Aspect::Depth), 4);
         // TODO(cwallez@chromium.org): It isn't clear if this format should be copyable
         // because its size isn't well defined, is it 4, 5 or 8?
         AddDepthStencilFormat(wgpu::TextureFormat::Depth24PlusStencil8,
-                              SingleAspect(Aspect::Depth) | SingleAspect(Aspect::Stencil), 4);
+                              SingleAspectMask(Aspect::Depth) | SingleAspectMask(Aspect::Stencil), 4);
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsExtensionEnabled(Extension::TextureCompressionBC);
