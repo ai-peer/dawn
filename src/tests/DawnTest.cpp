@@ -40,6 +40,10 @@
 #    include "dawn_native/OpenGLBackend.h"
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 
+#ifdef DAWN_PLATFORM_WINDOWS
+#    include "common/windows_with_undefs.h"
+#endif
+
 namespace {
 
     std::string ParamName(wgpu::BackendType type) {
@@ -81,7 +85,51 @@ namespace {
 
     DawnTestEnvironment* gTestEnv = nullptr;
 
-}  // namespace
+#ifdef DAWN_PLATFORM_WINDOWS
+    void SetupWindowsDebugOutput() {
+        if (IsDebuggerPresent()) {
+            return;
+        }
+
+        struct ODSBuffer {
+            DWORD process_id;
+            char data[4096 - sizeof(DWORD)];
+        };
+
+        HANDLE file = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0,
+                                         sizeof(ODSBuffer), "DBWIN_BUFFER");
+        ASSERT(file != INVALID_HANDLE_VALUE);
+
+        static ODSBuffer* ods_buffer =
+            reinterpret_cast<ODSBuffer*>(MapViewOfFile(file, SECTION_MAP_READ, 0, 0, 0));
+        ASSERT(ods_buffer);
+
+        static HANDLE ods_buffer_ready = CreateEventA(NULL, FALSE, FALSE, "DBWIN_BUFFER_READY");
+        ASSERT(ods_buffer_ready);
+
+        static HANDLE ods_data_ready = CreateEventA(NULL, FALSE, FALSE, "DBWIN_DATA_READY");
+        ASSERT(ods_data_ready);
+
+        HANDLE thread = CreateThread(
+            NULL, 0,
+            [](LPVOID) -> DWORD {
+                while (1) {
+                    SetEvent(ods_buffer_ready);
+                    DWORD wait = WaitForSingleObject(ods_data_ready, INFINITE);
+                    ASSERT(wait == WAIT_OBJECT_0);
+
+                    fprintf(stderr, "%.*s\n", static_cast<int>(sizeof(ods_buffer->data)),
+                            ods_buffer->data);
+                    fflush(stderr);
+                }
+                return 0;
+            },
+            NULL, 0, NULL);
+        ASSERT(thread);
+    }
+#endif  // DAWN_PLATFORM_WINDOWS
+
+}  // anonymous namespace
 
 const RGBA8 RGBA8::kZero = RGBA8(0, 0, 0, 0);
 const RGBA8 RGBA8::kBlack = RGBA8(0, 0, 0, 255);
@@ -185,6 +233,12 @@ void DawnTestEnvironment::SetEnvironment(DawnTestEnvironment* env) {
 
 DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
     ParseArgs(argc, argv);
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    if (mEnableBackendValidation) {
+        SetupWindowsDebugOutput();
+    }
+#endif
 
     // Create a temporary instance to select available and preferred adapters. This is done before
     // test instantiation so GetAvailableAdapterTestParamsForBackends can generate test
