@@ -86,6 +86,7 @@ namespace dawn_native { namespace d3d12 {
         D3D12EndingAccessResolveSubresourceParameters(TextureView* resolveDestination) {
             D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS subresourceParameters;
             Texture* resolveDestinationTexture = ToBackend(resolveDestination->GetTexture());
+            ASSERT(resolveDestinationTexture->GetFormat().aspects == Aspect::Color);
 
             subresourceParameters.DstX = 0;
             subresourceParameters.DstY = 0;
