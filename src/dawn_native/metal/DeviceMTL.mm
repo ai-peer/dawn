@@ -156,6 +156,32 @@ namespace dawn_native { namespace metal {
         return new TextureView(texture, descriptor);
     }
 
+    uint8_t Device::GetSubresourcePlaneCount(const Format& format) const {
+        switch (format.format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                return 2;
+            default:
+                return 1;
+        }
+    }
+
+    uint8_t Device::GetSubresourcePlaneIndex(const Format& format, Aspect aspect) const {
+        switch (format.format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                switch (aspect) {
+                    case Aspect::Depth:
+                        return 0;
+                    case Aspect::Stencil:
+                        return 1;
+                    default:
+                        UNREACHABLE();
+                        return 0;
+                }
+            default:
+                return 0;
+        }
+    }
+
     Serial Device::CheckAndUpdateCompletedSerials() {
         if (GetCompletedCommandSerial() > mCompletedSerial) {
             // sometimes we increase the serials, in which case the completed serial in

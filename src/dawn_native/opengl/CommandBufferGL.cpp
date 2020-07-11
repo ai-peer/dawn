@@ -521,8 +521,10 @@ namespace dawn_native { namespace opengl {
                     buffer->EnsureDataInitialized();
 
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+
                     SubresourceRange subresources = {dst.mipLevel, 1, dst.origin.z,
-                                                     copy->copySize.depth};
+                                                     copy->copySize.depth,
+                                                     dst.texture->GetFormat().aspectMask};
                     if (IsCompleteSubresourceCopiedTo(texture, copySize, dst.mipLevel)) {
                         texture->SetIsSubresourceContentInitialized(true, subresources);
                     } else {
@@ -612,8 +614,11 @@ namespace dawn_native { namespace opengl {
                     }
 
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+
                     SubresourceRange subresources = {src.mipLevel, 1, src.origin.z,
-                                                     copy->copySize.depth};
+                                                     copy->copySize.depth,
+                                                     src.texture->GetFormat().aspectMask};
+
                     texture->EnsureSubresourceContentInitialized(subresources);
                     // The only way to move data from a texture to a buffer in GL is via
                     // glReadPixels with a pack buffer. Create a temporary FBO for the copy.
@@ -693,10 +698,13 @@ namespace dawn_native { namespace opengl {
                     Extent3D copySize = ComputeTextureCopyExtent(dst, copy->copySize);
                     Texture* srcTexture = ToBackend(src.texture.Get());
                     Texture* dstTexture = ToBackend(dst.texture.Get());
+
                     SubresourceRange srcRange = {src.mipLevel, 1, src.origin.z,
-                                                 copy->copySize.depth};
+                                                 copy->copySize.depth,
+                                                 src.texture->GetFormat().aspectMask};
                     SubresourceRange dstRange = {dst.mipLevel, 1, dst.origin.z,
-                                                 copy->copySize.depth};
+                                                 copy->copySize.depth,
+                                                 dst.texture->GetFormat().aspectMask};
 
                     srcTexture->EnsureSubresourceContentInitialized(srcRange);
                     if (IsCompleteSubresourceCopiedTo(dstTexture, copySize, dst.mipLevel)) {
