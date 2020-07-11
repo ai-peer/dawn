@@ -156,6 +156,7 @@ BackendTestConfig VulkanBackend(std::initializer_list<const char*> forceEnabledW
 
 namespace utils {
     class TerribleCommandBuffer;
+    class WindowsDebugLogger;
 }  // namespace utils
 
 namespace detail {
@@ -176,7 +177,7 @@ void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
 class DawnTestEnvironment : public testing::Environment {
   public:
     DawnTestEnvironment(int argc, char** argv);
-    ~DawnTestEnvironment() override = default;
+    ~DawnTestEnvironment() override;
 
     static void SetEnvironment(DawnTestEnvironment* env);
 
@@ -219,6 +220,8 @@ class DawnTestEnvironment : public testing::Environment {
     std::string mWireTraceDir;
     std::vector<dawn_native::DeviceType> mDevicePreferences;
     std::vector<TestAdapterProperties> mAdapterProperties;
+
+    std::unique_ptr<utils::WindowsDebugLogger> mWindowsDebugLogger;
 };
 
 class DawnTestBase {

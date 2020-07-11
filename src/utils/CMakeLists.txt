@@ -31,6 +31,7 @@ target_sources(dawn_utils PRIVATE
     "Timer.h"
     "WGPUHelpers.cpp"
     "WGPUHelpers.h"
+    "WindowsDebugLogger.h"
 )
 target_link_libraries(dawn_utils
     PUBLIC dawncpp_headers
@@ -41,6 +42,12 @@ target_link_libraries(dawn_utils
             shaderc
             glfw
 )
+
+if(WIN32)
+    target_sources(dawn_utils PRIVATE "WindowsDebugLogger.cpp")
+else()
+    target_sources(dawn_utils PRIVATE "WindowsDebugLoggerNoop.cpp")
+endif()
 
 if(WIN32)
     target_sources(dawn_utils PRIVATE "WindowsTimer.cpp")
