@@ -121,7 +121,7 @@ TEST_P(DepthStencilCopyTests, FromStencilAspect) {
     renderPipelineDesc.vertexStage.module = mVertexModule;
     renderPipelineDesc.cFragmentStage.module = mFragmentModule;
     renderPipelineDesc.cDepthStencilState.format = texDescriptor.format;
-    renderPipelineDesc.cDepthStencilState.stencilFront.passOp =
+    renderPipelineDesc.cDepthStencilState.stencilBack.passOp =
         wgpu::StencilOperation::IncrementClamp;
     renderPipelineDesc.depthStencilState = &renderPipelineDesc.cDepthStencilState;
     renderPipelineDesc.colorStateCount = 0;
@@ -153,6 +153,9 @@ TEST_P(DepthStencilCopyTests, FromStencilAspect) {
 
 // Test copying to the stencil-aspect of a buffer
 TEST_P(DepthStencilCopyTests, ToStencilAspect) {
+    // Copies to a single aspect are unsupported on OpenGL.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
     // TODO(enga): Figure out why this fails on Vulkan Intel
     // Results are shifted by 1 byte on Windows, and crash/hang on Linux.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsIntel());
