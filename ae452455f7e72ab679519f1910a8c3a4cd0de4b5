@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "85ef7241_7b54dff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T16:11:33Z",
+      "side": 1,
+      "message": "Addressed all comments, PTAL because this is still missing CR+2!",
+      "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0e4950d_bc37f05b",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 19
@@ -36,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "58fba8e2_e29c6f23",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T16:11:33Z",
+      "side": 1,
+      "message": "Good catch! I introduced temporary booleans to fix this issue (in dawn_wire and dawn_native). I also added a test that fails without the change (in dawn_native).",
+      "parentUuid": "a0e4950d_bc37f05b",
+      "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a323928d_be48d653",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 19
@@ -50,6 +85,24 @@
       "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "307f2a12_f318e49f",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T16:11:33Z",
+      "side": 1,
+      "message": "Because we pass it as to an asynchronous function that takes a callback userdata as a void*, so we\u0027d create the unique_ptr and immediately call proxy.release().",
+      "parentUuid": "a323928d_be48d653",
+      "revId": "ae452455f7e72ab679519f1910a8c3a4cd0de4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
