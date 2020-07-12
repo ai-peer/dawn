@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be535b25_4ee26aeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "The implementation looks mostly good but the tests shouldn\u0027t be just copy pasted from CopyTests. I suggest a bunch of improvements.",
+      "revId": "c9cabbbf98f7c5b2a1920752ff73882fa8457562",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

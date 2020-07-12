@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "ad8d6d05_6df066f6",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Can these be moved in UtilsMetal.mm?",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "69300382_812f6b3a",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 19
@@ -65,6 +82,64 @@
     },
     {
       "key": {
+        "uuid": "c48ca70d_bb3df33d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Here it could be const except that the dst.texture Ref\u003c\u003e is const and will only return const pointers. We should really fix this at some point: have Ref\u003c\u003e and ConstRef\u003c\u003e",
+      "parentUuid": "0bc13ea1_76931f35",
+      "range": {
+        "startLine": 274,
+        "startChar": 48,
+        "endLine": 274,
+        "endChar": 64
+      },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1da50ae_588eb26e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "In a follow-up can you add a test for this in TextureZeroInitTests? (both for a full write and a partial write)",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "087b55a5_dfd0d535",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Maybe this could be in WriteTexture itself since all backends will want to skip the copy. We could check that writeSize is 0 instead of dataSize because the copy is a noop iff writeSize is 0, and if dataSize \u003d 0, then writeSize must be 0.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cda11c61_f781e9a8",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 19
@@ -94,6 +169,24 @@
       "side": 1,
       "message": "If this is a Metal restriction that we can\u0027t work around then it should be part of the linear texture data validation rules",
       "parentUuid": "cda11c61_f781e9a8",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4de816e5_23ea6971",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "We should be able to work around it because we\u0027re doing a copy in the staging buffer anyway, so we could compute the exact bytesPerRow, get a staging buffer for that exact bytesPerRow and do memcpy line by line.\n\nCan you also add a test that would fail without the workaround if bytesPerRow % blockByteSize is not zero?",
+      "parentUuid": "abcb1584_f7a99014",
       "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -158,6 +251,74 @@
     },
     {
       "key": {
+        "uuid": "b33873bb_123641ba",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Aaaaand this method isn\u0027t used so it should be deleted.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e59778_c86420dc",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "shouldn\u0027t that be x + texelBlocksPerRow * (y + texelBlocksPerImage * layer)?",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f3f6d78_8e99fd04",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "ExpectedData could be i % 256, (i \u003e\u003e 8) % 256, etc.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04014a00_d933187a",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "These two tests could be merged together and be a single test that checks full subresource writes for various texture sizes. It could be called VaryingTextureSizes. Also it could check for the depth of the texture being 1 vs. other values.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d760019f_40ff2cf3",
         "filename": "src/tests/end2end/QueueTests.cpp",
         "patchSetId": 19
@@ -175,6 +336,23 @@
         "endLine": 337,
         "endChar": 20
       },
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe9d870_7ae79863",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "This could be checking the offset with for-loops like in [1], be called VaryingTextureOffset and write a single texel at several 3D offsets. Since there isn\u0027t a 256 alignment constraint, we don\u0027t really need [2]",
       "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -204,6 +382,91 @@
     },
     {
       "key": {
+        "uuid": "8ad4b194_b7f71684",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d401c789_d62f35f9",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "This could be merged with the test below, do 3D regions and be called VaryingCopySize",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "010be7a4_7d599602",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4a762fe_04fb1b35",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "This is probably not needed.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4ec303_e65fb480",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "This could use a for-loop, be merged with the test below, and test offset that are aligned (0, 256) and unaligned (4, 2, 1, 17).",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a4d381f_76bedc12",
         "filename": "src/tests/end2end/QueueTests.cpp",
         "patchSetId": 19
@@ -227,6 +490,91 @@
     },
     {
       "key": {
+        "uuid": "4d7e3d4f_90a0330c",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Probably not useful?",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0cfe68a_bb2a2ac8",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Same comment as for the data offset tests.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24f58b16_3dbaeceb",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Covered by VaryingTextureSize",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee03cb9c_0e15bf20",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "Covered by VaryingCopySize",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a538bcc_6ad76f99",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "This can be VaryingRowsPerImage and same comment as for VaryingDataOffset",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c86a352_0bf59eb7",
         "filename": "src/tests/end2end/QueueTests.cpp",
         "patchSetId": 19
@@ -238,6 +586,23 @@
       "writtenOn": "2020-07-10T16:03:31Z",
       "side": 1,
       "message": "This is a new test.",
+      "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37032623_61f8c094",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-12T17:17:20Z",
+      "side": 1,
+      "message": "nit: just remove them and they\u0027ll be added when the feature is implemented in the backend.",
       "revId": "a9d38c64ae02140f7a0b5764bf70eee1290bda23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
