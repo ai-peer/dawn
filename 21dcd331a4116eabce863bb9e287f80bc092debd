@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9506895d_338e4a51",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-13T14:37:52Z",
+      "side": 1,
+      "message": "I changed this function, because it was dividing bytesPerRow by blockWidth.",
+      "range": {
+        "startLine": 373,
+        "startChar": 9,
+        "endLine": 373,
+        "endChar": 35
+      },
+      "revId": "21dcd331a4116eabce863bb9e287f80bc092debd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba95c2cc_c9107a30",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 34
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-13T14:37:52Z",
+      "side": 1,
+      "message": "I don\u0027t know if helper functions like that are already implemented in Dawn, so I wrote new ones for now.",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "21dcd331a4116eabce863bb9e287f80bc092debd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
