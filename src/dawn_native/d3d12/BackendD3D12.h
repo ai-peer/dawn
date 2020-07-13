@@ -35,6 +35,7 @@ namespace dawn_native { namespace d3d12 {
         const PlatformFunctions* GetFunctions() const;
 
         std::vector<std::unique_ptr<AdapterBase>> DiscoverDefaultAdapters() override;
+        std::unique_ptr<AdapterBase> CreateAdapterFromIDXGIAdapter(ComPtr<IDXGIAdapter1> IDXGIAdapter);
 
       private:
         // Keep mFunctions as the first member so that in the destructor it is freed last. Otherwise
