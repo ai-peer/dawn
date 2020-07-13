@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "816e5d6a_b2ab8316",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-13T06:46:53Z",
+      "side": 1,
+      "message": "On Vulkan, each query in query set has a status that is either unavailable or available, and also has state to store the numerical result. So maybe we can initalize the result value, but cannot change the status of unavailable/available which updated by query operations (begin/end/writetiemstap). I will raise it in community group for discussion.",
+      "parentUuid": "3ed30e93_ef9c2416",
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca76016e_d6bdf510",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -42,6 +60,53 @@
     },
     {
       "key": {
+        "uuid": "dfa0f1d8_385f64da",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-13T06:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca76016e_d6bdf510",
+      "range": {
+        "startLine": 554,
+        "startChar": 33,
+        "endLine": 554,
+        "endChar": 65
+      },
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26c54d7b_fce34c18",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-13T06:46:53Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 554,
+        "startChar": 33,
+        "endLine": 554,
+        "endChar": 84
+      },
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc5f5914_4bad7c4b",
         "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
         "patchSetId": 4
@@ -56,6 +121,24 @@
       "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a9a662_80d5bd82",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-13T06:46:53Z",
+      "side": 1,
+      "message": "So I need to check the multiplication of queryCount * sizeof(uint64_t) cannot overflow at [1], if overflow, DAWN_VALIDATION_ERROR is returned. In other words, there is a limit on the maximum of query count for 32bit and 64bit modes. \nHow about check the query count like this:\n\nuint64_t maxQueryCount \u003d static_cast\u003cuint64_t\u003e(std::numeric_limits\u003csize_t\u003e::max() / sizeof(uint64_t));\nif (queryCount \u003e maxQueryCount) {\n    return DAWN_VALIDATION_ERROR();\n}",
+      "parentUuid": "cc5f5914_4bad7c4b",
+      "revId": "f717deda750da21ca16d148ea6f2f6f67ffa949d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
