@@ -127,21 +127,23 @@ namespace dawn_native { namespace d3d12 {
             }
 
             ASSERT(dxgiAdapter != nullptr);
-
-            ComPtr<IDXGIAdapter3> dxgiAdapter3;
-            HRESULT result = dxgiAdapter.As(&dxgiAdapter3);
-            ASSERT(SUCCEEDED(result));
-
-            std::unique_ptr<Adapter> adapter =
-                std::make_unique<Adapter>(this, std::move(dxgiAdapter3));
-            if (GetInstance()->ConsumedError(adapter->Initialize())) {
-                continue;
-            }
+            std::unique_ptr<AdapterBase> adapter = CreateAdapterFromIDXGIAdapter(dxgiAdapter);
 
             adapters.push_back(std::move(adapter));
         }
 
         return adapters;
+    }
+
+    std::unique_ptr<AdapterBase> Backend::CreateAdapterFromIDXGIAdapter(
+        ComPtr<IDXGIAdapter1> dxgiAdapter) {
+        ComPtr<IDXGIAdapter3> dxgiAdapter3;
+        HRESULT result = dxgiAdapter.As(&dxgiAdapter3);
+        ASSERT(SUCCEEDED(result));
+        std::unique_ptr<Adapter> adapter = std::make_unique<Adapter>(this, std::move(dxgiAdapter3));
+        GetInstance()->ConsumedError(adapter->Initialize());
+
+        return std::move(adapter);
     }
 
     BackendConnection* Connect(InstanceBase* instance) {
