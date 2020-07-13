@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "9124146f_3122b5b4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-13T01:56:16Z",
+      "side": 1,
+      "message": "I think we can do these changes in another patch, what do you think?",
+      "parentUuid": "d0e67dc5_7134a6be",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "162be4fa_19b9cdd9",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 2
@@ -115,6 +133,24 @@
       "writtenOn": "2020-07-10T12:56:41Z",
       "side": 1,
       "message": "ComputeTextureCopySplit is now an implementation detail and can be removed from the header.",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f2e802_62d89825",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-13T01:56:16Z",
+      "side": 1,
+      "message": "This function is being used in many other places inside Dawn:\n1. CopySplitTests: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/d3d12/CopySplitTests.cpp;l\u003d296\n2. Texture initialization:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/TextureD3D12.cpp;l\u003d930\n\nI think this CL is big enough so I don\u0027t add more changes in these places. Shall we change them in another CL?",
+      "parentUuid": "4e41bd3f_397e88f4",
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
