@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "895b97f9_330650a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-13T23:39:20Z",
+      "side": 1,
+      "message": "PTAL! And here\u0027s the chromium side change: https://chromium-review.googlesource.com/c/chromium/src/+/2296011",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
