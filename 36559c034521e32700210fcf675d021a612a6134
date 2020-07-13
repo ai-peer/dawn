@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "274546ba_28cda92e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T18:54:27Z",
+      "side": 1,
+      "message": "LGTM up to my knowledge",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8cf9a1a_da080a9b",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 14
@@ -47,6 +64,23 @@
       "writtenOn": "2020-07-10T14:24:12Z",
       "side": 1,
       "message": "nit: stray include?",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595383be_19a5ccf2",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T18:54:27Z",
+      "side": 1,
+      "message": "Nit: not sure I understand what \"optimistic\" means in this context.",
       "revId": "36559c034521e32700210fcf675d021a612a6134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
