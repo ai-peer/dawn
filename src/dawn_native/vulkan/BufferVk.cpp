@@ -247,6 +247,8 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+        EnsureDataInitialized(recordingContext);
+
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
         return {};
     }
@@ -255,6 +257,8 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+        EnsureDataInitialized(recordingContext);
+
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
         return {};
     }
