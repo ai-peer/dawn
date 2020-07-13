@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41ff48cf_c27fb997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-13T16:48:50Z",
+      "side": 1,
+      "message": "A couple comments; haven\u0027t looked at the new tests yet",
+      "revId": "a1408633c4804fa526ee3bf4360b6e85d98f6dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce92870e_f2913210",
+        "filename": "src/dawn_native/metal/QueueMTL.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-13T16:48:50Z",
+      "side": 1,
+      "message": "nit: this include isn\u0027t needed",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 40
+      },
+      "revId": "a1408633c4804fa526ee3bf4360b6e85d98f6dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "857725c4_29df72fc",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 35
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-13T16:48:50Z",
+      "side": 1,
+      "message": "nit: these could probably go in common/Math.h",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "a1408633c4804fa526ee3bf4360b6e85d98f6dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1570e0ef_e3c76ab3",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 35
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-13T16:48:50Z",
+      "side": 1,
+      "message": "not sure if you need the MovePointerByBytes helpers though,\n\nit might be simpler to just have two static_casts to uint8_t* (one for uploadHandle.mappedBuffer and one for data) and increment those pointers instead of these offsets",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 0
+      },
+      "revId": "a1408633c4804fa526ee3bf4360b6e85d98f6dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
