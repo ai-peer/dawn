@@ -344,7 +344,7 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureMultipleArrayLayers) {
     encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
     wgpu::CommandBuffer commands = encoder.Finish();
 
-    // The copy overwrites the whole subresources su we don't need to do lazy initialization on
+    // The copy overwrites the whole subresources so we don't need to do lazy initialization on
     // them.
     EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
 
@@ -1142,6 +1142,93 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
 
     // Expect texture subresource initialized to be true
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
+}
+
+// In this test WriteTexture fully overwrites a range of subresources, so lazy initialization
+// is needed for neither the subresources involved in the write nor the other subresources.
+TEST_P(TextureZeroInitTest, WriteTexture) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsVulkan() || IsD3D12());
+
+    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
+        1, 6, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, kColorFormat);
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    constexpr uint32_t kBaseArrayLayer = 2u;
+    constexpr uint32_t kCopyLayerCount = 3u;
+
+    wgpu::TextureCopyView textureCopyView =
+        utils::CreateTextureCopyView(texture, 0, {0, 0, kBaseArrayLayer});
+    wgpu::Extent3D copySize = {kSize, kSize, kCopyLayerCount};
+
+    wgpu::TextureDataLayout textureDataLayout;
+    textureDataLayout.offset = 0;
+    textureDataLayout.bytesPerRow = kSize * kFormatBlockByteSize;
+    textureDataLayout.rowsPerImage = kSize;
+
+    std::vector<uint8_t> data(
+        utils::RequiredBytesInCopy(textureDataLayout.bytesPerRow, textureDataLayout.rowsPerImage,
+                                   copySize, kColorFormat),
+        100);
+
+    // The write overwrites the whole subresources so we don't need to do lazy initialization on
+    // them.
+    EXPECT_LAZY_CLEAR(0u, queue.WriteTexture(&textureCopyView, data.data(), data.size(),
+                                             &textureDataLayout, &copySize));
+
+    // Expect texture subresource initialized to be true
+    EXPECT_TRUE(dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, kBaseArrayLayer,
+                                                             kCopyLayerCount));
+
+    const std::vector<RGBA8> expected100(kSize * kSize, {100, 100, 100, 100});
+    for (uint32_t layer = kBaseArrayLayer; layer < kBaseArrayLayer + kCopyLayerCount; ++layer) {
+        EXPECT_TEXTURE_RGBA8_EQ(expected100.data(), texture, 0, 0, kSize, kSize, 0, layer);
+    }
+}
+
+// Test WriteTexture to a subset of the subresource, lazy init is necessary to clear the other
+// half.
+TEST_P(TextureZeroInitTest, WriteTextureHalf) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsVulkan() || IsD3D12());
+
+    wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
+        4, 6,
+        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
+        kColorFormat);
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    constexpr uint32_t kBaseArrayLayer = 2u;
+    constexpr uint32_t kCopyLayerCount = 3u;
+
+    wgpu::TextureCopyView textureCopyView =
+        utils::CreateTextureCopyView(texture, 0, {0, 0, kBaseArrayLayer});
+    wgpu::Extent3D copySize = {kSize / 2, kSize, kCopyLayerCount};
+
+    wgpu::TextureDataLayout textureDataLayout;
+    textureDataLayout.offset = 0;
+    textureDataLayout.bytesPerRow = kSize * kFormatBlockByteSize / 2;
+    textureDataLayout.rowsPerImage = kSize;
+
+    std::vector<uint8_t> data(
+        utils::RequiredBytesInCopy(textureDataLayout.bytesPerRow, textureDataLayout.rowsPerImage,
+                                   copySize, kColorFormat),
+        100);
+
+    EXPECT_LAZY_CLEAR(1u, queue.WriteTexture(&textureCopyView, data.data(), data.size(),
+                                             &textureDataLayout, &copySize));
+
+    // Expect texture subresource initialized to be true
+    EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1,
+                                                                 kBaseArrayLayer, kCopyLayerCount));
+
+    std::vector<RGBA8> expected100((kSize / 2) * kSize, {100, 100, 100, 100});
+    std::vector<RGBA8> expectedZeros((kSize / 2) * kSize, {0, 0, 0, 0});
+    for (uint32_t layer = kBaseArrayLayer; layer < kBaseArrayLayer + kCopyLayerCount; ++layer) {
+        // first half filled with 100, by the buffer data
+        EXPECT_TEXTURE_RGBA8_EQ(expected100.data(), texture, 0, 0, kSize / 2, kSize, 0, layer);
+        // second half should be cleared
+        EXPECT_TEXTURE_RGBA8_EQ(expectedZeros.data(), texture, kSize / 2, 0, kSize / 2, kSize, 0,
+                                layer);
+    }
 }
 
 DAWN_INSTANTIATE_TEST(TextureZeroInitTest,
