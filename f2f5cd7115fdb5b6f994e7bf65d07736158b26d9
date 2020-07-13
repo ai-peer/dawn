@@ -33,6 +33,23 @@
       "revId": "f2f5cd7115fdb5b6f994e7bf65d07736158b26d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "702e4f4c_035efcb8",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:44:20Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "revId": "f2f5cd7115fdb5b6f994e7bf65d07736158b26d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
