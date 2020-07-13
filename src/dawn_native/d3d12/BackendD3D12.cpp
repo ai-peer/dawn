@@ -127,21 +127,39 @@ namespace dawn_native { namespace d3d12 {
             }
 
             ASSERT(dxgiAdapter != nullptr);
-
-            ComPtr<IDXGIAdapter3> dxgiAdapter3;
-            HRESULT result = dxgiAdapter.As(&dxgiAdapter3);
-            ASSERT(SUCCEEDED(result));
-
-            std::unique_ptr<Adapter> adapter =
-                std::make_unique<Adapter>(this, std::move(dxgiAdapter3));
-            if (GetInstance()->ConsumedError(adapter->Initialize())) {
-                continue;
-            }
+            std::unique_ptr<AdapterBase> adapter = CreateAdapterFromIDXGIAdapter(dxgiAdapter);
 
             adapters.push_back(std::move(adapter));
         }
 
         return adapters;
+    }
+
+    ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> Backend::DiscoverAdapters(
+        const AdapterDiscoveryOptionsBase* optionsBase) {
+        ASSERT(optionsBase->backendType == WGPUBackendType_D3D12);
+        const AdapterDiscoveryOptions* options =
+            static_cast<const AdapterDiscoveryOptions*>(optionsBase);
+
+        if (options->dxgiAdapter) {
+            std::unique_ptr<AdapterBase> adapter =
+                CreateAdapterFromIDXGIAdapter(options->dxgiAdapter);
+            std::vector<std::unique_ptr<AdapterBase>> adapters;
+            adapters.push_back(std::move(adapter));
+            return std::move(adapters);
+        }
+        return DiscoverDefaultAdapters();
+    }
+
+    std::unique_ptr<AdapterBase> Backend::CreateAdapterFromIDXGIAdapter(
+        ComPtr<IDXGIAdapter> dxgiAdapter) {
+        ComPtr<IDXGIAdapter3> dxgiAdapter3;
+        HRESULT result = dxgiAdapter.As(&dxgiAdapter3);
+        ASSERT(SUCCEEDED(result));
+        std::unique_ptr<Adapter> adapter = std::make_unique<Adapter>(this, std::move(dxgiAdapter3));
+        GetInstance()->ConsumedError(adapter->Initialize());
+
+        return std::move(adapter);
     }
 
     BackendConnection* Connect(InstanceBase* instance) {
