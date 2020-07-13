@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "11ccccdc_b87da242",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:36:35Z",
+      "side": 1,
+      "message": "BTW, I think you forgot to do this one.",
+      "parentUuid": "1be69a91_a95acda8",
+      "revId": "4ba652899d43c0c32bc8652f04706dbbbf91ea72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08a4bd1e_47baabf2",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 16
