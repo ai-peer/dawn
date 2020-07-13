@@ -33,6 +33,74 @@
       "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c478995_759c2fe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:28:40Z",
+      "side": 1,
+      "message": "LGTM but please check my comments to see if they\u0027re helpful.\n\nSorry for the delay.",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f95ebe6c_485cebb2",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:28:40Z",
+      "side": 1,
+      "message": "Nit: looks a bit funny to do one comparison underlying type and one in Index, but I\u0027m guessing that\u0027s intentional/unavoidable?",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "744e3d82_f176695e",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:28:40Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09beeb73_1ceecbaf",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-13T16:28:40Z",
+      "side": 1,
+      "message": "Why the cast? Isn\u0027t Base::size() already an underlying type?",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
