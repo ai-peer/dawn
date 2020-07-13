@@ -88,6 +88,41 @@
     },
     {
       "key": {
+        "uuid": "e389be5d_c5788252",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-13T08:05:45Z",
+      "side": 1,
+      "message": "I think a TODO is fine and someone can do it in a very long time. (so it doesn\u0027t need to be a follow-up)",
+      "parentUuid": "9124146f_3122b5b4",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63b0b056_0bf400b1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-13T08:05:45Z",
+      "side": 1,
+      "message": "[1] somehow that message disappeared, sorry about that. This code could become:\n\n  for (uint32_t copySlice \u003d 0; copySlice \u003c copy-\u003ecopySize.depth; ++copySlice) {\n     const TextureCopySplit\u0026 copySplit \u003d  copySplits.copies2D[copySlice % 2];\n     const uint32_t copyTextureLayer \u003d copySlice + copy-\u003edestination.origin.z;\n     const bufferOffset \u003d copySlice * bytesPerSlice;\n\n     Record()",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "162be4fa_19b9cdd9",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 2
@@ -105,6 +140,29 @@
     },
     {
       "key": {
+        "uuid": "39dc2bcd_d081e21f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-13T08:05:45Z",
+      "side": 1,
+      "message": "Maybe rename to Texture2DCopySplits",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd983b79_22401230",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
         "patchSetId": 2
@@ -116,6 +174,29 @@
       "writtenOn": "2020-07-10T12:56:41Z",
       "side": 1,
       "message": "What about always having two splits, (but sometimes they are equal), this would allow simplifying the logic at [1]",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44a7a751_d659d14a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-13T08:05:45Z",
+      "side": 1,
+      "message": "nit: copies2D maybe? not sure.",
+      "range": {
+        "startLine": 50,
+        "startChar": 60,
+        "endLine": 50,
+        "endChar": 74
+      },
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -154,6 +235,24 @@
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffb6184d_f864e930",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-13T08:05:45Z",
+      "side": 1,
+      "message": "Ah, then it\u0027s ok we don\u0027t need to do this change.",
+      "parentUuid": "68f2e802_62d89825",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
