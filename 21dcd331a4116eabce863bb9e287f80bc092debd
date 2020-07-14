@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5ea286f0_5b8f4257",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "703272ca_6d5bc5ee",
+      "range": {
+        "startLine": 373,
+        "startChar": 9,
+        "endLine": 373,
+        "endChar": 35
+      },
+      "revId": "21dcd331a4116eabce863bb9e287f80bc092debd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba95c2cc_c9107a30",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 34

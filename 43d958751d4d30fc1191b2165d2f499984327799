@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c0964ac_f87be2ec",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "We no longer use ComputeTextureBufferCopySplit because of the alignedBytesPerRow and alignedRowsPerImage update, so the clampedCopyExtent values aren\u0027t computed. They shouldn\u0027t be necessary because of the size conditions in validate texture copy range. This should also apply to CopyBufferToTexture, so they could really be removed from there too.\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/metal/CommandBufferMTL.mm;l\u003d358",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 278,
+        "endChar": 81
+      },
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

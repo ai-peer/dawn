@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "6cba0fcc_799c52bd",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d47e123_8ffa1428",
+      "range": {
+        "startLine": 377,
+        "startChar": 36,
+        "endLine": 377,
+        "endChar": 52
+      },
+      "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d54d539_2d592422",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 39
@@ -73,6 +97,24 @@
       "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bea08f96_fdb3a182",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8d54d539_2d592422",
+      "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "725c149e_0c544222",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ee4c6099_37d62f79",
+      "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2841707d_b2063f3c",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 39
@@ -107,6 +167,24 @@
       "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f677a207_d213fce7",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:02:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2841707d_b2063f3c",
+      "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
