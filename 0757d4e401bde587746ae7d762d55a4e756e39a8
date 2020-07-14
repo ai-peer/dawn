@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "665b0299_764ecce9",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T22:45:26Z",
+      "side": 1,
+      "message": "@Natasha, what happens if you return adapter directly from the function? \n\nIf that doesn\u0027t work, what about returning ResultOrError(std::move(adapter))?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
