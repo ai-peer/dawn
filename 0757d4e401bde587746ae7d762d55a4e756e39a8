@@ -22,6 +22,47 @@
       "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c321bd_67f5483c",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T22:47:46Z",
+      "side": 1,
+      "message": "same issue with just returning adapter.\n\n With ResultOrError(std::move(adapter)) I get error: use of alias template \u0027ResultOrError\u0027 requires template arguments",
+      "parentUuid": "665b0299_764ecce9",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0edb65f6_773bf72a",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T22:47:46Z",
+      "side": 1,
+      "message": "do we need to keep this check if we also do it in webgpu_decoder_impl?",
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
