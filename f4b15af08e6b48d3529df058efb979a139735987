@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "38b6ccf0_bd972990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fded3722_b0425fbb",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0e67dc5_7134a6be",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -106,6 +124,42 @@
     },
     {
       "key": {
+        "uuid": "b322a91e_cdd4baaa",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e389be5d_c5788252",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4deb514_c9d4f461",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e389be5d_c5788252",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63b0b056_0bf400b1",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -117,6 +171,24 @@
       "writtenOn": "2020-07-13T08:05:45Z",
       "side": 1,
       "message": "[1] somehow that message disappeared, sorry about that. This code could become:\n\n  for (uint32_t copySlice \u003d 0; copySlice \u003c copy-\u003ecopySize.depth; ++copySlice) {\n     const TextureCopySplit\u0026 copySplit \u003d  copySplits.copies2D[copySlice % 2];\n     const uint32_t copyTextureLayer \u003d copySlice + copy-\u003edestination.origin.z;\n     const bufferOffset \u003d copySlice * bytesPerSlice;\n\n     Record()",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e18c8e_979858d7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "copySplits.copies2D[1] is actually computed with an extra offset \"bytesPerRow\" on the base of copySplits.copies2D[0], so \"copySlice * bytesPerSlice\" can only be applied on the copy layers that use copySplits.copies[0], while the extra offset for the copy layers that use copySplits.copies[1] should be \"(copySlice - 1) * bytesPerSlice\". So here I am using an array to track the correct extra offset for all the copy layers.",
+      "parentUuid": "63b0b056_0bf400b1",
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -140,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "7f72e4a2_8a0a2b8b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done. PTAL, thanks!",
+      "parentUuid": "162be4fa_19b9cdd9",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39dc2bcd_d081e21f",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
         "patchSetId": 2
@@ -160,6 +250,30 @@
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "936c655a_b1374a92",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39dc2bcd_d081e21f",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +311,48 @@
         "endLine": 50,
         "endChar": 74
       },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c014dce5_603b089a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44a7a751_d659d14a",
+      "range": {
+        "startLine": 50,
+        "startChar": 60,
+        "endLine": 50,
+        "endChar": 74
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7d343cf_ef9382fa",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "I have some problems about this idea. We can discuss it at [1].",
+      "parentUuid": "dd983b79_22401230",
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -279,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "036fdc90_215a8f9a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676a2051_c0575beb",
+      "range": {
+        "startLine": 749,
+        "startChar": 50,
+        "endLine": 749,
+        "endChar": 54
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf63ba76_963b9683",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 2
@@ -299,6 +479,30 @@
       "revId": "f4b15af08e6b48d3529df058efb979a139735987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70b1f447_437b1dad",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-14T08:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf63ba76_963b9683",
+      "range": {
+        "startLine": 776,
+        "startChar": 50,
+        "endLine": 776,
+        "endChar": 54
+      },
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
