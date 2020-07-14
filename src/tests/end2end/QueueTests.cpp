@@ -296,6 +296,8 @@ class QueueWriteTextureTests : public DawnTest {
 
 // Test writing the whole texture for varying texture sizes.
 TEST_P(QueueWriteTextureTests, VaryingTextureSize) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     for (unsigned int w : {127, 128}) {
         for (unsigned int h : {63, 64}) {
             for (unsigned int d : {1, 3, 4}) {
@@ -426,6 +428,8 @@ TEST_P(QueueWriteTextureTests, VaryingDataOffset) {
 
 // Test writing with rowsPerImage greater than needed.
 TEST_P(QueueWriteTextureTests, VaryingRowsPerImage) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     constexpr uint32_t kWidth = 65;
     constexpr uint32_t kHeight = 31;
     constexpr uint32_t kDepth = 17;
@@ -464,6 +468,8 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
 
 // Test with bytesPerRow greater than needed in a write to a texture array.
 TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     constexpr uint32_t kWidth = 257;
     constexpr uint32_t kHeight = 129;
     constexpr uint32_t kLayers = 65;
@@ -492,4 +498,4 @@ TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(QueueWriteTextureTests, MetalBackend());
+DAWN_INSTANTIATE_TEST(QueueWriteTextureTests, MetalBackend(), VulkanBackend());
