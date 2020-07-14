@@ -16,6 +16,103 @@
       "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e5401c2_e6bfe54b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:32:58Z",
+      "side": 1,
+      "message": "LGTM with the caveat that it needs to be updated for MapAsync.",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "194c5fa8_1665943f",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:32:58Z",
+      "side": 1,
+      "message": "What do you think of doing the lazy initialization on the CPU in the frontend instead? It is possible to do for mapped buffers (and mapped at creation ones) because they are CPU accessible.\n\nIf we did it this way it would be in OnMapCommandSerialFinished I think. And in MapAtCreation().\n\nI\u0027m not sure which is best, because the CPU should be less efficient than the GPU to clear buffers, but at the same time Enqueing work on the GPU to lazy-clear buffers means more barriers. Maybe it\u0027s fine as-is.\n\nAlso note that this should be rebased on top of https://dawn-review.googlesource.com/c/dawn/+/24260 that adds the MapAsyncImpl virtual method. (and we\u0027ll need the tests updated to also test MapAsync, or only MapAsync).",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1b309b_0c958126",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:32:58Z",
+      "side": 1,
+      "message": "All of this could be replaced by:\n\n  void MapReadAsyncAndWait(buffer) {\n    bool done \u003d fasle;\n    buffer.MapReadAsync([](WGPUBufferMapAsyncStatus status, const void*, uint64_t, void* userdata) {\n           ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);\n           *static_cast\u003cbool*\u003e(userdata) \u003d true;\n        }, \u0026done)\n\n     while !done {WaitABit();}\n  }\n\nThen the pointer can be retrieved with buffer.Get[Const]MappedRange(); (this is the new mapping mechanism).",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f14b9c13_6c26cdb8",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:32:58Z",
+      "side": 1,
+      "message": "These would become unused and could be removed.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6774babe_03fb0bcc",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:32:58Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to check with writing values, and could just check that the CPU-side pointer is filled with zeros (the CPU side gets uploaded to the GPU on Unmap anyway).",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
