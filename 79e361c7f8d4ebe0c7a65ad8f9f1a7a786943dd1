@@ -46,6 +46,30 @@
       "revId": "79e361c7f8d4ebe0c7a65ad8f9f1a7a786943dd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29dedb11_354bb58a",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:34:09Z",
+      "side": 1,
+      "message": "huh isn\u0027t this getting the raw pointer from |adapter| and casting it as unique_ptr ? (TBH I didn\u0027t know that was actually possible)\n\nIn any case, it seems like it would result in a double free because the std::unique_ptr isn\u0027t actually released.\n\nI think you need to\nreturn std::unique_ptr\u003cAdapterBase\u003e(adapter.release())\n\nwhich should release ownership from the derived unique_ptr and make a new unique_ptr with the base class.",
+      "parentUuid": "a285ee09_02eb4c46",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "79e361c7f8d4ebe0c7a65ad8f9f1a7a786943dd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
