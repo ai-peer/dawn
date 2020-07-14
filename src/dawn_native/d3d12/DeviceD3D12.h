@@ -199,15 +199,19 @@ namespace dawn_native { namespace d3d12 {
         static constexpr uint32_t kMaxViewDescriptorsPerBindGroup =
             kMaxBindingsPerPipelineLayout - kMaxSamplerDescriptorsPerBindGroup;
 
+        static constexpr uint32_t kNumSamplerDescriptorAllocators =
+            ConstexprLog2<2 * kMaxSamplerDescriptorsPerBindGroup - 1>() + 1;
+        static constexpr uint32_t kNumViewDescriptorAllocators =
+            ConstexprLog2<2 * kMaxViewDescriptorsPerBindGroup - 1>() + 1;
+
         // Index corresponds to the descriptor count in the range [0,
         // kMaxSamplerDescriptorsPerBindGroup].
-        std::array<std::unique_ptr<StagingDescriptorAllocator>,
-                   kMaxSamplerDescriptorsPerBindGroup + 1>
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumViewDescriptorAllocators + 1>
             mViewAllocators;
 
         // Index corresponds to the descriptor count in the range [0,
         // kMaxViewDescriptorsPerBindGroup].
-        std::array<std::unique_ptr<StagingDescriptorAllocator>, kMaxViewDescriptorsPerBindGroup + 1>
+        std::array<std::unique_ptr<StagingDescriptorAllocator>, kNumSamplerDescriptorAllocators + 1>
             mSamplerAllocators;
 
         std::unique_ptr<StagingDescriptorAllocator> mRenderTargetViewAllocator;

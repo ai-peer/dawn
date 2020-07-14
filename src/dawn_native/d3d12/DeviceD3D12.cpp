@@ -90,16 +90,15 @@ namespace dawn_native { namespace d3d12 {
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
 
         // Zero sized allocator is never requested and does not need to exist.
-        for (uint32_t countIndex = 1; countIndex <= kMaxViewDescriptorsPerBindGroup; countIndex++) {
-            mViewAllocators[countIndex] = std::make_unique<StagingDescriptorAllocator>(
-                this, countIndex, kShaderVisibleDescriptorHeapSize,
+        for (uint32_t countIndex = 0; countIndex < kNumViewDescriptorAllocators; countIndex++) {
+            mViewAllocators[countIndex + 1] = std::make_unique<StagingDescriptorAllocator>(
+                this, 1u << countIndex, kShaderVisibleDescriptorHeapSize,
                 D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
         }
 
-        for (uint32_t countIndex = 1; countIndex <= kMaxSamplerDescriptorsPerBindGroup;
-             countIndex++) {
-            mSamplerAllocators[countIndex] = std::make_unique<StagingDescriptorAllocator>(
-                this, countIndex, kShaderVisibleDescriptorHeapSize,
+        for (uint32_t countIndex = 0; countIndex < kNumSamplerDescriptorAllocators; countIndex++) {
+            mSamplerAllocators[countIndex + 1] = std::make_unique<StagingDescriptorAllocator>(
+                this, 1u << countIndex, kShaderVisibleDescriptorHeapSize,
                 D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
         }
 
@@ -559,13 +558,15 @@ namespace dawn_native { namespace d3d12 {
     StagingDescriptorAllocator* Device::GetViewStagingDescriptorAllocator(
         uint32_t descriptorCount) const {
         ASSERT(descriptorCount <= kMaxViewDescriptorsPerBindGroup);
-        return mViewAllocators[descriptorCount].get();
+        uint32_t allocatorIndex = descriptorCount == 0 ? 0 : Log2(2 * descriptorCount - 1) + 1;
+        return mViewAllocators[allocatorIndex].get();
     }
 
     StagingDescriptorAllocator* Device::GetSamplerStagingDescriptorAllocator(
         uint32_t descriptorCount) const {
         ASSERT(descriptorCount <= kMaxSamplerDescriptorsPerBindGroup);
-        return mSamplerAllocators[descriptorCount].get();
+        uint32_t allocatorIndex = descriptorCount == 0 ? 0 : Log2(2 * descriptorCount - 1) + 1;
+        return mSamplerAllocators[allocatorIndex].get();
     }
 
     StagingDescriptorAllocator* Device::GetRenderTargetViewAllocator() const {
