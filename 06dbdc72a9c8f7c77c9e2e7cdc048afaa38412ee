@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0a1e84c_33bc2aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T03:35:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "06dbdc72a9c8f7c77c9e2e7cdc048afaa38412ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97c7a7b1_49e9aef9",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T03:35:30Z",
+      "side": 1,
+      "message": "nit: this is the default. We could omit it and initialize the descriptor with \" \u003d {};\"",
+      "range": {
+        "startLine": 244,
+        "startChar": 8,
+        "endLine": 244,
+        "endChar": 35
+      },
+      "revId": "06dbdc72a9c8f7c77c9e2e7cdc048afaa38412ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "372f0de6_3baefb3b",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T03:35:30Z",
+      "side": 1,
+      "message": "here and in other tests where relevant, we should also test depth \u003d\u003d 1 as texture2d and texture2d_arrays are created differently on some backends",
+      "range": {
+        "startLine": 302,
+        "startChar": 30,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "06dbdc72a9c8f7c77c9e2e7cdc048afaa38412ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acffc74e_ff1305d3",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T03:35:30Z",
+      "side": 1,
+      "message": "nit: lowercase dataSpec",
+      "range": {
+        "startLine": 406,
+        "startChar": 17,
+        "endLine": 406,
+        "endChar": 25
+      },
+      "revId": "06dbdc72a9c8f7c77c9e2e7cdc048afaa38412ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
