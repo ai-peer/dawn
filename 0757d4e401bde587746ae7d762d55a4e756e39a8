@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "b83f54b0_50d93d1e",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T23:10:26Z",
+      "side": 1,
+      "message": "Or maybe like https://godbolt.org/z/o8sf14 ?",
+      "parentUuid": "b943492f_957c9c3f",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0edb65f6_773bf72a",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 5
@@ -84,6 +108,24 @@
       "writtenOn": "2020-07-14T22:47:46Z",
       "side": 1,
       "message": "do we need to keep this check if we also do it in webgpu_decoder_impl?",
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e46c7277_7c8db16f",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T23:10:26Z",
+      "side": 1,
+      "message": "Main reason I was concerned about that one is that if it were nullptr, we would do:\n\nDiscoverDefaultAdapters(); followed by\nDiscoverAdapters(adapter \u003d nullptr);\n\nWhich would then log an error on the second call, because:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Instance.cpp;l\u003d180;drc\u003d68abde3801df81aceaecbc517e8389d2a1504c33\n\nwhich could be a bit confusing since the first one may have succeeded.\n\nFor this code here, I don\u0027t really feel strongly. We could have an ASSERT since it seems wrong to not provide the only member the discovery options has.",
+      "parentUuid": "0edb65f6_773bf72a",
       "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
