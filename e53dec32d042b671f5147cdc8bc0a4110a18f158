@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b556ac1_68aeb204",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:25:32Z",
+      "side": 1,
+      "message": "Did your previous comments apply to this and [1] too?",
+      "range": {
+        "startLine": 601,
+        "startChar": 8,
+        "endLine": 602,
+        "endChar": 18
+      },
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d4bc41_2ce29614",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-14T16:25:32Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 625,
+        "startChar": 8,
+        "endLine": 626,
+        "endChar": 18
+      },
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
