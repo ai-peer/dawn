@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d23c37b6_59d33696",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T21:54:37Z",
+      "side": 1,
+      "message": "Are you sure this cast to the baseclass AdapterBase is necessary?",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "79e361c7f8d4ebe0c7a65ad8f9f1a7a786943dd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
