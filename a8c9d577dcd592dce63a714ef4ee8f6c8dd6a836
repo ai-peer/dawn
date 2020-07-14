@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3aca67fd_0ae88432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:19:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c703ee80_d8bc5a2d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:19:07Z",
+      "side": 1,
+      "message": "This check shouldn\u0027t be necessary it is technically valid to have 2^32 / 8 queries in the query set. The validation you added at [2] should be sufficient.",
+      "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79fa7afc_7036751f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:19:07Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
