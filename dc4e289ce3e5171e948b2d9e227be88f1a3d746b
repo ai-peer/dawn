@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e67b33d0_f5ad2d26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:29:33Z",
+      "side": 1,
+      "message": "WDYT? the jumps between powers of two are kinda big so maybe we could use fibonnaci numbers (one of Corentin\u0027s ideas) or just evenly distribute over |k| allocators where |k| is something like 32. Not sure whether or not the driver already allocates power-of-two blocks and if it\u0027ll make a difference.",
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e09c47dd_51c76c30",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:29:33Z",
+      "side": 1,
+      "message": "Log2Ceil(descriptorCount) where descriptorCount is in the range [0, kMaxSamplerDescriptorsPerBindGroup]",
+      "range": {
+        "startLine": 207,
+        "startChar": 32,
+        "endLine": 208,
+        "endChar": 47
+      },
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
