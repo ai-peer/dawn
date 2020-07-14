@@ -22,6 +22,30 @@
       "revId": "79e361c7f8d4ebe0c7a65ad8f9f1a7a786943dd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a285ee09_02eb4c46",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T22:04:01Z",
+      "side": 1,
+      "message": "without it I get compiler errors like:\ndawn_native/d3d12/BackendD3D12.cpp(83,20): error: no viable conversion from returned value of type \u0027typename remove_reference\u003cunique_ptr\u003cAdapter, default_delete\u003cAdapter\u003e\u003e \u0026\u003e::type\u0027 (aka \u0027std::__1::unique_ptr\u003cdawn_native::d3d12::Adapter, std::__1::default_delete\u003cdawn_native::d3d12::Adapter\u003e\u003e\u0027) to function return type \u0027ResultOrError\u003cstd::unique_ptr\u003cAdapterBase\u003e\u003e\u0027 (aka \u0027Result\u003cstd::__1::unique_ptr\u003cdawn_native::AdapterBase, std::__1::default_delete\u003cdawn_native::AdapterBase\u003e\u003e, dawn_native::ErrorData\u003e\u0027)",
+      "parentUuid": "d23c37b6_59d33696",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "79e361c7f8d4ebe0c7a65ad8f9f1a7a786943dd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
