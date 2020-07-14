@@ -1107,8 +1107,6 @@ class WriteBCTextureTest : public CompressedTextureBCFormatTest {
 // Test WriteTexture to a 2D texture with all parameters non-default
 // with BC formats.
 TEST_P(WriteBCTextureTest, Basic) {
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsVulkan() || IsD3D12());
-
     DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
@@ -1128,8 +1126,6 @@ TEST_P(WriteBCTextureTest, Basic) {
 
 // Test writing to multiple 2D texture array layers with BC formats.
 TEST_P(WriteBCTextureTest, WriteMultiple2DArrayLayers) {
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsVulkan() || IsD3D12());
-
     DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
@@ -1150,8 +1146,6 @@ TEST_P(WriteBCTextureTest, WriteMultiple2DArrayLayers) {
 // Test BC format write textures where the physical size of the destination
 // subresource is different from its virtual size.
 TEST_P(WriteBCTextureTest, WriteIntoSubresourceWithPhysicalSizeNotEqualToVirtualSize) {
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsVulkan() || IsD3D12());
-
     DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     for (unsigned int w : {12, 16}) {
@@ -1175,4 +1169,4 @@ TEST_P(WriteBCTextureTest, WriteIntoSubresourceWithPhysicalSizeNotEqualToVirtual
     }
 }
 
-DAWN_INSTANTIATE_TEST(WriteBCTextureTest, MetalBackend());
+DAWN_INSTANTIATE_TEST(WriteBCTextureTest, MetalBackend(), VulkanBackend());
