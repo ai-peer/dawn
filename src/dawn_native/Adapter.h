@@ -27,6 +27,7 @@ namespace dawn_native {
 
     class DeviceBase;
 
+ // hello
     class AdapterBase {
       public:
         AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
