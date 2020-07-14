@@ -344,7 +344,7 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureMultipleArrayLayers) {
     encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
     wgpu::CommandBuffer commands = encoder.Finish();
 
-    // The copy overwrites the whole subresources su we don't need to do lazy initialization on
+    // The copy overwrites the whole subresources so we don't need to do lazy initialization on
     // them.
     EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
 

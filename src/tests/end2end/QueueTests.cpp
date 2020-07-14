@@ -293,7 +293,7 @@ class QueueWriteTextureTests : public DawnTest {
 };
 
 // Test writing the whole texture for varying texture sizes.
-TEST_P(QueueWriteTextureTests, VaryingTextureSize) {
+TEST_P(QueueWriteTextureTests, VaryingTextureSize) {    
     for (unsigned int w : {127, 128}) {
         for (unsigned int h : {63, 64}) {
             for (unsigned int d : {1, 3, 4}) {
