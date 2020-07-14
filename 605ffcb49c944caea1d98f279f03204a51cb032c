@@ -33,6 +33,23 @@
       "revId": "605ffcb49c944caea1d98f279f03204a51cb032c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8cd641d1_c2263f11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-14T17:45:33Z",
+      "side": 1,
+      "message": "fyi I\u0027ll try to port the lint script to Python.",
+      "revId": "605ffcb49c944caea1d98f279f03204a51cb032c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
