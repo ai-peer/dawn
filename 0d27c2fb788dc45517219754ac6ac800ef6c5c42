@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "50d2d8db_5fb03bd7",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:30:52Z",
+      "side": 1,
+      "message": "Changed it to always compare the \"Index\" type.",
+      "parentUuid": "f95ebe6c_485cebb2",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "744e3d82_f176695e",
         "filename": "src/common/ityp_vector.h",
         "patchSetId": 4
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "12dedad9_34e152b2",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:30:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "744e3d82_f176695e",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09beeb73_1ceecbaf",
         "filename": "src/common/ityp_vector.h",
         "patchSetId": 4
@@ -101,6 +137,24 @@
       "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef9a95f2_1bb1fc88",
+        "filename": "src/common/ityp_vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:30:52Z",
+      "side": 1,
+      "message": "Base::size() could be size_t and \"I\" is the underlying type of \"Index\" which could be something smaller, or larger like uint32_t or uint64_t.",
+      "parentUuid": "09beeb73_1ceecbaf",
+      "revId": "0d27c2fb788dc45517219754ac6ac800ef6c5c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
