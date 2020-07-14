@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf82f7f3_89b4b961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T17:27:33Z",
+      "side": 1,
+      "message": "LGTM; we should also test WriteTexture to a full mip level / partial mip level",
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
