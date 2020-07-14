@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "bfb70810_448e4b51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T01:59:53Z",
+      "side": 1,
+      "message": "Caching introduces its own problems such as needing to invalidate the cache when the factory is no longer current. Probably more trouble than it\u0027s worth. \n\nToday, Chromium always fills in the IDXGIAdapter preference but when we get cross adapter handling working, Chromium may put nullptr. In this case, Dawn can use the power preference and list of extensions to inform its decision. Note that Chromium will still ask for a specific DXGI adapter for WebXR, where the XR runtime demands it use a specific one. \n\nWe could put the beginning of this as part of this change by having the code as the SharedImageManager for the preferred adapter instead of asking ANGLE but I do not have a strong preference either way.",
+      "parentUuid": "b4fa6f82_0048506b",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80fdc78d_3de40816",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
