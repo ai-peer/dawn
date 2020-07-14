@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be1257d6_afd153d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T14:25:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d8636f13070f55c69314681fd4ceefa9724becce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f747c885_c05f4766",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T14:25:58Z",
+      "side": 1,
+      "message": "The barrier doesn\u0027t exist anymore. Maybe reword the comment to say something like: \"There is no need of a barrier to make host writes available and visible to the copy operation for HOST_COHERENT memory. The Vulkan spec for vkQueueSubmit describes that it does an implicit availability, visibility and domain operation.\"\n\nThe same comment could be used for writeTexture.",
+      "revId": "d8636f13070f55c69314681fd4ceefa9724becce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2978625a_376395f2",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T14:25:58Z",
+      "side": 1,
+      "message": "This is a copy-pasted comment, in general try to understand the comments that are copied to know if they must be updated. This comment talks about a host write barrier but there isn\u0027t one in this function.",
+      "revId": "d8636f13070f55c69314681fd4ceefa9724becce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90d403cb_c42bf59d",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T14:25:58Z",
+      "side": 1,
+      "message": "Same comments as in the Metal backend\u0027s CL",
+      "revId": "d8636f13070f55c69314681fd4ceefa9724becce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db988aba_037946b0",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T14:25:58Z",
+      "side": 1,
+      "message": "Do you have any idea why it is failing on Swiftshader? We should file a bug on crbug.com/swiftshader if it is a Swiftshader issue.",
+      "revId": "d8636f13070f55c69314681fd4ceefa9724becce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
