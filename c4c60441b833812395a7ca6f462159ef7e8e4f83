@@ -16,6 +16,98 @@
       "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80fdc78d_3de40816",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:25:19Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 51
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da3769a6_fe7ee23f",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:25:19Z",
+      "side": 1,
+      "message": "perhaps if this fails we need to return nullptr, and then not push that into the vector at [1]\n\nEven better, this should probably return ResultOrError\u003cstd::unique_ptr\u003cAdapterBase\u003e\u003e",
+      "range": {
+        "startLine": 160,
+        "startChar": 8,
+        "endLine": 160,
+        "endChar": 60
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05941988_1111c611",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:25:19Z",
+      "side": 1,
+      "message": "I believe this can be private. In general, it\u0027s nice to have a separation between the function declarations which override the base class, and the functions which are private implementation details.\n\nBetter than private, it could probably be an a free function in BackendD3D12.cpp in the anonymous namespace, like \"CreateFactory\" is.",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "340a045e_c1ef5522",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:25:19Z",
+      "side": 1,
+      "message": "nit: std::move(adapter)",
+      "range": {
+        "startLine": 73,
+        "startChar": 74,
+        "endLine": 73,
+        "endChar": 81
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
