@@ -1076,6 +1076,11 @@ DAWN_INSTANTIATE_TEST(CompressedTextureBCFormatTest,
 
 class CompressedTextureWriteTextureTest : public CompressedTextureBCFormatTest {
   protected:
+    void SetUp() override {
+        CompressedTextureBCFormatTest::SetUp();
+        DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
+    }
+
     // Write the compressed texture data into the destination texture as is specified in copyConfig.
     void WriteToCompressedTexture(wgpu::Texture bcCompressedTexture, const CopyConfig& copyConfig) {
         ASSERT(IsBCFormatSupported());
@@ -1107,8 +1112,6 @@ class CompressedTextureWriteTextureTest : public CompressedTextureBCFormatTest {
 // Test WriteTexture to a 2D texture with all parameters non-default
 // with BC formats.
 TEST_P(CompressedTextureWriteTextureTest, Basic) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {20, 24, 1};
@@ -1126,8 +1129,6 @@ TEST_P(CompressedTextureWriteTextureTest, Basic) {
 
 // Test writing to multiple 2D texture array layers with BC formats.
 TEST_P(CompressedTextureWriteTextureTest, WriteMultiple2DArrayLayers) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {20, 24, 9};
@@ -1147,8 +1148,6 @@ TEST_P(CompressedTextureWriteTextureTest, WriteMultiple2DArrayLayers) {
 // subresource is different from its virtual size.
 TEST_P(CompressedTextureWriteTextureTest,
        WriteIntoSubresourceWithPhysicalSizeNotEqualToVirtualSize) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     // Texture virtual size at mipLevel 2 will be {15, 15, 1} while the physical
     // size will be {16, 16, 1}.
     // Setting copyExtent.width or copyExtent.height to 16 fits in
@@ -1172,4 +1171,4 @@ TEST_P(CompressedTextureWriteTextureTest,
     }
 }
 
-DAWN_INSTANTIATE_TEST(CompressedTextureWriteTextureTest, MetalBackend());
+DAWN_INSTANTIATE_TEST(CompressedTextureWriteTextureTest, MetalBackend(), VulkanBackend());
