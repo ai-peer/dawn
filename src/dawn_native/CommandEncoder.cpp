@@ -435,6 +435,55 @@ namespace dawn_native {
             return fixedView;
         }
 
+        MaybeError ValidateQuerySetResolve(const QuerySetBase* querySet,
+                                           uint32_t firstQuery,
+                                           uint32_t queryCount,
+                                           const BufferBase* destination,
+                                           uint64_t destinationOffset) {
+            if (firstQuery >= querySet->GetQueryCount()) {
+                return DAWN_VALIDATION_ERROR("Query index out of bounds");
+            }
+
+            if (queryCount > querySet->GetQueryCount() - firstQuery) {
+                return DAWN_VALIDATION_ERROR(
+                    "The sum of firstQuery and queryCount exceeds the number of queries in query "
+                    "set");
+            }
+
+            // TODO(hao.x.li@intel.com): Validate that the queries between [firstQuery, firstQuery +
+            // queryCount - 1] must be available(written by query operations).
+
+            // The destinationOffset must be a multiple of 8 bytes on D3D12 and Vulkan
+            if (destinationOffset % 8 != 0) {
+                return DAWN_VALIDATION_ERROR(
+                    "The alignment offset into the destination buffer must be a multiple of 8 "
+                    "bytes");
+            }
+
+            // The maximum count of queries that can be resolved. If the queryCount is too large,
+            // the computation of queryCount and sizeof(uint64_t) (each query result is written
+            // into 64-bits) maybe overflow in 32bit mode compilation.
+            uint64_t maxQueryCount =
+                static_cast<uint64_t>(std::numeric_limits<size_t>::max() / sizeof(uint64_t));
+            if (queryCount > maxQueryCount) {
+                return DAWN_VALIDATION_ERROR(
+                    "The count of queries for resolving exceeds the limitation of " +
+                    std::to_string(maxQueryCount));
+            }
+
+            uint64_t bufferSize = destination->GetSize();
+            // The destination buffer must have enough storage, from destination offset, to contain
+            // the result of resolved queries
+            bool fitsInBuffer = destinationOffset <= bufferSize &&
+                                (static_cast<uint64_t>(queryCount) * sizeof(uint64_t) <=
+                                 (bufferSize - destinationOffset));
+            if (!fitsInBuffer) {
+                return DAWN_VALIDATION_ERROR("The resolved query data would overflow the buffer");
+            }
+
+            return {};
+        }
+
     }  // namespace
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
@@ -783,6 +832,37 @@ namespace dawn_native {
         });
     }
 
+    void CommandEncoder::ResolveQuerySet(QuerySetBase* querySet,
+                                         uint32_t firstQuery,
+                                         uint32_t queryCount,
+                                         BufferBase* destination,
+                                         uint64_t destinationOffset) {
+        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(GetDevice()->ValidateObject(querySet));
+                DAWN_TRY(GetDevice()->ValidateObject(destination));
+
+                DAWN_TRY(ValidateQuerySetResolve(querySet, firstQuery, queryCount, destination,
+                                                 destinationOffset));
+
+                DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::QueryResolve));
+
+                TrackUsedQuerySet(querySet);
+                mTopLevelBuffers.insert(destination);
+            }
+
+            ResolveQuerySetCmd* cmd =
+                allocator->Allocate<ResolveQuerySetCmd>(Command::ResolveQuerySet);
+            cmd->querySet = querySet;
+            cmd->firstQuery = firstQuery;
+            cmd->queryCount = queryCount;
+            cmd->destination = destination;
+            cmd->destinationOffset = destinationOffset;
+
+            return {};
+        });
+    }
+
     void CommandEncoder::WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
@@ -881,6 +961,11 @@ namespace dawn_native {
                     const PushDebugGroupCmd* cmd = commands->NextCommand<PushDebugGroupCmd>();
                     commands->NextData<char>(cmd->length + 1);
                     debugGroupStackSize++;
+                    break;
+                }
+
+                case Command::ResolveQuerySet: {
+                    commands->NextCommand<ResolveQuerySetCmd>();
                     break;
                 }
 
