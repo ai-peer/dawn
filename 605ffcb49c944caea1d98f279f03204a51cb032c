@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a580e4a_088f937b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-14T17:42:33Z",
+      "side": 1,
+      "message": "I should have realized when Mac code was broken that the presubmit hadn\u0027t been run on multiple platforms on CQ. Whoops.",
+      "revId": "605ffcb49c944caea1d98f279f03204a51cb032c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
