@@ -272,10 +272,18 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapReadAsyncImpl() {
+        CommandRecordingContext* commandContext;
+        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
+        DAWN_TRY(EnsureDataInitialized(commandContext));
+
         return MapInternal(false, "D3D12 map read async");
     }
 
     MaybeError Buffer::MapWriteAsyncImpl() {
+        CommandRecordingContext* commandContext;
+        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
+        DAWN_TRY(EnsureDataInitialized(commandContext));
+
         return MapInternal(true, "D3D12 map write async");
     }
 

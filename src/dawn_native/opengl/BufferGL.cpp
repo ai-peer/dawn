@@ -106,6 +106,8 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapReadAsyncImpl() {
+        EnsureDataInitialized();
+
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
         // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
@@ -116,6 +118,8 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapWriteAsyncImpl() {
+        EnsureDataInitialized();
+
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
         // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high

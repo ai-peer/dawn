@@ -36,6 +36,56 @@ class BufferZeroInitTest : public DawnTest {
         descriptor.usage = usage;
         return device.CreateBuffer(&descriptor);
     }
+
+    static void MapReadCallback(WGPUBufferMapAsyncStatus status,
+                                const void* data,
+                                uint64_t,
+                                void* userdata) {
+        ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+        ASSERT_NE(nullptr, data);
+
+        static_cast<BufferZeroInitTest*>(userdata)->mReadableMappedData = data;
+    }
+
+    const void* MapReadAsyncAndWait(const wgpu::Buffer& buffer) {
+        buffer.MapReadAsync(MapReadCallback, this);
+
+        while (mReadableMappedData == nullptr) {
+            WaitABit();
+        }
+
+        return mReadableMappedData;
+    }
+
+    static void MapWriteCallback(WGPUBufferMapAsyncStatus status,
+                                 void* data,
+                                 uint64_t,
+                                 void* userdata) {
+        ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+        ASSERT_NE(nullptr, data);
+
+        static_cast<BufferZeroInitTest*>(userdata)->mWritableMappedData = data;
+    }
+
+    void* MapWriteAsyncAndWait(const wgpu::Buffer& buffer) {
+        buffer.MapWriteAsync(MapWriteCallback, this);
+
+        while (mWritableMappedData == nullptr) {
+            WaitABit();
+        }
+
+        return mWritableMappedData;
+    }
+
+    void Unmap(wgpu::Buffer buffer) {
+        buffer.Unmap();
+        mReadableMappedData = nullptr;
+        mWritableMappedData = nullptr;
+    }
+
+  private:
+    const void* mReadableMappedData = nullptr;
+    void* mWritableMappedData = nullptr;
 };
 
 // Test that calling writeBuffer to overwrite the entire buffer doesn't need to lazily initialize
@@ -258,6 +308,51 @@ TEST_P(BufferZeroInitTest, CopyBufferToBufferDestination) {
         EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(expectedData.data()), dstBuffer, 0,
                                    kBufferSize / sizeof(uint32_t));
     }
+}
+
+// Test that the code path of readable buffer mapping clears the destination buffer correctly when
+// it is the first use of the buffer.
+TEST_P(BufferZeroInitTest, MapRead) {
+    constexpr uint32_t kBufferSize = 16u;
+    constexpr wgpu::BufferUsage kBufferUsage =
+        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+
+    wgpu::Buffer buffer = CreateBuffer(kBufferSize, kBufferUsage);
+    const void* mappedData = nullptr;
+    EXPECT_LAZY_CLEAR(1u, mappedData = MapReadAsyncAndWait(buffer));
+
+    const uint32_t* mappedDataUint = static_cast<const uint32_t*>(mappedData);
+    for (uint32_t i = 0; i < kBufferSize / sizeof(uint32_t); ++i) {
+        EXPECT_EQ(0u, mappedDataUint[i]);
+    }
+
+    Unmap(buffer);
+}
+
+// Test that the code path of writable buffer mapping clears the destination buffer correctly when
+// it is the first use of the buffer.
+TEST_P(BufferZeroInitTest, MapWrite) {
+    constexpr uint32_t kBufferSize = 16u;
+    constexpr wgpu::BufferUsage kBufferUsage =
+        wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+
+    wgpu::Buffer buffer = CreateBuffer(kBufferSize, kBufferUsage);
+    void* mappedData = nullptr;
+    EXPECT_LAZY_CLEAR(1u, mappedData = MapWriteAsyncAndWait(buffer));
+
+    uint8_t* mappedUint32Pointer = static_cast<uint8_t*>(mappedData);
+    *mappedUint32Pointer = 16u;
+    *(mappedUint32Pointer + 8) = 32u;
+
+    std::array<uint8_t, kBufferSize> expectedData;
+    expectedData.fill(0);
+    expectedData[0] = 16u;
+    expectedData[8] = 32u;
+
+    Unmap(buffer);
+
+    EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(expectedData.data()), buffer, 0,
+                               kBufferSize / sizeof(uint32_t));
 }
 
 DAWN_INSTANTIATE_TEST(BufferZeroInitTest,

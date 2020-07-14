@@ -114,10 +114,18 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Buffer::MapReadAsyncImpl() {
+        CommandRecordingContext* commandContext =
+            ToBackend(GetDevice())->GetPendingCommandContext();
+        EnsureDataInitialized(commandContext);
+
         return {};
     }
 
     MaybeError Buffer::MapWriteAsyncImpl() {
+        CommandRecordingContext* commandContext =
+            ToBackend(GetDevice())->GetPendingCommandContext();
+        EnsureDataInitialized(commandContext);
+
         return {};
     }
 
