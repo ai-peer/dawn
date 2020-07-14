@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e873c8d9_5eef5884",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-14T20:01:51Z",
+      "side": 1,
+      "message": "TBRing since it is a DEPS roll",
+      "revId": "ab941d1d28fd05bc9aa6173995fbf960b61e27db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
