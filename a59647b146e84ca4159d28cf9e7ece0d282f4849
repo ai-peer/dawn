@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "5892768c_227a10f3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T00:47:03Z",
+      "side": 1,
+      "message": "I didn\u0027t change anything here. Let me know if you\u0027d like me to do a follow-up.",
+      "parentUuid": "0fa0871b_8607d1ed",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f7f8974_d70d6080",
         "filename": "src/dawn_native/BindingInfo.cpp",
         "patchSetId": 4
@@ -85,6 +103,24 @@
       "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41656c33_bd8bb4d7",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T00:47:03Z",
+      "side": 1,
+      "message": "No particular reason. I\u0027ve changed them to be ++ now.",
+      "parentUuid": "3f7f8974_d70d6080",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "5d2957f3_4de49f16",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T00:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f692cce_8456a438",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 18
+      },
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efa260c6_9c794e41",
         "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
         "patchSetId": 4
@@ -125,6 +185,24 @@
       "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f24b2143_80ea64bb",
+        "filename": "src/tests/end2end/PipelineLayoutTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T00:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efa260c6_9c794e41",
+      "revId": "a59647b146e84ca4159d28cf9e7ece0d282f4849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
