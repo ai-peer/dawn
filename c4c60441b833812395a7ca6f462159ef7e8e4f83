@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "86c861ca_0212c6ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:15:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80fdc78d_3de40816",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -135,6 +152,87 @@
         "endLine": 144,
         "endChar": 33
       },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e71f1ff_816df404",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:15:26Z",
+      "side": 1,
+      "message": "We usually check against nullptr directly, but it seems to be somewhat unpopular so let\u0027s check against nullptr for this one and discuss offline.",
+      "parentUuid": "1fe5b2e1_f004ffd1",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eca6fbea_4b79dc17",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:15:26Z",
+      "side": 1,
+      "message": "nit: I think it might be possible to do this:\n\n  return {{std::move(adapter)}}",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c5e97b_51cb8234",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:15:26Z",
+      "side": 1,
+      "message": "DiscoverAdapters is somewhat badly named but its semantic is to discover only the adapters corresponding to the options. So we shouldn\u0027t discover the default adapters here. This means that we could have an early return:\n\n  if (!options-\u003edxgiAdapter) { return {}; }",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6947c0b_37de83af",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:15:26Z",
+      "side": 1,
+      "message": "nit: CheckHRESULT for graceful error handling.",
       "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
