@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "273ed1e9_5aeb0e19",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8cf9a1a_da080a9b",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "595383be_19a5ccf2",
         "filename": "src/dawn_native/BindingInfo.h",
         "patchSetId": 14
@@ -81,6 +99,24 @@
       "writtenOn": "2020-07-13T18:54:27Z",
       "side": 1,
       "message": "Nit: not sure I understand what \"optimistic\" means in this context.",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c52a1a_a9628cf9",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:18:34Z",
+      "side": 1,
+      "message": "changed to \"expect valid usage\" should be more clear",
+      "parentUuid": "595383be_19a5ccf2",
       "revId": "36559c034521e32700210fcf675d021a612a6134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -136,6 +172,24 @@
       "revId": "36559c034521e32700210fcf675d021a612a6134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cdf05c2_84ad6dd3",
+        "filename": "src/dawn_native/opengl/PipelineLayoutGL.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T22:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c776a7_f2a96dca",
+      "revId": "36559c034521e32700210fcf675d021a612a6134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
