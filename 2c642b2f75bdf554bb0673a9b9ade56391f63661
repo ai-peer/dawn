@@ -19,6 +19,46 @@
     },
     {
       "key": {
+        "uuid": "18ca0cd0_a5fd8185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T17:41:04Z",
+      "side": 1,
+      "message": "LGTM too; this is quite clever!",
+      "revId": "2c642b2f75bdf554bb0673a9b9ade56391f63661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3fca6b8_62d75300",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T17:41:04Z",
+      "side": 1,
+      "message": "u-nit: \"\u003d {}\" should zero-initialize this too",
+      "range": {
+        "startLine": 697,
+        "startChar": 20,
+        "endLine": 699,
+        "endChar": 55
+      },
+      "revId": "2c642b2f75bdf554bb0673a9b9ade56391f63661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8c00d45_48be0ae3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -35,6 +75,29 @@
         "startChar": 50,
         "endLine": 712,
         "endChar": 88
+      },
+      "revId": "2c642b2f75bdf554bb0673a9b9ade56391f63661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d079561a_f37378db",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T17:41:04Z",
+      "side": 1,
+      "message": "u-nit: \"\u003d {}\" should zero-initialize this too",
+      "range": {
+        "startLine": 743,
+        "startChar": 20,
+        "endLine": 745,
+        "endChar": 55
       },
       "revId": "2c642b2f75bdf554bb0673a9b9ade56391f63661",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
