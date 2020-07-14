@@ -22,6 +22,30 @@
       "revId": "43d958751d4d30fc1191b2165d2f499984327799",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e2b3b5b_6a9ed7e3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T17:18:38Z",
+      "side": 1,
+      "message": "Hmm... thinking about this more.. please see the bottom of this section:\nhttps://gpuweb.github.io/gpuweb/#programming-model-resource-usages\n\n\"\"\"\nGPUTextures in block-based compressed GPUTextureFormats always have a mipmap level 0 whose [[textureSize]] is a multiple of the texel block size, but the lower mipmap levels might not be the multiple of the texel block size and can have paddings.\n\nConsidering a GPUTexture in BC format whose [[textureSize]] is {60, 60, 1}, when sampling the GPUTexture at mipmap level 2, the sampling hardware uses {15, 15, 1} as the size of the subresource, while its physical size is {16, 16, 1} as the block-compression algorithm can only operate on 4x4 texel blocks.\n\"\"\"\n\nThis then raises the question of how you even copy to a 15x15 region when the blocks are 4x4 ? The answer depends on what backend. Metal, D3D12, and Vulkan do different things. There\u0027s an investigation about it here: https://github.com/gpuweb/gpuweb/issues/363\n\nFor Metal, the restriction for these copies should be that the region is a multiple of the blockSize UNLESS the region goes to the edge of the texture. This is the reason for the clampedCopyExtent code.\n\nI do believe we still need to clamp |copySize|. We should have the WriteTexture tests also test using a 15x15 mip of a compressed format to be sure this is working correctly.\nWe provide 16x16 data, specify the size as 16x16, but when we call the Metal driver, we need to pass sourceSize: MTLSizeMake(15, 15, 1)\n\nI think Vulkan will also need to do this.",
+      "parentUuid": "0c0964ac_f87be2ec",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 278,
+        "endChar": 81
+      },
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
