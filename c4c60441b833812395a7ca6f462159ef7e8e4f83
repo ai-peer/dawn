@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "b4fa6f82_0048506b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:47:10Z",
+      "side": 1,
+      "message": "A high level thought I had while reviewing this code:\n\nWe should think about how adapter discovery and querying adapters will ultimately work in Chrome.\n\nRight now, the Chromium CL works because there is only a single adapter in the vector of the adapters, so the first one is always the D3D12 adapter we want to use.\n\nEventually, Chromium should probably cache this adapter discovery stuff, and not do it once per tab for multiple reasons:\n - caching will be faster\n - eventually we\u0027ll probably have ways for devs to ask for SwiftShader or the integrated / discrete GPU (with maybe slow or non-existent swapchain support b.c. we still need the same as ANGLE for that), or a compute-only adapter if there\u0027s such a thing.\n\nWhich means Dawn needs something more like \"GetCachedAdapterWithThesePropertiesOrTryDiscover\"\n\nThis might come after we make adapter discovery match webgpu.h though.",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80fdc78d_3de40816",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -70,6 +87,30 @@
       "writtenOn": "2020-07-14T01:30:02Z",
       "side": 1,
       "message": "@Corentin and @Austin, does Dawn coding standards still prefer that you check against nullptr explicitly?",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fe5b2e1_f004ffd1",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T01:47:10Z",
+      "side": 1,
+      "message": "I *think* the rule is not to do implicit checks with raw pointers, but if the class has an \"operator bool()\" defined, then it\u0027s okay to just say if (foo) { .. }\n\nCorentin could confirm though",
+      "parentUuid": "d4af097a_6d1c4b6b",
       "range": {
         "startLine": 144,
         "startChar": 11,
