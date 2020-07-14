@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "fe624da1_bcc0812c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 39
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T13:49:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b962e086d09145a0fbc7ae2f66469ac49bfad45a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d47e123_8ffa1428",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 39
