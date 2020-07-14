@@ -195,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "8a79ab2c_b64fd98d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T12:38:47Z",
+      "side": 1,
+      "message": "Ah, thanks for the explanation, it makes sense.",
+      "parentUuid": "c4e18c8e_979858d7",
+      "revId": "f4b15af08e6b48d3529df058efb979a139735987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "162be4fa_19b9cdd9",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 2
