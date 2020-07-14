@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a0ddab1a_15756236",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-14T16:50:05Z",
+      "side": 1,
+      "message": "The barrier is referring to \"TransitionUsageNow\". At [1] you could move the comment to be right before \"ToBackend(dst-\u003etexture)-\u003eTransitionUsageNow...\"\n\nMetal does the concept of barriers automatically for you. In Vulkan, we have to manually transition states with \"barriers\". This is because the GPU has to move the data in memory or change the representation in order for it to be efficient for different types of operations. We insert barriers when we want to transition those states. In this case, since we\u0027re copying data into the buffer / buffer, the texture/buffer needs to be in a state where it can be written into.",
+      "parentUuid": "7b556ac1_68aeb204",
+      "range": {
+        "startLine": 601,
+        "startChar": 8,
+        "endLine": 602,
+        "endChar": 18
+      },
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00d4bc41_2ce29614",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 10
