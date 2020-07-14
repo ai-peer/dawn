@@ -111,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "6a0c1e7f_e2991020",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80fdc78d_3de40816",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 51
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4af097a_6d1c4b6b",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -182,6 +206,30 @@
     },
     {
       "key": {
+        "uuid": "f7f41b45_dcaa8253",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e71f1ff_816df404",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eca6fbea_4b79dc17",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -193,6 +241,30 @@
       "writtenOn": "2020-07-14T12:15:26Z",
       "side": 1,
       "message": "nit: I think it might be possible to do this:\n\n  return {{std::move(adapter)}}",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33db168d_af7aee2a",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this works because unique ptr is not copyable :(",
+      "parentUuid": "eca6fbea_4b79dc17",
       "range": {
         "startLine": 147,
         "startChar": 0,
@@ -222,6 +294,24 @@
     },
     {
       "key": {
+        "uuid": "f3e63d2a_b2e29d20",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7c5e97b_51cb8234",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6947c0b_37de83af",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -236,6 +326,24 @@
       "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3a2955d_b8521844",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6947c0b_37de83af",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -262,6 +370,30 @@
     },
     {
       "key": {
+        "uuid": "e11f0109_e9a977da",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da3769a6_fe7ee23f",
+      "range": {
+        "startLine": 160,
+        "startChar": 8,
+        "endLine": 160,
+        "endChar": 60
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05941988_1111c611",
         "filename": "src/dawn_native/d3d12/BackendD3D12.h",
         "patchSetId": 3
@@ -285,6 +417,30 @@
     },
     {
       "key": {
+        "uuid": "2f01eda4_b002e7dc",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05941988_1111c611",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "340a045e_c1ef5522",
         "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
         "patchSetId": 3
@@ -305,6 +461,30 @@
       "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1275c554_2871d3a7",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-14T20:33:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "340a045e_c1ef5522",
+      "range": {
+        "startLine": 73,
+        "startChar": 74,
+        "endLine": 73,
+        "endChar": 81
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
