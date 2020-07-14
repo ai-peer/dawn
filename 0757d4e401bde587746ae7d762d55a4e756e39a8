@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b943492f_957c9c3f",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T23:04:24Z",
+      "side": 1,
+      "message": "You will need to give it template arguments. Try \n ResultOrError\u003cstd::unique_ptr\u003cAdapterBase\u003e\u003e(std::move(adapter));\n\nor\n\n ResultOrError\u003cstd::unique_ptr\u003cAdapter\u003e\u003e(std::move(adapter));",
+      "parentUuid": "f0c321bd_67f5483c",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0edb65f6_773bf72a",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 5
