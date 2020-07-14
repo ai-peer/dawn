@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "22df238c_340e7fa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-14T21:09:19Z",
+      "side": 1,
+      "message": "Left some thoughts, LGTM. Thanks, Jiawei.",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "194c5fa8_1665943f",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -70,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "72750627_60f59810",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-14T21:09:19Z",
+      "side": 1,
+      "message": "The fastest method I know of uses optimized clear (via ClearRTV). This dirties the pages in MMU w/o needing to write anything by CPU or firing-up the copy/3D engine on GPU. But it only works when clearing to some trivial 1-bit value (but that\u0027s what ClearBuffer here does).\n\nIf it\u0027s between the slowest options (GPU copy vs CPU), then I\u0027d wager touching smaller buffers via CPU could be faster per Corentin\u0027s rationale.",
+      "parentUuid": "194c5fa8_1665943f",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db1b309b_0c958126",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -81,6 +116,30 @@
       "writtenOn": "2020-07-14T12:32:58Z",
       "side": 1,
       "message": "All of this could be replaced by:\n\n  void MapReadAsyncAndWait(buffer) {\n    bool done \u003d fasle;\n    buffer.MapReadAsync([](WGPUBufferMapAsyncStatus status, const void*, uint64_t, void* userdata) {\n           ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);\n           *static_cast\u003cbool*\u003e(userdata) \u003d true;\n        }, \u0026done)\n\n     while !done {WaitABit();}\n  }\n\nThen the pointer can be retrieved with buffer.Get[Const]MappedRange(); (this is the new mapping mechanism).",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff789d3c_60e490a2",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-14T21:09:19Z",
+      "side": 1,
+      "message": "(Unrelated note) WaitABit spin-waits when a device error occurs in-flight and locks up my console on any failure. We should probably exit early given how prevalent this pattern is for testing.",
+      "parentUuid": "db1b309b_0c958126",
       "range": {
         "startLine": 40,
         "startChar": 0,
