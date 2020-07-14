@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "5cab4000_a32ce424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T01:30:02Z",
+      "side": 1,
+      "message": "LGTM assuming Austin\u0027s feedback is addressed.  \n\nI had typed up additional comments but Austin stole all of my good ones before I could hit reply. :-)",
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80fdc78d_3de40816",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 3
@@ -35,6 +52,29 @@
         "startChar": 12,
         "endLine": 132,
         "endChar": 51
+      },
+      "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4af097a_6d1c4b6b",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-07-14T01:30:02Z",
+      "side": 1,
+      "message": "@Corentin and @Austin, does Dawn coding standards still prefer that you check against nullptr explicitly?",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 33
       },
       "revId": "c4c60441b833812395a7ca6f462159ef7e8e4f83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
