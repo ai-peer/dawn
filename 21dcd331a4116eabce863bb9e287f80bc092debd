@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "703272ca_6d5bc5ee",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-14T13:49:53Z",
+      "side": 1,
+      "message": "Ack, blockWidth and blockHeight are always the same at the moment but it might change in the future.",
+      "parentUuid": "9506895d_338e4a51",
+      "range": {
+        "startLine": 373,
+        "startChar": 9,
+        "endLine": 373,
+        "endChar": 35
+      },
+      "revId": "21dcd331a4116eabce863bb9e287f80bc092debd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba95c2cc_c9107a30",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 34
