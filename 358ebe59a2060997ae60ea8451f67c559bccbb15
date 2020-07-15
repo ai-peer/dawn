@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "16770a9d_5e09cdfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-07-15T18:25:58Z",
+      "side": 1,
+      "message": "nit: s/of/off",
+      "revId": "358ebe59a2060997ae60ea8451f67c559bccbb15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a1ac928_9aa10eb4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -33,6 +50,40 @@
       "revId": "358ebe59a2060997ae60ea8451f67c559bccbb15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a95ebdcc_634e20b1",
+        "filename": "build_overrides/tint.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-07-15T18:25:58Z",
+      "side": 1,
+      "message": "Not sure if we need this one or not. If we receive SPIRV input, will we just go through cross, or are we going to go through tint for it? My assumption is we\u0027d go through cross for the SPIRvV case until we turn off SPIRV ingestion?",
+      "revId": "358ebe59a2060997ae60ea8451f67c559bccbb15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ba83a16_e40aca7e",
+        "filename": "build_overrides/tint.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-07-15T18:25:58Z",
+      "side": 1,
+      "message": "We don\u0027t need the WGSL writer I don\u0027t think.",
+      "revId": "358ebe59a2060997ae60ea8451f67c559bccbb15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
