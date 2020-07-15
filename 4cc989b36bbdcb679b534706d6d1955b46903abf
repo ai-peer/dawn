@@ -16,6 +16,103 @@
       "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0789e0a6_8085c802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:01:21Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a3b7b16_daf8abf1",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:01:21Z",
+      "side": 1,
+      "message": "nit: WriteWholeTexture",
+      "range": {
+        "startLine": 1148,
+        "startChar": 28,
+        "endLine": 1148,
+        "endChar": 40
+      },
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cc45717_c8672042",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:01:21Z",
+      "side": 1,
+      "message": "nit: add a TODO to enable the backends as they implement writeTexture. ditto for other tests.",
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c3912c0_86499d95",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:01:21Z",
+      "side": 1,
+      "message": "Maybe this could be RGBA8 directly (it would just require dividing by sizeof(RGBA8)). This way data can be used in EXPECT_TEXTURE_RGBA8_EQ directly. ditto in other tests.",
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfe84e70_dfda01e7",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:01:21Z",
+      "side": 1,
+      "message": "nit: WriteWholeTextureArray",
+      "range": {
+        "startLine": 1219,
+        "startChar": 28,
+        "endLine": 1219,
+        "endChar": 45
+      },
+      "revId": "4cc989b36bbdcb679b534706d6d1955b46903abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
