@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a3076910_c84a9696",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1697a1ca_aa3318ef",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc3ebed1_40696562",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 48
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-15T13:58:33Z",
       "side": 1,
       "message": "Why is this condition needed?",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bc0269c_f3ffacf4",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "We still don\u0027t throw validation errors when rowsPerImage \u003d 0 with depth \u003e 1, so we need to take care of the default rowsPerImage value here.",
+      "parentUuid": "fc3ebed1_40696562",
       "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +112,30 @@
     },
     {
       "key": {
+        "uuid": "46ec79e4_3f9c2401",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc5a4ac_d9005c40",
+      "range": {
+        "startLine": 1077,
+        "startChar": 6,
+        "endLine": 1077,
+        "endChar": 24
+      },
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d84ba9ff_b319d3b0",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 48
@@ -90,6 +150,24 @@
       "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12aca004_a7b7848c",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d84ba9ff_b319d3b0",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +188,24 @@
     },
     {
       "key": {
+        "uuid": "536d3f84_bef01845",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20b8294f_ee2bc3ef",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb043ba4_07dc08a1",
         "filename": "src/utils/WGPUHelpers.cpp",
         "patchSetId": 48
@@ -124,6 +220,24 @@
       "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b95d702f_8c5fd22d",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T14:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb043ba4_07dc08a1",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
