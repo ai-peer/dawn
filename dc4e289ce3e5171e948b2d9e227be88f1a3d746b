@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "3ba98495_b18f320f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T08:57:43Z",
+      "side": 1,
+      "message": "Maybe allocators could be sized for the max value that has a log2 of N: so 1, 3, 7, ... this way we only need to compute Log2 here.",
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6844668_aa8331ff",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 2
