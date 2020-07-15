@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "e94078e8_31fb106b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-15T01:51:03Z",
+      "side": 1,
+      "message": "LGTM. Bummer we can\u0027t re-use NextPowerOfTwo/Log2 due to constexpr.",
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e09c47dd_51c76c30",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 2
