@@ -16,6 +16,91 @@
       "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76455b49_86689c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:10:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef233d35_1cf309d6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:10:32Z",
+      "side": 1,
+      "message": "This is super ugly, maybe introduce local boolean variables?",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce92ece3_3e1e4299",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:10:32Z",
+      "side": 1,
+      "message": "ditto for asserts",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fdaf584_de787810",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:10:32Z",
+      "side": 1,
+      "message": "EEEEK that\u0027s horrible. Maybe switch it to be:\n\n  base_params \u003d {}\n  base_params[\u0027key\u0027] \u003d value\n  ...",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24955363_abd93fe4",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:10:32Z",
+      "side": 1,
+      "message": "Asserts are statements so we should remove the parenthesis\n\nditto everywhere else.",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
