@@ -16,6 +16,24 @@
       "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2138004d_84feba1a",
+        "filename": "DEPS",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T17:50:47Z",
+      "side": 0,
+      "message": "git-cl comes from depot_tools which has its own clang-format, so probably using that one. Checking.",
+      "parentUuid": "85e5c049_2947e436",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
