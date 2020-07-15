@@ -16,6 +16,40 @@
       "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f610c0a0_436ff75c",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-15T12:08:24Z",
+      "side": 1,
+      "message": "Don\u0027t you need parens here? !(isReadMode ^ isWriteMode)?\n\nIf so, also a test. :)",
+      "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bffa139b_7b05305f",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-15T12:08:24Z",
+      "side": 1,
+      "message": "Nit: this function\u0027s a bit long. Consider factoring the read \u0026 write cases into helper fns.",
+      "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
