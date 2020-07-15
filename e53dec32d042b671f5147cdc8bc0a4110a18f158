@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c92deb5e_d9b4a534",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T11:53:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b556ac1_68aeb204",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 10
@@ -49,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "068809a4_5e23aa8e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T11:53:04Z",
+      "side": 1,
+      "message": "nit: and make the comment at [1] refer to the texture too.",
+      "parentUuid": "a0ddab1a_15756236",
+      "range": {
+        "startLine": 601,
+        "startChar": 8,
+        "endLine": 602,
+        "endChar": 18
+      },
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00d4bc41_2ce29614",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 10
@@ -66,6 +107,40 @@
         "endLine": 626,
         "endChar": 18
       },
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab2c5cc1_94538507",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T11:53:04Z",
+      "side": 1,
+      "message": "ditto: same comment about namespace as for the metal backend.",
+      "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e740cc6a_1d3082a4",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T11:53:04Z",
+      "side": 1,
+      "message": "God dawn train eating my comments!\n\nCan this align the rowPitch to VkPhysicalDeviceLimits::optimalBufferCopyRowPitch? It might require adding some things to DeviceVk and VulkanInfo so it could be done as a follow-up (but we should have a TODO here.)",
       "revId": "e53dec32d042b671f5147cdc8bc0a4110a18f158",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
