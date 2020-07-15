@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed4db6e9_4ed11adc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 48
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "Still LGTM.",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1697a1ca_aa3318ef",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "nit: Do you think it might be possible to put this as a helper function on texture so it looks like the follwing? This could be factored with the code in CommandBufferMTL\n\n  texture-\u003eClampToMipLevelVirtualSize(origin, \u0026extent)",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc3ebed1_40696562",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "Why is this condition needed?",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adc5a4ac_d9005c40",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "nit: CompressedTextureWriteTextureTest ? This way the prefix matches the file name mostly.",
+      "range": {
+        "startLine": 1077,
+        "startChar": 6,
+        "endLine": 1077,
+        "endChar": 24
+      },
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d84ba9ff_b319d3b0",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "nit: explain the choice of values.",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20b8294f_ee2bc3ef",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "nit: the depth doesn\u0027t really matter here.",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb043ba4_07dc08a1",
+        "filename": "src/utils/WGPUHelpers.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T13:58:33Z",
+      "side": 1,
+      "message": "nit: use this helper in CreateBufferCopyView.",
+      "revId": "ee9a1799e6b9b8ed6bd276dfbc0ed4bd2c314f80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
