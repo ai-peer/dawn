@@ -33,6 +33,24 @@
       "revId": "b67f6b5b4d2b99feac8d7b6b81ab1b328969a0b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "599b9d45_cd2eab82",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-15T16:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4bef185_badc9b65",
+      "revId": "b67f6b5b4d2b99feac8d7b6b81ab1b328969a0b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
