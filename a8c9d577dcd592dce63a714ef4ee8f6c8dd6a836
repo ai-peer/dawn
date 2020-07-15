@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "c22a389d_c0a0b7bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-15T03:12:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c703ee80_d8bc5a2d",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 8
@@ -47,6 +64,29 @@
       "writtenOn": "2020-07-14T12:19:07Z",
       "side": 1,
       "message": "[2]",
+      "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51d8e66b_d5e6154e",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-15T03:12:14Z",
+      "side": 1,
+      "message": "nit: this is the case where offset + size is past the end of the buffer, but we should also test the case where the start offset is past the end of the buffer",
+      "range": {
+        "startLine": 415,
+        "startChar": 4,
+        "endLine": 420,
+        "endChar": 5
+      },
       "revId": "a8c9d577dcd592dce63a714ef4ee8f6c8dd6a836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
