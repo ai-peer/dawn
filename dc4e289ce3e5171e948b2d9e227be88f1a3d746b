@@ -36,6 +36,63 @@
     },
     {
       "key": {
+        "uuid": "ce73c3a6_88dd4d3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T08:56:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "743bb985_10bff043",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T08:56:20Z",
+      "side": 1,
+      "message": "No need for a template:\n\n constexpr uint32_t ConstexprLog2(uint64_t v) {\n     return v \u003c\u003d 1? 0 : ConstexprLog2(v/2) + 1;\n }",
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6844668_aa8331ff",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T08:56:20Z",
+      "side": 1,
+      "message": "It took me 30 seconds to understand that this was to compute the log2 of the next power of two. Maybe add a comment about it or make a helper constexpr method?",
+      "range": {
+        "startLine": 203,
+        "startChar": 12,
+        "endLine": 203,
+        "endChar": 69
+      },
+      "revId": "dc4e289ce3e5171e948b2d9e227be88f1a3d746b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e09c47dd_51c76c30",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 2
