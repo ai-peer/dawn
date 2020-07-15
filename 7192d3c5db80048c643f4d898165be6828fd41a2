@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e6f9f2e_9bccb416",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T18:06:38Z",
+      "side": 1,
+      "message": "I\u0027ll call 1+1\u003d2 for this.",
+      "revId": "7192d3c5db80048c643f4d898165be6828fd41a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
