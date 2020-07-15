@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "f7963ab4_ce3c3d83",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:15:14Z",
+      "side": 1,
+      "message": "We discussed this briefly in the meeting we had with Jiawei today, and any implementation works for now because we are in the \"correctness\" phase of this feature. I think it is ok as-is because it\u0027s not very complex and allows for optimizations like the RTV one you suggested.",
+      "parentUuid": "72750627_60f59810",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db1b309b_0c958126",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -140,6 +158,30 @@
       "side": 1,
       "message": "(Unrelated note) WaitABit spin-waits when a device error occurs in-flight and locks up my console on any failure. We should probably exit early given how prevalent this pattern is for testing.",
       "parentUuid": "db1b309b_0c958126",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6454ff6c_5346552f",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:15:14Z",
+      "side": 1,
+      "message": "I noticed that too, but it\u0027s usually because if an error in my WIP CL so it\u0027s ok. Do you know what WaitABit never stops? The callback should be called in finite time.",
+      "parentUuid": "ff789d3c_60e490a2",
       "range": {
         "startLine": 40,
         "startChar": 0,
