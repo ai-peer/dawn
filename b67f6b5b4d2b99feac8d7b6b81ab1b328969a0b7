@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36b4707f_7a6f3929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:00:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b67f6b5b4d2b99feac8d7b6b81ab1b328969a0b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4bef185_badc9b65",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T09:00:20Z",
+      "side": 1,
+      "message": "You need to acquire the error otherwise an ASSERT will fire.",
+      "revId": "b67f6b5b4d2b99feac8d7b6b81ab1b328969a0b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
