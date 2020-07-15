@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3fd43fe9_7fbaee9f",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:14:03Z",
+      "side": 1,
+      "message": "Damn! It\u0027s the third mistake I do on the same condition. It\u0027s hard to test this because we don\u0027t have test infrastructure to send commands to the server directly. We can only call the client and mock calls on the API that the server calls.\n\nAustin, do you think it is worth having wire tests that inject commands directly? (that would be in different files from regular tests) They would need to access the internals of Client / Server directly.",
+      "parentUuid": "f610c0a0_436ff75c",
+      "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bffa139b_7b05305f",
         "filename": "src/dawn_wire/server/ServerBuffer.cpp",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-15T12:08:24Z",
       "side": 1,
       "message": "Nit: this function\u0027s a bit long. Consider factoring the read \u0026 write cases into helper fns.",
+      "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d32c533a_420fe1c6",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-15T12:14:03Z",
+      "side": 1,
+      "message": "The function is simplified a bunch in the next CL.",
+      "parentUuid": "bffa139b_7b05305f",
       "revId": "a09411f0cbc9490f119280be53420d1abe7d2d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
