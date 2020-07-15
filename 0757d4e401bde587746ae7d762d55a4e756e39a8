@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "4056fc44_8a3b76a0",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-15T00:55:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b83f54b0_50d93d1e",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0edb65f6_773bf72a",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 5
@@ -129,6 +153,24 @@
       "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9b93637_4c59ccdc",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-07-15T00:55:54Z",
+      "side": 1,
+      "message": "yah that was my bad, I forgot to add the else branch when I intended to. And yah I think ASSERT makes more sense here.",
+      "parentUuid": "e46c7277_7c8db16f",
+      "revId": "0757d4e401bde587746ae7d762d55a4e756e39a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
