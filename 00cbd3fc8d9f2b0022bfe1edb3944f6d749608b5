@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26449792_4106f0c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T19:35:20Z",
+      "side": 1,
+      "message": "nit: where",
+      "range": {
+        "startLine": 9,
+        "startChar": 74,
+        "endLine": 9,
+        "endChar": 78
+      },
+      "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2783a6a_a79fdc57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T19:35:20Z",
+      "side": 1,
+      "message": "nit: maybe Bug: dawn:405? fine to omit a bug id if it\u0027s not really the right bug though.",
+      "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
