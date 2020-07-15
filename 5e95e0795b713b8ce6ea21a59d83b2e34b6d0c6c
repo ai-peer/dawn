@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a74349cf_2b014963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-15T17:30:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5e95e0795b713b8ce6ea21a59d83b2e34b6d0c6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1c33c2d_5471c2f2",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-15T17:30:02Z",
+      "side": 1,
+      "message": "nit: a bit odd to mutate this after creation. Instead of using kSize later in this test, couldn\u0027t we doing something like:\n\nkMipLevel \u003d 2;\nkMipSize \u003d kSize \u003e\u003e kMipLevel;\n\nand then use kMipSize for the copySize and other computations?\n\n?",
+      "range": {
+        "startLine": 1319,
+        "startChar": 4,
+        "endLine": 1320,
+        "endChar": 32
+      },
+      "revId": "5e95e0795b713b8ce6ea21a59d83b2e34b6d0c6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
