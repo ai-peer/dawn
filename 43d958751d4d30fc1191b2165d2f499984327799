@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "522a5390_04aa62f2",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T13:06:21Z",
+      "side": 1,
+      "message": "Thanks for explaining! I added clamping copySize back.",
+      "parentUuid": "9e2b3b5b_6a9ed7e3",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 278,
+        "endChar": 81
+      },
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a6d2c9d_d1c3710b",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 42
@@ -80,6 +104,24 @@
       "revId": "43d958751d4d30fc1191b2165d2f499984327799",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9c23921_35d2b893",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T13:06:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6d2c9d_d1c3710b",
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -100,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "90886de0_fb930568",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T13:06:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1224f3d8_227e734e",
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c483308_dc448ec2",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 42
@@ -114,6 +174,24 @@
       "revId": "43d958751d4d30fc1191b2165d2f499984327799",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b240cb_a486de56",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T13:06:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c483308_dc448ec2",
+      "revId": "43d958751d4d30fc1191b2165d2f499984327799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

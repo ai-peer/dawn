@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e6fd4cf_3d97e450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 47
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-15T13:06:21Z",
+      "side": 1,
+      "message": "I modified the CompressedTextureFormatTests functions a bit - UploadData and GetExpectedData are now used to return data for the exact region we want to write/copy to. \n\nPreviously, we used both of them to return data for the whole texture - that was fine since the tests are using only one texel block everywhere - it was just more of the same block in data. It could have caused problems with some physical/virtual size differences though, consider the case when physicalSize.width \u003d 16, virtualSize.width \u003d 15, copyExtent.width \u003d 12 - then data for the whole texture is aligned differently than data for the region. It wasn\u0027t covered in the tests that were implemented.\n\nThe change also includes rowsPerImage alignment \n",
+      "revId": "a6e80b11a31462d0bbc4244b8fce3e20e9efb7c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
