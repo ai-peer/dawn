@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a0627128_a12fcedb",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T17:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef233d35_1cf309d6",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce92ece3_3e1e4299",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a157e97_553970c9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T17:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce92ece3_3e1e4299",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "492cd4e3_1a36ef87",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T17:50:44Z",
+      "side": 1,
+      "message": "I don\u0027t get why it formatted it this way. I did it with backslashes and it\u0027s much better (although the formatter now seems to completely ignore the entire dict literal).",
+      "parentUuid": "1fdaf584_de787810",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24955363_abd93fe4",
         "filename": "generator/opengl_loader_generator.py",
         "patchSetId": 2
@@ -101,6 +155,24 @@
       "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82364ad6_bc99c5b0",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-15T17:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24955363_abd93fe4",
+      "revId": "c19a8ea19a94d6b949f0d68b706939b2fca8fb1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
