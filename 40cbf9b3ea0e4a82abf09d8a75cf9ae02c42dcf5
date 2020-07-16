@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8ebafbf_c23d50be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T08:46:43Z",
+      "side": 1,
+      "message": "Stephen PTAL at this CL, I think you missed it.",
+      "revId": "40cbf9b3ea0e4a82abf09d8a75cf9ae02c42dcf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
