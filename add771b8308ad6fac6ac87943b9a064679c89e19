@@ -56,6 +56,30 @@
       "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9c3ce24_427e4e68",
+        "filename": "dawn_wire.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T16:03:13Z",
+      "side": 1,
+      "message": "It\u0027s because it should be done for WriteTexture and WriteBuffer too.",
+      "parentUuid": "99b06af7_af3c73d7",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 6
+      },
+      "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
