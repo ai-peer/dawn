@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fcd5ec5_1bccb996",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-16T16:15:56Z",
+      "side": 0,
+      "message": "Probably dumb question (and not new to this patch), but if I\u0027m reading WireClient.h correctly, initialDataInfo is supposed to receive structured data (a pointer, and a size). Is there a reason it can\u0027t be typed to that struct and passed as such higher up? Is it because it\u0027s supposed to be a fixed size on the wire and not dependent on C struct layout or something?",
+      "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
