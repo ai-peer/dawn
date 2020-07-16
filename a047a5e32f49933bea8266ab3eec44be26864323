@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "0fe80afc_90d02479",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-16T07:57:53Z",
+      "side": 1,
+      "message": "\u003e What do you think of doing the lazy initialization on the CPU in the frontend instead? It is possible to do for mapped buffers (and mapped at creation ones) because they are CPU accessible.\n\nI think currently we only need to consider this on Vulkan (and maybe OpenGL) backend now.\n- On D3D12, we can only clear the writable mapped buffer on CPU side because it is created on UPLOAD heap.\n- On Metal we can always use function \"fillBuffer\" without any barriers.\n- On OpenGL currently we are clearing a buffer with BufferSubData(), where we need to create a large array on the CPU side and upload it to the GPU. This can be optimized.\n- On Vulkan currently we are calling FillBuffer() with a barrier before and a barrier after. I think it\u0027s worth writing a performance test to see if it is faster to clear buffer on CPU or GPU side. But I think maybe it\u0027s better for us to do it in another CL, what do you think?\n\n\u003e Also note that this should be rebased on top of https://dawn-review.googlesource.com/c/dawn/+/24260 that adds the MapAsyncImpl virtual method. (and we\u0027ll need the tests updated to also test MapAsync, or only MapAsync).\n\nIn the latest patch set I don\u0027t add the lazy initialization path for MapReadAsync and MapWriteAsync because they are deprecated.",
+      "parentUuid": "f7963ab4_ce3c3d83",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db1b309b_0c958126",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -194,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "a69c06d3_4d501b93",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-16T07:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6454ff6c_5346552f",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f14b9c13_6c26cdb8",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -217,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "95705da9_2c785360",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-16T07:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f14b9c13_6c26cdb8",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 40
+      },
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6774babe_03fb0bcc",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -231,6 +297,24 @@
       "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eacff71_a1050a3f",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-16T07:57:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6774babe_03fb0bcc",
+      "revId": "a047a5e32f49933bea8266ab3eec44be26864323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
