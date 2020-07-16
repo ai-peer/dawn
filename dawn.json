@@ -216,6 +216,16 @@
                 "returns": "void const *"
             },
             {
+                "name": "deprecated get whole mapped range",
+                "returns": "void *",
+                "TODO": "Remove once getMappedRange has range args"
+            },
+            {
+                "name": "deprecated get whole const mapped range",
+                "returns": "void const *",
+                "TODO": "Remove once getConstMappedRange has range args"
+            },
+            {
                 "name": "unmap"
             },
             {

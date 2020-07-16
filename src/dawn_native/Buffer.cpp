@@ -380,6 +380,14 @@ namespace dawn_native {
         return GetMappedRangeInternal(false);
     }
 
+    void* BufferBase::DeprecatedGetWholeMappedRange() {
+        return GetMappedRangeInternal(true);
+    }
+
+    const void* BufferBase::DeprecatedGetWholeConstMappedRange() {
+        return GetMappedRangeInternal(false);
+    }
+
     // TODO(dawn:445): When CreateBufferMapped is removed, make GetMappedRangeInternal also take
     // care of the validation of GetMappedRange.
     void* BufferBase::GetMappedRangeInternal(bool writable) {

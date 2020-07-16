@@ -102,6 +102,8 @@
             "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [
+            "BufferDeprecatedGetWholeConstMappedRange",
+            "BufferDeprecatedGetWholeMappedRange",
             "BufferMapAsync",
             "BufferMapReadAsync",
             "BufferMapWriteAsync",

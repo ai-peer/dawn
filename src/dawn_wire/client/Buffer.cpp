@@ -445,6 +445,14 @@ namespace dawn_wire { namespace client {
         return static_cast<uint8_t*>(mMappedData) + mMapOffset;
     }
 
+    void* Buffer::DeprecatedGetWholeMappedRange() {
+        return GetMappedRange();
+    }
+
+    const void* Buffer::DeprecatedGetWholeConstMappedRange() {
+        return GetConstMappedRange();
+    }
+
     void Buffer::Unmap() {
         // Invalidate the local pointer, and cancel all other in-flight requests that would
         // turn into errors anyway (you can't double map). This prevents race when the following

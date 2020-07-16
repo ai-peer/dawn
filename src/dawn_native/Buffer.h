@@ -69,6 +69,8 @@ namespace dawn_native {
                       void* userdata);
         void* GetMappedRange();
         const void* GetConstMappedRange();
+        void* DeprecatedGetWholeMappedRange();
+        const void* DeprecatedGetWholeConstMappedRange();
         void Unmap();
         void Destroy();
 
