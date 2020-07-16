@@ -56,6 +56,24 @@
       "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abe25ba5_8eaff51b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-16T15:45:05Z",
+      "side": 1,
+      "message": "It is some path issues in BUILD.gn, I need to investigate, might need a Tint side change.",
+      "parentUuid": "c0a7859c_8df49a93",
+      "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
