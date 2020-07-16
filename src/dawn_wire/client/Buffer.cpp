@@ -268,6 +268,7 @@ namespace dawn_wire { namespace client {
             WGPUBufferMapCallback callback;
             void* userdata;
             size_t mapOffset;
+            size_t mapSize;
             Buffer* self;
         };
         ProxyData* proxy = new ProxyData;
@@ -287,6 +288,7 @@ namespace dawn_wire { namespace client {
                         proxy->callback(status, proxy->userdata);
                     }
                     proxy->self->mMapOffset = proxy->mapOffset;
+                    proxy->self->mMapSize = proxy->mapSize;
                     delete proxy;
                 },
                 proxy);
@@ -299,6 +301,7 @@ namespace dawn_wire { namespace client {
                         proxy->callback(status, proxy->userdata);
                     }
                     proxy->self->mMapOffset = proxy->mapOffset;
+                    proxy->self->mMapSize = proxy->mapSize;
                     delete proxy;
                 },
                 proxy);
@@ -431,18 +434,19 @@ namespace dawn_wire { namespace client {
         }
     }
 
-    void* Buffer::GetMappedRange() {
-        if (!IsMappedForWriting()) {
+    void* Buffer::GetMappedRange(size_t offset, size_t size) {
+        if (!IsMappedForWriting() || !CheckGetMappedRangeOffsetSize(offset, size)) {
             return nullptr;
         }
-        return static_cast<uint8_t*>(mMappedData) + mMapOffset;
+        return static_cast<uint8_t*>(mMappedData) + offset;
     }
 
-    const void* Buffer::GetConstMappedRange() {
-        if (!IsMappedForWriting() && !IsMappedForReading()) {
+    const void* Buffer::GetConstMappedRange(size_t offset, size_t size) {
+        if (!(IsMappedForWriting() || IsMappedForReading()) ||
+            !CheckGetMappedRangeOffsetSize(offset, size)) {
             return nullptr;
         }
-        return static_cast<uint8_t*>(mMappedData) + mMapOffset;
+        return static_cast<uint8_t*>(mMappedData) + offset;
     }
 
     void Buffer::Unmap() {
@@ -480,6 +484,7 @@ namespace dawn_wire { namespace client {
         }
         mMappedData = nullptr;
         mMapOffset = 0;
+        mMapSize = mSize;
         ClearMapRequests(WGPUBufferMapAsyncStatus_Unknown);
 
         BufferUnmapCmd cmd;
@@ -517,4 +522,12 @@ namespace dawn_wire { namespace client {
         return mWriteHandle != nullptr;
     }
 
+    bool Buffer::CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const {
+        if (size > mMapSize || offset < mMapOffset) {
+            return false;
+        }
+
+        size_t offsetInMappedRange = offset - mMapOffset;
+        return offsetInMappedRange <= mMapSize - size;
+    }
 }}  // namespace dawn_wire::client
