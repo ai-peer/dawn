@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3bb3ebd7_cd0da87f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-16T10:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09062bf9_7346cb6a",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd3c82f0_f0f9da2c",
         "filename": "src/dawn_native/vulkan/QueueVk.cpp",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-16T10:40:52Z",
       "side": 1,
       "message": "This comment needs to be updated.",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07a22d1b_f3a6b959",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-16T10:58:13Z",
+      "side": 1,
+      "message": "In the new patch we still copy only the data that will appear in the texture, but we move the pointer by optimal bytes per row value.",
+      "parentUuid": "dd3c82f0_f0f9da2c",
       "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "604bf96c_6ddcc13c",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-16T10:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcbddfd6_e71a3278",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8f47009_4f72a983",
         "filename": "src/tests/end2end/QueueTests.cpp",
         "patchSetId": 5
@@ -84,6 +138,24 @@
       "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "901e6763_ef8969a1",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-16T10:58:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a8f47009_4f72a983",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
