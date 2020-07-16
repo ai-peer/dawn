@@ -372,6 +372,8 @@ TEST_P(QueueWriteTextureTests, VaryingWriteSize) {
 
 // Test writing with varying write sizes to texture arrays.
 TEST_P(QueueWriteTextureTests, VaryingArrayWriteSize) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     constexpr uint32_t kWidth = 257;
     constexpr uint32_t kHeight = 127;
     constexpr uint32_t kDepth = 65;
@@ -464,6 +466,8 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
 
 // Test with bytesPerRow greater than needed in a write to a texture array.
 TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
+    DAWN_SKIP_TEST_IF(IsSwiftshader());
+
     constexpr uint32_t kWidth = 257;
     constexpr uint32_t kHeight = 129;
     constexpr uint32_t kLayers = 65;
