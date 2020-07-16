@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dea2a38d_e4c333dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T00:45:40Z",
+      "side": 1,
+      "message": "feel free to look at the other patches for context, but it still needs some more work. See one comment here about the why the current approach isn\u0027t going to work. Let me know if you have other ideas",
+      "revId": "dd3b9b73baf3e7cd0c2d641d58168dc5752cd09f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5128937f_5038c33e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T00:45:40Z",
+      "side": 1,
+      "message": "tldr; I think subresource index hack is unsufficient and it\u0027ll be better to indicate in the aspect that depth/stencil are one subresource.\n\n\nSo I have Device::GetSubresourcePlaneIndex(..) and Texture::mPlaneIndices such that GetSubresourceIndex will return the same index for depth/stencil aspects on Vulkan, since separate depth/stencil layouts is an extension.\n\nHowever, even with that, this code will still end up doing a double barrier because it\u0027ll run this loop once for Depth and once for Stencil. CanReuseWithoutBarrier won\u0027t skip the barrier if one of the usages is writable. There\u0027s also the problem that this would totally do the wrong thing if depth/stencil had different usages. I think we need to use General layout there.. which means or-ing together the usages before building the barrier.",
+      "range": {
+        "startLine": 866,
+        "startChar": 12,
+        "endLine": 884,
+        "endChar": 13
+      },
+      "revId": "dd3b9b73baf3e7cd0c2d641d58168dc5752cd09f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
