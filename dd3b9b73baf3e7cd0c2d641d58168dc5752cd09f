@@ -39,6 +39,30 @@
       "revId": "dd3b9b73baf3e7cd0c2d641d58168dc5752cd09f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "954a18c5_d31da563",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T00:50:55Z",
+      "side": 1,
+      "message": "Actually, perhaps I don\u0027t need to do the same-index hack, but still have a boolean somewhere that tells me if they\u0027re a single resource. So if they\u0027re a single resource I OR the usages together before BuildMemoryBarrier",
+      "parentUuid": "5128937f_5038c33e",
+      "range": {
+        "startLine": 866,
+        "startChar": 12,
+        "endLine": 884,
+        "endChar": 13
+      },
+      "revId": "dd3b9b73baf3e7cd0c2d641d58168dc5752cd09f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
