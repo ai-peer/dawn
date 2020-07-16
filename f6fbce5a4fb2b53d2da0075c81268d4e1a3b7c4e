@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c12ae17_a1669ab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T10:40:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09062bf9_7346cb6a",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T10:40:52Z",
+      "side": 1,
+      "message": "This is quite a specialized getter. Maybe we could do device-\u003eGetDeviceInfo().properties.limits.optimalBufferCopyOffsetAlignment in [1] ?",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd3c82f0_f0f9da2c",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T10:40:52Z",
+      "side": 1,
+      "message": "This comment needs to be updated.",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcbddfd6_e71a3278",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T10:40:52Z",
+      "side": 1,
+      "message": "[1] and the optimalrowpitch could first be in its own variable for clarity.",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8f47009_4f72a983",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T10:40:52Z",
+      "side": 1,
+      "message": "Uuuh we really need to figure out these swiftshader issues, we\u0027re starting to have a lot of suppressions. (just to be clear, you don\u0027t need to do it, but someone should)",
+      "revId": "f6fbce5a4fb2b53d2da0075c81268d4e1a3b7c4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
