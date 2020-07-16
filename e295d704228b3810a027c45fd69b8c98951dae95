@@ -16,6 +16,23 @@
       "revId": "e295d704228b3810a027c45fd69b8c98951dae95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d82cda_aa99e3d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T17:02:05Z",
+      "side": 1,
+      "message": "LGTM. I had thought this would have been more tricky with both mapping variants, but I realize now it should be okay. And when we implement MapReadAsync on top of MapAsync we just have to pass the whole buffer size, so that\u0027s ok too.",
+      "revId": "e295d704228b3810a027c45fd69b8c98951dae95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
