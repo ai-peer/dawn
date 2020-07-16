@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4d839caa_a63e4e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T08:38:01Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7dcb0b8c96e63bb3e35ff8db0fd45d3e360a4773",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2617ca96_ad150d1d",
         "filename": "src/tests/end2end/DepthSamplingTests.cpp",
         "patchSetId": 2
