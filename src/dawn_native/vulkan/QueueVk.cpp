@@ -109,9 +109,9 @@ namespace dawn_native { namespace vulkan {
         // We are only copying the part of the data that will appear in the texture.
         // Note that validating texture copy range ensures that writeSize->width and
         // writeSize->height are multiples of blockWidth and blockHeight respectively.
-        // TODO(tommek@google.com): Add an optimization to align bytesPerRow to
-        // VkPhysicalDeviceLimits::optimalBufferCopyRowPitch.
-        uint32_t alignedBytesPerRow = (writeSize->width) / blockWidth * blockSize;
+        uint32_t alignedBytesPerRow =
+            Align((writeSize->width) / blockWidth * blockSize,
+                  ToBackend(GetDevice())->GetOptimalBufferCopyRowPitchAlignment());
         uint32_t alignedRowsPerImage = writeSize->height;
 
         UploadHandle uploadHandle;

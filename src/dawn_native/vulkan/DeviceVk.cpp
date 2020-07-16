@@ -789,6 +789,14 @@ namespace dawn_native { namespace vulkan {
         return mComputeSubgroupSize;
     }
 
+    VkDeviceSize Device::GetOptimalBufferCopyOffsetAlignment() const {
+        return mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+    }
+
+    VkDeviceSize Device::GetOptimalBufferCopyRowPitchAlignment() const {
+        return mDeviceInfo.properties.limits.optimalBufferCopyOffsetAlignment;
+    }
+
     MaybeError Device::WaitForIdleForDestruction() {
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
         // Move the mRecordingContext.used to mUnusedCommands so it can be cleaned up in
