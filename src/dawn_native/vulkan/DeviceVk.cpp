@@ -789,6 +789,10 @@ namespace dawn_native { namespace vulkan {
         return mComputeSubgroupSize;
     }
 
+    VkDeviceSize Device::GetOptimalBufferCopyOffsetAlignment() const {
+        return mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+    }
+
     VkDeviceSize Device::GetOptimalBufferCopyRowPitchAlignment() const {
         return mDeviceInfo.properties.limits.optimalBufferCopyOffsetAlignment;
     }
