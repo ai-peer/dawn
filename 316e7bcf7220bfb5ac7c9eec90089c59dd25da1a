@@ -16,6 +16,23 @@
       "revId": "316e7bcf7220bfb5ac7c9eec90089c59dd25da1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a1e16ef_4ffdc6d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T09:36:26Z",
+      "side": 1,
+      "message": "Oh, it is because when using the wire MapAsync will end up calling MapReadAsync / MapWriteAsync. It will be fixed with https://dawn-review.googlesource.com/c/dawn/+/24820\n\nIn the meantime you can add the lazy-zero init in MapReadAsyncImpl and MapWriteAsyncImpl (it\u0027s ok if it is not tested since it will be removed soon).",
+      "revId": "316e7bcf7220bfb5ac7c9eec90089c59dd25da1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
