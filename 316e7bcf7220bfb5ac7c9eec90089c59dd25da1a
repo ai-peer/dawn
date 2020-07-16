@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58df4016_f7273ce5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-16T08:58:41Z",
+      "side": 1,
+      "message": "Sorry that \"BufferZeroInitTest.MapReadAsync\" fails with wire layer and I am debugging the test to find out why this test fails with wire layer.",
+      "revId": "316e7bcf7220bfb5ac7c9eec90089c59dd25da1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
