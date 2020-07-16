@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb4a8277_f3d68a38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T23:23:29Z",
+      "side": 1,
+      "message": "WDYT? I remember we talked that people using Dawn shouldn\u0027t use our helpers directly... but I also don\u0027t want to go change the other build right now - it would involve taking a shaderc dependency from another package and forking the utils there.",
+      "revId": "e2a2f31599b3154435c15094d819dc53e215a3db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
