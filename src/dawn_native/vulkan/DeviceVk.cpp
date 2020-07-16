@@ -852,7 +852,12 @@ namespace dawn_native { namespace vulkan {
 
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
         mRecordingContext.used = false;
-        fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
+        if (mRecordingContext.commandPool != VK_NULL_HANDLE) {
+            // It shouldn't be necessary to call vkFreeCommandBuffers, but some drivers leak memory.
+            fn.FreeCommandBuffers(mVkDevice, mRecordingContext.commandPool, 1,
+                                  &mRecordingContext.commandBuffer);
+            fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
+        }
 
         for (VkSemaphore semaphore : mRecordingContext.waitSemaphores) {
             fn.DestroySemaphore(mVkDevice, semaphore, nullptr);
@@ -866,6 +871,8 @@ namespace dawn_native { namespace vulkan {
 
         ASSERT(mCommandsInFlight.Empty());
         for (const CommandPoolAndBuffer& commands : mUnusedCommands) {
+            // It shouldn't be necessary to call vkFreeCommandBuffers, but some drivers leak memory.
+            fn.FreeCommandBuffers(mVkDevice, commands.pool, 1, &commands.commandBuffer);
             fn.DestroyCommandPool(mVkDevice, commands.pool, nullptr);
         }
         mUnusedCommands.clear();
