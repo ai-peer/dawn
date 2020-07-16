@@ -16,6 +16,24 @@
       "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cc9de8_32747834",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-16T17:04:02Z",
+      "side": 0,
+      "message": "hm it probably could have. like a base::span ?",
+      "parentUuid": "0fcd5ec5_1bccb996",
+      "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
