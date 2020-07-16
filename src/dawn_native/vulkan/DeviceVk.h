@@ -105,6 +105,8 @@ namespace dawn_native { namespace vulkan {
         // needs to be set.
         uint32_t GetComputeSubgroupSize() const;
 
+        VkDeviceSize GetOptimalBufferCopyRowPitchAlignment() const;
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 
