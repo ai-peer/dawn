@@ -39,6 +39,23 @@
       "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0a7859c_8df49a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T14:08:25Z",
+      "side": 1,
+      "message": "LGTM, but how to we make the build happy?",
+      "revId": "00cbd3fc8d9f2b0022bfe1edb3944f6d749608b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
