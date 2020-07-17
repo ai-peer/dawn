@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab1f109a_0592b214",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-17T08:29:24Z",
+      "side": 1,
+      "message": "The try bot failure about writeTexture() is not related to my CL because the new test is behind a flag. \n\nPTAL, thanks!",
+      "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
