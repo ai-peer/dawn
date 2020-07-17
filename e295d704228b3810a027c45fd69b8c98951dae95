@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "852e54b3_41a4ef91",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T08:34:40Z",
+      "side": 1,
+      "message": "They are used internally by the buffer for a couple things. But I removed the default because we just need to call with (0, mSize)",
+      "parentUuid": "3a3ee663_c0641f6c",
+      "revId": "e295d704228b3810a027c45fd69b8c98951dae95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f87cd19c_2eda07cf",
         "filename": "src/dawn_native/Buffer.h",
         "patchSetId": 3
@@ -84,6 +102,24 @@
       "revId": "e295d704228b3810a027c45fd69b8c98951dae95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "456585ff_f184fe7f",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T08:34:40Z",
+      "side": 1,
+      "message": "Size \u003d 0 means the whole size right now. Maybe it could get changed. We need to come up with a nice interface.",
+      "parentUuid": "5afaa285_7a6e09ad",
+      "revId": "e295d704228b3810a027c45fd69b8c98951dae95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
