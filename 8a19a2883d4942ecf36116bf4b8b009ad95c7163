@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1cb1b0f_87e53153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T08:42:46Z",
+      "side": 1,
+      "message": "Still LGTM, glad that the MapAsync CL fixed it.",
+      "revId": "8a19a2883d4942ecf36116bf4b8b009ad95c7163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
