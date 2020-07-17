@@ -33,6 +33,23 @@
       "revId": "f3723f58edae0eeebe7454620882503d89bc714c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35b03446_e249d45e",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T08:47:55Z",
+      "side": 1,
+      "message": "The doc for VkApplicationInfo says the following:\n\nVulkan 1.0 implementations were required to return VK_ERROR_INCOMPATIBLE_DRIVER if apiVersion was larger than 1.0. Implementations that support Vulkan 1.1 or later must not return VK_ERROR_INCOMPATIBLE_DRIVER for any value of apiVersion.\n\nNote\nBecause Vulkan 1.0 implementations may fail with VK_ERROR_INCOMPATIBLE_DRIVER, applications should determine the version of Vulkan available before calling vkCreateInstance. If the vkGetInstanceProcAddr returns NULL for vkEnumerateInstanceVersion, it is a Vulkan 1.0 implementation. Otherwise, the application can call vkEnumerateInstanceVersion to determine the version of Vulkan.\n\nAs long as the instance supports at least Vulkan 1.1, an application can use different versions of Vulkan with an instance than it does with a device or physical device.\n\n\n\n\nSo we should set apiVersion to Vulkan 1.0 if the instance only supports Vulkan 1.0, otherwise we can set 1.2. (also we\u0027ll need a small comment that explains why we do the check)",
+      "revId": "f3723f58edae0eeebe7454620882503d89bc714c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
