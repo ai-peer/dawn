@@ -822,6 +822,10 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::ResolveQuerySet: {
+                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                }
+
                 case Command::WriteTimestamp: {
                     return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
