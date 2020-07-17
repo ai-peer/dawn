@@ -16,6 +16,23 @@
       "revId": "d3e54b909074153ade9aef100cd0e3fb9c285634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c5514c_b75ac291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-17T15:02:36Z",
+      "side": 1,
+      "message": "CQ-ing again. CompressedWriteTextureTests flaked",
+      "revId": "d3e54b909074153ade9aef100cd0e3fb9c285634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
