@@ -33,6 +33,23 @@
       "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f13ef0b_45c62e6e",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T08:44:51Z",
+      "side": 1,
+      "message": "nit: take advantage of the default values in TextureDescriptor",
+      "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
