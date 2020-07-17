@@ -36,6 +36,31 @@ class BufferZeroInitTest : public DawnTest {
         descriptor.usage = usage;
         return device.CreateBuffer(&descriptor);
     }
+
+    wgpu::Texture CreateAndInitialize2DTexture(const wgpu::Extent3D& size,
+                                               wgpu::TextureFormat format) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = wgpu::TextureDimension::e2D;
+        descriptor.size = size;
+        descriptor.sampleCount = 1;
+        descriptor.format = format;
+        descriptor.mipLevelCount = 1;
+        descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc |
+                           wgpu::TextureUsage::OutputAttachment;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView()});
+        renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
+        renderPassDescriptor.cColorAttachments[0].clearColor = {0.f, 0.f, 0.f, 0.f};
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+        renderPass.EndPass();
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+
+        return texture;
+    }
 };
 
 // Test that calling writeBuffer to overwrite the entire buffer doesn't need to lazily initialize
@@ -257,6 +282,69 @@ TEST_P(BufferZeroInitTest, CopyBufferToBufferDestination) {
 
         EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(expectedData.data()), dstBuffer, 0,
                                    kBufferSize / sizeof(uint32_t));
+    }
+}
+
+// Test that the code path of CopyBufferToTexture clears the source buffer correctly when it is the
+// first use of the buffer.
+TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
+    constexpr wgpu::Extent3D kTextureSize = {16u, 16u, 1u};
+
+    constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::R32Uint;
+
+    wgpu::Texture texture = CreateAndInitialize2DTexture(kTextureSize, kTextureFormat);
+    const wgpu::TextureCopyView textureCopyView =
+        utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
+
+    const uint32_t requiredBufferSizeForCopy = utils::GetBytesInBufferTextureCopy(
+        kTextureFormat, kTextureSize.width, kTextureBytesPerRowAlignment, kTextureSize.width,
+        kTextureSize.depth);
+
+    constexpr wgpu::BufferUsage kBufferUsage =
+        wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+
+    // bufferOffset == 0
+    {
+        constexpr uint64_t kOffset = 0;
+        const uint32_t totalBufferSize = requiredBufferSizeForCopy + kOffset;
+        wgpu::BufferDescriptor bufferDescriptor;
+        bufferDescriptor.size = totalBufferSize;
+        bufferDescriptor.usage = kBufferUsage;
+
+        wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+        const wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
+            buffer, kOffset, kTextureBytesPerRowAlignment, kTextureSize.height);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &kTextureSize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+
+        std::vector<uint32_t> expectedValues(totalBufferSize / sizeof(uint32_t), 0);
+        EXPECT_BUFFER_U32_RANGE_EQ(expectedValues.data(), buffer, 0,
+                                   totalBufferSize / sizeof(uint32_t));
+    }
+
+    // bufferOffset > 0
+    {
+        constexpr uint64_t kOffset = 8u;
+        const uint32_t totalBufferSize = requiredBufferSizeForCopy + kOffset;
+        wgpu::BufferDescriptor bufferDescriptor;
+        bufferDescriptor.size = totalBufferSize;
+        bufferDescriptor.usage = kBufferUsage;
+
+        wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+        const wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
+            buffer, kOffset, kTextureBytesPerRowAlignment, kTextureSize.height);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &kTextureSize);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+
+        std::vector<uint32_t> expectedValues(totalBufferSize / sizeof(uint32_t), 0);
+        EXPECT_BUFFER_U32_RANGE_EQ(expectedValues.data(), buffer, 0,
+                                   totalBufferSize / sizeof(uint32_t));
     }
 }
 
