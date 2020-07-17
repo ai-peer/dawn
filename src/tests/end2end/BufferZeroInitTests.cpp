@@ -297,7 +297,8 @@ TEST_P(BufferZeroInitTest, MapReadAsync) {
         wgpu::Buffer buffer = CreateBuffer(kBufferSize, kBufferUsage);
         EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize));
 
-        const uint32_t* mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange());
+        const uint32_t* mappedDataUint =
+            static_cast<const uint32_t*>(buffer.GetConstMappedRange(0, kBufferSize));
         for (uint32_t i = 0; i < kBufferSize / sizeof(uint32_t); ++i) {
             EXPECT_EQ(0u, mappedDataUint[i]);
         }
@@ -312,14 +313,15 @@ TEST_P(BufferZeroInitTest, MapReadAsync) {
         constexpr uint64_t kSize = 8u;
         EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, kOffset, kSize));
 
-        const uint32_t* mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange());
+        const uint32_t* mappedDataUint =
+            static_cast<const uint32_t*>(buffer.GetConstMappedRange(0, kBufferSize));
         for (uint32_t i = 0; i < kSize / sizeof(uint32_t); ++i) {
             EXPECT_EQ(0u, mappedDataUint[i]);
         }
         buffer.Unmap();
 
         EXPECT_LAZY_CLEAR(0u, MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize));
-        mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange());
+        mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange(0, kBufferSize));
         for (uint32_t i = 0; i < kBufferSize / sizeof(uint32_t); ++i) {
             EXPECT_EQ(0u, mappedDataUint[i]);
         }
