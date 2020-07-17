@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "3a5946b3_8672a0fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-17T15:39:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f13ef0b_45c62e6e",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 1
