@@ -34,6 +34,24 @@
       "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87dfa392_9d4a5340",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T07:36:47Z",
+      "side": 0,
+      "message": "Maybe we could have our own version of std/base::span, we already have ityp::span. I\u0027ll leave this to later though.",
+      "parentUuid": "36cc9de8_32747834",
+      "revId": "add771b8308ad6fac6ac87943b9a064679c89e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
