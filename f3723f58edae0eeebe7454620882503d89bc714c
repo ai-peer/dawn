@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea7ce557_992d0210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-07-17T08:21:45Z",
+      "side": 1,
+      "message": "Hi, I only directly changed the apiVersion. If it is not well-considered, please tell me, thank you.",
+      "revId": "f3723f58edae0eeebe7454620882503d89bc714c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
