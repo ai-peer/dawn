@@ -50,6 +50,24 @@
       "revId": "47a6168a898b7553984192ae2950aa66645e3de1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed58d930_f07ad161",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-17T15:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167205ca_e5d00d0e",
+      "revId": "47a6168a898b7553984192ae2950aa66645e3de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
