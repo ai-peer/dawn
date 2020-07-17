@@ -33,6 +33,24 @@
       "revId": "316e7bcf7220bfb5ac7c9eec90089c59dd25da1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f430a069_f5367261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-17T01:12:23Z",
+      "side": 1,
+      "message": "Great to know this. Now all try bots turn to green for this CL, thanks for your help!\n\nI still see \"Warning: CreateBufferMapped is deprecated, use wgpu::BufferDescriptor::mappedAtCreation and wgpu::Buffer::GetMappedRange instead\" with wire layer, so it seems we also need to remove CreateBufferMapped there.",
+      "parentUuid": "0a1e16ef_4ffdc6d2",
+      "revId": "316e7bcf7220bfb5ac7c9eec90089c59dd25da1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
