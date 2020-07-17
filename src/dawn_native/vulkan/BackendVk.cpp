@@ -231,7 +231,8 @@ namespace dawn_native { namespace vulkan {
         appInfo.applicationVersion = 0;
         appInfo.pEngineName = nullptr;
         appInfo.engineVersion = 0;
-        appInfo.apiVersion = mGlobalInfo.apiVersion;
+        // Treat 1.2.x as the highest API version dawn targets.
+        appInfo.apiVersion = VK_MAKE_VERSION(1, 2, 0);
 
         VkInstanceCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
