@@ -33,6 +33,23 @@
       "revId": "8da1e277fc846be79f84b379f36a5863c9905cd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a627dd49_9a233d3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T07:44:52Z",
+      "side": 1,
+      "message": "You can add a suppression for the failing configuration, similar tests are already failing on Windows Intel Vulkan.",
+      "revId": "8da1e277fc846be79f84b379f36a5863c9905cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
