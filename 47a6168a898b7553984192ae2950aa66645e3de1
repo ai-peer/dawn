@@ -16,6 +16,40 @@
       "revId": "47a6168a898b7553984192ae2950aa66645e3de1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "257e9acc_f2d18d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T07:28:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47a6168a898b7553984192ae2950aa66645e3de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "167205ca_e5d00d0e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-17T07:28:14Z",
+      "side": 1,
+      "message": "nit: Maybe detail the comment a bit more\n\n  The VkCommandBuffer memory should be wholly owned by the pool and freed when it is destroyed, but that\u0027s not the case in some drivers and the leak memory. So we call FreeCommandBuffers before DestroyCommandPool to be safe.\n  TODO(...): Only do this on a known list of bad drivers.",
+      "revId": "47a6168a898b7553984192ae2950aa66645e3de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
