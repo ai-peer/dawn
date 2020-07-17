@@ -16,6 +16,23 @@
       "revId": "f3723f58edae0eeebe7454620882503d89bc714c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4751d6d6_b1a43043",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-17T08:31:15Z",
+      "side": 1,
+      "message": "I am also meeting the failures about writeTexture() tests.",
+      "revId": "f3723f58edae0eeebe7454620882503d89bc714c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
