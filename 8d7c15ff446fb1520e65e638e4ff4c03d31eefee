@@ -33,6 +33,23 @@
       "revId": "8d7c15ff446fb1520e65e638e4ff4c03d31eefee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc77dcf0_20ee6db6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-18T00:15:03Z",
+      "side": 1,
+      "message": "LGTM, and seems to be green again, retrying",
+      "revId": "8d7c15ff446fb1520e65e638e4ff4c03d31eefee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
