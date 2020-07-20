@@ -67,6 +67,24 @@
       "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfee4404_223df478",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-20T02:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f13ef0b_45c62e6e",
+      "revId": "b048fb83f55222e64c2448f6aaa880d010f5d276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
