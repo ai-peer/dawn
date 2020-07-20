@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "442e67bf_50799922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "Looks good overall.",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3bfe4fe_596b629c",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50bfc15d_5db66ea2",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "nit: return an ID3D12QueryHeap*",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a67042d_ec2799ac",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "Why is this needed? If it is needed for follow-up CLs, then we could use it instead of [1]",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d05d37c_c5897375",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "Can we have a test just for one query type of what happens if we call destroy before we lose the reference to the QuerySet?\u0027\n\nAlso nit: comment before test (same for other tests)",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "832e65d6_505d42a7",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "nit: descriptor (same for other tests)",
+      "range": {
+        "startLine": 25,
+        "startChar": 29,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37a4cdff_422a82a8",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "nit: DAWN_SKIP_TEST_IF",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22fe7f75_21239692",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "nit: Could have the call to SupportsExtensions here directly.",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39392c20_f5ec8f61",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "nit: can be wgpu::PipelineStatisticName pipelineStatistics[2] or []",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a830c95d_dc3f1a3e",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "Same comments as PipelineStatisticsQueryTests",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e9ba3f3_4b6c78b2",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-20T10:51:22Z",
+      "side": 1,
+      "message": "unit: Add this newline for occlusion query tests, or remove it here.",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
