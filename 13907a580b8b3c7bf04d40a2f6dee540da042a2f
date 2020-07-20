@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "421f6165_e13bc521",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-20T16:21:23Z",
+      "side": 1,
+      "message": "nit: prefer camelCase: \"querySet\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 22,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3bfe4fe_596b629c",
         "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
         "patchSetId": 3
