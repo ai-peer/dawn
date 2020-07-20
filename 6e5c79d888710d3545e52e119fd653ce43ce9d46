@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c5691da_f4a45be4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-20T20:32:31Z",
+      "side": 1,
+      "message": "I am expecting this to fail on the Chromium bots, since the fix hasn\u0027t rolled there, but I want to confirm that there are no other issues with the Dawn builds.",
+      "revId": "6e5c79d888710d3545e52e119fd653ce43ce9d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
