@@ -202,6 +202,14 @@ namespace dawn_native {
         return mEnableBackendValidation;
     }
 
+    void InstanceBase::EnableGPUValidation(bool enableGPUValidation) {
+        mEnableGPUValidation = enableGPUValidation;
+    }
+
+    bool InstanceBase::IsGPUValidationEnabled() const {
+        return mEnableGPUValidation;
+    }
+
     void InstanceBase::EnableBeginCaptureOnStartup(bool beginCaptureOnStartup) {
         mBeginCaptureOnStartup = beginCaptureOnStartup;
     }

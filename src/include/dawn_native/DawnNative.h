@@ -157,6 +157,9 @@ namespace dawn_native {
         // Enable debug capture on Dawn startup
         void EnableBeginCaptureOnStartup(bool beginCaptureOnStartup);
 
+        // Enable GPU validation if it has.
+        void EnableGPUValidation(bool enableGPUValidation);
+
         void SetPlatform(dawn_platform::Platform* platform);
 
         // Returns the underlying WGPUInstance object.
