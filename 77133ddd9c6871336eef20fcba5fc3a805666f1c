@@ -158,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "5fa7e440_0e968da3",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T15:30:13Z",
+      "side": 1,
+      "message": "Maybe we could have a different triangle then :) It does make a difference, because right now it\u0027s not 100% clear that the depth samples that are written conform to the sampleMask",
+      "parentUuid": "fed28f1e_fad2fad0",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4d44cdd_7dee69ac",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 8
