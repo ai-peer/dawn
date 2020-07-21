@@ -16,6 +16,23 @@
       "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90d8b205_2cd46228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T13:22:44Z",
+      "side": 1,
+      "message": "Is there (and should there be) any support for the shader-output-mask in Dawn right now? (https://gpuweb.github.io/gpuweb/#shader-output-mask)",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
