@@ -93,6 +93,24 @@
     },
     {
       "key": {
+        "uuid": "6abf8dd8_398785bc",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-21T01:57:28Z",
+      "side": 1,
+      "message": "Actually they are different things, above is D3D12_QUERY_*HEAP*_TYPE which is only needed when creating ID3D12QueryHeap, here is D3D12_QUERY_TYPE which is required when calling BeginQuery/EndQuery/ResolveQueryData. I will remove it and add it when it\u0027s used.",
+      "parentUuid": "6a67042d_ec2799ac",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d05d37c_c5897375",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 3
