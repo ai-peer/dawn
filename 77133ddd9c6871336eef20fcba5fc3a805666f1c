@@ -33,6 +33,109 @@
       "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a985a97d_d858cd14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "There should be because it\u0027s a shader only feature so it happens to be translated correctly by SPIRV-Cross. We should have a basic test for it though.",
+      "parentUuid": "90d8b205_2cd46228",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ee60d65_06800ac5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "Looks pretty good!",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ca503ce_b0d535a4",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "Now that we have multisampled texture sampling, maybe we could read them back and assert the exact value of each sample. It would require a new EXPECT_TEXTURE_MS_RGBA_EQ that uses a compute shader to load the sample value into a buffer. (or a render pass into a texture). Austin WDYT?\n\nThis comment doesn\u0027t need to be addressed now.",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9000c219_2b61c7fa",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "nit: this could be an std::array\u003cwgpu::Color, 2\u003e kUniformData \u003d {kRed, kGreen};",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f1f55a_d795c074",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "To test the interaction with sample mask (and check the depth is written only for the given sample mask), we could draw to samples 1 and 2 with the sample mask, then draw to all samples, and check that samples 1 and 2 are not drawn but 3 and 4 are.",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d44cdd_7dee69ac",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T14:42:30Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need to modify this test, because it checks reading the multisampled texture, not writing to it. Tests in MultisampledRenderingTests should be sufficient.",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
