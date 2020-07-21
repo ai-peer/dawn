@@ -111,6 +111,24 @@
     },
     {
       "key": {
+        "uuid": "5bbfc8e0_d867bc2c",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T12:17:49Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation, it sounds good, although the method could just be a conversion function that takes a wgpu::QueryType and returns a D3D12_QUERY_TYPE.",
+      "parentUuid": "6abf8dd8_398785bc",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d05d37c_c5897375",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 3
@@ -140,6 +158,24 @@
       "side": 1,
       "message": "\u003e we call destroy before we lose the reference to the QuerySet?\nDo you mean destroy a query set which is used by BeginQuery() or set it in render pass? If that, I will add the test when implementing occlusion query.",
       "parentUuid": "5d05d37c_c5897375",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cce00144_3e1ec5ee",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T12:17:49Z",
+      "side": 1,
+      "message": "Not even that. The goal is to get coverage of both when DestroyInternal is called in the destructor and when called because the application did .Destroy().",
+      "parentUuid": "98b97662_ddfc47d7",
       "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -221,6 +257,30 @@
       "side": 1,
       "message": "Need record the result and use it in the DAWN_SKIP_TEST_IF() in Setup, otherwise we need to call SupportsExtensions twice.",
       "parentUuid": "22fe7f75_21239692",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4ffc574_2292fb34",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-21T12:17:49Z",
+      "side": 1,
+      "message": "Ah the naming was confusing, it looks like a local variable. GetRequiredExtensions looks like it is const (though we forgot to make it const), so it shouldn\u0027t modify internal state. Instead it\u0027s ok to call SupportsExtensions twice.",
+      "parentUuid": "78d2c1a9_068a2aab",
       "range": {
         "startLine": 47,
         "startChar": 12,
