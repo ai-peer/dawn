@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "7b0e1abe_25775eaa",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-21T19:27:08Z",
+      "side": 1,
+      "message": "Sounds reasonable. fyi I was working on making our texture expectations work with stencil-only / depth-only aspect inside this CL https://dawn-review.googlesource.com/c/dawn/+/24684/4 which changes the macros to forward to a template function. Nice for having good defaults. Maybe we could have a couple of overloads with good defaults and sample count can default to 1.",
+      "parentUuid": "8ca503ce_b0d535a4",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9000c219_2b61c7fa",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 8

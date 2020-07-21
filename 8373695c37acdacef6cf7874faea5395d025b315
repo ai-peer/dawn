@@ -16,6 +16,69 @@
       "revId": "8373695c37acdacef6cf7874faea5395d025b315",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e8a1b49_e89795d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-21T19:27:08Z",
+      "side": 1,
+      "message": "LGTM. I\u0027ll let Corentin review the test he was concerned about again. Looks ok to me because we render with different sample masks to check the the correct depth samples (of 1 and 2) are used.",
+      "revId": "8373695c37acdacef6cf7874faea5395d025b315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4e9229_c445c3a4",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-21T19:27:08Z",
+      "side": 1,
+      "message": "nit: find it kind of odd this returns a const reference. I think it would be better to just have it return uint32_t. We\u0027ll have to have a temporary stack variable and pass its address to VkPipelineMultisampleStateCreateInfo which is a little more verbose, but it should be more clear.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "8373695c37acdacef6cf7874faea5395d025b315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7313b692_f5fcd2e0",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-21T19:27:08Z",
+      "side": 1,
+      "message": "nit: don\u0027t prefix this with \"k\" because it is no longer constexpr. The const is ok though we usually don\u0027t have const primitive arguments.",
+      "range": {
+        "startLine": 155,
+        "startChar": 41,
+        "endLine": 155,
+        "endChar": 54
+      },
+      "revId": "8373695c37acdacef6cf7874faea5395d025b315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
