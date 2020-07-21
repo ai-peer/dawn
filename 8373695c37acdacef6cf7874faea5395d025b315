@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "c1011ab8_88ef1c72",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T23:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e4e9229_c445c3a4",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "8373695c37acdacef6cf7874faea5395d025b315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7313b692_f5fcd2e0",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 9
@@ -79,6 +103,30 @@
       "revId": "8373695c37acdacef6cf7874faea5395d025b315",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a11624b4_2ce3e34e",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T23:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7313b692_f5fcd2e0",
+      "range": {
+        "startLine": 155,
+        "startChar": 41,
+        "endLine": 155,
+        "endChar": 54
+      },
+      "revId": "8373695c37acdacef6cf7874faea5395d025b315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
