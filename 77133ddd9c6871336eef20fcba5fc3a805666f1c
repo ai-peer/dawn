@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "76cd13ff_86be4ef0",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T15:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9000c219_2b61c7fa",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f1f55a_d795c074",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 8
@@ -122,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "fed28f1e_fad2fad0",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T15:26:42Z",
+      "side": 1,
+      "message": "It\u0027s roughly that now. We can\u0027t draw to samples 3 and 4 since they\u0027re not covered by the triangle.",
+      "parentUuid": "a7f1f55a_d795c074",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4d44cdd_7dee69ac",
         "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
         "patchSetId": 8
@@ -136,6 +172,24 @@
       "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c30e8b50_52dca56f",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-21T15:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4d44cdd_7dee69ac",
+      "revId": "77133ddd9c6871336eef20fcba5fc3a805666f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
