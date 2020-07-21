@@ -410,7 +410,8 @@ namespace dawn_native { namespace vulkan {
         multisample.rasterizationSamples = VulkanSampleCount(GetSampleCount());
         multisample.sampleShadingEnable = VK_FALSE;
         multisample.minSampleShading = 0.0f;
-        multisample.pSampleMask = nullptr;
+        const uint32_t sampleMask = GetSampleMask();
+        multisample.pSampleMask = &sampleMask;
         multisample.alphaToCoverageEnable = VK_FALSE;
         multisample.alphaToOneEnable = VK_FALSE;
 
