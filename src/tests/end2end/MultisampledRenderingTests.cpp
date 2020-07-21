@@ -36,7 +36,9 @@ class MultisampledRenderingTest : public DawnTest {
         mDepthStencilView = mDepthStencilTexture.CreateView();
     }
 
-    wgpu::RenderPipeline CreateRenderPipelineWithOneOutputForTest(bool testDepth) {
+    wgpu::RenderPipeline CreateRenderPipelineWithOneOutputForTest(
+        bool testDepth,
+        uint32_t sampleMask = 0xFFFFFFFF) {
         const char* kFsOneOutputWithDepth =
             R"(#version 450
             layout(location = 0) out vec4 fragColor;
@@ -61,10 +63,11 @@ class MultisampledRenderingTest : public DawnTest {
 
         const char* fs = testDepth ? kFsOneOutputWithDepth : kFsOneOutputWithoutDepth;
 
-        return CreateRenderPipelineForTest(fs, 1, testDepth);
+        return CreateRenderPipelineForTest(fs, 1, testDepth, sampleMask);
     }
 
-    wgpu::RenderPipeline CreateRenderPipelineWithTwoOutputsForTest() {
+    wgpu::RenderPipeline CreateRenderPipelineWithTwoOutputsForTest(
+        uint32_t sampleMask = 0xFFFFFFFF) {
         const char* kFsTwoOutputs =
             R"(#version 450
             layout(location = 0) out vec4 fragColor1;
@@ -78,7 +81,7 @@ class MultisampledRenderingTest : public DawnTest {
                 fragColor2 = color2;
             })";
 
-        return CreateRenderPipelineForTest(kFsTwoOutputs, 2, false);
+        return CreateRenderPipelineForTest(kFsTwoOutputs, 2, false, sampleMask);
     }
 
     wgpu::Texture CreateTextureForOutputAttachment(wgpu::TextureFormat format,
@@ -148,9 +151,8 @@ class MultisampledRenderingTest : public DawnTest {
     void VerifyResolveTarget(const wgpu::Color& inputColor,
                              wgpu::Texture resolveTexture,
                              uint32_t mipmapLevel = 0,
-                             uint32_t arrayLayer = 0) {
-        constexpr float kMSAACoverage = 0.5f;
-
+                             uint32_t arrayLayer = 0,
+                             const float kMSAACoverage = 0.5f) {
         // In this test we only check the pixel in the middle of the texture.
         constexpr uint32_t kMiddleX = (kWidth - 1) / 2;
         constexpr uint32_t kMiddleY = (kHeight - 1) / 2;
@@ -172,6 +174,11 @@ class MultisampledRenderingTest : public DawnTest {
     constexpr static wgpu::TextureFormat kDepthStencilFormat =
         wgpu::TextureFormat::Depth24PlusStencil8;
 
+    constexpr static uint32_t kFirstSampleMaskBit = 0x00000001;
+    constexpr static uint32_t kSecondSampleMaskBit = 0x00000002;
+    constexpr static uint32_t kThirdSampleMaskBit = 0x00000004;
+    constexpr static uint32_t kFourthSampleMaskBit = 0x00000008;
+
     wgpu::Texture mMultisampledColorTexture;
     wgpu::TextureView mMultisampledColorView;
     wgpu::Texture mResolveTexture;
@@ -182,7 +189,8 @@ class MultisampledRenderingTest : public DawnTest {
   private:
     wgpu::RenderPipeline CreateRenderPipelineForTest(const char* fs,
                                                      uint32_t numColorAttachments,
-                                                     bool hasDepthStencilAttachment) {
+                                                     bool hasDepthStencilAttachment,
+                                                     uint32_t sampleMask) {
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
 
         // Draw a bottom-right triangle. In standard 4xMSAA pattern, for the pixels on diagonal,
@@ -207,6 +215,7 @@ class MultisampledRenderingTest : public DawnTest {
         }
 
         pipelineDescriptor.sampleCount = kSampleCount;
+        pipelineDescriptor.sampleMask = sampleMask;
 
         pipelineDescriptor.colorStateCount = numColorAttachments;
         for (uint32_t i = 0; i < numColorAttachments; ++i) {
@@ -513,6 +522,161 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
 
     VerifyResolveTarget(kRed, resolveTexture1, kBaseMipLevel1, kBaseArrayLayer1);
     VerifyResolveTarget(kGreen, resolveTexture2, kBaseMipLevel2, kBaseArrayLayer2);
+}
+
+// Test using one multisampled color attachment with resolve target can render correctly
+// with a non-default sample mask.
+TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+
+    constexpr bool kTestDepth = false;
+    // The second and third samples are included,
+    // only the second one is covered by the triangle.
+    constexpr uint32_t kSampleMask = kSecondSampleMaskBit | kThirdSampleMaskBit;
+    constexpr float kMSAACoverage = 0.25f;
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline =
+        CreateRenderPipelineWithOneOutputForTest(kTestDepth, kSampleMask);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr uint32_t kSize = sizeof(kGreen);
+
+    // Draw a green triangle.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+            kTestDepth);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, &kGreen.r, kSize);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kGreen, mResolveTexture, 0, 0, kMSAACoverage);
+}
+
+// Test using one multisampled color attachment with resolve target can render correctly
+// with the final sample mask empty.
+TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+
+    constexpr bool kTestDepth = false;
+    // The third and fourth samples are included,
+    // none of which is covered by the triangle.
+    constexpr uint32_t kSampleMask = kThirdSampleMaskBit | kFourthSampleMaskBit;
+    constexpr float kMSAACoverage = 0.00f;
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline =
+        CreateRenderPipelineWithOneOutputForTest(kTestDepth, kSampleMask);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr uint32_t kSize = sizeof(kGreen);
+
+    // Draw a green triangle.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+            kTestDepth);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, &kGreen.r, kSize);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kGreen, mResolveTexture, 0, 0, kMSAACoverage);
+}
+
+// Test doing MSAA resolve into multiple resolve targets works correctly with a non-default sample
+// mask.
+TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+
+    wgpu::TextureView multisampledColorView2 =
+        CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
+    wgpu::Texture resolveTexture2 = CreateTextureForOutputAttachment(kColorFormat, 1);
+    wgpu::TextureView resolveView2 = resolveTexture2.CreateView();
+
+    // The first and fourth samples are included,
+    // only the first one is covered by the triangle.
+    constexpr uint32_t kSampleMask = kFirstSampleMaskBit | kFourthSampleMaskBit;
+    constexpr float kMSAACoverage = 0.25f;
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithTwoOutputsForTest(kSampleMask);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+    constexpr bool kTestDepth = false;
+
+    // Draw a red triangle to the first color attachment, and a blue triangle to the second color
+    // attachment, and do MSAA resolve on two render targets in one render pass.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {mMultisampledColorView, multisampledColorView2}, {mResolveView, resolveView2},
+            wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, kTestDepth);
+
+        std::array<float, 8> kUniformData = {kRed.r,   kRed.g,   kRed.b,   kRed.a,     // color1
+                                             kGreen.r, kGreen.g, kGreen.b, kGreen.a};  // color2
+        constexpr uint32_t kSize = sizeof(kUniformData);
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kRed, mResolveTexture, 0, 0, kMSAACoverage);
+    VerifyResolveTarget(kGreen, resolveTexture2, 0, 0, kMSAACoverage);
+}
+
+// Test multisampled rendering with depth test works correctly with a non-default sample mask.
+TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+
+    constexpr bool kTestDepth = true;
+    // The second sample is included and it's covered by the triangle.
+    constexpr uint32_t kSampleMask = kSecondSampleMaskBit;
+    constexpr float kMSAACoverage = 0.25f;
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline =
+        CreateRenderPipelineWithOneOutputForTest(kTestDepth, kSampleMask);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+
+    // In first render pass we draw a green triangle with depth value == 0.2f.
+    {
+        utils::ComboRenderPassDescriptor renderPass =
+            CreateComboRenderPassDescriptorForTest({mMultisampledColorView}, {mResolveView},
+                                                   wgpu::LoadOp::Clear, wgpu::LoadOp::Clear, true);
+        std::array<float, 5> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
+                                             0.2f};                                   // depth
+        constexpr uint32_t kSize = sizeof(kUniformData);
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    // In second render pass we draw a red triangle with depth value == 0.5f.
+    // This red triangle should not be displayed because it is behind the green one that is drawn in
+    // the last render pass.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Load, wgpu::LoadOp::Load,
+            kTestDepth);
+
+        std::array<float, 8> kUniformData = {kRed.r, kRed.g, kRed.b, kRed.a,  // color
+                                             0.5f};                           // depth
+        constexpr uint32_t kSize = sizeof(kUniformData);
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    // The color of the pixel in the middle of mResolveTexture should be green if MSAA resolve runs
+    // correctly with depth test.
+    VerifyResolveTarget(kGreen, mResolveTexture, 0, 0, kMSAACoverage);
 }
 
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
