@@ -410,7 +410,11 @@ namespace dawn_native { namespace vulkan {
         multisample.rasterizationSamples = VulkanSampleCount(GetSampleCount());
         multisample.sampleShadingEnable = VK_FALSE;
         multisample.minSampleShading = 0.0f;
-        multisample.pSampleMask = nullptr;
+        // VkPipelineMultisampleStateCreateInfo.pSampleMask is an array of length
+        // ceil(rasterizationSamples / 32) and since we're passing a single uint32_t
+        // we have to assert that this length is indeed 1.
+        ASSERT(multisample.rasterizationSamples <= 32);
+        multisample.pSampleMask = &GetSampleMask();
         multisample.alphaToCoverageEnable = VK_FALSE;
         multisample.alphaToOneEnable = VK_FALSE;
 
