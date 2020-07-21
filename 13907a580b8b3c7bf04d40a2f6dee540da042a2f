@@ -128,6 +128,24 @@
     },
     {
       "key": {
+        "uuid": "98b97662_ddfc47d7",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-21T09:52:33Z",
+      "side": 1,
+      "message": "\u003e we call destroy before we lose the reference to the QuerySet?\nDo you mean destroy a query set which is used by BeginQuery() or set it in render pass? If that, I will add the test when implementing occlusion query.",
+      "parentUuid": "5d05d37c_c5897375",
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "832e65d6_505d42a7",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 3
@@ -179,6 +197,30 @@
       "writtenOn": "2020-07-20T10:51:22Z",
       "side": 1,
       "message": "nit: Could have the call to SupportsExtensions here directly.",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "13907a580b8b3c7bf04d40a2f6dee540da042a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d2c1a9_068a2aab",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-07-21T09:52:33Z",
+      "side": 1,
+      "message": "Need record the result and use it in the DAWN_SKIP_TEST_IF() in Setup, otherwise we need to call SupportsExtensions twice.",
+      "parentUuid": "22fe7f75_21239692",
       "range": {
         "startLine": 47,
         "startChar": 12,
