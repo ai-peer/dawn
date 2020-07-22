@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06a1b3aa_ecee9d27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-22T01:38:04Z",
+      "side": 1,
+      "message": "PTAL, no tests yet though. (What\u0027s the place for the tests?)",
+      "revId": "a4ec0a2a354b56a95ea53b4c0746b648772ea72d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
