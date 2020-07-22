@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "a3df373c_d70bc56e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-22T21:20:41Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48a55672_d9c1de53",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 4
