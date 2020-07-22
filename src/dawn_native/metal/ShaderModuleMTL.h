@@ -46,7 +46,8 @@ namespace dawn_native { namespace metal {
         MaybeError GetFunction(const char* functionName,
                                SingleShaderStage functionStage,
                                const PipelineLayout* layout,
-                               MetalFunctionData* out);
+                               MetalFunctionData* out,
+                               uint32_t sampleMask = 0xFFFFFFFF);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
