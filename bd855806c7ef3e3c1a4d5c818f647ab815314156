@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5edc5aaa_dd863ff2",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-22T17:27:35Z",
+      "side": 1,
+      "message": "(note that you\u0027ll need to add an SPVC path too, but that should be much simpler)",
+      "revId": "bd855806c7ef3e3c1a4d5c818f647ab815314156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
