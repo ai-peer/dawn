@@ -91,7 +91,8 @@ namespace dawn_native { namespace metal {
     MaybeError ShaderModule::GetFunction(const char* functionName,
                                          SingleShaderStage functionStage,
                                          const PipelineLayout* layout,
-                                         ShaderModule::MetalFunctionData* out) {
+                                         ShaderModule::MetalFunctionData* out,
+                                         uint32_t sampleMask) {
         ASSERT(!IsError());
         ASSERT(out);
         const std::vector<uint32_t>& spirv = GetSpirv();
@@ -121,6 +122,8 @@ namespace dawn_native { namespace metal {
             // Always use vertex buffer 30 (the last one in the vertex buffer table) to contain
             // the shader storage buffer lengths.
             options_msl.buffer_size_buffer_index = kBufferLengthBufferSlot;
+
+            options_msl.additional_fixed_sample_mask = sampleMask;
 
             compilerImpl = std::make_unique<spirv_cross::CompilerMSL>(spirv);
             compiler = compilerImpl.get();
