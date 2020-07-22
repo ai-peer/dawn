@@ -810,3 +810,4 @@ DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
                       MetalBackend({"always_resolve_into_zero_level_and_layer"}),
                       MetalBackend({"always_resolve_into_zero_level_and_layer",
                                     "emulate_store_and_msaa_resolve"}));
+
