@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6effb38_bdab0047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-22T11:40:33Z",
+      "side": 1,
+      "message": "Both of these should be possible to test in BufferTests.cpp (when run with the -w flag) LGTM too, thanks for the fix!",
+      "revId": "15a9b64c26af5906039f8bf1525058c7e5868de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
