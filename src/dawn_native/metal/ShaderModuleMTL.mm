@@ -91,7 +91,8 @@ namespace dawn_native { namespace metal {
     MaybeError ShaderModule::GetFunction(const char* functionName,
                                          SingleShaderStage functionStage,
                                          const PipelineLayout* layout,
-                                         ShaderModule::MetalFunctionData* out) {
+                                         ShaderModule::MetalFunctionData* out,
+                                         uint32_t sampleMask) {
         ASSERT(!IsError());
         ASSERT(out);
         const std::vector<uint32_t>& spirv = GetSpirv();
@@ -167,6 +168,8 @@ namespace dawn_native { namespace metal {
                 }
             }
         }
+
+        compiler->set_fixed_sample_mask(sampleMask);
 
         {
             if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
