@@ -352,16 +352,24 @@ class BufferMappingTests : public DawnTest {
     }
 };
 
+void CheckMapping(const void* actual, const void* expected, size_t size) {
+    EXPECT_NE(actual, nullptr);
+    if (actual != nullptr) {
+        EXPECT_EQ(0, memcmp(actual, expected, size));
+    }
+}
+
 // Test that the simplest map read works
 TEST_P(BufferMappingTests, MapRead_Basic) {
     wgpu::Buffer buffer = CreateMapReadBuffer(4);
 
     uint32_t myData = 0x01020304;
-    queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
 
     MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
-    ASSERT_NE(nullptr, buffer.GetConstMappedRange());
-    ASSERT_EQ(myData, *static_cast<const uint32_t*>(buffer.GetConstMappedRange()));
+    CheckMapping(buffer.GetConstMappedRange(), &myData, kSize);
+    CheckMapping(buffer.GetConstMappedRange(0, kSize), &myData, kSize);
     buffer.Unmap();
 }
 
@@ -421,6 +429,42 @@ TEST_P(BufferMappingTests, MapRead_Large) {
     buffer.Unmap();
 }
 
+// Test that GetConstMappedRange works inside map-read callback
+TEST_P(BufferMappingTests, MapRead_InCallback) {
+    wgpu::Buffer buffer = CreateMapReadBuffer(4);
+
+    uint32_t myData = 0x01020304;
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+    struct UserData {
+        bool done;
+        wgpu::Buffer buffer;
+        void* expected;
+    };
+    UserData user{false, buffer, &myData};
+
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            UserData* user = static_cast<UserData*>(userdata);
+
+            EXPECT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            if (status == WGPUBufferMapAsyncStatus_Success) {
+                CheckMapping(user->buffer.GetConstMappedRange(), user->expected, kSize);
+                CheckMapping(user->buffer.GetConstMappedRange(0, kSize), user->expected, kSize);
+
+                user->buffer.Unmap();
+            }
+            user->done = true;
+        },
+        &user);
+
+    while (!user.done) {
+        WaitABit();
+    }
+}
+
 // Test that the simplest map write works.
 TEST_P(BufferMappingTests, MapWrite_Basic) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
@@ -429,6 +473,20 @@ TEST_P(BufferMappingTests, MapWrite_Basic) {
     MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
     ASSERT_NE(nullptr, buffer.GetMappedRange());
     ASSERT_NE(nullptr, buffer.GetConstMappedRange());
+    memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
+    buffer.Unmap();
+
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+}
+
+// Test that the simplest map write works with a range.
+TEST_P(BufferMappingTests, MapWrite_BasicRange) {
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+
+    uint32_t myData = 2934875;
+    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    ASSERT_NE(nullptr, buffer.GetMappedRange(0, 4));
+    ASSERT_NE(nullptr, buffer.GetConstMappedRange(0, 4));
     memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
     buffer.Unmap();
 
@@ -519,6 +577,88 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
 
     // mMapOffset has not been updated so it should still be 4, which is data[1]
     ASSERT_EQ(0, memcmp(buffer.GetConstMappedRange(4), &data[1], sizeof(uint32_t)));
+}
+
+// Test that Get(Const)MappedRange work inside map-write callback.
+TEST_P(BufferMappingTests, MapWrite_InCallbackDefault) {
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+
+    constexpr uint32_t myData = 2934875;
+    constexpr size_t kSize = sizeof(myData);
+
+    struct UserData {
+        bool done;
+        wgpu::Buffer buffer;
+    };
+    UserData user{false, buffer};
+
+    buffer.MapAsync(
+        wgpu::MapMode::Write, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            UserData* user = static_cast<UserData*>(userdata);
+
+            EXPECT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            if (status == WGPUBufferMapAsyncStatus_Success) {
+                EXPECT_NE(nullptr, user->buffer.GetConstMappedRange());
+                void* ptr = user->buffer.GetMappedRange();
+                EXPECT_NE(nullptr, ptr);
+                if (ptr != nullptr) {
+                    uint32_t data = myData;
+                    memcpy(ptr, &data, kSize);
+                }
+
+                user->buffer.Unmap();
+            }
+            user->done = true;
+        },
+        &user);
+
+    while (!user.done) {
+        WaitABit();
+    }
+
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+}
+
+// Test that Get(Const)MappedRange with range work inside map-write callback.
+TEST_P(BufferMappingTests, MapWrite_InCallbackRange) {
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+
+    constexpr uint32_t myData = 2934875;
+    constexpr size_t kSize = sizeof(myData);
+
+    struct UserData {
+        bool done;
+        wgpu::Buffer buffer;
+    };
+    UserData user{false, buffer};
+
+    buffer.MapAsync(
+        wgpu::MapMode::Write, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            UserData* user = static_cast<UserData*>(userdata);
+
+            EXPECT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            if (status == WGPUBufferMapAsyncStatus_Success) {
+                EXPECT_NE(nullptr, user->buffer.GetConstMappedRange(0, kSize));
+                void* ptr = user->buffer.GetMappedRange(0, kSize);
+                EXPECT_NE(nullptr, ptr);
+                if (ptr != nullptr) {
+                    uint32_t data = myData;
+                    memcpy(ptr, &data, kSize);
+                }
+
+                user->buffer.Unmap();
+            }
+            user->done = true;
+        },
+        &user);
+
+    while (!user.done) {
+        WaitABit();
+    }
+
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
 }
 
 DAWN_INSTANTIATE_TEST(BufferMappingTests,
