@@ -67,6 +67,41 @@
       "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18462b31_54b4d378",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-22T21:31:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48a55672_d9c1de53",
+      "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1d76f77_48a063fc",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-22T21:31:16Z",
+      "side": 1,
+      "message": "FYI: too-small size on mapAsync in this test; still worked presumably because GetMappedRange defaulted to end at the end of the mapping instead of the end of the buffer, but should be caught when we change that.",
+      "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
