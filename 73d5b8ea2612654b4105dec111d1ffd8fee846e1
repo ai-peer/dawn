@@ -16,6 +16,40 @@
       "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d11bc7e1_bb685356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-22T19:51:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48a55672_d9c1de53",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-22T19:51:13Z",
+      "side": 1,
+      "message": "nit: also test getting the range at a non-zero offset",
+      "revId": "73d5b8ea2612654b4105dec111d1ffd8fee846e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
