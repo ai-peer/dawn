@@ -16,6 +16,23 @@
       "revId": "f6cbc423dbc8b09c1f5dc9d8989eb016570733ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ff6c7ce_95f01263",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-22T18:17:36Z",
+      "side": 1,
+      "message": "Woot! You saw the warning I just added ^^",
+      "revId": "f6cbc423dbc8b09c1f5dc9d8989eb016570733ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
