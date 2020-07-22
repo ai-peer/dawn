@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b184770_f63e5c0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-22T18:16:58Z",
+      "side": 1,
+      "message": "PTAL, gclient sync was warning me that this is no longer needed, so removing it.",
+      "revId": "f6cbc423dbc8b09c1f5dc9d8989eb016570733ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
