@@ -527,7 +527,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
     // TODO(dawn:491): Remove this condition after enabling sampleMask usage in those
     // backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     constexpr bool kTestDepth = false;
     // The second and third samples are included,
@@ -561,7 +561,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) {
     // TODO(dawn:491): Remove this condition after enabling sampleMask usage in those
     // backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     constexpr bool kTestDepth = false;
     // The third and fourth samples are included,
@@ -595,7 +595,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
     // TODO(dawn:491): Remove this condition after enabling sampleMask usage in those
     // backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
@@ -637,7 +637,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMas
 TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMask) {
     // TODO(dawn:491): Remove this condition after enabling sampleMask usage in those
     // backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     // TODO(dawn:491): Find out why this test doesn't work on Windows Intel Vulkan.
     DAWN_SKIP_TEST_IF(IsWindows() && IsIntel() && IsVulkan());
@@ -704,7 +704,9 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOutputMask) {
     // TODO(dawn:491): Remove this condition after enabling sampleMask usage in those
     // backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsMetal() || IsD3D12());
+    DAWN_SKIP_TEST_IF(IsMetal());
+
+        DAWN_SKIP_TEST_IF(IsD3D12());
 
     constexpr bool kTestDepth = false;
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
