@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b230ea4_6d748357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T09:55:27Z",
+      "side": 1,
+      "message": "LGTM but it seems it needs another fix in Tint\u0027s GN files.",
+      "revId": "2fc7781b0ad324a44cb3a25608d477a2f0896b34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
