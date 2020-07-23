@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ca6a9a0_625037ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T11:03:50Z",
+      "side": 1,
+      "message": "nit: BUG?",
+      "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a15ac439_399bf9f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T11:03:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c3a45ce_b8443bca",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T11:03:50Z",
+      "side": 1,
+      "message": "Can you also add an SPVC entrypoint to set the sample mask once the PR in SPIRV-Cross is landed?",
+      "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
