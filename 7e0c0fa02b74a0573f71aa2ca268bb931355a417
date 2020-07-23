@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "418fc66e_c16fb52d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-23T10:20:09Z",
+      "side": 1,
+      "message": "The MultisampledRenderingWithDepthTestAndSampleMask test fails on Windows Intel Vulkan and I don\u0027t have an idea what to do about that. I have added a suppression for now to see whether this was the only problem.",
+      "revId": "7e0c0fa02b74a0573f71aa2ca268bb931355a417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
