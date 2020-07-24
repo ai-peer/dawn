@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "6fc79f42_f6d51ab0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T17:50:34Z",
+      "side": 1,
+      "message": "LGTM too.",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdfd9b10_92b11441",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 1
@@ -53,6 +70,40 @@
     },
     {
       "key": {
+        "uuid": "45e087fb_cb18eaed",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T17:50:34Z",
+      "side": 1,
+      "message": "Looks like `EnsureDataInitializedAsDestination` code gets repeated because GL doesn\u0027t have a commandContext (will that always be true?). Maybe we can pass nullptr instead and eliminate the duplicate code.",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf75156_bc2c1ef6",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T17:50:34Z",
+      "side": 1,
+      "message": "unit: typo (source \u003d\u003e destination buffer)?",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "783775e0_2d793faf",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 1
@@ -64,6 +115,30 @@
       "writtenOn": "2020-07-24T16:43:28Z",
       "side": 1,
       "message": "nit: Maybe we could have a TestCopyBufferToTexture helper that takes parameters:\n - shouldLazyClear\n - bufferOffset\n - extraBytes (after the copy in the buffeR)\n - width, height, depth\n - bytesPerRow, rowsPerImage\n\nI think then we could programmatically generate the cases you have here.",
+      "range": {
+        "startLine": 494,
+        "startChar": 4,
+        "endLine": 517,
+        "endChar": 5
+      },
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6ea6ca3_acb0bb59",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T17:50:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "783775e0_2d793faf",
       "range": {
         "startLine": 494,
         "startChar": 4,
