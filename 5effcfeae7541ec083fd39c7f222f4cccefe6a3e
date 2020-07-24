@@ -33,6 +33,24 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e43a031_814014ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T18:56:45Z",
+      "side": 1,
+      "message": "I found it easiest to keep the initial (min) heap size large enough to satisfy the largest request, so no doubling occurs at first (or ASSERT). This was set for (sampler\u003d256, view\u003d4k), well above the limits but I left a TODO to tweak that, if needed.",
+      "parentUuid": "a12af324_52aef752",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
