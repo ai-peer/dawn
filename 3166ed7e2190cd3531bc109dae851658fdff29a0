@@ -16,6 +16,63 @@
       "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93eea61e_87e32832",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T16:43:28Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdfd9b10_92b11441",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T16:43:28Z",
+      "side": 1,
+      "message": "What about depth for copies of 2D array layer (and eventually 3D) textures?",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "783775e0_2d793faf",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T16:43:28Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a TestCopyBufferToTexture helper that takes parameters:\n - shouldLazyClear\n - bufferOffset\n - extraBytes (after the copy in the buffeR)\n - width, height, depth\n - bytesPerRow, rowsPerImage\n\nI think then we could programmatically generate the cases you have here.",
+      "range": {
+        "startLine": 494,
+        "startChar": 4,
+        "endLine": 517,
+        "endChar": 5
+      },
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
