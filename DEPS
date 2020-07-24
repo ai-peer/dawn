@@ -66,7 +66,7 @@ deps = {
 
   # SPIRV-Cross
   'third_party/spirv-cross': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/SPIRV-Cross@6575e451f5bffded6e308988362224dd076b0f2b',
+    'url': '{github_git}/ponitka/SPIRV-Cross.git@8443473a4fbf1d84a059a061f5df3d5bd9f1bb03',
     'condition': 'dawn_standalone',
   },
 
