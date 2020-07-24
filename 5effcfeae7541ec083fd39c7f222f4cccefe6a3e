@@ -69,6 +69,24 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a97a229_7617ce42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-24T19:50:41Z",
+      "side": 1,
+      "message": "Will do.\n\nYea, it\u0027s the latter but the current minimums are really only the maximums which is mostly a problem with the view heaps (max size \u003d\u003d 1 million+). So, picking a muuuuch smaller size (4k vs 1M) but big enough compared to Dawn\u0027s limits fixes our main memory issue.\n\nIf we use a min size that\u0027s sized exactly to the pipeline layout, heavy users will flush the pipeline a lot more as they ramp-up and we might find it preferable to minimize the growth phase by picking a larger min size. I am more concerned there because Dawn requires dynamic copies + uncached views.",
+      "parentUuid": "13085f32_fa04ec0c",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
