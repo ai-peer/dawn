@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "532842b4_97c002a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T02:16:34Z",
+      "side": 1,
+      "message": "Jiawei, PTAL in case you can identify any bugs. It\u0027s failing on Linux/Windows Intel Vulkan, but unfortunately I don\u0027t have an Intel Vulkan device to test with.",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
