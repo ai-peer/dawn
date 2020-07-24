@@ -16,6 +16,23 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a12af324_52aef752",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T18:28:09Z",
+      "side": 1,
+      "message": "Don\u0027t we need to inform AllocateAndSwitch at least how large we want the new heap? Otherwise it\u0027ll blindly double in size which still may not be large enough for PopulateViews.\n\nWe call AllocateAndSwitch here https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/CommandBufferD3D12.cpp;l\u003d212?q\u003dAllocateAndSwitchShaderVisibleHeap\n\nand then here https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/CommandBufferD3D12.cpp;l\u003d214?q\u003dAllocateAndSwitchShaderVisibleHeap\n\nwe ASSERT that the heap was actually large enough to satisfy PopulateViews\n\n",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
