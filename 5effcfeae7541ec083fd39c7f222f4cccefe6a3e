@@ -51,6 +51,24 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13085f32_fa04ec0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-24T19:08:18Z",
+      "side": 1,
+      "message": "Ah okay I see. Please add some comments about this invariant and also static_assert the min sizes w.r.t kMaxBindingsPerPipelineLayout and the computed max total descriptor count per pipeline layout per heap.\n\nIf we\u0027re doing this dynamic sizing though, is there a reason to have the minimum satisfy the largest possible request? Or, are the current minimums small enough to be insignificant? It seems reasonable to accumulate the required descriptor counts for the pipeline layout.",
+      "parentUuid": "6e43a031_814014ac",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
