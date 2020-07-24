@@ -371,6 +371,24 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    MaybeError Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
+                                                          const CopyTextureToBufferCmd* copy) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (IsDataInitialized() ||
+            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            return {};
+        }
+
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+            SetIsDataInitialized();
+        } else {
+            DAWN_TRY(InitializeToZero(commandContext));
+        }
+
+        return {};
+    }
+
     MaybeError Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
         ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
         ASSERT(!IsDataInitialized());

@@ -26,6 +26,7 @@ namespace dawn_native {
     class AttachmentState;
     class QuerySetBase;
     struct BeginRenderPassCmd;
+    struct CopyTextureToBufferCmd;
     struct PassResourceUsage;
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize);
@@ -53,7 +54,7 @@ namespace dawn_native {
                                         const Extent3D& copySize);
 
     MaybeError ValidateBufferCopyView(DeviceBase const* device,
-                                      const BufferCopyView& bufferCopyViewt);
+                                      const BufferCopyView& bufferCopyView);
     MaybeError ValidateTextureCopyView(DeviceBase const* device,
                                        const TextureCopyView& textureCopyView);
 
