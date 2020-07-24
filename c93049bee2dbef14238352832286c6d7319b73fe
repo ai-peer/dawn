@@ -52,6 +52,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60d619bd_205edce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-24T06:24:34Z",
+      "side": 1,
+      "message": "The error message reported by Mesa driver is:\nINTEL-MESA: error: ../src/intel/vulkan/anv_device.c:2167: GPU hung on one of our command buffers (VK_ERROR_DEVICE_LOST)",
+      "parentUuid": "5d188792_308a8c7b",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
