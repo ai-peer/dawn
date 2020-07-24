@@ -34,6 +34,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d188792_308a8c7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-24T06:20:59Z",
+      "side": 1,
+      "message": "On Windows, I\u0027ve tried DepthStencilCopyTests.FromStencilAspect can pass with 27.20.100.8280 on both HD630 (used by try bot) and UHD630.\n\nOn Linux, I\u0027ve tried DepthStencilCopyTests.FromStencilAspect causes GPU hangs with Mesa driver version 19.0.8 (Ubuntu 19.04) on Intel UHD630.",
+      "parentUuid": "8ec29e28_5cd2b9b1",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
