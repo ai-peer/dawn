@@ -416,7 +416,7 @@ TEST_P(BufferMappingTests, MapRead_Large) {
     }
     queue.WriteBuffer(buffer, 0, myData.data(), kDataSize * sizeof(uint32_t));
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
+    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, kDataSize * sizeof(uint32_t));
     ASSERT_EQ(0, memcmp(buffer.GetConstMappedRange(), myData.data(), kDataSize * sizeof(uint32_t)));
     buffer.Unmap();
 }
@@ -486,7 +486,7 @@ TEST_P(BufferMappingTests, MapWrite_Large) {
         myData.push_back(i);
     }
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, kDataSize * sizeof(uint32_t));
     memcpy(buffer.GetMappedRange(), myData.data(), kDataSize * sizeof(uint32_t));
     buffer.Unmap();
 
