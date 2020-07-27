@@ -79,12 +79,11 @@ namespace dawn_native { namespace d3d12 {
             // D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL set in D3D12_RESOURCE_DESC::Flags.
             // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_resource_desc
             // Currently all textures are zero-initialized via the render-target path so always add
-            // the render target flag, except for compressed textures for which the render-target
-            // flag is invalid.
+            // the render target flag, except for non-renderable formats.
             // TODO(natlee@microsoft.com, jiawei.shao@intel.com): do not require render target for
             // lazy clearing.
             if ((usage & wgpu::TextureUsage::OutputAttachment) || isMultisampledTexture ||
-                !format.isCompressed) {
+                format.isRenderable) {
                 if (format.HasDepthOrStencil()) {
                     flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
                 } else {
@@ -151,6 +150,8 @@ namespace dawn_native { namespace d3d12 {
 
                 case wgpu::TextureFormat::RG11B10Float:
                     return DXGI_FORMAT_R11G11B10_FLOAT;
+                case wgpu::TextureFormat::RGB9E5Float:
+                    return DXGI_FORMAT_R9G9B9E5_SHAREDEXP;
 
                 case wgpu::TextureFormat::RG32Uint:
                 case wgpu::TextureFormat::RG32Sint:
@@ -265,6 +266,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_R10G10B10A2_UNORM;
             case wgpu::TextureFormat::RG11B10Float:
                 return DXGI_FORMAT_R11G11B10_FLOAT;
+            case wgpu::TextureFormat::RGB9E5Float:
+                return DXGI_FORMAT_R9G9B9E5_SHAREDEXP;
 
             case wgpu::TextureFormat::RG32Uint:
                 return DXGI_FORMAT_R32G32_UINT;

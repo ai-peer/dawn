@@ -211,6 +211,7 @@ namespace dawn_native {
         AddColorFormat(wgpu::TextureFormat::RGB10A2Unorm, true, false, 4, Type::Float);
 
         AddColorFormat(wgpu::TextureFormat::RG11B10Float, false, false, 4, Type::Float);
+        AddColorFormat(wgpu::TextureFormat::RGB9E5Float, false, false, 4, Type::Float);
 
         // 8 bytes color formats
         AddColorFormat(wgpu::TextureFormat::RG32Uint, true, true, 8, Type::Uint);
