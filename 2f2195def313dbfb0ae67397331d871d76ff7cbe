@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a469758f_52076aae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T19:20:38Z",
+      "side": 1,
+      "message": "I really don\u0027t feel strongly between Patchset 3 and 4. I think 3 is slightly simpler.\n*IF* we have have a future where there\u0027s a D3D12 extension that\u0027s like \"use-lower-shader-model-for-testing\" then Patchset 4 (or Rafael\u0027s suggestion) would be better for that. I don\u0027t see a super useful case for that right now, so I weak vote Patchset 3",
+      "revId": "2f2195def313dbfb0ae67397331d871d76ff7cbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
