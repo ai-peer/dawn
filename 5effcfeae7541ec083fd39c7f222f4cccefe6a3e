@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "25408ea1_8165bc5a",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-27T19:35:46Z",
+      "side": 1,
+      "message": "I noticed we already store the same size on |ShaderVisibleDescriptorHeap| and didn\u0027t want to  unnecessarily duplicate/track another. Maybe we can pass |mHeap| to AllocateAndSwitchShaderVisibleHeap to make this more obvious?",
+      "parentUuid": "018b2e09_cf9b01de",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c259b281_f89ff4a9",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -118,6 +136,24 @@
       "writtenOn": "2020-07-27T08:36:11Z",
       "side": 1,
       "message": "This is going to grow the heap in powers of twos until it reaches the maxDescriptorCount, even for a light user.\n\nInstead how about doing the following: keep track of how many descriptors are in flight at each instant, and divide this number by two (or 4) to get an estimate of how many descriptors we need \"per frame\". Then allocate a ShaderVisibleDescriptorHeap with the correct size (or reuse the existing one).\n\nAlso the logic that does the estimate should be split in a different function, so this one only care about reusing vs. allocating and the heuristic is boxed in its own part of the code.",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e37349cb_f465a4d0",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-27T19:35:46Z",
+      "side": 1,
+      "message": "\u003e This is going to grow the heap in powers of twos until it reaches the maxDescriptorCount, even for a light user.\n\nA light user, by definition, is one that will never reach maxDescriptorCount. It can use the min size _indefinitely_.\n\n\u003e Then allocate a ShaderVisibleDescriptorHeap with the correct size (or reuse the existing one).\n\nI rarely (if ever) see more than one or two frames in-flight. If it proves too small, we incur expensive pipeline flushes + heap creation overhead. If you are certain that more accuracy is required, I\u0027ll need help to understand that scenario. Otherwise, a min heap + 2x growth should ensure there is always enough room for frames in-flight and comes with no additional tracking. WDYT?",
+      "parentUuid": "c259b281_f89ff4a9",
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
