@@ -28,6 +28,7 @@ namespace utils {
             case wgpu::TextureFormat::RGBA8Snorm:
             case wgpu::TextureFormat::RGB10A2Unorm:
             case wgpu::TextureFormat::RG11B10Float:
+            case wgpu::TextureFormat::RGB9E5Float:
             case wgpu::TextureFormat::RG32Float:
             case wgpu::TextureFormat::RGBA16Float:
             case wgpu::TextureFormat::RGBA32Float:
@@ -119,6 +120,7 @@ namespace utils {
             case wgpu::TextureFormat::BGRA8UnormSrgb:
             case wgpu::TextureFormat::RGB10A2Unorm:
             case wgpu::TextureFormat::RG11B10Float:
+            case wgpu::TextureFormat::RGB9E5Float:
             case wgpu::TextureFormat::Depth32Float:
                 return 4u;
 
@@ -190,6 +192,7 @@ namespace utils {
             case wgpu::TextureFormat::BGRA8UnormSrgb:
             case wgpu::TextureFormat::RGB10A2Unorm:
             case wgpu::TextureFormat::RG11B10Float:
+            case wgpu::TextureFormat::RGB9E5Float:
             case wgpu::TextureFormat::RG32Float:
             case wgpu::TextureFormat::RG32Uint:
             case wgpu::TextureFormat::RG32Sint:
@@ -255,6 +258,7 @@ namespace utils {
             case wgpu::TextureFormat::BGRA8UnormSrgb:
             case wgpu::TextureFormat::RGB10A2Unorm:
             case wgpu::TextureFormat::RG11B10Float:
+            case wgpu::TextureFormat::RGB9E5Float:
             case wgpu::TextureFormat::RG32Float:
             case wgpu::TextureFormat::RG32Uint:
             case wgpu::TextureFormat::RG32Sint:
@@ -359,6 +363,7 @@ namespace utils {
             case wgpu::TextureFormat::RGBA32Sint:
                 return "rgba32i";
 
+            case wgpu::TextureFormat::RGB9E5Float:
             case wgpu::TextureFormat::RGBA8UnormSrgb:
             case wgpu::TextureFormat::BGRA8Unorm:
             case wgpu::TextureFormat::BGRA8UnormSrgb:
