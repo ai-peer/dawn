@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "57849eb6_24474496",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:12:00Z",
+      "side": 1,
+      "message": "Because we linear allocate in the GPU descriptor heap, and expire allocations after the device serial changes, Corentin is saying that even light users will eventually switch heaps and double in size even though they never need a big heap. \n\nHeavy users call AllocateAndSwitch at a higher frequency, but light users still call it reasonably often.",
+      "parentUuid": "e37349cb_f465a4d0",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29cdbfb8_8e5a0c0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 3
