@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "590897e2_f049d6c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-27T22:21:58Z",
+      "side": 1,
+      "message": "Could we raise a warning (that would be visible in dev tools) if you use more than 4?",
+      "revId": "361a0d8334c846bb2b3f6b38cb556f3cf6be6cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
