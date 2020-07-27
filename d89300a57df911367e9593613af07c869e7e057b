@@ -16,6 +16,149 @@
       "revId": "d89300a57df911367e9593613af07c869e7e057b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96bcf396_c44ea4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "LGTM overall; given that alpha to coverage is implementation defined, it\u0027s definitely rather tricky to test. I\u0027m not sure if we\u0027re just getting lucky that the mask produced by alpha to coverage isn\u0027t (0x1 | 0x4) or (0x2 | 0x8). Perhaps we could try multiple sample masks and check that all of the (varying) resolve results are \u003c\u003d 50% coverage?",
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c065e7fd_1ff1c3e5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "unit: I think there are extra spaces here. Did the autoformatter do this?",
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7b90c77_6bf8c830",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "This spacing change looks ok though.",
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac869448_0ad4daa7",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "nit: could be more specific ExpectedMSAAColor",
+      "range": {
+        "startLine": 245,
+        "startChar": 10,
+        "endLine": 245,
+        "endChar": 23
+      },
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aefe0346_ad2dded2",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "lot of varied usage of how we pass this data in. We should probably just have a new overload for EncodeRenderPassForTest to take wgpu::Color*",
+      "range": {
+        "startLine": 918,
+        "startChar": 74,
+        "endLine": 918,
+        "endChar": 90
+      },
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dd5fe2f_d5d82c68",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "nit: here you\u0027ve passed \"kTestDepth\" which is true, and above you\u0027ve simply passed \"true\". This is a little inconsistent.",
+      "range": {
+        "startLine": 1014,
+        "startChar": 12,
+        "endLine": 1014,
+        "endChar": 22
+      },
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c476484_d37c612a",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T22:00:02Z",
+      "side": 1,
+      "message": "There are only 5 values provided to this array. Are the rest intended to be 0?",
+      "range": {
+        "startLine": 1016,
+        "startChar": 25,
+        "endLine": 1016,
+        "endChar": 27
+      },
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
