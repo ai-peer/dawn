@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "a4f8f4a6_377bc15e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-27T20:54:27Z",
+      "side": 1,
+      "message": "A TODO SGTM.",
+      "parentUuid": "48d9dbcb_d3af9b26",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbf75156_bc2c1ef6",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 1
