@@ -237,6 +237,7 @@ class DawnTestBase {
     bool IsImgTec() const;
     bool IsIntel() const;
     bool IsNvidia() const;
+    bool IsNVIDIAQuadroP400() const;
     bool IsQualcomm() const;
     bool IsSwiftshader() const;
     bool IsWARP() const;
