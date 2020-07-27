@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afe3717f_8e3abd7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T17:05:52Z",
+      "side": 1,
+      "message": "LGTM; So these tests fail on platforms not tested on our bot hardware. Not sure what our policy on suppressions is @cwallez. Do we care to add suppressions that don\u0027t break on CI?",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
