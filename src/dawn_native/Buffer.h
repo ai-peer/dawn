@@ -25,6 +25,8 @@
 
 namespace dawn_native {
 
+    struct CopyTextureToBufferCmd;
+
     enum class MapType : uint32_t;
 
     MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor);
@@ -81,6 +83,8 @@ namespace dawn_native {
         void DestroyInternal();
 
         bool IsMapped() const;
+
+        bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy) const;
 
       private:
         virtual MaybeError MapAtCreationImpl() = 0;

@@ -329,6 +329,22 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    void Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* recordingContext,
+                                                    const CopyTextureToBufferCmd* copy) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (IsDataInitialized() ||
+            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            return;
+        }
+
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+            SetIsDataInitialized();
+        } else {
+            InitializeToZero(recordingContext);
+        }
+    }
+
     void Buffer::InitializeToZero(CommandRecordingContext* recordingContext) {
         ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
         ASSERT(!IsDataInitialized());

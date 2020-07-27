@@ -176,6 +176,22 @@ namespace dawn_native { namespace metal {
         }
     }
 
+    void Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
+                                                    const CopyTextureToBufferCmd* copy) {
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
+        // instead when buffer lazy initialization is completely supported.
+        if (IsDataInitialized() ||
+            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            return;
+        }
+
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+            SetIsDataInitialized();
+        } else {
+            InitializeToZero(commandContext);
+        }
+    }
+
     void Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
         ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
         ASSERT(!IsDataInitialized());

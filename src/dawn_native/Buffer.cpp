@@ -15,6 +15,7 @@
 #include "dawn_native/Buffer.h"
 
 #include "common/Assert.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
@@ -660,6 +661,36 @@ namespace dawn_native {
 
     bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
         return offset == 0 && size == GetSize();
+    }
+
+    bool BufferBase::IsFullBufferOverwrittenInTextureToBufferCopy(
+        const CopyTextureToBufferCmd* copy) const {
+        ASSERT(copy != nullptr);
+        ASSERT(copy->destination.buffer.Get() == this);
+
+        if (copy->destination.offset > 0) {
+            return false;
+        }
+
+        if (copy->destination.rowsPerImage > copy->copySize.height) {
+            return false;
+        }
+
+        const TextureBase* texture = copy->source.texture.Get();
+        const uint64_t copyTextureDataSizePerRow = copy->copySize.width /
+                                                   texture->GetFormat().blockWidth *
+                                                   texture->GetFormat().blockByteSize;
+        if (copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
+            return false;
+        }
+
+        const uint64_t validTextureCopySizePerImage =
+            copyTextureDataSizePerRow * (copy->copySize.height / texture->GetFormat().blockHeight);
+        if (GetSize() > validTextureCopySizePerImage * copy->copySize.depth) {
+            return false;
+        }
+
+        return true;
     }
 
 }  // namespace dawn_native
