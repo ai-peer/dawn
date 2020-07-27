@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "396dc24a_6c25b64b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-27T23:47:21Z",
+      "side": 1,
+      "message": "Should this be done in spvc or spirv-cross instead?",
+      "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
