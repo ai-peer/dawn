@@ -367,6 +367,17 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
     }
 }
 
+/// Tests that the sample count of the render pipeline must be valid.
+TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
+    utils::ComboRenderPipelineDescriptor descriptor(device);
+    descriptor.vertexStage.module = vsModule;
+    descriptor.cFragmentStage.module = fsModule;
+    descriptor.sampleCount = 1;
+    descriptor.alphaToCoverageEnabled = true;
+
+    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+}
+
 // Tests that the texture component type in shader must match the bind group layout.
 TEST_F(RenderPipelineValidationTest, TextureComponentTypeCompatibility) {
     constexpr uint32_t kNumTextureComponentType = 3u;
