@@ -328,7 +328,7 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutWithStorageTextureBindingTy
 TEST_F(StorageTextureValidationTests, StorageTextureFormatInShaders) {
     // Not include RGBA8UnormSrgb, BGRA8Unorm, BGRA8UnormSrgb because they are not related to any
     // SPIR-V Image Formats.
-    constexpr std::array<wgpu::TextureFormat, 32> kWGPUTextureFormatSupportedAsSPIRVImageFormats = {
+    constexpr std::array<wgpu::TextureFormat, 33> kWGPUTextureFormatSupportedAsSPIRVImageFormats = {
         wgpu::TextureFormat::R32Uint,      wgpu::TextureFormat::R32Sint,
         wgpu::TextureFormat::R32Float,     wgpu::TextureFormat::RGBA8Unorm,
         wgpu::TextureFormat::RGBA8Snorm,   wgpu::TextureFormat::RGBA8Uint,
@@ -344,7 +344,8 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInShaders) {
         wgpu::TextureFormat::RG8Snorm,     wgpu::TextureFormat::RG8Uint,
         wgpu::TextureFormat::RG8Sint,      wgpu::TextureFormat::RG16Uint,
         wgpu::TextureFormat::RG16Sint,     wgpu::TextureFormat::RG16Float,
-        wgpu::TextureFormat::RGB10A2Unorm, wgpu::TextureFormat::RG11B10Float};
+        wgpu::TextureFormat::RGB10A2Unorm, wgpu::TextureFormat::RG11B10Float,
+        wgpu::TextureFormat::RGB9E5Float};
 
     for (wgpu::BindingType storageTextureBindingType : kSupportedStorageTextureBindingTypes) {
         for (wgpu::TextureFormat format : kWGPUTextureFormatSupportedAsSPIRVImageFormats) {
