@@ -34,6 +34,24 @@
       "revId": "361a0d8334c846bb2b3f6b38cb556f3cf6be6cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da26c031_7e73156a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-07-27T22:52:50Z",
+      "side": 1,
+      "message": "We could but going through the whole BGL creation (and the whole BG creation if the BGL is implicit) is a bunch of unnecessary work.",
+      "parentUuid": "4985a787_36b9f7fe",
+      "revId": "361a0d8334c846bb2b3f6b38cb556f3cf6be6cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
