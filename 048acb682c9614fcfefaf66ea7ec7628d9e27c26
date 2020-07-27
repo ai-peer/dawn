@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "c6332a6b_971f8c12",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c09a449_5288fe86",
+      "range": {
+        "startLine": 688,
+        "startChar": 23,
+        "endLine": 688,
+        "endChar": 51
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c3e7d33_e4892ee4",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 3
@@ -89,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "26d677d2_c6081dcf",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T08:54:06Z",
+      "side": 1,
+      "message": "Ack\nNow I don\u0027t see any tests on the clear of int/uint color attachments inside a render pass in Dawn. Maybe we need them to verify it is working as we expect?",
+      "parentUuid": "a1333ade_6aacd04f",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 72
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec7fea8d_54b5b0f2",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 3
@@ -103,6 +151,24 @@
       "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56bd26a6_c0ed4e53",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec7fea8d_54b5b0f2",
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -126,6 +192,30 @@
       "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b01119_dd9c72ae",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b89ea0_91c074ab",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 94
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
