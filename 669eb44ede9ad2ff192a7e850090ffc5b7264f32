@@ -16,6 +16,57 @@
       "revId": "669eb44ede9ad2ff192a7e850090ffc5b7264f32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4795dd9e_1e7a19f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T20:42:18Z",
+      "side": 1,
+      "message": "LGTM too with some nits",
+      "revId": "669eb44ede9ad2ff192a7e850090ffc5b7264f32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98ab7f58_e81ed88c",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T20:42:18Z",
+      "side": 1,
+      "message": "nit: Check getMappedRange after this?",
+      "revId": "669eb44ede9ad2ff192a7e850090ffc5b7264f32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeda006d_c40a4ca2",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-27T20:42:18Z",
+      "side": 1,
+      "message": "ditto getMappedRange should be null. Also this TODO may no longer be true depending on the nature of the failure. CreateWriteHandle can OOM and fail and the buffer becomes an error buffer",
+      "revId": "669eb44ede9ad2ff192a7e850090ffc5b7264f32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
