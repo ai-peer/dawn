@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4212e6eb_0b9bff88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T18:22:45Z",
+      "side": 1,
+      "message": "nit: the commit message make it seems it\u0027s disabled for all of D3D12.",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afe3717f_8e3abd7b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -13,6 +30,23 @@
       "writtenOn": "2020-07-27T17:05:52Z",
       "side": 1,
       "message": "LGTM; So these tests fail on platforms not tested on our bot hardware. Not sure what our policy on suppressions is @cwallez. Do we care to add suppressions that don\u0027t break on CI?",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0451185e_9ca36b3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T18:22:45Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -48,6 +82,24 @@
       "side": 1,
       "message": "I don\u0027t think our answer is to use E2E suppression(s) to document failures that can\u0027t be tested. Can\u0027t have it both ways - tightly scope E2E suppressions AND always be accurate where there is no CQ coverage. I think the bug/issue is a better place to document IMHO.",
       "parentUuid": "5b5a895e_c7cd2170",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f995ae7_b5b8e7ca",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T18:22:45Z",
+      "side": 1,
+      "message": "+1 unless it makes development for someone difficult because the end2end tests crash. Which I don\u0027t think is the case here.",
+      "parentUuid": "1304fb91_e5cafd06",
       "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
