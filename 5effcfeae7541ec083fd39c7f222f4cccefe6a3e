@@ -87,6 +87,57 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "018b2e09_cf9b01de",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:36:11Z",
+      "side": 1,
+      "message": "This feels like a hack, why not have a member variable on ShaderVisibleDescriptorAllocator instead?",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c259b281_f89ff4a9",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:36:11Z",
+      "side": 1,
+      "message": "This is going to grow the heap in powers of twos until it reaches the maxDescriptorCount, even for a light user.\n\nInstead how about doing the following: keep track of how many descriptors are in flight at each instant, and divide this number by two (or 4) to get an estimate of how many descriptors we need \"per frame\". Then allocate a ShaderVisibleDescriptorHeap with the correct size (or reuse the existing one).\n\nAlso the logic that does the estimate should be split in a different function, so this one only care about reusing vs. allocating and the heuristic is boxed in its own part of the code.",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29cdbfb8_8e5a0c0f",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:36:11Z",
+      "side": 1,
+      "message": "Can we have a separate fixture for tests that count the number of switches so we always run them with the toggle and don\u0027t need this DAWN_SKIP_TEST_IF?",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
