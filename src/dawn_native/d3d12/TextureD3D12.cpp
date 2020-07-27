@@ -151,6 +151,8 @@ namespace dawn_native { namespace d3d12 {
 
                 case wgpu::TextureFormat::RG11B10Float:
                     return DXGI_FORMAT_R11G11B10_FLOAT;
+                case wgpu::TextureFormat::RGB9E5Float:
+                    return DXGI_FORMAT_R9G9B9E5_SHAREDEXP;
 
                 case wgpu::TextureFormat::RG32Uint:
                 case wgpu::TextureFormat::RG32Sint:
@@ -265,6 +267,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_R10G10B10A2_UNORM;
             case wgpu::TextureFormat::RG11B10Float:
                 return DXGI_FORMAT_R11G11B10_FLOAT;
+            case wgpu::TextureFormat::RGB9E5Float:
+                return DXGI_FORMAT_R9G9B9E5_SHAREDEXP;
 
             case wgpu::TextureFormat::RG32Uint:
                 return DXGI_FORMAT_R32G32_UINT;
