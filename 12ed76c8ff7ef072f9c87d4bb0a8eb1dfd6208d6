@@ -16,6 +16,63 @@
       "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6eac3a79_e83950e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T09:40:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2975e768_c61cd6a6",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T09:40:23Z",
+      "side": 1,
+      "message": "Maybe we could use webgpu.h\u0027s EnumClassBitmask to avoid having to deal with the enum / mask duality.",
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684dc4e3_9bc9304c",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T09:40:23Z",
+      "side": 1,
+      "message": "nit: aspects?",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
