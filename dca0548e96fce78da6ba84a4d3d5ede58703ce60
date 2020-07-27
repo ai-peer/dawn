@@ -16,6 +16,23 @@
       "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b5a895e_c7cd2170",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-07-27T17:13:25Z",
+      "side": 1,
+      "message": "This failure shouldn\u0027t be Nvidia specific. This test should fail on all platforms that use the D3D12 Render Pass API (i.e. everything other than Intel Gen11 or Windows builds prior to 1809)",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
