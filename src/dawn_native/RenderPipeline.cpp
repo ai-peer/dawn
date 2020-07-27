@@ -572,6 +572,11 @@ namespace dawn_native {
         return mSampleMask;
     }
 
+    bool RenderPipelineBase::IsAlphaToCoverageEnabled() const {
+        ASSERT(!IsError());
+        return mAlphaToCoverageEnabled;
+    }
+
     const AttachmentState* RenderPipelineBase::GetAttachmentState() const {
         ASSERT(!IsError());
 
