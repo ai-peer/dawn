@@ -33,12 +33,14 @@ namespace gpu_info {
 
     static constexpr PCIDeviceID kDeviceID_Swiftshader = 0xC0DE;
     static constexpr PCIDeviceID kDeviceID_WARP = 0x8c;
+    static constexpr PCIDeviceID kDeviceID_QuadroP400 = 0x1CB3;
 
     bool IsAMD(PCIVendorID vendorId);
     bool IsARM(PCIVendorID vendorId);
     bool IsImgTec(PCIVendorID vendorId);
     bool IsIntel(PCIVendorID vendorId);
     bool IsNvidia(PCIVendorID vendorId);
+    bool IsNVIDIAQuadroP400(PCIVendorID vendorId, PCIDeviceID deviceId);
     bool IsQualcomm(PCIVendorID vendorId);
     bool IsSwiftshader(PCIVendorID vendorId, PCIDeviceID deviceId);
     bool IsWARP(PCIVendorID vendorId, PCIDeviceID deviceId);
