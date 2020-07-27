@@ -33,6 +33,24 @@
       "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1304fb91_e5cafd06",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-27T18:08:07Z",
+      "side": 1,
+      "message": "I don\u0027t think our answer is to use E2E suppression(s) to document failures that can\u0027t be tested. Can\u0027t have it both ways - tightly scope E2E suppressions AND always be accurate where there is no CQ coverage. I think the bug/issue is a better place to document IMHO.",
+      "parentUuid": "5b5a895e_c7cd2170",
+      "revId": "dca0548e96fce78da6ba84a4d3d5ede58703ce60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
