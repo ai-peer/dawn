@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "c7021e79_29b053c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c09a449_5288fe86",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "nit: overwrittenRangeSize maybe?",
+      "range": {
+        "startLine": 688,
+        "startChar": 23,
+        "endLine": 688,
+        "endChar": 51
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c3e7d33_e4892ee4",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 3
@@ -18,6 +58,70 @@
         "startChar": 12,
         "endLine": 97,
         "endChar": 72
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1333ade_6aacd04f",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "Ah yes, GPUColor is a bunch of doubles: https://gpuweb.github.io/gpuweb/#typedefdef-gpucolor so that it covers the full range of int32 / uint32 and floats.",
+      "parentUuid": "9c3e7d33_e4892ee4",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 72
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec7fea8d_54b5b0f2",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "nit: this can be inline in the buffer descriptor.",
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05b89ea0_91c074ab",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "I think this could use utils::RequiredBytesInCopy",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 94
       },
       "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",

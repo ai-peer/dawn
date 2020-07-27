@@ -88,6 +88,41 @@
     },
     {
       "key": {
+        "uuid": "b78d8fce_38767c8f",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "Also maybe this should be a freestanding function in CommandBuffer.cpp that\u0027s where a bunch of utilities are, and this one only uses mSize.",
+      "parentUuid": "3085ec0a_cfa5d872",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32844ae9_0ed9975c",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45e087fb_cb18eaed",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 1
@@ -117,6 +152,24 @@
       "side": 1,
       "message": "And the functions like InitializeToZero() and ClearBuffer() are also repeated in all backends. The main problem now is the definitions of CommandRecordingContext are different among all backend, and I think in the future we need to refactor the implementation of CommandRecordingContext to enable us do such code clean-ups, but not now. What do you think?",
       "parentUuid": "45e087fb_cb18eaed",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48d9dbcb_d3af9b26",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-27T08:22:04Z",
+      "side": 1,
+      "message": "Yeah, now or in the future we\u0027ll need a CommandRecordingContestBase object with per-backend versions (that you can ToBackend()) and the buffer initialization skipping code could be in the frontend.\n\nThat said the code duplication is simple to fix in the future, and I\u0027ll add a task in the tracker to do the CommandRecordingContextBase thing in a future sprint (Jiawei, or probably someone else).",
+      "parentUuid": "6b1abf16_0fec7744",
       "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
