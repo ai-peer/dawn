@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c3e7d33_e4892ee4",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T06:12:04Z",
+      "side": 1,
+      "message": "I find I have to use float format (R32Float) as the format of the color attachment because currently all components of wgpu::Color is float. Will we support clearing the color attachment with int/uint format in a render pass?",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 72
+      },
+      "revId": "048acb682c9614fcfefaf66ea7ec7628d9e27c26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
