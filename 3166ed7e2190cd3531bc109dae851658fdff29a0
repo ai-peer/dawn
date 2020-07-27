@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "3085ec0a_cfa5d872",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T05:26:31Z",
+      "side": 1,
+      "message": "I cannot implement this now because these CLs https://dawn-review.googlesource.com/c/dawn/+/24684 has not been landed.\n\nAccording to Vulkan SPEC:\n- When copying to or from a depth or stencil aspect, the data in buffer memory uses a layout that is a (mostly) tightly packed representation of the depth or stencil data. Specifically:\n\n- data copied to or from the stencil aspect of any depth/stencil format is tightly packed with one VK_FORMAT_S8_UINT value per texel.\n- data copied to or from the depth aspect of a VK_FORMAT_D32_SFLOAT or VK_FORMAT_D32_SFLOAT_S8_UINT format is tightly packed with one VK_FORMAT_D32_SFLOAT value per texel.\n- data copied to or from the depth aspect of a VK_FORMAT_X8_D24_UNORM_PACK32 or VK_FORMAT_D24_UNORM_S8_UINT format is packed with one 32-bit word per texel with the D24 value in the LSBs of the word, and undefined values in the eight MSBs.\n\nSo when we copy from or to the stencil aspect or the depth aspect of a D32 float, we can safely think there are no undefined contents within the buffer memory for each texel.\nWhen we copy from or to the depth aspect of a D24 float, we have to always do the buffer lazy initialization.\n\nI left a TODO in this CL about this issue. What do you think?",
+      "parentUuid": "cdfd9b10_92b11441",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45e087fb_cb18eaed",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2020-07-24T17:50:34Z",
       "side": 1,
       "message": "Looks like `EnsureDataInitializedAsDestination` code gets repeated because GL doesn\u0027t have a commandContext (will that always be true?). Maybe we can pass nullptr instead and eliminate the duplicate code.",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b1abf16_0fec7744",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T05:26:31Z",
+      "side": 1,
+      "message": "And the functions like InitializeToZero() and ClearBuffer() are also repeated in all backends. The main problem now is the definitions of CommandRecordingContext are different among all backend, and I think in the future we need to refactor the implementation of CommandRecordingContext to enable us do such code clean-ups, but not now. What do you think?",
+      "parentUuid": "45e087fb_cb18eaed",
       "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -101,6 +137,24 @@
       "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dcea466_198bb8ce",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T05:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbf75156_bc2c1ef6",
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -148,6 +202,30 @@
       "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b19f70bf_7375f2f0",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-27T05:26:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ea6ca3_acb0bb59",
+      "range": {
+        "startLine": 494,
+        "startChar": 4,
+        "endLine": 517,
+        "endChar": 5
+      },
+      "revId": "3166ed7e2190cd3531bc109dae851658fdff29a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
