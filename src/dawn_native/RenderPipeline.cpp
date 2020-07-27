@@ -366,9 +366,12 @@ namespace dawn_native {
             DAWN_TRY(ValidateDepthStencilStateDescriptor(device, descriptor->depthStencilState));
         }
 
-        if (descriptor->alphaToCoverageEnabled) {
-            return DAWN_VALIDATION_ERROR("alphaToCoverageEnabled isn't supported (yet)");
+        if (descriptor->alphaToCoverageEnabled && descriptor->sampleCount <= 1) {
+            return DAWN_VALIDATION_ERROR("Enabling alphaToCoverage requires sampleCount > 1");
         }
+
+        // TODO(dawn:494): Add validation for ensuring that alphaToCoverage is disabled
+        // if SV_Coverage is statically used in the shader.
 
         return {};
     }
