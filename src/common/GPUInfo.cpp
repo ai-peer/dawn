@@ -30,6 +30,9 @@ namespace gpu_info {
     bool IsNvidia(PCIVendorID vendorId) {
         return vendorId == kVendorID_Nvidia;
     }
+    bool IsQuadroP400(PCIDeviceID deviceID) {
+        return deviceID == kDeviceID_QuadroP400;
+    }
     bool IsQualcomm(PCIVendorID vendorId) {
         return vendorId == kVendorID_Qualcomm;
     }

@@ -638,6 +638,10 @@ bool DawnTestBase::IsNvidia() const {
     return gpu_info::IsNvidia(mParam.adapterProperties.vendorID);
 }
 
+bool DawnTestBase::IsQuadroP400() const {
+    return gpu_info::IsQuadroP400(mParam.adapterProperties.deviceID);
+}
+
 bool DawnTestBase::IsQualcomm() const {
     return gpu_info::IsQualcomm(mParam.adapterProperties.vendorID);
 }
