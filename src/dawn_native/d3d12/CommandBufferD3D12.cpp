@@ -28,6 +28,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
+#include "dawn_native/d3d12/QuerySetD3D12.h"
 #include "dawn_native/d3d12/RenderPassBuilderD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
@@ -841,11 +842,26 @@ namespace dawn_native { namespace d3d12 {
                 }
 
                 case Command::ResolveQuerySet: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                    Buffer* destination = ToBackend(cmd->destination.Get());
+
+                    commandList->ResolveQueryData(
+                        querySet->GetQueryHeap(), querySet->GetD3D12QueryType(), cmd->firstQuery,
+                        cmd->queryCount, destination->GetD3D12Resource(), cmd->destinationOffset);
+
+                    // TODO(hao.x.li@intel.com): Add compute shader to convert the query result
+                    // (ticks) to timestamp (ns)
+
+                    break;
                 }
 
                 case Command::WriteTimestamp: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                    commandList->EndQuery(querySet->GetQueryHeap(), querySet->GetD3D12QueryType(),
+                                          cmd->queryIndex);
+                    break;
                 }
 
                 default: {
@@ -959,7 +975,11 @@ namespace dawn_native { namespace d3d12 {
                 }
 
                 case Command::WriteTimestamp: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                    commandList->EndQuery(querySet->GetQueryHeap(), querySet->GetD3D12QueryType(),
+                                          cmd->queryIndex);
+                    break;
                 }
 
                 default: {
@@ -1379,7 +1399,11 @@ namespace dawn_native { namespace d3d12 {
                 }
 
                 case Command::WriteTimestamp: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+                    commandList->EndQuery(querySet->GetQueryHeap(), querySet->GetD3D12QueryType(),
+                                          cmd->queryIndex);
+                    break;
                 }
 
                 default: {

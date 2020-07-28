@@ -19,7 +19,53 @@
 
 #include "tests/DawnTest.h"
 
-class OcclusionQueryTests : public DawnTest {};
+#include "utils/WGPUHelpers.h"
+
+class QueryTests : public DawnTest {
+  protected:
+    wgpu::Buffer CreateBuffer(uint64_t size) {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = size;
+        descriptor.usage = wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopySrc;
+        return device.CreateBuffer(&descriptor);
+    }
+
+    void MapAsyncAndWait(const wgpu::Buffer& buffer,
+                         wgpu::MapMode mode,
+                         size_t offset,
+                         size_t size) {
+        bool done = false;
+        buffer.MapAsync(
+            mode, offset, size,
+            [](WGPUBufferMapAsyncStatus status, void* userdata) {
+                ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &done);
+
+        while (!done) {
+            WaitABit();
+        }
+    }
+
+    wgpu::Buffer GetMappedBuffer(const wgpu::Buffer& buffer, size_t offset, size_t size) {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = size;
+        descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+        wgpu::Buffer mappedBuffer = device.CreateBuffer(&descriptor);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(buffer, offset, mappedBuffer, 0, size);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        MapAsyncAndWait(mappedBuffer, wgpu::MapMode::Read, 0, size);
+
+        return mappedBuffer;
+    }
+};
+
+class OcclusionQueryTests : public QueryTests {};
 
 // Test creating query set with the type of Occlusion
 TEST_P(OcclusionQueryTests, QuerySetCreation) {
@@ -40,7 +86,7 @@ TEST_P(OcclusionQueryTests, QuerySetDestroy) {
 
 DAWN_INSTANTIATE_TEST(OcclusionQueryTests, D3D12Backend());
 
-class PipelineStatisticsQueryTests : public DawnTest {
+class PipelineStatisticsQueryTests : public QueryTests {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
@@ -74,7 +120,7 @@ TEST_P(PipelineStatisticsQueryTests, QuerySetCreation) {
 
 DAWN_INSTANTIATE_TEST(PipelineStatisticsQueryTests, D3D12Backend());
 
-class TimestampQueryTests : public DawnTest {
+class TimestampQueryTests : public QueryTests {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
@@ -90,14 +136,81 @@ class TimestampQueryTests : public DawnTest {
         }
         return requiredExtensions;
     }
+
+    wgpu::QuerySet CreateQuerySetForTimestamp(uint32_t queryCount) {
+        wgpu::QuerySetDescriptor descriptor;
+        descriptor.count = queryCount;
+        descriptor.type = wgpu::QueryType::Timestamp;
+        return device.CreateQuerySet(&descriptor);
+    }
+
+    // Check the results of timestamp query are greater than 0.
+    void CheckTimestampResult(const wgpu::Buffer& buffer, uint32_t count) {
+        wgpu::Buffer mappedBuffer = GetMappedBuffer(buffer, 0, count * sizeof(uint64_t));
+        for (uint32_t i = 0; i < count; i++) {
+            uint64_t result = *static_cast<const uint64_t*>(
+                mappedBuffer.GetConstMappedRange(i * sizeof(uint64_t), sizeof(uint64_t)));
+            ASSERT_GT(result, (uint64_t)0);
+        }
+    }
 };
 
 // Test creating query set with the type of Timestamp
 TEST_P(TimestampQueryTests, QuerySetCreation) {
-    wgpu::QuerySetDescriptor descriptor;
-    descriptor.count = 1;
-    descriptor.type = wgpu::QueryType::Timestamp;
-    device.CreateQuerySet(&descriptor);
+    CreateQuerySetForTimestamp(1);
+}
+
+// Test calling timestamp query from command encoder
+TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
+    uint32_t kQueryCount = 2;
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.WriteTimestamp(querySet, 0);
+    encoder.WriteTimestamp(querySet, 1);
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    CheckTimestampResult(destination, kQueryCount);
+}
+
+// Test calling timestamp query from render pass encoder
+TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
+    uint32_t kQueryCount = 2;
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.WriteTimestamp(querySet, 0);
+    pass.WriteTimestamp(querySet, 1);
+    pass.EndPass();
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    CheckTimestampResult(destination, kQueryCount);
+}
+
+// Test calling timestamp query from compute pass encoder
+TEST_P(TimestampQueryTests, TimestampOnComputePass) {
+    uint32_t kQueryCount = 2;
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    pass.WriteTimestamp(querySet, 0);
+    pass.WriteTimestamp(querySet, 1);
+    pass.EndPass();
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    CheckTimestampResult(destination, kQueryCount);
 }
 
 DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());

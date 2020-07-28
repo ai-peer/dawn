@@ -28,6 +28,7 @@ namespace dawn_native { namespace d3d12 {
                                                const QuerySetDescriptor* descriptor);
 
         ID3D12QueryHeap* GetQueryHeap() const;
+        D3D12_QUERY_TYPE GetD3D12QueryType() const;
 
       private:
         ~QuerySet() override;
