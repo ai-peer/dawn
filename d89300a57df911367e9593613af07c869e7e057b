@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "0bd2b8d4_cd2c01a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-28T22:21:12Z",
+      "side": 1,
+      "message": "Isn\u0027t an easy way to do this in Dawn tests. We can perhaps do it more easily in the CTS.",
+      "parentUuid": "5b16f4f4_8b15b5e5",
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07323712_20ae6014",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 23
