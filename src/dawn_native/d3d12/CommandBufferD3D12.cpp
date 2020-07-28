@@ -567,10 +567,12 @@ namespace dawn_native { namespace d3d12 {
             wgpu::BufferUsage bufferUsages = wgpu::BufferUsage::None;
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
+                Buffer* buffer = ToBackend(usages.buffers[i]);
+                buffer->GetDevice()->ConsumedError(buffer->EnsureDataInitialized(commandContext));
+
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.buffers[i])
-                        ->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                          usages.bufferUsages[i])) {
+                if (buffer->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                            usages.bufferUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 bufferUsages |= usages.bufferUsages[i];
