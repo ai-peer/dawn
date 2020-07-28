@@ -55,6 +55,25 @@ namespace dawn_native { namespace d3d12 {
         return mQueryHeap.Get();
     }
 
+    D3D12_QUERY_TYPE QuerySet::GetD3D12QueryType() const {
+        D3D12_QUERY_TYPE type;
+        switch (GetQueryType()) {
+            case wgpu::QueryType::Occlusion:
+                type = D3D12_QUERY_TYPE_OCCLUSION;
+                break;
+            case wgpu::QueryType::PipelineStatistics:
+                type = D3D12_QUERY_TYPE_PIPELINE_STATISTICS;
+                break;
+            case wgpu::QueryType::Timestamp:
+                type = D3D12_QUERY_TYPE_TIMESTAMP;
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+        return type;
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }
