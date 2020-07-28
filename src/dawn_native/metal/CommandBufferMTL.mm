@@ -545,6 +545,9 @@ namespace dawn_native { namespace metal {
                     texture->EnsureSubresourceContentInitialized(texture->GetAllSubresources());
                 }
             }
+            for (BufferBase* bufferBase : usages.buffers) {
+                ToBackend(bufferBase)->EnsureDataInitialized(commandContext);
+            }
         };
 
         Command type;
