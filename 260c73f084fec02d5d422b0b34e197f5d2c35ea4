@@ -68,6 +68,24 @@
       "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c895ebe_1958c46d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-07-28T15:05:28Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d188 to handle this in Tint. We need to determine if we should be fixing the warnings or disabling them.",
+      "parentUuid": "4871bc3b_924af3ef",
+      "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
