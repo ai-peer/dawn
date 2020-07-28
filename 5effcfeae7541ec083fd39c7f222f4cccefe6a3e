@@ -304,6 +304,24 @@
     },
     {
       "key": {
+        "uuid": "5b8fade0_6af623f1",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-28T19:59:59Z",
+      "side": 1,
+      "message": "Ok we clarified this offline. I had the wrong assumption that AllocateGPUDescriptors uses a linear allocator which is incorrect. It uses a ring-buffer allocator. So once the heap becomes large enough for a couple of frames, all of the descriptors will be reallocated within one ring buffer, and we won\u0027t call AllocateAndSwitchShaderVisiableHeap() anymore and double.",
+      "parentUuid": "348abc30_d1c5da68",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29cdbfb8_8e5a0c0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 3
