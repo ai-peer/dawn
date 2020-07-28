@@ -286,6 +286,24 @@
     },
     {
       "key": {
+        "uuid": "348abc30_d1c5da68",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-28T18:59:52Z",
+      "side": 1,
+      "message": "\u003e the application will call AllocateAndSwitchShaderVisibleHeap() less as the heap grows larger until it no longer needs to grow\n\nI\u0027m still not understanding how this is. The current code has no notion of knowing when it \"no longer needs to grow\". Doesn\u0027t it always double in size (until max) whenever AllocateAndSwitchShaderVisibleHeap() is called?",
+      "parentUuid": "2d05c96a_4e90a0bb",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29cdbfb8_8e5a0c0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 3
