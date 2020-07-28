@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "a46c1b5c_e8639a98",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "Maybe it\u0027s better to add a comment about why we need these two usage. In this CL actually we don\u0027t need D3D12_RESOURCE_STATE_UNORDERED_ACCESS.",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 91
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f9504d0_877b413f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "This piece of code seems duplicated at [1] and [2], maybe we can put it in one function?",
+      "range": {
+        "startLine": 860,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 59
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89f101b1_3110e8e1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 978,
+        "startChar": 1,
+        "endLine": 981,
+        "endChar": 59
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61d48af9_7b70d239",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -35,6 +104,52 @@
         "startChar": 68,
         "endLine": 1404,
         "endChar": 97
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e489c7bc_3eaf48ff",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1405,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 1402,
+        "startChar": 0,
+        "endLine": 1405,
+        "endChar": 59
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ccad37d_f229011a",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "We haven\u0027t support them yet so I think it\u0027s better to leave them UNREACHABLE().",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 22
       },
       "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -98,6 +213,75 @@
         "startChar": 0,
         "endLine": 65,
         "endChar": 5
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97b35e45_b55df047",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 29
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13355bf5_4e5344d8",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 29
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b76b6f0c_6b8ade52",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-28T08:46:19Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 29
       },
       "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
