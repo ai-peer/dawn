@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b36c89df_54509cb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-28T12:17:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ca6a9a0_625037ca",
+      "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a15ac439_399bf9f9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -50,6 +68,24 @@
       "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a24c9d83_f49608c8",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-28T12:17:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c3a45ce_b8443bca",
+      "revId": "6fc30bd18bb01fa886ad20854080e35e6f70325a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
