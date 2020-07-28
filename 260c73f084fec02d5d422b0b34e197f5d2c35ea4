@@ -33,6 +33,41 @@
       "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4871bc3b_924af3ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-28T15:01:52Z",
+      "side": 1,
+      "message": "I am not sure. If we are going to move it out Dawn, it will need to be also in Tint\u0027s MSL back end.\n\nSpecifically I am not sure if this is a situation where this is the appropriate place, since it reduces the number of implementations to 1, or if each emitter of MSL should be embedding it since it is an intrinsic issue/part of MSL.\n\ndsinclair@ thoughts?",
+      "parentUuid": "396dc24a_6c25b64b",
+      "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd98c30b_061281b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-07-28T15:01:52Z",
+      "side": 1,
+      "message": "We can land this here now, and figure out if we want to move the functionality other places.",
+      "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
