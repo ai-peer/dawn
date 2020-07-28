@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "f6044b0b_69166caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:00:32Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "ad737bd0d3a0947beb9a603d32a3f70a9bd8f405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54eff2e_3342c06c",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 3
@@ -82,6 +99,30 @@
       "writtenOn": "2020-07-27T20:29:38Z",
       "side": 1,
       "message": "nit: we just changed what size 0 means, but probably fine to fix how we do defaulting once the old path is completely gone",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "ad737bd0d3a0947beb9a603d32a3f70a9bd8f405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "324923d4_5639a2ff",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:00:32Z",
+      "side": 1,
+      "message": "Yeah I\u0027ll do it in a follow-up across dawn_native and dawn_wire.",
+      "parentUuid": "cb5b4613_949e6d61",
       "range": {
         "startLine": 221,
         "startChar": 8,
