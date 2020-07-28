@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "15f1c280_02066ea9",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-28T23:40:42Z",
+      "side": 1,
+      "message": "We could but that would require declaring them as \n\nenum class Aspect {\n Color \u003d 0x1,\n Depth \u003d 0x2,\n Stencil \u003d 0x4,\n};\n\n\nAnd we couldn\u0027t do IterateBitset on it because that yields us values {0, 1, 2} not {1, 2, 4}.\n\n\nWe could however make a different version like.. \"IterateEnumMask\" which calls IterateBitset and then yields (1 \u003c\u003c result)\n\nThat\u0027s actually a nice idea. Thoughts?",
+      "parentUuid": "2975e768_c61cd6a6",
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "684dc4e3_9bc9304c",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 4
