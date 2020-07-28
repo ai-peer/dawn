@@ -78,6 +78,9 @@ namespace dawn_native { namespace d3d12 {
             std::unique_ptr<ShaderVisibleDescriptorHeap> heap;
         };
 
+        ResultOrError<std::unique_ptr<ShaderVisibleDescriptorHeap>> AllocateHeap(
+            uint32_t descriptorCount) const;
+
         std::unique_ptr<ShaderVisibleDescriptorHeap> mHeap;
         RingBufferAllocator mAllocator;
         std::list<SerialDescriptorHeap> mPool;
