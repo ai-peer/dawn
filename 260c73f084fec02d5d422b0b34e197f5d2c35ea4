@@ -86,6 +86,24 @@
       "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "550d1627_24738d47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-28T15:08:37Z",
+      "side": 1,
+      "message": "okay, maybe it can be in Tint, but I think it\u0027s okay for it to be here because it\u0027s not really related to translation, but more with how the shader is ingested.\n\none could feasibly use Tint (in another project) to translate to MSL at build time, use Apple\u0027s other tools to compile at build time, and not have this issue.",
+      "parentUuid": "4871bc3b_924af3ef",
+      "revId": "260c73f084fec02d5d422b0b34e197f5d2c35ea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
