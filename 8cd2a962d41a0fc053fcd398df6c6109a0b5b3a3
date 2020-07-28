@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5780f942_c8ec0dad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61d48af9_7b70d239",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "I think we can assert that querySet-\u003eGetQueryType() \u003d\u003d wgpu::QueryType::Timestamp and put D3D12_QUERY_TYPE_TIMESTAMP directly here. Same for other writeTimestamp implementations.",
+      "range": {
+        "startLine": 1404,
+        "startChar": 68,
+        "endLine": 1404,
+        "endChar": 97
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ae0689c_040cb451",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "nit: This could be a standalone conversion function:\n\n  D3D12_QUERY_TYPE D3D12QueryType(wgpu::QueryType type);",
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f917bf_e56bc5d7",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "nit: CreateResolveBuffer",
+      "range": {
+        "startLine": 26,
+        "startChar": 17,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad78053c_ff312e10",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "Instead of doing this, we could create a new buffer expectation:\n\nclass TimestampExpectation: public detail::Expectation {\n  public:\n    ~TimestampExpectation() override \u003d default;\n    testing::AssertionResult Check(const void* data, size_t size) override {\n        ASSERT(size % sizeof(uint64_t) \u003d\u003d 0);\n        uint64_t* timestamps \u003d static_cast\u003cvoid*\u003e(data);\n        for (i \u003d 0 ... size / sizeof(uint64_t)) {\n            check timestamps[i];\n        }\n    }\n};\n\nThen in the test we could do:\n\n  EXPECT_BUFFER(buffer, 0, size, new TimestampExpectation);\n\n(that macro would need to be added in DawnTest.h, and other EXPECT_BUFFER macros rephrased in terms of it)",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12df7a71_82e31172",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T08:43:56Z",
+      "side": 1,
+      "message": "Can we test encoding a query to only one of the slots in the buffer and check that the other slot isn\u0027t written? (it can be done for a single encoder)",
+      "revId": "8cd2a962d41a0fc053fcd398df6c6109a0b5b3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
