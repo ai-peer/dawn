@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "66b9e209_1495f580",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T10:49:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b7052518_bf76c933",
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c065e7fd_1ff1c3e5",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 23
@@ -592,6 +610,30 @@
       "side": 1,
       "message": "When we don\u0027t flip the triangle we get that the alpha-to-coverage mask is exactly equal to the rasterization mask. When we do we get exactly one sample that is covered by both the triangle and alpha-to-coverage.",
       "parentUuid": "e2ff2f1c_c673790e",
+      "range": {
+        "startLine": 1091,
+        "startChar": 62,
+        "endLine": 1091,
+        "endChar": 75
+      },
+      "revId": "d89300a57df911367e9593613af07c869e7e057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8239a24a_99d11180",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-28T10:49:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b15fc6a_5cd76ac4",
       "range": {
         "startLine": 1091,
         "startChar": 62,
