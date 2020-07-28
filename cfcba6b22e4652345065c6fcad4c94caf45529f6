@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "807d0a74_777d485a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-28T21:42:51Z",
+      "side": 1,
+      "message": "After conferring with Rafael, OK to land (will update chromium).",
+      "revId": "cfcba6b22e4652345065c6fcad4c94caf45529f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
