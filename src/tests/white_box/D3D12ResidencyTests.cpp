@@ -236,7 +236,10 @@ TEST_P(D3D12ResourceResidencyTests, AsyncMappedBufferRead) {
     EXPECT_TRUE(CheckIfBufferIsResident(buffer));
 
     while (mMappedReadData == nullptr) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     // Touch enough resources such that the entire budget is used. The mappable buffer should remain
@@ -275,7 +278,10 @@ TEST_P(D3D12ResourceResidencyTests, AsyncMappedBufferWrite) {
     EXPECT_TRUE(CheckIfBufferIsResident(buffer));
 
     while (mMappedWriteData == nullptr) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     // Touch enough resources such that the entire budget is used. The mappable buffer should remain

@@ -69,7 +69,10 @@ class BufferZeroInitTest : public DawnTest {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }
 

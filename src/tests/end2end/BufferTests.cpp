@@ -32,7 +32,10 @@ class BufferMapReadTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
 
         return mappedData;
@@ -167,7 +170,10 @@ class BufferMapWriteTests : public DawnTest {
         buffer.MapWriteAsync(MapWriteCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
 
         // Ensure the prior write's status is updated.
@@ -333,7 +339,10 @@ class BufferMappingTests : public DawnTest {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }
 
@@ -480,7 +489,10 @@ TEST_P(BufferMappingTests, MapRead_InCallback) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 }
 
@@ -596,7 +608,10 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
     ASSERT_DEVICE_ERROR(buffer.MapAsync(wgpu::MapMode::Read, 8, 4, nullptr, nullptr));
 
     while (!done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     // mMapOffset has not been updated so it should still be 4, which is data[1]
@@ -638,7 +653,10 @@ TEST_P(BufferMappingTests, MapWrite_InCallbackDefault) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
@@ -679,7 +697,10 @@ TEST_P(BufferMappingTests, MapWrite_InCallbackRange) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
@@ -707,7 +728,10 @@ class CreateBufferMappedTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
 
         return mappedData;
@@ -864,7 +888,10 @@ TEST_P(CreateBufferMappedTests, CreateThenMapSuccess) {
         &done);
 
     while (!done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     UnmapBuffer(result.buffer);
@@ -889,7 +916,10 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }());
 
@@ -991,7 +1021,10 @@ class BufferMappedAtCreationTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
 
         return mappedData;
@@ -1133,7 +1166,10 @@ TEST_P(BufferMappedAtCreationTests, CreateThenMapSuccess) {
         &done);
 
     while (!done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     UnmapBuffer(buffer);
@@ -1158,7 +1194,10 @@ TEST_P(BufferMappedAtCreationTests, CreateThenMapBeforeUnmapFailure) {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }());
 
@@ -1379,7 +1418,10 @@ TEST_P(BufferTests, CreateBufferOOMMapReadAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 
@@ -1416,7 +1458,10 @@ TEST_P(BufferTests, CreateBufferOOMMapWriteAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 
@@ -1452,7 +1497,10 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 

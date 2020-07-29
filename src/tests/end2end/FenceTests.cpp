@@ -74,7 +74,10 @@ class FenceTests : public DawnTest {
 
     void WaitForCompletedValue(wgpu::Fence fence, uint64_t completedValue) {
         while (fence.GetCompletedValue() < completedValue) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }
 };

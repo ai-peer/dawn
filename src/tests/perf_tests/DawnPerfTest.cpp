@@ -247,7 +247,10 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
     while (mRunning) {
         // Wait if there are too many steps in flight on the GPU.
         while (signaledFenceValue - fence.GetCompletedValue() >= mMaxStepsInFlight) {
-            mTest->WaitABit();
+            if (!mTest->WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
         TRACE_EVENT0(platform, General, "Step");
         double stepStart = mTimer->GetElapsedTime();
@@ -271,7 +274,10 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
     // which waits for all threads to stop doing work. When we output results, there should
     // be no additional incoming trace events.
     while (signaledFenceValue != fence.GetCompletedValue()) {
-        mTest->WaitABit();
+        if (!mTest->WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     mTimer->Stop();

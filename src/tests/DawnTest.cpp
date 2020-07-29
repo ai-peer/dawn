@@ -891,6 +891,9 @@ void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* 
 }
 
 void DawnTestBase::OnDeviceLost(const char* message, void* userdata) {
+    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
+    self->mDeviceLost = true;
+
     FAIL() << "Device Lost during test: " << message;
 }
 
@@ -970,11 +973,16 @@ std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
-void DawnTestBase::WaitABit() {
+bool DawnTestBase::WaitABit() {
+    if (mDeviceLost) {
+        return false;
+    }
+
     device.Tick();
     FlushWire();
 
     utils::USleep(100);
+    return true;
 }
 
 void DawnTestBase::FlushWire() {
@@ -1021,7 +1029,10 @@ void DawnTestBase::MapSlotsSynchronously() {
 
     // Busy wait until all map operations are done.
     while (mNumPendingMapOperations != 0) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 }
 
