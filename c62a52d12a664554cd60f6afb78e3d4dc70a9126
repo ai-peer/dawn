@@ -16,6 +16,40 @@
       "revId": "c62a52d12a664554cd60f6afb78e3d4dc70a9126",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b1262e2_f3b6c7f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:20:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c62a52d12a664554cd60f6afb78e3d4dc70a9126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91c6ad1e_89c9dd78",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:20:45Z",
+      "side": 1,
+      "message": "Maybe this and BoundAsUniformBufferWithOffset could be done in a single case (same thing for storage / readonly storage). Also the common shader code could maybe be factored between all the new cases (I\u0027m not 100% if it makes sense though)",
+      "revId": "c62a52d12a664554cd60f6afb78e3d4dc70a9126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
