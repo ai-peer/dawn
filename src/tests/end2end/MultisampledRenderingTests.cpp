@@ -965,9 +965,6 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
 // Test using one multisampled color attachment with resolve target can render correctly
 // with alphaToCoverageEnabled and a sample mask.
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSampleMask) {
-    // TODO(dawn:491): Remove this condition after enabling sampleMask usage in Metal.
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     constexpr bool kTestDepth = false;
     constexpr float kMSAACoverage = 0.50f;
     constexpr uint32_t kSampleMask = kFirstSampleMaskBit | kThirdSampleMaskBit;
@@ -1036,6 +1033,47 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndRast
 
         VerifyResolveTarget(kGreen, mResolveTexture, 0, 0, kMSAACoverage * alpha);
     }
+}
+
+TEST_P(MultisampledRenderingTest, Test) {
+    constexpr bool kTestDepth = false;
+    constexpr float kMSAACoverage = 0.50f;
+    constexpr uint32_t kSampleMask = 0xFFFFFFFF;
+    constexpr bool kAlphaToCoverageEnabled = true;
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+
+    const char* fs =
+        R"(#version 450
+        layout(location = 0) out vec4 fragColor;
+        layout (std140, set = 0, binding = 0) uniform uBuffer {
+            vec4 color;
+        };
+        void main() {
+            fragColor = color;
+            gl_SampleMask[0] = 0xFFFFFFFF;
+        })";
+
+    wgpu::RenderPipeline pipeline =
+        CreateRenderPipelineForTest(fs, 1, kTestDepth, kSampleMask, kAlphaToCoverageEnabled);
+
+    const wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.50f};
+
+    // Draw a green triangle.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {mMultisampledColorView}, {mResolveView}, wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+            kTestDepth);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    // The coverage should be 0.5 since alpha = 0.5.
+    RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage);
+    EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, 1, 0, 1, 1, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
