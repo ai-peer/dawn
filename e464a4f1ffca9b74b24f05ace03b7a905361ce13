@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "380ea529_47ce156f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:41:47Z",
+      "side": 1,
+      "message": "PTAL the difference between patchset 1 and 2",
+      "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
