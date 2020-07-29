@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e7bb890f_40bc6fae",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fac51fe_3597d413",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9be20bad_13900166",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "ecd5edca_864b3276",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9be20bad_13900166",
+      "range": {
+        "startLine": 343,
+        "startChar": 4,
+        "endLine": 343,
+        "endChar": 13
+      },
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "384d49fe_4d61e6d5",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -73,6 +115,24 @@
       "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfcd86bc_198bc33f",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384d49fe_4d61e6d5",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "089b5373_223bb81a",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf74b365_8da00c44",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee248f23_2c0e3a7a",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -110,6 +188,24 @@
     },
     {
       "key": {
+        "uuid": "6e85ee54_ca025326",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee248f23_2c0e3a7a",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7c41a3f_ce12342f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 4
@@ -124,6 +220,24 @@
       "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71ba2ed7_8a9bc061",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Mistake, fixed.",
+      "parentUuid": "a7c41a3f_ce12342f",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

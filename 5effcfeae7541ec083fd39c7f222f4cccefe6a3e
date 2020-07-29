@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "f7b1b87d_e18449f2",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "25408ea1_8165bc5a",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c259b281_f89ff4a9",
         "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -387,6 +405,24 @@
       "side": 1,
       "message": "I\u0027m not sure I understand why we need a new toggle, it only controls the \"UseD3D12SmallShaderVisibleHeapForTesting\". We just need to not use this toggle for tests that don\u0027t support it.",
       "parentUuid": "dd79c453_3a66f5bd",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b169db2_d67cd1dc",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T19:41:41Z",
+      "side": 1,
+      "message": "The pooling tests expect to know the exact number of switches (don\u0027t care about growth) but after this change, it is variable (depends on min/max size). To avoid breaking those tests, I am using the small heaps toggle (originally needed to avoid slow encoding) to fix the heap size (no growth) where the new tests cover both modes.",
+      "parentUuid": "e2c6d807_ada403db",
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
