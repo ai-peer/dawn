@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "be4c3c9e_b13c1bd8",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-29T00:39:38Z",
+      "side": 1,
+      "message": "Guess it also means making a copy of EnumClassBitMasks.h too because it\u0027s implemented in the wgpu:: namespace now",
+      "parentUuid": "15f1c280_02066ea9",
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "684dc4e3_9bc9304c",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 4
