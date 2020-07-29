@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "eacc3b52_4e990903",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-29T17:26:13Z",
+      "side": 1,
+      "message": "Yes. I ran end2end tests with some additional printf statements:\n\nFor Metal:\na single copy: QueueWriteTextureTests.VaryingTextureSize,\ncopying layer by layer: QueueWriteTextureTests.VaryingRowsPerImage\ncopying row by row: QueueWriteTextureTests.VaryingArrayBytesPerRow\n\nFor Vulkan:\na single copy: QueueWriteTextureTests.VaryingArrayWriteSize\ncopying layer by layer: QueueWriteTextureTests.VaryingRowsPerImage\ncopying row by row: QueueWriteTextureTests.VaryingArrayWriteSize\n\nAll of the above include depth \u003e 1.\nI can still add a new test to make sure this is the case.",
+      "parentUuid": "ef2826a2_0ddb7063",
+      "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d688b54_36d3abee",
         "filename": "src/dawn_native/Queue.h",
         "patchSetId": 2
@@ -56,6 +74,30 @@
       "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5936821_a10b0298",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-29T17:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d688b54_36d3abee",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
