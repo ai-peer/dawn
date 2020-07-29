@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "845caca0_3497c7b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T16:53:17Z",
+      "side": 1,
+      "message": "Suggest to re-word:\n\nPrevent infinite loops in DawnTest.\n\nWaitABit waits forever should a device loss occurs, which \nhappens when a bug is introduced. This can lock up the console \npreventing debugging when needed the most.\n\nBUG\u003ddawn:495",
+      "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "687330a4_2728018d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T16:53:17Z",
+      "side": 1,
+      "message": "Adding others.",
+      "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b343d41_22df18e3",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-07-29T16:53:17Z",
+      "side": 1,
+      "message": "If a device gets lost, it would return early and continue in a (possibly) corrupted state.\n\nWDYT about something like ASSERT_TRUE(WaitUntilTrue(bool) \u003d\u003d Success)?",
+      "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
