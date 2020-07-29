@@ -16,6 +16,114 @@
       "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fac51fe_3597d413",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "I still think that we should store the current descriptor count on the ShaderVisibleDescriptorAllocator because it helps avoid this division, and makes the initialization logic simpler (instead of using a nullptr ID3D12DescriptorHeap as a tag).",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be20bad_13900166",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "nit: std::vector is almost always better than std::list.",
+      "range": {
+        "startLine": 343,
+        "startChar": 4,
+        "endLine": 343,
+        "endChar": 13
+      },
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "384d49fe_4d61e6d5",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "This tests that we went in \"mode 2\" but it seems fragile because it relies on kFrameDepth having done enough exactly iterations that we are now in mode 2. Could we make the test more robust, for example by doing many iterations, then check it ramps up, and stays constant after a while?",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf74b365_8da00c44",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "Likewise it seems a bit hacky because the magic value of \"5\" switches gets us to the mode 2.",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee248f23_2c0e3a7a",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7c41a3f_ce12342f",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "One test uses list, one vector and one set. Why?",
+      "revId": "01f467683f048c846dba70dd14b7cc63e8246526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

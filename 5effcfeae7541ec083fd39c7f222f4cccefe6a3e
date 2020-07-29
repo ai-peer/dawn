@@ -322,6 +322,24 @@
     },
     {
       "key": {
+        "uuid": "14e5985f_3a51da39",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "Ack, sorry we had forgoetten it\u0027s a ring buffer and not a linear allocator.",
+      "parentUuid": "5b8fade0_6af623f1",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29cdbfb8_8e5a0c0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 3
@@ -354,6 +372,24 @@
       "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2c6d807_ada403db",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T09:38:32Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why we need a new toggle, it only controls the \"UseD3D12SmallShaderVisibleHeapForTesting\". We just need to not use this toggle for tests that don\u0027t support it.",
+      "parentUuid": "dd79c453_3a66f5bd",
+      "revId": "5effcfeae7541ec083fd39c7f222f4cccefe6a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
