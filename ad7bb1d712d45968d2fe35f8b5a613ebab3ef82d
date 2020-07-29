@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6645ede_9ff19f85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-29T08:53:47Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll CQ patchset 3.",
+      "revId": "ad7bb1d712d45968d2fe35f8b5a613ebab3ef82d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
