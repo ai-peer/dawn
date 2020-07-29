@@ -16,6 +16,46 @@
       "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef2826a2_0ddb7063",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-29T16:52:25Z",
+      "side": 1,
+      "message": "LGTM; do we have tests that would hit each of these copy code paths?",
+      "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d688b54_36d3abee",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-29T16:52:25Z",
+      "side": 1,
+      "message": "unit: functions should start with a captial letter.",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "cc2b1a1b72d9b8ba2b135aa4b0754365c7842de0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
