@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "94577c42_16b01eca",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T00:36:45Z",
+      "side": 1,
+      "message": "I was able to reuse wgpu\u0027s and re-export in dawn_native::",
+      "parentUuid": "9beca35c_911690f4",
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "684dc4e3_9bc9304c",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 4
@@ -145,6 +163,30 @@
       "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26508bc9_7011f2c0",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T00:36:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "684dc4e3_9bc9304c",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "12ed76c8ff7ef072f9c87d4bb0a8eb1dfd6208d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
