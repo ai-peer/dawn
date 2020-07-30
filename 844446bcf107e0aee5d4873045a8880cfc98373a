@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ae7c5083_2d136f65",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T00:37:45Z",
+      "side": 1,
+      "message": "the difference is that T2B allows depth32float. B2T disallows and depth texture",
+      "parentUuid": "4c08627c_e334e35d",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8afb9cca_80c2ee09",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 6
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "5dcd02d3_b3349042",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T00:37:45Z",
+      "side": 1,
+      "message": "Can I address this in a follow-up? Changing this makes the diff hard to work with.",
+      "parentUuid": "90136821_6c0e3358",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47556506_268b1de2",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 6
@@ -101,6 +137,24 @@
       "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57e87394_682e8512",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T00:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47556506_268b1de2",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
