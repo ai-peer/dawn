@@ -67,6 +67,24 @@
       "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd3e4f6b_7e29157b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-30T08:50:13Z",
+      "side": 1,
+      "message": "On Metal when we specify a negative clear color for an uint color attachment, the result of the color seems to be undefined (something like 0xFF, 0xFE, etc), while on D3D12 at least on the devices in my side (2080Ti, UHD630) the result of the color is always 0.\n\nSo I need to do this to make the behavior consistent among all the backends.",
+      "parentUuid": "bd4a2de1_9e78ef61",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
