@@ -85,6 +85,24 @@
       "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6989390f_8a9870fc",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T09:08:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bd3e4f6b_7e29157b",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
