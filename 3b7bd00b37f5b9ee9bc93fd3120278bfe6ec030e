@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a42c272f_4630bcbd",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T16:24:10Z",
+      "side": 1,
+      "message": "Did we try using a negative value with validation layers on? for depth/stencil I remember seeing errors for outside 0-1 for depth.",
+      "parentUuid": "bc49c2ac_94360402",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd4a2de1_9e78ef61",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
