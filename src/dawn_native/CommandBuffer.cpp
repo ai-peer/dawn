@@ -175,4 +175,20 @@ namespace dawn_native {
 
         return true;
     }
+
+    std::array<int32_t, 4> ConvertToSignedIntegerColor(dawn_native::Color color) {
+        const std::array<int32_t, 4> outputValue = {
+            static_cast<int32_t>(color.r), static_cast<int32_t>(color.g),
+            static_cast<int32_t>(color.b), static_cast<int32_t>(color.a)};
+        return outputValue;
+    }
+
+    std::array<uint32_t, 4> ConvertToUnsignedIntegerColor(dawn_native::Color color) {
+        const std::array<uint32_t, 4> outputValue = {
+            color.r > 0 ? static_cast<uint32_t>(color.r) : 0,
+            color.g > 0 ? static_cast<uint32_t>(color.g) : 0,
+            color.b > 0 ? static_cast<uint32_t>(color.b) : 0,
+            color.a > 0 ? static_cast<uint32_t>(color.a) : 0};
+        return outputValue;
+    }
 }  // namespace dawn_native
