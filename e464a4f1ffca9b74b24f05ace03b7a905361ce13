@@ -68,6 +68,24 @@
       "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d0de41f_ccd60957",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-30T14:06:43Z",
+      "side": 1,
+      "message": "Oh cool! That\u0027s a nice feature.",
+      "parentUuid": "daa45483_82aa7a24",
+      "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
