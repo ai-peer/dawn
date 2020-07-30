@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "41598cbd_ba5e92eb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T15:57:39Z",
+      "side": 1,
+      "message": "I didn\u0027t do this now because I think it\u0027s easier to understand each independently, and the structure here matches more what will likely be in the spec.",
+      "parentUuid": "0812b6bd_f121abf8",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8afb9cca_80c2ee09",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 6
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "0cc7eb70_ff0568d5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T15:57:39Z",
+      "side": 1,
+      "message": "fyi: one of Kai\u0027s draft PRs has some details on this, but technically we\u0027re still soft blocked on confirmation from Apple that the stencil aspect is packed.",
+      "parentUuid": "8afb9cca_80c2ee09",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a6d7ff2_561c3ba8",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 6
@@ -100,6 +136,24 @@
       "writtenOn": "2020-07-27T09:57:48Z",
       "side": 1,
       "message": "ditto it should be added to the spec.",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a812f38_2f6232b9",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T15:57:39Z",
+      "side": 1,
+      "message": "fyi: one of Kai\u0027s draft PRs has some details on this, but technically we\u0027re still soft blocked on confirmation from Apple that the stencil aspect is packed.",
+      "parentUuid": "9a6d7ff2_561c3ba8",
       "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
