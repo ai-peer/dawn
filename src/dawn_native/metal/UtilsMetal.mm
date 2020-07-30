@@ -165,14 +165,30 @@ namespace dawn_native { namespace metal {
     }
 
     MTLBlitOption ComputeMTLBlitOption(const Format& format, wgpu::TextureAspect aspect) {
+        switch (aspect) {
+            case wgpu::TextureAspect::All:
+                return ComputeMTLBlitOption(format, format.aspects);
+            case wgpu::TextureAspect::DepthOnly:
+                return ComputeMTLBlitOption(format, Aspect::Depth);
+            case wgpu::TextureAspect::StencilOnly:
+                return ComputeMTLBlitOption(format, Aspect::Stencil);
+            default:
+                UNREACHABLE();
+        }
+    }
+
+    MTLBlitOption ComputeMTLBlitOption(const Format& format, Aspect aspect) {
+        ASSERT(HasOneBit(aspect));
+        ASSERT(format.aspects & aspect);
+
         constexpr Aspect kDepthStencil = Aspect::Depth | Aspect::Stencil;
         if ((format.aspects & kDepthStencil) == kDepthStencil) {
             // We only provide a blit option if the format has both depth and stencil.
             // It is invalid to provide a blit option otherwise.
             switch (aspect) {
-                case wgpu::TextureAspect::DepthOnly:
+                case Aspect::Depth:
                     return MTLBlitOptionDepthFromDepthStencil;
-                case wgpu::TextureAspect::StencilOnly:
+                case Aspect::Stencil:
                     return MTLBlitOptionStencilFromDepthStencil;
                 default:
                     UNREACHABLE();
