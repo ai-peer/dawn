@@ -16,6 +16,46 @@
       "revId": "527f7615a99bd3a7bdaa4ca172779132c66b85a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cca5af1_7cb845a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T18:30:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "527f7615a99bd3a7bdaa4ca172779132c66b85a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33cd2b96_29ae7f79",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T18:30:00Z",
+      "side": 1,
+      "message": "nit: update the error message",
+      "range": {
+        "startLine": 336,
+        "startChar": 92,
+        "endLine": 336,
+        "endChar": 96
+      },
+      "revId": "527f7615a99bd3a7bdaa4ca172779132c66b85a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
