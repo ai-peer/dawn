@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff3a48a9_b9328c2f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:44:28Z",
+      "side": 0,
+      "message": "Thanks for fixing this old TODO!",
+      "revId": "03cf7c3eaeaf79325e23937aa7a3069e148fe2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

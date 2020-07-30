@@ -16,6 +16,57 @@
       "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c29a034_f48c691c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:44:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc49c2ac_94360402",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:44:28Z",
+      "side": 1,
+      "message": "Maybe this should be a validation error, do you mind opening an issue in the WebGPU group about what should happen if the clear color value is outside the allowed bounds? (same question for depth and stencil)",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd4a2de1_9e78ef61",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:44:28Z",
+      "side": 1,
+      "message": "Why is this needed? Metal takes a double in the ClearColor so it should be ok to just forward what we have at the WebGPU API level no?",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
