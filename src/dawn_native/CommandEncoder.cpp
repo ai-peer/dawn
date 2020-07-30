@@ -383,12 +383,6 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Depth clear value cannot be NaN");
             }
 
-            // This validates that the depth storeOp and stencil storeOps are the same
-            if (depthStencilAttachment->depthStoreOp != depthStencilAttachment->stencilStoreOp) {
-                return DAWN_VALIDATION_ERROR(
-                    "The depth storeOp and stencil storeOp are not the same");
-            }
-
             // *sampleCount == 0 must only happen when there is no color attachment. In that case we
             // do not need to validate the sample count of the depth stencil attachment.
             const uint32_t depthStencilSampleCount = attachment->GetTexture()->GetSampleCount();
@@ -723,7 +717,8 @@ namespace dawn_native {
             copy->destination.texture = destination->texture;
             copy->destination.origin = destination->origin;
             copy->destination.mipLevel = destination->mipLevel;
-            copy->destination.aspect = destination->aspect;
+            copy->destination.aspect =
+                ConvertAspect(destination->texture->GetFormat(), destination->aspect);
             copy->copySize = *copySize;
 
             return {};
@@ -779,7 +774,7 @@ namespace dawn_native {
             copy->source.texture = source->texture;
             copy->source.origin = source->origin;
             copy->source.mipLevel = source->mipLevel;
-            copy->source.aspect = source->aspect;
+            copy->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
             copy->destination.buffer = destination->buffer;
             copy->destination.offset = destination->layout.offset;
             copy->destination.bytesPerRow = destination->layout.bytesPerRow;
@@ -828,11 +823,12 @@ namespace dawn_native {
             copy->source.texture = source->texture;
             copy->source.origin = source->origin;
             copy->source.mipLevel = source->mipLevel;
-            copy->source.aspect = source->aspect;
+            copy->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
             copy->destination.texture = destination->texture;
             copy->destination.origin = destination->origin;
             copy->destination.mipLevel = destination->mipLevel;
-            copy->destination.aspect = destination->aspect;
+            copy->destination.aspect =
+                ConvertAspect(destination->texture->GetFormat(), destination->aspect);
             copy->copySize = *copySize;
 
             return {};
