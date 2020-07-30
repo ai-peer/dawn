@@ -50,6 +50,24 @@
       "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daa45483_82aa7a24",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:18:12Z",
+      "side": 1,
+      "message": "It is valid to have mappedAtCreation but no Map usage. The WebGPU spec says:\n\n\u003e Note: it is valid to set mappedAtCreation to true without MAP_READ or MAP_WRITE in usage. This can be used to set the buffer’s initial data.",
+      "parentUuid": "391430a7_0d559925",
+      "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
