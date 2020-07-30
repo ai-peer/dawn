@@ -17,6 +17,7 @@
 #include "common/Constants.h"
 #include "common/Math.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
@@ -707,13 +708,15 @@ namespace dawn_native { namespace d3d12 {
 
             return;
         }
-        for (uint32_t arrayLayer = 0; arrayLayer < range.layerCount; ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < range.levelCount; ++mipLevel) {
-                uint32_t index = GetSubresourceIndex(range.baseMipLevel + mipLevel,
-                                                     range.baseArrayLayer + arrayLayer);
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            for (uint32_t arrayLayer = 0; arrayLayer < range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = 0; mipLevel < range.levelCount; ++mipLevel) {
+                    uint32_t index = GetSubresourceIndex(range.baseMipLevel + mipLevel,
+                                                         range.baseArrayLayer + arrayLayer, aspect);
 
-                TransitionSingleOrAllSubresources(barriers, index, newState, pendingCommandSerial,
-                                                  false);
+                    TransitionSingleOrAllSubresources(barriers, index, newState,
+                                                      pendingCommandSerial, false);
+                }
             }
         }
         mSameLastUsagesAcrossSubresources = areAllSubresourcesCovered;
@@ -748,20 +751,22 @@ namespace dawn_native { namespace d3d12 {
             return;
         }
 
-        for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
-            for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
-                uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer);
+        for (Aspect aspect : IterateEnumMask(GetFormat().aspects)) {
+            for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
+                for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
+                    uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
 
-                // Skip if this subresource is not used during the current pass
-                if (textureUsages.subresourceUsages[index] == wgpu::TextureUsage::None) {
-                    continue;
+                    // Skip if this subresource is not used during the current pass
+                    if (textureUsages.subresourceUsages[index] == wgpu::TextureUsage::None) {
+                        continue;
+                    }
+
+                    D3D12_RESOURCE_STATES newState =
+                        D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
+
+                    TransitionSingleOrAllSubresources(barriers, index, newState,
+                                                      pendingCommandSerial, false);
                 }
-
-                D3D12_RESOURCE_STATES newState =
-                    D3D12TextureUsage(textureUsages.subresourceUsages[index], GetFormat());
-
-                TransitionSingleOrAllSubresources(barriers, index, newState, pendingCommandSerial,
-                                                  false);
             }
         }
         mSameLastUsagesAcrossSubresources = textureUsages.sameUsagesAcrossSubresources;
@@ -844,10 +849,30 @@ namespace dawn_native { namespace d3d12 {
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
-                            // Skip lazy clears if already initialized.
+                        // Iterate the aspects individually to determine which clear flags to use.
+                        D3D12_CLEAR_FLAGS clearFlags = {};
+                        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+                            if (clearValue == TextureBase::ClearValue::Zero &&
+                                IsSubresourceContentInitialized(
+                                    SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
+                                // Skip lazy clears if already initialized.
+                                continue;
+                            }
+
+                            switch (aspect) {
+                                case Aspect::Depth:
+                                    clearFlags |= D3D12_CLEAR_FLAG_DEPTH;
+                                    break;
+                                case Aspect::Stencil:
+                                    clearFlags |= D3D12_CLEAR_FLAG_STENCIL;
+                                    break;
+                                default:
+                                    UNREACHABLE();
+                                    break;
+                            }
+                        }
+
+                        if (clearFlags == 0) {
                             continue;
                         }
 
@@ -860,13 +885,6 @@ namespace dawn_native { namespace d3d12 {
                         device->GetD3D12Device()->CreateDepthStencilView(GetD3D12Resource(),
                                                                          &dsvDesc, baseDescriptor);
 
-                        if (GetFormat().HasDepth()) {
-                            clearFlags |= D3D12_CLEAR_FLAG_DEPTH;
-                        }
-                        if (GetFormat().HasStencil()) {
-                            clearFlags |= D3D12_CLEAR_FLAG_STENCIL;
-                        }
-
                         commandList->ClearDepthStencilView(baseDescriptor, clearFlags, fClearColor,
                                                            clearColor, 0, nullptr);
                     }
@@ -878,13 +896,14 @@ namespace dawn_native { namespace d3d12 {
                 const float clearColorRGBA[4] = {fClearColor, fClearColor, fClearColor,
                                                  fClearColor};
 
+                ASSERT(range.aspects == Aspect::Color);
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleSubresource(level, layer))) {
+                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -920,6 +939,7 @@ namespace dawn_native { namespace d3d12 {
 
             TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
 
+            ASSERT(range.aspects == Aspect::Color);
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
                 // compute d3d12 texture copy locations for texture and buffer
@@ -934,13 +954,13 @@ namespace dawn_native { namespace d3d12 {
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                     if (clearValue == TextureBase::ClearValue::Zero &&
                         IsSubresourceContentInitialized(
-                            SubresourceRange::SingleSubresource(level, layer))) {
+                            SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
 
                     D3D12_TEXTURE_COPY_LOCATION textureLocation =
-                        ComputeTextureCopyLocationForTexture(this, level, layer);
+                        ComputeTextureCopyLocationForTexture(this, level, layer, Aspect::Color);
                     for (uint32_t i = 0; i < copySplit.count; ++i) {
                         Texture2DCopySplit::CopyInfo& info = copySplit.copies[i];
 
