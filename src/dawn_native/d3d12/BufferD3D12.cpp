@@ -63,6 +63,12 @@ namespace dawn_native { namespace d3d12 {
             if (usage & wgpu::BufferUsage::Indirect) {
                 resourceState |= D3D12_RESOURCE_STATE_INDIRECT_ARGUMENT;
             }
+            if (usage & wgpu::BufferUsage::QueryResolve) {
+                // The buffer of this usafe is used to write the query results after the compute
+                // shader post-processing.
+                resourceState |=
+                    (D3D12_RESOURCE_STATE_UNORDERED_ACCESS | D3D12_RESOURCE_STATE_COPY_DEST);
+            }
 
             return resourceState;
         }

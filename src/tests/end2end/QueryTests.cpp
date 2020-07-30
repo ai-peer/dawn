@@ -19,7 +19,26 @@
 
 #include "tests/DawnTest.h"
 
-class OcclusionQueryTests : public DawnTest {};
+#include "utils/WGPUHelpers.h"
+
+class QueryTests : public DawnTest {
+  protected:
+    wgpu::Buffer CreateResolveBuffer(uint64_t size) {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = size;
+        descriptor.usage = wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopySrc |
+                           wgpu::BufferUsage::CopyDst;
+        wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+        // Initialize the buffer values to 0.
+        std::vector<uint64_t> myData = {0, 0};
+        device.GetDefaultQueue().WriteBuffer(buffer, 0, myData.data(), size);
+
+        return buffer;
+    }
+};
+
+class OcclusionQueryTests : public QueryTests {};
 
 // Test creating query set with the type of Occlusion
 TEST_P(OcclusionQueryTests, QuerySetCreation) {
@@ -40,7 +59,7 @@ TEST_P(OcclusionQueryTests, QuerySetDestroy) {
 
 DAWN_INSTANTIATE_TEST(OcclusionQueryTests, D3D12Backend());
 
-class PipelineStatisticsQueryTests : public DawnTest {
+class PipelineStatisticsQueryTests : public QueryTests {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
@@ -74,7 +93,34 @@ TEST_P(PipelineStatisticsQueryTests, QuerySetCreation) {
 
 DAWN_INSTANTIATE_TEST(PipelineStatisticsQueryTests, D3D12Backend());
 
-class TimestampQueryTests : public DawnTest {
+class TimestampExpectation : public detail::Expectation {
+  public:
+    ~TimestampExpectation() override = default;
+
+    TimestampExpectation(uint64_t value) {
+        mExpected = value;
+    }
+
+    // Check the timestamp results are greater than the expected value.
+    testing::AssertionResult Check(const void* data, size_t size) override {
+        ASSERT(size % sizeof(uint64_t) == 0);
+        const uint64_t* timestamps = static_cast<const uint64_t*>(data);
+        for (uint32_t i = 0; i < size / sizeof(uint64_t); i++) {
+            if (timestamps[i] <= mExpected) {
+                return testing::AssertionFailure()
+                       << "Expected data[" << i << "] to be greater than " << mExpected
+                       << ", actual " << timestamps[i] << std::endl;
+            }
+        }
+
+        return testing::AssertionSuccess();
+    }
+
+  private:
+    uint64_t mExpected;
+};
+
+class TimestampQueryTests : public QueryTests {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
@@ -90,14 +136,111 @@ class TimestampQueryTests : public DawnTest {
         }
         return requiredExtensions;
     }
+
+    wgpu::QuerySet CreateQuerySetForTimestamp(uint32_t queryCount) {
+        wgpu::QuerySetDescriptor descriptor;
+        descriptor.count = queryCount;
+        descriptor.type = wgpu::QueryType::Timestamp;
+        return device.CreateQuerySet(&descriptor);
+    }
 };
 
 // Test creating query set with the type of Timestamp
 TEST_P(TimestampQueryTests, QuerySetCreation) {
-    wgpu::QuerySetDescriptor descriptor;
-    descriptor.count = 1;
-    descriptor.type = wgpu::QueryType::Timestamp;
-    device.CreateQuerySet(&descriptor);
+    CreateQuerySetForTimestamp(1);
+}
+
+// Test calling timestamp query from command encoder
+TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
+    constexpr uint32_t kQueryCount = 2;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.WriteTimestamp(querySet, 0);
+    encoder.WriteTimestamp(querySet, 1);
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U64_RANGE_GT(0, destination, 0, kQueryCount, new TimestampExpectation);
+}
+
+// Test calling timestamp query from render pass encoder
+TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
+    constexpr uint32_t kQueryCount = 2;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.WriteTimestamp(querySet, 0);
+    pass.WriteTimestamp(querySet, 1);
+    pass.EndPass();
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U64_RANGE_GT(0, destination, 0, kQueryCount, new TimestampExpectation);
+}
+
+// Test calling timestamp query from compute pass encoder
+TEST_P(TimestampQueryTests, TimestampOnComputePass) {
+    constexpr uint32_t kQueryCount = 2;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    pass.WriteTimestamp(querySet, 0);
+    pass.WriteTimestamp(querySet, 1);
+    pass.EndPass();
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U64_RANGE_GT(0, destination, 0, kQueryCount, new TimestampExpectation);
+}
+
+// Test resolving timestamp query to one slot in the buffer
+TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
+    constexpr uint32_t kQueryCount = 2;
+    std::vector<uint64_t> zero = {0};
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+    // Resolve the query result to first slot in the buffer, other slots should not be written
+    {
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+        encoder.WriteTimestamp(querySet, 1);
+        encoder.ResolveQuerySet(querySet, 0, 1, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER_U64_RANGE_GT(0, destination, 0, 1, new TimestampExpectation);
+        EXPECT_BUFFER_U64_RANGE_EQ(zero.data(), destination, sizeof(uint64_t), 1);
+    }
+
+    // Resolve the query result to the buffer with offset, the slots before the offset
+    // should not be written
+    {
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+        encoder.WriteTimestamp(querySet, 1);
+        encoder.ResolveQuerySet(querySet, 0, 1, destination, sizeof(uint64_t));
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER_U64_RANGE_EQ(zero.data(), destination, 0, 1);
+        EXPECT_BUFFER_U64_RANGE_GT(0, destination, sizeof(uint64_t), 1, new TimestampExpectation);
+    }
 }
 
 DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());

@@ -46,6 +46,14 @@
     AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t) * (count), \
                          new ::detail::ExpectEq<uint32_t>(expected, count))
 
+#define EXPECT_BUFFER_U64_RANGE_EQ(expected, buffer, offset, count)                      \
+    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint64_t) * (count), \
+                         new ::detail::ExpectEq<uint64_t>(expected, count))
+
+#define EXPECT_BUFFER_U64_RANGE_GT(value, buffer, offset, count, expectation)            \
+    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint64_t) * (count), \
+                         expectation(value))
+
 #define EXPECT_BUFFER_FLOAT_EQ(expected, buffer, offset)                       \
     AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t), \
                          new ::detail::ExpectEq<float>(expected))
@@ -436,6 +444,7 @@ namespace detail {
     extern template class ExpectEq<uint8_t>;
     extern template class ExpectEq<int16_t>;
     extern template class ExpectEq<uint32_t>;
+    extern template class ExpectEq<uint64_t>;
     extern template class ExpectEq<RGBA8>;
     extern template class ExpectEq<float>;
 }  // namespace detail
