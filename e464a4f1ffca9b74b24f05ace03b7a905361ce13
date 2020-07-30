@@ -33,6 +33,23 @@
       "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "391430a7_0d559925",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-07-30T13:16:52Z",
+      "side": 1,
+      "message": "Out of curiosity, when would it happen that mappedAtCreation was set but usage flags didn\u0027t have either MapRead or MapWrite? Isn\u0027t that a user/validation error?",
+      "revId": "e464a4f1ffca9b74b24f05ace03b7a905361ce13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
