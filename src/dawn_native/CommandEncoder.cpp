@@ -383,12 +383,6 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Depth clear value cannot be NaN");
             }
 
-            // This validates that the depth storeOp and stencil storeOps are the same
-            if (depthStencilAttachment->depthStoreOp != depthStencilAttachment->stencilStoreOp) {
-                return DAWN_VALIDATION_ERROR(
-                    "The depth storeOp and stencil storeOp are not the same");
-            }
-
             // *sampleCount == 0 must only happen when there is no color attachment. In that case we
             // do not need to validate the sample count of the depth stencil attachment.
             const uint32_t depthStencilSampleCount = attachment->GetTexture()->GetSampleCount();

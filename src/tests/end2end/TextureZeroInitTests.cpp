@@ -574,6 +574,142 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(srcTexture.Get(), 0, 1, 0, 1));
 }
 
+// Test that clear state is tracked independently for depth/stencil textures.
+TEST_P(TextureZeroInitTest, IndependentRenderPassDepthStencilClear) {
+    wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
+        1, 1, wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc,
+        kDepthStencilFormat);
+    wgpu::Texture depthStencilTexture = device.CreateTexture(&depthStencilDescriptor);
+
+    // Uninitialize only depth
+    {
+        // Clear the stencil to 2 and discard the depth
+        {
+            utils::ComboRenderPassDescriptor renderPassDescriptor({},
+                                                                  depthStencilTexture.CreateView());
+            renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Clear;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.clearStencil = 2;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
+            pass.EndPass();
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
+        }
+
+        // "all" subresources are not initialized; Depth is not initialized
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_All));
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_DepthOnly));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_StencilOnly));
+
+        // Now load both depth and stencil. Depth should be cleared and stencil should stay the same
+        // at 2.
+        {
+            wgpu::TextureDescriptor colorDescriptor =
+                CreateTextureDescriptor(1, 1,
+                                        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                            wgpu::TextureUsage::OutputAttachment,
+                                        kColorFormat);
+            wgpu::Texture colorTexture = device.CreateTexture(&colorDescriptor);
+
+            utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
+                                                                  depthStencilTexture.CreateView());
+            renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
+            pass.SetPipeline(CreatePipelineForTest());
+            pass.SetStencilReference(2);
+            pass.Draw(6);
+            pass.EndPass();
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            // No lazy clear because depth will be cleared with a loadOp
+            EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
+
+            // Expect the texture to be red because the depth and stencil tests passed. Depth was 0
+            // and stencil was 2.
+            std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
+            EXPECT_TEXTURE_RGBA8_EQ(expected.data(), colorTexture, 0, 0, kSize, kSize, 0, 0);
+        }
+
+        // Everything is initialized now
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_All));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_DepthOnly));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_StencilOnly));
+    }
+
+    // Uninitialize only stencil
+    {
+        // Clear the depth to 0.7 and discard the stencil.
+        {
+            utils::ComboRenderPassDescriptor renderPassDescriptor({},
+                                                                  depthStencilTexture.CreateView());
+            renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth = 0.7;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Clear;
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
+            pass.EndPass();
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
+        }
+
+        // "all" subresources are not initialized; Stencil is not initialized
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_All));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_DepthOnly));
+        EXPECT_EQ(false, dawn_native::IsTextureSubresourceInitialized(
+                             depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_StencilOnly));
+
+        // Now load both depth and stencil. Stencil should be cleared and depth should stay the same
+        // at 0.7.
+        {
+            wgpu::TextureDescriptor colorDescriptor =
+                CreateTextureDescriptor(1, 1,
+                                        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                            wgpu::TextureUsage::OutputAttachment,
+                                        kColorFormat);
+            wgpu::Texture colorTexture = device.CreateTexture(&colorDescriptor);
+
+            utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
+                                                                  depthStencilTexture.CreateView());
+            renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+            renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
+            pass.SetPipeline(CreatePipelineForTest());
+            pass.Draw(6);
+            pass.EndPass();
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            // No lazy clear because stencil will clear using a loadOp.
+            EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
+
+            // Expect the texture to be black because the depth test failed. Depth was not 0.
+            std::vector<RGBA8> expected(kSize * kSize, {0, 0, 0, 0});
+            EXPECT_TEXTURE_RGBA8_EQ(expected.data(), colorTexture, 0, 0, kSize, kSize, 0, 0);
+        }
+
+        // Everything is initialized now
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_All));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_DepthOnly));
+        EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(
+                            depthStencilTexture.Get(), 0, 1, 0, 1, WGPUTextureAspect_StencilOnly));
+    }
+}
+
 // This tests the color attachments clear to 0s
 TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
