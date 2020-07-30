@@ -32,40 +32,54 @@ namespace dawn_native { namespace d3d12 {
 
     ResultOrError<std::unique_ptr<ResourceHeapBase>> HeapAllocator::AllocateResourceHeap(
         uint64_t size) {
-        D3D12_HEAP_DESC heapDesc;
-        heapDesc.SizeInBytes = size;
-        heapDesc.Properties.Type = mHeapType;
-        heapDesc.Properties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
-        heapDesc.Properties.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
-        heapDesc.Properties.CreationNodeMask = 0;
-        heapDesc.Properties.VisibleNodeMask = 0;
-        // It is preferred to use a size that is a multiple of the alignment.
-        // However, MSAA heaps are always aligned to 4MB instead of 64KB. This means
-        // if the heap size is too small, the VMM would fragment.
-        // TODO(bryan.bernhart@intel.com): Consider having MSAA vs non-MSAA heaps.
-        heapDesc.Alignment = D3D12_DEFAULT_MSAA_RESOURCE_PLACEMENT_ALIGNMENT;
-        heapDesc.Flags = mHeapFlags;
+        std::unique_ptr<ResourceHeapBase> heapBase;
+        if (!mPool.empty() && mPool.front().heapSerial <= mDevice->GetCompletedCommandSerial()) {
+            heapBase = std::move(mPool.front().heap);
+            ASSERT(static_cast<Heap*>(heapBase.get())->GetSize() == size);
+            mPool.pop_front();
+        }
 
-        // CreateHeap will implicitly make the created heap resident. We must ensure enough free
-        // memory exists before allocating to avoid an out-of-memory error when overcommitted.
-        DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(size, mMemorySegment));
+        if (heapBase == nullptr) {
+            D3D12_HEAP_DESC heapDesc;
+            heapDesc.SizeInBytes = size;
+            heapDesc.Properties.Type = mHeapType;
+            heapDesc.Properties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
+            heapDesc.Properties.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
+            heapDesc.Properties.CreationNodeMask = 0;
+            heapDesc.Properties.VisibleNodeMask = 0;
+            // It is preferred to use a size that is a multiple of the alignment.
+            // However, MSAA heaps are always aligned to 4MB instead of 64KB. This means
+            // if the heap size is too small, the VMM would fragment.
+            // TODO(bryan.bernhart@intel.com): Consider having MSAA vs non-MSAA heaps.
+            heapDesc.Alignment = D3D12_DEFAULT_MSAA_RESOURCE_PLACEMENT_ALIGNMENT;
+            heapDesc.Flags = mHeapFlags;
 
-        ComPtr<ID3D12Heap> d3d12Heap;
-        DAWN_TRY(CheckOutOfMemoryHRESULT(
-            mDevice->GetD3D12Device()->CreateHeap(&heapDesc, IID_PPV_ARGS(&d3d12Heap)),
-            "ID3D12Device::CreateHeap"));
+            // CreateHeap will implicitly make the created heap resident. We must ensure enough free
+            // memory exists before allocating to avoid an out-of-memory error when overcommitted.
+            DAWN_TRY(mDevice->GetResidencyManager()->EnsureCanAllocate(size, mMemorySegment));
 
-        std::unique_ptr<ResourceHeapBase> heapBase =
-            std::make_unique<Heap>(std::move(d3d12Heap), mMemorySegment, size);
+            ComPtr<ID3D12Heap> d3d12Heap;
+            DAWN_TRY(CheckOutOfMemoryHRESULT(
+                mDevice->GetD3D12Device()->CreateHeap(&heapDesc, IID_PPV_ARGS(&d3d12Heap)),
+                "ID3D12Device::CreateHeap"));
 
-        // Calling CreateHeap implicitly calls MakeResident on the new heap. We must track this to
-        // avoid calling MakeResident a second time.
-        mDevice->GetResidencyManager()->TrackResidentAllocation(ToBackend(heapBase.get()));
+            heapBase = std::make_unique<Heap>(std::move(d3d12Heap), mMemorySegment, size);
+
+            // Calling CreateHeap implicitly calls MakeResident on the new heap. We must track this
+            // to avoid calling MakeResident a second time.
+            mDevice->GetResidencyManager()->TrackResidentAllocation(ToBackend(heapBase.get()));
+        }
+
         return std::move(heapBase);
     }
 
     void HeapAllocator::DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> heap) {
-        mDevice->ReferenceUntilUnused(static_cast<Heap*>(heap.get())->GetD3D12Heap());
+        // TODO(dawn:256): Consider periodically trimming to avoid OOM.
+        mPool.push_back({mDevice->GetPendingCommandSerial(), std::move(heap)});
+    }
+
+    uint64_t HeapAllocator::GetPoolSize() const {
+        return mPool.size();
     }
 
 }}  // namespace dawn_native::d3d12

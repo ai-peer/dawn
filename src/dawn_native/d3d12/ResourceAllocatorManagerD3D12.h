@@ -67,6 +67,8 @@ namespace dawn_native { namespace d3d12 {
 
         void Tick(Serial lastCompletedSerial);
 
+        uint64_t GetResourceHeapPoolSizeForTesting() const;
+
       private:
         void FreeMemory(ResourceHeapAllocation& allocation);
 

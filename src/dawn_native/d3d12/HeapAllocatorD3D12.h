@@ -15,9 +15,12 @@
 #ifndef DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 #define DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 
+#include "common/SerialQueue.h"
 #include "dawn_native/D3D12Backend.h"
 #include "dawn_native/ResourceHeapAllocator.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
+
+#include <list>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -36,7 +39,16 @@ namespace dawn_native { namespace d3d12 {
             uint64_t size) override;
         void DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> allocation) override;
 
+        uint64_t GetPoolSize() const;
+
       private:
+        struct SerialHeap {
+            Serial heapSerial = 0;
+            std::unique_ptr<ResourceHeapBase> heap;
+        };
+
+        std::list<SerialHeap> mPool;
+
         Device* mDevice;
         D3D12_HEAP_TYPE mHeapType;
         D3D12_HEAP_FLAGS mHeapFlags;

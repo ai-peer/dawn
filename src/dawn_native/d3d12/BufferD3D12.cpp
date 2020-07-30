@@ -428,4 +428,9 @@ namespace dawn_native { namespace d3d12 {
 
         return {};
     }
+
+    ResourceHeapAllocation Buffer::GetAllocationForTesting() const {
+        return mResourceAllocation;
+    }
+
 }}  // namespace dawn_native::d3d12
