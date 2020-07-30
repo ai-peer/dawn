@@ -16,6 +16,46 @@
       "revId": "c68a7839307aa6ebc18f68aff3fcd33f2ebf369b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b1ed097_f8187689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T16:20:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c68a7839307aa6ebc18f68aff3fcd33f2ebf369b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63425811_b332fa53",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-30T16:20:07Z",
+      "side": 1,
+      "message": "comment is wrong: there\u0027s no Tick() in this test",
+      "range": {
+        "startLine": 370,
+        "startChar": 23,
+        "endLine": 370,
+        "endChar": 32
+      },
+      "revId": "c68a7839307aa6ebc18f68aff3fcd33f2ebf369b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
