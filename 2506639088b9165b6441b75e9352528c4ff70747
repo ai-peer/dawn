@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc5c3ba0_64125b21",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "nit: rephrase to: D3D12_RESOURCE_STATE_COPY_DEST is required by ResolveQuery but we also add D3D12_RESOURCE_STATE_UNORDERED_ACCESS because some queries will be post-processed by a compute shader and written to this buffer via a UAV.",
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25eff3e0_b88b00a6",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf0740e2_420a8f88",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "This should instead be at [1] and do:\n\n #define EXPECT_BUFFER(buffer, offset, size, expectation)            \\\n    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, size, expectation)\n\nThen all other buffer expectations should be rephrased in term of EXPECT_BUFFER:\n\n #define EXPECT_BUFFER_U16_RANGE_EQ(expected, buffer, offset, count)                      \\\n    EXPECT_BUFFER(buffer, offset, sizeof(uint16_t) * count, new ::detail::ExpectEq\u003cuint16_t\u003e(expected, count))\n\nand the code at [2] (and other similar line) should be\n\n EXPECT_BUFFER(0, kQueryCount * sizeof(uint64_t), new TimestampExpectation)",
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6843188_32d2d5c3",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "No need for this value since mExpected is always 0.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f2b959e_02896fe7",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "nit: size_t",
+      "range": {
+        "startLine": 108,
+        "startChar": 13,
+        "endLine": 108,
+        "endChar": 21
+      },
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6b1bbd4_bbd15322",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d 0",
+      "range": {
+        "startLine": 109,
+        "startChar": 29,
+        "endLine": 109,
+        "endChar": 42
+      },
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "028aa404_273e25e0",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "nit: 0",
+      "range": {
+        "startLine": 111,
+        "startChar": 73,
+        "endLine": 112,
+        "endChar": 27
+      },
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f00c64d5_3b607193",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5244a730_2ad06b57",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "nit: constexpr uint64_t kZero \u003d 0; and use \u0026zero to check the U64 range at [3]",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 37
+      },
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ad4be1f_5c4e0693",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T13:47:55Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "2506639088b9165b6441b75e9352528c4ff70747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
