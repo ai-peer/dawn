@@ -455,8 +455,9 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers subresource = region.imageSubresource;
 
                     ASSERT(dst.texture->GetDimension() == wgpu::TextureDimension::e2D);
-                    SubresourceRange range = {subresource.mipLevel, 1, subresource.baseArrayLayer,
-                                              subresource.layerCount};
+                    SubresourceRange range =
+                        GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
+
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       subresource.mipLevel)) {
                         // Since texture has been overwritten, it has been "initialized"
@@ -490,12 +491,11 @@ namespace dawn_native { namespace vulkan {
 
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(dst, src, copy->copySize);
-                    VkImageSubresourceLayers subresource = region.imageSubresource;
 
                     ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D);
-                    const SubresourceRange range = {subresource.mipLevel, 1,
-                                                    subresource.baseArrayLayer,
-                                                    subresource.layerCount};
+                    SubresourceRange range =
+                        GetSubresourcesAffectedByCopy(copy->source, copy->copySize);
+
                     ToBackend(src.texture)
                         ->EnsureSubresourceContentInitialized(recordingContext, range);
 
