@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0812b6bd_f121abf8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:30:57Z",
+      "side": 1,
+      "message": "Maybe it could be an additional boolean or factored outside of the \"ValidateCommonBufferTextureCopyRestrictions\".\n\nOr we can keep the code as is and factor later if we see the opportunity.",
+      "parentUuid": "ae7c5083_2d136f65",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8afb9cca_80c2ee09",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 6
@@ -117,6 +135,24 @@
       "side": 1,
       "message": "Can I address this in a follow-up? Changing this makes the diff hard to work with.",
       "parentUuid": "90136821_6c0e3358",
+      "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a835647_a573aabf",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T08:30:57Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "5dcd02d3_b3349042",
       "revId": "844446bcf107e0aee5d4873045a8880cfc98373a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
