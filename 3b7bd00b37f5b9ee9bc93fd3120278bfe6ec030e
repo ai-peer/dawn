@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "12ed2fab_2c57347a",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-31T03:04:34Z",
+      "side": 1,
+      "message": "I\u0027ve opened an issue to gpuweb: https://github.com/gpuweb/gpuweb/issues/965\nPTAL, thanks!",
+      "parentUuid": "c6b0a34f_300b5c3f",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd4a2de1_9e78ef61",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
