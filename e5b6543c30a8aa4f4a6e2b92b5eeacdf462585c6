@@ -16,6 +16,46 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75832ff1_71f27fef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T17:10:12Z",
+      "side": 1,
+      "message": "What do you think about implementing this pooling in BuddyMemoryAllocator.cpp that both D3D12 and Vulkan use?",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b2ea326_6b47a2e0",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T17:10:12Z",
+      "side": 1,
+      "message": "seems like LIFO would be better for trimming one day right? Might be easier to detect something hasn\u0027t been touched in a while. Is there a benefit to FIFO? If not I suggest we just do LIFO now",
+      "range": {
+        "startLine": 36,
+        "startChar": 90,
+        "endLine": 36,
+        "endChar": 94
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
