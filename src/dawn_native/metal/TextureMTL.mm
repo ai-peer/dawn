@@ -406,24 +406,24 @@ namespace dawn_native { namespace metal {
 
                         // At least one aspect needs clearing. Iterate the aspects individually to
                         // determine which to clear.
-                        for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                            if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                    level, arrayLayer, aspect))) {
-                                // Skip lazy clears if already initialized.
-                                continue;
-                            }
+                        for (Aspect aspect : IterateEnumMask(GetFormat().aspects)) {
+                            bool shouldLoad = (aspect & range.aspects) == 0 ||
+                                              (clearValue == TextureBase::ClearValue::Zero &&
+                                               IsSubresourceContentInitialized(
+                                                   SubresourceRange::SingleMipAndLayer(
+                                                       level, arrayLayer, aspect)));
 
+                            auto loadAction = shouldLoad ? MTLLoadActionLoad : MTLLoadActionClear;
                             switch (aspect) {
                                 case Aspect::Depth:
                                     descriptor.depthAttachment.texture = GetMTLTexture();
-                                    descriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                                    descriptor.depthAttachment.loadAction = loadAction;
                                     descriptor.depthAttachment.storeAction = MTLStoreActionStore;
                                     descriptor.depthAttachment.clearDepth = dClearColor;
                                     break;
                                 case Aspect::Stencil:
                                     descriptor.stencilAttachment.texture = GetMTLTexture();
-                                    descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
+                                    descriptor.stencilAttachment.loadAction = loadAction;
                                     descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
                                     descriptor.stencilAttachment.clearStencil =
                                         static_cast<uint32_t>(clearColor);
