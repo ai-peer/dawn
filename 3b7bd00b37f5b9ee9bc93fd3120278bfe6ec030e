@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "07c2300c_82cfeb6c",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-31T00:26:00Z",
+      "side": 1,
+      "message": "Yes I\u0027ve tried running these tests with validation layers and I don\u0027t get error at all. We also have dawn_end2end_validation_layers_tests in the bots right now.",
+      "parentUuid": "a42c272f_4630bcbd",
+      "revId": "3b7bd00b37f5b9ee9bc93fd3120278bfe6ec030e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd4a2de1_9e78ef61",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
