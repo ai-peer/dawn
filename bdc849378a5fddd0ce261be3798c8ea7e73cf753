@@ -16,6 +16,40 @@
       "revId": "bdc849378a5fddd0ce261be3798c8ea7e73cf753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "949d0326_0e2cffd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T16:49:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bdc849378a5fddd0ce261be3798c8ea7e73cf753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1217bb3_32253fe1",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T16:49:32Z",
+      "side": 1,
+      "message": "nit: add comments in these tests to explain how the offset is used to bind just part of the vertex buffer, but we should still expect the bytes before the offset to get lazily cleared.",
+      "revId": "bdc849378a5fddd0ce261be3798c8ea7e73cf753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
