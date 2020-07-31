@@ -150,6 +150,9 @@ namespace dawn_native {
         SubresourceRange mRange;
     };
 
+    ResultOrError<TextureCopyView> FixTextureCopyView(DeviceBase* device,
+                                                      const TextureCopyView* view);
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_TEXTURE_H_
