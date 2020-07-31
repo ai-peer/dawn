@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "876bcffa_9bcad45a",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-31T17:34:06Z",
+      "side": 1,
+      "message": "I think with MakeErrorTextureCopyView the errors where coming from using both origin.z and arrayLayer rather than from OOB.\n\nI also had to add some EXPECT_DEPRECATION_WARNINGs since the count has to be correct at the end of the test - this is checked in DeprecationTest::TearDown().",
+      "range": {
+        "startLine": 241,
+        "startChar": 43,
+        "endLine": 241,
+        "endChar": 46
+      },
+      "revId": "9e6f25c3d61919450023aeef34b968b81e6013de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

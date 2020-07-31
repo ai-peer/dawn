@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7f7dd46a_e37c616c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-31T17:34:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81726bbc_85764e3d",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be5418a7_87ba2cc5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1475ee78_e03bd199",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-31T17:34:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be5418a7_87ba2cc5",
+      "range": {
+        "startLine": 10,
+        "startChar": 40,
+        "endLine": 11,
+        "endChar": 57
+      },
+      "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +124,30 @@
       "writtenOn": "2020-07-31T16:44:10Z",
       "side": 1,
       "message": "fyi: Corentin changed this here https://dawn-review.googlesource.com/c/dawn/+/26100 . Not a blocker as he could just rebase. But it\u0027s small enough that maybe you could just do the change.",
+      "range": {
+        "startLine": 653,
+        "startChar": 4,
+        "endLine": 670,
+        "endChar": 5
+      },
+      "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7d318a5_532cd01e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-07-31T17:34:06Z",
+      "side": 1,
+      "message": "Corentin changed FixTextureDescriptor for arrayLayerCount, this is FixTextureCopyView for arrayLayer. Do I still have to do something if we\u0027re modifying the same file?",
+      "parentUuid": "0333e2c1_5f9c2568",
       "range": {
         "startLine": 653,
         "startChar": 4,
