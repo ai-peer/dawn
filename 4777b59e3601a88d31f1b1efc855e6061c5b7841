@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72c403b8_131f50de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T21:09:39Z",
+      "side": 1,
+      "message": "whoa gerrit literally added everyone as a reviewer and auto +2\u0027ed",
+      "revId": "4777b59e3601a88d31f1b1efc855e6061c5b7841",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
