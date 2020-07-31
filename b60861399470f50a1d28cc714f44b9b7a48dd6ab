@@ -157,6 +157,30 @@
       "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5881ef84_c5caf2df",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T17:46:53Z",
+      "side": 1,
+      "message": "Sorry I misread; should be ok.",
+      "parentUuid": "d7d318a5_532cd01e",
+      "range": {
+        "startLine": 653,
+        "startChar": 4,
+        "endLine": 670,
+        "endChar": 5
+      },
+      "revId": "b60861399470f50a1d28cc714f44b9b7a48dd6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
