@@ -52,9 +52,18 @@ namespace dawn_native { namespace metal {
                 switch (attachmentInfo.loadOp) {
                     case wgpu::LoadOp::Clear:
                         descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
-                        descriptor.colorAttachments[i].clearColor = MTLClearColorMake(
-                            attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
-                            attachmentInfo.clearColor.b, attachmentInfo.clearColor.a);
+
+                        if (attachmentInfo.view->GetFormat().HasComponentType(Format::Type::Uint)) {
+                            const std::array<uint32_t, 4> appliedClearColor =
+                                ConvertToUnsignedIntegerColor(attachmentInfo.clearColor);
+                            descriptor.colorAttachments[i].clearColor =
+                                MTLClearColorMake(appliedClearColor[0], appliedClearColor[1],
+                                                  appliedClearColor[2], appliedClearColor[3]);
+                        } else {
+                            descriptor.colorAttachments[i].clearColor = MTLClearColorMake(
+                                attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
+                                attachmentInfo.clearColor.b, attachmentInfo.clearColor.a);
+                        }
                         break;
 
                     case wgpu::LoadOp::Load:
