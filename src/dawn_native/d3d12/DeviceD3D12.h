@@ -106,6 +106,8 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
+        uint64_t GetResourceHeapPoolSizeForTesting() const;
+
         ShaderVisibleDescriptorAllocator* GetViewShaderVisibleDescriptorAllocator() const;
         ShaderVisibleDescriptorAllocator* GetSamplerShaderVisibleDescriptorAllocator() const;
 

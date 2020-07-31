@@ -15,15 +15,21 @@
 #ifndef DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 #define DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 
+#include "common/SerialQueue.h"
 #include "dawn_native/D3D12Backend.h"
 #include "dawn_native/ResourceHeapAllocator.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
+
+#include <list>
 
 namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    // Wrapper to allocate a D3D12 heap.
+    // |HeapAllocator| allocates a d3d heap from a resource heap pool.
+    // Internally, it manages a list of heaps using a fixed-size memory allocator. The heap
+    // is in one of two states: AVAILABLE or not. Upon Deallocate(), the heap is returned to
+    // the pool and made AVAILABLE so it may be recycled.
     class HeapAllocator : public ResourceHeapAllocator {
       public:
         HeapAllocator(Device* device,
@@ -36,7 +42,16 @@ namespace dawn_native { namespace d3d12 {
             uint64_t size) override;
         void DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> allocation) override;
 
+        uint64_t GetPoolSizeForTesting() const;
+
       private:
+        struct SerialResourceHeap {
+            Serial heapSerial;
+            std::unique_ptr<ResourceHeapBase> heap;
+        };
+
+        std::list<SerialResourceHeap> mPool;
+
         Device* mDevice;
         D3D12_HEAP_TYPE mHeapType;
         D3D12_HEAP_FLAGS mHeapFlags;

@@ -51,6 +51,8 @@ namespace dawn_native { namespace d3d12 {
         MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
                                                       const CopyTextureToBufferCmd* copy);
 
+        ResourceHeapAllocation GetAllocationForTesting() const;
+
       private:
         ~Buffer() override;
         // Dawn API

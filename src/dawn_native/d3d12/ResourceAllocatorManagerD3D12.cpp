@@ -396,4 +396,12 @@ namespace dawn_native { namespace d3d12 {
                                       /*offset*/ 0, std::move(committedResource), heap};
     }
 
+    uint64_t ResourceAllocatorManager::GetResourceHeapPoolSizeForTesting() const {
+        uint64_t count = 0;
+        for (auto& alloc : mHeapAllocators) {
+            count += alloc->GetPoolSizeForTesting();
+        }
+        return count;
+    }
+
 }}  // namespace dawn_native::d3d12
