@@ -56,6 +56,46 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21880505_da470842",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T17:20:31Z",
+      "side": 1,
+      "message": "to confirm: this test didn\u0027t change",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec5925fc_3b86559a",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T17:20:31Z",
+      "side": 1,
+      "message": "what is being reused in this test? Comment could be more clear.\n\nIIUC it\u0027s just suballocating in the same heap but doesn\u0027t have to do with the pooling in this CL.",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
