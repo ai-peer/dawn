@@ -157,10 +157,6 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
     // Results are shifted by 1 byte on Windows, and crash/hang on Linux.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsIntel());
 
-    // TODO(enga): Figure out why this fails on MacOS Intel Iris.
-    // It passes on AMD Radeon Pro and Intel HD Graphics 630.
-    DAWN_SKIP_TEST_IF(IsMacOS() && IsIntel());
-
     // Create a stencil texture
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
