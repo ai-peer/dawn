@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7581ec3a_fc353f49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-31T02:56:01Z",
+      "side": 1,
+      "message": "Hi all the reviewers, I find currently in Dawn all the components of both dawn_native::Color and wgpu::Color are float, whose precision is not enough to represent a number around numeric_limits\u003cuint32_t\u003e::max() (for example, numeric_limits\u003cuint32_t\u003e::max() - 2), which may be used to clear a color attachment with RGBA32Uint format.\n\nIn the WebGPU SPEC they are declared in double[1], shall we also fix it in Dawn?\n\n[1] https://gpuweb.github.io/gpuweb/#typedefdef-gpucolor",
+      "revId": "71ecfc92c24cca3087ea174f420f881b43b27b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
