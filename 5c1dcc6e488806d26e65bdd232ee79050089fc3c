@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "469b32d6_3152057c",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "I should also test using WriteTexture",
+      "revId": "5c1dcc6e488806d26e65bdd232ee79050089fc3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dac54384_d5f9a15c",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "I should clarify this is in the r32uint color texture which is used to check the last result -- kinda not related to the stencil so maybe this test just has a bug.",
+      "range": {
+        "startLine": 157,
+        "startChar": 7,
+        "endLine": 157,
+        "endChar": 47
+      },
+      "revId": "5c1dcc6e488806d26e65bdd232ee79050089fc3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

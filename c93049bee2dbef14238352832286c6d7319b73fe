@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "b894aad6_48eb782e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de4dac8_a4d2334b",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d613286a_4afdda51",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 6
@@ -193,6 +211,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0845d418_29474cbf",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d613286a_4afdda51",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -213,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "ee111d8f_33d77bca",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "All of the information we need is already contained inside |dst| so I think passing the block info would be redundant. We need the |dst| for other stuff too.",
+      "parentUuid": "c8e82b0b_3e17e6c6",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef9d22c0_0a7e47c1",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 6
@@ -224,6 +278,24 @@
       "writtenOn": "2020-07-27T10:14:15Z",
       "side": 1,
       "message": "nit: can\u0027t we switch on dst-\u003easpect directly without guarding for depth || stencil? TextureAspect::All would be MTLBlitOptionNone",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80fa0736_b3bb7803",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Not really; we can only specify blit option if the texture as BOTH depth and stencil. Otherwise the validation layers complain. i.e. DepthOnly also needs to be MTLBlitOptionNone sometimes",
+      "parentUuid": "ef9d22c0_0a7e47c1",
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -253,6 +325,30 @@
     },
     {
       "key": {
+        "uuid": "96a2cd18_a52778cd",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a331afe5_53695ff7",
+      "range": {
+        "startLine": 120,
+        "startChar": 46,
+        "endLine": 120,
+        "endChar": 85
+      },
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0beba8db_fc1d00ab",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 6
@@ -267,6 +363,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f57ad4ed_c52cb0e4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0beba8db_fc1d00ab",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -287,6 +401,24 @@
     },
     {
       "key": {
+        "uuid": "1cdc43ae_f4c9f0e4",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ffb311_d640ee56",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ec7b1bf_14a27064",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 6
@@ -301,6 +433,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a62df9a_50549aee",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ec7b1bf_14a27064",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -321,6 +471,24 @@
     },
     {
       "key": {
+        "uuid": "2c1329f7_920fa9a2",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a664dbb7_3ca4b173",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5216dff_78794c70",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 6
@@ -335,6 +503,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4157f928_58383c5d",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5216dff_78794c70",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -355,6 +541,24 @@
     },
     {
       "key": {
+        "uuid": "8b9aa23c_8e5fde33",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c22868c6_5982ba5f",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4aeddb43_57ffde82",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 6
@@ -369,6 +573,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b49b1a0_a7653797",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-07-31T00:27:42Z",
+      "side": 1,
+      "message": "I added a decrement op on some of the fragments.",
+      "parentUuid": "4aeddb43_57ffde82",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
