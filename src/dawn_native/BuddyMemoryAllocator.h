@@ -15,15 +15,18 @@
 #ifndef DAWNNATIVE_BUDDYMEMORYALLOCATOR_H_
 #define DAWNNATIVE_BUDDYMEMORYALLOCATOR_H_
 
+#include "common/SerialQueue.h"
 #include "dawn_native/BuddyAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ResourceMemoryAllocation.h"
 
+#include <list>
 #include <memory>
 #include <vector>
 
 namespace dawn_native {
 
+    class DeviceBase;
     class ResourceHeapAllocator;
 
     // BuddyMemoryAllocator uses the buddy allocator to sub-allocate blocks of device
@@ -35,23 +38,31 @@ namespace dawn_native {
     // same memory index, the memory refcount is incremented to ensure de-allocating one doesn't
     // release the other prematurely.
     //
+    // When the memory refcount goes to 0, the memory is returned to the pool to be recycled.
+    // Backends that require memory to be de-allocated for shutdown can call DestroyPool() to
+    // release recycled memory.
+    //
     // The MemoryAllocator should return ResourceHeaps that are all compatible with each other.
     // It should also outlive all the resources that are in the buddy allocator.
     class BuddyMemoryAllocator {
       public:
         BuddyMemoryAllocator(uint64_t maxSystemSize,
                              uint64_t memoryBlockSize,
-                             ResourceHeapAllocator* heapAllocator);
+                             ResourceHeapAllocator* heapAllocator,
+                             DeviceBase* device);
         ~BuddyMemoryAllocator() = default;
 
         ResultOrError<ResourceMemoryAllocation> Allocate(uint64_t allocationSize,
                                                          uint64_t alignment);
         void Deallocate(const ResourceMemoryAllocation& allocation);
 
+        void DestroyPool();
+
         uint64_t GetMemoryBlockSize() const;
 
         // For testing purposes.
         uint64_t ComputeTotalNumOfHeapsForTesting() const;
+        uint64_t GetPoolSizeForTesting() const;
 
       private:
         uint64_t GetMemoryIndex(uint64_t offset) const;
@@ -61,11 +72,15 @@ namespace dawn_native {
         BuddyAllocator mBuddyBlockAllocator;
         ResourceHeapAllocator* mHeapAllocator;
 
+        DeviceBase* mDevice;
+
         struct TrackedSubAllocations {
+            Serial memorySerial = 0;
             size_t refcount = 0;
             std::unique_ptr<ResourceHeapBase> mMemoryAllocation;
         };
 
+        std::list<TrackedSubAllocations> mPool;
         std::vector<TrackedSubAllocations> mTrackedSubAllocations;
     };
 

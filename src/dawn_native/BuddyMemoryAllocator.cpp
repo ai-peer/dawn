@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/BuddyMemoryAllocator.h"
+#include "dawn_native/Device.h"
 
 #include "common/Math.h"
 #include "dawn_native/ResourceHeapAllocator.h"
@@ -21,15 +22,28 @@ namespace dawn_native {
 
     BuddyMemoryAllocator::BuddyMemoryAllocator(uint64_t maxSystemSize,
                                                uint64_t memoryBlockSize,
-                                               ResourceHeapAllocator* heapAllocator)
+                                               ResourceHeapAllocator* heapAllocator,
+                                               DeviceBase* device)
         : mMemoryBlockSize(memoryBlockSize),
           mBuddyBlockAllocator(maxSystemSize),
-          mHeapAllocator(heapAllocator) {
+          mHeapAllocator(heapAllocator),
+          mDevice(device) {
         ASSERT(memoryBlockSize <= maxSystemSize);
         ASSERT(IsPowerOfTwo(mMemoryBlockSize));
         ASSERT(maxSystemSize % mMemoryBlockSize == 0);
 
         mTrackedSubAllocations.resize(maxSystemSize / mMemoryBlockSize);
+    }
+
+    void BuddyMemoryAllocator::DestroyPool() {
+        for (auto& alloc : mPool) {
+            ASSERT(alloc.refcount == 0);
+            ASSERT(alloc.mMemoryAllocation != nullptr);
+            mHeapAllocator->DeallocateResourceHeap(std::move(alloc.mMemoryAllocation));
+
+            // Invalidate the memory allocation to ensure we can't use-after-free.
+            alloc.mMemoryAllocation = nullptr;
+        }
     }
 
     uint64_t BuddyMemoryAllocator::GetMemoryIndex(uint64_t offset) const {
@@ -64,15 +78,27 @@ namespace dawn_native {
             return std::move(invalidAllocation);
         }
 
-        const uint64_t memoryIndex = GetMemoryIndex(blockOffset);
-        if (mTrackedSubAllocations[memoryIndex].refcount == 0) {
-            // Transfer ownership to this allocator
+        TrackedSubAllocations& subAlloc = mTrackedSubAllocations[GetMemoryIndex(blockOffset)];
+        if (subAlloc.refcount == 0) {
+            ASSERT(subAlloc.mMemoryAllocation == nullptr);
+            // Pooled memory is LIFO because memory can be evicted by LRU. However, this means
+            // pooling is disabled in-frame when the memory is still pending. For high in-frame
+            // memory users, FIFO might be preferable when memory consumption is a higher priority.
             std::unique_ptr<ResourceHeapBase> memory;
-            DAWN_TRY_ASSIGN(memory, mHeapAllocator->AllocateResourceHeap(mMemoryBlockSize));
-            mTrackedSubAllocations[memoryIndex] = {/*refcount*/ 0, std::move(memory)};
+            if (!mPool.empty() &&
+                mPool.front().memorySerial <= mDevice->GetCompletedCommandSerial()) {
+                memory = std::move(mPool.front().mMemoryAllocation);
+                mPool.pop_front();
+            }
+
+            if (memory == nullptr) {
+                DAWN_TRY_ASSIGN(memory, mHeapAllocator->AllocateResourceHeap(mMemoryBlockSize));
+            }
+
+            subAlloc.mMemoryAllocation = std::move(memory);
         }
 
-        mTrackedSubAllocations[memoryIndex].refcount++;
+        subAlloc.refcount++;
 
         AllocationInfo info;
         info.mBlockOffset = blockOffset;
@@ -81,8 +107,7 @@ namespace dawn_native {
         // Allocation offset is always local to the memory.
         const uint64_t memoryOffset = blockOffset % mMemoryBlockSize;
 
-        return ResourceMemoryAllocation{
-            info, memoryOffset, mTrackedSubAllocations[memoryIndex].mMemoryAllocation.get()};
+        return ResourceMemoryAllocation{info, memoryOffset, subAlloc.mMemoryAllocation.get()};
     }
 
     void BuddyMemoryAllocator::Deallocate(const ResourceMemoryAllocation& allocation) {
@@ -96,8 +121,9 @@ namespace dawn_native {
         mTrackedSubAllocations[memoryIndex].refcount--;
 
         if (mTrackedSubAllocations[memoryIndex].refcount == 0) {
-            mHeapAllocator->DeallocateResourceHeap(
-                std::move(mTrackedSubAllocations[memoryIndex].mMemoryAllocation));
+            // Return heap to the pool so it can be recycled.
+            mPool.push_front({mDevice->GetPendingCommandSerial(), /*refcount*/ 0,
+                              std::move(mTrackedSubAllocations[memoryIndex].mMemoryAllocation)});
         }
 
         mBuddyBlockAllocator.Deallocate(info.mBlockOffset);
@@ -117,4 +143,7 @@ namespace dawn_native {
         return count;
     }
 
+    uint64_t BuddyMemoryAllocator::GetPoolSizeForTesting() const {
+        return mPool.size();
+    }
 }  // namespace dawn_native

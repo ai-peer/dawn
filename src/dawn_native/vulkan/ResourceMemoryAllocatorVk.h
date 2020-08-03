@@ -36,6 +36,8 @@ namespace dawn_native { namespace vulkan {
                                                          bool mappable);
         void Deallocate(ResourceMemoryAllocation* allocation);
 
+        void DestroyPool();
+
         void Tick(Serial completedSerial);
 
         int FindBestTypeIndex(VkMemoryRequirements requirements, bool mappable);
