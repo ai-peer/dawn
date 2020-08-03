@@ -46,7 +46,7 @@ namespace {
         queue.Submit(1, &commands);
 
         // Map the buffer, submitting when the buffer is mapped should fail
-        buffer.MapWriteAsync(nullptr, nullptr);
+        buffer.MapAsync(wgpu::MapMode::Write, 0, 4, nullptr, nullptr);
 
         // Try submitting before the callback is fired.
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
@@ -146,17 +146,6 @@ namespace {
 
     // Test WriteBuffer with mapped buffer
     TEST_F(QueueWriteBufferValidationTest, MappedBuffer) {
-        // CreateBufferMapped
-        {
-            wgpu::BufferDescriptor descriptor;
-            descriptor.size = 4;
-            descriptor.usage = wgpu::BufferUsage::CopyDst;
-            wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
-
-            uint32_t value = 0;
-            ASSERT_DEVICE_ERROR(queue.WriteBuffer(result.buffer, 0, &value, sizeof(value)));
-        }
-
         // mappedAtCreation
         {
             wgpu::BufferDescriptor descriptor;
