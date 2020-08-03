@@ -26,6 +26,9 @@ namespace dawn_native { namespace opengl {
 
     namespace {
 
+	constexpr const char* kGLESv2LibName = "libGLESv2.dll";
+	constexpr const char* kEGLLibName = "libEGL.dll";
+
         struct Vendor {
             const char* vendorName;
             uint32_t vendorId;
@@ -231,6 +234,20 @@ namespace dawn_native { namespace opengl {
     }
 
     std::vector<std::unique_ptr<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+        if (!mLibEGL.Open(kEGLLibName)) {
+            ASSERT(false);
+            return {};
+        }
+        if (!mLibGLESv2.Open(kGLESv2LibName)) {
+            ASSERT(false);
+            return {};
+        }
+
+        void* eglGetProcAddress = mLibEGL.GetProc("eglGetProcAddress");
+        dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
+        adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(eglGetProcAddress);
+        GetInstance()->DiscoverAdapters(&adapterOptions);
+
         // The OpenGL backend needs at least "getProcAddress" to discover an adapter.
         return {};
     }

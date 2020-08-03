@@ -436,6 +436,12 @@ test("dawn_end2end_tests") {
 
   if (dawn_enable_opengl) {
     deps += [ "${dawn_root}/src/utils:dawn_glfw" ]
+    include_dirs = [ "${dawn_root}/third_party/angle/include" ]
+    lib_dirs = [ "${dawn_root}/third_party/angle/out/Release" ]
+    libs = [
+        "libGLESv2.dll.lib",
+        "libEGL.dll.lib",
+    ]
   }
 
   if (is_chromeos) {
@@ -490,5 +496,11 @@ test("dawn_perf_tests") {
 
   if (dawn_enable_opengl) {
     deps += [ "${dawn_root}/src/utils:dawn_glfw" ]
+    include_dirs = [ "${dawn_root}/third_party/angle/include" ]
+    lib_dirs = [ "${dawn_root}/third_party/angle/out/Release" ]
+    libs += [
+        "libGLESv2.dll.lib",
+        "libEGL.dll.lib",
+    ]
   }
 }
