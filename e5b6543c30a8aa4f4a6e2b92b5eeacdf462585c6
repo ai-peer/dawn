@@ -100,6 +100,127 @@
     },
     {
       "key": {
+        "uuid": "ef3937c2_cdf24939",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "bc4e0f71_79e11586",
+      "range": {
+        "startLine": 36,
+        "startChar": 90,
+        "endLine": 36,
+        "endChar": 94
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4fc790f_474a0b7d",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "Maybe the size should be a property of the HeapAllocator to enforce the GetSize() \u003d\u003d size?",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352e46fd_05434de1",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "nit: if (heapBase !\u003d nullptr) {return std::move(heapBase)} so that the rest of the method is decrement.",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4102e444_e9c0d76a",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "Is this code path only hit for sub-allocation heaps? If direct allocated heaps go through the same path then we might reuse a non-power-of-two heap, which would cause issues for the buddy allocator.",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f3ce052_44280034",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "nit: size.",
+      "range": {
+        "startLine": 400,
+        "startChar": 17,
+        "endLine": 400,
+        "endChar": 22
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbf77baf_a6a50ae7",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "The type is a bit annoying to spell out I guess.\n\nnit: const auto\u0026",
+      "range": {
+        "startLine": 401,
+        "startChar": 13,
+        "endLine": 401,
+        "endChar": 18
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21880505_da470842",
         "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
         "patchSetId": 2
@@ -132,6 +253,23 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79907d89_e226f207",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "Did we have any clue on this issue?",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
@@ -176,6 +314,64 @@
         "endLine": 94,
         "endChar": 40
       },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e873e2b9_959df4a9",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "The test seems maybe a bit complicated for what it tests, maybe it could just create two buffers, and check they are in the same heap?",
+      "parentUuid": "e52467ed_ff40a50d",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91e9c5be_f40882ed",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "The buffers aren\u0027t kept alive and will be destroyed at the end of the scope. Is that what you intended to test? ditto for other tests\n\nMaybe this loop could be factored in a helper function to reuse it across tests.",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db345274_def3efda",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T12:14:04Z",
+      "side": 1,
+      "message": "nit: Or just .count?",
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
