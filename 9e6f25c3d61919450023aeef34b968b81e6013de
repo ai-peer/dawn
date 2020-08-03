@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "88860b4f_94b8c846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:02:38Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "9e6f25c3d61919450023aeef34b968b81e6013de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "876bcffa_9bcad45a",
         "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
         "patchSetId": 3
