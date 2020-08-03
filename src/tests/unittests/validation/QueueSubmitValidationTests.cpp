@@ -61,6 +61,64 @@ namespace {
         queue.Submit(1, &commands);
     }
 
+    // Test submitting with a destroyed buffer is disallowed.
+    TEST_F(QueueSubmitValidationTest, SubmitWithDestroyedBuffer) {
+        uint64_t bufferSize = 4096;
+
+        wgpu::BufferDescriptor bufDescriptor;
+        bufDescriptor.size = bufferSize;
+        bufDescriptor.usage = wgpu::BufferUsage::CopySrc;
+        wgpu::Buffer source = device.CreateBuffer(&bufDescriptor);
+
+        wgpu::TextureDescriptor texDescriptor;
+        texDescriptor.size = {16, 16, 5};
+        texDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+        texDescriptor.usage = wgpu::TextureUsage::CopyDst;
+        wgpu::Texture destination = device.CreateTexture(&texDescriptor);
+
+        source.Destroy();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(source, 0, 256, 4);
+        wgpu::TextureCopyView textureCopyView =
+            utils::CreateTextureCopyView(destination, 0, {0, 0, 0});
+        wgpu::Extent3D size = {4, 4, 1};
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &size);
+
+        wgpu::Queue queue = device.GetDefaultQueue();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+
+    // Test submitting with a destroyed texture is disallowed.
+    TEST_F(QueueSubmitValidationTest, SubmitWithDestroyedTexture) {
+        uint64_t bufferSize = 4096;
+
+        wgpu::BufferDescriptor bufDescriptor;
+        bufDescriptor.size = bufferSize;
+        bufDescriptor.usage = wgpu::BufferUsage::CopySrc;
+        wgpu::Buffer source = device.CreateBuffer(&bufDescriptor);
+
+        wgpu::TextureDescriptor texDescriptor;
+        texDescriptor.size = {16, 16, 5};
+        texDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+        texDescriptor.usage = wgpu::TextureUsage::CopyDst;
+        wgpu::Texture destination = device.CreateTexture(&texDescriptor);
+
+        destination.Destroy();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(source, 0, 256, 4);
+        wgpu::TextureCopyView textureCopyView =
+            utils::CreateTextureCopyView(destination, 0, {0, 0, 0});
+        wgpu::Extent3D size = {4, 4, 1};
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &size);
+
+        wgpu::Queue queue = device.GetDefaultQueue();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+
     class QueueWriteBufferValidationTest : public ValidationTest {
       private:
         void SetUp() override {
