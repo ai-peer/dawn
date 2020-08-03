@@ -333,34 +333,6 @@ TEST_P(DeviceLostTest, WriteBufferFails) {
 }
 
 // Test it's possible to GetMappedRange on a buffer created mapped after device loss
-TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAfterLoss) {
-    SetCallbackAndLoseForTesting();
-
-    wgpu::BufferDescriptor desc;
-    desc.size = 4;
-    desc.usage = wgpu::BufferUsage::CopySrc;
-    ASSERT_DEVICE_ERROR(wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&desc));
-
-    ASSERT_NE(result.buffer.GetMappedRange(), nullptr);
-    ASSERT_EQ(result.buffer.GetMappedRange(), result.data);
-}
-
-// Test that device loss doesn't change the result of GetMappedRange, createBufferMapped version.
-TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedBeforeLoss) {
-    wgpu::BufferDescriptor desc;
-    desc.size = 4;
-    desc.usage = wgpu::BufferUsage::CopySrc;
-    wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&desc);
-
-    void* rangeBeforeLoss = result.buffer.GetMappedRange();
-    SetCallbackAndLoseForTesting();
-
-    ASSERT_NE(result.buffer.GetMappedRange(), nullptr);
-    ASSERT_EQ(result.buffer.GetMappedRange(), rangeBeforeLoss);
-    ASSERT_EQ(result.buffer.GetMappedRange(), result.data);
-}
-
-// Test it's possible to GetMappedRange on a buffer created mapped after device loss
 TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationAfterLoss) {
     SetCallbackAndLoseForTesting();
 
