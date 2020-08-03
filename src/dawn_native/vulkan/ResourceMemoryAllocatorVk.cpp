@@ -52,7 +52,8 @@ namespace dawn_native { namespace vulkan {
                   uint64_t(1) << Log2(mMemoryHeapSize),
                   // Take the min in the very unlikely case the memory heap is tiny.
                   std::min(uint64_t(1) << Log2(mMemoryHeapSize), kBuddyHeapsSize),
-                  this) {
+                  this,
+                  device) {
             ASSERT(IsPowerOfTwo(kBuddyHeapsSize));
         }
         ~SingleTypeAllocator() override = default;
@@ -64,6 +65,10 @@ namespace dawn_native { namespace vulkan {
 
         void DeallocateMemory(const ResourceMemoryAllocation& allocation) {
             mBuddySystem.Deallocate(allocation);
+        }
+
+        void DestroyPool() {
+            mBuddySystem.DestroyPool();
         }
 
         // Implementation of the MemoryAllocator interface to be a client of BuddyMemoryAllocator
@@ -256,6 +261,12 @@ namespace dawn_native { namespace vulkan {
         }
 
         return bestType;
+    }
+
+    void ResourceMemoryAllocator::DestroyPool() {
+        for (auto& alloc : mAllocatorsPerType) {
+            alloc->DestroyPool();
+        }
     }
 
 }}  // namespace dawn_native::vulkan

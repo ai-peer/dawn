@@ -65,6 +65,8 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
+        void DestroyPool();
+
         void Tick(Serial lastCompletedSerial);
 
       private:
