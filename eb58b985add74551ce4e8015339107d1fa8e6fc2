@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66960bbe_a7349297",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-03T17:58:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eb58b985add74551ce4e8015339107d1fa8e6fc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7ef1b72_818a4399",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-03T17:58:45Z",
+      "side": 1,
+      "message": "nit: minor preference to have DAWN_TRY as it will log the function, file name, and line number if it fails.",
+      "revId": "eb58b985add74551ce4e8015339107d1fa8e6fc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
