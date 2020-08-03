@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "6bd6cf61_f65e9648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:05:07Z",
+      "side": 1,
+      "message": "LGTM still",
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5892f9b_fcd70cea",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:05:07Z",
+      "side": 1,
+      "message": "nit: sizeof(float)",
+      "range": {
+        "startLine": 56,
+        "startChar": 41,
+        "endLine": 56,
+        "endChar": 49
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa040b7a_8be50d09",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:05:07Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 59,
+        "startChar": 41,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9502d9fb_402b8562",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 4
