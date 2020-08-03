@@ -267,6 +267,24 @@
     },
     {
       "key": {
+        "uuid": "611afdc7_c5d03d0a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:22:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ee111d8f_33d77bca",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef9d22c0_0a7e47c1",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 6
@@ -299,6 +317,24 @@
       "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffe5116d_a7cd5bb2",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-03T08:22:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80fa0736_b3bb7803",
+      "revId": "c93049bee2dbef14238352832286c6d7319b73fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
