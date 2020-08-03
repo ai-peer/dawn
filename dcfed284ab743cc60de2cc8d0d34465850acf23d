@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9502d9fb_402b8562",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-03T01:50:56Z",
+      "side": 1,
+      "message": "I will remove this piece of code when I implement buffer lazy initialization before ResolveQuerySet().",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 77
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
