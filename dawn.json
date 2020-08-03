@@ -184,20 +184,6 @@
                 ]
             },
             {
-                "name": "map read async",
-                "args": [
-                    {"name": "callback", "type": "buffer map read callback"},
-                    {"name": "userdata", "type": "void", "annotation": "*"}
-                ]
-            },
-            {
-                "name": "map write async",
-                "args": [
-                    {"name": "callback", "type": "buffer map write callback"},
-                    {"name": "userdata", "type": "void", "annotation": "*"}
-                ]
-            },
-            {
                 "name": "map async",
                 "args": [
                     {"name": "mode", "type": "map mode"},
@@ -259,24 +245,6 @@
             {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
-    "buffer map read callback": {
-        "category": "callback",
-        "args": [
-            {"name": "status", "type": "buffer map async status"},
-            {"name": "data", "type": "void", "annotation": "const*"},
-            {"name": "data length", "type": "uint64_t"},
-            {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
-    "buffer map write callback": {
-        "category": "callback",
-        "args": [
-            {"name": "status", "type": "buffer map async status"},
-            {"name": "data", "type": "void", "annotation": "*"},
-            {"name": "data length", "type": "uint64_t"},
-            {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
     "buffer map async status": {
         "category": "enum",
         "values": [
@@ -304,14 +272,6 @@
     },
     "char": {
         "category": "native"
-    },
-    "create buffer mapped result": {
-        "category": "structure",
-        "members": [
-            {"name": "buffer", "type": "buffer"},
-            {"name": "data length", "type": "uint64_t"},
-            {"name": "data", "type": "void", "annotation": "*", "length": "data length"}
-        ]
     },
     "color": {
         "category": "structure",
@@ -585,13 +545,6 @@
                 "name": "create error buffer",
                 "returns": "buffer",
                 "TODO": "enga@: Make this part of a dawn_wire extension"
-            },
-            {
-                "name": "create buffer mapped",
-                "returns": "create buffer mapped result",
-                "args": [
-                    {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
             },
             {
                 "name": "create command encoder",

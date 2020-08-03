@@ -250,22 +250,6 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
-    MaybeError Buffer::MapReadAsyncImpl() {
-        Device* device = ToBackend(GetDevice());
-
-        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
-        return {};
-    }
-
-    MaybeError Buffer::MapWriteAsyncImpl() {
-        Device* device = ToBackend(GetDevice());
-
-        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
-        return {};
-    }
-
     MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
         Device* device = ToBackend(GetDevice());
 
