@@ -251,7 +251,9 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Buffer needs the CopyDst usage bit");
         }
 
-        return buffer->ValidateCanUseOnQueueNow();
+        DAWN_TRY(buffer->ValidateCanUseOnQueueNow());
+
+        return {};
     }
 
     MaybeError QueueBase::ValidateWriteTexture(const TextureCopyView* destination,
@@ -283,6 +285,8 @@ namespace dawn_native {
         DAWN_TRY(ValidateTextureCopyRange(*destination, *writeSize));
         DAWN_TRY(ValidateLinearTextureData(*dataLayout, dataSize, destination->texture->GetFormat(),
                                            *writeSize));
+
+        DAWN_TRY(destination->texture->ValidateCanUseInSubmitNow());
 
         return {};
     }
