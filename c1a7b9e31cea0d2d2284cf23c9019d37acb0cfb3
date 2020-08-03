@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e742a4_50f10d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-03T14:40:18Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "c1a7b9e31cea0d2d2284cf23c9019d37acb0cfb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "caa3c379_d99bd7df",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-03T14:40:18Z",
+      "side": 1,
+      "message": "Buffer is used both as an input and an output.",
+      "range": {
+        "startLine": 283,
+        "startChar": 85,
+        "endLine": 283,
+        "endChar": 92
+      },
+      "revId": "c1a7b9e31cea0d2d2284cf23c9019d37acb0cfb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d24c58_6afa141e",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-03T14:40:18Z",
+      "side": 1,
+      "message": "Even if we didn\u0027t check the texture is in the error state, we\u0027d still get a validation error for the extent not fitting in the texture.",
+      "range": {
+        "startLine": 590,
+        "startChar": 30,
+        "endLine": 590,
+        "endChar": 39
+      },
+      "revId": "c1a7b9e31cea0d2d2284cf23c9019d37acb0cfb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
