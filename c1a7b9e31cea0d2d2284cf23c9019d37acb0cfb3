@@ -147,6 +147,24 @@
     },
     {
       "key": {
+        "uuid": "2a5dab24_48ee170d",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-03T17:50:54Z",
+      "side": 1,
+      "message": "Ah, I think this is covered by end2end/DestroyTests.cpp.",
+      "parentUuid": "9d043b71_b18d8073",
+      "revId": "c1a7b9e31cea0d2d2284cf23c9019d37acb0cfb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f9f976e3_b0c8349c",
         "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
         "patchSetId": 2
