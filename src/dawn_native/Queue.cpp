@@ -284,7 +284,7 @@ namespace dawn_native {
         DAWN_TRY(ValidateLinearTextureData(*dataLayout, dataSize, destination->texture->GetFormat(),
                                            *writeSize));
 
-        return {};
+        return destination->texture->ValidateCanUseInSubmitNow();
     }
 
     void CopyTextureData(uint8_t* dstPointer,
