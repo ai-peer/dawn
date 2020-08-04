@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "577829ca_9615b310",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:46:21Z",
+      "side": 1,
+      "message": "Approach LGTM (reviewed now because I\u0027ll be OOO a while)",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea0068b0_f3543a66",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:46:21Z",
+      "side": 1,
+      "message": "Is this required given that there is an UNPACK_ROW_LENGTH with the correct alignment?",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f967a54_c17789cc",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:46:21Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb9d468_9babc2d6",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:46:21Z",
+      "side": 1,
+      "message": "I think this case too would be helped by having the aspect decayed in the frontend.",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
