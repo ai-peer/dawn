@@ -15,6 +15,7 @@
 #ifndef TESTS_PERFTESTS_DAWNPERFTEST_H_
 #define TESTS_PERFTESTS_DAWNPERFTEST_H_
 
+#include "common/Compiler.h"
 #include "tests/DawnTest.h"
 
 namespace utils {
@@ -74,7 +75,7 @@ class DawnPerfTestBase {
     // Call if the test step was aborted and the test should stop running.
     void AbortTest();
 
-    void RunTest();
+    DAWN_NO_DISCARD bool RunTest();
     void PrintPerIterationResultFromSeconds(const std::string& trace,
                                             double valueInSeconds,
                                             bool important) const;
@@ -88,7 +89,7 @@ class DawnPerfTestBase {
                      bool important) const;
 
   private:
-    void DoRunLoop(double maxRunTime);
+    bool DoRunLoop(double maxRunTime);
     void OutputResults();
 
     void PrintResultImpl(const std::string& trace,

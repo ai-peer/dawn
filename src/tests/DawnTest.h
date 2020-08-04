@@ -15,6 +15,7 @@
 #ifndef TESTS_DAWNTEST_H_
 #define TESTS_DAWNTEST_H_
 
+#include "common/Compiler.h"
 #include "common/Log.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
@@ -315,7 +316,7 @@ class DawnTestBase {
                                          x, y, 1, 1, level, slice, aspect, sizeof(T), bytesPerRow);
     }
 
-    void WaitABit();
+    DAWN_NO_DISCARD bool WaitABit();
     void FlushWire();
 
     bool SupportsExtensions(const std::vector<const char*>& extensions);
@@ -344,6 +345,7 @@ class DawnTestBase {
     static void OnDeviceLost(const char* message, void* userdata);
     bool mExpectError = false;
     bool mError = false;
+    bool mDeviceLost = false;
 
     std::ostringstream& AddTextureExpectationImpl(const char* file,
                                                   int line,
@@ -368,7 +370,7 @@ class DawnTestBase {
     std::vector<ReadbackSlot> mReadbackSlots;
 
     // Maps all the buffers and fill ReadbackSlot::mappedData
-    void MapSlotsSynchronously();
+    bool MapSlotsSynchronously();
     static void SlotMapCallback(WGPUBufferMapAsyncStatus status, void* userdata);
     size_t mNumPendingMapOperations = 0;
 

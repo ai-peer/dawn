@@ -608,7 +608,7 @@ void DrawCallPerf::Step() {
 }
 
 TEST_P(DrawCallPerf, Run) {
-    RunTest();
+    ASSERT_TRUE(RunTest());
 }
 
 DAWN_INSTANTIATE_PERF_TEST_SUITE_P(

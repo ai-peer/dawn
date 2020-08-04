@@ -236,7 +236,7 @@ TEST_P(D3D12ResourceResidencyTests, AsyncMappedBufferRead) {
     EXPECT_TRUE(CheckIfBufferIsResident(buffer));
 
     while (mMappedReadData == nullptr) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 
     // Touch enough resources such that the entire budget is used. The mappable buffer should remain
@@ -275,9 +275,8 @@ TEST_P(D3D12ResourceResidencyTests, AsyncMappedBufferWrite) {
     EXPECT_TRUE(CheckIfBufferIsResident(buffer));
 
     while (mMappedWriteData == nullptr) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
-
     // Touch enough resources such that the entire budget is used. The mappable buffer should remain
     // locked resident.
     TouchBuffers(0, bufferSet1.size(), bufferSet1);

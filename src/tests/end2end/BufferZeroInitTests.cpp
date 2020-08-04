@@ -54,7 +54,7 @@ class BufferZeroInitTest : public DawnTest {
         return device.CreateBuffer(&descriptor);
     }
 
-    void MapAsyncAndWait(wgpu::Buffer buffer,
+    bool MapAsyncAndWait(wgpu::Buffer buffer,
                          wgpu::MapMode mapMode,
                          uint64_t offset,
                          uint64_t size) {
@@ -70,8 +70,11 @@ class BufferZeroInitTest : public DawnTest {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                return false;
+            }
         }
+        return true;
     }
 
     wgpu::Texture CreateAndInitializeTexture(const wgpu::Extent3D& size,
@@ -574,7 +577,7 @@ TEST_P(BufferZeroInitTest, MapReadAsync) {
     // Map the whole buffer
     {
         wgpu::Buffer buffer = CreateBuffer(kBufferSize, kBufferUsage);
-        EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize));
+        EXPECT_LAZY_CLEAR(1u, ASSERT_TRUE(MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize)));
 
         const uint32_t* mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange());
         for (uint32_t i = 0; i < kBufferSize / sizeof(uint32_t); ++i) {
@@ -589,7 +592,7 @@ TEST_P(BufferZeroInitTest, MapReadAsync) {
 
         constexpr uint64_t kOffset = 4u;
         constexpr uint64_t kSize = 8u;
-        EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, kOffset, kSize));
+        EXPECT_LAZY_CLEAR(1u, ASSERT_TRUE(MapAsyncAndWait(buffer, kMapMode, kOffset, kSize)));
 
         const uint32_t* mappedDataUint =
             static_cast<const uint32_t*>(buffer.GetConstMappedRange(kOffset));
@@ -598,7 +601,7 @@ TEST_P(BufferZeroInitTest, MapReadAsync) {
         }
         buffer.Unmap();
 
-        EXPECT_LAZY_CLEAR(0u, MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize));
+        EXPECT_LAZY_CLEAR(0u, ASSERT_TRUE(MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize)));
         mappedDataUint = static_cast<const uint32_t*>(buffer.GetConstMappedRange());
         for (uint32_t i = 0; i < kBufferSize / sizeof(uint32_t); ++i) {
             EXPECT_EQ(0u, mappedDataUint[i]);
@@ -621,7 +624,7 @@ TEST_P(BufferZeroInitTest, MapWriteAsync) {
     // Map the whole buffer
     {
         wgpu::Buffer buffer = CreateBuffer(kBufferSize, kBufferUsage);
-        EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize));
+        EXPECT_LAZY_CLEAR(1u, ASSERT_TRUE(MapAsyncAndWait(buffer, kMapMode, 0, kBufferSize)));
         buffer.Unmap();
 
         EXPECT_LAZY_CLEAR(
@@ -635,7 +638,7 @@ TEST_P(BufferZeroInitTest, MapWriteAsync) {
 
         constexpr uint64_t kOffset = 4u;
         constexpr uint64_t kSize = 8u;
-        EXPECT_LAZY_CLEAR(1u, MapAsyncAndWait(buffer, kMapMode, kOffset, kSize));
+        EXPECT_LAZY_CLEAR(1u, ASSERT_TRUE(MapAsyncAndWait(buffer, kMapMode, kOffset, kSize)));
         buffer.Unmap();
 
         EXPECT_LAZY_CLEAR(
