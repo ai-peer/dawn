@@ -16,6 +16,24 @@
       "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b545bfe5_dc6ef5ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-04T18:17:19Z",
+      "side": 1,
+      "message": "Hey Bryan, sorry for the churn. Corentin (now OOO) was talking to me how he was concerned that putting the pooling details inside the buddy allocator. The code as it is now is not so complex, but it would be better organized to have the pooling details live outside of the buddy allocation.\n\nRight now we have an abstract class ResourceMemoryAllocator. What do you think about having a PooledResourceMemoryAllocator? The buddy allocator would use this allocator to Alloc/Free resource heaps.\n\nFeel free to ping me on chat to discuss more.",
+      "parentUuid": "8f5551fe_cada33d4",
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
