@@ -187,14 +187,18 @@ void DawnPerfTestBase::AbortTest() {
     mRunning = false;
 }
 
-void DawnPerfTestBase::RunTest() {
+bool DawnPerfTestBase::RunTest() {
     if (gTestEnv->OverrideStepsToRun() == 0) {
         // Run to compute the approximate number of steps to perform.
         mStepsToRun = std::numeric_limits<unsigned int>::max();
 
         // Do a warmup run for calibration.
-        DoRunLoop(kCalibrationRunTimeSeconds);
-        DoRunLoop(kCalibrationRunTimeSeconds);
+        if (!DoRunLoop(kCalibrationRunTimeSeconds)) {
+            return false;
+        }
+        if (!DoRunLoop(kCalibrationRunTimeSeconds)) {
+            return false;
+        }
 
         // Scale steps down according to the time that exceeded one second.
         double scale = kCalibrationRunTimeSeconds / mTimer->GetElapsedTime();
@@ -203,14 +207,16 @@ void DawnPerfTestBase::RunTest() {
         // Calibration allows the perf test runner script to save some time.
         if (gTestEnv->IsCalibrating()) {
             PrintResult("steps", mStepsToRun, "count", false);
-            return;
+            return true;
         }
     } else {
         mStepsToRun = gTestEnv->OverrideStepsToRun();
     }
 
     // Do another warmup run. Seems to consistently improve results.
-    DoRunLoop(kMaximumRunTimeSeconds);
+    if (!DoRunLoop(kMaximumRunTimeSeconds)) {
+        return false;
+    }
 
     DawnPerfTestPlatform* platform =
         reinterpret_cast<DawnPerfTestPlatform*>(gTestEnv->GetPlatform());
@@ -223,14 +229,18 @@ void DawnPerfTestBase::RunTest() {
         TRACE_EVENT0(platform, General, testName);
         for (unsigned int trial = 0; trial < kNumTrials; ++trial) {
             TRACE_EVENT0(platform, General, "Trial");
-            DoRunLoop(kMaximumRunTimeSeconds);
+            if (!DoRunLoop(kMaximumRunTimeSeconds)) {
+                return false;
+            }
             OutputResults();
         }
     }
     platform->EnableTraceEventRecording(false);
+
+    return true;
 }
 
-void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
+bool DawnPerfTestBase::DoRunLoop(double maxRunTime) {
     dawn_platform::Platform* platform = gTestEnv->GetPlatform();
 
     mNumStepsPerformed = 0;
@@ -247,7 +257,9 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
     while (mRunning) {
         // Wait if there are too many steps in flight on the GPU.
         while (signaledFenceValue - fence.GetCompletedValue() >= mMaxStepsInFlight) {
-            mTest->WaitABit();
+            if (!mTest->WaitABit()) {
+                return false;
+            }
         }
         TRACE_EVENT0(platform, General, "Step");
         double stepStart = mTimer->GetElapsedTime();
@@ -271,10 +283,13 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
     // which waits for all threads to stop doing work. When we output results, there should
     // be no additional incoming trace events.
     while (signaledFenceValue != fence.GetCompletedValue()) {
-        mTest->WaitABit();
+        if (!mTest->WaitABit()) {
+            return false;
+        }
     }
 
     mTimer->Stop();
+    return true;
 }
 
 void DawnPerfTestBase::OutputResults() {

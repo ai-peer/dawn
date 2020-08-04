@@ -144,7 +144,7 @@ void BufferUploadPerf::Step() {
 }
 
 TEST_P(BufferUploadPerf, Run) {
-    RunTest();
+    ASSERT_TRUE(RunTest());
 }
 
 DAWN_INSTANTIATE_PERF_TEST_SUITE_P(BufferUploadPerf,
