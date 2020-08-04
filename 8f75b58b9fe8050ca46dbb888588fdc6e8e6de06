@@ -34,6 +34,98 @@
       "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8fc24fd_86adbd06",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-04T22:01:43Z",
+      "side": 1,
+      "message": "Nit: std::moving alloc.mMemoryAllocation will already set the pointer in the unique_ptr to nullptr. \n\nIn general, you shouldn\u0027t have to worry about use-after-free with unique_ptrs allocated from the general C++ heap.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 46
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32a7fba3_ef18fe45",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-04T22:01:43Z",
+      "side": 1,
+      "message": "Can you please add a test for DestroyPool?",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d67a9aa3_955e596f",
+        "filename": "src/tests/unittests/BuddyMemoryAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-04T22:01:43Z",
+      "side": 1,
+      "message": "I presume you\u0027re using std::set because you want to prevent additions to the data structure if a ResourceHeapBase is used more than once.  \n\nIf a future bug enters the code, how do you know that the underlying ResourceHeapBases instances aren\u0027t getting freed and re-allocated at the same pointer location?",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 410,
+        "endChar": 43
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7549b0aa_a91671ec",
+        "filename": "src/tests/unittests/BuddyMemoryAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-04T22:01:43Z",
+      "side": 1,
+      "message": "Why do you call mDevice-\u003eSubmitPendingOperations() for this test but not the other ones you added ?",
+      "range": {
+        "startLine": 415,
+        "startChar": 1,
+        "endLine": 416,
+        "endChar": 39
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
