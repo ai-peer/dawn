@@ -33,6 +33,29 @@
       "revId": "3d83c6e81a7dec2a9057599799b641be52c4fd7a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4e07905_3dc8399c",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-04T00:21:46Z",
+      "side": 1,
+      "message": "Sorry that we still need some time to investigate this failure.",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 60
+      },
+      "revId": "3d83c6e81a7dec2a9057599799b641be52c4fd7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
