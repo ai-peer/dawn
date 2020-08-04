@@ -32,7 +32,9 @@ class BufferMapReadTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                return nullptr;
+            }
         }
 
         return mappedData;
@@ -58,6 +60,7 @@ TEST_P(BufferMapReadTests, SmallReadAtZero) {
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData));
 
     UnmapBuffer(buffer);
@@ -74,6 +77,7 @@ TEST_P(BufferMapReadTests, MapTwice) {
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     EXPECT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData));
 
     UnmapBuffer(buffer);
@@ -82,6 +86,7 @@ TEST_P(BufferMapReadTests, MapTwice) {
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
     const void* mappedData1 = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData1, nullptr);
     EXPECT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData1));
 
     UnmapBuffer(buffer);
@@ -103,6 +108,7 @@ TEST_P(BufferMapReadTests, LargeRead) {
     queue.WriteBuffer(buffer, 0, myData.data(), kDataSize * sizeof(uint32_t));
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(0, memcmp(mappedData, myData.data(), kDataSize * sizeof(uint32_t)));
 
     UnmapBuffer(buffer);
@@ -116,6 +122,7 @@ TEST_P(BufferMapReadTests, ZeroSized) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     MapReadAsyncAndWait(buffer);
+    ASSERT_NE(buffer, nullptr);
     UnmapBuffer(buffer);
 }
 
@@ -127,6 +134,7 @@ TEST_P(BufferMapReadTests, GetMappedRange) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), mappedData);
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     UnmapBuffer(buffer);
@@ -140,6 +148,7 @@ TEST_P(BufferMapReadTests, GetMappedRangeZeroSized) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), mappedData);
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     UnmapBuffer(buffer);
@@ -167,7 +176,9 @@ class BufferMapWriteTests : public DawnTest {
         buffer.MapWriteAsync(MapWriteCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                return nullptr;
+            }
         }
 
         // Ensure the prior write's status is updated.
@@ -195,6 +206,7 @@ TEST_P(BufferMapWriteTests, SmallWriteAtZero) {
 
     uint32_t myData = 2934875;
     void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     memcpy(mappedData, &myData, sizeof(myData));
     UnmapBuffer(buffer);
 
@@ -210,6 +222,7 @@ TEST_P(BufferMapWriteTests, MapTwice) {
 
     uint32_t myData = 2934875;
     void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     memcpy(mappedData, &myData, sizeof(myData));
     UnmapBuffer(buffer);
 
@@ -217,6 +230,7 @@ TEST_P(BufferMapWriteTests, MapTwice) {
 
     myData = 9999999;
     void* mappedData1 = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData1, nullptr);
     memcpy(mappedData1, &myData, sizeof(myData));
     UnmapBuffer(buffer);
 
@@ -237,6 +251,7 @@ TEST_P(BufferMapWriteTests, LargeWrite) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     memcpy(mappedData, myData.data(), kDataSize * sizeof(uint32_t));
     UnmapBuffer(buffer);
 
@@ -251,6 +266,7 @@ TEST_P(BufferMapWriteTests, ZeroSized) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(buffer, nullptr);
     UnmapBuffer(buffer);
 }
 
@@ -272,6 +288,7 @@ TEST_P(BufferMapWriteTests, ManyWrites) {
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
         void* mappedData = MapWriteAsyncAndWait(buffer);
+        ASSERT_NE(mappedData, nullptr);
         memcpy(mappedData, myData.data(), kDataSize * sizeof(uint32_t));
         UnmapBuffer(buffer);
 
@@ -291,6 +308,7 @@ TEST_P(BufferMapWriteTests, GetMappedRange) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(buffer.GetMappedRange(), mappedData);
     ASSERT_EQ(buffer.GetMappedRange(), buffer.GetConstMappedRange());
     ASSERT_NE(buffer.GetMappedRange(), nullptr);
@@ -305,6 +323,7 @@ TEST_P(BufferMapWriteTests, GetMappedRangeZeroSized) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
     void* mappedData = MapWriteAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(buffer.GetMappedRange(), mappedData);
     ASSERT_EQ(buffer.GetMappedRange(), buffer.GetConstMappedRange());
     ASSERT_NE(buffer.GetMappedRange(), nullptr);
@@ -319,7 +338,7 @@ DAWN_INSTANTIATE_TEST(BufferMapWriteTests,
 
 class BufferMappingTests : public DawnTest {
   protected:
-    void MapAsyncAndWait(const wgpu::Buffer& buffer,
+    bool MapAsyncAndWait(const wgpu::Buffer& buffer,
                          wgpu::MapMode mode,
                          size_t offset,
                          size_t size) {
@@ -333,8 +352,12 @@ class BufferMappingTests : public DawnTest {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                return false;
+            }
         }
+
+        return true;
     }
 
     wgpu::Buffer CreateMapReadBuffer(uint64_t size) {
@@ -367,7 +390,7 @@ TEST_P(BufferMappingTests, MapRead_Basic) {
     constexpr size_t kSize = sizeof(myData);
     queue.WriteBuffer(buffer, 0, &myData, kSize);
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4));
     CheckMapping(buffer.GetConstMappedRange(), &myData, kSize);
     CheckMapping(buffer.GetConstMappedRange(0, kSize), &myData, kSize);
     buffer.Unmap();
@@ -377,7 +400,7 @@ TEST_P(BufferMappingTests, MapRead_Basic) {
 TEST_P(BufferMappingTests, MapRead_ZeroSized) {
     wgpu::Buffer buffer = CreateMapReadBuffer(0);
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 0);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 0));
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     buffer.Unmap();
 }
@@ -389,7 +412,7 @@ TEST_P(BufferMappingTests, MapRead_NonZeroOffset) {
     uint32_t myData[2] = {0x01020304, 0x05060708};
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 4, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 4, 4));
     ASSERT_EQ(myData[1], *static_cast<const uint32_t*>(buffer.GetConstMappedRange(4)));
     buffer.Unmap();
 }
@@ -401,14 +424,14 @@ TEST_P(BufferMappingTests, MapRead_Twice) {
     uint32_t myData = 0x01020304;
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4));
     ASSERT_EQ(myData, *static_cast<const uint32_t*>(buffer.GetConstMappedRange()));
     buffer.Unmap();
 
     myData = 0x05060708;
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4));
     ASSERT_EQ(myData, *static_cast<const uint32_t*>(buffer.GetConstMappedRange()));
     buffer.Unmap();
 }
@@ -425,7 +448,7 @@ TEST_P(BufferMappingTests, MapRead_Large) {
     }
     queue.WriteBuffer(buffer, 0, myData.data(), kByteSize);
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, kByteSize);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, kByteSize));
     EXPECT_EQ(nullptr, buffer.GetConstMappedRange(0, kByteSize + 4));
     EXPECT_EQ(0, memcmp(buffer.GetConstMappedRange(), myData.data(), kByteSize));
     EXPECT_EQ(0, memcmp(buffer.GetConstMappedRange(8), myData.data() + 2, kByteSize - 8));
@@ -433,7 +456,7 @@ TEST_P(BufferMappingTests, MapRead_Large) {
         0, memcmp(buffer.GetConstMappedRange(8, kByteSize - 8), myData.data() + 2, kByteSize - 8));
     buffer.Unmap();
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 12, kByteSize - 12);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Read, 12, kByteSize - 12));
     EXPECT_EQ(nullptr, buffer.GetConstMappedRange(16, kByteSize - 12));
     EXPECT_EQ(nullptr, buffer.GetConstMappedRange());
     EXPECT_EQ(nullptr, buffer.GetConstMappedRange(8));
@@ -480,7 +503,7 @@ TEST_P(BufferMappingTests, MapRead_InCallback) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 }
 
@@ -489,7 +512,7 @@ TEST_P(BufferMappingTests, MapWrite_Basic) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
 
     uint32_t myData = 2934875;
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4));
     ASSERT_NE(nullptr, buffer.GetMappedRange());
     ASSERT_NE(nullptr, buffer.GetConstMappedRange());
     memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
@@ -503,7 +526,7 @@ TEST_P(BufferMappingTests, MapWrite_BasicRange) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
 
     uint32_t myData = 2934875;
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4));
     ASSERT_NE(nullptr, buffer.GetMappedRange(0, 4));
     ASSERT_NE(nullptr, buffer.GetConstMappedRange(0, 4));
     memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
@@ -516,7 +539,7 @@ TEST_P(BufferMappingTests, MapWrite_BasicRange) {
 TEST_P(BufferMappingTests, MapWrite_ZeroSized) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(0);
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 0);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 0));
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     ASSERT_NE(buffer.GetMappedRange(), nullptr);
     buffer.Unmap();
@@ -527,7 +550,7 @@ TEST_P(BufferMappingTests, MapWrite_NonZeroOffset) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(8);
 
     uint32_t myData = 2934875;
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 4, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 4, 4));
     memcpy(buffer.GetMappedRange(4), &myData, sizeof(myData));
     buffer.Unmap();
 
@@ -539,14 +562,14 @@ TEST_P(BufferMappingTests, MapWrite_Twice) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
 
     uint32_t myData = 2934875;
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4));
     memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
     buffer.Unmap();
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
 
     myData = 9999999;
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4));
     memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
     buffer.Unmap();
 
@@ -564,7 +587,7 @@ TEST_P(BufferMappingTests, MapWrite_Large) {
         myData.push_back(i);
     }
 
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 12, kByteSize - 20);
+    ASSERT_TRUE(MapAsyncAndWait(buffer, wgpu::MapMode::Write, 12, kByteSize - 20));
     EXPECT_EQ(nullptr, buffer.GetMappedRange());
     EXPECT_EQ(nullptr, buffer.GetMappedRange(0));
     EXPECT_EQ(nullptr, buffer.GetMappedRange(8));
@@ -596,7 +619,7 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
     ASSERT_DEVICE_ERROR(buffer.MapAsync(wgpu::MapMode::Read, 8, 4, nullptr, nullptr));
 
     while (!done) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 
     // mMapOffset has not been updated so it should still be 4, which is data[1]
@@ -638,7 +661,7 @@ TEST_P(BufferMappingTests, MapWrite_InCallbackDefault) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
@@ -679,7 +702,7 @@ TEST_P(BufferMappingTests, MapWrite_InCallbackRange) {
         &user);
 
     while (!user.done) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
@@ -707,7 +730,9 @@ class CreateBufferMappedTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                return nullptr;
+            }
         }
 
         return mappedData;
@@ -766,6 +791,7 @@ TEST_P(CreateBufferMappedTests, MapReadUsageSmall) {
     UnmapBuffer(result.buffer);
 
     const void* mappedData = MapReadAsyncAndWait(result.buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData));
     UnmapBuffer(result.buffer);
 }
@@ -808,6 +834,7 @@ TEST_P(CreateBufferMappedTests, MapReadUsageLarge) {
     UnmapBuffer(result.buffer);
 
     const void* mappedData = MapReadAsyncAndWait(result.buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(0, memcmp(mappedData, myData.data(), kDataSize * sizeof(uint32_t)));
     UnmapBuffer(result.buffer);
 }
@@ -864,7 +891,7 @@ TEST_P(CreateBufferMappedTests, CreateThenMapSuccess) {
         &done);
 
     while (!done) {
-        WaitABit();
+        ASSERT_TRUE(WaitABit());
     }
 
     UnmapBuffer(result.buffer);
@@ -889,7 +916,10 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }());
 
@@ -991,7 +1021,9 @@ class BufferMappedAtCreationTests : public DawnTest {
         buffer.MapReadAsync(MapReadCallback, this);
 
         while (mappedData == nullptr) {
-            WaitABit();
+            if (!WaitABit()) {
+                return nullptr;
+            }
         }
 
         return mappedData;
@@ -1038,6 +1070,7 @@ TEST_P(BufferMappedAtCreationTests, MapReadUsageSmall) {
     UnmapBuffer(buffer);
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData));
     UnmapBuffer(buffer);
 }
@@ -1078,6 +1111,7 @@ TEST_P(BufferMappedAtCreationTests, MapReadUsageLarge) {
     UnmapBuffer(buffer);
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
+    ASSERT_NE(mappedData, nullptr);
     ASSERT_EQ(0, memcmp(mappedData, myData.data(), kDataSize * sizeof(uint32_t)));
     UnmapBuffer(buffer);
 }
@@ -1133,7 +1167,10 @@ TEST_P(BufferMappedAtCreationTests, CreateThenMapSuccess) {
         &done);
 
     while (!done) {
-        WaitABit();
+        if (!WaitABit()) {
+            // Device was lost and request will never succeed
+            break;
+        }
     }
 
     UnmapBuffer(buffer);
@@ -1158,7 +1195,10 @@ TEST_P(BufferMappedAtCreationTests, CreateThenMapBeforeUnmapFailure) {
             &done);
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     }());
 
@@ -1379,7 +1419,10 @@ TEST_P(BufferTests, CreateBufferOOMMapReadAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 
@@ -1416,7 +1459,10 @@ TEST_P(BufferTests, CreateBufferOOMMapWriteAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 
@@ -1452,7 +1498,10 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
             &done));
 
         while (!done) {
-            WaitABit();
+            if (!WaitABit()) {
+                // Device was lost and request will never succeed
+                break;
+            }
         }
     };
 

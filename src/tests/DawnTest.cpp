@@ -863,7 +863,7 @@ void DawnTestBase::SetUp() {
 void DawnTestBase::TearDown() {
     FlushWire();
 
-    MapSlotsSynchronously();
+    ASSERT_TRUE(MapSlotsSynchronously());
     ResolveExpectations();
 
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
@@ -891,6 +891,9 @@ void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* 
 }
 
 void DawnTestBase::OnDeviceLost(const char* message, void* userdata) {
+    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
+    self->mDeviceLost = true;
+
     FAIL() << "Device Lost during test: " << message;
 }
 
@@ -970,11 +973,16 @@ std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
-void DawnTestBase::WaitABit() {
+bool DawnTestBase::WaitABit() {
+    if (mDeviceLost) {
+        return false;
+    }
+
     device.Tick();
     FlushWire();
 
     utils::USleep(100);
+    return true;
 }
 
 void DawnTestBase::FlushWire() {
@@ -1006,7 +1014,7 @@ DawnTestBase::ReadbackReservation DawnTestBase::ReserveReadback(uint64_t readbac
     return reservation;
 }
 
-void DawnTestBase::MapSlotsSynchronously() {
+bool DawnTestBase::MapSlotsSynchronously() {
     // Initialize numPendingMapOperations before mapping, just in case the callback is called
     // immediately.
     mNumPendingMapOperations = mReadbackSlots.size();
@@ -1021,8 +1029,12 @@ void DawnTestBase::MapSlotsSynchronously() {
 
     // Busy wait until all map operations are done.
     while (mNumPendingMapOperations != 0) {
-        WaitABit();
+        if (!WaitABit()) {
+            return false;
+        }
     }
+
+    return true;
 }
 
 // static

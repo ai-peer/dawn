@@ -72,10 +72,13 @@ class FenceTests : public DawnTest {
         DawnTest::TearDown();
     }
 
-    void WaitForCompletedValue(wgpu::Fence fence, uint64_t completedValue) {
+    bool WaitForCompletedValue(wgpu::Fence fence, uint64_t completedValue) {
         while (fence.GetCompletedValue() < completedValue) {
-            WaitABit();
+            if (!WaitABit()) {
+                return false;
+            }
         }
+        return true;
     }
 };
 
@@ -89,7 +92,7 @@ TEST_P(FenceTests, SimpleSignal) {
     EXPECT_EQ(fence.GetCompletedValue(), 1u);
 
     queue.Signal(fence, 2);
-    WaitForCompletedValue(fence, 2);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 2));
 
     // Completed value updates to signaled value
     EXPECT_EQ(fence.GetCompletedValue(), 2u);
@@ -126,7 +129,7 @@ TEST_P(FenceTests, OnCompletionOrdering) {
     fence.OnCompletion(3u, ToMockFenceOnCompletionCallback, this + 3);
     fence.OnCompletion(1u, ToMockFenceOnCompletionCallback, this + 1);
 
-    WaitForCompletedValue(fence, 4);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 4));
 }
 
 // Test callbacks still occur if Queue::Signal happens multiple times
@@ -140,7 +143,7 @@ TEST_P(FenceTests, MultipleSignalOnCompletion) {
         .Times(1);
     fence.OnCompletion(3u, ToMockFenceOnCompletionCallback, nullptr);
 
-    WaitForCompletedValue(fence, 4);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 4));
 }
 
 // Test callbacks still occur if Queue::Signal and fence::OnCompletion happens multiple times
@@ -158,7 +161,7 @@ TEST_P(FenceTests, SignalOnCompletionWait) {
     fence.OnCompletion(1u, ToMockFenceOnCompletionCallback, this + 2);
     fence.OnCompletion(5u, ToMockFenceOnCompletionCallback, this + 6);
 
-    WaitForCompletedValue(fence, 6);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 6));
 }
 
 // Test callbacks still occur if Queue::Signal and fence::OnCompletion happens multiple times
@@ -177,7 +180,7 @@ TEST_P(FenceTests, SignalOnCompletionWaitStaggered) {
         .Times(1);
     fence.OnCompletion(3u, ToMockFenceOnCompletionCallback, this + 4);
 
-    WaitForCompletedValue(fence, 4);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 4));
 }
 
 // Test all callbacks are called if they are added for the same fence value
@@ -203,7 +206,7 @@ TEST_P(FenceTests, OnCompletionMultipleCallbacks) {
     fence.OnCompletion(4u, ToMockFenceOnCompletionCallback, this + 2);
     fence.OnCompletion(4u, ToMockFenceOnCompletionCallback, this + 3);
 
-    WaitForCompletedValue(fence, 4u);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 4u));
 }
 
 // TODO(enga): Enable when fence is removed from fence signal tracker
@@ -241,7 +244,7 @@ TEST_P(FenceTests, DISABLED_DestroyBeforeOnCompletionEnd) {
 
     // Wait for another fence to be sure all callbacks have cleared
     queue.Signal(fence, 1);
-    WaitForCompletedValue(fence, 1);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 1));
 }
 
 // Regression test that validation errors that are tracked client-side are captured
@@ -257,7 +260,7 @@ TEST_P(FenceTests, ClientValidationErrorInErrorScope) {
     EXPECT_CALL(*mockPopErrorScopeCallback, Call(WGPUErrorType_Validation, _, this)).Times(1);
     device.PopErrorScope(ToMockPopErrorScopeCallback, this);
 
-    WaitForCompletedValue(fence, 4);
+    ASSERT_TRUE(WaitForCompletedValue(fence, 4));
 }
 
 DAWN_INSTANTIATE_TEST(FenceTests, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
