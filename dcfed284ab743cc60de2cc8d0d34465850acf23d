@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "265d68fd_b0e09812",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-04T05:54:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5892f9b_fcd70cea",
+      "range": {
+        "startLine": 56,
+        "startChar": 41,
+        "endLine": 56,
+        "endChar": 49
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa040b7a_8be50d09",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "dd52d55a_34badf09",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-04T05:54:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa040b7a_8be50d09",
+      "range": {
+        "startLine": 59,
+        "startChar": 41,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9502d9fb_402b8562",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 4
@@ -85,6 +133,30 @@
       "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11ef6a53_b497f44d",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-04T05:54:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9502d9fb_402b8562",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 77
+      },
+      "revId": "dcfed284ab743cc60de2cc8d0d34465850acf23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
