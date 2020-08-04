@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f5551fe_cada33d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Now works for both Vulkan/D3D12. PTAL! \u003d)",
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

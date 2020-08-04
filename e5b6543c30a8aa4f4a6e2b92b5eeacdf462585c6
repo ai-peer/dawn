@@ -124,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "2da042af_99e0b55b",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "\u003e Is there a benefit to FIFO?\n\nCan trim FIFO too. If we LIFO, un-evicted heaps that are pending submit likely cannot be reused. In FIFO, evicted heaps will more likely to be reused but also evicted. LIFO seems better for high FPS but I wasn\u0027t 100% sure.",
+      "parentUuid": "ef3937c2_cdf24939",
+      "range": {
+        "startLine": 36,
+        "startChar": 90,
+        "endLine": 36,
+        "endChar": 94
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4fc790f_474a0b7d",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 2
@@ -138,6 +162,24 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b9e06d_b49ddc96",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "a4fc790f_474a0b7d",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -158,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "dc803d7b_f181681e",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "352e46fd_05434de1",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4102e444_e9c0d76a",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 2
@@ -169,6 +229,24 @@
       "writtenOn": "2020-08-03T12:14:04Z",
       "side": 1,
       "message": "Is this code path only hit for sub-allocation heaps? If direct allocated heaps go through the same path then we might reuse a non-power-of-two heap, which would cause issues for the buddy allocator.",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f9fd4ea_6ce3323a",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Yup, only for sub-allocated heaps. Buuut, we could reuse these heaps for direct. Depends on # of POT sizes. Worth a TODO?",
+      "parentUuid": "4102e444_e9c0d76a",
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -198,6 +276,30 @@
     },
     {
       "key": {
+        "uuid": "6fbe02d1_acdc5c95",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "9f3ce052_44280034",
+      "range": {
+        "startLine": 400,
+        "startChar": 17,
+        "endLine": 400,
+        "endChar": 22
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dbf77baf_a6a50ae7",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -218,6 +320,30 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79933eca_d05b7462",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "dbf77baf_a6a50ae7",
+      "range": {
+        "startLine": 401,
+        "startChar": 13,
+        "endLine": 401,
+        "endChar": 18
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -344,6 +470,54 @@
     },
     {
       "key": {
+        "uuid": "bc6a8d09_645e7c38",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Removed + added \"in same heap\" checks to unit-tests.",
+      "parentUuid": "e873e2b9_959df4a9",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ecf186d_73617153",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Removed + added a check in the front-end tests.",
+      "parentUuid": "e873e2b9_959df4a9",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91e9c5be_f40882ed",
         "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
         "patchSetId": 2
@@ -355,6 +529,24 @@
       "writtenOn": "2020-08-03T12:14:04Z",
       "side": 1,
       "message": "The buffers aren\u0027t kept alive and will be destroyed at the end of the scope. Is that what you intended to test? ditto for other tests\n\nMaybe this loop could be factored in a helper function to reuse it across tests.",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78c51b14_d98f2b07",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Yea, it was to setup the pool for the specific test. PTAL again and LMK if re-factoring is still preferable.",
+      "parentUuid": "91e9c5be_f40882ed",
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -375,6 +567,24 @@
       "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc44a80_11adffd2",
+        "filename": "src/tests/white_box/D3D12ResourceHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-04T00:11:50Z",
+      "side": 1,
+      "message": "Switched to set insert.",
+      "parentUuid": "db345274_def3efda",
+      "revId": "e5b6543c30a8aa4f4a6e2b92b5eeacdf462585c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
