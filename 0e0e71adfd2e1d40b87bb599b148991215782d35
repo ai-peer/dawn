@@ -16,6 +16,23 @@
       "revId": "0e0e71adfd2e1d40b87bb599b148991215782d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d611bdd_3901a33e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-04T19:40:05Z",
+      "side": 1,
+      "message": "LGTM, plan sounds good",
+      "revId": "0e0e71adfd2e1d40b87bb599b148991215782d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
