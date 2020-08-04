@@ -16,6 +16,193 @@
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa2aa7b3_737c0a4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "LGTM overall. I\u0027ve dreaded this change because it exposes how much we need to have a datastructure to compress the storage of per-subresource data. (and it worry it will cause a perf regression). There\u0027s no way around it I guess.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "140d3167_a75e3193",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "Maybe we should store a dawn_native::Aspect in the TextureCopy instead of a wgpu::TextureAspect",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43d130ca_2e6cf306",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ASSERT(HasOneBit); return Log2(aspect)?",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e100714d_6ad39bab",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "This could probably be inside the format struct? Not sure what\u0027s the best for cache coherency.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5282ed2e_d9f95243",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "nit: factor the multiplication by numMipLevels.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b181abac_eda7fdec",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "I wonder if we could maybe have the following:\n\n None \u003d 0\n Color \u003d 0x1\n Depth \u003d 0x1\n Stencil \u003d 0x2\n\nBasically any time we have an Aspect, we have validated it applies to the current format, so we could alias values (and remove the need for the mPlaneIndices if we\u0027re ok having double storage for tracking of stencil-only structure, I think that\u0027s fine)",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32f457ff_90dd576a",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "nit: ConvertSingleAspect and ConvertAspect, so that it\u0027s clear we intend to use this functions only at the boundary of the library?",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7338bdbf_98e9f49d",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "Isn\u0027t that the same as std::array\u003cuint8_t, EnumBitmaskSize\u003cAspect\u003e::value\u003e? Also maybe it could  be deduplicated to be per format.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaa3306f_5cdfa228",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "Especially since this can turn into a single popcount CPU instruction.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "996c40ae_8588a68d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "It does now ^^",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f297506_e88057d8",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:37:10Z",
+      "side": 1,
+      "message": "This is where I think we should have decayed the wgpu::TextureAspec into an Aspect (and maybe pass in the format if we decide to alias Color and Depth)",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
