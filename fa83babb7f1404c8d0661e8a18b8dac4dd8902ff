@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "433807c6_4e1e2701",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T08:09:49Z",
+      "side": 1,
+      "message": "Still LGTM, feel free to land.",
+      "revId": "fa83babb7f1404c8d0661e8a18b8dac4dd8902ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
