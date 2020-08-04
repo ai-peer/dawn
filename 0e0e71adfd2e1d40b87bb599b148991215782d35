@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ecf84872_cd28bf29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-08-04T19:26:03Z",
+      "side": 1,
+      "message": "PTAL, this will fail on the *-rel bots that use the Chromium DEPS, since there is a big ball of mutual dependencies between tint, spirv-tool, dawn, etc. I will have to do a manual roll of the DEPS in Chromium after this lands to unblock things.",
+      "revId": "0e0e71adfd2e1d40b87bb599b148991215782d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
