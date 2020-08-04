@@ -33,6 +33,75 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8f36a45_77d3967a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-04T23:17:57Z",
+      "side": 1,
+      "message": "nit: we have a  GetSubresourcesAffectedByCopy helper",
+      "range": {
+        "startLine": 376,
+        "startChar": 8,
+        "endLine": 376,
+        "endChar": 83
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2360dcda_004e28d8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-04T23:17:57Z",
+      "side": 1,
+      "message": "[copy splits in copy-from-staging-to-texture]",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 388,
+        "endChar": 72
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a700271d_ee140b22",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-04T23:17:57Z",
+      "side": 1,
+      "message": "Since we\u0027re using the optimallyAlignedBytesPerRow, then could we skip computing the [copy splits in copy-from-staging-to-texture]? I think it should always yield a single copy.\n\nWe can ASSERT this alignment in |CopyFromStagingToTexture|",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
