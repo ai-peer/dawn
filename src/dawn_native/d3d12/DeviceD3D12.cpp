@@ -42,6 +42,7 @@
 #include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/SwapChainD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
+#include "dawn_native/d3d12/UtilsD3D12.h"
 
 #include <sstream>
 
@@ -362,6 +363,50 @@ namespace dawn_native { namespace d3d12 {
         commandContext->GetCommandList()->CopyBufferRegion(
             dstBuffer->GetD3D12Resource(), destinationOffset, srcBuffer->GetResource(),
             sourceOffset, size);
+    }
+
+    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+                                                const TextureDataLayout& src,
+                                                TextureCopy* dst,
+                                                const Extent3D copySize) {
+        CommandRecordingContext* commandContext;
+        DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+        Texture* texture = ToBackend(dst->texture.Get());
+
+        SubresourceRange range = {dst->mipLevel, 1, dst->origin.z, copySize.depth};
+
+        if (IsCompleteSubresourceCopiedTo(texture, copySize, dst->mipLevel)) {
+            texture->SetIsSubresourceContentInitialized(true, range);
+        } else {
+            texture->EnsureSubresourceContentInitialized(commandContext, range);
+        }
+
+        texture->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopyDst, range);
+
+        const TextureCopySplits copySplits =
+            ComputeTextureCopySplits(dst->origin, copySize, texture->GetFormat(), src.offset,
+                                     src.bytesPerRow, src.rowsPerImage);
+
+        const uint64_t bytesPerSlice =
+            src.bytesPerRow * (src.rowsPerImage / texture->GetFormat().blockHeight);
+
+        std::array<uint64_t, TextureCopySplits::kMaxTextureCopySplits> bufferOffsetsForNextSlice = {
+            {0u, 0u}};
+        for (uint32_t copySlice = 0; copySlice < copySize.depth; ++copySlice) {
+            const uint32_t splitIndex = copySlice % copySplits.copies2D.size();
+
+            const Texture2DCopySplit& copySplitPerLayerBase = copySplits.copies2D[splitIndex];
+            const uint64_t bufferOffsetForNextSlice = bufferOffsetsForNextSlice[splitIndex];
+            const uint32_t copyTextureLayer = copySlice + dst->origin.z;
+
+            RecordCopyBufferToTextureFromTextureCopySplit(
+                commandContext->GetCommandList(), copySplitPerLayerBase,
+                ToBackend(source)->GetResource(), bufferOffsetForNextSlice, src.bytesPerRow,
+                texture, dst->mipLevel, copyTextureLayer);
+
+            bufferOffsetsForNextSlice[splitIndex] += bytesPerSlice * copySplits.copies2D.size();
+        }
+        return {};
     }
 
     void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {

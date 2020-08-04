@@ -41,6 +41,15 @@ namespace dawn_native { namespace d3d12 {
 
     bool IsTypeless(DXGI_FORMAT format);
 
+    void RecordCopyBufferToTextureFromTextureCopySplit(ID3D12GraphicsCommandList* commandList,
+                                                       const Texture2DCopySplit& baseCopySplit,
+                                                       ID3D12Resource* bufferResource,
+                                                       uint64_t baseOffset,
+                                                       uint64_t bufferBytesPerRow,
+                                                       Texture* texture,
+                                                       uint32_t textureMiplevel,
+                                                       uint32_t textureSlice);
+
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_UTILSD3D12_H_

@@ -31,6 +31,11 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+        MaybeError WriteTextureImpl(const TextureCopyView* destination,
+                                    const void* data,
+                                    size_t dataSize,
+                                    const TextureDataLayout* dataLayout,
+                                    const Extent3D* writeSize) override;
     };
 
 }}  // namespace dawn_native::d3d12
