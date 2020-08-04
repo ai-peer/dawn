@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6f4a7adb_3864b6e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T08:10:51Z",
+      "side": 1,
+      "message": "Can this be abandoned? It has been superseeded by other CLs.",
+      "revId": "46e87f47c8dbabd52b87e9331d5ee52b3fac29d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "398c7f1e_5cfb24d5",
         "filename": "dawn.json",
         "patchSetId": 3
