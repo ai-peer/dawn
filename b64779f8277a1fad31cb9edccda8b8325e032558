@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "625d76e5_4cf3afab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-04T20:21:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "845caca0_3497c7b1",
+      "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "687330a4_2728018d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -50,6 +68,24 @@
       "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a5309a_acca9b02",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-04T20:21:20Z",
+      "side": 1,
+      "message": "Done. Some places required propagating the return.\n\nCouldn\u0027t switch WaitABit to WaitUntilTrue as not all wait loops use a single boolean variable to end.",
+      "parentUuid": "1b343d41_22df18e3",
+      "revId": "b64779f8277a1fad31cb9edccda8b8325e032558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
