@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8eefe308_398a3f23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:41:36Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4f7f6b722320527c76e63d18d2ba4ec647441c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60ec50e0_5f34380b",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -36,6 +53,23 @@
         "endLine": 20,
         "endChar": 31
       },
+      "revId": "4f7f6b722320527c76e63d18d2ba4ec647441c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d5da170_443e7ee2",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-04T14:41:36Z",
+      "side": 1,
+      "message": "nit: should be in the previous CL?",
       "revId": "4f7f6b722320527c76e63d18d2ba4ec647441c93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
