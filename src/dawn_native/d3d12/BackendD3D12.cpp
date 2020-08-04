@@ -39,7 +39,7 @@ namespace dawn_native { namespace d3d12 {
                             functions->d3d12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
                         ASSERT(debugController != nullptr);
                         debugController->EnableDebugLayer();
-                        debugController->SetEnableGPUBasedValidation(true);
+                        // debugController->SetEnableGPUBasedValidation(true);
 
                         // Enable additional debug layers.
                         dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
