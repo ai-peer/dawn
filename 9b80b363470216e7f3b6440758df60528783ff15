@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38e745c8_c1bba0f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-04T21:45:15Z",
+      "side": 1,
+      "message": "Please ignore reverted changes in patchset 5. I accidentally committed local test changes.",
+      "revId": "9b80b363470216e7f3b6440758df60528783ff15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
