@@ -123,6 +123,30 @@
     },
     {
       "key": {
+        "uuid": "22175c7b_bd467e42",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T21:57:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2360dcda_004e28d8",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 388,
+        "endChar": 72
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0c34105_0114bc10",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -143,6 +167,30 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e32e5e73_cf7ac001",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T21:57:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a0c34105_0114bc10",
+      "range": {
+        "startLine": 395,
+        "startChar": 8,
+        "endLine": 395,
+        "endChar": 79
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -169,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "c0ca3a10_d6e81899",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T21:57:35Z",
+      "side": 1,
+      "message": "I didn\u0027t see a [1] but I think it was the part in CommandBufferD3D12.cpp where we do the same for Command::CopyBufferToTexture. Done.",
+      "parentUuid": "7fe6e5cd_4ea472c0",
+      "range": {
+        "startLine": 386,
+        "startChar": 2,
+        "endLine": 410,
+        "endChar": 5
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d681c97f_e015359e",
         "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
         "patchSetId": 1
@@ -189,6 +261,30 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "203b06b0_f43383cd",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T21:57:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d681c97f_e015359e",
+      "range": {
+        "startLine": 46,
+        "startChar": 46,
+        "endLine": 46,
+        "endChar": 57
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -380,6 +476,30 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15f27fb0_d7cff4dc",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T21:57:35Z",
+      "side": 1,
+      "message": "Sorry for the confusion, I wasn\u0027t so sure myself. Thanks!",
+      "parentUuid": "4301ea2e_2f99c416",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
