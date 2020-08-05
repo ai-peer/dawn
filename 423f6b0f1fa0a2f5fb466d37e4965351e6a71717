@@ -197,6 +197,30 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c0d029_a76a94e4",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T01:33:19Z",
+      "side": 1,
+      "message": "I think it\u0027s for cases when dataLayout-\u003ebytesPerRow \u003d\u003d 508, then we need to align it to 512. \n\nI think for CopyTextureRegion RowPitch must be a multiple of 256.\nI saw this comment here \nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/TextureCopySplitter.cpp;l\u003d198;drc\u003d3b17f0bde80c3806f94ab11b4f7d059f1dbb32a5?originalUrl\u003dhttps:%2F%2Fcs.chromium.org%2F\n\nbut I don\u0027t think I saw that D3D12_TEXTURE_DATA_PITCH_ALIGNMENT was actually used to align the buffer offset. So I was getting errors without aligning it myself.",
+      "parentUuid": "112d20e0_83eb9fd3",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
