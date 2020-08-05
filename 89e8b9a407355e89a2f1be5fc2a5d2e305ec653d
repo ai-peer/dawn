@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "f2b0065f_278d2eaf",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:59:46Z",
+      "side": 1,
+      "message": "Actually I take that back. This is for a copy and not a render/compute encoder so I don\u0027t really care that much.",
+      "parentUuid": "d7235e24_4d08f027",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43d130ca_2e6cf306",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
