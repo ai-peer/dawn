@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "e5abe24c_456a8ce0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-05T00:02:25Z",
+      "side": 1,
+      "message": "\u003e\u003e What do you think about having a PooledResourceMemoryAllocator\n\nSGTM. Mind if I give it a go? Seems straightforward, PTAL.",
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8fc24fd_86adbd06",
         "filename": "src/dawn_native/BuddyMemoryAllocator.cpp",
         "patchSetId": 4
@@ -57,6 +74,30 @@
       "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbec497f_43b7b87d",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-05T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8fc24fd_86adbd06",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 46
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -83,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "1ef9673b_f930ae34",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-05T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a7fba3_ef18fe45",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d67a9aa3_955e596f",
         "filename": "src/tests/unittests/BuddyMemoryAllocatorTests.cpp",
         "patchSetId": 4
@@ -94,6 +159,30 @@
       "writtenOn": "2020-08-04T22:01:43Z",
       "side": 1,
       "message": "I presume you\u0027re using std::set because you want to prevent additions to the data structure if a ResourceHeapBase is used more than once.  \n\nIf a future bug enters the code, how do you know that the underlying ResourceHeapBases instances aren\u0027t getting freed and re-allocated at the same pointer location?",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 410,
+        "endChar": 43
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1c739f9_cf932c3d",
+        "filename": "src/tests/unittests/BuddyMemoryAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-05T00:02:25Z",
+      "side": 1,
+      "message": "Heaps are never freed until DestroyPool(). If it\u0027s not in the pool but gets re-used (a bug) then the pool size should be off by that count. I use set to only check if the same heaps get recycled. LMK, if you think we need a stronger check there.",
+      "parentUuid": "d67a9aa3_955e596f",
       "range": {
         "startLine": 410,
         "startChar": 0,
@@ -126,6 +215,30 @@
       "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc3a81d_653e3aad",
+        "filename": "src/tests/unittests/BuddyMemoryAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-05T00:02:25Z",
+      "side": 1,
+      "message": "The only test that doesn\u0027t need it is for a \"pending\" serial which never needs to call Tick (re-open if needed).",
+      "parentUuid": "7549b0aa_a91671ec",
+      "range": {
+        "startLine": 415,
+        "startChar": 1,
+        "endLine": 416,
+        "endChar": 39
+      },
+      "revId": "8f75b58b9fe8050ca46dbb888588fdc6e8e6de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
