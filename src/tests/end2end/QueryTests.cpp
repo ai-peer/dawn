@@ -57,7 +57,7 @@ TEST_P(OcclusionQueryTests, QuerySetDestroy) {
     querySet.Destroy();
 }
 
-DAWN_INSTANTIATE_TEST(OcclusionQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(OcclusionQueryTests, D3D12Backend(), VulkanBackend());
 
 class PipelineStatisticsQueryTests : public QueryTests {
   protected:
@@ -91,7 +91,7 @@ TEST_P(PipelineStatisticsQueryTests, QuerySetCreation) {
     device.CreateQuerySet(&descriptor);
 }
 
-DAWN_INSTANTIATE_TEST(PipelineStatisticsQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(PipelineStatisticsQueryTests, D3D12Backend(), VulkanBackend());
 
 class TimestampExpectation : public detail::Expectation {
   public:
@@ -144,6 +144,9 @@ TEST_P(TimestampQueryTests, QuerySetCreation) {
 
 // Test calling timestamp query from command encoder
 TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
+    // TODO(hao.x.li): Timestamp query is not implemented on Vulkan.
+    DAWN_SKIP_TEST_IF(IsVulkan());
+
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -161,6 +164,9 @@ TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
 
 // Test calling timestamp query from render pass encoder
 TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
+    // TODO(hao.x.li): Timestamp query is not implemented on Vulkan.
+    DAWN_SKIP_TEST_IF(IsVulkan());
+
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -181,6 +187,9 @@ TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
 
 // Test calling timestamp query from compute pass encoder
 TEST_P(TimestampQueryTests, TimestampOnComputePass) {
+    // TODO(hao.x.li): Timestamp query is not implemented on Vulkan.
+    DAWN_SKIP_TEST_IF(IsVulkan());
+
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -200,6 +209,9 @@ TEST_P(TimestampQueryTests, TimestampOnComputePass) {
 
 // Test resolving timestamp query to one slot in the buffer
 TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
+    // TODO(hao.x.li): Timestamp query is not implemented on Vulkan.
+    DAWN_SKIP_TEST_IF(IsVulkan());
+
     constexpr uint32_t kQueryCount = 2;
     constexpr uint64_t kZero = 0;
 
@@ -235,4 +247,4 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend(), VulkanBackend());
