@@ -28,6 +28,7 @@
 #include "dawn_native/vulkan/ComputePipelineVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/PipelineLayoutVk.h"
+#include "dawn_native/vulkan/QuerySetVk.h"
 #include "dawn_native/vulkan/QueueVk.h"
 #include "dawn_native/vulkan/RenderPassCache.h"
 #include "dawn_native/vulkan/RenderPipelineVk.h"
@@ -125,7 +126,7 @@ namespace dawn_native { namespace vulkan {
         return PipelineLayout::Create(this, descriptor);
     }
     ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
-        return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation");
+        return QuerySet::Create(this, descriptor);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
