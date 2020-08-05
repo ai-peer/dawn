@@ -69,6 +69,30 @@
       "revId": "adaacce634209a81e2b022b31b7c08f500c57bc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b58b95fe_939f9221",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-05T23:16:34Z",
+      "side": 1,
+      "message": "Is this function meant to ensure we do not read past the end of data or is that left to the callers? If it is UploadTextureDataAligningBytesPerRow to be the first line of defense, then we need to ensure that any offsetting of data stays within the bounds, otherwise we\u0027ll crash at best or have a security hole at worse. Both are undesireable and not fun to debug. :-)",
+      "parentUuid": "bbeb4329_222d32e1",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "adaacce634209a81e2b022b31b7c08f500c57bc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
