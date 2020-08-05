@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "27762e6c_3b231251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T21:09:31Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8f36a45_77d3967a",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -99,6 +116,29 @@
         "startChar": 8,
         "endLine": 388,
         "endChar": 72
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0c34105_0114bc10",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T21:09:31Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 395,
+        "startChar": 8,
+        "endLine": 395,
+        "endChar": 79
       },
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -307,6 +347,30 @@
       "side": 1,
       "message": "what happens when the depth is \u003e 1?",
       "parentUuid": "0b2d0360_067735e2",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4301ea2e_2f99c416",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T21:09:31Z",
+      "side": 1,
+      "message": "We iterate slice by slice at [3] but thinking about it now, that still won\u0027t work because on every other iteration, the buffer offset may not be a multiple of 512.\n\nSorry I was wrong; it looks like we nearly always need the copy splitter",
+      "parentUuid": "2e731fcf_ca5a82e3",
       "range": {
         "startLine": 108,
         "startChar": 8,
