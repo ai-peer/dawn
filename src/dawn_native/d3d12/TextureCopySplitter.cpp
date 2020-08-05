@@ -43,6 +43,10 @@ namespace dawn_native { namespace d3d12 {
                                                uint64_t offset,
                                                uint32_t bytesPerRow,
                                                uint32_t rowsPerImage) {
+        if (bytesPerRow == 0) {
+            bytesPerRow = copySize.width * format.blockByteSize;
+        }
+
         Texture2DCopySplit copy;
 
         ASSERT(bytesPerRow % format.blockByteSize == 0);
