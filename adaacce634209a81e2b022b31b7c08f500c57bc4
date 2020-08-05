@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b1e31a9_dd85e850",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-05T22:45:04Z",
+      "side": 1,
+      "message": "Please pass this and other input structures by const reference. With the current code, it\u0027s difficult to tell which parameters are inputs into the functions and which ones the functions fill out for the caller.",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 67
+      },
+      "revId": "adaacce634209a81e2b022b31b7c08f500c57bc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c063685_6b13757b",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-05T22:45:04Z",
+      "side": 1,
+      "message": "There are several places in the code where a variable has the word \"size\" or \"offset\" in it. Sometimes, it refers to a unit of pixels and other times, a unit of bytes.\n\nPlease go back and clarify these by adding the word \"bytes\" or \"pixels\" to the variable name as appropriate.\n\nVariables with the word \"stride\", \"height\", \"row\", and \"slice\" can stay how they are as the type has a well defined meaning.",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "adaacce634209a81e2b022b31b7c08f500c57bc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
