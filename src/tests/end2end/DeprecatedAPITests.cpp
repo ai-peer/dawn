@@ -321,9 +321,10 @@ TEST_P(BufferCopyViewDeprecationTests, DeprecationWarning) {
         wgpu::BufferCopyView bufCopy = {};
         bufCopy.buffer = buffer;
         bufCopy.offset = 4;
+        bufCopy.bytesPerRow = 4;
         EXPECT_DEPRECATION_WARNING(encoder.CopyBufferToTexture(&bufCopy, &texCopy, &copySize));
         EXPECT_DEPRECATION_WARNING(encoder.CopyTextureToBuffer(&texCopy, &bufCopy, &copySize));
-        // Since bytesPerRow is 0
+        // Since bytesPerRow is not 256-aligned.
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
     {
@@ -341,9 +342,10 @@ TEST_P(BufferCopyViewDeprecationTests, DeprecationWarning) {
         wgpu::BufferCopyView bufCopy = {};
         bufCopy.buffer = buffer;
         bufCopy.rowsPerImage = 1;
+        bufCopy.bytesPerRow = 4;
         EXPECT_DEPRECATION_WARNING(encoder.CopyBufferToTexture(&bufCopy, &texCopy, &copySize));
         EXPECT_DEPRECATION_WARNING(encoder.CopyTextureToBuffer(&texCopy, &bufCopy, &copySize));
-        // Since bytesPerRow is 0
+        // Since bytesPerRow is not 256-aligned.
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 }
