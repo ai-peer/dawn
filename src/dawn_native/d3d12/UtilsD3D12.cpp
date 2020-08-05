@@ -15,6 +15,9 @@
 #include "dawn_native/d3d12/UtilsD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/Format.h"
+#include "dawn_native/d3d12/BufferD3D12.h"
+#include "dawn_native/d3d12/CommandRecordingContext.h"
 
 #include <stringapiset.h>
 
@@ -132,6 +135,77 @@ namespace dawn_native { namespace d3d12 {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    void RecordCopyBufferToTextureFromTextureCopySplit(ID3D12GraphicsCommandList* commandList,
+                                                       const Texture2DCopySplit& baseCopySplit,
+                                                       ID3D12Resource* bufferResource,
+                                                       uint64_t baseOffset,
+                                                       uint64_t bufferBytesPerRow,
+                                                       Texture* texture,
+                                                       uint32_t textureMiplevel,
+                                                       uint32_t textureSlice) {
+        const D3D12_TEXTURE_COPY_LOCATION textureLocation =
+            ComputeTextureCopyLocationForTexture(texture, textureMiplevel, textureSlice);
+
+        const uint64_t offset = baseCopySplit.offset + baseOffset;
+
+        for (uint32_t i = 0; i < baseCopySplit.count; ++i) {
+            const Texture2DCopySplit::CopyInfo& info = baseCopySplit.copies[i];
+
+            // TODO(jiawei.shao@intel.com): pre-compute bufferLocation and sourceRegion as
+            // members in Texture2DCopySplit::CopyInfo.
+            const D3D12_TEXTURE_COPY_LOCATION bufferLocation =
+                ComputeBufferLocationForCopyTextureRegion(texture, bufferResource, info.bufferSize,
+                                                          offset, bufferBytesPerRow);
+            const D3D12_BOX sourceRegion =
+                ComputeD3D12BoxFromOffsetAndSize(info.bufferOffset, info.copySize);
+
+            commandList->CopyTextureRegion(&textureLocation, info.textureOffset.x,
+                                           info.textureOffset.y, info.textureOffset.z,
+                                           &bufferLocation, &sourceRegion);
+        }
+    }
+
+    void CopyBufferToTextureWithCopySplit(CommandRecordingContext* commandContext,
+                                          TextureCopy textureCopy,
+                                          Extent3D copySize,
+                                          Texture* texture,
+                                          ID3D12Resource* bufferResource,
+                                          uint64_t offset,
+                                          uint32_t bytesPerRow,
+                                          uint32_t rowsPerImage) {
+        // See comments in ComputeTextureCopySplits() for more details.
+        const TextureCopySplits copySplits = ComputeTextureCopySplits(
+            textureCopy.origin, copySize, texture->GetFormat(), offset, bytesPerRow, rowsPerImage);
+
+        const uint64_t bytesPerSlice =
+            bytesPerRow * (rowsPerImage / texture->GetFormat().blockHeight);
+
+        // copySplits.copies2D[1] is always calculated for the second copy slice with
+        // extra "bytesPerSlice" copy offset compared with the first copy slice. So
+        // here we use an array bufferOffsetsForNextSlice to record the extra offsets
+        // for each copy slice: bufferOffsetsForNextSlice[0] is the extra offset for
+        // the next copy slice that uses copySplits.copies2D[0], and
+        // bufferOffsetsForNextSlice[1] is the extra offset for the next copy slice
+        // that uses copySplits.copies2D[1].
+        std::array<uint64_t, TextureCopySplits::kMaxTextureCopySplits> bufferOffsetsForNextSlice = {
+            {0u, 0u}};
+
+        for (uint32_t copySlice = 0; copySlice < copySize.depth; ++copySlice) {
+            const uint32_t splitIndex = copySlice % copySplits.copies2D.size();
+
+            const Texture2DCopySplit& copySplitPerLayerBase = copySplits.copies2D[splitIndex];
+            const uint64_t bufferOffsetForNextSlice = bufferOffsetsForNextSlice[splitIndex];
+            const uint32_t copyTextureLayer = copySlice + textureCopy.origin.z;
+
+            RecordCopyBufferToTextureFromTextureCopySplit(
+                commandContext->GetCommandList(), copySplitPerLayerBase, bufferResource,
+                bufferOffsetForNextSlice, bytesPerRow, texture, textureCopy.mipLevel,
+                copyTextureLayer);
+
+            bufferOffsetsForNextSlice[splitIndex] += bytesPerSlice * copySplits.copies2D.size();
         }
     }
 
