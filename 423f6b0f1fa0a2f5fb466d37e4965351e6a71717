@@ -106,6 +106,29 @@
     },
     {
       "key": {
+        "uuid": "7fe6e5cd_4ea472c0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-05T01:23:58Z",
+      "side": 1,
+      "message": "Can we put this piece of code and [1] together in one function?",
+      "range": {
+        "startLine": 386,
+        "startChar": 2,
+        "endLine": 410,
+        "endChar": 5
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a700271d_ee140b22",
         "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
         "patchSetId": 1
@@ -140,6 +163,30 @@
       "writtenOn": "2020-08-05T01:20:07Z",
       "side": 1,
       "message": "Why does it always yield a single copy when we use optimally aligned bytes? \n(Just tried without computing copy splits and it was failing TextureZeroInitTest.WriteWholeTextureArray, debugged into it and with computing copy splits it had 2 copy splits)",
+      "parentUuid": "a700271d_ee140b22",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "112d20e0_83eb9fd3",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-05T01:23:58Z",
+      "side": 1,
+      "message": "Sorry that I don\u0027t understand why we can use Align(alignedBytesPerRow, D3D12_TEXTURE_DATA_PITCH_ALIGNMENT) as the \u0027bytesPerRow\u0027 instead of the original dataLayout-\u003ebytesPerRow. For example, when we want to upload data into a 4x4 texture with RGBA8Unorm format, and we use the dataLayout-\u003ebytesPerRow \u003d\u003d 512, will we upload all the texel data we want?",
       "parentUuid": "a700271d_ee140b22",
       "range": {
         "startLine": 108,
