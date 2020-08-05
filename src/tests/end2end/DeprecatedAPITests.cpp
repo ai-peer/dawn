@@ -321,16 +321,18 @@ TEST_P(BufferCopyViewDeprecationTests, DeprecationWarning) {
         wgpu::BufferCopyView bufCopy = {};
         bufCopy.buffer = buffer;
         bufCopy.offset = 4;
+
         EXPECT_DEPRECATION_WARNING(encoder.CopyBufferToTexture(&bufCopy, &texCopy, &copySize));
         EXPECT_DEPRECATION_WARNING(encoder.CopyTextureToBuffer(&texCopy, &bufCopy, &copySize));
-        // Since bytesPerRow is 0
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        wgpu::CommandBuffer command = encoder.Finish();
+        queue.Submit(1, &command);
     }
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::BufferCopyView bufCopy = {};
         bufCopy.buffer = buffer;
         bufCopy.bytesPerRow = kTextureBytesPerRowAlignment;
+
         EXPECT_DEPRECATION_WARNING(encoder.CopyBufferToTexture(&bufCopy, &texCopy, &copySize));
         EXPECT_DEPRECATION_WARNING(encoder.CopyTextureToBuffer(&texCopy, &bufCopy, &copySize));
         wgpu::CommandBuffer command = encoder.Finish();
@@ -341,10 +343,11 @@ TEST_P(BufferCopyViewDeprecationTests, DeprecationWarning) {
         wgpu::BufferCopyView bufCopy = {};
         bufCopy.buffer = buffer;
         bufCopy.rowsPerImage = 1;
+
         EXPECT_DEPRECATION_WARNING(encoder.CopyBufferToTexture(&bufCopy, &texCopy, &copySize));
         EXPECT_DEPRECATION_WARNING(encoder.CopyTextureToBuffer(&texCopy, &bufCopy, &copySize));
-        // Since bytesPerRow is 0
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        wgpu::CommandBuffer command = encoder.Finish();
+        queue.Submit(1, &command);
     }
 }
 
