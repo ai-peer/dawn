@@ -16,6 +16,86 @@
       "revId": "298ef3a0585044c51188b5761c7572f7a7bbd160",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "918d4056_040aee05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:02:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "298ef3a0585044c51188b5761c7572f7a7bbd160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af67d043_13ace6d0",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:02:14Z",
+      "side": 1,
+      "message": "These tests could use comments about how they\u0027re testing the zero init.\nIf I understand correctly, the indirect buffer is zeroed, so we perform a dispatch of nothing and don\u0027t execute the shader. The output texture should be unchanged.\n\nIs that correct?",
+      "revId": "298ef3a0585044c51188b5761c7572f7a7bbd160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bbabdec_1b66067a",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:02:14Z",
+      "side": 1,
+      "message": "nit: this could be CreateBufferFromData(device, wgpu::BufferUsage::Vertex, {0.f, 0.f, 0.f, 0.f})",
+      "range": {
+        "startLine": 383,
+        "startChar": 19,
+        "endLine": 383,
+        "endChar": 39
+      },
+      "revId": "298ef3a0585044c51188b5761c7572f7a7bbd160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a87ba3b4_a66bb938",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:02:14Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 386,
+        "startChar": 19,
+        "endLine": 386,
+        "endChar": 39
+      },
+      "revId": "298ef3a0585044c51188b5761c7572f7a7bbd160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
