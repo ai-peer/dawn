@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "d7235e24_4d08f027",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "We could, but it would be the first time our internal command buffer deviates from the public API. This would be fine, but I do want to keep them as close as possible so in the future we can have a trivial conversion from the wire format to the internal format. Should decrease latency a bunch.",
+      "parentUuid": "140d3167_a75e3193",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43d130ca_2e6cf306",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "a8b4432a_f89a2ee8",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d130ca_2e6cf306",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e100714d_6ad39bab",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
@@ -81,6 +117,24 @@
       "writtenOn": "2020-08-04T14:37:10Z",
       "side": 1,
       "message": "This could probably be inside the format struct? Not sure what\u0027s the best for cache coherency.",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79acfe69_fe8a13de",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "I think it\u0027s better here because it\u0027s very small and spatially next to the other texture info used to compute the subresource index.",
+      "parentUuid": "e100714d_6ad39bab",
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "a900835f_1d7b4308",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5282ed2e_d9f95243",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b181abac_eda7fdec",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 7
@@ -115,6 +187,24 @@
       "writtenOn": "2020-08-04T14:37:10Z",
       "side": 1,
       "message": "I wonder if we could maybe have the following:\n\n None \u003d 0\n Color \u003d 0x1\n Depth \u003d 0x1\n Stencil \u003d 0x2\n\nBasically any time we have an Aspect, we have validated it applies to the current format, so we could alias values (and remove the need for the mPlaneIndices if we\u0027re ok having double storage for tracking of stencil-only structure, I think that\u0027s fine)",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f24e5ebc_3795345a",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Right now we still need to differentiate depth/color in order to query the Format for what aspects it has, so we would need another tracking bit on the Format to do that, so not sure if it\u0027s worth the possible confusing with aliasing. I don\u0027t think the indirection through mPlaneIndices is so problematic.",
+      "parentUuid": "b181abac_eda7fdec",
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -138,6 +228,24 @@
     },
     {
       "key": {
+        "uuid": "b1496804_2f3d265a",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32f457ff_90dd576a",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7338bdbf_98e9f49d",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 7
@@ -152,6 +260,24 @@
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8834adb1_2ec5cf99",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7338bdbf_98e9f49d",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +312,24 @@
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d69424c_2920a084",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-05T17:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "996c40ae_8588a68d",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
