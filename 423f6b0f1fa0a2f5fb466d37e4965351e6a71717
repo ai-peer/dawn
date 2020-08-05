@@ -292,6 +292,30 @@
       "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e731fcf_ca5a82e3",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-05T20:37:07Z",
+      "side": 1,
+      "message": "what happens when the depth is \u003e 1?",
+      "parentUuid": "0b2d0360_067735e2",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "423f6b0f1fa0a2f5fb466d37e4965351e6a71717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
