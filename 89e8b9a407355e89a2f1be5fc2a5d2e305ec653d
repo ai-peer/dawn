@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "de6239a3_64c090a3",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-06T15:28:49Z",
+      "side": 1,
+      "message": "Done. Stores dawn_native::Aspect now",
+      "parentUuid": "f2b0065f_278d2eaf",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43d130ca_2e6cf306",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
@@ -365,6 +383,24 @@
       "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d1e09c7_f86fed3f",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-06T15:28:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f297506_e88057d8",
+      "revId": "89e8b9a407355e89a2f1be5fc2a5d2e305ec653d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
