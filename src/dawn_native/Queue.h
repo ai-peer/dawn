@@ -60,7 +60,6 @@ namespace dawn_native {
                                            size_t size);
         virtual MaybeError WriteTextureImpl(const TextureCopyView* destination,
                                             const void* data,
-                                            size_t dataSize,
                                             const TextureDataLayout* dataLayout,
                                             const Extent3D* writeSize);
 
