@@ -16,6 +16,57 @@
       "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22673b50_5111c0d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-06T20:58:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50602a5a_78aab937",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-06T20:58:01Z",
+      "side": 1,
+      "message": "Nit: I\u0027m guessing this is a bugfix exposed by the tests? Please add to the CL description if so.",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "511e58c0_16fc0d05",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-06T20:58:01Z",
+      "side": 1,
+      "message": "Would it also be worth testing mapping many buffers simultaneously (ie., not waiting)?",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
