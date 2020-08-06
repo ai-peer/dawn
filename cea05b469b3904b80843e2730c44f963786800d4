@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "0088c7f5_1f7a34fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-06T23:12:32Z",
+      "side": 1,
+      "message": "LGTM after Bryan\u0027s last comment",
+      "revId": "cea05b469b3904b80843e2730c44f963786800d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e183135_aa3b09b9",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 6
