@@ -892,7 +892,8 @@ void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* 
 }
 
 void DawnTestBase::OnDeviceLost(const char* message, void* userdata) {
-    FAIL() << "Device Lost during test: " << message;
+    ADD_FAILURE() << "Device Lost during test: " << message;
+    ASSERT(false);
 }
 
 std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
