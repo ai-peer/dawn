@@ -33,6 +33,24 @@
       "revId": "9b80b363470216e7f3b6440758df60528783ff15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23147d1c_e66e06d8",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-06T18:51:16Z",
+      "side": 1,
+      "message": "Per our discussion, I modified the device lost callback to assert instead of just using FAIL(). This removes the need to bubble up the result.",
+      "parentUuid": "76f003f9_cb277ba0",
+      "revId": "9b80b363470216e7f3b6440758df60528783ff15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
