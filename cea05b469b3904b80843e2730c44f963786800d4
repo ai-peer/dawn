@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47fe1d62_3e6339ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-06T22:03:22Z",
+      "side": 1,
+      "message": "Seems fine but I\u0027m not a gtest expert, @AE PTAL.",
+      "revId": "cea05b469b3904b80843e2730c44f963786800d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e183135_aa3b09b9",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-06T22:03:22Z",
+      "side": 1,
+      "message": "uuunit: please comment why we ADD_FAILURE + ASSERT vs not (ex. Fail() permits the test to continue in a possibly corrupted state and ASSERT ensures we abort).",
+      "revId": "cea05b469b3904b80843e2730c44f963786800d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
