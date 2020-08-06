@@ -31,15 +31,14 @@ namespace dawn_native { namespace vulkan {
         ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
             DeviceBase* device,
             const void* data,
-            size_t dataSize,
             uint32_t alignedBytesPerRow,
             uint32_t optimallyAlignedBytesPerRow,
             uint32_t alignedRowsPerImage,
             const TextureDataLayout* dataLayout,
             const Format& textureFormat,
-            const Extent3D* writeSize) {
-            uint32_t newDataSize = ComputeRequiredBytesInCopy(
-                textureFormat, *writeSize, optimallyAlignedBytesPerRow, alignedRowsPerImage);
+            const Extent3D* writeSizePixel) {
+            uint32_t newDataSizeBytes = ComputeRequiredBytesInCopy(
+                textureFormat, *writeSizePixel, optimallyAlignedBytesPerRow, alignedRowsPerImage);
 
             uint64_t optimalOffsetAlignment =
                 ToBackend(device)
@@ -48,7 +47,7 @@ namespace dawn_native { namespace vulkan {
 
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                              newDataSize + optimalOffsetAlignment - 1,
+                                              newDataSizeBytes + optimalOffsetAlignment - 1,
                                               device->GetPendingCommandSerial()));
             ASSERT(uploadHandle.mappedBuffer != nullptr);
 
@@ -59,7 +58,7 @@ namespace dawn_native { namespace vulkan {
             uint32_t alignedRowsPerImageInBlock = alignedRowsPerImage / textureFormat.blockHeight;
             uint32_t dataRowsPerImageInBlock = dataLayout->rowsPerImage / textureFormat.blockHeight;
             if (dataRowsPerImageInBlock == 0) {
-                dataRowsPerImageInBlock = writeSize->height / textureFormat.blockHeight;
+                dataRowsPerImageInBlock = writeSizePixel->height / textureFormat.blockHeight;
             }
 
             uint64_t additionalOffset =
@@ -71,9 +70,9 @@ namespace dawn_native { namespace vulkan {
             uint64_t imageAdditionalStride =
                 dataLayout->bytesPerRow * (dataRowsPerImageInBlock - alignedRowsPerImageInBlock);
 
-            CopyTextureData(dstPointer, srcPointer, writeSize->depth, alignedRowsPerImageInBlock,
-                            imageAdditionalStride, alignedBytesPerRow, optimallyAlignedBytesPerRow,
-                            dataLayout->bytesPerRow);
+            CopyTextureData(dstPointer, srcPointer, writeSizePixel->depth,
+                            alignedRowsPerImageInBlock, imageAdditionalStride, alignedBytesPerRow,
+                            optimallyAlignedBytesPerRow, dataLayout->bytesPerRow);
 
             return uploadHandle;
         }
@@ -107,16 +106,15 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError Queue::WriteTextureImpl(const TextureCopyView* destination,
                                        const void* data,
-                                       size_t dataSize,
                                        const TextureDataLayout* dataLayout,
-                                       const Extent3D* writeSize) {
+                                       const Extent3D* writeSizePixel) {
         uint32_t blockSize = destination->texture->GetFormat().blockByteSize;
         uint32_t blockWidth = destination->texture->GetFormat().blockWidth;
         // We are only copying the part of the data that will appear in the texture.
-        // Note that validating texture copy range ensures that writeSize->width and
-        // writeSize->height are multiples of blockWidth and blockHeight respectively.
-        uint32_t alignedBytesPerRow = (writeSize->width) / blockWidth * blockSize;
-        uint32_t alignedRowsPerImage = writeSize->height;
+        // Note that validating texture copy range ensures that writeSizePixel->width and
+        // writeSizePixel->height are multiples of blockWidth and blockHeight respectively.
+        uint32_t alignedBytesPerRow = (writeSizePixel->width) / blockWidth * blockSize;
+        uint32_t alignedRowsPerImage = writeSizePixel->height;
 
         uint32_t optimalBytesPerRowAlignment =
             ToBackend(GetDevice())
@@ -126,11 +124,11 @@ namespace dawn_native { namespace vulkan {
             Align(alignedBytesPerRow, optimalBytesPerRowAlignment);
 
         UploadHandle uploadHandle;
-        DAWN_TRY_ASSIGN(
-            uploadHandle,
-            UploadTextureDataAligningBytesPerRow(
-                GetDevice(), data, dataSize, alignedBytesPerRow, optimallyAlignedBytesPerRow,
-                alignedRowsPerImage, dataLayout, destination->texture->GetFormat(), writeSize));
+        DAWN_TRY_ASSIGN(uploadHandle,
+                        UploadTextureDataAligningBytesPerRow(
+                            GetDevice(), data, alignedBytesPerRow, optimallyAlignedBytesPerRow,
+                            alignedRowsPerImage, dataLayout, destination->texture->GetFormat(),
+                            writeSizePixel));
 
         TextureDataLayout passDataLayout = *dataLayout;
         passDataLayout.offset = uploadHandle.startOffset;
@@ -144,6 +142,6 @@ namespace dawn_native { namespace vulkan {
 
         return ToBackend(GetDevice())
             ->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout, &textureCopy,
-                                       *writeSize);
+                                       *writeSizePixel);
     }
 }}  // namespace dawn_native::vulkan
