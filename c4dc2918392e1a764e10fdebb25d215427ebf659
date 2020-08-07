@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "ccb1467d_9f8680ef",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-07T18:00:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e424d5_68d1d8b8",
+      "range": {
+        "startLine": 371,
+        "startChar": 48,
+        "endLine": 371,
+        "endChar": 62
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef633bdb_a395277e",
         "filename": "src/dawn_native/metal/DeviceMTL.h",
         "patchSetId": 11
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "0c6ac1ce_69b1fc62",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-07T18:00:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef633bdb_a395277e",
+      "range": {
+        "startLine": 70,
+        "startChar": 44,
+        "endLine": 70,
+        "endChar": 73
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "723a2b25_8c3994a6",
         "filename": "src/dawn_native/metal/QueueMTL.mm",
         "patchSetId": 11
@@ -102,6 +150,30 @@
       "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebd2e5ff_cb80fafc",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-07T18:00:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723a2b25_8c3994a6",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
