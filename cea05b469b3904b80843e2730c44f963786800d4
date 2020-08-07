@@ -50,6 +50,24 @@
       "revId": "cea05b469b3904b80843e2730c44f963786800d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5498eef4_9b733673",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-07T20:21:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e183135_aa3b09b9",
+      "revId": "cea05b469b3904b80843e2730c44f963786800d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
