@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "80b74679_ecadb7a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-07T00:10:31Z",
+      "side": 1,
+      "message": "LGTM after Stephen\u0027s comment",
+      "revId": "3497ea0f861e39756faf867b0e1b03263f0c4c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55e7a613_b5075f06",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 3
