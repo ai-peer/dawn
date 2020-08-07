@@ -16,6 +16,23 @@
       "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12c309c4_56ef0579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-07T19:07:31Z",
+      "side": 1,
+      "message": "Looks like you have 2 reviewers active, so moving myself to cc, but let me know if you want me to review.",
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
