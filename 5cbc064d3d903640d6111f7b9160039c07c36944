@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5691341_d6bf4dd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-08-07T19:35:40Z",
+      "side": 1,
+      "message": "Unfortunately, I can\u0027t come up with a simple way to write a regression test or assert that a texture\u0027s usage has been tracked :(",
+      "revId": "5cbc064d3d903640d6111f7b9160039c07c36944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
