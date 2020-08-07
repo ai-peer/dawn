@@ -33,6 +33,92 @@
       "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a516a48f_92252041",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-07T21:44:41Z",
+      "side": 1,
+      "message": "Code LGTM but I did not thoroughly check all of the math.  \n\nPlease make sure all of the codepaths you\u0027ve enabled are fully covered by tests: multiple \u0027slices\u0027, compressed formats of different block sizes, etc. ",
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09015e4d_5d721241",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-07T21:44:41Z",
+      "side": 1,
+      "message": "Can dst be a const references?  Seems like it\u0027s used as an \"in\" parameter.",
+      "range": {
+        "startLine": 370,
+        "startChar": 48,
+        "endLine": 370,
+        "endChar": 65
+      },
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7214a93_29530e16",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-07T21:44:41Z",
+      "side": 1,
+      "message": "Can dst be a const references?  Seems like it\u0027s used as an \"in\" parameter.",
+      "range": {
+        "startLine": 105,
+        "startChar": 44,
+        "endLine": 105,
+        "endChar": 61
+      },
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ee5344c_f4c495b0",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-07T21:44:41Z",
+      "side": 1,
+      "message": "Please make TextureCopy and Extent3D be const reference.",
+      "range": {
+        "startLine": 174,
+        "startChar": 42,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
