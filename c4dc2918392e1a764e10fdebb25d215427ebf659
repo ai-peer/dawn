@@ -16,6 +16,92 @@
       "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64c86cd0_81b4049e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-07T00:09:18Z",
+      "side": 1,
+      "message": "I didn\u0027t notice the first time, but after Rafael\u0027s comment I see that now we have a lot of places in these functions were sometimes we pass by const value, sometimes we pass by const reference, and sometimes we pass by const pointer. It would be great if we could fix this to be const reference for all structure-type arguments.\n\nWhat we should probably do is change the signature of WriteTextureImpl to take references instead of pointers and change the code at https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Queue.cpp;l\u003d161;drc\u003ddd03a800cb548f9beeb5db9ecc8dc993c0aa21db;bpv\u003d0;bpt\u003d1.",
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69e424d5_68d1d8b8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-07T00:09:18Z",
+      "side": 1,
+      "message": "nit: const reference. It looks like the other backends have this wrong for the CopyFromStaging.. and WriteTexture.. functions as well. Sorry, but could you change those as well please?",
+      "range": {
+        "startLine": 371,
+        "startChar": 48,
+        "endLine": 371,
+        "endChar": 62
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef633bdb_a395277e",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-07T00:09:18Z",
+      "side": 1,
+      "message": "not your change, but const reference as well",
+      "range": {
+        "startLine": 70,
+        "startChar": 44,
+        "endLine": 70,
+        "endChar": 73
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "723a2b25_8c3994a6",
+        "filename": "src/dawn_native/metal/QueueMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-07T00:09:18Z",
+      "side": 1,
+      "message": "it\u0027s unfortunate that some of these arguments are pointers and some are references. Do you think you could normalize them to be const references?",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "c4dc2918392e1a764e10fdebb25d215427ebf659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
