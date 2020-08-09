@@ -81,6 +81,8 @@ namespace dawn_native {
 
         const AttachmentState* GetAttachmentState() const;
 
+        const std::string& GetVertexEntryPoint() const;
+
         std::bitset<kMaxVertexAttributes> GetAttributesUsingVertexBuffer(uint32_t slot) const;
         std::array<std::bitset<kMaxVertexAttributes>, kMaxVertexBuffers>
             attributesUsingVertexBuffer;

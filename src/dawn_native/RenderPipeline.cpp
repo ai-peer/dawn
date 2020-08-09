@@ -583,6 +583,12 @@ namespace dawn_native {
         return mAttachmentState.Get();
     }
 
+    const std::string& RenderPipelineBase::GetVertexEntryPoint() const {
+        ASSERT(!IsError());
+
+        return mVertexEntryPoint;
+    }
+
     std::bitset<kMaxVertexAttributes> RenderPipelineBase::GetAttributesUsingVertexBuffer(
         uint32_t slot) const {
         ASSERT(!IsError());

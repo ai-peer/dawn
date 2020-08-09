@@ -330,10 +330,15 @@ namespace dawn_native { namespace metal {
         MTLRenderPipelineDescriptor* descriptorMTL = [MTLRenderPipelineDescriptor new];
 
         ShaderModule* vertexModule = ToBackend(descriptor->vertexStage.module);
+        // ShaderModuleBase* convertedModule = nullptr;
+        // DAWN_TRY_ASSIGN(convertedModule,
+        // vertexModule->ConvertToPulling(*GetVertexStateDescriptor(), GetVertexEntryPoint()));
+        // vertexModule = ToBackend(convertedModule);
         const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
         ShaderModule::MetalFunctionData vertexData;
         DAWN_TRY(vertexModule->GetFunction(vertexEntryPoint, SingleShaderStage::Vertex,
-                                           ToBackend(GetLayout()), &vertexData));
+                                           ToBackend(GetLayout()), &vertexData, 0xFFFFFFFF,
+                                           GetVertexStateDescriptor()));
 
         descriptorMTL.vertexFunction = vertexData.function;
         if (vertexData.needsStorageBufferLength) {
@@ -378,7 +383,7 @@ namespace dawn_native { namespace metal {
 
         descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
 
-        MTLVertexDescriptor* vertexDesc = MakeVertexDesc();
+        MTLVertexDescriptor* vertexDesc = [MTLVertexDescriptor new];
         descriptorMTL.vertexDescriptor = vertexDesc;
         [vertexDesc release];
 

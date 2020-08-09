@@ -87,15 +87,29 @@ namespace dawn_native { namespace metal {
         }
         return {};
     }
+    bool replace(std::string& str, const std::string& from, const std::string& to) {
+        size_t start_pos = str.find(from);
+        if (start_pos == std::string::npos)
+            return false;
+        str.replace(start_pos, from.length(), to);
+        return true;
+    }
 
     MaybeError ShaderModule::GetFunction(const char* functionName,
                                          SingleShaderStage functionStage,
                                          const PipelineLayout* layout,
                                          ShaderModule::MetalFunctionData* out,
-                                         uint32_t sampleMask) {
+                                         uint32_t sampleMask,
+                                         const VertexStateDescriptor* vertexState) {
         ASSERT(!IsError());
         ASSERT(out);
-        const std::vector<uint32_t>& spirv = GetSpirv();
+        const std::vector<uint32_t>* spirv = &GetSpirv();
+
+        std::vector<uint32_t> pullingSpirv;
+        if (functionStage == SingleShaderStage::Vertex) {
+            DAWN_TRY_ASSIGN(pullingSpirv, GeneratePullingSpirv(*vertexState, functionName));
+            spirv = &pullingSpirv;
+        }
 
         std::unique_ptr<spirv_cross::CompilerMSL> compilerImpl;
         spirv_cross::CompilerMSL* compiler;
@@ -103,7 +117,7 @@ namespace dawn_native { namespace metal {
             // Initializing the compiler is needed every call, because this method uses reflection
             // to mutate the compiler's IR.
             DAWN_TRY(
-                CheckSpvcSuccess(mSpvcContext.InitializeForMsl(spirv.data(), spirv.size(),
+                CheckSpvcSuccess(mSpvcContext.InitializeForMsl(spirv->data(), spirv->size(),
                                                                GetMSLCompileOptions(sampleMask)),
                                  "Unable to initialize instance of spvc"));
             DAWN_TRY(CheckSpvcSuccess(mSpvcContext.GetCompiler(reinterpret_cast<void**>(&compiler)),
@@ -126,7 +140,7 @@ namespace dawn_native { namespace metal {
 
             options_msl.additional_fixed_sample_mask = sampleMask;
 
-            compilerImpl = std::make_unique<spirv_cross::CompilerMSL>(spirv);
+            compilerImpl = std::make_unique<spirv_cross::CompilerMSL>(*spirv);
             compiler = compilerImpl.get();
             compiler->set_msl_options(options_msl);
         }
@@ -135,6 +149,7 @@ namespace dawn_native { namespace metal {
         // To make the MSL indices match the indices chosen in the PipelineLayout, we build
         // a table of MSLResourceBinding to give to SPIRV-Cross.
 
+        uint32_t largest = 0;
         // Create one resource binding entry per stage per binding.
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayoutBase::BindingMap& bindingMap =
@@ -158,6 +173,10 @@ namespace dawn_native { namespace metal {
                             shaderIndex;
                         DAWN_TRY(CheckSpvcSuccess(mSpvcContext.AddMSLResourceBinding(mslBinding),
                                                   "Unable to add MSL Resource Binding"));
+
+                        if (shaderIndex > largest) {
+                            largest = shaderIndex;
+                        }
                     } else {
                         spirv_cross::MSLResourceBinding mslBinding;
                         mslBinding.stage = SpirvExecutionModelForStage(stage);
@@ -166,10 +185,35 @@ namespace dawn_native { namespace metal {
                         mslBinding.msl_buffer = mslBinding.msl_texture = mslBinding.msl_sampler =
                             shaderIndex;
 
+                        if (shaderIndex > largest) {
+                            largest = shaderIndex;
+                        }
                         compiler->add_msl_resource_binding(mslBinding);
                     }
                 }
             }
+        }
+
+        if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+            shaderc_spvc_msl_resource_binding mslBinding;
+            mslBinding.stage = ToSpvcExecutionModel(SingleShaderStage::Vertex);
+            mslBinding.desc_set = static_cast<uint32_t>(0);
+            mslBinding.binding = static_cast<uint32_t>(largest + 1);
+            mslBinding.msl_buffer = mslBinding.msl_texture = mslBinding.msl_sampler =
+                kBufferLengthBufferSlot;
+            DAWN_TRY(CheckSpvcSuccess(mSpvcContext.AddMSLResourceBinding(mslBinding),
+                                      "Unable to add MSL Resource Binding"));
+        } else {
+            spirv_cross::MSLResourceBinding mslBinding;
+            mslBinding.stage = SpirvExecutionModelForStage(SingleShaderStage::Vertex);
+            mslBinding.desc_set = static_cast<uint32_t>(0);
+            mslBinding.binding = static_cast<uint32_t>(largest + 1);
+            mslBinding.msl_buffer = mslBinding.msl_texture = mslBinding.msl_sampler =
+                kBufferLengthBufferSlot;
+
+            compiler->add_msl_resource_binding(mslBinding);
+            printf("%d\n", largest + 1);
+            printf("%zu\n", kBufferLengthBufferSlot);
         }
 
         {
@@ -201,6 +245,7 @@ namespace dawn_native { namespace metal {
             } else {
                 msl = compiler->compile();
             }
+            printf("%s\n", msl.c_str());
             // Metal uses Clang to compile the shader as C++14. Disable everything in the -Wall
             // category. -Wunused-variable in particular comes up a lot in generated code, and some
             // (old?) Metal drivers accidentally treat it as a MTLLibraryErrorCompileError instead
@@ -210,6 +255,8 @@ namespace dawn_native { namespace metal {
 #pragma clang diagnostic ignored "-Wall"
 #endif
 )" + msl;
+            while (replace(msl, "= &", "= ")) {
+            }
             mslSource = [[NSString alloc] initWithUTF8String:msl.c_str()];
 
             auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();

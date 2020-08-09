@@ -91,6 +91,14 @@ namespace dawn_native {
         shaderc_spvc::Context* GetContext();
         const std::vector<uint32_t>& GetSpirv() const;
 
+        // TODO: only if wgsl on
+        ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
+            const VertexStateDescriptor& vertexState,
+            const std::string& entryPoint) const;
+
+        ResultOrError<ShaderModuleBase*> ConvertToPulling(const VertexStateDescriptor& vertexState,
+                                                          const std::string& entryPoint);
+
       protected:
         static MaybeError CheckSpvcSuccess(shaderc_spvc_status status, const char* error_msg);
         shaderc_spvc::CompileOptions GetCompileOptions() const;

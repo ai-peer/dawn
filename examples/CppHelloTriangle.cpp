@@ -98,22 +98,32 @@ void init() {
 
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
-        #version 450
-        layout(location = 0) in vec4 pos;
-        void main() {
-            gl_Position = pos;
-        })");
+        [[location 0]] var<in> pos : vec4<f32>;
+        [[location 1]] var<in> color : vec4<f32>;
+        [[builtin position]] var<out> Position : vec4<f32>;
+        [[location 0]] var<out> outColor : vec4<f32>;
+        [[builtin vertex_idx]] var<in> VID : u32;
+
+        type Particle = struct {
+           [[offset 0]] pos : vec4<f32>;
+        };
+
+        fn vtx_main() -> void {
+            Position = pos;
+            outColor = color;
+            return;
+        }
+        entry_point vertex as "main" = vtx_main;)");
 
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
-        #version 450
-        layout(set = 0, binding = 0) uniform sampler mySampler;
-        layout(set = 0, binding = 1) uniform texture2D myTexture;
-
-        layout(location = 0) out vec4 fragColor;
-        void main() {
-            fragColor = texture(sampler2D(myTexture, mySampler), gl_FragCoord.xy / vec2(640.0, 480.0));
-        })");
+        [[location 0]] var<in> outColor : vec4<f32>;
+        [[location 0]] var<out> fragColor : vec4<f32>;
+        fn frag_main() -> void {
+          fragColor = outColor; #vec4<f32>(1.0, 1.0, 0.0, 1.0);
+          return;
+        }
+        entry_point fragment as "main" = frag_main;)");
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
@@ -131,8 +141,10 @@ void init() {
     descriptor.cFragmentStage.module = fsModule;
     descriptor.cVertexState.vertexBufferCount = 1;
     descriptor.cVertexState.cVertexBuffers[0].arrayStride = 4 * sizeof(float);
-    descriptor.cVertexState.cVertexBuffers[0].attributeCount = 1;
+    descriptor.cVertexState.cVertexBuffers[0].attributeCount = 2;
     descriptor.cVertexState.cAttributes[0].format = wgpu::VertexFormat::Float4;
+    descriptor.cVertexState.cAttributes[1].format = wgpu::VertexFormat::Float4;
+    descriptor.cVertexState.cAttributes[1].shaderLocation = 1;
     descriptor.depthStencilState = &descriptor.cDepthStencilState;
     descriptor.cDepthStencilState.format = wgpu::TextureFormat::Depth24PlusStencil8;
     descriptor.cColorStates[0].format = GetPreferredSwapChainTextureFormat();

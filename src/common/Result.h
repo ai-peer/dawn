@@ -255,6 +255,9 @@ Result<void, E>& Result<void, E>::operator=(Result<void, E>&& other) {
 
 template <typename E>
 Result<void, E>::~Result() {
+    if (mError != nullptr) {
+        printf("%s\n", mError->GetMessage().c_str());
+    }
     ASSERT(mError == nullptr);
 }
 

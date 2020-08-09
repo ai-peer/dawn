@@ -504,7 +504,8 @@ namespace dawn_native { namespace metal {
                     mDirtyVertexBuffers & pipeline->GetVertexBufferSlotsUsed();
 
                 for (uint32_t dawnIndex : IterateBitSet(vertexBuffersToApply)) {
-                    uint32_t metalIndex = pipeline->GetMtlVertexBufferIndex(dawnIndex);
+                    // uint32_t metalIndex = pipeline->GetMtlVertexBufferIndex(dawnIndex);
+                    uint32_t metalIndex = dawnIndex;
 
                     [encoder setVertexBuffers:&mVertexBuffers[dawnIndex]
                                       offsets:&mVertexBufferOffsets[dawnIndex]

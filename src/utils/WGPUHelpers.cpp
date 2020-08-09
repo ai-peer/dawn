@@ -44,6 +44,15 @@ namespace utils {
             }
         }
 
+        wgpu::ShaderModule CreateShaderModuleFromWGSL(const wgpu::Device& device,
+                                                      const char* code) {
+            wgpu::ShaderModuleWGSLDescriptor wgslDesc;
+            wgslDesc.source = code;
+            wgpu::ShaderModuleDescriptor descriptor;
+            descriptor.nextInChain = &wgslDesc;
+            return device.CreateShaderModule(&descriptor);
+        }
+
         wgpu::ShaderModule CreateShaderModuleFromResult(
             const wgpu::Device& device,
             const shaderc::SpvCompilationResult& result) {
@@ -93,6 +102,8 @@ namespace utils {
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device,
                                           SingleShaderStage stage,
                                           const char* source) {
+        return CreateShaderModuleFromWGSL(device, source);
+        /*
         shaderc_shader_kind kind = ShadercShaderKind(stage);
 
         shaderc::Compiler* compiler = CompilerSingleton::Get();
@@ -101,7 +112,6 @@ namespace utils {
             dawn::ErrorLog() << result.GetErrorMessage();
             return {};
         }
-#ifdef DUMP_SPIRV_ASSEMBLY
         {
             shaderc::CompileOptions options;
             auto resultAsm = compiler->CompileGlslToSpvAssembly(source, strlen(source), kind,
@@ -114,7 +124,6 @@ namespace utils {
             printf("SPIRV ASSEMBLY DUMP START\n%s\nSPIRV ASSEMBLY DUMP END\n", buffer);
             free(buffer);
         }
-#endif
 
 #ifdef DUMP_SPIRV_JS_ARRAY
         printf("SPIRV JS ARRAY DUMP START\n");
@@ -130,7 +139,7 @@ namespace utils {
         printf("SPIRV JS ARRAY DUMP END\n");
 #endif
 
-        return CreateShaderModuleFromResult(device, result);
+        return CreateShaderModuleFromResult(device, result);*/
     }
 
     wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
