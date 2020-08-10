@@ -16,6 +16,92 @@
       "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2988f86e_686ac06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:33:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52e0ebee_b4e619dc",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:33:22Z",
+      "side": 1,
+      "message": "nit: update comment",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 796,
+        "endChar": 30
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af2888a3_a910d1ff",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:33:22Z",
+      "side": 1,
+      "message": "nit: update comment",
+      "range": {
+        "startLine": 1244,
+        "startChar": 0,
+        "endLine": 1244,
+        "endChar": 30
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e19b3f19_54c717e9",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:33:22Z",
+      "side": 1,
+      "message": "nit: update comment",
+      "range": {
+        "startLine": 337,
+        "startChar": 4,
+        "endLine": 337,
+        "endChar": 45
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
