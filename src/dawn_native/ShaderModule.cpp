@@ -357,7 +357,7 @@ namespace dawn_native {
         }
 
         tint::Validator validator;
-        if (!validator.Validate(module)) {
+        if (!validator.Validate(&module)) {
             errorStream << "Validation: " << validator.error() << std::endl;
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
         }
@@ -382,6 +382,74 @@ namespace dawn_native {
         tint::ast::Module module = parser.module();
         if (!module.IsValid()) {
             errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::TypeDeterminer type_determiner(&context, &module);
+        if (!type_determiner.Determine()) {
+            errorStream << "Type Determination: " << type_determiner.error();
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::writer::spirv::Generator generator(std::move(module));
+        if (!generator.Generate()) {
+            errorStream << "Generator: " << generator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        std::vector<uint32_t> spirv = generator.result();
+        return std::move(spirv);
+    }
+
+    ResultOrError<std::vector<uint32_t>> ConvertWGSLToSPIRVWithPulling(
+        const char* source,
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL->SPIR-V failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        // TODO: This is a duplicate parse with ValidateWGSL, need to store
+        // state between calls to avoid this.
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::ast::Module module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::ast::transform::VertexPullingTransform transform(&context, &module);
+        tint::wgpu::VertexStateDescriptor state;
+        for (size_t i = 0; i < vertexState.vertexBufferCount; ++i) {
+            auto& vertexBuffer = vertexState.vertexBuffers[i];
+            tint::wgpu::VertexBufferLayoutDescriptor layout;
+            layout.arrayStride = vertexBuffer.arrayStride;
+            layout.stepMode =
+                *reinterpret_cast<const tint::wgpu::InputStepMode*>(&vertexBuffer.stepMode);
+
+            for (size_t j = 0; j < vertexBuffer.attributeCount; ++j) {
+                auto& attribute = vertexBuffer.attributes[j];
+                tint::wgpu::VertexAttributeDescriptor attr;
+                attr.format = *reinterpret_cast<const tint::wgpu::VertexFormat*>(&attribute.format);
+                attr.offset = attribute.offset;
+                attr.shaderLocation = attribute.shaderLocation;
+
+                layout.attributes.push_back(std::move(attr));
+            }
+
+            state.vertexBuffers.push_back(std::move(layout));
+        }
+        transform.SetVertexState(std::move(state));
+        transform.SetEntryPoint(entryPoint);
+
+        if (!transform.Run()) {
+            errorStream << "Vertex pulling transform: " << transform.GetError();
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
         }
 
@@ -1093,6 +1161,14 @@ namespace dawn_native {
     const std::vector<uint32_t>& ShaderModuleBase::GetSpirv() const {
         return mSpirv;
     }
+
+#ifdef DAWN_ENABLE_WGSL
+    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint) const {
+        return ConvertWGSLToSPIRVWithPulling(mWgsl.c_str(), vertexState, entryPoint);
+    }
+#endif
 
     shaderc_spvc::CompileOptions ShaderModuleBase::GetCompileOptions() const {
         shaderc_spvc::CompileOptions options;

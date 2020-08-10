@@ -483,9 +483,16 @@ namespace dawn_native { namespace metal {
         // all the relevant state.
         class VertexBufferTracker {
           public:
+            explicit VertexBufferTracker(StorageBufferLengthTracker* lengthTracker)
+                : mLengthTracker(lengthTracker) {
+            }
+
             void OnSetVertexBuffer(uint32_t slot, Buffer* buffer, uint64_t offset) {
                 mVertexBuffers[slot] = buffer->GetMTLBuffer();
                 mVertexBufferOffsets[slot] = offset;
+
+                uint32_t bindingSize = static_cast<uint32_t>(buffer->GetSize() - offset);
+                mVertexPullingMetadataBuffer[slot] = bindingSize;
 
                 // Use 64 bit masks and make sure there are no shift UB
                 static_assert(kMaxVertexBuffers <= 8 * sizeof(unsigned long long) - 1, "");
@@ -506,10 +513,20 @@ namespace dawn_native { namespace metal {
                 for (uint32_t dawnIndex : IterateBitSet(vertexBuffersToApply)) {
                     uint32_t metalIndex = pipeline->GetMtlVertexBufferIndex(dawnIndex);
 
+                    // Insert lengths for vertex buffers bound as storage buffers
+                    // Not used yet, but will be when OpArrayLength is implemented
+                    mLengthTracker->data[SingleShaderStage::Vertex][metalIndex] =
+                        mVertexPullingMetadataBuffer[dawnIndex];
+
                     [encoder setVertexBuffers:&mVertexBuffers[dawnIndex]
                                       offsets:&mVertexBufferOffsets[dawnIndex]
                                     withRange:NSMakeRange(metalIndex, 1)];
                 }
+
+                // Binds a buffer full vertex buffer lengths, to clamp vertex pulling
+                [encoder setVertexBytes:mVertexPullingMetadataBuffer.data()
+                                 length:sizeof(uint32_t) * kMaxVertexBuffers
+                                atIndex:kVertexPullingMetadataBufferSlot];
 
                 mDirtyVertexBuffers.reset();
             }
@@ -519,6 +536,9 @@ namespace dawn_native { namespace metal {
             std::bitset<kMaxVertexBuffers> mDirtyVertexBuffers;
             std::array<id<MTLBuffer>, kMaxVertexBuffers> mVertexBuffers;
             std::array<NSUInteger, kMaxVertexBuffers> mVertexBufferOffsets;
+            std::array<uint32_t, kMaxVertexBuffers> mVertexPullingMetadataBuffer;
+
+            StorageBufferLengthTracker* mLengthTracker;
         };
 
     }  // anonymous namespace
@@ -948,8 +968,8 @@ namespace dawn_native { namespace metal {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
-        VertexBufferTracker vertexBuffers;
         StorageBufferLengthTracker storageBufferLengths = {};
+        VertexBufferTracker vertexBuffers(&storageBufferLengths);
         BindGroupTracker bindGroups(&storageBufferLengths);
 
         id<MTLRenderCommandEncoder> encoder = commandContext->BeginRender(mtlRenderPass);
