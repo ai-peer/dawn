@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29eadf66_278856d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-08-10T21:15:52Z",
+      "side": 1,
+      "message": "thanks everyone. @Rafael, I stepped through the tests and verified they hit all the copy split code paths and multiple slices are tested. Hopefully since the copy split math is coming directly from Jiawei\u0027s CommandBuffer::CopyBufferToTexture, that it has also been tested. ",
+      "revId": "b590c976445cbf890324d9f7b997af16fe75eacc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
