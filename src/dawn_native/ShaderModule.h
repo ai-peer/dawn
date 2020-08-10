@@ -90,6 +90,9 @@ namespace dawn_native {
 
         shaderc_spvc::Context* GetContext();
         const std::vector<uint32_t>& GetSpirv() const;
+        ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
+            const VertexStateDescriptor& vertexState,
+            const std::string& entryPoint) const;
 
       protected:
         static MaybeError CheckSpvcSuccess(shaderc_spvc_status status, const char* error_msg);

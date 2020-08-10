@@ -333,7 +333,8 @@ namespace dawn_native { namespace metal {
         const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
         ShaderModule::MetalFunctionData vertexData;
         DAWN_TRY(vertexModule->GetFunction(vertexEntryPoint, SingleShaderStage::Vertex,
-                                           ToBackend(GetLayout()), &vertexData));
+                                           ToBackend(GetLayout()), &vertexData, 0xFFFFFFFF,
+                                           GetVertexStateDescriptor()));
 
         descriptorMTL.vertexFunction = vertexData.function;
         if (vertexData.needsStorageBufferLength) {
@@ -381,6 +382,11 @@ namespace dawn_native { namespace metal {
         MTLVertexDescriptor* vertexDesc = MakeVertexDesc();
         descriptorMTL.vertexDescriptor = vertexDesc;
         [vertexDesc release];
+
+        // Calling MakeVertexDesc first is important since it sets indices for packed mtl bindings
+        MTLVertexDescriptor* emptyVertexDesc = [MTLVertexDescriptor new];
+        descriptorMTL.vertexDescriptor = emptyVertexDesc;
+        [emptyVertexDesc release];
 
         descriptorMTL.sampleCount = GetSampleCount();
         descriptorMTL.alphaToCoverageEnabled = descriptor->alphaToCoverageEnabled;
