@@ -370,10 +370,10 @@ namespace dawn_native {
                static_cast<uint64_t>(maxStart);
     }
 
-    uint32_t ComputeRequiredBytesInCopy(const TexelBlockInfo& blockInfo,
-                                        const Extent3D& copySize,
-                                        uint32_t bytesPerRow,
-                                        uint32_t rowsPerImage) {
+    ResultOrError<uint64_t> ComputeRequiredBytesInCopy(const TexelBlockInfo& blockInfo,
+                                                       const Extent3D& copySize,
+                                                       uint32_t bytesPerRow,
+                                                       uint32_t rowsPerImage) {
         // Default value for rowsPerImage
         if (rowsPerImage == 0) {
             rowsPerImage = copySize.height;
@@ -387,10 +387,16 @@ namespace dawn_native {
         ASSERT(copySize.depth >= 1);
 
         uint64_t texelBlockRowsPerImage = rowsPerImage / blockInfo.blockHeight;
-        uint64_t bytesPerImage = bytesPerRow * texelBlockRowsPerImage;
+        uint64_t bytesPerImage = texelBlockRowsPerImage * bytesPerRow;
         uint64_t bytesInLastSlice =
-            bytesPerRow * (copySize.height / blockInfo.blockHeight - 1) +
-            (copySize.width / blockInfo.blockWidth * blockInfo.blockByteSize);
+            static_cast<uint64_t>(bytesPerRow) * (copySize.height / blockInfo.blockHeight - 1) +
+            (static_cast<uint64_t>(copySize.width) / blockInfo.blockWidth *
+             blockInfo.blockByteSize);
+
+        if (copySize.depth > 1 &&
+            (UINT64_MAX - bytesInLastSlice) / (copySize.depth - 1) < bytesPerImage) {
+            return DAWN_VALIDATION_ERROR("requiredBytesInCopy overflows unsigned long long\n");
+        }
         return bytesPerImage * (copySize.depth - 1) + bytesInLastSlice;
     }
 
@@ -429,8 +435,10 @@ namespace dawn_native {
         // because the divisibility conditions are necessary for the algorithm to be valid.
         // TODO(tommek@google.com): to match the spec this should only be checked when
         // copyExtent.depth > 1.
-        uint32_t requiredBytesInCopy = ComputeRequiredBytesInCopy(
-            blockInfo, copyExtent, layout.bytesPerRow, layout.rowsPerImage);
+        uint64_t requiredBytesInCopy;
+        DAWN_TRY_ASSIGN(requiredBytesInCopy,
+                        ComputeRequiredBytesInCopy(blockInfo, copyExtent, layout.bytesPerRow,
+                                                   layout.rowsPerImage));
 
         bool fitsInData =
             layout.offset <= byteSize && (requiredBytesInCopy <= (byteSize - layout.offset));
