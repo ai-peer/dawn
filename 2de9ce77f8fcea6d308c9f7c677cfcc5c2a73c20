@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b63757d_19ade123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-10T12:56:43Z",
+      "side": 1,
+      "message": "PTAL! Uncertain about the reinterpret_cast for creating the vertex state descriptor passed to Tint, should we make functions to convert even though the structs should be the same? Also may want to double check my indices but I think they\u0027re okay.",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
