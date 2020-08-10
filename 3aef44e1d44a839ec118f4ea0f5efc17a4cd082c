@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "a3230caa_ec2fcd6a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-10T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52e0ebee_b4e619dc",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 796,
+        "endChar": 30
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af2888a3_a910d1ff",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 1
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "c3b9c762_654ee565",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-10T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af2888a3_a910d1ff",
+      "range": {
+        "startLine": 1244,
+        "startChar": 0,
+        "endLine": 1244,
+        "endChar": 30
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e19b3f19_54c717e9",
         "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
         "patchSetId": 1
@@ -102,6 +150,30 @@
       "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3553358c_f78bc99b",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-10T18:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e19b3f19_54c717e9",
+      "range": {
+        "startLine": 337,
+        "startChar": 4,
+        "endLine": 337,
+        "endChar": 45
+      },
+      "revId": "3aef44e1d44a839ec118f4ea0f5efc17a4cd082c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
