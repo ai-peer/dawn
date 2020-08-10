@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "af719cec_06199a95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:02:12Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09015e4d_5d721241",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 13
@@ -64,6 +81,30 @@
       "writtenOn": "2020-08-07T21:44:41Z",
       "side": 1,
       "message": "Can dst be a const references?  Seems like it\u0027s used as an \"in\" parameter.",
+      "range": {
+        "startLine": 370,
+        "startChar": 48,
+        "endLine": 370,
+        "endChar": 65
+      },
+      "revId": "72014e2676e6bd18ffd3fdec855a36cd55c38a35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b413691_f2a419fc",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T16:02:12Z",
+      "side": 1,
+      "message": "Don\u0027t think so. we use dst-\u003etexture mutably inside.\n\nOne day we should make Ref\u003c\u003e have a Get() const that returns the mutable contents, like unique_ptr does.",
+      "parentUuid": "09015e4d_5d721241",
       "range": {
         "startLine": 370,
         "startChar": 48,
