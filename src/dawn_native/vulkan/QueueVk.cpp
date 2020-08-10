@@ -38,8 +38,10 @@ namespace dawn_native { namespace vulkan {
             const TextureDataLayout* dataLayout,
             const TexelBlockInfo& blockInfo,
             const Extent3D* writeSize) {
-            uint32_t newDataSize = ComputeRequiredBytesInCopy(
-                blockInfo, *writeSize, optimallyAlignedBytesPerRow, alignedRowsPerImage);
+            uint64_t newDataSize;
+            DAWN_TRY_ASSIGN(newDataSize, ComputeRequiredBytesInCopy(blockInfo, *writeSize,
+                                                                    optimallyAlignedBytesPerRow,
+                                                                    alignedRowsPerImage));
 
             uint64_t optimalOffsetAlignment =
                 ToBackend(device)
