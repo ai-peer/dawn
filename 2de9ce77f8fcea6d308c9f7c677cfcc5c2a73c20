@@ -16,6 +16,46 @@
       "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0e202dd_4cb5c621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T21:35:04Z",
+      "side": 1,
+      "message": "My concern here is that we\u0027re going to have three paths to do shader clamping\n 1) the yet-to-be-created Tint pass\n 2) the graphics-robust-access pass in SPIR-V tools\n 3) the temporary clamping and metadata buffer in your Tint CL + this one\n\nSince right now we always have to go from WGSL-\u003eSPIR-V-\u003eMSL. Could we instead try enabling (2) ? I think that the support is there but it is simply not enabled. Maybe it only works using SPVC but that\u0027s okay for now. See https://source.chromium.org/chromium/chromium/src/+/master:third_party/shaderc/src/libshaderc_spvc/include/spvc/spvc.hpp;drc\u003d5ab69a33ea6dd21d45c379dda0c6ad2df42015c9;bpv\u003d1;bpt\u003d1;l\u003d161\n\nThis way, you don\u0027t need to implement your own clamping in the vertex pulling pass.",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0280e2c0_0936eb92",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-10T21:35:04Z",
+      "side": 1,
+      "message": "these checks should be: RobustnessEnabled \u0026\u0026 MetalEnableVertexPulling.\n\nMaybe also put Robustness in the name of the Metal toggle to be clear it\u0027s for robustness",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 77
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
