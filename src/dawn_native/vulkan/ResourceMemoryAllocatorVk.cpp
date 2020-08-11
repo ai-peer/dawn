@@ -112,6 +112,8 @@ namespace dawn_native { namespace vulkan {
         for (size_t i = 0; i < info.memoryTypes.size(); i++) {
             mAllocatorsPerType.emplace_back(std::make_unique<SingleTypeAllocator>(
                 mDevice, i, info.memoryHeaps[info.memoryTypes[i].heapIndex].size));
+            mPooledAllocatorsPerType.emplace_back(std::make_unique<PooledResourceMemoryAllocator>(
+                mDevice, mAllocatorsPerType[i].get()));
         }
     }
 
@@ -256,6 +258,12 @@ namespace dawn_native { namespace vulkan {
         }
 
         return bestType;
+    }
+
+    void ResourceMemoryAllocator::DestroyPool() {
+        for (auto& alloc : mPooledAllocatorsPerType) {
+            alloc->DestroyPool();
+        }
     }
 
 }}  // namespace dawn_native::vulkan
