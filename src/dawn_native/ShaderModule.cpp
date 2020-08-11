@@ -1095,7 +1095,8 @@ namespace dawn_native {
     }
 
     shaderc_spvc::CompileOptions ShaderModuleBase::GetCompileOptions() const {
-        shaderc_spvc::CompileOptions options;
+        shaderc_spvc::CompileOptions options(shaderc_spvc_spv_env_webgpu_0,
+                                             shaderc_spvc_spv_env_vulkan_1_1);
         options.SetValidate(GetDevice()->IsValidationEnabled());
         return options;
     }

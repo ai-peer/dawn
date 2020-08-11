@@ -131,7 +131,8 @@ namespace dawn_native { namespace null {
         Ref<ShaderModule> module = AcquireRef(new ShaderModule(this, descriptor));
 
         if (IsToggleEnabled(Toggle::UseSpvc)) {
-            shaderc_spvc::CompileOptions options;
+            shaderc_spvc::CompileOptions options(shaderc_spvc_spv_env_webgpu_0,
+                                                 shaderc_spvc_spv_env_vulkan_1_1);
             options.SetValidate(IsValidationEnabled());
             shaderc_spvc::Context* context = module->GetContext();
             shaderc_spvc_status status = context->InitializeForGlsl(

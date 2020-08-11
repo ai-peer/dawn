@@ -81,6 +81,7 @@ namespace utils {
             static std::once_flag mInitFlag;
 
             static void Initialize() {
+                shaderc::Compiler compiler;
                 mCompiler = new shaderc::Compiler();
             }
         };
@@ -93,15 +94,20 @@ namespace utils {
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device,
                                           SingleShaderStage stage,
                                           const char* source) {
+        printf("GLSL DUMP START\n%s\nGLSL DUMP END\n", source);
         shaderc_shader_kind kind = ShadercShaderKind(stage);
 
+        shaderc::CompileOptions options;
+        options.SetTargetEnvironment(shaderc_target_env_webgpu, shaderc_env_version_webgpu);
+        options.SetTargetSpirv(shaderc_spirv_version_1_3);
         shaderc::Compiler* compiler = CompilerSingleton::Get();
-        auto result = compiler->CompileGlslToSpv(source, strlen(source), kind, "myshader?");
+        auto result =
+            compiler->CompileGlslToSpv(source, strlen(source), kind, "myshader?", options);
         if (result.GetCompilationStatus() != shaderc_compilation_status_success) {
             dawn::ErrorLog() << result.GetErrorMessage();
             return {};
         }
-#ifdef DUMP_SPIRV_ASSEMBLY
+        //#ifdef DUMP_SPIRV_ASSEMBLY
         {
             shaderc::CompileOptions options;
             auto resultAsm = compiler->CompileGlslToSpvAssembly(source, strlen(source), kind,
@@ -114,7 +120,7 @@ namespace utils {
             printf("SPIRV ASSEMBLY DUMP START\n%s\nSPIRV ASSEMBLY DUMP END\n", buffer);
             free(buffer);
         }
-#endif
+        //#endif
 
 #ifdef DUMP_SPIRV_JS_ARRAY
         printf("SPIRV JS ARRAY DUMP START\n");

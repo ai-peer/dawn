@@ -28,9 +28,8 @@ namespace {
 
         DawnSPIRVCrossFuzzer::ExecuteWithSignalTrap([&context, &input]() {
             shaderc_spvc::CompilationResult result;
-            shaderc_spvc::CompileOptions options;
-            options.SetSourceEnvironment(shaderc_target_env_webgpu, shaderc_env_version_webgpu);
-            options.SetTargetEnvironment(shaderc_target_env_vulkan, shaderc_env_version_vulkan_1_1);
+            shaderc_spvc::CompileOptions options(shaderc_spvc_spv_env_webgpu_0,
+                                                 shaderc_spvc_spv_env_vulkan_1_1);
 
             // Using the options that are used by Dawn, they appear in ShaderModuleD3D12.cpp
             options.SetForceZeroInitializedVariables(true);

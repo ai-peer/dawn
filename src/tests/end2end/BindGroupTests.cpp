@@ -47,6 +47,9 @@ class BindGroupTests : public DawnTest {
     wgpu::ShaderModule MakeSimpleVSModule() const {
         return utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         void main() {
             const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
@@ -59,6 +62,9 @@ class BindGroupTests : public DawnTest {
         std::ostringstream fs;
         fs << R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout(location = 0) out vec4 fragColor;
         )";
 
@@ -125,6 +131,9 @@ class BindGroupTests : public DawnTest {
 TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
     const char* shader = R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout(std140, set = 0, binding = 0) uniform Contents {
             float f;
         } contents;
@@ -162,6 +171,9 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 0) uniform vertexUniformBuffer {
             mat2 transform;
         };
@@ -173,6 +185,9 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 1) uniform fragmentUniformBuffer {
             vec4 color;
         };
@@ -234,6 +249,9 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 0) uniform vertexUniformBuffer {
             mat2 transform;
         };
@@ -245,6 +263,9 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 1) uniform sampler samp;
         layout (set = 0, binding = 2) uniform texture2D tex;
         layout (location = 0) out vec4 fragColor;
@@ -332,6 +353,9 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 0) uniform vertexUniformBuffer1 {
             mat2 transform1;
         };
@@ -346,6 +370,9 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 1) uniform fragmentUniformBuffer1 {
             vec4 color1;
         };
@@ -901,6 +928,9 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         void main() {
             const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
@@ -909,6 +939,9 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
+        #extension GL_KHR_memory_scope_semantics : require
+
+        #pragma use_vulkan_memory_model
         layout (set = 0, binding = 953) uniform ubo1 {
             vec4 color1;
         };
