@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af70edd6_b9b0a9df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-11T00:21:00Z",
+      "side": 1,
+      "message": "This CL was originally submitted by Austin\nhttps://dawn-review.googlesource.com/c/dawn/+/13084\n\nI have rebased it and added clears to the commands buffer resource usages.",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
