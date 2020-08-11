@@ -16,6 +16,46 @@
       "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36c0733d_e1ceaaf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-11T01:04:27Z",
+      "side": 1,
+      "message": "LGTM with one comment",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1790c217_1bb79f2e",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-11T01:04:27Z",
+      "side": 1,
+      "message": "These would be able to eagerly clear the commands that were never submitted as well. Even if there was some other error, I think it\u0027s correct to consider the commands \"submitted\" and ineligible for submission again.\n\n^(we should have a test for this)\n\nTo simplify the error handling, we can add a private QueueBase::SubmitInternal which contains the original contents of this function. Then, always Clear() the commands after calling SubmitInternal.",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
