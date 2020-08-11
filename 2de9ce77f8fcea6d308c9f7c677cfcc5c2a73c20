@@ -90,6 +90,40 @@
     },
     {
       "key": {
+        "uuid": "3034676d_0a7e1aff",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "I think we\u0027re reaching too much into the Tint implementation details in Dawn, TypeDeterminer should be an implementation detail. Not that you need to do anything about it in this CL.",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10931f22_cf4483d4",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "Why do we need this? Isn\u0027t the mVertexPullingMetadataBuffer enough?",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0280e2c0_0936eb92",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 6
@@ -107,6 +141,93 @@
         "endLine": 386,
         "endChar": 77
       },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ea59c4_f56855f3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "Also maybe do an:\n\n  if (pulling) {\n    set empty\n  } else {\n    set MakeVertexDesc();\n  }\n\nFor the check for RobustnessEnabled, we could ForceToggle(vertexpulling, off) in DeviceMTL if robustness isn\u0027t enabled.",
+      "parentUuid": "0280e2c0_0936eb92",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 77
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ac89335_68693741",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "this shouldn\u0027t be needed",
+      "range": {
+        "startLine": 192,
+        "startChar": 40,
+        "endLine": 192,
+        "endChar": 87
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac1f2112_456ccb7a",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 201,
+        "startChar": 39,
+        "endLine": 201,
+        "endChar": 87
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28de8271_ec24e60f",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:43:52Z",
+      "side": 1,
+      "message": "nit: put this in WGPUHelpers?",
       "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
