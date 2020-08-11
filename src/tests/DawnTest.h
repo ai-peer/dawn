@@ -74,6 +74,7 @@
 
 // TODO(enga): Migrate other texure expectation helpers to this common one.
 #define EXPECT_TEXTURE_EQ(...) AddTextureExpectation(__FILE__, __LINE__, __VA_ARGS__)
+#define EXPECT_TEXTURE_EQ_T(type, ...) AddTextureExpectation<type>(__FILE__, __LINE__, __VA_ARGS__)
 
 // Should only be used to test validation of function that can't be tested by regular validation
 // tests;
@@ -298,6 +299,24 @@ class DawnTestBase {
         return AddTextureExpectationImpl(
             file, line, new detail::ExpectEq<T>(expectedData, width * height), texture, x, y, width,
             height, level, slice, aspect, sizeof(T), bytesPerRow);
+    }
+
+    template <typename T>
+    std::ostringstream& AddTextureExpectation(const char* file,
+                                              int line,
+                                              const std::vector<T>& expectedData,
+                                              const wgpu::Texture& texture,
+                                              uint32_t x,
+                                              uint32_t y,
+                                              uint32_t width = 1,
+                                              uint32_t height = 1,
+                                              uint32_t level = 0,
+                                              uint32_t slice = 0,
+                                              wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
+                                              uint32_t bytesPerRow = 0) {
+        return AddTextureExpectationImpl(
+            file, line, new detail::ExpectEq<T>(expectedData.data(), expectedData.size()), texture,
+            x, y, width, height, level, slice, aspect, sizeof(T), bytesPerRow);
     }
 
     template <typename T>
