@@ -36,6 +36,131 @@
     },
     {
       "key": {
+        "uuid": "1832d2c8_4d287c71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "LGTM too with a bunch of nits.",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5319e9e9_dcc6651f",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "nit: ASSERT(mBlocks.empty()); and this method can become:\n\n  ASSERT()\n  mBlocks \u003d std::move(other.mBlocks);\n  other.Reset();\n  Reset();\n  return *this;",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "827f3a6c_ec47d400",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "nit: we need an ASSERT(mBlocks.empty()) here too.",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab043dd3_2aec6634",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "Instead of having a mDataDestroyed, maybe we could check that mBlocks.empty(), and have a \"ClearAsDataWasDestroyed()\" that FreeCommands calls instead?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 32
+      },
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b97c7b0_9d68f539",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "It seems that it\u0027s not the CommandIterator\u0027s concern whether we are destroyed or not. Maybe we could have a boolean on CommandBufferBase?",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d8775ab_2d9c5fae",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "nit: mResourceUsages \u003d {} or CommandBufferResourceUsage(), this should clear all its members.",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9de3de3_04ab4078",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T10:01:57Z",
+      "side": 1,
+      "message": "nit: Destroy to keep the similarity with texture / buffer / render bundle destroy?",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1790c217_1bb79f2e",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 1
