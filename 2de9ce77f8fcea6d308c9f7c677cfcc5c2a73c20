@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "45502885_0961af47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-11T00:28:04Z",
+      "side": 1,
+      "message": "I believe the goal is to have a Tint AST pass for this https://bugs.chromium.org/p/tint/issues/detail?id\u003d101",
+      "parentUuid": "73ac30ee_25e7c7a9",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0280e2c0_0936eb92",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 6
