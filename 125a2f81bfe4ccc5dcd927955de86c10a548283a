@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ec5f1f_0d820e51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "571e33e7_c53c94cd",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "nit: also assert that\n\n  copySize.width / blockInfo.blockWidth * blockInfo.blockByteSize \u003c\u003d bytesPerRow",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "364ab964_52c85d9f",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "nit: make this a uint32_t since rowsPerImage is a uint32_t itself.",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "583b8231_6ed649bc",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "Add a comment that this can\u0027t overflow because both texelBlockRowsPerImage and bytesPerRow are uint32_t (so the multiplication fits in a uint64_t).",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b42a7d47_f18e86e2",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "nit: comment why this computation can\u0027t overflow. (also instead of static_cast you can use uint64_t(value)).",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1b20e76_682339ac",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "I think we can\u0027t be a bit overbroad and check std::numeric_limits\u003cuint64_t\u003e::max() / copySize.depth \u003c bytesPerImage",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f526f725_8e249d15",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "uint64_t, and we don\u0027t need the \\n at the end.",
+      "range": {
+        "startLine": 398,
+        "startChar": 71,
+        "endLine": 398,
+        "endChar": 92
+      },
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0bd50ea_48f22ac2",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:47:44Z",
+      "side": 1,
+      "message": "ditto: uint64_t(rowsPerImageInBlock)",
+      "range": {
+        "startLine": 317,
+        "startChar": 33,
+        "endLine": 317,
+        "endChar": 44
+      },
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
