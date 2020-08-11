@@ -194,4 +194,16 @@ namespace {
         }
     }
 
+    // Test it is invalid to submit a command buffer twice
+    TEST_F(QueueSubmitValidationTest, CommandBufferSubmittedTwice) {
+        wgpu::CommandBuffer commandBuffer = device.CreateCommandEncoder().Finish();
+        wgpu::Queue queue = device.GetDefaultQueue();
+
+        // Should succeed
+        queue.Submit(1, &commandBuffer);
+
+        // Should fail because command buffer was already submitted
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commandBuffer));
+    }
+
 }  // anonymous namespace

@@ -188,6 +188,8 @@ namespace dawn_native {
                 }
             }
         }
+
+        *commands = CommandIterator{};
         commands->DataWasDestroyed();
     }
 
