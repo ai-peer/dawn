@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "980057c9_1d120fdc",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "571e33e7_c53c94cd",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "364ab964_52c85d9f",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
@@ -50,6 +68,24 @@
       "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c78f590_e4f18ed4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364ab964_52c85d9f",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "95a2c865_79640217",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583b8231_6ed649bc",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b42a7d47_f18e86e2",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "b5190c73_58bff899",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b42a7d47_f18e86e2",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1b20e76_682339ac",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2020-08-11T09:47:44Z",
       "side": 1,
       "message": "I think we can\u0027t be a bit overbroad and check std::numeric_limits\u003cuint64_t\u003e::max() / copySize.depth \u003c bytesPerImage",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d1598a_939899bb",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Not sure about this change, it simplifies the condition, but we must trow a different error in this case since requiredBytesInCopy doesn\u0027t necessarily overflow uint64_t and it requires some additional logic in the comments. I implemented this, but let me know what you think.",
+      "parentUuid": "f1b20e76_682339ac",
       "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -127,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "50aaed15_fc69c411",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f526f725_8e249d15",
+      "range": {
+        "startLine": 398,
+        "startChar": 71,
+        "endLine": 398,
+        "endChar": 92
+      },
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0bd50ea_48f22ac2",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 4
@@ -147,6 +261,30 @@
       "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d973f58_a11cc039",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T10:45:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0bd50ea_48f22ac2",
+      "range": {
+        "startLine": 317,
+        "startChar": 33,
+        "endLine": 317,
+        "endChar": 44
+      },
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
