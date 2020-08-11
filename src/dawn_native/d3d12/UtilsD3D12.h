@@ -31,7 +31,7 @@ namespace dawn_native { namespace d3d12 {
     D3D12_TEXTURE_COPY_LOCATION ComputeTextureCopyLocationForTexture(const Texture* texture,
                                                                      uint32_t level,
                                                                      uint32_t slice,
-                                                                     const Aspect& aspect);
+                                                                     Aspect aspect);
 
     D3D12_TEXTURE_COPY_LOCATION ComputeBufferLocationForCopyTextureRegion(
         const Texture* texture,
