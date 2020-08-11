@@ -194,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "b5f1af94_3d63c22b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T11:23:32Z",
+      "side": 1,
+      "message": "Ah you mean the error message needs to change? I think either a message about OOB or being too large is ok.",
+      "parentUuid": "a4d1598a_939899bb",
+      "revId": "125a2f81bfe4ccc5dcd927955de86c10a548283a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f526f725_8e249d15",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
