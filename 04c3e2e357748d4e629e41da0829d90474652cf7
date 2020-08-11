@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c850a0f5_d9895537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-11T17:52:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "04c3e2e357748d4e629e41da0829d90474652cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c3de28_77755142",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-11T17:52:31Z",
+      "side": 1,
+      "message": "Possibly-bad idea: instead of an array, use a single counter that you increment. Then you could just wait until it hits kBuffers below, and wouldn\u0027t need a loop.",
+      "revId": "04c3e2e357748d4e629e41da0829d90474652cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

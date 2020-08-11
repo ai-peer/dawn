@@ -120,6 +120,24 @@
       "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62389550_f54e2bfd",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-11T17:52:31Z",
+      "side": 1,
+      "message": "Nice! That\u0027s what I had in mind.",
+      "parentUuid": "17794788_fe4f223a",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
