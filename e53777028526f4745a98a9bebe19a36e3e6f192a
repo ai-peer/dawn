@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "4f6f6bc4_0df83ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:24:39Z",
+      "side": 1,
+      "message": "PTAL at the updated test!",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50602a5a_78aab937",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 2
@@ -53,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "69196899_e416d492",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50602a5a_78aab937",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "511e58c0_16fc0d05",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 2
@@ -64,6 +99,24 @@
       "writtenOn": "2020-08-06T20:58:01Z",
       "side": 1,
       "message": "Would it also be worth testing mapping many buffers simultaneously (ie., not waiting)?",
+      "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17794788_fe4f223a",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T09:24:39Z",
+      "side": 1,
+      "message": "I think that was the purpose of this test, so instead of just modifying it to use mapAsync, I rewrote the test to map multiple buffers simulteanously.",
+      "parentUuid": "511e58c0_16fc0d05",
       "revId": "e53777028526f4745a98a9bebe19a36e3e6f192a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
