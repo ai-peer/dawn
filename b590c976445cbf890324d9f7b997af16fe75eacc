@@ -16,6 +16,24 @@
       "revId": "b590c976445cbf890324d9f7b997af16fe75eacc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "827eb9ab_3193e240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-11T00:34:34Z",
+      "side": 1,
+      "message": "Sounds like code coverage would have been helpful here. We should consider getting code coverage on Dawn bots. I\u0027d really, really like to have it for when we run CTS tests, because it\u0027ll help us identify holes in the CTS.\n\nI don\u0027t know exactly how coverage works, but probably in a non-standalone Dawn build inside Chromium, you could do it locally. https://chromium.googlesource.com/chromium/src/+/master/docs/testing/code_coverage.md",
+      "parentUuid": "29eadf66_278856d3",
+      "revId": "b590c976445cbf890324d9f7b997af16fe75eacc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
