@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72768d67_91821f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-11T08:36:33Z",
+      "side": 1,
+      "message": "Thanks for the review. I rebased and made a similar change in D3D12 as well.",
+      "revId": "4aac4b879f154fa59b9f74cec21e5c27b94bbe8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
