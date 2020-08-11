@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "8bcdd758_9d2a68c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T14:07:03Z",
+      "side": 1,
+      "message": "LGTM too. Maybe just adding a std::dequeue in both backends could have been sufficient.",
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "273e7115_0b29abeb",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 5
@@ -36,6 +53,46 @@
         "endLine": 106,
         "endChar": 40
       },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16e66a08_428b0469",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T14:07:03Z",
+      "side": 1,
+      "message": "Why is this needed? Currently we only free a resource once it is no longer in use by the GPU, so we know that when the heap is deallocated, no memory accesses can be done on it anymore.",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 96
+      },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b707d7e8_32af0fee",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-11T14:07:03Z",
+      "side": 1,
+      "message": "nit: std::vector or std::dequeue. std::list if very inefficient allocation wise.",
       "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
