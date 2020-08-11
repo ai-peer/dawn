@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "73ac30ee_25e7c7a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-11T00:24:38Z",
+      "side": 1,
+      "message": "this makes sense to me, and perhaps we want to avoid having clamping be a WGSL-\u003eWGSL pass at all (since it\u0027s a core feature of WGSL and all backends can do it). I\u0027m not sure what approach Dan+ had in mind.",
+      "parentUuid": "a0e202dd_4cb5c621",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0280e2c0_0936eb92",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 6
