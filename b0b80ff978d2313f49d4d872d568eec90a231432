@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7a8fef7_716931ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-11T22:01:29Z",
+      "side": 1,
+      "message": "How does this change impact the memory consumption of Skia/Dawn and the Babylon.JS Forest Demo? \n\nIf we need a followon Trim change in order for this to be successful, we should put it behind a flag for the time being.  ",
+      "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
