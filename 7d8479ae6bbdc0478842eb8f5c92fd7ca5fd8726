@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "b2e5bf2d_1df9188b",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-11T21:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273e7115_0b29abeb",
+      "range": {
+        "startLine": 106,
+        "startChar": 39,
+        "endLine": 106,
+        "endChar": 40
+      },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16e66a08_428b0469",
         "filename": "src/dawn_native/PooledResourceMemoryAllocator.cpp",
         "patchSetId": 5
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "10472b4e_0f0ef217",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-11T21:44:15Z",
+      "side": 1,
+      "message": "After this change, we no longer free memory once the GPU is done with it. Instead, it is returned back to the pool, so a similar check is needed to avoid recycling a heap still in use.",
+      "parentUuid": "16e66a08_428b0469",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 96
+      },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b707d7e8_32af0fee",
         "filename": "src/dawn_native/PooledResourceMemoryAllocator.h",
         "patchSetId": 5
@@ -96,6 +144,24 @@
       "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54e1715d_f6d8ae5b",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-11T21:44:15Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "b707d7e8_32af0fee",
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
