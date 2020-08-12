@@ -16,6 +16,69 @@
       "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5444c8bd_082459ac",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T19:38:55Z",
+      "side": 1,
+      "message": "This one could use IsWindows.",
+      "range": {
+        "startLine": 194,
+        "startChar": 8,
+        "endLine": 194,
+        "endChar": 32
+      },
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d50cc90e_e71f9a13",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T19:38:55Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to wrap any of these in defined(DAWN_PLATFORM_WINDOWS) because the WindowsDebugLogger doesn\u0027t use any Windows-specific headers, and make the implementation of the WIndowsDebugLogger empty on non-Windows.",
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc9d9c2f_09dee9b1",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T19:38:55Z",
+      "side": 1,
+      "message": "INFINITE wait means we might never exit the loop when the tests shut down no?",
+      "range": {
+        "startLine": 54,
+        "startChar": 67,
+        "endLine": 54,
+        "endChar": 75
+      },
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
