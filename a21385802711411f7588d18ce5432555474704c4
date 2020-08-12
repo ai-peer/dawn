@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "d0248c94_b757bffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T19:51:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88bc233f_39d1f735",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -51,6 +68,29 @@
         "startLine": 384,
         "startChar": 7,
         "endLine": 385,
+        "endChar": 91
+      },
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef8eee96_7c422601",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T19:51:41Z",
+      "side": 1,
+      "message": "It is because of this 1u. The test with the vertex buffer removed passes if it is 0u.",
+      "range": {
+        "startLine": 386,
+        "startChar": 88,
+        "endLine": 386,
         "endChar": 91
       },
       "revId": "a21385802711411f7588d18ce5432555474704c4",
