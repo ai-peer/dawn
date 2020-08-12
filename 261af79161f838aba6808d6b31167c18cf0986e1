@@ -42,6 +42,29 @@
     },
     {
       "key": {
+        "uuid": "e4c0cb1c_8375edbc",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:33:00Z",
+      "side": 1,
+      "message": "We should also set these for the transformed vertex attributes. We\u0027re getting lucky with how they\u0027re numbered by default right now.",
+      "range": {
+        "startLine": 164,
+        "startChar": 24,
+        "endLine": 170,
+        "endChar": 89
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bbc3558f_5762e420",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 9
