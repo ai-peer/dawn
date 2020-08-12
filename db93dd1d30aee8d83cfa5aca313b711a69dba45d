@@ -257,6 +257,24 @@
     },
     {
       "key": {
+        "uuid": "bd0a1e12_a3785b45",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9de3de3_04ab4078",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1790c217_1bb79f2e",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 1
