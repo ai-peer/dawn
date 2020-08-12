@@ -207,6 +207,7 @@ class BufferZeroInitTest : public DawnTest {
                     fragColor = i_color;
                 })");
 
+        ASSERT(vertexBufferCount <= 1u);
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.vertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
@@ -220,7 +221,7 @@ class BufferZeroInitTest : public DawnTest {
         return device.CreateRenderPipeline(&descriptor);
     }
 
-    void ValidateBufferAndOutputTexture(wgpu::CommandEncoder encoder,
+    void ExpectLazyClearSubmitAndCheckOutputs(wgpu::CommandEncoder encoder,
                                         wgpu::Buffer buffer,
                                         uint64_t bufferSize,
                                         wgpu::Texture colorAttachment) {
@@ -229,9 +230,9 @@ class BufferZeroInitTest : public DawnTest {
 
         // Although we just bind a part of the buffer, we still expect the whole buffer to be
         // lazily initialized to 0.
-        const std::vector<float> expectedVertexBufferData(bufferSize / sizeof(float), 0.f);
-        EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedVertexBufferData.data(), buffer,
-                                                           0, expectedVertexBufferData.size()));
+        const std::vector<uint32_t> expectedBufferData(bufferSize / sizeof(uint32_t), 0);
+        EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
+                                                         expectedBufferData.size()));
 
         const RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
         EXPECT_PIXEL_RGBA8_EQ(kExpectedPixelValue, colorAttachment, 0, 0);
@@ -274,7 +275,7 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.Draw(1);
         renderPass.EndPass();
 
-        ValidateBufferAndOutputTexture(encoder, vertexBuffer, vertexBufferSize, colorAttachment);
+        ExpectLazyClearSubmitAndCheckOutputs(encoder, vertexBuffer, vertexBufferSize, colorAttachment);
     }
 
     void TestBufferZeroInitAsIndexBuffer(uint64_t indexBufferOffset) {
@@ -323,7 +324,7 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndexed(1);
         renderPass.EndPass();
 
-        ValidateBufferAndOutputTexture(encoder, indexBuffer, indexBufferSize, colorAttachment);
+        ExpectLazyClearSubmitAndCheckOutputs(encoder, indexBuffer, indexBufferSize, colorAttachment);
     }
 
     void TestBufferZeroInitAsIndirectBufferForDrawIndirect(uint64_t indirectBufferOffset) {
@@ -360,7 +361,7 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndirect(indirectBuffer, indirectBufferOffset);
         renderPass.EndPass();
 
-        ValidateBufferAndOutputTexture(encoder, indirectBuffer, bufferSize, colorAttachment);
+        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, colorAttachment);
     }
 
     void TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(uint64_t indirectBufferOffset) {
@@ -383,8 +384,8 @@ class BufferZeroInitTest : public DawnTest {
         wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest(vertexShader, 1u);
         wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
             device, wgpu::BufferUsage::Vertex, {0.f, 0.f, 0.f, 0.f});
-        wgpu::Buffer indexBuffer = utils::CreateBufferFromData<float>(
-            device, wgpu::BufferUsage::Index, {0.f, 0.f, 0.f, 0.f});
+        wgpu::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(
+            device, wgpu::BufferUsage::Index, {0});
 
         // Clear the color attachment to green.
         wgpu::Texture colorAttachment =
@@ -406,7 +407,7 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndexedIndirect(indirectBuffer, indirectBufferOffset);
         renderPass.EndPass();
 
-        ValidateBufferAndOutputTexture(encoder, indirectBuffer, bufferSize, colorAttachment);
+        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, colorAttachment);
     }
 
     void TestBufferZeroInitAsIndirectBufferForDispatchIndirect(uint64_t indirectBufferOffset) {
@@ -452,7 +453,7 @@ class BufferZeroInitTest : public DawnTest {
         computePass.DispatchIndirect(indirectBuffer, indirectBufferOffset);
         computePass.EndPass();
 
-        ValidateBufferAndOutputTexture(encoder, indirectBuffer, bufferSize, outputTexture);
+        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, outputTexture);
     }
 };
 
