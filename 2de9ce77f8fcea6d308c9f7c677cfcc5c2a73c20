@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "f382d5b2_66684202",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3034676d_0a7e1aff",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10931f22_cf4483d4",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 6
@@ -118,6 +136,24 @@
       "writtenOn": "2020-08-11T11:43:52Z",
       "side": 1,
       "message": "Why do we need this? Isn\u0027t the mVertexPullingMetadataBuffer enough?",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ad7414f_ea7fbc3c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Slightly different now, but I\u0027m passing buffer lengths to the storage tracker for use in the clamping pass.",
+      "parentUuid": "10931f22_cf4483d4",
       "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -171,6 +207,30 @@
     },
     {
       "key": {
+        "uuid": "d2d53cd5_eac43db0",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Added the forcetoggle, but MakeVertexDesc is actually changing state, by creating mMtlVertexBufferIndices which is used in GetMtlVertexBufferIndex(..) and that is used in other loops. As-is without calling MakeVertexDesc stuff breaks.\n\nI also made the toggle only work if SPVC is on, since without it we have no clamp.",
+      "parentUuid": "06ea59c4_f56855f3",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 77
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ac89335_68693741",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6
@@ -191,6 +251,30 @@
       "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79532806_6b9fc5c3",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Gone!",
+      "parentUuid": "1ac89335_68693741",
+      "range": {
+        "startLine": 192,
+        "startChar": 40,
+        "endLine": 192,
+        "endChar": 87
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -217,6 +301,30 @@
     },
     {
       "key": {
+        "uuid": "71d59472_3a60c137",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Gone!",
+      "parentUuid": "ac1f2112_456ccb7a",
+      "range": {
+        "startLine": 201,
+        "startChar": 39,
+        "endLine": 201,
+        "endChar": 87
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28de8271_ec24e60f",
         "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
         "patchSetId": 6
@@ -231,6 +339,24 @@
       "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8e3ff43_1f5bc5db",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28de8271_ec24e60f",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

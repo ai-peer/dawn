@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c361aa7a_956d5936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-12T12:53:27Z",
+      "side": 1,
+      "message": "PTAL again! Updated to use SPVC robust buffer pass (until Tint has one). This is also pending https://github.com/google/shaderc/pull/1130 which makes the robust buffer SPVC option actually work.",
+      "revId": "575a7098877fd35bd678759d6909a1e3cb07b695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
