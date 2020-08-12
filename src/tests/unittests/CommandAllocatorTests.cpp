@@ -63,7 +63,7 @@ TEST(CommandAllocator, DoNothingAllocator) {
 TEST(CommandAllocator, DoNothingAllocatorWithIterator) {
     CommandAllocator allocator;
     CommandIterator iterator(std::move(allocator));
-    iterator.DataWasDestroyed();
+    iterator.ClearAsDataWasDestroyed();
 }
 
 // Test basic usage of allocator + iterator
@@ -108,7 +108,7 @@ TEST(CommandAllocator, Basic) {
         hasNext = iterator.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator.DataWasDestroyed();
+        iterator.ClearAsDataWasDestroyed();
     }
 }
 
@@ -152,7 +152,7 @@ TEST(CommandAllocator, BasicWithData) {
         hasNext = iterator.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator.DataWasDestroyed();
+        iterator.ClearAsDataWasDestroyed();
     }
 }
 
@@ -197,7 +197,7 @@ TEST(CommandAllocator, MultipleIterations) {
         hasNext = iterator.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator.DataWasDestroyed();
+        iterator.ClearAsDataWasDestroyed();
     }
 }
 // Test large commands work
@@ -230,7 +230,7 @@ TEST(CommandAllocator, LargeCommands) {
     }
     ASSERT_EQ(numCommands, kCommandCount);
 
-    iterator.DataWasDestroyed();
+    iterator.ClearAsDataWasDestroyed();
 }
 
 // Test many small commands work
@@ -260,7 +260,7 @@ TEST(CommandAllocator, ManySmallCommands) {
     }
     ASSERT_EQ(numCommands, kCommandCount);
 
-    iterator.DataWasDestroyed();
+    iterator.ClearAsDataWasDestroyed();
 }
 
 /*        ________
@@ -325,7 +325,7 @@ TEST(CommandAllocator, IteratorReset) {
         hasNext = iterator.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator.DataWasDestroyed();
+        iterator.ClearAsDataWasDestroyed();
     }
 }
 
@@ -339,7 +339,7 @@ TEST(CommandAllocator, EmptyIterator) {
         bool hasNext = iterator.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator.DataWasDestroyed();
+        iterator.ClearAsDataWasDestroyed();
     }
     {
         CommandAllocator allocator;
@@ -350,8 +350,8 @@ TEST(CommandAllocator, EmptyIterator) {
         bool hasNext = iterator2.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator1.DataWasDestroyed();
-        iterator2.DataWasDestroyed();
+        iterator1.ClearAsDataWasDestroyed();
+        iterator2.ClearAsDataWasDestroyed();
     }
     {
         CommandIterator iterator1;
@@ -361,8 +361,8 @@ TEST(CommandAllocator, EmptyIterator) {
         bool hasNext = iterator2.NextCommandId(&type);
         ASSERT_FALSE(hasNext);
 
-        iterator1.DataWasDestroyed();
-        iterator2.DataWasDestroyed();
+        iterator1.ClearAsDataWasDestroyed();
+        iterator2.ClearAsDataWasDestroyed();
     }
 }
 
@@ -425,7 +425,7 @@ TEST(CommandAllocator, AllocateDefaultInitializes) {
     ASSERT_EQ(int44->value, 44);
 
     CommandIterator iterator(std::move(allocator));
-    iterator.DataWasDestroyed();
+    iterator.ClearAsDataWasDestroyed();
 }
 
 // Test that the allcator correctly defaults initalizes data for AllocateData
@@ -445,5 +445,5 @@ TEST(CommandAllocator, AllocateDataDefaultInitializes) {
     ASSERT_EQ(int35[2].value, 35);
 
     CommandIterator iterator(std::move(allocator));
-    iterator.DataWasDestroyed();
+    iterator.ClearAsDataWasDestroyed();
 }

@@ -30,32 +30,21 @@ namespace dawn_native {
     }
 
     CommandIterator::~CommandIterator() {
-        ASSERT(mDataWasDestroyed);
-
-        if (!IsEmpty()) {
-            for (auto& block : mBlocks) {
-                free(block.block);
-            }
-        }
+        ASSERT(IsEmpty());
     }
 
     CommandIterator::CommandIterator(CommandIterator&& other) {
         if (!other.IsEmpty()) {
             mBlocks = std::move(other.mBlocks);
-            other.Reset();
+            other.ClearAsDataWasDestroyed();
         }
-        other.DataWasDestroyed();
         Reset();
     }
 
     CommandIterator& CommandIterator::operator=(CommandIterator&& other) {
-        if (!other.IsEmpty()) {
-            mBlocks = std::move(other.mBlocks);
-            other.Reset();
-        } else {
-            mBlocks.clear();
-        }
-        other.DataWasDestroyed();
+        ASSERT(IsEmpty());
+        mBlocks = std::move(other.mBlocks);
+        other.ClearAsDataWasDestroyed();
         Reset();
         return *this;
     }
@@ -66,6 +55,7 @@ namespace dawn_native {
     }
 
     CommandIterator& CommandIterator::operator=(CommandAllocator&& allocator) {
+        ASSERT(IsEmpty());
         mBlocks = allocator.AcquireBlocks();
         Reset();
         return *this;
@@ -97,12 +87,20 @@ namespace dawn_native {
         }
     }
 
-    void CommandIterator::DataWasDestroyed() {
-        mDataWasDestroyed = true;
+    void CommandIterator::ClearAsDataWasDestroyed() {
+        if (IsEmpty()) {
+            return;
+        }
+
+        for (auto& block : mBlocks) {
+            free(block.block);
+        }
+        mBlocks.clear();
     }
 
     bool CommandIterator::IsEmpty() const {
-        return mBlocks[0].block == reinterpret_cast<const uint8_t*>(&mEndOfBlock);
+        return mBlocks.empty() ||
+               mBlocks[0].block == reinterpret_cast<const uint8_t*>(&mEndOfBlock);
     }
 
     // Potential TODO(cwallez@chromium.org):

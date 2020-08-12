@@ -188,7 +188,8 @@ namespace dawn_native {
                 }
             }
         }
-        commands->DataWasDestroyed();
+
+        commands->ClearAsDataWasDestroyed();
     }
 
     void SkipCommand(CommandIterator* commands, Command type) {
