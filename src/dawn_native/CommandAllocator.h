@@ -94,7 +94,7 @@ namespace dawn_native {
         // Needs to be called if iteration was stopped early.
         void Reset();
 
-        void DataWasDestroyed();
+        void ClearAsDataWasDestroyed();
 
       private:
         bool IsEmpty() const;
@@ -139,7 +139,6 @@ namespace dawn_native {
         size_t mCurrentBlock = 0;
         // Used to avoid a special case for empty iterators.
         uint32_t mEndOfBlock = detail::kEndOfBlock;
-        bool mDataWasDestroyed = false;
     };
 
     class CommandAllocator {
