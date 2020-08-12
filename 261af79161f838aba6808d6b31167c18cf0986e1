@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "bc2f764d_ea37b77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T18:04:52Z",
+      "side": 1,
+      "message": "I was going to wait until tint stuff was finalized, but that just landed. So yes, if you could that would be great!\n\nStill needs to wait on shaderc fix from Ryan, and rolls of both shaderc and tint.",
+      "parentUuid": "ea7125c2_d5f6c3ea",
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e245b27_e792aa0d",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
