@@ -88,6 +88,24 @@
       "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69107217_de185a4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T22:08:35Z",
+      "side": 1,
+      "message": "Very well. I\u0027m OK moving forward with the change for now, provided the Trim implementations comes soon in a subsequent change.",
+      "parentUuid": "0cb4cbce_778e425e",
+      "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
