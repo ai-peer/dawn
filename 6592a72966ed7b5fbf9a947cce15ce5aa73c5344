@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "cc67601e_e97dce44",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T22:12:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f7860f_f56e81e7",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "956b7475_abc45e9f",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 7
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "fb137746_229111db",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T22:12:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "956b7475_abc45e9f",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "488762f0_aafe92ff",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 7
@@ -96,6 +144,24 @@
       "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92aa7d5e_356a8953",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T22:12:25Z",
+      "side": 1,
+      "message": "It is ASSERT\u0027ed so above after creation",
+      "parentUuid": "488762f0_aafe92ff",
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +185,30 @@
       "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff78cb17_b6e6fc58",
+        "filename": "src/utils/WindowsDebugLogger.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T22:12:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d2c7abd_7e10e697",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
