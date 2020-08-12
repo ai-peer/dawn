@@ -16,6 +16,98 @@
       "revId": "851dea39ef844c4a7f15e3f1b13dba3f1e243105",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "699ec6cb_759de668",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T20:19:17Z",
+      "side": 1,
+      "message": "Is the CommandIterator empty by the time we reach the close curly brace? If so, would be good to add an IsEmpty assert here.",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 5
+      },
+      "revId": "851dea39ef844c4a7f15e3f1b13dba3f1e243105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd2249e8_35d6fef7",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T20:19:17Z",
+      "side": 1,
+      "message": "Nit: Since \"clear\" calls \"reset\", should we rename to ResetAndMakeEmpty or ClearAndReset?",
+      "range": {
+        "startLine": 97,
+        "startChar": 13,
+        "endLine": 97,
+        "endChar": 36
+      },
+      "revId": "851dea39ef844c4a7f15e3f1b13dba3f1e243105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c23747f5_87fe66ad",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T20:19:17Z",
+      "side": 1,
+      "message": "Now that we have a notion of both \"clear\" and \"reset\", would be good to have a comment which describes the difference between the two of them and when you would want to use one over the other. Neither of these are talked about in the comment near the top of the file.\n\n(At first, I couldn\u0027t help but think \u0027clearing\u0027 referred to clearing pixels but I think this can be clarified with a comment if people really like the term)",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 97,
+        "endChar": 39
+      },
+      "revId": "851dea39ef844c4a7f15e3f1b13dba3f1e243105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a852197_49315910",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T20:19:17Z",
+      "side": 1,
+      "message": "Since ObjectBase is a reference counted object, please make the destructor be protected so that only Release frees the object.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 29
+      },
+      "revId": "851dea39ef844c4a7f15e3f1b13dba3f1e243105",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
