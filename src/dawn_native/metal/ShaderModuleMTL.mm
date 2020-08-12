@@ -92,10 +92,20 @@ namespace dawn_native { namespace metal {
                                          SingleShaderStage functionStage,
                                          const PipelineLayout* layout,
                                          ShaderModule::MetalFunctionData* out,
-                                         uint32_t sampleMask) {
+                                         uint32_t sampleMask,
+                                         const VertexStateDescriptor* vertexState) {
         ASSERT(!IsError());
         ASSERT(out);
-        const std::vector<uint32_t>& spirv = GetSpirv();
+        const std::vector<uint32_t>* spirv = &GetSpirv();
+
+#ifdef DAWN_ENABLE_WGSL
+        std::vector<uint32_t> pullingSpirv;
+        if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&
+            functionStage == SingleShaderStage::Vertex) {
+            DAWN_TRY_ASSIGN(pullingSpirv, GeneratePullingSpirv(*vertexState, functionName));
+            spirv = &pullingSpirv;
+        }
+#endif
 
         std::unique_ptr<spirv_cross::CompilerMSL> compilerImpl;
         spirv_cross::CompilerMSL* compiler;
@@ -103,7 +113,7 @@ namespace dawn_native { namespace metal {
             // Initializing the compiler is needed every call, because this method uses reflection
             // to mutate the compiler's IR.
             DAWN_TRY(
-                CheckSpvcSuccess(mSpvcContext.InitializeForMsl(spirv.data(), spirv.size(),
+                CheckSpvcSuccess(mSpvcContext.InitializeForMsl(spirv->data(), spirv->size(),
                                                                GetMSLCompileOptions(sampleMask)),
                                  "Unable to initialize instance of spvc"));
             DAWN_TRY(CheckSpvcSuccess(mSpvcContext.GetCompiler(reinterpret_cast<void**>(&compiler)),
@@ -126,7 +136,7 @@ namespace dawn_native { namespace metal {
 
             options_msl.additional_fixed_sample_mask = sampleMask;
 
-            compilerImpl = std::make_unique<spirv_cross::CompilerMSL>(spirv);
+            compilerImpl = std::make_unique<spirv_cross::CompilerMSL>(*spirv);
             compiler = compilerImpl.get();
             compiler->set_msl_options(options_msl);
         }
@@ -245,6 +255,11 @@ namespace dawn_native { namespace metal {
             out->needsStorageBufferLength = compiler->needs_buffer_size_buffer();
         }
 
+        if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&
+            functionStage == SingleShaderStage::Vertex) {
+            out->needsStorageBufferLength = true;
+        }
+
         return {};
     }
 
@@ -265,6 +280,7 @@ namespace dawn_native { namespace metal {
         options.SetMSLBufferSizeBufferIndex(kBufferLengthBufferSlot);
 
         options.SetMSLAdditionalFixedSampleMask(sampleMask);
+        options.SetRobustBufferAccessPass(true);
 
         return options;
     }
