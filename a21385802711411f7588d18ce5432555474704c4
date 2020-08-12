@@ -16,6 +16,46 @@
       "revId": "a21385802711411f7588d18ce5432555474704c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f97cce2_dc7bfb39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T18:18:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88bc233f_39d1f735",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T18:18:11Z",
+      "side": 1,
+      "message": "note: we should see if we can fix this in the future. I don\u0027t think it should be a restriction and looks like our command buffer state tracker is too strict.",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 385,
+        "endChar": 91
+      },
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
