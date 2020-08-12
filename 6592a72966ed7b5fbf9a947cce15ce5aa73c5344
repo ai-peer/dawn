@@ -16,6 +16,92 @@
       "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12520a78_7f694bd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T21:01:29Z",
+      "side": 1,
+      "message": "LGTM with some nits. ",
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69f7860f_f56e81e7",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T21:01:29Z",
+      "side": 1,
+      "message": "Please use nullptr instead of NULL for parameters which accept pointers.",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "956b7475_abc45e9f",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T21:01:29Z",
+      "side": 1,
+      "message": "I presume you got this from somewhere on the Internet. If so, please include a link so we read about what how the mechanism works.",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d2c7abd_7e10e697",
+        "filename": "src/utils/WindowsDebugLogger.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T21:01:29Z",
+      "side": 1,
+      "message": "Please type this to be HANDLE instead of void*",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
