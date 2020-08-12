@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "34a8d18c_7774fa24",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:01:20Z",
+      "side": 1,
+      "message": "Sorry what I meant is that when a suballocated resource is destroyed it is put in a serial queue in d3d12::ResourceAllocatorManager which call BuddyMemoryAllocator::Deallocate in d3d12::ResourceAllocatorManager::Tick that pops from that serial queue.\n\nThis means that when all allocation for a block in BuddyMemoryAllocator are Deallocated, we know all previous GPU accesses to them are finished (because we tracked that in ResourceAllocatorManager). So we don\u0027t need to do anything to check if we can reuse heaps from mPool.",
+      "parentUuid": "10472b4e_0f0ef217",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 96
+      },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b707d7e8_32af0fee",
         "filename": "src/dawn_native/PooledResourceMemoryAllocator.h",
         "patchSetId": 5
