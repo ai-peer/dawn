@@ -16,6 +16,23 @@
       "revId": "8d0042e65b183b6add9f2257c264d8e3d35d5188",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1704eecb_36ac83fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T20:41:30Z",
+      "side": 1,
+      "message": "lgtm; whoops we forgot about opengl",
+      "revId": "8d0042e65b183b6add9f2257c264d8e3d35d5188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
