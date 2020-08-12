@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "cc85b38b_9ca1fb52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aeca6a4_d7394b80",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "Can we have an ASSERT that buffer-\u003eGetSize() \u003c std::numeric_limits\u003cuint32_t\u003e::max()?",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "36e0d3a1_0c180b37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 10
@@ -19,6 +53,63 @@
         "endLine": 972,
         "endChar": 48
       },
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "208cae3b_37b52be0",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "Can this be done in a separate commit and done in GetCompileOptions() if (!DisableRobustness)? It is generally useful and will help other backends pass the shader robust access CTS tests.",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "843c2e4f_2bf432ff",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "Maybe this doesn\u0027t need to be gated on Metal, but be only enabled on Metal for now.",
+      "range": {
+        "startLine": 339,
+        "startChar": 6,
+        "endLine": 339,
+        "endChar": 26
+      },
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543566ed_d39132a8",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "nit: add a comment before the test",
       "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

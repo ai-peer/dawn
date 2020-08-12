@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "99938ce3_0ce09d7f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4ad7414f_ea7fbc3c",
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0280e2c0_0936eb92",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 6
@@ -219,6 +237,30 @@
       "side": 1,
       "message": "Added the forcetoggle, but MakeVertexDesc is actually changing state, by creating mMtlVertexBufferIndices which is used in GetMtlVertexBufferIndex(..) and that is used in other loops. As-is without calling MakeVertexDesc stuff breaks.\n\nI also made the toggle only work if SPVC is on, since without it we have no clamp.",
       "parentUuid": "06ea59c4_f56855f3",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 77
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f15352d4_7f86aeac",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-12T20:28:10Z",
+      "side": 1,
+      "message": "Can we have a TODO to make MakeVertexDesc const at least?",
+      "parentUuid": "d2d53cd5_eac43db0",
       "range": {
         "startLine": 386,
         "startChar": 8,
