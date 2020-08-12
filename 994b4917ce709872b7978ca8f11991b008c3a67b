@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a13f12d4_ef77f437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T20:21:53Z",
+      "side": 1,
+      "message": "Oops, forgot to delete the destructor declaration from the OpenGL backend.",
+      "revId": "994b4917ce709872b7978ca8f11991b008c3a67b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
