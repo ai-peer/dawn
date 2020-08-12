@@ -52,6 +52,24 @@
       "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cf6dcbf_cfec2432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-12T01:31:25Z",
+      "side": 1,
+      "message": "Good to see the FPS wins! \n\nDo you think we can get perf neutral with regard to memory by doing additional work (in this or a subsequent change) or is the 10MB regression permanent?",
+      "parentUuid": "6c4cc75c_ac270526",
+      "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
