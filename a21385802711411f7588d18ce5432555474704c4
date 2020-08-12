@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e15f7a3e_6b94046b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-12T02:17:15Z",
+      "side": 1,
+      "message": "Hi reviewers,\n\nThis is a follow-up CL for https://dawn-review.googlesource.com/c/dawn/+/26340. PTAL, thanks!",
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
