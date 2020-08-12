@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b87d751_091f63cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T21:00:14Z",
+      "side": 1,
+      "message": "woot! confirmed we get tons of validation messages in the logs now https://chromium-swarm.appspot.com/task?id\u003d4dfd41541f16b410\n\ncompile failure on other platforms just needs a DAWN_UNUSED",
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
