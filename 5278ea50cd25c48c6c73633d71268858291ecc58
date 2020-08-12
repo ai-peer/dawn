@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "38eeb26a_b324b197",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T20:37:46Z",
+      "side": 1,
+      "message": "IsWindows is on DawnTest, not DawnTestEnvironment. Shouldn\u0027t matter now anyway because the class is a no-op on non-windwos",
+      "parentUuid": "5444c8bd_082459ac",
+      "range": {
+        "startLine": 194,
+        "startChar": 8,
+        "endLine": 194,
+        "endChar": 32
+      },
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d50cc90e_e71f9a13",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 6
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "46e61fd9_00bdd8a6",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T20:37:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d50cc90e_e71f9a13",
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc9d9c2f_09dee9b1",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 6
@@ -70,6 +112,30 @@
       "writtenOn": "2020-08-12T19:38:55Z",
       "side": 1,
       "message": "INFINITE wait means we might never exit the loop when the tests shut down no?",
+      "range": {
+        "startLine": 54,
+        "startChar": 67,
+        "endLine": 54,
+        "endChar": 75
+      },
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d451143_1fd30096",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T20:37:46Z",
+      "side": 1,
+      "message": "Yea I updated this. Interesting that it didn\u0027t hang locally but it did on the bot. The test environment must be different on the bots.",
+      "parentUuid": "cc9d9c2f_09dee9b1",
       "range": {
         "startLine": 54,
         "startChar": 67,
