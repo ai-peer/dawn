@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64e70002_0699f1a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:20:01Z",
+      "side": 1,
+      "message": "LGTM, some nits",
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e245b27_e792aa0d",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:20:01Z",
+      "side": 1,
+      "message": "nit: do this at the top of the function so we can get and convert to the backend device just once.",
+      "range": {
+        "startLine": 986,
+        "startChar": 63,
+        "endLine": 986,
+        "endChar": 85
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc3558f_5762e420",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:20:01Z",
+      "side": 1,
+      "message": "can probably check mUsedVertexAttributes and only set this if there are any",
+      "range": {
+        "startLine": 259,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 49
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c2d4c5f_9d033ad4",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:20:01Z",
+      "side": 1,
+      "message": "nit: 2020",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a78a2658_466fe16f",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T16:20:01Z",
+      "side": 1,
+      "message": "nit: can we test some other formats too. Maybe don\u0027t need all of them but should at least do an integer format and a vec format as well. Can factor this into some helpers to not duplicate code.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
