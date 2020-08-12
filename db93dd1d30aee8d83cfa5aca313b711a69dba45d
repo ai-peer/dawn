@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "a2558c59_dc93d618",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done, had use IsEmpty() instead of mBlocks.empty() as Reset() adds a single block on an empty list.",
+      "parentUuid": "5319e9e9_dcc6651f",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "827f3a6c_ec47d400",
         "filename": "src/dawn_native/CommandAllocator.cpp",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25b8823f_2b3ed363",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done, same as above.",
+      "parentUuid": "827f3a6c_ec47d400",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +146,30 @@
     },
     {
       "key": {
+        "uuid": "1df5c295_b0a9aa30",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab043dd3_2aec6634",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 32
+      },
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b97c7b0_9d68f539",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 1
@@ -127,6 +187,24 @@
     },
     {
       "key": {
+        "uuid": "f7669610_fcd0006d",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b97c7b0_9d68f539",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d8775ab_2d9c5fae",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 1
@@ -141,6 +219,24 @@
       "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8d3fa9_07603632",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d8775ab_2d9c5fae",
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -181,6 +277,30 @@
       "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71a61ffd_35bf324b",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-08-12T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1790c217_1bb79f2e",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "db93dd1d30aee8d83cfa5aca313b711a69dba45d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
