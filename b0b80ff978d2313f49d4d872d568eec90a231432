@@ -34,6 +34,24 @@
       "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c4cc75c_ac270526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-12T01:16:36Z",
+      "side": 1,
+      "message": "No memory regression for cases like Forest Demo but SkiaDawn regressed a bit (70MB \u003d\u003e 80MB) but FPS goes up by +30%. Is that \"successful\"? Do consider that SkiaDawn is already behind a flag and adding another flag will skew perf.",
+      "parentUuid": "2e7655bf_5c8da05b",
+      "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
