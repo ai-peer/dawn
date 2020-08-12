@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36e0d3a1_0c180b37",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-12T18:30:21Z",
+      "side": 1,
+      "message": "Actually, sorry for churn, but we should probably just check the toggle here, and pass a simple boolean into the Apply functions",
+      "range": {
+        "startLine": 972,
+        "startChar": 8,
+        "endLine": 972,
+        "endChar": 48
+      },
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
