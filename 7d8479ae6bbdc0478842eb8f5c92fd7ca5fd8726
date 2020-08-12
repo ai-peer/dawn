@@ -154,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "9fd135c3_8f23ec83",
+        "filename": "src/dawn_native/PooledResourceMemoryAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-12T21:44:47Z",
+      "side": 1,
+      "message": "Ahh, thanks for clarifying. I think it\u0027s only used here for testing sub-allocation (NULL driver has no resource manager) but I can change the tests accordingly.",
+      "parentUuid": "34a8d18c_7774fa24",
+      "range": {
+        "startLine": 41,
+        "startChar": 30,
+        "endLine": 41,
+        "endChar": 96
+      },
+      "revId": "7d8479ae6bbdc0478842eb8f5c92fd7ca5fd8726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b707d7e8_32af0fee",
         "filename": "src/dawn_native/PooledResourceMemoryAllocator.h",
         "patchSetId": 5
