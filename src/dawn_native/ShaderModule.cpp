@@ -295,6 +295,82 @@ namespace dawn_native {
                     << " binding " << static_cast<uint32_t>(binding);
             return ostream.str();
         }
+
+#ifdef DAWN_ENABLE_WGSL
+        tint::ast::transform::VertexFormat ToTintVertexFormat(wgpu::VertexFormat format) {
+            switch (format) {
+                case wgpu::VertexFormat::UChar2:
+                    return tint::ast::transform::VertexFormat::vec2_u8;
+                case wgpu::VertexFormat::UChar4:
+                    return tint::ast::transform::VertexFormat::vec4_u8;
+                case wgpu::VertexFormat::Char2:
+                    return tint::ast::transform::VertexFormat::vec2_i8;
+                case wgpu::VertexFormat::Char4:
+                    return tint::ast::transform::VertexFormat::vec4_i8;
+                case wgpu::VertexFormat::UChar2Norm:
+                    return tint::ast::transform::VertexFormat::vec2_u8_norm;
+                case wgpu::VertexFormat::UChar4Norm:
+                    return tint::ast::transform::VertexFormat::vec4_u8_norm;
+                case wgpu::VertexFormat::Char2Norm:
+                    return tint::ast::transform::VertexFormat::vec2_i8_norm;
+                case wgpu::VertexFormat::Char4Norm:
+                    return tint::ast::transform::VertexFormat::vec4_i8_norm;
+                case wgpu::VertexFormat::UShort2:
+                    return tint::ast::transform::VertexFormat::vec2_u16;
+                case wgpu::VertexFormat::UShort4:
+                    return tint::ast::transform::VertexFormat::vec4_u16;
+                case wgpu::VertexFormat::Short2:
+                    return tint::ast::transform::VertexFormat::vec2_i16;
+                case wgpu::VertexFormat::Short4:
+                    return tint::ast::transform::VertexFormat::vec4_i16;
+                case wgpu::VertexFormat::UShort2Norm:
+                    return tint::ast::transform::VertexFormat::vec2_u16_norm;
+                case wgpu::VertexFormat::UShort4Norm:
+                    return tint::ast::transform::VertexFormat::vec4_u16_norm;
+                case wgpu::VertexFormat::Short2Norm:
+                    return tint::ast::transform::VertexFormat::vec2_i16_norm;
+                case wgpu::VertexFormat::Short4Norm:
+                    return tint::ast::transform::VertexFormat::vec4_i16_norm;
+                case wgpu::VertexFormat::Half2:
+                    return tint::ast::transform::VertexFormat::vec2_f16;
+                case wgpu::VertexFormat::Half4:
+                    return tint::ast::transform::VertexFormat::vec4_f16;
+                case wgpu::VertexFormat::Float:
+                    return tint::ast::transform::VertexFormat::f32;
+                case wgpu::VertexFormat::Float2:
+                    return tint::ast::transform::VertexFormat::vec2_f32;
+                case wgpu::VertexFormat::Float3:
+                    return tint::ast::transform::VertexFormat::vec3_f32;
+                case wgpu::VertexFormat::Float4:
+                    return tint::ast::transform::VertexFormat::vec4_f32;
+                case wgpu::VertexFormat::UInt:
+                    return tint::ast::transform::VertexFormat::u32;
+                case wgpu::VertexFormat::UInt2:
+                    return tint::ast::transform::VertexFormat::vec2_u32;
+                case wgpu::VertexFormat::UInt3:
+                    return tint::ast::transform::VertexFormat::vec3_u32;
+                case wgpu::VertexFormat::UInt4:
+                    return tint::ast::transform::VertexFormat::vec4_u32;
+                case wgpu::VertexFormat::Int:
+                    return tint::ast::transform::VertexFormat::i32;
+                case wgpu::VertexFormat::Int2:
+                    return tint::ast::transform::VertexFormat::vec2_i32;
+                case wgpu::VertexFormat::Int3:
+                    return tint::ast::transform::VertexFormat::vec3_i32;
+                case wgpu::VertexFormat::Int4:
+                    return tint::ast::transform::VertexFormat::vec4_i32;
+            }
+        }
+
+        tint::ast::transform::InputStepMode ToTintInputStepMode(wgpu::InputStepMode mode) {
+            switch (mode) {
+                case wgpu::InputStepMode::Vertex:
+                    return tint::ast::transform::InputStepMode::kVertex;
+                case wgpu::InputStepMode::Instance:
+                    return tint::ast::transform::InputStepMode::kInstance;
+            }
+        }
+#endif
     }  // anonymous namespace
 
     MaybeError ValidateSpirv(DeviceBase*, const uint32_t* code, uint32_t codeSize) {
@@ -382,6 +458,73 @@ namespace dawn_native {
         tint::ast::Module module = parser.module();
         if (!module.IsValid()) {
             errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::TypeDeterminer type_determiner(&context, &module);
+        if (!type_determiner.Determine()) {
+            errorStream << "Type Determination: " << type_determiner.error();
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::writer::spirv::Generator generator(std::move(module));
+        if (!generator.Generate()) {
+            errorStream << "Generator: " << generator.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        std::vector<uint32_t> spirv = generator.result();
+        return std::move(spirv);
+    }
+
+    ResultOrError<std::vector<uint32_t>> ConvertWGSLToSPIRVWithPulling(
+        const char* source,
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint) {
+        std::ostringstream errorStream;
+        errorStream << "Tint WGSL->SPIR-V failure:" << std::endl;
+
+        tint::Context context;
+        tint::reader::wgsl::Parser parser(&context, source);
+
+        // TODO: This is a duplicate parse with ValidateWGSL, need to store
+        // state between calls to avoid this.
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::ast::Module module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::ast::transform::VertexPullingTransform transform(&context, &module);
+        auto state = std::make_unique<tint::ast::transform::VertexStateDescriptor>();
+        for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
+            auto& vertexBuffer = vertexState.vertexBuffers[i];
+            tint::ast::transform::VertexBufferLayoutDescriptor layout;
+            layout.array_stride = vertexBuffer.arrayStride;
+            layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
+
+            for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
+                auto& attribute = vertexBuffer.attributes[j];
+                tint::ast::transform::VertexAttributeDescriptor attr;
+                attr.format = ToTintVertexFormat(attribute.format);
+                attr.offset = attribute.offset;
+                attr.shader_location = attribute.shaderLocation;
+
+                layout.attributes.push_back(std::move(attr));
+            }
+
+            state->vertex_buffers.push_back(std::move(layout));
+        }
+        transform.SetVertexState(std::move(state));
+        transform.SetEntryPoint(entryPoint);
+
+        if (!transform.Run()) {
+            errorStream << "Vertex pulling transform: " << transform.GetError();
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
         }
 
@@ -1093,6 +1236,14 @@ namespace dawn_native {
     const std::vector<uint32_t>& ShaderModuleBase::GetSpirv() const {
         return mSpirv;
     }
+
+#ifdef DAWN_ENABLE_WGSL
+    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint) const {
+        return ConvertWGSLToSPIRVWithPulling(mWgsl.c_str(), vertexState, entryPoint);
+    }
+#endif
 
     shaderc_spvc::CompileOptions ShaderModuleBase::GetCompileOptions() const {
         shaderc_spvc::CompileOptions options;
