@@ -82,6 +82,23 @@
     },
     {
       "key": {
+        "uuid": "488762f0_aafe92ff",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-12T22:10:06Z",
+      "side": 1,
+      "message": "nit: probably should check that these kernel objects are not null before calling.",
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d2c7abd_7e10e697",
         "filename": "src/utils/WindowsDebugLogger.h",
         "patchSetId": 7
