@@ -70,6 +70,24 @@
       "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cb4cbce_778e425e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-12T02:32:42Z",
+      "side": 1,
+      "message": "Both. It\u0027ll go down once Trim() is supported but there will always exist some memory overhead for pooling.",
+      "parentUuid": "6cf6dcbf_cfec2432",
+      "revId": "b0b80ff978d2313f49d4d872d568eec90a231432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
