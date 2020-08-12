@@ -47,7 +47,8 @@ namespace dawn_native { namespace metal {
                                SingleShaderStage functionStage,
                                const PipelineLayout* layout,
                                MetalFunctionData* out,
-                               uint32_t sampleMask = 0xFFFFFFFF);
+                               uint32_t sampleMask = 0xFFFFFFFF,
+                               const VertexStateDescriptor* vertexState = nullptr);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
