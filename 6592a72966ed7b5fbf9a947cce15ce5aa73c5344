@@ -165,6 +165,24 @@
     },
     {
       "key": {
+        "uuid": "4ddf61b5_70772856",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-12T22:38:10Z",
+      "side": 1,
+      "message": "CreateFileMapping can fail and return NULL which isn\u0027t ASSERT\u0027ed. It\u0027s best to play it safe IMHO.",
+      "parentUuid": "92aa7d5e_356a8953",
+      "revId": "6592a72966ed7b5fbf9a947cce15ce5aa73c5344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d2c7abd_7e10e697",
         "filename": "src/utils/WindowsDebugLogger.h",
         "patchSetId": 7
