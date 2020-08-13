@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "638f6458_bed00a87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T18:00:39Z",
+      "side": 1,
+      "message": "Thanks for pointing out all these Win32 things Bryan",
+      "revId": "fb78f92cc83969b62b32ff08d59c6268b664bcd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

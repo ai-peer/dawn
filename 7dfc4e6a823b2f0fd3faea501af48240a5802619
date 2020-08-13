@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5c12a777_0f68fd06",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T18:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1abf0753_7941d7a9",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76f702e7_ec169936",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f340c58_4515603a",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T18:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f702e7_ec169936",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "eae6d8c8_8ceacde0",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T18:00:39Z",
+      "side": 1,
+      "message": "In tests, which is what this is for, ASSERT is always enabled.",
+      "parentUuid": "a3d7f73b_02de5684",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
@@ -67,6 +121,24 @@
       "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cea188a_8ec4694d",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T18:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14c1bb10_40be8016",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
