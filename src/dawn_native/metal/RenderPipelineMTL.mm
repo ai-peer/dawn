@@ -333,7 +333,8 @@ namespace dawn_native { namespace metal {
         const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
         ShaderModule::MetalFunctionData vertexData;
         DAWN_TRY(vertexModule->GetFunction(vertexEntryPoint, SingleShaderStage::Vertex,
-                                           ToBackend(GetLayout()), &vertexData));
+                                           ToBackend(GetLayout()), &vertexData, 0xFFFFFFFF,
+                                           GetVertexStateDescriptor()));
 
         descriptorMTL.vertexFunction = vertexData.function;
         if (vertexData.needsStorageBufferLength) {
@@ -378,9 +379,18 @@ namespace dawn_native { namespace metal {
 
         descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
 
+        // TODO: MakeVertexDesc should be const in the future, so we don't need to call it here when
+        // vertex pulling is enabled
         MTLVertexDescriptor* vertexDesc = MakeVertexDesc();
         descriptorMTL.vertexDescriptor = vertexDesc;
         [vertexDesc release];
+
+        if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
+            // Calling MakeVertexDesc first is important since it sets indices for packed bindings
+            MTLVertexDescriptor* emptyVertexDesc = [MTLVertexDescriptor new];
+            descriptorMTL.vertexDescriptor = emptyVertexDesc;
+            [emptyVertexDesc release];
+        }
 
         descriptorMTL.sampleCount = GetSampleCount();
         descriptorMTL.alphaToCoverageEnabled = descriptor->alphaToCoverageEnabled;
