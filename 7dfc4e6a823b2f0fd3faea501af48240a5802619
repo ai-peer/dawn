@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "7e26a4cc_4b074538",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T19:49:36Z",
+      "side": 1,
+      "message": "To be more clear, even our release builds for testing have dcheck_always_on which makes DAWN_ALWAYS_ASSERT defined which makes ASSERT always crash",
+      "parentUuid": "43f3815b_925863ca",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
