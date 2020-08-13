@@ -233,6 +233,24 @@
     },
     {
       "key": {
+        "uuid": "af90ddf5_80939409",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-13T21:41:35Z",
+      "side": 1,
+      "message": "I think CHECK is ideal because unlike ASSERT, it can\u0027t be disabled via flags. This is also why DCHECK is not ideal too.",
+      "parentUuid": "415f8374_7e8e0f2a",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11

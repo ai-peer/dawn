@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "bc56a0c7_21373939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-13T21:41:35Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "fb78f92cc83969b62b32ff08d59c6268b664bcd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9325bb1_2e1badf3",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 12
