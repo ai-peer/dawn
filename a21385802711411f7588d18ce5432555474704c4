@@ -76,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "67c074d1_5acfff3f",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-13T01:18:22Z",
+      "side": 1,
+      "message": "I just made the change suggested by Corentin and removed these comments in the latest patch set.",
+      "parentUuid": "88bc233f_39d1f735",
+      "range": {
+        "startLine": 384,
+        "startChar": 7,
+        "endLine": 385,
+        "endChar": 91
+      },
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef8eee96_7c422601",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 2
@@ -96,6 +120,30 @@
       "revId": "a21385802711411f7588d18ce5432555474704c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f5419d0_b34b104e",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-13T01:18:22Z",
+      "side": 1,
+      "message": "Done. Thanks to point out this!",
+      "parentUuid": "ef8eee96_7c422601",
+      "range": {
+        "startLine": 386,
+        "startChar": 88,
+        "endLine": 386,
+        "endChar": 91
+      },
+      "revId": "a21385802711411f7588d18ce5432555474704c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
