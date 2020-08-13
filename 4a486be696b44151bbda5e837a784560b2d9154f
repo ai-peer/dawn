@@ -16,6 +16,23 @@
       "revId": "4a486be696b44151bbda5e837a784560b2d9154f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "510d6708_b69d6194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-08-13T14:05:10Z",
+      "side": 1,
+      "message": "If you are going to land anything that depends on these changes in Dawn, you will need to roll the DEP in chromium also.",
+      "revId": "4a486be696b44151bbda5e837a784560b2d9154f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
