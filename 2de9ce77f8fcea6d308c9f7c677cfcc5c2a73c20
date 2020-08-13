@@ -273,6 +273,30 @@
     },
     {
       "key": {
+        "uuid": "f4c4a870_0407f73e",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f15352d4_7f86aeac",
+      "range": {
+        "startLine": 386,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 77
+      },
+      "revId": "2de9ce77f8fcea6d308c9f7c677cfcc5c2a73c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ac89335_68693741",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6

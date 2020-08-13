@@ -77,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "a50d14b1_2718ccdd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e245b27_e792aa0d",
+      "range": {
+        "startLine": 986,
+        "startChar": 63,
+        "endLine": 986,
+        "endChar": 85
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4c0cb1c_8375edbc",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 9
@@ -97,6 +121,30 @@
       "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc4f844f_c523711c",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c0cb1c_8375edbc",
+      "range": {
+        "startLine": 164,
+        "startChar": 24,
+        "endLine": 170,
+        "endChar": 89
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -123,6 +171,30 @@
     },
     {
       "key": {
+        "uuid": "6cd31b77_d9dfed8b",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc3558f_5762e420",
+      "range": {
+        "startLine": 259,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 49
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c2d4c5f_9d033ad4",
         "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
         "patchSetId": 9
@@ -146,6 +218,30 @@
     },
     {
       "key": {
+        "uuid": "6d50cb85_1478a363",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c2d4c5f_9d033ad4",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a78a2658_466fe16f",
         "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
         "patchSetId": 9
@@ -166,6 +262,30 @@
       "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed5ab512_675571a2",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Added more tests!",
+      "parentUuid": "a78a2658_466fe16f",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "261af79161f838aba6808d6b31167c18cf0986e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

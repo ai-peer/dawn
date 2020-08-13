@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "10c8f2e6_abff45f1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aeca6a4_d7394b80",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36e0d3a1_0c180b37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 10
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "de207df8_aadff8dc",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e0d3a1_0c180b37",
+      "range": {
+        "startLine": 972,
+        "startChar": 8,
+        "endLine": 972,
+        "endChar": 48
+      },
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "208cae3b_37b52be0",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 10
@@ -70,6 +112,24 @@
       "writtenOn": "2020-08-12T20:28:10Z",
       "side": 1,
       "message": "Can this be done in a separate commit and done in GetCompileOptions() if (!DisableRobustness)? It is generally useful and will help other backends pass the shader robust access CTS tests.",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6844e63_05be3557",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done, made this dependent on the other commit",
+      "parentUuid": "208cae3b_37b52be0",
       "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -99,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "59165794_bd750f76",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "843c2e4f_2bf432ff",
+      "range": {
+        "startLine": 339,
+        "startChar": 6,
+        "endLine": 339,
+        "endChar": 26
+      },
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "543566ed_d39132a8",
         "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
         "patchSetId": 10
@@ -113,6 +197,24 @@
       "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b479f5ba_dcd44061",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2020-08-13T08:53:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "543566ed_d39132a8",
+      "revId": "0829fb0d6bd0e4e9729b717a0f85b767668bbd51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
