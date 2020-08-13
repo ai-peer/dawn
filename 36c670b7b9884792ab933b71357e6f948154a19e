@@ -16,6 +16,29 @@
       "revId": "36c670b7b9884792ab933b71357e6f948154a19e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6e7c7cc_6d1be26d",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-13T17:25:14Z",
+      "side": 1,
+      "message": "(Issue should not block merging since it is pre-existing)\n\n@Corentin and @Austin, is it by design that we Reset the CommandIterator in the move constructor?  Move constructors should just be transferring contents, not changing any state.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "36c670b7b9884792ab933b71357e6f948154a19e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
