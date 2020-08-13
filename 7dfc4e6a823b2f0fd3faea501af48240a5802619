@@ -215,6 +215,24 @@
     },
     {
       "key": {
+        "uuid": "415f8374_7e8e0f2a",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T21:05:52Z",
+      "side": 1,
+      "message": "Right but.. we don\u0027t have CHECK, and where this class is used, ASSERT does exactly what CHECK does. Is that not sufficient?\n\nAlso I\u0027m not opposed to adding a CHECK macro, don\u0027t think it\u0027s necessary here though because they would be the same in this case.",
+      "parentUuid": "ef80f858_9fa8ae74",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
