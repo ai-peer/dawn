@@ -51,6 +51,46 @@
       "revId": "aad23d5ba5ccf97b560c46f31002d4ce33bfc0de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c68e749_d44482f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T21:22:20Z",
+      "side": 1,
+      "message": "one more note, but otherwise LGTM!",
+      "revId": "aad23d5ba5ccf97b560c46f31002d4ce33bfc0de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "795264ea_a53c03c7",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T21:22:20Z",
+      "side": 1,
+      "message": "should be !IsSpvcBeingUsed(). if it\u0027s just spvc parser, we parse with SPVC but still compile with spirv-cross",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "aad23d5ba5ccf97b560c46f31002d4ce33bfc0de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
