@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "7fb54825_9071367d",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-13T19:04:18Z",
+      "side": 1,
+      "message": "it leaks even after the process crashes and exits?",
+      "parentUuid": "13b2b076_235a9154",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
