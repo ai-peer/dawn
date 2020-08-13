@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "ea1a201c_b856d81c",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-13T19:45:02Z",
+      "side": 1,
+      "message": "CHECK (instead of DCHECK) would be an ideal here. No error handling code needs to be written. As Bryan says, no subtle behavior; code crashes at the point of the error. No debug vs. release behavior differences.\n\nThe fact that this is test code is even more of a reason to have release asserts.",
+      "parentUuid": "7fb54825_9071367d",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
