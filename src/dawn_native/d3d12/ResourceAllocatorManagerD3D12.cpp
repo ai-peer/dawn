@@ -297,6 +297,12 @@ namespace dawn_native { namespace d3d12 {
             return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
         }
 
+        // Buffer resource size must always be a multiple of 64KB.
+        // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-getresourceallocationinfo
+        if (resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_BUFFER) {
+            resourceDescriptor.Width = resourceInfo.SizeInBytes;
+        }
+
         BuddyMemoryAllocator* allocator =
             mSubAllocatedResourceAllocators[static_cast<size_t>(resourceHeapKind)].get();
 
@@ -337,7 +343,7 @@ namespace dawn_native { namespace d3d12 {
 
     ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedResource(
         D3D12_HEAP_TYPE heapType,
-        const D3D12_RESOURCE_DESC& resourceDescriptor,
+        const D3D12_RESOURCE_DESC& requestedResourceDescriptor,
         const D3D12_CLEAR_VALUE* optimizedClearValue,
         D3D12_RESOURCE_STATES initialUsage) {
         D3D12_HEAP_PROPERTIES heapProperties;
@@ -349,10 +355,9 @@ namespace dawn_native { namespace d3d12 {
 
         // If d3d tells us the resource size is invalid, treat the error as OOM.
         // Otherwise, creating the resource could cause a device loss (too large).
-        // This is because NextPowerOfTwo(UINT64_MAX) overflows and proceeds to
-        // incorrectly allocate a mismatched size.
         D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
-            mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
+            mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1,
+                                                                 &requestedResourceDescriptor);
         if (resourceInfo.SizeInBytes == 0 ||
             resourceInfo.SizeInBytes == std::numeric_limits<uint64_t>::max()) {
             return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
@@ -360,6 +365,13 @@ namespace dawn_native { namespace d3d12 {
 
         if (resourceInfo.SizeInBytes > kMaxHeapSize) {
             return ResourceHeapAllocation{};  // Invalid
+        }
+
+        // Buffer resource size must always be a multiple of 64KB.
+        // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-getresourceallocationinfo
+        D3D12_RESOURCE_DESC resourceDescriptor = requestedResourceDescriptor;
+        if (resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_BUFFER) {
+            resourceDescriptor.Width = resourceInfo.SizeInBytes;
         }
 
         // CreateCommittedResource will implicitly make the created resource resident. We must
