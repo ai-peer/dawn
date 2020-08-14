@@ -22,6 +22,54 @@
       "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a09256c2_7ecb8aa4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T20:45:50Z",
+      "side": 1,
+      "message": "Pretty cheap. GetDesc doesn\u0027t hot because it doesn\u0027t go down into the driver.",
+      "parentUuid": "aee56389_fac861f8",
+      "range": {
+        "startLine": 421,
+        "startChar": 47,
+        "endLine": 421,
+        "endChar": 77
+      },
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b482a4_8a0b268f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T20:45:50Z",
+      "side": 1,
+      "message": "Never seen GetDesc show up on profiles (we use it a lot elsewhere) but easy to cache if it does. Maybe a TODO?",
+      "parentUuid": "aee56389_fac861f8",
+      "range": {
+        "startLine": 421,
+        "startChar": 47,
+        "endLine": 421,
+        "endChar": 77
+      },
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
