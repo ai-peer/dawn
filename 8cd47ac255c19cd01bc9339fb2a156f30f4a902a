@@ -102,6 +102,24 @@
       "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0714542_63ccbe8f",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-14T17:02:30Z",
+      "side": 1,
+      "message": "Yeah we use that option, but forgot to update the stencilFront/stencilBack i guess https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/opengl/ShaderModuleGL.cpp;l\u003d88?q\u003dShaderModuleGL",
+      "parentUuid": "e02fc7fb_9a4be354",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
