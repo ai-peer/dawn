@@ -95,7 +95,8 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.Alignment = 0;
         // TODO(cwallez@chromium.org): Have a global "zero" buffer that can do everything instead
         // of creating a new 4-byte buffer?
-        resourceDescriptor.Width = std::max(GetSize(), uint64_t(4u));
+        resourceDescriptor.Width = Align(std::max(GetSize(), uint64_t(4u)),
+                                         D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
         resourceDescriptor.Height = 1;
         resourceDescriptor.DepthOrArraySize = 1;
         resourceDescriptor.MipLevels = 1;
