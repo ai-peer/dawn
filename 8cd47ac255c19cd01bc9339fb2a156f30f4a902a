@@ -16,6 +16,40 @@
       "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5de1c1cf_60dcfa96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-14T07:36:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b72762b_3ac680e1",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-14T07:36:18Z",
+      "side": 1,
+      "message": "Eventually all this type of validation will need to be collected in a WebGPU compat toggle.",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
