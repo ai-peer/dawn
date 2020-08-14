@@ -111,6 +111,30 @@
       "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "500eddc7_c3130322",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T22:33:22Z",
+      "side": 1,
+      "message": "Yea, I would guess so. It doesn\u0027t go down into the driver like RESOURCE_ALLOCATION_INFO so it would surprise me if it was hot.\n\nSpeaking of which, reminds me to figure out how to avoid calling RESOURCE_ALLOCATION_INFO twice for sub-allocation.",
+      "parentUuid": "b35df57c_0569b860",
+      "range": {
+        "startLine": 421,
+        "startChar": 47,
+        "endLine": 421,
+        "endChar": 77
+      },
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
