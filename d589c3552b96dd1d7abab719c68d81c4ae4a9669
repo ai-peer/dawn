@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "e89cc3aa_f0227456",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T20:11:43Z",
+      "side": 1,
+      "message": "Okay, SGTM. Thanks!\n\n\u003e Also, in crbug.com/dawn/484\n\nIt\u0027s still open but currently, even sub-allocated heaps are always initialized.",
+      "parentUuid": "20faacaa_86bda54a",
+      "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc06bd5c_35489309",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -92,6 +110,30 @@
       "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0f3cf73_e8197919",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T20:11:43Z",
+      "side": 1,
+      "message": "Nope, buffers use the same size alignment afaik.",
+      "parentUuid": "fc06bd5c_35489309",
+      "range": {
+        "startLine": 99,
+        "startChar": 41,
+        "endLine": 99,
+        "endChar": 87
+      },
+      "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
