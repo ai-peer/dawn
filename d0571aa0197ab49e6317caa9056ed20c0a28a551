@@ -159,6 +159,30 @@
       "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3044fa36_8cfd4d43",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-14T23:16:10Z",
+      "side": 1,
+      "message": "Oh, thanks for adding me.\n\n\u003e Unless we do the computation for estimating the size of the texture and required alignment ourselves somehow.\n\nI think the algo goes like this: if we know the texture can be 4K aligned then always use small placement w/o calling GetResourceAllocationInfo() twice. To be 4K aligned, we need 64K / 4K \u003d 16 tiles. To count the number of tiles, divide the texture size by the tile size. For example, the tile size for RGBA8 for 4 bytes * 8 \u003d 32 bit (w\u003d32 texels, h\u003d32 texels).",
+      "parentUuid": "777c458d_7fbe299e",
+      "range": {
+        "startLine": 421,
+        "startChar": 47,
+        "endLine": 421,
+        "endChar": 77
+      },
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
