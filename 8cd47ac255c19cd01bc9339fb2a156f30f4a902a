@@ -50,6 +50,40 @@
       "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73ec9d1a_14b33d91",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-14T13:41:04Z",
+      "side": 1,
+      "message": "[1] stencilBack",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc58cde1_ba15bb47",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-14T13:41:04Z",
+      "side": 1,
+      "message": "Looking at this briefly, it seems to be because we \"flip-Y\" in OpenGL so front and back are reversed. If instead of this if we do the replacement at [1], then the test passes on OpenGL (but fails everywhere else)",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
