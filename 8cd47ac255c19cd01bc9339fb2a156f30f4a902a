@@ -120,6 +120,24 @@
       "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bb01e55_2c5f9034",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T20:03:54Z",
+      "side": 1,
+      "message": "Done. I\u0027ll update the bug to reflect that.",
+      "parentUuid": "a0714542_63ccbe8f",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
