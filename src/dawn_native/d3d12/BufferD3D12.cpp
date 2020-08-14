@@ -95,7 +95,8 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.Alignment = 0;
         // TODO(cwallez@chromium.org): Have a global "zero" buffer that can do everything instead
         // of creating a new 4-byte buffer?
-        resourceDescriptor.Width = std::max(GetSize(), uint64_t(4u));
+        resourceDescriptor.Width = Align(std::max(GetSize(), uint64_t(4u)),
+                                         D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
         resourceDescriptor.Height = 1;
         resourceDescriptor.DepthOrArraySize = 1;
         resourceDescriptor.MipLevels = 1;
@@ -415,9 +416,12 @@ namespace dawn_native { namespace d3d12 {
 
         // The state of the buffers on UPLOAD heap must always be GENERIC_READ and cannot be
         // changed away, so we can only clear such buffer with buffer mapping.
+        // Clear the entire VA by using the resource size (equal to width) since |mSize| could
+        // be smaller and this wasted allocated region could be left uninitialized.
+        const size_t size = mResourceAllocation.GetD3D12Resource()->GetDesc().Width;
         if (D3D12HeapType(GetUsage()) == D3D12_HEAP_TYPE_UPLOAD) {
-            DAWN_TRY(MapInternal(true, 0, size_t(GetSize()), "D3D12 map at clear buffer"));
-            memset(mMappedData, clearValue, GetSize());
+            DAWN_TRY(MapInternal(true, 0, size, "D3D12 map at clear buffer"));
+            memset(mMappedData, clearValue, size);
             UnmapImpl();
         } else {
             // TODO(jiawei.shao@intel.com): use ClearUnorderedAccessView*() when the buffer usage
@@ -425,12 +429,12 @@ namespace dawn_native { namespace d3d12 {
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(GetSize(), device->GetPendingCommandSerial()));
+                            uploader->Allocate(size, device->GetPendingCommandSerial()));
 
-            memset(uploadHandle.mappedBuffer, clearValue, GetSize());
+            memset(uploadHandle.mappedBuffer, clearValue, size);
 
             device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
-                                                uploadHandle.startOffset, this, 0, GetSize());
+                                                uploadHandle.startOffset, this, 0, size);
         }
 
         return {};
