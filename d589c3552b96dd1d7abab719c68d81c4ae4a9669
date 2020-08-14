@@ -51,6 +51,47 @@
       "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20faacaa_86bda54a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T19:26:56Z",
+      "side": 1,
+      "message": "\u003e Couldn\u0027t the buffer zero-init just clear the size of the resource (vs mSize) if we had to clear? \nYes, it should clear the size of the resource. I think Corentin\u0027s point is that the change should also update that code to do so. It does not right now.\n\n\u003e Also, when a resource heap is created, it is already initialized - why re-zero?\nFor suballocation, this may not always be true. Also, in crbug.com/dawn/484, I think we decided for buffers at least we would use D3D12_HEAP_FLAG_CREATE_NOT_ZEROED ?",
+      "parentUuid": "40a54ce4_d4dbcca7",
+      "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc06bd5c_35489309",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T19:26:56Z",
+      "side": 1,
+      "message": "Do we need a different alignment for other types of buffers?",
+      "range": {
+        "startLine": 99,
+        "startChar": 41,
+        "endLine": 99,
+        "endChar": 87
+      },
+      "revId": "d589c3552b96dd1d7abab719c68d81c4ae4a9669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
