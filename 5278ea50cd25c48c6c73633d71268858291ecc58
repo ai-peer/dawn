@@ -205,6 +205,30 @@
       "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9dc7525_148f6d8f",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T20:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d451143_1fd30096",
+      "range": {
+        "startLine": 54,
+        "startChar": 67,
+        "endLine": 54,
+        "endChar": 75
+      },
+      "revId": "5278ea50cd25c48c6c73633d71268858291ecc58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -269,6 +269,24 @@
     },
     {
       "key": {
+        "uuid": "302d9d40_e98f9cc7",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T20:38:31Z",
+      "side": 1,
+      "message": "Okay, I\u0027m going to leave this the way it is for now them until we need RELEASE_ASSERT for more reasons.",
+      "parentUuid": "e36dc3f3_c3f9ec85",
+      "revId": "7dfc4e6a823b2f0fd3faea501af48240a5802619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14c1bb10_40be8016",
         "filename": "src/utils/WindowsDebugLogger.cpp",
         "patchSetId": 11
