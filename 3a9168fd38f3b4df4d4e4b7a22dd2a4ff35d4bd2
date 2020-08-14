@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46afa7ab_4030bbfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T22:28:45Z",
+      "side": 1,
+      "message": "Corentin TBR. I misread the docs on the return value here.",
+      "revId": "3a9168fd38f3b4df4d4e4b7a22dd2a4ff35d4bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
