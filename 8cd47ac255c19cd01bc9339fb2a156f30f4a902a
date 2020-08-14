@@ -84,6 +84,24 @@
       "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e02fc7fb_9a4be354",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-14T17:00:31Z",
+      "side": 1,
+      "message": "ahh that makes sense. I was confused because changing the winding order didn\u0027t fix it. Isn\u0027t there a flip-y option on the shader transpilation somewhere?\n\nSPIR-V cross seems to discourage it though:\n\n\u003e Y-flipping of gl_Position and similar is also supported. The use of this is discouraged, because relying on vertex shader Y-flipping tends to get quite messy. To enable this, set CompilerGLSL::Options.vertex.flip_vert_y or --flip-vert-y in CLI.",
+      "parentUuid": "fc58cde1_ba15bb47",
+      "revId": "8cd47ac255c19cd01bc9339fb2a156f30f4a902a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
