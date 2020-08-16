@@ -43,14 +43,15 @@ namespace dawn_native { namespace opengl {
         void ApplyFrontFaceAndCulling(const OpenGLFunctions& gl,
                                       wgpu::FrontFace face,
                                       wgpu::CullMode mode) {
+            // Note that we invert winding direction in OpenGL. Because Y axis is up in OpenGL,
+            // which is different from WebGPU and other backends (Y axis is down).
+            GLenum direction = (face == wgpu::FrontFace::CCW) ? GL_CW : GL_CCW;
+            gl.FrontFace(direction);
+
             if (mode == wgpu::CullMode::None) {
                 gl.Disable(GL_CULL_FACE);
             } else {
                 gl.Enable(GL_CULL_FACE);
-                // Note that we invert winding direction in OpenGL. Because Y axis is up in OpenGL,
-                // which is different from WebGPU and other backends (Y axis is down).
-                GLenum direction = (face == wgpu::FrontFace::CCW) ? GL_CW : GL_CCW;
-                gl.FrontFace(direction);
 
                 GLenum cullMode = (mode == wgpu::CullMode::Front) ? GL_FRONT : GL_BACK;
                 gl.CullFace(cullMode);
@@ -176,17 +177,22 @@ namespace dawn_native { namespace opengl {
                 gl.Disable(GL_STENCIL_TEST);
             }
 
-            GLenum backCompareFunction = ToOpenGLCompareFunction(descriptor->stencilBack.compare);
-            GLenum frontCompareFunction = ToOpenGLCompareFunction(descriptor->stencilFront.compare);
+            // Note that the OpenGL front and back are inverted compared to WebGPU because the
+            // Y-flip added to all vertex shaders.
+            const StencilStateFaceDescriptor& glStencilFront = descriptor->stencilBack;
+            const StencilStateFaceDescriptor& glStencilBack = descriptor->stencilFront;
+
+            GLenum backCompareFunction = ToOpenGLCompareFunction(glStencilBack.compare);
+            GLenum frontCompareFunction = ToOpenGLCompareFunction(glStencilFront.compare);
             persistentPipelineState->SetStencilFuncsAndMask(
                 gl, backCompareFunction, frontCompareFunction, descriptor->stencilReadMask);
 
-            gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(descriptor->stencilBack.failOp),
-                                 OpenGLStencilOperation(descriptor->stencilBack.depthFailOp),
-                                 OpenGLStencilOperation(descriptor->stencilBack.passOp));
-            gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(descriptor->stencilFront.failOp),
-                                 OpenGLStencilOperation(descriptor->stencilFront.depthFailOp),
-                                 OpenGLStencilOperation(descriptor->stencilFront.passOp));
+            gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(glStencilBack.failOp),
+                                 OpenGLStencilOperation(glStencilBack.depthFailOp),
+                                 OpenGLStencilOperation(glStencilBack.passOp));
+            gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(glStencilFront.failOp),
+                                 OpenGLStencilOperation(glStencilFront.depthFailOp),
+                                 OpenGLStencilOperation(glStencilFront.passOp));
 
             gl.StencilMask(descriptor->stencilWriteMask);
         }
