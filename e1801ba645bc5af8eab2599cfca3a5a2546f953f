@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "68e3c8dd_26e4ab8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-16T13:01:18Z",
+      "side": 1,
+      "message": "LGTM too, we can gain back the missed validation coverage later.",
+      "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dddf456a_3df60509",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 3
@@ -30,6 +47,23 @@
       "writtenOn": "2020-08-14T23:44:41Z",
       "side": 1,
       "message": "Bummer. Means we lose strict back-end validation for ALL resources (small or not).\n\nMaybe a TODO to figure out how to calculate 4K alignment w/o GetResourceAllocationInfo()? \n\nSee comment in https://dawn-review.googlesource.com/c/dawn/+/26820/6/src/dawn_native/d3d12/BufferD3D12.cpp#421",
+      "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db65e0a4_2f8f4a94",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-16T13:01:18Z",
+      "side": 1,
+      "message": "Can we remove this TODO and put it in the LazyZeroInit test instead? (+ ask Natasha to look at it?)",
       "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
