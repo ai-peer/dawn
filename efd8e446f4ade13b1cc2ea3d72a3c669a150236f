@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "222c3997_0f63e82b",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-16T12:36:42Z",
+      "side": 1,
+      "message": "For some reason I thought there was still a misunderstanding on this (when there isn\u0027t) so I made a CL that fixes it https://dawn-review.googlesource.com/c/dawn/+/26880",
+      "revId": "efd8e446f4ade13b1cc2ea3d72a3c669a150236f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
