@@ -176,17 +176,22 @@ namespace dawn_native { namespace opengl {
                 gl.Disable(GL_STENCIL_TEST);
             }
 
-            GLenum backCompareFunction = ToOpenGLCompareFunction(descriptor->stencilBack.compare);
-            GLenum frontCompareFunction = ToOpenGLCompareFunction(descriptor->stencilFront.compare);
+            // Note that the OpenGL front and back are inverted compared to WebGPU because the
+            // Y-flip added to all vertex shaders.
+            const StencilStateFaceDescriptor& glStencilFront = descriptor->stencilBack;
+            const StencilStateFaceDescriptor& glStencilBack = descriptor->stencilFront;
+
+            GLenum backCompareFunction = ToOpenGLCompareFunction(glStencilBack.compare);
+            GLenum frontCompareFunction = ToOpenGLCompareFunction(glStencilFront.compare);
             persistentPipelineState->SetStencilFuncsAndMask(
                 gl, backCompareFunction, frontCompareFunction, descriptor->stencilReadMask);
 
-            gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(descriptor->stencilBack.failOp),
-                                 OpenGLStencilOperation(descriptor->stencilBack.depthFailOp),
-                                 OpenGLStencilOperation(descriptor->stencilBack.passOp));
-            gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(descriptor->stencilFront.failOp),
-                                 OpenGLStencilOperation(descriptor->stencilFront.depthFailOp),
-                                 OpenGLStencilOperation(descriptor->stencilFront.passOp));
+            gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(glStencilBack.failOp),
+                                 OpenGLStencilOperation(glStencilBack.depthFailOp),
+                                 OpenGLStencilOperation(glStencilBack.passOp));
+            gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(glStencilFront.failOp),
+                                 OpenGLStencilOperation(glStencilFront.depthFailOp),
+                                 OpenGLStencilOperation(glStencilFront.passOp));
 
             gl.StencilMask(descriptor->stencilWriteMask);
         }
