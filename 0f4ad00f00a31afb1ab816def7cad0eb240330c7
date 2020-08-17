@@ -33,6 +33,23 @@
       "revId": "0f4ad00f00a31afb1ab816def7cad0eb240330c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c3af7b9_667705e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-17T10:18:08Z",
+      "side": 1,
+      "message": "-[MTLDebugBlitCommandEncoder validateCopyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:options:]:502: failed assertion `sourceOffset (2876) must be a multiple of 8 bytes.\u0027\n\nThat might be the reason, we should somehow be able to ask the StagingAllocator to allocate with an alignment constraint.",
+      "revId": "0f4ad00f00a31afb1ab816def7cad0eb240330c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
