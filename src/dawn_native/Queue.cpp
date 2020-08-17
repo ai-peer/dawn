@@ -102,21 +102,7 @@ namespace dawn_native {
                                           uint64_t bufferOffset,
                                           const void* data,
                                           size_t size) {
-        if (size == 0) {
-            return {};
-        }
-
-        DeviceBase* device = GetDevice();
-
-        UploadHandle uploadHandle;
-        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                          size, device->GetPendingCommandSerial()));
-        ASSERT(uploadHandle.mappedBuffer != nullptr);
-
-        memcpy(uploadHandle.mappedBuffer, data, size);
-
-        return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
-                                               buffer, bufferOffset, size);
+        return {};
     }
 
     void QueueBase::WriteTexture(const TextureCopyView* destination,

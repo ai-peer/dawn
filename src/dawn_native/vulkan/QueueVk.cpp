@@ -108,6 +108,27 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
+    MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
+                                      uint64_t bufferOffset,
+                                      const void* data,
+                                      size_t size) {
+        if (size == 0) {
+            return {};
+        }
+
+        DeviceBase* device = GetDevice();
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
+                                          size, device->GetPendingCommandSerial()));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, size);
+
+        return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                               buffer, bufferOffset, size);
+    }
+
     MaybeError Queue::WriteTextureImpl(const TextureCopyView& destination,
                                        const void* data,
                                        const TextureDataLayout& dataLayout,
