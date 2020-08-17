@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "321fe964_a5ff98a6",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-17T21:47:51Z",
+      "side": 1,
+      "message": "Was this check meant to zero the data/content or memory (it says \"data\")? If it really meant the latter then the existing zero-init tests will fail if resource size aligned. Should I disable them for D3D12 + re-add to white-box?",
+      "parentUuid": "7f565376_f4abd6e0",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
