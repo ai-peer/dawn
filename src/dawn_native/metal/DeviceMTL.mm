@@ -371,4 +371,12 @@ namespace dawn_native { namespace metal {
         mMtlDevice = nil;
     }
 
+    uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
+#if defined(DAWN_PLATFORM_MACOS)
+        return 4;
+#else
+        return 1;
+#endif
+    }
+
 }}  // namespace dawn_native::metal

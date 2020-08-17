@@ -67,7 +67,9 @@ namespace dawn_native { namespace metal {
         MaybeError CopyFromStagingToTexture(StagingBufferBase* source,
                                             const TextureDataLayout& dataLayout,
                                             TextureCopy* dst,
-                                            const Extent3D& copySizePixels);
+                                            const Extent3D& copySizePixels) override;
+
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
 
       private:
         Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, const DeviceDescriptor* descriptor);

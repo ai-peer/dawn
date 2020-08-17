@@ -108,4 +108,19 @@ namespace dawn_native {
         }
         mReleasedStagingBuffers.ClearUpTo(lastCompletedSerial);
     }
+
+    ResultOrError<UploadHandle> DynamicUploader::AllocateWithOffsetAlignment(
+        uint64_t allocationSize,
+        Serial serial,
+        uint64_t offsetAlignment) {
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, Allocate(allocationSize + offsetAlignment - 1, serial));
+        uint64_t additionalOffset =
+            Align(uploadHandle.startOffset, offsetAlignment) - uploadHandle.startOffset;
+        uploadHandle.mappedBuffer =
+            static_cast<uint8_t*>(uploadHandle.mappedBuffer) + additionalOffset;
+        uploadHandle.startOffset += additionalOffset;
+        return uploadHandle;
+    }
+
 }  // namespace dawn_native
