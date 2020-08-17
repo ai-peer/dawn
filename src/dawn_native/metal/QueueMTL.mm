@@ -85,6 +85,33 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
+    MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
+                                      uint64_t bufferOffset,
+                                      const void* data,
+                                      size_t size) {
+        if (size == 0) {
+            return {};
+        }
+
+        DeviceBase* device = GetDevice();
+
+        UploadHandle uploadHandle;
+#if defined(DAWN_PLATFORM_MACOS)
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->AllocateWithOffsetAlignment(
+                                          size, device->GetPendingCommandSerial(), 4));
+#else
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
+                                          size, device->GetPendingCommandSerial()));
+#endif
+
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, size);
+
+        return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                               buffer, bufferOffset, size);
+    }
+
     // We don't write from the CPU to the texture directly which can be done in Metal using the
     // replaceRegion function, because the function requires a non-private storage mode and Dawn
     // sets the private storage mode by default for all textures except IOSurfaces on macOS.
