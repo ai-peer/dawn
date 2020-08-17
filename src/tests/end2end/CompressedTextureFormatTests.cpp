@@ -1179,6 +1179,30 @@ TEST_P(CompressedTextureWriteTextureTest,
     }
 }
 
+TEST_P(CompressedTextureWriteTextureTest,
+       WriteIntoSubresourceWithPhysicalSizeNotEqualToVirtualSize_allocateTempBuffer) {
+    // The test can pass on D3D12 when commenting out the following two statements.
+    std::vector<uint8_t> data(2876u, 0u);
+    wgpu::Buffer buffer = utils::CreateBufferFromData(
+        device, data.data(), 2876, wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst);
+
+    unsigned int w = 16;
+    unsigned int h = 16;
+    wgpu::TextureFormat format = wgpu::TextureFormat::BC1RGBAUnorm;
+
+    CopyConfig config;
+    config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
+    config.textureDescriptor.size = {60, 60, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+    config.viewMipmapLevel = 2;
+
+    config.copyOrigin3D = {0, 0, 0};
+    config.copyExtent3D = {w, h, 1};
+    config.bytesPerRowAlignment = 256;
+    config.textureDescriptor.format = format;
+    TestWriteRegionIntoBCFormatTextures(config);
+}
+
 DAWN_INSTANTIATE_TEST(CompressedTextureWriteTextureTest,
                       D3D12Backend(),
                       MetalBackend(),
