@@ -42,6 +42,9 @@ namespace dawn_native {
 
         ResultOrError<UploadHandle> Allocate(uint64_t allocationSize, Serial serial);
         void Deallocate(Serial lastCompletedSerial);
+        ResultOrError<UploadHandle> AllocateWithOffsetAlignment(uint64_t allocationSize,
+                                                                Serial serial,
+                                                                uint64_t offsetAlignment);
 
       private:
         static constexpr uint64_t kRingBufferSize = 4 * 1024 * 1024;

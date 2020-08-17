@@ -196,6 +196,13 @@ namespace dawn_native { namespace opengl {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
+    MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
+                                                const TextureDataLayout& src,
+                                                TextureCopy* dst,
+                                                const Extent3D& copySizePixels) {
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer to texture.");
+    }
+
     void Device::ShutDownImpl() {
         ASSERT(GetState() == State::Disconnected);
     }
