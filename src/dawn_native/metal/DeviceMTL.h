@@ -69,6 +69,8 @@ namespace dawn_native { namespace metal {
                                             TextureCopy* dst,
                                             const Extent3D& copySizePixels);
 
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+
       private:
         Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, const DeviceDescriptor* descriptor);
 
