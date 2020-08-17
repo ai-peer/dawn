@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf314651_9903ce5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-17T09:00:24Z",
+      "side": 1,
+      "message": "Hi Corentin, Austin and Tomek,\n\nThis CL reproduces an issue on D3D12 with writeTexture(). Could you help me take a look when you have time? Thanks!",
+      "revId": "0f4ad00f00a31afb1ab816def7cad0eb240330c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
