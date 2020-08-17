@@ -50,6 +50,23 @@
       "revId": "0f4ad00f00a31afb1ab816def7cad0eb240330c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db4359f2_abb144b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-17T10:46:48Z",
+      "side": 1,
+      "message": "On Metal and Vulkan the issue is coming from the fact that when using a dynamic uploader we don\u0027t align the offset that the allocated memory might already have. I should be able to fix this quickly since the code for aligning offsets on Vulkan is already implemented.",
+      "revId": "0f4ad00f00a31afb1ab816def7cad0eb240330c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
