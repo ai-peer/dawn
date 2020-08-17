@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "fb799a6d_773d3972",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T18:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dddf456a_3df60509",
+      "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db65e0a4_2f8f4a94",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60fb47bd_201a8e94",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T18:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db65e0a4_2f8f4a94",
+      "revId": "e1801ba645bc5af8eab2599cfca3a5a2546f953f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
