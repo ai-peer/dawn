@@ -503,6 +503,10 @@ namespace dawn_native { namespace d3d12 {
         SetToggle(Toggle::UseD3D12SmallShaderVisibleHeapForTesting, false);
     }
 
+    uint32_t Device::GetOptimalBytesPerRowAlignment() const {
+        return D3D12_TEXTURE_DATA_PITCH_ALIGNMENT;
+    }
+
     MaybeError Device::WaitForIdleForDestruction() {
         // Immediately forget about all pending commands
         mPendingCommands.Release();
