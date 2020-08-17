@@ -273,7 +273,7 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+    MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
                                                 const TextureDataLayout& dataLayout,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
@@ -369,6 +369,14 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+
+    uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
+#if defined(DAWN_PLATFORM_MACOS)
+        return 4;
+#else
+        return 1;
+#endif
     }
 
 }}  // namespace dawn_native::metal
