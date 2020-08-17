@@ -947,8 +947,9 @@ namespace dawn_native { namespace d3d12 {
             uint32_t bufferSize = static_cast<uint32_t>(bufferSize64);
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
+            DAWN_TRY_ASSIGN(uploadHandle, uploader->AllocateWithOffsetAlignment(
+                                              bufferSize, device->GetPendingCommandSerial(),
+                                              GetFormat().blockByteSize));
             memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
 
             TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);

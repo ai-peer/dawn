@@ -109,8 +109,9 @@ namespace dawn_native {
         DeviceBase* device = GetDevice();
 
         UploadHandle uploadHandle;
-        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                          size, device->GetPendingCommandSerial()));
+        DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->AllocateWithOffsetAlignment(
+                                          size, device->GetPendingCommandSerial(),
+                                          device->GetCopyBufferToBufferOffsetAlignment()));
         ASSERT(uploadHandle.mappedBuffer != nullptr);
 
         memcpy(uploadHandle.mappedBuffer, data, size);

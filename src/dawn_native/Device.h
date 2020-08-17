@@ -223,6 +223,9 @@ namespace dawn_native {
         void EmitDeprecationWarning(const char* warning);
         void LoseForTesting();
         void AddFutureCallbackSerial(Serial serial);
+        virtual uint64_t GetCopyBufferToBufferOffsetAlignment() const {
+            return 1;
+        }
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
