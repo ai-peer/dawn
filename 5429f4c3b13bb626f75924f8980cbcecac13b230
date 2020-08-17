@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "dd2364e2_8f5e499f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T16:31:45Z",
+      "side": 1,
+      "message": "old comment",
+      "parentUuid": "ea0068b0_f3543a66",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f967a54_c17789cc",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "732dfdd3_50338e9c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T16:31:45Z",
+      "side": 1,
+      "message": "old comment",
+      "parentUuid": "3f967a54_c17789cc",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aeb9d468_9babc2d6",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
@@ -67,6 +103,24 @@
       "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d6e7f1b_3ea75940",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T16:31:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb9d468_9babc2d6",
+      "revId": "5429f4c3b13bb626f75924f8980cbcecac13b230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
