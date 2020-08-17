@@ -26,7 +26,7 @@
 
 namespace dawn_native { namespace metal {
     namespace {
-        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
+        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
             DeviceBase* device,
             const void* data,
             uint32_t alignedBytesPerRow,
@@ -39,9 +39,12 @@ namespace dawn_native { namespace metal {
                             ComputeRequiredBytesInCopy(blockInfo, writeSizePixel,
                                                        alignedBytesPerRow, alignedRowsPerImage));
 
+            uint64_t offsetAlignment = blockInfo.blockByteSize;
+
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                              newDataSizeBytes, device->GetPendingCommandSerial()));
+                                              newDataSizeBytes + offsetAlignment - 1,
+                                              device->GetPendingCommandSerial()));
             ASSERT(uploadHandle.mappedBuffer != nullptr);
 
             uint8_t* dstPointer = static_cast<uint8_t*>(uploadHandle.mappedBuffer);
@@ -53,6 +56,11 @@ namespace dawn_native { namespace metal {
             if (dataRowsPerImageInBlock == 0) {
                 dataRowsPerImageInBlock = writeSizePixel.height / blockInfo.blockHeight;
             }
+
+            uint64_t additionalOffset =
+                Align(uploadHandle.startOffset, offsetAlignment) - uploadHandle.startOffset;
+            uploadHandle.startOffset += additionalOffset;
+            dstPointer += additionalOffset;
 
             ASSERT(dataRowsPerImageInBlock >= alignedRowsPerImageInBlock);
             uint64_t imageAdditionalStride =
@@ -103,9 +111,9 @@ namespace dawn_native { namespace metal {
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle,
-                        UploadTextureDataAligningBytesPerRow(GetDevice(), data, alignedBytesPerRow,
-                                                             alignedRowsPerImage, dataLayout,
-                                                             blockInfo, writeSizePixel));
+                        UploadTextureDataAligningBytesPerRowAndOffset(
+                            GetDevice(), data, alignedBytesPerRow, alignedRowsPerImage, dataLayout,
+                            blockInfo, writeSizePixel));
 
         TextureDataLayout passDataLayout = dataLayout;
         passDataLayout.offset = uploadHandle.startOffset;

@@ -27,7 +27,7 @@
 namespace dawn_native { namespace d3d12 {
 
     namespace {
-        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
+        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
             DeviceBase* device,
             const void* data,
             uint32_t alignedBytesPerRow,
@@ -42,9 +42,12 @@ namespace dawn_native { namespace d3d12 {
                 ComputeRequiredBytesInCopy(textureFormat, writeSizePixel,
                                            optimallyAlignedBytesPerRow, alignedRowsPerImage));
 
+            uint64_t offsetAlignment = textureFormat.blockByteSize;
+
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                              newDataSizeBytes, device->GetPendingCommandSerial()));
+                                              newDataSizeBytes + offsetAlignment - 1,
+                                              device->GetPendingCommandSerial()));
             ASSERT(uploadHandle.mappedBuffer != nullptr);
 
             uint8_t* dstPointer = static_cast<uint8_t*>(uploadHandle.mappedBuffer);
@@ -56,6 +59,11 @@ namespace dawn_native { namespace d3d12 {
             if (dataRowsPerImageInBlock == 0) {
                 dataRowsPerImageInBlock = writeSizePixel.height / textureFormat.blockHeight;
             }
+
+            uint64_t additionalOffset =
+                Align(uploadHandle.startOffset, offsetAlignment) - uploadHandle.startOffset;
+            uploadHandle.startOffset += additionalOffset;
+            dstPointer += additionalOffset;
 
             ASSERT(dataRowsPerImageInBlock >= alignedRowsPerImageInBlock);
             uint64_t imageAdditionalStride =
@@ -113,7 +121,7 @@ namespace dawn_native { namespace d3d12 {
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(
             uploadHandle,
-            UploadTextureDataAligningBytesPerRow(
+            UploadTextureDataAligningBytesPerRowAndOffset(
                 GetDevice(), data, alignedBytesPerRow, optimallyAlignedBytesPerRow,
                 alignedRowsPerImage, dataLayout, destination.texture->GetFormat(), writeSizePixel));
 
