@@ -16,6 +16,24 @@
       "revId": "efd8e446f4ade13b1cc2ea3d72a3c669a150236f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20a938b6_e726f954",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T15:59:31Z",
+      "side": 1,
+      "message": "oh... you\u0027re right. This is not really what I thought. That\u0027s kinda tricky",
+      "parentUuid": "222c3997_0f63e82b",
+      "revId": "efd8e446f4ade13b1cc2ea3d72a3c669a150236f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
