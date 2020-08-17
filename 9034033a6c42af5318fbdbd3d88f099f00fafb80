@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9525cd53_e3bd4ad1",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-17T16:13:40Z",
+      "side": 0,
+      "message": "Maybe instead of having a new implementation for each backend, we could have a query on DeviceBase to ask for the required B2B copy alignment. This would be useful too for storing things like the backend-specific optimal bytes per row, etc.",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 84
+      },
+      "revId": "9034033a6c42af5318fbdbd3d88f099f00fafb80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
