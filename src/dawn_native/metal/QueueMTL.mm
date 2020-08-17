@@ -26,7 +26,7 @@
 
 namespace dawn_native { namespace metal {
     namespace {
-        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
+        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
             DeviceBase* device,
             const void* data,
             uint32_t alignedBytesPerRow,
@@ -40,8 +40,9 @@ namespace dawn_native { namespace metal {
                                                        alignedBytesPerRow, alignedRowsPerImage));
 
             UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                              newDataSizeBytes, device->GetPendingCommandSerial()));
+            DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->AllocateWithOffsetAlignment(
+                                              newDataSizeBytes, device->GetPendingCommandSerial(),
+                                              blockInfo.blockByteSize));
             ASSERT(uploadHandle.mappedBuffer != nullptr);
 
             uint8_t* dstPointer = static_cast<uint8_t*>(uploadHandle.mappedBuffer);
@@ -103,9 +104,9 @@ namespace dawn_native { namespace metal {
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle,
-                        UploadTextureDataAligningBytesPerRow(GetDevice(), data, alignedBytesPerRow,
-                                                             alignedRowsPerImage, dataLayout,
-                                                             blockInfo, writeSizePixel));
+                        UploadTextureDataAligningBytesPerRowAndOffset(
+                            GetDevice(), data, alignedBytesPerRow, alignedRowsPerImage, dataLayout,
+                            blockInfo, writeSizePixel));
 
         TextureDataLayout passDataLayout = dataLayout;
         passDataLayout.offset = uploadHandle.startOffset;

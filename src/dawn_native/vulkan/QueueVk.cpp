@@ -28,7 +28,7 @@
 namespace dawn_native { namespace vulkan {
 
     namespace {
-        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRow(
+        ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
             DeviceBase* device,
             const void* data,
             uint32_t alignedBytesPerRow,
@@ -47,11 +47,17 @@ namespace dawn_native { namespace vulkan {
                 ToBackend(device)
                     ->GetDeviceInfo()
                     .properties.limits.optimalBufferCopyOffsetAlignment;
+            ASSERT(IsPowerOfTwo(optimalOffsetAlignment));
+            ASSERT(IsPowerOfTwo(blockInfo.blockByteSize));
+            // We need the offset to be aligned to both optimalOffsetAlignment and blockByteSize,
+            // since both of them are powers of two, we only need to align to the max value.
+            uint64_t offsetAlignment =
+                std::max(optimalOffsetAlignment, uint64_t(blockInfo.blockByteSize));
 
             UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->Allocate(
-                                              newDataSizeBytes + optimalOffsetAlignment - 1,
-                                              device->GetPendingCommandSerial()));
+            DAWN_TRY_ASSIGN(uploadHandle, device->GetDynamicUploader()->AllocateWithOffsetAlignment(
+                                              newDataSizeBytes, device->GetPendingCommandSerial(),
+                                              offsetAlignment));
             ASSERT(uploadHandle.mappedBuffer != nullptr);
 
             uint8_t* dstPointer = static_cast<uint8_t*>(uploadHandle.mappedBuffer);
@@ -65,7 +71,7 @@ namespace dawn_native { namespace vulkan {
             }
 
             uint64_t additionalOffset =
-                Align(uploadHandle.startOffset, optimalOffsetAlignment) - uploadHandle.startOffset;
+                Align(uploadHandle.startOffset, offsetAlignment) - uploadHandle.startOffset;
             uploadHandle.startOffset += additionalOffset;
             dstPointer += additionalOffset;
 
@@ -130,7 +136,7 @@ namespace dawn_native { namespace vulkan {
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle,
-                        UploadTextureDataAligningBytesPerRow(
+                        UploadTextureDataAligningBytesPerRowAndOffset(
                             GetDevice(), data, alignedBytesPerRow, optimallyAlignedBytesPerRow,
                             alignedRowsPerImage, dataLayout, blockInfo, writeSizePixel));
 
