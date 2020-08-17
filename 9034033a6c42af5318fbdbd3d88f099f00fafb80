@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba40a908_61557901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-17T13:57:43Z",
+      "side": 1,
+      "message": "PTAL\n\nThanks Jiawei for spotting the bug!\n\nThis makes the test work on D3D12 as well even though it seems that there should be no offset alignment required there.",
+      "revId": "9034033a6c42af5318fbdbd3d88f099f00fafb80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
