@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "2d476702_f760809c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-18T15:28:18Z",
+      "side": 1,
+      "message": "LGTM too after Corentin\u0027s comments",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5d22b43_ab607c9d",
         "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
         "patchSetId": 2
