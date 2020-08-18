@@ -33,6 +33,24 @@
       "revId": "2efe7d1e3e4e02e16a4df2ef4aa5211e9776c34b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afdfb0a7_b8c41b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-18T17:32:58Z",
+      "side": 1,
+      "message": "Argh, sorry, meant to delete that comment -- obviously I figured it out mid-sentence. Ignore.",
+      "parentUuid": "8714ab47_e71852d7",
+      "revId": "2efe7d1e3e4e02e16a4df2ef4aa5211e9776c34b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
