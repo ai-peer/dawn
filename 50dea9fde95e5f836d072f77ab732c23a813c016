@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "712992c1_1ec4e1f7",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T17:07:51Z",
+      "side": 1,
+      "message": "Ah yes, ok let\u0027s ignore this for now, and make this Allocate a private function. We\u0027ll over-allocate all the time but we can add a TODO to fix it eventually.",
+      "parentUuid": "652abf86_996a2359",
+      "range": {
+        "startLine": 51,
+        "startChar": 52,
+        "endLine": 51,
+        "endChar": 85
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d4a7475_e61fc478",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 15
