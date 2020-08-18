@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "099a6fd4_53d0f6c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "nit: Enable end2end tests on Vulkan.",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20c4b182_ca740902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5d22b43_ab607c9d",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "nit: CheckVkOOMThenSuccess?",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf04ac4_7ab8bb5c",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "Uh that\u0027s not really the Dawn API, since the Dawn API calls QuerySetBase::Destroy.",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76b47b99_8032ed20",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "Maybe enable the test at [1] in a follow-up CL instead?",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6402d2e7_728c7bc9",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:09:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
