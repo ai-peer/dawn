@@ -71,7 +71,7 @@ namespace dawn_native { namespace opengl {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullBufferRange(offset, size, GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero();
@@ -86,7 +86,8 @@ namespace dawn_native { namespace opengl {
             return;
         }
 
-        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy,
+                                                         copy->destination.buffer->GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero();

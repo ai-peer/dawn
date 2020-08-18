@@ -61,7 +61,8 @@ namespace dawn_native {
 
     void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass);
 
-    bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy);
+    bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy,
+                                                      uint64_t dstBufferSize);
 
     std::array<int32_t, 4> ConvertToSignedIntegerColor(dawn_native::Color color);
     std::array<uint32_t, 4> ConvertToUnsignedIntegerColor(dawn_native::Color color);

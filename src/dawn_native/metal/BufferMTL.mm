@@ -170,7 +170,7 @@ namespace dawn_native { namespace metal {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullBufferRange(offset, size, GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(commandContext);
@@ -186,7 +186,8 @@ namespace dawn_native { namespace metal {
             return;
         }
 
-        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy,
+                                                         copy->destination.buffer->GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(commandContext);

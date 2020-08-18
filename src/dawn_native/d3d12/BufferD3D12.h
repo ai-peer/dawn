@@ -71,6 +71,7 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError InitializeToZero(CommandRecordingContext* commandContext);
         MaybeError ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue);
+        uint64_t GetSizeForClearBuffer() const;
 
         ResourceHeapAllocation mResourceAllocation;
         bool mFixedResourceState = false;

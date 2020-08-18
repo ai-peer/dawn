@@ -95,7 +95,8 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.Alignment = 0;
         // TODO(cwallez@chromium.org): Have a global "zero" buffer that can do everything instead
         // of creating a new 4-byte buffer?
-        resourceDescriptor.Width = std::max(GetSize(), uint64_t(4u));
+        resourceDescriptor.Width = Align(std::max(GetSize(), uint64_t(4u)),
+                                         D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
         resourceDescriptor.Height = 1;
         resourceDescriptor.DepthOrArraySize = 1;
         resourceDescriptor.MipLevels = 1;
@@ -369,8 +370,8 @@ namespace dawn_native { namespace d3d12 {
             !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
             return {};
         }
-
-        if (IsFullBufferRange(offset, size)) {
+        const size_t bufferSize = GetSizeForClearBuffer();
+        if (IsFullBufferRange(offset, size, bufferSize)) {
             SetIsDataInitialized();
         } else {
             DAWN_TRY(InitializeToZero(commandContext));
@@ -387,8 +388,8 @@ namespace dawn_native { namespace d3d12 {
             !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
             return {};
         }
-
-        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+        const size_t bufferSize = GetSizeForClearBuffer();
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy, bufferSize)) {
             SetIsDataInitialized();
         } else {
             DAWN_TRY(InitializeToZero(commandContext));
@@ -410,14 +411,25 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    uint64_t Buffer::GetSizeForClearBuffer() const {
+        // Resource size could be larger than data size or GetSize(). Clear tests
+        // use the same size as created to determine to clear. This ensures these
+        // tests do not fail but not break backend specific tests.
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            return mResourceAllocation.GetD3D12Resource()->GetDesc().Width;
+        }
+        return GetSize();
+    }
+
     MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {
         Device* device = ToBackend(GetDevice());
 
         // The state of the buffers on UPLOAD heap must always be GENERIC_READ and cannot be
         // changed away, so we can only clear such buffer with buffer mapping.
+        const size_t bufferSize = GetSizeForClearBuffer();
         if (D3D12HeapType(GetUsage()) == D3D12_HEAP_TYPE_UPLOAD) {
-            DAWN_TRY(MapInternal(true, 0, size_t(GetSize()), "D3D12 map at clear buffer"));
-            memset(mMappedData, clearValue, GetSize());
+            DAWN_TRY(MapInternal(true, 0, bufferSize, "D3D12 map at clear buffer"));
+            memset(mMappedData, clearValue, bufferSize);
             UnmapImpl();
         } else {
             // TODO(jiawei.shao@intel.com): use ClearUnorderedAccessView*() when the buffer usage
@@ -425,12 +437,12 @@ namespace dawn_native { namespace d3d12 {
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(GetSize(), device->GetPendingCommandSerial()));
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
 
-            memset(uploadHandle.mappedBuffer, clearValue, GetSize());
+            memset(uploadHandle.mappedBuffer, clearValue, bufferSize);
 
             device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
-                                                uploadHandle.startOffset, this, 0, GetSize());
+                                                uploadHandle.startOffset, this, 0, bufferSize);
         }
 
         return {};

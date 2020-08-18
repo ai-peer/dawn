@@ -163,7 +163,8 @@ namespace dawn_native {
     }
 
     // TODO(jiawei.shao@intel.com): support copying with depth stencil textures
-    bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy) {
+    bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy,
+                                                      uint64_t dstBufferSize) {
         ASSERT(copy != nullptr);
 
         if (copy->destination.offset > 0) {
@@ -185,7 +186,7 @@ namespace dawn_native {
         const uint64_t overwrittenRangeSize =
             copyTextureDataSizePerRow * (copy->copySize.height / texture->GetFormat().blockHeight) *
             copy->copySize.depth;
-        if (copy->destination.buffer->GetSize() > overwrittenRangeSize) {
+        if (dstBufferSize > overwrittenRangeSize) {
             return false;
         }
 

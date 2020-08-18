@@ -323,7 +323,7 @@ namespace dawn_native { namespace vulkan {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullBufferRange(offset, size, GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(recordingContext);
@@ -339,7 +339,8 @@ namespace dawn_native { namespace vulkan {
             return;
         }
 
-        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
+        if (IsFullBufferOverwrittenInTextureToBufferCopy(copy,
+                                                         copy->destination.buffer->GetSize())) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(recordingContext);
