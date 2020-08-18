@@ -334,8 +334,15 @@ namespace dawn_native { namespace opengl {
                 return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
             }
 
-            // TODO(natlee@microsoft.com): use Dynamic Uplaoder here for temp buffer
+            // TODO(natlee@microsoft.com): use Dynamic Uploader here for temp buffer
             Ref<Buffer> srcBuffer = AcquireRef(ToBackend(device->CreateBuffer(&descriptor)));
+
+            // We don't count the lazy clear of srcBuffer because it is an internal buffer.
+            // TODO(jiawei.shao@intel.com): use Toggle::LazyClearResourceOnFirstUse instead when
+            // we complete the support of buffer lazy initialization.
+            if (device->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+                device->DecrementLazyClearCountForTesting();
+            }
 
             // Fill the buffer with clear color
             memset(srcBuffer->GetMappedRange(0, descriptor.size), clearColor, descriptor.size);

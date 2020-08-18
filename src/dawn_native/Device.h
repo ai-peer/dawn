@@ -236,6 +236,8 @@ namespace dawn_native {
         // Check for passed fences and set the new completed serial
         void CheckPassedSerials();
 
+        size_t mLazyClearCountForTesting = 0;
+
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) = 0;
@@ -364,7 +366,6 @@ namespace dawn_native {
 
         TogglesSet mEnabledToggles;
         TogglesSet mOverridenToggles;
-        size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
     };
