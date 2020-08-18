@@ -16,6 +16,23 @@
       "revId": "2efe7d1e3e4e02e16a4df2ef4aa5211e9776c34b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8714ab47_e71852d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-08-18T17:32:09Z",
+      "side": 1,
+      "message": "I\u0027m a little confused about how unsupported features are reported.\n\nIn one case in this patch, we throw a validation error, while in another, we just skip the test\nwith a comment (or is it for the same ",
+      "revId": "2efe7d1e3e4e02e16a4df2ef4aa5211e9776c34b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
