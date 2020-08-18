@@ -93,6 +93,30 @@
     },
     {
       "key": {
+        "uuid": "652abf86_996a2359",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-18T16:26:01Z",
+      "side": 1,
+      "message": "GetUsedSize() might not directly correspond to the offset with which we\u0027ll allocate - the used part of the ring buffer might already have some offset and it\u0027s not clear where exactly we\u0027ll do the allocation at this time, so we might just move the offset alignment logic inside RingBufferAllocator::Allocate.",
+      "parentUuid": "baa099eb_27128896",
+      "range": {
+        "startLine": 51,
+        "startChar": 52,
+        "endLine": 51,
+        "endChar": 85
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2d4a7475_e61fc478",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 15
@@ -138,6 +162,30 @@
       "writtenOn": "2020-08-18T13:29:04Z",
       "side": 1,
       "message": "nit: this one could be constant, and set to 4.",
+      "range": {
+        "startLine": 201,
+        "startChar": 42,
+        "endLine": 201,
+        "endChar": 88
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6565be73_b3585828",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-18T16:26:01Z",
+      "side": 1,
+      "message": "This is 4 only for macOS.",
+      "parentUuid": "0dfbcad7_d7c466ad",
       "range": {
         "startLine": 201,
         "startChar": 42,
