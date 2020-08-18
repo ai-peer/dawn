@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a831d1c_7930316a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "This is a great cleanup! Could we have the DynamicUploader changes in a first CL, then the WriteTextureImpl factorization? The first CL would also tests that would have failed without the change.",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c18da25_523dd326",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "nit: these should be a separate block, and pure virtual (so \u003d 0) (if a backend supports 1, it should do so explicitly). Maybe in the future these values would be part of a Capabilities structure but we can do the refactor later.",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92147233_20a790cf",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "[2] this function could be changed to take the alignment into account.",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5189602a_9e569ef7",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "Here we\u0027d ASSERT that the alignment is at least kMaxRequestableAlignment (that\u0027s 512) (and ASSERT kMaxRequestableAlignment is more than the request alignment)",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baa099eb_27128896",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "Usage of GetUsedSize would be wrapped in Align(alignment)",
+      "range": {
+        "startLine": 51,
+        "startChar": 52,
+        "endLine": 51,
+        "endChar": 85
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4a7475_e61fc478",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "With [1] instead of over allocating then aligning, we could do it directly in [2]",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "857837ed_58a7822a",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "nit: this could be changed to take an explicit offset instead. All use cases of the dynamic uploader should have some alignment requirements.",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dfbcad7_d7c466ad",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "nit: this one could be constant, and set to 4.",
+      "range": {
+        "startLine": 201,
+        "startChar": 42,
+        "endLine": 201,
+        "endChar": 88
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdcd48d6_6d65d546",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "nit: let\u0027s but this in metal::Device::CopyFromStagingToTexture. Backend-specific details should be avoided in the frontend.",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1390a48b_38d9d50f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:29:04Z",
+      "side": 1,
+      "message": "The optimal buffer offset should also be provided and be D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
