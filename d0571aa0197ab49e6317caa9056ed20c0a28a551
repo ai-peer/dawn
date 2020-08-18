@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "c7b43475_42dda90a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-18T13:03:02Z",
+      "side": 1,
+      "message": "I\u0027m not sure I followed, but the logic in this function is to say \"Hey, I\u0027m going to write the range [offset, offset+size), perform lazy-clearing only if needed\". When we check the full buffer range here, we should check offset \u003d\u003d 0 and size \u003d\u003d mAlignedSize.\n\nWe could add a whitebox test, or add an end2end test to create a buffer that\u0027s size 4, uniform + vertex, and tries to use the vertex state to index past the size of 4 (and it should correctly contain 0s)\n\nSomething similar for the ditto below.",
+      "parentUuid": "321fe964_a5ff98a6",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
