@@ -16,6 +16,29 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "faee81d0_d3b02946",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-19T08:11:45Z",
+      "side": 1,
+      "message": "This test still fails even when we enable depth writing so I don\u0027t add change to this test.",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
