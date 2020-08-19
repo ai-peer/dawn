@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d104c17_f215c224",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T22:59:33Z",
+      "side": 1,
+      "message": "just realized, we could apply this alignment only if the usage has wgpu::BufferUsage::Uniform",
+      "range": {
+        "startLine": 98,
+        "startChar": 34,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

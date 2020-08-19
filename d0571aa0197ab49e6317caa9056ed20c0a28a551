@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "3e1f8b60_2480d356",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T22:59:33Z",
+      "side": 1,
+      "message": "Okay, I do agree with you here, but it\u0027s still quite scary. We align this to 256, and the constant buffer view binding size gets aligned to 256. That means the extra padding *is* unprotected from D3D12\u0027s validation. We\u0027re still safe though because we reflect the binding size from the shader as part of the minimum buffer size validation. We should ad least have some comments explaining how we\u0027re safe.",
+      "parentUuid": "265ec4a6_8fa53e18",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
