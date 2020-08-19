@@ -50,6 +50,23 @@
       "revId": "c32436e177de705685e2e373c2d63bf116285d42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d2733d1_16789330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:29:59Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll wait for the WebGPU CL to land before landing this.",
+      "revId": "c32436e177de705685e2e373c2d63bf116285d42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
