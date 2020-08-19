@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0607e40c_0f0ea2c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a74528ea_96d63b3e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "See discussion in the abandoned CL, but I think this could be a constant.",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b23d50d8_5815c839",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "Uh? Maybe it is just CopyT2B of compressed textures that\u0027s unimplemented?",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1100025f_3a63a66a",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "950a39c9_a9f5f04b",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "This could be in TextureFormatUtils.",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b15f420_667ec1e2",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:20:38Z",
+      "side": 1,
+      "message": "This is pretty test-specific but we don\u0027t really have a good place for it. Maybe put it in a TestUtils.h/.cpp file and more the RequiredBytesInCopy and put everything below [1] in it too?",
+      "revId": "56aa4c99ff31a8d62afe41cde5cd8f80cbd12de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
