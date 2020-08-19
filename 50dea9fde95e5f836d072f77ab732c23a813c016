@@ -403,6 +403,24 @@
       "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f17a06f_49021b41",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T15:57:47Z",
+      "side": 1,
+      "message": "Can we add a TODO on the same bug that you filed for the DynamicUploader uploading too much?",
+      "parentUuid": "d676f56c_4f285338",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
