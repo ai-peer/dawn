@@ -138,6 +138,8 @@ namespace dawn_native { namespace d3d12 {
 
         void InitTogglesFromDriver();
 
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+
       private:
         using DeviceBase::DeviceBase;
 

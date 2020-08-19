@@ -224,6 +224,8 @@ namespace dawn_native {
         void LoseForTesting();
         void AddFutureCallbackSerial(Serial serial);
 
+        virtual uint64_t GetCopyBufferToBufferOffsetAlignment() const = 0;
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);

@@ -616,4 +616,8 @@ namespace dawn_native { namespace d3d12 {
         return mSamplerHeapCache.get();
     }
 
+    uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
+        return 1;
+    }
+
 }}  // namespace dawn_native::d3d12

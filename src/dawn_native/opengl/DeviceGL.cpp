@@ -208,4 +208,8 @@ namespace dawn_native { namespace opengl {
         return {};
     }
 
+    uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
+        return 1;
+    }
+
 }}  // namespace dawn_native::opengl

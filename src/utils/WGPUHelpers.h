@@ -166,6 +166,12 @@ namespace utils {
                                  wgpu::Extent3D copyExtent,
                                  wgpu::TextureFormat textureFormat);
 
+    // A helper function used for testing DynamicUploader offset alignment.
+    // A call of this function will do a Queue::WriteTexture with 1 byte of data,
+    // so that assuming that WriteTexture uses DynamicUploader, the first RingBuffer
+    // in it will contain 1 byte of data.
+    void UnalignDynamicUploader(wgpu::Device device);
+
 }  // namespace utils
 
 #endif  // UTILS_DAWNHELPERS_H_
