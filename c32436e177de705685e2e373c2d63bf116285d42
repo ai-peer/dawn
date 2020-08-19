@@ -102,6 +102,47 @@
       "revId": "c32436e177de705685e2e373c2d63bf116285d42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc7a5815_284aecaa",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T19:13:55Z",
+      "side": 1,
+      "message": "I think [1] makes this okay.",
+      "parentUuid": "4288e174_2d4408c0",
+      "revId": "c32436e177de705685e2e373c2d63bf116285d42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfcf6ca0_e8325cac",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T19:13:55Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "c32436e177de705685e2e373c2d63bf116285d42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
