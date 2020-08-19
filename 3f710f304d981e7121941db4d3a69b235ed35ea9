@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5462bcb_4b4e88a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:03:58Z",
+      "side": 1,
+      "message": "PTAL again, this is the part of https://dawn-review.googlesource.com/c/dawn/+/26882 with WriteTexture refactoring.",
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
