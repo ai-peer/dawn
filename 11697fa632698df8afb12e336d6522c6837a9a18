@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5da4bd21_f688edd5",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T21:25:57Z",
+      "side": 1,
+      "message": "Now that I think about it, I\u0027m not sure this is actually what we want. Unless the user asks for a buffer with an aligned size, first usage of the buffer will *always* result in a lazy clear which is unnecessary if the user is trying to populate the whole buffer. The other option would be to clear the padding bits after creation (and after we use the NO_ZERO). This is also still two copies (one is the user\u0027s one is our clearing), but we don\u0027t have to copy as much data, so maybe better?",
+      "range": {
+        "startLine": 373,
+        "startChar": 7,
+        "endLine": 374,
+        "endChar": 58
+      },
+      "revId": "11697fa632698df8afb12e336d6522c6837a9a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "987dd848_280a2fb6",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T21:25:57Z",
+      "side": 1,
+      "message": "if we\u0027re calling GetSizeForClearBuffer, we\u0027ve already checked the toggle. May as well always return this instead of returning GetSize() in the else case",
+      "revId": "11697fa632698df8afb12e336d6522c6837a9a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

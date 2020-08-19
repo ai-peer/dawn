@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "ecb9b8d8_c836bfe0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T21:25:57Z",
+      "side": 1,
+      "message": "We should still test it. Security is very important here.",
+      "parentUuid": "a8f16ade_8901e2db",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
