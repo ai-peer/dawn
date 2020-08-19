@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "d6817b97_d5ca55c0",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-19T20:14:47Z",
+      "side": 1,
+      "message": "ah, gotcha. Didn\u0027t actually review :)",
+      "parentUuid": "fc7a5815_284aecaa",
+      "revId": "c32436e177de705685e2e373c2d63bf116285d42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfcf6ca0_e8325cac",
         "filename": "generator/templates/webgpu_cpp.h",
         "patchSetId": 6
@@ -143,6 +161,30 @@
       "revId": "c32436e177de705685e2e373c2d63bf116285d42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d743084_cb351a62",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-19T20:14:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cfcf6ca0_e8325cac",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "c32436e177de705685e2e373c2d63bf116285d42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
