@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "057ca750_39f42337",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:42:23Z",
+      "side": 1,
+      "message": "Ah makes sense for D3D12, can we still have a test for it because this way we\u0027re 100% of the security, and we\u0027ll catch issues in other backends if we start aligning in similar ways?",
+      "parentUuid": "f58f9f24_7abf59a0",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
