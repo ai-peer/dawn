@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "979beccd_bfeac3b4",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c18da25_523dd326",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92147233_20a790cf",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 15
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "1ebf2a51_cd20e271",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92147233_20a790cf",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5189602a_9e569ef7",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 15
@@ -67,6 +103,24 @@
       "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd352fce_fe473182",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5189602a_9e569ef7",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +195,30 @@
     },
     {
       "key": {
+        "uuid": "ee25e9da_0c3a3df7",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "712992c1_1ec4e1f7",
+      "range": {
+        "startLine": 51,
+        "startChar": 52,
+        "endLine": 51,
+        "endChar": 85
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d4a7475_e61fc478",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 15
@@ -158,6 +236,24 @@
     },
     {
       "key": {
+        "uuid": "e4b95dbb_234f76c0",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d4a7475_e61fc478",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "857837ed_58a7822a",
         "filename": "src/dawn_native/DynamicUploader.h",
         "patchSetId": 15
@@ -172,6 +268,24 @@
       "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f114095_3f2dd30b",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "857837ed_58a7822a",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -239,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "ae0bd434_1a74dee4",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdcd48d6_6d65d546",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1390a48b_38d9d50f",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 15
@@ -250,6 +382,24 @@
       "writtenOn": "2020-08-18T13:29:04Z",
       "side": 1,
       "message": "The optimal buffer offset should also be provided and be D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT",
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d676f56c_4f285338",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T11:02:23Z",
+      "side": 1,
+      "message": "This is not used directly in the current WriteTexture implementation on D3D12 and D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT is taken into account in ComputeTextureCopySplits. Adding this now without optimizing DynamicUploader::Allocate will mean we\u0027ll allocate additional 511 bytes, so I\u0027m not sure about doing that.",
+      "parentUuid": "1390a48b_38d9d50f",
       "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
