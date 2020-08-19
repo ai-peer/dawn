@@ -105,6 +105,8 @@ namespace dawn_native { namespace vulkan {
         // needs to be set.
         uint32_t GetComputeSubgroupSize() const;
 
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 

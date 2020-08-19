@@ -910,4 +910,8 @@ namespace dawn_native { namespace vulkan {
         mVkDevice = VK_NULL_HANDLE;
     }
 
+    uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
+        return 1;
+    }
+
 }}  // namespace dawn_native::vulkan
