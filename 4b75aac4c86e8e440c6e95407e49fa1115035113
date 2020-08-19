@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d75d2712_6a50e009",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T08:47:43Z",
+      "side": 1,
+      "message": "Ah maybe we should add validation in the WeBGPU spec to disallow writing gl_FragDepth if depthWriteEnabled is not true?",
+      "parentUuid": "66780135_63c67df6",
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "faee81d0_d3b02946",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 3
