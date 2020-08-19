@@ -109,6 +109,8 @@ namespace dawn_native { namespace null {
         MaybeError IncrementMemoryUsage(uint64_t bytes);
         void DecrementMemoryUsage(uint64_t bytes);
 
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+
       private:
         using DeviceBase::DeviceBase;
 

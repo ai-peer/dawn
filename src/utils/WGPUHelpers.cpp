@@ -465,4 +465,21 @@ namespace utils {
         }
     }
 
+    void UnalignDynamicUploader(wgpu::Device device) {
+        std::vector<uint8_t> data = {1};
+
+        wgpu::TextureDescriptor descriptor = {};
+        descriptor.size = {1, 1, 1};
+        descriptor.format = wgpu::TextureFormat::R8Unorm;
+        descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
+        wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(0, 0, 0);
+        wgpu::Extent3D copyExtent = {1, 1, 1};
+
+        // WriteTexture with exactly 1 byte of data.
+        device.GetDefaultQueue().WriteTexture(&textureCopyView, data.data(), 1, &textureDataLayout,
+                                              &copyExtent);
+    }
 }  // namespace utils
