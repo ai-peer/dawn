@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "a8f16ade_8901e2db",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-19T19:37:22Z",
+      "side": 1,
+      "message": "That alignment is specific to D3D12, never changes, doesn\u0027t actually modify the d3d buffer size, and not relevant for other backends. We can zero-init to that or the unaligned size, it doesn\u0027t change security (resource is already initialized by default). \n\nSo, I think we\u0027re OK until we re-visit the NO_ZERO flag.",
+      "parentUuid": "057ca750_39f42337",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
