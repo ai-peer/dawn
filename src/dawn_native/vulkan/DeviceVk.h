@@ -88,10 +88,10 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
-        MaybeError CopyFromStagingToTexture(StagingBufferBase* source,
+        MaybeError CopyFromStagingToTexture(const StagingBufferBase* source,
                                             const TextureDataLayout& src,
                                             TextureCopy* dst,
-                                            const Extent3D& copySizePixels);
+                                            const Extent3D& copySizePixels) override;
 
         ResultOrError<ResourceMemoryAllocation> AllocateMemory(VkMemoryRequirements requirements,
                                                                bool mappable);
@@ -106,6 +106,8 @@ namespace dawn_native { namespace vulkan {
         uint32_t GetComputeSubgroupSize() const;
 
         uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+        uint32_t GetOptimalBytesPerRowAlignment() const override;
+        uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);

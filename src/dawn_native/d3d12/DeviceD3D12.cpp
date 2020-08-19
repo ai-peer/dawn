@@ -620,4 +620,12 @@ namespace dawn_native { namespace d3d12 {
         return 1;
     }
 
+    uint32_t Device::GetOptimalBytesPerRowAlignment() const {
+        return D3D12_TEXTURE_DATA_PITCH_ALIGNMENT;
+    }
+
+    uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
+        return 1;
+    }
+
 }}  // namespace dawn_native::d3d12

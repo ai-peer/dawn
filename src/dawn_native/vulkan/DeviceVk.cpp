@@ -614,7 +614,7 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
-    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+    MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
                                                 const TextureDataLayout& src,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
@@ -912,6 +912,14 @@ namespace dawn_native { namespace vulkan {
 
     uint64_t Device::GetCopyBufferToBufferOffsetAlignment() const {
         return 1;
+    }
+
+    uint32_t Device::GetOptimalBytesPerRowAlignment() const {
+        return GetDeviceInfo().properties.limits.optimalBufferCopyRowPitchAlignment;
+    }
+
+    uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
+        return GetDeviceInfo().properties.limits.optimalBufferCopyOffsetAlignment;
     }
 
 }}  // namespace dawn_native::vulkan
