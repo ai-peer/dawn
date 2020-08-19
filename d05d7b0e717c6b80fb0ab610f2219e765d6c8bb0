@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f365645_62f9c38c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-19T10:05:00Z",
+      "side": 1,
+      "message": "PTAL again, this is the part of https://dawn-review.googlesource.com/c/dawn/+/26882 without WriteTexture refactoring and with new end2end tests.\n",
+      "revId": "d05d7b0e717c6b80fb0ab610f2219e765d6c8bb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
