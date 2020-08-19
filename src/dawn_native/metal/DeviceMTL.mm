@@ -14,6 +14,7 @@
 
 #include "dawn_native/metal/DeviceMTL.h"
 
+#include "common/Platform.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Commands.h"
@@ -75,8 +76,10 @@ namespace dawn_native { namespace metal {
         {
             bool haveStoreAndMSAAResolve = false;
 #if defined(DAWN_PLATFORM_MACOS)
-            haveStoreAndMSAAResolve =
-                [mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
+            if (@available(macOS 10.12, *)) {
+                haveStoreAndMSAAResolve =
+                    [mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
+            }
 #elif defined(DAWN_PLATFORM_IOS)
             haveStoreAndMSAAResolve =
                 [mMtlDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily3_v2];
@@ -273,7 +276,10 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    MaybeError Device::CopyFromStagingToTexture(StagingBufferBase* source,
+    // In Metal we don't write from the CPU to the texture directly which can be done using the
+    // replaceRegion function, because the function requires a non-private storage mode and Dawn
+    // sets the private storage mode by default for all textures except IOSurfaces on macOS.
+    MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
                                                 const TextureDataLayout& dataLayout,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
@@ -369,6 +375,14 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+
+    uint32_t Device::GetOptimalBytesPerRowAlignment() const {
+        return 1;
+    }
+
+    uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
+        return 1;
     }
 
 }}  // namespace dawn_native::metal
