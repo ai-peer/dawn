@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c6d8e306_d6f02280",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-19T02:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "099a6fd4_53d0f6c4",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20c4b182_ca740902",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -76,6 +100,24 @@
     },
     {
       "key": {
+        "uuid": "960784e5_3dd8abbb",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-19T02:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5d22b43_ab607c9d",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edf04ac4_7ab8bb5c",
         "filename": "src/dawn_native/vulkan/QuerySetVk.h",
         "patchSetId": 2
@@ -90,6 +132,24 @@
       "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931c4291_62141086",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-19T02:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edf04ac4_7ab8bb5c",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +170,24 @@
     },
     {
       "key": {
+        "uuid": "b4e1e9f8_97fa9608",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-19T02:54:15Z",
+      "side": 1,
+      "message": "OK, I will enable the timestamp query part in next CL which implement timestamp query.",
+      "parentUuid": "76b47b99_8032ed20",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6402d2e7_728c7bc9",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 2
@@ -124,6 +202,24 @@
       "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c10e73f3_fc83f079",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-19T02:54:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6402d2e7_728c7bc9",
+      "revId": "fdceddd7ac0147f7103e7f8d68db594b101a5fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
