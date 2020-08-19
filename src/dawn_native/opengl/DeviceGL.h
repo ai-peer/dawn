@@ -62,6 +62,8 @@ namespace dawn_native { namespace opengl {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        uint64_t GetCopyBufferToBufferOffsetAlignment() const override;
+
       private:
         Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
