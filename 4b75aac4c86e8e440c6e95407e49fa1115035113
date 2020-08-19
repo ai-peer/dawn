@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "aaf3bc0d_31b78bcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T17:07:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "837c8360_84f6d214",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 3
@@ -72,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "57d207f9_9c924af0",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T17:07:46Z",
+      "side": 1,
+      "message": "^makes sense to have the validation on render pipeline creation. Yay, more stuff to validate and reflect from the shader!",
+      "parentUuid": "d75d2712_6a50e009",
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "faee81d0_d3b02946",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 3
@@ -83,6 +118,30 @@
       "writtenOn": "2020-08-19T08:11:45Z",
       "side": 1,
       "message": "This test still fails even when we enable depth writing so I don\u0027t add change to this test.",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a63bd6f_19ff4c10",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-19T17:07:46Z",
+      "side": 1,
+      "message": "It still writes depth though so I think we should update it. Could be failing for more than one reason.",
+      "parentUuid": "faee81d0_d3b02946",
       "range": {
         "startLine": 153,
         "startChar": 30,
