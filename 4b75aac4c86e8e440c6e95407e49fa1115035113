@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "837c8360_84f6d214",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T08:16:43Z",
+      "side": 1,
+      "message": "Oh, is there a more general fix we could do in the Vulkan backend that would workaround all such issues?",
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "faee81d0_d3b02946",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 3
