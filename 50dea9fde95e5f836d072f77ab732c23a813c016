@@ -336,6 +336,30 @@
     },
     {
       "key": {
+        "uuid": "fe1bc5e3_cd931841",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T16:33:15Z",
+      "side": 1,
+      "message": "I\u0027m surprised this isn\u0027t an issue in other APIs. GPUs work in 32bit sized chunks. Even if it isn\u0027t required by the API we should probably make the alignment 4 (and just call it kOptimalB2BCopyAlignment?)",
+      "parentUuid": "6565be73_b3585828",
+      "range": {
+        "startLine": 201,
+        "startChar": 42,
+        "endLine": 201,
+        "endChar": 88
+      },
+      "revId": "50dea9fde95e5f836d072f77ab732c23a813c016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdcd48d6_6d65d546",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 15
