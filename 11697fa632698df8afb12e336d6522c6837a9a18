@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5949b12f_02447fac",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-19T22:03:24Z",
+      "side": 1,
+      "message": "Reverted back. This change shouldn\u0027t need to use the aligned size elsewhere, it\u0027s only relevant for the D3D\u0027s backend validation issue.",
+      "parentUuid": "5da4bd21_f688edd5",
+      "range": {
+        "startLine": 373,
+        "startChar": 7,
+        "endLine": 374,
+        "endChar": 58
+      },
+      "revId": "11697fa632698df8afb12e336d6522c6837a9a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "987dd848_280a2fb6",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 7

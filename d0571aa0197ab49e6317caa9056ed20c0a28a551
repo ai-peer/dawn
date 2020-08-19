@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "265ec4a6_8fa53e18",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-19T22:03:24Z",
+      "side": 1,
+      "message": "Can add more tests for backend validation failure (if checking only for alignment is not sufficient). But I\u0027m not aware of a means to ensure zero-init can clear more than the unaligned size. \u003d(",
+      "parentUuid": "ecb9b8d8_c836bfe0",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
