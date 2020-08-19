@@ -16,6 +16,63 @@
       "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9bf8f87_8c8f108b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:28:53Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4422da63_35ce3492",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:28:53Z",
+      "side": 1,
+      "message": "Can we add a TODO to use D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT once the DynamicUploader knows to not over-allocate?",
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b235d12f_0ecce30e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-19T17:28:53Z",
+      "side": 1,
+      "message": "nit: mDeviceInfo, ditto below.",
+      "range": {
+        "startLine": 918,
+        "startChar": 15,
+        "endLine": 918,
+        "endChar": 30
+      },
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
