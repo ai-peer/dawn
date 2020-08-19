@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f58f9f24_7abf59a0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-19T00:12:10Z",
+      "side": 1,
+      "message": "\u003e tries to use the vertex state to index past the size of 4\n\nIf we try to read off the end of the buffer, D3D12\u0027s validation will forbid it because Dawn still uses the unaligned size. The actual range is [offset, offset + 64KB) and wasn\u0027t checked when size % 64KB !\u003d 0, regardless if size is aligned or not. The misaligned size is only relevant for backend validation.\n\nIt seems the best we can do is to ensure the buffer of the unaligned size can be used for testing but let D3D use the correct alignment size.",
+      "parentUuid": "c7b43475_42dda90a",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
