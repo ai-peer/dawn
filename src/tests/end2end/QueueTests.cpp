@@ -553,4 +553,17 @@ TEST_P(QueueWriteTextureTests, UnalignedDynamicUploader) {
     DoTest(textureSpec, MinimumDataSpec(size), size);
 }
 
+// Testing a special code path: writing with unaligned size big enough so that DynamicUploader will
+// create a separate RingBuffer.
+TEST_P(QueueWriteTextureTests, BigUnalignedDataSize) {
+    constexpr wgpu::Extent3D size = {1 << 12, 1 << 12, 1};
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = size;
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+
+    DoTest(textureSpec, {(1 << 26) + 2, 0, 1 << 14, 0}, size);
+}
+
 DAWN_INSTANTIATE_TEST(QueueWriteTextureTests, D3D12Backend(), MetalBackend(), VulkanBackend());
