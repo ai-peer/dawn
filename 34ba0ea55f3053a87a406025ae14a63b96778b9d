@@ -16,6 +16,63 @@
       "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60cae03e_3765a2f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T13:50:48Z",
+      "side": 1,
+      "message": "LGTM overall with a suggestion for the GL decrementLazyClearCountForTesting.",
+      "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "255c1764_49c65b6d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T13:50:48Z",
+      "side": 1,
+      "message": "How about having a ScopedLazyClearCountRestorer class that\u0027s friend with DeviceBase? This way we don\u0027t need to know if a LazyClear happens or not. (Here in OpenGL buffers are guaranteed to always start cleared so maybe we could skip the lazy clear in the future and forget to update this part of the code.)",
+      "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80ea0afc_3829072b",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T13:50:48Z",
+      "side": 1,
+      "message": "nit: and",
+      "range": {
+        "startLine": 1017,
+        "startChar": 14,
+        "endLine": 1017,
+        "endChar": 16
+      },
+      "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
