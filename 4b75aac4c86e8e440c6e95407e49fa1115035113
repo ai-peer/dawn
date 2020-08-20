@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "0f044855_4569c9d9",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-20T12:24:40Z",
+      "side": 1,
+      "message": "OK. Then can we merge this CL now? With this CL at least we can ensure that copying from the stencil aspect works well on Linux Intel Vulkan driver.",
+      "parentUuid": "20fcb3c4_0f887e2e",
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "faee81d0_d3b02946",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 3
