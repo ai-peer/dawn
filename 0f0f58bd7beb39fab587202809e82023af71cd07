@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de61a94a_499f7c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-20T13:07:39Z",
+      "side": 1,
+      "message": "Suppressed UnalignDynamicUploader test on OpenGL.\n",
+      "revId": "0f0f58bd7beb39fab587202809e82023af71cd07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
