@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fd246ad_5aa82cf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-20T01:04:14Z",
+      "side": 1,
+      "message": "fyi: I\u0027m working on making these tests better, as well as testing more cases like copying from a non-zero mip level of a stencil aspect in https://dawn-review.googlesource.com/c/dawn/+/26660\n\nTurns out the non-zero stencil mip level case also is broken on Mac Intel Iris but works on Mac Intel HD 630 and Mac AMD",
+      "revId": "be94e0b92aa0013327c16b9b32dde1bfd84cef48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
