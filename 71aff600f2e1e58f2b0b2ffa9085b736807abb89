@@ -73,6 +73,30 @@
       "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b1f642a_5aa0c01a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-20T17:23:04Z",
+      "side": 1,
+      "message": "Good point, RC. Opened dawn:515 for follow-up.",
+      "parentUuid": "118820a5_4c12746f",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 9
+      },
+      "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
