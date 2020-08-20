@@ -50,6 +50,29 @@
       "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "118820a5_4c12746f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-20T17:04:43Z",
+      "side": 1,
+      "message": "This fix is a example of why fallible resource initialization should happen outside of a class (in a Create method) with fully built objects being given to the constructor. Other code in Chromium follows this (good IMHO) practice. \n\nFeel free to fix with create method as a separate change.",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 9
+      },
+      "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
