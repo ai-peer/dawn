@@ -197,6 +197,42 @@
     },
     {
       "key": {
+        "uuid": "25e35da4_c86b348b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T10:17:05Z",
+      "side": 1,
+      "message": "Pushback here is unfortunate because security properties are important to test, even if \"we know\" it is ok. Knowing doesn\u0027t prevent future bugs from breaking that property and doesn\u0027t prevent similar issues in other code paths.\n\nAt the very least let\u0027s open an issue for this, and it will be blocking for releasing WebGPU without a flag.",
+      "parentUuid": "3e1f8b60_2480d356",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0178803_4135dbfa",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T10:17:05Z",
+      "side": 1,
+      "message": "Pushback here is unfortunate because security properties are important to test, even if \"we know\" it is ok. Knowing doesn\u0027t prevent future bugs from breaking that property and doesn\u0027t prevent similar issues in other code paths.\n\nAt the very least let\u0027s open an issue for this, and it will be blocking for releasing WebGPU without a flag.",
+      "parentUuid": "3e1f8b60_2480d356",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6

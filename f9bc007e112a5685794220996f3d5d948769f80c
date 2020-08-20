@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a0601b47_1407a4d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T10:17:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d104c17_f215c224",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 8
