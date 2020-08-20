@@ -204,6 +204,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b28f747b_aade80d1",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-20T00:32:31Z",
+      "side": 1,
+      "message": "I tried enabling depth writing on this test but it failed with swift shader. You can see the try bot result on PatchSet 4 for more details.",
+      "parentUuid": "4a63bd6f_19ff4c10",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
