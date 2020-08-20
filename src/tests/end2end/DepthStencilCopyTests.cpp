@@ -99,9 +99,6 @@ TEST_P(DepthStencilCopyTests, FromDepthAspect) {
 
 // Test copying the stencil-only aspect into a buffer.
 TEST_P(DepthStencilCopyTests, FromStencilAspect) {
-    // TODO(enga): Figure out why this fails on Linux Vulkan Intel
-    DAWN_SKIP_TEST_IF(IsLinux() && IsVulkan() && IsIntel());
-
     // Create a stencil texture
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
@@ -121,6 +118,7 @@ TEST_P(DepthStencilCopyTests, FromStencilAspect) {
     renderPipelineDesc.vertexStage.module = mVertexModule;
     renderPipelineDesc.cFragmentStage.module = mFragmentModule;
     renderPipelineDesc.cDepthStencilState.format = texDescriptor.format;
+    renderPipelineDesc.cDepthStencilState.depthWriteEnabled = true;
     renderPipelineDesc.cDepthStencilState.stencilFront.passOp =
         wgpu::StencilOperation::IncrementClamp;
     renderPipelineDesc.depthStencilState = &renderPipelineDesc.cDepthStencilState;
@@ -156,8 +154,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
     // Copies to a single aspect are unsupported on OpenGL.
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
-    // TODO(enga): Figure out why this fails on Vulkan Intel
-    // Results are shifted by 1 byte on Windows, and crash/hang on Linux.
+    // TODO(enga): Figure out why this fails on Vulkan Intel: results are shifted by 1 byte.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsIntel());
 
     // TODO(enga): Figure out why this fails on MacOS Intel Iris.
@@ -235,6 +232,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
         renderPipelineDesc.vertexStage.module = mVertexModule;
         renderPipelineDesc.cFragmentStage.module = mFragmentModule;
         renderPipelineDesc.cDepthStencilState.format = texDescriptor.format;
+        renderPipelineDesc.cDepthStencilState.depthWriteEnabled = true;
         renderPipelineDesc.cDepthStencilState.stencilFront.passOp =
             wgpu::StencilOperation::DecrementClamp;
         renderPipelineDesc.depthStencilState = &renderPipelineDesc.cDepthStencilState;
@@ -302,6 +300,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
         pipelineDescriptor.primitiveTopology = wgpu::PrimitiveTopology::TriangleList;
         pipelineDescriptor.depthStencilState = &pipelineDescriptor.cDepthStencilState;
         pipelineDescriptor.cDepthStencilState.format = texDescriptor.format;
+        pipelineDescriptor.cDepthStencilState.depthWriteEnabled = true;
         pipelineDescriptor.cDepthStencilState.depthCompare = wgpu::CompareFunction::Equal;
         pipelineDescriptor.cColorStates[0].format = colorTexDesc.format;
 
