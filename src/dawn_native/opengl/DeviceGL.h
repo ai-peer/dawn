@@ -49,6 +49,8 @@ namespace dawn_native { namespace opengl {
 
         void SubmitFenceSync();
 
+        void DecrementLazyClearCountForTesting();
+
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoder* encoder,
                                                const CommandBufferDescriptor* descriptor) override;
