@@ -324,6 +324,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c419a29_23413785",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-20T00:59:18Z",
+      "side": 1,
+      "message": "Changing gl_FragDepth should still affect whether or not the depth test passes though.\n\nWe\u0027d have to copy out the original contents of the depth texture, and then copy them back in order to preserve depth. That\u0027s a bit unfortunate though because it would require ending the render pass.\n\nOr maybe we could sample the contents out to another texture, and them sample them again to write them back. That way we don\u0027t have to end the render pass.\n\nBoth are pretty slow workarounds though...",
+      "parentUuid": "113267d6_67bcbc87",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
