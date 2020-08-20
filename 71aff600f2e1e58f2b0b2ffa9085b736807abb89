@@ -97,6 +97,30 @@
       "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea584fa5_7b820948",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T17:25:51Z",
+      "side": 1,
+      "message": "That\u0027s already the case, the error is generated during Device::Initialize, but we still need to gracefully ShutDown after that happens to undo all the partial initialization.",
+      "parentUuid": "7b1f642a_5aa0c01a",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 9
+      },
+      "revId": "71aff600f2e1e58f2b0b2ffa9085b736807abb89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
