@@ -276,6 +276,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "113267d6_67bcbc87",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-20T00:54:50Z",
+      "side": 1,
+      "message": "Enn I think the workaround should be rewriting the shader to make all the writes to gl_FragDepth don\u0027t work when depthWriteEnabled is false (for example, renaming all the references of gl_FragDepth so that it will be a common global variable)",
+      "parentUuid": "e099c543_8923442e",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
