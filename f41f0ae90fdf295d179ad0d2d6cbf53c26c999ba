@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "632d5e8f_116be90c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T10:13:32Z",
+      "side": 1,
+      "message": "Thanks for the update, still LGTM!",
+      "revId": "f41f0ae90fdf295d179ad0d2d6cbf53c26c999ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
