@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "f7f7885a_36d72564",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-20T10:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4422da63_35ce3492",
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b235d12f_0ecce30e",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -90,6 +108,30 @@
       "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7711dedc_b27b1970",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000961
+      },
+      "writtenOn": "2020-08-20T10:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b235d12f_0ecce30e",
+      "range": {
+        "startLine": 918,
+        "startChar": 15,
+        "endLine": 918,
+        "endChar": 30
+      },
+      "revId": "3f710f304d981e7121941db4d3a69b235ed35ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
