@@ -208,4 +208,9 @@ namespace dawn_native { namespace opengl {
         return {};
     }
 
+    void Device::DecrementLazyClearCountForTesting() {
+        ASSERT(mLazyClearCountForTesting > 0);
+        --mLazyClearCountForTesting;
+    }
+
 }}  // namespace dawn_native::opengl
