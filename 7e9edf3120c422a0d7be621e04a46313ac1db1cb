@@ -16,6 +16,23 @@
       "revId": "7e9edf3120c422a0d7be621e04a46313ac1db1cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aac07a83_c1bcb55f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-20T15:56:54Z",
+      "side": 1,
+      "message": "LGTM to land, but I think the only fix here is to forbid the behavior, or fix Mesa. We can\u0027t workaround this issue :/",
+      "revId": "7e9edf3120c422a0d7be621e04a46313ac1db1cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
