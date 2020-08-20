@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "f9326c3a_218d93e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-20T18:01:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "255c1764_49c65b6d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 3
@@ -47,6 +64,24 @@
       "writtenOn": "2020-08-20T13:50:48Z",
       "side": 1,
       "message": "How about having a ScopedLazyClearCountRestorer class that\u0027s friend with DeviceBase? This way we don\u0027t need to know if a LazyClear happens or not. (Here in OpenGL buffers are guaranteed to always start cleared so maybe we could skip the lazy clear in the future and forget to update this part of the code.)",
+      "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d69e4ce4_4f533347",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-20T18:01:25Z",
+      "side": 1,
+      "message": "Maybe instead we could have opengl::Buffer::Create(device, descriptor, shouldClear \u003d true);\nEven with Scoped restorer, this code is still going to clear unnecessarily.",
+      "parentUuid": "255c1764_49c65b6d",
       "revId": "34ba0ea55f3053a87a406025ae14a63b96778b9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
