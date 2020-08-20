@@ -228,6 +228,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "065b234c_2cd0d1fd",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-20T00:47:03Z",
+      "side": 1,
+      "message": "Oh it is failing everywhere in patch set 4, so I decide to go back to patch set 3.",
+      "parentUuid": "b28f747b_aade80d1",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
