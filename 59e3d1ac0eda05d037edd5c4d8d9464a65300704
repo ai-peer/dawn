@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fe04be8_18eb0fc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T06:14:48Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I found TextureSubresourceTest/ArrayLayersTest should also be skipped on the Vulkan backend with the same reason as in https://dawn-review.googlesource.com/c/dawn/+/27123.\n\nPTAL, thanks! ",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "771fa2e4_42d5f423",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T06:14:48Z",
+      "side": 1,
+      "message": "MapAtCreation is not handled in the constructor of Buffer. For external buffers it is handled in Device::CreateBufferInternal(). So here I have to call it for internal buffers.",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 43
+      },
+      "revId": "c053dd64892ad845d0f1c68f26c85d71a6552dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
