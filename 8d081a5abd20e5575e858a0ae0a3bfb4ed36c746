@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "6a0de414_bb39d97e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77721455_af3fecf5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "nit: Not that it matters a whole lot, but shouldn\u0027t this be the physical size (if we ever have compressed texture with that restriction, the copy size will be a multiple of the block size). Or just add an ASSERT that the format isn\u0027t block-based.",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46d72853_62aa0c68",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 14
@@ -35,6 +69,120 @@
         "startChar": 94,
         "endLine": 531,
         "endChar": 43
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a8549a_f6bbd002",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "nit: why doesn\u0027t this one take a miplevel?",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b1d6d64_e706ed8d",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "If I understand this function correctly: it uploads the expected data in a texture that\u0027s sampled in a quad, uses it to set gl_FragDepth then use depth equal comparison to do the expectation.\n\nI wonder if it might be slightly simpler to use the sampling path to get the data from the depth texture. But maybe not. In all cases can we have a comment at the start of the function that describes how it does the check?",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd18970_edaaea65",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "Why do we need the T? Maybe it would infer properly if all the 0.0 had the f suffix? Or we could keep the vector outside of the EXPECT call. Ditto in other places, and it might remove the need for the DawnTest.h changes.",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6099de8b_1a1ca27a",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "What about copying the depth at a mip level?",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b260dcd_f60556ca",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "nit: texture, ditto below",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 796,
+        "endChar": 64
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34932599_4ad9f5dc",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T08:01:39Z",
+      "side": 1,
+      "message": "nit: why is this needed?",
+      "range": {
+        "startLine": 1516,
+        "startChar": 51,
+        "endLine": 1516,
+        "endChar": 90
       },
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
