@@ -21,12 +21,40 @@ namespace dawn_native { namespace opengl {
 
     // Buffer
 
+    // static
+    ResultOrError<Ref<Buffer>> Buffer::CreateInternalBuffer(Device* device,
+                                                            const BufferDescriptor* descriptor,
+                                                            bool shouldLazyClear) {
+        Ref<Buffer> buffer = AcquireRef(new Buffer(device, descriptor, shouldLazyClear));
+        if (descriptor->mappedAtCreation) {
+            DAWN_TRY(buffer->MapAtCreation());
+        }
+
+        return std::move(buffer);
+    }
+
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
+        Initialize();
+
+        // TODO(jiawei.shao@intel.com): use Toggle::LazyClearResourceOnFirstUse instead when
+        // we complete the support of buffer lazy initialization.
+        mShouldLazyClear = GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse);
+    }
+
+    Buffer::Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear)
+        : BufferBase(device, descriptor) {
+        Initialize();
+
+        mShouldLazyClear = shouldLazyClear;
+    }
+
+    void Buffer::Initialize() {
         // TODO(cwallez@chromium.org): Have a global "zero" buffer instead of creating a new 4-byte
         // buffer?
         uint64_t size = GetAppliedSize();
 
+        Device* device = ToBackend(GetDevice());
         device->gl.GenBuffers(1, &mBuffer);
         device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
 
@@ -55,8 +83,7 @@ namespace dawn_native { namespace opengl {
     void Buffer::EnsureDataInitialized() {
         // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
         // instead when buffer lazy initialization is completely supported.
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+        if (IsDataInitialized() || !mShouldLazyClear) {
             return;
         }
 
@@ -66,8 +93,7 @@ namespace dawn_native { namespace opengl {
     void Buffer::EnsureDataInitializedAsDestination(uint64_t offset, uint64_t size) {
         // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
         // instead when buffer lazy initialization is completely supported.
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+        if (IsDataInitialized() || !mShouldLazyClear) {
             return;
         }
 
@@ -81,8 +107,7 @@ namespace dawn_native { namespace opengl {
     void Buffer::EnsureDataInitializedAsDestination(const CopyTextureToBufferCmd* copy) {
         // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse
         // instead when buffer lazy initialization is completely supported.
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+        if (IsDataInitialized() || !mShouldLazyClear) {
             return;
         }
 
@@ -94,7 +119,7 @@ namespace dawn_native { namespace opengl {
     }
 
     void Buffer::InitializeToZero() {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse));
+        ASSERT(mShouldLazyClear);
         ASSERT(!IsDataInitialized());
 
         const uint64_t size = GetAppliedSize();

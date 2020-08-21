@@ -25,6 +25,10 @@ namespace dawn_native { namespace opengl {
 
     class Buffer final : public BufferBase {
       public:
+        static ResultOrError<Ref<Buffer>> CreateInternalBuffer(Device* device,
+                                                               const BufferDescriptor* descriptor,
+                                                               bool shouldLazyClear);
+
         Buffer(Device* device, const BufferDescriptor* descriptor);
 
         GLuint GetHandle() const;
@@ -34,7 +38,9 @@ namespace dawn_native { namespace opengl {
         void EnsureDataInitializedAsDestination(const CopyTextureToBufferCmd* copy);
 
       private:
+        Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear);
         ~Buffer() override;
+        void Initialize();
         MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
@@ -48,6 +54,7 @@ namespace dawn_native { namespace opengl {
 
         GLuint mBuffer = 0;
         void* mMappedData = nullptr;
+        bool mShouldLazyClear;
     };
 
 }}  // namespace dawn_native::opengl
