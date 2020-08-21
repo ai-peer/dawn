@@ -16,6 +16,57 @@
       "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2ff6a15_47a7a2a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T07:30:19Z",
+      "side": 1,
+      "message": "LGTM, I wish we didn\u0027t need to add this much code to BufferGL but it seems unavoidable unless we implement StagingBuffers for GL.",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31f4ea0a_c452a941",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T07:30:19Z",
+      "side": 1,
+      "message": "Erf this is unfortunate. I don\u0027t know how to avoid the code duplication here.",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb04e0eb_a1d9c192",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-21T07:30:19Z",
+      "side": 1,
+      "message": "Instead of mShouldLazyClear maybe we could SetIsDataInitialized()?",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
