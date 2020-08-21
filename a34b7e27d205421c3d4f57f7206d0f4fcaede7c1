@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "415e5d99_803f0dff",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-08-21T21:06:35Z",
+      "side": 1,
+      "message": "Does D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT apply to buffers besides constant buffers?  If not, we should scope this only to constant buffers.",
+      "range": {
+        "startLine": 105,
+        "startChar": 41,
+        "endLine": 105,
+        "endChar": 87
+      },
+      "revId": "a34b7e27d205421c3d4f57f7206d0f4fcaede7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
