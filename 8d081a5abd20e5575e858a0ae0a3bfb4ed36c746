@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "89a0550e_8265382e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T11:37:23Z",
+      "side": 1,
+      "message": "restriction. This restriction",
+      "range": {
+        "startLine": 10,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "913d6c85_6e72ef4d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 14
@@ -30,6 +53,23 @@
       "writtenOn": "2020-08-21T08:01:39Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7024e39b_448337cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T11:37:23Z",
+      "side": 1,
+      "message": "+1 with Corentin\u0027s comments",
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
