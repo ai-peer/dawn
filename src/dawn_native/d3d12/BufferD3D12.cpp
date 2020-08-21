@@ -283,20 +283,16 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
-        DAWN_TRY(EnsureDataInitialized(commandContext));
-
         // Setting isMapWrite to false on MapRead buffers to silence D3D12 debug layer warning.
         bool isMapWrite = (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
         DAWN_TRY(MapInternal(isMapWrite, 0, size_t(GetSize()), "D3D12 map at creation"));
+
+        DAWN_TRY(EnsureDataInitialized(nullptr));
         return {};
     }
 
     MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-        CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
-        DAWN_TRY(EnsureDataInitialized(commandContext));
+        DAWN_TRY(EnsureDataInitialized(nullptr));
 
         return MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async");
     }
@@ -405,12 +401,16 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {
         Device* device = ToBackend(GetDevice());
 
-        // The state of the buffers on UPLOAD heap must always be GENERIC_READ and cannot be
-        // changed away, so we can only clear such buffer with buffer mapping.
-        if (D3D12HeapType(GetUsage()) == D3D12_HEAP_TYPE_UPLOAD) {
-            DAWN_TRY(MapInternal(true, 0, size_t(GetSize()), "D3D12 map at clear buffer"));
+        // When the buffer is mappable we directly clear the buffer on the CPU side.
+        if (IsMappableAtCreation()) {
+            bool isBufferMapped = (mMappedData != nullptr);
+            if (!isBufferMapped) {
+                DAWN_TRY(MapInternal(true, 0, size_t(GetSize()), "D3D12 map at clear buffer"));
+            }
             memset(mMappedData, clearValue, GetSize());
-            UnmapImpl();
+            if (!isBufferMapped) {
+                UnmapImpl();
+            }
         } else {
             // TODO(jiawei.shao@intel.com): use ClearUnorderedAccessView*() when the buffer usage
             // includes STORAGE.
