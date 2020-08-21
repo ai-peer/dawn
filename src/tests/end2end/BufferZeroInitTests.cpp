@@ -312,7 +312,8 @@ class BufferZeroInitTest : public DawnTest {
 
         // Bind the buffer with offset == indexBufferOffset and size sizeof(uint32_t) as the index
         // buffer.
-        renderPass.SetIndexBuffer(indexBuffer, indexBufferOffset, sizeof(uint32_t));
+        renderPass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32, indexBufferOffset,
+                                  sizeof(uint32_t));
         renderPass.DrawIndexed(1);
         renderPass.EndPass();
 
@@ -391,7 +392,7 @@ class BufferZeroInitTest : public DawnTest {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPass.SetPipeline(renderPipeline);
-        renderPass.SetIndexBuffer(indexBuffer);
+        renderPass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
         renderPass.DrawIndexedIndirect(indirectBuffer, indirectBufferOffset);
         renderPass.EndPass();
 

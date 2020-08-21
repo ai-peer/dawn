@@ -135,7 +135,8 @@ namespace dawn_native {
         });
     }
 
-    void RenderEncoderBase::SetIndexBuffer(BufferBase* buffer, uint64_t offset, uint64_t size) {
+    void RenderEncoderBase::SetIndexBuffer(BufferBase* buffer, wgpu::IndexFormat format,
+                                           uint64_t offset, uint64_t size) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             DAWN_TRY(GetDevice()->ValidateObject(buffer));
 
@@ -156,6 +157,7 @@ namespace dawn_native {
             SetIndexBufferCmd* cmd =
                 allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
             cmd->buffer = buffer;
+            cmd->format = format;
             cmd->offset = offset;
             cmd->size = size;
 

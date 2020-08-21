@@ -61,7 +61,8 @@ namespace dawn_native {
         1 << VALIDATION_ASPECT_VERTEX_BUFFERS | 1 << VALIDATION_ASPECT_INDEX_BUFFER;
 
     static constexpr CommandBufferStateTracker::ValidationAspects kLazyAspects =
-        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS;
+        1 << VALIDATION_ASPECT_BIND_GROUPS | 1 << VALIDATION_ASPECT_VERTEX_BUFFERS |
+        1 << VALIDATION_ASPECT_INDEX_BUFFER;
 
     MaybeError CommandBufferStateTracker::ValidateCanDispatch() {
         return ValidateOperation(kDispatchAspects);
@@ -124,6 +125,13 @@ namespace dawn_native {
                 mAspects.set(VALIDATION_ASPECT_VERTEX_BUFFERS);
             }
         }
+
+        if (aspects[VALIDATION_ASPECT_INDEX_BUFFER]) {
+            if (mIndexFormat == mLastRenderPipeline->GetVertexStateDescriptor()->indexFormat &&
+                mIndexBufferSet) {
+                mAspects.set(VALIDATION_ASPECT_INDEX_BUFFER);
+            }
+        }
     }
 
     MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspects) {
@@ -132,7 +140,12 @@ namespace dawn_native {
         }
 
         if (aspects[VALIDATION_ASPECT_INDEX_BUFFER]) {
-            return DAWN_VALIDATION_ERROR("Missing index buffer");
+            if (mIndexFormat != mLastRenderPipeline->GetVertexStateDescriptor()->indexFormat) {
+                return DAWN_VALIDATION_ERROR(
+                    "Pipeline strip index format does match index buffer format");
+            } else if (!mIndexBufferSet) {
+                return DAWN_VALIDATION_ERROR("Missing index buffer");
+            }
         }
 
         if (aspects[VALIDATION_ASPECT_VERTEX_BUFFERS]) {
@@ -185,8 +198,9 @@ namespace dawn_native {
         mAspects.reset(VALIDATION_ASPECT_BIND_GROUPS);
     }
 
-    void CommandBufferStateTracker::SetIndexBuffer() {
-        mAspects.set(VALIDATION_ASPECT_INDEX_BUFFER);
+    void CommandBufferStateTracker::SetIndexBuffer(wgpu::IndexFormat format) {
+        mIndexBufferSet = true;
+        mIndexFormat = format;
     }
 
     void CommandBufferStateTracker::SetVertexBuffer(uint32_t slot) {

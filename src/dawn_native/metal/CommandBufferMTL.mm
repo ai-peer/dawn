@@ -41,6 +41,15 @@ namespace dawn_native { namespace metal {
             MTLStoreActionStoreAndMultisampleResolve;
 #pragma clang diagnostic pop
 
+        MTLIndexType MTLIndexFormat(wgpu::IndexFormat format) {
+            switch (format) {
+                case wgpu::IndexFormat::Uint16:
+                    return MTLIndexTypeUInt16;
+                case wgpu::IndexFormat::Uint32:
+                    return MTLIndexTypeUInt32;
+            }
+        }
+
         // Creates an autoreleased MTLRenderPassDescriptor matching desc
         MTLRenderPassDescriptor* CreateMTLRenderPassDescriptor(BeginRenderPassCmd* renderPass) {
             MTLRenderPassDescriptor* descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
@@ -979,6 +988,8 @@ namespace dawn_native { namespace metal {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
+        MTLIndexType indexFormat;
+        size_t indexFormatSize = 0;
         StorageBufferLengthTracker storageBufferLengths = {};
         VertexBufferTracker vertexBuffers(&storageBufferLengths);
         BindGroupTracker bindGroups(&storageBufferLengths);
@@ -1015,8 +1026,6 @@ namespace dawn_native { namespace metal {
 
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
-                    size_t formatSize =
-                        IndexFormatSize(lastPipeline->GetVertexStateDescriptor()->indexFormat);
 
                     vertexBuffers.Apply(encoder, lastPipeline, enableVertexPulling);
                     bindGroups.Apply(encoder);
@@ -1029,18 +1038,18 @@ namespace dawn_native { namespace metal {
                         if (draw->baseVertex == 0 && draw->firstInstance == 0) {
                             [encoder drawIndexedPrimitives:lastPipeline->GetMTLPrimitiveTopology()
                                                 indexCount:draw->indexCount
-                                                 indexType:lastPipeline->GetMTLIndexType()
+                                                 indexType:indexFormat
                                                indexBuffer:indexBuffer
                                          indexBufferOffset:indexBufferBaseOffset +
-                                                           draw->firstIndex * formatSize
+                                                           draw->firstIndex * indexFormatSize
                                              instanceCount:draw->instanceCount];
                         } else {
                             [encoder drawIndexedPrimitives:lastPipeline->GetMTLPrimitiveTopology()
                                                 indexCount:draw->indexCount
-                                                 indexType:lastPipeline->GetMTLIndexType()
+                                                 indexType:indexFormat
                                                indexBuffer:indexBuffer
                                          indexBufferOffset:indexBufferBaseOffset +
-                                                           draw->firstIndex * formatSize
+                                                           draw->firstIndex * indexFormatSize
                                              instanceCount:draw->instanceCount
                                                 baseVertex:draw->baseVertex
                                               baseInstance:draw->firstInstance];
@@ -1074,7 +1083,7 @@ namespace dawn_native { namespace metal {
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     id<MTLBuffer> indirectBuffer = buffer->GetMTLBuffer();
                     [encoder drawIndexedPrimitives:lastPipeline->GetMTLPrimitiveTopology()
-                                         indexType:lastPipeline->GetMTLIndexType()
+                                         indexType:indexFormat
                                        indexBuffer:indexBuffer
                                  indexBufferOffset:indexBufferBaseOffset
                                     indirectBuffer:indirectBuffer
@@ -1142,6 +1151,8 @@ namespace dawn_native { namespace metal {
                     auto b = ToBackend(cmd->buffer.Get());
                     indexBuffer = b->GetMTLBuffer();
                     indexBufferBaseOffset = cmd->offset;
+                    indexFormat = MTLIndexFormat(cmd->format);
+                    indexFormatSize = IndexFormatSize(cmd->format);
                     break;
                 }
 

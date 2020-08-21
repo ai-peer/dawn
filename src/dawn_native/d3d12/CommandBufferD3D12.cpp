@@ -467,18 +467,15 @@ namespace dawn_native { namespace d3d12 {
 
         class IndexBufferTracker {
           public:
-            void OnSetIndexBuffer(Buffer* buffer, uint64_t offset, uint64_t size) {
+            void OnSetIndexBuffer(Buffer* buffer, wgpu::IndexFormat format, uint64_t offset,
+                                  uint64_t size) {
                 mD3D12BufferView.BufferLocation = buffer->GetVA() + offset;
                 mD3D12BufferView.SizeInBytes = size;
+                mD3D12BufferView.Format = DXGIIndexFormat(format);
 
                 // We don't need to dirty the state unless BufferLocation or SizeInBytes
                 // change, but most of the time this will always be the case.
                 mLastAppliedIndexFormat = DXGI_FORMAT_UNKNOWN;
-            }
-
-            void OnSetPipeline(const RenderPipelineBase* pipeline) {
-                mD3D12BufferView.Format =
-                    DXGIIndexFormat(pipeline->GetVertexStateDescriptor()->indexFormat);
             }
 
             void Apply(ID3D12GraphicsCommandList* commandList) {
@@ -1261,7 +1258,6 @@ namespace dawn_native { namespace d3d12 {
                     commandList->IASetPrimitiveTopology(pipeline->GetD3D12PrimitiveTopology());
 
                     bindingTracker->OnSetPipeline(pipeline);
-                    indexBufferTracker.OnSetPipeline(pipeline);
 
                     lastPipeline = pipeline;
                     lastLayout = layout;
@@ -1285,8 +1281,8 @@ namespace dawn_native { namespace d3d12 {
                 case Command::SetIndexBuffer: {
                     SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
 
-                    indexBufferTracker.OnSetIndexBuffer(ToBackend(cmd->buffer.Get()), cmd->offset,
-                                                        cmd->size);
+                    indexBufferTracker.OnSetIndexBuffer(ToBackend(cmd->buffer.Get()),
+                                                        cmd->format, cmd->offset, cmd->size);
                     break;
                 }
 
