@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "913d6c85_6e72ef4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T00:28:39Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46d72853_62aa0c68",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T00:28:39Z",
+      "side": 1,
+      "message": "remove this text",
+      "range": {
+        "startLine": 530,
+        "startChar": 94,
+        "endLine": 531,
+        "endChar": 43
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
