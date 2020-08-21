@@ -167,7 +167,7 @@ namespace dawn_native { namespace vulkan {
             "vkBindBufferMemory"));
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
+            ClearBuffer(device->GetPendingRecordingContext(), 1u);
         }
 
         return {};
@@ -243,8 +243,6 @@ namespace dawn_native { namespace vulkan {
     MaybeError Buffer::MapAtCreationImpl() {
         CommandRecordingContext* recordingContext =
             ToBackend(GetDevice())->GetPendingRecordingContext();
-
-        // TODO(jiawei.shao@intel.com): initialize mapped buffer in CPU side.
         EnsureDataInitialized(recordingContext);
 
         return {};
@@ -254,8 +252,6 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-
-        // TODO(jiawei.shao@intel.com): initialize mapped buffer in CPU side.
         EnsureDataInitialized(recordingContext);
 
         if (mode & wgpu::MapMode::Read) {
@@ -339,15 +335,25 @@ namespace dawn_native { namespace vulkan {
         SetIsDataInitialized();
     }
 
-    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext, uint32_t clearValue) {
+    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext, uint8_t clearValuePerByte) {
         ASSERT(recordingContext != nullptr);
+
+        // Clear the mappable buffers in the CPU side;
+        if (IsMappableAtCreation()) {
+            TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
+            uint8_t* mappedMemory = static_cast<uint8_t*>(GetMappedPointerImpl());
+            memset(mappedMemory, clearValuePerByte, GetSize());
+            return;
+        }
 
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
         Device* device = ToBackend(GetDevice());
         // TODO(jiawei.shao@intel.com): find out why VK_WHOLE_SIZE doesn't work on old Windows Intel
         // Vulkan drivers.
+        uint32_t clearValueUint32;
+        memset(reinterpret_cast<uint8_t*>(&clearValueUint32), clearValuePerByte, sizeof(uint32_t));
         device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, 0, GetSize(),
-                                 clearValue);
+                                 clearValueUint32);
     }
 }}  // namespace dawn_native::vulkan
