@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "978e9cc3_a564579f",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T08:43:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "31f4ea0a_c452a941",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb04e0eb_a1d9c192",
         "filename": "src/dawn_native/opengl/BufferGL.cpp",
         "patchSetId": 7
@@ -67,6 +85,24 @@
       "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a274f62d_046a4517",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T08:43:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb04e0eb_a1d9c192",
+      "revId": "59e3d1ac0eda05d037edd5c4d8d9464a65300704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
