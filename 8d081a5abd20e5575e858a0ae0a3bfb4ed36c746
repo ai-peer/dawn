@@ -186,6 +186,24 @@
     },
     {
       "key": {
+        "uuid": "215c64bf_8fabdc2d",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T18:22:47Z",
+      "side": 1,
+      "message": "I don\u0027t think I said anything about changing formats. We just can\u0027t do that *-only views in Dawn yet.",
+      "parentUuid": "ba142926_7430259a",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
