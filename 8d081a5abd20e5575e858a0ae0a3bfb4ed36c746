@@ -222,6 +222,24 @@
     },
     {
       "key": {
+        "uuid": "236d12db_3fd05221",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-21T18:29:02Z",
+      "side": 1,
+      "message": "Gotcha. Theoretically they could be using the output of a render pass that needed depth testing (so the format is depth24plus-stencil8), but only need to sample the stencil aspect.",
+      "parentUuid": "efb4d1f3_0f9fc29f",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
