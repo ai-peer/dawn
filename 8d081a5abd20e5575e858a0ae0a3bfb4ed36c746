@@ -150,6 +150,24 @@
     },
     {
       "key": {
+        "uuid": "323a6ad9_dfce1363",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T17:55:28Z",
+      "side": 1,
+      "message": "I think it would be much better, and avoids issues with setting gl_FragDepth without depthWriteEnabled. Also will let us have a tolerance b.c. instead of relying on the pipeline to do the \u003d\u003d comparison.\n\nBut.... Dawn can\u0027t do stencil-only/depth-only texture *views* yet, so we can\u0027t sample depth from depth24plus-stencil8. Do we want this in the near term? depth32float works for depth sampling. We don\u0027t have stencil8 (yet) so there\u0027s no stencil sampling. Not sure if that\u0027s an important use case.\n\nIt probably won\u0027t be too much work to add support for since (hopefully) the subresource tracking works for separate planes now.",
+      "parentUuid": "9b1d6d64_e706ed8d",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
@@ -161,6 +179,24 @@
       "writtenOn": "2020-08-21T08:01:39Z",
       "side": 1,
       "message": "Why do we need the T? Maybe it would infer properly if all the 0.0 had the f suffix? Or we could keep the vector outside of the EXPECT call. Ditto in other places, and it might remove the need for the DawnTest.h changes.",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ac7b4a_94b08bed",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T17:55:28Z",
+      "side": 1,
+      "message": "suffix works for float. Doesn\u0027t work in a pretty way for uint8_t. This extra macro was so I don\u0027t have to have a named vector everywhere which I think is kinda nice.",
+      "parentUuid": "9dd18970_edaaea65",
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
