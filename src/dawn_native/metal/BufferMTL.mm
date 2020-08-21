@@ -197,6 +197,13 @@ namespace dawn_native { namespace metal {
 
     void Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {
         ASSERT(commandContext != nullptr);
+
+        if (IsMappableAtCreation()) {
+            uint8_t* mappedData = static_cast<uint8_t*>(GetMappedPointerImpl());
+            memset(mappedData, clearValue, GetSize());
+            return;
+        }
+
         [commandContext->EnsureBlit() fillBuffer:mMtlBuffer
                                            range:NSMakeRange(0, GetSize())
                                            value:clearValue];
