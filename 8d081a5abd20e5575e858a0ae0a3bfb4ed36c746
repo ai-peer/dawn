@@ -168,6 +168,24 @@
     },
     {
       "key": {
+        "uuid": "ba142926_7430259a",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-21T18:21:04Z",
+      "side": 1,
+      "message": "Using a sub-aspect in a texture view doesn\u0027t require changing the format. To get a stencil view of a depth24plus-stencil8 texture you would keep the format the same (/leave it to default) and use aspect:\u0027stencil-only\u0027",
+      "parentUuid": "323a6ad9_dfce1363",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
