@@ -16,6 +16,29 @@
       "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a91e503_48479126",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T17:42:50Z",
+      "side": 1,
+      "message": "Hm, so for buffers in the READBACK heap, this will memset the CPU-side virtual mapping. However, will that actually change the GPU buffer contents? That is, is it possible for:\n\nbuffer \u003d CreateBuffer();\nvoid* ptr \u003d buffer.Map(Read); // data in ptr is cleared, and state is marked as initialized.\nbuffer.Unmap();\n\nptr \u003d buffer.Map(Read); // data in ptr is uninitialized ??\n\nI think we should be able to test a case like this with the NonzeroClearResourcesOnCreationForTesting toggle.",
+      "range": {
+        "startLine": 406,
+        "startChar": 12,
+        "endLine": 415,
+        "endChar": 13
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
