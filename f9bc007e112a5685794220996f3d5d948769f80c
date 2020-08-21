@@ -87,6 +87,30 @@
       "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c06d1ff_e6c8307b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-21T17:09:40Z",
+      "side": 1,
+      "message": "While this size alignment is needed for UBO, always doing so is also OK as no other usage uses it for validation and the desc size will be ignored anyway (always padded to 64KB).",
+      "parentUuid": "4473d214_91768ba2",
+      "range": {
+        "startLine": 98,
+        "startChar": 34,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
