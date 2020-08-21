@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21684fe8_50941798",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-21T23:13:37Z",
+      "side": 1,
+      "message": "Apologies if this overlaps with any work already being done. I started making this change as a learning exercise to familiarize myself with Dawn\u0027s code a bit more and didn\u0027t see https://bugs.chromium.org/p/dawn/issues/detail?id\u003d502 till I had gotten to this point.\n\nIf Jiawei has a WIP change that covers the same thing I\u0027m happy to defer to it, otherwise I can see from the issue that I\u0027ll need to make a few changes to match with the discussed migration plan.",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
