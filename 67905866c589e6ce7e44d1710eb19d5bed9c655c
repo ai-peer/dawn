@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8d93f06_b7aac960",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-21T11:28:46Z",
+      "side": 1,
+      "message": "The failure is not related to this patch and will be skipped once https://dawn-review.googlesource.com/c/dawn/+/26960 is merged. PTAL, thanks!",
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
