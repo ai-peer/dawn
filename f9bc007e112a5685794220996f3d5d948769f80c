@@ -39,6 +39,30 @@
       "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91cea3ef_243ebc3a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-21T16:52:38Z",
+      "side": 1,
+      "message": "Only UBO has a \"size\" to check, the others will ignore the alignment. I left a comment explaining this (do re-open if needed).",
+      "parentUuid": "8d104c17_f215c224",
+      "range": {
+        "startLine": 98,
+        "startChar": 34,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "f9bc007e112a5685794220996f3d5d948769f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

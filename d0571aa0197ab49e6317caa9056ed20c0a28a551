@@ -233,6 +233,24 @@
     },
     {
       "key": {
+        "uuid": "1d653195_ec262923",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-21T16:52:38Z",
+      "side": 1,
+      "message": "@AE, that explanation matches my understanding. But D3D12 can also protect you (this is how the issue was found) but only checks when the resource is committed. Filed dawn:518.",
+      "parentUuid": "f0178803_4135dbfa",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d970f5e5_fdf9a403",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 6
@@ -247,6 +265,24 @@
       "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39f95524_1c63a453",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-08-21T16:52:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d970f5e5_fdf9a403",
+      "revId": "d0571aa0197ab49e6317caa9056ed20c0a28a551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
