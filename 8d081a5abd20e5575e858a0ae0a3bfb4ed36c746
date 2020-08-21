@@ -204,6 +204,24 @@
     },
     {
       "key": {
+        "uuid": "efb4d1f3_0f9fc29f",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-21T18:27:26Z",
+      "side": 1,
+      "message": "Oh sorry I see that my statement was very confusing.\n\nI was saying that we don\u0027t have stencil8 yet, so that only way if someone wanted to do sampling of a stencil buffer to implement some rendering algorithm, they\u0027d have to use depth24plus-stencil8. But then they can\u0027t select just stencil because we don\u0027t support that.\n\nAnyway, we should probably just add the stencil8 format.",
+      "parentUuid": "215c64bf_8fabdc2d",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
