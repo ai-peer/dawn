@@ -16,6 +16,74 @@
       "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68ce05a7_21fbae31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-22T09:56:08Z",
+      "side": 1,
+      "message": "Either you doing this change or Jiawei doing it is fine, but please synchronize to make sure there\u0027s no conflict. (Slack can help for direct communication) Also we can\u0027t break Dawn\u0027s public API without first sending a PSA, and only gradually. So the process to update SetIndexBuffer needs to do something like the following: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d502#c8\n\nIf we could break compatibility, change would have been mostly good except that we would need validation tests for the modified validation.",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1496f540_332a8b97",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-22T09:56:08Z",
+      "side": 1,
+      "message": "We should add an \"undefined\" index format if the default for the vertex state descriptor, (and set it to 0, it is ok to shift values because the compabitility with the header doesn\u0027t change, at least before the v1.0 of the header)",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35066cd6_a67e3de1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-22T09:56:08Z",
+      "side": 1,
+      "message": "I think we should check it only if the pipeline uses strip topology.",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f99d0773_f107e64a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-22T09:56:08Z",
+      "side": 1,
+      "message": "I think IASetIndexBuffer can be called immediately when we see the SetIndexBuffer command because we have all the information we need (previsouly we needed to wait for draw-time to make sure there was a pipeline set, to extract the index from it).",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
