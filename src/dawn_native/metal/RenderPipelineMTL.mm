@@ -132,6 +132,8 @@ namespace dawn_native { namespace metal {
                     return MTLIndexTypeUInt16;
                 case wgpu::IndexFormat::Uint32:
                     return MTLIndexTypeUInt32;
+                default:
+                    UNREACHABLE();
             }
         }
 
