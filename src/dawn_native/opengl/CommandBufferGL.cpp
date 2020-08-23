@@ -982,6 +982,7 @@ namespace dawn_native { namespace opengl {
 
         RenderPipeline* lastPipeline = nullptr;
         uint64_t indexBufferBaseOffset = 0;
+        wgpu::IndexFormat indexBufferFormat;
 
         VertexStateBufferBindingTracker vertexStateBufferBindingTracker;
         BindGroupTracker bindGroupTracker = {};
@@ -1011,14 +1012,25 @@ namespace dawn_native { namespace opengl {
                     vertexStateBufferBindingTracker.Apply(gl);
                     bindGroupTracker.Apply(gl);
 
-                    wgpu::IndexFormat indexFormat =
-                        lastPipeline->GetVertexStateDescriptor()->indexFormat;
-                    size_t formatSize = IndexFormatSize(indexFormat);
-                    GLenum formatType = IndexFormatType(indexFormat);
+                    GLenum formatType;
+                    size_t formatSize;
+                    if (indexBufferFormat != wgpu::IndexFormat::Undefined) {
+                        // If a index format was specified in setIndexBuffer always use it.
+                        formatType = IndexFormatType(indexBufferFormat);
+                        formatSize = IndexFormatSize(indexBufferFormat);
+                    } else {
+                        // Otherwise use the pipeline's index format. This path is deprecated and
+                        // will be removed soon.
+                        wgpu::IndexFormat pipelineFormat =
+                            lastPipeline->GetVertexStateDescriptor()->indexFormat;
+                        formatType = IndexFormatType(pipelineIndexFormat);
+                        formatSize = IndexFormatSize(pipelineIndexFormat);
+                    }
 
                     if (draw->firstInstance > 0) {
                         gl.DrawElementsInstancedBaseVertexBaseInstance(
-                            lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, formatType,
+                            lastPipeline->GetGLPrimitiveTopology(), draw->indexCount,
+                            formatType,
                             reinterpret_cast<void*>(draw->firstIndex * formatSize +
                                                     indexBufferBaseOffset),
                             draw->instanceCount, draw->baseVertex, draw->firstInstance);
@@ -1064,12 +1076,19 @@ namespace dawn_native { namespace opengl {
                     vertexStateBufferBindingTracker.Apply(gl);
                     bindGroupTracker.Apply(gl);
 
-                    wgpu::IndexFormat indexFormat =
-                        lastPipeline->GetVertexStateDescriptor()->indexFormat;
-                    GLenum formatType = IndexFormatType(indexFormat);
-
                     uint64_t indirectBufferOffset = draw->indirectOffset;
                     Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
+
+                    GLenum formatType;
+                    if (indexBufferFormat != wgpu::IndexFormat::Undefined) {
+                        // If a index format was specified in setIndexBuffer always use it.
+                        formatType = IndexFormatType(indexBufferFormat);
+                    } else {
+                        // Otherwise use the pipeline's index format. This path is deprecated and
+                        // will be removed soon.
+                        formatType = IndexFormatType(
+                            lastPipeline->GetVertexStateDescriptor()->indexFormat);
+                    }
 
                     gl.BindBuffer(GL_DRAW_INDIRECT_BUFFER, indirectBuffer->GetHandle());
                     gl.DrawElementsIndirect(
@@ -1110,6 +1129,7 @@ namespace dawn_native { namespace opengl {
 
                 case Command::SetIndexBuffer: {
                     SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
+                    indexBufferFormat = cmd->format;
                     indexBufferBaseOffset = cmd->offset;
                     vertexStateBufferBindingTracker.OnSetIndexBuffer(cmd->buffer.Get());
                     break;
