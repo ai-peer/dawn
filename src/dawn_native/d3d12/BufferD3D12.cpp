@@ -424,6 +424,16 @@ namespace dawn_native { namespace d3d12 {
 
             device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
                                                 uploadHandle.startOffset, this, 0, GetSize());
+
+            // Execute immediately for the buffers with MapRead usage so that we can always finish
+            // the content on the GPU side before reading it from the CPU side.
+            if (D3D12HeapType(GetUsage()) == D3D12_HEAP_TYPE_READBACK) {
+                device->Tick();
+
+                // Without calling this the test NonzeroBufferCreationTests will fail with D3D12
+                // validation layer enabled.
+                Sleep(1);
+            }
         }
 
         return {};

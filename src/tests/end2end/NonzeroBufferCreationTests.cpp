@@ -50,6 +50,26 @@ TEST_P(NonzeroBufferCreationTests, BufferCreationWithMapWriteWithoutCopyDstUsage
                                kSize / sizeof(uint32_t));
 }
 
+// Verify that each byte of the buffer has all been initialized to 1 with the toggle enabled when it
+// is created with MapWrite and MapAtCreation == true.
+TEST_P(NonzeroBufferCreationTests, BufferCreationWithMapReadAndMapAtCreation) {
+    // TODO(jiawei.shao@intel.com): investigate why this test fails with Dawn wire.
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    constexpr uint32_t kSize = 32u;
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = kSize;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    descriptor.mappedAtCreation = true;
+
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    const std::vector<uint8_t> expectedData(kSize, static_cast<uint8_t>(1u));
+    const uint8_t* mappedData = static_cast<const uint8_t*>(buffer.GetConstMappedRange());
+    EXPECT_EQ(0, memcmp(mappedData, expectedData.data(), kSize));
+}
+
 DAWN_INSTANTIATE_TEST(NonzeroBufferCreationTests,
                       D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
                       MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
