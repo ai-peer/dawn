@@ -531,6 +531,12 @@ namespace dawn_native {
         return mPrimitiveTopology;
     }
 
+    bool RenderPipelineBase::IsStripPrimitiveTopology() const {
+        ASSERT(!IsError());
+        return mPrimitiveTopology == wgpu::PrimitiveTopology::LineStrip ||
+               mPrimitiveTopology == wgpu::PrimitiveTopology::TriangleStrip;
+    }
+
     wgpu::CullMode RenderPipelineBase::GetCullMode() const {
         ASSERT(!IsError());
         return mRasterizationState.cullMode;

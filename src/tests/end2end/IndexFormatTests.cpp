@@ -79,7 +79,7 @@ TEST_P(IndexFormatTest, Uint32) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffer(0, vertexBuffer);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint32);
         pass.DrawIndexed(3);
         pass.EndPass();
     }
@@ -106,7 +106,7 @@ TEST_P(IndexFormatTest, Uint16) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffer(0, vertexBuffer);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint16);
         pass.DrawIndexed(3);
         pass.EndPass();
     }
@@ -156,7 +156,7 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffer(0, vertexBuffer);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint32);
         pass.DrawIndexed(7);
         pass.EndPass();
     }
@@ -198,7 +198,7 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffer(0, vertexBuffer);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint16);
         pass.DrawIndexed(7);
         pass.EndPass();
     }
@@ -233,7 +233,7 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline16);
         pass.SetVertexBuffer(0, vertexBuffer);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint32);
         pass.SetPipeline(pipeline32);
         pass.DrawIndexed(3);
         pass.EndPass();
@@ -262,7 +262,7 @@ TEST_P(IndexFormatTest, DISABLED_SetIndexBufferBeforeSetPipeline) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-        pass.SetIndexBuffer(indexBuffer);
+        pass.SetIndexBufferWithFormat(indexBuffer, wgpu::IndexFormat::Uint32);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffer(0, vertexBuffer);
         pass.DrawIndexed(3);
