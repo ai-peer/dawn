@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "8e5be360_abc3df28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-08-24T17:31:15Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "3fc63e54cebcc5edc1576c524c43e276b7715aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19bc37e3_a0a23d31",
         "filename": "src/dawn_native/Pipeline.h",
         "patchSetId": 2
