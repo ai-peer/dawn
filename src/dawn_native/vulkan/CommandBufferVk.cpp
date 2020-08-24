@@ -185,6 +185,55 @@ namespace dawn_native { namespace vulkan {
             }
         };
 
+        class IndexBufferTracker {
+          public:
+            void OnSetIndexBuffer(Device* device, VkCommandBuffer commands, VkBuffer buffer,
+                                  wgpu::IndexFormat format, VkDeviceSize offset) {
+                mIndexBuffer = buffer;
+                mOffset = offset;
+                mBufferIndexFormat = format;
+
+                VkIndexType indexType;
+                if (mBufferIndexFormat != wgpu::IndexFormat::Undefined) {
+                    // If a index format was specified we can always set the buffer right away.
+                    indexType = VulkanIndexType(mBufferIndexFormat);
+                } else if (mPipelineIndexFormat != wgpu::IndexFormat::Undefined) {
+                    // Otherwise if we have a pipeline set use it's index format. This path is
+                    // deprecated and will be removed soon.
+                    indexType = VulkanIndexType(mPipelineIndexFormat);
+                } else {
+                    // If we don't have either format from either location don't set the index
+                    // bufer yet.
+                    return;
+                }
+
+                device->fn.CmdBindIndexBuffer(commands, mIndexBuffer, mOffset, indexType);
+            }
+
+            void OnSetPipeline(Device* device, VkCommandBuffer commands, RenderPipeline* pipeline) {
+                wgpu::IndexFormat newPipelineIndexFormat =
+                    pipeline->GetVertexStateDescriptor()->indexFormat;
+
+                // If we have an index buffer but the index format wasn't specified AND the new
+                // pipeline specifies a different index format than the previously set one then
+                // update the index buffer binding to use this pipelines format. This path is
+                // deprecated and will be removed soon.
+                if (mIndexBuffer && mBufferIndexFormat == wgpu::IndexFormat::Undefined &&
+                    mPipelineIndexFormat != newPipelineIndexFormat) {
+                    device->fn.CmdBindIndexBuffer(commands, mIndexBuffer, mOffset,
+                                                  VulkanIndexType(newPipelineIndexFormat));
+                }
+
+                mPipelineIndexFormat = newPipelineIndexFormat;
+            }
+
+          private:
+            wgpu::IndexFormat mBufferIndexFormat = wgpu::IndexFormat::Undefined;
+            wgpu::IndexFormat mPipelineIndexFormat = wgpu::IndexFormat::Undefined;
+            VkBuffer mIndexBuffer;
+            VkDeviceSize mOffset;
+        };
+
         MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
                                          Device* device,
                                          BeginRenderPassCmd* renderPass) {
@@ -799,6 +848,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         RenderDescriptorSetTracker descriptorSets = {};
+        IndexBufferTracker indexBufferTracker = {};
         RenderPipeline* lastPipeline = nullptr;
 
         auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
@@ -911,13 +961,8 @@ namespace dawn_native { namespace vulkan {
                     SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
                     VkBuffer indexBuffer = ToBackend(cmd->buffer)->GetHandle();
 
-                    // TODO(cwallez@chromium.org): get the index type from the last render pipeline
-                    // and rebind if needed on pipeline change
-                    ASSERT(lastPipeline != nullptr);
-                    VkIndexType indexType =
-                        VulkanIndexType(lastPipeline->GetVertexStateDescriptor()->indexFormat);
-                    device->fn.CmdBindIndexBuffer(
-                        commands, indexBuffer, static_cast<VkDeviceSize>(cmd->offset), indexType);
+                    indexBufferTracker.OnSetIndexBuffer(device, commands, indexBuffer, cmd->format,
+                                                        static_cast<VkDeviceSize>(cmd->offset));
                     break;
                 }
 
@@ -930,6 +975,7 @@ namespace dawn_native { namespace vulkan {
                     lastPipeline = pipeline;
 
                     descriptorSets.OnSetPipeline(pipeline);
+                    indexBufferTracker.OnSetPipeline(device, commands, pipeline);
                     break;
                 }
 
