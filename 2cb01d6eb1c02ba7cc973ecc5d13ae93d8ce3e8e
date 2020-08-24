@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "8a3fcafa_5ead51af",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-24T19:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1496f540_332a8b97",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35066cd6_a67e3de1",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 1
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "96e84c17_279d27a1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-24T19:35:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35066cd6_a67e3de1",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f99d0773_f107e64a",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -138,6 +174,24 @@
       "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f43b02db_d594fc0d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-24T19:35:26Z",
+      "side": 1,
+      "message": "This can\u0027t happen just yet because we need to be able to fall back to the pipeline format at draw time if the deprecated variant of the method is used. Once we remove that path we can start calling this directly.",
+      "parentUuid": "f99d0773_f107e64a",
+      "revId": "2cb01d6eb1c02ba7cc973ecc5d13ae93d8ce3e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
