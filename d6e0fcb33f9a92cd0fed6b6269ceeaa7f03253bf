@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "a088fb29_34506839",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T08:32:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b7b2b8b_dcbfdf85",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5ccfd93_52df5cce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -93,6 +117,24 @@
     },
     {
       "key": {
+        "uuid": "e695eb03_994ab9ce",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T08:32:31Z",
+      "side": 1,
+      "message": "The second parameter of memset() specifies the data per byte, so I change this parameter to specify the data for each byte instead of per 4-bytes.",
+      "parentUuid": "a03d75d0_d9a4e4e0",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71463a52_470c352b",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -121,6 +163,24 @@
       "writtenOn": "2020-08-24T06:46:06Z",
       "side": 1,
       "message": "We should probably memset 0 here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_wire/client/Buffer.cpp;l\u003d85",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de76707f_24de1dfd",
+        "filename": "src/tests/end2end/NonzeroBufferCreationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T08:32:31Z",
+      "side": 1,
+      "message": "In this test the buffer should be cleared to 1 as we enabled that toggle. So do you mean I should check that toggle to dawn wire?",
+      "parentUuid": "4b42c93f_91f85bb7",
       "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
