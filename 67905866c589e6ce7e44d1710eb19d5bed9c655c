@@ -39,6 +39,52 @@
       "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9331556_5dae3b2c",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T01:00:32Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 473,
+        "startChar": 8,
+        "endLine": 473,
+        "endChar": 65
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a77cf4d_c630bc92",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T01:00:32Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, sorry that I still have some problems with this test. In this test, do we want to first create a buffer with MapRead and CopyDst usage, and upload the data myData into the buffer from the CPU side at [1]? In fact now myData won\u0027t be uploaded to the GPU side on D3D12 because the buffer is created at the Readback heap, so when we enable the buffer lazy initialization, on D3D12 the logic will be:\n1. create a buffer on the Readback heap\n2. clear the buffer to 0 on the GPU side\n3. call memcpy to write myData to the mapped pointer at the CPU side\n4. unmap the buffer\n5. re-map the buffer and check the content in the buffer. The content of the buffer should not be myData but all 0 because actually we cannot upload myData to the GPU side on D3D12.\n\nOn Metal and Vulkan it\u0027s OK because now the mapped pointer on those backends are both readable and writable on the CPU side.",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 24
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
