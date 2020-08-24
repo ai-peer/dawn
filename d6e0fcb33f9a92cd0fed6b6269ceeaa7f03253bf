@@ -135,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "4b5bcd8b_37202953",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T09:12:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e695eb03_994ab9ce",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71463a52_470c352b",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -181,6 +199,24 @@
       "side": 1,
       "message": "In this test the buffer should be cleared to 1 as we enabled that toggle. So do you mean I should check that toggle to dawn wire?",
       "parentUuid": "4b42c93f_91f85bb7",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "928bcb21_60fa329d",
+        "filename": "src/tests/end2end/NonzeroBufferCreationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T09:12:12Z",
+      "side": 1,
+      "message": "Ah yes, we can skip this test on the wire, with a comment that mappedAtCreation zero-init is done in the wire and doesn\u0027t take into account the nonzeroClear toggle. (and zero-init is tested separately)",
+      "parentUuid": "de76707f_24de1dfd",
       "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
