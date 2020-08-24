@@ -16,6 +16,46 @@
       "revId": "3fc63e54cebcc5edc1576c524c43e276b7715aeb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc46ad3b_b6931105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:45:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3fc63e54cebcc5edc1576c524c43e276b7715aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19bc37e3_a0a23d31",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:45:44Z",
+      "side": 1,
+      "message": "nit: Maybe this can be StackVector\u003cT, 2\u003e",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 59
+      },
+      "revId": "3fc63e54cebcc5edc1576c524c43e276b7715aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
