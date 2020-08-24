@@ -16,6 +16,92 @@
       "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f98011_300e8b8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:14:20Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4485b5f0_dba8036e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:14:20Z",
+      "side": 1,
+      "message": "unit: string doesn\u0027t need to be broken across lines",
+      "range": {
+        "startLine": 638,
+        "startChar": 32,
+        "endLine": 639,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18287fcb_7557058d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:14:20Z",
+      "side": 1,
+      "message": "ditto (maybe)",
+      "range": {
+        "startLine": 645,
+        "startChar": 32,
+        "endLine": 646,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8487a1c_8a54ac92",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-24T16:14:20Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 659,
+        "startChar": 32,
+        "endLine": 660,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
