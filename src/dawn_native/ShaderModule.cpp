@@ -549,7 +549,7 @@ namespace dawn_native {
 #endif  // DAWN_ENABLE_WGSL
 
         std::vector<uint64_t> GetBindGroupMinBufferSizes(
-            const ShaderModuleBase::BindingInfoMap& shaderBindings,
+            const EntryPointMetadata::BindingGroupInfoMap& shaderBindings,
             const BindGroupLayoutBase* layout) {
             std::vector<uint64_t> requiredBufferSizes(layout->GetUnverifiedBufferCount());
             uint32_t packedIdx = 0;
@@ -580,7 +580,7 @@ namespace dawn_native {
 
         MaybeError ValidateCompatibilityWithBindGroupLayout(
             BindGroupIndex group,
-            const ShaderModuleBase::EntryPointMetadata& entryPoint,
+            const EntryPointMetadata& entryPoint,
             const BindGroupLayoutBase* layout) {
             const BindGroupLayoutBase::BindingMap& layoutBindings = layout->GetBindingMap();
 
@@ -588,7 +588,7 @@ namespace dawn_native {
             // corresponding binding in the BindGroupLayout, if it exists.
             for (const auto& it : entryPoint.bindings[group]) {
                 BindingNumber bindingNumber = it.first;
-                const ShaderModuleBase::ShaderBindingInfo& shaderInfo = it.second;
+                const EntryPointMetadata::ShaderBindingInfo& shaderInfo = it.second;
 
                 const auto& bindingIt = layoutBindings.find(bindingNumber);
                 if (bindingIt == layoutBindings.end()) {
@@ -735,7 +735,7 @@ namespace dawn_native {
     }
 
     RequiredBufferSizes ComputeRequiredBufferSizesForLayout(
-        const ShaderModuleBase::EntryPointMetadata& entryPoint,
+        const EntryPointMetadata& entryPoint,
         const PipelineLayoutBase* layout) {
         RequiredBufferSizes bufferSizes;
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
@@ -747,7 +747,7 @@ namespace dawn_native {
     }
 
     MaybeError ValidateCompatibilityWithPipelineLayout(
-        const ShaderModuleBase::EntryPointMetadata& entryPoint,
+        const EntryPointMetadata& entryPoint,
         const PipelineLayoutBase* layout) {
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             DAWN_TRY(ValidateCompatibilityWithBindGroupLayout(group, entryPoint,
@@ -768,7 +768,7 @@ namespace dawn_native {
 
     // EntryPointMetadata
 
-    ShaderModuleBase::EntryPointMetadata::EntryPointMetadata() {
+    EntryPointMetadata::EntryPointMetadata() {
         fragmentOutputFormatBaseTypes.fill(Format::Type::Other);
     }
 
@@ -816,6 +816,18 @@ namespace dawn_native {
         return new ShaderModuleBase(device, ObjectBase::kError);
     }
 
+    bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint, SingleShaderStage stage) const {
+        // TODO(dawn:216): Properly extract all entryPoints from the shader module.
+        return entryPoint == "main" && stage == mMainEntryPoint->stage;
+    }
+
+    const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& entryPoint, SingleShaderStage stage) const {
+        // TODO(dawn:216): Properly extract all entryPoints from the shader module.
+        ASSERT(entryPoint == "main");
+        ASSERT(stage == mMainEntryPoint->stage);
+        return *mMainEntryPoint;
+    }
+
     MaybeError ShaderModuleBase::ExtractSpirvInfo(const spirv_cross::Compiler& compiler) {
         ASSERT(!IsError());
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
@@ -826,7 +838,7 @@ namespace dawn_native {
         return {};
     }
 
-    ResultOrError<std::unique_ptr<ShaderModuleBase::EntryPointMetadata>>
+    ResultOrError<std::unique_ptr<EntryPointMetadata>>
     ShaderModuleBase::ExtractSpirvInfoWithSpvc() {
         DeviceBase* device = GetDevice();
         std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
@@ -850,7 +862,7 @@ namespace dawn_native {
         // Fill in bindingInfo with the SPIRV bindings
         auto ExtractResourcesBinding =
             [](const DeviceBase* device, const std::vector<shaderc_spvc_binding_info>& spvcBindings,
-               ModuleBindingInfo* metadataBindings) -> MaybeError {
+               EntryPointMetadata::BindingInfo* metadataBindings) -> MaybeError {
             for (const shaderc_spvc_binding_info& binding : spvcBindings) {
                 BindGroupIndex bindGroupIndex(binding.set);
 
@@ -859,12 +871,12 @@ namespace dawn_native {
                 }
 
                 const auto& it = (*metadataBindings)[bindGroupIndex].emplace(
-                    BindingNumber(binding.binding), ShaderBindingInfo{});
+                    BindingNumber(binding.binding), EntryPointMetadata::ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
 
-                ShaderBindingInfo* info = &it.first->second;
+                EntryPointMetadata::ShaderBindingInfo* info = &it.first->second;
                 info->id = binding.id;
                 info->base_type_id = binding.base_type_id;
                 info->type = ToWGPUBindingType(binding.binding_type);
@@ -996,7 +1008,7 @@ namespace dawn_native {
         return {std::move(metadata)};
     }
 
-    ResultOrError<std::unique_ptr<ShaderModuleBase::EntryPointMetadata>>
+    ResultOrError<std::unique_ptr<EntryPointMetadata>>
     ShaderModuleBase::ExtractSpirvInfoWithSpirvCross(const spirv_cross::Compiler& compiler) {
         DeviceBase* device = GetDevice();
         std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
@@ -1033,7 +1045,7 @@ namespace dawn_native {
             [](const DeviceBase* device,
                const spirv_cross::SmallVector<spirv_cross::Resource>& resources,
                const spirv_cross::Compiler& compiler, wgpu::BindingType bindingType,
-               ModuleBindingInfo* metadataBindings) -> MaybeError {
+               EntryPointMetadata::BindingInfo* metadataBindings) -> MaybeError {
             for (const auto& resource : resources) {
                 if (!compiler.get_decoration_bitset(resource.id).get(spv::DecorationBinding)) {
                     return DAWN_VALIDATION_ERROR("No Binding decoration set for resource");
@@ -1054,12 +1066,12 @@ namespace dawn_native {
                 }
 
                 const auto& it =
-                    (*metadataBindings)[bindGroupIndex].emplace(bindingNumber, ShaderBindingInfo{});
+                    (*metadataBindings)[bindGroupIndex].emplace(bindingNumber, EntryPointMetadata::ShaderBindingInfo{});
                 if (!it.second) {
                     return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
                 }
 
-                ShaderBindingInfo* info = &it.first->second;
+                EntryPointMetadata::ShaderBindingInfo* info = &it.first->second;
                 info->id = resource.id;
                 info->base_type_id = resource.base_type_id;
 
@@ -1204,39 +1216,6 @@ namespace dawn_native {
         }
 
         return {std::move(metadata)};
-    }
-
-    const ShaderModuleBase::ModuleBindingInfo& ShaderModuleBase::GetBindingInfo() const {
-        ASSERT(!IsError());
-        return mMainEntryPoint->bindings;
-    }
-
-    const std::bitset<kMaxVertexAttributes>& ShaderModuleBase::GetUsedVertexAttributes() const {
-        ASSERT(!IsError());
-        return mMainEntryPoint->usedVertexAttributes;
-    }
-
-    const ShaderModuleBase::FragmentOutputBaseTypes& ShaderModuleBase::GetFragmentOutputBaseTypes()
-        const {
-        ASSERT(!IsError());
-        return mMainEntryPoint->fragmentOutputFormatBaseTypes;
-    }
-
-    SingleShaderStage ShaderModuleBase::GetExecutionModel() const {
-        ASSERT(!IsError());
-        return mMainEntryPoint->stage;
-    }
-
-    RequiredBufferSizes ShaderModuleBase::ComputeRequiredBufferSizesForLayout(
-        const PipelineLayoutBase* layout) const {
-        ASSERT(!IsError());
-        return ::dawn_native::ComputeRequiredBufferSizesForLayout(*mMainEntryPoint, layout);
-    }
-
-    MaybeError ShaderModuleBase::ValidateCompatibilityWithPipelineLayout(
-        const PipelineLayoutBase* layout) const {
-        ASSERT(!IsError());
-        return ::dawn_native::ValidateCompatibilityWithPipelineLayout(*mMainEntryPoint, layout);
     }
 
     size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {

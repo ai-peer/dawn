@@ -28,6 +28,7 @@ namespace dawn_native {
     struct BeginRenderPassCmd;
 
     class DeviceBase;
+    struct EntryPointMetadata;
     class RenderBundleEncoder;
 
     MaybeError ValidateRenderPipelineDescriptor(const DeviceBase* device,
@@ -85,6 +86,9 @@ namespace dawn_native {
         std::array<std::bitset<kMaxVertexAttributes>, kMaxVertexBuffers>
             attributesUsingVertexBuffer;
 
+        const EntryPointMetadata& GetVertexMetadata() const;
+        const EntryPointMetadata& GetFragmentMetadata() const;
+
         // Functors necessary for the unordered_set<RenderPipelineBase*>-based cache.
         struct HashFunc {
             size_t operator()(const RenderPipelineBase* pipeline) const;
@@ -118,8 +122,11 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): Store a crypto hash of the modules instead.
         Ref<ShaderModuleBase> mVertexModule;
         std::string mVertexEntryPoint;
+        const EntryPointMetadata* mVertexMetadata;
+
         Ref<ShaderModuleBase> mFragmentModule;
         std::string mFragmentEntryPoint;
+        const EntryPointMetadata* mFragmentMetadata;
     };
 
 }  // namespace dawn_native
