@@ -28,6 +28,7 @@ namespace dawn_native {
     struct BeginRenderPassCmd;
 
     class DeviceBase;
+    struct EntryPointMetadata;
     class RenderBundleEncoder;
 
     MaybeError ValidateRenderPipelineDescriptor(const DeviceBase* device,
@@ -85,6 +86,9 @@ namespace dawn_native {
         std::bitset<kMaxVertexAttributes> GetAttributesUsingVertexBuffer(uint32_t slot) const;
         std::array<std::bitset<kMaxVertexAttributes>, kMaxVertexBuffers>
             attributesUsingVertexBuffer;
+
+        const EntryPointMetadata& GetVertexMetadata() const;
+        const EntryPointMetadata& GetFragmentMetadata() const;
 
         // Functors necessary for the unordered_set<RenderPipelineBase*>-based cache.
         struct HashFunc {

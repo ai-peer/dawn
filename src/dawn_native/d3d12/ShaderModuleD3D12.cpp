@@ -170,7 +170,9 @@ namespace dawn_native { namespace d3d12 {
             compiler->set_hlsl_options(options_hlsl);
         }
 
-        const ModuleBindingInfo& moduleBindingInfo = GetBindingInfo();
+        const EntryPointMetadata::BindingInfo& moduleBindingInfo =
+            GetEntryPoint("main", GetMainEntryPointStageForTransition()).bindings;
+
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
             const auto& bindingOffsets = bgl->GetBindingOffsets();
