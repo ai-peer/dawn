@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "e9217898_66ab5c6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "MapRead buffers that are mapped at creation.\n\nI think the fix for this should be entirely in the frontend: when we mappedAtCreation a buffer, we memset(0) it.",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b7b2b8b_dcbfdf85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "nit: bug",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5ccfd93_52df5cce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -16,6 +56,74 @@
       "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5963285a_b86ff60c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "Eww, this is because the command isn\u0027t finished yet. If we want to do this we should wait with a fence.",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a03d75d0_d9a4e4e0",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "Why was this changed?",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71463a52_470c352b",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "In the contract for MapAtCreationImpl we could say that the frontend will take care of zero-initialization if it is needed.",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b42c93f_91f85bb7",
+        "filename": "src/tests/end2end/NonzeroBufferCreationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-24T06:46:06Z",
+      "side": 1,
+      "message": "We should probably memset 0 here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_wire/client/Buffer.cpp;l\u003d85",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
