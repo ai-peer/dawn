@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5ccfd93_52df5cce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-24T00:51:52Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, sorry that I am trapped at this issue for quite a long time but I still cannot find a good solution. Could you take a look? Thanks.",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
