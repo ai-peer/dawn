@@ -16,6 +16,23 @@
       "revId": "10a0c36cf92a5ecce3af8484514077dedc64ed13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a58514f7_dc64fe12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-25T16:32:50Z",
+      "side": 1,
+      "message": "LGTM, though this doesn\u0027t solve the issue where creating a MapRead buffer with mappedAtCreation \u003d\u003d true won\u0027t actually let you write into it, correct?\n\nI think if we can solve that problem, then this problem will also be solved. The initial mapping would have to be created in the Upload heap instead, and we zero those contents.",
+      "revId": "10a0c36cf92a5ecce3af8484514077dedc64ed13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
