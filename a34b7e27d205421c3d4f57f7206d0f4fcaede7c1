@@ -22,6 +22,30 @@
       "revId": "a34b7e27d205421c3d4f57f7206d0f4fcaede7c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46809e19_5f6bc7e5",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-25T17:22:14Z",
+      "side": 1,
+      "message": "I had the same comment, but Bryan said it doesn\u0027t matter since buffers are always aligned to 64KB anyway. Seems minor, but I think it would be more clear if we only apply this alignment for buffers with Uniform usage.",
+      "parentUuid": "415e5d99_803f0dff",
+      "range": {
+        "startLine": 105,
+        "startChar": 41,
+        "endLine": 105,
+        "endChar": 87
+      },
+      "revId": "a34b7e27d205421c3d4f57f7206d0f4fcaede7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
