@@ -100,6 +100,24 @@
     },
     {
       "key": {
+        "uuid": "45038ca5_4382b349",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-25T08:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5963285a_b86ff60c",
+      "revId": "d6e0fcb33f9a92cd0fed6b6269ceeaa7f03253bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a03d75d0_d9a4e4e0",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 2

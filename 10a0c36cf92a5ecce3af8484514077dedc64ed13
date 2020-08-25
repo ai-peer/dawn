@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b8a5346_422b6254",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-25T08:37:29Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I\u0027ve used another way to solve this problem. PTAL, thanks!",
+      "revId": "10a0c36cf92a5ecce3af8484514077dedc64ed13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
