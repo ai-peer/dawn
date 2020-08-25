@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5a077de_fc3c0694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-25T16:13:23Z",
+      "side": 1,
+      "message": "Adding kainino@ as a reviewer, since Corentin isn\u0027t available at the moment.",
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
