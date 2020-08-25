@@ -85,6 +85,30 @@
       "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb4b505e_4114985a",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-25T16:14:25Z",
+      "side": 1,
+      "message": "so for MapRead buffers created with mappedAtCreation \u003d\u003d true, it seems like the initial mapping created on creation has to be a mapping of a different buffer in the upload heap. On Unmap(), we copy the buffer into the MapRead buffer. Would that resolve the issue?",
+      "parentUuid": "3a77cf4d_c630bc92",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 24
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
