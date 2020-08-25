@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4aff49d8_df9db357",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-08-25T13:07:51Z",
+      "side": 0,
+      "message": "If driver supports D3D_SHADER_MODEL_6_2, info.shaderModel value is 62, but D3D_SHADER_MODEL_6_2 is 0x62, we should use driverShaderModel for comparison.",
+      "range": {
+        "startLine": 101,
+        "startChar": 41,
+        "endLine": 101,
+        "endChar": 84
+      },
+      "revId": "c3e3c30b0d7f51064f7247a09b61d208252416b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
