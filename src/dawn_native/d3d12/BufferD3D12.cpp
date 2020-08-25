@@ -283,12 +283,22 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
+        Device* device = ToBackend(GetDevice());
+        bool isMapWrite = (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
+
+        // Submit the pending GPU commands recorded in function initialize() to make sure we have
+        // already filled the expected data into the buffer.
+        if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+            !isMapWrite) {
+            device->Tick();
+            DAWN_TRY(device->WaitForSerial(device->GetLastSubmittedCommandSerial()));
+        }
+
         CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
+        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
         DAWN_TRY(EnsureDataInitialized(commandContext));
 
         // Setting isMapWrite to false on MapRead buffers to silence D3D12 debug layer warning.
-        bool isMapWrite = (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
         DAWN_TRY(MapInternal(isMapWrite, 0, size_t(GetSize()), "D3D12 map at creation"));
         return {};
     }
