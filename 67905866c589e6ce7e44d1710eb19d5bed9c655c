@@ -109,6 +109,30 @@
       "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac331eff_b5d4caae",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-26T00:09:30Z",
+      "side": 1,
+      "message": "Yes and thanks Corentin to explain it for me.\n\nBut now I don\u0027t see the staging buffer is created and used when I try to create a D3D12 buffer with MapRead and mappedAtCreation?  Here the staging buffer won\u0027t be created if the backend of IsMappableAtCreation() return true: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Buffer.cpp;l\u003d176. And on D3D12 IsMappableAtCreation() return true if the buffer is created with MapRead: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/BufferD3D12.cpp;l\u003d254.\n\nSo at Buffer::Unmap() the CopyFromStagingBuffer() won\u0027t be executed because the staging buffer is empty: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/Buffer.cpp;l\u003d346\n\nI think it a bug on D3D12 and this patch will not be needed after the fix and https://dawn-review.googlesource.com/c/dawn/+/27220.",
+      "parentUuid": "eb4b505e_4114985a",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 24
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
