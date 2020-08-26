@@ -16,6 +16,23 @@
       "revId": "01415a658e79500bbb17d27c25e063c30d932132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf5f450b_f9220b50",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T22:50:38Z",
+      "side": 1,
+      "message": "I think this command gets skipped if we change the index buffer without changing the format, e.g.\n- setPipeline\n- setIndexBuffer (b1, uint32)\n- draw\n- setIndexBuffer (b2, uint32)\nI think just need to do the same thing as in the D3D12 tracker and clear the index format on setIndexBuffer.\n\nTechnically a test for this would be ideal, but since we\u0027re going to stop needing these lazy trackers very soon, I think it\u0027s okay to not.",
+      "revId": "01415a658e79500bbb17d27c25e063c30d932132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

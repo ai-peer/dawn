@@ -281,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "3233411e_ab9a68d1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T22:50:38Z",
+      "side": 1,
+      "message": "Agree, just suggesting adding a TODO here for when we do disallow undefined.",
+      "parentUuid": "8414dc3d_fe0082bb",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9e635f7_08f8859b",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 11
