@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1ce0d43_e0651b30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-26T07:48:16Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nThanks for your comments in here and https://dawn-review.googlesource.com/c/dawn/+/27140. I\u0027ve changed another way to fix the issues in both this CL and https://dawn-review.googlesource.com/c/dawn/+/27140. PTAL, thanks!",
+      "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
