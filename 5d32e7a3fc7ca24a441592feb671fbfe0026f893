@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fd80250_93a8f601",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "Mostly LGTM but with a few things",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9757eb5_013ebab7",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "nit: Can be TODO(crbug.com/dawn/502)",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554932e9_cc8925e6",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "This logic changes with the removal of the deprecated thing, I think? If so, should have a TODO here. Similar elsewhere",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df77f059_a2b7916f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "If we\u0027re here then there should always be an error. Should have UNREACHABLE+return at the end here like in the block for bind groups. [1]",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ae30c45_af67493c",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d66496f3_d5ee322a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "The logic here might be correct, but I\u0027m having a really hard time convincing myself there isn\u0027t a series of commands where we end up skipping a necessary IASetIndexBuffer. Maybe prior to the removal of the deprecated thing, it would be best to use something more similar to the old code with Apply()? Or a comment explaining why it\u0027s sound? (But I think better to just write this more simply/dumbly for now since it\u0027s temporary code.)",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e88c0f_7f00bf42",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "I think newPipelineIndexFormat could be Undefined here? If you had\n- setPipeline with format\n- setIndexBuffer without format\n- setPipeline without format",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8bda70e_d876c891",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "TODO: post-removal, the conversion to MTLIndexType should be done early (here) instead of late (on draw)",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9e635f7_08f8859b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "same",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d384265f_5e71b33d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "same comments on this tracker",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "474cb4ba_25ad74a5",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "This reminds me in the JS API this still isn\u0027t possible because the field has a default value (it was decided to change it on https://github.com/gpuweb/gpuweb/issues/767 but not implemented yet; I was sort of planning to do it with https://github.com/gpuweb/gpuweb/issues/936, but we should probably just do it separately first)",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d2979bf_da718077",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-26T20:00:25Z",
+      "side": 1,
+      "message": "Maybe\n\n    for (wgpu::PrimitiveTopology primitiveTopology : kStripTopologyTypes) {\n\n?",
+      "revId": "5d32e7a3fc7ca24a441592feb671fbfe0026f893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
