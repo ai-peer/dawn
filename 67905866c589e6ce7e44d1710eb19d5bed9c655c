@@ -133,6 +133,30 @@
       "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0359b2a2_11233c20",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T00:30:27Z",
+      "side": 1,
+      "message": "Agree that this is a bug in our D3D12 backend. IsMappableAtCreation should only be true on D3D12 for MapWrite (not if it\u0027s only MapRead) since we can\u0027t actually set the contents. Also agree that after the fix we don\u0027t need this CL.",
+      "parentUuid": "ac331eff_b5d4caae",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 24
+      },
+      "revId": "67905866c589e6ce7e44d1710eb19d5bed9c655c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
