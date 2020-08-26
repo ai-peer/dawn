@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "651d5d77_c9ad50f5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 0,
+      "message": "nice! thanks for fixing this too!",
+      "range": {
+        "startLine": 914,
+        "startChar": 20,
+        "endLine": 915,
+        "endChar": 62
+      },
+      "revId": "c3e3c30b0d7f51064f7247a09b61d208252416b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

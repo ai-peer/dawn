@@ -33,6 +33,156 @@
       "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efee81ec_2f5d4d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "+1 for tests, new end2end tests could probably check that changing the index format with SetIndexBuffer is reflected on draw calls. Previously we needed to change pipelines to do that.\n\nDeprecation tests would go in DeprecatedAPITests. Most of them were removed because we removed the deprecated APIs so maybe see https://dawn-review.googlesource.com/c/dawn/+/23104 or other similar CLs for an example.",
+      "parentUuid": "61669ee3_8f3617eb",
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b237599e_6f1ed9d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf5e1ad9_9efacfba",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t really need to be const",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 17
+      },
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f0e453_90fd3705",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "Please add a validation test for this",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b76296d_b9ab0563",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "typo: buffer",
+      "range": {
+        "startLine": 485,
+        "startChar": 23,
+        "endLine": 485,
+        "endChar": 28
+      },
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea55c86_0a28ece2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "nit: initialize this to undefined for clarity",
+      "range": {
+        "startLine": 993,
+        "startChar": 26,
+        "endLine": 993,
+        "endChar": 43
+      },
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0d77556_bba028db",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T16:35:15Z",
+      "side": 1,
+      "message": "nit: initialize this to VK_NULL_HANDLE for clarity, and explicitly check against VK_NULL_HANDLE above instead of the implicit cast to boolean",
+      "range": {
+        "startLine": 233,
+        "startChar": 21,
+        "endLine": 233,
+        "endChar": 33
+      },
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
