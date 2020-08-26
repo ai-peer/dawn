@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ecd07f98_b2b7c6e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-26T22:22:41Z",
+      "side": 1,
+      "message": "Thanks Kai! Addressed most of your feedback and left a couple of comments to explain my thinking in the cases I didn\u0027t.",
+      "revId": "01415a658e79500bbb17d27c25e063c30d932132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
