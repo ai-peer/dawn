@@ -26,4 +26,5 @@ namespace dawn_native {
     void* StagingBufferBase::GetMappedPointer() const {
         return mMappedPointer;
     }
+
 }  // namespace dawn_native

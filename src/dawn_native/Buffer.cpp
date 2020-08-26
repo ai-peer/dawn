@@ -175,14 +175,25 @@ namespace dawn_native {
         // Mappable buffers don't use a staging buffer and are just as if mapped through MapAsync.
         if (IsMappableAtCreation()) {
             DAWN_TRY(MapAtCreationImpl());
-            return {};
+        } else {
+            // If any of these fail, the buffer will be deleted and replaced with an
+            // error buffer.
+            // TODO(enga): Suballocate and reuse memory from a larger staging buffer so we don't
+            // create many small buffers.
+            DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
         }
 
-        // If any of these fail, the buffer will be deleted and replaced with an
-        // error buffer.
-        // TODO(enga): Suballocate and reuse memory from a larger staging buffer so we don't create
-        // many small buffers.
-        DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
+        DeviceBase* device = GetDevice();
+
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse instead when
+        // buffer lazy initialization is completely supported.
+        if (device->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            memset(GetMappedRange(0, mSize), uint8_t(0u), mSize);
+            SetIsDataInitialized();
+            device->IncrementLazyClearCountForTesting();
+        } else if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            memset(GetMappedRange(0, mSize), uint8_t(1u), mSize);
+        }
 
         return {};
     }

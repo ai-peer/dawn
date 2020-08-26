@@ -134,8 +134,6 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        EnsureDataInitialized();
-
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
         gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
         mMappedData = gl.MapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
