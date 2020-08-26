@@ -252,8 +252,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     bool Buffer::IsMappableAtCreation() const {
+        // Buffers with MapRead usage will be created on READBACK heap so we need a staging buffer
+        // to upload the CPU data to the GPU memory of this buffer.
         // TODO(enga): Handle CPU-visible memory on UMA
-        return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
+        return (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
     }
 
     MaybeError Buffer::MapInternal(bool isWrite,
