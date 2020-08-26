@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93e10129_cd567a89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-26T15:25:13Z",
+      "side": 1,
+      "message": "First run, it hadn\u0027t rolled in yet. Good now.",
+      "revId": "939ff6962afc68fa88cc1337c05bbc219b393751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
