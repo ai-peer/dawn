@@ -76,6 +76,8 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_RANGE mWrittenMappedRange = {0, 0};
         void* mMappedData = nullptr;
+
+        bool mMappedAtCreation;
     };
 
 }}  // namespace dawn_native::d3d12
