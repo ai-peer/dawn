@@ -26,4 +26,10 @@ namespace dawn_native {
     void* StagingBufferBase::GetMappedPointer() const {
         return mMappedPointer;
     }
+
+    void StagingBufferBase::Clear(uint8_t clearValuePerByte) {
+        ASSERT(mMappedPointer != nullptr);
+
+        memset(mMappedPointer, clearValuePerByte, GetSize());
+    }
 }  // namespace dawn_native
