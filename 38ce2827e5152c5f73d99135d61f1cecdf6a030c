@@ -16,6 +16,29 @@
       "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee052539_7cf09dd4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-26T08:24:43Z",
+      "side": 1,
+      "message": "Why not just: memset(GetMappedRange(0, mSize), 0, mSize)? It would also handle the case where the buffer is a mappable buffer, and would remove the need for all other changes to dawn_native. Am I missing something?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
