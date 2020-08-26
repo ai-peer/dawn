@@ -184,6 +184,17 @@ namespace dawn_native {
         // many small buffers.
         DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
 
+        DeviceBase* device = GetDevice();
+
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse instead when
+        // buffer lazy initialization is completely supported.
+        if (device->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse)) {
+            mStagingBuffer->Clear(uint8_t(0u));
+            device->IncrementLazyClearCountForTesting();
+        } else if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            mStagingBuffer->Clear(uint8_t(1u));
+        }
+
         return {};
     }
 

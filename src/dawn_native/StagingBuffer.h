@@ -29,6 +29,8 @@ namespace dawn_native {
         void* GetMappedPointer() const;
         size_t GetSize() const;
 
+        void Clear(uint8_t clearValuePerByte);
+
       protected:
         void* mMappedPointer = nullptr;
 

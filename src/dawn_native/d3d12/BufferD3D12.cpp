@@ -87,6 +87,7 @@ namespace dawn_native { namespace d3d12 {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
+        mMappedAtCreation = descriptor->mappedAtCreation;
     }
 
     MaybeError Buffer::Initialize() {
@@ -131,11 +132,41 @@ namespace dawn_native { namespace d3d12 {
             ToBackend(GetDevice())->AllocateMemory(heapType, resourceDescriptor, bufferUsage));
 
         if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            CommandRecordingContext* commandRecordingContext;
-            DAWN_TRY_ASSIGN(commandRecordingContext,
-                            ToBackend(GetDevice())->GetPendingCommandContext());
+            constexpr uint8_t kClearValue = uint8_t(1u);
+            switch (heapType) {
+                case D3D12_HEAP_TYPE_UPLOAD: {
+                    DAWN_TRY(ClearBuffer(nullptr, kClearValue));
+                } break;
 
-            DAWN_TRY(ClearBuffer(commandRecordingContext, uint8_t(1u)));
+                case D3D12_HEAP_TYPE_READBACK:
+                case D3D12_HEAP_TYPE_DEFAULT: {
+                    // When the buffer is on READBACK heap with mappedAtCreation == true, we will
+                    // clear its staging buffer instead of its own GPU memory.
+                    if (heapType == D3D12_HEAP_TYPE_READBACK && mMappedAtCreation) {
+                        break;
+                    }
+
+                    CommandRecordingContext* commandRecordingContext;
+                    DAWN_TRY_ASSIGN(commandRecordingContext,
+                                    ToBackend(GetDevice())->GetPendingCommandContext());
+                    DAWN_TRY(ClearBuffer(commandRecordingContext, kClearValue));
+                } break;
+
+                case D3D12_HEAP_TYPE_CUSTOM:
+                default:
+                    UNREACHABLE();
+                    break;
+            }
+        }
+
+        // The buffer with MapRead usage and mMappedAtCreation == true will be fully overwritten by
+        // its staging buffer on the first time Unmap() is called, so we don't need to clear its GPU
+        // memory again.
+        // TODO(jiawei.shao@intel.com): check Toggle::LazyClearResourceOnFirstUse instead when
+        // buffer lazy initialization is completely supported.
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearBufferOnFirstUse) &&
+            heapType == D3D12_HEAP_TYPE_READBACK && mMappedAtCreation) {
+            SetIsDataInitialized();
         }
 
         return {};
@@ -252,8 +283,16 @@ namespace dawn_native { namespace d3d12 {
     }
 
     bool Buffer::IsMappableAtCreation() const {
+        // We use a staging buffer for the buffers with mappedAtCreation == true and created on the
+        // READBACK heap because for the buffers on the READBACK heap, the data written to the
+        // mMappedData on the CPU side won't be uploaded to GPU, and when we enable the buffer lazy
+        // initialization, the GPU memory of the buffer has all been set to 0, then we the buffer
+        // is mapped again, the data in the CPU side will also be flushed away to 0 and lost. With
+        // a staging buffer, the data on the CPU side will first upload to the staging buffer, and
+        // copied from the staging buffer to the GPU memory of the current buffer in the unmap()
+        // call.
         // TODO(enga): Handle CPU-visible memory on UMA
-        return (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
+        return (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
     }
 
     MaybeError Buffer::MapInternal(bool isWrite,
@@ -283,13 +322,15 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
-        DAWN_TRY(EnsureDataInitialized(commandContext));
+        // We will use a staging buffer for MapRead buffers instead so we just clear the staging
+        // buffer and initialize the original buffer by copying the staging buffer to the original
+        // buffer one the first time Unmap() is called.
+        ASSERT((GetUsage() & wgpu::BufferUsage::MapWrite) != 0);
 
-        // Setting isMapWrite to false on MapRead buffers to silence D3D12 debug layer warning.
-        bool isMapWrite = (GetUsage() & wgpu::BufferUsage::MapWrite) != 0;
-        DAWN_TRY(MapInternal(isMapWrite, 0, size_t(GetSize()), "D3D12 map at creation"));
+        DAWN_TRY(EnsureDataInitialized(nullptr));
+
+        DAWN_TRY(MapInternal(true, 0, size_t(GetSize()), "D3D12 map at creation"));
+
         return {};
     }
 
