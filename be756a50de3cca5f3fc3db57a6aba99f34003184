@@ -16,6 +16,23 @@
       "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61669ee3_8f3617eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-26T08:29:21Z",
+      "side": 1,
+      "message": "I\u0027m OOO, Austin can you take a look? Also we should make sure we have 1) deprecation tests, and 2) validation (are any end2end needed?) tests that show the old behaviour still works, and validation for the new one works.",
+      "revId": "be756a50de3cca5f3fc3db57a6aba99f34003184",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
