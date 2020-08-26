@@ -467,31 +467,49 @@ namespace dawn_native { namespace d3d12 {
 
         class IndexBufferTracker {
           public:
-            void OnSetIndexBuffer(Buffer* buffer, uint64_t offset, uint64_t size) {
+            void OnSetIndexBuffer(ID3D12GraphicsCommandList* commandList, Buffer* buffer,
+                                  wgpu::IndexFormat format, uint64_t offset, uint64_t size) {
                 mD3D12BufferView.BufferLocation = buffer->GetVA() + offset;
                 mD3D12BufferView.SizeInBytes = size;
+                mBufferIndexFormat = format;
 
-                // We don't need to dirty the state unless BufferLocation or SizeInBytes
-                // change, but most of the time this will always be the case.
-                mLastAppliedIndexFormat = DXGI_FORMAT_UNKNOWN;
-            }
-
-            void OnSetPipeline(const RenderPipelineBase* pipeline) {
-                mD3D12BufferView.Format =
-                    DXGIIndexFormat(pipeline->GetVertexStateDescriptor()->indexFormat);
-            }
-
-            void Apply(ID3D12GraphicsCommandList* commandList) {
-                if (mD3D12BufferView.Format == mLastAppliedIndexFormat) {
+                if (mBufferIndexFormat != wgpu::IndexFormat::Undefined) {
+                    // If a index format was specified we can always set the buffer right away.
+                    mD3D12BufferView.Format = DXGIIndexFormat(mBufferIndexFormat);
+                } else if (mPipelineIndexFormat != wgpu::IndexFormat::Undefined) {
+                    // Otherwise if we have a pipeline set use it's index format. This path is
+                    // deprecated and will be removed soon.
+                    mD3D12BufferView.Format = DXGIIndexFormat(mPipelineIndexFormat);
+                } else {
+                    // If we don't have either format from either location don't set the index
+                    // buffer yet.
                     return;
                 }
 
                 commandList->IASetIndexBuffer(&mD3D12BufferView);
-                mLastAppliedIndexFormat = mD3D12BufferView.Format;
+            }
+
+            void OnSetPipeline(ID3D12GraphicsCommandList* commandList, RenderPipeline* pipeline) {
+                wgpu::IndexFormat newPipelineIndexFormat =
+                    pipeline->GetVertexStateDescriptor()->indexFormat;
+
+                // If we have an index buffer but the index format wasn't specified AND the new
+                // pipeline specifies a different index format than the previously set one then
+                // update the index buffer binding to use this pipelines format. This path is
+                // deprecated and will be removed soon.
+                if (mD3D12BufferView.BufferLocation &&
+                    mBufferIndexFormat == wgpu::IndexFormat::Undefined &&
+                    mPipelineIndexFormat != newPipelineIndexFormat) {
+                    mD3D12BufferView.Format = DXGIIndexFormat(newPipelineIndexFormat);
+                    commandList->IASetIndexBuffer(&mD3D12BufferView);
+                }
+
+                mPipelineIndexFormat = newPipelineIndexFormat;
             }
 
           private:
-            DXGI_FORMAT mLastAppliedIndexFormat = DXGI_FORMAT_UNKNOWN;
+            wgpu::IndexFormat mBufferIndexFormat = wgpu::IndexFormat::Undefined;
+            wgpu::IndexFormat mPipelineIndexFormat = wgpu::IndexFormat::Undefined;
             D3D12_INDEX_BUFFER_VIEW mD3D12BufferView = {};
         };
 
@@ -1177,7 +1195,6 @@ namespace dawn_native { namespace d3d12 {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
                     DAWN_TRY(bindingTracker->Apply(commandContext));
-                    indexBufferTracker.Apply(commandList);
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
@@ -1202,7 +1219,6 @@ namespace dawn_native { namespace d3d12 {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
                     DAWN_TRY(bindingTracker->Apply(commandContext));
-                    indexBufferTracker.Apply(commandList);
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
@@ -1261,7 +1277,7 @@ namespace dawn_native { namespace d3d12 {
                     commandList->IASetPrimitiveTopology(pipeline->GetD3D12PrimitiveTopology());
 
                     bindingTracker->OnSetPipeline(pipeline);
-                    indexBufferTracker.OnSetPipeline(pipeline);
+                    indexBufferTracker.OnSetPipeline(commandList, pipeline);
 
                     lastPipeline = pipeline;
                     lastLayout = layout;
@@ -1285,8 +1301,8 @@ namespace dawn_native { namespace d3d12 {
                 case Command::SetIndexBuffer: {
                     SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
 
-                    indexBufferTracker.OnSetIndexBuffer(ToBackend(cmd->buffer.Get()), cmd->offset,
-                                                        cmd->size);
+                    indexBufferTracker.OnSetIndexBuffer(commandList, ToBackend(cmd->buffer.Get()),
+                                                        cmd->format, cmd->offset, cmd->size);
                     break;
                 }
 

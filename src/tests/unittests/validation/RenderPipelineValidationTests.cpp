@@ -526,3 +526,60 @@ TEST_F(RenderPipelineValidationTest, MultisampledTexture) {
         })");
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
+
+// Tests that strip primitive topologies require an index format
+TEST_F(RenderPipelineValidationTest, StripIndexFormatRequired) {
+    constexpr uint32_t kNumStripType = 2u;
+    constexpr uint32_t kNumListType = 3u;
+    constexpr uint32_t kNumIndexFormat = 3u;
+
+    std::array<wgpu::PrimitiveTopology, kNumStripType> kStripTopologyTypes = {{
+        wgpu::PrimitiveTopology::LineStrip,
+        wgpu::PrimitiveTopology::TriangleStrip
+    }};
+
+    std::array<wgpu::PrimitiveTopology, kNumListType> kListTopologyTypes = {{
+        wgpu::PrimitiveTopology::PointList,
+        wgpu::PrimitiveTopology::LineList,
+        wgpu::PrimitiveTopology::TriangleList
+    }};
+
+    std::array<wgpu::IndexFormat, kNumIndexFormat> kIndexFormatTypes = {{
+        wgpu::IndexFormat::Undefined,
+        wgpu::IndexFormat::Uint16,
+        wgpu::IndexFormat::Uint32
+    }};
+
+    for (size_t i = 0; i < kNumStripType; ++i) {
+        for (size_t j = 0; j < kNumIndexFormat; ++j) {
+            utils::ComboRenderPipelineDescriptor descriptor(device);
+            descriptor.vertexStage.module = vsModule;
+            descriptor.cFragmentStage.module = fsModule;
+            descriptor.primitiveTopology = kStripTopologyTypes[i];
+            descriptor.cVertexState.indexFormat = kIndexFormatTypes[j];
+
+            if (kIndexFormatTypes[j] == wgpu::IndexFormat::Undefined) {
+                // Fail because the index format is undefined and the primitive
+                // topology is a strip type.
+                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            } else {
+                // Succeeds because the index format is given.
+                device.CreateRenderPipeline(&descriptor);
+            }
+        }
+    }
+
+    for (size_t i = 0; i < kNumListType; ++i) {
+        for (size_t j = 0; j < kNumIndexFormat; ++j) {
+            utils::ComboRenderPipelineDescriptor descriptor(device);
+            descriptor.vertexStage.module = vsModule;
+            descriptor.cFragmentStage.module = fsModule;
+            descriptor.primitiveTopology = kListTopologyTypes[i];
+            descriptor.cVertexState.indexFormat = kIndexFormatTypes[j];
+
+            // Succeeds even when the index format is undefined because the
+            // primitive topology isn't a strip type.
+            device.CreateRenderPipeline(&descriptor);
+        }
+    }
+}
