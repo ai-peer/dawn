@@ -33,6 +33,24 @@
       "revId": "01415a658e79500bbb17d27c25e063c30d932132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca00246c_634f4ce5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-26T23:41:01Z",
+      "side": 1,
+      "message": "Derp. I absolutely intended to clear the flag the same way as the D3D12 tracker, thanks for catching that I missed it.",
+      "parentUuid": "cf5f450b_f9220b50",
+      "revId": "01415a658e79500bbb17d27c25e063c30d932132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
