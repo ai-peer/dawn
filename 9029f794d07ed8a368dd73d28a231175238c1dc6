@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "eb1361e1_c981e190",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-26T08:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4485b5f0_dba8036e",
+      "range": {
+        "startLine": 638,
+        "startChar": 32,
+        "endLine": 639,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18287fcb_7557058d",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "aed1d194_41ceb9d1",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-26T08:17:48Z",
+      "side": 1,
+      "message": "Ack (was needed)",
+      "parentUuid": "18287fcb_7557058d",
+      "range": {
+        "startLine": 645,
+        "startChar": 32,
+        "endLine": 646,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8487a1c_8a54ac92",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -102,6 +150,30 @@
       "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3588416b_1d3c53da",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-26T08:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8487a1c_8a54ac92",
+      "range": {
+        "startLine": 659,
+        "startChar": 32,
+        "endLine": 660,
+        "endChar": 41
+      },
+      "revId": "9029f794d07ed8a368dd73d28a231175238c1dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
