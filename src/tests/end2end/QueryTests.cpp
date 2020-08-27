@@ -235,4 +235,4 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend(), VulkanBackend());
