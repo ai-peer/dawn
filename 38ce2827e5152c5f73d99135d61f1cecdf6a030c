@@ -87,6 +87,30 @@
       "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db0c241_0cdde2fd",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-27T20:40:56Z",
+      "side": 1,
+      "message": "LGTM, one comment though: maybe rename IsMappableAtCreation to be more clear? Perhaps IsCPUWritableAtCreation",
+      "parentUuid": "ec271182_45f2bbe4",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
