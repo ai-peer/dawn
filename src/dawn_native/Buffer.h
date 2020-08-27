@@ -81,6 +81,9 @@ namespace dawn_native {
 
         bool IsMapped() const;
 
+        MaybeError MapAtCreationInternal();
+        bool IsMappedAtCreation() const;
+
       private:
         virtual MaybeError MapAtCreationImpl() = 0;
         virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
@@ -116,6 +119,8 @@ namespace dawn_native {
         wgpu::MapMode mMapMode = wgpu::MapMode::None;
         size_t mMapOffset = 0;
         size_t mMapSize = 0;
+
+        bool mMappedAtCreation;
     };
 
 }  // namespace dawn_native
