@@ -63,6 +63,30 @@
       "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec271182_45f2bbe4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-08-27T06:39:57Z",
+      "side": 1,
+      "message": "Thanks for reminding me. I\u0027ve added these changes in the new patch set but I am not sure I have fully understood your thoughts. PTAL, thanks!",
+      "parentUuid": "19fcf4d3_599be0d0",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 0
+      },
+      "revId": "38ce2827e5152c5f73d99135d61f1cecdf6a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
