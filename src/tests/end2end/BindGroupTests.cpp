@@ -642,6 +642,10 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
 // Do a successful draw. Then, change the pipeline and one bind group.
 // Draw to check that the all bind groups are set.
 TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
+    // This test produces an incorrect error in the D3D12 gpu-based validation layer on Windows
+    // version 2004 and below. It is expected to be fixed in a future version of Windows.
+    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
+
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     // Create a bind group layout which uses a single dynamic uniform buffer.
