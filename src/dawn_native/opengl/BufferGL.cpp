@@ -27,7 +27,7 @@ namespace dawn_native { namespace opengl {
                                                             bool shouldLazyClear) {
         Ref<Buffer> buffer = AcquireRef(new Buffer(device, descriptor, shouldLazyClear));
         if (descriptor->mappedAtCreation) {
-            DAWN_TRY(buffer->MapAtCreation());
+            DAWN_TRY(buffer->MapAtCreationInternal());
         }
 
         return std::move(buffer);
@@ -42,7 +42,10 @@ namespace dawn_native { namespace opengl {
         device->gl.GenBuffers(1, &mBuffer);
         device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
 
-        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+        // The buffers with mappedAtCreation == true will be initialized in
+        // BufferBase::MapAtCreation().
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+            !IsMappedAtCreation()) {
             std::vector<uint8_t> clearValues(size, 1u);
             device->gl.BufferData(GL_ARRAY_BUFFER, size, clearValues.data(), GL_STATIC_DRAW);
         } else {
@@ -134,8 +137,6 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        EnsureDataInitialized();
-
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
         gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
         mMappedData = gl.MapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
