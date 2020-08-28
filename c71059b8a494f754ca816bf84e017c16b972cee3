@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "50a42af1_3f946a92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-28T17:51:27Z",
+      "side": 1,
+      "message": "Definitely what I meant :)",
+      "parentUuid": "d0454754_c5acb8d9",
+      "revId": "c71059b8a494f754ca816bf84e017c16b972cee3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9b16748_e3eef2dd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
