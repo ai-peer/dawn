@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7595dcd_352b2edd",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-08-28T19:59:30Z",
+      "side": 1,
+      "message": "1. This is just POD so the std::move probably isn\u0027t necessary? (guess it probably doesn\u0027t hurt anything though)\n2. Is it actually necessary to remove it from the map before calling the callback? I think you could just not move it out, and remove it after.",
+      "revId": "d0b7779985ccdb7a1e40d12280ab6caac0494f4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
