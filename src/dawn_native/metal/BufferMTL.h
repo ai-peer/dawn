@@ -47,7 +47,7 @@ namespace dawn_native { namespace metal {
         void UnmapImpl() override;
         void DestroyImpl() override;
         void* GetMappedPointerImpl() override;
-        bool IsMappableAtCreation() const override;
+        bool IsCPUWritableAtCreation() const override;
         MaybeError MapAtCreationImpl() override;
 
         void InitializeToZero(CommandRecordingContext* commandContext);

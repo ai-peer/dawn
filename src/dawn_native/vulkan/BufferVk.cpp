@@ -166,7 +166,10 @@ namespace dawn_native { namespace vulkan {
                                         mMemoryAllocation.GetOffset()),
             "vkBindBufferMemory"));
 
-        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+        // The buffers with mappedAtCreation == true will be initialized in
+        // BufferBase::MapAtCreation().
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+            !IsMappedAtCreation()) {
             ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
         }
 
@@ -235,18 +238,12 @@ namespace dawn_native { namespace vulkan {
         mLastUsage = usage;
     }
 
-    bool Buffer::IsMappableAtCreation() const {
+    bool Buffer::IsCPUWritableAtCreation() const {
         // TODO(enga): Handle CPU-visible memory on UMA
         return mMemoryAllocation.GetMappedPointer() != nullptr;
     }
 
     MaybeError Buffer::MapAtCreationImpl() {
-        CommandRecordingContext* recordingContext =
-            ToBackend(GetDevice())->GetPendingRecordingContext();
-
-        // TODO(jiawei.shao@intel.com): initialize mapped buffer in CPU side.
-        EnsureDataInitialized(recordingContext);
-
         return {};
     }
 
