@@ -34,6 +34,24 @@
       "revId": "d0b7779985ccdb7a1e40d12280ab6caac0494f4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0b511c4_ef530155",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-28T20:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b1a11a_e286534a",
+      "revId": "d0b7779985ccdb7a1e40d12280ab6caac0494f4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
