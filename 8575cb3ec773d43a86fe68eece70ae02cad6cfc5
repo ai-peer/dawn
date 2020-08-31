@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "62e3a090_23368cd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Thanks for the follow up! Addressed your comments in https://dawn-review.googlesource.com/c/dawn/+/27761",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adad8ffe_cd426beb",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 14
@@ -33,6 +50,24 @@
       "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "193174a5_755c0845",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adad8ffe_cd426beb",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "8abc22c3_083b957d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Done, but that required plumbing through a non-const Device*, which is a bit unfortunate.",
+      "parentUuid": "cb02ee8e_bcbd028e",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b767298_c36ed994",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 14
@@ -84,6 +137,24 @@
       "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4934074d_0179731a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b767298_c36ed994",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "fedce87e_720fd4c9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Correct, which is why mLastAppliedIndexFormat is explicitly set to DXGI_FORMAT_UNKNOWN in OnSetIndexBuffer, which effectively forces this path next time Apply is called. (That pattern was from prior to my change)",
+      "parentUuid": "34db79af_7430671a",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2793df5_5d0caeea",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14
@@ -118,6 +207,24 @@
       "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92a72023_3ffbe903",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Same explanation as D3D12",
+      "parentUuid": "c2793df5_5d0caeea",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -138,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "519c75d2_4696743a",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "That is tested in RenderPipelineValidationTests, unless there\u0027s something else you\u0027re looking for here?",
+      "parentUuid": "ba17acf8_e8eed258",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10340a32_a59ff277",
         "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 14
@@ -152,6 +277,24 @@
       "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4608fd63_729a4951",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-08-31T18:12:37Z",
+      "side": 1,
+      "message": "Correct, but we can\u0027t actually test for the failure until we\u0027ve moved past the deprecation grace period. I\u0027ll add a comment to highlight that, though.",
+      "parentUuid": "10340a32_a59ff277",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
