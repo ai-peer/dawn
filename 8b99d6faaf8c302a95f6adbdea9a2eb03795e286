@@ -36,6 +36,52 @@
     },
     {
       "key": {
+        "uuid": "e48fbf3e_d143f84f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-31T16:55:41Z",
+      "side": 1,
+      "message": "queryIndexes should be a const reference,\nand then this could probably be\n\nstd::all_of(queryIndexes.begin() + first, queryIndexes.begin() + first + count, ...);\n\nthat way we don\u0027t need to make any new allocations.",
+      "range": {
+        "startLine": 474,
+        "startChar": 12,
+        "endLine": 481,
+        "endChar": 13
+      },
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dca9489a_1fe2f822",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-31T16:55:41Z",
+      "side": 1,
+      "message": "mm, I don\u0027t think these methods should be on the QuerySet. There can be multiple command encoders recorded simultaneously, and then submitted later, so they should not use tracking state on the query set. Each encoder needs to have its own local state for tracking which query set indices are used.",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 5
+      },
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f50962bb_f6d2caa5",
         "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
         "patchSetId": 4
