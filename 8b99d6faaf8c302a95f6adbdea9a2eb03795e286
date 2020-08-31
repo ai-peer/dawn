@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c14d8e6_b72c8ac8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-31T05:17:57Z",
+      "side": 1,
+      "message": "To make the validation tests simple, I move this validation to the back of other checkpoints, otherwise all tests will be need to write values to every queries, even if the tests have nothing to do with the checkout of query index , especially for the test at [1] in https://dawn-review.googlesource.com/c/dawn/+/27561/4/src/tests/unittests/validation/QuerySetValidationTests.cpp, we need write a large amount of queries which will make the test hang a long time in recording the commands.",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f50962bb_f6d2caa5",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-08-31T05:17:57Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
