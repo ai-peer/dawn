@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c711fc0_ec85a44a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T09:27:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6c39a56_dfe3953b",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T09:27:14Z",
+      "side": 1,
+      "message": "Do we have guarantees that the callbacks are fired in the correct order (of fence signal values)?",
+      "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
