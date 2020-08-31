@@ -300,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "3ec5447a_e13396f1",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T10:57:01Z",
+      "side": 1,
+      "message": "Can we at least have a top-level comment explaining what happens?",
+      "parentUuid": "236d12db_3fd05221",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
@@ -329,6 +347,24 @@
       "side": 1,
       "message": "suffix works for float. Doesn\u0027t work in a pretty way for uint8_t. This extra macro was so I don\u0027t have to have a named vector everywhere which I think is kinda nice.",
       "parentUuid": "9dd18970_edaaea65",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a41d489_f6d1f2dc",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T10:57:01Z",
+      "side": 1,
+      "message": "Heh, I\u0027m not a huge fan myself, especially if we start having _T and regular version of all these macros.",
+      "parentUuid": "81ac7b4a_94b08bed",
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -393,6 +429,30 @@
     },
     {
       "key": {
+        "uuid": "263d6227_f89b6a27",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T10:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b260dcd_f60556ca",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 796,
+        "endChar": 64
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34932599_4ad9f5dc",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 14
@@ -413,6 +473,30 @@
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64c8cb6_883cf91f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T10:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34932599_4ad9f5dc",
+      "range": {
+        "startLine": 1516,
+        "startChar": 51,
+        "endLine": 1516,
+        "endChar": 90
+      },
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
