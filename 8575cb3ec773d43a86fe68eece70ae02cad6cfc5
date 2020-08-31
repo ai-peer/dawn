@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4c6967c_a5744e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "LGTM, sorry for the post-landing review. I found a couple issues that need fixing in a follow-up.",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adad8ffe_cd426beb",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "We also need to DAWN_TRY(ValidateIndexFormat(format)) to make sure someone doesn\u0027t pass in a garbage enum.",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "996c69e8_e1c76066",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb02ee8e_bcbd028e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "We should add a deprecation warning when the index format is specified without a strip topology.",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b767298_c36ed994",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "This could be a standalone function so it could also be used in [1]",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34db79af_7430671a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s correct, we need to apply if the offset or size changed (even if the format is the same).",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2793df5_5d0caeea",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "ditto, same as D3D12",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba17acf8_e8eed258",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "Can we have tests that SetIndexBuffer\u0027s format must match the format set in the pipeline for strip primitive topologies?",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10340a32_a59ff277",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T08:59:52Z",
+      "side": 1,
+      "message": "I think the WebGPU spec will require this to fail in the future?",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
