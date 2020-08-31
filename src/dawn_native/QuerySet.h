@@ -34,6 +34,10 @@ namespace dawn_native {
         wgpu::QueryType GetQueryType() const;
         uint32_t GetQueryCount() const;
         const std::vector<wgpu::PipelineStatisticName>& GetPipelineStatistics() const;
+        const std::vector<bool>& GetQueryIndexes() const;
+
+        void TrackQueryIndex(uint32_t queryIndex);
+        void ResetQueryIndexes();
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -53,6 +57,7 @@ namespace dawn_native {
         wgpu::QueryType mQueryType;
         uint32_t mQueryCount;
         std::vector<wgpu::PipelineStatisticName> mPipelineStatistics;
+        std::vector<bool> mQueryIndexes;
 
         enum class QuerySetState { Unavailable, Available, Destroyed };
         QuerySetState mState = QuerySetState::Unavailable;

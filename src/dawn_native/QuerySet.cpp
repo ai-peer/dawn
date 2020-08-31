@@ -100,6 +100,9 @@ namespace dawn_native {
           mQueryType(descriptor->type),
           mQueryCount(descriptor->count),
           mState(QuerySetState::Available) {
+        // Initialize the size of query indexes to the query count.
+        mQueryIndexes.resize(descriptor->count);
+
         for (uint32_t i = 0; i < descriptor->pipelineStatisticsCount; i++) {
             mPipelineStatistics.push_back(descriptor->pipelineStatistics[i]);
         }
@@ -129,6 +132,18 @@ namespace dawn_native {
 
     const std::vector<wgpu::PipelineStatisticName>& QuerySetBase::GetPipelineStatistics() const {
         return mPipelineStatistics;
+    }
+
+    const std::vector<bool>& QuerySetBase::GetQueryIndexes() const {
+        return mQueryIndexes;
+    }
+
+    void QuerySetBase::TrackQueryIndex(uint32_t queryIndex) {
+        mQueryIndexes[queryIndex] = 1;
+    }
+
+    void QuerySetBase::ResetQueryIndexes() {
+        std::fill(mQueryIndexes.begin(), mQueryIndexes.end(), 0);
     }
 
     MaybeError QuerySetBase::ValidateCanUseInSubmitNow() const {

@@ -173,6 +173,8 @@ namespace dawn_native {
                 mCommandEncoder->TrackUsedQuerySet(querySet);
             }
 
+            querySet->TrackQueryIndex(queryIndex);
+
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
             cmd->querySet = querySet;
