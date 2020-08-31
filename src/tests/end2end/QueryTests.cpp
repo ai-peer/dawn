@@ -31,8 +31,9 @@ class QueryTests : public DawnTest {
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
         // Initialize the buffer values to 0.
-        std::vector<uint64_t> myData = {0, 0};
+        std::vector<uint64_t> myData(size / sizeof(uint64_t), 0);
         device.GetDefaultQueue().WriteBuffer(buffer, 0, myData.data(), size);
+        EXPECT_BUFFER_U64_RANGE_EQ(myData.data(), buffer, 0, size / sizeof(uint64_t));
 
         return buffer;
     }
@@ -235,4 +236,4 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend(), VulkanBackend());
