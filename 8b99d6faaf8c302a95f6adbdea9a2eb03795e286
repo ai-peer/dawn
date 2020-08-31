@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "624cd6f6_e1b6b3f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-31T10:50:30Z",
+      "side": 1,
+      "message": "Do we have WebGPU spec text for this? As discussed in our last meeting, we might choose to resolve unused queries t o0 instead of just disallowing it.",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c14d8e6_b72c8ac8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
