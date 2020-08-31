@@ -452,9 +452,6 @@ namespace dawn_native {
                     "set");
             }
 
-            // TODO(hao.x.li@intel.com): Validate that the queries between [firstQuery, firstQuery +
-            // queryCount - 1] must be available(written by query operations).
-
             // The destinationOffset must be a multiple of 8 bytes on D3D12 and Vulkan
             if (destinationOffset % 8 != 0) {
                 return DAWN_VALIDATION_ERROR(
@@ -472,6 +469,17 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("The resolved query data would overflow the buffer");
             }
 
+            // The queries between [firstQuery, firstQuery + queryCount - 1] must be available
+            // (written by query operations).
+            std::vector<bool> queryIndexes = querySet->GetQueryIndexes();
+            std::vector<bool> usedIndexes(queryIndexes.begin() + firstQuery,
+                                          queryIndexes.begin() + firstQuery + queryCount);
+
+            std::vector<bool> resolveIndexes(queryCount, 1);
+            if (!(resolveIndexes == usedIndexes)) {
+                return DAWN_VALIDATION_ERROR("All queries for resolving must be written");
+            }
+
             return {};
         }
 
@@ -479,6 +487,10 @@ namespace dawn_native {
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
         : ObjectBase(device), mEncodingContext(device, this) {
+        // Reset index tracking for the used query sets in each command encoder.
+        for (auto querySet : mUsedQuerySets) {
+            querySet->ResetQueryIndexes();
+        }
     }
 
     CommandBufferResourceUsage CommandEncoder::AcquireResourceUsages() {
@@ -863,6 +875,8 @@ namespace dawn_native {
                 DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
                 TrackUsedQuerySet(querySet);
             }
+
+            querySet->TrackQueryIndex(queryIndex);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
