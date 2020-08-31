@@ -51,6 +51,24 @@
       "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13fb054c_b3b12aca",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-31T17:46:27Z",
+      "side": 1,
+      "message": "Or, maybe this is better done by registering a DidFlush callback on the WebGPU command serializer, and handling all of the needs_flush logic in blink",
+      "parentUuid": "4c0df590_a9d6f09f",
+      "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
