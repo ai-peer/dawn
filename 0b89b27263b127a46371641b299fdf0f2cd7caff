@@ -33,6 +33,24 @@
       "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c0df590_a9d6f09f",
+        "filename": "src/dawn_wire/client/Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-08-31T16:13:46Z",
+      "side": 1,
+      "message": "Seems like this probably wouldn\u0027t matter for the JS API. For native, I guess we should probably fix this to be in the order of signal value.",
+      "parentUuid": "b6c39a56_dfe3953b",
+      "revId": "0b89b27263b127a46371641b299fdf0f2cd7caff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
