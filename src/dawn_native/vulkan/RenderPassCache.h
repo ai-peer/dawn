@@ -17,6 +17,7 @@
 
 #include "common/Constants.h"
 #include "common/vulkan_platform.h"
+#include "dawn_native/AttachmentState.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/dawn_platform.h"
 
@@ -34,7 +35,7 @@ namespace dawn_native { namespace vulkan {
     struct RenderPassCacheQuery {
         // Use these helpers to build the query, they make sure all relevant data is initialized and
         // masks set.
-        void SetColor(uint32_t index,
+        void SetColor(ColorAttachmentIndex index,
                       wgpu::TextureFormat format,
                       wgpu::LoadOp loadOp,
                       bool hasResolveTarget);
@@ -43,10 +44,10 @@ namespace dawn_native { namespace vulkan {
                              wgpu::LoadOp stencilLoadOp);
         void SetSampleCount(uint32_t sampleCount);
 
-        std::bitset<kMaxColorAttachments> colorMask;
-        std::bitset<kMaxColorAttachments> resolveTargetMask;
-        std::array<wgpu::TextureFormat, kMaxColorAttachments> colorFormats;
-        std::array<wgpu::LoadOp, kMaxColorAttachments> colorLoadOp;
+        ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> colorMask;
+        ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> resolveTargetMask;
+        ityp::array<ColorAttachmentIndex, wgpu::TextureFormat, kMaxColorAttachments> colorFormats;
+        ityp::array<ColorAttachmentIndex, wgpu::LoadOp, kMaxColorAttachments> colorLoadOp;
 
         bool hasDepthStencil = false;
         wgpu::TextureFormat depthStencilFormat;

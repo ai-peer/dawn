@@ -499,7 +499,7 @@ namespace dawn_native { namespace d3d12 {
                                            BeginRenderPassCmd* renderPass) {
             ASSERT(renderPass != nullptr);
 
-            for (uint32_t i :
+            for (ColorAttachmentIndex i :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                 TextureViewBase* resolveTarget =
                     renderPass->colorAttachments[i].resolveTarget.Get();
@@ -970,7 +970,8 @@ namespace dawn_native { namespace d3d12 {
                                               RenderPassBuilder* renderPassBuilder) {
         Device* device = ToBackend(GetDevice());
 
-        for (uint32_t i : IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+        for (ColorAttachmentIndex i :
+             IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             RenderPassColorAttachmentInfo& attachmentInfo = renderPass->colorAttachments[i];
             TextureView* view = ToBackend(attachmentInfo.view.Get());
 

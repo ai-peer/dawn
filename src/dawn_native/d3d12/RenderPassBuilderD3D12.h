@@ -34,7 +34,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         RenderPassBuilder(bool hasUAV);
 
-        uint32_t GetColorAttachmentCount() const;
+        ColorAttachmentIndex GetColorAttachmentCount() const;
 
         // Returns descriptors that are fed directly to BeginRenderPass, or are used as parameter
         // storage if D3D12 render pass API is unavailable.
@@ -55,12 +55,12 @@ namespace dawn_native { namespace d3d12 {
                             DXGI_FORMAT format);
         void SetDepthNoAccess();
         void SetDepthStencilNoAccess();
-        void SetRenderTargetBeginningAccess(uint32_t attachment,
+        void SetRenderTargetBeginningAccess(ColorAttachmentIndex attachment,
                                             wgpu::LoadOp loadOp,
                                             dawn_native::Color clearColor,
                                             DXGI_FORMAT format);
-        void SetRenderTargetEndingAccess(uint32_t attachment, wgpu::StoreOp storeOp);
-        void SetRenderTargetEndingAccessResolve(uint32_t attachment,
+        void SetRenderTargetEndingAccess(ColorAttachmentIndex attachment, wgpu::StoreOp storeOp);
+        void SetRenderTargetEndingAccessResolve(ColorAttachmentIndex attachment,
                                                 wgpu::StoreOp storeOp,
                                                 TextureView* resolveSource,
                                                 TextureView* resolveDestination);
@@ -70,20 +70,23 @@ namespace dawn_native { namespace d3d12 {
                               DXGI_FORMAT format);
         void SetStencilNoAccess();
 
-        void SetRenderTargetView(uint32_t attachmentIndex,
+        void SetRenderTargetView(ColorAttachmentIndex attachmentIndex,
                                  D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor);
         void SetDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor);
 
       private:
-        uint32_t mColorAttachmentCount = 0;
+        ColorAttachmentIndex mColorAttachmentCount = 0;
         bool mHasDepth = false;
         D3D12_RENDER_PASS_FLAGS mRenderPassFlags = D3D12_RENDER_PASS_FLAG_NONE;
         D3D12_RENDER_PASS_DEPTH_STENCIL_DESC mRenderPassDepthStencilDesc;
-        std::array<D3D12_RENDER_PASS_RENDER_TARGET_DESC, kMaxColorAttachments>
-            mRenderPassRenderTargetDescriptors;
-        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> mRenderTargetViews;
-        std::array<D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
-                   kMaxColorAttachments>
+        ityp::
+            array<ColorAttachmentIndex, D3D12_RENDER_PASS_RENDER_TARGET_DESC, kMaxColorAttachments>
+                mRenderPassRenderTargetDescriptors;
+        ityp::array<ColorAttachmentIndex, D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments>
+            mRenderTargetViews;
+        ityp::array<ColorAttachmentIndex,
+                    D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS,
+                    kMaxColorAttachments>
             mSubresourceParams;
     };
 }}  // namespace dawn_native::d3d12
