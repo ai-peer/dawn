@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "feaa0a6f_a77e913d",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-09-01T16:37:18Z",
+      "side": 1,
+      "message": "Ah! Good call! I keep forgetting that\u0027s a thing you can do with WebGPU. :)",
+      "parentUuid": "4087e23e_7a00fdaf",
+      "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0e7f086_3c9d9b48",
         "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
         "patchSetId": 2
@@ -50,6 +68,24 @@
       "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf2f2fd0_bb7b7117",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-09-01T16:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0e7f086_3c9d9b48",
+      "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
