@@ -318,6 +318,24 @@
     },
     {
       "key": {
+        "uuid": "53ef08f7_279680db",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-01T16:08:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ec5447a_e13396f1",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9dd18970_edaaea65",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 14
@@ -368,6 +386,24 @@
       "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c856ea34_9a55d3aa",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-01T16:08:50Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "0a41d489_f6d1f2dc",
+      "revId": "8d081a5abd20e5575e858a0ae0a3bfb4ed36c746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
