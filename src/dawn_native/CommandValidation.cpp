@@ -488,12 +488,15 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("mipLevel out of range");
         }
 
-        if (textureCopy.origin.x % textureCopy.texture->GetFormat().blockWidth != 0) {
+        const TexelBlockInfo& blockInfo =
+            textureCopy.texture->GetFormat().GetTexelBlockInfo(textureCopy.aspect);
+
+        if (textureCopy.origin.x % blockInfo.blockWidth != 0) {
             return DAWN_VALIDATION_ERROR(
                 "Offset.x must be a multiple of compressed texture format block width");
         }
 
-        if (textureCopy.origin.y % textureCopy.texture->GetFormat().blockHeight != 0) {
+        if (textureCopy.origin.y % blockInfo.blockHeight != 0) {
             return DAWN_VALIDATION_ERROR(
                 "Offset.y must be a multiple of compressed texture format block height");
         }
@@ -546,12 +549,14 @@ namespace dawn_native {
         }
 
         // Validation for the texel block alignments:
-        if (copySize.width % textureCopy.texture->GetFormat().blockWidth != 0) {
+        const TexelBlockInfo& blockInfo =
+            textureCopy.texture->GetFormat().GetTexelBlockInfo(textureCopy.aspect);
+        if (copySize.width % blockInfo.blockWidth != 0) {
             return DAWN_VALIDATION_ERROR(
                 "copySize.width must be a multiple of compressed texture format block width");
         }
 
-        if (copySize.height % textureCopy.texture->GetFormat().blockHeight != 0) {
+        if (copySize.height % blockInfo.blockHeight != 0) {
             return DAWN_VALIDATION_ERROR(
                 "copySize.height must be a multiple of compressed texture format block height");
         }

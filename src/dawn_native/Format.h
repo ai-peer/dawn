@@ -40,7 +40,7 @@ namespace dawn_native {
     static constexpr size_t kKnownFormatCount = 53;
 
     // A wgpu::TextureFormat along with all the information about it necessary for validation.
-    struct Format : TexelBlockInfo {
+    struct Format {
         enum class Type {
             Float,
             Sint,
@@ -56,6 +56,7 @@ namespace dawn_native {
         bool supportsStorageUsage;
         Type type;
         Aspect aspects;
+        TexelBlockInfo blockInfo;
 
         static Type TextureComponentTypeToFormatType(wgpu::TextureComponentType componentType);
         static wgpu::TextureComponentType FormatTypeToTextureComponentType(Type type);
