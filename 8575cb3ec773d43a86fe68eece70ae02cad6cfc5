@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "e0fb7e87_4f7bda31",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T08:01:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "adad8ffe_cd426beb",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 14
@@ -193,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "765ac0b7_354cbcff",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T08:01:43Z",
+      "side": 1,
+      "message": "Ah, the logic isn\u0027t trivial, and not commented enough but I think that\u0027s ok given the IndexBufferTrackers will disappear after the move to SetIndexBuffer(format) is completed.",
+      "parentUuid": "fedce87e_720fd4c9",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2793df5_5d0caeea",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14
@@ -260,6 +295,24 @@
       "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64323e12_61434d22",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T08:01:43Z",
+      "side": 1,
+      "message": "What I meant is that as far as I can tell we don\u0027t have tests for validation at [1]",
+      "parentUuid": "519c75d2_4696743a",
+      "revId": "8575cb3ec773d43a86fe68eece70ae02cad6cfc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
