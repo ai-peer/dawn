@@ -33,6 +33,23 @@
       "revId": "f0d2eff4bee75da5678ac6714a559234fa7db0a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "224fd08f_78d82aa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T07:56:51Z",
+      "side": 1,
+      "message": "I think the vulkan loader needs to be updated to use the \"frameworks\" GN variable instead of libs for frameworks. LGTM oterhwise",
+      "revId": "f0d2eff4bee75da5678ac6714a559234fa7db0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
