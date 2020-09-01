@@ -50,6 +50,24 @@
       "revId": "f0d2eff4bee75da5678ac6714a559234fa7db0a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f3e4823_4a3353fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-01T14:25:49Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I will try that. Before looking at the error log I was concerned it was something like the bots needed a newer version of XCode, since it was Mac only and I was updating clang.",
+      "parentUuid": "224fd08f_78d82aa6",
+      "revId": "f0d2eff4bee75da5678ac6714a559234fa7db0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
