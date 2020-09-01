@@ -644,11 +644,12 @@ namespace dawn_native {
             }
 
             // In the case of one row copy bytesPerRow might not contain enough bytes
+            const TexelBlockInfo& blockInfo =
+                destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect);
             uint32_t bytesPerRow = source->layout.bytesPerRow;
             if (copySize->height <= 1 && copySize->depth <= 1) {
                 bytesPerRow =
-                    Align(copySize->width * destination->texture->GetFormat().blockByteSize,
-                          kTextureBytesPerRowAlignment);
+                    Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
             }
 
             // Record the copy command.
@@ -702,10 +703,12 @@ namespace dawn_native {
             }
 
             // In the case of one row copy bytesPerRow might not contain enough bytes
+            const TexelBlockInfo& blockInfo =
+                source->texture->GetFormat().GetTexelBlockInfo(source->aspect);
             uint32_t bytesPerRow = destination->layout.bytesPerRow;
             if (copySize->height <= 1 && copySize->depth <= 1) {
-                bytesPerRow = Align(copySize->width * source->texture->GetFormat().blockByteSize,
-                                    kTextureBytesPerRowAlignment);
+                bytesPerRow =
+                    Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
             }
 
             // Record the copy command.

@@ -90,13 +90,13 @@ namespace dawn_native {
                     default:
                         UNREACHABLE();
                 }
-                return *this;
+                return blockInfo;
 
             case wgpu::TextureAspect::DepthOnly:
                 ASSERT(HasDepth());
                 switch (format) {
                     case wgpu::TextureFormat::Depth32Float:
-                        return *this;
+                        return blockInfo;
                     default:
                         UNREACHABLE();
                         break;
@@ -126,11 +126,11 @@ namespace dawn_native {
         switch (aspect) {
             case Aspect::Color:
                 ASSERT(aspects == aspect);
-                return *this;
+                return blockInfo;
             case Aspect::Depth:
                 switch (format) {
                     case wgpu::TextureFormat::Depth32Float:
-                        return *this;
+                        return blockInfo;
                     default:
                         UNREACHABLE();
                         break;
@@ -195,9 +195,9 @@ namespace dawn_native {
             internalFormat.supportsStorageUsage = supportsStorageUsage;
             internalFormat.aspects = Aspect::Color;
             internalFormat.type = type;
-            internalFormat.blockByteSize = byteSize;
-            internalFormat.blockWidth = 1;
-            internalFormat.blockHeight = 1;
+            internalFormat.blockInfo.blockByteSize = byteSize;
+            internalFormat.blockInfo.blockWidth = 1;
+            internalFormat.blockInfo.blockHeight = 1;
             AddFormat(internalFormat);
         };
 
@@ -211,9 +211,9 @@ namespace dawn_native {
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = aspects;
             internalFormat.type = Type::Other;
-            internalFormat.blockByteSize = byteSize;
-            internalFormat.blockWidth = 1;
-            internalFormat.blockHeight = 1;
+            internalFormat.blockInfo.blockByteSize = byteSize;
+            internalFormat.blockInfo.blockWidth = 1;
+            internalFormat.blockInfo.blockHeight = 1;
             AddFormat(internalFormat);
         };
 
@@ -227,9 +227,9 @@ namespace dawn_native {
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = Aspect::Depth;
             internalFormat.type = type;
-            internalFormat.blockByteSize = byteSize;
-            internalFormat.blockWidth = 1;
-            internalFormat.blockHeight = 1;
+            internalFormat.blockInfo.blockByteSize = byteSize;
+            internalFormat.blockInfo.blockWidth = 1;
+            internalFormat.blockInfo.blockHeight = 1;
             AddFormat(internalFormat);
         };
 
@@ -243,9 +243,9 @@ namespace dawn_native {
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = Aspect::Color;
             internalFormat.type = Type::Float;
-            internalFormat.blockByteSize = byteSize;
-            internalFormat.blockWidth = width;
-            internalFormat.blockHeight = height;
+            internalFormat.blockInfo.blockByteSize = byteSize;
+            internalFormat.blockInfo.blockWidth = width;
+            internalFormat.blockInfo.blockHeight = height;
             AddFormat(internalFormat);
         };
 
