@@ -57,6 +57,10 @@ if (!defined(dawn_spirv_cross_dir)) {
   dawn_spirv_cross_dir = "//third_party/spirv-cross"
 }
 
+if (!defined(dawn_spirv_headers_dir)) {
+  dawn_spirv_headers_dir = "//third_party/spirv-headers"
+}
+
 if (!defined(dawn_spirv_tools_dir)) {
   dawn_spirv_tools_dir = "//third_party/SPIRV-Tools"
 }
