@@ -195,7 +195,7 @@ namespace dawn_native { namespace vulkan {
             {
                 RenderPassCacheQuery query;
 
-                for (uint32_t i :
+                for (ColorAttachmentIndex i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                     const auto& attachmentInfo = renderPass->colorAttachments[i];
 
@@ -227,7 +227,7 @@ namespace dawn_native { namespace vulkan {
                 // Fill in the attachment info that will be chained in the framebuffer create info.
                 std::array<VkImageView, kMaxColorAttachments * 2 + 1> attachments;
 
-                for (uint32_t i :
+                for (ColorAttachmentIndex i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                     auto& attachmentInfo = renderPass->colorAttachments[i];
                     TextureView* view = ToBackend(attachmentInfo.view.Get());
@@ -271,7 +271,7 @@ namespace dawn_native { namespace vulkan {
                     attachmentCount++;
                 }
 
-                for (uint32_t i :
+                for (ColorAttachmentIndex i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                     if (renderPass->colorAttachments[i].resolveTarget.Get() != nullptr) {
                         TextureView* view =

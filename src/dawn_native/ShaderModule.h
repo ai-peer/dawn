@@ -17,6 +17,7 @@
 
 #include "common/Constants.h"
 #include "common/ityp_array.h"
+#include "dawn_native/AttachmentState.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/CachedObject.h"
 #include "dawn_native/Error.h"
@@ -70,7 +71,8 @@ namespace dawn_native {
 
         // An array to record the basic types (float, int and uint) of the fragment shader outputs
         // or Format::Type::Other means the fragment shader output is unused.
-        using FragmentOutputBaseTypes = std::array<Format::Type, kMaxColorAttachments>;
+        using FragmentOutputBaseTypes =
+            ityp::array<ColorAttachmentIndex, Format::Type, kMaxColorAttachments>;
         const FragmentOutputBaseTypes& GetFragmentOutputBaseTypes() const;
 
         MaybeError ValidateCompatibilityWithPipelineLayout(const PipelineLayoutBase* layout) const;

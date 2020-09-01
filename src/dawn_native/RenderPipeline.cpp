@@ -357,8 +357,10 @@ namespace dawn_native {
         ASSERT(descriptor->fragmentStage != nullptr);
         const ShaderModuleBase::FragmentOutputBaseTypes& fragmentOutputBaseTypes =
             descriptor->fragmentStage->module->GetFragmentOutputBaseTypes();
-        for (uint32_t i = 0; i < descriptor->colorStateCount; ++i) {
-            DAWN_TRY(ValidateColorStateDescriptor(device, descriptor->colorStates[i],
+        for (ColorAttachmentIndex i(uint8_t(0));
+             i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->colorStateCount)); ++i) {
+            DAWN_TRY(ValidateColorStateDescriptor(device,
+                                                  descriptor->colorStates[static_cast<uint8_t>(i)],
                                                   fragmentOutputBaseTypes[i]));
         }
 
@@ -464,8 +466,8 @@ namespace dawn_native {
             mDepthStencilState.stencilWriteMask = 0xff;
         }
 
-        for (uint32_t i : IterateBitSet(mAttachmentState->GetColorAttachmentsMask())) {
-            mColorStates[i] = descriptor->colorStates[i];
+        for (ColorAttachmentIndex i : IterateBitSet(mAttachmentState->GetColorAttachmentsMask())) {
+            mColorStates[i] = descriptor->colorStates[static_cast<uint8_t>(i)];
         }
 
         // TODO(cwallez@chromium.org): Check against the shader module that the correct color
@@ -515,7 +517,7 @@ namespace dawn_native {
     }
 
     const ColorStateDescriptor* RenderPipelineBase::GetColorStateDescriptor(
-        uint32_t attachmentSlot) const {
+        ColorAttachmentIndex attachmentSlot) const {
         ASSERT(!IsError());
         ASSERT(attachmentSlot < mColorStates.size());
         return &mColorStates[attachmentSlot];
@@ -541,7 +543,8 @@ namespace dawn_native {
         return mRasterizationState.frontFace;
     }
 
-    std::bitset<kMaxColorAttachments> RenderPipelineBase::GetColorAttachmentsMask() const {
+    ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments>
+    RenderPipelineBase::GetColorAttachmentsMask() const {
         ASSERT(!IsError());
         return mAttachmentState->GetColorAttachmentsMask();
     }
@@ -551,7 +554,8 @@ namespace dawn_native {
         return mAttachmentState->HasDepthStencilAttachment();
     }
 
-    wgpu::TextureFormat RenderPipelineBase::GetColorAttachmentFormat(uint32_t attachment) const {
+    wgpu::TextureFormat RenderPipelineBase::GetColorAttachmentFormat(
+        ColorAttachmentIndex attachment) const {
         ASSERT(!IsError());
         return mColorStates[attachment].format;
     }
@@ -602,7 +606,8 @@ namespace dawn_native {
         HashCombine(&hash, pipeline->mAttachmentState.Get());
 
         // Hash attachments
-        for (uint32_t i : IterateBitSet(pipeline->mAttachmentState->GetColorAttachmentsMask())) {
+        for (ColorAttachmentIndex i :
+             IterateBitSet(pipeline->mAttachmentState->GetColorAttachmentsMask())) {
             const ColorStateDescriptor& desc = *pipeline->GetColorStateDescriptor(i);
             HashCombine(&hash, desc.writeMask);
             HashCombine(&hash, desc.colorBlend.operation, desc.colorBlend.srcFactor,
@@ -667,7 +672,8 @@ namespace dawn_native {
             return false;
         }
 
-        for (uint32_t i : IterateBitSet(a->mAttachmentState->GetColorAttachmentsMask())) {
+        for (ColorAttachmentIndex i :
+             IterateBitSet(a->mAttachmentState->GetColorAttachmentsMask())) {
             const ColorStateDescriptor& descA = *a->GetColorStateDescriptor(i);
             const ColorStateDescriptor& descB = *b->GetColorStateDescriptor(i);
             if (descA.writeMask != descB.writeMask) {

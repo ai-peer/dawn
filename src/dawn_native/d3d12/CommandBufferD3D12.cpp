@@ -499,7 +499,7 @@ namespace dawn_native { namespace d3d12 {
                                            BeginRenderPassCmd* renderPass) {
             ASSERT(renderPass != nullptr);
 
-            for (uint32_t i :
+            for (ColorAttachmentIndex i :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                 TextureViewBase* resolveTarget =
                     renderPass->colorAttachments[i].resolveTarget.Get();
@@ -970,7 +970,8 @@ namespace dawn_native { namespace d3d12 {
                                               RenderPassBuilder* renderPassBuilder) {
         Device* device = ToBackend(GetDevice());
 
-        for (uint32_t i : IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+        for (ColorAttachmentIndex i :
+             IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             RenderPassColorAttachmentInfo& attachmentInfo = renderPass->colorAttachments[i];
             TextureView* view = ToBackend(attachmentInfo.view.Get());
 
@@ -1061,7 +1062,8 @@ namespace dawn_native { namespace d3d12 {
 
         // Clear framebuffer attachments as needed.
         {
-            for (uint32_t i = 0; i < renderPassBuilder->GetColorAttachmentCount(); i++) {
+            for (ColorAttachmentIndex i(uint8_t(0));
+                 i < renderPassBuilder->GetColorAttachmentCount(); i++) {
                 // Load op - color
                 if (renderPassBuilder->GetRenderPassRenderTargetDescriptors()[i]
                         .BeginningAccess.Type == D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR) {
@@ -1105,8 +1107,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         commandList->OMSetRenderTargets(
-            renderPassBuilder->GetColorAttachmentCount(), renderPassBuilder->GetRenderTargetViews(),
-            FALSE,
+            static_cast<uint8_t>(renderPassBuilder->GetColorAttachmentCount()),
+            renderPassBuilder->GetRenderTargetViews(), FALSE,
             renderPassBuilder->HasDepth()
                 ? &renderPassBuilder->GetRenderPassDepthStencilDescriptor()->cpuDescriptor
                 : nullptr);
@@ -1130,8 +1132,8 @@ namespace dawn_native { namespace d3d12 {
         // beginning and ending access operations.
         if (useRenderPass) {
             commandContext->GetCommandList4()->BeginRenderPass(
-                renderPassBuilder.GetColorAttachmentCount(),
-                renderPassBuilder.GetRenderPassRenderTargetDescriptors(),
+                static_cast<uint8_t>(renderPassBuilder.GetColorAttachmentCount()),
+                renderPassBuilder.GetRenderPassRenderTargetDescriptors().data(),
                 renderPassBuilder.HasDepth()
                     ? renderPassBuilder.GetRenderPassDepthStencilDescriptor()
                     : nullptr,

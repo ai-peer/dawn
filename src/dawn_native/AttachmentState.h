@@ -16,6 +16,9 @@
 #define DAWNNATIVE_ATTACHMENTSTATE_H_
 
 #include "common/Constants.h"
+#include "common/TypedInteger.h"
+#include "common/ityp_array.h"
+#include "common/ityp_bitset.h"
 #include "dawn_native/CachedObject.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -26,6 +29,11 @@
 namespace dawn_native {
 
     class DeviceBase;
+
+    using ColorAttachmentIndex = TypedInteger<struct ColorAttachmentIndexT, uint8_t>;
+
+    constexpr ColorAttachmentIndex kMaxColorAttachmentsTyped =
+        ColorAttachmentIndex(kMaxColorAttachments);
 
     // AttachmentStateBlueprint and AttachmentState are separated so the AttachmentState
     // can be constructed by copying the blueprint state instead of traversing descriptors.
@@ -49,8 +57,8 @@ namespace dawn_native {
         };
 
       protected:
-        std::bitset<kMaxColorAttachments> mColorAttachmentsSet;
-        std::array<wgpu::TextureFormat, kMaxColorAttachments> mColorFormats;
+        ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> mColorAttachmentsSet;
+        ityp::array<ColorAttachmentIndex, wgpu::TextureFormat, kMaxColorAttachments> mColorFormats;
         // Default (texture format Undefined) indicates there is no depth stencil attachment.
         wgpu::TextureFormat mDepthStencilFormat = wgpu::TextureFormat::Undefined;
         uint32_t mSampleCount = 0;
@@ -60,8 +68,8 @@ namespace dawn_native {
       public:
         AttachmentState(DeviceBase* device, const AttachmentStateBlueprint& blueprint);
 
-        std::bitset<kMaxColorAttachments> GetColorAttachmentsMask() const;
-        wgpu::TextureFormat GetColorAttachmentFormat(uint32_t index) const;
+        ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> GetColorAttachmentsMask() const;
+        wgpu::TextureFormat GetColorAttachmentFormat(ColorAttachmentIndex index) const;
         bool HasDepthStencilAttachment() const;
         wgpu::TextureFormat GetDepthStencilFormat() const;
         uint32_t GetSampleCount() const;
