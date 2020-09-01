@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14ff3622_83689651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T16:16:34Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4087e23e_7a00fdaf",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T16:16:34Z",
+      "side": 1,
+      "message": "nit: We might not even need a vertex buffer for this test.",
+      "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0e7f086_3c9d9b48",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T16:16:34Z",
+      "side": 1,
+      "message": "nit: We could use a single index buffer, this is a validation test and doesn\u0027t run anything on the GPU.",
+      "revId": "9282450aa10be763f2863c87ea102f6acbf1b667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
