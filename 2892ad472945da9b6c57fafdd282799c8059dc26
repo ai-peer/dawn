@@ -33,6 +33,24 @@
       "revId": "2892ad472945da9b6c57fafdd282799c8059dc26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "803d2b8e_34ad1b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-09-01T16:10:30Z",
+      "side": 1,
+      "message": "Ah, got it! Apologies for getting confused about which validation step you were referring to, and thanks for your patience. I\u0027ve added a new validation test to this CL to cover that case.",
+      "parentUuid": "666778a0_5d43b178",
+      "revId": "2892ad472945da9b6c57fafdd282799c8059dc26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
