@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a900fd98_896a17e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T14:24:46Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "fb50d22a16a7377a1431624df3a41bd45c2351fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5f2fdf5_9daff503",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T14:24:46Z",
+      "side": 1,
+      "message": "Note: this is a slightly unrelated but trivial update to match the function linked above.",
+      "revId": "fb50d22a16a7377a1431624df3a41bd45c2351fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
