@@ -16,6 +16,23 @@
       "revId": "2892ad472945da9b6c57fafdd282799c8059dc26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "666778a0_5d43b178",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-01T08:03:07Z",
+      "side": 1,
+      "message": "LGTM overall, but I think we still need to address this comment https://dawn-review.googlesource.com/c/dawn/+/27182/comment/ba17acf8_e8eed258/ we\u0027re missing validation that (when specified) the pipeline\u0027s index format must match the setIndexBuffer\u0027s index format.",
+      "revId": "2892ad472945da9b6c57fafdd282799c8059dc26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
