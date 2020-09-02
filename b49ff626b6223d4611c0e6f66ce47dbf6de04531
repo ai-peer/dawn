@@ -19,6 +19,91 @@
     },
     {
       "key": {
+        "uuid": "c5d71a25_e97b60c9",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T12:07:40Z",
+      "side": 1,
+      "message": "We also need barriers for uniform and sampled textures potentially,",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad37cd33_bc4acfd0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T12:07:40Z",
+      "side": 1,
+      "message": "Ditto, we need barriers for uniform and sampled textures.",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70d19325_c4ecb211",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T12:07:40Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the correct solution. The problem is that previously the same restrictions applied to Render and Compute passes, doing PrepareResourcesForSubmission worked, and the BindGroupGroupTracker helped just do \"UAV barriers\" between two dispatches that used the same resource.\n\nNow each dispatch is its own usage scope, so validation of usages should happen per-dispatch (I don\u0027t think it is implemented at the moment :( ), and the equivalent of PrepareResourcesForSubmission should happen per dispatch, nor per compute pass.\n\nInstead of adding more things to PrepareResourcesForSubmission, on Dispatch in the D3D12 we should walk all the currently bound bindgroups and transition each resource separately. There\u0027s some slight optimization that could be done later, but it will get us in a correct place first.",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee4fff6_c17149dc",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T12:07:40Z",
+      "side": 1,
+      "message": "nit: just inline \"1\" in the calls to CreateTexture?",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c6cd979_0ebc1696",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T12:07:40Z",
+      "side": 1,
+      "message": "nit: We shouldn\u0027t need these two barriers.",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f2bbf07_6d413d41",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 5
