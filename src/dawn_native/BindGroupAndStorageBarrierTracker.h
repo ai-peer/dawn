@@ -57,13 +57,13 @@ namespace dawn_native {
                     mBindingTypes[index][bindingIndex] = bindingInfo.type;
                     switch (bindingInfo.type) {
                         case wgpu::BindingType::UniformBuffer:
-                        case wgpu::BindingType::ReadonlyStorageBuffer:
                         case wgpu::BindingType::Sampler:
                         case wgpu::BindingType::ComparisonSampler:
                         case wgpu::BindingType::SampledTexture:
                             // Don't require barriers.
                             break;
 
+                        case wgpu::BindingType::ReadonlyStorageBuffer:
                         case wgpu::BindingType::StorageBuffer:
                             mBindingsNeedingBarrier[index].set(bindingIndex);
                             mBindings[index][bindingIndex] = static_cast<ObjectBase*>(
