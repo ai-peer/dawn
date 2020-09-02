@@ -22,6 +22,30 @@
       "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "128f9158_2945e6a4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-02T17:48:09Z",
+      "side": 0,
+      "message": "Done, added it being called to InitializeBase",
+      "parentUuid": "fa914d05_133a814b",
+      "range": {
+        "startLine": 1284,
+        "startChar": 8,
+        "endLine": 1284,
+        "endChar": 78
+      },
+      "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
