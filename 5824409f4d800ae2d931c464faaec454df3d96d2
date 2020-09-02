@@ -39,6 +39,30 @@
       "revId": "5824409f4d800ae2d931c464faaec454df3d96d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9d0d045_8699cce8",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T08:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a004bb41_63acb50e",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "5824409f4d800ae2d931c464faaec454df3d96d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
