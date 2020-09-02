@@ -137,7 +137,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         VkImageCreateInfo createInfo = baseCreateInfo;
         createInfo.pNext = &externalMemoryImageCreateInfo;
         createInfo.flags = VK_IMAGE_CREATE_ALIAS_BIT_KHR;
-        createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+        createInfo.tiling = VK_IMAGE_TILING_LINEAR;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
         ASSERT(IsSampleCountSupported(mDevice, createInfo));
