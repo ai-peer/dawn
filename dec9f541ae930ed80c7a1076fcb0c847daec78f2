@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2792f15f_8c3df095",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T17:05:42Z",
+      "side": 1,
+      "message": "unit: initialize the variable on the same line",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 169,
+        "endChar": 38
+      },
+      "revId": "dec9f541ae930ed80c7a1076fcb0c847daec78f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f3fc076_937bbba4",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T17:05:42Z",
+      "side": 1,
+      "message": "unit: declare + initialize these below",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "dec9f541ae930ed80c7a1076fcb0c847daec78f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

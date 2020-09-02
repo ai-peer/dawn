@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa914d05_133a814b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T17:05:42Z",
+      "side": 0,
+      "message": "without using SPVC, do we still have this pass? Might need to add it again separately if we don\u0027t want to lose coverage.",
+      "range": {
+        "startLine": 1284,
+        "startChar": 8,
+        "endLine": 1284,
+        "endChar": 78
+      },
+      "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
