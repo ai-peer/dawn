@@ -87,6 +87,24 @@
       "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "857128fe_76188b24",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-02T10:45:51Z",
+      "side": 1,
+      "message": "The original problem from TFJS team is that we notice that before beginning a compute pass we transition the buffers into STORAGE in PrepareResourcesForSubmission(), while in the first dispatch we see another barrier is added on that buffer (it is a UAV barrier as the buffer has already been transitioned into a UAV). While we want to save that barrier, I find another issue that will cause Dawn crash. Then comes this patch to fix both of these problems.",
+      "parentUuid": "bc38e1d8_e128d70c",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
