@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2304fba_f5bf34eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T00:00:08Z",
+      "side": 1,
+      "message": "PTAL!\n\nThe code here probably intended to do a Vulkan render pass w/ load op for renderable textures.\nFor now, I\u0027m going to leave this as a future optimization.",
+      "revId": "e208dca136ed705073f725630225beed84661066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
