@@ -90,10 +90,15 @@ class TextureSubresourceTest : public DawnTest {
         wgpu::ShaderModule vsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
                 #version 450
+                layout (location = 0) out vec2 fUV;
                 void main() {
                     const vec2 pos[6] = vec2[6](
                         vec2(-1.f, -1.f), vec2(1.f, 1.f), vec2(-1.f, 1.f),
                         vec2(-1.f, -1.f), vec2(1.f, -1.f), vec2(1.f, 1.f));
+                    const vec2 uv[6] = vec2[6](
+                        vec2(0.f, 1.f), vec2(1.f, 0.f), vec2(0.f, 0.f),
+                        vec2(0.f, 1.f), vec2(1.f, 1.f), vec2(1.f, 0.f));
+                    fUV = uv[gl_VertexIndex];
                     gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
                  })");
 
@@ -102,9 +107,10 @@ class TextureSubresourceTest : public DawnTest {
                 #version 450
                 layout (set = 0, binding = 0) uniform sampler samp;
                 layout (set = 0, binding = 1) uniform texture2D tex;
+                layout (location = 0) in vec2 fUV;
                 layout (location = 0) out vec4 fragColor;
                 void main() {
-                    fragColor = texture(sampler2D(tex, samp), gl_FragCoord.xy / 4);
+                    fragColor = texture(sampler2D(tex, samp), fUV);
                 })");
 
         utils::ComboRenderPipelineDescriptor descriptor(device);
@@ -153,12 +159,21 @@ TEST_P(TextureSubresourceTest, MipmapLevelsTest) {
     // Sample from one subresource and draw into another subresource in the same texture
     SampleAndDraw(samplerView, renderView);
 
-    // Verify that pixel at bottom-left corner is red, while pixel at top-right corner is background
-    // black in render view (mip level 1).
-    RGBA8 topRight = RGBA8::kBlack;
-    RGBA8 bottomLeft = RGBA8::kRed;
-    EXPECT_TEXTURE_RGBA8_EQ(&topRight, texture, kSize / 2 - 1, 0, 1, 1, 1, 0);
-    EXPECT_TEXTURE_RGBA8_EQ(&bottomLeft, texture, 0, kSize / 2 - 1, 1, 1, 1, 0);
+    // Check both subresources.
+    std::vector<RGBA8> mip0Expected = {
+        RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kRed,   RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kRed,   RGBA8::kRed,   RGBA8::kBlack,  //
+    };
+
+    std::vector<RGBA8> mip1Expected = {
+        RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed, RGBA8::kBlack,    //
+    };
+
+    EXPECT_TEXTURE_EQ(mip0Expected.data(), texture, 0, 0, kSize, kSize, 0);
+    EXPECT_TEXTURE_EQ(mip1Expected.data(), texture, 0, 0, kSize / 2, kSize / 2, 1);
 }
 
 // Test different array layers
@@ -179,12 +194,16 @@ TEST_P(TextureSubresourceTest, ArrayLayersTest) {
     // Sample from one subresource and draw into another subresource in the same texture
     SampleAndDraw(samplerView, renderView);
 
-    // Verify that pixel at bottom-left corner is red, while pixel at top-right corner is background
-    // black in render view (array layer 1).
-    RGBA8 topRight = RGBA8::kBlack;
-    RGBA8 bottomLeft = RGBA8::kRed;
-    EXPECT_TEXTURE_RGBA8_EQ(&topRight, texture, kSize - 1, 0, 1, 1, 0, 1);
-    EXPECT_TEXTURE_RGBA8_EQ(&bottomLeft, texture, 0, kSize - 1, 1, 1, 0, 1);
+    // Check both subresources.
+    std::vector<RGBA8> expected = {
+        RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kBlack, RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kRed,   RGBA8::kBlack, RGBA8::kBlack,  //
+        RGBA8::kRed,   RGBA8::kRed,   RGBA8::kRed,   RGBA8::kBlack,  //
+    };
+
+    EXPECT_TEXTURE_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_TEXTURE_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 1);
 }
 
 // TODO (yunchao.he@intel.com):
