@@ -16,6 +16,40 @@
       "revId": "8f3c0406b72815f058523c99f22ec0bb8decc1a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81877752_8d6064f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T07:45:32Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "8f3c0406b72815f058523c99f22ec0bb8decc1a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "760360e0_fa966bec",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T07:45:32Z",
+      "side": 1,
+      "message": "nit: this could be private to force usage through GetTexelBlockInfo",
+      "revId": "8f3c0406b72815f058523c99f22ec0bb8decc1a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
