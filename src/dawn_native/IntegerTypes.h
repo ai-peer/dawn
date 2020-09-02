@@ -27,14 +27,23 @@ namespace dawn_native {
     // Binding numbers get mapped to a packed range of indices
     using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;
 
-    using BindGroupIndex = TypedInteger<struct BindGroupIndexT, uint32_t>;
+    using BindGroupIndex = TypedInteger<struct BindGroupIndexT, decltype(kMaxBindGroups)>;
 
     static constexpr BindGroupIndex kMaxBindGroupsTyped = BindGroupIndex(kMaxBindGroups);
 
-    using ColorAttachmentIndex = TypedInteger<struct ColorAttachmentIndexT, uint8_t>;
+    using ColorAttachmentIndex =
+        TypedInteger<struct ColorAttachmentIndexT, decltype(kMaxColorAttachments)>;
 
     constexpr ColorAttachmentIndex kMaxColorAttachmentsTyped =
         ColorAttachmentIndex(kMaxColorAttachments);
+
+    using VertexBufferSlot = TypedInteger<struct VertexBufferSlotT, decltype(kMaxVertexBuffers)>;
+    using VertexAttributeLocation =
+        TypedInteger<struct VertexAttributeLocationT, decltype(kMaxColorAttachments)>;
+
+    constexpr VertexBufferSlot kMaxVertexBuffersTyped = VertexBufferSlot(kMaxVertexBuffers);
+    constexpr VertexAttributeLocation kMaxVertexAttributesTyped =
+        VertexAttributeLocation(kMaxVertexAttributes);
 
 }  // namespace dawn_native
 
