@@ -16,6 +16,23 @@
       "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2bbf07_6d413d41",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T09:34:49Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this is disallowed by the validation rules (but we don\u0027t validate things properly for compute passes yet).\n\nHowever it raised another issue for buffer: https://github.com/gpuweb/gpuweb/issues/1044",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
