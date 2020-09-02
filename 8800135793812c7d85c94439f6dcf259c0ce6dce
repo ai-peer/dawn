@@ -46,6 +46,30 @@
       "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46572362_8859d85f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-02T19:26:38Z",
+      "side": 0,
+      "message": "From investigating the test issues I am seeing, it is adding in the robust passes that are causing things to fail. I realized that we never had the robust access pass on for non-spvc code, so I am going to keep the existing behaviour, i.e. no robust for non-spvc, and file a bug, https://bugs.chromium.org/p/dawn/issues/detail?id\u003d523, for getting it working.",
+      "parentUuid": "128f9158_2945e6a4",
+      "range": {
+        "startLine": 1284,
+        "startChar": 8,
+        "endLine": 1284,
+        "endChar": 78
+      },
+      "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
