@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "687d5b12_cb522dcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T15:50:43Z",
+      "side": 1,
+      "message": "I think the failure is because this condition needs to be updated. https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/metal/DeviceMTL.mm;l\u003d66?q\u003dDeviceMTL",
+      "revId": "fd2277ac4818256a21b57ce8439b60e078488d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
