@@ -33,6 +33,24 @@
       "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bcf0f55_420d491b",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-02T10:32:08Z",
+      "side": 1,
+      "message": "I still remember such usage is disallowed in render pass, so do you mean in a compute pass we cannot do such usage: write into a write-only storage texture (storage buffer), and read from it (as a read-only storage texture or read-only storage buffer) afterwards?\n\nIf we want to do this in tfjs, then we must begin different compute passes for such usage?",
+      "parentUuid": "5f2bbf07_6d413d41",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
