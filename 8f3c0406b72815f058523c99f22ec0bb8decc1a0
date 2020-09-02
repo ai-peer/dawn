@@ -50,6 +50,24 @@
       "revId": "8f3c0406b72815f058523c99f22ec0bb8decc1a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d3c2749_0a7bd8ed",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T18:48:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "760360e0_fa966bec",
+      "revId": "8f3c0406b72815f058523c99f22ec0bb8decc1a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
