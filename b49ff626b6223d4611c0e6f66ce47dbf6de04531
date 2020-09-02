@@ -69,6 +69,24 @@
       "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc38e1d8_e128d70c",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T10:40:10Z",
+      "side": 1,
+      "message": "Sorry I was confused because at the same time I found a real issue in the spec. Let me take another look.",
+      "parentUuid": "21a9785d_85da2b13",
+      "revId": "b49ff626b6223d4611c0e6f66ce47dbf6de04531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
