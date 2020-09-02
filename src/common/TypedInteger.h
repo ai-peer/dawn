@@ -101,6 +101,14 @@ namespace detail {
         TYPED_COMPARISON(!=)
 #undef TYPED_COMPARISON
 
+#define TYPED_BINOP(op)                                                         \
+    constexpr TypedIntegerImpl operator op(const TypedIntegerImpl& rhs) const { \
+        return TypedIntegerImpl(static_cast<T>(mValue op rhs.mValue));          \
+    }
+        TYPED_BINOP(+)
+        TYPED_BINOP(-)
+#undef TYPED_BINOP
+
         // Increment / decrement operators for for-loop iteration
         constexpr TypedIntegerImpl& operator++() {
             ASSERT(this->mValue < std::numeric_limits<T>::max());
