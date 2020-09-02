@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "1c1649f8_ed5eb2cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-02T15:02:14Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "edadd4c1c28e8fbc879221df0efe5eddb17968cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94d97014_29d2fdba",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-02T15:02:14Z",
+      "side": 1,
+      "message": "Nit: precompute the redundant computation? i.e.,\n\nbool isZero \u003d clearValue \u003d\u003d TextureBase::ClearValue::Zero;\nuint32_t uClearColor \u003d isZero ? 0 : 1;\netc.\n\nAlternatively, the last two vars could just be casts from the first one, but signed/unsigned casts always make me squint.",
+      "revId": "edadd4c1c28e8fbc879221df0efe5eddb17968cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f23d87c4_62c099c2",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 6
