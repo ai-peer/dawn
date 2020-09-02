@@ -251,11 +251,16 @@ namespace dawn_native { namespace d3d12 {
                                                                  view->GetSubresourceRange());
                                 break;
                             }
+                            case wgpu::BindingType::ReadonlyStorageBuffer:
+                                static_cast<Buffer*>(mBindings[index][binding])
+                                    ->TrackUsageAndTransitionNow(commandContext,
+                                                                 kReadOnlyStorageBuffer);
+                                break;
+
                             case wgpu::BindingType::StorageTexture:
                                 // Not implemented.
 
                             case wgpu::BindingType::UniformBuffer:
-                            case wgpu::BindingType::ReadonlyStorageBuffer:
                             case wgpu::BindingType::Sampler:
                             case wgpu::BindingType::ComparisonSampler:
                             case wgpu::BindingType::SampledTexture:
@@ -564,7 +569,8 @@ namespace dawn_native { namespace d3d12 {
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
         auto PrepareResourcesForSubmission = [](CommandRecordingContext* commandContext,
-                                                const PassResourceUsage& usages) -> bool {
+                                                const PassResourceUsage& usages,
+                                                bool ForComputePass) -> bool {
             std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
             ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
@@ -578,9 +584,24 @@ namespace dawn_native { namespace d3d12 {
                 // ClearUnorderedAccessView*().
                 buffer->GetDevice()->ConsumedError(buffer->EnsureDataInitialized(commandContext));
 
+                wgpu::BufferUsage bufferUsageToTransition = usages.bufferUsages[i];
+
+                if (ForComputePass) {
+                    // D3D12 Validation layer treats UAV and SRV as invalid combination of state
+                    // bits so we cannot set them together.
+                    // The state of the storage buffers and read-only storage buffers will always be
+                    // transitioned before dispatch().
+                    // TODO(jiawei.shao@intel.com): fix this issue for storage textures.
+                    bufferUsageToTransition &=
+                        ~(wgpu::BufferUsage::Storage | kReadOnlyStorageBuffer);
+                    if (bufferUsageToTransition == wgpu::BufferUsage::None) {
+                        continue;
+                    }
+                }
+
                 D3D12_RESOURCE_BARRIER barrier;
                 if (buffer->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                            usages.bufferUsages[i])) {
+                                                            bufferUsageToTransition)) {
                     barriers.push_back(barrier);
                 }
                 bufferUsages |= usages.bufferUsages[i];
@@ -624,7 +645,7 @@ namespace dawn_native { namespace d3d12 {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
                     PrepareResourcesForSubmission(commandContext,
-                                                  passResourceUsages[nextPassNumber]);
+                                                  passResourceUsages[nextPassNumber], true);
                     bindingTracker.SetInComputePass(true);
                     DAWN_TRY(RecordComputePass(commandContext, &bindingTracker));
 
@@ -637,7 +658,7 @@ namespace dawn_native { namespace d3d12 {
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
                     const bool passHasUAV = PrepareResourcesForSubmission(
-                        commandContext, passResourceUsages[nextPassNumber]);
+                        commandContext, passResourceUsages[nextPassNumber], false);
                     bindingTracker.SetInComputePass(false);
 
                     LazyClearRenderPassAttachments(beginRenderPassCmd);
