@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "c915cef3_81318d5b",
+        "filename": "src/dawn_native/AttachmentState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T19:33:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac5f2176_3c532d23",
+      "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fb39ca0_5c31203b",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e35b557_a4229b6c",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T19:33:10Z",
+      "side": 1,
+      "message": "I made IntegerTypes.h instead",
+      "parentUuid": "7fb39ca0_5c31203b",
+      "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
