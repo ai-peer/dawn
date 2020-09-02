@@ -224,9 +224,10 @@ namespace dawn_native { namespace opengl {
         gl.GenVertexArrays(1, &mVertexArrayObject);
         gl.BindVertexArray(mVertexArrayObject);
 
-        for (uint32_t location : IterateBitSet(GetAttributeLocationsUsed())) {
+        for (VertexAttributeLocation location : IterateBitSet(GetAttributeLocationsUsed())) {
             const auto& attribute = GetAttribute(location);
-            gl.EnableVertexAttribArray(location);
+            GLuint glAttrib = static_cast<GLuint>(static_cast<uint8_t>(location));
+            gl.EnableVertexAttribArray(glAttrib);
 
             attributesUsingVertexBuffer[attribute.vertexBufferSlot][location] = true;
             const VertexBufferInfo& vertexBuffer = GetVertexBuffer(attribute.vertexBufferSlot);
@@ -234,13 +235,13 @@ namespace dawn_native { namespace opengl {
             if (vertexBuffer.arrayStride == 0) {
                 // Emulate a stride of zero (constant vertex attribute) by
                 // setting the attribute instance divisor to a huge number.
-                gl.VertexAttribDivisor(location, 0xffffffff);
+                gl.VertexAttribDivisor(glAttrib, 0xffffffff);
             } else {
                 switch (vertexBuffer.stepMode) {
                     case wgpu::InputStepMode::Vertex:
                         break;
                     case wgpu::InputStepMode::Instance:
-                        gl.VertexAttribDivisor(location, 1);
+                        gl.VertexAttribDivisor(glAttrib, 1);
                         break;
                     default:
                         UNREACHABLE();
