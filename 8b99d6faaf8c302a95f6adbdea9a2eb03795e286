@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f8093108_0e453f2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-02T08:46:19Z",
+      "side": 1,
+      "message": "OK, I\u0027ve submitted the spec changes: https://github.com/gpuweb/gpuweb/pull/1042.\nIf we want to resolve unused queries to 0, we need find all unused query indexes, calculate the range of used queries, then call resolve method for many times if users skip many indexes when writing values. \n\nAnother reason is that a query set can only store one type of query values, we cannot reserve space to write other data. And timestamps are also the values that need to be compared in order, so I think it\u0027s meaningless to write to the queries discontinuously, it wastes the resources.",
+      "parentUuid": "624cd6f6_e1b6b3f9",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c14d8e6_b72c8ac8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "f418f876_474d9cd6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-02T08:46:19Z",
+      "side": 1,
+      "message": "Thanks, this\u0027s a better way.",
+      "parentUuid": "e48fbf3e_d143f84f",
+      "range": {
+        "startLine": 474,
+        "startChar": 12,
+        "endLine": 481,
+        "endChar": 13
+      },
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dca9489a_1fe2f822",
         "filename": "src/dawn_native/QuerySet.cpp",
         "patchSetId": 4
@@ -70,6 +112,30 @@
       "writtenOn": "2020-08-31T16:55:41Z",
       "side": 1,
       "message": "mm, I don\u0027t think these methods should be on the QuerySet. There can be multiple command encoders recorded simultaneously, and then submitted later, so they should not use tracking state on the query set. Each encoder needs to have its own local state for tracking which query set indices are used.",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 5
+      },
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4de83d75_597bf7a2",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-02T08:46:19Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a problem, I will fix it.",
+      "parentUuid": "dca9489a_1fe2f822",
       "range": {
         "startLine": 137,
         "startChar": 4,
