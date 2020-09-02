@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b56cc44_3bec8e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-02T04:53:19Z",
+      "side": 1,
+      "message": "TBRing since this is a DEPS only change.",
+      "revId": "dd01fa961ddc0c235083ed5d5e2c5f396284bbca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
