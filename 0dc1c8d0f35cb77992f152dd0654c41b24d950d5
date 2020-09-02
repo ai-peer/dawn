@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db301c13_fd83b86e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T14:49:59Z",
+      "side": 1,
+      "message": "LGTM overall with a couple comments for buildflags and an issue about VertexPullingTransform. Also we should update the reference to SPVC in docs/overview.md",
+      "revId": "0dc1c8d0f35cb77992f152dd0654c41b24d950d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba2c84bf_395db0ac",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T14:49:59Z",
+      "side": 1,
+      "message": "Instead of this, targets that require spirv headers can add a dep on \"${dawn_spirv_headers_dir}:spv_headers\" that\u0027s defined in https://source.chromium.org/chromium/chromium/src/+/master:third_party/spirv-headers/src/BUILD.gn;l\u003d29 and implicitly adds a config with the include directory.",
+      "revId": "0dc1c8d0f35cb77992f152dd0654c41b24d950d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8ad0bbf_f1e19872",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T14:49:59Z",
+      "side": 1,
+      "message": "Could this be in a //third_party/gn/spirv_cross? It\u0027s important to not bundle all third_party BUILD.gn files together in //third_party/BUILD.gn otherwise if a single one of these dependencies is found, then they will all be built (even if they aren\u0027t supported in the current configuration).\n\nHaving no //third_party/BUILD.gn helps make sure this doesn\u0027t happen.",
+      "revId": "0dc1c8d0f35cb77992f152dd0654c41b24d950d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
