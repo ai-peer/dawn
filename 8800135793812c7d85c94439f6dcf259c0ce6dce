@@ -70,6 +70,30 @@
       "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c300f63_78a4713e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-02T19:32:09Z",
+      "side": 0,
+      "message": "Ok to do in a follow-up, but the crash you\u0027re seeing looks more like we have some bug in the initialization/teardown code. We cache objects only on successfully initialization, and we shouldn\u0027t be trying to uncache anything on destruction unless caching was actually successful.",
+      "parentUuid": "46572362_8859d85f",
+      "range": {
+        "startLine": 1284,
+        "startChar": 8,
+        "endLine": 1284,
+        "endChar": 78
+      },
+      "revId": "8800135793812c7d85c94439f6dcf259c0ce6dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
