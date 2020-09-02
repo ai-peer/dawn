@@ -16,6 +16,29 @@
       "revId": "e208dca136ed705073f725630225beed84661066",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "969ff451_9ab8b511",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-02T00:34:27Z",
+      "side": 1,
+      "message": "Actually VkClearColorValue is a union which has different members for different texture formats (float, int, uint}.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkClearColorValue.html",
+      "range": {
+        "startLine": 933,
+        "startChar": 2,
+        "endLine": 934,
+        "endChar": 78
+      },
+      "revId": "e208dca136ed705073f725630225beed84661066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
