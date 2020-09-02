@@ -16,6 +16,57 @@
       "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f647031_4bf9f815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T07:57:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac5f2176_3c532d23",
+        "filename": "src/dawn_native/AttachmentState.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T07:57:35Z",
+      "side": 1,
+      "message": "nit: this for-loop could be done similarly to the ones above so that i is a ColorAttachmentIndex",
+      "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fb39ca0_5c31203b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T07:57:35Z",
+      "side": 1,
+      "message": "This seems a bit unnecessary. Maybe all typed integers should be in a single header (Forward.h?)",
+      "revId": "fced9a575428f89fa2c72191f542b73b8388e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
