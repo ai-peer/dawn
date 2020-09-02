@@ -674,7 +674,7 @@ namespace dawn_native { namespace vulkan {
         }
         if (!mExternalMemoryService->SupportsImportMemory(
                 VulkanImageFormat(this, textureDescriptor->format), VK_IMAGE_TYPE_2D,
-                VK_IMAGE_TILING_OPTIMAL,
+                VK_IMAGE_TILING_LINEAR,
                 VulkanImageUsage(textureDescriptor->usage,
                                  GetValidInternalFormat(textureDescriptor->format)),
                 VK_IMAGE_CREATE_ALIAS_BIT_KHR)) {

@@ -49,7 +49,7 @@ namespace dawn_native { namespace vulkan {
                 externalInfo.pNext = nullptr;
                 externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
 
-                auto usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
+                auto usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
                              VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
                 VkImageCreateInfo createInfo;
@@ -62,7 +62,7 @@ namespace dawn_native { namespace vulkan {
                 createInfo.mipLevels = 1;
                 createInfo.arrayLayers = 1;
                 createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
-                createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+                createInfo.tiling = VK_IMAGE_TILING_LINEAR;
                 createInfo.usage = usage;
                 createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
                 createInfo.queueFamilyIndexCount = 0;
@@ -213,8 +213,7 @@ namespace dawn_native { namespace vulkan {
             defaultDescriptor.size = {1, 1, 1};
             defaultDescriptor.sampleCount = 1;
             defaultDescriptor.mipLevelCount = 1;
-            defaultDescriptor.usage = wgpu::TextureUsage::OutputAttachment |
-                                      wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+            defaultDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
         }
 
         void TearDown() override {
@@ -374,8 +373,7 @@ namespace dawn_native { namespace vulkan {
             defaultDescriptor.size = {1, 1, 1};
             defaultDescriptor.sampleCount = 1;
             defaultDescriptor.mipLevelCount = 1;
-            defaultDescriptor.usage = wgpu::TextureUsage::OutputAttachment |
-                                      wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+            defaultDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
         }
 
         void TearDown() override {
