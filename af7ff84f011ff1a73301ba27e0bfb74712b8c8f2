@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c14023d5_57259256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-03T06:38:01Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, this patch is a preparation of https://dawn-review.googlesource.com/c/dawn/+/27942, where I find it is not performant to generate one barrier for each resource in the bind group before dispatch. PTAL, thanks!",
+      "revId": "af7ff84f011ff1a73301ba27e0bfb74712b8c8f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
