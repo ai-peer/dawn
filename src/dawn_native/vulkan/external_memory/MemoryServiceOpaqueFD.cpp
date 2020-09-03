@@ -68,11 +68,14 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
             return false;
         }
 
-        // TODO(http://crbug.com/dawn/206): Investigate dedicated only images
         VkFlags memoryFlags =
             externalFormatProperties.externalMemoryProperties.externalMemoryFeatures;
-        return (memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR) &&
-               !(memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR);
+
+        if ((memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR) != 0 &&
+            !mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation)) {
+            return false;
+        }
+        return (memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR) != 0;
     }
 
     bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
@@ -90,8 +93,31 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         const ExternalImageDescriptorOpaqueFD* opaqueFDDescriptor =
             static_cast<const ExternalImageDescriptorOpaqueFD*>(descriptor);
 
-        MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
-                                     opaqueFDDescriptor->memoryTypeIndex};
+        VkDevice device = mDevice->GetVkDevice();
+
+        // Get the valid memory types for the VkImage.
+        VkMemoryRequirements memoryRequirements;
+        mDevice->fn.GetImageMemoryRequirements(device, image, &memoryRequirements);
+
+        VkMemoryFdPropertiesKHR fdProperties;
+        fdProperties.sType = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
+        fdProperties.pNext = nullptr;
+
+        // Get the valid memory types that the external memory can be imported as.
+        mDevice->fn.GetMemoryFdPropertiesKHR(device, VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
+                                             opaqueFDDescriptor->memoryFD, &fdProperties);
+
+        // Choose the best memory type that satisfies both the image's constraint and the import's
+        // constraint.
+        memoryRequirements.memoryTypeBits &= fdProperties.memoryTypeBits;
+        int memoryTypeIndex =
+            mDevice->FindBestMemoryTypeIndex(memoryRequirements, false /* mappable */);
+        if (memoryTypeIndex == -1) {
+            return DAWN_VALIDATION_ERROR("Unable to find appropriate memory type for import");
+        }
+        MemoryImportParams params = {memoryRequirements.size,
+                                     static_cast<uint32_t>(memoryTypeIndex)};
+
         return params;
     }
 
@@ -102,9 +128,44 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
             return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
         }
 
-        VkMemoryRequirements requirements;
-        mDevice->fn.GetImageMemoryRequirements(mDevice->GetVkDevice(), image, &requirements);
-        if (requirements.size > importParams.allocationSize) {
+        VkMemoryDedicatedRequirements dedicatedMemoryRequirements;
+        dedicatedMemoryRequirements.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+        dedicatedMemoryRequirements.pNext = nullptr;
+
+        VkMemoryRequirements2 requirements;
+        requirements.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+        requirements.pNext = &dedicatedMemoryRequirements;
+
+        VkImageMemoryRequirementsInfo2 requirementsInfo;
+        requirementsInfo.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
+        requirementsInfo.pNext = nullptr;
+        requirementsInfo.image = image;
+
+        bool useDedicatedAllocation = false;
+        if (mDevice->GetDeviceInfo().HasExt(DeviceExt::GetMemoryRequirements2)) {
+            // If we have the extension, use it to get memory requirements.
+            mDevice->fn.GetImageMemoryRequirements2(mDevice->GetVkDevice(), &requirementsInfo,
+                                                    &requirements);
+
+            bool hasDedicatedAllocation =
+                mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);
+            if (dedicatedMemoryRequirements.requiresDedicatedAllocation &&
+                !hasDedicatedAllocation) {
+                return DAWN_VALIDATION_ERROR("Cannot import dedicated allocation");
+            }
+
+            useDedicatedAllocation = hasDedicatedAllocation &&
+                                     (dedicatedMemoryRequirements.requiresDedicatedAllocation ||
+                                      dedicatedMemoryRequirements.prefersDedicatedAllocation);
+        } else {
+            // Otherwise, use the unextended version. We only need GetMemoryRequirements2 if the
+            // imported image is a dedicated allocation. If it is dedicated, allocation will fail
+            // later.
+            mDevice->fn.GetImageMemoryRequirements(mDevice->GetVkDevice(), requirementsInfo.image,
+                                                   &requirements.memoryRequirements);
+        }
+
+        if (requirements.memoryRequirements.size > importParams.allocationSize) {
             return DAWN_VALIDATION_ERROR("Requested allocation size is too small for image");
         }
 
@@ -113,6 +174,15 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         importMemoryFdInfo.pNext = nullptr;
         importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
         importMemoryFdInfo.fd = handle;
+
+        VkMemoryDedicatedAllocateInfo memoryDedicatedAllocateInfo;
+        if (useDedicatedAllocation) {
+            importMemoryFdInfo.pNext = &memoryDedicatedAllocateInfo;
+            memoryDedicatedAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+            memoryDedicatedAllocateInfo.pNext = nullptr;
+            memoryDedicatedAllocateInfo.image = image;
+            memoryDedicatedAllocateInfo.buffer = VkBuffer{};
+        }
 
         VkMemoryAllocateInfo allocateInfo;
         allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;

@@ -294,6 +294,10 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(GetSemaphoreFdKHR);
         }
 
+        if (deviceInfo.HasExt(DeviceExt::GetMemoryRequirements2)) {
+            GET_DEVICE_PROC(GetImageMemoryRequirements2);
+        }
+
 #if VK_USE_PLATFORM_FUCHSIA
         if (deviceInfo.HasExt(DeviceExt::ExternalMemoryZirconHandle)) {
             GET_DEVICE_PROC(GetMemoryZirconHandleFUCHSIA);

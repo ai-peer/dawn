@@ -79,6 +79,7 @@ namespace dawn_native { namespace vulkan {
         StorageBufferStorageClass,
         GetPhysicalDeviceProperties2,
         GetMemoryRequirements2,
+        DedicatedAllocation,
         ExternalMemoryCapabilities,
         ExternalSemaphoreCapabilities,
         ExternalMemory,

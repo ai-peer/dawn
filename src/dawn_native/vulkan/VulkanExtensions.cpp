@@ -143,6 +143,7 @@ namespace dawn_native { namespace vulkan {
         {DeviceExt::GetPhysicalDeviceProperties2, "VK_KHR_get_physical_device_properties2",
          VulkanVersion_1_1},
         {DeviceExt::GetMemoryRequirements2, "VK_KHR_get_memory_requirements2", VulkanVersion_1_1},
+        {DeviceExt::DedicatedAllocation, "VK_KHR_dedicated_allocation", VulkanVersion_1_1},
         {DeviceExt::ExternalMemoryCapabilities, "VK_KHR_external_memory_capabilities",
          VulkanVersion_1_1},
         {DeviceExt::ExternalSemaphoreCapabilities, "VK_KHR_external_semaphore_capabilities",
@@ -257,6 +258,10 @@ namespace dawn_native { namespace vulkan {
                                       HasDep(DeviceExt::BindMemory2) &&
                                       HasDep(DeviceExt::GetMemoryRequirements2) &&
                                       HasDep(DeviceExt::GetPhysicalDeviceProperties2);
+                    break;
+
+                case DeviceExt::DedicatedAllocation:
+                    hasDependencies = HasDep(DeviceExt::GetMemoryRequirements2);
                     break;
 
                 case DeviceExt::ShaderFloat16Int8:
