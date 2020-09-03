@@ -72,6 +72,10 @@ namespace dawn_native { namespace d3d12 {
                                            wgpu::TextureUsage usage);
         void TrackAllUsageAndTransitionNow(CommandRecordingContext* commandContext,
                                            D3D12_RESOURCE_STATES newState);
+        void TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
+                                                  std::vector<D3D12_RESOURCE_BARRIER>* barrier,
+                                                  wgpu::TextureUsage usage,
+                                                  const SubresourceRange& range);
 
       private:
         Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
