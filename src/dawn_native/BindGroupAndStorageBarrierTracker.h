@@ -42,9 +42,7 @@ namespace dawn_native {
             if (this->mBindGroups[index] != bindGroup) {
                 const BindGroupLayoutBase* layout = bindGroup->GetLayout();
 
-                mBindings[index].resize(layout->GetBindingCount());
                 mBindingTypes[index].resize(layout->GetBindingCount());
-                mBindingsNeedingBarrier[index] = {};
 
                 for (BindingIndex bindingIndex{0}; bindingIndex < layout->GetBindingCount();
                      ++bindingIndex) {
@@ -55,37 +53,6 @@ namespace dawn_native {
                     }
 
                     mBindingTypes[index][bindingIndex] = bindingInfo.type;
-                    switch (bindingInfo.type) {
-                        case wgpu::BindingType::UniformBuffer:
-                        case wgpu::BindingType::ReadonlyStorageBuffer:
-                        case wgpu::BindingType::Sampler:
-                        case wgpu::BindingType::ComparisonSampler:
-                        case wgpu::BindingType::SampledTexture:
-                            // Don't require barriers.
-                            break;
-
-                        case wgpu::BindingType::StorageBuffer:
-                            mBindingsNeedingBarrier[index].set(bindingIndex);
-                            mBindings[index][bindingIndex] = static_cast<ObjectBase*>(
-                                bindGroup->GetBindingAsBufferBinding(bindingIndex).buffer);
-                            break;
-
-                        // Read-only and write-only storage textures must use general layout
-                        // because load and store operations on storage images can only be done on
-                        // the images in VK_IMAGE_LAYOUT_GENERAL layout.
-                        case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture:
-                            mBindingsNeedingBarrier[index].set(bindingIndex);
-                            mBindings[index][bindingIndex] = static_cast<ObjectBase*>(
-                                bindGroup->GetBindingAsTextureView(bindingIndex));
-                            break;
-
-                        case wgpu::BindingType::StorageTexture:
-                            // Not implemented.
-                        default:
-                            UNREACHABLE();
-                            break;
-                    }
                 }
             }
 
@@ -94,17 +61,9 @@ namespace dawn_native {
 
       protected:
         ityp::array<BindGroupIndex,
-                    ityp::bitset<BindingIndex, kMaxBindingsPerPipelineLayout>,
-                    kMaxBindGroups>
-            mBindingsNeedingBarrier = {};
-        ityp::array<BindGroupIndex,
                     ityp::stack_vec<BindingIndex, wgpu::BindingType, kMaxOptimalBindingsPerGroup>,
                     kMaxBindGroups>
             mBindingTypes = {};
-        ityp::array<BindGroupIndex,
-                    ityp::stack_vec<BindingIndex, ObjectBase*, kMaxOptimalBindingsPerGroup>,
-                    kMaxBindGroups>
-            mBindings = {};
     };
 
 }  // namespace dawn_native
