@@ -19,15 +19,15 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
+// TODO(rharrison): Re-enable as part of https://bugs.chromium.org/p/dawn/issues/detail?id=523
+#if 0
+
 // Vertex buffer robustness tests that clamping is applied on vertex attributes. This would happen
 // on backends where vertex pulling is enabled, such as Metal.
-
 class VertexBufferRobustnessTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        // SPVC must be used currently, since we rely on the robustness pass in it
-        DAWN_SKIP_TEST_IF(!IsSpvcBeingUsed());
     }
 
     // Creates a vertex module that tests an expression with given attributes. If successful, the
@@ -229,3 +229,5 @@ TEST_P(VertexBufferRobustnessTest, Float4Clamp) {
 }
 
 DAWN_INSTANTIATE_TEST(VertexBufferRobustnessTest, MetalBackend({"metal_enable_vertex_pulling"}));
+
+#endif
