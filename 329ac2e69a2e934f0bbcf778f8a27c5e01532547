@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6aa15f2a_cc59f400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-03T17:10:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "329ac2e69a2e934f0bbcf778f8a27c5e01532547",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaa9cf32_cf14edf8",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-03T17:10:27Z",
+      "side": 1,
+      "message": "Instead of an #if 0, can we GTEST_SKIP() in VertexBufferRobustnessTest::SetUp? This would avoid losing compilation coverage and make it clear that there are disabled tests.\n\nAlso the link can be https://crbug.com/dawn/523",
+      "revId": "329ac2e69a2e934f0bbcf778f8a27c5e01532547",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
