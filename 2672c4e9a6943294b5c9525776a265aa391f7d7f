@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04ad9775_bdb24d69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-03T12:57:50Z",
+      "side": 1,
+      "message": "LGTM, thanks for the rework!",
+      "revId": "2672c4e9a6943294b5c9525776a265aa391f7d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb547cf6_e41c648a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-03T12:57:50Z",
+      "side": 1,
+      "message": "Eek it\u0027s unfortunate that we need to special case compute passes like this. Can we have a separate PrepareResourcesForRenderPass and PrepareResourcesForComputePass with the compute pass version just doing the lazy clearing?\n\nIt\u0027s code duplication but eventually I\u0027m pretty sure we\u0027ll move the lazy clearing inside the barrier tracking, so we can add a TODO to that effect.\n\nSame comment for D3D12.",
+      "revId": "2672c4e9a6943294b5c9525776a265aa391f7d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4577204_64843e98",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-03T12:57:50Z",
+      "side": 1,
+      "message": "We just removed SPVC from Dawn, because Tint is the future. So this comment can be removed.",
+      "revId": "2672c4e9a6943294b5c9525776a265aa391f7d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
