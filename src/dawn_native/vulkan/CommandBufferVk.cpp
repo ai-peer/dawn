@@ -148,34 +148,47 @@ namespace dawn_native { namespace vulkan {
                                     mDynamicOffsetCounts, mDynamicOffsets);
 
                 for (BindGroupIndex index : IterateBitSet(mBindGroupLayoutsMask)) {
-                    for (BindingIndex bindingIndex :
-                         IterateBitSet(mBindingsNeedingBarrier[index])) {
-                        switch (mBindingTypes[index][bindingIndex]) {
+                    BindGroup* bindGroup = ToBackend(mBindGroups[index]);
+                    for (BindingIndex binding{0};
+                         binding < bindGroup->GetLayout()->GetBindingCount(); ++binding) {
+                        switch (mBindingTypes[index][binding]) {
                             case wgpu::BindingType::StorageBuffer:
-                                static_cast<Buffer*>(mBindings[index][bindingIndex])
+                            case wgpu::BindingType::ReadonlyStorageBuffer:
+                                ToBackend(bindGroup->GetBindingAsBufferBinding(binding).buffer)
                                     ->TransitionUsageNow(recordingContext,
                                                          wgpu::BufferUsage::Storage);
                                 break;
 
                             case wgpu::BindingType::ReadonlyStorageTexture:
                             case wgpu::BindingType::WriteonlyStorageTexture: {
-                                TextureViewBase* view =
-                                    static_cast<TextureViewBase*>(mBindings[index][bindingIndex]);
+                                TextureViewBase* view = bindGroup->GetBindingAsTextureView(binding);
                                 ToBackend(view->GetTexture())
                                     ->TransitionUsageNow(recordingContext,
                                                          wgpu::TextureUsage::Storage,
                                                          view->GetSubresourceRange());
                                 break;
                             }
-                            case wgpu::BindingType::StorageTexture:
-                                // Not implemented.
-
                             case wgpu::BindingType::UniformBuffer:
-                            case wgpu::BindingType::ReadonlyStorageBuffer:
+                                ToBackend(bindGroup->GetBindingAsBufferBinding(binding).buffer)
+                                    ->TransitionUsageNow(recordingContext,
+                                                         wgpu::BufferUsage::Uniform);
+                                break;
+                            case wgpu::BindingType::SampledTexture: {
+                                TextureViewBase* view = bindGroup->GetBindingAsTextureView(binding);
+                                ToBackend(view->GetTexture())
+                                    ->TransitionUsageNow(recordingContext,
+                                                         wgpu::TextureUsage::Sampled,
+                                                         view->GetSubresourceRange());
+                                break;
+                            }
+
                             case wgpu::BindingType::Sampler:
                             case wgpu::BindingType::ComparisonSampler:
-                            case wgpu::BindingType::SampledTexture:
                                 // Don't require barriers.
+                                break;
+
+                            case wgpu::BindingType::StorageTexture:
+                                // Not implemented.
 
                             default:
                                 UNREACHABLE();
@@ -431,8 +444,8 @@ namespace dawn_native { namespace vulkan {
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](Device* device, CommandRecordingContext* recordingContext,
-                                    const PassResourceUsage& usages) {
+        auto PrepareResourcesForPass = [](Device* device, CommandRecordingContext* recordingContext,
+                                          const PassResourceUsage& usages, bool forComputePass) {
             std::vector<VkBufferMemoryBarrier> bufferBarriers;
             std::vector<VkImageMemoryBarrier> imageBarriers;
             VkPipelineStageFlags srcStages = 0;
@@ -441,8 +454,13 @@ namespace dawn_native { namespace vulkan {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
                 buffer->EnsureDataInitialized(recordingContext);
-                buffer->TransitionUsageNow(recordingContext, usages.bufferUsages[i],
-                                           &bufferBarriers, &srcStages, &dstStages);
+
+                // In the compute pass the resource states will be transitioned before each
+                // dispatch() call instead of here.
+                if (!forComputePass) {
+                    buffer->TransitionUsageNow(recordingContext, usages.bufferUsages[i],
+                                               &bufferBarriers, &srcStages, &dstStages);
+                }
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
@@ -454,8 +472,13 @@ namespace dawn_native { namespace vulkan {
                     texture->EnsureSubresourceContentInitialized(recordingContext,
                                                                  texture->GetAllSubresources());
                 }
-                texture->TransitionUsageForPass(recordingContext, usages.textureUsages[i],
-                                                &imageBarriers, &srcStages, &dstStages);
+
+                // In the compute pass the resource states will be transitioned before each
+                // dispatch() call instead of here.
+                if (!forComputePass) {
+                    texture->TransitionUsageForPass(recordingContext, usages.textureUsages[i],
+                                                    &imageBarriers, &srcStages, &dstStages);
+                }
             }
 
             if (bufferBarriers.size() || imageBarriers.size()) {
@@ -644,7 +667,8 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(device, recordingContext, passResourceUsages[nextPassNumber]);
+                    PrepareResourcesForPass(device, recordingContext,
+                                            passResourceUsages[nextPassNumber], false);
 
                     LazyClearRenderPassAttachments(cmd);
                     DAWN_TRY(RecordRenderPass(recordingContext, cmd));
@@ -656,7 +680,8 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(device, recordingContext, passResourceUsages[nextPassNumber]);
+                    PrepareResourcesForPass(device, recordingContext,
+                                            passResourceUsages[nextPassNumber], true);
                     DAWN_TRY(RecordComputePass(recordingContext));
 
                     nextPassNumber++;
