@@ -27,6 +27,7 @@
 
 #include <bitset>
 #include <map>
+#include <unordered_map>
 #include <vector>
 
 namespace spirv_cross {
@@ -121,11 +122,6 @@ namespace dawn_native {
       protected:
         MaybeError InitializeBase();
 
-        // Allows backends to get the stage for the "main" entrypoint while they are transitioned to
-        // support multiple entrypoints.
-        // TODO(dawn:216): Remove this once the transition is complete.
-        SingleShaderStage GetMainEntryPointStageForTransition() const;
-
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
@@ -134,7 +130,8 @@ namespace dawn_native {
         std::vector<uint32_t> mSpirv;
         std::string mWgsl;
 
-        std::unique_ptr<EntryPointMetadata> mMainEntryPoint;
+        // A map from [name, stage] to EntryPointMetadata.
+        std::unordered_map<std::string, PerStage<std::unique_ptr<EntryPointMetadata>>> mEntryPoints;
     };
 
 }  // namespace dawn_native
