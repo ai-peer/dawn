@@ -444,14 +444,13 @@ namespace dawn_native {
         ResultOrError<std::unique_ptr<EntryPointMetadata>> ExtractSpirvInfo(
             const DeviceBase* device,
             const spirv_cross::Compiler& compiler,
-            const char* entryPointName) {
+            const std::string& entryPointName,
+            SingleShaderStage stage) {
             std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
 
             // TODO(cwallez@chromium.org): make errors here creation errors
             // currently errors here do not prevent the shadermodule from being used
             const auto& resources = compiler.get_shader_resources();
-
-            metadata->stage = ExecutionModelToShaderStage(compiler.get_execution_model());
 
             if (resources.push_constant_buffers.size() > 0) {
                 return DAWN_VALIDATION_ERROR("Push constants aren't supported.");
@@ -585,7 +584,7 @@ namespace dawn_native {
                                              &metadata->bindings));
 
             // Extract the vertex attributes
-            if (metadata->stage == SingleShaderStage::Vertex) {
+            if (stage == SingleShaderStage::Vertex) {
                 for (const auto& attrib : resources.stage_inputs) {
                     if (!(compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation))) {
                         return DAWN_VALIDATION_ERROR(
@@ -609,7 +608,7 @@ namespace dawn_native {
                 }
             }
 
-            if (metadata->stage == SingleShaderStage::Fragment) {
+            if (stage == SingleShaderStage::Fragment) {
                 // Without a location qualifier on vertex inputs, spirv_cross::CompilerMSL gives
                 // them all the location 0, causing a compile error.
                 for (const auto& attrib : resources.stage_inputs) {
@@ -642,13 +641,15 @@ namespace dawn_native {
                 }
             }
 
-            if (metadata->stage == SingleShaderStage::Compute) {
+            if (stage == SingleShaderStage::Compute) {
                 const spirv_cross::SPIREntryPoint& spirEntryPoint =
                     compiler.get_entry_point(entryPointName, spv::ExecutionModelGLCompute);
                 metadata->localWorkgroupSize.x = spirEntryPoint.workgroup_size.x;
                 metadata->localWorkgroupSize.y = spirEntryPoint.workgroup_size.y;
                 metadata->localWorkgroupSize.z = spirEntryPoint.workgroup_size.z;
             }
+
+            metadata->stage = stage;
 
             return {std::move(metadata)};
         }
@@ -770,16 +771,17 @@ namespace dawn_native {
 
     bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint,
                                          SingleShaderStage stage) const {
-        // TODO(dawn:216): Properly extract all entryPoints from the shader module.
-        return entryPoint == "main" && stage == mMainEntryPoint->stage;
+        auto entryPointsForNameIt = mEntryPoints.find(entryPoint);
+        if (entryPointsForNameIt == mEntryPoints.end()) {
+            return false;
+        }
+        return entryPointsForNameIt->second[stage] != nullptr;
     }
 
     const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& entryPoint,
                                                               SingleShaderStage stage) const {
-        // TODO(dawn:216): Properly extract all entryPoints from the shader module.
-        ASSERT(entryPoint == "main");
-        ASSERT(stage == mMainEntryPoint->stage);
-        return *mMainEntryPoint;
+        ASSERT(HasEntryPoint(entryPoint, stage));
+        return *mEntryPoints.at(entryPoint)[stage];
     }
 
     size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
@@ -821,14 +823,16 @@ namespace dawn_native {
         }
 
         spirv_cross::Compiler compiler(mSpirv);
-        DAWN_TRY_ASSIGN(mMainEntryPoint, ExtractSpirvInfo(GetDevice(), compiler, "main"));
+        for (spirv_cross::EntryPoint entryPoint : compiler.get_entry_points_and_stages()) {
+            SingleShaderStage stage = ExecutionModelToShaderStage(entryPoint.execution_model);
+            compiler.set_entry_point(entryPoint.name, entryPoint.execution_model);
+
+            std::unique_ptr<EntryPointMetadata> metadata;
+            DAWN_TRY_ASSIGN(metadata, ExtractSpirvInfo(GetDevice(), compiler, entryPoint.name, stage));
+            mEntryPoints[entryPoint.name][stage] = std::move(metadata);
+        }
 
         return {};
-    }
-
-    SingleShaderStage ShaderModuleBase::GetMainEntryPointStageForTransition() const {
-        ASSERT(!IsError());
-        return mMainEntryPoint->stage;
     }
 
 }  // namespace dawn_native
