@@ -33,6 +33,24 @@
       "revId": "329ac2e69a2e934f0bbcf778f8a27c5e01532547",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b24fb03e_bb1d15f1",
+        "filename": "src/tests/end2end/VertexBufferRobustnessTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-03T17:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaa9cf32_cf14edf8",
+      "revId": "329ac2e69a2e934f0bbcf778f8a27c5e01532547",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
