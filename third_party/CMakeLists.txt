@@ -51,7 +51,7 @@ else()
     # Change the default value of SHADERC_ENABLE_SHARED_CRT to ON as that's what matches the
     # CMake defaults better.
     if(MSVC)
-        option(SHADERC_ENABLE_SHARED_CRT "Use the shared CRT instead of the static CRT" ON CACHE BOOL "" FORCE)
+        set(SHADERC_ENABLE_SHARED_CRT true CACHE BOOL "Use the shared CRT instead of the static CRT" FORCE)
     endif()
 
     # Let SPVC's CMakeLists.txt deal with configuring SPIRV-Cross
