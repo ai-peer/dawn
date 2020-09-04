@@ -23,7 +23,6 @@
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/PerStage.h"
-
 #include "dawn_native/dawn_platform.h"
 
 #include <bitset>
@@ -80,8 +79,10 @@ namespace dawn_native {
         using FragmentOutputBaseTypes = std::array<Format::Type, kMaxColorAttachments>;
         FragmentOutputBaseTypes fragmentOutputFormatBaseTypes;
 
-        // The shader stage for this binding, TODO(dawn:216): can likely be removed once we
-        // properly support multiple entrypoints per ShaderModule.
+        // The local workgroup size declared for a compute entry point (or 0s otehrwise).
+        Origin3D localWorkgroupSize;
+
+        // The shader stage for this binding.
         SingleShaderStage stage;
     };
 

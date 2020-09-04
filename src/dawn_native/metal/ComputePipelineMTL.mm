@@ -46,7 +46,9 @@ namespace dawn_native { namespace metal {
         }
 
         // Copy over the local workgroup size as it is passed to dispatch explicitly in Metal
-        mLocalWorkgroupSize = computeData.localWorkgroupSize;
+        Origin3D localSize = GetStage(SingleShaderStage::Compute).metadata->localWorkgroupSize;
+        mLocalWorkgroupSize = MTLSizeMake(localSize.x, localSize.y, localSize.z);
+
         mRequiresStorageBufferLength = computeData.needsStorageBufferLength;
         return {};
     }
