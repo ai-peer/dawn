@@ -38,14 +38,13 @@ namespace dawn_native { namespace metal {
 
         struct MetalFunctionData {
             id<MTLFunction> function = nil;
-            MTLSize localWorkgroupSize;
             bool needsStorageBufferLength;
             ~MetalFunctionData() {
                 [function release];
             }
         };
-        MaybeError GetFunction(const char* functionName,
-                               SingleShaderStage functionStage,
+        MaybeError GetFunction(const char* entryPointName,
+                               SingleShaderStage stage,
                                const PipelineLayout* layout,
                                MetalFunctionData* out,
                                uint32_t sampleMask = 0xFFFFFFFF,
