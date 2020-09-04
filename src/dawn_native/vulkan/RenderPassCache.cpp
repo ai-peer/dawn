@@ -161,6 +161,13 @@ namespace dawn_native { namespace vulkan {
             ++resolveAttachmentIndex;
         }
 
+        // All color attachments without a corresponding resolve attachment must be set to unused
+        for (; resolveAttachmentIndex <= colorAttachmentIndex; resolveAttachmentIndex++) {
+            auto& attachmentRef = resolveAttachmentRefs[resolveAttachmentIndex];
+            attachmentRef.attachment = VK_ATTACHMENT_UNUSED;
+            attachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        }
+
         VkAttachmentReference* resolveTargetAttachmentRefs =
             query.resolveTargetMask.any() ? resolveAttachmentRefs.data() : nullptr;
 
