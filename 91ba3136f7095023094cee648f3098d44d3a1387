@@ -16,6 +16,24 @@
       "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4920e53_c5f41fdc",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2020-09-06T15:59:20Z",
+      "side": 1,
+      "message": "The main problem is that the arguments are wrong for option(). The build will fail on generating the cache. There is no CACHE or type argument for option(): https://cmake.org/cmake/help/latest/command/option.html.\n\nWhen using set() with CACHE, the variable is still customizable. My understanding is that option() and set() are essentially the same here, I just went with set() because that\u0027s what the rest of the code was using. I could replace it with option().",
+      "parentUuid": "f6e1946f_dd4c3d84",
+      "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
