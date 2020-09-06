@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6e1946f_dd4c3d84",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-06T08:27:11Z",
+      "side": 1,
+      "message": "I\u0027m not a CMake expert but I would have thought that declaring the option() before shaderc does would have been enough to make it default to ON. The version with set() makes the option no longer customizable, am I missing something?",
+      "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
