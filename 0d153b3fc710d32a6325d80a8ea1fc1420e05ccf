@@ -33,6 +33,24 @@
       "revId": "0d153b3fc710d32a6325d80a8ea1fc1420e05ccf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ae063ba_8722ff0e",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2020-09-06T15:56:54Z",
+      "side": 1,
+      "message": "If you don\u0027t set the layout field, the Khronos Vulkan validation layer will complain about an invalid value. I\u0027m not sure if this warning is justified, but it\u0027s just one more line of code.",
+      "parentUuid": "d8b208d0_c848e71f",
+      "revId": "0d153b3fc710d32a6325d80a8ea1fc1420e05ccf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
