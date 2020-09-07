@@ -36,34 +36,38 @@ void init() {
     swapChainFormat = static_cast<WGPUTextureFormat>(GetPreferredSwapChainTextureFormat());
     wgpuSwapChainConfigure(swapchain, swapChainFormat, WGPUTextureUsage_OutputAttachment, 640, 480);
 
-    const char* vs =
-        "#version 450\n"
-        "const vec2 pos[3] = vec2[3](vec2(0.0f, 0.5f), vec2(-0.5f, -0.5f), vec2(0.5f, -0.5f));\n"
-        "void main() {\n"
-        "   gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);\n"
-        "}\n";
-    WGPUShaderModule vsModule =
-        utils::CreateShaderModule(wgpu::Device(device), utils::SingleShaderStage::Vertex, vs)
-            .Release();
+    const char* wgsl =
+        "var<private> pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(\n"
+        "        vec2<f32>(0.0, 0.5),\n"
+        "        vec2<f32>(-0.5, -0.5),\n"
+        "        vec2<f32>(0.5, -0.5));\n"
+        "[[builtin position]] var<out> Position : vec4<f32>;\n"
+        "[[builtin vertex_idx]] var<in> VertexIndex : i32;\n"
+        "fn vtx_main() -> void {\n"
+        "    Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);\n"
+        "    return;\n"
+        "}\n"
+        "entry_point vertex = vtx_main; \n"
+        "\n"
+        "[[location 0]] var<out> outColor : vec4<f32>;\n"
+        "fn frag_main() -> void {\n"
+        "  outColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);\n"
+        "  return;\n"
+        "}\n"
+        "entry_point fragment = frag_main;\n";
 
-    const char* fs =
-        "#version 450\n"
-        "layout(location = 0) out vec4 fragColor;\n"
-        "void main() {\n"
-        "   fragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
-        "}\n";
-    WGPUShaderModule fsModule =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, fs).Release();
+    WGPUShaderModule module =
+        utils::CreateShaderModuleFromWGSL(wgpu::Device(device), wgsl).Release();
 
     {
         WGPURenderPipelineDescriptor descriptor = {};
 
-        descriptor.vertexStage.module = vsModule;
-        descriptor.vertexStage.entryPoint = "main";
+        descriptor.vertexStage.module = module;
+        descriptor.vertexStage.entryPoint = "vtx_main";
 
         WGPUProgrammableStageDescriptor fragmentStage = {};
-        fragmentStage.module = fsModule;
-        fragmentStage.entryPoint = "main";
+        fragmentStage.module = module;
+        fragmentStage.entryPoint = "frag_main";
         descriptor.fragmentStage = &fragmentStage;
 
         descriptor.sampleCount = 1;
@@ -109,8 +113,7 @@ void init() {
         pipeline = wgpuDeviceCreateRenderPipeline(device, &descriptor);
     }
 
-    wgpuShaderModuleRelease(vsModule);
-    wgpuShaderModuleRelease(fsModule);
+    wgpuShaderModuleRelease(module);
 }
 
 void frame() {
