@@ -73,6 +73,7 @@ namespace dawn_native { namespace opengl {
 
         mProgram = gl.CreateProgram();
 
+        // Compute the set of active stages.
         wgpu::ShaderStage activeStages = wgpu::ShaderStage::None;
         for (SingleShaderStage stage : IterateStages(kAllStages)) {
             if (modules[stage] != nullptr) {
@@ -80,11 +81,15 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        // Create an OpenGL shader for each stage and gather the list of combined samplers.
+        PerStage<CombinedSamplerInfo> combinedSamplers;
         for (SingleShaderStage stage : IterateStages(activeStages)) {
-            GLuint shader = CreateShader(gl, GLShaderType(stage), modules[stage]->GetSource());
+            std::string glsl = modules[stage]->GetGLSL("main", stage, &combinedSamplers[stage]);
+            GLuint shader = CreateShader(gl, GLShaderType(stage), glsl.c_str());
             gl.AttachShader(mProgram, shader);
         }
 
+        // Link all the shaders together.
         gl.LinkProgram(mProgram);
 
         GLint linkStatus = GL_FALSE;
@@ -100,10 +105,9 @@ namespace dawn_native { namespace opengl {
             }
         }
 
-        gl.UseProgram(mProgram);
-
         // The uniforms are part of the program state so we can pre-bind buffer units, texture units
         // etc.
+        gl.UseProgram(mProgram);
         const auto& indices = layout->GetBindingIndexInfo();
 
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
@@ -154,8 +158,6 @@ namespace dawn_native { namespace opengl {
                     case wgpu::BindingType::StorageTexture:
                         UNREACHABLE();
                         break;
-
-                        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
                 }
             }
         }
@@ -164,7 +166,7 @@ namespace dawn_native { namespace opengl {
         {
             std::set<CombinedSampler> combinedSamplersSet;
             for (SingleShaderStage stage : IterateStages(activeStages)) {
-                for (const auto& combined : modules[stage]->GetCombinedSamplerInfo()) {
+                for (const CombinedSampler& combined : combinedSamplers[stage]) {
                     combinedSamplersSet.insert(combined);
                 }
             }
