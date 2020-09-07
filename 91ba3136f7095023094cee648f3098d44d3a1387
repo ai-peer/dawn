@@ -34,6 +34,24 @@
       "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aef7ccd_dde66c92",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-07T08:20:03Z",
+      "side": 1,
+      "message": "Thanks for the explanation! I think the FORCE argument needs to be removed though, because it will overwrite whatever is in the cache prior to this line executing.",
+      "parentUuid": "b4920e53_c5f41fdc",
+      "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
