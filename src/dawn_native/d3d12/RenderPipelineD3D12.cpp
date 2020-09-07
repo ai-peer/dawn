@@ -328,19 +328,21 @@ namespace dawn_native { namespace d3d12 {
         wgpu::ShaderStage renderStages = wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment;
         for (auto stage : IterateStages(renderStages)) {
             std::string hlslSource;
-            DAWN_TRY_ASSIGN(hlslSource, modules[stage]->GetHLSLSource(ToBackend(GetLayout())));
+            DAWN_TRY_ASSIGN(hlslSource,
+                            modules[stage]->TranslateToHLSL(GetStage(stage).entryPoint.c_str(),
+                                                            stage, ToBackend(GetLayout())));
 
             if (device->IsToggleEnabled(Toggle::UseDXC)) {
-                DAWN_TRY_ASSIGN(compiledDXCShader[stage],
-                                modules[stage]->CompileShaderDXC(stage, hlslSource,
-                                                                 entryPoints[stage], compileFlags));
+                DAWN_TRY_ASSIGN(
+                    compiledDXCShader[stage],
+                    CompileShaderDXC(device, stage, hlslSource, entryPoints[stage], compileFlags));
 
                 shaders[stage]->pShaderBytecode = compiledDXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledDXCShader[stage]->GetBufferSize();
             } else {
-                DAWN_TRY_ASSIGN(compiledFXCShader[stage],
-                                modules[stage]->CompileShaderFXC(stage, hlslSource,
-                                                                 entryPoints[stage], compileFlags));
+                DAWN_TRY_ASSIGN(
+                    compiledFXCShader[stage],
+                    CompileShaderFXC(device, stage, hlslSource, entryPoints[stage], compileFlags));
 
                 shaders[stage]->pShaderBytecode = compiledFXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledFXCShader[stage]->GetBufferSize();
