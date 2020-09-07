@@ -31,8 +31,9 @@ class QueryTests : public DawnTest {
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
         // Initialize the buffer values to 0.
-        std::vector<uint64_t> myData = {0, 0};
+        std::vector<uint64_t> myData(size / sizeof(uint64_t), 0);
         device.GetDefaultQueue().WriteBuffer(buffer, 0, myData.data(), size);
+        EXPECT_BUFFER_U64_RANGE_EQ(myData.data(), buffer, 0, size / sizeof(uint64_t));
 
         return buffer;
     }
@@ -203,14 +204,12 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     constexpr uint32_t kQueryCount = 2;
     constexpr uint64_t kZero = 0;
 
-    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-
     // Resolve the query result to first slot in the buffer, other slots should not be written
     {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
         encoder.ResolveQuerySet(querySet, 0, 1, destination, 0);
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -222,10 +221,10 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     // Resolve the query result to the buffer with offset, the slots before the offset
     // should not be written
     {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
         encoder.ResolveQuerySet(querySet, 0, 1, destination, sizeof(uint64_t));
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -235,4 +234,4 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend(), VulkanBackend());
