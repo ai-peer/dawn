@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2c31542f_c6df823d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-07T08:39:46Z",
+      "side": 1,
+      "message": "At the beginning, I wanted to make the implementaion simpler on Vulkan, so I planed to disallow resolve unused queries. If we don\u0027t need this validation, it\u0027s a bit complicated and more effort will be needed.\n\nFirst, we need record the used indexes (std::map(QuerySet*, std::vector\u003cbool\u003e)) when encoding the commands, and calculate the interval of the used queries in vulkan backend, then call call resolve command for each interval. \nExample: \n```\nencoder.WriteTimestamp(querySet, 0); // Set mUsedQuerIndex[0] \u003d 1\nencoder.WriteTimestamp(querySet, 2); // Set mUsedQuerIndex[2] \u003d 1\nencoder.ResolveQuerySet(querySet, 0, 3, destination, 0);\n\n// The mUsedQuerIndex (1-used, 0-unused): {1, 0, 1}\n// Vulkan implementation for resolving:\nvkCmdCopyQueryPoolResults(cmd, querySet, 0 /*firstIndex*/, 1 /*queryCount*/, dstBuffer, ....);\nvkCmdCopyQueryPoolResults(cmd, querySet, 2 /*firstIndex*/, 1 /*queryCount*/, dstBuffer, ....);\n// Wirte the index 1 of destination buffer with 0.\n```\n\nSecond，Vulkan requires each queries must be reset via vkCmdResetQueryPool between uses, and this command must be called outside render/compute pass. Currently I reset the queries based on the recorded indexes when the command buffer is created.\n\nBut if we write timestamps to a same query index in both command encoder and render encoder, we also need to reset it again before beginning render pass, so we need other two vectors to record the used index in render pass and compute pass.\n\nExample:\n```\n// Need reset queryset[0, 2] when creating command buffer following mUsedQuerIndexAtTop\nencoder.WriteTimestamp(querySet, 0); // Set mUsedQuerIndexAtTop[0] \u003d 1\nencoder.WriteTimestamp(querySet, 2); // Set mUsedQuerIndexAtTop[2] \u003d 1\n\n// Need reset queryset[2] when beginning compute pass following mUsedQuerIndexComputePass\nwgpu::ComputePassEncoder pass \u003d encoder.BeginComputePass();\npass.WriteTimestamp(querySet, 1); // Set mUsedQuerIndexComputePass[1] \u003d 1\npass.WriteTimestamp(querySet, 2); // Set mUsedQuerIndexComputePass[2] \u003d 1\npass.EndPass();\n\n// Need to combine the records of mUsedQuerIndexAtTop and mUsedQuerIndexComputePass\nencoder.ResolveQuerySet(querySet, 0, 3, destination, 0);\n```\n\nOn D3D12 and Metal, they have no such limits, on Vulkan, it need more effort to record and parse these data for these two cases, maybe there are more use cases I haven\u0027t thought of. \n\nImplementaion steps on Vulkan:\n1. Create three index recorders for command encoder, render encoder, compute encoder in PassResourceUsageTracker\n2. Record the index when encoding commands\n3. In Vulkan backend, parse the data of the index recoders to get the intervals of used indexes in CommandBufferVk.\n4. When creating command buffer and begin render/compute pass, we need to reset the queries in the intervals.\n5. When resolving the queries, call resolve commands for each interval, first query is the first query index in each interval, query count is the number of the queries in each interval. For the left memory in destination buffer which not written values, write with 0.\n\n@Corentin, I\u0027m not sure if we want to do these.",
+      "parentUuid": "f8093108_0e453f2e",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c14d8e6_b72c8ac8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
