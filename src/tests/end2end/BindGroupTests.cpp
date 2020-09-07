@@ -129,6 +129,8 @@ TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
             float f;
         } contents;
         void main() {
+            // Statically use f.
+            float f = contents.f;
         }
     )";
 

@@ -165,7 +165,7 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
 // Tests that the format of the color state descriptor must match the output of the fragment shader.
 TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
     constexpr uint32_t kNumTextureFormatBaseType = 3u;
-    std::array<const char*, kNumTextureFormatBaseType> kVecPreFix = {{"", "i", "u"}};
+    std::array<const char*, kNumTextureFormatBaseType> kVecPrefix = {{"", "i", "u"}};
     std::array<wgpu::TextureFormat, kNumTextureFormatBaseType> kColorFormats = {
         {wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA8Sint,
          wgpu::TextureFormat::RGBA8Uint}};
@@ -180,8 +180,10 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
             stream << R"(
                 #version 450
                 layout(location = 0) out )"
-                   << kVecPreFix[i] << R"(vec4 fragColor;
+                   << kVecPrefix[i] << R"(vec4 fragColor;
                 void main() {
+                    // Statically use fragColor.
+                    fragColor = fragColor;
                 })";
             descriptor.cFragmentStage.module = utils::CreateShaderModule(
                 device, utils::SingleShaderStage::Fragment, stream.str().c_str());
@@ -411,14 +413,19 @@ TEST_F(RenderPipelineValidationTest, TextureComponentTypeCompatibility) {
                 #version 450
                 layout(set = 0, binding = 0) uniform )"
                    << kTexturePrefix[i] << R"(texture2D tex;
+                layout(set = 0, binding = 1) uniform sampler mySampler;
                 void main() {
+                    // Statically use the texture.
+                    )"
+                   << kTexturePrefix[i] << R"(sampler2D(tex, mySampler);
                 })";
             descriptor.cFragmentStage.module = utils::CreateShaderModule(
                 device, utils::SingleShaderStage::Fragment, stream.str().c_str());
 
             wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false,
-                          0, false, wgpu::TextureViewDimension::e2D, kTextureComponentTypes[j]}});
+                          0, false, wgpu::TextureViewDimension::e2D, kTextureComponentTypes[j]},
+                         {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler}});
             descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
 
             if (i == j) {
@@ -433,13 +440,13 @@ TEST_F(RenderPipelineValidationTest, TextureComponentTypeCompatibility) {
 // Tests that the texture view dimension in shader must match the bind group layout.
 TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
     constexpr uint32_t kNumTextureViewDimensions = 6u;
-    std::array<const char*, kNumTextureViewDimensions> kTextureKeywords = {{
-        "texture1D",
-        "texture2D",
-        "texture2DArray",
-        "textureCube",
-        "textureCubeArray",
-        "texture3D",
+    std::array<const char*, kNumTextureViewDimensions> kDimensionSuffix = {{
+        "1D",
+        "2D",
+        "2DArray",
+        "Cube",
+        "CubeArray",
+        "3D",
     }};
 
     std::array<wgpu::TextureViewDimension, kNumTextureViewDimensions> kTextureViewDimensions = {{
@@ -459,16 +466,21 @@ TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
             std::ostringstream stream;
             stream << R"(
                 #version 450
-                layout(set = 0, binding = 0) uniform )"
-                   << kTextureKeywords[i] << R"( tex;
+                layout(set = 0, binding = 0) uniform texture)"
+                   << kDimensionSuffix[i] << R"( tex;
+                layout(set = 0, binding = 1) uniform sampler mySampler;
                 void main() {
+                    // Statically use tex.
+                    sampler)"
+                   << kDimensionSuffix[i] << R"((tex, mySampler);
                 })";
             descriptor.cFragmentStage.module = utils::CreateShaderModule(
                 device, utils::SingleShaderStage::Fragment, stream.str().c_str());
 
             wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
                 device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false,
-                          0, false, kTextureViewDimensions[j], wgpu::TextureComponentType::Float}});
+                          0, false, kTextureViewDimensions[j], wgpu::TextureComponentType::Float},
+                         {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler}});
             descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
 
             if (i == j) {
@@ -513,7 +525,10 @@ TEST_F(RenderPipelineValidationTest, MultisampledTexture) {
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture2DMS texture;
+        layout(set = 0, binding = 1) uniform sampler mySampler;
         void main() {
+            // Statically use texture.
+            sampler2DMS(texture, mySampler);
         })");
     device.CreateRenderPipeline(&descriptor);
 
@@ -522,7 +537,10 @@ TEST_F(RenderPipelineValidationTest, MultisampledTexture) {
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
         layout(set = 0, binding = 0) uniform texture2DMSArray texture;
+        layout(set = 0, binding = 1) uniform sampler mySampler;
         void main() {
+            // Statically use texture.
+            sampler2DMSArray(texture, mySampler);
         })");
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }

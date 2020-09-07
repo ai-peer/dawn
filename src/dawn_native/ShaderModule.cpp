@@ -447,9 +447,8 @@ namespace dawn_native {
             const char* entryPointName) {
             std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
 
-            // TODO(cwallez@chromium.org): make errors here creation errors
-            // currently errors here do not prevent the shadermodule from being used
-            const auto& resources = compiler.get_shader_resources();
+            const auto& resources =
+                compiler.get_shader_resources(compiler.get_active_interface_variables());
 
             metadata->stage = ExecutionModelToShaderStage(compiler.get_execution_model());
 
