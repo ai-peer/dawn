@@ -43,7 +43,9 @@ namespace dawn_native { namespace d3d12 {
 
         ShaderModule* module = ToBackend(descriptor->computeStage.module);
         std::string hlslSource;
-        DAWN_TRY_ASSIGN(hlslSource, module->GetHLSLSource(ToBackend(GetLayout())));
+        DAWN_TRY_ASSIGN(hlslSource,
+                        module->GetHLSL(descriptor->computeStage.entryPoint,
+                                        SingleShaderStage::Compute, ToBackend(GetLayout())));
 
         D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
         d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
@@ -52,18 +54,16 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3DBlob> compiledFXCShader;
 
         if (device->IsToggleEnabled(Toggle::UseDXC)) {
-            DAWN_TRY_ASSIGN(
-                compiledDXCShader,
-                module->CompileShaderDXC(SingleShaderStage::Compute, hlslSource,
-                                         descriptor->computeStage.entryPoint, compileFlags));
+            DAWN_TRY_ASSIGN(compiledDXCShader,
+                            CompileShaderDXC(device, SingleShaderStage::Compute, hlslSource,
+                                             descriptor->computeStage.entryPoint, compileFlags));
 
             d3dDesc.CS.pShaderBytecode = compiledDXCShader->GetBufferPointer();
             d3dDesc.CS.BytecodeLength = compiledDXCShader->GetBufferSize();
         } else {
-            DAWN_TRY_ASSIGN(
-                compiledFXCShader,
-                module->CompileShaderFXC(SingleShaderStage::Compute, hlslSource,
-                                         descriptor->computeStage.entryPoint, compileFlags));
+            DAWN_TRY_ASSIGN(compiledFXCShader,
+                            CompileShaderFXC(device, SingleShaderStage::Compute, hlslSource,
+                                             descriptor->computeStage.entryPoint, compileFlags));
             d3dDesc.CS.pShaderBytecode = compiledFXCShader->GetBufferPointer();
             d3dDesc.CS.BytecodeLength = compiledFXCShader->GetBufferSize();
         }
