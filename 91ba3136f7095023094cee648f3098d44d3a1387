@@ -52,6 +52,24 @@
       "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f13529bb_b04b7056",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2020-09-08T19:36:40Z",
+      "side": 1,
+      "message": "Right, I have fixed it.",
+      "parentUuid": "2aef7ccd_dde66c92",
+      "revId": "91ba3136f7095023094cee648f3098d44d3a1387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
