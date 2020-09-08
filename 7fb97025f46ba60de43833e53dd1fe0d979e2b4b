@@ -16,6 +16,24 @@
       "revId": "7fb97025f46ba60de43833e53dd1fe0d979e2b4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b8ae7d_0ebd2b7f",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-08T19:20:25Z",
+      "side": 1,
+      "message": "nvm, looks okay.",
+      "parentUuid": "5d7c4731_cacd1929",
+      "revId": "7fb97025f46ba60de43833e53dd1fe0d979e2b4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
