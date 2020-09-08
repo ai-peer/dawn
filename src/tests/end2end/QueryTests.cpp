@@ -21,6 +21,8 @@
 
 #include "utils/WGPUHelpers.h"
 
+#include <iostream>
+
 class QueryTests : public DawnTest {
   protected:
     wgpu::Buffer CreateResolveBuffer(uint64_t size) {
@@ -31,8 +33,9 @@ class QueryTests : public DawnTest {
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
         // Initialize the buffer values to 0.
-        std::vector<uint64_t> myData = {0, 0};
+        std::vector<uint64_t> myData(size / sizeof(uint64_t), 0);
         device.GetDefaultQueue().WriteBuffer(buffer, 0, myData.data(), size);
+        EXPECT_BUFFER_U64_RANGE_EQ(myData.data(), buffer, 0, size / sizeof(uint64_t));
 
         return buffer;
     }
@@ -102,6 +105,7 @@ class TimestampExpectation : public detail::Expectation {
         ASSERT(size % sizeof(uint64_t) == 0);
         const uint64_t* timestamps = static_cast<const uint64_t*>(data);
         for (size_t i = 0; i < size / sizeof(uint64_t); i++) {
+            std::cout << timestamps[i] << std::endl;
             if (timestamps[i] == 0) {
                 return testing::AssertionFailure()
                        << "Expected data[" << i << "] to be greater than 0." << std::endl;
@@ -203,29 +207,13 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     constexpr uint32_t kQueryCount = 2;
     constexpr uint64_t kZero = 0;
 
-    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-
-    // Resolve the query result to first slot in the buffer, other slots should not be written
-    {
-        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
-        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
-        encoder.ResolveQuerySet(querySet, 0, 1, destination, 0);
-        wgpu::CommandBuffer commands = encoder.Finish();
-        queue.Submit(1, &commands);
-
-        EXPECT_BUFFER(destination, 0, sizeof(uint64_t), new TimestampExpectation);
-        EXPECT_BUFFER_U64_RANGE_EQ(&kZero, destination, sizeof(uint64_t), 1);
-    }
-
     // Resolve the query result to the buffer with offset, the slots before the offset
     // should not be written
     {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
         encoder.ResolveQuerySet(querySet, 0, 1, destination, sizeof(uint64_t));
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -235,4 +223,4 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend());
+DAWN_INSTANTIATE_TEST(TimestampQueryTests, D3D12Backend(), VulkanBackend());
