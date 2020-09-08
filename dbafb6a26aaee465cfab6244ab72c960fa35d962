@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6528bf4b_5dad3cdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2020-09-08T20:22:47Z",
+      "side": 1,
+      "message": "This issue appeared with the removal of SPVC. The options for spirv-cross are based on the BUILD.gn and the other SPIRV related dependencies.",
+      "revId": "dbafb6a26aaee465cfab6244ab72c960fa35d962",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
