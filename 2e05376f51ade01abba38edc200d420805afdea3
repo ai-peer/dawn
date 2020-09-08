@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b035490c_0e520288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-08T22:08:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2e05376f51ade01abba38edc200d420805afdea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4988abae_a18d2be7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-08T22:08:44Z",
+      "side": 1,
+      "message": "unit: a bit odd to assign this way at the bottom. Usually I would expect an object to be populated with data as each datum is computed/ready. In this case we have it as a function argument at the top.",
+      "revId": "2e05376f51ade01abba38edc200d420805afdea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7ed2705_4164f9b7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-08T22:08:44Z",
+      "side": 1,
+      "message": "nit: could be const reference",
+      "range": {
+        "startLine": 826,
+        "startChar": 13,
+        "endLine": 826,
+        "endChar": 36
+      },
+      "revId": "2e05376f51ade01abba38edc200d420805afdea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c42ffb3_80eaecd6",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-08T22:08:44Z",
+      "side": 1,
+      "message": "unit: this case is duplicated",
+      "range": {
+        "startLine": 638,
+        "startChar": 8,
+        "endLine": 639,
+        "endChar": 49
+      },
+      "revId": "2e05376f51ade01abba38edc200d420805afdea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
