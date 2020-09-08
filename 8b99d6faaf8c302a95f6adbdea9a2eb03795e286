@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "8f82d8ce_9b816222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-08T14:17:09Z",
+      "side": 1,
+      "message": "The two vectors you mentioned for vkCmdResetQueryPool are required in all cases, it\u0027s a bit annoying but we do this kind of tracking for other things already. Implementation of it can come as a follow-up step if it is too much at once.\n\nFor the sparse resolve, the group hasn\u0027t decided 100% on it yet, so we could implement the simple solution now (no validation, no defaulting to 0, just invalid Vulkan code), then revisit when the group has decided on the path forward.\n\nHopefully breaking things down this way makes the task more manageable?",
+      "parentUuid": "2c31542f_c6df823d",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c14d8e6_b72c8ac8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
