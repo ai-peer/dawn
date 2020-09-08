@@ -33,6 +33,23 @@
       "revId": "8d7eed4b0cac6abee93fc0a705efa9460f1c0669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a34fedf_e56880ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2020-09-08T18:57:49Z",
+      "side": 1,
+      "message": "I figured out why the tests failed. Silly off-by-one bug...",
+      "revId": "8d7eed4b0cac6abee93fc0a705efa9460f1c0669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
