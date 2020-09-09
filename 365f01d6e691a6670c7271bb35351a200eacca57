@@ -50,6 +50,24 @@
       "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2f58d21_8f0c1459",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-09T21:45:39Z",
+      "side": 1,
+      "message": "IIRC, we had a hard time making the ObjC reference inside ref/release correctly",
+      "parentUuid": "d7de6cb7_ea999bb7",
+      "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
