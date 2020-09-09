@@ -468,7 +468,7 @@ namespace dawn_native { namespace metal {
                 layoutDesc.stepRate = 0;
                 // Metal requires the stride must be a multiple of 4 bytes, align it with next
                 // multiple of 4 if it's not.
-                layoutDesc.stride = Align(maxArrayStride, 4);
+                layoutDesc.stride = Align(static_cast<uint32_t>(maxArrayStride), 4);
             } else {
                 layoutDesc.stepFunction = InputStepModeFunction(info.stepMode);
                 layoutDesc.stepRate = 1;

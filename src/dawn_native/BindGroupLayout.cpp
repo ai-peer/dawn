@@ -498,7 +498,8 @@ namespace dawn_native {
         size_t objectPointerStart = mBindingCounts.bufferCount * sizeof(BufferBindingData);
         ASSERT(IsAligned(objectPointerStart, alignof(Ref<ObjectBase>)));
         size_t bufferSizeArrayStart =
-            Align(objectPointerStart + mBindingCounts.totalCount * sizeof(Ref<ObjectBase>),
+            Align(static_cast<uint32_t>(objectPointerStart +
+                                        mBindingCounts.totalCount * sizeof(Ref<ObjectBase>)),
                   sizeof(uint64_t));
         ASSERT(IsAligned(bufferSizeArrayStart, alignof(uint64_t)));
         return bufferSizeArrayStart + mBindingCounts.unverifiedBufferCount * sizeof(uint64_t);
