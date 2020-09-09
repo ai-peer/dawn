@@ -46,6 +46,30 @@
       "revId": "a34b7e27d205421c3d4f57f7206d0f4fcaede7c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "822433b0_e285e97d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-09T00:38:46Z",
+      "side": 1,
+      "message": "Sounds fine, Done.",
+      "parentUuid": "46809e19_5f6bc7e5",
+      "range": {
+        "startLine": 105,
+        "startChar": 41,
+        "endLine": 105,
+        "endChar": 87
+      },
+      "revId": "a34b7e27d205421c3d4f57f7206d0f4fcaede7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
