@@ -37,11 +37,11 @@ namespace dawn_native { namespace vulkan {
         // `commands`.
         // TODO(cwallez@chromium.org): coalesce barriers and do them early when possible.
         void TransitionUsageNow(CommandRecordingContext* recordingContext, wgpu::BufferUsage usage);
-        void TransitionUsageNow(CommandRecordingContext* recordingContext,
-                                wgpu::BufferUsage usage,
-                                std::vector<VkBufferMemoryBarrier>* bufferBarriers,
-                                VkPipelineStageFlags* srcStages,
-                                VkPipelineStageFlags* dstStages);
+        void TransitionUsageAndGetResourceBarrier(
+            wgpu::BufferUsage usage,
+            std::vector<VkBufferMemoryBarrier>* bufferBarriers,
+            VkPipelineStageFlags* srcStages,
+            VkPipelineStageFlags* dstStages);
 
         void EnsureDataInitialized(CommandRecordingContext* recordingContext);
         void EnsureDataInitializedAsDestination(CommandRecordingContext* recordingContext,

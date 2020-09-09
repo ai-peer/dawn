@@ -190,7 +190,7 @@ namespace dawn_native { namespace vulkan {
         VkPipelineStageFlags srcStages = 0;
         VkPipelineStageFlags dstStages = 0;
 
-        TransitionUsageNow(recordingContext, usage, &barriers, &srcStages, &dstStages);
+        TransitionUsageAndGetResourceBarrier(usage, &barriers, &srcStages, &dstStages);
 
         if (barriers.size() > 0) {
             ASSERT(barriers.size() == 1);
@@ -200,11 +200,11 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
-                                    wgpu::BufferUsage usage,
-                                    std::vector<VkBufferMemoryBarrier>* bufferBarriers,
-                                    VkPipelineStageFlags* srcStages,
-                                    VkPipelineStageFlags* dstStages) {
+    void Buffer::TransitionUsageAndGetResourceBarrier(
+        wgpu::BufferUsage usage,
+        std::vector<VkBufferMemoryBarrier>* bufferBarriers,
+        VkPipelineStageFlags* srcStages,
+        VkPipelineStageFlags* dstStages) {
         bool lastIncludesTarget = (mLastUsage & usage) == usage;
         bool lastReadOnly = (mLastUsage & kReadOnlyBufferUsages) == mLastUsage;
 

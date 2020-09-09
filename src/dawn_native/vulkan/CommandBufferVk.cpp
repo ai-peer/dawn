@@ -146,8 +146,11 @@ namespace dawn_native { namespace vulkan {
                                     mDirtyBindGroupsObjectChangedOrIsDynamic, mBindGroups,
                                     mDynamicOffsetCounts, mDynamicOffsets);
 
-                // TODO(jiawei.shao@intel.com): combine the following barriers in one
-                // vkCmdPipelineBarrier() call.
+                std::vector<VkBufferMemoryBarrier> bufferBarriers;
+                std::vector<VkImageMemoryBarrier> imageBarriers;
+                VkPipelineStageFlags srcStages = 0;
+                VkPipelineStageFlags dstStages = 0;
+
                 for (BindGroupIndex index : IterateBitSet(mBindGroupLayoutsMask)) {
                     BindGroupLayoutBase* layout = mBindGroups[index]->GetLayout();
                     for (BindingIndex binding{0}; binding < layout->GetBindingCount(); ++binding) {
@@ -156,8 +159,9 @@ namespace dawn_native { namespace vulkan {
                             case wgpu::BindingType::ReadonlyStorageBuffer:
                                 ToBackend(
                                     mBindGroups[index]->GetBindingAsBufferBinding(binding).buffer)
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::BufferUsage::Storage);
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::BufferUsage::Storage, &bufferBarriers, &srcStages,
+                                        &dstStages);
                                 break;
 
                             case wgpu::BindingType::ReadonlyStorageTexture:
@@ -165,24 +169,25 @@ namespace dawn_native { namespace vulkan {
                                 TextureViewBase* view =
                                     mBindGroups[index]->GetBindingAsTextureView(binding);
                                 ToBackend(view->GetTexture())
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::TextureUsage::Storage,
-                                                         view->GetSubresourceRange());
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::TextureUsage::Storage, view->GetSubresourceRange(),
+                                        &imageBarriers, &srcStages, &dstStages);
                                 break;
                             }
                             case wgpu::BindingType::UniformBuffer:
                                 ToBackend(
                                     mBindGroups[index]->GetBindingAsBufferBinding(binding).buffer)
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::BufferUsage::Uniform);
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::BufferUsage::Uniform, &bufferBarriers, &srcStages,
+                                        &dstStages);
                                 break;
                             case wgpu::BindingType::SampledTexture: {
                                 TextureViewBase* view =
                                     mBindGroups[index]->GetBindingAsTextureView(binding);
                                 ToBackend(view->GetTexture())
-                                    ->TransitionUsageNow(recordingContext,
-                                                         wgpu::TextureUsage::Sampled,
-                                                         view->GetSubresourceRange());
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::TextureUsage::Sampled, view->GetSubresourceRange(),
+                                        &imageBarriers, &srcStages, &dstStages);
                                 break;
                             }
 
@@ -200,6 +205,14 @@ namespace dawn_native { namespace vulkan {
                         }
                     }
                 }
+
+                if (!bufferBarriers.empty() || !imageBarriers.empty()) {
+                    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages,
+                                                  dstStages, 0, 0, nullptr, bufferBarriers.size(),
+                                                  bufferBarriers.data(), imageBarriers.size(),
+                                                  imageBarriers.data());
+                }
+
                 DidApply();
             }
         };
@@ -459,8 +472,8 @@ namespace dawn_native { namespace vulkan {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
                 buffer->EnsureDataInitialized(recordingContext);
-                buffer->TransitionUsageNow(recordingContext, usages.bufferUsages[i],
-                                           &bufferBarriers, &srcStages, &dstStages);
+                buffer->TransitionUsageAndGetResourceBarrier(
+                    usages.bufferUsages[i], &bufferBarriers, &srcStages, &dstStages);
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
