@@ -50,6 +50,23 @@
       "revId": "83eb8208261e6408ecc29e611a4e7e3003ad9575",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfc4c1ef_8a3b3c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T16:01:32Z",
+      "side": 1,
+      "message": "PTAL as second review Kai!",
+      "revId": "83eb8208261e6408ecc29e611a4e7e3003ad9575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
