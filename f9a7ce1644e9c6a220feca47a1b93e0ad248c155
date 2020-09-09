@@ -22,6 +22,30 @@
       "revId": "f9a7ce1644e9c6a220feca47a1b93e0ad248c155",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "814b8b36_919d7d44",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-09T16:51:56Z",
+      "side": 1,
+      "message": "I removed it to avoid 32-bit overflow when near UINT32_MAX. For example, Align(0xFFFFFFFFu, 4) \u003d\u003e 0, is not correct. Do you think that\u0027s OK?",
+      "parentUuid": "1928737e_dc8de401",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "f9a7ce1644e9c6a220feca47a1b93e0ad248c155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
