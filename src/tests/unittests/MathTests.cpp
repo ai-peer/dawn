@@ -157,6 +157,10 @@ TEST(Math, Align) {
     for (uint32_t i = 1; i <= 64; ++i) {
         ASSERT_EQ(Align(64 + i, 64), 128u);
     }
+
+    // Test extrema
+    ASSERT_EQ(Align(0xFFFFFFFFu, 4), 0x100000000u);
+    ASSERT_EQ(Align(0xFFFFFFFFFFFFFFFFull, 1), 0xFFFFFFFFFFFFFFFFull);
 }
 
 // Tests for IsPtrAligned

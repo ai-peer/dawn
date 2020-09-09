@@ -98,12 +98,11 @@ bool IsAligned(uint32_t value, size_t alignment) {
     return (value & (alignment32 - 1)) == 0;
 }
 
-uint32_t Align(uint32_t value, size_t alignment) {
-    ASSERT(alignment <= UINT32_MAX);
+uint64_t Align(uint64_t value, size_t alignment) {
     ASSERT(IsPowerOfTwo(alignment));
     ASSERT(alignment != 0);
-    uint32_t alignment32 = static_cast<uint32_t>(alignment);
-    return (value + (alignment32 - 1)) & ~(alignment32 - 1);
+    uint64_t alignment64 = static_cast<uint64_t>(alignment);
+    return (value + (alignment64 - 1)) & ~(alignment64 - 1);
 }
 
 uint16_t Float32ToFloat16(float fp32) {
