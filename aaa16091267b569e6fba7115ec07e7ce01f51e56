@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "881aaca4_e1fbc172",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T07:00:17Z",
+      "side": 1,
+      "message": "Thanks! We forgot to add back spirv-cross when SPVC was removed.",
+      "revId": "aaa16091267b569e6fba7115ec07e7ce01f51e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
