@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee3d2065_20341d9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c65ab0e_f6da2d99",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "We should handle QueryResolve here with VK_BUFFER_USAGE_TRANSFER_DST_BIT (until we implement the compute path)",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d260028_f7b23fc9",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "These bitfields aren\u0027t the correct type: they are buffer usages when instead they should be pipeline stages.\n\nFor now because queries are implemented with vkCmdCopyQueryPoolResults we only need VK_PIPELINE_STAGE_TRANSFER_BIT.",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aee78fed_ad0b2bcd",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "Ditto, this should handle QueryResolve with VK_ACCESS_TRANSFER_WRITE_BIT",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc1df81e_c43d1c88",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "nit: queries",
+      "range": {
+        "startLine": 364,
+        "startChar": 51,
+        "endLine": 364,
+        "endChar": 57
+      },
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37c436c9_6ff27d3c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "nit: QuerySetBase* we should spell out simple types.",
+      "range": {
+        "startLine": 365,
+        "startChar": 17,
+        "endLine": 365,
+        "endChar": 21
+      },
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af49cd10_3a965748",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-09T10:10:11Z",
+      "side": 1,
+      "message": "That shouldn\u0027t be needed now that buffer lazy zero init is implemented.",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
