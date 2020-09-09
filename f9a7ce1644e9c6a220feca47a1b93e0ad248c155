@@ -46,6 +46,30 @@
       "revId": "f9a7ce1644e9c6a220feca47a1b93e0ad248c155",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07fceaff_738559c8",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-09T18:34:03Z",
+      "side": 1,
+      "message": "We should ASSERT that this overflow doesn\u0027t happen, and if there are callsites that could overflow like this, they should cast to uint64_t first and then use the other overload.",
+      "parentUuid": "814b8b36_919d7d44",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "f9a7ce1644e9c6a220feca47a1b93e0ad248c155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
