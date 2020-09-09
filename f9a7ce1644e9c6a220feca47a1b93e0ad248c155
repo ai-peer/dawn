@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1928737e_dc8de401",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-09T01:03:07Z",
+      "side": 1,
+      "message": "did we need to remove this? It looks like the only problem is that the comparison against MAX is tautological. I\u0027m pretty sure we probably use Align with 32-bit numbers sometimes.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "f9a7ce1644e9c6a220feca47a1b93e0ad248c155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
