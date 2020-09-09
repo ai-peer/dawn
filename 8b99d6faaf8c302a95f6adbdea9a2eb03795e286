@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "722f2fd2_3fccb120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-09T06:18:34Z",
+      "side": 1,
+      "message": "Yes, it will be simpler. I will do the reset queries firstly, it seems that the index record and analysis are essential part if we allow to write same query index twice in same command encoder.",
+      "parentUuid": "8f82d8ce_9b816222",
+      "revId": "8b99d6faaf8c302a95f6adbdea9a2eb03795e286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c14d8e6_b72c8ac8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
