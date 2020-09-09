@@ -271,8 +271,9 @@ void DrawCallPerf::SetUp() {
     DawnPerfTestWithParams::SetUp();
 
     // Compute aligned uniform / vertex data sizes.
-    mAlignedUniformSize = Align(kUniformSize, kMinDynamicBufferOffsetAlignment);
-    mAlignedVertexDataSize = Align(sizeof(kVertexData), 4);
+    mAlignedUniformSize =
+        Align(static_cast<uint32_t>(kUniformSize), kMinDynamicBufferOffsetAlignment);
+    mAlignedVertexDataSize = Align(static_cast<uint32_t>(sizeof(kVertexData)), 4);
 
     // Initialize uniform buffer data.
     mNumUniformFloats = mAlignedUniformSize / sizeof(float);

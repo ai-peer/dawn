@@ -115,7 +115,8 @@ namespace dawn_native {
         SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
             return SlabAllocator<BindGroup>(
                 size,  // bytes
-                Align(sizeof(BindGroup), GetBindingDataAlignment()) + GetBindingDataSize(),  // size
+                Align(static_cast<uint32_t>(sizeof(BindGroup)), GetBindingDataAlignment()) +
+                    GetBindingDataSize(),                                // size
                 std::max(alignof(BindGroup), GetBindingDataAlignment())  // alignment
             );
         }

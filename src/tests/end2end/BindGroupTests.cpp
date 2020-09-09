@@ -519,7 +519,8 @@ TEST_P(BindGroupTests, SetDynamicBindGroupBeforePipeline) {
     std::array<float, 4> color0 = {1, 0, 0, 0.501};
     std::array<float, 4> color1 = {0, 1, 0, 0.501};
 
-    size_t color1Offset = Align(sizeof(color0), kMinDynamicBufferOffsetAlignment);
+    size_t color1Offset =
+        Align(static_cast<uint32_t>(sizeof(color0)), kMinDynamicBufferOffsetAlignment);
 
     std::vector<uint8_t> data(color1Offset + sizeof(color1));
     memcpy(data.data(), color0.data(), sizeof(color0));
@@ -589,7 +590,8 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
     std::array<float, 4> color0 = {1, 0, 0, 0.5};
     std::array<float, 4> color1 = {0, 1, 0, 0.5};
 
-    size_t color1Offset = Align(sizeof(color0), kMinDynamicBufferOffsetAlignment);
+    size_t color1Offset =
+        Align(static_cast<uint32_t>(sizeof(color0)), kMinDynamicBufferOffsetAlignment);
 
     std::vector<uint8_t> data(color1Offset + sizeof(color1));
     memcpy(data.data(), color0.data(), sizeof(color0));
@@ -676,9 +678,12 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
     std::array<float, 4> color2 = {0, 0, 0, 0.501};
     std::array<float, 4> color3 = {0, 0, 1, 0};
 
-    size_t color1Offset = Align(sizeof(color0), kMinDynamicBufferOffsetAlignment);
-    size_t color2Offset = Align(color1Offset + sizeof(color1), kMinDynamicBufferOffsetAlignment);
-    size_t color3Offset = Align(color2Offset + sizeof(color2), kMinDynamicBufferOffsetAlignment);
+    size_t color1Offset =
+        Align(static_cast<uint32_t>(sizeof(color0)), kMinDynamicBufferOffsetAlignment);
+    size_t color2Offset = Align(static_cast<uint32_t>(color1Offset + sizeof(color1)),
+                                kMinDynamicBufferOffsetAlignment);
+    size_t color3Offset = Align(static_cast<uint32_t>(color2Offset + sizeof(color2)),
+                                kMinDynamicBufferOffsetAlignment);
 
     std::vector<uint8_t> data(color3Offset + sizeof(color3), 0);
     memcpy(data.data(), color0.data(), sizeof(color0));

@@ -61,7 +61,8 @@ namespace dawn_native { namespace metal {
                 // Alignment would overlow.
                 return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
             }
-            currentSize = Align(currentSize, kMinUniformOrStorageBufferAlignment);
+            currentSize =
+                Align(static_cast<uint32_t>(currentSize), kMinUniformOrStorageBufferAlignment);
         }
 
         if (@available(iOS 12, macOS 10.14, *)) {
