@@ -16,6 +16,40 @@
       "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f64ec03e_af78d396",
+        "filename": "src/dawn_native/SpirvUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-09T21:44:36Z",
+      "side": 1,
+      "message": "We have SO many conversion functions (especially in the backends), maybe we can come up with a more common style for them? like static_cast-style:\n\n template \u003ctypename To, typename From\u003e\n To into(From value);\n \n template \u003c\u003e\n spv::ExecutionModel into(SingleShaderStage stage) { ... }\n \n into\u003cspv::ExecutionModel\u003e(mySingleShaderStage);\n\nthough this probably won\u0027t work if certain types are not strong enough (like vulkan enums)",
+      "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7de6cb7_ea999bb7",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-09T21:44:36Z",
+      "side": 1,
+      "message": "unrelated nit: This should probably be in the return type instead of an out parameter?",
+      "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
