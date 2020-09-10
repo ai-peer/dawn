@@ -181,14 +181,48 @@ namespace dawn_native { namespace vulkan {
                 return wgpu::Texture::Acquire(texture);
             }
 
+            wgpu::Texture WrapVulkanImage(wgpu::Device dawnDevice,
+                                          const wgpu::TextureDescriptor* textureDescriptor,
+                                          int memoryFd,
+                                          VkDeviceSize allocationSize,
+                                          uint32_t memoryTypeIndex,
+                                          std::vector<int> waitFDs,
+                                          VkImageLayout releasedOldLayout,
+                                          VkImageLayout releasedNewLayout,
+                                          bool isCleared = true,
+                                          bool expectValid = true) {
+                dawn_native::vulkan::ExternalImageDescriptorOpaqueFD descriptor;
+                descriptor.cTextureDescriptor =
+                    reinterpret_cast<const WGPUTextureDescriptor*>(textureDescriptor);
+                descriptor.isCleared = isCleared;
+                descriptor.allocationSize = allocationSize;
+                descriptor.memoryTypeIndex = memoryTypeIndex;
+                descriptor.memoryFD = memoryFd;
+                descriptor.waitFDs = waitFDs;
+                descriptor.releasedOldLayout = releasedOldLayout;
+                descriptor.releasedNewLayout = releasedNewLayout;
+
+                WGPUTexture texture =
+                    dawn_native::vulkan::WrapVulkanImage(dawnDevice.Get(), &descriptor);
+
+                if (expectValid) {
+                    EXPECT_NE(texture, nullptr) << "Failed to wrap image, are external memory / "
+                                                   "semaphore extensions supported?";
+                } else {
+                    EXPECT_EQ(texture, nullptr);
+                }
+
+                return wgpu::Texture::Acquire(texture);
+            }
+
             // Exports the signal from a wrapped texture and ignores it
             // We have to export the signal before destroying the wrapped texture else it's an
             // assertion failure
             void IgnoreSignalSemaphore(wgpu::Device dawnDevice, wgpu::Texture wrappedTexture) {
-                int fd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(dawnDevice.Get(),
-                                                                            wrappedTexture.Get());
-                ASSERT_NE(fd, -1);
-                close(fd);
+                dawn_native::vulkan::ExternalImageExportInfo info;
+                dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &info);
+                ASSERT_NE(info.semaphoreHandle, -1);
+                close(info.semaphoreHandle);
             }
 
           protected:
@@ -461,14 +495,16 @@ namespace dawn_native { namespace vulkan {
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
         // Import the image to |device|, making sure we wait on signalFd
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Verify |device| sees the changes from |secondDevice|
         EXPECT_PIXEL_RGBA8_EQ(RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
@@ -489,27 +525,33 @@ namespace dawn_native { namespace vulkan {
         int defaultFdCopy = dup(defaultFd);
         ASSERT(defaultFdCopy != -1);
 
-        // Import the image on |device
+        // Import the image on |device|
+        // This one must wrap this one as the layout we will read it as later in the test.
+        // We can't simply alias unless the layouts are matching in the end.
         wgpu::Texture wrappedTextureAlias =
             WrapVulkanImage(device, &defaultDescriptor, defaultFdCopy, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+                            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_UNDEFINED,
+                            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |device|, making sure we wait on signalFd
+        // Import the image to |device|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Verify |device| sees the changes from |secondDevice| (waits)
         EXPECT_PIXEL_RGBA8_EQ(RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
@@ -529,19 +571,22 @@ namespace dawn_native { namespace vulkan {
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_UNDEFINED,
+                            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |device|, making sure we wait on signalFd
+        // Import the image to |device|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd}, false);
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout, false);
 
         // Verify |device| doesn't see the changes from |secondDevice|
         EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), nextWrappedTexture, 0, 0);
@@ -558,19 +603,22 @@ namespace dawn_native { namespace vulkan {
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_UNDEFINED,
+                            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |device|, making sure we wait on |signalFd|
+        // Import the image to |device|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture deviceWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Create a second texture on |device|
         wgpu::Texture copyDstTexture = device.CreateTexture(&defaultDescriptor);
@@ -596,21 +644,23 @@ namespace dawn_native { namespace vulkan {
         DAWN_SKIP_TEST_IF(UsesWire());
 
         // Import the image on |device|
-        wgpu::Texture wrappedTexture =
-            WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+        wgpu::Texture wrappedTexture = WrapVulkanImage(
+            device, &defaultDescriptor, defaultFd, defaultAllocationSize, defaultMemoryTypeIndex,
+            {}, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |device|
         ClearImage(device, wrappedTexture, {5 / 255.0f, 6 / 255.0f, 7 / 255.0f, 8 / 255.0f});
 
-        int signalFd =
-            dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(device.Get(), wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |secondDevice|, making sure we wait on |signalFd|
+        // Import the image to |secondDevice|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture secondDeviceWrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Create a texture with color B on |secondDevice|
         wgpu::Texture copySrcTexture = secondDevice.CreateTexture(&defaultDescriptor);
@@ -622,13 +672,13 @@ namespace dawn_native { namespace vulkan {
                                    secondDeviceWrappedTexture);
 
         // Re-import back into |device|, waiting on |secondDevice|'s signal
-        signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(
-            secondDevice.Get(), secondDeviceWrappedTexture.Get());
+        dawn_native::vulkan::ExportVulkanImage(secondDeviceWrappedTexture.Get(), &exportInfo);
         memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
 
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Verify |nextWrappedTexture| contains the color from our copy
         EXPECT_PIXEL_RGBA8_EQ(RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
@@ -645,19 +695,22 @@ namespace dawn_native { namespace vulkan {
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_UNDEFINED,
+                            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |device|, making sure we wait on |signalFd|
+        // Import the image to |device|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture deviceWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Create a destination buffer on |device|
         wgpu::BufferDescriptor bufferDesc;
@@ -696,21 +749,23 @@ namespace dawn_native { namespace vulkan {
         DAWN_SKIP_TEST_IF(UsesWire());
 
         // Import the image on |device|
-        wgpu::Texture wrappedTexture =
-            WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+        wgpu::Texture wrappedTexture = WrapVulkanImage(
+            device, &defaultDescriptor, defaultFd, defaultAllocationSize, defaultMemoryTypeIndex,
+            {}, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |device|
         ClearImage(device, wrappedTexture, {5 / 255.0f, 6 / 255.0f, 7 / 255.0f, 8 / 255.0f});
 
-        int signalFd =
-            dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(device.Get(), wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
         // Import the image to |secondDevice|, making sure we wait on |signalFd|
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture secondDeviceWrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Copy color B on |secondDevice|
         wgpu::Queue secondDeviceQueue = secondDevice.GetDefaultQueue();
@@ -732,13 +787,13 @@ namespace dawn_native { namespace vulkan {
         secondDeviceQueue.Submit(1, &commands);
 
         // Re-import back into |device|, waiting on |secondDevice|'s signal
-        signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(
-            secondDevice.Get(), secondDeviceWrappedTexture.Get());
+        dawn_native::vulkan::ExportVulkanImage(secondDeviceWrappedTexture.Get(), &exportInfo);
         memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
 
         wgpu::Texture nextWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Verify |nextWrappedTexture| contains the color from our copy
         EXPECT_PIXEL_RGBA8_EQ(RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
@@ -756,19 +811,22 @@ namespace dawn_native { namespace vulkan {
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
             WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {});
+                            defaultMemoryTypeIndex, {}, VK_IMAGE_LAYOUT_UNDEFINED,
+                            VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         // Clear |wrappedTexture| on |secondDevice|
         ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
 
-        // Import the image to |device|, making sure we wait on |signalFd|
+        // Import the image to |device|, making sure we wait on the semaphore
         int memoryFd = GetMemoryFd(deviceVk, defaultAllocation);
         wgpu::Texture deviceWrappedTexture =
             WrapVulkanImage(device, &defaultDescriptor, memoryFd, defaultAllocationSize,
-                            defaultMemoryTypeIndex, {signalFd});
+                            defaultMemoryTypeIndex, {exportInfo.semaphoreHandle},
+                            exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
 
         // Create a second texture on |device|
         wgpu::Texture copyDstTexture = device.CreateTexture(&defaultDescriptor);
@@ -844,10 +902,12 @@ namespace dawn_native { namespace vulkan {
 
         // Import TexA, TexB on device 3
         wgpu::Texture wrappedTexADevice3 = WrapVulkanImage(
-            thirdDevice, &defaultDescriptor, memoryFdA, allocationSizeA, memoryTypeIndexA, {});
+            thirdDevice, &defaultDescriptor, memoryFdA, allocationSizeA, memoryTypeIndexA, {},
+            VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
 
         wgpu::Texture wrappedTexBDevice3 = WrapVulkanImage(
-            thirdDevice, &defaultDescriptor, memoryFdB, allocationSizeB, memoryTypeIndexB, {});
+            thirdDevice, &defaultDescriptor, memoryFdB, allocationSizeB, memoryTypeIndexB, {},
+            VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
         // Clear TexA
         ClearImage(thirdDevice, wrappedTexADevice3,
@@ -857,32 +917,39 @@ namespace dawn_native { namespace vulkan {
         SimpleCopyTextureToTexture(thirdDevice, thirdDeviceQueue, wrappedTexADevice3,
                                    wrappedTexBDevice3);
 
-        int signalFdTexBDevice3 = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(
-            thirdDevice.Get(), wrappedTexBDevice3.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfoTexBDevice3(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexBDevice3.Get(), &exportInfoTexBDevice3);
+
         IgnoreSignalSemaphore(thirdDevice, wrappedTexADevice3);
 
         // Import TexB, TexC on device 2
         memoryFdB = GetMemoryFd(secondDeviceVk, allocationB);
-        wgpu::Texture wrappedTexBDevice2 =
-            WrapVulkanImage(secondDevice, &defaultDescriptor, memoryFdB, allocationSizeB,
-                            memoryTypeIndexB, {signalFdTexBDevice3});
+        wgpu::Texture wrappedTexBDevice2 = WrapVulkanImage(
+            secondDevice, &defaultDescriptor, memoryFdB, allocationSizeB, memoryTypeIndexB,
+            {exportInfoTexBDevice3.semaphoreHandle}, exportInfoTexBDevice3.releasedOldLayout,
+            exportInfoTexBDevice3.releasedNewLayout);
 
         wgpu::Texture wrappedTexCDevice2 = WrapVulkanImage(
-            secondDevice, &defaultDescriptor, memoryFdC, allocationSizeC, memoryTypeIndexC, {});
+            secondDevice, &defaultDescriptor, memoryFdC, allocationSizeC, memoryTypeIndexC, {},
+            VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
         // Copy B->C on device 2
         SimpleCopyTextureToTexture(secondDevice, secondDeviceQueue, wrappedTexBDevice2,
                                    wrappedTexCDevice2);
 
-        int signalFdTexCDevice2 = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(
-            secondDevice.Get(), wrappedTexCDevice2.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfoTexCDevice2(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexCDevice2.Get(), &exportInfoTexCDevice2);
+
         IgnoreSignalSemaphore(secondDevice, wrappedTexBDevice2);
 
         // Import TexC on device 1
         memoryFdC = GetMemoryFd(deviceVk, allocationC);
-        wgpu::Texture wrappedTexCDevice1 =
-            WrapVulkanImage(device, &defaultDescriptor, memoryFdC, allocationSizeC,
-                            memoryTypeIndexC, {signalFdTexCDevice2});
+        wgpu::Texture wrappedTexCDevice1 = WrapVulkanImage(
+            device, &defaultDescriptor, memoryFdC, allocationSizeC, memoryTypeIndexC,
+            {exportInfoTexCDevice2.semaphoreHandle}, exportInfoTexCDevice2.releasedOldLayout,
+            exportInfoTexCDevice2.releasedNewLayout);
 
         // Create TexD on device 1
         wgpu::Texture texD = device.CreateTexture(&defaultDescriptor);
@@ -938,8 +1005,9 @@ namespace dawn_native { namespace vulkan {
                               &allocationA, &allocationSizeA, &memoryTypeIndexA, &memoryFdA);
 
         // Import the image on |secondDevice|
-        wgpu::Texture wrappedTexture = WrapVulkanImage(secondDevice, &descriptor, memoryFdA,
-                                                       allocationSizeA, memoryTypeIndexA, {});
+        wgpu::Texture wrappedTexture =
+            WrapVulkanImage(secondDevice, &descriptor, memoryFdA, allocationSizeA, memoryTypeIndexA,
+                            {}, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
         // Draw a non-trivial picture
         uint32_t width = 640, height = 480, pixelSize = 4;
@@ -975,13 +1043,17 @@ namespace dawn_native { namespace vulkan {
             secondDeviceQueue.Submit(1, &commands);
         }
 
-        int signalFd = dawn_native::vulkan::ExportSignalSemaphoreOpaqueFD(secondDevice.Get(),
-                                                                          wrappedTexture.Get());
+        dawn_native::vulkan::ExternalImageExportInfo exportInfo(
+            VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        dawn_native::vulkan::ExportVulkanImage(wrappedTexture.Get(), &exportInfo);
+
         int memoryFd = GetMemoryFd(secondDeviceVk, allocationA);
 
         // Import the image on |device|
-        wgpu::Texture nextWrappedTexture = WrapVulkanImage(
-            device, &descriptor, memoryFd, allocationSizeA, memoryTypeIndexA, {signalFd});
+        wgpu::Texture nextWrappedTexture =
+            WrapVulkanImage(device, &descriptor, memoryFd, allocationSizeA, memoryTypeIndexA,
+                            {exportInfo.semaphoreHandle}, exportInfo.releasedOldLayout,
+                            exportInfo.releasedNewLayout);
 
         // Copy the image into a buffer for comparison
         wgpu::BufferDescriptor copyDesc;

@@ -72,20 +72,12 @@ namespace dawn_native { namespace vulkan {
         : ExternalImageDescriptorFD(ExternalImageDescriptorType::DmaBuf) {
     }
 
-    int ExportSignalSemaphoreOpaqueFD(WGPUDevice cDevice, WGPUTexture cTexture) {
-        Device* device = reinterpret_cast<Device*>(cDevice);
-        Texture* texture = reinterpret_cast<Texture*>(cTexture);
-
-        if (!texture) {
+    int ExportSignalSemaphoreOpaqueFD(WGPUDevice, WGPUTexture cTexture) {
+        ExternalImageExportInfo info;
+        if (!ExportVulkanImage(cTexture, &info)) {
             return -1;
         }
-
-        ExternalSemaphoreHandle outHandle;
-        if (device->ConsumedError(device->SignalAndExportExternalTexture(texture, &outHandle))) {
-            return -1;
-        }
-
-        return outHandle;
+        return info.semaphoreHandle;
     }
 
     WGPUTexture WrapVulkanImage(WGPUDevice cDevice, const ExternalImageDescriptor* descriptor) {
@@ -96,14 +88,24 @@ namespace dawn_native { namespace vulkan {
             case ExternalImageDescriptorType::DmaBuf: {
                 const ExternalImageDescriptorFD* fdDescriptor =
                     static_cast<const ExternalImageDescriptorFD*>(descriptor);
-                TextureBase* texture = device->CreateTextureWrappingVulkanImage(
-                    descriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+                TextureBase* texture = device->CreateTextureWrappingVulkanImage(fdDescriptor);
                 return reinterpret_cast<WGPUTexture>(texture);
             }
             default:
                 return nullptr;
         }
     }
+
+    bool ExportVulkanImage(WGPUTexture cTexture, ExternalImageExportInfo* info) {
+        if (cTexture == nullptr) {
+            return false;
+        }
+        Texture* texture = reinterpret_cast<Texture*>(cTexture);
+        Device* device = ToBackend(texture->GetDevice());
+        return !texture->GetDevice()->ConsumedError(
+            device->SignalAndExportExternalTexture(texture, info));
+    }
+
 #endif
 
 }}  // namespace dawn_native::vulkan

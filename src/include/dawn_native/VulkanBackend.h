@@ -44,6 +44,18 @@ namespace dawn_native { namespace vulkan {
             int memoryFD;  // A file descriptor from an export of the memory of the image
             std::vector<int> waitFDs;  // File descriptors of semaphores which will be waited on
 
+            // The following members may be ignored if |ExternalImageDescriptor::isCleared| is false
+            // since the import does not need to preserve texture contents.
+
+            // See https://www.khronos.org/registry/vulkan/specs/1.1/html/chap7.html. The acquire
+            // operation old/new layouts must match exactly the layouts in the release operation. So
+            // we may need to issue two barriers releasedOldLayout -> releasedNewLayout ->
+            // cTextureDescriptor.usage if the new layout is not compatible with the desired usage.
+            // The first barrier is the queue transfer, the second is the layout transition to our
+            // desired usage.
+            VkImageLayout releasedOldLayout = VK_IMAGE_LAYOUT_GENERAL;
+            VkImageLayout releasedNewLayout = VK_IMAGE_LAYOUT_GENERAL;
+
           protected:
             ExternalImageDescriptorFD(ExternalImageDescriptorType type);
         };
@@ -64,8 +76,27 @@ namespace dawn_native { namespace vulkan {
             uint64_t drmModifier;  // DRM modifier of the buffer
         };
 
+        // Info struct that is written to in |ExportVulkanImage|.
+        struct DAWN_NATIVE_EXPORT ExternalImageExportInfo {
+            ExternalImageExportInfo() = default;
+            ExternalImageExportInfo(VkImageLayout desiredLayout) : desiredLayout(desiredLayout) {
+            }
+
+            // By default, export into the general layout.
+            const VkImageLayout desiredLayout = VK_IMAGE_LAYOUT_GENERAL;
+
+            // Contains the exported semaphore handle.
+            int semaphoreHandle;
+
+            // See comments in |ExternalImageDescriptorFD|
+            // Contains the old/new layouts used in the queue release operation.
+            VkImageLayout releasedOldLayout;
+            VkImageLayout releasedNewLayout;
+        };
+
         // Exports a signal semaphore from a wrapped texture. This must be called on wrapped
         // textures before they are destroyed. On failure, returns -1
+        // TODO(enga): Remove after updating Chromium.
         DAWN_NATIVE_EXPORT int ExportSignalSemaphoreOpaqueFD(WGPUDevice cDevice,
                                                              WGPUTexture cTexture);
 
@@ -75,6 +106,12 @@ namespace dawn_native { namespace vulkan {
         // On failure, returns a nullptr.
         DAWN_NATIVE_EXPORT WGPUTexture WrapVulkanImage(WGPUDevice cDevice,
                                                        const ExternalImageDescriptor* descriptor);
+
+        // Exports external memory from a Vulkan image. This must be called on wrapped textures
+        // before they are destroyed. It writes the semaphore to wait on and the old/new image
+        // layouts to |info|.
+        DAWN_NATIVE_EXPORT bool ExportVulkanImage(WGPUTexture cTexture,
+                                                  ExternalImageExportInfo* info);
 #endif  // __linux__
 
 }}  // namespace dawn_native::vulkan

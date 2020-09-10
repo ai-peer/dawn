@@ -658,10 +658,8 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
-    MaybeError Device::ImportExternalImage(const ExternalImageDescriptor* descriptor,
-                                           ExternalMemoryHandle memoryHandle,
+    MaybeError Device::ImportExternalImage(const ExternalImageDescriptorFD* descriptor,
                                            VkImage image,
-                                           const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                            VkSemaphore* outSignalSemaphore,
                                            VkDeviceMemory* outAllocation,
                                            std::vector<VkSemaphore>* outWaitSemaphores) {
@@ -689,11 +687,11 @@ namespace dawn_native { namespace vulkan {
         external_memory::MemoryImportParams importParams;
         DAWN_TRY_ASSIGN(importParams,
                         mExternalMemoryService->GetMemoryImportParams(descriptor, image));
-        DAWN_TRY_ASSIGN(*outAllocation,
-                        mExternalMemoryService->ImportMemory(memoryHandle, importParams, image));
+        DAWN_TRY_ASSIGN(*outAllocation, mExternalMemoryService->ImportMemory(descriptor->memoryFD,
+                                                                             importParams, image));
 
         // Import semaphores we have to wait on before using the texture
-        for (const ExternalSemaphoreHandle& handle : waitHandles) {
+        for (const ExternalSemaphoreHandle& handle : descriptor->waitFDs) {
             VkSemaphore semaphore = VK_NULL_HANDLE;
             DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
             outWaitSemaphores->push_back(semaphore);
@@ -703,23 +701,25 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::SignalAndExportExternalTexture(Texture* texture,
-                                                      ExternalSemaphoreHandle* outHandle) {
+                                                      ExternalImageExportInfo* info) {
         DAWN_TRY(ValidateObject(texture));
 
-        VkSemaphore outSignalSemaphore;
-        DAWN_TRY(texture->SignalAndDestroy(&outSignalSemaphore));
+        VkSemaphore signalSemaphore;
+        VkImageLayout releasedOldLayout;
+        VkImageLayout releasedNewLayout;
+        DAWN_TRY(texture->ExportExternalTexture(info->desiredLayout, &signalSemaphore,
+                                                &releasedOldLayout, &releasedNewLayout));
 
-        // This has to happen right after SignalAndDestroy, since the semaphore will be
-        // deleted when the fenced deleter runs after the queue submission
-        DAWN_TRY_ASSIGN(*outHandle, mExternalSemaphoreService->ExportSemaphore(outSignalSemaphore));
+        DAWN_TRY_ASSIGN(info->semaphoreHandle,
+                        mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
+        info->releasedOldLayout = releasedOldLayout;
+        info->releasedNewLayout = releasedNewLayout;
 
         return {};
     }
 
     TextureBase* Device::CreateTextureWrappingVulkanImage(
-        const ExternalImageDescriptor* descriptor,
-        ExternalMemoryHandle memoryHandle,
-        const std::vector<ExternalSemaphoreHandle>& waitHandles) {
+        const ExternalImageDescriptorFD* descriptor) {
         const TextureDescriptor* textureDescriptor =
             reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
 
@@ -734,7 +734,7 @@ namespace dawn_native { namespace vulkan {
         VkSemaphore signalSemaphore = VK_NULL_HANDLE;
         VkDeviceMemory allocation = VK_NULL_HANDLE;
         std::vector<VkSemaphore> waitSemaphores;
-        waitSemaphores.reserve(waitHandles.size());
+        waitSemaphores.reserve(descriptor->waitFDs.size());
 
         // Cleanup in case of a failure, the image creation doesn't acquire the external objects
         // if a failure happems.
@@ -743,9 +743,8 @@ namespace dawn_native { namespace vulkan {
         if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
                                                       mExternalMemoryService.get()),
                           &result) ||
-            ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
-                                              waitHandles, &signalSemaphore, &allocation,
-                                              &waitSemaphores)) ||
+            ConsumedError(ImportExternalImage(descriptor, result->GetHandle(), &signalSemaphore,
+                                              &allocation, &waitSemaphores)) ||
             ConsumedError(result->BindExternalMemory(descriptor, signalSemaphore, allocation,
                                                      waitSemaphores))) {
             // Delete the Texture if it was created
