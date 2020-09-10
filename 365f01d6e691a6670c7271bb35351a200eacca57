@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "efcdf369_c461e8e9",
+        "filename": "src/dawn_native/SpirvUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-10T08:07:34Z",
+      "side": 1,
+      "message": "Yeah, and the template argument doesn\u0027t help reduce the amount of typing so ToFooType() is probably better.",
+      "parentUuid": "f64ec03e_af78d396",
+      "revId": "365f01d6e691a6670c7271bb35351a200eacca57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7de6cb7_ea999bb7",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 3
