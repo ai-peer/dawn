@@ -16,6 +16,40 @@
       "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17297db8_a4208224",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-10T09:20:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c496806_643ff765",
+        "filename": "third_party/gn/glfw/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-10T09:20:17Z",
+      "side": 1,
+      "message": "GLFW doesn\u0027t have support for ChromeOS so the is_linux in this file should stay just is_linux. (use of this BUILD.gn file is guarded by https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/scripts/dawn_features.gni;l\u003d90?q\u003ddawn_supports_glfw_for_windowing )",
+      "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
