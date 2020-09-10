@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "888e0618_3a514353",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001631
+      },
+      "writtenOn": "2020-09-10T09:16:44Z",
+      "side": 1,
+      "message": "Thank you for help to upload this CL, and for review in advance,\n- hidehiko",
+      "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
