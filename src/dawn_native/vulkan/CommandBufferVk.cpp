@@ -1072,10 +1072,10 @@ namespace dawn_native { namespace vulkan {
                 case Command::SetBlendColor: {
                     SetBlendColorCmd* cmd = mCommands.NextCommand<SetBlendColorCmd>();
                     float blendConstants[4] = {
-                        cmd->color.r,
-                        cmd->color.g,
-                        cmd->color.b,
-                        cmd->color.a,
+                        static_cast<float>(cmd->color.r),
+                        static_cast<float>(cmd->color.g),
+                        static_cast<float>(cmd->color.b),
+                        static_cast<float>(cmd->color.a),
                     };
                     device->fn.CmdSetBlendConstants(commands, blendConstants);
                     break;

@@ -514,7 +514,9 @@ namespace dawn_native { namespace d3d12 {
 
         class IndexBufferTracker {
           public:
-            void OnSetIndexBuffer(Buffer* buffer, wgpu::IndexFormat format, uint64_t offset,
+            void OnSetIndexBuffer(Buffer* buffer,
+                                  wgpu::IndexFormat format,
+                                  uint64_t offset,
                                   uint64_t size) {
                 mD3D12BufferView.BufferLocation = buffer->GetVA() + offset;
                 mD3D12BufferView.SizeInBytes = size;
@@ -1428,7 +1430,14 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::SetBlendColor: {
                     SetBlendColorCmd* cmd = mCommands.NextCommand<SetBlendColorCmd>();
-                    commandList->OMSetBlendFactor(static_cast<const FLOAT*>(&cmd->color.r));
+                    float blendConstants[4] = {
+                        static_cast<float>(cmd->color.r),
+                        static_cast<float>(cmd->color.g),
+                        static_cast<float>(cmd->color.b),
+                        static_cast<float>(cmd->color.a),
+                    };
+
+                    commandList->OMSetBlendFactor(blendConstants);
                     break;
                 }
 
