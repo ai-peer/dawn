@@ -16,6 +16,109 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35525c6d_4ae6ec4c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-10T15:50:15Z",
+      "side": 1,
+      "message": "this is a nice optimization. We can actually skip the entire queue transfer if we don\u0027t care about the previous contents.\n\nNot sure if we still need the semaphore though?",
+      "range": {
+        "startLine": 550,
+        "startChar": 8,
+        "endLine": 552,
+        "endChar": 94
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaa568a9_e394730d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-10T15:50:15Z",
+      "side": 1,
+      "message": "not sure if we\u0027ll ever need multi-subresource import/export",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 61
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdc89461_369892a8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-10T15:50:15Z",
+      "side": 1,
+      "message": "I did this barrier directly. Not sure if using the existing mechanisms + TweakExternal make sense because the inverse operation of layout -\u003e wgpu::TextureUsage isn\u0027t so possible",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c3e025_b712874a",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-10T15:50:15Z",
+      "side": 1,
+      "message": "one day, I think this stuff will be encapsulated in some \"ExternalImage\" interface and we won\u0027t need the separate import Descriptor and export Info.",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 70
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dcd4f59_4ae42ee2",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-10T15:50:15Z",
+      "side": 1,
+      "message": "I changed these tests to go directly to the new layout. Probably also need a couple tests that go through an intermediate first.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
