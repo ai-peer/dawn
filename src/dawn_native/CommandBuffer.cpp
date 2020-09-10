@@ -193,6 +193,13 @@ namespace dawn_native {
         return true;
     }
 
+    std::array<float, 4> ConvertToFloatColor(dawn_native::Color color) {
+        const std::array<float, 4> outputValue = {
+            static_cast<float>(color.r), static_cast<float>(color.g),
+            static_cast<float>(color.b), static_cast<float>(color.a)};
+        return outputValue;
+
+    }
     std::array<int32_t, 4> ConvertToSignedIntegerColor(dawn_native::Color color) {
         const std::array<int32_t, 4> outputValue = {
             static_cast<int32_t>(color.r), static_cast<int32_t>(color.g),
@@ -206,4 +213,5 @@ namespace dawn_native {
             static_cast<uint32_t>(color.b), static_cast<uint32_t>(color.a)};
         return outputValue;
     }
+
 }  // namespace dawn_native
