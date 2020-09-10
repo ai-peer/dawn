@@ -84,7 +84,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
     ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
-        if (descriptor->type != ExternalImageDescriptorType::OpaqueFD) {
+        if (descriptor->type != ExternalImageType::OpaqueFD) {
             return DAWN_VALIDATION_ERROR("ExternalImageDescriptor is not an OpaqueFD descriptor");
         }
         const ExternalImageDescriptorOpaqueFD* opaqueFDDescriptor =
