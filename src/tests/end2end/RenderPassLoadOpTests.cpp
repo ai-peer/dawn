@@ -236,6 +236,54 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearOnIntegerFormats) {
     }
 }
 
+// This test verifies that input double values are being rounded to floats internally when
+// clearing.
+TEST_P(RenderPassLoadOpTests, LoadOpClearLargeIntegerValueRounding) {
+    // RGBA32Uint
+    {
+        constexpr wgpu::Color kClearColor = {2247483447.0f, 1000000555.0, 1000000555.0,
+                                             1000000555.0};
+        constexpr std::array<uint32_t, 4> kExpectedPixelValue = {2247483392, 1000000576, 1000000576,
+                                                                 1000000576};
+        TestIntegerClearColor<uint32_t>(wgpu::TextureFormat::RGBA32Uint, kClearColor,
+                                        kExpectedPixelValue);
+    }
+
+    // RGBA32Sint
+    {
+        constexpr wgpu::Color kClearColor = {2147483447.0, -2147483447.0, 1000000555.0,
+                                             -1000000555.0};
+        constexpr std::array<int32_t, 4> kExpectedPixelValue = {2147483392, -2147483392, 1000000576,
+                                                                -1000000576};
+        TestIntegerClearColor<int32_t>(wgpu::TextureFormat::RGBA32Sint, kClearColor,
+                                       kExpectedPixelValue);
+    }
+}
+
+// This test verifies that input double values are being rounded to floats internally when
+// clearing./*
+TEST_P(RenderPassLoadOpTests, LoadOpClearLargeIntegerValueRounding2) {
+    // RGBA32Uint
+    {
+        constexpr wgpu::Color kClearColor = {2147483447.0, 1000000555.0, 1000000555.0,
+                                             1000000555.0};
+        constexpr std::array<uint32_t, 4> kExpectedPixelValue = {2147483392, 1000000576, 1000000576,
+                                                                 1000000576};
+        TestIntegerClearColor<uint32_t>(wgpu::TextureFormat::RGBA32Uint, kClearColor,
+                                        kExpectedPixelValue);
+    }
+
+    // RGBA32Sint
+    {
+        constexpr wgpu::Color kClearColor = {2147483447.0, -2147483447.0, 1000000555.0,
+                                             -1000000555.0};
+        constexpr std::array<int32_t, 4> kExpectedPixelValue = {2147483392, -2147483392, 1000000576,
+                                                                -1000000576};
+        TestIntegerClearColor<int32_t>(wgpu::TextureFormat::RGBA32Sint, kClearColor,
+                                       kExpectedPixelValue);
+    }
+}
+
 DAWN_INSTANTIATE_TEST(RenderPassLoadOpTests,
                       D3D12Backend(),
                       MetalBackend(),
