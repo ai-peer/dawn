@@ -265,10 +265,10 @@
     "color": {
         "category": "structure",
         "members": [
-            {"name": "r", "type": "float"},
-            {"name": "g", "type": "float"},
-            {"name": "b", "type": "float"},
-            {"name": "a", "type": "float"}
+            {"name": "r", "type": "double"},
+            {"name": "g", "type": "double"},
+            {"name": "b", "type": "double"},
+            {"name": "a", "type": "double"}
         ]
     },
     "color write mask": {
@@ -683,6 +683,9 @@
             {"name": "stencil read mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
             {"name": "stencil write mask", "type": "uint32_t", "default": "0xFFFFFFFF"}
         ]
+    },
+    "double": {
+        "category": "native"
     },
     "error callback": {
         "category": "callback",
