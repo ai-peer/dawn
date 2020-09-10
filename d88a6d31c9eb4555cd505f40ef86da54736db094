@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "d0436d47_e9a7ce5c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-10T20:46:39Z",
+      "side": 1,
+      "message": "We may still need it to make sure the previous contents aren\u0027t still in use by something?",
+      "parentUuid": "35525c6d_4ae6ec4c",
+      "range": {
+        "startLine": 550,
+        "startChar": 8,
+        "endLine": 552,
+        "endChar": 94
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aaa568a9_e394730d",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -83,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "58b9aea5_466242e1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-10T20:46:39Z",
+      "side": 1,
+      "message": "Possibly for VR (2+ layers)?",
+      "parentUuid": "aaa568a9_e394730d",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 61
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdc89461_369892a8",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -94,6 +142,24 @@
       "writtenOn": "2020-09-10T15:50:15Z",
       "side": 1,
       "message": "I did this barrier directly. Not sure if using the existing mechanisms + TweakExternal make sense because the inverse operation of layout -\u003e wgpu::TextureUsage isn\u0027t so possible",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a264acc4_3386df86",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-10T20:46:39Z",
+      "side": 1,
+      "message": "Seems straightforward enough that doing it directly is fine.",
+      "parentUuid": "cdc89461_369892a8",
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
