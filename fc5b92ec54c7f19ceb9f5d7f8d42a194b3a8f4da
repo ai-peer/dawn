@@ -50,6 +50,24 @@
       "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bebd90fb_50076716",
+        "filename": "third_party/gn/glfw/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001631
+      },
+      "writtenOn": "2020-09-10T17:49:19Z",
+      "side": 1,
+      "message": "Good to know. Reverted.",
+      "parentUuid": "1c496806_643ff765",
+      "revId": "fc5b92ec54c7f19ceb9f5d7f8d42a194b3a8f4da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

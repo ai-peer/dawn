@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0abbf70b_62b66733",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001631
+      },
+      "writtenOn": "2020-09-10T17:49:19Z",
+      "side": 1,
+      "message": "Thank you for review! PTAL. (updating new PS removes the CR bit).",
+      "revId": "512010dd3c757d1e06fe286e3cbf296984e5d3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
