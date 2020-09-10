@@ -936,7 +936,9 @@ namespace dawn_native { namespace opengl {
 
                     const Format& attachmentFormat = attachmentInfo->view->GetFormat();
                     if (attachmentFormat.HasComponentType(Format::Type::Float)) {
-                        gl.ClearBufferfv(GL_COLOR, i, &attachmentInfo->clearColor.r);
+                        const std::array<float, 4> appliedClearColor =
+                            ConvertToFloatColor(attachmentInfo->clearColor);
+                        gl.ClearBufferfv(GL_COLOR, i, appliedClearColor.data());
                     } else if (attachmentFormat.HasComponentType(Format::Type::Uint)) {
                         const std::array<uint32_t, 4> appliedClearColor =
                             ConvertToUnsignedIntegerColor(attachmentInfo->clearColor);
