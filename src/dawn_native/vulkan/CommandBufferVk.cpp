@@ -315,10 +315,11 @@ namespace dawn_native { namespace vulkan {
 
                     const Format& attachmentFormat = view->GetFormat();
                     if (attachmentFormat.HasComponentType(Format::Type::Float)) {
-                        clearValues[attachmentCount].color.float32[0] = attachmentInfo.clearColor.r;
-                        clearValues[attachmentCount].color.float32[1] = attachmentInfo.clearColor.g;
-                        clearValues[attachmentCount].color.float32[2] = attachmentInfo.clearColor.b;
-                        clearValues[attachmentCount].color.float32[3] = attachmentInfo.clearColor.a;
+                        const std::array<float, 4> appliedClearColor =
+                            ConvertToFloatColor(attachmentInfo.clearColor);
+                        for (uint32_t i = 0; i < 4; ++i) {
+                            clearValues[attachmentCount].color.float32[i] = appliedClearColor[i];
+                        }
                     } else if (attachmentFormat.HasComponentType(Format::Type::Uint)) {
                         const std::array<uint32_t, 4> appliedClearColor =
                             ConvertToUnsignedIntegerColor(attachmentInfo.clearColor);
@@ -1072,10 +1073,10 @@ namespace dawn_native { namespace vulkan {
                 case Command::SetBlendColor: {
                     SetBlendColorCmd* cmd = mCommands.NextCommand<SetBlendColorCmd>();
                     float blendConstants[4] = {
-                        cmd->color.r,
-                        cmd->color.g,
-                        cmd->color.b,
-                        cmd->color.a,
+                        static_cast<float>(cmd->color.r),
+                        static_cast<float>(cmd->color.g),
+                        static_cast<float>(cmd->color.b),
+                        static_cast<float>(cmd->color.a),
                     };
                     device->fn.CmdSetBlendConstants(commands, blendConstants);
                     break;

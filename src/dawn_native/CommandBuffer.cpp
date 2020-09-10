@@ -193,6 +193,24 @@ namespace dawn_native {
         return true;
     }
 
+    // Converts a dawn_native::Color (doubles) to floats, then back to doubles. This must be done on
+    // Metal to ensure that colors are consistent across other APIs (which are or are converted from
+    // floats).
+    std::array<double, 4> ConvertToFloatToDoubleColor(dawn_native::Color color) {
+        const std::array<double, 4> outputValue = {
+            static_cast<double>(static_cast<float>(color.r)),
+            static_cast<double>(static_cast<float>(color.g)),
+            static_cast<double>(static_cast<float>(color.b)),
+            static_cast<double>(static_cast<float>(color.a))};
+        return outputValue;
+    }
+
+    std::array<float, 4> ConvertToFloatColor(dawn_native::Color color) {
+        const std::array<float, 4> outputValue = {
+            static_cast<float>(color.r), static_cast<float>(color.g), static_cast<float>(color.b),
+            static_cast<float>(color.a)};
+        return outputValue;
+    }
     std::array<int32_t, 4> ConvertToSignedIntegerColor(dawn_native::Color color) {
         const std::array<int32_t, 4> outputValue = {
             static_cast<int32_t>(color.r), static_cast<int32_t>(color.g),
@@ -206,4 +224,5 @@ namespace dawn_native {
             static_cast<uint32_t>(color.b), static_cast<uint32_t>(color.a)};
         return outputValue;
     }
+
 }  // namespace dawn_native
