@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "36040656_8def8a21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-10T20:38:03Z",
+      "side": 1,
+      "message": "\u003e Also, Kai is your AMD card back? I\u0027m curious to know if this fixes the image wrapping there.\n\nNot yet. I\u0027ll try this as soon as it is.",
+      "parentUuid": "e7db3e4f_8a45cf50",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35525c6d_4ae6ec4c",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
