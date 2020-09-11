@@ -222,6 +222,30 @@
     },
     {
       "key": {
+        "uuid": "8cb2023e_29578a92",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-11T18:33:30Z",
+      "side": 1,
+      "message": "Though maybe we should add a subtraction op such that (endSlot - startSlot) returns uint8_t?",
+      "parentUuid": "1aaddc2e_e75ab54d",
+      "range": {
+        "startLine": 498,
+        "startChar": 32,
+        "endLine": 498,
+        "endChar": 95
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdd515e2_4d04f1cf",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
