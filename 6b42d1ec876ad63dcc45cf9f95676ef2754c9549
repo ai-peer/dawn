@@ -16,6 +16,29 @@
       "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdd515e2_4d04f1cf",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-11T01:17:56Z",
+      "side": 1,
+      "message": "nit: noop cast to uint8_t I think, also could use kMaxVertexBuffersTyped",
+      "range": {
+        "startLine": 512,
+        "startChar": 40,
+        "endLine": 512,
+        "endChar": 48
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
