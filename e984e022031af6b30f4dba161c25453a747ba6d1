@@ -16,6 +16,23 @@
       "revId": "e984e022031af6b30f4dba161c25453a747ba6d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7393c1e2_97189975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T11:39:37Z",
+      "side": 1,
+      "message": "Heh, it seems the resolve algorithm changed and gives results that are 1bit different now.",
+      "revId": "e984e022031af6b30f4dba161c25453a747ba6d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
