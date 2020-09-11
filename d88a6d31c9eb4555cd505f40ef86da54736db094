@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "069bd62f_31ad79c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "LGTM overall.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35525c6d_4ae6ec4c",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -78,6 +95,47 @@
         "endLine": 552,
         "endChar": 94
       },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a6a7c45_3d4c627b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "What Kai said, we need to make sure the previous commands using the texture are completed, so we still need to wait on the semaphore.",
+      "parentUuid": "d0436d47_e9a7ce5c",
+      "range": {
+        "startLine": 550,
+        "startChar": 8,
+        "endLine": 552,
+        "endChar": 94
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70fb0e7f_a9c13b24",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "I think that if !isCleared this can be uninitialized too and in TweakTransitionForExternalUsage we can detect that and just use the newLayout.",
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -166,6 +224,57 @@
     },
     {
       "key": {
+        "uuid": "0abfa037_4b8eefa5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "Maybe explain relevant parts of this. For example that dstAccessMask can be 0 because the visibility operation will be done on the other side of the barrier, that newLayout can be anything if the desiredLayout is undefined because the content will be lost anyway. And that we wait for all operations to be finished (that\u0027s why we use TOP_OF_PIPE_BIT)",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3399b50a_1d4d60f4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445baab4_39d24dd5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "I think it might be more readable to create a barrier from scratch and copy the subresourceRange over.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27c3e025_b712874a",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 1
@@ -189,6 +298,74 @@
     },
     {
       "key": {
+        "uuid": "e33550a1_1160a15b",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an argument to ExportVulkanImage?",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5c0b03d_0e15fa93",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "Maybe this should be an std::vector just in case for later multiqueue support.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68cbf50f_453d5b9a",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "All changes done to this file will also need to be done for the DmaBuf version.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7120187_a36c93dd",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "Should this overload be deleted?",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3dcd4f59_4ae42ee2",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
         "patchSetId": 1
@@ -200,6 +377,40 @@
       "writtenOn": "2020-09-10T15:50:15Z",
       "side": 1,
       "message": "I changed these tests to go directly to the new layout. Probably also need a couple tests that go through an intermediate first.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4369e5ca_7966c58a",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "\"This one must wrap this one\" isn\u0027t very explicit. I don\u0027t know if we should support the aliased usecase now because of how the layouts must match 100% and we have no API to make sure of that.\n\nSo I think we should remove this test and the corresponding one for DmaBuf.",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b2099ff_06e578da",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:39:54Z",
+      "side": 1,
+      "message": "Eeek we\u0027re just reimporting the texture to have a device wait on another :S",
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
