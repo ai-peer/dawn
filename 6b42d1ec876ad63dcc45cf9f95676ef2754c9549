@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a0ba2d10_74e5a3f4",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-11T18:30:06Z",
+      "side": 1,
+      "message": "https://github.com/gpuweb/gpuweb/issues/693#issuecomment-613555566\n(but we should do it in followup of course)",
+      "parentUuid": "d72b4a59_fd421dda",
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0d68924_cbf48ad2",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
