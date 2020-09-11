@@ -110,6 +110,30 @@
     },
     {
       "key": {
+        "uuid": "ddd490cc_5c27d44a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-11T17:10:29Z",
+      "side": 1,
+      "message": "We actually don\u0027t have +/- binary operators for TypedIntegers. Initially had them but I think we decided to not include them. The fact that uint8_t(slot) + uint8_t(1) is type \"int\" is really really really unfortunate.\n\nI can add the binops though?",
+      "parentUuid": "02f2bf8c_04ab0693",
+      "range": {
+        "startLine": 460,
+        "startChar": 46,
+        "endLine": 460,
+        "endChar": 89
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44463a65_8e1d6ce4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
