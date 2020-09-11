@@ -19,6 +19,143 @@
     },
     {
       "key": {
+        "uuid": "1aacc12e_f13a470b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d72b4a59_fd421dda",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "I think we decided in the group that this would be 8.",
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0d68924_cbf48ad2",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "nit: could be initialized in the loop.",
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cbe12f2_424016b5",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "nit: this member variable should be private.",
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02f2bf8c_04ab0693",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "nit: slot + VertexBufferSlot(1)?",
+      "range": {
+        "startLine": 460,
+        "startChar": 46,
+        "endLine": 460,
+        "endChar": 89
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44463a65_8e1d6ce4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 484,
+        "startChar": 52,
+        "endLine": 484,
+        "endChar": 96
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aaddc2e_e75ab54d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-11T07:09:22Z",
+      "side": 1,
+      "message": "nit: static_cast\u003cuint8_t\u003e(endSlot - startSlot)?",
+      "range": {
+        "startLine": 498,
+        "startChar": 32,
+        "endLine": 498,
+        "endChar": 95
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdd515e2_4d04f1cf",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
