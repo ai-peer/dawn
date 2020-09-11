@@ -176,6 +176,30 @@
     },
     {
       "key": {
+        "uuid": "fd064d01_aed0645e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-11T19:15:46Z",
+      "side": 1,
+      "message": "Issue with this and the subtraction suggestion are that in release, TypedInteger is a POD. so it would have to be PlusOne(slot) and Subtract(endSlot, startSlot) which is... not so bad? but it would be defined on all uint8_t?",
+      "parentUuid": "c45f9dfb_c64d0cf9",
+      "range": {
+        "startLine": 460,
+        "startChar": 46,
+        "endLine": 460,
+        "endChar": 89
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44463a65_8e1d6ce4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -234,6 +258,30 @@
       "side": 1,
       "message": "Though maybe we should add a subtraction op such that (endSlot - startSlot) returns uint8_t?",
       "parentUuid": "1aaddc2e_e75ab54d",
+      "range": {
+        "startLine": 498,
+        "startChar": 32,
+        "endLine": 498,
+        "endChar": 95
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "650ab84a_bee3e142",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-11T19:15:46Z",
+      "side": 1,
+      "message": "^ though we could perhaps have TypedInteger binops auto-untypify the result so you have to re-typify if you\u0027re sure it should still be the same type.",
+      "parentUuid": "8cb2023e_29578a92",
       "range": {
         "startLine": 498,
         "startChar": 32,
