@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "b4e7f3b5_29c848d7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done. Moved handling of both to Tweak",
+      "parentUuid": "70fb0e7f_a9c13b24",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaa568a9_e394730d",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -241,6 +259,24 @@
     },
     {
       "key": {
+        "uuid": "149fd221_45c950ef",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0abfa037_4b8eefa5",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3399b50a_1d4d60f4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -252,6 +288,24 @@
       "writtenOn": "2020-09-11T07:39:54Z",
       "side": 1,
       "message": "[1]",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd8ab8d7_50196b1b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "? in reference to Kai\u0027s comment about VR?",
+      "parentUuid": "3399b50a_1d4d60f4",
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -272,6 +326,24 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10496518_009690a5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "445baab4_39d24dd5",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -315,6 +387,24 @@
     },
     {
       "key": {
+        "uuid": "18f7ca28_5ccf54ce",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33550a1_1160a15b",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5c0b03d_0e15fa93",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 1
@@ -329,6 +419,24 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9da7a43_8ace474c",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5c0b03d_0e15fa93",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -349,6 +457,24 @@
     },
     {
       "key": {
+        "uuid": "f80a119c_b5ea8110",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68cbf50f_453d5b9a",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7120187_a36c93dd",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
         "patchSetId": 1
@@ -363,6 +489,24 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "733a1e0c_d5a6c664",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Kinda. We use it for the validation tests where we don\u0027t care about the layouts. I changed it to wrap the other function.",
+      "parentUuid": "c7120187_a36c93dd",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -397,6 +541,24 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "958a417a_65be80af",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-12T00:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4369e5ca_7966c58a",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
