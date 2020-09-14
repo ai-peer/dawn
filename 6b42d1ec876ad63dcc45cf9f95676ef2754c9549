@@ -224,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "e5808122_d81a8b27",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T09:21:22Z",
+      "side": 1,
+      "message": "TypedIntegers each represent a different \"space\" or \"unit\" so I think it\u0027s ok to add binops to them, especially additions. In physics, units are unchanged under addition and subtraction, but are changed by multiplication and division, so I think that\u0027s a good rational to only add + and -",
+      "parentUuid": "9a813c12_942d7482",
+      "range": {
+        "startLine": 460,
+        "startChar": 46,
+        "endLine": 460,
+        "endChar": 89
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44463a65_8e1d6ce4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
