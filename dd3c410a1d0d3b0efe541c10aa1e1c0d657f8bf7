@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "0886f63b_082e6d6b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-14T16:53:45Z",
+      "side": 1,
+      "message": "Maybe, but I\u0027d rather not write to the struct until everything succeeds.",
+      "parentUuid": "a3868026_0d6c1e43",
+      "range": {
+        "startLine": 717,
+        "startChar": 52,
+        "endLine": 717,
+        "endChar": 90
+      },
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5633e161_86a71cc2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -93,6 +117,24 @@
     },
     {
       "key": {
+        "uuid": "dfae0598_5fc12fa1",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-14T16:53:45Z",
+      "side": 1,
+      "message": "hmm.. I thought that was anonymous structs. We already have anonymous unions in some places like\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/BuddyAllocator.h;l\u003d83?q\u003df:dawn%20union\n\nNot really about reading uninitialized data, but more that when we roll, some stuff will get cleared when it shouldn\u0027t which would be a breaking change.",
+      "parentUuid": "ccff4e2d_38eccc14",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0acfc03a_d94f3ed7",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
         "patchSetId": 4
@@ -110,6 +152,24 @@
     },
     {
       "key": {
+        "uuid": "4c7ce3e4_fb3845f2",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-14T16:53:45Z",
+      "side": 1,
+      "message": "Used it in the wrapping validation tests which don\u0027t care about the layout.",
+      "parentUuid": "0acfc03a_d94f3ed7",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07239cad_96092541",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
         "patchSetId": 4
@@ -121,6 +181,30 @@
       "writtenOn": "2020-09-14T10:01:01Z",
       "side": 1,
       "message": "nit: syntax error here and in all other parts that have this code?",
+      "range": {
+        "startLine": 368,
+        "startChar": 30,
+        "endLine": 368,
+        "endChar": 32
+      },
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9ed5c8a_0c280d5d",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-14T16:53:45Z",
+      "side": 1,
+      "message": "my find-replace didn\u0027t work :(",
+      "parentUuid": "07239cad_96092541",
       "range": {
         "startLine": 368,
         "startChar": 30,
