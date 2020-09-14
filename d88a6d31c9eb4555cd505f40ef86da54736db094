@@ -312,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "10cdf263_9f7468c5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "In reference to a comment that I didn\u0027t post ^^",
+      "parentUuid": "fd8ab8d7_50196b1b",
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "445baab4_39d24dd5",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -367,6 +385,30 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3729b9bc_dba3ad5e",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "Yeah I think it makes sense it would be symmetric, but let\u0027s not force it now.",
+      "parentUuid": "27c3e025_b712874a",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 70
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

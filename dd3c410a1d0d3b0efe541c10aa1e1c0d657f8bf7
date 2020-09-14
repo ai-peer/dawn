@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89da47cd_4e54e465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3868026_0d6c1e43",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "Maybe these could directly be info-\u003ereleasedOldLayout etc.",
+      "range": {
+        "startLine": 717,
+        "startChar": 52,
+        "endLine": 717,
+        "endChar": 90
+      },
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5633e161_86a71cc2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "nit: this would be a bit easier to read with an if.",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7b48997_733d3195",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "nit: this would be a bit easier to read with an if / else maybe.",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccff4e2d_38eccc14",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "Anonymous unions are forbidden on some of our compiler configuration (MSVC?) Can we just have the two booleans outside of the union instead? If you\u0027re worried about reading uninitialized data, we could default them to false here with \u003d false, or in the constructor.",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0acfc03a_d94f3ed7",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "Why do we need to keep this overload?",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07239cad_96092541",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "nit: syntax error here and in all other parts that have this code?",
+      "range": {
+        "startLine": 368,
+        "startChar": 30,
+        "endLine": 368,
+        "endChar": 32
+      },
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5490e9a4_85cca9a3",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-14T10:01:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
