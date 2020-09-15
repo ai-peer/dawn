@@ -326,6 +326,30 @@
     },
     {
       "key": {
+        "uuid": "3f71f318_f328a95d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-15T21:46:24Z",
+      "side": 1,
+      "message": "LGTM\n\nStrictly speaking I disagree that these index types should be addable like physics units, but I think this is fine. In physics, (x kg \u003d x * kg), so (x kg + y kg \u003d (x+y) kg). Here, I see indices as 1d homogeneous coordinates (i,1), so (i,1) + (j,1) doesn\u0027t make sense.",
+      "parentUuid": "d92f87a1_ce039386",
+      "range": {
+        "startLine": 460,
+        "startChar": 46,
+        "endLine": 460,
+        "endChar": 89
+      },
+      "revId": "6b42d1ec876ad63dcc45cf9f95676ef2754c9549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44463a65_8e1d6ce4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
