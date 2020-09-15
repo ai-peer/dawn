@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "e17f1482_3245f4ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-15T08:41:20Z",
+      "side": 1,
+      "message": "LGTM too, no additional comments.",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "170c67b0_0d0f8c87",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -33,6 +50,23 @@
       "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6cfcc1c5_50217080",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-15T08:41:20Z",
+      "side": 1,
+      "message": "unit: empty newline to separate cases?",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
