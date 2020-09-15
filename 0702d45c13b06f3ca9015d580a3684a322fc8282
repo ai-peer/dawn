@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "42218d53_35d0696a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-15T18:38:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but leaning towards no.\n\nInitially it seemed like I could try clearing to a color with higher than float precision and ensuring it is rendered as the converted float, but we don\u0027t have a color format with more precision than 32Float to do the check.",
+      "parentUuid": "721c96c5_cf67a7a7",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "170c67b0_0d0f8c87",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -67,6 +85,24 @@
       "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76ec4bdb_8acf110c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-15T18:38:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cfcc1c5_50217080",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
