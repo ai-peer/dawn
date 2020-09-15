@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "b69e5237_47a02eb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-15T23:20:01Z",
+      "side": 1,
+      "message": "Thanks Kai. \n\nI\u0027ve got a test for load op clear now. I added more code to convert to float then to uint/int on vk/gl to get the e2e test passing.",
+      "parentUuid": "2ec227a8_4df2a4a1",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "170c67b0_0d0f8c87",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
