@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2ec227a8_4df2a4a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-15T19:44:20Z",
+      "side": 1,
+      "message": "The loss of precision occurs when you try to clear a 32-bit integer texture, because `float` can\u0027t represent all 32-bit integer values. See: https://github.com/gpuweb/gpuweb/issues/965#issuecomment-675078918",
+      "parentUuid": "42218d53_35d0696a",
+      "revId": "0702d45c13b06f3ca9015d580a3684a322fc8282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "170c67b0_0d0f8c87",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
