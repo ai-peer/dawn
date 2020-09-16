@@ -47,7 +47,7 @@ namespace dawn_native { namespace metal {
                     return MTLIndexTypeUInt16;
                 case wgpu::IndexFormat::Uint32:
                     return MTLIndexTypeUInt32;
-                default:
+                case wgpu::IndexFormat::Undefined:
                     UNREACHABLE();
             }
         }
@@ -71,10 +71,6 @@ namespace dawn_native { namespace metal {
 
                     case wgpu::LoadOp::Load:
                         descriptor.colorAttachments[i].loadAction = MTLLoadActionLoad;
-                        break;
-
-                    default:
-                        UNREACHABLE();
                         break;
                 }
 
@@ -105,10 +101,6 @@ namespace dawn_native { namespace metal {
                     case wgpu::StoreOp::Clear:
                         descriptor.colorAttachments[i].storeAction = MTLStoreActionDontCare;
                         break;
-
-                    default:
-                        UNREACHABLE();
-                        break;
                 }
             }
 
@@ -132,10 +124,6 @@ namespace dawn_native { namespace metal {
                         case wgpu::StoreOp::Clear:
                             descriptor.depthAttachment.storeAction = MTLStoreActionDontCare;
                             break;
-
-                        default:
-                            UNREACHABLE();
-                            break;
                     }
 
                     switch (attachmentInfo.depthLoadOp) {
@@ -146,10 +134,6 @@ namespace dawn_native { namespace metal {
 
                         case wgpu::LoadOp::Load:
                             descriptor.depthAttachment.loadAction = MTLLoadActionLoad;
-                            break;
-
-                        default:
-                            UNREACHABLE();
                             break;
                     }
                 }
@@ -167,10 +151,6 @@ namespace dawn_native { namespace metal {
                         case wgpu::StoreOp::Clear:
                             descriptor.stencilAttachment.storeAction = MTLStoreActionDontCare;
                             break;
-
-                        default:
-                            UNREACHABLE();
-                            break;
                     }
 
                     switch (attachmentInfo.stencilLoadOp) {
@@ -181,10 +161,6 @@ namespace dawn_native { namespace metal {
 
                         case wgpu::LoadOp::Load:
                             descriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
-                            break;
-
-                        default:
-                            UNREACHABLE();
                             break;
                     }
                 }
@@ -795,10 +771,8 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
-                default: {
+                default:
                     UNREACHABLE();
-                    break;
-                }
             }
         }
 
