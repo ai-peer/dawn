@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "125e6b62_026df11f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-16T21:20:27Z",
+      "side": 1,
+      "message": "Hold off on submitting this. Having some confusion over clearing uint32 formats on DX12.",
+      "revId": "29011114d61a17f2e465b24ed79247f0d11dbeee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
