@@ -43,7 +43,7 @@ namespace dawn_native { namespace vulkan {
                     return VK_INDEX_TYPE_UINT16;
                 case wgpu::IndexFormat::Uint32:
                     return VK_INDEX_TYPE_UINT32;
-                default:
+                case wgpu::IndexFormat::Undefined:
                     UNREACHABLE();
             }
         }
@@ -205,10 +205,6 @@ namespace dawn_native { namespace vulkan {
                             case wgpu::BindingType::Sampler:
                             case wgpu::BindingType::ComparisonSampler:
                                 // Don't require barriers.
-                                break;
-
-                            default:
-                                UNREACHABLE();
                                 break;
                         }
                     }
@@ -734,10 +730,8 @@ namespace dawn_native { namespace vulkan {
                     return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
-                default: {
-                    UNREACHABLE();
+                default:
                     break;
-                }
             }
         }
 
@@ -857,10 +851,8 @@ namespace dawn_native { namespace vulkan {
                     return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
                 }
 
-                default: {
+                default:
                     UNREACHABLE();
-                    break;
-                }
             }
         }
 

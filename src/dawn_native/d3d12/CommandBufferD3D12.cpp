@@ -54,8 +54,6 @@ namespace dawn_native { namespace d3d12 {
                     return DXGI_FORMAT_R16_UINT;
                 case wgpu::IndexFormat::Uint32:
                     return DXGI_FORMAT_R32_UINT;
-                default:
-                    UNREACHABLE();
             }
         }
 
@@ -67,8 +65,6 @@ namespace dawn_native { namespace d3d12 {
                     return D3D12_QUERY_TYPE_PIPELINE_STATISTICS;
                 case wgpu::QueryType::Timestamp:
                     return D3D12_QUERY_TYPE_TIMESTAMP;
-                default:
-                    UNREACHABLE();
             }
         }
 
@@ -294,10 +290,6 @@ namespace dawn_native { namespace d3d12 {
                             case wgpu::BindingType::ComparisonSampler:
                                 // Don't require barriers.
                                 break;
-
-                            default:
-                                UNREACHABLE();
-                                break;
                         }
                     }
                 }
@@ -385,13 +377,9 @@ namespace dawn_native { namespace d3d12 {
                                                                                bufferLocation);
                             }
                             break;
-                        case wgpu::BindingType::SampledTexture:
-                        case wgpu::BindingType::Sampler:
-                        case wgpu::BindingType::ComparisonSampler:
-                        case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture:
+
+                        default:
                             UNREACHABLE();
-                            break;
                     }
                 }
             }
@@ -906,10 +894,8 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
-                default: {
+                default:
                     UNREACHABLE();
-                    break;
-                }
             }
         }
 
@@ -1024,10 +1010,8 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
-                default: {
+                default:
                     UNREACHABLE();
-                    break;
-                }
             }
         }
 
