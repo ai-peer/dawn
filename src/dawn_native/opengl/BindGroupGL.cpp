@@ -51,10 +51,6 @@ namespace dawn_native { namespace opengl {
                 case wgpu::BindingType::Sampler:
                 case wgpu::BindingType::ComparisonSampler:
                     break;
-
-                default:
-                    UNREACHABLE();
-                    break;
             }
         }
 
