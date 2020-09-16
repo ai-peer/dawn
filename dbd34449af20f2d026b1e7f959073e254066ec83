@@ -16,6 +16,24 @@
       "revId": "dbd34449af20f2d026b1e7f959073e254066ec83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a3b6576_b83324ed",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-16T08:54:35Z",
+      "side": 0,
+      "message": "The timestamp query on Vulkan has not been merged, so it doesnot matter if we remove this initialization now. I will update https://dawn-review.googlesource.com/c/dawn/+/27540 to use buffer lazy initialization in resolveQuerySet implementation.",
+      "parentUuid": "12462987_15db9b9f",
+      "revId": "dbd34449af20f2d026b1e7f959073e254066ec83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
