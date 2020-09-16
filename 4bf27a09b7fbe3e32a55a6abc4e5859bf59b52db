@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b664b662_79dfa554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-16T07:58:43Z",
+      "side": 1,
+      "message": "Still LGTM but the new test fails on Intel D3D12",
+      "revId": "4bf27a09b7fbe3e32a55a6abc4e5859bf59b52db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
