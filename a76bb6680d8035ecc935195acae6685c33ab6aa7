@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f883fbf_d69071c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-16T22:05:25Z",
+      "side": 1,
+      "message": "I think this is good to go now. I had some confusion about how clearing uint32 formats worked due to some odd behavior on D3D12. Turns out you can\u0027t clear to UINT32_MAX using ClearRenderTarget. I\u0027ve opened a bug to add a workaround for this: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d528.\n\nTo retract my previous statement - I don\u0027t think there are any values that will trigger undefined behavior (that can\u0027t be worked around at least)\n\n",
+      "revId": "a76bb6680d8035ecc935195acae6685c33ab6aa7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
