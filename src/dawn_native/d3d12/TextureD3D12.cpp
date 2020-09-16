@@ -96,7 +96,9 @@ namespace dawn_native { namespace d3d12 {
             switch (dimension) {
                 case wgpu::TextureDimension::e2D:
                     return D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-                default:
+
+                case wgpu::TextureDimension::e1D:
+                case wgpu::TextureDimension::e3D:
                     UNREACHABLE();
             }
         }
@@ -198,9 +200,6 @@ namespace dawn_native { namespace d3d12 {
                 case wgpu::TextureFormat::BC7RGBAUnorm:
                 case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                     return DXGI_FORMAT_BC7_TYPELESS;
-
-                default:
-                    UNREACHABLE();
             }
         }
 
@@ -320,9 +319,6 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_BC7_UNORM;
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                 return DXGI_FORMAT_BC7_UNORM_SRGB;
-
-            default:
-                UNREACHABLE();
         }
     }
 
@@ -552,7 +548,6 @@ namespace dawn_native { namespace d3d12 {
                         return DXGI_FORMAT_R8_UINT;
                     default:
                         UNREACHABLE();
-                        return GetD3D12Format();
                 }
             default:
                 ASSERT(HasOneBit(GetFormat().aspects));
@@ -888,7 +883,6 @@ namespace dawn_native { namespace d3d12 {
                                     break;
                                 default:
                                     UNREACHABLE();
-                                    break;
                             }
                         }
 
@@ -1050,6 +1044,7 @@ namespace dawn_native { namespace d3d12 {
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
                     mSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2DMS;
                     break;
+
                 default:
                     UNREACHABLE();
             }
@@ -1077,7 +1072,10 @@ namespace dawn_native { namespace d3d12 {
                     mSrvDesc.TextureCubeArray.MipLevels = descriptor->mipLevelCount;
                     mSrvDesc.TextureCubeArray.ResourceMinLODClamp = 0;
                     break;
-                default:
+
+                case wgpu::TextureViewDimension::e1D:
+                case wgpu::TextureViewDimension::e3D:
+                case wgpu::TextureViewDimension::Undefined:
                     UNREACHABLE();
             }
         }

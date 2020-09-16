@@ -86,9 +86,6 @@ namespace dawn_native {
             case wgpu::BindingType::ComparisonSampler:
             case wgpu::BindingType::SampledTexture:
                 break;
-            default:
-                UNREACHABLE();
-                break;
         }
 
         return {};
@@ -109,10 +106,6 @@ namespace dawn_native {
             case wgpu::BindingType::ComparisonSampler:
             case wgpu::BindingType::SampledTexture:
                 return {};
-
-            default:
-                UNREACHABLE();
-                return {};
         }
 
         switch (dimension) {
@@ -128,9 +121,8 @@ namespace dawn_native {
                 return {};
 
             case wgpu::TextureViewDimension::Undefined:
-            default:
                 UNREACHABLE();
-                return {};
+                break;
         }
     }
 
@@ -152,15 +144,11 @@ namespace dawn_native {
             case wgpu::BindingType::Sampler:
             case wgpu::BindingType::ComparisonSampler:
                 return DAWN_VALIDATION_ERROR("Sampler bindings may not be multisampled");
-
-            default:
-                UNREACHABLE();
-                return {};
         }
 
         switch (viewDimension) {
             case wgpu::TextureViewDimension::e2D:
-                break;
+                return {};
 
             case wgpu::TextureViewDimension::e2DArray:
                 return DAWN_VALIDATION_ERROR("2D array texture bindings may not be multisampled");
@@ -176,12 +164,9 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("1D texture bindings may not be multisampled");
 
             case wgpu::TextureViewDimension::Undefined:
-            default:
                 UNREACHABLE();
-                return {};
+                break;
         }
-
-        return {};
     }
 
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
@@ -242,9 +227,6 @@ namespace dawn_native {
                         return DAWN_VALIDATION_ERROR("Storage textures cannot be dynamic");
                     }
                     break;
-                default:
-                    UNREACHABLE();
-                    break;
             }
 
             IncrementBindingCounts(&bindingCounts, entry);
@@ -287,9 +269,6 @@ namespace dawn_native {
                 case wgpu::BindingType::ComparisonSampler:
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
-                    return false;
-                default:
-                    UNREACHABLE();
                     return false;
             }
         }
