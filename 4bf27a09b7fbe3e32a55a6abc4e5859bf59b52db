@@ -34,6 +34,24 @@
       "revId": "4bf27a09b7fbe3e32a55a6abc4e5859bf59b52db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c4ec270_933fe199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-16T20:47:41Z",
+      "side": 1,
+      "message": "If there are numbers that can be passed in that trigger undefined behavior, we need to add more rules to prevent that from occurring, and test them. Can be a followup. May end up needing to be in the spec too.",
+      "parentUuid": "aa8c2a93_10e6d4e2",
+      "revId": "4bf27a09b7fbe3e32a55a6abc4e5859bf59b52db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
