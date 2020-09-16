@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12462987_15db9b9f",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-16T08:42:43Z",
+      "side": 0,
+      "message": "Don\u0027t we need to do the same on Vulkan before we can remove this initialization?",
+      "revId": "dbd34449af20f2d026b1e7f959073e254066ec83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

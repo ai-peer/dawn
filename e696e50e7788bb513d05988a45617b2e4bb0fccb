@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d7531f6_13b4ce2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-16T08:42:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e696e50e7788bb513d05988a45617b2e4bb0fccb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d08ef37_b2c67d5a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-16T08:42:43Z",
+      "side": 1,
+      "message": "Can we have a buffer lazy zero init test for this?",
+      "revId": "e696e50e7788bb513d05988a45617b2e4bb0fccb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e64ec019_98db6677",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-16T08:42:43Z",
+      "side": 1,
+      "message": "nit: we can just return device.CreateBuffer(\u0026descriptor);",
+      "revId": "e696e50e7788bb513d05988a45617b2e4bb0fccb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
