@@ -33,6 +33,23 @@
       "revId": "e039b6642f74862c73b271cfc8ddd7b1323e2049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11e84ccd_1df744e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-16T17:02:34Z",
+      "side": 1,
+      "message": "discussed offline about having explicit construction from any integer type (with asserts) and non-narrowing implicit casts out of TypedInteger. Will explore in a follow-up.",
+      "revId": "e039b6642f74862c73b271cfc8ddd7b1323e2049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
