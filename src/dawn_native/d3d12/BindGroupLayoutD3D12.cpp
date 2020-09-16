@@ -114,11 +114,8 @@ namespace dawn_native { namespace d3d12 {
                     case wgpu::BindingType::ReadonlyStorageBuffer:
                         mBindingOffsets[bindingIndex] = baseRegister++;
                         break;
-                    case wgpu::BindingType::SampledTexture:
-                    case wgpu::BindingType::Sampler:
-                    case wgpu::BindingType::ComparisonSampler:
-                    case wgpu::BindingType::ReadonlyStorageTexture:
-                    case wgpu::BindingType::WriteonlyStorageTexture:
+
+                    default:
                         UNREACHABLE();
                         break;
                 }

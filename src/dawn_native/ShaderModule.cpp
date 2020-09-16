@@ -430,10 +430,6 @@ namespace dawn_native {
                     case wgpu::BindingType::Sampler:
                     case wgpu::BindingType::ComparisonSampler:
                         break;
-
-                    default:
-                        UNREACHABLE();
-                        return DAWN_VALIDATION_ERROR("Unsupported binding type");
                 }
             }
 
