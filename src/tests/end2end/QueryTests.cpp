@@ -30,10 +30,6 @@ class QueryTests : public DawnTest {
                            wgpu::BufferUsage::CopyDst;
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-        // Initialize the buffer values to 0.
-        std::vector<uint64_t> myData = {0, 0};
-        device.GetDefaultQueue().WriteBuffer(buffer, 0, myData.data(), size);
-
         return buffer;
     }
 };

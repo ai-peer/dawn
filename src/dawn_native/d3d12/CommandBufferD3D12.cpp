@@ -892,6 +892,10 @@ namespace dawn_native { namespace d3d12 {
                     QuerySet* querySet = ToBackend(cmd->querySet.Get());
                     Buffer* destination = ToBackend(cmd->destination.Get());
 
+                    DAWN_TRY(destination->EnsureDataInitialized(commandContext));
+                    destination->TrackUsageAndTransitionNow(commandContext,
+                                                            wgpu::BufferUsage::CopyDst);
+
                     commandList->ResolveQueryData(
                         querySet->GetQueryHeap(), D3D12QueryType(querySet->GetQueryType()),
                         cmd->firstQuery, cmd->queryCount, destination->GetD3D12Resource(),
