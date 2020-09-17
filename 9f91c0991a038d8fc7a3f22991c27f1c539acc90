@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62c41763_d9e2b16a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-17T00:01:45Z",
+      "side": 1,
+      "message": "Not sure why this is still failing on Intel for high uint clear values - I see different behavior on my local machine. Continuing to investigate.",
+      "revId": "9f91c0991a038d8fc7a3f22991c27f1c539acc90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
