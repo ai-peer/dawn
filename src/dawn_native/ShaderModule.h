@@ -112,6 +112,7 @@ namespace dawn_native {
             bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
         };
 
+        const std::vector<uint32_t>& GetOriginalSpirv() const;
         const std::vector<uint32_t>& GetSpirv() const;
 
 #ifdef DAWN_ENABLE_WGSL
@@ -129,6 +130,7 @@ namespace dawn_native {
 
         enum class Type { Undefined, Spirv, Wgsl };
         Type mType;
+        std::vector<uint32_t> mOriginalSpirv;
         std::vector<uint32_t> mSpirv;
         std::string mWgsl;
 

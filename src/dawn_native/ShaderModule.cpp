@@ -22,6 +22,7 @@
 #include "dawn_native/SpirvUtils.h"
 
 #include <spirv-tools/libspirv.hpp>
+#include <spirv-tools/optimizer.hpp>
 #include <spirv_cross.hpp>
 
 #ifdef DAWN_ENABLE_WGSL
@@ -32,6 +33,7 @@
 // clang-format on
 #endif  // DAWN_ENABLE_WGSL
 
+#include <iostream>
 #include <sstream>
 
 namespace dawn_native {
@@ -741,7 +743,7 @@ namespace dawn_native {
                 mType = Type::Spirv;
                 const auto* spirvDesc =
                     static_cast<const ShaderModuleSPIRVDescriptor*>(descriptor->nextInChain);
-                mSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+                mOriginalSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
                 break;
             }
             case wgpu::SType::ShaderModuleWGSLDescriptor: {
@@ -789,7 +791,7 @@ namespace dawn_native {
     size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
         size_t hash = 0;
 
-        for (uint32_t word : module->mSpirv) {
+        for (uint32_t word : module->mOriginalSpirv) {
             HashCombine(&hash, word);
         }
 
@@ -798,7 +800,11 @@ namespace dawn_native {
 
     bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
                                                     const ShaderModuleBase* b) const {
-        return a->mSpirv == b->mSpirv;
+        return a->mOriginalSpirv == b->mOriginalSpirv && a->mWgsl == b->mWgsl;
+    }
+
+    const std::vector<uint32_t>& ShaderModuleBase::GetOriginalSpirv() const {
+        return mOriginalSpirv;
     }
 
     const std::vector<uint32_t>& ShaderModuleBase::GetSpirv() const {
@@ -810,19 +816,62 @@ namespace dawn_native {
         const VertexStateDescriptor& vertexState,
         const std::string& entryPoint,
         uint32_t pullingBufferBindingSet) const {
-        return ConvertWGSLToSPIRVWithPulling(mWgsl.c_str(), vertexState, entryPoint,
-                                             pullingBufferBindingSet);
+        std::vector<uint32_t> spirv;
+        DAWN_TRY_ASSIGN(spirv, ConvertWGSLToSPIRVWithPulling(mWgsl.c_str(), vertexState, entryPoint,
+                                                             pullingBufferBindingSet));
+        return std::move(spirv);
     }
 #endif
 
     MaybeError ShaderModuleBase::InitializeBase() {
+        std::vector<uint32_t> spirv;
         if (mType == Type::Wgsl) {
 #ifdef DAWN_ENABLE_WGSL
-            DAWN_TRY_ASSIGN(mSpirv, ConvertWGSLToSPIRV(mWgsl.c_str()));
+            DAWN_TRY_ASSIGN(spirv, ConvertWGSLToSPIRV(mWgsl.c_str()));
 #else
             return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
 #endif  // DAWN_ENABLE_WGSL
+        } else {
+            spirv = mOriginalSpirv;
         }
+
+        if (GetDevice()->IsRobustnessEnabled()) {
+            spvtools::Optimizer opt(SPV_ENV_VULKAN_1_1);
+
+            std::ostringstream errorStream;
+            errorStream << "SPIRV Optimizer failure:" << std::endl;
+            opt.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
+                                                  const spv_position_t& position,
+                                                  const char* message) {
+                switch (level) {
+                    case SPV_MSG_FATAL:
+                    case SPV_MSG_INTERNAL_ERROR:
+                    case SPV_MSG_ERROR:
+                        errorStream << "error: line " << position.index << ": " << message
+                                    << std::endl;
+                        break;
+                    case SPV_MSG_WARNING:
+                        errorStream << "warning: line " << position.index << ": " << message
+                                    << std::endl;
+                        break;
+                    case SPV_MSG_INFO:
+                        errorStream << "info: line " << position.index << ": " << message
+                                    << std::endl;
+                        break;
+                    default:
+                        break;
+                }
+            });
+            opt.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
+
+            std::vector<uint32_t> result;
+            if (!opt.Run(spirv.data(), spirv.size(), &result, spvtools::ValidatorOptions(),
+                         false)) {
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+            spirv = std::move(result);
+        }
+        mSpirv = std::move(spirv);
 
         spirv_cross::Compiler compiler(mSpirv);
         for (const spirv_cross::EntryPoint& entryPoint : compiler.get_entry_points_and_stages()) {
