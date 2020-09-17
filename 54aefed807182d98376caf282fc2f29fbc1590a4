@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1b6b26b6_a52e32cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T17:27:57Z",
+      "side": 1,
+      "message": "typo: destination",
+      "range": {
+        "startLine": 11,
+        "startChar": 22,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "54aefed807182d98376caf282fc2f29fbc1590a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d84fa718_8a03204b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 14
@@ -13,6 +36,23 @@
       "writtenOn": "2020-09-17T08:58:38Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "54aefed807182d98376caf282fc2f29fbc1590a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a7b903d_8e0aeee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T17:27:57Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "54aefed807182d98376caf282fc2f29fbc1590a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
