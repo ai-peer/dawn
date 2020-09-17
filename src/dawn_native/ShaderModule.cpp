@@ -511,7 +511,9 @@ namespace dawn_native {
                             spirv_cross::SPIRType::BaseType textureComponentType =
                                 compiler.get_type(imageType.type).basetype;
 
-                            info->multisampled = imageType.ms;
+                            if (imageType.ms) {
+                                info->type = wgpu::BindingType::MultisampledTexture;
+                            }
                             info->viewDimension =
                                 SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                             info->textureComponentType =
@@ -556,7 +558,9 @@ namespace dawn_native {
                                 return DAWN_VALIDATION_ERROR(
                                     "The storage texture format is not supported");
                             }
-                            info->multisampled = imageType.ms;
+                            if (imageType.ms) {
+                                return DAWN_VALIDATION_ERROR("Multisampled storage texture aren't supported");
+                            }
                             info->storageTextureFormat = storageTextureFormat;
                             info->viewDimension =
                                 SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);

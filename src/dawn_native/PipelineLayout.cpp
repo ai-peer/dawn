@@ -32,7 +32,7 @@ namespace dawn_native {
             // Visibility is excluded because we take the OR across stages.
             return lhs.binding == rhs.binding && lhs.type == rhs.type &&
                    lhs.hasDynamicOffset == rhs.hasDynamicOffset &&
-                   lhs.multisampled == rhs.multisampled && lhs.viewDimension == rhs.viewDimension &&
+                   lhs.viewDimension == rhs.viewDimension &&
                    lhs.textureComponentType == rhs.textureComponentType;
         }
 
@@ -121,12 +121,11 @@ namespace dawn_native {
                     BindingNumber bindingNumber = it.first;
                     const EntryPointMetadata::ShaderBindingInfo& bindingInfo = it.second;
 
-                    BindGroupLayoutEntry bindingSlot;
+                    BindGroupLayoutEntry bindingSlot = {};
                     bindingSlot.binding = static_cast<uint32_t>(bindingNumber);
                     bindingSlot.visibility = StageBit(shaderStage);
                     bindingSlot.type = bindingInfo.type;
                     bindingSlot.hasDynamicOffset = false;
-                    bindingSlot.multisampled = bindingInfo.multisampled;
                     bindingSlot.viewDimension = bindingInfo.viewDimension;
                     bindingSlot.textureComponentType =
                         Format::FormatTypeToTextureComponentType(bindingInfo.textureComponentType);
