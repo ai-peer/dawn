@@ -386,6 +386,7 @@ namespace dawn_native { namespace d3d12 {
                             }
                             break;
                         case wgpu::BindingType::SampledTexture:
+                        case wgpu::BindingType::MultisampledTexture:
                         case wgpu::BindingType::Sampler:
                         case wgpu::BindingType::ComparisonSampler:
                         case wgpu::BindingType::ReadonlyStorageTexture:
