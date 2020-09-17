@@ -16,6 +16,108 @@
       "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed7274b2_8ba508a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "LGTM, but can\u0027t we re-enable the vertex pulling robustness test with this?",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cb4e731_e9d21af6",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "nit: stray include.",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eb0ce12_9e7401a3",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "We should hash the type and both the SPIRV and WGSL here. (depending one the type, one of them will be empty but that\u0027s fine)",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e186dc88_7a1996f0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "ditto, we also need to compare mType.",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d3ac2fe_d52727c2",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "nit: This chunk of code is not using `this` so maybe it could be moved to a freestanding function in the anonymous namespace that returns ResultOrError\u003cstd::vector\u003cuint32_t\u003e\u003e?",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad20c9e7_0d514893",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-17T09:05:15Z",
+      "side": 1,
+      "message": "nit: unnecessary getter?",
+      "revId": "3a3601f58433415d8aa728c025b0e88257472d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
