@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f2ba167_9a2c1660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T19:36:05Z",
+      "side": 1,
+      "message": "err sorry I just saw this was updated. I don\u0027t think we need all the extra casts - the issue is that unsigned long long and unsigned long are not the same type which is why you had ambiguous overload errors. On some platforms size_t is unsigned long and on some it is unsigned long long\n\nSo we could just define all three overloads and I think it should be okay.\nBut also, in Release builds, this function is literally just two instructions, maybe have a template in the header and inline it?",
+      "revId": "38f4bd1d225a127c114d9a481ed8444b5402cd62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
