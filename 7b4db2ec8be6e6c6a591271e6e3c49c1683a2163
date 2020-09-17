@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a017efc7_a72be971",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-17T23:26:14Z",
+      "side": 1,
+      "message": "Interestingly, GL has more support than VK (2% vs 0.4%).",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b0eed23_58f39a54",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-17T23:26:14Z",
+      "side": 1,
+      "message": "Do init these structs, ex. `info{}` then no need to pNext \u003d nullptr.",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "053666e5_cd41c43c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-17T23:26:14Z",
+      "side": 1,
+      "message": "nit: \u003d { ... } seem cleaner IMHO",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
