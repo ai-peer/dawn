@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3a968294_20e6cedd",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c65ab0e_f6da2d99",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d260028_f7b23fc9",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 11
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "e43136a7_5d69fcca",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d260028_f7b23fc9",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aee78fed_ad0b2bcd",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 11
@@ -67,6 +103,24 @@
       "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51b6ca9b_97fc3ea7",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aee78fed_ad0b2bcd",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "289b4731_76315de5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc1df81e_c43d1c88",
+      "range": {
+        "startLine": 364,
+        "startChar": 51,
+        "endLine": 364,
+        "endChar": 57
+      },
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c436c9_6ff27d3c",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 11
@@ -116,6 +194,30 @@
     },
     {
       "key": {
+        "uuid": "c8ea1303_c1dab1d4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37c436c9_6ff27d3c",
+      "range": {
+        "startLine": 365,
+        "startChar": 17,
+        "endLine": 365,
+        "endChar": 21
+      },
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af49cd10_3a965748",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 11
@@ -130,6 +232,24 @@
       "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a3e9c59_975a2467",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-17T03:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af49cd10_3a965748",
+      "revId": "120cf17621022d8a7f6ee91ae88782fe5d68cd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
