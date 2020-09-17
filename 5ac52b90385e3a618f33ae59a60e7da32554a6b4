@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "0cd7b8f0_9d5d141f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T18:00:29Z",
+      "side": 1,
+      "message": "typo: calling",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d4f3ecc_ee2604d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T18:00:29Z",
+      "side": 1,
+      "message": "dawn:527",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cfe7d3e_21745ab1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -16,6 +62,46 @@
       "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe7ca2a4_1cc7d5e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T18:00:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b618e34_5003cdad",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-17T18:00:29Z",
+      "side": 1,
+      "message": "nit: this will do double validation - can use GetOrCreatePipelineLayout instead",
+      "range": {
+        "startLine": 204,
+        "startChar": 37,
+        "endLine": 204,
+        "endChar": 57
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
