@@ -830,6 +830,19 @@ TEST_P(CopyTests_B2T, FullTextureAligned) {
     DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 1});
 }
 
+// Test that copying an entire texture with 256-byte aligned dimensions works
+TEST_P(CopyTests_B2T, ZeroSizedCopy) {
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {0, 0, 0});
+}
+
 // Test that copying an entire texture without 256-byte aligned dimensions works
 TEST_P(CopyTests_B2T, FullTextureUnaligned) {
     constexpr uint32_t kWidth = 259;
@@ -1242,6 +1255,17 @@ TEST_P(CopyTests_T2T, Texture) {
     textureSpec.level = 0;
     textureSpec.textureSize = {kWidth, kHeight, 1};
     DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1});
+}
+
+TEST_P(CopyTests_T2T, ZeroSizedCopy) {
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    DoTest(textureSpec, textureSpec, {0, 0, 0});
 }
 
 TEST_P(CopyTests_T2T, TextureRegion) {
