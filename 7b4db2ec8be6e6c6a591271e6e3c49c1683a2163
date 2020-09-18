@@ -19,6 +19,46 @@
     },
     {
       "key": {
+        "uuid": "cfb2a19a_dcb470a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T16:18:26Z",
+      "side": 1,
+      "message": "lgtm too",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e639808e_5b69f4f2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T16:18:26Z",
+      "side": 1,
+      "message": "nit: this could be allocated and released inside the @available block",
+      "range": {
+        "startLine": 791,
+        "startChar": 20,
+        "endLine": 791,
+        "endChar": 85
+      },
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a017efc7_a72be971",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
