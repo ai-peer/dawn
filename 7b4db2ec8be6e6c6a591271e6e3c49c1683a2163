@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "91d6215c_49ab30e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T09:48:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a017efc7_a72be971",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
@@ -13,6 +30,24 @@
       "writtenOn": "2020-09-17T23:26:14Z",
       "side": 1,
       "message": "Interestingly, GL has more support than VK (2% vs 0.4%).",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b18f6617_226e5469",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T09:48:56Z",
+      "side": 1,
+      "message": "AFAIK Vulkan drivers don\u0027t really support it, it\u0027s tools that inject an extension when you run against them.",
+      "parentUuid": "a017efc7_a72be971",
       "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
