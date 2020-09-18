@@ -213,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "fe27f2f9_9fb6522e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-18T18:18:47Z",
+      "side": 1,
+      "message": "Yes, it was a hack to prevent the code from running on AMD hardware we knew it didn\u0027t work on (since we weren\u0027t sure if that flag might be related to why it wasn\u0027t working).\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d206",
+      "parentUuid": "7a2380db_43a1173b",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccff4e2d_38eccc14",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 4
