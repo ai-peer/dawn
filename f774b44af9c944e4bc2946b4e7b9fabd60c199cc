@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "7c616894_0d994351",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:40:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1b0e98c_48729d14",
+      "revId": "f774b44af9c944e4bc2946b4e7b9fabd60c199cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75bb987f_b3d5a863",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 1
@@ -90,6 +108,30 @@
       "revId": "f774b44af9c944e4bc2946b4e7b9fabd60c199cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e76ec3f5_2e2f04f9",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:40:02Z",
+      "side": 1,
+      "message": "I was thinking that the XOR was one less instructions but it so doesn\u0027t matter here ^^ Moved to the \u0026\u003d ~Vertex",
+      "parentUuid": "75bb987f_b3d5a863",
+      "range": {
+        "startLine": 106,
+        "startChar": 20,
+        "endLine": 106,
+        "endChar": 63
+      },
+      "revId": "f774b44af9c944e4bc2946b4e7b9fabd60c199cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
