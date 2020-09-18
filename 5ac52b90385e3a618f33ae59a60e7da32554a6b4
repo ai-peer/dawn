@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c084535_86604265",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:02:49Z",
+      "side": 0,
+      "message": "It looks like this gives up some clarity/specificity in error messages. They all become \"binding type cannot be used with this visibility\", AFAICT. I suppose that\u0027s an acceptable tradeoff for code simplicity.",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
