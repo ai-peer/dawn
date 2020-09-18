@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f53b10d_67192ed9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T23:15:47Z",
+      "side": 1,
+      "message": "TBR, rolling shader deps. After this, we should be able to use textures in WGSL!",
+      "revId": "ecac0191c78e44705100629c5aa5f66fb7aa6d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
