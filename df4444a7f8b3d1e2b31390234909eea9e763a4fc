@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "310bd1be_eb5167ab",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T21:53:52Z",
+      "side": 1,
+      "message": "nit: this assumes the order of the members which we don\u0027t do in Dawn. We should probably say:\nmarkerInfo \u003d {};\nmarkerInfo.prop1 \u003d val;\nmarkerInfo.prop2 \u003d val;\n\netc.. but no need to specify pNext.\nI think this is what Bryan meant as well.",
+      "range": {
+        "startLine": 744,
+        "startChar": 24,
+        "endLine": 744,
+        "endChar": 50
+      },
+      "revId": "df4444a7f8b3d1e2b31390234909eea9e763a4fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
