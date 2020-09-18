@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "60b3b73f_ce13e113",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5633e161_86a71cc2",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7b48997_733d3195",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -124,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "6dea1c7f_8b125699",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b48997_733d3195",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8faf9e60_64449996",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
         "patchSetId": 4
@@ -138,6 +174,24 @@
       "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61a4a4c6_19144338",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Done!!",
+      "parentUuid": "8faf9e60_64449996",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +242,24 @@
       "side": 1,
       "message": "Ah yes, although that\u0027s assuming the layout of union which is undefined.",
       "parentUuid": "dfae0598_5fc12fa1",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5e96dca_84f655f8",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "same compiler though for us - this okay given we\u0027ll update it in Chrome and then get rid of the union shortly?",
+      "parentUuid": "d0c1b34d_333429e8",
       "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -294,6 +366,30 @@
     },
     {
       "key": {
+        "uuid": "72d9e35b_3084e019",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9ed5c8a_0c280d5d",
+      "range": {
+        "startLine": 368,
+        "startChar": 30,
+        "endLine": 368,
+        "endChar": 32
+      },
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5490e9a4_85cca9a3",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
         "patchSetId": 4
@@ -308,6 +404,24 @@
       "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c810bc84_bfa36493",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Also used for validation tests whcih don\u0027t care about layouts.",
+      "parentUuid": "5490e9a4_85cca9a3",
+      "revId": "dd3c410a1d0d3b0efe541c10aa1e1c0d657f8bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

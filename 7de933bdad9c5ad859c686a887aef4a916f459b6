@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27ca584b_fe3967c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "This CL + https://chromium-review.googlesource.com/c/chromium/src/+/2417461 (which has some hacks b.c. Skia probably needs an API change) has WebGPU working on my Linux machine!",
+      "revId": "7de933bdad9c5ad859c686a887aef4a916f459b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}

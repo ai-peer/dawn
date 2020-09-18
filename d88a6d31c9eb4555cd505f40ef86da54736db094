@@ -125,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "467f53ac_afe63395",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6a6a7c45_3d4c627b",
+      "range": {
+        "startLine": 550,
+        "startChar": 8,
+        "endLine": 552,
+        "endChar": 94
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70fb0e7f_a9c13b24",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -204,6 +228,30 @@
       "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f944853e_b1e17e5e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T01:46:06Z",
+      "side": 1,
+      "message": "I thought that these images couldn\u0027t have more than one layer, but maybe they can. Anyway for now we have a bunch of ASSERTions about single-layered ness, and the swapchain/ImageBitmap gives us single-layer textures.",
+      "parentUuid": "58b9aea5_466242e1",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 61
+      },
+      "revId": "d88a6d31c9eb4555cd505f40ef86da54736db094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
