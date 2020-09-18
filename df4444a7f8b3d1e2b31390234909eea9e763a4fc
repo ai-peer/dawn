@@ -94,6 +94,30 @@
       "revId": "df4444a7f8b3d1e2b31390234909eea9e763a4fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52ef7012_9c9f9715",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-18T22:36:38Z",
+      "side": 1,
+      "message": "Sorry for the confusion. If you memcpy to info.color to init then black \u003d {..} also works.",
+      "parentUuid": "41bb6802_38d86cc5",
+      "range": {
+        "startLine": 744,
+        "startChar": 24,
+        "endLine": 744,
+        "endChar": 50
+      },
+      "revId": "df4444a7f8b3d1e2b31390234909eea9e763a4fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
