@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "acab7f4f_30e292b9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-09-18T22:05:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e639808e_5b69f4f2",
+      "range": {
+        "startLine": 791,
+        "startChar": 20,
+        "endLine": 791,
+        "endChar": 85
+      },
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a017efc7_a72be971",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
