@@ -46,6 +46,30 @@
       "revId": "df4444a7f8b3d1e2b31390234909eea9e763a4fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df6f3b5_f4c9e367",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-18T22:08:49Z",
+      "side": 1,
+      "message": "oh yea, you can\u0027t assign to a plain-old array like that. I think your original code would be preferable.",
+      "parentUuid": "4243ea86_3ab4bbd3",
+      "range": {
+        "startLine": 744,
+        "startChar": 24,
+        "endLine": 744,
+        "endChar": 50
+      },
+      "revId": "df4444a7f8b3d1e2b31390234909eea9e763a4fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
