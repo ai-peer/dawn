@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59f62eb6_885db9bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd7b8f0_9d5d141f",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d4f3ecc_ee2604d9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "662be852_49cf65a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d4f3ecc_ee2604d9",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 8
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +164,24 @@
     },
     {
       "key": {
+        "uuid": "1950e258_87180414",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdadbdb3_2d8520ec",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b618e34_5003cdad",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 1
@@ -139,6 +205,30 @@
     },
     {
       "key": {
+        "uuid": "42d55297_9a5b13eb",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b618e34_5003cdad",
+      "range": {
+        "startLine": 204,
+        "startChar": 37,
+        "endLine": 204,
+        "endChar": 57
+      },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7110c004_d8389443",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 1
@@ -153,6 +243,24 @@
       "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8405ba1d_af5b5d72",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "nit: 125 lines but it\u0027s a bit big. I\u0027ll look at splitting it slightly in a followup.",
+      "parentUuid": "7110c004_d8389443",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "d6d81ba5_39f98eaf",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "843b5809_df8597e9",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6a888c_daeda8c3",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 1
@@ -187,6 +313,24 @@
       "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9ca96cf_7aafae6a",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T14:48:14Z",
+      "side": 1,
+      "message": "This isn\u0027t guaranteed by WebGPU, for example this would break when using dawn_wire because it creates a new BGL object for each call to GetBindGroupLayout (since it has no knowledge of what\u0027s inside them).\n\nTo check for equality the proper way, we\u0027d have to create a pipeline against one layout, a bindgroup against another, and do a draw (validation would fail if they are different). We take advantage of validation tests running only on dawn_native for now to check equality with pointers.",
+      "parentUuid": "1c6a888c_daeda8c3",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
