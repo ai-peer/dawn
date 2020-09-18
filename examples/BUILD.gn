@@ -83,3 +83,14 @@ dawn_sample("CubeReflection") {
 dawn_sample("ManualSwapChainTest") {
   sources = [ "ManualSwapChainTest.cpp" ]
 }
+
+dawn_sample("MultiDeviceInterop") {
+  sources = [ "MultiDeviceInterop.cpp" ]
+
+  frameworks = [
+    # "Cocoa.framework",
+    # "IOKit.framework",
+    "IOSurface.framework",
+    # "QuartzCore.framework",
+  ]
+}
