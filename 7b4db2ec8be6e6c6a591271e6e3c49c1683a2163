@@ -135,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "d0f82c88_ea9bac0e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-09-18T22:24:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b0eed23_58f39a54",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "053666e5_cd41c43c",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 3
@@ -149,6 +167,24 @@
       "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f171c3a0_c1c4510f",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-09-18T22:24:11Z",
+      "side": 1,
+      "message": "Unable to use aggregate initialization on just .color.",
+      "parentUuid": "053666e5_cd41c43c",
+      "revId": "7b4db2ec8be6e6c6a591271e6e3c49c1683a2163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
