@@ -140,9 +140,12 @@ class CopyTests_T2B : public CopyTests {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
+        const uint32_t fullRowHeight = copySize.height != 0 ? copySize.height - 1 : 0;
         uint64_t bufferOffset = bufferSpec.offset;
         const uint32_t texelCountInCopyRegion =
-            bufferSpec.bytesPerRow / bytesPerTexel * (copySize.height - 1) + copySize.width;
+            copySize.height == 0
+                ? 0
+                : bufferSpec.bytesPerRow / bytesPerTexel * fullRowHeight + copySize.width;
         const uint32_t maxArrayLayer = textureSpec.copyOrigin.z + copySize.depth;
         std::vector<RGBA8> expected(texelCountInCopyRegion);
         for (uint32_t slice = textureSpec.copyOrigin.z; slice < maxArrayLayer; ++slice) {
@@ -308,8 +311,10 @@ class CopyTests_T2T : public CopyTests {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
+        const uint32_t fullRowHeight = copySize.height != 0 ? copySize.height - 1 : 0;
         const uint32_t texelCountInCopyRegion =
-            copyLayout.texelBlocksPerRow * (copySize.height - 1) + copySize.width;
+            copySize.height == 0 ? 0
+                                 : copyLayout.texelBlocksPerRow * fullRowHeight + copySize.width;
         std::vector<RGBA8> expected(texelCountInCopyRegion);
         for (uint32_t slice = 0; slice < copySize.depth; ++slice) {
             std::fill(expected.begin(), expected.end(), RGBA8());
@@ -393,6 +398,20 @@ TEST_P(CopyTests_T2B, FullTextureAligned) {
     textureSpec.level = 0;
 
     DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 1});
+}
+
+TEST_P(CopyTests_T2B, ZeroSizedCopy) {
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {0, kHeight, 1});
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, 0, 1});
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 0});
 }
 
 // Test that copying an entire texture without 256-byte aligned dimensions works
@@ -830,6 +849,21 @@ TEST_P(CopyTests_B2T, FullTextureAligned) {
     DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 1});
 }
 
+// Test that copying an entire texture with 256-byte aligned dimensions works
+TEST_P(CopyTests_B2T, ZeroSizedCopy) {
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {0, kHeight, 1});
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, 0, 1});
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight), {kWidth, kHeight, 0});
+}
+
 // Test that copying an entire texture without 256-byte aligned dimensions works
 TEST_P(CopyTests_B2T, FullTextureUnaligned) {
     constexpr uint32_t kWidth = 259;
@@ -1242,6 +1276,19 @@ TEST_P(CopyTests_T2T, Texture) {
     textureSpec.level = 0;
     textureSpec.textureSize = {kWidth, kHeight, 1};
     DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1});
+}
+
+TEST_P(CopyTests_T2T, ZeroSizedCopy) {
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.level = 0;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+    DoTest(textureSpec, textureSpec, {0, kHeight, 1});
+    DoTest(textureSpec, textureSpec, {kWidth, 0, 1});
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 0});
 }
 
 TEST_P(CopyTests_T2T, TextureRegion) {
