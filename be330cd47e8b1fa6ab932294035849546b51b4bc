@@ -16,6 +16,159 @@
       "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a5c6eba_8958b48d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50e94140_608384e9",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "unit: keep the empty newline before this block.",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71e164fa_c93dc74c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "unit: keep the empty newline before this block.",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29a123d9_9b19795d",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "nit: Can we also remove this initialization now that Jiawei completed buffer lazy zero init? ditto below",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "256dfc61_cc34c0f1",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "Can we use RequiredBytesInCopy or a RequiredTexelsInCopy? ditto below",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "167613c8_74e63de5",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "nit: comment before test.",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b389103_4655fa0a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "note: the test doesn\u0027t check that other texels are untouched, but the CTS does so it\u0027s probably ok?",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ec69ecb_3f7d5d7d",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "nit: comment needs updating.",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0f4c1a7_427fc53c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-18T10:09:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
