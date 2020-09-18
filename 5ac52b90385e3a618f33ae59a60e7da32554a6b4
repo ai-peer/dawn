@@ -82,6 +82,40 @@
     },
     {
       "key": {
+        "uuid": "31c75cc9_ce34092b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:27:06Z",
+      "side": 1,
+      "message": "I\u0027ll let Austin verify the actual logic.\n\nLGTM2",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdadbdb3_2d8520ec",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:27:06Z",
+      "side": 1,
+      "message": "μNit: \"stage\" -\u003e \"stages\"? Also, sentence ends with a preposition. Prefer \"stages at which we find this binding\".",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4b618e34_5003cdad",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 1
@@ -99,6 +133,57 @@
         "endLine": 204,
         "endChar": 57
       },
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7110c004_d8389443",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:27:06Z",
+      "side": 1,
+      "message": "Nit: this function is fairly long (175 lines). Consider breaking it up.",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "843b5809_df8597e9",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:27:06Z",
+      "side": 1,
+      "message": "μμNit: some comments start with \"Check that\", some do not.",
+      "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c6a888c_daeda8c3",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-18T14:27:06Z",
+      "side": 1,
+      "message": "Out of curiosity (and because inferred BGLs are new to me), is this something that we expect other native wgpu implementations to adhere to? ie., that only one canonical BGL will be created for inferred layouts and they can be compared by pointer?",
       "revId": "5ac52b90385e3a618f33ae59a60e7da32554a6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
