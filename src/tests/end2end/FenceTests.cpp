@@ -260,4 +260,100 @@ TEST_P(FenceTests, ClientValidationErrorInErrorScope) {
     WaitForCompletedValue(fence, 4);
 }
 
+// Test that Buffer.MapAsync read followed by Queue.Signal should happen in order
+TEST_P(FenceTests, MapReadSignalOnComplete) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    uint32_t myData = 0x01020304;
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+    bool done = false;
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+
+    wgpu::Fence fence = queue.CreateFence();
+
+    queue.Signal(fence, 1);
+    fence.OnCompletion(
+        1u,
+        [](WGPUFenceCompletionStatus status, void* userdata) {
+            // the done flag should be true since it's set by the map async callback
+            EXPECT_EQ(*static_cast<bool*>(userdata), true);
+        },
+        &done);
+    WaitForCompletedValue(fence, 1);
+}
+
+// Test that Buffer.MapAsync read followed by Queue.Signal should happen in order
+TEST_P(FenceTests, SignalMapReadOnComplete) {
+    wgpu::Fence fence = queue.CreateFence();
+    queue.Signal(fence, 2);
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    uint32_t myData = 0x01020304;
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+    bool done = false;
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+
+    fence.OnCompletion(
+        2u,
+        [](WGPUFenceCompletionStatus status, void* userdata) {
+            // the done flag should be true since it's set by the map async callback
+            EXPECT_EQ(*static_cast<bool*>(userdata), true);
+        },
+        &done);
+    WaitForCompletedValue(fence, 2);
+}
+
+// Test that signal, fence on completion, map happen in order
+TEST_P(FenceTests, SignalOnCompleteMapRead) {
+    wgpu::Fence fence = queue.CreateFence();
+    queue.Signal(fence, 2);
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    uint32_t myData = 0x01020304;
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+    bool done = false;
+    fence.OnCompletion(
+        2u,
+        [](WGPUFenceCompletionStatus status, void* userdata) {
+            // the done flag should be true since it's set by the map async callback
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+    WaitForCompletedValue(fence, 2);
+
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, kSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            EXPECT_EQ(*static_cast<bool*>(userdata), true);
+        },
+        &done);
+}
+
 DAWN_INSTANTIATE_TEST(FenceTests, D3D12Backend(), MetalBackend(), OpenGLBackend(), VulkanBackend());
