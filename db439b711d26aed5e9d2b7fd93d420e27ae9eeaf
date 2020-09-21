@@ -16,6 +16,75 @@
       "revId": "db439b711d26aed5e9d2b7fd93d420e27ae9eeaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9a218f5_7a15f278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-21T23:40:11Z",
+      "side": 1,
+      "message": "Sorry, didn\u0027t notice it was out of \"draft\". (also I wasn\u0027t on the reviewer list)",
+      "parentUuid": "6a2617a8_79b17b53",
+      "revId": "db439b711d26aed5e9d2b7fd93d420e27ae9eeaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a2019ce_2b167142",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-21T23:40:11Z",
+      "side": 1,
+      "message": "nit: Maybe\n\n // ExternalImageExportInfo\n\nto separate these two sections (otherwise it looks like a duplicated definition)",
+      "revId": "db439b711d26aed5e9d2b7fd93d420e27ae9eeaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87cc7042_101e72b1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-21T23:40:11Z",
+      "side": 1,
+      "message": "nit: if already initialized",
+      "revId": "db439b711d26aed5e9d2b7fd93d420e27ae9eeaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c84a83_8db16626",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-21T23:40:11Z",
+      "side": 1,
+      "message": "nit: \"any the\"",
+      "revId": "db439b711d26aed5e9d2b7fd93d420e27ae9eeaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
