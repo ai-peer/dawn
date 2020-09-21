@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24706d7d_7974b3f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-21T22:49:58Z",
+      "side": 1,
+      "message": "Well, the intent though was to have errors get logged so that validation layer failures show up on the bots with meaningful messages. Does this just remove messages completely?",
+      "revId": "1b67fc09a32f8676811731e24e4915fccc642d30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
