@@ -15,10 +15,12 @@
 #include "dawn_native/Buffer.h"
 
 #include "common/Assert.h"
+#include "common/Log.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
@@ -263,6 +265,9 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
+        // if (mMapSerial < GetDevice()->GetFutureCallbackSerial()) {
+        //     GetDevice()->GetFenceSignalTracker()->Tick(GetDevice()->GetFutureCallbackSerial());
+        // }
         if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
             CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_DeviceLost);
             return;
@@ -277,6 +282,7 @@ namespace dawn_native {
     }
 
     const void* BufferBase::GetConstMappedRange(size_t offset, size_t size) {
+        dawn::DebugLog() << "get const mapped range";
         return GetMappedRangeInternal(false, offset, size);
     }
 

@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -72,6 +73,10 @@ namespace dawn_native {
             return;
         }
         ASSERT(!IsError());
+
+        // if (mCompletedValue <= GetDevice()->GetFutureCallbackSerial()) {
+        //     GetDevice()->GetMapRequestTracker()->Tick(GetDevice()->GetFutureCallbackSerial());
+        // }
 
         if (value <= mCompletedValue) {
             callback(WGPUFenceCompletionStatus_Success, userdata);
