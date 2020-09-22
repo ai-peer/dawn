@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "common/Log.h"
 #include "common/Math.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/DynamicUploader.h"
@@ -271,6 +272,7 @@ namespace dawn_native { namespace d3d12 {
                                    size_t offset,
                                    size_t size,
                                    const char* contextInfo) {
+        dawn::DebugLog() << "in map internal";
         // The mapped buffer can be accessed at any time, so it must be locked to ensure it is never
         // evicted. This buffer should already have been made resident when it was created.
         Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
@@ -289,7 +291,8 @@ namespace dawn_native { namespace d3d12 {
         if (isWrite) {
             mWrittenMappedRange = range;
         }
-
+        dawn::DebugLog() << "finishing map internal: "
+                         << *static_cast<const uint32_t*>(mMappedData);
         return {};
     }
 
@@ -328,6 +331,7 @@ namespace dawn_native { namespace d3d12 {
     void* Buffer::GetMappedPointerImpl() {
         // The frontend asks that the pointer returned is from the start of the resource
         // irrespective of the offset passed in MapAsyncImpl, which is what mMappedData is.
+        dawn::DebugLog() << "get mapped pointer : " << *static_cast<const uint32_t*>(mMappedData);
         return mMappedData;
     }
 
