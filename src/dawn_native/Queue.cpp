@@ -25,6 +25,7 @@
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/FenceSignalTracker.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -152,6 +153,11 @@ namespace dawn_native {
             return;
         }
         ASSERT(!IsError());
+
+        // // Submit any map callbacks before continuing
+        if (device->GetPendingCommandSerial() >= device->GetFutureCallbackSerial()) {
+            device->GetMapRequestTracker()->Tick(device->GetPendingCommandSerial());
+        }
 
         fence->SetSignaledValue(signalValue);
         device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
