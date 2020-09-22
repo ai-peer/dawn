@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e06a961_88bdde02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-22T13:19:56Z",
+      "side": 1,
+      "message": "PTAL! The deprecation warnings were slightly annoying so I fixed them.",
+      "revId": "87ccd773c1ff6c24248a1042442d8166fc129a3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
