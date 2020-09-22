@@ -193,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "692aab23_7509d96e",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-22T09:26:20Z",
+      "side": 1,
+      "message": "I think this computes the copy size of a single slice so we could have a helper GetTexelCountInCopyRegion and specify a single slice no?",
+      "parentUuid": "9de26f4c_2ccb720c",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "167613c8_74e63de5",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
