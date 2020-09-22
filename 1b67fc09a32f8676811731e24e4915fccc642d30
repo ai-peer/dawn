@@ -16,6 +16,24 @@
       "revId": "1b67fc09a32f8676811731e24e4915fccc642d30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "801c98bf_8b7c9d2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-09-22T00:43:25Z",
+      "side": 1,
+      "message": "When I tested locally, only the bad messages (via same filter) were removed from stdout and stderr (also fixes dawn:514). Hopefully, this will do the trick.",
+      "parentUuid": "24706d7d_7974b3f4",
+      "revId": "1b67fc09a32f8676811731e24e4915fccc642d30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
