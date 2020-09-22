@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "3c496d3f_abfd70e9",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50e94140_608384e9",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71e164fa_c93dc74c",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 3
@@ -84,6 +102,24 @@
       "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2accf71d_79b949e0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71e164fa_c93dc74c",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "173156e1_f610409f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29a123d9_9b19795d",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "256dfc61_cc34c0f1",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
@@ -115,6 +169,24 @@
       "writtenOn": "2020-09-18T10:09:00Z",
       "side": 1,
       "message": "Can we use RequiredBytesInCopy or a RequiredTexelsInCopy? ditto below",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9de26f4c_2ccb720c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Sry, I don\u0027t think RequiredBytesInCopy can help. By reading the next test logic, requiredBytesInCopy doesn\u0027t work for this. The test logic is to verify pixels slice by slice and the texelCountInCopyRegion is the texels in one slice.",
+      "parentUuid": "256dfc61_cc34c0f1",
       "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -138,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "60fc506d_461db6db",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167613c8_74e63de5",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b389103_4655fa0a",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
@@ -152,6 +242,24 @@
       "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "248d622b_36428ccf",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Ack and Yes.",
+      "parentUuid": "3b389103_4655fa0a",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -172,6 +280,24 @@
     },
     {
       "key": {
+        "uuid": "b7f57fe4_bb8f9d4d",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ec69ecb_3f7d5d7d",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0f4c1a7_427fc53c",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
@@ -186,6 +312,24 @@
       "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18953ae9_d77cbe6e",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-22T05:45:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0f4c1a7_427fc53c",
+      "revId": "be330cd47e8b1fa6ab932294035849546b51b4bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
