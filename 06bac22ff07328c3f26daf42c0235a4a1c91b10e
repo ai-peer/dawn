@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "91213b80_5591c393",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T10:09:37Z",
+      "side": 1,
+      "message": "This is weird, it seems to be a bug in the Intel driver when it emulates the MTLCounterSampleBufferDescriptor with a regular MTLBuffer. Can we add a Toggle that\u0027s a workaround for this and makes it use Shared instead of Private (instead of blanket using Shared)?",
+      "parentUuid": "5508aa4f_9b53ea3c",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
