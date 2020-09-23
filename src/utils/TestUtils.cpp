@@ -87,6 +87,27 @@ namespace utils {
         }
     }
 
+    uint64_t GetTexelCountInCopyRegion(uint64_t bytesPerRow,
+                                       uint64_t rowsPerImage,
+                                       wgpu::Extent3D copyExtent,
+                                       wgpu::TextureFormat textureFormat,
+                                       uint64_t copyArrayLayerCount) {
+        if (copyExtent.width == 0 || copyExtent.height == 0 || copyExtent.depth == 0) {
+            return 0;
+        } else {
+            const uint32_t blockSize = utils::GetTexelBlockSizeInBytes(textureFormat);
+            const uint32_t blockWidth = utils::GetTextureFormatBlockWidth(textureFormat);
+            const uint32_t blockHeight = utils::GetTextureFormatBlockHeight(textureFormat);
+
+            uint64_t texelsPerRow = bytesPerRow / blockSize;
+            uint64_t texelBlockRowsPerImage = rowsPerImage / blockHeight;
+            uint64_t texelsPerImage = texelsPerRow * texelBlockRowsPerImage;
+            uint64_t texelsAtLastImage = texelsPerRow * (copyExtent.height / blockHeight - 1) +
+                                         copyExtent.width / blockWidth;
+            return texelsPerImage * (copyArrayLayerCount - 1) + texelsAtLastImage;
+        }
+    }
+
     void UnalignDynamicUploader(wgpu::Device device) {
         std::vector<uint8_t> data = {1};
 
