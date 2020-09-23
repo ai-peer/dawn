@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e21e4ed_7a907a43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:13:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9dbbd78_e89a1b8c",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:13:25Z",
+      "side": 1,
+      "message": "Removing this on my system didn\u0027t cause an issue (even with the Intel GPU). Can you detail what error you get and which component produces it?",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a942ab6_06c34197",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:13:25Z",
+      "side": 1,
+      "message": "nit: NSUInteger and cast to that type. That\u0027s the type of newBufferWithLength, which is actually unsigned long, so not uint64_t.",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 24
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "579d70c2_417be685",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:13:25Z",
+      "side": 1,
+      "message": "nit: This is duplicated with wgpu::QueryType::PipelineStatistics maybe we could make the helper function create the MTLCounterSampleBuffer and return an error if it failed instead? This way both the pipeline statistics and timestamp cases would be a single line and share all the code.",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c3407be_8dce007f",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:13:25Z",
+      "side": 1,
+      "message": "nit: sort alphabetically. ditto below",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
