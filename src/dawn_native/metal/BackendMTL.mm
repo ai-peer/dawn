@@ -216,8 +216,10 @@ namespace dawn_native { namespace metal {
             }
 
             if (@available(macOS 10.15, *)) {
-                mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
-                mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
+                if ([mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1]) {
+                    mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
+                    mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
+                }
             }
 #endif
 
