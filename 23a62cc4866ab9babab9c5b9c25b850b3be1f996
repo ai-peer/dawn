@@ -16,6 +16,40 @@
       "revId": "23a62cc4866ab9babab9c5b9c25b850b3be1f996",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5cf4096_9897cee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-23T18:56:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "23a62cc4866ab9babab9c5b9c25b850b3be1f996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ffcebf2_656acd0c",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-23T18:56:38Z",
+      "side": 1,
+      "message": "whoa the alternating || and \u003d\u003d on lines is super hard to read; will () make it group better?",
+      "revId": "23a62cc4866ab9babab9c5b9c25b850b3be1f996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
