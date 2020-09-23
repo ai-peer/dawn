@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "708c012b_bbb117a5",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T15:18:57Z",
+      "side": 1,
+      "message": "It\u0027s a style where the helper functions are directly inline in the function instead of being in an anonymous namespace far away at the top of the file. I think it is marginally better for readability but it\u0027s subjective.",
+      "parentUuid": "b02cf1a3_29e40ed0",
+      "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f888e49_bb4f8543",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 7
@@ -47,6 +65,24 @@
       "writtenOn": "2020-09-23T14:55:26Z",
       "side": 1,
       "message": "Nit: why the trailing // ?",
+      "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49073145_37852801",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T15:18:57Z",
+      "side": 1,
+      "message": "It\u0027s to make sure clang-format doesn\u0027t try to put two of them on the same line, this way the formatted code is more readable (each line checks a single aspect). Maybe some of them can be removed.",
+      "parentUuid": "5f888e49_bb4f8543",
       "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
