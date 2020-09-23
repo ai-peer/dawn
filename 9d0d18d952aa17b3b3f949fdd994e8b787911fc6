@@ -16,6 +16,23 @@
       "revId": "9d0d18d952aa17b3b3f949fdd994e8b787911fc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80cb300c_7f9fad43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T15:15:31Z",
+      "side": 1,
+      "message": "The roll of Dawn in Chromium landed, so compilation passed.",
+      "revId": "9d0d18d952aa17b3b3f949fdd994e8b787911fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
