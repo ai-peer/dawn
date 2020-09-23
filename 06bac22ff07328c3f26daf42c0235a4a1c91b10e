@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "5e0e328a_c3b8edd3",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-23T19:22:15Z",
+      "side": 1,
+      "message": "Will these work in iOS 10.14+ ?",
+      "range": {
+        "startLine": 218,
+        "startChar": 40,
+        "endLine": 218,
+        "endChar": 41
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9dbbd78_e89a1b8c",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -89,6 +112,23 @@
         "endLine": 66,
         "endChar": 24
       },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6abeb1ce_4d085ad3",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-23T19:22:15Z",
+      "side": 1,
+      "message": "these are available in iOS 10.14 as well",
       "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
