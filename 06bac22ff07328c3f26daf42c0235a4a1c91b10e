@@ -95,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "9482d7c6_b5167ed4",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-23T20:21:53Z",
+      "side": 1,
+      "message": "If you delete the line it probably defaults to MTLStorageModeShared because that has enum value 0.",
+      "parentUuid": "91213b80_5591c393",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
