@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "5508aa4f_9b53ea3c",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-23T10:01:15Z",
+      "side": 1,
+      "message": "It seems that removing storageMode does not affect the creation, but Metal spec says \"The storage mode must be either MTLStorageModeShared or MTLStorageModePrivate.\" at https://developer.apple.com/documentation/metal/mtlcountersamplebufferdescriptor/3081733-storagemode?language\u003dobjc, this should be another issue.\n\nIf we use MTLStorageModePrivate, we will get error when run PipelineStatisticsQueryTests.QuerySetCreation/Metal_Intel_R_UHD_Graphics_630: \n-[MTLIOAccelBuffer initWithDevice:pointer:length:options:sysMemSize:vidMemSize:args:argsSize:deallocator:]:126: failed assertion `Invalid cacheMode 2\u0027\n\nI update the macOS to 10.15.6 and Xcode to 12.0, but also can reproduce it. I\u0027m not sure whether it\u0027s related with MTLCPUCacheMode.",
+      "parentUuid": "b9dbbd78_e89a1b8c",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
