@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1909a18a_1b058706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-23T14:55:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b02cf1a3_29e40ed0",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-23T14:55:26Z",
+      "side": 1,
+      "message": "Nit: if no bindings and it\u0027s named anyway (by the var), why the lambda?",
+      "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f888e49_bb4f8543",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-23T14:55:26Z",
+      "side": 1,
+      "message": "Nit: why the trailing // ?",
+      "revId": "7d42cee9a9ae0bbfc0f49fcb32f77996c821af9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
