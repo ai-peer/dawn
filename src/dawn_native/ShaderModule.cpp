@@ -296,6 +296,69 @@ namespace dawn_native {
             std::vector<uint32_t> spirv = generator.result();
             return std::move(spirv);
         }
+
+        ResultOrError<std::vector<uint32_t>> ConvertSPIRVToSPIRVViaTint(
+            const std::vector<uint32_t>& source) {
+            {
+                std::string spv_asm;
+                spvtools::SpirvTools tools(SPV_ENV_VULKAN_1_1);
+                tools.SetMessageConsumer(
+                    [](spv_message_level_t, const char*, const spv_position_t&, const char*) {});
+                tools.Disassemble(
+                    source, &spv_asm,
+                    SPV_BINARY_TO_TEXT_OPTION_INDENT | SPV_BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES);
+                fprintf(stderr, "ORIGINAL SHADER\nSPIRV TEXT DUMP START\n%s\nSPIRV TEXT DUMP END\n",
+                        spv_asm.c_str());
+                fflush(stderr);
+            }
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V->SPIR-V failure:" << std::endl;
+
+            tint::Context context;
+            tint::reader::spirv::Parser parser(&context, source);
+
+            if (!parser.Parse()) {
+                errorStream << "Parser: " << parser.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::ast::Module module = parser.module();
+            if (!module.IsValid()) {
+                errorStream << "Invalid module generated..." << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::TypeDeterminer type_determiner(&context, &module);
+            if (!type_determiner.Determine()) {
+                errorStream << "Type Determination: " << type_determiner.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::writer::spirv::Generator generator(std::move(module));
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            std::vector<uint32_t> spirv = generator.result();
+
+            {
+                std::string spv_asm;
+                spvtools::SpirvTools tools(SPV_ENV_VULKAN_1_1);
+                tools.SetMessageConsumer(
+                    [](spv_message_level_t, const char*, const spv_position_t&, const char*) {});
+                tools.Disassemble(
+                    spirv, &spv_asm,
+                    SPV_BINARY_TO_TEXT_OPTION_INDENT | SPV_BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES);
+                fprintf(stderr, "RESULT SHADER\nSPIRV TEXT DUMP START\n%s\nSPIRV TEXT DUMP END\n",
+                        spv_asm.c_str());
+                fflush(stderr);
+            }
+
+            return std::move(spirv);
+        }
+
 #endif  // DAWN_ENABLE_WGSL
 
         std::vector<uint64_t> GetBindGroupMinBufferSizes(
@@ -403,7 +466,9 @@ namespace dawn_native {
                     validBindingConversion |=
                         (layoutInfo.type == wgpu::BindingType::ComparisonSampler &&
                          shaderInfo.type == wgpu::BindingType::Sampler);
-
+                    fprintf(stderr, "RHARRISON: layoutInfo.type = %u\n", layoutInfo.type);
+                    fprintf(stderr, "RHARRISON: shaderInfo.type = %u\n", shaderInfo.type);
+                    fflush(stderr);
                     if (!validBindingConversion) {
                         return DAWN_VALIDATION_ERROR(
                             "The binding type of the bind group layout entry conflicts " +
@@ -877,7 +942,11 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
 #endif  // DAWN_ENABLE_WGSL
         } else {
+#ifdef DAWN_ENABLE_WGSL
+            DAWN_TRY_ASSIGN(spirv, ConvertSPIRVToSPIRVViaTint(mOriginalSpirv));
+#else
             spirv = mOriginalSpirv;
+#endif  // DAWN_ENABLE_WGSL
         }
 
         if (GetDevice()->IsRobustnessEnabled()) {
