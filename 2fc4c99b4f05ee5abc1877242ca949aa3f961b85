@@ -16,6 +16,63 @@
       "revId": "2fc4c99b4f05ee5abc1877242ca949aa3f961b85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca75f266_e68b842e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:06:08Z",
+      "side": 1,
+      "message": "LGTM with a simplification.",
+      "revId": "2fc4c99b4f05ee5abc1877242ca949aa3f961b85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb57455a_0cdb62ff",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:06:08Z",
+      "side": 1,
+      "message": "This 1 is part of the copySize. The number of array layers copied uses copySize.depth.",
+      "range": {
+        "startLine": 145,
+        "startChar": 85,
+        "endLine": 145,
+        "endChar": 89
+      },
+      "revId": "2fc4c99b4f05ee5abc1877242ca949aa3f961b85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f0bd845_8671b5e9",
+        "filename": "src/utils/TestUtils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-23T08:06:08Z",
+      "side": 1,
+      "message": "nit:\n\nuint64_t GetTexelBlockCountInCopyRegion(uint64_t bytesPerRow,\n                                 uint64_t rowsPerImage,\n                                 wgpu::Extent3D copyExtent,\n                                 wgpu::TextureFormat textureFormat) {\n    return RequiredBytesInCopy(...) / utils::GetTexelBlockSizeInBytes(textureFormat);\n}",
+      "revId": "2fc4c99b4f05ee5abc1877242ca949aa3f961b85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
