@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_D3D12_BUFFERD3D12_H_
 #define DAWNNATIVE_D3D12_BUFFERD3D12_H_
 
-#include "common/SerialQueue.h"
 #include "dawn_native/Buffer.h"
 
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
