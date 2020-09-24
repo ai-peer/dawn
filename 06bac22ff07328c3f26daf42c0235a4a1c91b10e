@@ -90,6 +90,30 @@
     },
     {
       "key": {
+        "uuid": "fbb23664_76fef672",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60d51f4a_ad58522b",
+      "range": {
+        "startLine": 218,
+        "startChar": 40,
+        "endLine": 218,
+        "endChar": 41
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9dbbd78_e89a1b8c",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -197,6 +221,24 @@
     },
     {
       "key": {
+        "uuid": "0da40384_a895533b",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "925d0125_1726bede",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -217,6 +259,30 @@
       "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352e0aba_c6008d69",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a942ab6_06c34197",
+      "range": {
+        "startLine": 66,
+        "startChar": 16,
+        "endLine": 66,
+        "endChar": 24
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -273,6 +339,24 @@
     },
     {
       "key": {
+        "uuid": "1d6f1a1e_8b5809c5",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b6d3a97_75ceaa37",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "579d70c2_417be685",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -290,6 +374,24 @@
     },
     {
       "key": {
+        "uuid": "dd3b632c_49f948e7",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "579d70c2_417be685",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c3407be_8dce007f",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 5
@@ -304,6 +406,24 @@
       "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a736184a_1d44fb88",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T12:55:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c3407be_8dce007f",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
