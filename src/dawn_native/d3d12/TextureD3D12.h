@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_D3D12_TEXTURED3D12_H_
 #define DAWNNATIVE_D3D12_TEXTURED3D12_H_
 
-#include "common/Serial.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/DawnNative.h"

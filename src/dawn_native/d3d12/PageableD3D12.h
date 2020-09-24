@@ -16,7 +16,6 @@
 #define DAWNNATIVE_D3D12_PAGEABLED3D12_H_
 
 #include "common/LinkedList.h"
-#include "common/Serial.h"
 #include "dawn_native/D3D12Backend.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 

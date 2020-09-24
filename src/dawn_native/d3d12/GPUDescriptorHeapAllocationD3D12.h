@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_D3D12_GPUDESCRIPTORHEAPALLOCATION_H_
 #define DAWNNATIVE_D3D12_GPUDESCRIPTORHEAPALLOCATION_H_
 
-#include "common/Serial.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
