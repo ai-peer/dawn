@@ -64,7 +64,7 @@ namespace dawn_wire { namespace client {
 
         class WriteHandleImpl : public WriteHandle {
           public:
-            explicit WriteHandleImpl(size_t size) : mSize(size) {
+            explicit WriteHandleImpl(Client* client, size_t size) : mClient(client), mSize(size) {
             }
 
             ~WriteHandleImpl() override = default;
@@ -85,23 +85,28 @@ namespace dawn_wire { namespace client {
                 return std::make_pair(mStagingData.get(), mSize);
             }
 
+            void PrepareFlush() override {
+                ASSERT(mStagingData != nullptr);
+                mClient->SerializeChunkedInlineData(mStagingData.get(), mSize);
+            }
+
             size_t SerializeFlushSize() override {
-                return mSize;
+                // Data is sent ahead of time in PrepareFlush.
+                return 0;
             }
 
             void SerializeFlush(void* serializePointer) override {
-                ASSERT(mStagingData != nullptr);
-                ASSERT(serializePointer != nullptr);
-                memcpy(serializePointer, mStagingData.get(), mSize);
+                // Data is sent ahead of time in PrepareFlush.
             }
 
           private:
+            Client* mClient;
             size_t mSize;
             std::unique_ptr<uint8_t[]> mStagingData;
         };
 
       public:
-        InlineMemoryTransferService() {
+        InlineMemoryTransferService(Client* client) : mClient(client) {
         }
         ~InlineMemoryTransferService() override = default;
 
@@ -110,12 +115,15 @@ namespace dawn_wire { namespace client {
         }
 
         WriteHandle* CreateWriteHandle(size_t size) override {
-            return new WriteHandleImpl(size);
+            return new WriteHandleImpl(mClient, size);
         }
+
+      private:
+        Client* mClient;
     };
 
-    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService() {
-        return std::make_unique<InlineMemoryTransferService>();
+    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService(Client* client) {
+        return std::make_unique<InlineMemoryTransferService>(client);
     }
 
 }}  //  namespace dawn_wire::client

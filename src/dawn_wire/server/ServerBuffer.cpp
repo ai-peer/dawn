@@ -171,6 +171,13 @@ namespace dawn_wire { namespace server {
     bool Server::DoBufferUpdateMappedData(ObjectId bufferId,
                                           uint64_t writeFlushInfoLength,
                                           const uint8_t* writeFlushInfo) {
+        // Always acquire the inline data in case we return early.
+        // Note that in the MapError case below, we return true, but do nothing.
+        std::vector<uint8_t> inlineData;
+        if (!AcquireChunkedInlineData(&inlineData)) {
+            return false;
+        }
+
         // The null object isn't valid as `self`
         if (bufferId == 0) {
             return false;
@@ -199,6 +206,10 @@ namespace dawn_wire { namespace server {
             // to Unmap and attempt to update mapped data of an error buffer.
             return false;
         }
+
+        // Move the inline data back now that checks have passed.
+        mChunkedInlineDataOffset = inlineData.size();
+        mChunkedInlineData = std::move(inlineData);
 
         // Deserialize the flush info and flush updated data from the handle into the target
         // of the handle. The target is set via WriteHandle::SetTarget.

@@ -742,6 +742,7 @@ void DawnTestBase::SetUp() {
 
         dawn_wire::WireClientDescriptor clientDesc = {};
         clientDesc.serializer = mC2sBuf.get();
+        clientDesc.maxCommandSize = 4 * 1024 * 1024;
 
         mWireClient.reset(new dawn_wire::WireClient(clientDesc));
         WGPUDevice clientDevice = mWireClient->GetDevice();

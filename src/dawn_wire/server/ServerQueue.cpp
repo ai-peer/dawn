@@ -54,6 +54,17 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
+    bool Server::DoQueueWriteBufferInternalInline(ObjectId queueId,
+                                                  ObjectId bufferId,
+                                                  uint64_t bufferOffset) {
+        std::vector<uint8_t> data;
+        if (!AcquireChunkedInlineData(&data)) {
+            return false;
+        }
+        return DoQueueWriteBufferInternal(queueId, bufferId, bufferOffset, data.data(),
+                                          data.size());
+    }
+
     bool Server::DoQueueWriteTextureInternal(ObjectId queueId,
                                              const WGPUTextureCopyView* destination,
                                              const uint8_t* data,
@@ -69,6 +80,18 @@ namespace dawn_wire { namespace server {
 
         mProcs.queueWriteTexture(queue->handle, destination, data, dataSize, dataLayout, writeSize);
         return true;
+    }
+
+    bool Server::DoQueueWriteTextureInternalInline(ObjectId queueId,
+                                                   const WGPUTextureCopyView* destination,
+                                                   const WGPUTextureDataLayout* dataLayout,
+                                                   const WGPUExtent3D* writeSize) {
+        std::vector<uint8_t> data;
+        if (!AcquireChunkedInlineData(&data)) {
+            return false;
+        }
+        return DoQueueWriteTextureInternal(queueId, destination, data.data(), data.size(),
+                                           dataLayout, writeSize);
     }
 
 }}  // namespace dawn_wire::server

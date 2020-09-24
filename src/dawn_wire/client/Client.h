@@ -30,7 +30,7 @@ namespace dawn_wire { namespace client {
 
     class Client : public ClientBase {
       public:
-        Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService);
+        Client(const WireClientDescriptor& descriptor);
         ~Client();
 
         WGPUDevice GetDevice();
@@ -41,6 +41,12 @@ namespace dawn_wire { namespace client {
 
         const volatile char* HandleCommands(const volatile char* commands, size_t size);
         ReservedTexture ReserveTexture(WGPUDevice device);
+
+        size_t GetMaxCommandSize() const {
+            return mMaxCommandSize;
+        }
+
+        void SerializeChunkedInlineData(const void* data, size_t dataSize);
 
         template <typename Cmd>
         char* SerializeCommand(const Cmd& cmd, size_t extraSize = 0) {
@@ -64,13 +70,15 @@ namespace dawn_wire { namespace client {
         MemoryTransferService* mMemoryTransferService = nullptr;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
 
+        const size_t mMaxCommandSize;
+
         std::vector<char> mDummyCmdSpace;
         bool mIsDisconnected = false;
     };
 
     DawnProcTable GetProcs();
 
-    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService();
+    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService(Client* client);
 
 }}  // namespace dawn_wire::client
 
