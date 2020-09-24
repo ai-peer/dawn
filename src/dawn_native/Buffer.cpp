@@ -141,7 +141,7 @@ namespace dawn_native {
     BufferBase::~BufferBase() {
         if (mState == BufferState::Mapped) {
             ASSERT(!IsError());
-            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown);
+            CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_Unknown);
         }
     }
 
@@ -217,9 +217,9 @@ namespace dawn_native {
         }
     }
 
-    void BufferBase::CallMapCallback(uint32_t serial, WGPUBufferMapAsyncStatus status) {
+    void BufferBase::CallMapCallback(MapRequestID mapID, WGPUBufferMapAsyncStatus status) {
         ASSERT(!IsError());
-        if (mMapCallback != nullptr && serial == mMapSerial) {
+        if (mMapCallback != nullptr && mapID == mLastMapID) {
             // Tag the callback as fired before firing it, otherwise it could fire a second time if
             // for example buffer.Unmap() is called inside the application-provided callback.
             WGPUBufferMapCallback callback = mMapCallback;
@@ -254,8 +254,7 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        // TODO(cwallez@chromium.org): what to do on wraparound? Could cause crashes.
-        mMapSerial++;
+        mLastMapID++;
         mMapMode = mode;
         mMapOffset = offset;
         mMapSize = size;
@@ -264,12 +263,12 @@ namespace dawn_native {
         mState = BufferState::Mapped;
 
         if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
-            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_DeviceLost);
+            CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_DeviceLost);
             return;
         }
 
         MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
-        tracker->Track(this, mMapSerial);
+        tracker->Track(this, mLastMapID);
     }
 
     void* BufferBase::GetMappedRange(size_t offset, size_t size) {
@@ -351,7 +350,7 @@ namespace dawn_native {
             // completed before the Unmap.
             // Callbacks are not fired if there is no callback registered, so this is correct for
             // mappedAtCreation = true.
-            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown);
+            CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_Unknown);
             UnmapImpl();
 
             mMapCallback = nullptr;
@@ -520,8 +519,8 @@ namespace dawn_native {
         mState = BufferState::Destroyed;
     }
 
-    void BufferBase::OnMapCommandSerialFinished(uint32_t mapSerial) {
-        CallMapCallback(mapSerial, WGPUBufferMapAsyncStatus_Success);
+    void BufferBase::OnMapRequestCompleted(MapRequestID mapID) {
+        CallMapCallback(mapID, WGPUBufferMapAsyncStatus_Success);
     }
 
     bool BufferBase::IsDataInitialized() const {
