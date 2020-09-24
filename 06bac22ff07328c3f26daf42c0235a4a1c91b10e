@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "7a3ff992_981c9d8f",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T04:55:27Z",
+      "side": 1,
+      "message": "The APIs are available in iOS 14.14+ now. I can add iOS support here (the feature set should be iOS GPU family 5 I guess), but I don’t make sure they can work, we have no iOS device now.",
+      "parentUuid": "5e0e328a_c3b8edd3",
+      "range": {
+        "startLine": 218,
+        "startChar": 40,
+        "endLine": 218,
+        "endChar": 41
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9dbbd78_e89a1b8c",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -113,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "6bf3f592_d2466446",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T04:55:27Z",
+      "side": 1,
+      "message": "For the Toggle, do we need control to use Shared for Intel platform and use Private for other platforms? or just control to use Shared or Private for all?",
+      "parentUuid": "9482d7c6_b5167ed4",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -147,6 +189,24 @@
       "writtenOn": "2020-09-23T19:22:15Z",
       "side": 1,
       "message": "these are available in iOS 10.14 as well",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff5552a3_98fb1741",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-24T04:55:27Z",
+      "side": 1,
+      "message": "Yes, they\u0027re also available on iOS 10.14+ now, previously only supported by macOS 10.15+. I can add the iOS support if needed.",
+      "parentUuid": "6abeb1ce_4d085ad3",
       "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
