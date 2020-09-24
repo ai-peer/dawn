@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee49538_439c1ba2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-24T15:24:03Z",
+      "side": 1,
+      "message": "remove - not used",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fcf7e28_4704bc37",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-24T15:24:03Z",
+      "side": 1,
+      "message": "couldn\u0027t think of a good way to avoid adding this",
+      "range": {
+        "startLine": 310,
+        "startChar": 12,
+        "endLine": 313,
+        "endChar": 41
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d476a440_8b68e992",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-24T15:24:03Z",
+      "side": 1,
+      "message": "remove UNREACHABLE",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
