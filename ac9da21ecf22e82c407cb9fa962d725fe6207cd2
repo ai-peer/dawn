@@ -36,6 +36,41 @@
     },
     {
       "key": {
+        "uuid": "c2348549_b10eb6e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T14:05:42Z",
+      "side": 1,
+      "message": "Nope, but if it doesn\u0027t compile, we\u0027ll just add a suppression for the warning it produces. It\u0027s not a hard compile error.",
+      "parentUuid": "11785607_17615682",
+      "revId": "ac9da21ecf22e82c407cb9fa962d725fe6207cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba2ad862_520cb634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T14:05:42Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "ac9da21ecf22e82c407cb9fa962d725fe6207cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c153ef74_9025d054",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 8
@@ -56,6 +91,30 @@
       "revId": "ac9da21ecf22e82c407cb9fa962d725fe6207cd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50e64877_21242808",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T14:05:42Z",
+      "side": 1,
+      "message": "Lol wut.",
+      "parentUuid": "c153ef74_9025d054",
+      "range": {
+        "startLine": 478,
+        "startChar": 20,
+        "endLine": 478,
+        "endChar": 30
+      },
+      "revId": "ac9da21ecf22e82c407cb9fa962d725fe6207cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
