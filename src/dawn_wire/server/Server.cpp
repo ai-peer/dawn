@@ -24,7 +24,7 @@ namespace dawn_wire { namespace server {
         : mSerializer(serializer), mProcs(procs), mMemoryTransferService(memoryTransferService) {
         if (mMemoryTransferService == nullptr) {
             // If a MemoryTransferService is not provided, fallback to inline memory.
-            mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
+            mOwnedMemoryTransferService = CreateInlineMemoryTransferService(this);
             mMemoryTransferService = mOwnedMemoryTransferService.get();
         }
         // The client-server knowledge is bootstrapped with device 1.
@@ -56,6 +56,35 @@ namespace dawn_wire { namespace server {
         // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
         // message from the client. Add a reference to counterbalance the eventual release.
         mProcs.textureReference(texture);
+
+        return true;
+    }
+
+    bool Server::AcquireChunkedInlineData(std::vector<uint8_t>* out) {
+        // Ensure that the data was completely populated
+        bool success = mChunkedInlineDataOffset == mChunkedInlineData.size();
+        mChunkedInlineDataOffset = 0;
+        *out = std::move(mChunkedInlineData);
+        return success;
+    }
+
+    bool Server::DoInlineDataBegin(size_t totalDataSize) {
+        // Check that we're not in the middle of a chunked upload.
+        if (mChunkedInlineData.size() != 0 || mChunkedInlineDataOffset != 0) {
+            return false;
+        }
+        mChunkedInlineData.resize(totalDataSize);
+        mChunkedInlineDataOffset = 0;
+        return true;
+    }
+
+    bool Server::DoInlineDataChunk(const uint8_t* data, size_t dataSize) {
+        // Check if |dataSize| overflows the available space.
+        if (dataSize > mChunkedInlineData.size() - mChunkedInlineDataOffset) {
+            return false;
+        }
+        memcpy(mChunkedInlineData.data() + mChunkedInlineDataOffset, data, dataSize);
+        mChunkedInlineDataOffset += dataSize;
 
         return true;
     }

@@ -45,21 +45,30 @@ namespace dawn_wire { namespace server {
 
         class WriteHandleImpl : public WriteHandle {
           public:
-            WriteHandleImpl() {
+            WriteHandleImpl(Server* server) : mServer(server) {
             }
             ~WriteHandleImpl() override = default;
 
             bool DeserializeFlush(const void* deserializePointer, size_t deserializeSize) override {
-                if (deserializeSize != mDataLength || mTargetData == nullptr ||
-                    deserializePointer == nullptr) {
+                std::vector<uint8_t> data;
+                if (!mServer->AcquireChunkedInlineData(&data)) {
+                    UNREACHABLE();
                     return false;
                 }
-                memcpy(mTargetData, deserializePointer, mDataLength);
+
+                if (mTargetData == nullptr || data.size() != mDataLength) {
+                    return false;
+                }
+
+                memcpy(mTargetData, data.data(), data.size());
                 return true;
             }
+
+          private:
+            Server* mServer;
         };
 
-        InlineMemoryTransferService() {
+        InlineMemoryTransferService(Server* server) : mServer(server) {
         }
         ~InlineMemoryTransferService() override = default;
 
@@ -75,13 +84,16 @@ namespace dawn_wire { namespace server {
                                     size_t deserializeSize,
                                     WriteHandle** writeHandle) override {
             ASSERT(writeHandle != nullptr);
-            *writeHandle = new WriteHandleImpl();
+            *writeHandle = new WriteHandleImpl(mServer);
             return true;
         }
+
+      private:
+        Server* mServer;
     };
 
-    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService() {
-        return std::make_unique<InlineMemoryTransferService>();
+    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService(Server* server) {
+        return std::make_unique<InlineMemoryTransferService>(server);
     }
 
 }}  //  namespace dawn_wire::server

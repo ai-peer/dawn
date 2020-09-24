@@ -19,11 +19,14 @@
 
 namespace dawn_wire { namespace client {
 
-    Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-        : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+    Client::Client(const WireClientDescriptor& descriptor)
+        : ClientBase(),
+          mSerializer(descriptor.serializer),
+          mMemoryTransferService(descriptor.memoryTransferService),
+          mMaxCommandSize(descriptor.maxCommandSize) {
         if (mMemoryTransferService == nullptr) {
             // If a MemoryTransferService is not provided, fall back to inline memory.
-            mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
+            mOwnedMemoryTransferService = CreateInlineMemoryTransferService(this);
             mMemoryTransferService = mOwnedMemoryTransferService.get();
         }
     }
@@ -53,6 +56,7 @@ namespace dawn_wire { namespace client {
     }
 
     char* Client::GetCmdSpace(size_t size) {
+        ASSERT(size <= mMaxCommandSize);
         if (DAWN_UNLIKELY(mIsDisconnected)) {
             if (size > mDummyCmdSpace.size()) {
                 mDummyCmdSpace.resize(size);
@@ -60,6 +64,27 @@ namespace dawn_wire { namespace client {
             return mDummyCmdSpace.data();
         }
         return static_cast<char*>(mSerializer->GetCmdSpace(size));
+    }
+
+    void Client::SerializeChunkedInlineData(const void* data, size_t dataSize) {
+        InlineDataBeginCmd beginCmd;
+        beginCmd.totalDataSize = dataSize;
+        SerializeCommand(beginCmd);
+
+        InlineDataChunkCmd dataCmd;
+        dataCmd.dataSize = 0;
+
+        // Set the size to zero to compute the largest data size.
+        size_t maxDataSize = mMaxCommandSize - dataCmd.GetRequiredSize();
+
+        size_t byteOffset = 0;
+        while (byteOffset != dataSize) {
+            dataCmd.data = static_cast<const uint8_t*>(data) + byteOffset;
+            dataCmd.dataSize = std::min(maxDataSize, dataSize - byteOffset);
+
+            SerializeCommand(dataCmd);
+            byteOffset += dataCmd.dataSize;
+        }
     }
 
     void Client::Disconnect() {
