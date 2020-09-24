@@ -73,6 +73,30 @@
       "revId": "a3481fd13302e8e326006a7bae71aaf6a53758e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac70f16_ff6c4b4d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T16:04:15Z",
+      "side": 1,
+      "message": "I think it\u0027s fairly non-controversial so it\u0027ll just go in the next batch of updates, wdyt?",
+      "parentUuid": "8de856f1_de8b15c1",
+      "range": {
+        "startLine": 341,
+        "startChar": 60,
+        "endLine": 341,
+        "endChar": 71
+      },
+      "revId": "a3481fd13302e8e326006a7bae71aaf6a53758e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
