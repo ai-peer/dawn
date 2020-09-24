@@ -46,6 +46,12 @@ namespace utils {
                 return GetCmdSpace(size);
             }
 
+            // Make sure any large commands are flushed because we will
+            // use the same buffer.
+            if (!Flush()) {
+                return nullptr;
+            }
+
             // Resize large buffer to the size that can
             // contain incoming command if needed.
             if (mLargeBuffer.size() < size) {

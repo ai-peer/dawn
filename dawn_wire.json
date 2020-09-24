@@ -18,6 +18,13 @@
         "Remove usage of size_t because it is not network transparent"
     ],
     "commands": {
+        "inline data begin": [
+           { "name": "total data size", "type": "size_t" }
+        ],
+        "inline data chunk": [
+            {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "data size"},
+            {"name": "data size", "type": "size_t"}
+        ],
         "buffer map async": [
             { "name": "buffer id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint32_t" },
@@ -59,11 +66,22 @@
             {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "size"},
             {"name": "size", "type": "size_t"}
         ],
+        "queue write buffer internal inline": [
+            {"name": "queue id", "type": "ObjectId" },
+            {"name": "buffer id", "type": "ObjectId" },
+            {"name": "buffer offset", "type": "uint64_t"}
+        ],
         "queue write texture internal": [
             {"name": "queue id", "type": "ObjectId" },
             {"name": "destination", "type": "texture copy view", "annotation": "const*"},
             {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "data size"},
             {"name": "data size", "type": "size_t"},
+            {"name": "data layout", "type": "texture data layout", "annotation": "const*"},
+            {"name": "writeSize", "type": "extent 3D", "annotation": "const*"}
+        ],
+        "queue write texture internal inline": [
+            {"name": "queue id", "type": "ObjectId" },
+            {"name": "destination", "type": "texture copy view", "annotation": "const*"},
             {"name": "data layout", "type": "texture data layout", "annotation": "const*"},
             {"name": "writeSize", "type": "extent 3D", "annotation": "const*"}
         ]
