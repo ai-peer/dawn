@@ -141,7 +141,7 @@ namespace dawn_native {
     BufferBase::~BufferBase() {
         if (mState == BufferState::Mapped) {
             ASSERT(!IsError());
-            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown);
+            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         }
     }
 
@@ -307,13 +307,13 @@ namespace dawn_native {
         ASSERT(!IsError());
 
         if (mState == BufferState::Mapped) {
-            Unmap();
+            UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         } else if (mState == BufferState::MappedAtCreation) {
             if (mStagingBuffer != nullptr) {
                 mStagingBuffer.reset();
             } else if (mSize != 0) {
                 ASSERT(IsCPUWritableAtCreation());
-                Unmap();
+                UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
             }
         }
 
@@ -335,6 +335,10 @@ namespace dawn_native {
     }
 
     void BufferBase::Unmap() {
+        UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);
+    }
+
+    void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus errorStatus) {
         if (IsError()) {
             // It is an error to call Unmap() on an ErrorBuffer, but we still need to reclaim the
             // fake mapped staging data.
@@ -351,7 +355,7 @@ namespace dawn_native {
             // completed before the Unmap.
             // Callbacks are not fired if there is no callback registered, so this is correct for
             // mappedAtCreation = true.
-            CallMapCallback(mMapSerial, WGPUBufferMapAsyncStatus_Unknown);
+            CallMapCallback(mMapSerial, errorStatus);
             UnmapImpl();
 
             mMapCallback = nullptr;
