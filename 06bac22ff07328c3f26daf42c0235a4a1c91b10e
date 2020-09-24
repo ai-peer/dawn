@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "60d51f4a_ad58522b",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T08:50:30Z",
+      "side": 1,
+      "message": "Yeah that\u0027s ok, we can speculatively add iOS support and when someone tries it maybe they\u0027ll find bugs, but maybe not.",
+      "parentUuid": "7a3ff992_981c9d8f",
+      "range": {
+        "startLine": 218,
+        "startChar": 40,
+        "endLine": 218,
+        "endChar": 41
+      },
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9dbbd78_e89a1b8c",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -155,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "925d0125_1726bede",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T08:50:30Z",
+      "side": 1,
+      "message": "Maybe just for Intel when on a version of macOS prior to the one that will have the bug fixed.",
+      "parentUuid": "6bf3f592_d2466446",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a942ab6_06c34197",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 5
@@ -207,6 +249,24 @@
       "side": 1,
       "message": "Yes, they\u0027re also available on iOS 10.14+ now, previously only supported by macOS 10.15+. I can add the iOS support if needed.",
       "parentUuid": "6abeb1ce_4d085ad3",
+      "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b6d3a97_75ceaa37",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-24T08:50:30Z",
+      "side": 1,
+      "message": "Please add iOS support, just so we don\u0027t have to think about it in the future.",
+      "parentUuid": "ff5552a3_98fb1741",
       "revId": "06bac22ff07328c3f26daf42c0235a4a1c91b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
