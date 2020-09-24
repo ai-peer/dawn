@@ -146,7 +146,9 @@ namespace dawn_native {
         }
     }
 
-    void QueueBase::Signal(Fence* fence, uint64_t signalValue) {
+    void QueueBase::Signal(Fence* fence, uint64_t apiSignalValue) {
+        FenceAPISerial signalValue(apiSignalValue);
+
         DeviceBase* device = GetDevice();
         if (device->ConsumedError(ValidateSignal(fence, signalValue))) {
             return;
@@ -303,7 +305,7 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError QueueBase::ValidateSignal(const Fence* fence, uint64_t signalValue) const {
+    MaybeError QueueBase::ValidateSignal(const Fence* fence, FenceAPISerial signalValue) const {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         DAWN_TRY(GetDevice()->ValidateObject(fence));
