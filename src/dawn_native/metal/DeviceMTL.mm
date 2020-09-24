@@ -14,6 +14,7 @@
 
 #include "dawn_native/metal/DeviceMTL.h"
 
+#include "common/GPUInfo.h"
 #include "common/Platform.h"
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/BindGroupLayout.h"
@@ -25,6 +26,7 @@
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
+#include "dawn_native/metal/QuerySetMTL.h"
 #include "dawn_native/metal/QueueMTL.h"
 #include "dawn_native/metal/RenderPipelineMTL.h"
 #include "dawn_native/metal/SamplerMTL.h"
@@ -106,6 +108,14 @@ namespace dawn_native { namespace metal {
 
         // TODO(jiawei.shao@intel.com): tighten this workaround when the driver bug is fixed.
         SetToggle(Toggle::AlwaysResolveIntoZeroLevelAndLayer, true);
+
+        // TODO(hao.x.li@intel.com): Use the shared mode when creating MTLCounterSampleBuffer in
+        // QuerySet to workaround the private mode does not work on Intel. Change to use private
+        // mode when the bug is fixed.
+        if (@available(macOS 10.15, iOS 14.0, *)) {
+            bool useSharedMode = gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId);
+            SetToggle(Toggle::MetalUseSharedModeForCounterSampleBuffer, useSharedMode);
+        }
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -132,7 +142,7 @@ namespace dawn_native { namespace metal {
         return new PipelineLayout(this, descriptor);
     }
     ResultOrError<QuerySetBase*> Device::CreateQuerySetImpl(const QuerySetDescriptor* descriptor) {
-        return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation");
+        return QuerySet::Create(this, descriptor);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
