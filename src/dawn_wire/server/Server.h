@@ -66,6 +66,8 @@ namespace dawn_wire { namespace server {
 
         bool InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation);
 
+        bool AcquireChunkedInlineData(std::vector<uint8_t>* out);
+
       private:
         template <typename Cmd>
         char* SerializeCommand(const Cmd& cmd, size_t extraSize = 0) {
@@ -104,9 +106,12 @@ namespace dawn_wire { namespace server {
         DawnProcTable mProcs;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
         MemoryTransferService* mMemoryTransferService = nullptr;
+
+        std::vector<uint8_t> mChunkedInlineData;
+        size_t mChunkedInlineDataOffset = 0;
     };
 
-    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService();
+    std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService(Server* server);
 
 }}  // namespace dawn_wire::server
 

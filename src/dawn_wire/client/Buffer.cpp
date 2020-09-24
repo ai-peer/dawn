@@ -115,6 +115,10 @@ namespace dawn_wire { namespace client {
         mRequests.clear();
     }
 
+    uint64_t Buffer::GetSize() const {
+        return mSize;
+    }
+
     void Buffer::MapAsync(WGPUMapModeFlags mode,
                           size_t offset,
                           size_t size,
@@ -302,6 +306,11 @@ namespace dawn_wire { namespace client {
             // Writes need to be flushed before Unmap is sent. Unmap calls all associated
             // in-flight callbacks which may read the updated data.
             ASSERT(mReadHandle == nullptr);
+
+            // Prepare to flush data. With the InlineMemoryTransferService,
+            // this sends inline data ahead of time so that the flush can
+            // reference it.
+            mWriteHandle->PrepareFlush();
 
             // Get the serialization size of metadata to flush writes.
             size_t writeFlushInfoLength = mWriteHandle->SerializeFlushSize();

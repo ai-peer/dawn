@@ -37,6 +37,7 @@ namespace dawn_wire {
     struct DAWN_WIRE_EXPORT WireClientDescriptor {
         CommandSerializer* serializer;
         client::MemoryTransferService* memoryTransferService = nullptr;
+        size_t maxCommandSize = std::numeric_limits<size_t>::max();
     };
 
     class DAWN_WIRE_EXPORT WireClient : public CommandHandler {
@@ -115,6 +116,12 @@ namespace dawn_wire {
                 // The data returned must live at least until the WriteHandle is destructed.
                 // On failure, the pointer returned should be null.
                 virtual std::pair<void*, size_t> Open() = 0;
+
+                // Prepare to flush the data. Used by the inline memory transfer
+                // service to send data ahead of time. Called immediately before
+                // |SerializeFlushSize|.
+                virtual void PrepareFlush() {
+                }
 
                 // Get the required serialization size for SerializeFlush
                 virtual size_t SerializeFlushSize() = 0;

@@ -34,6 +34,7 @@ namespace dawn_wire { namespace client {
         ~Buffer();
         void ClearMapRequests(WGPUBufferMapAsyncStatus status);
 
+        uint64_t GetSize() const;
         bool OnMapAsyncCallback(uint32_t requestSerial,
                                 uint32_t status,
                                 uint64_t readInitialDataInfoLength,
