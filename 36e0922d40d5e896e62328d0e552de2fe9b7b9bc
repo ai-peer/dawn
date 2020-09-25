@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "1e93d166_2ebbeb2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-25T23:10:17Z",
+      "side": 1,
+      "message": "LGTM too ",
+      "revId": "36e0922d40d5e896e62328d0e552de2fe9b7b9bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddb6be12_347e0fef",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 1
