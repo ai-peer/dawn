@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "6083b094_3c340004",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-25T07:49:12Z",
+      "side": 1,
+      "message": "I\u0027ve opened the PR to add these two status to webgpu.h:\nhttps://github.com/webgpu-native/webgpu-headers/pull/68\n\nWe can see if there are any comments about this update, for example the name of the new enums.",
+      "parentUuid": "60869f2d_139e033c",
+      "revId": "a3481fd13302e8e326006a7bae71aaf6a53758e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8de856f1_de8b15c1",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 1
@@ -97,6 +115,30 @@
       "revId": "a3481fd13302e8e326006a7bae71aaf6a53758e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c64325d_545bd4b6",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-25T07:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ac70f16_ff6c4b4d",
+      "range": {
+        "startLine": 341,
+        "startChar": 60,
+        "endLine": 341,
+        "endChar": 71
+      },
+      "revId": "a3481fd13302e8e326006a7bae71aaf6a53758e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
