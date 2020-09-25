@@ -1173,9 +1173,6 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
     // Timestamp query is not supported on OpenGL
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
-    // TODO(hao.x.li@intel.com): Remove it after timestamp query is implementated on Metal
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     // Skip if timestamp extension is not supported on device
     DAWN_SKIP_TEST_IF(!SupportsExtensions({"timestamp_query"}));
 
@@ -1187,6 +1184,7 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
     descriptor.count = 2u;
     descriptor.type = wgpu::QueryType::Timestamp;
     wgpu::QuerySet querySet = device.CreateQuerySet(&descriptor);
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
 
     // Resolve data to the whole buffer doesn't need lazy initialization.
     {
@@ -1195,8 +1193,10 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
 
         wgpu::Buffer destination = CreateBuffer(kBufferSize, kBufferUsage);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
         encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, kDestinationOffset);
         wgpu::CommandBuffer commands = encoder.Finish();
 
@@ -1211,7 +1211,9 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
 
         wgpu::Buffer destination = CreateBuffer(kBufferSize, kBufferUsage);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.EndPass();
         encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, kDestinationOffset);
         wgpu::CommandBuffer commands = encoder.Finish();
 
@@ -1225,7 +1227,9 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
 
         wgpu::Buffer destination = CreateBuffer(kBufferSize, kBufferUsage);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.EndPass();
         encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, kDestinationOffset);
         wgpu::CommandBuffer commands = encoder.Finish();
 
