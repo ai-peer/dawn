@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "180349cb_21ad5510",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-25T04:53:05Z",
+      "side": 1,
+      "message": "Becuase MTLCounterSampleBuffer is only availabe on iOS 14.0+ and macOS 10.15+, so I thought it need to explain the version requirements for this toggle. If no needed, I will remove it.",
+      "parentUuid": "0457521d_98067736",
+      "range": {
+        "startLine": 112,
+        "startChar": 24,
+        "endLine": 112,
+        "endChar": 73
+      },
+      "revId": "3f2f1679be61651a996822193e95547737460c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c990879e_6db4fc70",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 6
@@ -59,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "67aa2184_8bd751b5",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-25T04:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c990879e_6db4fc70",
+      "revId": "3f2f1679be61651a996822193e95547737460c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5f3650b_5f95ea08",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 6
@@ -73,6 +115,24 @@
       "revId": "3f2f1679be61651a996822193e95547737460c03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac4bdff0_b1524f2e",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-25T04:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5f3650b_5f95ea08",
+      "revId": "3f2f1679be61651a996822193e95547737460c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -96,6 +156,30 @@
       "revId": "3f2f1679be61651a996822193e95547737460c03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1112b56d_025b7f8a",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-09-25T04:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d119e234_72792afc",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "3f2f1679be61651a996822193e95547737460c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
