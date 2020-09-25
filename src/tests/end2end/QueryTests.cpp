@@ -141,7 +141,8 @@ TEST_P(TimestampQueryTests, QuerySetCreation) {
 
 // Test calling timestamp query from command encoder
 TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
-    // TODO(hao.x.li@intel.com): Waiting for timestamp query implementation on Metal
+    // TODO(hao.x.li@intel.com): On Metal, we cannot write timestamp without any copy commands.
+    // Should be Metal bug.
     DAWN_SKIP_TEST_IF(IsMetal());
 
     constexpr uint32_t kQueryCount = 2;
@@ -161,9 +162,6 @@ TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
 
 // Test calling timestamp query from render pass encoder
 TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
-    // TODO(hao.x.li@intel.com): Waiting for timestamp query implementation on Metal
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -184,9 +182,6 @@ TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
 
 // Test calling timestamp query from compute pass encoder
 TEST_P(TimestampQueryTests, TimestampOnComputePass) {
-    // TODO(hao.x.li@intel.com): Waiting for timestamp query implementation on Metal
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -206,23 +201,25 @@ TEST_P(TimestampQueryTests, TimestampOnComputePass) {
 
 // Test resolving timestamp query to one slot in the buffer
 TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
-    // TODO(hao.x.li@intel.com): Failed on old Intel Vulkan driver on Windows, need investigation.
+    // TODO(hao.x.li@intel.com): Fail to resolve query to buffer with offset on Windows Vulkan and
+    // Metal on Intel platforms, need investigation.
     DAWN_SKIP_TEST_IF(IsWindows() && IsIntel() && IsVulkan());
-
-    // TODO(hao.x.li@intel.com): Waiting for timestamp query implementation on Metal
-    DAWN_SKIP_TEST_IF(IsMetal());
+    DAWN_SKIP_TEST_IF(IsIntel() && IsMetal());
 
     constexpr uint32_t kQueryCount = 2;
     constexpr uint64_t kZero = 0;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
 
     // Resolve the query result to first slot in the buffer, other slots should not be written
     {
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
         encoder.ResolveQuerySet(querySet, 0, 1, destination, 0);
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -236,8 +233,10 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     {
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
         encoder.ResolveQuerySet(querySet, 0, 1, destination, sizeof(uint64_t));
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
