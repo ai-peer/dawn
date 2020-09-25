@@ -718,31 +718,6 @@ namespace {
             AssertBeginRenderPassError(&renderPass);
         }
 
-        // Tests that INFINITY can be used in clearColor.
-        {
-            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
-            renderPass.cColorAttachments[0].clearColor.r = INFINITY;
-            AssertBeginRenderPassSuccess(&renderPass);
-        }
-
-        {
-            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
-            renderPass.cColorAttachments[0].clearColor.g = INFINITY;
-            AssertBeginRenderPassSuccess(&renderPass);
-        }
-
-        {
-            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
-            renderPass.cColorAttachments[0].clearColor.b = INFINITY;
-            AssertBeginRenderPassSuccess(&renderPass);
-        }
-
-        {
-            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
-            renderPass.cColorAttachments[0].clearColor.a = INFINITY;
-            AssertBeginRenderPassSuccess(&renderPass);
-        }
-
         // Tests that NaN cannot be used in clearDepth.
         {
             wgpu::TextureView depth =
@@ -759,6 +734,81 @@ namespace {
             utils::ComboRenderPassDescriptor renderPass({color}, depth);
             renderPass.cDepthStencilAttachmentInfo.clearDepth = INFINITY;
             AssertBeginRenderPassSuccess(&renderPass);
+        }
+    }
+
+    // Tests that values that require more than 24 bits to express are not allowed.
+    TEST_F(RenderPassDescriptorValidationTest, ExceedValidColorClearRange) {
+        wgpu::TextureView color = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+
+        // Tests that 16777215.0 is a valid clear color.
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.r = 16777215.0;
+            renderPass.cColorAttachments[0].clearColor.g = 16777215.0;
+            renderPass.cColorAttachments[0].clearColor.b = 16777215.0;
+            renderPass.cColorAttachments[0].clearColor.a = 16777215.0;
+            AssertBeginRenderPassSuccess(&renderPass);
+        }
+
+        // Tests that 16777216.0 cannot be used as a clear color.
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.r = 16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.g = 16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.b = 16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.a = 16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        // Tests that -16777215.0 is a valid clear color.
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.r = -16777215.0;
+            renderPass.cColorAttachments[0].clearColor.g = -16777215.0;
+            renderPass.cColorAttachments[0].clearColor.b = -16777215.0;
+            renderPass.cColorAttachments[0].clearColor.a = -16777215.0;
+            AssertBeginRenderPassSuccess(&renderPass);
+        }
+
+        // Tests that -16777216.0 cannot be used as a clear color.
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.r = -16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.g = -16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.b = -16777216.0;
+            AssertBeginRenderPassError(&renderPass);
+        }
+
+        {
+            utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+            renderPass.cColorAttachments[0].clearColor.a = -16777216.0;
+            AssertBeginRenderPassError(&renderPass);
         }
     }
 

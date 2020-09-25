@@ -931,15 +931,15 @@ namespace dawn_native { namespace opengl {
                     const Format& attachmentFormat = attachmentInfo->view->GetFormat();
                     if (attachmentFormat.HasComponentType(Format::Type::Float)) {
                         const std::array<float, 4> appliedClearColor =
-                            ConvertToFloatColor(attachmentInfo->clearColor);
+                            ConvertToSignedIntegerColor(attachmentInfo->clearColor);
                         gl.ClearBufferfv(GL_COLOR, i, appliedClearColor.data());
                     } else if (attachmentFormat.HasComponentType(Format::Type::Uint)) {
                         const std::array<uint32_t, 4> appliedClearColor =
-                            ConvertToFloatToUnsignedIntegerColor(attachmentInfo->clearColor);
+                            ConvertToSignedIntegerColor(attachmentInfo->clearColor);
                         gl.ClearBufferuiv(GL_COLOR, i, appliedClearColor.data());
                     } else if (attachmentFormat.HasComponentType(Format::Type::Sint)) {
                         const std::array<int32_t, 4> appliedClearColor =
-                            ConvertToFloatToSignedIntegerColor(attachmentInfo->clearColor);
+                            ConvertToSignedIntegerColor(attachmentInfo->clearColor);
                         gl.ClearBufferiv(GL_COLOR, i, appliedClearColor.data());
                     } else {
                         UNREACHABLE();
