@@ -292,6 +292,15 @@ namespace dawn_native {
                     std::isnan(colorAttachment.clearColor.a)) {
                     return DAWN_VALIDATION_ERROR("Color clear value cannot contain NaN");
                 }
+
+                if (std::abs(colorAttachment.clearColor.r) > 16777215.0 ||
+                    std::abs(colorAttachment.clearColor.g) > 16777215.0 ||
+                    std::abs(colorAttachment.clearColor.b) > 16777215.0 ||
+                    std::abs(colorAttachment.clearColor.a) > 16777215.0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Clear values with an absolute value of more than 16777215.0 (2^24 - 1) "
+                        "are invalid.");
+                }
             }
 
             DAWN_TRY(ValidateOrSetColorAttachmentSampleCount(attachment, sampleCount));
