@@ -16,6 +16,74 @@
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a19e3ce_979d2ea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-25T15:00:01Z",
+      "side": 1,
+      "message": "As discussed offline, this CL does chunking at the application level instead of the transport level. It would be simpler and with less special casing to have the chunking at the transport level, for example by having each batch of commands contains a small header with the total size, or current size + a boolean saying whether it needs a continuation.",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37170aba_4e240c54",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-25T15:00:01Z",
+      "side": 1,
+      "message": "nit: define the empty implementation in WireClient.cpp",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c248180b_308c89c7",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-25T15:00:01Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6577200_9862d90c",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-25T15:00:01Z",
+      "side": 1,
+      "message": "Ah, maybe we can just remove the mOffset \u003e 0 above or make a singl combined if(mOffset \u003e 0 || mLargeBufferSize \u003e 0) {flush, recurse}",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
