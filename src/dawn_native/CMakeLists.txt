@@ -107,6 +107,8 @@ target_sources(dawn_native PRIVATE
     "PerStage.h"
     "Pipeline.cpp"
     "Pipeline.h"
+    "PipelineCache.cpp",
+    "PipelineCache.h"
     "PipelineLayout.cpp"
     "PipelineLayout.h"
     "PooledResourceMemoryAllocator.cpp"
@@ -213,6 +215,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/NativeSwapChainImplD3D12.h"
         "d3d12/PageableD3D12.cpp"
         "d3d12/PageableD3D12.h"
+        "d3d12/PipelineCacheD3D12.cpp"
+        "d3d12/PipelineCacheD3D12.h"
         "d3d12/PipelineLayoutD3D12.cpp"
         "d3d12/PipelineLayoutD3D12.h"
         "d3d12/PlatformFunctions.cpp"

@@ -35,6 +35,16 @@ size_t Hash(const TypedInteger<Tag, T>& value) {
     return Hash(static_cast<T>(value));
 }
 
+// Add hashing of CachedObjects
+template <typename T>
+size_t HashCachedObject(const T* objPtr, bool isContentLess) {
+    if (isContentLess) {
+        return Hash(objPtr);
+    } else {
+        return T::HashForCache(objPtr, isContentLess);
+    }
+}
+
 // When hashing sparse structures we want to iteratively build a hash value with only parts of the
 // data. HashCombine "hashes" together an existing hash and hashable values.
 //

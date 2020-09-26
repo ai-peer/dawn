@@ -28,6 +28,18 @@ namespace dawn_platform {
         GPUWork,     // Actual GPU work
     };
 
+    typedef void (*StorePersistentCacheCB)(const void* key,
+                                           size_t keySize,
+                                           const void* value,
+                                           size_t valueSize,
+                                           void* cacheData);
+
+    typedef size_t (*LoadPersistentCacheCB)(const void* key,
+                                            size_t keySize,
+                                            void* value,
+                                            size_t valueSize,
+                                            void* cacheData);
+
     class DAWN_NATIVE_EXPORT Platform {
       public:
         virtual ~Platform() {
@@ -46,6 +58,27 @@ namespace dawn_platform {
                                        const unsigned char* argTypes,
                                        const uint64_t* argValues,
                                        unsigned char flags) = 0;
+
+        // PersistentCache API. Not abstract since not all platform have support.
+        virtual void setPersistentCacheFuncs(dawn_platform::StorePersistentCacheCB set,
+                                             dawn_platform::LoadPersistentCacheCB get,
+                                             void* userCache) {
+        }
+
+        virtual size_t loadData(const void* key, size_t keySize, void* valueOut, size_t valueSize) {
+            return 0;
+        }
+
+        virtual void storeData(const void* key,
+                               size_t keySize,
+                               const void* value,
+                               size_t valueSize) {
+            return;
+        }
+
+        virtual bool arePersistentCacheFuncsSet() {
+            return false;
+        }
     };
 
 }  // namespace dawn_platform

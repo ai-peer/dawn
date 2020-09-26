@@ -18,6 +18,7 @@
 #include "common/Log.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/PipelineCacheD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
@@ -309,8 +310,27 @@ namespace dawn_native { namespace d3d12 {
         PerStage<ComPtr<ID3DBlob>> compiledFXCShader;
         PerStage<ComPtr<IDxcBlob>> compiledDXCShader;
 
+        PerStage<std::unique_ptr<uint8_t[]>> shaderBlobs;
+
         wgpu::ShaderStage renderStages = wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment;
         for (auto stage : IterateStages(renderStages)) {
+            // Load shader from persistent cache
+            PersistentCacheKey shaderBlobKey = {};
+            const size_t shaderHash = ShaderModuleBase::HashForCache(modules[stage], false);
+            ASSERT(sizeof(shaderHash) < shaderBlobKey.size());
+            memcpy(shaderBlobKey.data(), &shaderHash, sizeof(shaderHash));
+
+            const size_t shaderBlobSize = device->GetPersistentCache()->getDataSize(shaderBlobKey);
+            if (shaderBlobSize > 0) {
+                shaderBlobs[stage].reset(new uint8_t[shaderBlobSize]);
+                device->GetPersistentCache()->loadData(shaderBlobKey, shaderBlobs[stage].get(),
+                                                       shaderBlobSize);
+
+                shaders[stage]->pShaderBytecode = shaderBlobs[stage].get();
+                shaders[stage]->BytecodeLength = shaderBlobSize;
+                continue;
+            }
+
             // Note that the HLSL entryPoint will always be "main".
             std::string hlslSource;
             DAWN_TRY_ASSIGN(hlslSource,
@@ -329,6 +349,12 @@ namespace dawn_native { namespace d3d12 {
 
                 shaders[stage]->pShaderBytecode = compiledFXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledFXCShader[stage]->GetBufferSize();
+            }
+
+            // Store shader in persistent cache
+            if (shaderBlobs[stage] == nullptr) {
+                device->GetPersistentCache()->storeData(
+                    shaderBlobKey, shaders[stage]->pShaderBytecode, shaders[stage]->BytecodeLength);
             }
         }
 
@@ -382,9 +408,8 @@ namespace dawn_native { namespace d3d12 {
 
         mD3d12PrimitiveTopology = D3D12PrimitiveTopology(GetPrimitiveTopology());
 
-        DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
-                                  &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
-                              "D3D12 create graphics pipeline state"));
+        DAWN_TRY_ASSIGN(mPipelineState, device->GetPipelineCache()->getOrCreateGraphicsPipeline(
+                                            descriptorD3D12, HashForCache(this, false)));
         return {};
     }
 

@@ -28,6 +28,7 @@
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
+#include "dawn_native/d3d12/PipelineCacheD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/QuerySetD3D12.h"
@@ -68,6 +69,10 @@ namespace dawn_native { namespace d3d12 {
         mD3d12Device = ToBackend(GetAdapter())->GetDevice();
 
         ASSERT(mD3d12Device != nullptr);
+
+        // Store a cast to ID3D12Device1. This is required to use D3D12 pipeline libraries
+        // introduced since Windows 10 Anniversary Update (WDDM 2.1+).
+        mD3d12Device.As(&mD3d12Device1);
 
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
@@ -112,6 +117,8 @@ namespace dawn_native { namespace d3d12 {
             this, 1, kAttachmentDescriptorHeapSize, D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 
         mSamplerHeapCache = std::make_unique<SamplerHeapCache>(this);
+
+        mPipelineCache = std::make_unique<PipelineCache>(this);
 
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
@@ -162,6 +169,10 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12Device* Device::GetD3D12Device() const {
         return mD3d12Device.Get();
+    }
+
+    ID3D12Device1* Device::GetD3D12Device1() const {
+        return mD3d12Device1.Get();
     }
 
     ComPtr<ID3D12CommandQueue> Device::GetCommandQueue() const {
@@ -628,6 +639,10 @@ namespace dawn_native { namespace d3d12 {
     // so we return 1 and let ComputeTextureCopySplits take care of the alignment.
     uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
         return 1;
+    }
+
+    PipelineCache* Device::GetPipelineCache() {
+        return mPipelineCache.get();
     }
 
 }}  // namespace dawn_native::d3d12

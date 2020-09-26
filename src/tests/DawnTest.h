@@ -15,6 +15,7 @@
 #ifndef TESTS_DAWNTEST_H_
 #define TESTS_DAWNTEST_H_
 
+#include <dawn_platform/DawnPlatform.h>
 #include "common/Log.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
@@ -174,6 +175,60 @@ namespace dawn_wire {
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
 
+class DawnTestPlatform : public dawn_platform::Platform {
+  public:
+    void setPersistentCacheFuncs(dawn_platform::StorePersistentCacheCB set,
+                                 dawn_platform::LoadPersistentCacheCB get,
+                                 void* userCache) override {
+        mStorePersistentCacheCB = set;
+        mLoadPersistentCacheCB = get;
+        mUserCache = userCache;
+    }
+
+  private:
+    // Tracing API
+    const unsigned char* GetTraceCategoryEnabledFlag(
+        dawn_platform::TraceCategory category) override {
+        return nullptr;
+    }
+
+    double MonotonicallyIncreasingTime() override {
+        return 0;
+    }
+
+    uint64_t AddTraceEvent(char phase,
+                           const unsigned char* categoryGroupEnabled,
+                           const char* name,
+                           uint64_t id,
+                           double timestamp,
+                           int numArgs,
+                           const char** argNames,
+                           const unsigned char* argTypes,
+                           const uint64_t* argValues,
+                           unsigned char flags) override {
+        return 0;
+    }
+
+    // PersistentCache API
+    size_t loadData(const void* key, size_t keySize, void* valueOut, size_t valueSize) override {
+        return mLoadPersistentCacheCB(key, keySize, valueOut, valueSize, mUserCache);
+    }
+
+    void storeData(const void* key, size_t keySize, const void* value, size_t valueSize) override {
+        mStorePersistentCacheCB(key, keySize, value, valueSize, mUserCache);
+    }
+
+    virtual bool arePersistentCacheFuncsSet() override {
+        return mLoadPersistentCacheCB != nullptr && mStorePersistentCacheCB != nullptr;
+    }
+
+  private:
+    dawn_platform::StorePersistentCacheCB mStorePersistentCacheCB = nullptr;
+    dawn_platform::LoadPersistentCacheCB mLoadPersistentCacheCB = nullptr;
+
+    void* mUserCache = nullptr;
+};
+
 class DawnTestEnvironment : public testing::Environment {
   public:
     DawnTestEnvironment(int argc, char** argv);
@@ -195,6 +250,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
     const char* GetWireTraceDir() const;
+    DawnTestPlatform* GetPlatform() const;
 
   protected:
     std::unique_ptr<dawn_native::Instance> mInstance;
@@ -216,6 +272,7 @@ class DawnTestEnvironment : public testing::Environment {
     std::vector<TestAdapterProperties> mAdapterProperties;
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
+    std::unique_ptr<DawnTestPlatform> mPlatform;
 };
 
 class DawnTestBase {
@@ -262,6 +319,10 @@ class DawnTestBase {
 
     wgpu::Instance GetInstance() const;
     dawn_native::Adapter GetAdapter() const;
+
+    void setPersistentCacheFuncs(dawn_platform::StorePersistentCacheCB set,
+                                 dawn_platform::LoadPersistentCacheCB get,
+                                 void* userCache);
 
   protected:
     wgpu::Device device;

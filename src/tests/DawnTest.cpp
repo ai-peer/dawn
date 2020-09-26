@@ -445,6 +445,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
 void DawnTestEnvironment::SetUp() {
     mInstance = CreateInstanceAndDiscoverAdapters();
     ASSERT(mInstance);
+
+    mPlatform = std::make_unique<DawnTestPlatform>();
+    mInstance->SetPlatform(mPlatform.get());
 }
 
 void DawnTestEnvironment::TearDown() {
@@ -482,6 +485,10 @@ const char* DawnTestEnvironment::GetWireTraceDir() const {
         return nullptr;
     }
     return mWireTraceDir.c_str();
+}
+
+DawnTestPlatform* DawnTestEnvironment::GetPlatform() const {
+    return mPlatform.get();
 }
 
 class WireServerTraceLayer : public dawn_wire::CommandHandler {
@@ -628,6 +635,12 @@ bool DawnTestBase::IsAsan() const {
 
 bool DawnTestBase::HasVendorIdFilter() const {
     return gTestEnv->HasVendorIdFilter();
+}
+
+void DawnTestBase::setPersistentCacheFuncs(dawn_platform::StorePersistentCacheCB set,
+                                           dawn_platform::LoadPersistentCacheCB get,
+                                           void* userCache) {
+    return gTestEnv->GetPlatform()->setPersistentCacheFuncs(set, get, userCache);
 }
 
 uint32_t DawnTestBase::GetVendorIdFilter() const {

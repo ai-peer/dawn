@@ -69,6 +69,8 @@ namespace dawn_native {
             bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
         };
 
+        static size_t HashForCache(const PipelineLayoutBase* pl, bool isContentLess);
+
       protected:
         PipelineLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
