@@ -266,6 +266,12 @@ namespace dawn_native { namespace d3d12 {
         return mPendingCommands.ExecuteCommandList(this);
     }
 
+    MaybeError Device::ExecutePendingCommands() {
+        DAWN_TRY(ExecutePendingCommandContext());
+        DAWN_TRY(NextSerial());
+        return {};
+    }
+
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) {
         return BindGroup::Create(this, descriptor);

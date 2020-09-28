@@ -231,6 +231,12 @@ namespace dawn_native {
         virtual uint32_t GetOptimalBytesPerRowAlignment() const = 0;
         virtual uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const = 0;
 
+        // During shut down of device, some operations might have been started since the last submit
+        // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
+        // make all commands look completed.
+        void AssumeCommandsComplete();
+        virtual MaybeError ExecutePendingCommands() = 0;
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
@@ -314,10 +320,7 @@ namespace dawn_native {
         // Each backend should implement to check their passed fences if there are any and return a
         // completed serial. Return 0 should indicate no fences to check.
         virtual Serial CheckAndUpdateCompletedSerials() = 0;
-        // During shut down of device, some operations might have been started since the last submit
-        // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
-        // make all commands look completed.
-        void AssumeCommandsComplete();
+
         // mCompletedSerial tracks the last completed command serial that the fence has returned.
         // mLastSubmittedSerial tracks the last submitted command serial.
         // During device removal, the serials could be artificially incremented

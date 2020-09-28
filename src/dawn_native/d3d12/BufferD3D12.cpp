@@ -289,7 +289,6 @@ namespace dawn_native { namespace d3d12 {
         if (isWrite) {
             mWrittenMappedRange = range;
         }
-
         return {};
     }
 

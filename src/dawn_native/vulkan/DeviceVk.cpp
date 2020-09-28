@@ -216,6 +216,11 @@ namespace dawn_native { namespace vulkan {
         return &mRecordingContext;
     }
 
+    MaybeError Device::ExecutePendingCommands() {
+        DAWN_TRY(SubmitPendingCommands());
+        return {};
+    }
+
     MaybeError Device::SubmitPendingCommands() {
         if (!mRecordingContext.used) {
             return {};

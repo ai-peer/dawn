@@ -29,8 +29,10 @@ namespace dawn_native {
     void FenceSignalTracker::UpdateFenceOnComplete(Fence* fence, uint64_t value) {
         // Because we currently only have a single queue, we can simply update
         // the fence completed value once the last submitted serial has passed.
-        mFencesInFlight.Enqueue(FenceInFlight{fence, value},
-                                mDevice->GetLastSubmittedCommandSerial());
+        Serial serial = (mDevice->GetFutureCallbackSerial() >= mDevice->GetPendingCommandSerial())
+                            ? mDevice->GetPendingCommandSerial()
+                            : mDevice->GetLastSubmittedCommandSerial();
+        mFencesInFlight.Enqueue(FenceInFlight{fence, value}, serial);
         mDevice->AddFutureCallbackSerial(mDevice->GetPendingCommandSerial());
     }
 

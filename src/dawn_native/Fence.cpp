@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 

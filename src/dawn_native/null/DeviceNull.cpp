@@ -236,6 +236,11 @@ namespace dawn_native { namespace null {
         IncrementLastSubmittedCommandSerial();
     }
 
+    MaybeError Device::ExecutePendingCommands() {
+        SubmitPendingOperations();
+        return {};
+    }
+
     // BindGroupDataHolder
 
     BindGroupDataHolder::BindGroupDataHolder(size_t size)
