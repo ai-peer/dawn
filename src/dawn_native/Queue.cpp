@@ -153,6 +153,11 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
+        // Submit any map callbacks before continuing
+        if (device->GetPendingCommandSerial() <= device->GetFutureCallbackSerial()) {
+            device->ConsumedError(device->ExecutePendingCommands());
+        }
+
         fence->SetSignaledValue(signalValue);
         device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
