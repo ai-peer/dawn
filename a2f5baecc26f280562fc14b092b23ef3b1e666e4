@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "759a4d9a_49312bc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-28T13:20:59Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7335a0cb_c3a63fde",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-28T13:20:59Z",
+      "side": 1,
+      "message": "Why was the change to use render passes needed? Can we minimize test changes and instead have two additional tests that use timestamp queries in compute and render passes?",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374a629e_c625fc88",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-28T13:20:59Z",
+      "side": 1,
+      "message": "Can you describe the issue a bit more, can we have a workaround?",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
