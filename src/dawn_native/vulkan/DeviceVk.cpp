@@ -299,6 +299,11 @@ namespace dawn_native { namespace vulkan {
         // Always require fragmentStoresAndAtomics because it is required by end2end tests.
         usedKnobs.features.fragmentStoresAndAtomics = VK_TRUE;
 
+        // TODO(enrico.galli@inte.com): Remove check when SwiftShader supports depthClampBias.
+        if (mDeviceInfo.features.depthBiasClamp) {
+            usedKnobs.features.depthBiasClamp = VK_TRUE;
+        }
+
         if (IsRobustnessEnabled()) {
             usedKnobs.features.robustBufferAccess = VK_TRUE;
         }
