@@ -754,8 +754,8 @@ namespace dawn_native {
             // reclaiming resources one tick earlier.
             mDynamicUploader->Deallocate(mCompletedSerial);
             mErrorScopeTracker->Tick(mCompletedSerial);
-            mFenceSignalTracker->Tick(mCompletedSerial);
             mMapRequestTracker->Tick(mCompletedSerial);
+            mFenceSignalTracker->Tick(mCompletedSerial);
         }
     }
 
