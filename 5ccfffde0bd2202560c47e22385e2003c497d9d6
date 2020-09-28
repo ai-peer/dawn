@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a18277d7_1504e246",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-28T21:24:37Z",
+      "side": 1,
+      "message": "Corentin, TBR. Enrico, this should have the depthBiasClamp. Rolled right up until Swiftshader\u0027s fast multisample changes so hopefully this passes tests.",
+      "revId": "5ccfffde0bd2202560c47e22385e2003c497d9d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
