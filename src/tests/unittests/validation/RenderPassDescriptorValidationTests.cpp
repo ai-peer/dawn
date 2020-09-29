@@ -762,6 +762,87 @@ namespace {
         }
     }
 
+    // Tests that values that require more than 24 bits to express are not allowed for integer
+    // formats.
+    TEST_F(RenderPassDescriptorValidationTest, ExceedValidColorClearRange) {
+        std::array<wgpu::TextureFormat, 2> formats = {wgpu::TextureFormat::RGBA32Sint,
+                                                      wgpu::TextureFormat::RGBA32Uint};
+
+        for (uint32_t i = 0; i < formats.size(); i++) {
+            wgpu::TextureView color = Create2DAttachment(device, 1, 1, formats[i]);
+
+            // Tests that 16777216.0 is a valid clear color.
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.r = 16777216.0;
+                renderPass.cColorAttachments[0].clearColor.g = 16777216.0;
+                renderPass.cColorAttachments[0].clearColor.b = 16777216.0;
+                renderPass.cColorAttachments[0].clearColor.a = 16777216.0;
+                AssertBeginRenderPassSuccess(&renderPass);
+            }
+
+            // Tests that 16777216.01 cannot be used as a clear color.
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.r = 16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.g = 16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.b = 16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.a = 16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            // Tests that -16777216.0 is a valid clear color.
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.r = -16777216.0;
+                renderPass.cColorAttachments[0].clearColor.g = -16777216.0;
+                renderPass.cColorAttachments[0].clearColor.b = -16777216.0;
+                renderPass.cColorAttachments[0].clearColor.a = -16777216.0;
+                AssertBeginRenderPassSuccess(&renderPass);
+            }
+
+            // Tests that -16777216.01 cannot be used as a clear color.
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.r = -16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.g = -16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.b = -16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+
+            {
+                utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+                renderPass.cColorAttachments[0].clearColor.a = -16777216.01;
+                AssertBeginRenderPassError(&renderPass);
+            }
+        }
+    }
+
     TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
         wgpu::TextureView colorView =
             Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
