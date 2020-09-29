@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83544d91_98de8a94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-29T21:17:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "881b4b5d6b58bf79461942a78b2272d1aa8a3b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb43430b_aa46437a",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-29T21:17:00Z",
+      "side": 1,
+      "message": "nit: maybe we could check 16777215.01. These tests could pass if we were instead checking that abs(val) \u003e\u003d 16777216.0, not abs(val) \u003e 16777215.0",
+      "range": {
+        "startLine": 787,
+        "startChar": 63,
+        "endLine": 787,
+        "endChar": 73
+      },
+      "revId": "881b4b5d6b58bf79461942a78b2272d1aa8a3b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
