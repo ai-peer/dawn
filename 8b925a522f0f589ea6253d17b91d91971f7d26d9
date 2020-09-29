@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8e933ab_f13aed59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-09-29T16:43:45Z",
+      "side": 1,
+      "message": "[driveby] If I\u0027m reading this correctly I think it applies to all clears; however we still want to be able to clear to values \u003e2^24 for f32-component textures, only disallowing larger values for integer textures.",
+      "revId": "8b925a522f0f589ea6253d17b91d91971f7d26d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
