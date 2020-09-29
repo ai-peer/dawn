@@ -63,6 +63,30 @@
       "revId": "881b4b5d6b58bf79461942a78b2272d1aa8a3b66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0f69525_bf1c4a79",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-29T23:07:37Z",
+      "side": 1,
+      "message": "Kai is correct. Made both changes.",
+      "parentUuid": "2b1a2c72_2ed5afbb",
+      "range": {
+        "startLine": 787,
+        "startChar": 63,
+        "endLine": 787,
+        "endChar": 73
+      },
+      "revId": "881b4b5d6b58bf79461942a78b2272d1aa8a3b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
