@@ -36,6 +36,74 @@
     },
     {
       "key": {
+        "uuid": "17694efd_466f8cf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-29T15:07:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41e51304_b8adfdd7",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-29T15:07:16Z",
+      "side": 1,
+      "message": "Nit: I would find this loop a bit clearer if it incremented the pointer and decremented the remaining bytes. Something like:\n\n    dataCmd.data \u003d static_cast\u003cconst uint8_t*\u003e(data);\n    while (dataSize \u003e 0) {\n        dataCmd.dataSize \u003d std::min(maxDataSize, dataSize);\n\n        SerializeCommand(dataCmd);\n        dataCmd.data +\u003d dataCmd.dataSize;\n        dataSize -\u003d dataCmd.dataSize;\n    }\n\n\nJust a thought; feel free to ignore if you prefer it as-written.",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a538c24e_8fee860b",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-29T15:07:16Z",
+      "side": 1,
+      "message": "Is this an expected condition? Should it be an assert?",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06b37972_3472a072",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-09-29T15:07:16Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37170aba_4e240c54",
         "filename": "src/include/dawn_wire/WireClient.h",
         "patchSetId": 4
