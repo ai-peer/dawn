@@ -14,9 +14,9 @@
 
 #include "dawn/dawn_proc.h"
 
-static DawnProcTable procs;
+static DawnProcTable procs = {};
 
-static DawnProcTable nullProcs;
+static DawnProcTable nullProcs = {};
 
 void dawnProcSetProcs(const DawnProcTable* procs_) {
     if (procs_) {
