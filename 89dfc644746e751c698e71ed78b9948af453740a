@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62f93fed_11eeb425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T21:57:07Z",
+      "side": 1,
+      "message": "I decided to try this given the shared image leaks I encountered (also copy image bitmap code...). WDYT? In the normal case we would never use this code path in Chrome, but it does keeping things working in a single process world.",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
