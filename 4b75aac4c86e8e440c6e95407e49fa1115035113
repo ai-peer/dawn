@@ -408,6 +408,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d9c83ec_3f1e76d7",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-09-30T01:28:19Z",
+      "side": 1,
+      "message": "Sorry for the delay. I\u0027ve reported this issue to Mesa:\nhttps://gitlab.freedesktop.org/mesa/mesa/-/issues/3576\n\nOn the latest Intel Mesa driver the test will pass after quite a long time (about 8 seconds), while it can finish immediately on AMD and NVidia, so it should still be an issue inside Intel Mesa driver.",
+      "parentUuid": "a040e532_8b096e69",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
