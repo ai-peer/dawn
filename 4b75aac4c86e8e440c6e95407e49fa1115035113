@@ -432,6 +432,30 @@
       "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6573c1d_ab7b4560",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-30T09:47:49Z",
+      "side": 1,
+      "message": "Uh discussions seem to be around whether the test app is correct and not the bug, that\u0027s mildly annoying. Hopefully Mesa takes a look and fixes it soon!",
+      "parentUuid": "3d9c83ec_3f1e76d7",
+      "range": {
+        "startLine": 153,
+        "startChar": 30,
+        "endLine": 153,
+        "endChar": 45
+      },
+      "revId": "4b75aac4c86e8e440c6e95407e49fa1115035113",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
