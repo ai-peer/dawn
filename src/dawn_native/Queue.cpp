@@ -17,6 +17,7 @@
 #include "common/Constants.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
@@ -26,6 +27,8 @@
 #include "dawn_native/Fence.h"
 #include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/QuerySet.h"
+#include "dawn_native/RenderPassEncoder.h"
+#include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
@@ -119,6 +122,23 @@ namespace dawn_native {
 
             return uploadHandle;
         }
+
+        const std::set<wgpu::TextureFormat> supportTextureFormatInCopyT2TDawn{
+            wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::BGRA8Unorm};
+
+        MaybeError ValidateFormatConversion(const wgpu::TextureFormat srcFormat,
+                                            const wgpu::TextureFormat dstFormat) {
+            if (supportTextureFormatInCopyT2TDawn.find(srcFormat) !=
+                    supportTextureFormatInCopyT2TDawn.end() ||
+                supportTextureFormatInCopyT2TDawn.find(dstFormat) !=
+                    supportTextureFormatInCopyT2TDawn.end()) {
+                return DAWN_VALIDATION_ERROR(
+                    "Unsupported texture formats for copyTextureToTextureDawn");
+            }
+
+            return {};
+        }
+
     }  // namespace
     // QueueBase
 
@@ -269,6 +289,208 @@ namespace dawn_native {
         return GetDevice()->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                                      &textureCopy, writeSizePixel);
     }
+
+    void QueueBase::CopyTextureToTextureDawn(const TextureCopyView* source,
+                                             const TextureCopyView* destination,
+                                             const Extent3D* copySize,
+                                             ImageOrientationEnum orientation,
+                                             bool unpremultiplyAlpha) {
+        GetDevice()->ConsumedError(CopyTextureToTextureDawnInternal(
+            source, destination, copySize, orientation, unpremultiplyAlpha));
+    }
+
+    MaybeError QueueBase::CopyTextureToTextureDawnInternal(const TextureCopyView* source,
+                                                           const TextureCopyView* destination,
+                                                           const Extent3D* copySize,
+                                                           ImageOrientationEnum orientation,
+                                                           bool unpremultiplyAlpha) {
+        if (GetDevice()->IsValidationEnabled()) {
+            DAWN_TRY(GetDevice()->ValidateObject(source->texture));
+            DAWN_TRY(GetDevice()->ValidateObject(destination->texture));
+
+            // TODO(shaobo.yan@intel.com): Create or reuse:
+            // ValidateTextureCopyView, ValidateTextureToTextureCopyRestrictions
+            DAWN_TRY(ValidateTextureCopyView(GetDevice(), *source, *copySize));
+            DAWN_TRY(ValidateTextureCopyView(GetDevice(), *destination, *copySize));
+
+            DAWN_TRY(ValidateTextureToTextureCopyRestrictions(*source, *destination, *copySize));
+
+            DAWN_TRY(ValidateTextureCopyRange(*source, *copySize));
+            DAWN_TRY(ValidateTextureCopyRange(*destination, *copySize));
+
+            DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc));
+            DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst));
+
+            DAWN_TRY(ValidateFormatConversion(source->texture->GetFormat().format,
+                                              destination->texture->GetFormat().format));
+        }
+
+        return CopyTextureToTextureDawnImpl(source, destination, copySize, orientation,
+                                            unpremultiplyAlpha);
+    }
+
+    BufferBase* QueueBase::GenerateVertexBufferForCopyTextureToTextureDawn(
+        ImageOrientationEnum orientation) {
+        using UVCoord = struct {
+            float u;
+            float v;
+        };
+        enum Vertices {
+            TOP_LEFT = 0,
+            TOP_RIGHT,
+            BOTTOM_RIGHT,
+            BOTTOM_LEFT,
+        };
+        UVCoord verticeUV[4];
+        // Calculate UV
+        // TODO(shaobo.yan@intel.com): Support copy sub rect from source texture.
+        switch (orientation) {
+            case kOriginTopLeft:
+                verticeUV[TOP_LEFT] = {0, 0};
+                verticeUV[TOP_RIGHT] = {1, 0};
+                verticeUV[BOTTOM_RIGHT] = {1, 1};
+                verticeUV[BOTTOM_LEFT] = {0, 1};
+                break;
+            case kOriginBottomRight:
+                verticeUV[TOP_LEFT] = {1, 1};
+                verticeUV[TOP_RIGHT] = {0, 1};
+                verticeUV[BOTTOM_RIGHT] = {0, 0};
+                verticeUV[BOTTOM_LEFT] = {1, 0};
+                break;
+        }
+
+        float rectVertices[] = {
+            1.0,
+            1.0,
+            0.0,  // top-right
+            verticeUV[Vertices::TOP_RIGHT].u,
+            verticeUV[Vertices::TOP_RIGHT].v,
+            1.0,
+            -1.0,
+            0.0,
+            verticeUV[Vertices::BOTTOM_RIGHT].u,
+            verticeUV[Vertices::BOTTOM_RIGHT].v,
+            -1.0,
+            -1.0,
+            0.0,
+            verticeUV[Vertices::BOTTOM_LEFT].u,
+            verticeUV[Vertices::BOTTOM_LEFT].v,
+            1.0,
+            1.0,
+            0.0,
+            verticeUV[Vertices::TOP_RIGHT].u,
+            verticeUV[Vertices::TOP_RIGHT].v,
+            -1.0,
+            -1.0,
+            0.0,
+            verticeUV[Vertices::BOTTOM_LEFT].u,
+            verticeUV[Vertices::BOTTOM_LEFT].v,
+            -1.0,
+            1.0,
+            0.0,
+            verticeUV[Vertices::TOP_LEFT].u,
+            verticeUV[Vertices::TOP_LEFT].v,
+        };
+
+        BufferDescriptor descriptor = {};
+        descriptor.usage = wgpu::BufferUsage::Vertex;
+        descriptor.size = sizeof(rectVertices);
+        BufferBase* vertexBuffer = GetDevice()->CreateBuffer(&descriptor);
+        GetDevice()->GetDefaultQueue()->WriteBuffer(vertexBuffer, 0, rectVertices,
+                                                    sizeof(rectVertices));
+
+        return vertexBuffer;
+    }
+
+    InternalRenderPipelineType QueueBase::GetInternalRenderPipelineTypeForCopyTextureToTextureDawn(
+        const TextureCopyView* source,
+        const TextureCopyView* destination) {
+        if (source->texture->GetDimension() == wgpu::TextureDimension::e2D) {
+            if (destination->texture->GetDimension() == wgpu::TextureDimension::e2D) {
+                if (source->texture->GetFormat().format == wgpu::TextureFormat::RGBA8Unorm) {
+                    switch (destination->texture->GetFormat().format) {
+                        case wgpu::TextureFormat::BGRA8Unorm:
+                            return InternalRenderPipelineType::RGBA8_2D_TO_BGRA8_2D_CONV;
+                        default:
+                            return InternalRenderPipelineType::INVALID_RENDER_PIPELINE_TYPE;
+                    }
+                }
+            }
+        }
+        return InternalRenderPipelineType::INVALID_RENDER_PIPELINE_TYPE;
+    }
+
+    MaybeError QueueBase::CopyTextureToTextureDawnImpl(const TextureCopyView* source,
+                                                       const TextureCopyView* destination,
+                                                       const Extent3D* copySize,
+                                                       ImageOrientationEnum orientation,
+                                                       bool unpremultiplyAlpha) {
+        // TODO(shaobo.yan@intel.com): In D3D12 and Vulkan, compatible texture format can directly
+        // copy to each other. This can be a potential fast path.
+
+        // TODO(shaobo.yan@intel.com): We may need an extra copy to support sub image to texture
+        // copy.
+
+        // Get pre-built render pipeline
+        InternalRenderPipelineType pipelineType =
+            GetInternalRenderPipelineTypeForCopyTextureToTextureDawn(source, destination);
+        RenderPipelineBase* pipeline = GetDevice()->GetInternalRenderPipeline(pipelineType);
+
+        SamplerDescriptor samplerDesc = {};
+        samplerDesc.minFilter = wgpu::FilterMode::Linear;
+        samplerDesc.magFilter = wgpu::FilterMode::Linear;
+
+        TextureViewDescriptor srcTextureViewDesc = {};
+        srcTextureViewDesc.format = source->texture->GetFormat().format;
+        srcTextureViewDesc.baseMipLevel = source->mipLevel;
+        srcTextureViewDesc.mipLevelCount = 1;
+
+        TextureViewBase* srcTextureView = source->texture->CreateView(&srcTextureViewDesc);
+
+        BindGroupDescriptor bglDesc = {};
+        BindGroupEntry bindGroupEntries[2];
+        bindGroupEntries[0].sampler = GetDevice()->CreateSampler(&samplerDesc);
+        bindGroupEntries[1].textureView = srcTextureView;
+
+        bglDesc.layout = pipeline->GetBindGroupLayout(0);
+        bglDesc.entryCount = 2;
+        bglDesc.entries = &bindGroupEntries[0];
+
+        BindGroupBase* bindGroup = GetDevice()->CreateBindGroup(&bglDesc);
+
+        CommandEncoderDescriptor encoderDesc = {};
+
+        CommandEncoder* encoder = GetDevice()->CreateCommandEncoder(&encoderDesc);
+        TextureViewDescriptor dstTextureViewDesc;
+        dstTextureViewDesc.format = destination->texture->GetFormat().format;
+        dstTextureViewDesc.baseMipLevel = destination->mipLevel;
+        dstTextureViewDesc.mipLevelCount = 1;
+
+        TextureViewBase* dstView = destination->texture->CreateView(&dstTextureViewDesc);
+        RenderPassColorAttachmentDescriptor colorAttachmentDesc;
+        colorAttachmentDesc.attachment = dstView;
+        colorAttachmentDesc.clearColor = {0.0, 0.0, 0.0, 1.0};
+        RenderPassDescriptor renderPassDesc;
+        renderPassDesc.colorAttachmentCount = 1;
+        renderPassDesc.colorAttachments = &colorAttachmentDesc;
+        RenderPassEncoder* passEncoder = encoder->BeginRenderPass(&renderPassDesc);
+        passEncoder->SetPipeline(GetDevice()->GetInternalRenderPipeline(pipelineType));
+
+        // It's internal pipeline, we know the slot info.
+        passEncoder->SetVertexBuffer(
+            0, GenerateVertexBufferForCopyTextureToTextureDawn(orientation), 0, 0);
+        passEncoder->SetBindGroup(0, bindGroup, 0, nullptr);
+        passEncoder->Draw(6, 1, 0, 0);
+        passEncoder->EndPass();
+
+        CommandBufferDescriptor cbDesc = {};
+        CommandBufferBase* commandBuffer = encoder->Finish(&cbDesc);
+
+        GetDevice()->GetDefaultQueue()->Submit(1, &commandBuffer);
+
+        return {};
+    }
+
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
                                          CommandBufferBase* const* commands) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), Validation, "Queue::ValidateSubmit");

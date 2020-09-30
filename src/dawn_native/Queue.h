@@ -17,11 +17,17 @@
 
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
+#include "dawn_native/InternalPipelineLoader.h"
 #include "dawn_native/ObjectBase.h"
 
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native {
+
+    enum ImageOrientationEnum {
+        kOriginTopLeft,
+        kOriginBottomRight,
+    };
 
     class QueueBase : public ObjectBase {
       public:
@@ -39,6 +45,11 @@ namespace dawn_native {
                           size_t dataSize,
                           const TextureDataLayout* dataLayout,
                           const Extent3D* writeSize);
+        void CopyTextureToTextureDawn(const TextureCopyView* source,
+                                      const TextureCopyView* destination,
+                                      const Extent3D* copySize,
+                                      ImageOrientationEnum orientation = kOriginTopLeft,
+                                      bool unpremultiplyAlpha = false);
 
       private:
         QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag);
@@ -52,6 +63,11 @@ namespace dawn_native {
                                         size_t dataSize,
                                         const TextureDataLayout* dataLayout,
                                         const Extent3D* writeSize);
+        MaybeError CopyTextureToTextureDawnInternal(const TextureCopyView* source,
+                                                    const TextureCopyView* destination,
+                                                    const Extent3D* copySize,
+                                                    ImageOrientationEnum orientation,
+                                                    bool unpremultiplyAlpha);
 
         virtual MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands);
         virtual MaybeError WriteBufferImpl(BufferBase* buffer,
@@ -62,6 +78,12 @@ namespace dawn_native {
                                             const void* data,
                                             const TextureDataLayout& dataLayout,
                                             const Extent3D& writeSize);
+
+        MaybeError CopyTextureToTextureDawnImpl(const TextureCopyView* source,
+                                                const TextureCopyView* destination,
+                                                const Extent3D* copySize,
+                                                ImageOrientationEnum orientaion,
+                                                bool unpremultiplyAlpha);
 
         MaybeError ValidateSubmit(uint32_t commandCount, CommandBufferBase* const* commands) const;
         MaybeError ValidateSignal(const Fence* fence, uint64_t signalValue) const;
@@ -75,6 +97,12 @@ namespace dawn_native {
                                         const Extent3D* writeSize) const;
 
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
+
+        BufferBase* GenerateVertexBufferForCopyTextureToTextureDawn(
+            ImageOrientationEnum orientation);
+        InternalRenderPipelineType GetInternalRenderPipelineTypeForCopyTextureToTextureDawn(
+            const TextureCopyView* source,
+            const TextureCopyView* destination);
     };
 
 }  // namespace dawn_native

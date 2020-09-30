@@ -212,6 +212,8 @@ source_set("dawn_native_sources") {
     "Instance.cpp",
     "Instance.h",
     "IntegerTypes.h",
+    "InternalPipelineLoader.cpp",
+    "InternalPipelineLoader.h",
     "MapRequestTracker.cpp",
     "MapRequestTracker.h",
     "ObjectBase.cpp",
@@ -267,6 +269,13 @@ source_set("dawn_native_sources") {
     "Toggles.cpp",
     "Toggles.h",
     "dawn_platform.h",
+
+    # Internal pipelines
+    "pipelines/BaseRenderPipelineInfo.h",
+    "pipelines/RGBA8ToBGRA8RenderPipelineInfo.cpp",
+    "pipelines/RGBA8ToBGRA8RenderPipelineInfo.h",
+    "pipelines/shaders/2DRGBA8To2DBGRA8WGSL.h",
+    "pipelines/shaders/CopyTextureVertexWGSL.h",
   ]
 
   if (dawn_use_x11) {

@@ -21,6 +21,7 @@
 #include "dawn_native/Extensions.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
+#include "dawn_native/InternalPipelineLoader.h"
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
 
@@ -159,6 +160,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        RenderPipelineBase* GetInternalRenderPipeline(InternalRenderPipelineType type);
 
         // For Dawn Wire
         BufferBase* CreateErrorBuffer();
