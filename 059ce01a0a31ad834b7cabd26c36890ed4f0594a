@@ -59,6 +59,30 @@
     },
     {
       "key": {
+        "uuid": "cc8c9871_0d0537e3",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-30T17:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02be107c_4620e62f",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "059ce01a0a31ad834b7cabd26c36890ed4f0594a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91637838_d65a8407",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1
@@ -79,6 +103,30 @@
       "revId": "059ce01a0a31ad834b7cabd26c36890ed4f0594a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dea011a_5383f95c",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-09-30T17:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91637838_d65a8407",
+      "range": {
+        "startLine": 103,
+        "startChar": 38,
+        "endLine": 103,
+        "endChar": 43
+      },
+      "revId": "059ce01a0a31ad834b7cabd26c36890ed4f0594a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
