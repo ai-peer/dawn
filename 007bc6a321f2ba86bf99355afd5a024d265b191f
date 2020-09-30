@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "855203a1_53818dcb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-30T17:57:03Z",
+      "side": 1,
+      "message": "Didn\u0027t think of negatives for Uint. doing static_cast\u003cuint32_t\u003e on a negative number \u003c 2^24 I think will always end up being larger than 2^24 after the conversion. I added another block to the validation to disallow negative numbers for uint.",
+      "parentUuid": "78fe0578_96a1ed4c",
+      "range": {
+        "startLine": 298,
+        "startChar": 62,
+        "endLine": 298,
+        "endChar": 72
+      },
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49ffe38a_d820a989",
         "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
         "patchSetId": 7
@@ -56,6 +80,24 @@
       "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f62949d_a6553c6e",
+        "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-30T17:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49ffe38a_d820a989",
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,30 @@
     },
     {
       "key": {
+        "uuid": "a10ecc78_c98048ef",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-30T17:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "830f90bf_52ffcf0b",
+      "range": {
+        "startLine": 771,
+        "startChar": 12,
+        "endLine": 771,
+        "endChar": 52
+      },
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4292072_6aadee3f",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 7
@@ -105,6 +171,30 @@
     },
     {
       "key": {
+        "uuid": "cc8fae89_3396a135",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-30T17:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4292072_6aadee3f",
+      "range": {
+        "startLine": 777,
+        "startChar": 63,
+        "endLine": 777,
+        "endChar": 73
+      },
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93e16774_96fb5984",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 7
@@ -125,6 +215,30 @@
       "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df8e54ac_adc5b42e",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-09-30T17:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93e16774_96fb5984",
+      "range": {
+        "startLine": 787,
+        "startChar": 63,
+        "endLine": 787,
+        "endChar": 74
+      },
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
