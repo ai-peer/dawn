@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7573e44_8fa5f43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d08aff74_d7e95d28",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "this #include should be below the dawn includes, in with newlines between them so it\u0027s in a different \"block\"",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf3829f_b637f00c",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "typo: biasClamp",
+      "range": {
+        "startLine": 46,
+        "startChar": 32,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16a39f61_4ad6757d",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "nit: sampleCount and mipLevelCount default to 1, dimension defaults to 2D (if you \u003d {})",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eacaf04e_ccfdb6e1",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "nit: this is the default",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82189a4f_d9a3f9f6",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "nit: can depthCompare be Always? (the default)",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "647e2494_2c38f0d7",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "tests are nice to read :) overall, should we also test:\n - negative slope scales\n - negative biases\n - non-identity slopes\n?\n\nAnd, what happens with inf / nan? is the behavior specified / consistent or should we have validation for it?",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82ba05c9_e3c5faa9",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "typo: clamp",
+      "range": {
+        "startLine": 170,
+        "startChar": 46,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38b2a7da_e39f9ebd",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:54:00Z",
+      "side": 1,
+      "message": "typo: slope",
+      "range": {
+        "startLine": 193,
+        "startChar": 60,
+        "endLine": 193,
+        "endChar": 64
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
