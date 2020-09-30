@@ -239,6 +239,30 @@
       "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d76e902e_79e00bb4",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-09-30T23:27:49Z",
+      "side": 1,
+      "message": "I think the test is still using \"+ 0.01\" instead of Corentin\u0027s suggestion here.",
+      "parentUuid": "df8e54ac_adc5b42e",
+      "range": {
+        "startLine": 787,
+        "startChar": 63,
+        "endLine": 787,
+        "endChar": 74
+      },
+      "revId": "007bc6a321f2ba86bf99355afd5a024d265b191f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
