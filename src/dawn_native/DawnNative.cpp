@@ -22,11 +22,7 @@
 
 namespace dawn_native {
 
-    DawnProcTable GetProcsAutogen();
-
-    DawnProcTable GetProcs() {
-        return GetProcsAutogen();
-    }
+    const DawnProcTable& GetProcs();
 
     std::vector<const char*> GetTogglesUsed(WGPUDevice device) {
         const dawn_native::DeviceBase* deviceBase =
