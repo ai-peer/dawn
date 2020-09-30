@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "111f0f79_ff115c39",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-30T08:32:16Z",
+      "side": 1,
+      "message": "Want to have a helper function to generate these vertex value.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ce45420_e5c4129c",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-30T08:32:16Z",
+      "side": 1,
+      "message": "Support sub copy may need an extra copy. The flow likes:\nSource --internal copy--\u003e intermediate_src_texture --internal rendering--\u003e intermediate_dst_texture --internal copy--\u003e dstTexture.\n\nOr you may have better ideas to support it.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "905e5283_59c04a52",
+        "filename": "src/dawn_native/pipelines/BaseRenderPipelineInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-09-30T08:32:16Z",
+      "side": 1,
+      "message": "Trying to make it support ComputePipeline too(e.g. use union). But not have good idea. Because I can assign this directly to the renderPipelineDescriptor.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
