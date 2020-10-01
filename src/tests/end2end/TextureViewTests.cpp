@@ -454,13 +454,27 @@ class TextureViewRenderingTest : public DawnTest {
                                            uint32_t levelCount,
                                            uint32_t textureViewBaseLayer,
                                            uint32_t textureViewBaseLevel) {
+        TextureLayerAsSizedColorAttachmentTest(dimension, layerCount, levelCount,
+                                               textureViewBaseLayer, textureViewBaseLevel,
+                                               1 << levelCount, 1 << levelCount);
+        if (levelCount >= 2) {
+            TextureLayerAsSizedColorAttachmentTest(dimension, layerCount, levelCount,
+                                                   textureViewBaseLayer, textureViewBaseLevel,
+                                                   1 << levelCount, 1 << (levelCount - 2));
+        }
+    }
+    void TextureLayerAsSizedColorAttachmentTest(wgpu::TextureViewDimension dimension,
+                                                uint32_t layerCount,
+                                                uint32_t levelCount,
+                                                uint32_t textureViewBaseLayer,
+                                                uint32_t textureViewBaseLevel,
+                                                uint32_t textureWidthLevel0,
+                                                uint32_t textureHeightLevel0) {
         ASSERT(dimension == wgpu::TextureViewDimension::e2D ||
                dimension == wgpu::TextureViewDimension::e2DArray);
         ASSERT_LT(textureViewBaseLayer, layerCount);
         ASSERT_LT(textureViewBaseLevel, levelCount);
 
-        const uint32_t textureWidthLevel0 = 1 << levelCount;
-        const uint32_t textureHeightLevel0 = 1 << levelCount;
         constexpr wgpu::TextureUsage kUsage =
             wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
         wgpu::Texture texture = Create2DTexture(device, textureWidthLevel0, textureHeightLevel0,
@@ -511,8 +525,8 @@ class TextureViewRenderingTest : public DawnTest {
         queue.Submit(1, &commands);
 
         // Check if the right pixels (Green) have been written into the right part of the texture.
-        uint32_t textureViewWidth = textureWidthLevel0 >> textureViewBaseLevel;
-        uint32_t textureViewHeight = textureHeightLevel0 >> textureViewBaseLevel;
+        uint32_t textureViewWidth = std::max(1u, textureWidthLevel0 >> textureViewBaseLevel);
+        uint32_t textureViewHeight = std::max(1u, textureHeightLevel0 >> textureViewBaseLevel);
         uint32_t bytesPerRow =
             Align(kBytesPerTexel * textureWidthLevel0, kTextureBytesPerRowAlignment);
         uint32_t expectedDataSize =
