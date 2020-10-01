@@ -19,7 +19,6 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
-#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -268,8 +267,11 @@ namespace dawn_native {
             return;
         }
 
-        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
-        tracker->Track(this, mMapSerial);
+        QueueBase::MapRequestTask* task = new QueueBase::MapRequestTask();
+        task->buffer = this;
+        task->mapSerial = mMapSerial;
+        task->type = QueueBase::InFlightTask::Type::MapRequest;
+        GetDevice()->GetDefaultQueue()->TrackTaskInFlight(task);
     }
 
     void* BufferBase::GetMappedRange(size_t offset, size_t size) {

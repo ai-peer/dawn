@@ -15,7 +15,10 @@
 #ifndef DAWNNATIVE_QUEUE_H_
 #define DAWNNATIVE_QUEUE_H_
 
+#include "common/SerialQueue.h"
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/Fence.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
 
@@ -26,6 +29,7 @@ namespace dawn_native {
     class QueueBase : public ObjectBase {
       public:
         QueueBase(DeviceBase* device);
+        ~QueueBase();
 
         static QueueBase* MakeError(DeviceBase* device);
 
@@ -39,6 +43,24 @@ namespace dawn_native {
                           size_t dataSize,
                           const TextureDataLayout* dataLayout,
                           const Extent3D* writeSize);
+
+        struct InFlightTask {
+            enum class Type { FenceSignal, MapRequest };
+            Type type;
+        };
+
+        struct MapRequestTask : InFlightTask {
+            Ref<BufferBase> buffer;
+            uint32_t mapSerial;
+        };
+
+        struct FenceSignalTask : InFlightTask {
+            Ref<Fence> fence;
+            uint64_t value;
+        };
+
+        void TrackTaskInFlight(InFlightTask* task);
+        void TickTasks(Serial finishedSerial);
 
       private:
         QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag);
@@ -75,6 +97,8 @@ namespace dawn_native {
                                         const Extent3D* writeSize) const;
 
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
+
+        SerialQueue<InFlightTask*> mTasksInFlight;
     };
 
 }  // namespace dawn_native

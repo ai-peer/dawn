@@ -37,8 +37,6 @@ namespace dawn_native {
     class DynamicUploader;
     class ErrorScope;
     class ErrorScopeTracker;
-    class FenceSignalTracker;
-    class MapRequestTracker;
     class StagingBufferBase;
 
     class DeviceBase {
@@ -72,8 +70,6 @@ namespace dawn_native {
         dawn_platform::Platform* GetPlatform() const;
 
         ErrorScopeTracker* GetErrorScopeTracker() const;
-        FenceSignalTracker* GetFenceSignalTracker() const;
-        MapRequestTracker* GetMapRequestTracker() const;
 
         // Returns the Format corresponding to the wgpu::TextureFormat or an error if the format
         // isn't a valid wgpu::TextureFormat or isn't supported by this device.
@@ -357,8 +353,6 @@ namespace dawn_native {
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
         std::unique_ptr<ErrorScopeTracker> mErrorScopeTracker;
-        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
-        std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         Ref<QueueBase> mDefaultQueue;
 
         struct DeprecationWarnings;

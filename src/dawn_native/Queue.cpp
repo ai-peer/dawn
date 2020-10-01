@@ -24,7 +24,6 @@
 #include "dawn_native/ErrorScope.h"
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
-#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -128,6 +127,42 @@ namespace dawn_native {
     QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
     }
 
+    QueueBase::~QueueBase() {
+        ASSERT(mTasksInFlight.Empty());
+    }
+
+    void QueueBase::TrackTaskInFlight(InFlightTask* task) {
+        // If the task is map type, then we track using the pending command serial.
+        // Otherwise, when the task is fence signal type then we want to check if there are any
+        // pending future callback work to determine the serial to track with.
+        // With pending future callback work, we use the pending callback serial,
+        // without pending callback work, we use the last submitted serial.
+        Serial serial = GetDevice()->GetPendingCommandSerial();
+        mTasksInFlight.Enqueue(task, serial);
+
+        GetDevice()->AddFutureCallbackSerial(serial);
+    }
+
+    void QueueBase::TickTasks(Serial finishedSerial) {
+        for (InFlightTask* task : mTasksInFlight.IterateUpTo(finishedSerial)) {
+            switch (task->type) {
+                case InFlightTask::Type::FenceSignal: {
+                    FenceSignalTask* fenceTask = reinterpret_cast<FenceSignalTask*>(task);
+                    Fence* fence = fenceTask->fence.Get();
+                    fence->SetCompletedValue(fenceTask->value);
+                    break;
+                }
+                case InFlightTask::Type::MapRequest: {
+                    MapRequestTask* mapTask = reinterpret_cast<MapRequestTask*>(task);
+                    BufferBase* buffer = reinterpret_cast<BufferBase*>(mapTask->buffer.Get());
+                    buffer->OnMapCommandSerialFinished(mapTask->mapSerial);
+                    break;
+                }
+            }
+        }
+        mTasksInFlight.ClearUpTo(finishedSerial);
+    }
+
     // static
     QueueBase* QueueBase::MakeError(DeviceBase* device) {
         return new QueueBase(device, ObjectBase::kError);
@@ -154,7 +189,11 @@ namespace dawn_native {
         ASSERT(!IsError());
 
         fence->SetSignaledValue(signalValue);
-        device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
+        FenceSignalTask* task = new FenceSignalTask();
+        task->type = InFlightTask::Type::FenceSignal;
+        task->fence = fence;
+        task->value = signalValue;
+        TrackTaskInFlight(task);
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
             device->GetCurrentErrorScope());
     }
