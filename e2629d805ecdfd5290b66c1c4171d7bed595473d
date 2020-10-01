@@ -88,6 +88,24 @@
       "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81cb2337_f222bd9f",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T18:58:38Z",
+      "side": 1,
+      "message": "^cool didn\u0027t know about nextafter. if it works then sure. otherwise LGTM",
+      "parentUuid": "274fa941_1efc218e",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
