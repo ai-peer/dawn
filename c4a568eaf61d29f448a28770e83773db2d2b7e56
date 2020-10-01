@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0a61fdf_03211332",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T17:03:56Z",
+      "side": 1,
+      "message": "Erhm, this is missing all the reintepret_casts. The goal is to check the first representable value that\u0027s larger than k2toThe24 which is the value + 1 when represented as a bunch of bits.",
+      "revId": "c4a568eaf61d29f448a28770e83773db2d2b7e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
