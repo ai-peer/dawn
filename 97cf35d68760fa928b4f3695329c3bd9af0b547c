@@ -51,6 +51,24 @@
       "revId": "97cf35d68760fa928b4f3695329c3bd9af0b547c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44bc4346_2fc65f66",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T23:10:41Z",
+      "side": 1,
+      "message": "Yea, more coverage is great, but doing it here makes the test less care to read and harder to ensure we\u0027ve actually tested the important cases.\n\nIdeally we would have better parameterization with the DAWN_INSTANTIATE_TEST macro - but we don\u0027t right now :-/. That would give us both readable parameterization, explicit naming, and more coverage.",
+      "parentUuid": "aa09274c_ef125f13",
+      "revId": "97cf35d68760fa928b4f3695329c3bd9af0b547c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
