@@ -70,6 +70,24 @@
       "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "274fa941_1efc218e",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-01T18:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5046265_c3f244d3",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
