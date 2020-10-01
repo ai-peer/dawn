@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e962dd18_d0c8fae5",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T17:54:09Z",
+      "side": 1,
+      "message": "Erhm, this needs a reinterpret_cast with uint64_t instead of static casts that convert numbers between representation. What we\u0027re trying to do is manipulate the bit representation of the double value.",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
