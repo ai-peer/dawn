@@ -33,6 +33,24 @@
       "revId": "97cf35d68760fa928b4f3695329c3bd9af0b547c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa09274c_ef125f13",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-01T20:15:27Z",
+      "side": 1,
+      "message": "As written, this code exercises three of the four tests in both rectangle and square mode. So it gives more coverage than a single test would. But I\u0027ll try it as a separate test and you can decide.",
+      "parentUuid": "61ec38eb_67c8ea98",
+      "revId": "97cf35d68760fa928b4f3695329c3bd9af0b547c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
