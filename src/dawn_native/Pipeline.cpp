@@ -136,16 +136,15 @@ namespace dawn_native {
     }
 
     // static
-    size_t PipelineBase::HashForCache(const PipelineBase* pipeline) {
+    size_t PipelineBase::HashForCache(const PipelineBase* pipeline, bool isContentLess) {
         size_t hash = 0;
 
-        // The layout is deduplicated so it can be hashed by pointer.
-        HashCombine(&hash, pipeline->mLayout.Get());
+        HashCombine(&hash, HashCachedObject(pipeline->mLayout.Get(), isContentLess));
 
         HashCombine(&hash, pipeline->mStageMask);
         for (SingleShaderStage stage : IterateStages(pipeline->mStageMask)) {
-            // The module is deduplicated so it can be hashed by pointer.
-            HashCombine(&hash, pipeline->mStages[stage].module.Get());
+            HashCombine(&hash,
+                        HashCachedObject(pipeline->mStages[stage].module.Get(), isContentLess));
             HashCombine(&hash, pipeline->mStages[stage].entryPoint);
         }
 

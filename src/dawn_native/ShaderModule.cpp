@@ -828,8 +828,9 @@ namespace dawn_native {
         ASSERT(HasEntryPoint(entryPoint, stage));
         return *mEntryPoints.at(entryPoint)[stage];
     }
-
-    size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
+    
+    // static
+    size_t ShaderModuleBase::HashForCache(const ShaderModuleBase* module, bool isContentLess) {
         size_t hash = 0;
 
         HashCombine(&hash, module->mType);
@@ -843,6 +844,10 @@ namespace dawn_native {
         }
 
         return hash;
+    }
+
+    size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
+        return HashForCache(module, true);
     }
 
     bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,

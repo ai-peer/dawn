@@ -15,9 +15,11 @@
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "common/HashUtils.h"
 #include "common/Log.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/PipelineCacheD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
@@ -309,8 +311,40 @@ namespace dawn_native { namespace d3d12 {
         PerStage<ComPtr<ID3DBlob>> compiledFXCShader;
         PerStage<ComPtr<IDxcBlob>> compiledDXCShader;
 
+        PerStage<std::unique_ptr<uint8_t[]>> shaderBlobs;
+
+        // D3D considers the PSO desc invalid if the DX shader code gets re-compiled from source.
+        bool useCachedShaders = true;
+
         wgpu::ShaderStage renderStages = wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment;
         for (auto stage : IterateStages(renderStages)) {
+            // Load shader from cache instead of re-compiling.
+            PersistentCacheKey shaderBlobKey = {};
+            if (useCachedShaders) {
+                // Compute the shader key using the hash.
+                size_t shaderHash = ShaderModuleBase::HashForCache(modules[stage], false);
+
+                // If the source contains multiple entry points, we must ensure they are
+                // cached seperately per stage since DX shader code can only be compiled per stage
+                // using the same entry point.
+                HashCombine(&shaderHash, stage);
+
+                shaderBlobKey = PersistentCache::CreateKey(shaderHash);
+
+                // Load the shader blob from the cache.
+                const size_t shaderBlobSize =
+                    device->GetPersistentCache()->getDataSize(shaderBlobKey);
+                if (shaderBlobSize > 0) {
+                    shaderBlobs[stage].reset(new uint8_t[shaderBlobSize]);
+                    device->GetPersistentCache()->loadData(shaderBlobKey, shaderBlobs[stage].get(),
+                                                           shaderBlobSize);
+
+                    shaders[stage]->pShaderBytecode = shaderBlobs[stage].get();
+                    shaders[stage]->BytecodeLength = shaderBlobSize;
+                    continue;
+                }
+            }
+
             // Note that the HLSL entryPoint will always be "main".
             std::string hlslSource;
             DAWN_TRY_ASSIGN(hlslSource,
@@ -329,6 +363,12 @@ namespace dawn_native { namespace d3d12 {
 
                 shaders[stage]->pShaderBytecode = compiledFXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledFXCShader[stage]->GetBufferSize();
+            }
+
+            // Store shader in cache.
+            if (useCachedShaders) {
+                useCachedShaders = device->GetPersistentCache()->storeData(
+                    shaderBlobKey, shaders[stage]->pShaderBytecode, shaders[stage]->BytecodeLength);
             }
         }
 
@@ -382,9 +422,25 @@ namespace dawn_native { namespace d3d12 {
 
         mD3d12PrimitiveTopology = D3D12PrimitiveTopology(GetPrimitiveTopology());
 
-        DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
-                                  &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
-                              "D3D12 create graphics pipeline state"));
+        // Create a new PSO or re-use a prebuilt one from the pipeline cache.
+        size_t psoKey = 0;
+        if (useCachedShaders) {
+            psoKey = HashForCache(this, false);
+            DAWN_TRY_ASSIGN(mPipelineState, device->GetPipelineCache()->loadGraphicsPipeline(
+                                                descriptorD3D12, psoKey));
+        }
+
+        if (mPipelineState == nullptr) {
+            DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
+                                      &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
+                                  "ID3D12Device::CreateGraphicsPipelineState"));
+
+            // If the shaders cannot be loaded into the cache, there is no point caching the PSO
+            // since load will fail when using re-compiled DX shader code.
+            if (useCachedShaders) {
+                DAWN_TRY(device->GetPipelineCache()->storePipeline(mPipelineState.Get(), psoKey));
+            }
+        }
         return {};
     }
 

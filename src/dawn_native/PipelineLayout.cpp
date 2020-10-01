@@ -255,13 +255,7 @@ namespace dawn_native {
     }
 
     size_t PipelineLayoutBase::HashFunc::operator()(const PipelineLayoutBase* pl) const {
-        size_t hash = Hash(pl->mMask);
-
-        for (BindGroupIndex group : IterateBitSet(pl->mMask)) {
-            HashCombine(&hash, pl->GetBindGroupLayout(group));
-        }
-
-        return hash;
+        return HashForCache(pl, true);
     }
 
     bool PipelineLayoutBase::EqualityFunc::operator()(const PipelineLayoutBase* a,
@@ -278,5 +272,16 @@ namespace dawn_native {
 
         return true;
     }
+
+    // static
+    size_t PipelineLayoutBase::HashForCache(const PipelineLayoutBase* pl, bool isContentLess) {
+        size_t hash = Hash(pl->mMask);
+
+        for (BindGroupIndex group : IterateBitSet(pl->mMask)) {
+            HashCombine(&hash, HashCachedObject(pl->GetBindGroupLayout(group), isContentLess));
+        }
+        return hash;
+    }
+
 
 }  // namespace dawn_native

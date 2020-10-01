@@ -38,6 +38,7 @@ namespace dawn_native { namespace vulkan {
     class BindGroupLayout;
     class BufferUploader;
     class FencedDeleter;
+    class PipelineCache;
     class RenderPassCache;
     class ResourceMemoryAllocator;
 
@@ -109,6 +110,8 @@ namespace dawn_native { namespace vulkan {
         uint32_t GetOptimalBytesPerRowAlignment() const override;
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
+        PipelineCache* GetPipelineCache();
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 
@@ -168,6 +171,8 @@ namespace dawn_native { namespace vulkan {
 
         std::unique_ptr<external_memory::Service> mExternalMemoryService;
         std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
+
+        std::unique_ptr<PipelineCache> mPipelineCache;
 
         ResultOrError<VkFence> GetUnusedFence();
         Serial CheckAndUpdateCompletedSerials() override;

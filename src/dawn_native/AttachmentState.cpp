@@ -77,6 +77,12 @@ namespace dawn_native {
 
     size_t AttachmentStateBlueprint::HashFunc::operator()(
         const AttachmentStateBlueprint* attachmentState) const {
+        return HashForCache(attachmentState, true);
+    }
+
+    // static
+    size_t AttachmentStateBlueprint::HashForCache(const AttachmentStateBlueprint* attachmentState,
+                                                  bool isContentLess) {
         size_t hash = 0;
 
         // Hash color formats

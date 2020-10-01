@@ -39,6 +39,7 @@ namespace dawn_native {
     class ErrorScopeTracker;
     class FenceSignalTracker;
     class MapRequestTracker;
+    class PersistentCache;
     class StagingBufferBase;
 
     class DeviceBase {
@@ -176,6 +177,8 @@ namespace dawn_native {
         MaybeError ValidateIsAlive() const;
 
         ErrorScope* GetCurrentErrorScope();
+
+        PersistentCache* GetPersistentCache();
 
         void Reference();
         void Release();
@@ -374,6 +377,8 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        std::unique_ptr<PersistentCache> mPersistentCache;
     };
 
 }  // namespace dawn_native
