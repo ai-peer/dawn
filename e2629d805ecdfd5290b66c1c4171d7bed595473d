@@ -16,6 +16,24 @@
       "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46afe29b_1f650da6",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-01T18:30:44Z",
+      "side": 1,
+      "message": "Sure - I\u0027m just not really sure how to do that as you\u0027re suggesting. reinterpret_cast\u003cuint64_t\u003e(k2toThe24) will not compile. reinterpret_cast is only for pointers. \n\nTo get the true next possible value, it seems like I\u0027m going to have to come up with some bit ops to do this.",
+      "parentUuid": "e962dd18_d0c8fae5",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
