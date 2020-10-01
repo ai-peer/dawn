@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "25edf7f5_fa67a9e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T23:20:53Z",
+      "side": 1,
+      "message": "Stephen, please review too",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea11b8eb_4b68fe33",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
         "patchSetId": 2
@@ -47,6 +64,24 @@
       "writtenOn": "2020-10-01T10:55:52Z",
       "side": 1,
       "message": "Any chances the procs end up not statically known? For example if we do per-backend procs (maybe that\u0027s unlikely).",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88abad8e_82ff7781",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T23:20:53Z",
+      "side": 1,
+      "message": "eh, can always change it later, but I don\u0027t think it\u0027s likely",
+      "parentUuid": "ea11b8eb_4b68fe33",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -98,6 +133,24 @@
       "writtenOn": "2020-10-01T10:55:52Z",
       "side": 1,
       "message": "thread_local is currently banned in Chromium says the docs, but the email thread about it seems to say we\u0027re fine trying it: https://groups.google.com/u/1/a/chromium.org/g/chromium-dev/c/2msN8k3Xzgs",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceea2175_2ffbaf5a",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T23:20:53Z",
+      "side": 1,
+      "message": "interesting.. I think we should be okay - we\u0027re not using destructors at all or anything since it\u0027s just a pointer.",
+      "parentUuid": "efb8d780_891d1b5f",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
