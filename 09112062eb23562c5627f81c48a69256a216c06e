@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "ce5008a8_0f43a093",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:35:55Z",
+      "side": 1,
+      "message": "The InternalPipelineStore could be a just a pointer stored in the device a bit like FenceSignalTracker for example, so this include wouldn\u0027t be needed.\n\nThe InternalPipelineStore could have getters and setters for various internal pipelines keyed on what\u0027s important like the output format.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e0cc9c_0f8f7d1a",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:35:55Z",
+      "side": 1,
+      "message": "That\u0027s a lot of code to add to QueueBase that isn\u0027t really related to its code function. Maybe everything for BlitTextureForBrowser (suggestion for a name change) could be in a single dawn_native/BlitTextureForBrowser.cpp/.h (or an internal_pipelines subdirectory), including the shaders, pipeline creation, validation, and execution on the queue. Then the queue would just do:\n\n if (validation enabled) {\n   DAWN_TRY(Validate...);\u003d\n }\n DAWN_TRY(DoBlitTextureForBrowser)",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ba7db4_953fd4e4",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:35:55Z",
+      "side": 1,
+      "message": "The orientation computations could be handled purely in the shader based on a uniform, I think it would be marginally simpler than messing with vertex buffers.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "111f0f79_ff115c39",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 1
@@ -47,6 +98,24 @@
       "writtenOn": "2020-09-30T08:32:16Z",
       "side": 1,
       "message": "Support sub copy may need an extra copy. The flow likes:\nSource --internal copy--\u003e intermediate_src_texture --internal rendering--\u003e intermediate_dst_texture --internal copy--\u003e dstTexture.\n\nOr you may have better ideas to support it.",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280e2cd6_ce2c64d4",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:35:55Z",
+      "side": 1,
+      "message": "We could use uniforms to scale and move the rectangle that\u0027s sampled from the imagebitmap. I did something similar in ANGLE\u0027s BlitGL. https://source.chromium.org/chromium/chromium/src/+/master:third_party/angle/src/libANGLE/renderer/gl/BlitGL.cpp;l\u003d1289?q\u003dBlitGL",
+      "parentUuid": "3ce45420_e5c4129c",
       "revId": "09112062eb23562c5627f81c48a69256a216c06e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
