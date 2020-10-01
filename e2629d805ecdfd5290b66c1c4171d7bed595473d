@@ -52,6 +52,24 @@
       "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1c7b8bd_39841767",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-01T18:50:14Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised this isn\u0027t possible in constexpr, but indeed it seems not to be.\n\nI just found out these exist: https://en.cppreference.com/w/cpp/numeric/math/nextafter\nso maybe we should use them. (Still not constexpr though.)\nhttps://stackoverflow.com/q/45568999",
+      "parentUuid": "e5046265_c3f244d3",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
