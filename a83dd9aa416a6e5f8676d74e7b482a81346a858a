@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "119b0b5e_ef9309ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "LGTM overall!",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d08aff74_d7e95d28",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -65,6 +82,40 @@
     },
     {
       "key": {
+        "uuid": "685bcef5_fb8c3414",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "Any reason why the quad is in the bottom left quadrant only?",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c89313a_c91c27f7",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "u-nit: you can do .size \u003d {kRTSize, kRTSize, 1};",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16a39f61_4ad6757d",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -76,6 +127,24 @@
       "writtenOn": "2020-09-30T23:54:00Z",
       "side": 1,
       "message": "nit: sampleCount and mipLevelCount default to 1, dimension defaults to 2D (if you \u003d {})",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0457a6b6_6703a2d4",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "Even without {} for the wgpu:: type.",
+      "parentUuid": "16a39f61_4ad6757d",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -116,6 +185,23 @@
     },
     {
       "key": {
+        "uuid": "a08c1ca2_abb6bd06",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "nit: these two modules aren\u0027t used outside of RunDepthBiasTest so they don\u0027t need to be member variables.",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "647e2494_2c38f0d7",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -127,6 +213,23 @@
       "writtenOn": "2020-09-30T23:54:00Z",
       "side": 1,
       "message": "tests are nice to read :) overall, should we also test:\n - negative slope scales\n - negative biases\n - non-identity slopes\n?\n\nAnd, what happens with inf / nan? is the behavior specified / consistent or should we have validation for it?",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96916815_cc9707ce",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "That\u0027s really unfortunate. Does it fail on NVIDIA on all APIs? Is there a workaround we could add?\n\nI\u0027m looking to see if there are depth bias tests in the Vulkan CTS, and will file a bug there if there are none so hopefully NVIDIA fixes their implementation.",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -156,6 +259,23 @@
     },
     {
       "key": {
+        "uuid": "2493b0bc_871612d6",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "Can we have a test case with QuadAngle::TiltedX and no depth bias to control that the values are the expected 0.5, 0.5, 0.0, 0.0?",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "38b2a7da_e39f9ebd",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -173,6 +293,40 @@
         "endLine": 193,
         "endChar": 64
       },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e84db0_af809405",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "Using the clearing to know the depth value is a bit roundabout, hopefully we\u0027re soon able to sample from depth textures to simplify tests like this one.",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2163d974_13b96341",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-01T10:00:44Z",
+      "side": 1,
+      "message": "nit: It\u0027s probably easy to implement the feature in OpenGL (without the clamping) using glPolygonOffset.",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
