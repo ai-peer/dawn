@@ -34,6 +34,24 @@
       "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5046265_c3f244d3",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-01T18:34:20Z",
+      "side": 1,
+      "message": "maybe can\u0027t be constexpr, but should be able to take the address first.\n\nSomething like this https://godbolt.org/z/77fKWq",
+      "parentUuid": "46afe29b_1f650da6",
+      "revId": "e2629d805ecdfd5290b66c1c4171d7bed595473d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
