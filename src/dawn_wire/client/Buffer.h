@@ -32,7 +32,6 @@ namespace dawn_wire { namespace client {
         static WGPUBuffer CreateError(Device* device);
 
         ~Buffer();
-        void ClearMapRequests(WGPUBufferMapAsyncStatus status);
 
         bool OnMapAsyncCallback(uint32_t requestSerial,
                                 uint32_t status,
