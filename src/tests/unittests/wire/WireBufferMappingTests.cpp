@@ -171,6 +171,9 @@ TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForRead) {
     FlushServer();
 }
 
+// TODO unmap called too early, but error on the server side anyway.
+// TODO same two tests for destroy.
+
 // Check that an error map read callback gets nullptr while a buffer is already mapped
 TEST_F(WireBufferMappingTests, MappingForReadingErrorWhileAlreadyMappedGetsNullptr) {
     // Successful map
