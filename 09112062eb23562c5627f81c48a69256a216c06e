@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4a6cb52_21516f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-01T03:51:37Z",
+      "side": 1,
+      "message": "Hi, Corentin,\nSry for late and just go through the whole process(and try to do some initial modification). Here is the arch I think should work for internal shader.\nBut there are still many place I\u0027m not feeling good. e.g. the Info provider for pipeline. \n\nIf you think it is ok for you to do the initial arch review, it will be appreciated. I\u0027d like to aligh with you about the whole arch and then send prs for landing.\n\nThanks!",
+      "revId": "09112062eb23562c5627f81c48a69256a216c06e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "111f0f79_ff115c39",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 1
