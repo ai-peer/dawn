@@ -335,6 +335,11 @@ namespace dawn_native {
     }
 
     size_t BindGroupLayoutBase::HashFunc::operator()(const BindGroupLayoutBase* bgl) const {
+        return HashForCache(bgl, true);
+    }
+
+    // static
+    size_t BindGroupLayoutBase::HashForCache(const BindGroupLayoutBase* bgl, bool isContentLess) {
         size_t hash = 0;
         // std::map is sorted by key, so two BGLs constructed in different orders
         // will still hash the same.

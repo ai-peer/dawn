@@ -172,6 +172,40 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param) {
     return os;
 }
 
+// Implementation of DawnTestPlatform
+
+size_t DawnTestPlatform::getPersistentCacheSize() const {
+    return mCache.size();
+}
+
+void DawnTestPlatform::resetPersistentCache() {
+    mCache = {};
+}
+
+bool DawnTestPlatform::storeData(const void* key,
+                                 size_t keySize,
+                                 const void* value,
+                                 size_t valueSize) {
+    const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+
+    const uint8_t* value_start = reinterpret_cast<const uint8_t*>(value);
+    std::vector<uint8_t> entry_value(value_start, value_start + valueSize);
+
+    return mCache.insert({keyStr, std::move(entry_value)}).second;
+}
+
+size_t DawnTestPlatform::loadData(const void* key, size_t keySize, void* value, size_t valueSize) {
+    std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+    auto entry = mCache.find(keyStr);
+    if (entry == mCache.end()) {
+        return 0;
+    }
+    if (valueSize >= entry->second.size()) {
+        memcpy(value, entry->second.data(), entry->second.size());
+    }
+    return entry->second.size();
+}
+
 // Implementation of DawnTestEnvironment
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv) {
@@ -445,6 +479,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
 void DawnTestEnvironment::SetUp() {
     mInstance = CreateInstanceAndDiscoverAdapters();
     ASSERT(mInstance);
+
+    mPlatform = std::make_unique<DawnTestPlatform>();
+    mInstance->SetPlatform(mPlatform.get());
 }
 
 void DawnTestEnvironment::TearDown() {
@@ -482,6 +519,10 @@ const char* DawnTestEnvironment::GetWireTraceDir() const {
         return nullptr;
     }
     return mWireTraceDir.c_str();
+}
+
+DawnTestPlatform* DawnTestEnvironment::GetPlatform() const {
+    return mPlatform.get();
 }
 
 class WireServerTraceLayer : public dawn_wire::CommandHandler {
@@ -610,6 +651,14 @@ bool DawnTestBase::IsDawnValidationSkipped() const {
     return gTestEnv->IsDawnValidationSkipped();
 }
 
+size_t DawnTestBase::getPersistentCacheSize() const {
+    return gTestEnv->GetPlatform()->getPersistentCacheSize();
+}
+
+void DawnTestBase::resetPersistentCache() {
+    gTestEnv->GetPlatform()->resetPersistentCache();
+}
+
 bool DawnTestBase::HasWGSL() const {
 #ifdef DAWN_ENABLE_WGSL
     return true;
@@ -708,6 +757,9 @@ void DawnTestBase::SetUp() {
     ASSERT_NE(nullptr, backendDevice);
 
     backendProcs = dawn_native::GetProcs();
+
+    // Reset the persistent cache so each test can run independently.
+    resetPersistentCache();
 
     // Choose whether to use the backend procs and devices directly, or set up the wire.
     WGPUDevice cDevice = nullptr;

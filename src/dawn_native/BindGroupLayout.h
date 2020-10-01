@@ -64,6 +64,9 @@ namespace dawn_native {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
 
+        static size_t HashForCache(const BindGroupLayoutBase* bgl,
+                                   bool isContentLess);
+
         BindingIndex GetBindingCount() const;
         // Returns |BindingIndex| because buffers are packed at the front.
         BindingIndex GetBufferCount() const;

@@ -51,6 +51,9 @@ namespace dawn_native {
                             const AttachmentStateBlueprint* b) const;
         };
 
+        static size_t HashForCache(const AttachmentStateBlueprint* attachmentState,
+                                   bool isContentLess);
+
       protected:
         ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> mColorAttachmentsSet;
         ityp::array<ColorAttachmentIndex, wgpu::TextureFormat, kMaxColorAttachments> mColorFormats;
