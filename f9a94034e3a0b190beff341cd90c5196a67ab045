@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "963113a7_4b60f607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-02T15:00:33Z",
+      "side": 1,
+      "message": "OK, here\u0027s a separate rectangular test. I\u0027ve also added horizontal and vertical variants.",
+      "revId": "f9a94034e3a0b190beff341cd90c5196a67ab045",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
