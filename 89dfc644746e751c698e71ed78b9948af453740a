@@ -208,6 +208,24 @@
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "115e7c41_57cc8342",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-02T15:28:59Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure it\u0027s already a pointer internally yeah (or that the linker collects all the thread_local variables in a single TLS slot mega structure).",
+      "parentUuid": "698795af_f305c12e",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
