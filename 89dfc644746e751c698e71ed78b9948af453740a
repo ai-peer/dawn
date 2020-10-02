@@ -190,6 +190,24 @@
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "698795af_f305c12e",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-02T15:27:39Z",
+      "side": 1,
+      "message": "Actually, do you think I should make this a struct instead of a pointer? It probably already goes TLS-\u003epointer-\u003estruct which is a double indirection when it could be TLS-\u003estruct.\n\nHowever, I\u0027m not 100% sure that\u0027s how it is on all platforms. It wouldn\u0027t be great if the entire struct were allocated in TLS.",
+      "parentUuid": "3e987757_220a0a68",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
