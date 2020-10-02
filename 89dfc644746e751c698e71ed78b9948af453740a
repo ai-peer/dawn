@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "6ef2cb1d_e7afa2e3",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-02T19:32:06Z",
+      "side": 1,
+      "message": "On the declaration of struct DawnProcTable. Something like \"often allocated as a static global, please don\u0027t add a complex constructor\". I mean, it seems unlikely, since it\u0027s just a bunch of pointers. Just a random thought; I won\u0027t be offended if you don\u0027t do it. :)",
+      "parentUuid": "ecebb919_6a0abc30",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 2
