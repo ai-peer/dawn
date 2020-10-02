@@ -118,6 +118,26 @@ TEST_P(DeprecationTests, BGLEntryMultisampledBooleanTracking) {
     utils::MakeBindGroup(device, bgl, {{0, texture4Sample.CreateView()}});
 }
 
+// Old: rowsPerImage == 0 defaults to height.
+// New: rowsPerImage == 0 is only allowed if height <= 1.
+TEST_P(DeprecationTests, RowsPerImageZero) {
+    // XXX: test copyBufferToTexture
+
+    // XXX: test copyTextureToBuffer
+
+    // XXX: test writeTexture
+}
+
+// Old: bytesPerRow < actual row size is allowed if there is only one row.
+// New: bytesPerRow != 0 must always be >= actual row size.
+TEST_P(DeprecationTests, BytesPerRowTooSmallButNonZero) {
+    // XXX: test copyBufferToTexture
+
+    // XXX: test copyTextureToBuffer
+
+    // XXX: test writeTexture
+}
+
 DAWN_INSTANTIATE_TEST(DeprecationTests,
                       D3D12Backend(),
                       MetalBackend(),

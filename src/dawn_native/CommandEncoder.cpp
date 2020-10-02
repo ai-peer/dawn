@@ -614,6 +614,9 @@ namespace dawn_native {
                                              const TextureCopyView* destination,
                                              const Extent3D* copySize) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            // Local copy of the layout, for fixups.
+            TextureDataLayout layout = source->layout;
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateBufferCopyView(GetDevice(), *source));
                 DAWN_TRY(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc));
@@ -622,35 +625,36 @@ namespace dawn_native {
                 DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst));
                 DAWN_TRY(ValidateTextureSampleCountInBufferCopyCommands(destination->texture));
 
-                DAWN_TRY(ValidateBufferToTextureCopyRestrictions(*destination));
+                DAWN_TRY(ValidateLinearTextureCopyRestrictions(*destination));
                 // We validate texture copy range before validating linear texture data,
                 // because in the latter we divide copyExtent.width by blockWidth and
                 // copyExtent.height by blockHeight while the divisibility conditions are
                 // checked in validating texture copy range.
                 DAWN_TRY(ValidateTextureCopyRange(*destination, *copySize));
-                DAWN_TRY(ValidateLinearTextureData(
-                    source->layout, source->buffer->GetSize(),
-                    destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect),
-                    *copySize));
+            }
+
+            const TexelBlockInfo& blockInfo =
+                destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect);
+            // TODO(crbug.com/dawn/520): Delete (and merge the two IsValidationEnabled blocks).
+            FixUpDeprecatedLayoutOptions(GetDevice(), blockInfo, *copySize, &layout);
+
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateBufferToTextureCopyRestrictions(layout, blockInfo));
+                DAWN_TRY(ValidateLinearTextureData(layout, source->buffer->GetSize(), blockInfo,
+                                                   *copySize));
 
                 mTopLevelBuffers.insert(source->buffer);
                 mTopLevelTextures.insert(destination->texture);
             }
 
-            // Compute default value for rowsPerImage
-            uint32_t defaultedRowsPerImage = source->layout.rowsPerImage;
-            if (defaultedRowsPerImage == 0) {
-                defaultedRowsPerImage = copySize->height;
-            }
+            // XXX: Figure out if the old defaultedRowsPerImage code is needed for some backends.
 
-            // In the case of one row copy bytesPerRow might not contain enough bytes
-            const TexelBlockInfo& blockInfo =
-                destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect);
-            uint32_t bytesPerRow = source->layout.bytesPerRow;
-            if (copySize->height <= 1 && copySize->depth <= 1) {
-                bytesPerRow =
-                    Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
-            }
+            // XXX: Figure out if the thing below is needed for some backends.
+            // In the case of a single-row copy, bytesPerRow might not contain enough bytes
+            //if (copySize->height <= 1 && copySize->depth <= 1) {
+            //    layout.bytesPerRow =
+            //        Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
+            //}
 
             // Skip noop copies.
             if (copySize->width != 0 && copySize->height != 0 && copySize->depth != 0) {
@@ -658,9 +662,9 @@ namespace dawn_native {
                 CopyBufferToTextureCmd* copy =
                     allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
                 copy->source.buffer = source->buffer;
-                copy->source.offset = source->layout.offset;
-                copy->source.bytesPerRow = bytesPerRow;
-                copy->source.rowsPerImage = defaultedRowsPerImage;
+                copy->source.offset = layout.offset;
+                copy->source.bytesPerRow = layout.bytesPerRow;
+                copy->source.rowsPerImage = layout.rowsPerImage;
                 copy->destination.texture = destination->texture;
                 copy->destination.origin = destination->origin;
                 copy->destination.mipLevel = destination->mipLevel;
@@ -677,6 +681,9 @@ namespace dawn_native {
                                              const BufferCopyView* destination,
                                              const Extent3D* copySize) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            // Local copy of the layout, for fixups.
+            TextureDataLayout layout = destination->layout;
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateTextureCopyView(GetDevice(), *source, *copySize));
                 DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc));
@@ -691,28 +698,30 @@ namespace dawn_native {
                 // copyExtent.height by blockHeight while the divisibility conditions are
                 // checked in validating texture copy range.
                 DAWN_TRY(ValidateTextureCopyRange(*source, *copySize));
-                DAWN_TRY(ValidateLinearTextureData(
-                    destination->layout, destination->buffer->GetSize(),
-                    source->texture->GetFormat().GetTexelBlockInfo(source->aspect), *copySize));
+            }
+
+            const TexelBlockInfo& blockInfo =
+                source->texture->GetFormat().GetTexelBlockInfo(source->aspect);
+            // TODO(crbug.com/dawn/520): Delete (and merge the two IsValidationEnabled blocks).
+            FixUpDeprecatedLayoutOptions(GetDevice(), blockInfo, *copySize, &layout);
+
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateBufferToTextureCopyRestrictions(layout, blockInfo));
+                DAWN_TRY(ValidateLinearTextureData(layout, destination->buffer->GetSize(),
+                                                   blockInfo, *copySize));
 
                 mTopLevelTextures.insert(source->texture);
                 mTopLevelBuffers.insert(destination->buffer);
             }
 
-            // Compute default value for rowsPerImage
-            uint32_t defaultedRowsPerImage = destination->layout.rowsPerImage;
-            if (defaultedRowsPerImage == 0) {
-                defaultedRowsPerImage = copySize->height;
-            }
+            // XXX: Figure out if the old defaultedRowsPerImage code is needed for some backends.
 
-            // In the case of one row copy bytesPerRow might not contain enough bytes
-            const TexelBlockInfo& blockInfo =
-                source->texture->GetFormat().GetTexelBlockInfo(source->aspect);
-            uint32_t bytesPerRow = destination->layout.bytesPerRow;
-            if (copySize->height <= 1 && copySize->depth <= 1) {
-                bytesPerRow =
-                    Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
-            }
+            // XXX: Figure out if the thing below is needed for some backends.
+            // In the case of a single-row copy, bytesPerRow might not contain enough bytes
+            //if (copySize->height <= 1 && copySize->depth <= 1) {
+            //    layout.bytesPerRow =
+            //        Align(copySize->width * blockInfo.blockByteSize, kTextureBytesPerRowAlignment);
+            //}
 
             // Skip noop copies.
             if (copySize->width != 0 && copySize->height != 0 && copySize->depth != 0) {
@@ -724,9 +733,9 @@ namespace dawn_native {
                 copy->source.mipLevel = source->mipLevel;
                 copy->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
                 copy->destination.buffer = destination->buffer;
-                copy->destination.offset = destination->layout.offset;
-                copy->destination.bytesPerRow = bytesPerRow;
-                copy->destination.rowsPerImage = defaultedRowsPerImage;
+                copy->destination.offset = layout.offset;
+                copy->destination.bytesPerRow = layout.bytesPerRow;
+                copy->destination.rowsPerImage = layout.rowsPerImage;
                 copy->copySize = *copySize;
             }
 
