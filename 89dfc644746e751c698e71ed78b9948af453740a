@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "c567f452_a04097fb",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-02T08:34:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "88abad8e_82ff7781",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 2
@@ -154,6 +172,24 @@
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e987757_220a0a68",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-02T08:34:17Z",
+      "side": 1,
+      "message": "Yeah. looking at the latest answer on that thread, it seems some usages have already snuck in third_party dependencies.",
+      "parentUuid": "ceea2175_2ffbaf5a",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
