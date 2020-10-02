@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "94a17190_767f328f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-02T19:45:58Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4eaad56_45a0e596",
         "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 4
