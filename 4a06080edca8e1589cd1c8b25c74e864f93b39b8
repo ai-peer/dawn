@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c63da843_25577d57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-02T19:45:48Z",
+      "side": 1,
+      "message": "Out of curiosity, does this cause MapAsync() to roundtrip where it might not have before? Doesn\u0027t seem so from the code, but if so, does this have any effect on the performance of CreateBuffer() with mappedAtCreation \u003d true? I\u0027m guessing not, since it already required a roundtrip.",
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43b5ac06_d09e8f76",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
