@@ -104,7 +104,7 @@ namespace dawn_native {
             srcPointer += dataLayout.offset;
 
             uint32_t alignedRowsPerImageInBlock = alignedRowsPerImage / blockInfo.blockHeight;
-            uint32_t dataRowsPerImageInBlock = dataLayout.rowsPerImage / blockInfo.blockHeight;
+            uint32_t dataRowsPerImageInBlock = dataLayout.rowsPerImage;
             if (dataRowsPerImageInBlock == 0) {
                 dataRowsPerImageInBlock = writeSizePixel.height / blockInfo.blockHeight;
             }
@@ -233,13 +233,14 @@ namespace dawn_native {
                                                size_t dataSize,
                                                const TextureDataLayout* dataLayout,
                                                const Extent3D* writeSize) {
-        DAWN_TRY(ValidateWriteTexture(destination, dataSize, dataLayout, writeSize));
+        TextureDataLayout layoutFixedUp = *dataLayout;
+        DAWN_TRY(ValidateWriteTexture(destination, dataSize, &layoutFixedUp, writeSize));
 
         if (writeSize->width == 0 || writeSize->height == 0 || writeSize->depth == 0) {
             return {};
         }
 
-        return WriteTextureImpl(*destination, data, *dataLayout, *writeSize);
+        return WriteTextureImpl(*destination, data, layoutFixedUp, *writeSize);
     }
 
     MaybeError QueueBase::WriteTextureImpl(const TextureCopyView& destination,
@@ -369,7 +370,7 @@ namespace dawn_native {
 
     MaybeError QueueBase::ValidateWriteTexture(const TextureCopyView* destination,
                                                size_t dataSize,
-                                               const TextureDataLayout* dataLayout,
+                                               TextureDataLayout* dataLayout,
                                                const Extent3D* writeSize) const {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
@@ -395,6 +396,12 @@ namespace dawn_native {
         // copyExtent.height by blockHeight while the divisibility conditions are
         // checked in validating texture copy range.
         DAWN_TRY(ValidateTextureCopyRange(*destination, *writeSize));
+        {
+            // TODO(crbug.com/dawn/520): Delete this block and make dataLayout const.
+            const TexelBlockInfo& blockInfo =
+                destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect);
+            FixUpDeprecatedLayoutOptions(GetDevice(), blockInfo, *writeSize, dataLayout);
+        }
         DAWN_TRY(ValidateLinearTextureData(
             *dataLayout, dataSize,
             destination->texture->GetFormat().GetTexelBlockInfo(destination->aspect), *writeSize));

@@ -72,6 +72,11 @@ namespace dawn_native {
 
     bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length);
 
+    void FixUpDeprecatedLayoutOptions(DeviceBase* device,
+                                      const TexelBlockInfo& blockInfo,
+                                      const Extent3D& copySize,
+                                      TextureDataLayout* layout);
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_COMMANDVALIDATION_H_

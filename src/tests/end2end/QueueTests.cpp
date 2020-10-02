@@ -483,8 +483,7 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
     }
 }
 
-// Test that writing with bytesPerRow = 0 and bytesPerRow < bytesInACompleteRow works
-// when we're copying one row only
+// Test that writing with bytesPerRow = 0 works when we're copying one row only
 TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
     constexpr uint32_t kWidth = 259;
     constexpr uint32_t kHeight = 127;
@@ -503,6 +502,7 @@ TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, dataSpec, copyExtent);
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove:
     // bytesPerRow < bytesInACompleteRow
     {
         constexpr wgpu::Extent3D copyExtent = {259, 1, 1};

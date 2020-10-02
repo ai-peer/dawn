@@ -118,6 +118,10 @@ TEST_P(DeprecationTests, BGLEntryMultisampledBooleanTracking) {
     utils::MakeBindGroup(device, bgl, {{0, texture4Sample.CreateView()}});
 }
 
+TEST_P(DeprecationTests, RowsPerImageZero) {
+    // XXX
+}
+
 DAWN_INSTANTIATE_TEST(DeprecationTests,
                       D3D12Backend(),
                       MetalBackend(),
