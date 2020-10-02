@@ -687,8 +687,7 @@ TEST_P(CopyTests_T2B, RowPitchUnaligned) {
     }
 }
 
-// Test that copying with bytesPerRow = 0 and bytesPerRow < bytesInACompleteRow works
-// when we're copying one row only
+// Test that copying with bytesPerRow = 0 works when we're copying one row only
 TEST_P(CopyTests_T2B, BytesPerRowWithOneRowCopy) {
     constexpr uint32_t kWidth = 259;
     constexpr uint32_t kHeight = 127;
@@ -705,6 +704,7 @@ TEST_P(CopyTests_T2B, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove:
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);
@@ -1137,8 +1137,7 @@ TEST_P(CopyTests_B2T, RowPitchUnaligned) {
     }
 }
 
-// Test that copying with bytesPerRow = 0 and bytesPerRow < bytesInACompleteRow works
-// when we're copying one row only
+// Test that copying with bytesPerRow = 0 works when we're copying one row only
 TEST_P(CopyTests_B2T, BytesPerRowWithOneRowCopy) {
     constexpr uint32_t kWidth = 259;
     constexpr uint32_t kHeight = 127;
@@ -1155,6 +1154,7 @@ TEST_P(CopyTests_B2T, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove:
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);

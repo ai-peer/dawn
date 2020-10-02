@@ -73,7 +73,7 @@ namespace dawn_native {
                                        size_t size) const;
         MaybeError ValidateWriteTexture(const TextureCopyView* destination,
                                         size_t dataSize,
-                                        const TextureDataLayout* dataLayout,
+                                        TextureDataLayout* dataLayout,
                                         const Extent3D* writeSize) const;
 
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);

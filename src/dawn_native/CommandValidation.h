@@ -52,7 +52,9 @@ namespace dawn_native {
                                          const Extent3D& copyExtent);
     MaybeError ValidateTextureCopyRange(const TextureCopyView& textureCopyView,
                                         const Extent3D& copySize);
-    MaybeError ValidateBufferToTextureCopyRestrictions(const TextureCopyView& dst);
+    MaybeError ValidateLinearTextureCopyRestrictions(const TextureCopyView& dst);
+    MaybeError ValidateBufferToTextureCopyRestrictions(const TextureDataLayout& layout,
+                                                       const TexelBlockInfo& blockInfo);
 
     MaybeError ValidateBufferCopyView(DeviceBase const* device,
                                       const BufferCopyView& bufferCopyView);
@@ -71,6 +73,11 @@ namespace dawn_native {
                                             uint64_t size);
 
     bool IsRangeOverlapped(uint32_t startA, uint32_t startB, uint32_t length);
+
+    void FixUpDeprecatedLayoutOptions(DeviceBase* device,
+                                      const TexelBlockInfo& blockInfo,
+                                      const Extent3D& copySize,
+                                      TextureDataLayout* layout);
 
 }  // namespace dawn_native
 
