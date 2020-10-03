@@ -148,7 +148,7 @@ TEST_P(TextureZeroInitTest, CopyMultipleTextureArrayLayersToBufferSource) {
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
     bufferDescriptor.size =
-        utils::GetBytesInBufferTextureCopy(kColorFormat, kSize, bytesPerRow, kSize, kArrayLayers);
+        utils::RequiredBytesInCopy(bytesPerRow, kSize, {kSize, kSize, kArrayLayers}, kColorFormat);
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
     const wgpu::BufferCopyView bufferCopyView =
