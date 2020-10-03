@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c065db8_f11a0a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-03T02:25:52Z",
+      "side": 1,
+      "message": "This is not quite done but I think it\u0027s ready for a review. Note that this doesn\u0027t actually quite implement the spec, because I made an error writing the spec.",
+      "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
