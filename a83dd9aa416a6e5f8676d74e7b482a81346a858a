@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "54cf6a29_f58af4ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Yes, it does 😊",
+      "parentUuid": "7c88ab5b_af67d744",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d08aff74_d7e95d28",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -73,6 +91,30 @@
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "300a77cf_31734812",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Removed, looks like I wasn\u0027t using array anyways.",
+      "parentUuid": "d08aff74_d7e95d28",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +141,30 @@
     },
     {
       "key": {
+        "uuid": "5ee2968c_baee00cf",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf3829f_b637f00c",
+      "range": {
+        "startLine": 46,
+        "startChar": 32,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "685bcef5_fb8c3414",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -116,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "849c9c55_b6213aa2",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "I had just based the test from the DepthStencilCopyTests code. Modified tests to draw over the entire texture.",
+      "parentUuid": "685bcef5_fb8c3414",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c89313a_c91c27f7",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -130,6 +214,24 @@
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c606b329_4d212336",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c89313a_c91c27f7",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -168,6 +270,24 @@
     },
     {
       "key": {
+        "uuid": "fe79ed59_df49e6b0",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0457a6b6_6703a2d4",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eacaf04e_ccfdb6e1",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -185,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "bb4ca302_fcb0c7be",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eacaf04e_ccfdb6e1",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82189a4f_d9a3f9f6",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -196,6 +334,24 @@
       "writtenOn": "2020-09-30T23:54:00Z",
       "side": 1,
       "message": "nit: can depthCompare be Always? (the default)",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d5a9fdc_84a245cd",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "No. Depth24PlusStencil8 depth textures currently can\u0027t be copied or sampled. Therefore, I\u0027m using depth testing to \"read\" the depth values by proxy.",
+      "parentUuid": "82189a4f_d9a3f9f6",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -219,6 +375,24 @@
     },
     {
       "key": {
+        "uuid": "85e343cf_ddeeff9d",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a08c1ca2_abb6bd06",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "647e2494_2c38f0d7",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -236,6 +410,24 @@
     },
     {
       "key": {
+        "uuid": "c80b5a34_3d7f6a7e",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Added negative slope scales, bias, and non-identity slopes.\n\nAs for inf/nan, we don\u0027t allow NaN as a bias. +Inf gives you a depth of 1 and -Inf gives you a depth of 0. However, I have not seen any references to NaN/Inf in the specs.\n\nShould I add a test for the clamping behavior?",
+      "parentUuid": "647e2494_2c38f0d7",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96916815_cc9707ce",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -247,6 +439,24 @@
       "writtenOn": "2020-10-01T10:00:44Z",
       "side": 1,
       "message": "That\u0027s really unfortunate. Does it fail on NVIDIA on all APIs? Is there a workaround we could add?\n\nI\u0027m looking to see if there are depth bias tests in the Vulkan CTS, and will file a bug there if there are none so hopefully NVIDIA fixes their implementation.",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "620f5b47_77ae1d25",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Checked the APIs. It seems to only be a problem under Vulkan.\n\nAs for a workaround, it seems like would be really hard to do/expensive. Constant biases on floating point depth buffers are calculated using \"the range of z values spanned by the primitive\". My understanding is that we would need know the z values to create a workaround.",
+      "parentUuid": "96916815_cc9707ce",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -276,6 +486,30 @@
     },
     {
       "key": {
+        "uuid": "06a2ff44_4278f952",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82ba05c9_e3c5faa9",
+      "range": {
+        "startLine": 170,
+        "startChar": 46,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2493b0bc_871612d6",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -290,6 +524,24 @@
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f399a74_aaf6bf3a",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Added a test. But that\u0027s not how depth values are stored in depth buffers. It looks like it is the center value of the pixel (i.e. 0.375, 0.375, 0.125, 0.125).",
+      "parentUuid": "2493b0bc_871612d6",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -316,6 +568,30 @@
     },
     {
       "key": {
+        "uuid": "27d824a4_8809beea",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38b2a7da_e39f9ebd",
+      "range": {
+        "startLine": 193,
+        "startChar": 60,
+        "endLine": 193,
+        "endChar": 64
+      },
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4e84db0_af809405",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -333,6 +609,24 @@
     },
     {
       "key": {
+        "uuid": "4ee80b2c_9eeb8bd6",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Indeed, do we have an ETA for this feature?",
+      "parentUuid": "e4e84db0_af809405",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2163d974_13b96341",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -344,6 +638,24 @@
       "writtenOn": "2020-10-01T10:00:44Z",
       "side": 1,
       "message": "nit: It\u0027s probably easy to implement the feature in OpenGL (without the clamping) using glPolygonOffset.",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d3b473e_f4fda2e7",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-03T10:06:57Z",
+      "side": 1,
+      "message": "Slope bias seems to work like the rest of the APIs. However, constant bias is different and the spec doesn\u0027t say how it is calculated.",
+      "parentUuid": "2163d974_13b96341",
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
