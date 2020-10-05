@@ -43,6 +43,7 @@ namespace dawn_native {
         UseDXC,
         DisableRobustness,
         MetalEnableVertexPulling,
+        UseD3D12ShaderCaching,
 
         EnumCount,
         InvalidEnum = EnumCount,

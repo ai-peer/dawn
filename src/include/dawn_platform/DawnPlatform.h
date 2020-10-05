@@ -46,6 +46,18 @@ namespace dawn_platform {
                                        const unsigned char* argTypes,
                                        const uint64_t* argValues,
                                        unsigned char flags) = 0;
+
+        // PersistentCache API. Not abstract since not all platforms have support.
+        virtual size_t loadData(const void* key, size_t keySize, void* valueOut, size_t valueSize) {
+            return 0;
+        }
+
+        virtual bool storeData(const void* key,
+                               size_t keySize,
+                               const void* value,
+                               size_t valueSize) {
+            return false;
+        }
     };
 
 }  // namespace dawn_platform

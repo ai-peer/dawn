@@ -316,8 +316,9 @@ namespace dawn_native {
 
         std::bitset<kMaxVertexAttributes> attributesSetMask;
         if (descriptor->vertexState) {
-            DAWN_TRY(ValidateVertexStateDescriptor(device,
-                descriptor->vertexState, descriptor->primitiveTopology, &attributesSetMask));
+            DAWN_TRY(ValidateVertexStateDescriptor(device, descriptor->vertexState,
+                                                   descriptor->primitiveTopology,
+                                                   &attributesSetMask));
         }
 
         DAWN_TRY(ValidateProgrammableStageDescriptor(
@@ -585,12 +586,18 @@ namespace dawn_native {
     }
 
     size_t RenderPipelineBase::HashFunc::operator()(const RenderPipelineBase* pipeline) const {
+        return HashForCache(pipeline, true);
+    }
+
+    // static
+    size_t RenderPipelineBase::HashForCache(const RenderPipelineBase* pipeline,
+                                            bool isContentLess) {
         // Hash modules and layout
-        size_t hash = PipelineBase::HashForCache(pipeline);
+        size_t hash = PipelineBase::HashForCache(pipeline, isContentLess);
 
         // Hierarchically hash the attachment state.
         // It contains the attachments set, texture formats, and sample count.
-        HashCombine(&hash, pipeline->mAttachmentState.Get());
+        HashCombine(&hash, HashCachedObject(pipeline->mAttachmentState.Get(), isContentLess));
 
         // Hash attachments
         for (ColorAttachmentIndex i :

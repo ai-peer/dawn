@@ -95,6 +95,8 @@ namespace dawn_native {
             bool operator()(const RenderPipelineBase* a, const RenderPipelineBase* b) const;
         };
 
+        static size_t HashForCache(const RenderPipelineBase* pipeline, bool isContentLess);
+
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 

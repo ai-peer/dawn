@@ -112,6 +112,8 @@ namespace dawn_native {
             bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
         };
 
+        static size_t HashForCache(const ShaderModuleBase* module, bool isContentLess);
+
         const std::vector<uint32_t>& GetSpirv() const;
 
 #ifdef DAWN_ENABLE_WGSL

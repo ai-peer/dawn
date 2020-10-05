@@ -60,7 +60,7 @@ namespace dawn_native {
     }
 
     size_t ComputePipelineBase::HashFunc::operator()(const ComputePipelineBase* pipeline) const {
-        return PipelineBase::HashForCache(pipeline);
+        return PipelineBase::HashForCache(pipeline, true);
     }
 
     bool ComputePipelineBase::EqualityFunc::operator()(const ComputePipelineBase* a,
