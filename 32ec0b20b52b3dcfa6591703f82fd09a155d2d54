@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4e18df7_212e2e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:15:06Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "32ec0b20b52b3dcfa6591703f82fd09a155d2d54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcaa234d_f88a0aff",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 13
