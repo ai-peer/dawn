@@ -16,6 +16,57 @@
       "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd82f329_2871ba73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:43:31Z",
+      "side": 1,
+      "message": "IDK, I feel like this CL does too much at once, and just moves a ton of validation around that it\u0027s hard to make sense of it.\n\nMaybe split it into a CL that does the unit conversion for rowsPerImage (and backend fixes), plus one CL that changes the offset to not be required to be aligned for WriteTexture, and one or more CLs for the defaulting / change in computation for requiredBytesInCopy.\n\nMaking things step by step will make it easier to handle the backend changes (and know what backend changes are needed), easier to review and faster to land in general. (plus with Gerrit it\u0027s easy to upload a chain of CLs all at once).",
+      "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0af08d7_c183f107",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:43:31Z",
+      "side": 1,
+      "message": "nit: We\u0027re not looking at making nice error messages yet.",
+      "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54459d01_ad32040a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:43:31Z",
+      "side": 1,
+      "message": "Do we think any of these are hit in the wild already? These cases seem very niche and we could just start validating without deprecation to make this CL simpler.",
+      "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
