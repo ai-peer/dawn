@@ -18,6 +18,7 @@
 #include "common/RefCounted.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/IntegerTypes.h"
+#include "dawn_native/Queue.h"
 
 namespace dawn_native {
 
@@ -25,22 +26,17 @@ namespace dawn_native {
     class Fence;
 
     class FenceSignalTracker {
-        struct FenceInFlight {
+      public:
+        struct FenceInFlight : QueueBase::TaskInFlight {
             Ref<Fence> fence;
             FenceAPISerial value;
         };
-
-      public:
         FenceSignalTracker(DeviceBase* device);
-        ~FenceSignalTracker();
 
         void UpdateFenceOnComplete(Fence* fence, FenceAPISerial value);
 
-        void Tick(ExecutionSerial finishedSerial);
-
       private:
         DeviceBase* mDevice;
-        SerialQueue<ExecutionSerial, FenceInFlight> mFencesInFlight;
     };
 
 }  // namespace dawn_native
