@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f8438b3_1a6b8cc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T23:55:46Z",
+      "side": 1,
+      "message": "Note: Adding the warning that caused compilation to fail doesn\u0027t catch the problem on Dawn\u0027s CQ (so I didn\u0027t add it in the reland) because it only happened when compiling tests in Chromium which don\u0027t build with the dawn_internal config.",
+      "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
