@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b49ede0_bbc8abb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001706
+      },
+      "writtenOn": "2020-10-05T21:34:12Z",
+      "side": 1,
+      "message": "PTAL\n\nIf Dawn jobs specifically need \"11b52\" for some reason, we\u0027ll have to move them to a separate machine pool.",
+      "revId": "60c4c122e650c02c61a4ab5cfd8ba4abdde562f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
