@@ -152,8 +152,7 @@ namespace dawn_native {
             // freed by backends in the ShutDownImpl() call. Still tick the ones that might have
             // pending callbacks.
             mErrorScopeTracker->Tick(GetCompletedCommandSerial());
-            mFenceSignalTracker->Tick(GetCompletedCommandSerial());
-            mMapRequestTracker->Tick(GetCompletedCommandSerial());
+            GetDefaultQueue()->TickTasksInFlight(GetCompletedCommandSerial());
             // call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
             IgnoreErrors(TickImpl());
@@ -755,8 +754,7 @@ namespace dawn_native {
             // reclaiming resources one tick earlier.
             mDynamicUploader->Deallocate(mCompletedSerial);
             mErrorScopeTracker->Tick(mCompletedSerial);
-            mFenceSignalTracker->Tick(mCompletedSerial);
-            mMapRequestTracker->Tick(mCompletedSerial);
+            GetDefaultQueue()->TickTasksInFlight(mCompletedSerial);
         }
     }
 
