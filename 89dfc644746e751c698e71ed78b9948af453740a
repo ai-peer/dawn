@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "6f66dcee_04d2058b",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-05T13:36:43Z",
+      "side": 1,
+      "message": "Good question! I wasn\u0027t thinking of compiler warnings, but it seems newer GCC and Clang have -Wglobal-constructors, which warns on non-trivial constructors (and MSVC has C26426 NO_GLOBAL_INIT_CALLS, which looks similar). It might be interesting to turn it on and see how noisy it is. I imagine third-party code might be problematic. If it is noisy, another option would be to use a #pragma to enable it just for this class. But I leave it up to the team to decide if this is good practice.",
+      "parentUuid": "d0245fbc_6369684b",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 2
