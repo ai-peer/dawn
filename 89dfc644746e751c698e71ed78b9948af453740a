@@ -214,6 +214,24 @@
     },
     {
       "key": {
+        "uuid": "2672c0b0_851e9dd4",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Added a comment to the DawnProcTable declaration",
+      "parentUuid": "557c3050_2e8ab4ac",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 2
@@ -231,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "4a29519f_7d1d0230",
+        "filename": "generator/templates/dawn_proc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89637fd7_a0f27d28",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27f7a85c_3d205a15",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
         "patchSetId": 2
@@ -245,6 +281,24 @@
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36af745e_fff0105e",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f7a85c_3d205a15",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -337,6 +391,24 @@
     },
     {
       "key": {
+        "uuid": "d8783287_f36b1105",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Made this not a pointer.",
+      "parentUuid": "115e7c41_57cc8342",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59091f29_fb264471",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
@@ -354,6 +426,24 @@
     },
     {
       "key": {
+        "uuid": "ded329bd_5b4238ca",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Done. Kept it as a copy",
+      "parentUuid": "59091f29_fb264471",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccad6dff_0a28e0fc",
         "filename": "src/tests/unittests/PerThreadProcTests.cpp",
         "patchSetId": 2
@@ -368,6 +458,24 @@
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78ca7509_87dd5d5a",
+        "filename": "src/tests/unittests/PerThreadProcTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T18:22:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccad6dff_0a28e0fc",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
