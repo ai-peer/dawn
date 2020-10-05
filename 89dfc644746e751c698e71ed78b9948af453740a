@@ -196,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "557c3050_2e8ab4ac",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T13:41:14Z",
+      "side": 1,
+      "message": "I just tried, and it\u0027s not trivial to add because every TEST_F / TEST_P is a global constructor. We don\u0027t have a good way to gate some compile options to just the implementation of Dawn at the moment.",
+      "parentUuid": "6f66dcee_04d2058b",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
         "patchSetId": 2
