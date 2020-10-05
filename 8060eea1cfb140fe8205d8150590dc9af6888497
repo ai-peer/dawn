@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "760162d8_310dbd40",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T18:04:52Z",
+      "side": 1,
+      "message": "I think so, we still need to figure out how we\u0027re going to do nicer error reporting from Dawn.",
+      "parentUuid": "ca97b9ce_0c5637d1",
+      "revId": "8060eea1cfb140fe8205d8150590dc9af6888497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "54459d01_ad32040a",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 4
