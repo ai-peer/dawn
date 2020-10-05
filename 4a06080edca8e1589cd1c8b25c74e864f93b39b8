@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "db84817a_cb416354",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-05T13:23:40Z",
+      "side": 1,
+      "message": "Good to know. Thanks!",
+      "parentUuid": "cc813f29_f608efc8",
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43b5ac06_d09e8f76",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
