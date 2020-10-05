@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "53cd08f6_b7ce29cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-05T17:45:23Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "32ec0b20b52b3dcfa6591703f82fd09a155d2d54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcaa234d_f88a0aff",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 13
