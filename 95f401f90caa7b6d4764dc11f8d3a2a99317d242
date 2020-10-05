@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58e6a13b_66805ea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-05T22:09:50Z",
+      "side": 1,
+      "message": "PTAL\n\nA couple opens:\n- The secure hash (ANGLE uses SHA1).\n- E2E coverage: test local vs global (up to 50% faster if the latter).\n- Caching DX shader bytecode for release builds (vs not).\n\nProposed split:\n1. Metadata for keys\n2. D3D + persistence + whitebox tests\n3. VK + E2E coverage\n\n",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
