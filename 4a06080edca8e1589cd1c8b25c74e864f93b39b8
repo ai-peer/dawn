@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cc813f29_f608efc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:49:54Z",
+      "side": 1,
+      "message": "Yes it causes mapAsync to wait for the roundtrip if you unmap or destroy the buffer early (when before it fired the callback inside the call to unmap/destroy).\n\nIt doesn\u0027t change that an async roundtrip is required for successful mapAsync.\n\nIt doesn\u0027t change the performance of mappedAtCreation\u003dtrue which it still non-blocking (and not a roundtrip contrary to what you said because we created the mapping client-side).",
+      "parentUuid": "c63da843_25577d57",
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43b5ac06_d09e8f76",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -70,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "eb581dca_82142927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:49:54Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4eaad56_45a0e596",
         "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 4
@@ -93,6 +128,30 @@
     },
     {
       "key": {
+        "uuid": "515a974d_3be6b0fa",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4eaad56_45a0e596",
+      "range": {
+        "startLine": 174,
+        "startChar": 34,
+        "endLine": 174,
+        "endChar": 40
+      },
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fe72b6e_cc8d71be",
         "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 4
@@ -113,6 +172,30 @@
       "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ba25cb6_4986c5e7",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T09:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fe72b6e_cc8d71be",
+      "range": {
+        "startLine": 226,
+        "startChar": 20,
+        "endLine": 226,
+        "endChar": 40
+      },
+      "revId": "4a06080edca8e1589cd1c8b25c74e864f93b39b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
