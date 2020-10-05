@@ -25,6 +25,7 @@
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/FenceSignalTracker.h"
+#include "dawn_native/MapRequestTracker.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -142,6 +143,10 @@ namespace dawn_native {
     QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
     }
 
+    QueueBase::~QueueBase() {
+        ASSERT(mTasksInFlight.Empty());
+    }
+
     // static
     QueueBase* QueueBase::MakeError(DeviceBase* device) {
         return new ErrorQueue(device);
@@ -168,6 +173,43 @@ namespace dawn_native {
         device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
             device->GetCurrentErrorScope());
+    }
+
+    void QueueBase::TrackTasksInFlight(std::unique_ptr<TaskInFlight> task) {
+        // If the task is map type, then we track using the pending command serial.
+        // Otherwise, when the task is fence signal type then we want to check if there are any
+        // pending future callback work to determine the serial to track with.
+        // If there is pending future callback work, we use the pending callback serial,
+        // without pending future callback work, we use the last submitted serial.
+        ExecutionSerial serial = (task->type == TaskInFlight::Type::MapRequestTask) ||
+                                         (GetDevice()->GetFutureCallbackSerial() >=
+                                          GetDevice()->GetPendingCommandSerial())
+                                     ? GetDevice()->GetPendingCommandSerial()
+                                     : GetDevice()->GetLastSubmittedCommandSerial();
+        mTasksInFlight.Enqueue(std::move(task), serial);
+        GetDevice()->AddFutureCallbackSerial(GetDevice()->GetPendingCommandSerial());
+    }
+
+    void QueueBase::TickTasksInFlight(ExecutionSerial finishedSerial) {
+        for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
+            switch (task->type) {
+                case TaskInFlight::Type::FenceInFlightTask: {
+                    std::unique_ptr<FenceSignalTracker::FenceInFlight> fenceInFlight(
+                        static_cast<FenceSignalTracker::FenceInFlight*>(task.release()));
+                    Fence* fence = fenceInFlight->fence.Get();
+                    fence->SetCompletedValue(fenceInFlight->value);
+                    break;
+                }
+                case TaskInFlight::Type::MapRequestTask: {
+                    std::unique_ptr<MapRequestTracker::Request> mapRequest(
+                        static_cast<MapRequestTracker::Request*>(task.release()));
+                    BufferBase* buffer = mapRequest->buffer.Get();
+                    buffer->OnMapRequestCompleted(mapRequest->id);
+                    break;
+                }
+            }
+        }
+        mTasksInFlight.ClearUpTo(finishedSerial);
     }
 
     Fence* QueueBase::CreateFence(const FenceDescriptor* descriptor) {

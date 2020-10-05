@@ -19,25 +19,23 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
+#include "dawn_native/Queue.h"
 
 namespace dawn_native {
 
     class MapRequestTracker {
       public:
-        MapRequestTracker(DeviceBase* device);
-        ~MapRequestTracker();
-
-        void Track(BufferBase* buffer, MapRequestID mapID);
-        void Tick(ExecutionSerial finishedSerial);
-
-      private:
-        DeviceBase* mDevice;
-
-        struct Request {
+        struct Request : QueueBase::TaskInFlight {
             Ref<BufferBase> buffer;
             MapRequestID id;
         };
-        SerialQueue<ExecutionSerial, Request> mInflightRequests;
+
+        MapRequestTracker(DeviceBase* device);
+
+        void Track(BufferBase* buffer, MapRequestID mapID);
+
+      private:
+        DeviceBase* mDevice;
     };
 
 }  // namespace dawn_native

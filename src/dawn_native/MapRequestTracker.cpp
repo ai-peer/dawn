@@ -22,23 +22,12 @@ namespace dawn_native {
     MapRequestTracker::MapRequestTracker(DeviceBase* device) : mDevice(device) {
     }
 
-    MapRequestTracker::~MapRequestTracker() {
-        ASSERT(mInflightRequests.Empty());
-    }
-
     void MapRequestTracker::Track(BufferBase* buffer, MapRequestID mapID) {
-        Request request;
-        request.buffer = buffer;
-        request.id = mapID;
-
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
-        mDevice->AddFutureCallbackSerial(mDevice->GetPendingCommandSerial());
+        std::unique_ptr<Request> request = std::make_unique<Request>();
+        request->buffer = buffer;
+        request->id = mapID;
+        request->type = QueueBase::TaskInFlight::Type::MapRequestTask;
+        mDevice->GetDefaultQueue()->TrackTasksInFlight(std::move(request));
     }
 
-    void MapRequestTracker::Tick(ExecutionSerial finishedSerial) {
-        for (auto& request : mInflightRequests.IterateUpTo(finishedSerial)) {
-            request.buffer->OnMapRequestCompleted(request.id);
-        }
-        mInflightRequests.ClearUpTo(finishedSerial);
-    }
 }  // namespace dawn_native

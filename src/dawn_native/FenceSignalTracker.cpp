@@ -22,23 +22,12 @@ namespace dawn_native {
     FenceSignalTracker::FenceSignalTracker(DeviceBase* device) : mDevice(device) {
     }
 
-    FenceSignalTracker::~FenceSignalTracker() {
-        ASSERT(mFencesInFlight.Empty());
-    }
-
     void FenceSignalTracker::UpdateFenceOnComplete(Fence* fence, FenceAPISerial value) {
-        // Because we currently only have a single queue, we can simply update
-        // the fence completed value once the last submitted serial has passed.
-        mFencesInFlight.Enqueue(FenceInFlight{fence, value},
-                                mDevice->GetLastSubmittedCommandSerial());
-        mDevice->AddFutureCallbackSerial(mDevice->GetPendingCommandSerial());
-    }
-
-    void FenceSignalTracker::Tick(ExecutionSerial finishedSerial) {
-        for (auto& fenceInFlight : mFencesInFlight.IterateUpTo(finishedSerial)) {
-            fenceInFlight.fence->SetCompletedValue(fenceInFlight.value);
-        }
-        mFencesInFlight.ClearUpTo(finishedSerial);
+        std::unique_ptr<FenceInFlight> fenceInFlight = std::make_unique<FenceInFlight>();
+        fenceInFlight->fence = fence;
+        fenceInFlight->value = value;
+        fenceInFlight->type = QueueBase::TaskInFlight::Type::FenceInFlightTask;
+        mDevice->GetDefaultQueue()->TrackTasksInFlight(std::move(fenceInFlight));
     }
 
 }  // namespace dawn_native
