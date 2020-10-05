@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcaa234d_f88a0aff",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "nit: Why is this one extracted to a variable and not GetDepthBiasSlopeScale()?",
+      "revId": "32ec0b20b52b3dcfa6591703f82fd09a155d2d54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce917e45_cafd7a55",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "nit: Can we add a TODO to remove once a more recent version of swiftshader is rolled?",
+      "revId": "32ec0b20b52b3dcfa6591703f82fd09a155d2d54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -428,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "8608df44_b5d81958",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "If you want, or we could wait for the operation tests in the CTS to check these.",
+      "parentUuid": "c80b5a34_3d7f6a7e",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96916815_cc9707ce",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -460,6 +478,24 @@
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "babcbce9_7848b850",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "Ok sound good. After this is landed we\u0027ll file a bug against the NVIDIA driver.",
+      "parentUuid": "620f5b47_77ae1d25",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -627,6 +663,24 @@
     },
     {
       "key": {
+        "uuid": "009f61fe_f30827d9",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "This quarter, but not clear when exactly. Maybe we could just have a TODO to fix it later (it\u0027s not the first time we use the depth test as a proxy to know the depth value).",
+      "parentUuid": "4ee80b2c_9eeb8bd6",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2163d974_13b96341",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
@@ -659,6 +713,24 @@
       "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d05dd2a4_2661cbf2",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-05T08:14:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1d3b473e_f4fda2e7",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
