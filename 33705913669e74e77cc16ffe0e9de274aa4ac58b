@@ -16,6 +16,137 @@
       "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c084e47_728408d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35c2e5ae_d5ed8906",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "this is probably okay now because there\u0027s only one queue and the device owns it. Once we have multiqueue though, we\u0027re probably going to need to have the device ref all queues that have in flight commands so they don\u0027t get destroyed before commands finish. Perhaps add a comment about this.",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b61415_39130324",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "nit: the condition of the ternary is really big; break it out into a separate variable for better readability",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e03183ac_8ec5de5a",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "here is where I think having an abstract base class would make this a bit simpler. I think cwallez@ had some reservations about this, but I think it would be better for a few reasons:\n - no need for our own type enum, the virtual function dispatch will handle that automatically, so less error prone\n - also no need for this manual casting of unique_ptr",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ec58d15_95dc881d",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "nit: this could have a protected, explicit constructor that takes in Type. Then FenceInFlight and MapRequestTracker::Request constructors could call it with the correct type.",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eecc584d_3bab9b07",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "should be ~QueueBase override;",
+      "range": {
+        "startLine": 35,
+        "startChar": 9,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfff2a09_15609515",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T00:00:18Z",
+      "side": 1,
+      "message": "mm.. this is an interesting case kainino@ not sure if this has been clarified or talked about in the spec. I didn\u0027t find anything on it.\n\nqueue.signal(fence, 2);\nconst p1 \u003d buffer.mapAsync();\nconst p2 \u003d fence.onCompletion(2);\n\nWhich promise resolves first?\n\nThe fence was signaled first before the buffer was mapped, but the fence callback was registered after the buffer callback.",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
