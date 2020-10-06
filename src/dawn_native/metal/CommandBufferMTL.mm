@@ -1145,6 +1145,9 @@ namespace dawn_native { namespace metal {
                     [encoder setDepthStencilState:newPipeline->GetMTLDepthStencilState()];
                     [encoder setFrontFacingWinding:newPipeline->GetMTLFrontFace()];
                     [encoder setCullMode:newPipeline->GetMTLCullMode()];
+                    [encoder setDepthBias:newPipeline->GetDepthBias()
+                               slopeScale:newPipeline->GetDepthBiasSlopeScale()
+                                    clamp:newPipeline->GetDepthBiasClamp()];
                     newPipeline->Encode(encoder);
 
                     lastPipeline = newPipeline;
