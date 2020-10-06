@@ -482,6 +482,24 @@
     },
     {
       "key": {
+        "uuid": "95f3e185_93995c7a",
+        "filename": "src/tests/end2end/DepthBiasTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-06T05:28:36Z",
+      "side": 1,
+      "message": "Looks like, NVIDIA decided to not clamp bias under Vulkan. Is there a Vulkan CTS for this?",
+      "parentUuid": "1a6a11d6_dc85cbd1",
+      "revId": "a83dd9aa416a6e5f8676d74e7b482a81346a858a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96916815_cc9707ce",
         "filename": "src/tests/end2end/DepthBiasTests.cpp",
         "patchSetId": 12
