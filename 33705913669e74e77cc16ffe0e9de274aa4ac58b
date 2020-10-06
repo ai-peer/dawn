@@ -36,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "7d5c3db9_797418ef",
+        "filename": "src/dawn_native/FenceSignalTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-06T09:35:26Z",
+      "side": 1,
+      "message": "Ditto, this could likely be merged in Fence.cpp/.h",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83ec3b62_de35a5e3",
+        "filename": "src/dawn_native/MapRequestTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-06T09:35:26Z",
+      "side": 1,
+      "message": "This file could be removed completely and put in Buffer.cpp.h given it is a single function and single structure.",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35c2e5ae_d5ed8906",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 1
