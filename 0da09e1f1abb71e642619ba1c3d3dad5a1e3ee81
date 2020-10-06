@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "17ef4813_76ebb425",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-06T08:08:31Z",
+      "side": 1,
+      "message": "nit: with the deletion of an unused exported function in dawn_wire that was causing a compilation failure on Windows.",
+      "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f8438b3_1a6b8cc5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -31,6 +48,23 @@
       "side": 1,
       "message": "I wonder if there\u0027s any way to get it to run on the CQ for the roll. Maybe\n\n Cq-Include-Trybots: luci.chromium.try:win_archive\n\n? (We could pause autoroll, manually trigger an autoroll, and edit it to include that. But I don\u0027t know if it would catch it.)",
       "parentUuid": "6f8438b3_1a6b8cc5",
+      "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54f8944d_3cf5b3af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-06T08:08:31Z",
+      "side": 1,
+      "message": "LGTM!",
       "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
