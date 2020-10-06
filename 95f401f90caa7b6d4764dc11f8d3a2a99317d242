@@ -16,6 +16,121 @@
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be15c24f_423b7958",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "I feel we might need to be more careful than ANGLE w.r.t. secure hashing. D3D12 has fewer guard rails w.r.t. robust buffer access than GL/D3D11.\nWe have this issue now that dynamic buffers aren\u0027t bounds checked and Dawn will need to upload a constant to specify the buffer length. Any Dawn-side protections could probably be circumvented if an attacker manufactures the right hash collision... maybe?\n\nTesting: we could probably just run the tests twice with both variants. They\u0027re pretty fast.\n\nWhat reasons are there for not caching DX shader bytecode?",
+      "parentUuid": "58e6a13b_66805ea3",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0de4679e_eedad106",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "\"Enable\" comment should describe what the toggle does, not what toggling it away from the default does.",
+      "range": {
+        "startLine": 138,
+        "startChar": 44,
+        "endLine": 138,
+        "endChar": 51
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8ce3956_dd39f3f2",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "this may narrow size_t -\u003e uint32_t",
+      "range": {
+        "startLine": 124,
+        "startChar": 85,
+        "endLine": 124,
+        "endChar": 91
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91ebda88_ce8116e1",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "So if you make two devices on the same adapter, then I think they have the same cache key, but use different pipeline libraries. Then, seems like only the device that is destroyed last will have its pipeline cache persisted because the first device will be overwritten. Is there some way to avoid this?\n\nNote: in the future we\u0027d like to have \"logical\" and \"physical\" Dawn devices where we emulate multiple logical devices w/ tracking, limits validation, etc. on top of one real D3D12 device - so this would be less of a problem.\n\nThough it would be another reason to have GetDeviceKey mentioned at [1]",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "106fc357_17b1d6f8",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "add a TODO to look at VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT on VK_EXT_pipeline_creation_cache_control\n\nThat would let us compile ONLY using the cache first, and then if it fails (when we have threads) make a background thread to do the compilation (for createReadyPipeline)\n\nThis lets us have the try-the-cache-then-fallback pattern we use in D3D12.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2021c4_f0a393f3",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T01:35:56Z",
+      "side": 1,
+      "message": "[1] Eventually, I think this DawnPlatform object will be shared between multiple origins and devices. Perhaps we should have a |size_t GetDeviceKey(WGPUDevice device)| so that Chrome can look up an origin-specific identifier in a device-\u003eorigin mapping.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
