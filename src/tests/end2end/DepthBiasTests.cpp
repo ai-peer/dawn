@@ -136,9 +136,6 @@ class DepthBiasTests : public DawnTest {
 
 // Test adding positive bias to output
 TEST_P(DepthBiasTests, PositiveBiasOnFloat) {
-    // NVIDIA GPUs under Vulkan seem to be using a different scale than everyone else.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // SwiftShader incorrectly uses depthBias directly when calculating bias.
     // TODO(enrico.galli@intel.com): Remove once it has been fixed upstream.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsSwiftshader());
@@ -185,9 +182,6 @@ TEST_P(DepthBiasTests, PositiveBiasOnFloatWithClamp) {
 
 // Test adding negative bias to output
 TEST_P(DepthBiasTests, NegativeBiasOnFloat) {
-    // NVIDIA GPUs seems to be using a different scale than everyone else
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // SwiftShader incorrectly uses depthBias directly when calculating bias.
     // TODO(enrico.galli@intel.com): Remove once it has been fixed upstream.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsSwiftshader());
@@ -238,9 +232,6 @@ TEST_P(DepthBiasTests, PositiveInfinitySlopeBiasOnFloat) {
     // TODO(enrico.galli@intel.com): Remove once it has been fixed upstream.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsSwiftshader());
 
-    // NVIDIA GPUs do not clamp values to 1 when using Inf slope bias.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // Draw quad with z from 0 to 0.5 with inf slope bias
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.125, QuadAngle::TiltedX, 0,
                      std::numeric_limits<float>::infinity(), 0);
@@ -260,9 +251,6 @@ TEST_P(DepthBiasTests, NegativeInfinityBiasOnFloat) {
     // SwiftShader incorrectly uses depthBias directly when calculating bias.
     // TODO(enrico.galli@intel.com): Remove once it has been fixed upstream.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsSwiftshader());
-
-    // NVIDIA GPUs do not clamp values to 0 when using -Inf slope bias.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
 
     // Draw quad with z from 0 to 0.5 with -inf slope bias
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.125, QuadAngle::TiltedX, 0,
