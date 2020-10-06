@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "58e6a13b_66805ea3",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "PTAL\n\nA couple opens:\n- The secure hash (ANGLE uses SHA1).\n- E2E coverage: test local vs global (up to 50% faster if the latter).\n- Caching DX shader bytecode for release builds (vs not).\n\nProposed split:\n1. Metadata for keys\n2. D3D + persistence + whitebox tests\n3. VK + E2E coverage\n\n",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "be15c24f_423b7958",
         "filename": "/PATCHSET_LEVEL",
@@ -32,10 +33,45 @@
       "message": "I feel we might need to be more careful than ANGLE w.r.t. secure hashing. D3D12 has fewer guard rails w.r.t. robust buffer access than GL/D3D11.\nWe have this issue now that dynamic buffers aren\u0027t bounds checked and Dawn will need to upload a constant to specify the buffer length. Any Dawn-side protections could probably be circumvented if an attacker manufactures the right hash collision... maybe?\n\nTesting: we could probably just run the tests twice with both variants. They\u0027re pretty fast.\n\nWhat reasons are there for not caching DX shader bytecode?",
       "parentUuid": "58e6a13b_66805ea3",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5fbbdc_686e61cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-06T21:26:22Z",
+      "side": 1,
+      "message": "\u003e\u003e I feel we might need to be more careful than ANGLE w.r.t. secure hashing.\n\nIf we key stretch from the XOR hash of CachedObject to SHA2, that\u0027ll bring us up to TLS/SSL level for preventing collisions. The weaker link is CachedObject\u0027s being only XOR hashed.\n\n\u003e\u003e What reasons are there for not caching DX shader bytecode?\n\n1. Space, E2E was +10% more memory. Not too bad but this is unbounded.\n2. No guarantee the cached DX bytecode will be the same (vs re-gen). Need a Tint-side hash to be 100% sure.",
+      "parentUuid": "be15c24f_423b7958",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d1dbaa_ff780539",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-06T21:26:22Z",
+      "side": 1,
+      "message": "Thanks, AE. Left some questions.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "0de4679e_eedad106",
         "filename": "src/dawn_native/Toggles.cpp",
@@ -55,10 +91,10 @@
         "endChar": 51
       },
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b8ce3956_dd39f3f2",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
@@ -78,10 +114,10 @@
         "endChar": 91
       },
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "91ebda88_ce8116e1",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
@@ -95,10 +131,28 @@
       "side": 1,
       "message": "So if you make two devices on the same adapter, then I think they have the same cache key, but use different pipeline libraries. Then, seems like only the device that is destroyed last will have its pipeline cache persisted because the first device will be overwritten. Is there some way to avoid this?\n\nNote: in the future we\u0027d like to have \"logical\" and \"physical\" Dawn devices where we emulate multiple logical devices w/ tracking, limits validation, etc. on top of one real D3D12 device - so this would be less of a problem.\n\nThough it would be another reason to have GetDeviceKey mentioned at [1]",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3011c323_cc31bf7f",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-06T21:26:22Z",
+      "side": 1,
+      "message": "For D3D, easier to have a separate pipeline library per device. For Vulkan, we can use vkMergePipeline to de-dup. But I have questions: 1) will logical devices be persistent? and 2) who will manage Dawn\u0027s logical devices? Ex. client can also prepend the key, HashCombine(deviceGUID, key) upon load/store.",
+      "parentUuid": "91ebda88_ce8116e1",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "106fc357_17b1d6f8",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
@@ -112,10 +166,28 @@
       "side": 1,
       "message": "add a TODO to look at VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT on VK_EXT_pipeline_creation_cache_control\n\nThat would let us compile ONLY using the cache first, and then if it fails (when we have threads) make a background thread to do the compilation (for createReadyPipeline)\n\nThis lets us have the try-the-cache-then-fallback pattern we use in D3D12.",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2d33f9_459f95ef",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-06T21:26:22Z",
+      "side": 1,
+      "message": "\u003e\u003e VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT\n\nWhy wouldn\u0027t you always want to create the pipeline but get notified if re-compile (vs two pipeline creations)? It\u0027s like asking for permission vs forgiveness, the latter is usually faster since the compilation is already underway.\n\n\u003e\u003e VK_EXT_pipeline_creation_cache_control\n\nAre you thinking we do an Dawn-side cache? I figured between Dawn\u0027s in-memory cache and the client\u0027s cache, it would only be useful for Dawn native (or testing w/o persistence API).",
+      "parentUuid": "106fc357_17b1d6f8",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "5f2021c4_f0a393f3",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
@@ -129,8 +201,7 @@
       "side": 1,
       "message": "[1] Eventually, I think this DawnPlatform object will be shared between multiple origins and devices. Perhaps we should have a |size_t GetDeviceKey(WGPUDevice device)| so that Chrome can look up an origin-specific identifier in a device-\u003eorigin mapping.",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
