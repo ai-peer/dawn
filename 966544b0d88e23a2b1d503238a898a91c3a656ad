@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "acd46b57_84efd631",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "PTAL!",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "e95e6aff_3bd9b338",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,27 @@
       "side": 1,
       "message": "LGTM",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c52165f_a270c826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-06T18:00:53Z",
+      "side": 1,
+      "message": "LGTM too after Stephen\u0027s comment",
+      "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "83b9e5ed_2ec8210a",
         "filename": "src/dawn_wire/client/Buffer.cpp",
@@ -48,8 +66,7 @@
       "side": 1,
       "message": "Is this new size check tested somewhere?\n\nI see that there\u0027s a test for size % 4 \u003d\u003d 0 at https://dawn-review.googlesource.com/c/dawn/+/29360/2/src/tests/unittests/validation/BufferValidationTests.cpp#194\n\nBut that test was presumably passing (failing validation) before this change. Do we need more coverage here?",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
