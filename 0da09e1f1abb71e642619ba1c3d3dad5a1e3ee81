@@ -16,6 +16,24 @@
       "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db17acf2_b6bac4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-06T00:48:37Z",
+      "side": 1,
+      "message": "I wonder if there\u0027s any way to get it to run on the CQ for the roll. Maybe\n\n Cq-Include-Trybots: luci.chromium.try:win_archive\n\n? (We could pause autoroll, manually trigger an autoroll, and edit it to include that. But I don\u0027t know if it would catch it.)",
+      "parentUuid": "6f8438b3_1a6b8cc5",
+      "revId": "0da09e1f1abb71e642619ba1c3d3dad5a1e3ee81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
