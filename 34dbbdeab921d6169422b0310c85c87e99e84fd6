@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21e147be_7b17bfaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-06T08:50:33Z",
+      "side": 1,
+      "message": "LGTM! (we picked that version because it was better than the preferred version, but that was a while ago ^^)",
+      "revId": "34dbbdeab921d6169422b0310c85c87e99e84fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
