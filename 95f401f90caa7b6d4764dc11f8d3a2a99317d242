@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57be65dc_a544442a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T16:59:11Z",
+      "side": 1,
+      "message": "Include the tint version hash in the key?",
+      "parentUuid": "50adc5b9_c3a2a1b0",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de4679e_eedad106",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 6
@@ -220,6 +238,24 @@
       "side": 1,
       "message": "\u003e are all the same no matter what origin you\u0027re using, no?\n\nThe client could always isolate its keys by wrapping the key retuned by Dawn with origin data.\n\nBut I\u0027m unsure if this is an issue in practice. PSOs will be checked for compatibility so they should always be the same.",
       "parentUuid": "9d133f48_3c31a3ff",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce410013_a82bf153",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T16:59:11Z",
+      "side": 1,
+      "message": "DawnPlatform will not know what origin it\u0027s on. The platform is a member of the dawn_native::Instance which will probably be a singleton in the GPU process. So inside Chrome\u0027s implementation of load/storeData, we don\u0027t know which origin it\u0027s coming from.\n\nWhat about we have a Dawn extension for DeviceIsolation that puts a key chained on the DeviceDescriptor, and we include it in this cache key?",
+      "parentUuid": "8873155e_277586cd",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
