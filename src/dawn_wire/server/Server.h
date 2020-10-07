@@ -15,6 +15,8 @@
 #ifndef DAWNWIRE_SERVER_SERVER_H_
 #define DAWNWIRE_SERVER_SERVER_H_
 
+#include "dawn_wire/ChunkedCommandHandler.h"
+#include "dawn_wire/ChunkedCommandSerializer.h"
 #include "dawn_wire/server/ServerBase_autogen.h"
 
 namespace dawn_wire { namespace server {
@@ -54,28 +56,32 @@ namespace dawn_wire { namespace server {
         uint64_t requestSerial;
     };
 
-    class Server : public ServerBase {
+    class Server : public ServerBase, public ChunkedCommandHandler {
       public:
         Server(WGPUDevice device,
                const DawnProcTable& procs,
                CommandSerializer* serializer,
                MemoryTransferService* memoryTransferService);
-        ~Server();
+        ~Server() override;
 
-        const volatile char* HandleCommands(const volatile char* commands, size_t size);
+        // ChunkedCommandHandler implementation
+        const volatile char* HandleCommandsImpl(const volatile char* commands,
+                                                size_t size) override;
 
         bool InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation);
 
       private:
         template <typename Cmd>
-        char* SerializeCommand(const Cmd& cmd, size_t extraSize = 0) {
-            size_t requiredSize = cmd.GetRequiredSize();
-            // TODO(cwallez@chromium.org): Check for overflows and allocation success?
-            char* allocatedBuffer = GetCmdSpace(requiredSize + extraSize);
-            cmd.Serialize(allocatedBuffer);
-            return allocatedBuffer + requiredSize;
+        void SerializeCommand(const Cmd& cmd) {
+            mSerializer.SerializeCommand(cmd);
         }
-        char* GetCmdSpace(size_t size);
+
+        template <typename Cmd, typename ExtraSizeSerializeFn>
+        void SerializeCommand(const Cmd& cmd,
+                              size_t extraSize,
+                              ExtraSizeSerializeFn&& SerializeExtraSize) {
+            mSerializer.SerializeCommand(cmd, extraSize, SerializeExtraSize);
+        }
 
         // Forwarding callbacks
         static void ForwardUncapturedError(WGPUErrorType type, const char* message, void* userdata);
@@ -99,8 +105,8 @@ namespace dawn_wire { namespace server {
 
 #include "dawn_wire/server/ServerPrototypes_autogen.inc"
 
-        CommandSerializer* mSerializer = nullptr;
         WireDeserializeAllocator mAllocator;
+        ChunkedCommandSerializer mSerializer;
         DawnProcTable mProcs;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
         MemoryTransferService* mMemoryTransferService = nullptr;
