@@ -20,12 +20,27 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Queue.h"
 
 #include "dawn_native/dawn_platform.h"
 
 #include <map>
 
 namespace dawn_native {
+    class FenceSignalTracker {
+      public:
+        struct FenceInFlight : QueueBase::TaskInFlight {
+            void Tick() override;
+            Ref<Fence> fence;
+            FenceAPISerial value;
+        };
+        FenceSignalTracker(DeviceBase* device);
+
+        void UpdateFenceOnComplete(Fence* fence, FenceAPISerial value);
+
+      private:
+        DeviceBase* mDevice;
+    };
 
     MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor);
 
