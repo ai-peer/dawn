@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50adc5b9_c3a2a1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T16:48:30Z",
+      "side": 1,
+      "message": "\u003e If the cache gets too big\n\nYup.\n\n\u003e For (2) is this because of Dawn\u0027s renaming of stuff\n\nIf we bugfix Tint, loading the previously (buggy) cached DX bytecode version would be bad.",
+      "parentUuid": "eadf42bf_2aff5e9f",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de4679e_eedad106",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 6
@@ -190,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8873155e_277586cd",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T16:48:30Z",
+      "side": 1,
+      "message": "\u003e are all the same no matter what origin you\u0027re using, no?\n\nThe client could always isolate its keys by wrapping the key retuned by Dawn with origin data.\n\nBut I\u0027m unsure if this is an issue in practice. PSOs will be checked for compatibility so they should always be the same.",
+      "parentUuid": "9d133f48_3c31a3ff",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "106fc357_17b1d6f8",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 6
@@ -237,6 +273,24 @@
       "side": 1,
       "message": "in D3D12 we do\n\n(relatively cheap?)\nDAWN_TRY_ASSIGN(mPipelineState, device-\u003eGetPipelineCache()-\u003eloadComputePipeline(d3dDesc, psoKey))\n\nand if that is a cache miss,\n(relatively expensive?)\ndevice-\u003eGetD3D12Device()-\u003eCreateComputePipelineState(\n                                      \u0026d3dDesc, IID_PPV_ARGS(\u0026mPipelineState)),\n                                  \"ID3D12Device::CreateComputePipelineState\")\n\nso the thought was that if it\u0027s a cache hit, we could resolve the createReadyPipeline synchronously right away without going to ask a worker thread to do a compilation\n\nMaybe this Vulkan extension (kinda low adoption) would let us do something similar. I haven\u0027t read it in full, but I believe it tells you if Vulkan\u0027s builtin cache was a cache miss and it needs to go do a full pipeline compilation.",
       "parentUuid": "9e2d33f9_459f95ef",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "088f7d8e_989b720e",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T16:48:30Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "e103a22b_3ee6bf7f",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
