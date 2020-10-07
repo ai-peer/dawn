@@ -103,6 +103,24 @@
       "parentUuid": "239ce437_23cf4a18",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad8eee3_1a5a1248",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T15:50:16Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll go ahead and land this now, and add an item to test the validation tests on dawn_wire too.",
+      "parentUuid": "0dc424ed_1ea570db",
+      "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
