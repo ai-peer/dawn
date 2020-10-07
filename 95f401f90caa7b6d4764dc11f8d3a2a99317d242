@@ -594,6 +594,24 @@
       "parentUuid": "1288042c_68ddf689",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a591780b_41f17aef",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T17:47:48Z",
+      "side": 1,
+      "message": "oh yes, that was one of my suggestions above as well. Either works, though we could avoid the lookup table if we store the origin on the device.",
+      "parentUuid": "32d4cdc4_5136a3d4",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
