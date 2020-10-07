@@ -19,12 +19,28 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Queue.h"
 
 #include "dawn_native/dawn_platform.h"
 
 #include <memory>
 
 namespace dawn_native {
+    class MapRequestTracker {
+      public:
+        struct Request : QueueBase::TaskInFlight {
+            void Tick() override;
+            Ref<BufferBase> buffer;
+            MapRequestID id;
+        };
+
+        MapRequestTracker(DeviceBase* device);
+
+        void Track(BufferBase* buffer, MapRequestID mapID);
+
+      private:
+        DeviceBase* mDevice;
+    };
 
     struct CopyTextureToBufferCmd;
 
