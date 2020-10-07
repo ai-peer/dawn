@@ -127,6 +127,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c227d4f_99335161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "Let\u0027s add the Tint hash to the key, and also its dependencies in general. We could have a method in Tint that queries the caching fingerprint from it.\n\nIf we start going the crypto-hash route, then we\u0027ll need to serialize the whole caching fingerprint before running it through the crypto hash (I think it\u0027s quite rare to have streaming hashes at the granularity of the uint32_t). So how about generating the key as an std::vector\u003cuint8_t\u003e already, then see whether we\u0027ll apply a crypto hash on it or not?",
+      "parentUuid": "50adc5b9_c3a2a1b0",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9098bc59_19cef5fe",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "nit: This is missing PersistentCache",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f94a8f_245b9d2d",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "This is an extremely low-level API, can we have some higher-level version that helps use the thing correctly?\n\nFor example\n\n    template\u003ctypename T\u003e\n    ResultOrError\u003cT\u003e LoadFromCacheOrCreate(key, std::function\u003cResultOrError\u003cT\u003e(std::function\u003cvoid(span\u003cvoid\u003e)\u003e)\u003e createFn);\n\n That\u0027s used like the following:\n\n   DAWN_TRY_ASSIGN(pipelineState, LoadFromCacheOrCreate(key, [\u0026](DoCacheFn doCache){\n       // We know we need to create the thing, do a bunch of work\n       // We create the thing, now put it in the cache, the PersistentCache will check we called this\n       doCache(thing-\u003eCachedBlob());\n       return {thing};\n   }));\n\nThis is a sketch and there should be something nicer possible.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dca10a0_5023466e",
+        "filename": "src/dawn_native/PipelineCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used in the frontend and does almost nothing, so it could be moved to the backend entirely.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "910887b4_e9bb780e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "Uh, I\u0027m not sure I understand the isContentLess. What is the difference between true and false, given that here RenderPipeline can take both but it always content-less.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de4679e_eedad106",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 6
@@ -150,6 +236,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "299df253_b626ab5a",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "Mabye Dawn adapters should expose a \"CachingFingerprint\" that when changed invalidates all the previous cache so that embedders easily know when to nuke the whole cache. (it would be a combination of backend-specific stuff, the Dawn git commit, and the Tint git commit). This CachingFingerprint would always be a prefix to what\u0027s used to make the keys (so that we can test it is correctly used).",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79999e7d_409a23ba",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "It seems that this logic should be a property of the ShaderModule instead because it is duplicated here and in [a]. GPUShaderModule-\u003eCompile could return structure that holds the ref to either the DxcBloc or the D3DBloc and has a method to get a D3D12_SHADER_BYTECODE.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042ba6bf_a4156b35",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "Right now the hashing mechanism makes it super easy to create collisions, maybe we could use variable-length key forever, or in preparation to use a crypto hash.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8ce3956_dd39f3f2",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 6
@@ -166,6 +303,29 @@
         "startChar": 85,
         "endLine": 124,
         "endChar": 91
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2e2b2f_d18041ec",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "What does this mean? We\u0027ll need to be able to run on Windows 10 pre Anniversary Update forever.",
+      "range": {
+        "startLine": 118,
+        "startChar": 72,
+        "endLine": 119,
+        "endChar": 29
       },
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -262,6 +422,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02380cfe_63184e26",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "This uses a single pipeline library for all the pipelines, is there any advantage to doing that, compared to doing one library per pipeline (or at least per combination of VS / FS / CS)? It would allow flushing at a smaller granularity.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a450d2_25dd5c96",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "106fc357_17b1d6f8",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 6
@@ -344,6 +538,24 @@
       "writtenOn": "2020-10-06T01:35:56Z",
       "side": 1,
       "message": "[1] Eventually, I think this DawnPlatform object will be shared between multiple origins and devices. Perhaps we should have a |size_t GetDeviceKey(WGPUDevice device)| so that Chrome can look up an origin-specific identifier in a device-\u003eorigin mapping.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd500b8d_80886d9c",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:42:01Z",
+      "side": 1,
+      "message": "Maybe we could just pass the WGPUDevice object as an argument?\n\nAlso we\u0027ll have to make sure we key on a representative Adapter description so that if the driver is upgraded, or the device swapped, we invalidate correctly.",
+      "parentUuid": "5f2021c4_f0a393f3",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
