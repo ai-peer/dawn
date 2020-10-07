@@ -68,14 +68,31 @@ namespace dawn_wire { namespace server {
 
       private:
         template <typename Cmd>
-        char* SerializeCommand(const Cmd& cmd, size_t extraSize = 0) {
+        void SerializeCommand(const Cmd& cmd) {
             size_t requiredSize = cmd.GetRequiredSize();
-            // TODO(cwallez@chromium.org): Check for overflows and allocation success?
-            char* allocatedBuffer = GetCmdSpace(requiredSize + extraSize);
-            cmd.Serialize(allocatedBuffer);
-            return allocatedBuffer + requiredSize;
+            bool isOwned;
+            char* allocatedBuffer = mSerializer->GetCmdSpaceInternal(requiredSize, &isOwned);
+            cmd.Serialize(requiredSize, allocatedBuffer);
+            if (isOwned) {
+                mSerializer->SerializeOwnedCmdSpace();
+            }
         }
-        char* GetCmdSpace(size_t size);
+
+        template <typename Cmd, typename ExtraSizeSerializeFn>
+        void SerializeCommand(const Cmd& cmd,
+                              size_t extraSize,
+                              ExtraSizeSerializeFn SerializeExtraSize) {
+            size_t commandSize = cmd.GetRequiredSize();
+            size_t requiredSize = commandSize + extraSize;
+            // TODO(cwallez@chromium.org): Check for overflows and allocation success?
+            bool isOwned;
+            char* allocatedBuffer = mSerializer->GetCmdSpaceInternal(requiredSize, &isOwned);
+            cmd.Serialize(requiredSize, allocatedBuffer);
+            SerializeExtraSize(allocatedBuffer + commandSize);
+            if (isOwned) {
+                mSerializer->SerializeOwnedCmdSpace();
+            }
+        }
 
         // Forwarding callbacks
         static void ForwardUncapturedError(WGPUErrorType type, const char* message, void* userdata);
@@ -104,6 +121,9 @@ namespace dawn_wire { namespace server {
         DawnProcTable mProcs;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
         MemoryTransferService* mMemoryTransferService = nullptr;
+
+        size_t mChunkedCommandRemainingSize = 0;
+        std::vector<char> mChunkedCommandData;
     };
 
     std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService();

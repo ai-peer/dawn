@@ -52,22 +52,12 @@ namespace dawn_wire { namespace client {
         return result;
     }
 
-    char* Client::GetCmdSpace(size_t size) {
-        if (DAWN_UNLIKELY(mIsDisconnected)) {
-            if (size > mDummyCmdSpace.size()) {
-                mDummyCmdSpace.resize(size);
-            }
-            return mDummyCmdSpace.data();
-        }
-        return static_cast<char*>(mSerializer->GetCmdSpace(size));
-    }
-
     void Client::Disconnect() {
-        if (mIsDisconnected) {
+        if (mSerializer->IsDisconnected()) {
             return;
         }
 
-        mIsDisconnected = true;
+        mSerializer->Disconnect();
         if (mDevice != nullptr) {
             mDevice->HandleDeviceLost("GPU connection lost");
         }

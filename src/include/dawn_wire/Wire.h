@@ -16,17 +16,44 @@
 #define DAWNWIRE_WIRE_H_
 
 #include <cstdint>
+#include <limits>
+#include <vector>
 
 #include "dawn/webgpu.h"
 #include "dawn_wire/dawn_wire_export.h"
 
 namespace dawn_wire {
 
+    namespace client {
+        class Client;
+    }  // namespace client
+
+    namespace server {
+        class Server;
+    }  // namespace server
+
     class DAWN_WIRE_EXPORT CommandSerializer {
       public:
+        CommandSerializer() = default;
+        CommandSerializer(size_t maxCommandSize);
         virtual ~CommandSerializer() = default;
+
         virtual void* GetCmdSpace(size_t size) = 0;
         virtual bool Flush() = 0;
+
+        bool IsDisconnected() const;
+        void Disconnect();
+
+      private:
+        friend class client::Client;
+        friend class server::Server;
+
+        char* GetCmdSpaceInternal(size_t size, bool* isOwned);
+        void SerializeOwnedCmdSpace();
+
+        const size_t mMaxCommandSize = std::numeric_limits<size_t>::max();
+        std::vector<char> mOwnedCmdSpace;
+        bool mIsDisconnected = false;
     };
 
     class DAWN_WIRE_EXPORT CommandHandler {

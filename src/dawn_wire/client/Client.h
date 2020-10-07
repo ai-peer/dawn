@@ -43,12 +43,30 @@ namespace dawn_wire { namespace client {
         ReservedTexture ReserveTexture(WGPUDevice device);
 
         template <typename Cmd>
-        char* SerializeCommand(const Cmd& cmd, size_t extraSize = 0) {
+        void SerializeCommand(const Cmd& cmd) {
             size_t requiredSize = cmd.GetRequiredSize();
+            bool isOwned;
+            char* allocatedBuffer = mSerializer->GetCmdSpaceInternal(requiredSize, &isOwned);
+            cmd.Serialize(requiredSize, allocatedBuffer, *this);
+            if (isOwned) {
+                mSerializer->SerializeOwnedCmdSpace();
+            }
+        }
+
+        template <typename Cmd, typename ExtraSizeSerializeFn>
+        void SerializeCommand(const Cmd& cmd,
+                              size_t extraSize,
+                              ExtraSizeSerializeFn SerializeExtraSize) {
+            size_t commandSize = cmd.GetRequiredSize();
+            size_t requiredSize = commandSize + extraSize;
             // TODO(cwallez@chromium.org): Check for overflows and allocation success?
-            char* allocatedBuffer = GetCmdSpace(requiredSize + extraSize);
-            cmd.Serialize(allocatedBuffer, *this);
-            return allocatedBuffer + requiredSize;
+            bool isOwned;
+            char* allocatedBuffer = mSerializer->GetCmdSpaceInternal(requiredSize, &isOwned);
+            cmd.Serialize(requiredSize, allocatedBuffer, *this);
+            SerializeExtraSize(allocatedBuffer + commandSize);
+            if (isOwned) {
+                mSerializer->SerializeOwnedCmdSpace();
+            }
         }
 
         void Disconnect();
@@ -56,16 +74,14 @@ namespace dawn_wire { namespace client {
       private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inc"
 
-        char* GetCmdSpace(size_t size);
-
         Device* mDevice = nullptr;
         CommandSerializer* mSerializer = nullptr;
         WireDeserializeAllocator mAllocator;
         MemoryTransferService* mMemoryTransferService = nullptr;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
 
-        std::vector<char> mDummyCmdSpace;
-        bool mIsDisconnected = false;
+        size_t mChunkedCommandRemainingSize = 0;
+        std::vector<char> mChunkedCommandData;
     };
 
     DawnProcTable GetProcs();

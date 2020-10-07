@@ -54,11 +54,37 @@ namespace dawn_wire { namespace client {
     {% endfor %}
 
     const volatile char* Client::HandleCommands(const volatile char* commands, size_t size) {
-        while (size >= sizeof(ReturnWireCmd)) {
-            ReturnWireCmd cmdId = *reinterpret_cast<const volatile ReturnWireCmd*>(commands);
+        if (mChunkedCommandRemainingSize > 0) {
+            size_t chunkSize = std::min(size, mChunkedCommandRemainingSize);
+            mChunkedCommandData.insert(mChunkedCommandData.end(), commands, commands + chunkSize);
+
+            commands += chunkSize;
+            mChunkedCommandRemainingSize -= chunkSize;
+            size -= chunkSize;
+
+            if (mChunkedCommandRemainingSize == 0) {
+                const volatile char* chunkedCommandsEnd = HandleCommands(mChunkedCommandData.data(), mChunkedCommandData.size());
+                if (chunkedCommandsEnd != mChunkedCommandData.data() + mChunkedCommandData.size()) {
+                    return nullptr;
+                }
+                mChunkedCommandData.clear();
+            }
+        }
+
+        while (size >= sizeof(ReturnWireCmdHeader)) {
+            const volatile ReturnWireCmdHeader* header = reinterpret_cast<const volatile ReturnWireCmdHeader*>(commands);
+            uint64_t commandSize = header->commandSize;
+
+            ASSERT(commandSize <= std::numeric_limits<size_t>::max());
+            if (size < commandSize) {
+                // Command data only includes part of the command.
+                mChunkedCommandData.insert(mChunkedCommandData.end(), commands, commands + size);
+                mChunkedCommandRemainingSize = static_cast<size_t>(commandSize) - size;
+                return commands + size;
+            }
 
             bool success = false;
-            switch (cmdId) {
+            switch (header->commandId) {
                 {% for command in cmd_records["return command"] %}
                     {% set Suffix = command.name.CamelCase() %}
                     case ReturnWireCmd::{{Suffix}}:

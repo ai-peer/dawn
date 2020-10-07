@@ -90,13 +90,39 @@ namespace dawn_wire { namespace server {
     {% endfor %}
 
     const volatile char* Server::HandleCommands(const volatile char* commands, size_t size) {
+        if (mChunkedCommandRemainingSize > 0) {
+            size_t chunkSize = std::min(size, mChunkedCommandRemainingSize);
+            mChunkedCommandData.insert(mChunkedCommandData.end(), commands, commands + chunkSize);
+
+            commands += chunkSize;
+            mChunkedCommandRemainingSize -= chunkSize;
+            size -= chunkSize;
+
+            if (mChunkedCommandRemainingSize == 0) {
+                const volatile char* chunkedCommandsEnd = HandleCommands(mChunkedCommandData.data(), mChunkedCommandData.size());
+                if (chunkedCommandsEnd != mChunkedCommandData.data() + mChunkedCommandData.size()) {
+                    return nullptr;
+                }
+                mChunkedCommandData.clear();
+            }
+        }
+
         mProcs.deviceTick(DeviceObjects().Get(1)->handle);
 
-        while (size >= sizeof(WireCmd)) {
-            WireCmd cmdId = *reinterpret_cast<const volatile WireCmd*>(commands);
+        while (size >= sizeof(WireCmdHeader)) {
+            const volatile WireCmdHeader* header = reinterpret_cast<const volatile WireCmdHeader*>(commands);
+            uint64_t commandSize = header->commandSize;
+
+            ASSERT(commandSize <= std::numeric_limits<size_t>::max());
+            if (size < commandSize) {
+                // Command data only includes part of the command.
+                mChunkedCommandData.insert(mChunkedCommandData.end(), commands, commands + size);
+                mChunkedCommandRemainingSize = static_cast<size_t>(commandSize) - size;
+                return commands + size;
+            }
 
             bool success = false;
-            switch (cmdId) {
+            switch (header->commandId) {
                 {% for command in cmd_records["command"] %}
                     case WireCmd::{{command.name.CamelCase()}}:
                         success = Handle{{command.name.CamelCase()}}(&commands, &size);

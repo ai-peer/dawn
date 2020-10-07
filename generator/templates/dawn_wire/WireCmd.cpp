@@ -109,6 +109,7 @@ namespace {
         {% if is_cmd %}
             //* Start the transfer structure with the command ID, so that casting to WireCmd gives the ID.
             {{Return}}WireCmd commandId;
+            uint64_t commandSize;
         {% elif record.extensible %}
             bool hasNextInChain;
         {% elif record.chained %}
@@ -379,12 +380,13 @@ namespace {
         return size;
     }
 
-    void {{Cmd}}::Serialize(char* buffer
+    void {{Cmd}}::Serialize(size_t commandSize, char* buffer
         {%- if not is_return -%}
             , const ObjectIdProvider& objectIdProvider
         {%- endif -%}
     ) const {
         auto transfer = reinterpret_cast<{{Name}}Transfer*>(buffer);
+        transfer->commandSize = commandSize;
         buffer += sizeof({{Name}}Transfer);
 
         {{Name}}Serialize(*this, transfer, &buffer

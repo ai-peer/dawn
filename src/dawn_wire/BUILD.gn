@@ -59,6 +59,7 @@ dawn_component("dawn_wire") {
   sources = get_target_outputs(":dawn_wire_gen")
   sources += [
     "WireClient.cpp",
+    "WireCommandSerializer.cpp",
     "WireDeserializeAllocator.cpp",
     "WireDeserializeAllocator.h",
     "WireServer.cpp",
