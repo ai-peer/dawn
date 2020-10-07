@@ -169,6 +169,7 @@ namespace dawn_native { namespace opengl {
             // Workaroud to find vendor id from vendor name
             const char* vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
             mPCIInfo.vendorId = GetVendorIdFromVendors(vendor);
+            mDriverDescription = mFunctions.GetString(GL_RENDERER);
 
             InitializeSupportedExtensions();
 
