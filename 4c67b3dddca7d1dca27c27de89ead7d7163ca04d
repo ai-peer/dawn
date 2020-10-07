@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb21ba37_7bd34ff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T23:58:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4c67b3dddca7d1dca27c27de89ead7d7163ca04d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3436c96_325d7204",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T23:58:09Z",
+      "side": 1,
+      "message": "Probably best to give these classes constructors so we can do make_unique\u003cRequest\u003e(buffer, id)\n\nthen, I think the members can be private\n\nand I think we should call this Finish() instead of Tick()",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "4c67b3dddca7d1dca27c27de89ead7d7163ca04d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
