@@ -85,6 +85,24 @@
       "parentUuid": "83b9e5ed_2ec8210a",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc424ed_1ea570db",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-07T15:46:31Z",
+      "side": 1,
+      "message": "As long as there\u0027s a test somewhere, whether it\u0027s in the CTS in the future or unit tests now, I\u0027m fine with it. I think we can lean on the CTS for this and it seems better for the ecosystem too.",
+      "parentUuid": "239ce437_23cf4a18",
+      "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
