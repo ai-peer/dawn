@@ -89,12 +89,15 @@ namespace dawn_wire { namespace server {
         }
     {% endfor %}
 
-    const volatile char* Server::HandleCommands(const volatile char* commands, size_t size) {
+    const volatile char* Server::HandleCommandsImpl(const volatile char* commands, size_t size) {
         mProcs.deviceTick(DeviceObjects().Get(1)->handle);
 
-        while (size >= sizeof(WireCmd)) {
-            WireCmd cmdId = *reinterpret_cast<const volatile WireCmd*>(commands);
+        while (size >= sizeof(CmdHeader) + sizeof(WireCmd)) {
+            if (HandleCommandHeader(commands, size)) {
+                return commands + size;
+            }
 
+            WireCmd cmdId = *reinterpret_cast<const volatile WireCmd*>(commands + sizeof(CmdHeader));
             bool success = false;
             switch (cmdId) {
                 {% for command in cmd_records["command"] %}

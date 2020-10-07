@@ -53,10 +53,13 @@ namespace dawn_wire { namespace client {
         }
     {% endfor %}
 
-    const volatile char* Client::HandleCommands(const volatile char* commands, size_t size) {
-        while (size >= sizeof(ReturnWireCmd)) {
-            ReturnWireCmd cmdId = *reinterpret_cast<const volatile ReturnWireCmd*>(commands);
+    const volatile char* Client::HandleCommandsImpl(const volatile char* commands, size_t size) {
+        while (size >= sizeof(CmdHeader) + sizeof(ReturnWireCmd)) {
+            if (HandleCommandHeader(commands, size)) {
+                return commands + size;
+            }
 
+            ReturnWireCmd cmdId = *reinterpret_cast<const volatile ReturnWireCmd*>(commands + sizeof(CmdHeader));
             bool success = false;
             switch (cmdId) {
                 {% for command in cmd_records["return command"] %}
