@@ -138,6 +138,24 @@
       "parentUuid": "0dc424ed_1ea570db",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f29d1f96_f10617b2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T16:36:38Z",
+      "side": 1,
+      "message": "Ok, seems fine. And we\u0027ll look into making the validation tests use the wire to get more coverage",
+      "parentUuid": "cad8eee3_1a5a1248",
+      "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
