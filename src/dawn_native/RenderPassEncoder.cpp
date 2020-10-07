@@ -97,8 +97,8 @@ namespace dawn_native {
             // TODO(yunchao.he@intel.com): there are more restrictions for x, y, width and height in
             // Vulkan, and height can be a negative value in Vulkan 1.1. Revisit this part later
             // (say, for WebGPU v1).
-            if (width <= 0 || height <= 0) {
-                return DAWN_VALIDATION_ERROR("Width and height must be greater than 0.");
+            if (width < 0 || height < 0) {
+                return DAWN_VALIDATION_ERROR("Width and height must be non-negative.");
             }
 
             if (minDepth < 0 || minDepth > 1 || maxDepth < 0 || maxDepth > 1) {

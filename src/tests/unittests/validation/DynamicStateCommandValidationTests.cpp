@@ -63,7 +63,7 @@ TEST_F(SetViewportTest, ViewportParameterNaN) {
     }
 }
 
-// Test to check that an empty viewport is not allowed
+// Test to check that an empty viewport is allowed.
 TEST_F(SetViewportTest, EmptyViewport) {
     DummyRenderPass renderPass(device);
 
@@ -73,7 +73,7 @@ TEST_F(SetViewportTest, EmptyViewport) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.SetViewport(0.0, 0.0, 0.0, 1.0, 0.0, 1.0);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        encoder.Finish();
     }
 
     // Height of viewport is zero.
@@ -82,7 +82,7 @@ TEST_F(SetViewportTest, EmptyViewport) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.SetViewport(0.0, 0.0, 1.0, 0.0, 0.0, 1.0);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        encoder.Finish();
     }
 
     // Both width and height of viewport are zero.
@@ -91,7 +91,7 @@ TEST_F(SetViewportTest, EmptyViewport) {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.SetViewport(0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        encoder.Finish();
     }
 }
 
