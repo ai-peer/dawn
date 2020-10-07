@@ -185,6 +185,10 @@ namespace dawn_native { namespace metal {
                 mPCIInfo.deviceId = ids.deviceId;
             }
 
+            NSString* osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
+            // TODO add macos / ios etc.
+            mDriverDescription = "Builtin driver on " + std::string([osVersion UTF8String]);
+
 #if defined(DAWN_PLATFORM_IOS)
             mAdapterType = wgpu::AdapterType::IntegratedGPU;
 #elif defined(DAWN_PLATFORM_MACOS)
