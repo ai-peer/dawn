@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eadf42bf_2aff5e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T00:17:29Z",
+      "side": 1,
+      "message": "if the cache gets too big, could the embedder just decide to evict some stuff?\n(in that case, maybe it\u0027s valuable for the embedder to know what it\u0027s caching shader/pipeline)\n\nFor (2) is this because of Dawn\u0027s renaming of stuff - or the debug information that\u0027s different for each compile - or something else?",
+      "parentUuid": "fc5fbbdc_686e61cb",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de4679e_eedad106",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 6
@@ -154,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d133f48_3c31a3ff",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T00:17:29Z",
+      "side": 1,
+      "message": "(actually, forget about logical devices, it\u0027s probably orthogonal, and we don\u0027t need to consider it too much since it\u0027s some time in the future)\n\nWhat WILL happen sooner though is we\u0027re going to stop making a new dawn_native::Instance per-tab and rediscovering adapters on the system every time someone uses WebGPU.\n\nSo even with adding the device GUID to the key, the design still can\u0027t do per-origin cache isolation. The subSysId, deviceGuid, etc. are all the same no matter what origin you\u0027re using, no?\n\nIt seems like we either need to a way to pass some origin-identifier from Chrome into Dawn on device creation, or we need to have a way for Dawn to ask the embedder for an origin-identifier for the device ?",
+      "parentUuid": "3011c323_cc31bf7f",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "106fc357_17b1d6f8",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 6
@@ -183,6 +219,24 @@
       "side": 1,
       "message": "\u003e\u003e VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT\n\nWhy wouldn\u0027t you always want to create the pipeline but get notified if re-compile (vs two pipeline creations)? It\u0027s like asking for permission vs forgiveness, the latter is usually faster since the compilation is already underway.\n\n\u003e\u003e VK_EXT_pipeline_creation_cache_control\n\nAre you thinking we do an Dawn-side cache? I figured between Dawn\u0027s in-memory cache and the client\u0027s cache, it would only be useful for Dawn native (or testing w/o persistence API).",
       "parentUuid": "106fc357_17b1d6f8",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e103a22b_3ee6bf7f",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-07T00:17:29Z",
+      "side": 1,
+      "message": "in D3D12 we do\n\n(relatively cheap?)\nDAWN_TRY_ASSIGN(mPipelineState, device-\u003eGetPipelineCache()-\u003eloadComputePipeline(d3dDesc, psoKey))\n\nand if that is a cache miss,\n(relatively expensive?)\ndevice-\u003eGetD3D12Device()-\u003eCreateComputePipelineState(\n                                      \u0026d3dDesc, IID_PPV_ARGS(\u0026mPipelineState)),\n                                  \"ID3D12Device::CreateComputePipelineState\")\n\nso the thought was that if it\u0027s a cache hit, we could resolve the createReadyPipeline synchronously right away without going to ask a worker thread to do a compilation\n\nMaybe this Vulkan extension (kinda low adoption) would let us do something similar. I haven\u0027t read it in full, but I believe it tells you if Vulkan\u0027s builtin cache was a cache miss and it needs to go do a full pipeline compilation.",
+      "parentUuid": "9e2d33f9_459f95ef",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
