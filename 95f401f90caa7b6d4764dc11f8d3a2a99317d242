@@ -145,6 +145,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9305a22e_6d016722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "\u003e then we\u0027ll need to serialize the whole caching fingerprint \n\nThe pipeline cache already does that and it\u0027s not based on uint32_t. The key for PSO desc is based on uint32_t since D3D forbids collisions anyway. Note: same goes for all the other CachedObjects.",
+      "parentUuid": "4c227d4f_99335161",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "872d8fe1_6f7e0262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "Thanks, @CW! Left some comments/questions.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9098bc59_19cef5fe",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 6
@@ -196,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "737bdea2_8e16ee2b",
+        "filename": "src/dawn_native/PipelineCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "Couldn\u0027t the front-end control how backends store/flush the pipeline cache? Note: right now, it\u0027s done on Shutdown() for lack of a better heuristic.",
+      "parentUuid": "6dca10a0_5023466e",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "910887b4_e9bb780e",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 6
@@ -207,6 +260,24 @@
       "writtenOn": "2020-10-07T17:42:01Z",
       "side": 1,
       "message": "Uh, I\u0027m not sure I understand the isContentLess. What is the difference between true and false, given that here RenderPipeline can take both but it always content-less.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d94359_a8359296",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "\u003e but it always content-less.\n\nRenderPipeline needs a full hash of its contents to persist (IsContentLess\u003dfalse). If not, we can still avoid re-hashing child objects for the in-memory cache (IsContentLess\u003dtrue).",
+      "parentUuid": "910887b4_e9bb780e",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -285,6 +356,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4ce6b8_f1d2d369",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "I think this is related to the other comment on serializing the footprint with a new key type. Please see my other response and re-open if I misunderstood.",
+      "parentUuid": "042ba6bf_a4156b35",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8ce3956_dd39f3f2",
@@ -321,6 +410,30 @@
       "writtenOn": "2020-10-07T17:42:01Z",
       "side": 1,
       "message": "What does this mean? We\u0027ll need to be able to run on Windows 10 pre Anniversary Update forever.",
+      "range": {
+        "startLine": 118,
+        "startChar": 72,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad1556c_6d4a0668",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "The use of ID3D12PipelineLibrary does not guarantee support. This points out this is not optional and ALL versions of Windows/drivers will (eventually) support it in lieu of the using cached pipeline blobs.\n\nAlso, I really hope users don\u0027t stay on the Anniversary Update forever \u003d)",
+      "parentUuid": "fa2e2b2f_d18041ec",
       "range": {
         "startLine": 118,
         "startChar": 72,
@@ -416,6 +529,24 @@
       "side": 1,
       "message": "DawnPlatform will not know what origin it\u0027s on. The platform is a member of the dawn_native::Instance which will probably be a singleton in the GPU process. So inside Chrome\u0027s implementation of load/storeData, we don\u0027t know which origin it\u0027s coming from.\n\nWhat about we have a Dawn extension for DeviceIsolation that puts a key chained on the DeviceDescriptor, and we include it in this cache key?",
       "parentUuid": "8873155e_277586cd",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df2caa0_942aca48",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-07T20:01:55Z",
+      "side": 1,
+      "message": "Hmm. Where would the origin data come from in Chromium?",
+      "parentUuid": "ce410013_a82bf153",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
