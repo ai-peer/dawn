@@ -404,6 +404,47 @@ TEST_P(ViewportTest, DoNotTruncateWidthAndHeight2) {
     DoTest(info);
 }
 
+// Test that a draw with an empty viewport doesn't draw anything.
+TEST_P(ViewportTest, EmptyViewport) {
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+    pipelineDescriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA8Unorm;
+
+    pipelineDescriptor.vertexStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(#version 450
+            const vec2 pos[6] = vec2[6](vec2(-1.0f,  1.0f),
+                                        vec2(-1.0f, -1.0f),
+                                        vec2( 1.0f,  1.0f),
+                                        vec2( 1.0f,  1.0f),
+                                        vec2(-1.0f, -1.0f),
+                                        vec2( 1.0f, -1.0f));
+            void main() {
+                gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);
+            })");
+
+    pipelineDescriptor.cFragmentStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(#version 450
+            layout(location = 0) out vec4 fragColor;
+            void main() {
+               fragColor = vec4(1.0);
+            })");
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.SetViewport(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+    pass.Draw(6);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 0, 0);
+}
+
 DAWN_INSTANTIATE_TEST(ViewportTest,
                       D3D12Backend(),
                       MetalBackend(),
