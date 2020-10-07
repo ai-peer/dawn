@@ -24,7 +24,6 @@
 #include "dawn_native/ErrorScope.h"
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
-#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -142,6 +141,12 @@ namespace dawn_native {
     QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
     }
 
+    QueueBase::~QueueBase() {
+        // TODO: once we have multiqueue, device will need to ref all queues so they don't get
+        // destroyed before commands finish.
+        ASSERT(mTasksInFlight.Empty());
+    }
+
     // static
     QueueBase* QueueBase::MakeError(DeviceBase* device) {
         return new ErrorQueue(device);
@@ -168,6 +173,18 @@ namespace dawn_native {
         device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
             device->GetCurrentErrorScope());
+    }
+
+    void QueueBase::TrackTasksInFlight(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
+        mTasksInFlight.Enqueue(std::move(task), serial);
+        GetDevice()->AddFutureCallbackSerial(GetDevice()->GetPendingCommandSerial());
+    }
+
+    void QueueBase::TickTasksInFlight(ExecutionSerial finishedSerial) {
+        for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
+            task->Tick();
+        }
+        mTasksInFlight.ClearUpTo(finishedSerial);
     }
 
     Fence* QueueBase::CreateFence(const FenceDescriptor* descriptor) {
