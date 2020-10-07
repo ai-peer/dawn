@@ -67,6 +67,24 @@
       "message": "Is this new size check tested somewhere?\n\nI see that there\u0027s a test for size % 4 \u003d\u003d 0 at https://dawn-review.googlesource.com/c/dawn/+/29360/2/src/tests/unittests/validation/BufferValidationTests.cpp#194\n\nBut that test was presumably passing (failing validation) before this change. Do we need more coverage here?",
       "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239ce437_23cf4a18",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T13:57:28Z",
+      "side": 1,
+      "message": "Validation tests only cover dawn_native at the moment (though we should make it cover the wire as well at some point). The code will be tested by this CTS PR https://github.com/gpuweb/cts/pull/301/files. WDYT of testing dawn_wire in dawn_unittests in the future as the way to provide coverage local to Dawn.",
+      "parentUuid": "83b9e5ed_2ec8210a",
+      "revId": "966544b0d88e23a2b1d503238a898a91c3a656ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
