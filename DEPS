@@ -108,7 +108,7 @@ deps = {
 
   # Khronos Vulkan headers, validation layers and loader.
   'third_party/vulkan-headers': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@ced848d699b5673a7df900bcfe0b1a6ba9e989ce',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@94ff600cc8623a2fd270cc14b14def3fca12ffaf',
     'condition': 'dawn_standalone',
   },
   'third_party/vulkan-validation-layers': {
