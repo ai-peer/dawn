@@ -576,6 +576,24 @@
       "parentUuid": "fd500b8d_80886d9c",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d4cdc4_5136a3d4",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-07T17:45:52Z",
+      "side": 1,
+      "message": "Can\u0027t the embedder have a map from GPUDevice to whatever it needs to know?",
+      "parentUuid": "1288042c_68ddf689",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
