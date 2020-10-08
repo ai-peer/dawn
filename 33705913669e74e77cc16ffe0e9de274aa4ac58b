@@ -319,6 +319,24 @@
       "message": "mm.. this is an interesting case kainino@ not sure if this has been clarified or talked about in the spec. I didn\u0027t find anything on it.\n\nqueue.signal(fence, 2);\nconst p1 \u003d buffer.mapAsync();\nconst p2 \u003d fence.onCompletion(2);\n\nWhich promise resolves first?\n\nThe fence was signaled first before the buffer was mapped, but the fence callback was registered after the buffer callback.",
       "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb5f625c_ef9aa3c3",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "\u003e mm.. this is an interesting case kainino@ not sure if this has been clarified or talked about in the spec. I didn\u0027t find anything on it.\n\u003e \n\u003e queue.signal(fence, 2);\n\u003e const p1 \u003d buffer.mapAsync();\n\u003e const p2 \u003d fence.onCompletion(2);\n\u003e \n\u003e Which promise resolves first?\n\u003e \n\u003e The fence was signaled first before the buffer was mapped, but the fence callback was registered after the buffer callback.\n\nIt should be p2, then p1 because p2 resolves when the signal is passed (or immediately). This will work in dawn_wire because we ask for OnCompletion after every signal, so the client will receive the callbacks in order.",
+      "parentUuid": "dfff2a09_15609515",
+      "revId": "33705913669e74e77cc16ffe0e9de274aa4ac58b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

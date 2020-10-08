@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a0063a_2945ea47",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 0,
+      "message": "These two can be removed from the device completely if we inline the logic in BufferBase / FenceBase.\n\nOverall the goal of the cleanup I suggested in the previous patch was to avoid unnecessery indirection: previously MapRequestTracker and FenceSignalTracker contained useful state in their SerialQueue, but with this CL they lose all state, so the indirection isn\u0027t necessary anymore.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 0
+      },
+      "revId": "6b4a4a85dfd778964c48f5cec939b7da160a5db1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

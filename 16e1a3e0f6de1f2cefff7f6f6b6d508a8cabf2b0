@@ -1,0 +1,277 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b7c474_5011c8e2",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "This could be inlined inside Buffer given how little it does now.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3ffadf_4ae8ca55",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "nit: MapRequestTask, and move it to the anonymous namespace inside Buffer.cpp since it isn\u0027t used by anyone except BufferBase.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfc8d538_a9cb409c",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "nit: ~Request() override \u003d default to make sure the destructor is called correctly.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6075dd01_35234d25",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "This comment says what the code does, but not why it does it, can we have an explanation instead? Also is there a test that covers this logic?\n\nI thought we wanted to check if there was work enqueued already (like WriteBuffer) but the FutureCallback seems unrelated with it?\n\n[1]",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044fccf3_bc15917e",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "Same comments as in Buffer.h",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4531e00a_a21f1b0b",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "I don\u0027t know that this TODO is necessary when we have the ASSERT that will trigger if we do things wrong. What this TODO says is an implementation detail of some potential future feature, so it\u0027s not really a TODO.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c6e9c6b_1d73db3c",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be serial instead? Can we have better documentation for AddFutureCallbackSerial that explains how to use it?",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 83
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d6b5cf_cc16fff3",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "u-nit: put the definition of the destructor in Queue.cpp",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6896a14f_ac8773a9",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "nit: Tasks should be singular. But also this could just be \"TrackTask\".",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b09d41_c6170bb4",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "nit: Tick? It might do more things in the future.",
+      "range": {
+        "startLine": 51,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a54f1c_8d8db60d",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "I have a hard time making sure that these tests are providing enough coverage. Can we add tests  that surround the a mapAsync with fence signals? Also can we have a test that covers the condition at [1] specifically with an explanation of why it covers it?",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3920ccfb_b9671914",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "?",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04657624_ca180aa8",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "Or just utils::CreateBufferFromData(device, kUsage, {myData}); Or actually we don\u0027t need the data so we can just create the mMapReadbuffer in SetUp.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01bcc22_06dd68cd",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "It might be simpler to make a Mock map callback, and a mock fence signal callback, then use googlemock\u0027s InSequence concept to make sure they are called in a specific order. Then we can use WaitForAllOperations (a copy of it will need to be taken from https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/ValidationTest.cpp;l\u003d89;bpv\u003d0;bpt\u003d0)",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15f1d11_883e3b8b",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:57:31Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t needed this we are only testing the callback here.\n\nSame comments as for this test in other tests obviously.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
