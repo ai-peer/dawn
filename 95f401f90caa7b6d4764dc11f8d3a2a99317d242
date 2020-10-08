@@ -709,6 +709,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b00ccca_f169b34c",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T18:12:28Z",
+      "side": 1,
+      "message": "What if we introduced our own dawn pipeline cache header that contains the logical deviceId so the client can read it to isolate keys as it wishes?\n\nThis avoids passing some blob around and doesn\u0027t depend on Dawn to isolate keys on behalf of the client.",
+      "parentUuid": "9deb9db9_288ec67c",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
