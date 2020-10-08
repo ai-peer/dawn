@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58da641c_2eb91d0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-08T00:06:26Z",
+      "side": 1,
+      "message": "Rewrote this to chunk at the transport level. A little inefficient but Corentin and I discussed this is okay since we\u0027re going to special case writeBuffer and writeTexture in Chrome anyway.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539eff26_df130c78",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-08T00:06:26Z",
+      "side": 1,
+      "message": "note: didn\u0027t see a great way to dedup this code with the server because they\u0027re slightly different",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
