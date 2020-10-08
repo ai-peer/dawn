@@ -124,6 +124,7 @@
             "DeviceGetDefaultQueue",
             "DeviceInjectError",
             "DevicePushErrorScope",
+            "DeviceTick",
             "QueueCreateFence"
         ],
         "client_special_objects": [

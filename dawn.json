@@ -622,7 +622,8 @@
                 "name": "lose for testing"
             },
             {
-                "name": "tick"
+                "name": "tick",
+                "returns": "bool"
             },
             {
                 "name": "set uncaptured error callback",

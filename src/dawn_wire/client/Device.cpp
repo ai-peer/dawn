@@ -158,4 +158,8 @@ namespace dawn_wire { namespace client {
         return ToAPI(mDefaultQueue);
     }
 
+    bool Device::Tick() {
+        return true;
+    }
+
 }}  // namespace dawn_wire::client
