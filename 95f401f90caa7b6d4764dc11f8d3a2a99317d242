@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "218e0d31_0d930d79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T17:15:47Z",
+      "side": 1,
+      "message": "The pipeline cache does serialize the entire backing store upon storePipelineCache().\n\nD3D has a separate key to load/store PSOs based off of HashUtils. This is because the objects used to compute the PSO key are also based off of HashUtils and D3D enforces that a PSO lookup cannot use the wrong PSO desc or use the same key.\n\nIf the D3D pipeline cache can only use compatible PSOs then the key we must protect is the pipeline cache key. If we get PSO key collisions where D3D must error then I think it\u0027s better to strengthen the hash or use a better key that\u0027s compatible.",
+      "parentUuid": "ada370cc_01dd5048",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9098bc59_19cef5fe",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 6
@@ -279,6 +297,24 @@
       "side": 1,
       "message": "It could, but it doesn\u0027t now and we don\u0027t have a plan for it so this is just extra indirection. We can always extract a base class later if we feel that we need to for extra frontend control.",
       "parentUuid": "737bdea2_8e16ee2b",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c537a2_66d9dddf",
+        "filename": "src/dawn_native/PipelineCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T17:15:47Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "6e6ec0af_97ed95b2",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -524,6 +560,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11c91b51_f9436a7a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T17:15:47Z",
+      "side": 1,
+      "message": "If drivers don\u0027t update, one will need to consider employing the older cached blobs approach. This is not obvious to me (no \"tier\" option either) so it seems appropriate to comment. Happy to re-word, if needed.",
+      "parentUuid": "0b11371e_237885e6",
+      "range": {
+        "startLine": 118,
+        "startChar": 72,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91ebda88_ce8116e1",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
         "patchSetId": 6
@@ -660,6 +720,24 @@
       "writtenOn": "2020-10-07T17:42:01Z",
       "side": 1,
       "message": "This uses a single pipeline library for all the pipelines, is there any advantage to doing that, compared to doing one library per pipeline (or at least per combination of VS / FS / CS)? It would allow flushing at a smaller granularity.",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71cb7b6f_0d058eee",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T17:15:47Z",
+      "side": 1,
+      "message": "Not that I know of. @RC?",
+      "parentUuid": "02380cfe_63184e26",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
