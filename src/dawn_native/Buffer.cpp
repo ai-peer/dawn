@@ -19,8 +19,6 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
-#include "dawn_native/MapRequestTracker.h"
-#include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstdio>
@@ -80,6 +78,21 @@ namespace dawn_native {
         };
 
     }  // anonymous namespace
+
+    // MapRequestTracker
+
+    MapRequestTracker::MapRequestTracker(DeviceBase* device) : mDevice(device) {
+    }
+
+    void MapRequestTracker::Track(BufferBase* buffer, MapRequestID mapID) {
+        std::unique_ptr<Request> request = std::make_unique<Request>(buffer, mapID);
+        mDevice->GetDefaultQueue()->TrackTasksInFlight(std::move(request),
+                                                       mDevice->GetPendingCommandSerial());
+    }
+
+    void MapRequestTracker::Request::Finish() {
+        buffer->OnMapRequestCompleted(id);
+    }
 
     MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {

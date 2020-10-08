@@ -16,12 +16,31 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
-#include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <utility>
 
 namespace dawn_native {
+
+    // FenceSignalTracker
+    FenceSignalTracker::FenceSignalTracker(DeviceBase* device) : mDevice(device) {
+    }
+
+    void FenceSignalTracker::UpdateFenceOnComplete(Fence* fence, FenceAPISerial value) {
+        std::unique_ptr<FenceInFlight> fenceInFlight =
+            std::make_unique<FenceInFlight>(fence, value);
+        // If there is pending future callback work, we use the pending callback serial,
+        // without pending future callback work, we use the last submitted serial.
+        bool hasFutureCallbackWork =
+            mDevice->GetFutureCallbackSerial() >= mDevice->GetPendingCommandSerial();
+        ExecutionSerial serial = hasFutureCallbackWork ? mDevice->GetPendingCommandSerial()
+                                                       : mDevice->GetLastSubmittedCommandSerial();
+        mDevice->GetDefaultQueue()->TrackTasksInFlight(std::move(fenceInFlight), serial);
+    }
+
+    void FenceSignalTracker::FenceInFlight::Finish() {
+        fence->SetCompletedValue(value);
+    }
 
     MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
