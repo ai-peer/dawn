@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ffea23_a753dec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T07:07:03Z",
+      "side": 1,
+      "message": "dawn_native changes LGTM but can we have some simple validation tests in Dawn too?",
+      "revId": "cf11db324da12f51b25a4f8d55649538fb74cf98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
