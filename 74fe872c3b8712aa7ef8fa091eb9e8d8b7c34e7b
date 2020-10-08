@@ -16,6 +16,23 @@
       "message": "LGTM. Not exactly sure why these templates broke with the recent Serial and TypedInteger changes, but it seems minor. Blocks updating Dawn in Skia so we should land this and fixup later if necessary.",
       "revId": "74fe872c3b8712aa7ef8fa091eb9e8d8b7c34e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1044fd32_4e018e7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-08T21:48:44Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "74fe872c3b8712aa7ef8fa091eb9e8d8b7c34e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
