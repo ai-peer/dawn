@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1766387_fa99ace0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T07:03:50Z",
+      "side": 1,
+      "message": "LGTM, but how did the CQ breaking change get in in the first place?",
+      "revId": "6b4a4a85dfd778964c48f5cec939b7da160a5db1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
