@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ada370cc_01dd5048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:36:24Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem to serialize, but uses HashUtils instead to do a streaming hash.\n\n\u003e The key for PSO desc is based on uint32_t since D3D forbids collisions anyway.\n\nI\u0027m not sure I understood what you meant.",
+      "parentUuid": "9305a22e_6d016722",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9098bc59_19cef5fe",
         "filename": "src/dawn_native/CMakeLists.txt",
         "patchSetId": 6
@@ -249,6 +267,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e6ec0af_97ed95b2",
+        "filename": "src/dawn_native/PipelineCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:36:24Z",
+      "side": 1,
+      "message": "It could, but it doesn\u0027t now and we don\u0027t have a plan for it so this is just extra indirection. We can always extract a base class later if we feel that we need to for extra frontend control.",
+      "parentUuid": "737bdea2_8e16ee2b",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "910887b4_e9bb780e",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 6
@@ -278,6 +314,24 @@
       "side": 1,
       "message": "\u003e but it always content-less.\n\nRenderPipeline needs a full hash of its contents to persist (IsContentLess\u003dfalse). If not, we can still avoid re-hashing child objects for the in-memory cache (IsContentLess\u003dtrue).",
       "parentUuid": "910887b4_e9bb780e",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53d81a0_10cb1a52",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:36:24Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation, isContentLess is a bit misleading. Maybe hashSubobjectContent?\n\nMaybe it makes sense to structure a bit more how we fingerprint contentless objects. What about:\n\nclass Pipeline : ContentLessObject, ObjectBase {\n  // ContentLessObject implementation.\n  void Fingerprint(FingerprintRecorder* recorder) override {\n    recorder-\u003erecord(member1);\n    recorder-\u003erecord(member2);\n    recorder-\u003erecordSubObject(subobject); // Either does by pointer or by value.\n  }\n\nThen the recorder recording of sub objects can be different for the in-memory cache and the persistent cache.",
+      "parentUuid": "60d94359_a8359296",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -446,6 +500,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b11371e_237885e6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:36:24Z",
+      "side": 1,
+      "message": "Erhm, we can\u0027t really rely on driver updates either, and should make a best effort to run on old drivers too, so we can\u0027t rely on the feature being ubiquitous until many many years from now.",
+      "parentUuid": "2ad1556c_6d4a0668",
+      "range": {
+        "startLine": 118,
+        "startChar": 72,
+        "endLine": 119,
+        "endChar": 29
+      },
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91ebda88_ce8116e1",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
         "patchSetId": 6
@@ -547,6 +625,24 @@
       "side": 1,
       "message": "Hmm. Where would the origin data come from in Chromium?",
       "parentUuid": "ce410013_a82bf153",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9deb9db9_288ec67c",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T13:36:24Z",
+      "side": 1,
+      "message": "Which origin called GPU.requestAdapter in the renderer process. There is something in the WebGPUCommandDecoder\u0027s parent class to know the origin it\u0027s used with.",
+      "parentUuid": "9df2caa0_942aca48",
       "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
