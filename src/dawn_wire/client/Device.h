@@ -48,6 +48,8 @@ namespace dawn_wire { namespace client {
 
         WGPUQueue GetDefaultQueue();
 
+        bool Tick();
+
       private:
         struct ErrorScopeData {
             WGPUErrorCallback callback = nullptr;
