@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8570004d_1ae34107",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1b7c474_5011c8e2",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e3ffadf_4ae8ca55",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8faa0bd4_27bd6173",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e3ffadf_4ae8ca55",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfc8d538_a9cb409c",
@@ -48,6 +84,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "nit: ~Request() override \u003d default to make sure the destructor is called correctly.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe81651_c001cef3",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfc8d538_a9cb409c",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "337d0397_5066e202",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Sorry I fixed the comment.\n\nThe FenceValidationTests has tests that uses the logic not having pending callback work (they expect only queue signal and fence oncompletion work and so they do singular Flush/Tick calls which would not be enough if we used pending command serial, needs another Flush/Tick to complete). The QueueTimeline tests the logic of having pending callback work with map calls. But I can definitely add more tests to QueueTimeline like you suggest.\n \nI thought it was to check if we had callback work enqueued. Does this need to include other work as well? Is there a way to check if we have other work like WriteBuffer enqueued?",
+      "parentUuid": "6075dd01_35234d25",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "044fccf3_bc15917e",
         "filename": "src/dawn_native/Fence.h",
         "patchSetId": 4
@@ -82,6 +154,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "Same comments as in Buffer.h",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eebce1fe_4eb1d28c",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "044fccf3_bc15917e",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +189,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "I don\u0027t know that this TODO is necessary when we have the ASSERT that will trigger if we do things wrong. What this TODO says is an implementation detail of some potential future feature, so it\u0027s not really a TODO.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cccf5923_c78e9367",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "I see, so this should just be a normal comment then?",
+      "parentUuid": "4531e00a_a21f1b0b",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d756b480_4e1ce666",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c6e9c6b_1d73db3c",
+      "range": {
+        "startLine": 180,
+        "startChar": 45,
+        "endLine": 180,
+        "endChar": 83
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0d6b5cf_cc16fff3",
@@ -139,6 +271,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "u-nit: put the definition of the destructor in Queue.cpp",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96ba220_120cc97d",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0d6b5cf_cc16fff3",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +316,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a2cfbe_29346692",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6896a14f_ac8773a9",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46b09d41_c6170bb4",
@@ -179,6 +353,30 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "nit: Tick? It might do more things in the future.",
+      "range": {
+        "startLine": 51,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c19a9cb_ba8d5cd8",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b09d41_c6170bb4",
       "range": {
         "startLine": 51,
         "startChar": 13,
@@ -219,6 +417,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "?",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa5797d_830845d5",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3920ccfb_b9671914",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -270,6 +486,24 @@
       "writtenOn": "2020-10-08T13:57:31Z",
       "side": 1,
       "message": "nit: this isn\u0027t needed this we are only testing the callback here.\n\nSame comments as for this test in other tests obviously.",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793a934b_83935297",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-08T20:24:10Z",
+      "side": 1,
+      "message": "do we not want to make sure the read is actually done? could we run into problems with the callbacks firing correctly but the actual mapAsync calls not actually completed before the callback?",
+      "parentUuid": "e15f1d11_883e3b8b",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
