@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b079f4_3641dd41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Approach LGTM overall but I have several suggestions for sharing code between the server and the client, and removing code / indirection in super-hot code.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12e25c1_df97e7a9",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Maybe we could generate static asserts that the commands start with that header? Or use inheritance?",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539eff26_df130c78",
@@ -31,6 +65,143 @@
       "writtenOn": "2020-10-08T00:06:26Z",
       "side": 1,
       "message": "note: didn\u0027t see a great way to dedup this code with the server because they\u0027re slightly different",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9163d7_7242c1bd",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Slightly different how? Maybe we could start the command with the size instead of with the ID, so that both types of commands start with the same shared header (that contains only the size).\n\nThen maybe we could have a helper called \"WireEndPoint\" that shared the logic for both SerializeCommand, and the HandleChunkedCommand and TrimChunkedCommand below.\n\nThis function could maybe become:\n\n  // Does the chunk gathering and if the chunk isn\u0027t complete enough it sets size to 0.\n  // If the chunk is big enough for one command, then it sets size and commands to point\n  // at the start of it.\n  HandleChunkedCommand(\u0026commands, \u0026size);\n\n  GIANT SWITCH OMG\n\n  // Remove all the part of chunked commands that was consumed.\n  TrimChunkedComand(size);\n\nThis is to avoid introducing extra code in the switch that will run for every command.",
+      "parentUuid": "539eff26_df130c78",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfaa11b3_b6efc27c",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Oh wow I didn\u0027t realize we had a random Tick here. Is it required?",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c4535c_58df85f2",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "nit: update the CMakeLists.txt as well.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f98eb0c_aec1921b",
+        "filename": "src/dawn_wire/WireCommandSerializer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "[1] Maybe the responsibility of handling disconnect could be moved to the CommandSerializer implementer so that 1) it can fold both conditions, 2) there is no additional indirection to get to it.\n\nBasically the SerializeCommand function would say \"GetCmdSpace\" to the implementer, and if the implementer says no, then we see if it is disconnected and try chunking if it isn\u0027t.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30bc127_29a02000",
+        "filename": "src/dawn_wire/WireCommandSerializer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Maybe this could set mMaxCommandSize to 0 so the condition at [1] has less branches? This is ultra-hot code in the wire client.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea75efbf_c1d91eb6",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Maybe to try to optimize this hot code it could be (along with the change suggested at [1])\n\n            size_t requiredSize \u003d cmd.GetRequiredSize();\n            char* allocatedBuffer \u003d GetCmdSpace(requiredSize + extraSize);\n\n            if(DAWN_LIKELY(allocatedBuffer !\u003d nullptr)) {\n                cmd.Serialize(requiredSize, allocatedBuffer, *this);\n                return;\n            }\n\n            if (IsDisconnected()) return;\n\n            allocatedBuffer \u003d GetOwnedSpace();\n            if it fails then disconnect and return?\n            cmd.Serialize(requiredSize, allocatedBuffer, *this);",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "343a638e_e1cafaa9",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "That ExtraSerializeFn is really nice to control the lifetime. I think it needs to be \u0026\u0026 to be most efficient though (not 100% sure)",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b4365e_3a0a5b82",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T14:27:13Z",
+      "side": 1,
+      "message": "Same comments as for the client. Maybe it could be shared logic somehow?",
       "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
