@@ -781,6 +781,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "082168e4_1ab98428",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T21:40:36Z",
+      "side": 1,
+      "message": "Add the deviceUUID to DeviceDescriptor then in DAWN_PIPELINE_CACHE_HEADER, add two fields (total size and deviceUUID) and I think that\u0027s it. Updated the design doc w/ more detail.",
+      "parentUuid": "693cdaff_0028bdde",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
