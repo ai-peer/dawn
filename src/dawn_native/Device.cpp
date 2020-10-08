@@ -349,6 +349,14 @@ namespace dawn_native {
         mCompletedSerial = maxSerial;
     }
 
+    bool DeviceBase::IsDeviceIdle() {
+        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureCallbackSerial);
+        if (mCompletedSerial == maxSerial) {
+            return true;
+        }
+        return false;
+    }
+
     ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
         return mLastSubmittedSerial + ExecutionSerial(1);
     }
@@ -728,9 +736,10 @@ namespace dawn_native {
 
     // Other Device API methods
 
-    void DeviceBase::Tick() {
+    // Returns true if future ticking is needed.
+    bool DeviceBase::Tick() {
         if (ConsumedError(ValidateIsAlive())) {
-            return;
+            return false;
         }
         // to avoid overly ticking, we only want to tick when:
         // 1. the last submitted serial has moved beyond the completed serial
@@ -739,7 +748,7 @@ namespace dawn_native {
             CheckPassedSerials();
 
             if (ConsumedError(TickImpl())) {
-                return;
+                return false;
             }
 
             // There is no GPU work in flight, we need to move the serials forward so that
@@ -758,6 +767,12 @@ namespace dawn_native {
             mFenceSignalTracker->Tick(mCompletedSerial);
             mMapRequestTracker->Tick(mCompletedSerial);
         }
+
+        if (!IsDeviceIdle()) {
+            return true;
+        }
+
+        return false;
     }
 
     void DeviceBase::Reference() {
