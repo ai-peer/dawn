@@ -19,6 +19,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Queue.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -42,6 +43,16 @@ namespace dawn_native {
             Mapped,
             MappedAtCreation,
             Destroyed,
+        };
+
+        class MapRequestTracker {
+          public:
+            MapRequestTracker(DeviceBase* device);
+
+            void Track(BufferBase* buffer, MapRequestID mapID);
+
+          private:
+            DeviceBase* mDevice;
         };
 
       public:
@@ -118,6 +129,8 @@ namespace dawn_native {
         wgpu::MapMode mMapMode = wgpu::MapMode::None;
         size_t mMapOffset = 0;
         size_t mMapSize = 0;
+
+        std::unique_ptr<MapRequestTracker> mMapRequestTracker = nullptr;
     };
 
 }  // namespace dawn_native

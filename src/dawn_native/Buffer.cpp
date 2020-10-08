@@ -19,8 +19,6 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
-#include "dawn_native/MapRequestTracker.h"
-#include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstdio>
@@ -30,6 +28,19 @@
 namespace dawn_native {
 
     namespace {
+        struct MapRequestTask : QueueBase::TaskInFlight {
+            MapRequestTask(Ref<BufferBase> buffer, MapRequestID id)
+                : buffer(std::move(buffer)), id(id) {
+            }
+            void Finish() override {
+                buffer->OnMapRequestCompleted(id);
+            }
+            ~MapRequestTask() override = default;
+
+          private:
+            Ref<BufferBase> buffer;
+            MapRequestID id;
+        };
 
         class ErrorBuffer final : public BufferBase {
           public:
@@ -122,6 +133,7 @@ namespace dawn_native {
         if (mUsage & wgpu::BufferUsage::Storage) {
             mUsage |= kReadOnlyStorageBuffer;
         }
+        mMapRequestTracker = std::make_unique<MapRequestTracker>(device);
     }
 
     BufferBase::BufferBase(DeviceBase* device,
@@ -133,6 +145,7 @@ namespace dawn_native {
             mMapOffset = 0;
             mMapSize = mSize;
         }
+        mMapRequestTracker = std::make_unique<MapRequestTracker>(device);
     }
 
     BufferBase::~BufferBase() {
@@ -140,6 +153,15 @@ namespace dawn_native {
             ASSERT(!IsError());
             CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         }
+    }
+
+    BufferBase::MapRequestTracker::MapRequestTracker(DeviceBase* device) : mDevice(device) {
+    }
+
+    void BufferBase::MapRequestTracker::Track(BufferBase* buffer, MapRequestID mapID) {
+        std::unique_ptr<MapRequestTask> request = std::make_unique<MapRequestTask>(buffer, mapID);
+        mDevice->GetDefaultQueue()->TrackTask(std::move(request),
+                                              mDevice->GetPendingCommandSerial());
     }
 
     // static
@@ -262,8 +284,7 @@ namespace dawn_native {
             return;
         }
 
-        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
-        tracker->Track(this, mLastMapID);
+        mMapRequestTracker->Track(this, mLastMapID);
     }
 
     void* BufferBase::GetMappedRange(size_t offset, size_t size) {

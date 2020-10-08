@@ -16,12 +16,25 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
-#include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <utility>
 
 namespace dawn_native {
+
+    struct FenceInFlight : QueueBase::TaskInFlight {
+        FenceInFlight(Ref<Fence> fence, FenceAPISerial value)
+            : fence(std::move(fence)), value(value) {
+        }
+        void Finish() override {
+            fence->SetCompletedValue(value);
+        }
+        ~FenceInFlight() override = default;
+
+      private:
+        Ref<Fence> fence;
+        FenceAPISerial value;
+    };
 
     MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
@@ -38,9 +51,11 @@ namespace dawn_native {
           mSignalValue(descriptor->initialValue),
           mCompletedValue(descriptor->initialValue),
           mQueue(queue) {
+        mFenceSignalTracker = std::make_unique<FenceSignalTracker>(queue->GetDevice());
     }
 
     Fence::Fence(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
+        mFenceSignalTracker = std::make_unique<FenceSignalTracker>(device);
     }
 
     Fence::~Fence() {
@@ -49,6 +64,24 @@ namespace dawn_native {
             request.completionCallback(WGPUFenceCompletionStatus_Unknown, request.userdata);
         }
         mRequests.Clear();
+    }
+
+    Fence::FenceSignalTracker::FenceSignalTracker(DeviceBase* device) : mDevice(device) {
+    }
+
+    void Fence::FenceSignalTracker::UpdateFenceOnComplete(Fence* fence, FenceAPISerial value) {
+        std::unique_ptr<FenceInFlight> fenceInFlight =
+            std::make_unique<FenceInFlight>(fence, value);
+        // If there is pending future callback work, we use the pending callback serial so that
+        // we wait for the next serial to be completed before we update the fence completed
+        // value. Without pending future callback work, we can use the last submitted serial
+        // because we only have a single queue, we can update the fence
+        // completed value once the last submitted serial has passed
+        bool hasFutureCallbackWork =
+            mDevice->GetFutureCallbackSerial() >= mDevice->GetPendingCommandSerial();
+        ExecutionSerial serial = hasFutureCallbackWork ? mDevice->GetPendingCommandSerial()
+                                                       : mDevice->GetLastSubmittedCommandSerial();
+        mDevice->GetDefaultQueue()->TrackTask(std::move(fenceInFlight), serial);
     }
 
     // static

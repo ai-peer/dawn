@@ -20,6 +20,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Queue.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -30,6 +31,16 @@ namespace dawn_native {
     MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor);
 
     class Fence final : public ObjectBase {
+        class FenceSignalTracker {
+          public:
+            FenceSignalTracker(DeviceBase* device);
+
+            void UpdateFenceOnComplete(Fence* fence, FenceAPISerial value);
+
+          private:
+            DeviceBase* mDevice;
+        };
+
       public:
         Fence(QueueBase* queue, const FenceDescriptor* descriptor);
 
@@ -44,7 +55,7 @@ namespace dawn_native {
 
       protected:
         friend class QueueBase;
-        friend class FenceSignalTracker;
+        friend struct FenceInFlight;
         void SetSignaledValue(FenceAPISerial signalValue);
         void SetCompletedValue(FenceAPISerial completedValue);
 
@@ -64,6 +75,7 @@ namespace dawn_native {
         FenceAPISerial mCompletedValue;
         Ref<QueueBase> mQueue;
         SerialMap<FenceAPISerial, OnCompletionData> mRequests;
+        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker = nullptr;
     };
 
 }  // namespace dawn_native
