@@ -34,6 +34,24 @@
       "parentUuid": "b1766387_fa99ace0",
       "revId": "6b4a4a85dfd778964c48f5cec939b7da160a5db1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d03bc1_9a21d8a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-08T18:26:44Z",
+      "side": 1,
+      "message": "I needed a combined Dawn+Tint roll in Chromium in order for the dawn-rel bots to pass (because they use Chromium DEPS). But I forgot the end2end tests only run on dawn-rel.",
+      "parentUuid": "2aa916f3_71d25bb4",
+      "revId": "6b4a4a85dfd778964c48f5cec939b7da160a5db1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
