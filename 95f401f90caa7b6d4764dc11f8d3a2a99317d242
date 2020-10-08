@@ -763,6 +763,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "693cdaff_0028bdde",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-08T19:38:06Z",
+      "side": 1,
+      "message": "passing something on device creation chained on the device descriptor makes sense. What\u0027s the proposed interface?",
+      "parentUuid": "7fabb1be_717bc9e7",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
