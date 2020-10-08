@@ -727,6 +727,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05c67f25_c7ede7a7",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-08T18:18:25Z",
+      "side": 1,
+      "message": "Sorry, I\u0027m not exactly following. Could you clarify?",
+      "parentUuid": "8b00ccca_f169b34c",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
