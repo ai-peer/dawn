@@ -215,6 +215,8 @@ namespace dawn_native {
 
         memcpy(uploadHandle.mappedBuffer, data, size);
 
+        device->AddFutureSerial(device->GetPendingCommandSerial());
+
         return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
                                                buffer, bufferOffset, size);
     }
@@ -277,8 +279,12 @@ namespace dawn_native {
         textureCopy.origin = destination.origin;
         textureCopy.aspect = ConvertAspect(destination.texture->GetFormat(), destination.aspect);
 
-        return GetDevice()->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
-                                                     &textureCopy, writeSizePixel);
+        DeviceBase* device = GetDevice();
+
+        device->AddFutureSerial(device->GetPendingCommandSerial());
+
+        return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
+                                                &textureCopy, writeSizePixel);
     }
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
                                          CommandBufferBase* const* commands) const {

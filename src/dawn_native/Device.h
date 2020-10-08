@@ -90,7 +90,7 @@ namespace dawn_native {
 
         ExecutionSerial GetCompletedCommandSerial() const;
         ExecutionSerial GetLastSubmittedCommandSerial() const;
-        ExecutionSerial GetFutureCallbackSerial() const;
+        ExecutionSerial GetFutureSerial() const;
         ExecutionSerial GetPendingCommandSerial() const;
         virtual MaybeError TickImpl() = 0;
 
@@ -165,7 +165,7 @@ namespace dawn_native {
         QueueBase* GetDefaultQueue();
 
         void InjectError(wgpu::ErrorType type, const char* message);
-        void Tick();
+        bool Tick();
 
         void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
@@ -225,7 +225,7 @@ namespace dawn_native {
         size_t GetDeprecationWarningCountForTesting();
         void EmitDeprecationWarning(const char* warning);
         void LoseForTesting();
-        void AddFutureCallbackSerial(ExecutionSerial serial);
+        void AddFutureSerial(ExecutionSerial serial);
 
         virtual uint32_t GetOptimalBytesPerRowAlignment() const = 0;
         virtual uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const = 0;
@@ -317,17 +317,19 @@ namespace dawn_native {
         // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
         // make all commands look completed.
         void AssumeCommandsComplete();
+        bool IsDeviceIdle();
+
         // mCompletedSerial tracks the last completed command serial that the fence has returned.
         // mLastSubmittedSerial tracks the last submitted command serial.
         // During device removal, the serials could be artificially incremented
         // to make it appear as if commands have been compeleted. They can also be artificially
         // incremented when no work is being done in the GPU so CPU operations don't have to wait on
         // stale serials.
-        // mFutureCallbackSerial tracks the largest serial we need to tick to for the callbacks to
-        // fire
+        // mFutureSerial tracks the largest serial we need to tick to for asynchronous commands or
+        // callbacks to fire
         ExecutionSerial mCompletedSerial = ExecutionSerial(0);
         ExecutionSerial mLastSubmittedSerial = ExecutionSerial(0);
-        ExecutionSerial mFutureCallbackSerial = ExecutionSerial(0);
+        ExecutionSerial mFutureSerial = ExecutionSerial(0);
 
         // ShutDownImpl is used to clean up and release resources used by device, does not wait for
         // GPU or check errors.
