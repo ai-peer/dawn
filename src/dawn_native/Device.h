@@ -165,7 +165,7 @@ namespace dawn_native {
         QueueBase* GetDefaultQueue();
 
         void InjectError(wgpu::ErrorType type, const char* message);
-        void Tick();
+        bool Tick();
 
         void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
@@ -317,6 +317,8 @@ namespace dawn_native {
         // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
         // make all commands look completed.
         void AssumeCommandsComplete();
+        bool CommandsAssumedComplete();
+
         // mCompletedSerial tracks the last completed command serial that the fence has returned.
         // mLastSubmittedSerial tracks the last submitted command serial.
         // During device removal, the serials could be artificially incremented
