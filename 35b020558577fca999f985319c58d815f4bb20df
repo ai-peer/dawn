@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28494770_5b97960d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T17:10:45Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "35b020558577fca999f985319c58d815f4bb20df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5181a9_94bd1486",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-08T17:10:45Z",
+      "side": 1,
+      "message": "Assume there are suppressions here until we know if inverted depth is supposed to be supported.",
+      "revId": "35b020558577fca999f985319c58d815f4bb20df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
