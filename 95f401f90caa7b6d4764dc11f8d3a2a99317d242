@@ -745,6 +745,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fabb1be_717bc9e7",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-08T19:17:07Z",
+      "side": 1,
+      "message": "Just pass the key as a UID, Dawn doesn\u0027t need to hash it.\n\nLong answer, client generates a logical device UID which could be based on origin data or not. The logical device UID is specified on device creation and returned in the payload header by Dawn. If the client generated the UID based on origin data, the GUID simply acts as the key in its cache. Otherwise, map the UID to origin data.",
+      "parentUuid": "05c67f25_c7ede7a7",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
