@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91dcaa3b_47380f6f",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-08T18:25:17Z",
+      "side": 1,
+      "message": "yea I actually did end up making some common code for this but evidently completely forgot to upload it. I\u0027ll do so in the next iteration. Code-wise it\u0027s fairly similar but factored a bit. That said, most of this code here is not happening per-command before the giant switch ? It\u0027s just the header size check (and inserting into the vector is moved out-of-line)",
+      "parentUuid": "dc9163d7_7242c1bd",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfaa11b3_b6efc27c",
         "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
         "patchSetId": 5
