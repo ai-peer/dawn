@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3fbf032_bd3d8800",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-08T21:35:24Z",
+      "side": 1,
+      "message": "PTAL. I\u0027m not sure if this is the correct fix, but it does seem to make MSVC happy.",
+      "revId": "aa38bcdc5dc08a800d3c4ad503735eb01581df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
