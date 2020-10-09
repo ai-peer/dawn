@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77893387_94fb1efd",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:18:11Z",
+      "side": 1,
+      "message": "[2]",
+      "parentUuid": "5ab02c7e_ec9bad42",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "374a629e_c625fc88",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "The issue is if we only call WriteTimestamp on a command encoder, it will crash on Metal (now I find it\u0027s only reproduced on AMD GPU). But if we add copy command such as CopyBufferToBuffer before WriteTimestamp, it will work, the WriteTimestamp before CopyBufferToBuffer cannot write value, but it does not crash. \n\nCase 1:\nencoder \u003d device.CreateCommandEncoder();\nencoder.WriteTimestamp(querySet, 0);  // will crash.\n\nCase 2:\nencoder \u003d device.CreateCommandEncoder();\nencoder.WriteTimestamp(querySet, 0);  // The result is 0.\nencoder.CopyBufferToBuffer(source, 0, destination, 0, 16);\nencoder.WriteTimestamp(querySet, 1);  // The result is a correct timestamp.\n\nCase 3:\nencoder \u003d device.CreateCommandEncoder();\nencoder.CopyBufferToBuffer(source, 0, destination, 0, 16);\nencoder.WriteTimestamp(querySet, 0);  // The result is a correct timestamp.\nencoder.WriteTimestamp(querySet, 1);  // The result is a correct timestamp.\n\nI will update the issue with more details and only skip it on AMD.",
       "parentUuid": "374a629e_c625fc88",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52afe557_28b21d66",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:18:11Z",
+      "side": 1,
+      "message": "Sounds good thanks a lot for the explanation, and let\u0027s make sure we record it somewhere for when we need to workaround / fix it. Can you also revert the changes at [2] and do the same skip?",
+      "parentUuid": "bcc474ef_13981b58",
       "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
