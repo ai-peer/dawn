@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "759a4d9a_49312bc0",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "LGTM overall",
       "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7335a0cb_c3a63fde",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
@@ -31,10 +32,28 @@
       "side": 1,
       "message": "Why was the change to use render passes needed? Can we minimize test changes and instead have two additional tests that use timestamp queries in compute and render passes?",
       "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ab02c7e_ec9bad42",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-09T07:35:16Z",
+      "side": 1,
+      "message": "This changes is to avoid hitting the issue at [1].  The tests check the buffer lazy initialization using in ResolveQuerySet method, not related to compute pass or render passes, so I think we don\u0027t need to test it again on them.",
+      "parentUuid": "7335a0cb_c3a63fde",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "374a629e_c625fc88",
         "filename": "src/tests/end2end/QueryTests.cpp",
@@ -48,8 +67,42 @@
       "side": 1,
       "message": "Can you describe the issue a bit more, can we have a workaround?",
       "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc474ef_13981b58",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-09T07:35:16Z",
+      "side": 1,
+      "message": "The issue is if we only call WriteTimestamp on a command encoder, it will crash on Metal (now I find it\u0027s only reproduced on AMD GPU). But if we add copy command such as CopyBufferToBuffer before WriteTimestamp, it will work, the WriteTimestamp before CopyBufferToBuffer cannot write value, but it does not crash. \n\nCase 1:\nencoder \u003d device.CreateCommandEncoder();\nencoder.WriteTimestamp(querySet, 0);  // will crash.\n\nCase 2:\nencoder \u003d device.CreateCommandEncoder();\nencoder.WriteTimestamp(querySet, 0);  // The result is 0.\nencoder.CopyBufferToBuffer(source, 0, destination, 0, 16);\nencoder.WriteTimestamp(querySet, 1);  // The result is a correct timestamp.\n\nCase 3:\nencoder \u003d device.CreateCommandEncoder();\nencoder.CopyBufferToBuffer(source, 0, destination, 0, 16);\nencoder.WriteTimestamp(querySet, 0);  // The result is a correct timestamp.\nencoder.WriteTimestamp(querySet, 1);  // The result is a correct timestamp.\n\nI will update the issue with more details and only skip it on AMD.",
+      "parentUuid": "374a629e_c625fc88",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a7026f_5cda7ea4",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-09T07:35:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
