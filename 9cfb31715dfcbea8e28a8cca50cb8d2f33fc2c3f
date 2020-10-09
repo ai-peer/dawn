@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5cb1cb_01f0d86a",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b12e25c1_df97e7a9",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539eff26_df130c78",
@@ -105,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ef2b1b_bf34e057",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91dcaa3b_47380f6f",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfaa11b3_b6efc27c",
@@ -122,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f921a1_6299a119",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "Tests don\u0027t pass without it so :-/. It\u0027s there otherwise Dawn doesn\u0027t make progress on callbacks when we Flush. The client could call tick - need to update tests though. Keeping this here since it\u0027s already like that.",
+      "parentUuid": "cfaa11b3_b6efc27c",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c4535c_58df85f2",
@@ -135,6 +189,24 @@
       "writtenOn": "2020-10-08T14:27:13Z",
       "side": 1,
       "message": "nit: update the CMakeLists.txt as well.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d21ee4c_0509b8d7",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c4535c_58df85f2",
       "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -158,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e354fab6_7ea046a4",
+        "filename": "src/dawn_wire/WireCommandSerializer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "yea so before, we swapped out the serializer and went on writing into dummy space. But now it\u0027s a bit easier to noop and do nothing if GetCmdSpace returns null. I updated the code to do that.\n\nKeeping some of the Disconnect stuff in b.c. will need to update Chrome to make the serializer return null if it\u0027s disconnected. We might still need a disconnect on the WireClient so we can fire device lost (or we fire it a different way)",
+      "parentUuid": "6f98eb0c_aec1921b",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b30bc127_29a02000",
         "filename": "src/dawn_wire/WireCommandSerializer.cpp",
         "patchSetId": 5
@@ -169,6 +259,24 @@
       "writtenOn": "2020-10-08T14:27:13Z",
       "side": 1,
       "message": "Maybe this could set mMaxCommandSize to 0 so the condition at [1] has less branches? This is ultra-hot code in the wire client.",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6161f216_14377e4f",
+        "filename": "src/dawn_wire/WireCommandSerializer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "Got rid of disconnect.",
+      "parentUuid": "b30bc127_29a02000",
       "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -192,6 +300,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eba251e2_2e55e647",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "the DAWN_LIKELY didn\u0027t seem to matter much. If anything it made the code have extra weird jumps. As it is now, we have the two cmp/jmp and then jmp to the cmd.Serialize",
+      "parentUuid": "ea75efbf_c1d91eb6",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "343a638e_e1cafaa9",
         "filename": "src/dawn_wire/client/Client.h",
         "patchSetId": 5
@@ -203,6 +329,24 @@
       "writtenOn": "2020-10-08T14:27:13Z",
       "side": 1,
       "message": "That ExtraSerializeFn is really nice to control the lifetime. I think it needs to be \u0026\u0026 to be most efficient though (not 100% sure)",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2985164b_41e49341",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "I think you\u0027re right.",
+      "parentUuid": "343a638e_e1cafaa9",
       "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -220,6 +364,24 @@
       "writtenOn": "2020-10-08T14:27:13Z",
       "side": 1,
       "message": "Same comments as for the client. Maybe it could be shared logic somehow?",
+      "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "053ea6eb_a3ceec1c",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T01:45:04Z",
+      "side": 1,
+      "message": "So I made it shared.. but it required some more lambdas and templates.. Since the client serialization uses the objectIdProvider, and the server doesn\u0027t. I disassembled the libdawn_wire though and it looks like what we want.\n\n   __ZN9dawn_wire6client34ClientRenderPassEncoderDrawIndexedEP25WGPURenderPassEncoderImpljjjij:\n\ncallq to..  __ZN9dawn_wire24ChunkedCommandSerializer20SerializeCommandImplINS_24RenderPassEncoderDrawCmdEZNS0_16SerializeCommandIS2_ZNS0_16SerializeCommandIS2_EEvRKT_RKNS_16ObjectIdProviderEEUlPcE_EEvS7_SA_mOT0_EUlRKS2_mSB_E_SC_EEvS7_SE_mOT1_\n\njmp to..\n__ZNK9dawn_wire24RenderPassEncoderDrawCmd9SerializeEmPcRKNS_16ObjectIdProvider\n\n\nOne day we can probably get rid of the intermediate call if it helps perf a lot.",
+      "parentUuid": "77b4365e_3a0a5b82",
       "revId": "9cfb31715dfcbea8e28a8cca50cb8d2f33fc2c3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
