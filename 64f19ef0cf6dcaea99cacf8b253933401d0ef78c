@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b56d845_6f889795",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:42:59Z",
+      "side": 1,
+      "message": "Yes, actually it was \"render target box\" in the SetScissorRect CL and Austin suggested using plural. The idea is that it needs to be contained in all the attachments (even if they all need to have the same size so singular could have maybe worked too)",
+      "parentUuid": "68317e61_3b2041af",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2392026_8fde625e",
@@ -65,6 +83,41 @@
       "writtenOn": "2020-10-09T14:37:55Z",
       "side": 1,
       "message": "uNit: Is there (or should there be) a test which exercises that depth is unaffected when the viewport is not enabled? It might be a sanity check against the test values being cherry-picked.",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ec68de_4208a866",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:42:59Z",
+      "side": 1,
+      "message": "Viewport is always enabled, however there is a test for what happens when you don\u0027t set it (to know what the default is) at [1]",
+      "parentUuid": "a2392026_8fde625e",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b914af7_191d827b",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:42:59Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
