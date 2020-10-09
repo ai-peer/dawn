@@ -239,6 +239,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3aaf33c_927d4da1",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T19:06:08Z",
+      "side": 1,
+      "message": "Although it\u0027s probably less branching to ask the wire client to swap out the mSerializer pointer with an implementation that always returns nullptr.",
+      "parentUuid": "dc64f0f2_4d3094a9",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3515f2e0_03cebd2f",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 6
