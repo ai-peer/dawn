@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f16185_2a070cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T17:50:01Z",
+      "side": 1,
+      "message": "LGTM too, though sounds like we need to disallow the inverted viewport?",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68317e61_3b2041af",
