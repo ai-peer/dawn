@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11f0933_ff95c236",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8858682_b609ff79",
+      "range": {
+        "startLine": 135,
+        "startChar": 63,
+        "endLine": 135,
+        "endChar": 81
+      },
+      "revId": "322d514d29e333348cc7b422e61dbacb2b5e64ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60e3af51_b7771202",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-10-08T18:07:46Z",
       "side": 1,
       "message": "nit: this has tests for both larger-than and contained-inside. Could split the tests or change the naming.",
+      "range": {
+        "startLine": 179,
+        "startChar": 32,
+        "endLine": 180,
+        "endChar": 52
+      },
+      "revId": "322d514d29e333348cc7b422e61dbacb2b5e64ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413c7186_6c5ca4a8",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60e3af51_b7771202",
       "range": {
         "startLine": 179,
         "startChar": 32,
