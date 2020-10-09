@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaba6b3a_72b702f5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "What I meant is that the MapRequestTracker does nothing and is just extra indirection that make the code more complicated than it is needed. Can you remove the class completely and move the two lines of code that are inside this function and put them at [1] please?\n\nSimilar thing for FenceSignalTracker.",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04754df4_209ca4a5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a14579_a62bb154",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "nit: unused include (at least not in this header)",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20be287_8e8bc03f",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "[2] Thanks for the comment, it helps a lot understand the thought process and figure out what\u0027s happening.\n\nI don\u0027t think this is correct: what we\u0027re trying to do is make sure all previous work on the queue completed, for example a WriteBuffer call. FutureCallbackSerial isn\u0027t telling us if there is pending work on the queue, but instead tells us the largest serial that has a callback waiting for it. It\u0027s two different things.\n\nFor simplicity I think we should just use GetPendingCommandSerial() and add a TODO to use GetLastSubmittedCommandSerial in the future for performance (it isn\u0027t a correctness issue).",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ce80c7_35531291",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1193b9d7_37b4fa60",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t needed?",
+      "revId": "1947b82410974116d7c8245fd9aedfefa9075971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

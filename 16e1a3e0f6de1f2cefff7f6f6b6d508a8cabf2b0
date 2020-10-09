@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76b7f5a6_49bd5a13",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "The FenceValidationTests should be updated, because needing a single Tick() is an implementation detail. They can use WaitForAllOperations instead: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/ValidationTest.h;l\u003d56\n\nThere isn\u0027t a way at the moment to know that we have other work enqueued, in the comment [2] I suggested leaving it for later.",
+      "parentUuid": "337d0397_5066e202",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "044fccf3_bc15917e",
         "filename": "src/dawn_native/Fence.h",
         "patchSetId": 4
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "I see, so this should just be a normal comment then?",
       "parentUuid": "4531e00a_a21f1b0b",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f170cb2_fb687181",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "Just remove it because today it is more confusing when reading the code.",
+      "parentUuid": "cccf5923_c78e9367",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -504,6 +540,24 @@
       "side": 1,
       "message": "do we not want to make sure the read is actually done? could we run into problems with the callbacks firing correctly but the actual mapAsync calls not actually completed before the callback?",
       "parentUuid": "e15f1d11_883e3b8b",
+      "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24126882_e4c8871e",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T13:25:13Z",
+      "side": 1,
+      "message": "Mmmh it would require a lot more complicated tests than this that almost get into the MemorySynchronization tests that Yunchao\u0027s doing. We definitely don\u0027t need to test it here.",
+      "parentUuid": "793a934b_83935297",
       "revId": "16e1a3e0f6de1f2cefff7f6f6b6d508a8cabf2b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
