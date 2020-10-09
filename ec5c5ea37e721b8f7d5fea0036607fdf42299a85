@@ -1,0 +1,220 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb5d674_be09cd71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "LGTM, I guess we can micro-optimize more when we have a benchmark that shows the code here is a bottleneck.",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a73c7b_06655ad5",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: this was a bit hard to understand, maybe something like:\n\n  // Start by chunked command handling, if it is done, then it means the whole buffer\n  // was consumed by it, so we return a pointer to the end of the commands.\n  if (HandleChunkedCommands(commands, size)) { return commands + size; }\n\nditto for the client.",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09461222_0c9dfe0e",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: better explain that we append only the part that is needed to finish the currently chunked command and split the HandleCommandsImpl call in two. (and that we do it so we can just clear mChunkedCommandData in between the two)",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2edc6581_363d57eb",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: I think that HandleCommands returns nullptr on error.",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b84ebc_18e903a9",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: else return? otherwise we are going to go in HandleCommandsImpl with size\u003d0, which is fine but weird.",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44769c16_769c5d03",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: initialSize",
+      "range": {
+        "startLine": 53,
+        "startChar": 36,
+        "endLine": 53,
+        "endChar": 47
+      },
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f32b130_6e8237b0",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "commandSize cannot be trusted, so instead we could do if (uint64_t(size) \u003c commandSize) and move the assert in the branch?",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96344ea_76c92853",
+        "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "Oh, that\u0027s unfortunate that we have to duplicate because of the objectIdProvider, but I don\u0027t see a way around it.",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156e552e_6f5145a5",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: // ChunkedCommandHandler",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fc9abc_75b991ef",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "The notion of being disconnected is probably similar between the client and the server, and could maybe be put in the ChunkedCommandHandler (basically when disconnected serializing commands becomes a noop). I\u0027m still slightly worried about all the branches on the super hot code, so maybe doing that will allow merging some common branches together?\n\nOr adding a TODO to do it later is fine too ^^",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3515f2e0_03cebd2f",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: // ChunkedCommandHandler implementation,",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe40a6d_d8f29dd8",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T09:42:40Z",
+      "side": 1,
+      "message": "nit: forward declarations aren\u0027t needed anymore I think.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 0
+      },
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
