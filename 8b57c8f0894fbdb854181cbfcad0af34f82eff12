@@ -67,6 +67,41 @@
       "message": "Nit: might read clearer as \"x + width \u003e mRenderTargetWidth || y + height \u003e mRenderTargetHeight\".",
       "revId": "8b57c8f0894fbdb854181cbfcad0af34f82eff12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b831536_ff43fc77",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:44:12Z",
+      "side": 1,
+      "message": "This is intentional to avoid overflows. Writing it the more readable way would make [1] fail.",
+      "parentUuid": "3815154f_e41cc84f",
+      "revId": "8b57c8f0894fbdb854181cbfcad0af34f82eff12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557a2447_01efaf4a",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:44:12Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8b57c8f0894fbdb854181cbfcad0af34f82eff12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
