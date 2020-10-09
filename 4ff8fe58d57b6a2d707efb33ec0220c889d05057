@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5e3c36_6cd02b87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T08:02:17Z",
+      "side": 1,
+      "message": "LGTM with last nit. Austin can you TAL?",
+      "revId": "4ff8fe58d57b6a2d707efb33ec0220c889d05057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24078fe8_2088d1cd",
+        "filename": "src/tests/unittests/validation/ComputeIndirectValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T08:02:17Z",
+      "side": 1,
+      "message": "nit: the \"limit\" offset alignment is 2 so we should test that. Ditto for DrawIndirect.",
+      "revId": "4ff8fe58d57b6a2d707efb33ec0220c889d05057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
