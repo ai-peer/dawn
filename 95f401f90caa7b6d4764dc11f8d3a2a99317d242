@@ -799,6 +799,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "148e53f7_75b5b95a",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T14:57:27Z",
+      "side": 1,
+      "message": "That could work with the caveat that DeviceDescriptor is in webgpu.h so it\u0027d be better as a device descriptor extension struct. However browsers are likely the only clients that will need to do this type of thing (and maybe they\u0027ll need the GPUDevice anyway for tracking the cache size per origin or something) so I think it\u0027s marginally better to pass the GPUDevice inside the platform callbacks.",
+      "parentUuid": "082168e4_1ab98428",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02380cfe_63184e26",
         "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
         "patchSetId": 6
