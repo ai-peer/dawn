@@ -16,6 +16,57 @@
       "message": "PTAL I think you missed this one.",
       "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16d5aee_c39d1434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-09T14:37:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68317e61_3b2041af",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-09T14:37:55Z",
+      "side": 1,
+      "message": "Nit: targets plural: intentional?",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2392026_8fde625e",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-09T14:37:55Z",
+      "side": 1,
+      "message": "uNit: Is there (or should there be) a test which exercises that depth is unaffected when the viewport is not enabled? It might be a sanity check against the test values being cherry-picked.",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
