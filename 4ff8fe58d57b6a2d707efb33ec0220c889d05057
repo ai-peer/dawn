@@ -50,6 +50,24 @@
       "message": "nit: the \"limit\" offset alignment is 2 so we should test that. Ditto for DrawIndirect.",
       "revId": "4ff8fe58d57b6a2d707efb33ec0220c889d05057",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e373e5a9_a84db083",
+        "filename": "src/tests/unittests/validation/ComputeIndirectValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-10-09T22:58:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24078fe8_2088d1cd",
+      "revId": "4ff8fe58d57b6a2d707efb33ec0220c889d05057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
