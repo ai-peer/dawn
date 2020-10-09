@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ebfca44_6eac0c70",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T17:23:04Z",
+      "side": 1,
+      "message": "You can have the last chunk of a big command, followed by another command so we still need to call into Impl unless we check first if there\u0027s anything left in |size|, but the Impl already does that.",
+      "parentUuid": "c5b84ebc_18e903a9",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44769c16_769c5d03",
         "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
         "patchSetId": 6
@@ -99,6 +117,30 @@
       "writtenOn": "2020-10-09T09:42:40Z",
       "side": 1,
       "message": "nit: initialSize",
+      "range": {
+        "startLine": 53,
+        "startChar": 36,
+        "endLine": 53,
+        "endChar": 47
+      },
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8228a3_466dda70",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T17:23:04Z",
+      "side": 1,
+      "message": "why not the entire size that we\u0027re expecting to receive?",
+      "parentUuid": "44769c16_769c5d03",
       "range": {
         "startLine": 53,
         "startChar": 36,
@@ -173,6 +215,24 @@
       "writtenOn": "2020-10-09T09:42:40Z",
       "side": 1,
       "message": "The notion of being disconnected is probably similar between the client and the server, and could maybe be put in the ChunkedCommandHandler (basically when disconnected serializing commands becomes a noop). I\u0027m still slightly worried about all the branches on the super hot code, so maybe doing that will allow merging some common branches together?\n\nOr adding a TODO to do it later is fine too ^^",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc64f0f2_4d3094a9",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-09T17:23:04Z",
+      "side": 1,
+      "message": "I\u0027ll add a TODO. I think this check can be removed once we update Chrome to check for and return nullptr on errors",
+      "parentUuid": "20fc9abc_75b991ef",
       "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
