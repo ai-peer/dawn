@@ -494,7 +494,9 @@ TEST_P(DeviceLostTest, FenceSignalTickOnCompletion) {
     wgpu::Fence fence = queue.CreateFence(&descriptor);
 
     queue.Signal(fence, 2);
-    device.Tick();
+    while (fence.GetCompletedValue() < 2) {
+        device.Tick();
+    }
 
     // callback should have device lost status
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_Success, nullptr))
