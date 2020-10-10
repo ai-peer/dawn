@@ -30,6 +30,9 @@ namespace {
 
     class DevNull : public dawn_wire::CommandSerializer {
       public:
+        size_t GetMaximumAllocationSize() const override {
+            return 1024 * 1024 * 1024;
+        }
         void* GetCmdSpace(size_t size) override {
             if (size > buf.size()) {
                 buf.resize(size);
