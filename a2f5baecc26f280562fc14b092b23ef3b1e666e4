@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eccd007_08b83811",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-10T08:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77893387_94fb1efd",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "374a629e_c625fc88",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Sounds good thanks a lot for the explanation, and let\u0027s make sure we record it somewhere for when we need to workaround / fix it. Can you also revert the changes at [2] and do the same skip?",
       "parentUuid": "bcc474ef_13981b58",
+      "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "726d2724_3909f5c7",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-10T08:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52afe557_28b21d66",
       "revId": "a2f5baecc26f280562fc14b092b23ef3b1e666e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
