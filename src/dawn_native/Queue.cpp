@@ -37,7 +37,7 @@ namespace dawn_native {
         void CopyTextureData(uint8_t* dstPointer,
                              const uint8_t* srcPointer,
                              uint32_t depth,
-                             uint32_t rowsPerImageInBlock,
+                             uint32_t rowsPerImage,
                              uint64_t imageAdditionalStride,
                              uint32_t actualBytesPerRow,
                              uint32_t dstBytesPerRow,
@@ -48,7 +48,7 @@ namespace dawn_native {
 
             if (!copyWholeLayer) {  // copy row by row
                 for (uint32_t d = 0; d < depth; ++d) {
-                    for (uint32_t h = 0; h < rowsPerImageInBlock; ++h) {
+                    for (uint32_t h = 0; h < rowsPerImage; ++h) {
                         memcpy(dstPointer, srcPointer, actualBytesPerRow);
                         dstPointer += dstBytesPerRow;
                         srcPointer += srcBytesPerRow;
@@ -56,7 +56,7 @@ namespace dawn_native {
                     srcPointer += imageAdditionalStride;
                 }
             } else {
-                uint64_t layerSize = uint64_t(rowsPerImageInBlock) * actualBytesPerRow;
+                uint64_t layerSize = uint64_t(rowsPerImage) * actualBytesPerRow;
                 if (!copyWholeData) {  // copy layer by layer
                     for (uint32_t d = 0; d < depth; ++d) {
                         memcpy(dstPointer, srcPointer, layerSize);
@@ -103,19 +103,18 @@ namespace dawn_native {
             const uint8_t* srcPointer = static_cast<const uint8_t*>(data);
             srcPointer += dataLayout.offset;
 
-            uint32_t alignedRowsPerImageInBlock = alignedRowsPerImage / blockInfo.blockHeight;
-            uint32_t dataRowsPerImageInBlock = dataLayout.rowsPerImage / blockInfo.blockHeight;
-            if (dataRowsPerImageInBlock == 0) {
-                dataRowsPerImageInBlock = writeSizePixel.height / blockInfo.blockHeight;
+            uint32_t dataRowsPerImage = dataLayout.rowsPerImage;
+            if (dataRowsPerImage == 0) {
+                dataRowsPerImage = writeSizePixel.height / blockInfo.blockHeight;
             }
 
-            ASSERT(dataRowsPerImageInBlock >= alignedRowsPerImageInBlock);
+            ASSERT(dataRowsPerImage >= alignedRowsPerImage);
             uint64_t imageAdditionalStride =
-                dataLayout.bytesPerRow * (dataRowsPerImageInBlock - alignedRowsPerImageInBlock);
+                dataLayout.bytesPerRow * (dataRowsPerImage - alignedRowsPerImage);
 
-            CopyTextureData(dstPointer, srcPointer, writeSizePixel.depth,
-                            alignedRowsPerImageInBlock, imageAdditionalStride, alignedBytesPerRow,
-                            optimallyAlignedBytesPerRow, dataLayout.bytesPerRow);
+            CopyTextureData(dstPointer, srcPointer, writeSizePixel.depth, alignedRowsPerImage,
+                            imageAdditionalStride, alignedBytesPerRow, optimallyAlignedBytesPerRow,
+                            dataLayout.bytesPerRow);
 
             return uploadHandle;
         }
@@ -252,9 +251,11 @@ namespace dawn_native {
         // We are only copying the part of the data that will appear in the texture.
         // Note that validating texture copy range ensures that writeSizePixel->width and
         // writeSizePixel->height are multiples of blockWidth and blockHeight respectively.
+        ASSERT(writeSizePixel.width % blockInfo.blockWidth == 0);
+        ASSERT(writeSizePixel.height % blockInfo.blockHeight == 0);
         uint32_t alignedBytesPerRow =
-            (writeSizePixel.width) / blockInfo.blockWidth * blockInfo.blockByteSize;
-        uint32_t alignedRowsPerImage = writeSizePixel.height;
+            writeSizePixel.width / blockInfo.blockWidth * blockInfo.blockByteSize;
+        uint32_t alignedRowsPerImage = writeSizePixel.height / blockInfo.blockHeight;
 
         uint32_t optimalBytesPerRowAlignment = GetDevice()->GetOptimalBytesPerRowAlignment();
         uint32_t optimallyAlignedBytesPerRow =
@@ -429,7 +430,7 @@ namespace dawn_native {
     void CopyTextureData(uint8_t* dstPointer,
                          const uint8_t* srcPointer,
                          uint32_t depth,
-                         uint32_t rowsPerImageInBlock,
+                         uint32_t rowsPerImage,
                          uint64_t imageAdditionalStride,
                          uint32_t actualBytesPerRow,
                          uint32_t dstBytesPerRow,
@@ -440,7 +441,7 @@ namespace dawn_native {
 
         if (!copyWholeLayer) {  // copy row by row
             for (uint32_t d = 0; d < depth; ++d) {
-                for (uint32_t h = 0; h < rowsPerImageInBlock; ++h) {
+                for (uint32_t h = 0; h < rowsPerImage; ++h) {
                     memcpy(dstPointer, srcPointer, actualBytesPerRow);
                     dstPointer += dstBytesPerRow;
                     srcPointer += srcBytesPerRow;
@@ -448,7 +449,7 @@ namespace dawn_native {
                 srcPointer += imageAdditionalStride;
             }
         } else {
-            uint64_t layerSize = uint64_t(rowsPerImageInBlock) * actualBytesPerRow;
+            uint64_t layerSize = uint64_t(rowsPerImage) * actualBytesPerRow;
             if (!copyWholeData) {  // copy layer by layer
                 for (uint32_t d = 0; d < depth; ++d) {
                     memcpy(dstPointer, srcPointer, layerSize);
