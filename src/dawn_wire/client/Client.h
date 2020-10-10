@@ -49,10 +49,6 @@ namespace dawn_wire { namespace client {
 
         template <typename Cmd>
         void SerializeCommand(const Cmd& cmd) {
-            // TODO(enga): Swap out the serializer with a no-op one on disconnect.
-            if (mDisconnected) {
-                return;
-            }
             mSerializer.SerializeCommand(cmd, *this);
         }
 
@@ -60,10 +56,6 @@ namespace dawn_wire { namespace client {
         void SerializeCommand(const Cmd& cmd,
                               size_t extraSize,
                               ExtraSizeSerializeFn&& SerializeExtraSize) {
-            // TODO(enga): Swap out the serializer with a no-op one on disconnect.
-            if (mDisconnected) {
-                return;
-            }
             mSerializer.SerializeCommand(cmd, *this, extraSize, SerializeExtraSize);
         }
 
@@ -77,7 +69,6 @@ namespace dawn_wire { namespace client {
         WireDeserializeAllocator mAllocator;
         MemoryTransferService* mMemoryTransferService = nullptr;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
-        bool mDisconnected = false;
     };
 
     std::unique_ptr<MemoryTransferService> CreateInlineMemoryTransferService();
