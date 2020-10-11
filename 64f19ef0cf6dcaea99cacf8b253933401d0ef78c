@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d8205f_dae00707",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-11T17:35:53Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll make a spec PR.",
+      "parentUuid": "e6f16185_2a070cb5",
+      "revId": "64f19ef0cf6dcaea99cacf8b253933401d0ef78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68317e61_3b2041af",
