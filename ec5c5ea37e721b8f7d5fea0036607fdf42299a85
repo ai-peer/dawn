@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdae4749_21c1ad3b",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-11T17:24:21Z",
+      "side": 1,
+      "message": "Makes sense, that could be explained in the comment mentioned in the review comment above.",
+      "parentUuid": "4ebfca44_6eac0c70",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44769c16_769c5d03",
         "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
         "patchSetId": 6
@@ -141,6 +159,30 @@
       "side": 1,
       "message": "why not the entire size that we\u0027re expecting to receive?",
       "parentUuid": "44769c16_769c5d03",
+      "range": {
+        "startLine": 53,
+        "startChar": 36,
+        "endLine": 53,
+        "endChar": 47
+      },
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3180e10e_4eb8d50e",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-11T17:24:21Z",
+      "side": 1,
+      "message": "Duh :) nit: comment about it then!",
+      "parentUuid": "ef8228a3_466dda70",
       "range": {
         "startLine": 53,
         "startChar": 36,
@@ -251,6 +293,24 @@
       "side": 1,
       "message": "Although it\u0027s probably less branching to ask the wire client to swap out the mSerializer pointer with an implementation that always returns nullptr.",
       "parentUuid": "dc64f0f2_4d3094a9",
+      "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97940d4e_04fc4220",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-11T17:24:21Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "d3aaf33c_927d4da1",
       "revId": "ec5c5ea37e721b8f7d5fea0036607fdf42299a85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
