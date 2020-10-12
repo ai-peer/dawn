@@ -886,7 +886,7 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
 }
 
 void DawnTestBase::WaitABit() {
-    device.Tick();
+    WaitABit();
     FlushWire();
 
     utils::USleep(100);
@@ -898,6 +898,17 @@ void DawnTestBase::FlushWire() {
         bool S2CFlushed = mS2cBuf->Flush();
         ASSERT(C2SFlushed);
         ASSERT(S2CFlushed);
+    }
+}
+
+void DawnTestBase::WaitForAllOperations() const {
+    wgpu::Queue queue = device.GetDefaultQueue();
+    wgpu::Fence fence = queue.CreateFence();
+
+    // Force the currently submitted operations to completed.
+    queue.Signal(fence, 1);
+    while (fence.GetCompletedValue() < 1) {
+        device.Tick();
     }
 }
 
