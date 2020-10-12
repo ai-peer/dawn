@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9a6666_1131cee4",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-12T19:04:03Z",
+      "side": 1,
+      "message": "Huh. Done.",
+      "parentUuid": "a1f5c885_bf70f4de",
+      "revId": "e995b7d97fd7b14750a367077bb17a124a20dbea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf36b64f_4abbfecc",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-10-11T17:21:30Z",
       "side": 1,
       "message": "[1]",
+      "revId": "e995b7d97fd7b14750a367077bb17a124a20dbea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12abf9bf_a6c41176",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-12T19:04:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf36b64f_4abbfecc",
       "revId": "e995b7d97fd7b14750a367077bb17a124a20dbea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
