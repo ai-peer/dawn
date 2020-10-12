@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b486cb_2c52b15c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T19:33:50Z",
+      "side": 1,
+      "message": "LGTM. Looks like most of the driver descriptions are full descriptions whereas on D3D12 it\u0027s just the version string. Would be nice to make them a little more similar even just output \"D3D12 driver version: ...\"",
+      "revId": "e1b4063cef4d1c59409076ecd67635baefce56c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
