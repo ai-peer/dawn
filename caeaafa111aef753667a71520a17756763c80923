@@ -16,6 +16,69 @@
       "message": "Stephen, please review again, thanks!",
       "revId": "caeaafa111aef753667a71520a17756763c80923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c12115f_590499ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-12T16:12:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "caeaafa111aef753667a71520a17756763c80923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "330b8a87_3d0c253e",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-12T16:12:24Z",
+      "side": 1,
+      "message": "nit: pass",
+      "range": {
+        "startLine": 26,
+        "startChar": 51,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "caeaafa111aef753667a71520a17756763c80923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2122a769_79799ecb",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-12T16:12:24Z",
+      "side": 1,
+      "message": "nit: the start since its size is 0.",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "caeaafa111aef753667a71520a17756763c80923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
