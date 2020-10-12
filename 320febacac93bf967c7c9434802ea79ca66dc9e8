@@ -94,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c5f382_cd98cdc6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-12T23:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b8d3ab9_f93c25ec",
+      "range": {
+        "startLine": 352,
+        "startChar": 21,
+        "endLine": 352,
+        "endChar": 44
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21fe028a_5859e7ff",
@@ -141,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4780253_b508b06d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-12T23:03:39Z",
+      "side": 1,
+      "message": "Done...I think.",
+      "parentUuid": "0e40b780_acd92f41",
+      "range": {
+        "startLine": 355,
+        "startChar": 12,
+        "endLine": 355,
+        "endChar": 48
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caf7a7de_20b7c93a",
@@ -154,6 +202,30 @@
       "writtenOn": "2020-10-12T16:10:13Z",
       "side": 1,
       "message": "nit: may be slightly simpler to return !IsDeviceIdle() at the bottom.",
+      "range": {
+        "startLine": 771,
+        "startChar": 12,
+        "endLine": 776,
+        "endChar": 21
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e927cb3_cc52b256",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-12T23:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf7a7de_20b7c93a",
       "range": {
         "startLine": 771,
         "startChar": 12,
