@@ -33,6 +33,24 @@
       "message": "Can we put this in DawnTestBase and use it for DeviceLostTest too?",
       "revId": "2cca655c040139d71324bd4e1e292aeb801c4771",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5fe8d5_3e0293ed",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-12T21:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85c384cd_2dc55516",
+      "revId": "2cca655c040139d71324bd4e1e292aeb801c4771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
