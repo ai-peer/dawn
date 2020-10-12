@@ -852,6 +852,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b97bb17_52fd26c8",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-12T21:51:18Z",
+      "side": 1,
+      "message": "I think this is do-able by storing entries as {key: Hash(PSO) + Hash(RP or CS), value: PipelineCacheBlob} pairs.\n\nWe prefix the key using the PSO hash to 1) give the key strength (via crypto) and 2) prevent collisions, and 3) it\u0027s cheaply computed. For 2), the loaded pipeline cache can only store compatible pipelines, so if the weaker XOR hash, Hash(RP or CS) collides, it results into a cache-miss in the pipeline cache.\n\nObviously we know having pipelines in separate caches will not come for free, so I propose we have a switch to change the key back to eval impact. WDYT?",
+      "parentUuid": "71cb7b6f_0d058eee",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a450d2_25dd5c96",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 6
