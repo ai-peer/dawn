@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa1c8ca2_9ae54eca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-12T08:09:27Z",
+      "side": 1,
+      "message": "@Austin, @Jiawei, do you have any comments on this?",
+      "revId": "c7a160664ca2e56903a0be71562d8f4b6993ec8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
