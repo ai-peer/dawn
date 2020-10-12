@@ -16,6 +16,24 @@
       "message": "Looks like in Patchset 6 it\u0027s because the tests never ran with the wire. Did you try running locally with --use-wire ?",
       "revId": "1408189f777855a8abdfe1af8f7b2659de22a2a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe209ab5_102a4a3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T17:55:40Z",
+      "side": 1,
+      "message": "(were timing out so maybe it was stuck waiting for a fence)",
+      "parentUuid": "469dc963_6c1afe6c",
+      "revId": "1408189f777855a8abdfe1af8f7b2659de22a2a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
