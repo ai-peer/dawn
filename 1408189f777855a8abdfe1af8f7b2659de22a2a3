@@ -52,6 +52,24 @@
       "parentUuid": "fe209ab5_102a4a3a",
       "revId": "1408189f777855a8abdfe1af8f7b2659de22a2a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f391142_63b37bd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-10-12T18:09:11Z",
+      "side": 1,
+      "message": "in patch5, win-dawn-rel job has the same failure but passed in retry",
+      "parentUuid": "d6be3f54_5be9455d",
+      "revId": "1408189f777855a8abdfe1af8f7b2659de22a2a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
