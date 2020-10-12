@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "eee49538_439c1ba2",
         "filename": "src/dawn_wire/client/Buffer.cpp",
@@ -20,10 +21,34 @@
         "endChar": 5
       },
       "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea299ba_b46da35b",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee49538_439c1ba2",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "6fcf7e28_4704bc37",
         "filename": "src/dawn_wire/client/Buffer.cpp",
@@ -43,10 +68,34 @@
         "endChar": 41
       },
       "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "094ed9b6_8a3ddfc9",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6fcf7e28_4704bc37",
+      "range": {
+        "startLine": 310,
+        "startChar": 12,
+        "endLine": 313,
+        "endChar": 41
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "d476a440_8b68e992",
         "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
@@ -66,8 +115,31 @@
         "endChar": 34
       },
       "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e7d8438_b4390539",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now",
+      "parentUuid": "d476a440_8b68e992",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "5c16f8406fb3c43cdc8dc246ff96fd4300f02252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

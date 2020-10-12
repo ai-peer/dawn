@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "556634cd_90dc6988",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "PTAL!",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8a19e3ce_979d2ea6",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "As discussed offline, this CL does chunking at the application level instead of the transport level. It would be simpler and with less special casing to have the chunking at the transport level, for example by having each batch of commands contains a small header with the total size, or current size + a boolean saying whether it needs a continuation.",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "17694efd_466f8cf2",
         "filename": "/PATCHSET_LEVEL",
@@ -48,10 +49,10 @@
       "side": 1,
       "message": "LGTM",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "41e51304_b8adfdd7",
         "filename": "src/dawn_wire/client/Client.cpp",
@@ -65,10 +66,28 @@
       "side": 1,
       "message": "Nit: I would find this loop a bit clearer if it incremented the pointer and decremented the remaining bytes. Something like:\n\n    dataCmd.data \u003d static_cast\u003cconst uint8_t*\u003e(data);\n    while (dataSize \u003e 0) {\n        dataCmd.dataSize \u003d std::min(maxDataSize, dataSize);\n\n        SerializeCommand(dataCmd);\n        dataCmd.data +\u003d dataCmd.dataSize;\n        dataSize -\u003d dataCmd.dataSize;\n    }\n\n\nJust a thought; feel free to ignore if you prefer it as-written.",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d56099_27f47a41",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now",
+      "parentUuid": "41e51304_b8adfdd7",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a538c24e_8fee860b",
         "filename": "src/dawn_wire/server/Server.cpp",
@@ -82,10 +101,28 @@
       "side": 1,
       "message": "Is this an expected condition? Should it be an assert?",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fd6840_fc0321b6",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now",
+      "parentUuid": "a538c24e_8fee860b",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "06b37972_3472a072",
         "filename": "src/dawn_wire/server/Server.cpp",
@@ -99,10 +136,28 @@
       "side": 1,
       "message": "Ibid.",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3cee964_08fd6d79",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now.",
+      "parentUuid": "06b37972_3472a072",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "37170aba_4e240c54",
         "filename": "src/include/dawn_wire/WireClient.h",
@@ -116,10 +171,28 @@
       "side": 1,
       "message": "nit: define the empty implementation in WireClient.cpp",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a991bf2_f4a7503b",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now.",
+      "parentUuid": "37170aba_4e240c54",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "c248180b_308c89c7",
         "filename": "src/tests/end2end/QueueTests.cpp",
@@ -133,10 +206,28 @@
       "side": 1,
       "message": "Why?",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "672c2c99_a310d5be",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Swiftshader had a bug but that\u0027s fixed now.",
+      "parentUuid": "c248180b_308c89c7",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "e6577200_9862d90c",
         "filename": "src/utils/TerribleCommandBuffer.cpp",
@@ -150,8 +241,25 @@
       "side": 1,
       "message": "Ah, maybe we can just remove the mOffset \u003e 0 above or make a singl combined if(mOffset \u003e 0 || mLargeBufferSize \u003e 0) {flush, recurse}",
       "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c7936a_c8b2303b",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:04:04Z",
+      "side": 1,
+      "message": "Code outdated now.",
+      "parentUuid": "e6577200_9862d90c",
+      "revId": "69bfa33f603b9b7e7bd23267600adc1f861f61ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
