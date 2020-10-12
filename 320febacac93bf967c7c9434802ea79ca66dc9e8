@@ -16,6 +16,69 @@
       "message": "Went with adding a new dawn_native entry point. I tried just making a change to the dawn.json instead, but found that I needed to serialize the tick cmd on the wire client to keep some Chrome tests working. I couldn\u0027t figure out how to get the DeviceTickCmd struct to autogen, so just went with adding an entry point. Happy to revise it to the dawn.json way if preferred.\n\n",
       "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95acd143_32665668",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:10:13Z",
+      "side": 1,
+      "message": "Ah, so this is the hybrid solution where Device::Tick returns bool, but we don\u0027t actually wire it up to the webgpu.h API. Seems fine to me since we\u0027re going to need to replace/improve this in the future.",
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8d3ab9_f93c25ec",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:10:13Z",
+      "side": 1,
+      "message": "unit: name is a bit confusing with \"AssumeCommandsComplete\" - maybe call this \"IsDeviceIdle\" or something like that",
+      "range": {
+        "startLine": 352,
+        "startChar": 21,
+        "endLine": 352,
+        "endChar": 44
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf7a7de_20b7c93a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:10:13Z",
+      "side": 1,
+      "message": "nit: may be slightly simpler to return !IsDeviceIdle() at the bottom.",
+      "range": {
+        "startLine": 771,
+        "startChar": 12,
+        "endLine": 776,
+        "endChar": 21
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
