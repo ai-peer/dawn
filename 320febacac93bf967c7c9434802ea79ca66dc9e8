@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47adf9ec_611f797e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-10-12T15:46:48Z",
+      "side": 1,
+      "message": "Went with adding a new dawn_native entry point. I tried just making a change to the dawn.json instead, but found that I needed to serialize the tick cmd on the wire client to keep some Chrome tests working. I couldn\u0027t figure out how to get the DeviceTickCmd struct to autogen, so just went with adding an entry point. Happy to revise it to the dawn.json way if preferred.\n\n",
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
