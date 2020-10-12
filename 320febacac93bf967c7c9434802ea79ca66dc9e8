@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6334d51_38ddecb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-12T16:19:45Z",
+      "side": 1,
+      "message": "you would add \"DeviceTick\" to \"client_side_commands\" in dawn_wire.json, and then define Device::Tick in dawn_wire/client/Device.cpp and do something like:\n\n\nDeviceTickCmd cmd;\ncmd.device \u003d ToAPI(this);\nmClient-\u003eSerializeCommand(cmd);\n\nreturn true;\n\n\n\nI don\u0027t feel strongly about doing this though. Corentin might.",
+      "parentUuid": "47adf9ec_611f797e",
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b8d3ab9_f93c25ec",
