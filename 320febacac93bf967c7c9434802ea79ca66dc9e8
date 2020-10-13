@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d85fb87_d97013ce",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T14:58:06Z",
+      "side": 1,
+      "message": "What about dropping \"Callback\" from \"mFutureCallbackSerial\" and setting it as max(future, pending) in WriteBuffer and WriteTexture ?\n\nMaybe possible to do this at an even lower level - like creation of the pending command buffer.",
+      "parentUuid": "61b11ca9_7d55124f",
+      "range": {
+        "startLine": 355,
+        "startChar": 12,
+        "endLine": 355,
+        "endChar": 48
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "caf7a7de_20b7c93a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
