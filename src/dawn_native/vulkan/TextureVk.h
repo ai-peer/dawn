@@ -84,6 +84,8 @@ namespace dawn_native { namespace vulkan {
         void EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
                                                  const SubresourceRange& range);
 
+        VkImageLayout GetCurrentLayoutForSwapChain() const;
+
         // Binds externally allocated memory to the VkImage and on success, takes ownership of
         // semaphores.
         MaybeError BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
