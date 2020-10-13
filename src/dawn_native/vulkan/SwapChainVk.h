@@ -57,9 +57,12 @@ namespace dawn_native { namespace vulkan {
         struct Config {
             // Information that's passed to swapchain creation.
             VkPresentModeKHR presentMode;
+            VkExtent2D extent;
+            VkImageUsageFlags usage;
 
             // TODO more information used to create the swapchain.
             // TODO information about the blit that needs to happen.
+            bool needsBlit = false;
         };
         ResultOrError<Config> ChooseConfig(const VulkanSurfaceInfo& surfaceInfo) const;
 
@@ -75,6 +78,7 @@ namespace dawn_native { namespace vulkan {
         std::vector<VkImage> mSwapChainImages;
         uint32_t mLastImageIndex = 0;
 
+        Ref<Texture> mBlitTexture;
         Ref<Texture> mTexture;
     };
 
