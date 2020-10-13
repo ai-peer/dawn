@@ -1094,6 +1094,11 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    VkImageLayout Texture::GetCurrentLayoutForSwapChain() const {
+        ASSERT(mSubresourceLastUsages.size() == 1);
+        return VulkanImageLayout(mSubresourceLastUsages[0], GetFormat());
+    }
+
     // static
     ResultOrError<TextureView*> TextureView::Create(TextureBase* texture,
                                                     const TextureViewDescriptor* descriptor) {
