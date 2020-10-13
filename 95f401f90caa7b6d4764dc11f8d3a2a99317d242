@@ -870,6 +870,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1e12035_a359b375",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T21:40:56Z",
+      "side": 1,
+      "message": "RP is render pipeline and CS is compute shader? not sure if those were supposed to indicate the same \"level\" of object.\n\nDo we need to key on the PSO or just the combination of shaders? Seems like PSO means we have nearly one pipeline library per pipeline.",
+      "parentUuid": "6b97bb17_52fd26c8",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a450d2_25dd5c96",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 6
