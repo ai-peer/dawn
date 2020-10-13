@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a08dc0_de2a4502",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T21:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2576cea9_e66fba10",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97df729a_2c0ba694",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "813d8c52_eeb2be53",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T21:26:49Z",
+      "side": 1,
+      "message": "Because the commands live in shared memory between the GPU/Renderer processes. So a malicious renderer could manage to mutate the commands after sending them.\n\nThere can be security bugs if the compiler assumes that data from the same address isn\u0027t going to change, so we tag it volatile.",
+      "parentUuid": "97df729a_2c0ba694",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59eabbc7_e53b91f5",
@@ -65,6 +101,24 @@
       "writtenOn": "2020-10-13T20:33:17Z",
       "side": 1,
       "message": "Personally, I\u0027m not a big fan of MI with more than one concrete base class (prefer secondary bases to be abstract). My preference would be to aggregate this functionality into a concrete member var that calls back to an abstract interface for HandleCommandsImpl. But feel free to ignore me if the team style accepts multiple concrete bases.",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95114fe7_aebb04a4",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T21:26:49Z",
+      "side": 1,
+      "message": "Sure that\u0027s a good suggestion. It was a bit easier though. I just moved ChunkedCommandHandler to ClientBase and ServerBase which only inherit pure abstract interfaces right now.",
+      "parentUuid": "59eabbc7_e53b91f5",
       "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
