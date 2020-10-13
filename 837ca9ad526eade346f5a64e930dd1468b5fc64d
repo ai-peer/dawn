@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7624688b_e5e727b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-13T08:51:48Z",
+      "side": 1,
+      "message": "Done, also changed OpenGL to not return redundant information (GL_RENDERER is already used as the PCI name, so instead I but the OpenGL context version, there is no way to get the driver\u0027s version from OpenGL).",
+      "revId": "837ca9ad526eade346f5a64e930dd1468b5fc64d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
