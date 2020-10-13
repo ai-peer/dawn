@@ -38,6 +38,8 @@ namespace dawn_native { namespace vulkan {
     bool IsSampleCountSupported(const dawn_native::vulkan::Device* device,
                                 const VkImageCreateInfo& imageCreateInfo);
 
+    VkImageLayout VulkanImageLayout(wgpu::TextureUsage usage, const Format& format);
+
     class Texture final : public TextureBase {
       public:
         // Used to create a regular texture from a descriptor.
