@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c2a24c_763dd1a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:43:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "112d2dbf0f5384491d401eff5799d61b3535cb92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e6583c_623590da",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:43:03Z",
+      "side": 1,
+      "message": "Nit: Builtin -\u003e Built-in.\n\nAlso, why does this one say built-in but the others are \"OpenGL\", \"Vulkan\", etc? Shouldn\u0027t this be Metal?",
+      "revId": "112d2dbf0f5384491d401eff5799d61b3535cb92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
