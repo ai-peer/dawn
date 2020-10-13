@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eec7fc2_599bcfe2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-13T21:48:20Z",
+      "side": 1,
+      "message": "WriteTexture/Buffer work by enqueuing copy commands on the \"pending\" command buffer. This is the set of commands the prefix the next queue.Submit() or are submitted in the next device.Tick().\n\nSo if there\u0027s a pending command buffer in existence, maybe we can know that we need to call Tick() again to submit it.",
+      "parentUuid": "3f3a2c5b_98108fc7",
+      "range": {
+        "startLine": 355,
+        "startChar": 12,
+        "endLine": 355,
+        "endChar": 48
+      },
+      "revId": "320febacac93bf967c7c9434802ea79ca66dc9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "caf7a7de_20b7c93a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
