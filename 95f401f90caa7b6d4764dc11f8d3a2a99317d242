@@ -888,6 +888,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3acf8f37_40343e68",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-13T23:17:12Z",
+      "side": 1,
+      "message": "Good catch, that\u0027s a typo. Should be \"Hash(RP or CP)\" and not \"Hash(RP or CS)\" for 1 pipeline per library.",
+      "parentUuid": "d1e12035_a359b375",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a450d2_25dd5c96",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 6
