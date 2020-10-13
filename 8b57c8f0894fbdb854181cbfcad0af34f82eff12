@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe6fe37_3c172023",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:35:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b831536_ff43fc77",
+      "revId": "8b57c8f0894fbdb854181cbfcad0af34f82eff12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "557a2447_01efaf4a",
