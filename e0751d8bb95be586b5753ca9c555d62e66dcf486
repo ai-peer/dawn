@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ed7480_40584461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:33:17Z",
+      "side": 1,
+      "message": "LGTM. Comments/nits are at your discretion.",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2576cea9_e66fba10",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:33:17Z",
+      "side": 1,
+      "message": "Nit: past -\u003e pass?",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97df729a_2c0ba694",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:33:17Z",
+      "side": 1,
+      "message": "Out of curiosity, why volatile? (I see it\u0027s used a fair bit in the wire already.)",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59eabbc7_e53b91f5",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-13T20:33:17Z",
+      "side": 1,
+      "message": "Personally, I\u0027m not a big fan of MI with more than one concrete base class (prefer secondary bases to be abstract). My preference would be to aggregate this functionality into a concrete member var that calls back to an abstract interface for HandleCommandsImpl. But feel free to ignore me if the team style accepts multiple concrete bases.",
+      "revId": "e0751d8bb95be586b5753ca9c555d62e66dcf486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
