@@ -102,48 +102,6 @@ namespace dawn_native { namespace vulkan {
             return flags;
         }
 
-        // Chooses which Vulkan image layout should be used for the given Dawn usage
-        VkImageLayout VulkanImageLayout(wgpu::TextureUsage usage, const Format& format) {
-            if (usage == wgpu::TextureUsage::None) {
-                return VK_IMAGE_LAYOUT_UNDEFINED;
-            }
-
-            if (!wgpu::HasZeroOrOneBits(usage)) {
-                return VK_IMAGE_LAYOUT_GENERAL;
-            }
-
-            // Usage has a single bit so we can switch on its value directly.
-            switch (usage) {
-                case wgpu::TextureUsage::CopyDst:
-                    return VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-                case wgpu::TextureUsage::Sampled:
-                    return VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-                // Vulkan texture copy functions require the image to be in _one_  known layout.
-                // Depending on whether parts of the texture have been transitioned to only
-                // CopySrc or a combination with something else, the texture could be in a
-                // combination of GENERAL and TRANSFER_SRC_OPTIMAL. This would be a problem, so we
-                // make CopySrc use GENERAL.
-                case wgpu::TextureUsage::CopySrc:
-                // Read-only and write-only storage textures must use general layout because load
-                // and store operations on storage images can only be done on the images in
-                // VK_IMAGE_LAYOUT_GENERAL layout.
-                case wgpu::TextureUsage::Storage:
-                case kReadonlyStorageTexture:
-                    return VK_IMAGE_LAYOUT_GENERAL;
-                case wgpu::TextureUsage::OutputAttachment:
-                    if (format.HasDepthOrStencil()) {
-                        return VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-                    } else {
-                        return VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-                    }
-                case kPresentTextureUsage:
-                    return VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-
-                case wgpu::TextureUsage::None:
-                    UNREACHABLE();
-            }
-        }
-
         // Computes which Vulkan pipeline stage can access a texture in the given Dawn usage
         VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage, const Format& format) {
             VkPipelineStageFlags flags = 0;
@@ -248,6 +206,48 @@ namespace dawn_native { namespace vulkan {
         }
 
     }  // namespace
+
+    // Chooses which Vulkan image layout should be used for the given Dawn usage
+    VkImageLayout VulkanImageLayout(wgpu::TextureUsage usage, const Format& format) {
+        if (usage == wgpu::TextureUsage::None) {
+            return VK_IMAGE_LAYOUT_UNDEFINED;
+        }
+
+        if (!wgpu::HasZeroOrOneBits(usage)) {
+            return VK_IMAGE_LAYOUT_GENERAL;
+        }
+
+        // Usage has a single bit so we can switch on its value directly.
+        switch (usage) {
+            case wgpu::TextureUsage::CopyDst:
+                return VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+            case wgpu::TextureUsage::Sampled:
+                return VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            // Vulkan texture copy functions require the image to be in _one_  known layout.
+            // Depending on whether parts of the texture have been transitioned to only
+            // CopySrc or a combination with something else, the texture could be in a
+            // combination of GENERAL and TRANSFER_SRC_OPTIMAL. This would be a problem, so we
+            // make CopySrc use GENERAL.
+            case wgpu::TextureUsage::CopySrc:
+            // Read-only and write-only storage textures must use general layout because load
+            // and store operations on storage images can only be done on the images in
+            // VK_IMAGE_LAYOUT_GENERAL layout.
+            case wgpu::TextureUsage::Storage:
+            case kReadonlyStorageTexture:
+                return VK_IMAGE_LAYOUT_GENERAL;
+            case wgpu::TextureUsage::OutputAttachment:
+                if (format.HasDepthOrStencil()) {
+                    return VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+                } else {
+                    return VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+                }
+            case kPresentTextureUsage:
+                return VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+            case wgpu::TextureUsage::None:
+                UNREACHABLE();
+        }
+    }
 
     // Converts Dawn texture format to Vulkan formats.
     VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
