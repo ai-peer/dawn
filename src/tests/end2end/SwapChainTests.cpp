@@ -202,7 +202,7 @@ TEST_P(SwapChainTests, ResizingWindowAndSwapChain) {
 
 // Test switching devices on the same adapter.
 TEST_P(SwapChainTests, SwitchingDevice) {
-    wgpu::Device device2 = GetAdapter().CreateDevice();
+    wgpu::Device device2 = wgpu::Device::Acquire(GetAdapter().CreateDevice());
 
     for (int i = 0; i < 3; i++) {
         wgpu::Device deviceToUse;
@@ -218,4 +218,4 @@ TEST_P(SwapChainTests, SwitchingDevice) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(SwapChainTests, MetalBackend());
+DAWN_INSTANTIATE_TEST(SwapChainTests, MetalBackend(), VulkanBackend());
