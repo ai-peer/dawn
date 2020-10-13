@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fd6a5d_6e205a4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-13T22:13:08Z",
+      "side": 1,
+      "message": "PTAL, wanted to hack on some stuff so I revived this old CL. Hopefully it\u0027s pretty incomplete but Vulkan swapchains are going to be complicated so I\u0027ll build them up in several stages.",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
