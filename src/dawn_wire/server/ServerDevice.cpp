@@ -26,6 +26,15 @@ namespace dawn_wire { namespace server {
         server->OnDeviceLost(message);
     }
 
+    void Server::ForwardCreateReadyComputePipeline(bool isSuccess,
+                                                   WGPUComputePipeline pipeline,
+                                                   void* userdata) {
+        CreateReadyPipelineUserData* createReadyPipelineUserData =
+            static_cast<CreateReadyPipelineUserData*>(userdata);
+        createReadyPipelineUserData->server->OnCreateReadyComputePipelineCallback(
+            isSuccess, pipeline, createReadyPipelineUserData);
+    }
+
     void Server::OnUncapturedError(WGPUErrorType type, const char* message) {
         ReturnDeviceUncapturedErrorCallbackCmd cmd;
         cmd.type = type;
@@ -51,6 +60,40 @@ namespace dawn_wire { namespace server {
             delete userdata;
         }
         return success;
+    }
+
+    bool Server::DoDeviceCreateReadyComputePipeline(
+        WGPUDevice cDevice,
+        uint64_t requestSerial,
+        ObjectHandle pipelineObjectHandle,
+        const WGPUComputePipelineDescriptor* descriptor) {
+        CreateReadyPipelineUserData* userdata = new CreateReadyPipelineUserData;
+        userdata->server = this;
+        userdata->requestSerial = requestSerial;
+
+        auto* resultData = ComputePipelineObjects().Allocate(pipelineObjectHandle.id);
+        if (resultData == nullptr) {
+            return false;
+        }
+        resultData->generation = pipelineObjectHandle.generation;
+        userdata->result = &resultData->handle;
+
+        mProcs.deviceCreateReadyComputePipeline(cDevice, descriptor,
+                                                ForwardCreateReadyComputePipeline, userdata);
+        return true;
+    }
+
+    void Server::OnCreateReadyComputePipelineCallback(bool isSuccess,
+                                                      WGPUComputePipeline pipeline,
+                                                      CreateReadyPipelineUserData* userdata) {
+        std::unique_ptr<CreateReadyPipelineUserData> data(userdata);
+        *(data->result) = pipeline;
+
+        ReturnDeviceCreateReadyComputePipelineCallbackCmd cmd;
+        cmd.isSuccess = isSuccess;
+        cmd.requestSerial = data->requestSerial;
+
+        SerializeCommand(cmd);
     }
 
     // static

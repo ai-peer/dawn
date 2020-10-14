@@ -27,7 +27,6 @@
 #include <bitset>
 
 namespace dawn_native {
-
     MaybeError ValidateProgrammableStageDescriptor(const DeviceBase* device,
                                                    const ProgrammableStageDescriptor* descriptor,
                                                    const PipelineLayoutBase* layout,

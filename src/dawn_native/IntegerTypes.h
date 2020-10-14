@@ -57,6 +57,10 @@ namespace dawn_native {
     // The type for the WebGPU API fence serial values.
     using FenceAPISerial = TypedInteger<struct FenceAPISerialT, uint64_t>;
 
+    // The type for the serial values of CreateReady*Pipeline.
+    using CreateReadyPipelineRequestID =
+        TypedInteger<struct CreateReadyPipelineRequestIDT, uint64_t>;
+
     // A serial used to watch the progression of GPU execution on a queue, each time operations
     // that need to be followed individually are scheduled for execution on a queue, the serial
     // is incremented by one. This way to know if something is done executing, we just need to

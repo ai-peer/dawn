@@ -100,6 +100,17 @@ void ProcTableAsClass::FenceOnCompletion(WGPUFence self,
     OnFenceOnCompletionCallback(self, value, callback, userdata);
 }
 
+void ProcTableAsClass::DeviceCreateReadyComputePipeline(WGPUDevice self,
+                                                        WGPUComputePipelineDescriptor const * descriptor,
+                                                        WGPUCreateReadyComputePipelineCallback callback,
+                                                        void* userdata) {
+    auto object = reinterpret_cast<ProcTableAsClass::Object*>(self);
+    object->createReadyComputePipelineCallback = callback;
+    object->userdata = userdata;
+
+    OnDeviceCreateReadyComputePipelineCallback(self, descriptor, callback, userdata);
+}
+
 void ProcTableAsClass::CallDeviceErrorCallback(WGPUDevice device,
                                                WGPUErrorType type,
                                                const char* message) {
@@ -121,6 +132,13 @@ void ProcTableAsClass::CallFenceOnCompletionCallback(WGPUFence fence,
                                                      WGPUFenceCompletionStatus status) {
     auto object = reinterpret_cast<ProcTableAsClass::Object*>(fence);
     object->fenceOnCompletionCallback(status, object->userdata);
+}
+
+void ProcTableAsClass::CallDeviceCreateReadyComputePipelineCallback(WGPUDevice device,
+                                                                    bool isSuccess,
+                                                                    WGPUComputePipeline pipeline) {
+    auto object = reinterpret_cast<ProcTableAsClass::Object*>(device);
+    object->createReadyComputePipelineCallback(isSuccess, pipeline, object->userdata);
 }
 
 {% for type in by_category["object"] %}

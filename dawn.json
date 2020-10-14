@@ -500,6 +500,14 @@
             {"name": "compute stage", "type": "programmable stage descriptor"}
         ]
     },
+    "create ready compute pipeline callback": {
+        "category": "callback",
+        "args": [
+            {"name": "is success", "type": "bool"},
+            {"name": "pipeline", "type": "compute pipeline"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "cull mode": {
         "category": "enum",
         "values": [
@@ -549,6 +557,15 @@
                 "returns": "compute pipeline",
                 "args": [
                     {"name": "descriptor", "type": "compute pipeline descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "create ready compute pipeline",
+                "returns": "void",
+                "args": [
+                    {"name": "descriptor", "type": "compute pipeline descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "create ready compute pipeline callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             },
             {

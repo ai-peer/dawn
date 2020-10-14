@@ -15,7 +15,6 @@
 #include "dawn_wire/client/Device.h"
 
 #include "common/Assert.h"
-#include "dawn_wire/WireCmd_autogen.h"
 #include "dawn_wire/client/ApiObjects_autogen.h"
 #include "dawn_wire/client/Client.h"
 #include "dawn_wire/client/ObjectAllocator.h"
@@ -158,4 +157,44 @@ namespace dawn_wire { namespace client {
         return ToAPI(mDefaultQueue);
     }
 
+    void Device::CreateReadyComputePipeline(WGPUComputePipelineDescriptor const* descriptor,
+                                            WGPUCreateReadyComputePipelineCallback callback,
+                                            void* userdata) {
+        // TODO(jiawei.shao@intel.com): Make DeviceMatches() in ApiProcs_autogen.cpp public and use
+        // it here.
+        DeviceCreateReadyComputePipelineCmd cmd;
+        cmd.device = ToAPI(this);
+        cmd.descriptor = descriptor;
+
+        uint64_t serial = mCreateReadyComputePipelineRequestSerial++;
+        ASSERT(mCreateReadyComputePipelineRequests.find(serial) ==
+               mCreateReadyComputePipelineRequests.end());
+        cmd.requestSerial = serial;
+
+        auto* allocation = GetClient()->ComputePipelineAllocator().New(this);
+        CreateReadyComputePipelineRequest request = {};
+        request.callback = callback;
+        request.userdata = userdata;
+        request.pipelineObjectID = allocation->object->id;
+
+        cmd.pipelineObjectHandle = ObjectHandle{allocation->object->id, allocation->generation};
+        GetClient()->SerializeCommand(cmd);
+
+        mCreateReadyComputePipelineRequests[serial] = std::move(request);
+    }
+
+    bool Device::OnCreateReadyComputePipelineCallback(uint64_t requestSerial, bool isSuccess) {
+        const auto& requestIt = mCreateReadyComputePipelineRequests.find(requestSerial);
+        if (requestIt == mCreateReadyComputePipelineRequests.end()) {
+            return false;
+        }
+
+        CreateReadyComputePipelineRequest request = std::move(requestIt->second);
+
+        auto pipelineAllocation =
+            GetClient()->ComputePipelineAllocator().GetObject(request.pipelineObjectID);
+        WGPUComputePipeline pipeline = reinterpret_cast<WGPUComputePipeline>(pipelineAllocation);
+        request.callback(isSuccess, pipeline, request.userdata);
+        return true;
+    }
 }}  // namespace dawn_wire::client
