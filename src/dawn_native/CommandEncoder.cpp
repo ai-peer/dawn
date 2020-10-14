@@ -286,6 +286,9 @@ namespace dawn_native {
             DAWN_TRY(ValidateStoreOp(colorAttachment.storeOp));
 
             if (colorAttachment.loadOp == wgpu::LoadOp::Clear) {
+                wgpu::TextureComponentType baseType =
+                    attachment->GetFormat().GetAspectInfo(Aspect::Color).baseType;
+
                 if (std::isnan(colorAttachment.clearColor.r) ||
                     std::isnan(colorAttachment.clearColor.g) ||
                     std::isnan(colorAttachment.clearColor.b) ||
@@ -293,7 +296,7 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("Color clear value cannot contain NaN");
                 }
 
-                if (attachment->GetFormat().HasComponentType(Format::Type::Uint) &&
+                if (baseType == wgpu::TextureComponentType::Uint &&
                     (colorAttachment.clearColor.r < 0 || colorAttachment.clearColor.g < 0 ||
                      colorAttachment.clearColor.b < 0 || colorAttachment.clearColor.a < 0)) {
                     return DAWN_VALIDATION_ERROR(
@@ -302,8 +305,8 @@ namespace dawn_native {
 
                 constexpr double k2ToThe24 = 16777216.0;
 
-                if ((attachment->GetFormat().HasComponentType(Format::Type::Uint) ||
-                     attachment->GetFormat().HasComponentType(Format::Type::Sint)) &&
+                if ((baseType == wgpu::TextureComponentType::Uint ||
+                     baseType == wgpu::TextureComponentType::Sint) &&
                     (std::abs(colorAttachment.clearColor.r) > k2ToThe24 ||
                      std::abs(colorAttachment.clearColor.g) > k2ToThe24 ||
                      std::abs(colorAttachment.clearColor.b) > k2ToThe24 ||

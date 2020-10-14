@@ -24,44 +24,37 @@ namespace dawn_native {
 
     namespace {
 
-        static const AspectInfo kStencil8AspectInfo = {{1, 1, 1}};
+        static const AspectInfo kStencil8AspectInfo = {{1, 1, 1},
+                                                       wgpu::TextureComponentType::Uint,
+                                                       ComponentTypeBit::Uint};
 
     }
 
     // Format
 
-    // static
-    Format::Type Format::TextureComponentTypeToFormatType(
-        wgpu::TextureComponentType componentType) {
-        switch (componentType) {
+    ComponentTypeBit ToComponentTypeBit(wgpu::TextureComponentType type) {
+        switch (type) {
             case wgpu::TextureComponentType::Float:
             case wgpu::TextureComponentType::Sint:
             case wgpu::TextureComponentType::Uint:
                 break;
         }
-        // Check that Type correctly mirrors TextureComponentType except for "Other".
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Float) == Type::Float, "");
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Sint) == Type::Sint, "");
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Uint) == Type::Uint, "");
-        return static_cast<Type>(componentType);
-    }
 
-    // static
-    wgpu::TextureComponentType Format::FormatTypeToTextureComponentType(Type type) {
-        switch (type) {
-            case Type::Float:
-            case Type::Sint:
-            case Type::Uint:
-                break;
-
-            case Type::Other:
-                UNREACHABLE();
-        }
-        // Check that Type correctly mirrors TextureComponentType except for "Other".
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Float) == Type::Float, "");
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Sint) == Type::Sint, "");
-        static_assert(static_cast<Type>(wgpu::TextureComponentType::Uint) == Type::Uint, "");
-        return static_cast<wgpu::TextureComponentType>(type);
+        // Check that ComponentTypeBit bits are in the same position / order as the respective
+        // wgpu::TextureComponentType value.
+        static_assert(ComponentTypeBit::Float ==
+                          static_cast<ComponentTypeBit>(
+                              1 << static_cast<uint32_t>(wgpu::TextureComponentType::Float)),
+                      "");
+        static_assert(ComponentTypeBit::Uint ==
+                          static_cast<ComponentTypeBit>(
+                              1 << static_cast<uint32_t>(wgpu::TextureComponentType::Uint)),
+                      "");
+        static_assert(ComponentTypeBit::Sint ==
+                          static_cast<ComponentTypeBit>(
+                              1 << static_cast<uint32_t>(wgpu::TextureComponentType::Sint)),
+                      "");
+        return static_cast<ComponentTypeBit>(1 << static_cast<uint32_t>(type));
     }
 
     bool Format::IsColor() const {
@@ -78,10 +71,6 @@ namespace dawn_native {
 
     bool Format::HasDepthOrStencil() const {
         return (aspects & (Aspect::Depth | Aspect::Stencil)) != 0;
-    }
-
-    bool Format::HasComponentType(Type componentType) const {
-        return componentType == type;
     }
 
     const AspectInfo& Format::GetAspectInfo(wgpu::TextureAspect aspect) const {
@@ -126,11 +115,11 @@ namespace dawn_native {
         return static_cast<size_t>(static_cast<uint32_t>(format) - 1);
     }
 
+    using Type = wgpu::TextureComponentType;
+
     FormatTable BuildFormatTable(const DeviceBase* device) {
         FormatTable table;
         std::bitset<kKnownFormatCount> formatsSet;
-
-        using Type = Format::Type;
 
         auto AddFormat = [&table, &formatsSet](Format format) {
             size_t index = ComputeFormatIndex(format.format);
@@ -154,10 +143,11 @@ namespace dawn_native {
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = supportsStorageUsage;
             internalFormat.aspects = Aspect::Color;
-            internalFormat.type = type;
             internalFormat.firstAspect.block.byteSize = byteSize;
             internalFormat.firstAspect.block.width = 1;
             internalFormat.firstAspect.block.height = 1;
+            internalFormat.firstAspect.baseType = type;
+            internalFormat.firstAspect.supportedComponentTypes = ToComponentTypeBit(type);
             AddFormat(internalFormat);
         };
 
@@ -170,15 +160,15 @@ namespace dawn_native {
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = aspects;
-            internalFormat.type = Type::Other;
             internalFormat.firstAspect.block.byteSize = byteSize;
             internalFormat.firstAspect.block.width = 1;
             internalFormat.firstAspect.block.height = 1;
+            internalFormat.firstAspect.baseType = wgpu::TextureComponentType::Float;
+            internalFormat.firstAspect.supportedComponentTypes = ComponentTypeBit::Float;
             AddFormat(internalFormat);
         };
 
-        auto AddDepthFormat = [&AddFormat](wgpu::TextureFormat format, uint32_t byteSize,
-                                           Type type) {
+        auto AddDepthFormat = [&AddFormat](wgpu::TextureFormat format, uint32_t byteSize) {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = true;
@@ -186,10 +176,11 @@ namespace dawn_native {
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = Aspect::Depth;
-            internalFormat.type = type;
             internalFormat.firstAspect.block.byteSize = byteSize;
             internalFormat.firstAspect.block.width = 1;
             internalFormat.firstAspect.block.height = 1;
+            internalFormat.firstAspect.baseType = wgpu::TextureComponentType::Float;
+            internalFormat.firstAspect.supportedComponentTypes = ComponentTypeBit::Float;
             AddFormat(internalFormat);
         };
 
@@ -202,10 +193,11 @@ namespace dawn_native {
             internalFormat.isSupported = isSupported;
             internalFormat.supportsStorageUsage = false;
             internalFormat.aspects = Aspect::Color;
-            internalFormat.type = Type::Float;
             internalFormat.firstAspect.block.byteSize = byteSize;
             internalFormat.firstAspect.block.width = width;
             internalFormat.firstAspect.block.height = height;
+            internalFormat.firstAspect.baseType = wgpu::TextureComponentType::Float;
+            internalFormat.firstAspect.supportedComponentTypes = ComponentTypeBit::Float;
             AddFormat(internalFormat);
         };
 
@@ -259,7 +251,7 @@ namespace dawn_native {
         AddColorFormat(wgpu::TextureFormat::RGBA32Float, true, true, 16, Type::Float);
 
         // Depth only formats
-        AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, Type::Float);
+        AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4);
 
         // Packed depth/depth-stencil formats
         AddDepthStencilFormat(wgpu::TextureFormat::Depth24Plus, Aspect::Depth, 4);

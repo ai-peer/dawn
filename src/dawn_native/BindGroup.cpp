@@ -102,8 +102,14 @@ namespace dawn_native {
             }
             DAWN_TRY(device->ValidateObject(entry.textureView));
 
-            TextureBase* texture = entry.textureView->GetTexture();
+            TextureViewBase* view = entry.textureView;
 
+            Aspect aspect = view->GetAspects();
+            if (!HasOneBit(aspect)) {
+                return DAWN_VALIDATION_ERROR("texture view must select a single aspect");
+            }
+
+            TextureBase* texture = view->GetTexture();
             if (!(texture->GetUsage() & requiredUsage)) {
                 return DAWN_VALIDATION_ERROR("texture binding usage mismatch");
             }
@@ -114,9 +120,8 @@ namespace dawn_native {
 
             switch (requiredUsage) {
                 case wgpu::TextureUsage::Sampled: {
-                    if (!texture->GetFormat().HasComponentType(
-                            Format::TextureComponentTypeToFormatType(
-                                bindingInfo.textureComponentType))) {
+                    if ((texture->GetFormat().GetAspectInfo(aspect).supportedComponentTypes &
+                         ToComponentTypeBit(bindingInfo.textureComponentType)) == 0) {
                         return DAWN_VALIDATION_ERROR("texture component type usage mismatch");
                     }
                     break;
