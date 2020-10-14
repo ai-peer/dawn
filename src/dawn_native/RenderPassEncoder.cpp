@@ -36,10 +36,12 @@ namespace dawn_native {
                                          CommandEncoder* commandEncoder,
                                          EncodingContext* encodingContext,
                                          PassResourceUsageTracker usageTracker,
+                                         QuerySetBase* occlusionQuerySet,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight)
         : RenderEncoderBase(device, encodingContext),
           mCommandEncoder(commandEncoder),
+          mOcclusionQuerySet(occlusionQuerySet),
           mRenderTargetWidth(renderTargetWidth),
           mRenderTargetHeight(renderTargetHeight) {
         mUsageTracker = std::move(usageTracker);
@@ -61,6 +63,12 @@ namespace dawn_native {
     void RenderPassEncoder::EndPass() {
         if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
+
+                if (GetDevice()->IsValidationEnabled()) {
+                    if (mHasBeginOcclusionQuery) {
+                        return DAWN_VALIDATION_ERROR("All begin queries must be ended.");
+                    }
+                }
 
                 return {};
             })) {
@@ -171,6 +179,76 @@ namespace dawn_native {
                     mUsageTracker.AddTextureUsage(usages.textures[i], usages.textureUsages[i]);
                 }
             }
+
+            return {};
+        });
+    }
+
+    void RenderPassEncoder::BeginOcclusionQuery(uint32_t queryIndex) {
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                if (mOcclusionQuerySet.Get() == nullptr) {
+                    return DAWN_VALIDATION_ERROR(
+                        "The occlusionQuerySet in RenderPassDescriptor must be set.");
+                }
+
+                // The type of querySet has been validated by ValidateRenderPassDescriptor
+
+                if (queryIndex >= mOcclusionQuerySet->GetQueryCount()) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Query index exceeds the number of queries in query set.");
+                }
+
+                if (mHasBeginOcclusionQuery) {
+                    return DAWN_VALIDATION_ERROR(
+                        "The query that is begun cannot be begun again before it is ended.");
+                }
+
+                UsedQueryMap::const_iterator it =
+                    mCommandEncoder->GetUsedQueryIndices().find(mOcclusionQuerySet.Get());
+                if (it != mCommandEncoder->GetUsedQueryIndices().end()) {
+                    // Check the query at queryIndex is unused, otherwise it cann't be writen.
+                    if (it->second[queryIndex]) {
+                        return DAWN_VALIDATION_ERROR(
+                            "The query at same query index cannot be written twice in render "
+                            "pass.");
+                    }
+                }
+            }
+
+            // Record the current query index for endOcclusionQuery.
+            mCurrentOcclusionQueryIndex = queryIndex;
+            mHasBeginOcclusionQuery = true;
+
+            BeginOcclusionQueryCmd* cmd =
+                allocator->Allocate<BeginOcclusionQueryCmd>(Command::BeginOcclusionQuery);
+            cmd->querySet = mOcclusionQuerySet.Get();
+            cmd->queryIndex = queryIndex;
+
+            return {};
+        });
+    }
+
+    void RenderPassEncoder::EndOcclusionQuery() {
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                if (!mHasBeginOcclusionQuery) {
+                    return DAWN_VALIDATION_ERROR(
+                        "EndOcclusionQuery cannot be called without corresponding "
+                        "BeginOcclusionQuery.");
+                }
+
+                mCommandEncoder->TrackUsedQuerySet(mOcclusionQuerySet.Get());
+            }
+
+            mCommandEncoder->TrackUsedQueryIndex(mOcclusionQuerySet.Get(),
+                                                 mCurrentOcclusionQueryIndex);
+            mHasBeginOcclusionQuery = false;
+
+            EndOcclusionQueryCmd* cmd =
+                allocator->Allocate<EndOcclusionQueryCmd>(Command::EndOcclusionQuery);
+            cmd->querySet = mOcclusionQuerySet.Get();
+            cmd->queryIndex = mCurrentOcclusionQueryIndex;
 
             return {};
         });
