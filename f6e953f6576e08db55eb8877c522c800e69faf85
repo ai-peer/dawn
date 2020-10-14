@@ -16,6 +16,92 @@
       "message": "PTAL!",
       "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e815fb73_5f8b2674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:46:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54691182_b9110e1c",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:46:48Z",
+      "side": 1,
+      "message": "unit: maybe make this its own variable. the \u0026 is bit hard to read over two lines",
+      "range": {
+        "startLine": 123,
+        "startChar": 25,
+        "endLine": 123,
+        "endChar": 90
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f71f6be_f440f7e9",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:46:48Z",
+      "side": 1,
+      "message": "this code was already like this, but ??\n\nmaybe it\u0027s supposed to be an assert that it is exactly one of them?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43720397_a768ec9a",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:46:48Z",
+      "side": 1,
+      "message": "nit: extraneous?",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 44
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
