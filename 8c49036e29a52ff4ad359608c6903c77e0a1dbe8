@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54cd9b44_b02d0f01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:24:15Z",
+      "side": 1,
+      "message": "LGTm too",
+      "revId": "8c49036e29a52ff4ad359608c6903c77e0a1dbe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f25ab733_844a6654",
@@ -48,6 +65,24 @@
       "writtenOn": "2020-10-14T16:13:25Z",
       "side": 1,
       "message": "Could this return const-ref?",
+      "revId": "8c49036e29a52ff4ad359608c6903c77e0a1dbe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d5af5b0_d66d192c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T18:24:15Z",
+      "side": 1,
+      "message": "this is actually just 8 bits though so I think it might be better to return a copy of it",
+      "parentUuid": "f25ab733_844a6654",
       "revId": "8c49036e29a52ff4ad359608c6903c77e0a1dbe8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
