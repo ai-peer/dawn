@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "311303ed_d3f892d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T14:19:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bbab8e9_2960bd9e",
@@ -66,6 +83,46 @@
       "side": 1,
       "message": "Mostly Swiftshader/Mac since that\u0027s what I use for testing most of the time. Also for completeness.",
       "parentUuid": "0bbab8e9_2960bd9e",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f794854_e7f7128f",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T14:19:43Z",
+      "side": 1,
+      "message": "or default: return ERROR",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 80
+      },
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0f8a80_f4967926",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T14:19:43Z",
+      "side": 1,
+      "message": "you could probably do some of these now somewhat easily (maybe??) based on the format/usage in the swap chain descriptor if you want",
       "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
