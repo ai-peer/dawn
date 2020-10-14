@@ -906,6 +906,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0931611_453e3562",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-14T14:43:14Z",
+      "side": 1,
+      "message": "Based on your response over mail, I think Corentin\u0027s suggestion in the call to do one pipeline library per (VS, FS, CS) combination makes sense. We omit all the smaller pieces of state that presumably go away nicely with the driver\u0027s diffing. I don\u0027t think it would be reasonable for us at this time to attempt computing binary similarity of the shaders (though it would be cool).\n\nSo we could crypto hash (VS, FS, CS) blobs ? Then hash the rest of the state and use that as the key for the pipeline library?",
+      "parentUuid": "3acf8f37_40343e68",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a450d2_25dd5c96",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 6
