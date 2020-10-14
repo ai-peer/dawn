@@ -16,6 +16,262 @@
       "message": "PTAL, thanks!",
       "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757134f8_a951091e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16c763b_38d2cc67",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Like for other callbacks I think it\u0027s important to have a status enum, this allows making the difference between a validation error and a device loss for example.",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "195a224d_d4035a8b",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Maybe we could have a const char* for the eventual error message?",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1674d0a1_361b6921",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Would it be possible to have a couple wire tests with things like errors and success being reported successfully?",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a448bde_ac0232d8",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "That would be the status too.",
+      "range": {
+        "startLine": 87,
+        "startChar": 26,
+        "endLine": 87,
+        "endChar": 33
+      },
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a287469e_212fdd45",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Maybe at some point we should autogenerate these as well now that we have the callback types in dawn.json? I don\u0027t know how practical it will be.",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146bc1a6_1d5d17f9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "The pipeline creation validation errors should be caught so that they aren\u0027t exposed to the error scope. That\u0027s part of the spec for createReadyPipeline.\n\nCan we also have a test for validation error only being in the callback?",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a74d34d_900963dd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "note: in the future maybe we can defer the validation to the thread as well? I don\u0027t know how practical it would be though because it would require copying the whole descriptor. WDYT?",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58e3b73_bb0e4988",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Typo: there\u0027s a missing l in Pipeline.",
+      "range": {
+        "startLine": 643,
+        "startChar": 24,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289508c5_c90b0a44",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "note: TrackTask is meant to track queue tasks so it\u0027s not a great fit for CreateReadyPipeline. However I think it is ok for now as it\u0027s only temporary until we do the multithreading correctly. When we do the refactor of callbacks in Dawn to go through Instance-\u003eProcessEvents we\u0027ll need to buffer callback calls too probably.",
+      "range": {
+        "startLine": 645,
+        "startChar": 27,
+        "endLine": 645,
+        "endChar": 36
+      },
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91009cab_86648b5b",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "If the return status is a failure we should give a null pipeline to the callback and free the allocation both on the client side and the server side.",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d3a0d9e_4f9e56c1",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "nit: I think it would be slightly more clear if this was a `reservedId` instead.",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8218d9_7b278e59",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "nit: do this before allocating the userdata otherwise we leak the userdata, or use a unique_ptr for the userdata.",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04dc205_746f5a11",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 1,
+      "message": "Can we also have a test with a validation error and check that nothing is put in the error scope / unhandled error callback (basically that we don\u0027t need ASSERT_DEVICE_ERROR)?",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

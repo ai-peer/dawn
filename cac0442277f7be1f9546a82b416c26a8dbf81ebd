@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ff5a84_3216c5c3",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T09:54:38Z",
+      "side": 0,
+      "message": "nit: Why did this header need to be moved?",
+      "revId": "cac0442277f7be1f9546a82b416c26a8dbf81ebd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
