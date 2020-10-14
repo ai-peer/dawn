@@ -42,6 +42,11 @@ namespace dawn_native {
 
     MaybeError ValidatePassResourceUsage(const PassResourceUsage& usage);
 
+    MaybeError ValidateQueriesEnded(const std::vector<QueryState>& queryStates);
+    MaybeError ValidateOcclusionQuery(Command type,
+                                      QuerySetBase* querySet,
+                                      uint32_t queryIndex,
+                                      const std::vector<QueryState>& queryStates);
     MaybeError ValidateTimestampQuery(QuerySetBase* querySet,
                                       uint32_t queryIndex,
                                       const UsedQueryMap& usedQueryIndices);

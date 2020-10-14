@@ -68,6 +68,165 @@ TEST_F(QuerySetValidationTest, DestroyDestroyedQuerySet) {
     querySet.Destroy();
 }
 
+class OcclusionQueryValidationTest : public QuerySetValidationTest {};
+
+// Test the occlusionQuerySet in RenderPassDescriptor
+TEST_F(OcclusionQueryValidationTest, InvalidOcclusionQuerySet) {
+    wgpu::QuerySet occlusionQuerySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, 2);
+    DummyRenderPass renderPass(device);
+
+    // Success
+    {
+        renderPass.occlusionQuerySet = occlusionQuerySet;
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        encoder.Finish();
+    }
+
+    // Fail to begin occlusion query if the occlusionQuerySet is not set in RenderPassDescriptor
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        DummyRenderPass renderPassWithoutOcclusion(device);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassWithoutOcclusion);
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to begin render pass if the occlusionQuerySet is created from other device
+    {
+        wgpu::QuerySet occlusionQuerySetFromOtherDevice =
+            CreateQuerySet(deviceWithTimestamp, wgpu::QueryType::Occlusion, 2);
+        renderPass.occlusionQuerySet = occlusionQuerySetFromOtherDevice;
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.BeginRenderPass(&renderPass);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to begin render pass if the type of occlusionQuerySet is not Occlusion
+    {
+        wgpu::QuerySet timestampQuerySet =
+            CreateQuerySet(deviceWithTimestamp, wgpu::QueryType::Timestamp, 2);
+        DummyRenderPass renderPass(deviceWithTimestamp);
+        renderPass.occlusionQuerySet = timestampQuerySet;
+        wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
+        encoder.BeginRenderPass(&renderPass);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to submit occlusion query with a destroyed query set
+    {
+        renderPass.occlusionQuerySet = occlusionQuerySet;
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        wgpu::Queue queue = device.GetDefaultQueue();
+        occlusionQuerySet.Destroy();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+}
+
+// Test query index of occlusion query
+TEST_F(OcclusionQueryValidationTest, InvalidQueryIndex) {
+    wgpu::QuerySet occlusionQuerySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, 2);
+    DummyRenderPass renderPass(device);
+    renderPass.occlusionQuerySet = occlusionQuerySet;
+
+    // Fail to begin occlusion query if the query index exceeds the number of queries in query set
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(2);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to begin occlusion query with same query index twice on a same render pass
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to begin occlusion query with same query index twice on different render passes
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        wgpu::RenderPassEncoder pass2 = encoder.BeginRenderPass(&renderPass);
+        pass2.BeginOcclusionQuery(0);
+        pass2.EndOcclusionQuery();
+        pass2.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
+// Test the nesting of BeginOcclusionQuery and EndOcclusionQuery
+TEST_F(OcclusionQueryValidationTest, InvalidBeginAndEndNesting) {
+    wgpu::QuerySet occlusionQuerySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, 2);
+    DummyRenderPass renderPass(device);
+    renderPass.occlusionQuerySet = occlusionQuerySet;
+
+    // Fail to begin an occlusion query without corresponding end operation
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.BeginOcclusionQuery(1);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to end occlusion query twice in a row even the begin occlusion query twice
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.BeginOcclusionQuery(1);
+        pass.EndOcclusionQuery();
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to end occlusion query without any begin operation
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.EndOcclusionQuery();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Fail to begin and end an occlusion query on different render pass.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.BeginOcclusionQuery(0);
+        pass.EndPass();
+        wgpu::RenderPassEncoder pass2 = encoder.BeginRenderPass(&renderPass);
+        pass2.EndOcclusionQuery();
+        pass2.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
 class TimestampQueryValidationTest : public QuerySetValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
