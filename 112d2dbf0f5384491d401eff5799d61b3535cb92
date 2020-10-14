@@ -51,6 +51,24 @@
       "parentUuid": "d8e6583c_623590da",
       "revId": "112d2dbf0f5384491d401eff5799d61b3535cb92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "578e9c0e_6a92a87b",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T13:18:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5a7c3208_6b143010",
+      "revId": "112d2dbf0f5384491d401eff5799d61b3535cb92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
