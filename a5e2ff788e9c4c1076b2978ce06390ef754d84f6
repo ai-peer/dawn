@@ -16,6 +16,74 @@
       "message": "PTAL, wanted to hack on some stuff so I revived this old CL. Hopefully it\u0027s pretty incomplete but Vulkan swapchains are going to be complicated so I\u0027ll build them up in several stages.",
       "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6555ff1_f8f4bb6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "BTW, is there a design doc for this? As a native Dawn developer, I have always found the swapchain implementation one of the more confusing and mysterious parts of Dawn, and it would be nice to have some clarity.\n\nLGTM",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bbab8e9_2960bd9e",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Out of curiosity, is this for MoltenVk, SwiftShader/Mac, or something else?",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630c7226_3beb7a18",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Nit: assert that we haven\u0027t fallen off the end of the list?",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e576e7_083e19a8",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T13:31:55Z",
+      "side": 1,
+      "message": "Note: some projects use \"Deprecated\" in cases like these (e.g., DeprecatedSwapChain), although I see the base class is already landed, so probably best to go with \"Old\".",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
