@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "213d0a4e_bada79a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T16:11:13Z",
+      "side": 1,
+      "message": "Nit: additional what?",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e563e479_5683031f",
@@ -14,6 +31,57 @@
       "writtenOn": "2020-10-14T15:53:57Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec122dd8_fd6839b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T16:11:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b5783d7_e4782720",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T16:11:13Z",
+      "side": 1,
+      "message": "Nit: aspec -\u003e aspect, alwaus -\u003e always",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3455881f_12857a89",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-14T16:11:13Z",
+      "side": 1,
+      "message": "Ibid.\n\nIn fact, could this function just call the other one, or vice versa?",
       "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
