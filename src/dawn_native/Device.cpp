@@ -45,6 +45,25 @@
 
 namespace dawn_native {
 
+    namespace {
+        struct CreateReadyComputePipeineTask : QueueBase::TaskInFlight {
+            CreateReadyComputePipeineTask(ComputePipelineBase* pipeline,
+                                          WGPUCreateReadyComputePipelineCallback callback,
+                                          void* userdata)
+                : mPipeline(pipeline), mCallback(callback), mUserData(userdata) {
+            }
+            void Finish() override {
+                mCallback(true, reinterpret_cast<WGPUComputePipeline>(mPipeline), mUserData);
+            }
+            ~CreateReadyComputePipeineTask() override = default;
+
+          private:
+            ComputePipelineBase* mPipeline;
+            WGPUCreateReadyComputePipelineCallback mCallback;
+            void* mUserData;
+        };
+    }  // anonymous namespace
+
     // DeviceBase sub-structures
 
     // The caches are unordered_sets of pointers with special hash and compare functions
@@ -610,6 +629,20 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    void DeviceBase::CreateReadyComputePipeline(const ComputePipelineDescriptor* descriptor,
+                                                WGPUCreateReadyComputePipelineCallback callback,
+                                                void* userdata) {
+        ComputePipelineBase* result = nullptr;
+        if (ConsumedError(CreateComputePipelineInternal(&result, descriptor))) {
+            result = ComputePipelineBase::MakeError(this);
+            callback(false, reinterpret_cast<WGPUComputePipeline>(result), userdata);
+            return;
+        }
+
+        std::unique_ptr<CreateReadyComputePipeineTask> request =
+            std::make_unique<CreateReadyComputePipeineTask>(result, callback, userdata);
+        GetDefaultQueue()->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     PipelineLayoutBase* DeviceBase::CreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
