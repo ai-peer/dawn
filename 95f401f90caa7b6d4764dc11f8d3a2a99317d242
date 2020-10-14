@@ -924,6 +924,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4b0497d_49cacd31",
+        "filename": "src/dawn_native/d3d12/PipelineCacheD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-14T17:34:20Z",
+      "side": 1,
+      "message": "No strong preference either way since we have no data. But I think it\u0027s worth a toggle. In the N\u003d1 case, we can switch between library vs blob to see which is actually better. WDYT?\n\n\u003e So we could crypto hash (VS, FS, CS) blobs ? \n\nYea but flip it. The pipeline cache is crypto along with a weaker hash of the pipeline object.\n\nEven w/o diffing Dawn-side, a means to group pipelines at runtime (N per pipeline cache) would be pretty slick, IMHO.",
+      "parentUuid": "e0931611_453e3562",
+      "revId": "95f401f90caa7b6d4764dc11f8d3a2a99317d242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a450d2_25dd5c96",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 6
