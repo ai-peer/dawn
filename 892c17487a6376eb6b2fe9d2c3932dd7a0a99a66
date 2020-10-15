@@ -222,6 +222,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9df396_e63fb250",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ede0fda_02ce1c56",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "146bc1a6_1d5d17f9",

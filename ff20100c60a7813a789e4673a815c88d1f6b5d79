@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71590ecb_6ec6974e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "LGTM with the missing wire tests.",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0e3302_34bce214",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "nit: we could have \"length\": \"strlen\" to signify it is a null-terminated string (not that it will change anything in the generated code because because it is a handwritten command)",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa19b25_d8e99f33",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "nit: can success come first, just so that success is always 0 in all statuses? Also we should probably have a \"device lost\" version.",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4848fec6_476f2956",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "[1] nit: Also add a comment that explains what we do inside this if, and why.",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6538a331_ec7df58f",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "Ah, this does the freeing on the server side I see, and when the client receives the message it will remove its own allocation.\n\nI think it works but there\u0027s something subtly in the wire: when the client allocates an ID never seen before, the server check it is the next ID: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_wire/server/ObjectStorage.h\n\nI was worried that we needed the ID destruction to round-trip through the client and send a DestroyComputePipelineCmd at [1] but it seems not necessary.\n\nnit: result could be queried inside the branch, or even better we could do \n\nif (status !\u003d ...) {\n ...\n} else {\n    ComputePipelineObjects().Get(data-\u003epipelineObjectID)-\u003ehandle \u003d pipeline;\n}",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 16
+      },
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4582c0fb_c2a7dda5",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "nit: the message is only valid for the duration of the callback, if you want to check it after the callback this needs to be an std::string.",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbb32b3_3513a779",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "ASSERT_TRUE(task.message.empty())?",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c02a40_8501544e",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "nit: also explain that the error isn\u0027t forwarded to the error scope / unhandled error callback.",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3879fe1_69e1ce5a",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T09:11:25Z",
+      "side": 1,
+      "message": "nit: ASSERT_FALSE(task.message.empty());",
+      "revId": "ff20100c60a7813a789e4673a815c88d1f6b5d79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
