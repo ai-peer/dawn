@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a5da0e_24b16f11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:05:29Z",
+      "side": 1,
+      "message": "Don\u0027t leave me hanging\u0027... ;)",
+      "parentUuid": "213d0a4e_bada79a7",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e563e479_5683031f",
@@ -135,6 +153,24 @@
       "side": 1,
       "message": "Done, made the other function call this one.",
       "parentUuid": "3455881f_12857a89",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04be4952_5af786b0",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:05:29Z",
+      "side": 1,
+      "message": "Nit: alwaus -\u003e always",
+      "parentUuid": "c6233cef_01019cb5",
       "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
