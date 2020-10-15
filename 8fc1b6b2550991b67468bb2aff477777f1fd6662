@@ -136,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf7c2ce4_245242b5",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:02:19Z",
+      "side": 1,
+      "message": "uNit: You\u0027ve got two independent clauses. You need either a semicolon or a period.",
+      "parentUuid": "4599987b_fbe5c32c",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d81cc1f_c506c244",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -165,6 +183,24 @@
       "side": 1,
       "message": "It isn\u0027t covered by a test because it is specific to spirv-cross. When we switch to using Tint for reflection the assumption is that texture types will be well formed.",
       "parentUuid": "7d81cc1f_c506c244",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57bafba2_40356615",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:02:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d5eb81e_a5126031",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -299,6 +335,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c013886_3935423d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:02:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "577bf122_152f6f66",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93f33cc1_ac09ec31",
@@ -330,6 +384,24 @@
       "side": 1,
       "message": "Same comment about SPIRV-Cross vs. Tint.",
       "parentUuid": "93f33cc1_ac09ec31",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcaf148_7f3539a3",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:02:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d2ff40f8_d102f374",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
