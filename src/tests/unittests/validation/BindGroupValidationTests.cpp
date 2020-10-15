@@ -309,6 +309,41 @@ TEST_F(BindGroupValidationTest, TextureComponentType) {
     ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, uintTextureView}}));
 }
 
+// Check that a texture must have a correct format for DepthComparison
+TEST_F(BindGroupValidationTest, TextureComponentTypeDepthComparison) {
+    wgpu::BindGroupLayout depthLayout = utils::MakeBindGroupLayout(
+        device,
+        {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false, 0, false,
+          wgpu::TextureViewDimension::e2D, wgpu::TextureComponentType::DepthComparison}});
+
+    // Control case: setting a depth texture works.
+    wgpu::Texture depthTexture =
+        CreateTexture(wgpu::TextureUsage::Sampled, wgpu::TextureFormat::Depth32Float, 1);
+    utils::MakeBindGroup(device, depthLayout, {{0, depthTexture.CreateView()}});
+
+    // Error case: setting a Float typed texture view fails.
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, depthLayout, {{0, mSampledTextureView}}));
+}
+
+// Check that a depth texture is allowed to be used for both TextureComponentType::Float and
+// ::DepthComparison
+TEST_F(BindGroupValidationTest, TextureComponentTypeForDepthTexture) {
+    wgpu::BindGroupLayout depthLayout = utils::MakeBindGroupLayout(
+        device,
+        {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false, 0, false,
+          wgpu::TextureViewDimension::e2D, wgpu::TextureComponentType::DepthComparison}});
+
+    wgpu::BindGroupLayout floatLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture, false, 0,
+                  false, wgpu::TextureViewDimension::e2D, wgpu::TextureComponentType::Float}});
+
+    wgpu::Texture depthTexture =
+        CreateTexture(wgpu::TextureUsage::Sampled, wgpu::TextureFormat::Depth32Float, 1);
+
+    utils::MakeBindGroup(device, depthLayout, {{0, depthTexture.CreateView()}});
+    utils::MakeBindGroup(device, floatLayout, {{0, depthTexture.CreateView()}});
+}
+
 // Check that a texture must have the correct dimension
 TEST_F(BindGroupValidationTest, TextureDimension) {
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(

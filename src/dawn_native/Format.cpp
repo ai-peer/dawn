@@ -27,7 +27,6 @@ namespace dawn_native {
         static const AspectInfo kStencil8AspectInfo = {{1, 1, 1},
                                                        wgpu::TextureComponentType::Uint,
                                                        ComponentTypeBit::Uint};
-
     }
 
     // Format
@@ -37,6 +36,7 @@ namespace dawn_native {
             case wgpu::TextureComponentType::Float:
             case wgpu::TextureComponentType::Sint:
             case wgpu::TextureComponentType::Uint:
+            case wgpu::TextureComponentType::DepthComparison:
                 // When the compiler complains that you need to add a case statement here, please
                 // also add a corresponding static assert below!
                 break;
@@ -56,6 +56,11 @@ namespace dawn_native {
                           static_cast<ComponentTypeBit>(
                               1 << static_cast<uint32_t>(wgpu::TextureComponentType::Sint)),
                       "");
+        static_assert(
+            ComponentTypeBit::DepthComparison ==
+                static_cast<ComponentTypeBit>(
+                    1 << static_cast<uint32_t>(wgpu::TextureComponentType::DepthComparison)),
+            "");
         return static_cast<ComponentTypeBit>(1 << static_cast<uint32_t>(type));
     }
 
@@ -157,7 +162,8 @@ namespace dawn_native {
             internalFormat.firstAspect.block.width = 1;
             internalFormat.firstAspect.block.height = 1;
             internalFormat.firstAspect.baseType = wgpu::TextureComponentType::Float;
-            internalFormat.firstAspect.supportedComponentTypes = ComponentTypeBit::Float;
+            internalFormat.firstAspect.supportedComponentTypes =
+                ComponentTypeBit::Float | ComponentTypeBit::DepthComparison;
             AddFormat(internalFormat);
         };
 
@@ -173,7 +179,8 @@ namespace dawn_native {
             internalFormat.firstAspect.block.width = 1;
             internalFormat.firstAspect.block.height = 1;
             internalFormat.firstAspect.baseType = wgpu::TextureComponentType::Float;
-            internalFormat.firstAspect.supportedComponentTypes = ComponentTypeBit::Float;
+            internalFormat.firstAspect.supportedComponentTypes =
+                ComponentTypeBit::Float | ComponentTypeBit::DepthComparison;
             AddFormat(internalFormat);
         };
 
