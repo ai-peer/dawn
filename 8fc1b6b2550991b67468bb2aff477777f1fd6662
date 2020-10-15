@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f33f94ec_96837d44",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-15T15:56:57Z",
+      "side": 1,
+      "message": "oh great, I forgot bindingType also had multisampled-texture so it\u0027s BGL creation and not BG. \n\nI\u0027m wondering now if we should even add this validation here because\n1. you can\u0027t make a valid BGL so it\u0027s maybe fine if the pipeline has multisampled depth-comparison textures.\n2. ^that\u0027s really only a problem with SPIR-V because WGSL doesn\u0027t have a texture_depth_multisampled_2d type",
+      "parentUuid": "9c455939_daac6010",
+      "range": {
+        "startLine": 577,
+        "startChar": 27,
+        "endLine": 581,
+        "endChar": 33
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51493a52_46f5aeec",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
