@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "62f93fed_11eeb425",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "I decided to try this given the shared image leaks I encountered (also copy image bitmap code...). WDYT? In the normal case we would never use this code path in Chrome, but it does keeping things working in a single process world.",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "7d959b95_8f4101fc",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "LGTM",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "25edf7f5_fa67a9e7",
         "filename": "/PATCHSET_LEVEL",
@@ -48,10 +49,10 @@
       "side": 1,
       "message": "Stephen, please review too",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ea11b8eb_4b68fe33",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -65,10 +66,10 @@
       "side": 1,
       "message": "Any chances the procs end up not statically known? For example if we do per-backend procs (maybe that\u0027s unlikely).",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "88abad8e_82ff7781",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -83,10 +84,10 @@
       "message": "eh, can always change it later, but I don\u0027t think it\u0027s likely",
       "parentUuid": "ea11b8eb_4b68fe33",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c567f452_a04097fb",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -101,10 +102,10 @@
       "message": "Ack",
       "parentUuid": "88abad8e_82ff7781",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2b530c67_4a1f83a6",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -119,10 +120,10 @@
       "message": "WDYT about adding a warning to DawnProcTable itself indicating that it\u0027s allocated as a static global, so people avoid introducing static initialization problems?",
       "parentUuid": "c567f452_a04097fb",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ecebb919_6a0abc30",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -137,10 +138,10 @@
       "message": "Not exactly sure what you mean - where would the warning go?",
       "parentUuid": "2b530c67_4a1f83a6",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6ef2cb1d_e7afa2e3",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -155,10 +156,10 @@
       "message": "On the declaration of struct DawnProcTable. Something like \"often allocated as a static global, please don\u0027t add a complex constructor\". I mean, it seems unlikely, since it\u0027s just a bunch of pointers. Just a random thought; I won\u0027t be offended if you don\u0027t do it. :)",
       "parentUuid": "ecebb919_6a0abc30",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d0245fbc_6369684b",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -173,10 +174,10 @@
       "message": "Oh okay, that\u0027s a good suggestion. I just wasn\u0027t sure what you meant - like if the compiler could autogenerate some warning message if you do something bad like that ?",
       "parentUuid": "6ef2cb1d_e7afa2e3",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6f66dcee_04d2058b",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -191,10 +192,10 @@
       "message": "Good question! I wasn\u0027t thinking of compiler warnings, but it seems newer GCC and Clang have -Wglobal-constructors, which warns on non-trivial constructors (and MSVC has C26426 NO_GLOBAL_INIT_CALLS, which looks similar). It might be interesting to turn it on and see how noisy it is. I imagine third-party code might be problematic. If it is noisy, another option would be to use a #pragma to enable it just for this class. But I leave it up to the team to decide if this is good practice.",
       "parentUuid": "d0245fbc_6369684b",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "557c3050_2e8ab4ac",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -209,10 +210,10 @@
       "message": "I just tried, and it\u0027s not trivial to add because every TEST_F / TEST_P is a global constructor. We don\u0027t have a good way to gate some compile options to just the implementation of Dawn at the moment.",
       "parentUuid": "6f66dcee_04d2058b",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2672c0b0_851e9dd4",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
@@ -227,10 +228,28 @@
       "message": "Added a comment to the DawnProcTable declaration",
       "parentUuid": "557c3050_2e8ab4ac",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0c4e78_6adb5421",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:36:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "557c3050_2e8ab4ac",
+      "revId": "89dfc644746e751c698e71ed78b9948af453740a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "89637fd7_a0f27d28",
         "filename": "generator/templates/dawn_proc.c",
@@ -244,10 +263,10 @@
       "side": 1,
       "message": "nit: The procs are already initialized to nullptrs because they are declared static.",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4a29519f_7d1d0230",
         "filename": "generator/templates/dawn_proc.c",
@@ -262,10 +281,10 @@
       "message": "Done",
       "parentUuid": "89637fd7_a0f27d28",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "27f7a85c_3d205a15",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -279,10 +298,10 @@
       "side": 1,
       "message": "ditto about the static being already initialized to nullptr.",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "36af745e_fff0105e",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -297,10 +316,10 @@
       "message": "Done",
       "parentUuid": "27f7a85c_3d205a15",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "efb8d780_891d1b5f",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -314,10 +333,10 @@
       "side": 1,
       "message": "thread_local is currently banned in Chromium says the docs, but the email thread about it seems to say we\u0027re fine trying it: https://groups.google.com/u/1/a/chromium.org/g/chromium-dev/c/2msN8k3Xzgs",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ceea2175_2ffbaf5a",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -332,10 +351,10 @@
       "message": "interesting.. I think we should be okay - we\u0027re not using destructors at all or anything since it\u0027s just a pointer.",
       "parentUuid": "efb8d780_891d1b5f",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3e987757_220a0a68",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -350,10 +369,10 @@
       "message": "Yeah. looking at the latest answer on that thread, it seems some usages have already snuck in third_party dependencies.",
       "parentUuid": "ceea2175_2ffbaf5a",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "698795af_f305c12e",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -368,10 +387,10 @@
       "message": "Actually, do you think I should make this a struct instead of a pointer? It probably already goes TLS-\u003epointer-\u003estruct which is a double indirection when it could be TLS-\u003estruct.\n\nHowever, I\u0027m not 100% sure that\u0027s how it is on all platforms. It wouldn\u0027t be great if the entire struct were allocated in TLS.",
       "parentUuid": "3e987757_220a0a68",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "115e7c41_57cc8342",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -386,10 +405,10 @@
       "message": "I\u0027m pretty sure it\u0027s already a pointer internally yeah (or that the linker collects all the thread_local variables in a single TLS slot mega structure).",
       "parentUuid": "698795af_f305c12e",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "d8783287_f36b1105",
         "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
@@ -404,10 +423,10 @@
       "message": "Made this not a pointer.",
       "parentUuid": "115e7c41_57cc8342",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "59091f29_fb264471",
         "filename": "src/tests/DawnTest.cpp",
@@ -421,10 +440,10 @@
       "side": 1,
       "message": "Nit: not new to this patch, but why not set procs directly, instead of through this local clientProcs?\n\nAlso, it seems like they also could all be const\u0026 now to avoid copies, although that makes it a bit fragile if you change your mind later on.",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "ded329bd_5b4238ca",
         "filename": "src/tests/DawnTest.cpp",
@@ -439,10 +458,10 @@
       "message": "Done. Kept it as a copy",
       "parentUuid": "59091f29_fb264471",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ccad6dff_0a28e0fc",
         "filename": "src/tests/unittests/PerThreadProcTests.cpp",
@@ -456,10 +475,10 @@
       "side": 1,
       "message": "Nit: \"run\" -\u003e \"ready\"? Then the spinloop below is while (!ready) {}.",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "78ca7509_87dd5d5a",
         "filename": "src/tests/unittests/PerThreadProcTests.cpp",
@@ -474,8 +493,7 @@
       "message": "Done",
       "parentUuid": "ccad6dff_0a28e0fc",
       "revId": "89dfc644746e751c698e71ed78b9948af453740a",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
