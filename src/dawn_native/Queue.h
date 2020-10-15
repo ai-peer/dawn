@@ -24,6 +24,12 @@
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native {
+    class BlitTextureForBrowserHelper;
+
+    enum ImageOrientationEnum {
+        kOriginTopLeft,
+        kOriginBottomRight,
+    };
 
     class QueueBase : public ObjectBase {
       public:
@@ -45,6 +51,9 @@ namespace dawn_native {
                           size_t dataSize,
                           const TextureDataLayout* dataLayout,
                           const Extent3D* writeSize);
+        void BlitTextureForBrowser(const TextureCopyView* source,
+                                   const TextureCopyView* destination,
+                                   const Extent3D* copySize);
 
         void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
@@ -63,6 +72,9 @@ namespace dawn_native {
                                         size_t dataSize,
                                         const TextureDataLayout* dataLayout,
                                         const Extent3D* writeSize);
+        MaybeError BlitTextureForBrowserInternal(const TextureCopyView* source,
+                                                 const TextureCopyView* destination,
+                                                 const Extent3D* copySize);
 
         virtual MaybeError SubmitImpl(uint32_t commandCount,
                                       CommandBufferBase* const* commands) = 0;
@@ -89,6 +101,8 @@ namespace dawn_native {
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
         SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
+
+        std::unique_ptr<BlitTextureForBrowserHelper> mBlitTextureForBrowserHelper;
     };
 
 }  // namespace dawn_native

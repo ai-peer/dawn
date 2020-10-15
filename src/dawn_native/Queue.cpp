@@ -15,8 +15,10 @@
 #include "dawn_native/Queue.h"
 
 #include "common/Constants.h"
+#include "dawn_native/BlitTextureForBrowserHelper.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
@@ -25,6 +27,8 @@
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/QuerySet.h"
+#include "dawn_native/RenderPassEncoder.h"
+#include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Texture.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
@@ -131,6 +135,22 @@ namespace dawn_native {
                 UNREACHABLE();
             }
         };
+
+        const std::set<wgpu::TextureFormat> supportTextureFormatInCopyT2TDawn{
+            wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::BGRA8Unorm};
+
+        MaybeError ValidateFormatConversion(const wgpu::TextureFormat srcFormat,
+                                            const wgpu::TextureFormat dstFormat) {
+            if (supportTextureFormatInCopyT2TDawn.find(srcFormat) !=
+                    supportTextureFormatInCopyT2TDawn.end() ||
+                supportTextureFormatInCopyT2TDawn.find(dstFormat) !=
+                    supportTextureFormatInCopyT2TDawn.end()) {
+                return DAWN_VALIDATION_ERROR(
+                    "Unsupported texture formats for copyTextureToTextureDawn");
+            }
+
+            return {};
+        }
 
     }  // namespace
 
@@ -301,6 +321,27 @@ namespace dawn_native {
         return GetDevice()->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                                      &textureCopy, writeSizePixel);
     }
+
+    void QueueBase::BlitTextureForBrowser(const TextureCopyView* source,
+                                          const TextureCopyView* destination,
+                                          const Extent3D* copySize) {
+        if (!mBlitTextureForBrowserHelper) {
+            mBlitTextureForBrowserHelper = std::make_unique<BlitTextureForBrowser>(GetDevice());
+        }
+
+        GetDevice()->ConsumedError(BlitTextureForBrowserInternal(source, destination, copySize));
+    }
+
+    MaybeError QueueBase::BlitTextureForBrowserInternal(const TextureCopyView* source,
+                                                        const TextureCopyView* destination,
+                                                        const Extent3D* copySize) {
+        if (GetDevice()->IsValidationEnabled()) {
+            mBlitTextureForBrowserHelper->ValidateBlitForBrowser(source, destination, copySize);
+        }
+
+        return mBlitTextureForBrowserHelper->DoBlitTextureForBrowser(source, destination, copySize);
+    }
+
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
                                          CommandBufferBase* const* commands) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), Validation, "Queue::ValidateSubmit");

@@ -29,6 +29,7 @@
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/Instance.h"
+#include "dawn_native/InternalPipelineStore.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Queue.h"
@@ -40,6 +41,7 @@
 #include "dawn_native/SwapChain.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
+#include "dawn_native/pipelines/BaseRenderPipelineInfo.h"
 
 #include <unordered_set>
 
@@ -71,6 +73,12 @@ namespace dawn_native {
         ContentLessObjectCache<RenderPipelineBase> renderPipelines;
         ContentLessObjectCache<SamplerBase> samplers;
         ContentLessObjectCache<ShaderModuleBase> shaderModules;
+        std::array<ShaderModuleBase*, 2>
+            internalShaderModules;  // static_cast<uint32_t>(InternalShaderType::COUNT_OF_INTERNAL_SHADER)>
+                                    // internalShaderModules;
+        std::array<RenderPipelineBase*, 1>
+            internalRenderPipelines;  // static_cast<uint32_t>(InternalRenderPipelineType::COUNT_OF_INTERNAL_RENDER_PIPELINE)>
+                                      // internalRenderPipeline;
     };
 
     struct DeviceBase::DeprecationWarnings {
@@ -103,12 +111,48 @@ namespace dawn_native {
         mErrorScopeTracker = std::make_unique<ErrorScopeTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
+        mInternalPipelineStore = AcquireRef(new InternalPipelineStore(GetDevice()));
 
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
         mState = State::Alive;
 
         DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, CreateEmptyBindGroupLayout());
+
+        // Load all internal shaders and create shader module
+        for (InternalShaderType shader : AllInternalShaders) {
+            ShaderModuleBase* backendObj;
+            ShaderModuleDescriptor descriptor;
+            ShaderModuleWGSLDescriptor wgslDesc = GetShaderModuleWGSLDesc(shader);
+            descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+            DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(&descriptor));
+            backendObj->SetIsCachedReference();
+            mCaches->internalShaderModules[static_cast<uint32_t>(shader)] = backendObj;
+        }
+
+        // Intenral shader should obey on this.
+        char vertexShaderEntry[] = "vertex_main";
+        char fragmentShaderEntry[] = "fragment_main";
+
+        for (InternalRenderPipelineType pipeline : AllInternalRenderPipelines) {
+            BaseRenderPipelineInfo info = GetInternalRenderPipelineInfo(pipeline);
+            RenderPipelineDescriptor descriptor = info;
+            descriptor.vertexStage.module =
+                mCaches->internalShaderModules[static_cast<uint32_t>(info.vertexType)];
+            descriptor.vertexStage.entryPoint = vertexShaderEntry;
+            ProgrammableStageDescriptor fragmentDesc = {};
+            fragmentDesc.module =
+                mCaches->internalShaderModules[static_cast<uint32_t>(info.fragType)];
+            fragmentDesc.entryPoint = fragmentShaderEntry;
+            fragmentDesc.module =
+                mCaches->internalShaderModules[static_cast<uint32_t>(info.fragType)];
+            descriptor.fragmentStage = &fragmentDesc;
+
+            RenderPipelineBase* backendObj;
+            DAWN_TRY_ASSIGN(backendObj, CreateRenderPipelineImpl(&descriptor));
+            backendObj->SetIsCachedReference();
+            mCaches->internalRenderPipelines[static_cast<uint32_t>(pipeline)] = backendObj;
+        }
 
         return {};
     }
@@ -702,6 +746,14 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    InternalPipelineStore* DeviceBase::GetInternalPipelineStore() {
+        // Backends gave the default queue during initialization.
+        ASSERT(mInternalPipelineStore.Get() != nullptr);
+
+        // Returns a new reference to the queue.
+        mInternalPipelineStore->Reference();
+        return mInternalPipelineStore.Get();
     }
 
     // For Dawn Wire
