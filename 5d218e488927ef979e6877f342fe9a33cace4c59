@@ -86,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff9d3ab_0acc4a4f",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T07:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b5783d7_e4782720",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3455881f_12857a89",
@@ -99,6 +117,24 @@
       "writtenOn": "2020-10-14T16:11:13Z",
       "side": 1,
       "message": "Ibid.\n\nIn fact, could this function just call the other one, or vice versa?",
+      "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6233cef_01019cb5",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T07:56:19Z",
+      "side": 1,
+      "message": "Done, made the other function call this one.",
+      "parentUuid": "3455881f_12857a89",
       "revId": "5d218e488927ef979e6877f342fe9a33cace4c59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
