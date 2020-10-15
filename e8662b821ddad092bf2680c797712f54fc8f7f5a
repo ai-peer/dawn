@@ -97,6 +97,30 @@
       },
       "revId": "e8662b821ddad092bf2680c797712f54fc8f7f5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b79be97_474d9b09",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T10:23:43Z",
+      "side": 1,
+      "message": "Sorry I meant in a future CL, not necessary a follow-up.\n\nin [1] we could just do mFutureSerial + 1. The goal is to align everything to a new serial that bigger than all the previous ones so +100 would be ok too.",
+      "parentUuid": "945f6f34_19151a7f",
+      "range": {
+        "startLine": 338,
+        "startChar": 45,
+        "endLine": 338,
+        "endChar": 65
+      },
+      "revId": "e8662b821ddad092bf2680c797712f54fc8f7f5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
