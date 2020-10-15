@@ -16,6 +16,24 @@
       "message": "nit: Why did this header need to be moved?",
       "revId": "cac0442277f7be1f9546a82b416c26a8dbf81ebd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374a820c_28ab47a9",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-15T08:53:39Z",
+      "side": 0,
+      "message": "Because I need the definition of \"ObjectId\" in the definition of CreateReadyComputePipelineRequest in Device.h.",
+      "parentUuid": "75ff5a84_3216c5c3",
+      "revId": "cac0442277f7be1f9546a82b416c26a8dbf81ebd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
