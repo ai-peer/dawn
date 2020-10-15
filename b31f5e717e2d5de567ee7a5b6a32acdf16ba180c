@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "5b9e9b67_4bdd39b1",
         "filename": "/PATCHSET_LEVEL",
@@ -14,8 +15,25 @@
       "side": 1,
       "message": "FYI Stephen, I was searching to make sure removed this constant everywhere, and saw that you had a comment about it in Skia Dawn. https://source.chromium.org/chromium/chromium/src/+/master:third_party/skia/src/gpu/dawn/GrDawnCaps.cpp;l\u003d28?q\u003dkMaxBindingsPerGroup\n\nIt should no longer be a restriction now.",
       "revId": "b31f5e717e2d5de567ee7a5b6a32acdf16ba180c",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": false
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875925b9_7966005a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T16:37:01Z",
+      "side": 1,
+      "message": "Cool, thanks!",
+      "parentUuid": "5b9e9b67_4bdd39b1",
+      "revId": "b31f5e717e2d5de567ee7a5b6a32acdf16ba180c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
