@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d18aec_7bcc8e94",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T08:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "455ed888_51010d5b",
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54691182_b9110e1c",
@@ -82,6 +100,30 @@
       "writtenOn": "2020-10-14T18:46:48Z",
       "side": 1,
       "message": "unit: maybe make this its own variable. the \u0026 is bit hard to read over two lines",
+      "range": {
+        "startLine": 123,
+        "startChar": 25,
+        "endLine": 123,
+        "endChar": 90
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1273a4_80a5d55e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T08:02:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54691182_b9110e1c",
       "range": {
         "startLine": 123,
         "startChar": 25,
@@ -139,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c599bd5a_ba45ba3b",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T08:02:38Z",
+      "side": 1,
+      "message": "Yeah I think that was the intent of the original code. I added a comment explicitly saying this.",
+      "parentUuid": "10f45480_448b57e6",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43720397_a768ec9a",
@@ -152,6 +218,30 @@
       "writtenOn": "2020-10-14T18:46:48Z",
       "side": 1,
       "message": "nit: extraneous?",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 44
+      },
+      "revId": "f6e953f6576e08db55eb8877c522c800e69faf85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d2234b_f2ca9d11",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T08:02:38Z",
+      "side": 1,
+      "message": "Whoops I meant to keep it inside the function. Done.",
+      "parentUuid": "43720397_a768ec9a",
       "range": {
         "startLine": 118,
         "startChar": 4,
