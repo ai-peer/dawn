@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb6023f_9153209b",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93764fff_a41a21d5",
+      "range": {
+        "startLine": 42,
+        "startChar": 42,
+        "endLine": 42,
+        "endChar": 43
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4865f8c_b4475261",
@@ -92,6 +116,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4599987b_fbe5c32c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4865f8c_b4475261",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d81cc1f_c506c244",
@@ -105,6 +147,24 @@
       "writtenOn": "2020-10-15T15:33:09Z",
       "side": 1,
       "message": "Is this covered by a test? Sorry if I missed it.",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5eb81e_a5126031",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "It isn\u0027t covered by a test because it is specific to spirv-cross. When we switch to using Tint for reflection the assumption is that texture types will be well formed.",
+      "parentUuid": "7d81cc1f_c506c244",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -134,6 +194,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c455939_daac6010",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "I just put up a PR that disallows depth-comparison with multisampled-texture and will update the CL accordingly.\n\nDone put please take a look again.",
+      "parentUuid": "9eaee5eb_793e9a09",
+      "range": {
+        "startLine": 577,
+        "startChar": 27,
+        "endLine": 581,
+        "endChar": 33
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51493a52_46f5aeec",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -151,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "577bf122_152f6f66",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "Same comment about SPIRV-Cross vs. Tint.",
+      "parentUuid": "51493a52_46f5aeec",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93f33cc1_ac09ec31",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -162,6 +264,24 @@
       "writtenOn": "2020-10-15T15:33:09Z",
       "side": 1,
       "message": "Is this covered by a test? Sorry if I missed it.",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ff40f8_d102f374",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:47:04Z",
+      "side": 1,
+      "message": "Same comment about SPIRV-Cross vs. Tint.",
+      "parentUuid": "93f33cc1_ac09ec31",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
