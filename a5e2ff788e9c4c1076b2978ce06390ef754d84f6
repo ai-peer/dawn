@@ -72,6 +72,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aabdf0ca_5292cc71",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T23:01:31Z",
+      "side": 1,
+      "message": "nit: remove this.",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bbab8e9_2960bd9e",
         "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
         "patchSetId": 7
