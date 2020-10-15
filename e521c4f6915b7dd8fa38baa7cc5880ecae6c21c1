@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0da26b_a44866bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T08:44:05Z",
+      "side": 1,
+      "message": "I had to put a couple blocks into if (isCompressed), I\u0027ll land them TBR.",
+      "revId": "e521c4f6915b7dd8fa38baa7cc5880ecae6c21c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
