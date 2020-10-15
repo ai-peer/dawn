@@ -242,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e148b949_910319dc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T15:58:31Z",
+      "side": 1,
+      "message": "Yeah I\u0027m happy to remove this part of the CL. That\u0027d work too and will fix itself once we use Tint.",
+      "parentUuid": "f33f94ec_96837d44",
+      "range": {
+        "startLine": 577,
+        "startChar": 27,
+        "endLine": 581,
+        "endChar": 33
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51493a52_46f5aeec",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
