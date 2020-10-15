@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6149f47d_a5edaf07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-15T15:17:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93764fff_a41a21d5",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-15T15:17:12Z",
+      "side": 1,
+      "message": "4\n\nwe don\u0027t use IterateEnumMask with this bitfield though so we could also remove this entire struct for now.",
+      "range": {
+        "startLine": 42,
+        "startChar": 42,
+        "endLine": 42,
+        "endChar": 43
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eaee5eb_793e9a09",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-15T15:17:12Z",
+      "side": 1,
+      "message": "So this is fine, but it could also be checked on bind group creation instead or in addition. Depends on if we want the pipeline to be invalid or the bind group or both. As far as I can tell, checking here (or one day in Tint/disallowed by the WGSL language) matches the spec.\n\nNot sure though if the depth check will be added to the section:\n\n\"\"\"\nIf bindingType is\n  \"sampled-texture\" or \"multisampled-texture\"\n  layoutBinding.textureComponentType is compatible with resource’s format.\n\"\"\"\n\nto also disallow depth-comparison with multisampled-texture",
+      "range": {
+        "startLine": 577,
+        "startChar": 27,
+        "endLine": 581,
+        "endChar": 33
+      },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
