@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1647da9e_1640c9de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:33:09Z",
+      "side": 1,
+      "message": "LGTM2 but please verify test coverage for your possibly-wrong reviewer",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93764fff_a41a21d5",
@@ -60,6 +77,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4865f8c_b4475261",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:33:09Z",
+      "side": 1,
+      "message": "uNit: comma splice (in English)",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d81cc1f_c506c244",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:33:09Z",
+      "side": 1,
+      "message": "Is this covered by a test? Sorry if I missed it.",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9eaee5eb_793e9a09",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -77,6 +128,40 @@
         "endLine": 581,
         "endChar": 33
       },
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51493a52_46f5aeec",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:33:09Z",
+      "side": 1,
+      "message": "uuNit: why compare against the converted (WGPU) type? It sort of feels like this is an error at the SPIR-V/WGSL level (to have a depth texture binding that\u0027s non-float) so why not compare against the original textureComponentType?",
+      "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f33cc1_ac09ec31",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-15T15:33:09Z",
+      "side": 1,
+      "message": "Is this covered by a test? Sorry if I missed it.",
       "revId": "8fc1b6b2550991b67468bb2aff477777f1fd6662",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
