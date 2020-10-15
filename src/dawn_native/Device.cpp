@@ -45,6 +45,26 @@
 
 namespace dawn_native {
 
+    namespace {
+        struct CreateReadyComputePipelineTask : QueueBase::TaskInFlight {
+            CreateReadyComputePipelineTask(ComputePipelineBase* pipeline,
+                                           WGPUCreateReadyComputePipelineCallback callback,
+                                           void* userdata)
+                : mPipeline(pipeline), mCallback(callback), mUserData(userdata) {
+            }
+            void Finish() override {
+                mCallback(WGPUCreateReadyPipelineStatus_Success,
+                          reinterpret_cast<WGPUComputePipeline>(mPipeline), "", mUserData);
+            }
+            ~CreateReadyComputePipelineTask() override = default;
+
+          private:
+            ComputePipelineBase* mPipeline;
+            WGPUCreateReadyComputePipelineCallback mCallback;
+            void* mUserData;
+        };
+    }  // anonymous namespace
+
     // DeviceBase sub-structures
 
     // The caches are unordered_sets of pointers with special hash and compare functions
@@ -610,6 +630,22 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    void DeviceBase::CreateReadyComputePipeline(const ComputePipelineDescriptor* descriptor,
+                                                WGPUCreateReadyComputePipelineCallback callback,
+                                                void* userdata) {
+        ComputePipelineBase* result = nullptr;
+        MaybeError maybeError = CreateComputePipelineInternal(&result, descriptor);
+        if (maybeError.IsError()) {
+            std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+            callback(WGPUCreateReadyPipelineStatus_Error, nullptr, error->GetMessage().c_str(),
+                     userdata);
+            return;
+        }
+
+        std::unique_ptr<CreateReadyComputePipelineTask> request =
+            std::make_unique<CreateReadyComputePipelineTask>(result, callback, userdata);
+        GetDefaultQueue()->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     PipelineLayoutBase* DeviceBase::CreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
