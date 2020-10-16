@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dd630b0_c9a8392e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T13:27:36Z",
+      "side": 1,
+      "message": "Austin PTAL again for the latest change that keeps depth24 plus non-sampleable.",
+      "revId": "debacb8c27dd8bee75e8cc94ffe402e81e6ad7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
