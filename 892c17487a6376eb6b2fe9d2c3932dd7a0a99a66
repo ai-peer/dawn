@@ -140,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00d3457_f99c7ec8",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-16T07:58:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a5fc0a_cf679221",
+      "revId": "892c17487a6376eb6b2fe9d2c3932dd7a0a99a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a448bde_ac0232d8",

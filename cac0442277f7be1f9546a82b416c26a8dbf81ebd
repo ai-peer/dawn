@@ -34,6 +34,24 @@
       "parentUuid": "75ff5a84_3216c5c3",
       "revId": "cac0442277f7be1f9546a82b416c26a8dbf81ebd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e001ffb_42ce4c89",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-16T07:58:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "374a820c_28ab47a9",
+      "revId": "cac0442277f7be1f9546a82b416c26a8dbf81ebd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
