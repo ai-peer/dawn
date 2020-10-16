@@ -145,6 +145,9 @@ namespace dawn_native {
         PipelineLayoutBase* CreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
         QuerySetBase* CreateQuerySet(const QuerySetDescriptor* descriptor);
         QueueBase* CreateQueue();
+        void CreateReadyComputePipeline(const ComputePipelineDescriptor* descriptor,
+                                        WGPUCreateReadyComputePipelineCallback callback,
+                                        void* userdata);
         RenderBundleEncoder* CreateRenderBundleEncoder(
             const RenderBundleEncoderDescriptor* descriptor);
         RenderPipelineBase* CreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
