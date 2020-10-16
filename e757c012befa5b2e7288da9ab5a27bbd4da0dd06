@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da9c2c49_8928f7d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001771
+      },
+      "writtenOn": "2020-10-16T02:22:24Z",
+      "side": 1,
+      "message": "This regressed static initializers in Chromium, see e.g. https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket.appspot.com/8866325819188693328/+/steps/check_static_initializers__with_patch_/0/stdout\n\nI\u0027m not sure what the protocol on reverting this is; please fix.",
+      "revId": "e757c012befa5b2e7288da9ab5a27bbd4da0dd06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
