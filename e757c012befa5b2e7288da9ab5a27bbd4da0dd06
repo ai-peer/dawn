@@ -16,6 +16,23 @@
       "message": "This regressed static initializers in Chromium, see e.g. https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket.appspot.com/8866325819188693328/+/steps/check_static_initializers__with_patch_/0/stdout\n\nI\u0027m not sure what the protocol on reverting this is; please fix.",
       "revId": "e757c012befa5b2e7288da9ab5a27bbd4da0dd06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4344a5f6_a26ff7cc",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000243
+      },
+      "writtenOn": "2020-10-16T02:26:42Z",
+      "side": 1,
+      "message": "We paused the roll to chromium and reverted the latest roll in https://crrev.com/c/2477138\nCulprit is this line.",
+      "revId": "e757c012befa5b2e7288da9ab5a27bbd4da0dd06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
