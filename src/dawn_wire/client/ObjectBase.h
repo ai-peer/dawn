@@ -17,6 +17,9 @@
 
 #include <dawn/webgpu.h>
 
+#include "common/LinkedList.h"
+#include "dawn_wire/WireCmd_autogen.h"
+
 namespace dawn_wire { namespace client {
 
     class Device;
@@ -25,14 +28,19 @@ namespace dawn_wire { namespace client {
     //  - A pointer to the device to get where to serialize commands
     //  - The external reference count
     //  - An ID that is used to refer to this object when talking with the server side
-    struct ObjectBase {
-        ObjectBase(Device* device, uint32_t refcount, uint32_t id)
-            : device(device), refcount(refcount), id(id) {
+    struct ObjectBase : public LinkNode<ObjectBase> {
+        ObjectBase(ObjectType objectType, Device* device, uint32_t refcount, uint32_t id)
+            : objectType(objectType), device(device), refcount(refcount), id(id) {
         }
 
-        Device* device;
+        ~ObjectBase() {
+            RemoveFromList();
+        }
+
+        const ObjectType objectType;
+        Device* const device;
         uint32_t refcount;
-        uint32_t id;
+        const uint32_t id;
     };
 
 }}  // namespace dawn_wire::client

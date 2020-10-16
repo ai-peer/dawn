@@ -17,6 +17,7 @@
 
 #include <dawn/webgpu.h>
 
+#include "common/LinkedList.h"
 #include "dawn_wire/WireCmd_autogen.h"
 #include "dawn_wire/client/ObjectBase.h"
 
@@ -25,6 +26,7 @@
 namespace dawn_wire { namespace client {
 
     class Client;
+    class LinkedObjectBase;
     class Queue;
 
     class Device : public ObjectBase {
@@ -61,7 +63,11 @@ namespace dawn_wire { namespace client {
 
         WGPUQueue GetDefaultQueue();
 
+        void TrackObject(ObjectBase* object);
+
       private:
+        void DestroyAllObjects();
+
         struct ErrorScopeData {
             WGPUErrorCallback callback = nullptr;
             void* userdata = nullptr;
@@ -87,6 +93,8 @@ namespace dawn_wire { namespace client {
         void* mDeviceLostUserdata = nullptr;
 
         Queue* mDefaultQueue = nullptr;
+
+        LinkedList<ObjectBase> mObjects;
     };
 
 }}  // namespace dawn_wire::client

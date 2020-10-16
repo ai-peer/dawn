@@ -26,7 +26,9 @@ namespace dawn_wire { namespace client {
 
     class Queue : public ObjectBase {
       public:
-        using ObjectBase::ObjectBase;
+        Queue(Device* device_, uint32_t refcount_, uint32_t id_)
+            : ObjectBase(ObjectType::Queue, device_, refcount_, id_) {
+        }
 
         WGPUFence CreateFence(const WGPUFenceDescriptor* descriptor);
         void WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size);

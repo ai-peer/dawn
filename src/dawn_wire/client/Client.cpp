@@ -53,8 +53,19 @@ namespace dawn_wire { namespace client {
     }
 
     Client::~Client() {
-        if (mDevice != nullptr) {
-            DeviceAllocator().Free(mDevice);
+        DestroyAllObjects();
+    }
+
+    void Client::DestroyAllObjects() {
+        while (!mObjects.empty()) {
+            ObjectBase* object = mObjects.head()->value();
+
+            // The client only owns Device objects.
+            ASSERT(object->objectType == ObjectType::Device);
+
+            // Note: We don't send a DestroyObject command for the device
+            // since freeing a device obejct is done out of band.
+            DeviceAllocator().Free(static_cast<Device*>(object));
         }
     }
 
@@ -67,7 +78,7 @@ namespace dawn_wire { namespace client {
 
     ReservedTexture Client::ReserveTexture(WGPUDevice cDevice) {
         Device* device = FromAPI(cDevice);
-        ObjectAllocator<Texture>::ObjectAndSerial* allocation = TextureAllocator().New(device);
+        auto* allocation = TextureAllocator().New(device);
 
         ReservedTexture result;
         result.texture = ToAPI(allocation->object.get());
@@ -81,6 +92,10 @@ namespace dawn_wire { namespace client {
         if (mDevice != nullptr) {
             mDevice->HandleDeviceLost("GPU connection lost");
         }
+    }
+
+    void Client::TrackObject(ObjectBase* object) {
+        mObjects.Append(object);
     }
 
 }}  // namespace dawn_wire::client

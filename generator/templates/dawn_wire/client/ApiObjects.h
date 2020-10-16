@@ -15,6 +15,8 @@
 #ifndef DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 #define DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 
+#include "dawn_wire/WireCmd_autogen.h"
+
 namespace dawn_wire { namespace client {
 
     {% for type in by_category["object"] %}
@@ -23,7 +25,8 @@ namespace dawn_wire { namespace client {
             class {{Type}};
         {% else %}
             struct {{type.name.CamelCase()}} : ObjectBase {
-                using ObjectBase::ObjectBase;
+                // using ObjectBase::ObjectBase;
+                {{type.name.CamelCase()}}(Device* device_, uint32_t refcount_, uint32_t id_) : ObjectBase(ObjectType::{{type.name.CamelCase()}}, device_, refcount_, id_) {}
             };
         {% endif %}
 

@@ -26,7 +26,9 @@ namespace dawn_wire { namespace client {
 
     class Buffer : public ObjectBase {
       public:
-        using ObjectBase::ObjectBase;
+        Buffer(Device* device_, uint32_t refcount_, uint32_t id_)
+            : ObjectBase(ObjectType::Buffer, device_, refcount_, id_) {
+        }
 
         static WGPUBuffer Create(Device* device, const WGPUBufferDescriptor* descriptor);
         static WGPUBuffer CreateError(Device* device);
