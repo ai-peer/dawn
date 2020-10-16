@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fefba8_a49ad74d",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-16T11:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca86046_36ebb2a4",
+      "revId": "2e993184f7af90d999d771f8318ee8d45a430cf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fdc06d1_1cc5a010",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-10-16T09:46:23Z",
       "side": 1,
       "message": "nit: requires",
+      "range": {
+        "startLine": 93,
+        "startChar": 50,
+        "endLine": 93,
+        "endChar": 58
+      },
+      "revId": "2e993184f7af90d999d771f8318ee8d45a430cf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "224d60ac_ba963dde",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-16T11:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fdc06d1_1cc5a010",
       "range": {
         "startLine": 93,
         "startChar": 50,
