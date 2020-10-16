@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "4ffae2496b5bd10ef1f67b056d8f9272f277afc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f75d5f_d4ebb71b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-16T20:55:54Z",
+      "side": 1,
+      "message": "LGTM (assuming Chrome is ok with it).",
+      "revId": "4ffae2496b5bd10ef1f67b056d8f9272f277afc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
