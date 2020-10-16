@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d136ded_1c8cedf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T09:46:23Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "2e993184f7af90d999d771f8318ee8d45a430cf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca86046_36ebb2a4",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T09:46:23Z",
+      "side": 1,
+      "message": "nit: also edit CMakeLists.txt",
+      "revId": "2e993184f7af90d999d771f8318ee8d45a430cf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fdc06d1_1cc5a010",
+        "filename": "src/tests/end2end/CreateReadyPipelineTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T09:46:23Z",
+      "side": 1,
+      "message": "nit: requires",
+      "range": {
+        "startLine": 93,
+        "startChar": 50,
+        "endLine": 93,
+        "endChar": 58
+      },
+      "revId": "2e993184f7af90d999d771f8318ee8d45a430cf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
