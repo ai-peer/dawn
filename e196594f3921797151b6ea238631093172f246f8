@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "e196594f3921797151b6ea238631093172f246f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81d4556_6b9c7c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-16T14:16:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e196594f3921797151b6ea238631093172f246f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b8bd40_02ee4382",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-16T14:16:02Z",
+      "side": 1,
+      "message": "Why this value? Comment on the reasoning?",
+      "revId": "e196594f3921797151b6ea238631093172f246f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
