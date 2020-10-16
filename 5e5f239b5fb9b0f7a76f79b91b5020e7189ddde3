@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5918513_3a8da9b2",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T08:51:01Z",
+      "side": 0,
+      "message": "Ah it must have had a static initializer because of the vtable. If we make the constructor constexpr I think it will be fine as per https://chromium.googlesource.com/chromium/src/+/master/docs/static_initializers.md",
+      "revId": "5e5f239b5fb9b0f7a76f79b91b5020e7189ddde3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
