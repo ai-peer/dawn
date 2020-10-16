@@ -16,6 +16,46 @@
       "message": "Still LGTM, let\u0027s wait for Austin\u0027s review.",
       "revId": "c8e8d0fd4806c58034b022f03f4484c91e4c3829",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e132dfcb_41a63891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-16T14:27:32Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c8e8d0fd4806c58034b022f03f4484c91e4c3829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3d940f_eeb50295",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-16T14:27:32Z",
+      "side": 1,
+      "message": "nit: empty namespace",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "c8e8d0fd4806c58034b022f03f4484c91e4c3829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
