@@ -186,6 +186,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b749e3f1_0cf64228",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-16T14:14:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0eea10f4_b2781d9f",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 80
+      },
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0f8a80_f4967926",
@@ -217,6 +241,24 @@
       "side": 1,
       "message": "I tried doing more, but it was a daunting because there\u0027s so many things to do. In follow ups I\u0027ll (slowly, this is outside of work hours) fix most of the hardcoded ones.",
       "parentUuid": "bb0f8a80_f4967926",
+      "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3f16b4_74fbe427",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-16T14:14:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9b9ff4d9_4a8d464e",
       "revId": "a5e2ff788e9c4c1076b2978ce06390ef754d84f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
