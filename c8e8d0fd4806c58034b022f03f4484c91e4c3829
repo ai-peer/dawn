@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a236d919_fdb74feb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-16T11:58:18Z",
+      "side": 1,
+      "message": "Still LGTM, let\u0027s wait for Austin\u0027s review.",
+      "revId": "c8e8d0fd4806c58034b022f03f4484c91e4c3829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
