@@ -269,6 +269,7 @@ int main(int argc, const char* argv[]) {
     dawnProcSetProcs(&procs);
 
     instance = std::make_unique<dawn_native::Instance>();
+    instance->EnableBackendValidation(true);
     instance->DiscoverDefaultAdapters();
 
     std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
@@ -276,7 +277,8 @@ int main(int argc, const char* argv[]) {
     for (dawn_native::Adapter& adapter : adapters) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
-        if (properties.backendType != wgpu::BackendType::Null) {
+        if (properties.backendType != wgpu::BackendType::Null &&
+            properties.backendType != wgpu::BackendType::Metal) {
             chosenAdapter = adapter;
             break;
         }
