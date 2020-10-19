@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2020 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,22 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn_native/CachedObject.h"
 #include "dawn_native/FingerprintRecorder.h"
+#include "dawn_native/CachedObject.h"
 
 namespace dawn_native {
-    bool CachedObject::IsCachedReference() const {
-        return mIsCachedReference;
+
+    void FingerprintRecorder::recordObject(RecordedObject* obj) {
+        ASSERT(obj != nullptr);
+        if (obj->mKey != kEmptyKeyValue) {
+            record(obj->getKey());
+        } else {
+            obj->Fingerprint(this);
+            obj->mKey = mHash;
+        }
     }
 
-    void CachedObject::SetIsCachedReference() {
-        mIsCachedReference = true;
+    size_t FingerprintRecorder::getKey() const {
+        ASSERT(mHash != kEmptyKeyValue);
+        return mHash;
     }
-
-    size_t RecordedObject::getKey() const {
-        // Object was never recorded, the empty key should never be used.
-        ASSERT(mKey != kEmptyKeyValue);
-        return mKey;
-    }
-
 }  // namespace dawn_native

@@ -80,6 +80,9 @@ namespace dawn_native { namespace d3d12 {
         mPCIInfo.deviceId = adapterDesc.DeviceId;
         mPCIInfo.vendorId = adapterDesc.VendorId;
 
+        // D3D12 specific properties required for pipeline caching.
+        mPCIExtendedInfo.subSysId = adapterDesc.SubSysId;
+
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
         if (adapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
@@ -139,6 +142,9 @@ namespace dawn_native { namespace d3d12 {
             // https://crbug.com/dawn/422
             D3D12_MESSAGE_ID_EXECUTECOMMANDLISTS_GPU_WRITTEN_READBACK_RESOURCE_MAPPED,
 
+            // Dawn PSO cache could be empty.
+            D3D12_MESSAGE_ID_LOADPIPELINE_NAMENOTFOUND,
+
             //
             // Temporary IDs: list of warnings that should be fixed or promoted
             //
@@ -192,6 +198,10 @@ namespace dawn_native { namespace d3d12 {
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
         return Device::Create(this, descriptor);
+    }
+
+    const PCIExtendedInfo& Adapter::GetPCIExtendedInfo() const {
+        return mPCIExtendedInfo;
     }
 
 }}  // namespace dawn_native::d3d12

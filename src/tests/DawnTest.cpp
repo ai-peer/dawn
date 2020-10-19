@@ -172,6 +172,65 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param) {
     return os;
 }
 
+// Implementation of DawnTestPlatform
+
+DawnTestPlatform::DawnTestPlatform(bool usePersistentCache)
+    : dawn_platform::Platform(), mUsePersistentCache(usePersistentCache) {
+}
+
+// Implementation of FakePersistentCache
+
+FakePersistentCache::~FakePersistentCache() {
+    if (!mCache.empty()) {
+        logPersistentCacheInfo();
+    }
+}
+
+bool FakePersistentCache::storeData(WGPUDevice device,
+                                    const void* key,
+                                    size_t keySize,
+                                    const void* value,
+                                    size_t valueSize) {
+    const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+
+    const uint8_t* value_start = reinterpret_cast<const uint8_t*>(value);
+    std::vector<uint8_t> entry_value(value_start, value_start + valueSize);
+
+    mCacheInfo.total_size += valueSize;
+
+    return mCache.insert({keyStr, std::move(entry_value)}).second;
+}
+
+size_t FakePersistentCache::loadData(WGPUDevice device,
+                                     const void* key,
+                                     size_t keySize,
+                                     void* value,
+                                     size_t valueSize) {
+    std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+    auto entry = mCache.find(keyStr);
+    if (entry == mCache.end()) {
+        mCacheInfo.miss_count++;
+        return 0;
+    }
+    if (valueSize >= entry->second.size()) {
+        memcpy(value, entry->second.data(), entry->second.size());
+    }
+    mCacheInfo.hit_count++;
+    return entry->second.size();
+}
+
+void FakePersistentCache::logPersistentCacheInfo() const {
+    dawn::LogMessage log = dawn::InfoLog();
+    log << "Persistent cache info\n";
+    log << "Data size: " << mCacheInfo.total_size << " bytes (" << mCache.size() << " entries)\n";
+    log << "Hit / Miss: " << mCacheInfo.hit_count << " / " << mCacheInfo.miss_count << "\n";
+
+    const size_t lookupCount = mCacheInfo.miss_count + mCacheInfo.hit_count;
+    const size_t hit_ratio =
+        (lookupCount == 0) ? 0 : ((mCacheInfo.hit_count / static_cast<float>(lookupCount)) * 100);
+    log << "Hit Ratio: " << hit_ratio << "%\n";
+}
+
 // Implementation of DawnTestEnvironment
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv) {
@@ -227,6 +286,17 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 
         if (strcmp("--skip-validation", argv[i]) == 0) {
             mSkipDawnValidation = true;
+            continue;
+        }
+
+        if (strcmp("-p", argv[i]) == 0 || strcmp("--enable-persistent-cache", argv[i]) == 0) {
+            mUsePersistentCache = true;
+            continue;
+        }
+
+        if (strcmp("-n", argv[i]) == 0 ||
+            strcmp("--disable-persistent-cache-nuking", argv[i]) == 0) {
+            mNukePersistentCache = false;
             continue;
         }
 
@@ -294,7 +364,9 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
                    "on multi-GPU systems \n"
                    "  --exclusive-device-type-preference: Comma-delimited list of preferred device "
                    "types. For each backend, tests will run only on adapters that match the first "
-                   "available device type\n";
+                   "available device type\n"
+                   "  -p, --use-persistent-cache: Use the persistent cache for all "
+                   "tests (defaults to reset cache per test)\n";
             continue;
         }
     }
@@ -420,7 +492,10 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
            "BeginCaptureOnStartup: "
         << (mBeginCaptureOnStartup ? "true" : "false")
         << "\n"
-           "\n"
+           "UsePersistentCache: "
+        << (mUsePersistentCache ? "true" : "false") << " ("
+        << (mNukePersistentCache ? "nuke after each test" : "no nuking") << ")\n"
+        << "\n"
         << "System adapters: \n";
 
     for (const TestAdapterProperties& properties : mAdapterProperties) {
@@ -445,6 +520,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
 void DawnTestEnvironment::SetUp() {
     mInstance = CreateInstanceAndDiscoverAdapters();
     ASSERT(mInstance);
+
+    mPlatform = std::make_unique<DawnTestPlatform>(mUsePersistentCache);
+    mInstance->SetPlatform(mPlatform.get());
 }
 
 void DawnTestEnvironment::TearDown() {
@@ -469,6 +547,14 @@ dawn_native::Instance* DawnTestEnvironment::GetInstance() const {
     return mInstance.get();
 }
 
+bool DawnTestEnvironment::IsPersistentCacheNukedEnabled() const {
+    return mNukePersistentCache;
+}
+
+bool DawnTestEnvironment::UsePersistentCache() const {
+    return mUsePersistentCache;
+}
+
 bool DawnTestEnvironment::HasVendorIdFilter() const {
     return mHasVendorIdFilter;
 }
@@ -482,6 +568,10 @@ const char* DawnTestEnvironment::GetWireTraceDir() const {
         return nullptr;
     }
     return mWireTraceDir.c_str();
+}
+
+DawnTestPlatform* DawnTestEnvironment::GetPlatform() const {
+    return mPlatform.get();
 }
 
 class WireServerTraceLayer : public dawn_wire::CommandHandler {
@@ -610,6 +700,10 @@ bool DawnTestBase::IsDawnValidationSkipped() const {
     return gTestEnv->IsDawnValidationSkipped();
 }
 
+bool DawnTestBase::UsesPersistentCache() const {
+    return gTestEnv->UsePersistentCache();
+}
+
 bool DawnTestBase::HasWGSL() const {
 #ifdef DAWN_ENABLE_WGSL
     return true;
@@ -708,6 +802,12 @@ void DawnTestBase::SetUp() {
     ASSERT_NE(nullptr, backendDevice);
 
     backendProcs = dawn_native::GetProcs();
+
+    // Nuke the persistent cache so each test can run independently.
+    if (gTestEnv->UsePersistentCache() && gTestEnv->IsPersistentCacheNukedEnabled()) {
+        // TODO: prefix the keys from the footprint.
+        gTestEnv->GetPlatform()->CachingInterface(nullptr, 0);
+    }
 
     // Choose whether to use the backend procs and devices directly, or set up the wire.
     WGPUDevice cDevice = nullptr;

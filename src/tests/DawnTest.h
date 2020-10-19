@@ -15,6 +15,7 @@
 #ifndef TESTS_DAWNTEST_H_
 #define TESTS_DAWNTEST_H_
 
+#include <dawn_platform/DawnPlatform.h>
 #include "common/Log.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
@@ -174,6 +175,84 @@ namespace dawn_wire {
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
 
+class FakePersistentCache : public dawn_platform::CachingInterface {
+  public:
+    FakePersistentCache() = default;
+    ~FakePersistentCache() override;
+
+    // PersistentCache API
+    bool storeData(WGPUDevice device,
+                   const void* key,
+                   size_t keySize,
+                   const void* value,
+                   size_t valueSize) override;
+
+    size_t loadData(WGPUDevice device,
+                    const void* key,
+                    size_t keySize,
+                    void* value,
+                    size_t valueSize) override;
+
+    void logPersistentCacheInfo() const;
+
+    using Blob = std::vector<uint8_t>;
+    using FakeCache = std::unordered_map<std::string, Blob>;
+
+    FakeCache mCache;
+
+    struct CacheInfo {
+        size_t hit_count = 0;
+        size_t miss_count = 0;
+        size_t total_size = 0;
+    } mCacheInfo;
+};
+
+class DawnTestPlatform : public dawn_platform::Platform {
+  public:
+    DawnTestPlatform(bool usePersistentCache);
+    ~DawnTestPlatform() override = default;
+
+    dawn_platform::CachingInterface* CachingInterface(void* fingerprint,
+                                                      size_t fingerprintSize) override {
+        if (!mUsePersistentCache) {
+            return nullptr;
+        }
+        mPersistentCache = FakePersistentCache{};  // reset
+        return &mPersistentCache;
+    }
+
+  private:
+    dawn_platform::CachingInterface* GetCachingInterface() override {
+        return &mPersistentCache;
+    }
+
+    bool mUsePersistentCache = true;
+    FakePersistentCache mPersistentCache;
+
+    // Tracing API
+    const unsigned char* GetTraceCategoryEnabledFlag(
+        dawn_platform::TraceCategory category) override {
+        return nullptr;
+    }
+
+    double MonotonicallyIncreasingTime() override {
+        return 0;
+    }
+
+    uint64_t AddTraceEvent(char phase,
+                           const unsigned char* categoryGroupEnabled,
+                           const char* name,
+                           uint64_t id,
+                           double timestamp,
+                           int numArgs,
+                           const char** argNames,
+                           const unsigned char* argTypes,
+                           const uint64_t* argValues,
+                           unsigned char flags) override {
+        return 0;
+    }
+};
+
 class DawnTestEnvironment : public testing::Environment {
   public:
     DawnTestEnvironment(int argc, char** argv);
@@ -195,6 +274,10 @@ class DawnTestEnvironment : public testing::Environment {
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
     const char* GetWireTraceDir() const;
+    DawnTestPlatform* GetPlatform() const;
+
+    bool IsPersistentCacheNukedEnabled() const;
+    bool UsePersistentCache() const;
 
   protected:
     std::unique_ptr<dawn_native::Instance> mInstance;
@@ -210,12 +293,15 @@ class DawnTestEnvironment : public testing::Environment {
     bool mSkipDawnValidation = false;
     bool mBeginCaptureOnStartup = false;
     bool mHasVendorIdFilter = false;
+    bool mNukePersistentCache = true;
+    bool mUsePersistentCache = false;
     uint32_t mVendorIdFilter = 0;
     std::string mWireTraceDir;
     std::vector<dawn_native::DeviceType> mDevicePreferences;
     std::vector<TestAdapterProperties> mAdapterProperties;
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
+    std::unique_ptr<DawnTestPlatform> mPlatform;
 };
 
 class DawnTestBase {
@@ -262,6 +348,8 @@ class DawnTestBase {
 
     wgpu::Instance GetInstance() const;
     dawn_native::Adapter GetAdapter() const;
+
+    bool UsesPersistentCache() const;
 
   protected:
     wgpu::Device device;
@@ -323,6 +411,8 @@ class DawnTestBase {
     virtual std::vector<const char*> GetRequiredExtensions();
 
     const wgpu::AdapterProperties& GetAdapterProperties() const;
+
+    void resetPersistentCache();
 
   private:
     AdapterTestParam mParam;

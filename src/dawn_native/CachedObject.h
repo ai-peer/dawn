@@ -15,9 +15,31 @@
 #ifndef DAWNNATIVE_CACHED_OBJECT_H_
 #define DAWNNATIVE_CACHED_OBJECT_H_
 
+#include <limits>
 #include "dawn_native/ObjectBase.h"
 
 namespace dawn_native {
+
+    class FingerprintRecorder;
+
+    static constexpr size_t kEmptyKeyValue = std::numeric_limits<size_t>::max();
+
+    // Objects that record themselves upon creation so they can us used in a cache.
+    // This interface is separated from CachedObject because blueprint objects are only used for
+    // lookup but still have the same record.
+    class RecordedObject {
+      public:
+        // Implemented by cached objects so they can record themselves upon creation.
+        // Once recorded, getKey() can be used to quickly lookup or compare the object in its cache.
+        virtual void Fingerprint(FingerprintRecorder* recorder) = 0;
+
+        size_t getKey() const;
+
+      private:
+        friend class FingerprintRecorder;
+
+        size_t mKey = kEmptyKeyValue;
+    };
 
     // Some objects are cached so that instead of creating new duplicate objects,
     // we increase the refcount of an existing object.

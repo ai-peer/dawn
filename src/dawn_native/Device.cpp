@@ -31,6 +31,7 @@
 #include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/MapRequestTracker.h"
+#include "dawn_native/PersistentCache.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Queue.h"
@@ -107,6 +108,7 @@ namespace dawn_native {
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
+        mPersistentCache = std::make_unique<PersistentCache>(this);
 
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
@@ -269,6 +271,11 @@ namespace dawn_native {
     ErrorScope* DeviceBase::GetCurrentErrorScope() {
         ASSERT(mCurrentErrorScope.Get() != nullptr);
         return mCurrentErrorScope.Get();
+    }
+
+    PersistentCache* DeviceBase::GetPersistentCache() {
+        ASSERT(mPersistentCache.get() != nullptr);
+        return mPersistentCache.get();
     }
 
     MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
