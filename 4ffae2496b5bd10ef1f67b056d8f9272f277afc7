@@ -33,6 +33,23 @@
       "message": "LGTM (assuming Chrome is ok with it).",
       "revId": "4ffae2496b5bd10ef1f67b056d8f9272f277afc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b822e0_2c18f056",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-19T07:02:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4ffae2496b5bd10ef1f67b056d8f9272f277afc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
