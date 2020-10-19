@@ -67,6 +67,24 @@
       "message": "Is there a SwiftShader bug here? Link if so?\n\nIf it\u0027s not a bug, is there a desire for a Vk precision extension in SS to help us pass this test?",
       "revId": "e05f54c9a9512f0538708a33cdc5fbc19be72643",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6765df03_26e915ac",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-19T16:44:24Z",
+      "side": 1,
+      "message": "It\u0027s technical not a Swiftshader bug because the Vulkan spec says that the resolve computation is implementation dependent (could even be zeroes, yay). That said all GPUs on all APIs agree on this result, but not Swiftshader.",
+      "parentUuid": "b0211674_9b7444f7",
+      "revId": "e05f54c9a9512f0538708a33cdc5fbc19be72643",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
