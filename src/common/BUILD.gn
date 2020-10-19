@@ -96,6 +96,7 @@ config("dawn_internal") {
   # Enable more warnings that were found when using Dawn in other projects
   if (is_clang) {
     cflags += [
+      "-Weverything",
       "-Wconditional-uninitialized",
       "-Wcstring-format-directive",
       "-Wc++11-narrowing",
@@ -119,7 +120,50 @@ config("dawn_internal") {
     # or 64bit systems. Without this the following produces an error on 64bit:
     #
     #   if (myUint64 > std::numeric_limits<size_t>::max()) {...}
-    cflags += [ "-Wno-tautological-type-limit-compare" ]
+    cflags += [
+      "-Wno-tautological-type-limit-compare",
+      "-Wno-c++98-compat-pedantic",
+      "-Wno-padded",
+      "-Wno-undef",
+      "-Wno-shadow-field-in-constructor",
+      "-Wno-used-but-marked-unused",
+      "-Wno-unused-template",
+      "-Wno-weak-vtables",
+      "-Wno-covered-switch-default",
+      "-Wno-suggest-destructor-override",
+      "-Wno-comma",
+      "-Wno-zero-as-null-pointer-constant",
+      "-Wno-global-constructors",
+      "-Wno-non-virtual-dtor",
+      "-Wno-documentation",
+      "-Wno-implicit-int-conversion",
+      "-Wno-exit-time-destructors",
+      "-Wno-weak-template-vtables",
+      "-Wno-float-equal",
+      "-Wno-shorten-64-to-32",
+      "-Wno-shadow-uncaptured-local",
+      "-Wno-missing-prototypes",
+      "-Wno-sign-conversion",
+      "-Wno-double-promotion",
+      "-Wno-switch-enum",
+      "-Wno-missing-variable-declarations",
+      "-Wno-shadow",
+      "-Wno-unreachable-code-break",
+      "-Wno-deprecated-copy-dtor",
+      "-Wno-newline-eof",
+      "-Wno-float-conversion",
+      "-Wno-implicit-float-conversion",
+      "-Wno-suggest-override",
+      "-Wno-undefined-reinterpret-cast",
+      "-Wno-documentation-unknown-command",
+      "-Wno-old-style-cast",
+      "-Wno-unreachable-code-return",
+      "-Wno-undefined-func-template",
+      "-Wno-unused-member-function",
+      "-Wno-shift-sign-overflow",
+      "-Wno-strict-selector-match",
+      "-Wno-objc-messaging-id",
+    ]
 
     if (is_win) {
       cflags += [
