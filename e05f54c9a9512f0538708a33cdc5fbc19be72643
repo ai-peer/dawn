@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "e05f54c9a9512f0538708a33cdc5fbc19be72643",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae1db663_03d03716",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-19T16:40:19Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "e05f54c9a9512f0538708a33cdc5fbc19be72643",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0211674_9b7444f7",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-19T16:40:19Z",
+      "side": 1,
+      "message": "Is there a SwiftShader bug here? Link if so?\n\nIf it\u0027s not a bug, is there a desire for a Vk precision extension in SS to help us pass this test?",
+      "revId": "e05f54c9a9512f0538708a33cdc5fbc19be72643",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
