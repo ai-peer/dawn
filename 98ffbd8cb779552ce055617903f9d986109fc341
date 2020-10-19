@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "675e9849_b89beaf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-19T15:10:16Z",
+      "side": 1,
+      "message": "See https://ci.chromium.org/p/chromium/builders/try/chromeos-amd64-generic-rel/675410?",
+      "revId": "98ffbd8cb779552ce055617903f9d986109fc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
