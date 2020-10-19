@@ -16,6 +16,23 @@
       "message": "See https://logs.chromium.org/logs/skia/4f5a18d831828d11/+/steps/ninja/0/stdout",
       "revId": "0ae1c47d8d03865f92ccd026aeb6159611e42e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2afdd9c9_f639fe98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-19T14:48:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ae1c47d8d03865f92ccd026aeb6159611e42e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
