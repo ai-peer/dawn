@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a3b2a0_e3245dfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-20T09:37:33Z",
+      "side": 1,
+      "message": "This patch is almost ready to send for reviewing. Except the issue I mentioned in the comments. I\u0027d like to send it out to collect comments about the internal pipeline and the thoughts on the issue.\n\nThanks !",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30065fc_00a53961",
+        "filename": "src/tests/end2end/BlitTextureForBrowserTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-20T09:37:33Z",
+      "side": 1,
+      "message": "This test can pass in a smaller size texture. I tried 1x1, 12 x 1 or 6 x  6 in my local machine. And the test works fine.\nBut when it becomes a bit large in width/height, the value will have errors, for example if we have the size 13 x 1, in my local machine.\nExpected:\n00 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05 00 00 00 06 00 00 00 07 00 00 00 08 00 00 00 09 00 00 00 0A 00 00 00 \n// expected values\n0B 00 00 00 0C 00 00 00\nActual:\n00 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05 00 00 00 06 00 00 00 07 00 00 00 08 00 00 00 09 00 00 00 0A 00 00 00 \n// error values\n0C 00 00 00 0C 00 00 00\n\nI suspect it is the sampler precise issue(again. the 10 x 1 or 6 x 6 size texture can pass the test). But I\u0027m still in trying. Send this out to see your comments about this.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
