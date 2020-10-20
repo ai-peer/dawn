@@ -185,16 +185,16 @@ namespace dawn_native { namespace metal {
                 mPCIInfo.deviceId = ids.deviceId;
             }
 
-#if defined(DAWN_PLATFORM_IOS)
+#if defined(DAWN_PLATFORM_MACOS)
             mAdapterType = wgpu::AdapterType::IntegratedGPU;
-            const char* systemName = "macOS";
-#elif defined(DAWN_PLATFORM_MACOS)
+            const char* systemName = "macOS ";
+#elif defined(DAWN_PLATFORM_IOS)
             if ([device isLowPower]) {
                 mAdapterType = wgpu::AdapterType::IntegratedGPU;
             } else {
                 mAdapterType = wgpu::AdapterType::DiscreteGPU;
             }
-            const char* systemName = "iOS";
+            const char* systemName = "iOS ";
 #else
 #    error "Unsupported Apple platform."
 #endif
