@@ -25,18 +25,24 @@ namespace dawn_native {
 
     class ComputePipelineBase;
     class DeviceBase;
+    class PipelineBase;
+    class RenderPipelineBase;
 
-    struct CreateReadyComputePipelineTask {
-        CreateReadyComputePipelineTask(ComputePipelineBase* pipeline,
-                                       WGPUCreateReadyComputePipelineCallback callback,
-                                       void* userdata);
-        ~CreateReadyComputePipelineTask();
+    struct CreateReadyPipelineTask {
+        CreateReadyPipelineTask(ComputePipelineBase* pipeline,
+                                WGPUCreateReadyComputePipelineCallback callback,
+                                void* userdata);
+        CreateReadyPipelineTask(RenderPipelineBase* pipeline,
+                                WGPUCreateReadyRenderPipelineCallback callback,
+                                void* userdata);
+        ~CreateReadyPipelineTask();
 
         void Finish();
 
       private:
-        ComputePipelineBase* mPipeline;
-        WGPUCreateReadyComputePipelineCallback mCallback;
+        PipelineBase* mPipeline;
+        WGPUCreateReadyComputePipelineCallback mCreateReadyComputePipelineCallback;
+        WGPUCreateReadyRenderPipelineCallback mCreateReadyRenderPipelineCallback;
         void* mUserData;
     };
 
@@ -45,14 +51,13 @@ namespace dawn_native {
         CreateReadyPipelineTracker(DeviceBase* device);
         ~CreateReadyPipelineTracker();
 
-        void TrackTask(std::unique_ptr<CreateReadyComputePipelineTask> task,
-                       ExecutionSerial serial);
+        void TrackTask(std::unique_ptr<CreateReadyPipelineTask> task, ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
 
       private:
         DeviceBase* mDevice;
-        SerialQueue<ExecutionSerial, std::unique_ptr<CreateReadyComputePipelineTask>>
-            mCreateReadyComputePipelineTasksInFlight;
+        SerialQueue<ExecutionSerial, std::unique_ptr<CreateReadyPipelineTask>>
+            mCreateReadyPipelineTasksInFlight;
     };
 
 }  // namespace dawn_native
