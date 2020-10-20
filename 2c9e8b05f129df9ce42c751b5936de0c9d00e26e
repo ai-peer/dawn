@@ -50,6 +50,24 @@
       "message": "nit: add a comment that says is can be None in particular circumstances with namespace modules?\n\nAnd maybe \u003d\u003d None instead of the implicit conversion?",
       "revId": "2c9e8b05f129df9ce42c751b5936de0c9d00e26e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb488ff6_f6db2c4d",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-20T14:20:05Z",
+      "side": 1,
+      "message": "Done. Left the implicit conversion to match line 194",
+      "parentUuid": "bec07032_f329e019",
+      "revId": "2c9e8b05f129df9ce42c751b5936de0c9d00e26e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
