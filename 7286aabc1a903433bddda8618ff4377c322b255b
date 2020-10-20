@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c06e314_a71045ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "LGTM too with some minor nits",
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f545a1f_bdda6d72",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "nit: set this to null so we\u0027re sure it doesn\u0027t get called more than once.",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e2b621_2134178e",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "nit: set this to null so we\u0027re sure it doesn\u0027t get called more than once.",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 42
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a77c6f_a485d84c",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "nit: probably can be `final`",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 41
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b21609_c9b9b774",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "nit: can be `final`",
+      "range": {
+        "startLine": 46,
+        "startChar": 22,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b1aca02_1869d8c3",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-20T19:22:44Z",
+      "side": 1,
+      "message": "definitely prefer the current version without the reinterpret_cast\u0027ing",
+      "parentUuid": "364bb7cd_29852207",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147a6503_9cc9720d",
         "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
         "patchSetId": 2
