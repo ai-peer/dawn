@@ -36,6 +36,7 @@ namespace dawn_native {
     class DynamicUploader;
     class ErrorScope;
     class ErrorScopeTracker;
+    class InternalPipelineStore;
     class StagingBufferBase;
 
     class DeviceBase {
@@ -154,6 +155,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        InternalPipelineStore* GetInternalPipelineStore();
 
         // For Dawn Wire
         BufferBase* CreateErrorBuffer();
@@ -374,6 +376,8 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
     };
 
 }  // namespace dawn_native

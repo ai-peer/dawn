@@ -263,6 +263,7 @@ source_set("dawn_end2end_tests_sources") {
     "DawnTest.h",
     "end2end/BasicTests.cpp",
     "end2end/BindGroupTests.cpp",
+    "end2end/BlitTextureForBrowserTests.cpp",
     "end2end/BufferTests.cpp",
     "end2end/BufferZeroInitTests.cpp",
     "end2end/ClipSpaceTests.cpp",
