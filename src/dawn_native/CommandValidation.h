@@ -19,6 +19,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Texture.h"
 
+#include <map>
 #include <vector>
 
 namespace dawn_native {
@@ -39,7 +40,10 @@ namespace dawn_native {
 
     MaybeError ValidatePassResourceUsage(const PassResourceUsage& usage);
 
-    MaybeError ValidateTimestampQuery(QuerySetBase* querySet, uint32_t queryIndex);
+    MaybeError ValidateTimestampQuery(
+        QuerySetBase* querySet,
+        uint32_t queryIndex,
+        const std::map<QuerySetBase*, std::vector<bool>>& usedQueryIndexes);
 
     ResultOrError<uint64_t> ComputeRequiredBytesInCopy(const TexelBlockInfo& blockInfo,
                                                        const Extent3D& copySize,
