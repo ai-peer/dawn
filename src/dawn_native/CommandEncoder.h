@@ -22,6 +22,7 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
 
+#include <map>
 #include <string>
 
 namespace dawn_native {
@@ -36,6 +37,8 @@ namespace dawn_native {
         CommandBufferResourceUsage AcquireResourceUsages();
 
         void TrackUsedQuerySet(QuerySetBase* querySet);
+        void TrackUsedQueryIndex(QuerySetBase* querySet, uint32_t queryIndex);
+        const std::map<QuerySetBase*, std::vector<bool>>& GetUsedQueryIndexes() const;
 
         // Dawn API
         ComputePassEncoder* BeginComputePass(const ComputePassDescriptor* descriptor);
@@ -77,6 +80,7 @@ namespace dawn_native {
         std::set<BufferBase*> mTopLevelBuffers;
         std::set<TextureBase*> mTopLevelTextures;
         std::set<QuerySetBase*> mUsedQuerySets;
+        std::map<QuerySetBase*, std::vector<bool>> mUsedQueryIndexes;
     };
 
 }  // namespace dawn_native

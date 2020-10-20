@@ -467,6 +467,24 @@ namespace dawn_native {
         mUsedQuerySets.insert(querySet);
     }
 
+    void CommandEncoder::TrackUsedQueryIndex(QuerySetBase* querySet, uint32_t queryIndex) {
+        std::map<QuerySetBase*, std::vector<bool>>::iterator it = mUsedQueryIndexes.find(querySet);
+        if (it != mUsedQueryIndexes.end()) {
+            // Record index on existed query set
+            std::vector<bool>& queryIndexes = it->second;
+            queryIndexes[queryIndex] = 1;
+        } else {
+            // Record index on new query set
+            std::vector<bool> queryIndexes(querySet->GetQueryCount(), 0);
+            queryIndexes[queryIndex] = 1;
+            mUsedQueryIndexes.insert({querySet, queryIndexes});
+        }
+    }
+
+    const std::map<QuerySetBase*, std::vector<bool>>& CommandEncoder::GetUsedQueryIndexes() const {
+        return mUsedQueryIndexes;
+    }
+
     // Implementation of the API's command recording methods
 
     ComputePassEncoder* CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
@@ -850,9 +868,11 @@ namespace dawn_native {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex, GetUsedQueryIndexes()));
                 TrackUsedQuerySet(querySet);
             }
+
+            TrackUsedQueryIndex(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
