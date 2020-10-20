@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "2c9e8b05f129df9ce42c751b5936de0c9d00e26e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4399ae_e4d958d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T14:14:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2c9e8b05f129df9ce42c751b5936de0c9d00e26e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec07032_f329e019",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T14:14:56Z",
+      "side": 1,
+      "message": "nit: add a comment that says is can be None in particular circumstances with namespace modules?\n\nAnd maybe \u003d\u003d None instead of the implicit conversion?",
+      "revId": "2c9e8b05f129df9ce42c751b5936de0c9d00e26e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
