@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4fb0dba_39ffab5d",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-20T12:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fb3c5fd_45824612",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "147a6503_9cc9720d",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a8bfa8_0e7aef0b",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-20T12:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "147a6503_9cc9720d",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a92d9187_910ca3ab",
@@ -82,6 +118,24 @@
       "writtenOn": "2020-10-20T11:38:33Z",
       "side": 1,
       "message": "This should return the result of OnCreateReadyRenderPipelineCallback instead of unconditionally true. Right now the errors happening in OnCreateReadyRenderPipelineCallback are just ignored. Ditto for DoDeviceCreateReadyComputePipelineCallback",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a6aeb95_dcc0225e",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-20T12:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a92d9187_910ca3ab",
       "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
