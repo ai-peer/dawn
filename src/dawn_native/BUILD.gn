@@ -159,6 +159,8 @@ source_set("dawn_native_sources") {
     "BindGroupTracker.h",
     "BindingInfo.cpp",
     "BindingInfo.h",
+    "BlitTextureForBrowserHelper.cpp",
+    "BlitTextureForBrowserHelper.h",
     "BuddyAllocator.cpp",
     "BuddyAllocator.h",
     "BuddyMemoryAllocator.cpp",
@@ -211,6 +213,8 @@ source_set("dawn_native_sources") {
     "Instance.cpp",
     "Instance.h",
     "IntegerTypes.h",
+    "InternalPipelineStore.cpp",
+    "InternalPipelineStore.h",
     "ObjectBase.cpp",
     "ObjectBase.h",
     "PassResourceUsage.h",
@@ -264,6 +268,14 @@ source_set("dawn_native_sources") {
     "Toggles.cpp",
     "Toggles.h",
     "dawn_platform.h",
+
+    # Internal pipelines
+    "internal_pipelines/BaseRenderPipelineInfo.h",
+    "internal_pipelines/BlitTextureForBrowserPipelineInfo.cpp",
+    "internal_pipelines/BlitTextureForBrowserPipelineInfo.h",
+    "internal_pipelines/InternalPipelineUtils.h",
+    "internal_pipelines/shaders/BlitTextureVertexWGSL.h",
+    "internal_pipelines/shaders/Passthrough4Channel2DTexturesFragmentWGSL.h",
   ]
 
   if (dawn_use_x11) {
