@@ -16,6 +16,23 @@
       "message": "I\u0027d need first permissions for trybot, that I don\u0027t have in dawn. This should be a trivial IWYU fix for dawn.",
       "revId": "67a78c237b940c056dfcf429beee3179f930d7e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa601914_c6941cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-20T19:08:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "67a78c237b940c056dfcf429beee3179f930d7e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
