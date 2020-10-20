@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eadb5c4_7258a05e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-20T07:47:19Z",
+      "side": 1,
+      "message": "I update this PR to do the query index tracking and move it from query set to command encoder and add validation for duplicate query index writen. For reset query set and resolve unused quries to 0, they will be in other separate PRs.",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
