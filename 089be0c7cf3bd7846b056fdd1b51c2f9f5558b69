@@ -1,6 +1,138 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7789c7c_da5119ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: endPipelineStatisticsQuery",
+      "range": {
+        "startLine": 10,
+        "startChar": 29,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4c17c2_c2d15c28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "If we need to know the queries used per pass in Vulkan, then tracking queries per command encoder won\u0027t be enough because the query could be written twice in the same encoder maybe? Oh actually no because you added validation to writeTimestamp. That\u0027s something the spec PR will have to detail: when it is valid to overwrite a query, if ever.",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b08ec37f_cb8bd958",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: also",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4020b859_ca27b4ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: because",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d8eea3_7e2e1669",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: remove the \"so\", because it is redundant with the \"because\" earlier in the sentence.",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af577989_d171653f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: for duplicate writes",
+      "range": {
+        "startLine": 15,
+        "startChar": 35,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9eadb5c4_7258a05e",
@@ -14,6 +146,86 @@
       "writtenOn": "2020-10-20T07:47:19Z",
       "side": 1,
       "message": "I update this PR to do the query index tracking and move it from query set to command encoder and add validation for duplicate query index writen. For reset query set and resolve unused quries to 0, they will be in other separate PRs.",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ce7f2e_d3059e41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c426dfe_9a9316fa",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: I think we use \"Indices\" in Dawn. AFAIK both are valid in different flavors of english but it\u0027s nice to have a consistent name across the codebase.",
+      "range": {
+        "startLine": 370,
+        "startChar": 42,
+        "endLine": 370,
+        "endChar": 49
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc463296_c259c2c0",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "I think it\u0027s probably fine, but can we have a spec pull request that adds this validation and the rest of timestamp query validation so we\u0027re sure the group agrees with it?",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7d106f_222cd9b4",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:30:16Z",
+      "side": 1,
+      "message": "nit: can we have a type alias for this? UseQueryMap?",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 56
+      },
       "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
