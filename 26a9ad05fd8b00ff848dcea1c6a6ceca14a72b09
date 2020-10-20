@@ -16,6 +16,74 @@
       "message": "PTAL, thanks!",
       "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53636df3_6dbe5154",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:38:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb3c5fd_45824612",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:38:33Z",
+      "side": 1,
+      "message": "nit: this is a bit scary because it isn\u0027t clear that the pointer to the PipelineBase* is the same as the pointer to the ComputePipelineBase* (for example this can change if PipelineBase* is the second inherited class). Can we reinterpret_cast\u003cWGPUComputePipeline\u003e(static_cast\u003cComputePipelineBase*\u003e(mPipeline))? It\u0027s a bit verbose but would prevent the problem outlined above.",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147a6503_9cc9720d",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:38:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92d9187_910ca3ab",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-20T11:38:33Z",
+      "side": 1,
+      "message": "This should return the result of OnCreateReadyRenderPipelineCallback instead of unconditionally true. Right now the errors happening in OnCreateReadyRenderPipelineCallback are just ignored. Ditto for DoDeviceCreateReadyComputePipelineCallback",
+      "revId": "26a9ad05fd8b00ff848dcea1c6a6ceca14a72b09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
