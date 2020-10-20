@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7fe2ba_a2fa31e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001791
+      },
+      "writtenOn": "2020-10-20T16:47:31Z",
+      "side": 1,
+      "message": "I\u0027d need first permissions for trybot, that I don\u0027t have in dawn. This should be a trivial IWYU fix for dawn.",
+      "revId": "67a78c237b940c056dfcf429beee3179f930d7e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
