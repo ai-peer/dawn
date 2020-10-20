@@ -636,8 +636,8 @@ namespace dawn_native {
             return;
         }
 
-        std::unique_ptr<CreateReadyComputePipelineTask> request =
-            std::make_unique<CreateReadyComputePipelineTask>(result, callback, userdata);
+        std::unique_ptr<CreateReadyPipelineTask> request =
+            std::make_unique<CreateReadyPipelineTask>(result, callback, userdata);
         mCreateReadyPipelineTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     PipelineLayoutBase* DeviceBase::CreatePipelineLayout(
@@ -673,6 +673,22 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    void DeviceBase::CreateReadyRenderPipeline(const RenderPipelineDescriptor* descriptor,
+                                               WGPUCreateReadyRenderPipelineCallback callback,
+                                               void* userdata) {
+        RenderPipelineBase* result = nullptr;
+        MaybeError maybeError = CreateRenderPipelineInternal(&result, descriptor);
+        if (maybeError.IsError()) {
+            std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+            callback(WGPUCreateReadyPipelineStatus_Error, nullptr, error->GetMessage().c_str(),
+                     userdata);
+            return;
+        }
+
+        std::unique_ptr<CreateReadyPipelineTask> request =
+            std::make_unique<CreateReadyPipelineTask>(result, callback, userdata);
+        mCreateReadyPipelineTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::CreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
