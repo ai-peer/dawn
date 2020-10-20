@@ -33,6 +33,24 @@
       "message": "LGTM",
       "revId": "67a78c237b940c056dfcf429beee3179f930d7e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac82062_7a491b20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-20T19:09:42Z",
+      "side": 1,
+      "message": "Thanks for the contribution! Are you expecting to make more contributions to Dawn? We can add you to the trybot ACL.",
+      "parentUuid": "bd7fe2ba_a2fa31e2",
+      "revId": "67a78c237b940c056dfcf429beee3179f930d7e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
