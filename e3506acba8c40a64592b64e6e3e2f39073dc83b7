@@ -158,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abf0334f_3b0af0e2",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:15:45Z",
+      "side": 1,
+      "message": "should these parameters go in an options dictionary ? or perhaps a structure extending texture copy view ?",
+      "parentUuid": "fd1a99c5_1c8c1b6b",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45401548_fc965c3b",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 2
@@ -204,6 +222,40 @@
       "side": 1,
       "message": "My bad. I think that\u0027s a better way. Originally, in this patch, I\u0027d like to focus on the internal pipeline work and want to have a basic shader to test the whole system. But I think this patch can do better on CopyIB work.\nThanks for this suggestion!",
       "parentUuid": "de9ac2f3_33370088",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ded08b6_647ef6c9",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:15:45Z",
+      "side": 1,
+      "message": "nit: break up the rows of matrixes with \"\\\\\" at the end so they go on new lines.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea020c79_f6b0211e",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:15:45Z",
+      "side": 1,
+      "message": "don\u0027t need all the \"\u003dnullptr\" since you default initialize the struct at the top",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -290,6 +342,47 @@
       "side": 1,
       "message": "For CopyIB, yes. But the whole internal pipeline works in my mind like this:\n1. Precompile all of the shaders (not only CopyIB in future) to shader module\n2. Read all pipeline descriptor (not only CopyIB in future) to create the pipeline and cache it.\nAnd when copyTextureForBrowser(Or other internal API) need it,\nit just get the prebuilt pipeline.\n\nThat\u0027s the reason I provide the center internal pipeline helper.\n\nI think that\u0027s different from the above suggestions.But persoanlly, I think current implementation is more general and will benefit incoming internal shaders.\n\nWDYT?",
       "parentUuid": "7c968850_39284203",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d5fd93_81536f04",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:15:45Z",
+      "side": 1,
+      "message": "I understand the concerns about have more stuff precompiled in the future. That\u0027s definitely an important improvement we should make later. I think though we should try to use more of the Dawn API to keep it simple for now.\n\nWe can have a simple InternalStore mapping as Corentin said from Key \u003d\u003e ShaderModule and/or Key \u003d\u003e Pipeline.\n\nTo support better precompilation in the future, we can add a way for Dawn to Serialize its InternalStore to a binary blob. Linking Dawn into Chrome then becomes a two-step process where you build Dawn, use Dawn to generate the serialized internal pipelines, and then embed the serialized blob into the binary. At runtime, we load Dawn and pass in a pointer to the serialized internal pipelines. This is good because it:\n - reuses existing code paths to create the internal pipelines\n - keeps the precompilation optimization mostly outside of Dawn\n - lets embedders of Dawn (like Skia) also precompile pipelines\n - fits in nicely with the pipeline cache which we also load from a serialized blob. the internal pipelines would essentially have their own VkPipelineCache or D3D12 pipeline library",
+      "parentUuid": "e4cc517c_cdc6d694",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b0741a_0bbcb46b",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:15:45Z",
+      "side": 1,
+      "message": "? are these parameters going to influence the the shaders or will we select an entirely different pipeline?",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 37
+      },
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
