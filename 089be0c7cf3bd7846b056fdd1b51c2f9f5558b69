@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "add49746_34e4b154",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7789c7c_da5119ac",
+      "range": {
+        "startLine": 10,
+        "startChar": 29,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c4c17c2_c2d15c28",
@@ -64,6 +88,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33348a14_20d4aec2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b08ec37f_cb8bd958",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d9ddd0b_c898b5f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Yes, I submit the validation of overwriting at same index in https://github.com/gpuweb/gpuweb/pull/1161. \n\nTo make it simple, I prefer to disallow overwrite timestamp on both command encoder and compute/render encoders, otherwise we need to have two or three recorders for them on a same command encoder. \n\nIt allows overwrite in different command encoder.",
+      "parentUuid": "8c4c17c2_c2d15c28",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4020b859_ca27b4ec",
@@ -77,6 +143,30 @@
       "writtenOn": "2020-10-20T11:30:16Z",
       "side": 1,
       "message": "nit: because",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25e16bf_8faf964a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4020b859_ca27b4ec",
       "range": {
         "startLine": 12,
         "startChar": 26,
@@ -110,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33c468e_6f147be2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7d8eea3_7e2e1669",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af577989_d171653f",
@@ -123,6 +237,30 @@
       "writtenOn": "2020-10-20T11:30:16Z",
       "side": 1,
       "message": "nit: for duplicate writes",
+      "range": {
+        "startLine": 15,
+        "startChar": 35,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6956f69a_79a7f0e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af577989_d171653f",
       "range": {
         "startLine": 15,
         "startChar": 35,
@@ -190,6 +328,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42bc3db8_430a7bc0",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "9c426dfe_9a9316fa",
+      "range": {
+        "startLine": 370,
+        "startChar": 42,
+        "endLine": 370,
+        "endChar": 49
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc463296_c259c2c0",
@@ -207,6 +369,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b9551bc_b2974f70",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Sure, I\u0027ve submitted the spec PR: https://github.com/gpuweb/gpuweb/pull/1161",
+      "parentUuid": "fc463296_c259c2c0",
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c7d106f_222cd9b4",
@@ -220,6 +400,30 @@
       "writtenOn": "2020-10-20T11:30:16Z",
       "side": 1,
       "message": "nit: can we have a type alias for this? UseQueryMap?",
+      "range": {
+        "startLine": 46,
+        "startChar": 14,
+        "endLine": 46,
+        "endChar": 56
+      },
+      "revId": "089be0c7cf3bd7846b056fdd1b51c2f9f5558b69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ece6294_d7f0364f",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-10-21T07:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7d106f_222cd9b4",
       "range": {
         "startLine": 46,
         "startChar": 14,
