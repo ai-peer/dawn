@@ -104,6 +104,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afc63d4_b87a0c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T01:42:07Z",
+      "side": 1,
+      "message": "Hi, Corentin,\nThanks for the comments.\nI\u0027d like to emphasize that this patch is most focus on how the internal pipeline works(not only for CopyIB, I try to make it general to minimum the future changes to the arch).\n\nSo I left some comments to describe the workflow. PTAL and thanks!",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70de38d8_98c37681",
@@ -175,6 +192,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2052041b_6d5978d7",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T01:42:07Z",
+      "side": 1,
+      "message": "My bad. I think that\u0027s a better way. Originally, in this patch, I\u0027d like to focus on the internal pipeline work and want to have a basic shader to test the whole system. But I think this patch can do better on CopyIB work.\nThanks for this suggestion!",
+      "parentUuid": "de9ac2f3_33370088",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34515b31_c6ed1913",
         "filename": "src/dawn_native/BlitTextureForBrowserHelper.h",
         "patchSetId": 2
@@ -237,6 +272,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "I\u0027m not sure I got all of what\u0027s happening here, but it seems much more complicated than it needs to be.\n\nstruct InternalPipelineStore {\n    some_map\u003ckey, Ref\u003cShaderModule\u003e\u003e copyForBrowserFSes;\n    Ref\u003cShaderModule\u003e copyForBrowserVS;\n    some_map\u003ckey, Ref\u003cRenderPipeline\u003e\u003e copyForBrowserPipelines;\n}\n\nThen in DoCopyTextureForBrowser() {\n   pipelineStore \u003d device-\u003eGetPipelineStore();\n\n   if (pipelineStore.copyForBrowserVS \u003d\u003d nullptr) { create it }\n   // same for FS\n\n   // same for the pipeline\n\n   // create the objects and encode the commands.\n}\n\nA lot of the complexity in the current form of this CL is removed by putting all the logic together in a single file. The pipeline store is jut a dumb structure that stores maps of references to create objects, that\u0027s it.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4cc517c_cdc6d694",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T01:42:07Z",
+      "side": 1,
+      "message": "For CopyIB, yes. But the whole internal pipeline works in my mind like this:\n1. Precompile all of the shaders (not only CopyIB in future) to shader module\n2. Read all pipeline descriptor (not only CopyIB in future) to create the pipeline and cache it.\nAnd when copyTextureForBrowser(Or other internal API) need it,\nit just get the prebuilt pipeline.\n\nThat\u0027s the reason I provide the center internal pipeline helper.\n\nI think that\u0027s different from the above suggestions.But persoanlly, I think current implementation is more general and will benefit incoming internal shaders.\n\nWDYT?",
+      "parentUuid": "7c968850_39284203",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
