@@ -39,7 +39,7 @@ namespace dawn_native {
 
     using StageAndDescriptor = std::pair<SingleShaderStage, const ProgrammableStageDescriptor*>;
 
-    class PipelineLayoutBase : public CachedObject {
+    class PipelineLayoutBase : public CachedObject, public RecordedObject {
       public:
         PipelineLayoutBase(DeviceBase* device, const PipelineLayoutDescriptor* descriptor);
         ~PipelineLayoutBase() override;
@@ -74,6 +74,10 @@ namespace dawn_native {
 
         BindGroupLayoutArray mBindGroupLayouts;
         BindGroupLayoutMask mMask;
+
+      private:
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
     };
 
 }  // namespace dawn_native
