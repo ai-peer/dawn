@@ -99,7 +99,7 @@ namespace dawn_native {
             if (attachmentInfo.loadOp == wgpu::LoadOp::Load &&
                 !view->GetTexture()->IsSubresourceContentInitialized(range)) {
                 attachmentInfo.loadOp = wgpu::LoadOp::Clear;
-                attachmentInfo.clearColor = {0.f, 0.f, 0.f, 0.f};
+                attachmentInfo.clearColor = {0.0, 0.0, 0.0, 0.0};
             }
 
             if (hasResolveTarget) {

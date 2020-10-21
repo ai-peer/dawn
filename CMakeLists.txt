@@ -173,7 +173,6 @@ function(dawn_compile_options TARGET)
           -Wno-deprecated-copy-dtor
           -Wno-documentation
           -Wno-documentation-unknown-command
-          -Wno-double-promotion
           -Wno-exit-time-destructors
           -Wno-float-equal
           -Wno-global-constructors

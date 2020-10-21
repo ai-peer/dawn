@@ -22,7 +22,10 @@
 #include "dawn_native/PerStage.h"
 #include "dawn_native/dawn_platform.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdouble-promotion"
 #include <spirv_cross.hpp>
+#pragma clang diagnostic pop
 
 namespace dawn_native {
 
