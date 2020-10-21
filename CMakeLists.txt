@@ -188,7 +188,6 @@ function(dawn_compile_options TARGET)
           -Wno-reserved-id-macro
           -Wno-shadow-field-in-constructor
           -Wno-shorten-64-to-32
-          -Wno-shadow
           -Wno-shadow-uncaptured-local
           -Wno-sign-conversion
           -Wno-switch-enum

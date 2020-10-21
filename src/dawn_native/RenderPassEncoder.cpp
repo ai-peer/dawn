@@ -163,12 +163,12 @@ namespace dawn_native {
                 bundles[i] = renderBundles[i];
 
                 const PassResourceUsage& usages = bundles[i]->GetResourceUsage();
-                for (uint32_t i = 0; i < usages.buffers.size(); ++i) {
-                    mUsageTracker.BufferUsedAs(usages.buffers[i], usages.bufferUsages[i]);
+                for (uint32_t j = 0; j < usages.buffers.size(); ++j) {
+                    mUsageTracker.BufferUsedAs(usages.buffers[j], usages.bufferUsages[j]);
                 }
 
-                for (uint32_t i = 0; i < usages.textures.size(); ++i) {
-                    mUsageTracker.AddTextureUsage(usages.textures[i], usages.textureUsages[i]);
+                for (uint32_t j = 0; j < usages.textures.size(); ++j) {
+                    mUsageTracker.AddTextureUsage(usages.textures[j], usages.textureUsages[j]);
                 }
             }
 

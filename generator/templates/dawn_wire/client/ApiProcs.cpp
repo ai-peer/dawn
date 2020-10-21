@@ -162,8 +162,8 @@ namespace dawn_wire { namespace client {
                                 // Allocate an object without registering it on the server. This is backed by a real allocation on
                                 // the client so commands can be sent with it. But because it's not allocated on the server, it will
                                 // be a fatal error to use it.
-                                auto self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
-                                auto* allocation = self->device->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(self->device);
+                                auto sub_self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
+                                auto* allocation = sub_self->device->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(sub_self->device);
                                 return reinterpret_cast<{{as_cType(method.return_type.name)}}>(allocation->object.get());
                             {% elif method.return_type.name.canonical_case() == "void" %}
                                 return;

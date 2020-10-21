@@ -46,16 +46,16 @@ namespace dawn_native { namespace vulkan {
     }
 
     void RenderPassCacheQuery::SetDepthStencil(wgpu::TextureFormat format,
-                                               wgpu::LoadOp depthLoadOp,
-                                               wgpu::LoadOp stencilLoadOp) {
+                                               wgpu::LoadOp new_depthLoadOp,
+                                               wgpu::LoadOp new_stencilLoadOp) {
         hasDepthStencil = true;
         depthStencilFormat = format;
-        this->depthLoadOp = depthLoadOp;
-        this->stencilLoadOp = stencilLoadOp;
+        this->depthLoadOp = new_depthLoadOp;
+        this->stencilLoadOp = new_stencilLoadOp;
     }
 
-    void RenderPassCacheQuery::SetSampleCount(uint32_t sampleCount) {
-        this->sampleCount = sampleCount;
+    void RenderPassCacheQuery::SetSampleCount(uint32_t new_sampleCount) {
+        this->sampleCount = new_sampleCount;
     }
 
     // RenderPassCache

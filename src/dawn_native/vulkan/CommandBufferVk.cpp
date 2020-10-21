@@ -312,25 +312,25 @@ namespace dawn_native { namespace vulkan {
                         case wgpu::TextureComponentType::Float: {
                             const std::array<float, 4> appliedClearColor =
                                 ConvertToFloatColor(attachmentInfo.clearColor);
-                            for (uint32_t i = 0; i < 4; ++i) {
-                                clearValues[attachmentCount].color.float32[i] =
-                                    appliedClearColor[i];
+                            for (uint32_t j = 0; j < 4; ++j) {
+                                clearValues[attachmentCount].color.float32[j] =
+                                    appliedClearColor[j];
                             }
                             break;
                         }
                         case wgpu::TextureComponentType::Uint: {
                             const std::array<uint32_t, 4> appliedClearColor =
                                 ConvertToUnsignedIntegerColor(attachmentInfo.clearColor);
-                            for (uint32_t i = 0; i < 4; ++i) {
-                                clearValues[attachmentCount].color.uint32[i] = appliedClearColor[i];
+                            for (uint32_t j = 0; j < 4; ++j) {
+                                clearValues[attachmentCount].color.uint32[j] = appliedClearColor[j];
                             }
                             break;
                         }
                         case wgpu::TextureComponentType::Sint: {
                             const std::array<int32_t, 4> appliedClearColor =
                                 ConvertToSignedIntegerColor(attachmentInfo.clearColor);
-                            for (uint32_t i = 0; i < 4; ++i) {
-                                clearValues[attachmentCount].color.int32[i] = appliedClearColor[i];
+                            for (uint32_t j = 0; j < 4; ++j) {
+                                clearValues[attachmentCount].color.int32[j] = appliedClearColor[j];
                             }
                             break;
                         }

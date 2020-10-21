@@ -340,9 +340,9 @@ namespace dawn_native {
             // Inspect the subresources if the usage of the whole texture violates usage validation.
             // Every single subresource can only be used as single-write or multiple read.
             for (wgpu::TextureUsage subresourceUsage : textureUsage.subresourceUsages) {
-                bool readOnly = (subresourceUsage & kReadOnlyTextureUsages) == subresourceUsage;
-                bool singleUse = wgpu::HasZeroOrOneBits(subresourceUsage);
-                if (!readOnly && !singleUse) {
+                bool subresource_readOnly = (subresourceUsage & kReadOnlyTextureUsages) == subresourceUsage;
+                bool subresource_singleUse = wgpu::HasZeroOrOneBits(subresourceUsage);
+                if (!subresource_readOnly && !subresource_singleUse) {
                     return DAWN_VALIDATION_ERROR(
                         "Texture used as writable usage and another usage in render pass");
                 }
