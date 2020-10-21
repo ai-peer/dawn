@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ccbb2b_0ef68fd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "typo: BGRA8Unorm",
+      "range": {
+        "startLine": 19,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e917d75_a03d70fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e083c3e7_6de08803",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "very interesting. so there are cases when min !\u003d max and the vk swapchain knows how to stretch the output?",
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8b9749_12ec5113",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "nit: remove \"make\" or say \"make sure to\"",
+      "range": {
+        "startLine": 358,
+        "startChar": 76,
+        "endLine": 358,
+        "endChar": 80
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8615a8_559c3e06",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "this value means it\u0027s an adaptable swapchain?",
+      "range": {
+        "startLine": 361,
+        "startChar": 64,
+        "endLine": 361,
+        "endChar": 76
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "902b29d5_af6f492c",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "maybe we can keep the blit texture around and reuse it if the texture descriptor on the next frame doesn\u0027t change. could be a TODO",
+      "range": {
+        "startLine": 426,
+        "startChar": 12,
+        "endLine": 427,
+        "endChar": 35
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384f5b73_e2aef386",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "notify",
+      "range": {
+        "startLine": 509,
+        "startChar": 68,
+        "endLine": 509,
+        "endChar": 74
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "518377c3_77052ac6",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T22:10:31Z",
+      "side": 1,
+      "message": "nit: we have a bool() operator on Ref\u003c\u003e",
+      "range": {
+        "startLine": 563,
+        "startChar": 12,
+        "endLine": 563,
+        "endChar": 41
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
