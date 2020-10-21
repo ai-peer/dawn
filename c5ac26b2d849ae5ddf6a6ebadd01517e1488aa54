@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ac87bd_96948233",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T14:13:42Z",
+      "side": 1,
+      "message": "fyi I used the \"git cl upload\" path but it didn\u0027t put it on \"main\". Maybe because I did --no-squash. I\u0027ll try again.",
+      "parentUuid": "c155dd02_76082eb5",
+      "revId": "c5ac26b2d849ae5ddf6a6ebadd01517e1488aa54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d8fa738_dc478c43",
