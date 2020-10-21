@@ -16,6 +16,23 @@
       "message": "PTAL\n\nfor --no-squash, it seems you need to set the upstream branch to origin/main in git first.",
       "revId": "0433cf1749761b8ec4b2adea97d4ec9da856e117",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2e3120_f0d23956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T14:20:13Z",
+      "side": 1,
+      "message": "Can you answer that on the email thread about the change? LGTM",
+      "revId": "0433cf1749761b8ec4b2adea97d4ec9da856e117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
