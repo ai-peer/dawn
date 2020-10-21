@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "c5ac26b2d849ae5ddf6a6ebadd01517e1488aa54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c155dd02_76082eb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T14:10:56Z",
+      "side": 1,
+      "message": "Please put this CL for the \"main\" branch.",
+      "revId": "c5ac26b2d849ae5ddf6a6ebadd01517e1488aa54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8fa738_dc478c43",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T14:10:56Z",
+      "side": 1,
+      "message": "Actually that\u0027s the systemName we should change: IOS doesn\u0027t have integrated vs discrete.",
+      "revId": "c5ac26b2d849ae5ddf6a6ebadd01517e1488aa54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
