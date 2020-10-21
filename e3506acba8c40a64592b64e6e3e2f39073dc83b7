@@ -366,6 +366,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3878e526_f85f7c2f",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T02:20:58Z",
+      "side": 1,
+      "message": "More about this. I mean your suggestion is something like not prebuilt anything but do it in a lazy mode. And the file here is prebuilt everything.",
+      "parentUuid": "e4cc517c_cdc6d694",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48b0741a_0bbcb46b",
         "filename": "src/dawn_native/InternalPipelineStore.cpp",
         "patchSetId": 2
