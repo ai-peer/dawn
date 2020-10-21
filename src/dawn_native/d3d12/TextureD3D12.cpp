@@ -171,7 +171,7 @@ namespace dawn_native { namespace d3d12 {
                     return DXGI_FORMAT_R32_TYPELESS;
 
                 case wgpu::TextureFormat::Depth24PlusStencil8:
-                    return DXGI_FORMAT_X32_TYPELESS_G8X24_UINT;
+                    return DXGI_FORMAT_R32G8X24_TYPELESS;
 
                 case wgpu::TextureFormat::BC1RGBAUnorm:
                 case wgpu::TextureFormat::BC1RGBAUnormSrgb:
@@ -451,8 +451,8 @@ namespace dawn_native { namespace d3d12 {
 
         // This will need to be much more nuanced when WebGPU has
         // texture view compatibility rules.
-        bool needsTypelessFormat = GetFormat().format == wgpu::TextureFormat::Depth32Float &&
-                                   (GetUsage() & wgpu::TextureUsage::Sampled) != 0;
+        const bool needsTypelessFormat =
+            GetFormat().HasDepthOrStencil() && (GetUsage() & wgpu::TextureUsage::Sampled) != 0;
 
         DXGI_FORMAT dxgiFormat = needsTypelessFormat
                                      ? D3D12TypelessTextureFormat(GetFormat().format)
@@ -1027,11 +1027,36 @@ namespace dawn_native { namespace d3d12 {
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
         mSrvDesc.Format = D3D12TextureFormat(descriptor->format);
-        if (descriptor->format == wgpu::TextureFormat::Depth32Float) {
-            // TODO(enga): This will need to be much more nuanced when WebGPU has
-            // texture view compatibility rules.
-            mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+
+        // TODO(enga): This will need to be much more nuanced when WebGPU has
+        // texture view compatibility rules.
+        if (GetFormat().HasDepthOrStencil()) {
+            switch (descriptor->format) {
+                case wgpu::TextureFormat::Depth32Float:
+                case wgpu::TextureFormat::Depth24Plus:
+                    mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+                    break;
+                case wgpu::TextureFormat::Depth24PlusStencil8:
+                    switch (descriptor->aspect) {
+                        case wgpu::TextureAspect::DepthOnly:
+                            mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
+                            break;
+                        case wgpu::TextureAspect::StencilOnly:
+                            mSrvDesc.Format = DXGI_FORMAT_X32_TYPELESS_G8X24_UINT;
+                            break;
+                        case wgpu::TextureAspect::All:
+                            // A single aspect is not selected. The texture view must not be
+                            // sampled.
+                            mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+                            break;
+                    }
+                    break;
+                default:
+                    UNREACHABLE();
+                    break;
+            }
         }
+
         mSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
         // Currently we always use D3D12_TEX2D_ARRAY_SRV because we cannot specify base array layer
@@ -1093,6 +1118,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     const D3D12_SHADER_RESOURCE_VIEW_DESC& TextureView::GetSRVDescriptor() const {
+        ASSERT(mSrvDesc.Format != DXGI_FORMAT_UNKNOWN);
         return mSrvDesc;
     }
 
