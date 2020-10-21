@@ -33,7 +33,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
         createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
         createInfo.queueFamilyIndexCount = 0;
-        createInfo.pQueueFamilyIndices = 0;
+        createInfo.pQueueFamilyIndices = nullptr;
 
         DAWN_TRY(CheckVkSuccess(
             mDevice->fn.CreateBuffer(mDevice->GetVkDevice(), &createInfo, nullptr, &*mBuffer),

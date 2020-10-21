@@ -201,7 +201,6 @@ function(dawn_compile_options TARGET)
           -Wno-unused-template
           -Wno-used-but-marked-unused
           -Wno-weak-vtables
-          -Wno-zero-as-null-pointer-constant
         )
       endif()
     endif()

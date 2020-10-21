@@ -74,7 +74,7 @@ namespace dawn_native { namespace vulkan {
     MaybeError QuerySet::Initialize() {
         VkQueryPoolCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
-        createInfo.pNext = NULL;
+        createInfo.pNext = nullptr;
         createInfo.flags = 0;
         createInfo.queryType = VulkanQueryType(GetQueryType());
         createInfo.queryCount = GetQueryCount();

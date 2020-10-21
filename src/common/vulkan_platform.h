@@ -102,10 +102,10 @@ namespace dawn_native { namespace vulkan {
 
             // Comparisons between handles and VK_NULL_HANDLE
             bool operator==(std::nullptr_t) const {
-                return mHandle == 0;
+                return mHandle == nullptr;
             }
             bool operator!=(std::nullptr_t) const {
-                return mHandle != 0;
+                return mHandle != nullptr;
             }
 
             // Implicit conversion to real Vulkan types.
@@ -129,7 +129,7 @@ namespace dawn_native { namespace vulkan {
             explicit VkHandle(HandleType handle) : mHandle(handle) {
             }
 
-            HandleType mHandle = 0;
+            HandleType mHandle = nullptr;
         };
     }  // namespace detail
 
