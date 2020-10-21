@@ -139,6 +139,12 @@ namespace wgpu {
         return (static_cast<Integral>(value) & (static_cast<Integral>(value) - 1)) == 0;
     }
 
+    template <typename T1, typename T2>
+    constexpr bool IsSubset(T1 subset, T2 set) {
+        T2 bitsAlsoinSet = subset & set;
+        return bitsAlsoinSet == subset;
+    }
+
 }  // namespace wgpu
 
 #endif  // DAWN_ENUM_CLASS_BITMASKS_H_
