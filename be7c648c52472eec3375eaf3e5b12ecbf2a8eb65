@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b63065e_2620debb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T01:37:47Z",
+      "side": 1,
+      "message": "nit existing",
+      "range": {
+        "startLine": 473,
+        "startChar": 31,
+        "endLine": 473,
+        "endChar": 38
+      },
+      "revId": "be7c648c52472eec3375eaf3e5b12ecbf2a8eb65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153b0c64_5f654ec7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T01:37:47Z",
+      "side": 1,
+      "message": "should check if this is doing a copy or a move, but I think we may need std::move in order to move it.",
+      "range": {
+        "startLine": 480,
+        "startChar": 48,
+        "endLine": 480,
+        "endChar": 60
+      },
+      "revId": "be7c648c52472eec3375eaf3e5b12ecbf2a8eb65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb43450_086290ef",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T01:37:47Z",
+      "side": 1,
+      "message": "nit: I think \"auto\" would be ok here, or UsedQueryMap::const_iterator",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 366,
+        "endChar": 66
+      },
+      "revId": "be7c648c52472eec3375eaf3e5b12ecbf2a8eb65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
