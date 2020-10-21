@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4add273e_59811826",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-21T02:46:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f545a1f_bdda6d72",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60e2b621_2134178e",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-10-20T19:22:44Z",
       "side": 1,
       "message": "nit: set this to null so we\u0027re sure it doesn\u0027t get called more than once.",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 42
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d2a7af_4c52e61d",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-21T02:46:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60e2b621_2134178e",
       "range": {
         "startLine": 58,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff7db22_b54e1902",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-21T02:46:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a77c6f_a485d84c",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 41
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90b21609_c9b9b774",
@@ -100,6 +172,30 @@
       "writtenOn": "2020-10-20T19:22:44Z",
       "side": 1,
       "message": "nit: can be `final`",
+      "range": {
+        "startLine": 46,
+        "startChar": 22,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "7286aabc1a903433bddda8618ff4377c322b255b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0411ab44_55cf7542",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-21T02:46:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b21609_c9b9b774",
       "range": {
         "startLine": 46,
         "startChar": 22,
