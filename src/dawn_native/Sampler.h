@@ -26,7 +26,7 @@ namespace dawn_native {
 
     MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor);
 
-    class SamplerBase : public CachedObject {
+    class SamplerBase : public CachedObject, public RecordedObject {
       public:
         SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor);
         ~SamplerBase() override;
@@ -45,6 +45,9 @@ namespace dawn_native {
 
       private:
         SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         // TODO(cwallez@chromium.org): Store a crypto hash of the items instead?
         wgpu::AddressMode mAddressModeU;
