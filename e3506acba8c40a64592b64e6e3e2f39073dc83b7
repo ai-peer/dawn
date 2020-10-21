@@ -420,6 +420,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0bca21b_5e1e10a5",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T04:36:24Z",
+      "side": 1,
+      "message": "Correcting myself on this: one day if we optimize this to precompile - it still can\u0027t compile pipelines using the graphics driver since that would be driver-dependent - so no vkPipelineCache and D3D12 pipeline library. We could still compile shaders to SPIR-V/DXIL/MSL though.",
+      "parentUuid": "66da14c0_6914b5f8",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48b0741a_0bbcb46b",
         "filename": "src/dawn_native/InternalPipelineStore.cpp",
         "patchSetId": 2
