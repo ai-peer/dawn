@@ -402,6 +402,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66da14c0_6914b5f8",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T02:40:31Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll update this.",
+      "parentUuid": "1bc800c8_88dd4c99",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48b0741a_0bbcb46b",
         "filename": "src/dawn_native/InternalPipelineStore.cpp",
         "patchSetId": 2
@@ -413,6 +431,30 @@
       "writtenOn": "2020-10-21T02:15:45Z",
       "side": 1,
       "message": "? are these parameters going to influence the the shaders or will we select an entirely different pipeline?",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1ef78e_ad208f41",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-21T02:40:31Z",
+      "side": 1,
+      "message": "The shaders.",
+      "parentUuid": "48b0741a_0bbcb46b",
       "range": {
         "startLine": 101,
         "startChar": 9,
