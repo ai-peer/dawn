@@ -67,6 +67,8 @@ DAWN_DEFINE_NATIVE_NON_DISPATCHABLE_HANDLE(VkSomeHandle)
 
 namespace dawn_native { namespace vulkan {
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
     namespace detail {
         template <typename T>
         struct WrapperStruct {
@@ -132,6 +134,7 @@ namespace dawn_native { namespace vulkan {
             HandleType mHandle = 0;
         };
     }  // namespace detail
+#pragma clang diagnostic pop
 
     static constexpr std::nullptr_t VK_NULL_HANDLE = nullptr;
 

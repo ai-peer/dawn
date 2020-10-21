@@ -366,7 +366,7 @@ namespace dawn_native {
             UnmapImpl();
 
             mMapCallback = nullptr;
-            mMapUserdata = 0;
+            mMapUserdata = nullptr;
 
         } else if (mState == BufferState::MappedAtCreation) {
             if (mStagingBuffer != nullptr) {

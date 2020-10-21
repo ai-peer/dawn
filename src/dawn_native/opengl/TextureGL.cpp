@@ -372,7 +372,7 @@ namespace dawn_native { namespace opengl {
                             }
                             gl.TexSubImage2D(GetGLTarget(), static_cast<GLint>(level), 0, 0,
                                              size.width, size.height, GetGLFormat().format,
-                                             GetGLFormat().type, 0);
+                                             GetGLFormat().type, nullptr);
                         } else {
                             for (uint32_t layer = range.baseArrayLayer;
                                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
@@ -385,7 +385,7 @@ namespace dawn_native { namespace opengl {
                                 }
                                 gl.TexSubImage3D(GetGLTarget(), static_cast<GLint>(level), 0, 0,
                                                  static_cast<GLint>(layer), size.width, size.height,
-                                                 1, GetGLFormat().format, GetGLFormat().type, 0);
+                                                 1, GetGLFormat().format, GetGLFormat().type, nullptr);
                             }
                         }
                         break;
