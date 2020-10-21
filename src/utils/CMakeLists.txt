@@ -13,6 +13,7 @@
 # limitations under the License.
 
 add_library(dawn_utils STATIC ${DAWN_DUMMY_FILE})
+dawn_compile_options(dawn_utils)
 target_sources(dawn_utils PRIVATE
     "BackendBinding.cpp"
     "BackendBinding.h"

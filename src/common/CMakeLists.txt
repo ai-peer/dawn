@@ -13,6 +13,7 @@
 # limitations under the License.
 
 add_library(dawn_common STATIC ${DAWN_DUMMY_FILE})
+dawn_compile_options(dawn_common)
 target_sources(dawn_common PRIVATE
     "Assert.cpp"
     "Assert.h"

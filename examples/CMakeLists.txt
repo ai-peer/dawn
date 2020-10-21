@@ -13,6 +13,7 @@
 # limitations under the License.
 
 add_library(dawn_sample_utils STATIC ${DAWN_DUMMY_FILE})
+dawn_compile_options(dawn_sample_utils)
 target_sources(dawn_sample_utils PRIVATE
     "SampleUtils.cpp"
     "SampleUtils.h"
@@ -29,16 +30,21 @@ target_link_libraries(dawn_sample_utils PUBLIC
 )
 
 add_executable(CppHelloTriangle "CppHelloTriangle.cpp")
+dawn_compile_options(CppHelloTriangle)
 target_link_libraries(CppHelloTriangle dawn_sample_utils)
 
 add_executable(CHelloTriangle "CHelloTriangle.cpp")
+dawn_compile_options(CHelloTriangle)
 target_link_libraries(CHelloTriangle dawn_sample_utils)
 
 add_executable(ComputeBoids "ComputeBoids.cpp")
+dawn_compile_options(ComputeBoids)
 target_link_libraries(ComputeBoids dawn_sample_utils glm)
 
 add_executable(Animometer "Animometer.cpp")
+dawn_compile_options(Animometer)
 target_link_libraries(Animometer dawn_sample_utils)
 
 add_executable(CubeReflection "CubeReflection.cpp")
+dawn_compile_options(CubeReflection)
 target_link_libraries(CubeReflection dawn_sample_utils glm)

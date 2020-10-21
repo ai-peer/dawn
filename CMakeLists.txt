@@ -72,6 +72,9 @@ option(DAWN_ENABLE_VULKAN "Enable compilation of the Vulkan backend" ${ENABLE_VU
 option(DAWN_ALWAYS_ASSERT "Enable assertions on all build types" OFF)
 option(DAWN_USE_X11 "Enable support for X11 surface" ${USE_X11})
 
+option(DAWN_BUILD_WERROR "Turn on Werror" OFF)
+option(DAWN_BUILD_WEVERYTHING "Turn on Weverything" OFF)
+
 option(DAWN_BUILD_EXAMPLES "Enables building Dawn's exmaples" ON)
 
 set(DAWN_THIRD_PARTY_DIR "${Dawn_SOURCE_DIR}/third_party" CACHE STRING "Directory in which to find third-party dependencies.")
@@ -130,8 +133,102 @@ if (WIN32)
     target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
 
+set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_CXX_STANDARD "14")
+if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") OR
+    ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang") OR
+    (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") AND
+     (NOT CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC")))
+  set(COMPILER_IS_LIKE_GNU TRUE)
+endif()
+
+function(dawn_compile_options TARGET)
+  if (${COMPILER_IS_LIKE_GNU})
+    target_compile_options(${TARGET} PRIVATE
+      -Wall
+      -Wextra
+      -pedantic-errors
+    )
+
+    if(${DAWN_BUILD_WERROR})
+      target_compile_options(${TARGET} PRIVATE
+        -Werror
+        -Wno-unused-parameter
+        -Wno-unneeded-internal-declaration
+      )
+    endif()
+
+    if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR
+        ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang"))
+      target_compile_options(${TARGET} PRIVATE
+        -Wno-c++98-compat
+        -Wno-c++98-compat-pedantic
+        -Wno-format-pedantic
+      )
+
+      if (${DAWN_BUILD_WEVERYTHING})
+        target_compile_options(${TARGET} PRIVATE
+          -Weverything
+          -Wno-covered-switch-default
+          -Wno-deprecated-copy-dtor
+          -Wno-documentation
+          -Wno-documentation-unknown-command
+          -Wno-double-promotion
+          -Wno-exit-time-destructors
+          -Wno-float-equal
+          -Wno-global-constructors
+          -Wno-implicit-int-conversion
+          -Wno-implicit-int-float-conversion
+          -Wno-invalid-offsetof
+          -Wno-missing-prototypes
+          -Wno-missing-variable-declarations
+          -Wno-newline-eof
+          -Wno-non-virtual-dtor
+          -Wno-old-style-cast
+          -Wno-padded
+          -Wno-reserved-id-macro
+          -Wno-shadow-field-in-constructor
+          -Wno-shorten-64-to-32
+          -Wno-shadow
+          -Wno-shadow-uncaptured-local
+          -Wno-sign-conversion
+          -Wno-switch-enum
+          -Wno-tautological-type-limit-compare
+          -Wno-undef
+          -Wno-unreachable-code-break
+          -Wno-unreachable-code-return
+          -Wno-unused-member-function
+          -Wno-unused-template
+          -Wno-used-but-marked-unused
+          -Wno-weak-vtables
+          -Wno-zero-as-null-pointer-constant
+        )
+      endif()
+    endif()
+  endif()
+
+  if (MSVC)
+    # Specify /EHs for exception handling.
+    target_compile_options(${TARGET} PRIVATE
+      /bigobj
+      /EHsc
+      /W3
+      /WX
+      /wd4068
+      /wd4244
+      /wd4267
+      /wd4514
+      /wd4571
+      /wd4625
+      /wd4626
+      /wd4710
+      /wd4774
+      /wd4820
+      /wd5026
+      /wd5027
+    )
+  endif()
+endfunction()
 
 ################################################################################
 # Run on all subdirectories

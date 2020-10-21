@@ -19,6 +19,7 @@ DawnJSONGenerator(
 )
 
 add_library(dawn_wire ${DAWN_DUMMY_FILE})
+dawn_compile_options(dawn_wire)
 
 target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_IMPLEMENTATION")
 if(BUILD_SHARED_LIBS)

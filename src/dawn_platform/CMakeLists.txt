@@ -13,6 +13,7 @@
 # limitations under the License.
 
 add_library(dawn_platform STATIC ${DAWN_DUMMY_FILE})
+dawn_compile_options(dawn_platform)
 target_sources(dawn_platform PRIVATE
     "${DAWN_INCLUDE_DIR}/dawn_platform/DawnPlatform.h"
     "tracing/EventTracer.cpp"
