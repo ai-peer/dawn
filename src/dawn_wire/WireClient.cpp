@@ -1,3 +1,4 @@
+#include "..\include\dawn_wire\WireClient.h"
 // Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,6 +43,8 @@ namespace dawn_wire {
     }
 
     namespace client {
+        MemoryTransferService::MemoryTransferService() = default;
+
         MemoryTransferService::~MemoryTransferService() = default;
 
         MemoryTransferService::ReadHandle*
@@ -54,7 +57,11 @@ namespace dawn_wire {
             return CreateWriteHandle(size);
         }
 
+        MemoryTransferService::ReadHandle::ReadHandle() = default;
+
         MemoryTransferService::ReadHandle::~ReadHandle() = default;
+
+        MemoryTransferService::WriteHandle::WriteHandle() = default;
 
         MemoryTransferService::WriteHandle::~WriteHandle() = default;
     }  // namespace client
