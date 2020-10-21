@@ -144,23 +144,23 @@ namespace {
             device.CreateTexture(&descriptor);
         }
 
-        // Too big mip chains on width are disallowed
+        // Too big mip chains on height are disallowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
             descriptor.size.width = 31;
             descriptor.size.height = 32;
-            // Mip level width: 31, 15, 7, 3, 1, 1
+            // Mip level height: 32, 16, 8, 4, 2, 1
             descriptor.mipLevelCount = 7;
 
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
-        // Too big mip chains on height are disallowed
+        // Too big mip chains on width are disallowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
             descriptor.size.width = 32;
             descriptor.size.height = 31;
-            // Mip level height: 31, 15, 7, 3, 1, 1
+            // Mip level width: 32, 16, 8, 4, 2, 1
             descriptor.mipLevelCount = 7;
 
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
@@ -446,25 +446,16 @@ namespace {
     TEST_F(CompressedTextureFormatsValidationTests, TextureUsage) {
         // Test that only CopySrc, CopyDst and Sampled are accepted as the texture usage of the
         // textures in BC formats.
+        wgpu::TextureUsage invalidUsages[] = {
+            wgpu::TextureUsage::OutputAttachment,
+            wgpu::TextureUsage::Storage,
+            wgpu::TextureUsage::Present,
+        };
         for (wgpu::TextureFormat format : kBCFormats) {
-            {
+            for (wgpu::TextureUsage usage : invalidUsages) {
                 wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
                 descriptor.format = format;
-                descriptor.usage = wgpu::TextureUsage::OutputAttachment;
-                ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
-            }
-
-            {
-                wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
-                descriptor.format = format;
-                descriptor.usage = wgpu::TextureUsage::Storage;
-                ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
-            }
-
-            {
-                wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
-                descriptor.format = format;
-                descriptor.usage = wgpu::TextureUsage::Present;
+                descriptor.usage = usage;
                 ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
             }
         }
