@@ -96,6 +96,11 @@ namespace dawn_native { namespace opengl {
                 return true;
             }
 
+            if (ToBackend(texture)->GetGLFormat().type == GL_DEPTH_STENCIL &&
+                (texture->GetUsage() & wgpu::TextureUsage::Sampled) != 0) {
+                return true;
+            }
+
             switch (textureViewDescriptor->dimension) {
                 case wgpu::TextureViewDimension::Cube:
                 case wgpu::TextureViewDimension::CubeArray:
