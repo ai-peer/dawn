@@ -384,6 +384,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bc800c8_88dd4c99",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-21T02:31:02Z",
+      "side": 1,
+      "message": "yea - basically always do it lazy, and when we want to optimize this, we preload the internal store the the precompiled pipelines / shader modules so that the compile never happens at runtime.",
+      "parentUuid": "3878e526_f85f7c2f",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48b0741a_0bbcb46b",
         "filename": "src/dawn_native/InternalPipelineStore.cpp",
         "patchSetId": 2
