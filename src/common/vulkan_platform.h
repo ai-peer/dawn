@@ -66,6 +66,7 @@ DAWN_DEFINE_NATIVE_NON_DISPATCHABLE_HANDLE(VkSomeHandle)
 // wrapped in a structure. Hence VkSameHandleNativeWrappe
 
 namespace dawn_native { namespace vulkan {
+    static constexpr std::nullptr_t VK_NULL_HANDLE = nullptr;
 
     namespace detail {
         template <typename T>
@@ -102,10 +103,10 @@ namespace dawn_native { namespace vulkan {
 
             // Comparisons between handles and VK_NULL_HANDLE
             bool operator==(std::nullptr_t) const {
-                return mHandle == 0;
+                return mHandle == nullptr;
             }
             bool operator!=(std::nullptr_t) const {
-                return mHandle != 0;
+                return mHandle != nullptr;
             }
 
             // Implicit conversion to real Vulkan types.
@@ -129,11 +130,9 @@ namespace dawn_native { namespace vulkan {
             explicit VkHandle(HandleType handle) : mHandle(handle) {
             }
 
-            HandleType mHandle = 0;
+            HandleType mHandle = VK_NULL_HANDLE;
         };
     }  // namespace detail
-
-    static constexpr std::nullptr_t VK_NULL_HANDLE = nullptr;
 
     template <typename Tag, typename HandleType>
     HandleType* AsVkArray(detail::VkHandle<Tag, HandleType>* handle) {

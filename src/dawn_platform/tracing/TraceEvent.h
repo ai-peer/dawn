@@ -670,9 +670,9 @@
 #define INTERNALTRACEEVENTUID(name_prefix) INTERNAL_TRACE_EVENT_UID2(name_prefix, __LINE__)
 
 // Implementation detail: internal macro to create static category.
-#define INTERNAL_TRACE_EVENT_GET_CATEGORY_INFO(platform, category)    \
-    static const unsigned char* INTERNALTRACEEVENTUID(catstatic) = 0; \
-    if (!INTERNALTRACEEVENTUID(catstatic))                            \
+#define INTERNAL_TRACE_EVENT_GET_CATEGORY_INFO(platform, category)          \
+    static const unsigned char* INTERNALTRACEEVENTUID(catstatic) = nullptr; \
+    if (!INTERNALTRACEEVENTUID(catstatic))                                  \
         INTERNALTRACEEVENTUID(catstatic) = TRACE_EVENT_API_GET_CATEGORY_ENABLED(platform, category);
 
 // Implementation detail: internal macro to create static category and add
@@ -898,7 +898,7 @@ namespace dawn_platform { namespace TraceEvent {
             unsigned char flags,
             int /*unused, helps avoid empty __VA_ARGS__*/) {
             return TRACE_EVENT_API_ADD_TRACE_EVENT(platform, phase, categoryEnabled, name, id,
-                                                   zeroNumArgs, 0, 0, 0, flags);
+                                                   zeroNumArgs, nullptr, nullptr, nullptr, flags);
         }
 
         template <class ARG1_TYPE>
@@ -947,7 +947,7 @@ namespace dawn_platform { namespace TraceEvent {
         class TraceEndOnScopeClose {
           public:
             // Note: members of m_data intentionally left uninitialized. See initialize.
-            TraceEndOnScopeClose() : m_pdata(0) {
+            TraceEndOnScopeClose() : m_pdata(nullptr) {
             }
             ~TraceEndOnScopeClose() {
                 if (m_pdata)
@@ -970,7 +970,7 @@ namespace dawn_platform { namespace TraceEvent {
                 if (*m_pdata->categoryEnabled) {
                     TRACE_EVENT_API_ADD_TRACE_EVENT(
                         m_pdata->platform, TRACE_EVENT_PHASE_END, m_pdata->categoryEnabled,
-                        m_pdata->name, noEventId, zeroNumArgs, 0, 0, 0, TRACE_EVENT_FLAG_NONE);
+                        m_pdata->name, noEventId, zeroNumArgs, nullptr, nullptr, nullptr, TRACE_EVENT_FLAG_NONE);
                 }
             }
 

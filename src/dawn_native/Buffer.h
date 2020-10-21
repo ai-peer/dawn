@@ -113,7 +113,7 @@ namespace dawn_native {
         std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         WGPUBufferMapCallback mMapCallback = nullptr;
-        void* mMapUserdata = 0;
+        void* mMapUserdata = nullptr;
         MapRequestID mLastMapID = MapRequestID(0);
         wgpu::MapMode mMapMode = wgpu::MapMode::None;
         size_t mMapOffset = 0;
