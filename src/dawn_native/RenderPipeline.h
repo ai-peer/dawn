@@ -91,16 +91,11 @@ namespace dawn_native {
 
         const AttachmentState* GetAttachmentState() const;
 
-        // Functors necessary for the unordered_set<RenderPipelineBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const RenderPipelineBase* pipeline) const;
-        };
-        struct EqualityFunc {
-            bool operator()(const RenderPipelineBase* a, const RenderPipelineBase* b) const;
-        };
-
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        // RecoredObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         // Vertex state
         VertexStateDescriptor mVertexState;
