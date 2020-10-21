@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/CachedObject.h"
+#include "dawn_native/FingerprintRecorder.h"
 
 namespace dawn_native {
 
@@ -22,6 +23,20 @@ namespace dawn_native {
 
     void CachedObject::SetIsCachedReference() {
         mIsCachedReference = true;
+    }
+
+    size_t RecordedObject::getKey() const {
+        ASSERT(mKey != kEmptyKeyValue);
+        return mKey;
+    }
+
+    size_t RecordedObject::HashFunc::operator()(const RecordedObject* obj) const {
+        return obj->getKey();
+    }
+
+    bool RecordedObject::EqualityFunc::operator()(const RecordedObject* a,
+                                                  const RecordedObject* b) const {
+        return a->getKey() == b->getKey();
     }
 
 }  // namespace dawn_native
