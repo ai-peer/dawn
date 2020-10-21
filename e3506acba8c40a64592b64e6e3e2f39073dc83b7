@@ -176,6 +176,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90ba0815_9742d671",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T10:55:34Z",
+      "side": 1,
+      "message": "It could be a separate options structure so we can add members over time without breaking compatibility I guess.",
+      "parentUuid": "abf0334f_3b0af0e2",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45401548_fc965c3b",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 2
