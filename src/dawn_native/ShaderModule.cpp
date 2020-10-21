@@ -514,24 +514,24 @@ namespace dawn_native {
 
             // Fill in bindingInfo with the SPIRV bindings
             auto ExtractResourcesBinding =
-                [](const DeviceBase* device,
-                   const spirv_cross::SmallVector<spirv_cross::Resource>& resources,
-                   const spirv_cross::Compiler& compiler, wgpu::BindingType bindingType,
+                [](const DeviceBase* sub_device,
+                   const spirv_cross::SmallVector<spirv_cross::Resource>& res,
+                   const spirv_cross::Compiler& sub_compiler, wgpu::BindingType sub_bindingType,
                    EntryPointMetadata::BindingInfo* metadataBindings) -> MaybeError {
-                for (const auto& resource : resources) {
-                    if (!compiler.get_decoration_bitset(resource.id).get(spv::DecorationBinding)) {
+                for (const auto& resource : res) {
+                    if (!sub_compiler.get_decoration_bitset(resource.id).get(spv::DecorationBinding)) {
                         return DAWN_VALIDATION_ERROR("No Binding decoration set for resource");
                     }
 
-                    if (!compiler.get_decoration_bitset(resource.id)
+                    if (!sub_compiler.get_decoration_bitset(resource.id)
                              .get(spv::DecorationDescriptorSet)) {
                         return DAWN_VALIDATION_ERROR("No Descriptor Decoration set for resource");
                     }
 
                     BindingNumber bindingNumber(
-                        compiler.get_decoration(resource.id, spv::DecorationBinding));
+                        sub_compiler.get_decoration(resource.id, spv::DecorationBinding));
                     BindGroupIndex bindGroupIndex(
-                        compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
+                        sub_compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
 
                     if (bindGroupIndex >= kMaxBindGroupsTyped) {
                         return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
@@ -547,21 +547,21 @@ namespace dawn_native {
                     info->id = resource.id;
                     info->base_type_id = resource.base_type_id;
 
-                    if (bindingType == wgpu::BindingType::UniformBuffer ||
-                        bindingType == wgpu::BindingType::StorageBuffer ||
-                        bindingType == wgpu::BindingType::ReadonlyStorageBuffer) {
+                    if (sub_bindingType == wgpu::BindingType::UniformBuffer ||
+                        sub_bindingType == wgpu::BindingType::StorageBuffer ||
+                        sub_bindingType == wgpu::BindingType::ReadonlyStorageBuffer) {
                         // Determine buffer size, with a minimum of 1 element in the runtime array
-                        spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
+                        spirv_cross::SPIRType type = sub_compiler.get_type(info->base_type_id);
                         info->minBufferBindingSize =
-                            compiler.get_declared_struct_size_runtime_array(type, 1);
+                            sub_compiler.get_declared_struct_size_runtime_array(type, 1);
                     }
 
-                    switch (bindingType) {
+                    switch (sub_bindingType) {
                         case wgpu::BindingType::SampledTexture: {
                             spirv_cross::SPIRType::ImageType imageType =
-                                compiler.get_type(info->base_type_id).image;
+                                sub_compiler.get_type(info->base_type_id).image;
                             spirv_cross::SPIRType::BaseType textureComponentType =
-                                compiler.get_type(imageType.type).basetype;
+                                sub_compiler.get_type(imageType.type).basetype;
 
                             info->viewDimension =
                                 SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
@@ -593,7 +593,7 @@ namespace dawn_native {
                             // Differentiate between readonly storage bindings and writable ones
                             // based on the NonWritable decoration
                             spirv_cross::Bitset flags =
-                                compiler.get_buffer_block_flags(resource.id);
+                                sub_compiler.get_buffer_block_flags(resource.id);
                             if (flags.get(spv::DecorationNonWritable)) {
                                 info->type = wgpu::BindingType::ReadonlyStorageBuffer;
                             } else {
@@ -602,7 +602,7 @@ namespace dawn_native {
                             break;
                         }
                         case wgpu::BindingType::ReadonlyStorageTexture: {
-                            spirv_cross::Bitset flags = compiler.get_decoration_bitset(resource.id);
+                            spirv_cross::Bitset flags = sub_compiler.get_decoration_bitset(resource.id);
                             if (flags.get(spv::DecorationNonReadable)) {
                                 info->type = wgpu::BindingType::WriteonlyStorageTexture;
                             } else if (flags.get(spv::DecorationNonWritable)) {
@@ -613,7 +613,7 @@ namespace dawn_native {
                             }
 
                             spirv_cross::SPIRType::ImageType imageType =
-                                compiler.get_type(info->base_type_id).image;
+                                sub_compiler.get_type(info->base_type_id).image;
                             wgpu::TextureFormat storageTextureFormat =
                                 SpirvImageFormatToTextureFormat(imageType.format);
                             if (storageTextureFormat == wgpu::TextureFormat::Undefined) {
@@ -621,7 +621,7 @@ namespace dawn_native {
                                     "Invalid image format declaration on storage image");
                             }
                             const Format& format =
-                                device->GetValidInternalFormat(storageTextureFormat);
+                                sub_device->GetValidInternalFormat(storageTextureFormat);
                             if (!format.supportsStorageUsage) {
                                 return DAWN_VALIDATION_ERROR(
                                     "The storage texture format is not supported");
@@ -640,7 +640,7 @@ namespace dawn_native {
                             break;
                         }
                         default:
-                            info->type = bindingType;
+                            info->type = sub_bindingType;
                     }
                 }
                 return {};

@@ -124,7 +124,7 @@ namespace dawn_native {
         };
 
         // Creates the BGL from the entries for a stage, checking it is valid.
-        auto CreateBGL = [](DeviceBase* device,
+        auto CreateBGL = [](DeviceBase* sub_device,
                             const EntryMap& entries) -> ResultOrError<Ref<BindGroupLayoutBase>> {
             std::vector<BindGroupLayoutEntry> entryVec;
             entryVec.reserve(entries.size());
@@ -136,8 +136,8 @@ namespace dawn_native {
             desc.entries = entryVec.data();
             desc.entryCount = entryVec.size();
 
-            DAWN_TRY(ValidateBindGroupLayoutDescriptor(device, &desc));
-            return device->GetOrCreateBindGroupLayout(&desc);
+            DAWN_TRY(ValidateBindGroupLayoutDescriptor(sub_device, &desc));
+            return sub_device->GetOrCreateBindGroupLayout(&desc);
         };
 
         ASSERT(!stages.empty());

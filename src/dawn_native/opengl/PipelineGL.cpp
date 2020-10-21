@@ -48,21 +48,21 @@ namespace dawn_native { namespace opengl {
     void PipelineGL::Initialize(const OpenGLFunctions& gl,
                                 const PipelineLayout* layout,
                                 const PerStage<ProgrammableStage>& stages) {
-        auto CreateShader = [](const OpenGLFunctions& gl, GLenum type,
+        auto CreateShader = [](const OpenGLFunctions& sub_gl, GLenum type,
                                const char* source) -> GLuint {
-            GLuint shader = gl.CreateShader(type);
-            gl.ShaderSource(shader, 1, &source, nullptr);
-            gl.CompileShader(shader);
+            GLuint shader = sub_gl.CreateShader(type);
+            sub_gl.ShaderSource(shader, 1, &source, nullptr);
+            sub_gl.CompileShader(shader);
 
             GLint compileStatus = GL_FALSE;
-            gl.GetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
+            sub_gl.GetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
             if (compileStatus == GL_FALSE) {
                 GLint infoLogLength = 0;
-                gl.GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
+                sub_gl.GetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
 
                 if (infoLogLength > 1) {
                     std::vector<char> buffer(infoLogLength);
-                    gl.GetShaderInfoLog(shader, infoLogLength, nullptr, &buffer[0]);
+                    sub_gl.GetShaderInfoLog(shader, infoLogLength, nullptr, &buffer[0]);
                     dawn::ErrorLog() << source << "\nProgram compilation failed:\n"
                                      << buffer.data();
                 }

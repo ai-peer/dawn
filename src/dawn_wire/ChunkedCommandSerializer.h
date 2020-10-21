@@ -40,8 +40,8 @@ namespace dawn_wire {
                               ExtraSizeSerializeFn&& SerializeExtraSize) {
             SerializeCommandImpl(
                 cmd,
-                [](const Cmd& cmd, size_t requiredSize, char* allocatedBuffer) {
-                    cmd.Serialize(requiredSize, allocatedBuffer);
+                [](const Cmd& sub_cmd, size_t requiredSize, char* allocatedBuffer) {
+                    sub_cmd.Serialize(requiredSize, allocatedBuffer);
                 },
                 extraSize, std::forward<ExtraSizeSerializeFn>(SerializeExtraSize));
         }
@@ -58,8 +58,8 @@ namespace dawn_wire {
                               ExtraSizeSerializeFn&& SerializeExtraSize) {
             SerializeCommandImpl(
                 cmd,
-                [&objectIdProvider](const Cmd& cmd, size_t requiredSize, char* allocatedBuffer) {
-                    cmd.Serialize(requiredSize, allocatedBuffer, objectIdProvider);
+                [&objectIdProvider](const Cmd& sub_cmd, size_t requiredSize, char* allocatedBuffer) {
+                    sub_cmd.Serialize(requiredSize, allocatedBuffer, objectIdProvider);
                 },
                 extraSize, std::forward<ExtraSizeSerializeFn>(SerializeExtraSize));
         }

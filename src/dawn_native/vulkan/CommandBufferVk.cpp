@@ -495,8 +495,8 @@ namespace dawn_native { namespace vulkan {
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto PrepareResourcesForRenderPass = [](Device* device,
-                                                CommandRecordingContext* recordingContext,
+        auto PrepareResourcesForRenderPass = [](Device* sub_device,
+                                                CommandRecordingContext* recordingCxt,
                                                 const PassResourceUsage& usages) {
             std::vector<VkBufferMemoryBarrier> bufferBarriers;
             std::vector<VkImageMemoryBarrier> imageBarriers;
@@ -505,7 +505,7 @@ namespace dawn_native { namespace vulkan {
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
-                buffer->EnsureDataInitialized(recordingContext);
+                buffer->EnsureDataInitialized(recordingCxt);
 
                 VkBufferMemoryBarrier bufferBarrier;
                 if (buffer->TransitionUsageAndGetResourceBarrier(
@@ -520,15 +520,15 @@ namespace dawn_native { namespace vulkan {
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the
                 // texture subresource has not been initialized before the render pass.
                 if (!(usages.textureUsages[i].usage & wgpu::TextureUsage::OutputAttachment)) {
-                    texture->EnsureSubresourceContentInitialized(recordingContext,
+                    texture->EnsureSubresourceContentInitialized(recordingCxt,
                                                                  texture->GetAllSubresources());
                 }
-                texture->TransitionUsageForPass(recordingContext, usages.textureUsages[i],
+                texture->TransitionUsageForPass(recordingCxt, usages.textureUsages[i],
                                                 &imageBarriers, &srcStages, &dstStages);
             }
 
             if (bufferBarriers.size() || imageBarriers.size()) {
-                device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages,
+                sub_device->fn.CmdPipelineBarrier(recordingCxt->commandBuffer, srcStages, dstStages,
                                               0, 0, nullptr, bufferBarriers.size(),
                                               bufferBarriers.data(), imageBarriers.size(),
                                               imageBarriers.data());
@@ -537,17 +537,17 @@ namespace dawn_native { namespace vulkan {
 
         // TODO(jiawei.shao@intel.com): move the resource lazy clearing inside the barrier tracking
         // for compute passes.
-        auto PrepareResourcesForComputePass = [](Device* device,
-                                                 CommandRecordingContext* recordingContext,
+        auto PrepareResourcesForComputePass = [](Device* sub_device,
+                                                 CommandRecordingContext* recordingCxt,
                                                  const PassResourceUsage& usages) {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
-                buffer->EnsureDataInitialized(recordingContext);
+                buffer->EnsureDataInitialized(recordingCxt);
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
-                texture->EnsureSubresourceContentInitialized(recordingContext,
+                texture->EnsureSubresourceContentInitialized(recordingCxt,
                                                              texture->GetAllSubresources());
             }
         };
