@@ -182,7 +182,6 @@ function(dawn_compile_options TARGET)
           -Wno-invalid-offsetof
           -Wno-missing-prototypes
           -Wno-missing-variable-declarations
-          -Wno-newline-eof
           -Wno-non-virtual-dtor
           -Wno-old-style-cast
           -Wno-padded
