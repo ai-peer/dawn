@@ -39,7 +39,7 @@ namespace dawn_native {
 
     using StageAndDescriptor = std::pair<SingleShaderStage, const ProgrammableStageDescriptor*>;
 
-    class PipelineLayoutBase : public CachedObject {
+    class PipelineLayoutBase : public CachedObject, public RecordedObject {
       public:
         PipelineLayoutBase(DeviceBase* device, const PipelineLayoutDescriptor* descriptor);
         ~PipelineLayoutBase() override;
@@ -61,19 +61,15 @@ namespace dawn_native {
         // [0, kMaxBindGroups]
         BindGroupIndex GroupsInheritUpTo(const PipelineLayoutBase* other) const;
 
-        // Functors necessary for the unordered_set<PipelineLayoutBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const PipelineLayoutBase* pl) const;
-        };
-        struct EqualityFunc {
-            bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
-        };
-
       protected:
         PipelineLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         BindGroupLayoutArray mBindGroupLayouts;
         BindGroupLayoutMask mMask;
+
+      private:
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
     };
 
 }  // namespace dawn_native

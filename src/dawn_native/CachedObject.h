@@ -17,7 +17,38 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include <limits>
+
 namespace dawn_native {
+
+    class FingerprintRecorder;
+
+    static constexpr size_t kEmptyKeyValue = std::numeric_limits<size_t>::max();
+
+    // Object that knows how to record itself upon creation so it may be used as a cache key.
+    // This interface is separate from CachedObject because some cached objects are never cached
+    // and only used for lookup.
+    class RecordedObject {
+      public:
+        // Called upon creation to record the objects immutable state.
+        // Once recorded, getKey() can be used to lookup or compare the object.
+        virtual void Fingerprint(FingerprintRecorder* recorder) = 0;
+
+        size_t getKey() const;
+
+        // Functors necessary for the unordered_set<CachedObject*>-based cache.
+        struct HashFunc {
+            size_t operator()(const RecordedObject* obj) const;
+        };
+
+        struct EqualityFunc {
+            bool operator()(const RecordedObject* a, const RecordedObject* b) const;
+        };
+
+      private:
+        friend class FingerprintRecorder;
+        size_t mKey = kEmptyKeyValue;
+    };
 
     // Some objects are cached so that instead of creating new duplicate objects,
     // we increase the refcount of an existing object.

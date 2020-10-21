@@ -33,7 +33,7 @@ namespace dawn_native {
     // AttachmentStateBlueprint and AttachmentState are separated so the AttachmentState
     // can be constructed by copying the blueprint state instead of traversing descriptors.
     // Also, AttachmentStateBlueprint does not need a refcount like AttachmentState.
-    class AttachmentStateBlueprint {
+    class AttachmentStateBlueprint : public RecordedObject {
       public:
         // Note: Descriptors must be validated before the AttachmentState is constructed.
         explicit AttachmentStateBlueprint(const RenderBundleEncoderDescriptor* descriptor);
@@ -42,16 +42,10 @@ namespace dawn_native {
 
         AttachmentStateBlueprint(const AttachmentStateBlueprint& rhs);
 
-        // Functors necessary for the unordered_set<AttachmentState*>-based cache.
-        struct HashFunc {
-            size_t operator()(const AttachmentStateBlueprint* attachmentState) const;
-        };
-        struct EqualityFunc {
-            bool operator()(const AttachmentStateBlueprint* a,
-                            const AttachmentStateBlueprint* b) const;
-        };
-
       protected:
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
+
         ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> mColorAttachmentsSet;
         ityp::array<ColorAttachmentIndex, wgpu::TextureFormat, kMaxColorAttachments> mColorFormats;
         // Default (texture format Undefined) indicates there is no depth stencil attachment.

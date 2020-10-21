@@ -38,7 +38,7 @@ namespace dawn_native {
     // Bindings are specified as a |BindingNumber| in the BindGroupLayoutDescriptor.
     // These numbers may be arbitrary and sparse. Internally, Dawn packs these numbers
     // into a packed range of |BindingIndex| integers.
-    class BindGroupLayoutBase : public CachedObject {
+    class BindGroupLayoutBase : public CachedObject, public RecordedObject {
       public:
         BindGroupLayoutBase(DeviceBase* device, const BindGroupLayoutDescriptor* descriptor);
         ~BindGroupLayoutBase() override;
@@ -55,14 +55,6 @@ namespace dawn_native {
         }
         const BindingMap& GetBindingMap() const;
         BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
-
-        // Functors necessary for the unordered_set<BGLBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const BindGroupLayoutBase* bgl) const;
-        };
-        struct EqualityFunc {
-            bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
-        };
 
         BindingIndex GetBindingCount() const;
         // Returns |BindingIndex| because buffers are packed at the front.
@@ -107,6 +99,9 @@ namespace dawn_native {
         }
 
       private:
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
+
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         BindingCounts mBindingCounts = {};
