@@ -309,9 +309,7 @@ TEST_F(BindGroupValidationTest, TextureComponentType) {
     ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, uintTextureView}}));
 }
 
-// Test which depth-stencil formats are allowed to be sampled.
-// This is a regression test for a change in dawn_native mistakenly allowing the depth24plus formats
-// to be sampled without proper backend support.
+// Test which depth-stencil formats are allowed to be sampled (all of them).
 TEST_F(BindGroupValidationTest, SamplingDepthTexture) {
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture}});
@@ -328,20 +326,22 @@ TEST_F(BindGroupValidationTest, SamplingDepthTexture) {
         utils::MakeBindGroup(device, layout, {{0, texture.CreateView()}});
     }
 
-    // Depth24Plus is not allowed to be sampled.
+    // Depth24Plus is allowed to be sampled.
     {
         desc.format = wgpu::TextureFormat::Depth24Plus;
         wgpu::Texture texture = device.CreateTexture(&desc);
 
-        ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, texture.CreateView()}}));
+        utils::MakeBindGroup(device, layout, {{0, texture.CreateView()}});
     }
 
-    // Depth24PlusStencil8 is not allowed to be sampled.
+    // Depth24PlusStencil8 is allowed to be sampled, if the depth aspect is selected.
     {
         desc.format = wgpu::TextureFormat::Depth24PlusStencil8;
         wgpu::Texture texture = device.CreateTexture(&desc);
+        wgpu::TextureViewDescriptor viewDesc = {};
+        viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
 
-        ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, layout, {{0, texture.CreateView()}}));
+        utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&viewDesc)}});
     }
 }
 
