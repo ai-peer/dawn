@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3c7d0f5_3cd8a3bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:28:36Z",
+      "side": 1,
+      "message": "Still LGTM, let\u0027s assume the validation will be like this in the spec and revisit if it differs.",
+      "revId": "a0e3fe2c28cd5507d371659266003c79ec9d5c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
