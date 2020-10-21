@@ -26,7 +26,7 @@ namespace dawn_native {
 
     MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor);
 
-    class SamplerBase : public CachedObject {
+    class SamplerBase : public CachedObject, public RecordedObject {
       public:
         SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor);
         ~SamplerBase() override;
@@ -35,16 +35,12 @@ namespace dawn_native {
 
         bool HasCompareFunction() const;
 
-        // Functors necessary for the unordered_set<SamplerBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const SamplerBase* module) const;
-        };
-        struct EqualityFunc {
-            bool operator()(const SamplerBase* a, const SamplerBase* b) const;
-        };
 
       private:
         SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         // TODO(cwallez@chromium.org): Store a crypto hash of the items instead?
         wgpu::AddressMode mAddressModeU;
