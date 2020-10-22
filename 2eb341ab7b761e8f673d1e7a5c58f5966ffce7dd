@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10127334_759c4d19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Reshape the patch to \"lazy compile\"\n\nPlease take a look again!",
+      "revId": "2eb341ab7b761e8f673d1e7a5c58f5966ffce7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edbdcdac_d4733206",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Try to not set nullptr (ignore this) but get an device error. The same to resolveTarget.",
+      "revId": "2eb341ab7b761e8f673d1e7a5c58f5966ffce7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

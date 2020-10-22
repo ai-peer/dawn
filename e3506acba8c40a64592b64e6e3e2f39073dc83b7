@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "793c45fe_cacbe802",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0e9b8d5_392d1861",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a6cabb5_708e38a7",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f872f8fd_6004d058",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6cabb5_708e38a7",
+      "range": {
+        "startLine": 13,
+        "startChar": 29,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15970441_3712a3e6",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "nit: BlitTextureForBrowser.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c88e22c_313d5311",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15970441_3712a3e6",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -194,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4db38970_a185a804",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Agree with use a seperate options structure. My plan is to add flipY support with the internal pipeline in following patch. Do you think it is Ok for me to add this option structure in the next patch?",
+      "parentUuid": "90ba0815_9742d671",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45401548_fc965c3b",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 2
@@ -246,6 +336,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a184de99_4d8c084d",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Keep the simple rotation matrix here.(I tried a bit with vec2 but seems cannot get correct value). And in the following patch, I\u0027d like to support flipY with the method in BlitGL in ANGLE to workaround some interpolate issue. I think the vertex shader will be in a different shape, but the API side will keep no changes WDYT?",
+      "parentUuid": "2052041b_6d5978d7",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ded08b6_647ef6c9",
         "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
         "patchSetId": 2
@@ -257,6 +365,24 @@
       "writtenOn": "2020-10-21T02:15:45Z",
       "side": 1,
       "message": "nit: break up the rows of matrixes with \"\\\\\" at the end so they go on new lines.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c8b419_3683c255",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ded08b6_647ef6c9",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -278,6 +404,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2534e5d_25afc85b",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea020c79_f6b0211e",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34515b31_c6ed1913",
@@ -291,6 +435,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "This function doesn\u0027t have any state and be outside of the structure.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "704e6632_18e65e1b",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34515b31_c6ed1913",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -312,6 +474,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8215a452_94dd731e",
+        "filename": "src/dawn_native/BlitTextureForBrowserHelper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c51a8f2_2b0cd89c",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b961b9b7_b930087d",
@@ -325,6 +505,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "I don\u0027t think we need this ASSERT, backends always call Initialize, and the pipeline store seems like it is independent of the default queue.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d46e0b_d813b889",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b961b9b7_b930087d",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -501,6 +699,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33391282_33140109",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de1ef78e_ad208f41",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe7265d6_dbcd41fb",
@@ -514,6 +736,30 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "We should use a Ref\u003c\u003e so that we don\u0027t need to call Release ourselves in the destructor.",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 37
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c860dc2_1647512f",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe7265d6_dbcd41fb",
       "range": {
         "startLine": 41,
         "startChar": 19,
@@ -547,6 +793,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d598bedd_4a80e692",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f748e4_7ea7f4c8",
+      "range": {
+        "startLine": 42,
+        "startChar": 19,
+        "endLine": 42,
+        "endChar": 35
+      },
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d8f7874_ed03847e",
@@ -560,6 +830,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "nit: this could be in the BlitInternal call because in the future it is very likely the creation of the helper will be able to fail (for example if it compiles shader modules).",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bcdb42c_b7a0a61e",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d8f7874_ed03847e",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -581,6 +869,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0404d18_3c5e6c0d",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8afefae_3217704b",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14b7332b_8e54ebf6",
@@ -594,6 +900,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "This shader code could just be inside a static variable in the CopyTextureForBrowserHelper file.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ac442e_43c4d019",
+        "filename": "src/dawn_native/internal_pipelines/shaders/BlitTextureVertexWGSL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14b7332b_8e54ebf6",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -615,6 +939,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c93b5be_b8d5e0ee",
+        "filename": "src/dawn_native/internal_pipelines/shaders/BlitTextureVertexWGSL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3076819_3b752ccf",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb22913e_0c0e671e",
@@ -628,6 +970,24 @@
       "writtenOn": "2020-10-20T12:14:30Z",
       "side": 1,
       "message": "ditto",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "397fe4c7_ee2936db",
+        "filename": "src/dawn_native/internal_pipelines/shaders/Passthrough4Channel2DTexturesFragmentWGSL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb22913e_0c0e671e",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -649,6 +1009,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc3f7e9_a01f30d5",
+        "filename": "src/dawn_native/internal_pipelines/shaders/Passthrough4Channel2DTexturesFragmentWGSL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9201751c_7a733a53",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d30065fc_00a53961",
@@ -662,6 +1040,24 @@
       "writtenOn": "2020-10-20T09:37:33Z",
       "side": 1,
       "message": "This test can pass in a smaller size texture. I tried 1x1, 12 x 1 or 6 x  6 in my local machine. And the test works fine.\nBut when it becomes a bit large in width/height, the value will have errors, for example if we have the size 13 x 1, in my local machine.\nExpected:\n00 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05 00 00 00 06 00 00 00 07 00 00 00 08 00 00 00 09 00 00 00 0A 00 00 00 \n// expected values\n0B 00 00 00 0C 00 00 00\nActual:\n00 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 04 00 00 00 05 00 00 00 06 00 00 00 07 00 00 00 08 00 00 00 09 00 00 00 0A 00 00 00 \n// error values\n0C 00 00 00 0C 00 00 00\n\nI suspect it is the sampler precise issue(again. the 10 x 1 or 6 x 6 size texture can pass the test). But I\u0027m still in trying. Send this out to see your comments about this.",
+      "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2594f1fa_50af7351",
+        "filename": "src/tests/end2end/BlitTextureForBrowserTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-22T10:18:26Z",
+      "side": 1,
+      "message": "I think this maybe the same reason here:https://source.chromium.org/chromium/chromium/src/+/master:third_party/angle/src/libANGLE/renderer/gl/BlitGL.cpp;l\u003d1127",
+      "parentUuid": "d30065fc_00a53961",
       "revId": "e3506acba8c40a64592b64e6e3e2f39073dc83b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
