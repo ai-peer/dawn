@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36cd788c_6fd02a04",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-22T08:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f04cdf1d_682102d5",
+      "range": {
+        "startLine": 38,
+        "startChar": 48,
+        "endLine": 38,
+        "endChar": 52
+      },
+      "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a6d3645_397bae0a",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-10-22T08:10:12Z",
       "side": 1,
       "message": "I\u0027m not sure whether this should be DeviceLost or Unknown, WDYT? Maybe we should have a IsLost() on the device that says if it is a graceful shutdown or something bad happened, then choose Unknown vs DeviceLost accordingly?\n\nMaybe it will depend on the specification for what happens with CreateReadyPipeline when the device is destroyed. +Kai WDYT from should happen on the spec side when the device is lost, vs when device.destroy() is called (assuming the latter is a thing)",
+      "range": {
+        "startLine": 43,
+        "startChar": 48,
+        "endLine": 43,
+        "endChar": 88
+      },
+      "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1519dc30_1c2327c6",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-22T08:54:11Z",
+      "side": 1,
+      "message": "Now I\u0027ve added another state DeviceDestroyed for this situation, which I think will provide clearer information. PTAL!",
+      "parentUuid": "0a6d3645_397bae0a",
       "range": {
         "startLine": 43,
         "startChar": 48,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ec62e2_29b18fc3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-22T08:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df158d8_93886ed8",
+      "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "116dbe14_f7bce204",
@@ -111,6 +177,24 @@
       "writtenOn": "2020-10-22T08:10:12Z",
       "side": 1,
       "message": "That\u0027s very interesting and a problem that could happen in more callbacks too. Not in this CL but in the future maybe we could have the userdata contain a weak pointer to the server so that we can know whether it has been destroyed. It\u0027s not clear that it will always be the case that deviceLost means we can always skip the call.\n\n(but it\u0027s fine to land the fuzzer fix as is)",
+      "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f5aca4_ecbea023",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-22T08:54:11Z",
+      "side": 1,
+      "message": "Yes I find I have to do such early return or the program will crash because the pointer has already pointed to some garbages instead of valid memory.",
+      "parentUuid": "116dbe14_f7bce204",
       "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
