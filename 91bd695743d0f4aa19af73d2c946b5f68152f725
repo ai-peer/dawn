@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f08c55_ae7def1b",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-10-22T00:02:06Z",
+      "side": 1,
+      "message": "Per my understanding, the mipLevelCount should be less or equal than lg(Max(width, height)). So it depends on the bigger one (not the smaller one) of width and height.",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 54
+      },
+      "revId": "91bd695743d0f4aa19af73d2c946b5f68152f725",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

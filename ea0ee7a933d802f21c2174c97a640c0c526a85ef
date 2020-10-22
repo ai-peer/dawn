@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8811fcfe_a52a0641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-10-22T00:02:06Z",
+      "side": 1,
+      "message": "Started working on 3D texture with a tiny change. 😊  \nPTAL. ",
+      "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
