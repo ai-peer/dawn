@@ -865,8 +865,8 @@ TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
         utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
 
     const uint32_t requiredBufferSizeForCopy = utils::GetBytesInBufferTextureCopy(
-        kTextureFormat, kTextureSize.width, kTextureBytesPerRowAlignment, kTextureSize.width,
-        kTextureSize.depth);
+        kTextureFormat, kTextureSize.width, kTextureSize.height, kTextureBytesPerRowAlignment,
+        kTextureSize.width, kTextureSize.depth);
 
     constexpr wgpu::BufferUsage kBufferUsage =
         wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
