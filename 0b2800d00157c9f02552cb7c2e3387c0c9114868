@@ -16,6 +16,40 @@
       "message": "I\u0027m surprised this worked on my 5+ yr old NV GPU.",
       "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8cca33_0f8362b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T20:08:02Z",
+      "side": 1,
+      "message": "Woa that\u0027s pretty crazy! But the general approach would work. I\u0027m not sure how to do per-plane GPUTexture for WebCodec with this, because it would need to be imported twice but force the view to a different plane?",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b00c2541_b8774d98",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T20:08:02Z",
+      "side": 1,
+      "message": "Not even copying from? :(",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
