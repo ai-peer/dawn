@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c1a7a031_1a2d3634",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Done. For some reason I keep making this typo (20+ times already, but usually the compiler catches it)",
+      "parentUuid": "f0ccbb2b_0ef68fd3",
+      "range": {
+        "startLine": 19,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2e917d75_a03d70fd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32fb7fcf_c5cff966",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Yep!",
+      "parentUuid": "e083c3e7_6de08803",
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8b9749_12ec5113",
@@ -71,6 +113,30 @@
       "writtenOn": "2020-10-21T22:10:31Z",
       "side": 1,
       "message": "nit: remove \"make\" or say \"make sure to\"",
+      "range": {
+        "startLine": 358,
+        "startChar": 76,
+        "endLine": 358,
+        "endChar": 80
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42991609_f4bb0d0b",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b8b9749_12ec5113",
       "range": {
         "startLine": 358,
         "startChar": 76,
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddede7b_7ffc997d",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Done, and I realized I had the condition flipped.",
+      "parentUuid": "9d8615a8_559c3e06",
+      "range": {
+        "startLine": 361,
+        "startChar": 64,
+        "endLine": 361,
+        "endChar": 76
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "902b29d5_af6f492c",
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0116f150_ba486ab6",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "902b29d5_af6f492c",
+      "range": {
+        "startLine": 426,
+        "startChar": 12,
+        "endLine": 427,
+        "endChar": 35
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "384f5b73_e2aef386",
@@ -140,6 +254,30 @@
       "writtenOn": "2020-10-21T22:10:31Z",
       "side": 1,
       "message": "notify",
+      "range": {
+        "startLine": 509,
+        "startChar": 68,
+        "endLine": 509,
+        "endChar": 74
+      },
+      "revId": "0bff1bdf2aa539cd02fe4b6db2198bdd2b16653b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5fcb36_fb783f7b",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:57:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384f5b73_e2aef386",
       "range": {
         "startLine": 509,
         "startChar": 68,
