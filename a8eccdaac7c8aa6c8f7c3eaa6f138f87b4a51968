@@ -103,6 +103,30 @@
       },
       "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501acd61_9d5ddb0e",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T16:49:20Z",
+      "side": 1,
+      "message": "Okay we need to support three things: real equality, hashing, and serialization.\n\nYou\u0027re right we should still have the hash for fast lookup, but we need a real infallible equality check as well. std::unordered_* works by first hashing, and if they hash the same, it does an equality check. That\u0027s why we need to support both.\n\nSerialization we will need in the future to pass serialized blobs to the embedder.",
+      "parentUuid": "a7e11b05_b6d5684d",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
