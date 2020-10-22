@@ -199,6 +199,30 @@
       },
       "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51dc0e9e_bfa46d8b",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T19:27:58Z",
+      "side": 1,
+      "message": "The user would not pass the handle to the malicious pipeline. If they do, that\u0027s their problem. The bigger issue is:\n\nmalicious \u003d device.createPipeline(...);\n\nmyPipeline \u003d device.createPipeline(..); // Hash collision! and I actually get a reference to |malicious|\n\nThis is particularly a problem if we muliplex on a single device in Dawn as an optimization. ex. on android making a VkDevice is very expensive so we probably want something like this.\n\nQuoting myself from the comment in the bug:\n\nSerializing b.c. we\u0027re not going to crypto hash in Dawn. We need a crypto hash somewhere for security, and to make a crypto hash we need serialized data unless there\u0027s a good rolling crypto (but I don\u0027t know of one). So we serialize and let the embedder do the hashing.\n - for the key for shader blobs\n - for the key for the pipeline library data on both D3D12 and Vulkan (not for getting the d3d12 pso from the library)",
+      "parentUuid": "2dc1fcc2_6a9be4a6",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
