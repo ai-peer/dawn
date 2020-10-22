@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05af3d69_8ba6ecf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:59:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc07e932_f3cda445",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:59:45Z",
+      "side": 1,
+      "message": "nit: !\u003d success?",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
