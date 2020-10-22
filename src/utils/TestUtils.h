@@ -32,6 +32,7 @@ namespace utils {
     uint32_t GetMinimumBytesPerRow(wgpu::TextureFormat format, uint32_t width);
     uint32_t GetBytesInBufferTextureCopy(wgpu::TextureFormat format,
                                          uint32_t width,
+                                         uint32_t height,
                                          uint32_t bytesPerRow,
                                          uint32_t rowsPerImage,
                                          uint32_t copyArrayLayerCount);

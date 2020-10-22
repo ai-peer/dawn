@@ -61,8 +61,9 @@ class CopyTests : public DawnTest {
                                         uint32_t arrayLayer = 1,
                                         bool testZeroRowsPerImage = true) {
         const uint32_t bytesPerRow = utils::GetMinimumBytesPerRow(kTextureFormat, width);
+        const uint32_t height = rowsPerImage;
         const uint32_t totalBufferSize = utils::GetBytesInBufferTextureCopy(
-            kTextureFormat, width, bytesPerRow, rowsPerImage, arrayLayer);
+            kTextureFormat, width, height, bytesPerRow, rowsPerImage, arrayLayer);
         uint32_t appliedRowsPerImage = testZeroRowsPerImage ? 0 : rowsPerImage;
         return {totalBufferSize, 0, bytesPerRow, appliedRowsPerImage};
     }
