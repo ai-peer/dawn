@@ -16,6 +16,57 @@
       "message": "still LGTM",
       "revId": "ece8797a1f039d6cb5a2b7c265eb29188d8fda3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "663e90a8_36abdcd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-22T14:58:43Z",
+      "side": 1,
+      "message": "Man, Vulkan swapchains are a disaster of biblical proportions.\n\nLGTM2",
+      "revId": "ece8797a1f039d6cb5a2b7c265eb29188d8fda3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b52896_19ec6d86",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-22T14:58:43Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "revId": "ece8797a1f039d6cb5a2b7c265eb29188d8fda3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a108acd_bb162808",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-22T14:58:43Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "revId": "ece8797a1f039d6cb5a2b7c265eb29188d8fda3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
