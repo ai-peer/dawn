@@ -53,6 +53,7 @@ namespace dawn_native { namespace vulkan {
             switch (aspect) {
                 case Aspect::Color:
                     flags |= VK_IMAGE_ASPECT_COLOR_BIT;
+                    // TODO: VK multi-planar format support
                     break;
                 case Aspect::Depth:
                     flags |= VK_IMAGE_ASPECT_DEPTH_BIT;
@@ -60,6 +61,8 @@ namespace dawn_native { namespace vulkan {
                 case Aspect::Stencil:
                     flags |= VK_IMAGE_ASPECT_STENCIL_BIT;
                     break;
+                case Aspect::Plane0:  // TODO: VK multi-planar format support
+                case Aspect::Plane1:
                 case Aspect::None:
                     UNREACHABLE();
             }

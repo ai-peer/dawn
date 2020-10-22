@@ -127,6 +127,9 @@ namespace dawn_native {
                 case wgpu::TextureAspect::StencilOnly:
                     ASSERT(format.aspects & Aspect::Stencil);
                     break;
+                case wgpu::TextureAspect::Plane0:
+                case wgpu::TextureAspect::Plane1:
+                    return DAWN_VALIDATION_ERROR("Multi-planar textures do not support copying.");
             }
 
             if (depthSelected) {
@@ -139,7 +142,6 @@ namespace dawn_native {
                         break;
                     case wgpu::TextureFormat::Depth32Float:
                         break;
-
                     default:
                         UNREACHABLE();
                 }
