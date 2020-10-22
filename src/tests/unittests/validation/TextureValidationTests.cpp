@@ -144,25 +144,35 @@ namespace {
             device.CreateTexture(&descriptor);
         }
 
-        // Too big mip chains on height are disallowed
+        // Test non-power-of-two width
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            // Mip level width: 31, 15, 7, 3, 1
             descriptor.size.width = 31;
-            descriptor.size.height = 32;
-            // Mip level height: 32, 16, 8, 4, 2, 1
-            descriptor.mipLevelCount = 7;
+            descriptor.size.height = 4;
 
+            // Full mip chains on non-power-of-two width are allowed
+            descriptor.mipLevelCount = 5;
+            device.CreateTexture(&descriptor);
+
+            // Too big mip chains on non-power-of-two width are disallowed
+            descriptor.mipLevelCount = 6;
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
-        // Too big mip chains on width are disallowed
+        // Test non-power-of-two height
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
-            descriptor.size.width = 32;
+            descriptor.size.width = 4;
+            // Mip level height: 31, 15, 7, 3, 1
             descriptor.size.height = 31;
-            // Mip level width: 32, 16, 8, 4, 2, 1
-            descriptor.mipLevelCount = 7;
 
+            // Full mip chains on non-power-of-two height are allowed
+            descriptor.mipLevelCount = 5;
+            device.CreateTexture(&descriptor);
+
+            // Too big mip chains on non-power-of-two height are disallowed
+            descriptor.mipLevelCount = 6;
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
