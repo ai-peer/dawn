@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "214b78a3_1cba89ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T15:30:44Z",
+      "side": 1,
+      "message": "So, wouldn\u0027t this be an issue for all callbacks - including buffer mapping, fences, and error scopes? If so, I think we should design a solution that handles all of them.",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc07e932_f3cda445",
@@ -31,6 +48,52 @@
       "writtenOn": "2020-10-22T08:59:45Z",
       "side": 1,
       "message": "nit: !\u003d success?",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc43c989_9c783a24",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T15:30:44Z",
+      "side": 1,
+      "message": "it\u0027s maybe a bit odd this happens here since we WaitForIdleForDestruction in the Alive case as well - so technically everything should actually be done.\n\nIs this change here part of fixing the crash? or is it mostly for correctness of passing the right callback status? Looks like we always (wrongly) said Success since we wait for everything to complete.",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 59
+      },
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c0e923_2e7eaf77",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T15:30:44Z",
+      "side": 1,
+      "message": "I feel like this condition isn\u0027t actually that related to DeviceDestroyed status. The device could live forever, but if the WireServer is destroyed, we still have the problem where |createReadyPipelineUserData-\u003eserver| is invalid.\n\nWe could do as Corentin said and have a weak ref in the future, but for now maybe we can just fix the test destruction to ensure this situation doesn\u0027t happen.\n\nOverall, I\u0027m not sure how important it is that we handle cases where the server is destroyed while there\u0027s still work in flight. I would be okay throwing an ASSERT if the developer destroys the server with in-flight callback. Although that would require weak-refs anyway so maybe we should just implement this ignore functionality and log warnings.",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 82
+      },
       "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
