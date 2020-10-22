@@ -30,20 +30,38 @@ namespace dawn_wire { namespace server {
                                                    WGPUComputePipeline pipeline,
                                                    const char* message,
                                                    void* userdata) {
-        CreateReadyPipelineUserData* createReadyPipelineUserData =
-            static_cast<CreateReadyPipelineUserData*>(userdata);
+        std::unique_ptr<CreateReadyPipelineUserData> createReadyPipelineUserData(
+            static_cast<CreateReadyPipelineUserData*>(userdata));
+
+        // Because WireClient and WireServer both is removed before the removal of backend device
+        // (e.g. in DawnTestBase::~DawnTestBase()), when the callback is called inside
+        // device::ShutDown(), createReadyPipelineUserData->server is pointing to an invalid memory
+        // and we should not call any functions on this invalid object.
+        if (status == WGPUCreateReadyPipelineStatus_DeviceLost) {
+            return;
+        }
+
         createReadyPipelineUserData->server->OnCreateReadyComputePipelineCallback(
-            status, pipeline, message, createReadyPipelineUserData);
+            status, pipeline, message, createReadyPipelineUserData.release());
     }
 
     void Server::ForwardCreateReadyRenderPipeline(WGPUCreateReadyPipelineStatus status,
                                                   WGPURenderPipeline pipeline,
                                                   const char* message,
                                                   void* userdata) {
-        CreateReadyPipelineUserData* createReadyPipelineUserData =
-            static_cast<CreateReadyPipelineUserData*>(userdata);
+        std::unique_ptr<CreateReadyPipelineUserData> createReadyPipelineUserData(
+            static_cast<CreateReadyPipelineUserData*>(userdata));
+
+        // Because WireClient and WireServer both is removed before the removal of backend device
+        // (e.g. in DawnTestBase::~DawnTestBase()), when the callback is called inside
+        // device::ShutDown(), createReadyPipelineUserData->server is pointing to an invalid memory
+        // and we should not call any functions on this invalid object.
+        if (status == WGPUCreateReadyPipelineStatus_DeviceLost) {
+            return;
+        }
+
         createReadyPipelineUserData->server->OnCreateReadyRenderPipelineCallback(
-            status, pipeline, message, createReadyPipelineUserData);
+            status, pipeline, message, createReadyPipelineUserData.release());
     }
 
     void Server::OnUncapturedError(WGPUErrorType type, const char* message) {
@@ -101,10 +119,23 @@ namespace dawn_wire { namespace server {
                                                       const char* message,
                                                       CreateReadyPipelineUserData* userdata) {
         std::unique_ptr<CreateReadyPipelineUserData> data(userdata);
-        if (status != WGPUCreateReadyPipelineStatus_Success) {
-            ComputePipelineObjects().Free(data->pipelineObjectID);
-        } else {
-            ComputePipelineObjects().Get(data->pipelineObjectID)->handle = pipeline;
+
+        auto* computePipelineObject = ComputePipelineObjects().Get(data->pipelineObjectID);
+        ASSERT(computePipelineObject != nullptr);
+
+        switch (status) {
+            case WGPUCreateReadyPipelineStatus_Success:
+                computePipelineObject->handle = pipeline;
+                break;
+
+            case WGPUCreateReadyPipelineStatus_Error:
+                ComputePipelineObjects().Free(data->pipelineObjectID);
+                break;
+
+            case WGPUCreateReadyPipelineStatus_DeviceLost:
+            case WGPUCreateReadyPipelineStatus_Unknown:
+            default:
+                UNREACHABLE();
         }
 
         ReturnDeviceCreateReadyComputePipelineCallbackCmd cmd;
@@ -142,10 +173,23 @@ namespace dawn_wire { namespace server {
                                                      const char* message,
                                                      CreateReadyPipelineUserData* userdata) {
         std::unique_ptr<CreateReadyPipelineUserData> data(userdata);
-        if (status != WGPUCreateReadyPipelineStatus_Success) {
-            RenderPipelineObjects().Free(data->pipelineObjectID);
-        } else {
-            RenderPipelineObjects().Get(data->pipelineObjectID)->handle = pipeline;
+
+        auto* renderPipelineObject = RenderPipelineObjects().Get(data->pipelineObjectID);
+        ASSERT(renderPipelineObject != nullptr);
+
+        switch (status) {
+            case WGPUCreateReadyPipelineStatus_Success:
+                renderPipelineObject->handle = pipeline;
+                break;
+
+            case WGPUCreateReadyPipelineStatus_Error:
+                RenderPipelineObjects().Free(data->pipelineObjectID);
+                break;
+
+            case WGPUCreateReadyPipelineStatus_DeviceLost:
+            case WGPUCreateReadyPipelineStatus_Unknown:
+            default:
+                UNREACHABLE();
         }
 
         ReturnDeviceCreateReadyRenderPipelineCallbackCmd cmd;

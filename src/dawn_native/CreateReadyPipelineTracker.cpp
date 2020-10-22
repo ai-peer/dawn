@@ -14,7 +14,9 @@
 
 #include "dawn_native/CreateReadyPipelineTracker.h"
 
+#include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/RenderPipeline.h"
 
 namespace dawn_native {
 
@@ -33,13 +35,19 @@ namespace dawn_native {
           mCreateReadyComputePipelineCallback(callback) {
     }
 
-    void CreateReadyComputePipelineTask::Finish() {
+    void CreateReadyComputePipelineTask::Finish(bool isDeviceShutDown) {
         ASSERT(mPipeline != nullptr);
         ASSERT(mCreateReadyComputePipelineCallback != nullptr);
 
-        mCreateReadyComputePipelineCallback(WGPUCreateReadyPipelineStatus_Success,
-                                            reinterpret_cast<WGPUComputePipeline>(mPipeline), "",
-                                            mUserData);
+        if (isDeviceShutDown) {
+            mCreateReadyComputePipelineCallback(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr,
+                                                "Device destroyed before callback", mUserData);
+            mPipeline->Release();
+        } else {
+            mCreateReadyComputePipelineCallback(WGPUCreateReadyPipelineStatus_Success,
+                                                reinterpret_cast<WGPUComputePipeline>(mPipeline),
+                                                "", mUserData);
+        }
 
         // Set mCreateReadyComputePipelineCallback to nullptr in case it is called more than once.
         mCreateReadyComputePipelineCallback = nullptr;
@@ -54,13 +62,19 @@ namespace dawn_native {
           mCreateReadyRenderPipelineCallback(callback) {
     }
 
-    void CreateReadyRenderPipelineTask::Finish() {
+    void CreateReadyRenderPipelineTask::Finish(bool isDeviceShutDown) {
         ASSERT(mPipeline != nullptr);
         ASSERT(mCreateReadyRenderPipelineCallback != nullptr);
 
-        mCreateReadyRenderPipelineCallback(WGPUCreateReadyPipelineStatus_Success,
-                                           reinterpret_cast<WGPURenderPipeline>(mPipeline), "",
-                                           mUserData);
+        if (isDeviceShutDown) {
+            mCreateReadyRenderPipelineCallback(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr,
+                                               "Device destroyed before callback", mUserData);
+            mPipeline->Release();
+        } else {
+            mCreateReadyRenderPipelineCallback(WGPUCreateReadyPipelineStatus_Success,
+                                               reinterpret_cast<WGPURenderPipeline>(mPipeline), "",
+                                               mUserData);
+        }
 
         // Set mCreateReadyPipelineCallback to nullptr in case it is called more than once.
         mCreateReadyRenderPipelineCallback = nullptr;
@@ -79,9 +93,9 @@ namespace dawn_native {
         mDevice->AddFutureSerial(serial);
     }
 
-    void CreateReadyPipelineTracker::Tick(ExecutionSerial finishedSerial) {
+    void CreateReadyPipelineTracker::Tick(ExecutionSerial finishedSerial, bool isDeviceShutDown) {
         for (auto& task : mCreateReadyPipelineTasksInFlight.IterateUpTo(finishedSerial)) {
-            task->Finish();
+            task->Finish(isDeviceShutDown);
         }
         mCreateReadyPipelineTasksInFlight.ClearUpTo(finishedSerial);
     }
