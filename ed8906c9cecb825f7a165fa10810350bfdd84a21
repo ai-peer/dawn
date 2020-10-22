@@ -16,6 +16,24 @@
       "message": "Austin: Could you help me figure out what in this CL is causing this:\n\n D3D12 ERROR: ID3D12CommandList::CopyTextureRegion: The region specified by \n D3D12_TEXTURE_COPY_LOCATION:PlacedFootprint extends past the end of the buffer it is placed on. The \n size required by PlacedFootprint is 33280, as the fields of PlacedFootprint::Placement are as follows: RowPitch is 256, Height is 130, and Format is R8G8B8A8_UNORM. PlacedFootprint::Offset is 230912, which requires the buffer to have 264192 bytes; but the buffer only has 263936 bytes. [ RESOURCE_MANIPULATION ERROR #869: COPYTEXTUREREGION_INVALIDSRCPLACEMENT]\n\nin this test:\n\n // Test a special code path in the D3D12 backends when (BytesPerRow * RowsPerImage) is not a\n // multiple of 512.\n TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetOddRowsPerImage) {\n\nThe change that caused the test behavior to change is in GetTextureDataCopyLayoutForTexture2DAtLevel. RequiredBytesInCopy returns a smaller number than GetBytesInBufferTextureCopy did, because it uses `height` instead of `rowsPerImage` for the height of the last image. I think this was already a problem but we were missing test coverage?\n\nWhat seems like an issue is here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/TextureCopySplitter.cpp;l\u003d181;drc\u003d6298d2b70cb67bb929f7817f2186f618ec8f1ca1\nthe height of each subcopy is rowsPerImageInTexels instead of copySize.height. I\u0027m sure there was a reason for that though?\n\nIt also brings up the question of what values the padding data is supposed to get set to on T2B copies.",
       "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c74e0e9d_1241028e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-22T02:30:41Z",
+      "side": 1,
+      "message": "Running a test here to see if this was already broken:\nhttps://dawn-review.googlesource.com/c/dawn/+/30743",
+      "parentUuid": "e7096d10_bf0a2d4d",
+      "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
