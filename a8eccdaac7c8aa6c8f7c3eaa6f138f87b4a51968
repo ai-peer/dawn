@@ -43,6 +43,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4fafb05_cacb32e2",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-22T16:46:45Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9861d63_0da74a00",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 6
@@ -54,6 +71,30 @@
       "writtenOn": "2020-10-22T05:06:41Z",
       "side": 1,
       "message": "nit: methods should start with a capital letter.\n\nhigh level, I like the structure of my prototype in https://godbolt.org/z/8q9eW9 better if we can get that to work. It lets you pass in a struct which implements the visitor functionality so it can be customized for different types of traversals.\n\nThere\u0027s a few downsides to the current approach:\n - the equality function now walks the entire object tree - this is suboptimal if it can return early\n - the equality function is now effectively comparing hashes - which means our equality check is wrong if there are hash collisions\n - I don\u0027t immediately see how this is extendable to serialization",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e11b05_b6d5684d",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-22T16:46:45Z",
+      "side": 1,
+      "message": "\u003e  so it can be customized for different types of traversals.\n\nThanks for the snippet. That approach is good for whole object serialization but not for fast lookup, which I don\u0027t believe requires multiple walks or copies as suggested.\n\n\u003e the equality function now walks the entire object\n\nOnce the hash is recorded, no traversal is needed [1].\n\n\u003e equality check is wrong if there are hash collisions\n\nI use a hash because lookup needs to be fast and collisions are not consequential.\n\n\u003e I don\u0027t immediately see how this is extendable to serialization\n\nThis is for lookup only, so I didn\u0027t see any need for serialization.",
+      "parentUuid": "b9861d63_0da74a00",
       "range": {
         "startLine": 24,
         "startChar": 5,
