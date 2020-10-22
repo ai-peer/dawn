@@ -52,6 +52,24 @@
       "parentUuid": "c74e0e9d_1241028e",
       "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58bd6add_e7d7ad65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T14:22:30Z",
+      "side": 1,
+      "message": "I\u0027ll take a look next week when I\u0027m back and have my Windows machine.\n\nI believe we have this exact issue and a workaround for Metal as well though.",
+      "parentUuid": "c5194613_32cefabb",
+      "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
