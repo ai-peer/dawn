@@ -34,6 +34,24 @@
       "parentUuid": "e7096d10_bf0a2d4d",
       "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5194613_32cefabb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-22T03:58:59Z",
+      "side": 1,
+      "message": "It failed, so looks like this was broken already. Added a workaround in this CL, to restore the old, weaker test behavior. Test passes now.\n\nAustin, would you be able to look at the splitter at some point and see if it can be fixed to make the test change pass? (can just take this CL and remove the workaround)",
+      "parentUuid": "c74e0e9d_1241028e",
+      "revId": "ed8906c9cecb825f7a165fa10810350bfdd84a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
