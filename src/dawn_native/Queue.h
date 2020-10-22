@@ -25,6 +25,11 @@
 
 namespace dawn_native {
 
+    enum ImageOrientationEnum {
+        kOriginTopLeft,
+        kOriginBottomRight,
+    };
+
     class QueueBase : public ObjectBase {
       public:
         struct TaskInFlight {
@@ -45,6 +50,9 @@ namespace dawn_native {
                           size_t dataSize,
                           const TextureDataLayout* dataLayout,
                           const Extent3D* writeSize);
+        void CopyTextureForBrowser(const TextureCopyView* source,
+                                   const TextureCopyView* destination,
+                                   const Extent3D* copySize);
 
         void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
@@ -63,6 +71,9 @@ namespace dawn_native {
                                         size_t dataSize,
                                         const TextureDataLayout* dataLayout,
                                         const Extent3D* writeSize);
+        MaybeError CopyTextureForBrowserInternal(const TextureCopyView* source,
+                                                 const TextureCopyView* destination,
+                                                 const Extent3D* copySize);
 
         virtual MaybeError SubmitImpl(uint32_t commandCount,
                                       CommandBufferBase* const* commands) = 0;

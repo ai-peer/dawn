@@ -29,6 +29,7 @@
 #include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/Instance.h"
+#include "dawn_native/InternalPipelineStore.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/Queue.h"
@@ -109,7 +110,7 @@ namespace dawn_native {
         mState = State::Alive;
 
         DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, CreateEmptyBindGroupLayout());
-
+        mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         return {};
     }
 
@@ -165,6 +166,8 @@ namespace dawn_native {
         mDynamicUploader = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
+
+        mInternalPipelineStore = nullptr;
 
         AssumeCommandsComplete();
         // Tell the backend that it can free all the objects now that the GPU timeline is empty.
@@ -702,6 +705,9 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    InternalPipelineStore* DeviceBase::GetInternalPipelineStore() {
+        return mInternalPipelineStore.get();
     }
 
     // For Dawn Wire
