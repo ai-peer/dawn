@@ -32,7 +32,7 @@ namespace dawn_native {
         CreateReadyPipelineTaskBase(void* userData);
         virtual ~CreateReadyPipelineTaskBase();
 
-        virtual void Finish() = 0;
+        virtual void Finish(bool isDeviceShutDown) = 0;
 
       protected:
         void* mUserData;
@@ -43,7 +43,7 @@ namespace dawn_native {
                                        WGPUCreateReadyComputePipelineCallback callback,
                                        void* userdata);
 
-        void Finish() final;
+        void Finish(bool isDeviceShutDown) final;
 
       private:
         ComputePipelineBase* mPipeline;
@@ -55,7 +55,7 @@ namespace dawn_native {
                                       WGPUCreateReadyRenderPipelineCallback callback,
                                       void* userdata);
 
-        void Finish() final;
+        void Finish(bool isDeviceShutDown) final;
 
       private:
         RenderPipelineBase* mPipeline;
@@ -68,7 +68,7 @@ namespace dawn_native {
         ~CreateReadyPipelineTracker();
 
         void TrackTask(std::unique_ptr<CreateReadyPipelineTaskBase> task, ExecutionSerial serial);
-        void Tick(ExecutionSerial finishedSerial);
+        void Tick(ExecutionSerial finishedSerial, bool isDeviceShutDown);
 
       private:
         DeviceBase* mDevice;
