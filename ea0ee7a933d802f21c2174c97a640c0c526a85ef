@@ -67,6 +67,24 @@
       "message": "we should also have a test for 31, 30, so that the largest dimension of the base mip level is non-power-of-two",
       "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b77ea7_05fa68d2",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-10-22T17:46:05Z",
+      "side": 1,
+      "message": "I see. So this test itself is incorrect. I thought only the comment was incorrect. \n\nDone. I revised the test and now it can cover non-power-of-two values for width/height. Note that the non-power-of-two value should be the bigger one. Otherwise, it doesn\u0027t impact mipLevelCount.",
+      "parentUuid": "01a5d9b4_d39bea67",
+      "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
