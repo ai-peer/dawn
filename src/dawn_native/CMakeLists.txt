@@ -66,6 +66,8 @@ target_sources(dawn_native PRIVATE
     "ComputePassEncoder.h"
     "ComputePipeline.cpp"
     "ComputePipeline.h"
+    "CopyTextureForBrowserHelper.cpp",
+    "CopyTextureForBrowserHelper.h",
     "CreateReadyPipelineTracker.cpp"
     "CreateReadyPipelineTracker.h"
     "Device.cpp"
