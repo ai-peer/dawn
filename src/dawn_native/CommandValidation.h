@@ -51,13 +51,14 @@ namespace dawn_native {
                                                        uint32_t bytesPerRow,
                                                        uint32_t rowsPerImage);
 
-    MaybeError ValidateLinearTextureData(const TextureDataLayout& layout,
+    MaybeError ValidateLinearTextureData(TextureDataLayout layout,
                                          uint64_t byteSize,
                                          const TexelBlockInfo& blockInfo,
                                          const Extent3D& copyExtent);
     MaybeError ValidateTextureCopyRange(const TextureCopyView& textureCopyView,
                                         const Extent3D& copySize);
-    MaybeError ValidateBufferToTextureCopyRestrictions(const TextureCopyView& dst);
+    ResultOrError<Aspect> AspectUsedByTextureCopyView(const TextureCopyView& view);
+    MaybeError ValidateLinearToDepthStencilCopyRestrictions(const TextureCopyView& dst);
 
     MaybeError ValidateBufferCopyView(DeviceBase const* device,
                                       const BufferCopyView& bufferCopyView);

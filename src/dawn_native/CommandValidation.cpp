@@ -381,6 +381,13 @@ namespace dawn_native {
                static_cast<uint64_t>(maxStart);
     }
 
+    template <typename A, typename B>
+    DAWN_FORCE_INLINE uint64_t Safe32x32(A a, B b) {
+        static_assert(std::is_same<A, uint32_t>::value, "'a' must be uint32_t");
+        static_assert(std::is_same<B, uint32_t>::value, "'b' must be uint32_t");
+        return uint64_t(a) * uint64_t(b);
+    }
+
     ResultOrError<uint64_t> ComputeRequiredBytesInCopy(const TexelBlockInfo& blockInfo,
                                                        const Extent3D& copySize,
                                                        uint32_t bytesPerRow,
@@ -390,43 +397,27 @@ namespace dawn_native {
         uint32_t widthInBlocks = copySize.width / blockInfo.width;
         uint32_t heightInBlocks = copySize.height / blockInfo.height;
 
-        // Default value for rowsPerImage
-        if (rowsPerImage == 0) {
-            rowsPerImage = heightInBlocks;
+        if (copySize.depth == 0) {
+            return 0;
         }
 
-        // Various multiplications here won't overflow since we're multiplying two uint32_t numbers.
-        uint64_t requiredBytesInCopy = 0;
-        if (copySize.depth > 0) {
-            if (heightInBlocks > 0) {
-                // Last row:
-                requiredBytesInCopy += uint64_t(widthInBlocks) * blockInfo.byteSize;
+        uint64_t bytesPerImage = Safe32x32(bytesPerRow, rowsPerImage);
+        if (bytesPerImage == 0) {
+            return 0;
+        }
+        if (copySize.depth - 1 > std::numeric_limits<uint64_t>::max() / bytesPerImage) {
+            return DAWN_VALIDATION_ERROR("requiredBytesInCopy is too large.");
+        }
+        uint64_t requiredBytesInCopy = bytesPerImage * (copySize.depth - 1);
 
-                // Plus last image except for the last row:
-                if (heightInBlocks > 1) {
-                    ASSERT(bytesPerRow >= widthInBlocks);
-                    uint64_t additionalBytes = bytesPerRow * uint64_t(heightInBlocks - 1);
-                    if (std::numeric_limits<uint64_t>::max() - additionalBytes <
-                        requiredBytesInCopy) {
-                        return DAWN_VALIDATION_ERROR("requiredBytesInCopy is too large.");
-                    }
-                    requiredBytesInCopy += additionalBytes;
-                }
-            }
+        if (heightInBlocks != 0) {
+            ASSERT(Safe32x32(widthInBlocks, blockInfo.byteSize) <= bytesPerRow);
+            uint32_t lastRowBytes = widthInBlocks * blockInfo.byteSize;
 
-            // Plus the rest of the copy except for the last image:
-            if (copySize.depth > 1) {
-                ASSERT(rowsPerImage >= heightInBlocks);
-                uint64_t bytesPerImage = uint64_t(bytesPerRow) * rowsPerImage;
-                if (bytesPerImage > std::numeric_limits<uint32_t>::max()) {
-                    return DAWN_VALIDATION_ERROR("requiredBytesInCopy is too large.");
-                }
-                uint64_t additionalBytes = bytesPerImage * uint64_t(copySize.depth - 1);
-                if (std::numeric_limits<uint64_t>::max() - additionalBytes < requiredBytesInCopy) {
-                    return DAWN_VALIDATION_ERROR("requiredBytesInCopy is too large.");
-                }
-                requiredBytesInCopy += additionalBytes;
-            }
+            ASSERT(Safe32x32(bytesPerRow, heightInBlocks) <= bytesPerImage);
+            uint64_t lastImageBytes = Safe32x32(bytesPerRow, heightInBlocks - 1) + lastRowBytes;
+
+            requiredBytesInCopy += lastImageBytes;
         }
         return requiredBytesInCopy;
     }
@@ -443,27 +434,35 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError ValidateLinearTextureData(const TextureDataLayout& layout,
+    MaybeError ValidateLinearTextureData(TextureDataLayout layout,
                                          uint64_t byteSize,
                                          const TexelBlockInfo& blockInfo,
                                          const Extent3D& copyExtent) {
-        // Validation for the texel block alignments:
-        if (layout.offset % blockInfo.byteSize != 0) {
-            return DAWN_VALIDATION_ERROR("Offset must be a multiple of the texel or block size");
+        ASSERT(copyExtent.width % blockInfo.width == 0);
+        uint32_t widthInBlocks = copyExtent.width / blockInfo.width;
+        ASSERT(copyExtent.height % blockInfo.height == 0);
+        uint32_t heightInBlocks = copyExtent.height / blockInfo.height;
+
+        // Default value for rowsPerImage
+        if (layout.rowsPerImage == 0) {
+            layout.rowsPerImage = heightInBlocks;
         }
 
         // Validation for other members in layout:
-        if ((copyExtent.height > 1 || copyExtent.depth > 1) &&
-            layout.bytesPerRow < copyExtent.width / blockInfo.width * blockInfo.byteSize) {
-            return DAWN_VALIDATION_ERROR(
-                "bytesPerRow must not be less than the number of bytes per row");
+        ASSERT(Safe32x32(widthInBlocks, blockInfo.byteSize) <=
+               std::numeric_limits<uint32_t>::max());
+        uint32_t lastRowBytes = widthInBlocks * blockInfo.byteSize;
+        if (lastRowBytes > layout.bytesPerRow) {
+            if (copyExtent.height > 1 || copyExtent.depth > 1) {
+                return DAWN_VALIDATION_ERROR("The byte size of a row must be <= bytesPerRow.");
+            } else {
+                // bytesPerRow is unused. Populate it with a valid value for later validation.
+                layout.bytesPerRow = lastRowBytes;
+            }
         }
 
         // TODO(tommek@google.com): to match the spec there should be another condition here
         // on rowsPerImage >= copyExtent.height if copyExtent.depth > 1.
-
-        ASSERT(copyExtent.height % blockInfo.height == 0);
-        uint32_t heightInBlocks = copyExtent.height / blockInfo.height;
 
         // Validation for the copy being in-bounds:
         if (layout.rowsPerImage != 0 && layout.rowsPerImage < heightInBlocks) {
@@ -593,36 +592,38 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError ValidateBufferToTextureCopyRestrictions(const TextureCopyView& dst) {
-        const Format& format = dst.texture->GetFormat();
-
-        bool depthSelected = false;
-        switch (dst.aspect) {
+    // Always returns a single aspect (color, stencil, or depth).
+    ResultOrError<Aspect> AspectUsedByTextureCopyView(const TextureCopyView& view) {
+        const Format& format = view.texture->GetFormat();
+        switch (view.aspect) {
             case wgpu::TextureAspect::All:
                 switch (format.aspects) {
                     case Aspect::Color:
                     case Aspect::Stencil:
-                        break;
                     case Aspect::Depth:
-                        depthSelected = true;
-                        break;
+                        return Aspect{format.aspects};
                     default:
                         return DAWN_VALIDATION_ERROR(
-                            "A single aspect must be selected for multi planar formats in buffer "
-                            "to texture copies");
+                            "A single aspect must be selected for multi-planar formats in "
+                            "texture <-> linear data copies");
                 }
                 break;
             case wgpu::TextureAspect::DepthOnly:
                 ASSERT(format.aspects & Aspect::Depth);
-                depthSelected = true;
-                break;
+                return Aspect::Depth;
             case wgpu::TextureAspect::StencilOnly:
                 ASSERT(format.aspects & Aspect::Stencil);
-                break;
+                return Aspect::Stencil;
         }
-        if (depthSelected) {
+    }
+
+    MaybeError ValidateLinearToDepthStencilCopyRestrictions(const TextureCopyView& dst) {
+        Aspect aspectUsed;
+        DAWN_TRY_ASSIGN(aspectUsed, AspectUsedByTextureCopyView(dst));
+        if (aspectUsed == Aspect::Depth) {
             return DAWN_VALIDATION_ERROR("Cannot copy into the depth aspect of a texture");
         }
+
         return {};
     }
 

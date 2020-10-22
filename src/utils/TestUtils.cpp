@@ -88,20 +88,16 @@ namespace utils {
                                  uint64_t heightInBlocks,
                                  uint64_t depth,
                                  uint64_t bytesPerBlock) {
-        uint64_t requiredBytesInCopy = 0;
-        if (depth > 0) {
-            if (heightInBlocks > 0) {
-                // Last row:
-                requiredBytesInCopy += widthInBlocks * bytesPerBlock;
-                // Plus last image except for the last row:
-                if (heightInBlocks > 1) {
-                    requiredBytesInCopy += bytesPerRow * (heightInBlocks - 1);
-                }
-            }
-            // Plus the rest of the copy except for the last image:
-            if (depth > 1) {
-                requiredBytesInCopy += bytesPerRow * rowsPerImage * (depth - 1);
-            }
+        if (depth == 0) {
+            return 0;
+        }
+
+        uint64_t bytesPerImage = bytesPerRow * rowsPerImage;
+        uint64_t requiredBytesInCopy = bytesPerImage * (depth - 1);
+        if (heightInBlocks != 0) {
+            uint64_t lastRowBytes = widthInBlocks * bytesPerBlock;
+            uint64_t lastImageBytes = bytesPerRow * (heightInBlocks - 1) + lastRowBytes;
+            requiredBytesInCopy += lastImageBytes;
         }
         return requiredBytesInCopy;
     }
