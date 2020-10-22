@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d5fed1_5e00adb1",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:42:02Z",
+      "side": 1,
+      "message": "I think the whole logic would be equivalent and simpler with the following:\n\n  if (depth \u003d\u003d 0) {return 0}; then I think the logic can be\n\n  // Overflow check for the multiplication \"bytesPerImage * depth\"\n  requiredBytesInCopy \u003d bytesPerImage * (depth - 1);\n\n  if (heightInBlocks !\u003d 0) {\n    // We know there are no overflows because we are computing a value less than bytesPerRow * heightInBlocks that are both uint32_t.\n    ASSERT(bytesPerRow \u003e\u003d widthInBlocks * blockInfo.byteSize);\n    lastImageBytes \u003d bytesPerRow * (heightInBlocks - 1) + widthInBlocks * blockInfo.byteSize);\n\n    // This justifies the single overflow check that we did for bytesPerImage * depth;\n    ASSERT(lastImageBytes \u003c\u003d bytesPerImage);\n    requiredBytesInCopy +\u003d lastImageBytes;\n  }\n\nAlso can we have validation test for empties copies that return requiredBytesInCopy !\u003d 0?",
+      "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7055fcbb_d21bbaab",
+        "filename": "src/utils/TestUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-22T08:42:02Z",
+      "side": 1,
+      "message": "ditto, same comment as for CommandEncoder.cpp",
+      "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
