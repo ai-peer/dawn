@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a584b2f_b8b59256",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-22T20:10:28Z",
+      "side": 1,
+      "message": "Moved this complexity here because it should disappear on the last CL (for \"undefined\").",
+      "revId": "d7cfea08941e24fa15d302cf173911ccbf56ba06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
