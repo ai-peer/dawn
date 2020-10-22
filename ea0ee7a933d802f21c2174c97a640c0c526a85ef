@@ -16,6 +16,40 @@
       "message": "Started working on 3D texture with a tiny change. 😊  \nPTAL. ",
       "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f0e72a_127c8729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T05:09:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a5d9b4_d39bea67",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-22T05:09:07Z",
+      "side": 1,
+      "message": "we should also have a test for 31, 30, so that the largest dimension of the base mip level is non-power-of-two",
+      "revId": "ea0ee7a933d802f21c2174c97a640c0c526a85ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
