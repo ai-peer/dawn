@@ -151,7 +151,9 @@ namespace dawn_native {
             // pending callbacks.
             mErrorScopeTracker->Tick(GetCompletedCommandSerial());
             GetDefaultQueue()->Tick(GetCompletedCommandSerial());
-            mCreateReadyPipelineTracker->Tick(GetCompletedCommandSerial());
+
+            constexpr bool kIsDeviceShutDown = true;
+            mCreateReadyPipelineTracker->Tick(GetCompletedCommandSerial(), kIsDeviceShutDown);
 
             // call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
@@ -787,7 +789,9 @@ namespace dawn_native {
             mDynamicUploader->Deallocate(mCompletedSerial);
             mErrorScopeTracker->Tick(mCompletedSerial);
             GetDefaultQueue()->Tick(mCompletedSerial);
-            mCreateReadyPipelineTracker->Tick(mCompletedSerial);
+
+            constexpr bool kIsDeviceShutDown = false;
+            mCreateReadyPipelineTracker->Tick(mCompletedSerial, kIsDeviceShutDown);
         }
 
         return !IsDeviceIdle();
