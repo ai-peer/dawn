@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "271be798_49848710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T04:50:44Z",
+      "side": 1,
+      "message": "The failure on mac-dawn-rel seems not to be related to my CL. PTAL, thanks!",
+      "revId": "fddf09e7bc7a0189d002a1a2b8a8d460de34cc6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
