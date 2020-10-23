@@ -16,6 +16,86 @@
       "message": "PTAL!",
       "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cecda22a_7863b2a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T17:19:39Z",
+      "side": 1,
+      "message": "looks okay, but still a little unclear on when Detach is called and when it is not",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae50b195_9e455f2b",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T17:19:39Z",
+      "side": 1,
+      "message": "nit: this \"null\" probably is unintended",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9f835d_58608bce",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T17:19:39Z",
+      "side": 1,
+      "message": "Why are we calling DetachFromSurfaceImpl instead of DetachFromSurface ? Shouldn\u0027t we need to check the mAttached state?",
+      "range": {
+        "startLine": 183,
+        "startChar": 8,
+        "endLine": 183,
+        "endChar": 29
+      },
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf26305_44fac271",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T17:19:39Z",
+      "side": 1,
+      "message": "and then test: when we lose the ref to the surface, then the texture view is destroyed",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
