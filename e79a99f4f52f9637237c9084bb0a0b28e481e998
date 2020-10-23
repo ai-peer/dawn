@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Austin and Corentin. Please take another look. Thank you. ",
       "revId": "e79a99f4f52f9637237c9084bb0a0b28e481e998",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958f9c87_9abb0314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-10-23T07:08:27Z",
+      "side": 1,
+      "message": "It\u0027s a very simple change, so I didn\u0027t add Intel folks. Add you guys anyway. ",
+      "revId": "e79a99f4f52f9637237c9084bb0a0b28e481e998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
