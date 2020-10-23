@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62dc8988_98a8954d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T00:42:49Z",
+      "side": 1,
+      "message": "If we don\u0027t clear the cached pipeline objects recorded in the mCreateReadyPipelineTracker here, we will meet an assert failure at \"ASSERT(computePipelines.empty());\" in ~DeviceBase::Caches().\n\nSo I just refer other trackers in DeviceBase and write down this logic.",
+      "parentUuid": "fc43c989_9c783a24",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 59
+      },
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3c0e923_2e7eaf77",
         "filename": "src/dawn_wire/server/ServerDevice.cpp",
         "patchSetId": 5
