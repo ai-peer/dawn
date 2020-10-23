@@ -69,6 +69,24 @@
       "parentUuid": "ba77417c_255bd7a0",
       "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "490db358_2adac75f",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T12:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9f252f4_11f48375",
+      "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
