@@ -117,6 +117,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ba40ce_db2f580f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T02:31:32Z",
+      "side": 1,
+      "message": "Ah okay - makes sense now.",
+      "parentUuid": "62dc8988_98a8954d",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 59
+      },
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c0e923_2e7eaf77",
@@ -130,6 +154,30 @@
       "writtenOn": "2020-10-22T15:30:44Z",
       "side": 1,
       "message": "I feel like this condition isn\u0027t actually that related to DeviceDestroyed status. The device could live forever, but if the WireServer is destroyed, we still have the problem where |createReadyPipelineUserData-\u003eserver| is invalid.\n\nWe could do as Corentin said and have a weak ref in the future, but for now maybe we can just fix the test destruction to ensure this situation doesn\u0027t happen.\n\nOverall, I\u0027m not sure how important it is that we handle cases where the server is destroyed while there\u0027s still work in flight. I would be okay throwing an ASSERT if the developer destroys the server with in-flight callback. Although that would require weak-refs anyway so maybe we should just implement this ignore functionality and log warnings.",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 82
+      },
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "989a9470_8adf82fa",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T02:31:32Z",
+      "side": 1,
+      "message": "would it be possible to have the weak ref as a separate change? if we do it we should fix it for all of the wire callbacks \n\nstill not convinced we need it though. We could just change the test destruction order so that the wire server isn\u0027t destroyed until callbacks are all done.",
+      "parentUuid": "e3c0e923_2e7eaf77",
       "range": {
         "startLine": 37,
         "startChar": 12,
