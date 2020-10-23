@@ -33,6 +33,24 @@
       "message": "You mention a crash in the commit message, but the comment here says it is only for performance. What\u0027s the crash?",
       "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba77417c_255bd7a0",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T08:56:05Z",
+      "side": 1,
+      "message": "Without this CL there is a crash in the mentioned end2end test on the latest Intel Windows Vulkan driver because in this function there is no code to handle VK_SUBOPTIMAL_KHR as the return value of vkQueuePresentKHR.\n\nThere are potentially two ways to fix the crash:\n1.  case VK_SUCCESS:\n    case VK_SUBOPTIMAL_KHR:\n                return {};\n\nThe performance will not be the best as the swapchain no longer matches the surface properties.\n\n\n2. What I am doing in this CL.\nBy recreating the swapchain the swapchain will match the surface properties and can have better performance than 1.",
+      "parentUuid": "6aa338a3_b690928a",
+      "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
