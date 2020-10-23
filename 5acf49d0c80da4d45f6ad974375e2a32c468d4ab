@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad345274_1701e3a5",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-23T20:04:53Z",
+      "side": 1,
+      "message": "yes, I locally modify the layout inside this function now. I might be able to revert it in the \u0027undefined\u0027 CL.",
+      "parentUuid": "48a2d7b4_13dfee6f",
+      "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7055fcbb_d21bbaab",
         "filename": "src/utils/TestUtils.cpp",
         "patchSetId": 3

@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33bb4df5_8de0f8fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-23T20:04:53Z",
+      "side": 1,
+      "message": "Austin would you take another quick look?",
+      "revId": "61e99d3a14081270e5385d5801521e18b36f24cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e40f118_ac9fc12c",
@@ -31,6 +48,30 @@
       "writtenOn": "2020-10-23T09:30:07Z",
       "side": 1,
       "message": "nit: If we remove the -1 then we don\u0027t need other overflow checks. We could add a comment like:\n\n // Check for potential overflows for the rest of the computations. We have the following\n // inequalities:\n //\n //   lastRowBytes \u003c\u003d bytesPerRow\n //   heightInBlocks \u003c\u003d rowsPerImage\n //\n // So:\n //\n //   lastImageBytes \u003d bytesPerRow * heightInBlocks - 1 + lastRowBytes\n //                  \u003c\u003d bytesPerRow * heightInBlocks\n //                  \u003c\u003d bytesPerRow * rowsPerImage\n //                  \u003c\u003d bytesPerImage\n //\n // This means that if the computation of depth * bytesPerImage doesn\u0027t overflow, none of the\n // computations for requiredBytesInCopy will. (and it\u0027s not a very pessimizing check)",
+      "range": {
+        "startLine": 408,
+        "startChar": 26,
+        "endLine": 408,
+        "endChar": 32
+      },
+      "revId": "61e99d3a14081270e5385d5801521e18b36f24cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af91fd81_27f8efe4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-23T20:04:53Z",
+      "side": 1,
+      "message": "Good point the -1 is a perfectly fine tiny pessimization here. However this is the only validation check right now, I assume you just mean removing the ASSERTs?",
+      "parentUuid": "3e40f118_ac9fc12c",
       "range": {
         "startLine": 408,
         "startChar": 26,
