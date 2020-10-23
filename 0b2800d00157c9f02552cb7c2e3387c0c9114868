@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96338b18_e0512204",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T08:52:33Z",
+      "side": 1,
+      "message": "In Chromium we decode each plane in a separate texture? That would be pretty convenient for WebCodec interop.",
+      "parentUuid": "f1c02c04_f7cc0c25",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b00c2541_b8774d98",
