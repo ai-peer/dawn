@@ -465,9 +465,13 @@ namespace dawn_native { namespace vulkan {
             case VK_SUCCESS:
                 return {};
 
+            // This present cannot be recovered. Re-initialize the VkSwapchain so that future
+            // presents work..
             case VK_ERROR_OUT_OF_DATE_KHR:
-                // This present cannot be recovered. Re-initialize the VkSwapchain so that future
-                // presents work..
+            // VK_SUBOPTIMAL_KHR means "a swapchain no longer matches the surface properties"
+            // exactly, but can still be used to present to the surface successfully. We should
+            // recreate the swapchain in this situation for better performance.
+            case VK_SUBOPTIMAL_KHR:
                 return Initialize(this);
 
             // TODO(cwallez@chromium.org): Allow losing the surface at Dawn's API level?
