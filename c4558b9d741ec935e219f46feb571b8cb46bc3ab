@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c741f5_589cff22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:01:31Z",
+      "side": 1,
+      "message": "nit: Bug: None (or have a tracking bug for vkb stuff if we expect a bunch more CLs)",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fbb573a8_894e9ae4",
@@ -20,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19c8027a_1e8c132b",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:01:31Z",
+      "side": 1,
+      "message": "These include directories should be set as public properties in Tint\u0027s targets instead. To unblock stuff it can be a follow-up after Tint\u0027s CMakeLists.txt is fixed but please at least add a TODO.",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a06c3d20_ef5da7a9",
         "filename": "CMakeLists.txt",
         "patchSetId": 1
@@ -31,6 +65,64 @@
       "writtenOn": "2020-10-23T02:57:48Z",
       "side": 1,
       "message": "I added the utils directory because, downstream, I want to use `dawn_utils` to setup the swapchain. This probably isn\u0027t needed in the long run, but it makes it a lot easier to create the swapchain at the moment.",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c9e00c_198a83ba",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:01:31Z",
+      "side": 1,
+      "message": "nit: Add a TODO(dawn:269): Remove once the implementation-based swapchains are removed.",
+      "parentUuid": "a06c3d20_ef5da7a9",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf195849_08ad830e",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:01:31Z",
+      "side": 1,
+      "message": "Since we\u0027re linking against libtint, its INTERFACE_COMPILE_DEFINITIONS will be used to compile any source in dawn_native even without this line.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714ccb23_9a38a2dd",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:01:31Z",
+      "side": 1,
+      "message": "Can this be part of the interface for Tint instead? Same as the toplevel CMakeLists.txt comment, we can add a TODO instead to unblock.",
       "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
