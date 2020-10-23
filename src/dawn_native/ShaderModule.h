@@ -20,6 +20,7 @@
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/CachedObject.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
@@ -87,7 +88,7 @@ namespace dawn_native {
         SingleShaderStage stage;
     };
 
-    class ShaderModuleBase : public CachedObject {
+    class ShaderModuleBase : public CachedObject, public RecordedObject {
       public:
         ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModuleBase() override;
@@ -102,10 +103,7 @@ namespace dawn_native {
         const EntryPointMetadata& GetEntryPoint(const std::string& entryPoint,
                                                 SingleShaderStage stage) const;
 
-        // Functors necessary for the unordered_set<ShaderModuleBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const ShaderModuleBase* module) const;
-        };
+        // Functor necessary for the unordered_set<ShaderModuleBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
         };
@@ -122,14 +120,18 @@ namespace dawn_native {
       protected:
         MaybeError InitializeBase();
 
+        std::string mWgsl;
+        std::vector<uint32_t> mOriginalSpirv;
+
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
+        // RecordedObject implementation
+        void fingerprint(FingerprintRecorder* recorder) override;
+
         enum class Type { Undefined, Spirv, Wgsl };
         Type mType;
-        std::vector<uint32_t> mOriginalSpirv;
         std::vector<uint32_t> mSpirv;
-        std::string mWgsl;
 
         // A map from [name, stage] to EntryPointMetadata.
         std::unordered_map<std::string, PerStage<std::unique_ptr<EntryPointMetadata>>> mEntryPoints;

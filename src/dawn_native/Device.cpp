@@ -403,6 +403,7 @@ namespace dawn_native {
             BindGroupLayoutBase* backendObj;
             DAWN_TRY_ASSIGN(backendObj, CreateBindGroupLayoutImpl(descriptor));
             backendObj->SetIsCachedReference();
+            backendObj->setKey(blueprint.getKey());
             mCaches->bindGroupLayouts.insert(backendObj);
             result = AcquireRef(backendObj);
         }
@@ -442,6 +443,7 @@ namespace dawn_native {
         ComputePipelineBase* backendObj;
         DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(descriptor));
         backendObj->SetIsCachedReference();
+        backendObj->setKey(blueprint.getKey());
         mCaches->computePipelines.insert(backendObj);
         return backendObj;
     }
@@ -465,6 +467,7 @@ namespace dawn_native {
         PipelineLayoutBase* backendObj;
         DAWN_TRY_ASSIGN(backendObj, CreatePipelineLayoutImpl(descriptor));
         backendObj->SetIsCachedReference();
+        backendObj->setKey(blueprint.getKey());
         mCaches->pipelineLayouts.insert(backendObj);
         return backendObj;
     }
@@ -488,6 +491,7 @@ namespace dawn_native {
         RenderPipelineBase* backendObj;
         DAWN_TRY_ASSIGN(backendObj, CreateRenderPipelineImpl(descriptor));
         backendObj->SetIsCachedReference();
+        backendObj->setKey(blueprint.getKey());
         mCaches->renderPipelines.insert(backendObj);
         return backendObj;
     }
@@ -511,6 +515,7 @@ namespace dawn_native {
         SamplerBase* backendObj;
         DAWN_TRY_ASSIGN(backendObj, CreateSamplerImpl(descriptor));
         backendObj->SetIsCachedReference();
+        backendObj->setKey(blueprint.getKey());
         mCaches->samplers.insert(backendObj);
         return backendObj;
     }
@@ -534,6 +539,7 @@ namespace dawn_native {
         ShaderModuleBase* backendObj;
         DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor));
         backendObj->SetIsCachedReference();
+        backendObj->setKey(blueprint.getKey());
         mCaches->shaderModules.insert(backendObj);
         return backendObj;
     }
