@@ -70,6 +70,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "154d35ad_33838315",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e57f164d_80d38c84",
+      "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a2d7b4_13dfee6f",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:30:07Z",
+      "side": 1,
+      "message": "nit: was this intentional?",
+      "revId": "5acf49d0c80da4d45f6ad974375e2a32c468d4ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7055fcbb_d21bbaab",
