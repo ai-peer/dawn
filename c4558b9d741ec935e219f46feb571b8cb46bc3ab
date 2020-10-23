@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06c3d20_ef5da7a9",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T02:57:48Z",
+      "side": 1,
+      "message": "I added the utils directory because, downstream, I want to use `dawn_utils` to setup the swapchain. This probably isn\u0027t needed in the long run, but it makes it a lot easier to create the swapchain at the moment.",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
