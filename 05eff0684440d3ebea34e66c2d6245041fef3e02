@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3139b8_a086b158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "Nit: its",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e6202d_07de6370",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "uNit: Grammar is weird here. Have knowledge, maybe?",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4eb03e7_c4062c1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "Nit: suggest , after \"addition\"",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1e74d10d_f4225848",
@@ -35,6 +86,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a45d53_9f5aa885",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae50b195_9e455f2b",
@@ -54,6 +122,40 @@
         "endLine": 83,
         "endChar": 52
       },
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ee3357_b12f0ae6",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "This code looks very similar in the subclasses now. I realize Create() still needs to be a factory method, and it\u0027s only a few lines but I wonder if the base class could somehow be made responsible for checking that the previous swap chain\u0027s backend matches, for example, rather than having that logic duplicated in each subclass.",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e86c997_429e81f3",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-23T17:27:14Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
