@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1c1178_c5ebb755",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-23T23:13:53Z",
+      "side": 1,
+      "message": "Chromium decodes into a single NV12 texture then has to binds each plane using two separate GL textures because ANGLE cannot import the NV12 texture directly.\n\nDoes WebCodec expect this as well?",
+      "parentUuid": "96338b18_e0512204",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b00c2541_b8774d98",
