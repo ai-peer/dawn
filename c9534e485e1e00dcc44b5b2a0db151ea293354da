@@ -197,6 +197,24 @@
       "parentUuid": "116dbe14_f7bce204",
       "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942d6e40_2adee573",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T02:33:50Z",
+      "side": 1,
+      "message": "In the latest patch set I am trying to use a weak_ptr to identify if the server has been deleted or not. PTAL.",
+      "parentUuid": "b9f5aca4_ecbea023",
+      "revId": "c9534e485e1e00dcc44b5b2a0db151ea293354da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

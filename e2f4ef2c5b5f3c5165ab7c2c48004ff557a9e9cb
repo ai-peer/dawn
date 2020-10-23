@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d69b20e_935d33d3",
+        "filename": "src/dawn_native/CreateReadyPipelineTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T02:33:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc07e932_f3cda445",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc43c989_9c783a24",
@@ -177,6 +195,30 @@
       "writtenOn": "2020-10-23T02:31:32Z",
       "side": 1,
       "message": "would it be possible to have the weak ref as a separate change? if we do it we should fix it for all of the wire callbacks \n\nstill not convinced we need it though. We could just change the test destruction order so that the wire server isn\u0027t destroyed until callbacks are all done.",
+      "parentUuid": "e3c0e923_2e7eaf77",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 82
+      },
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f165232_0c0c89c4",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T02:33:50Z",
+      "side": 1,
+      "message": "Now I am using a weak_ptr in the userdata to identify if the server is still alive or not. PTAL.",
       "parentUuid": "e3c0e923_2e7eaf77",
       "range": {
         "startLine": 37,
