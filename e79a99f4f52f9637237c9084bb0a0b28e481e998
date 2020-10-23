@@ -33,6 +33,23 @@
       "message": "It\u0027s a very simple change, so I didn\u0027t add Intel folks. Add you guys anyway. ",
       "revId": "e79a99f4f52f9637237c9084bb0a0b28e481e998",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e06100_b51992e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T08:50:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e79a99f4f52f9637237c9084bb0a0b28e481e998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
