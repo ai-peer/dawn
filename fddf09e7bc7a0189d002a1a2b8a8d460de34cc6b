@@ -33,6 +33,23 @@
       "message": "LGTM I think, I don\u0027t know weak_ptr too much bit it looks correct.",
       "revId": "fddf09e7bc7a0189d002a1a2b8a8d460de34cc6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0e16c8_6bd1feb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-23T15:03:46Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "fddf09e7bc7a0189d002a1a2b8a8d460de34cc6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
