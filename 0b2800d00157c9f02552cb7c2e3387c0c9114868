@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c02c04_f7cc0c25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-23T03:16:02Z",
+      "side": 1,
+      "message": "Cool.\nI have a question about where this multi-plane texture come from. Currently, as you mentioned, chromium decodes video into seperate d3d textures. Is there anyway d3d can combine several textures into one NV12 format texture or do you think video decoder could directly generate it.(That will be great because I think ChromeOS/Android(maybe) can do this).\n\nBecause if we have a chance to make VideoFrame contains this type texture only, the import path will be quite easier when we accept HTMLVideoElement as input.\n",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b00c2541_b8774d98",
