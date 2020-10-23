@@ -72,6 +72,8 @@ option(DAWN_ENABLE_VULKAN "Enable compilation of the Vulkan backend" ${ENABLE_VU
 option(DAWN_ALWAYS_ASSERT "Enable assertions on all build types" OFF)
 option(DAWN_USE_X11 "Enable support for X11 surface" ${USE_X11})
 
+option(DAWN_ENABLE_WGSL "Enable WGSL support" OFF)
+
 option(DAWN_BUILD_EXAMPLES "Enables building Dawn's exmaples" ON)
 
 set(DAWN_THIRD_PARTY_DIR "${Dawn_SOURCE_DIR}/third_party" CACHE STRING "Directory in which to find third-party dependencies.")
@@ -84,6 +86,7 @@ set(DAWN_SHADERC_DIR "${DAWN_THIRD_PARTY_DIR}/shaderc" CACHE STRING "Directory i
 set(DAWN_SPIRV_CROSS_DIR "${DAWN_THIRD_PARTY_DIR}/spirv-cross" CACHE STRING "Directory in which to find SPIRV-Cross")
 set(DAWN_SPIRV_HEADERS_DIR "${DAWN_THIRD_PARTY_DIR}/spirv-headers" CACHE STRING "Directory in which to find SPIRV-Headers")
 set(DAWN_SPIRV_TOOLS_DIR "${DAWN_THIRD_PARTY_DIR}/SPIRV-Tools" CACHE STRING "Directory in which to find SPIRV-Tools")
+set(DAWN_TINT_DIR "${DAWN_THIRD_PARTY_DIR}/tint" CACHE STRING "Directory in which to find Tint")
 
 ################################################################################
 # Dawn's public and internal "configs"
@@ -130,6 +133,11 @@ if (WIN32)
     target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
 
+if (DAWN_ENABLE_WGSL)
+    add_definitions(-DDAWN_ENABLE_WGSL=1)
+    include_directories(${DAWN_TINT_DIR}/include)
+    include_directories(${DAWN_TINT_DIR})
+endif()
 
 set(CMAKE_CXX_STANDARD "14")
 
@@ -144,6 +152,7 @@ add_subdirectory(src/dawn)
 add_subdirectory(src/dawn_platform)
 add_subdirectory(src/dawn_native)
 add_subdirectory(src/dawn_wire)
+add_subdirectory(src/utils)
 
 if (DAWN_BUILD_EXAMPLES)
     add_subdirectory(src/utils)
