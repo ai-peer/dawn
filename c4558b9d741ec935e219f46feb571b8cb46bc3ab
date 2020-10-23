@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d920e3bd_0018ba0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T12:38:16Z",
+      "side": 1,
+      "message": "Done. This isn\u0027t for VKB, I\u0027m trying to use Dawn native.",
+      "parentUuid": "b4c741f5_589cff22",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fbb573a8_894e9ae4",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-10-23T09:01:31Z",
       "side": 1,
       "message": "These include directories should be set as public properties in Tint\u0027s targets instead. To unblock stuff it can be a follow-up after Tint\u0027s CMakeLists.txt is fixed but please at least add a TODO.",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26add7c_14d08fdb",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T12:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c8027a_1e8c132b",
       "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -87,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b130fd_d01369b7",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T12:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c9e00c_198a83ba",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf195849_08ad830e",
@@ -110,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4821392_7937de61",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T12:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf195849_08ad830e",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "714ccb23_9a38a2dd",
@@ -123,6 +201,24 @@
       "writtenOn": "2020-10-23T09:01:31Z",
       "side": 1,
       "message": "Can this be part of the interface for Tint instead? Same as the toplevel CMakeLists.txt comment, we can add a TODO instead to unblock.",
+      "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07822a0a_b82f55d9",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-10-23T12:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "714ccb23_9a38a2dd",
       "revId": "c4558b9d741ec935e219f46feb571b8cb46bc3ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
