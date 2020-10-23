@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "184aea11_419c844d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-10-23T01:01:08Z",
+      "side": 1,
+      "message": "Oh to be honest when writing this CL I just wanted to fix the assert failure at \"ASSERT(computePipelines.empty());\" in ~DeviceBase::Caches() if we don\u0027t remove the cached compute pipeline object in Device::ShutDown() and I didn\u0027t expect I would meet such error in dawn_wire.\n\nNow the problem is with dawn_wire when we call the callback the userdata may point to an invalid piece of memory (the wireserver is released before the removal of the backend device).",
+      "parentUuid": "214b78a3_1cba89ed",
+      "revId": "e2f4ef2c5b5f3c5165ab7c2c48004ff557a9e9cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc07e932_f3cda445",
