@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0c1d31_33e49735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T08:55:02Z",
+      "side": 1,
+      "message": "PTAL! We\u0027ll need to take a closer look at making good error messages at some point.",
+      "revId": "594e31727682361966c68d962089265dfd1327a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
