@@ -51,6 +51,24 @@
       "parentUuid": "6aa338a3_b690928a",
       "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f252f4_11f48375",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-23T09:04:05Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation, I didn\u0027t realize SUBOPTIMAL was unhandled and went to the default: case.\n\nI think we should bundle SUBOPTIMAL with SUCCESS because the driver is likely doing a blit too, which it would know how to do more efficiently. Also in the future I think there will be a \"suboptimal\" signal going to the application so it knows it should resize but we wouldn\u0027t be doing it on its behalf.",
+      "parentUuid": "ba77417c_255bd7a0",
+      "revId": "91b7967ad8298fbfd78504d957d440af570a577a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
