@@ -180,7 +180,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     SwapChain::~SwapChain() {
-        DetachFromSurface();
+        DetachFromSurfaceImpl();
     }
 
     // Note that when we need to re-create the swapchain because it is out of date,
@@ -198,7 +198,15 @@ namespace dawn_native { namespace vulkan {
             // TODO(cwallez@chromium.org): figure out what should happen when surfaces are used by
             // multiple backends one after the other. It probably needs to block until the backend
             // and GPU are completely finished with the previous swapchain.
-            ASSERT(previousSwapChain->GetBackendType() == wgpu::BackendType::Vulkan);
+            if (previousSwapChain->GetBackendType() != wgpu::BackendType::Vulkan) {
+                return DAWN_VALIDATION_ERROR("vulkan::SwapChain cannot switch between APIs");
+            }
+
+            // TODO(cwallez@chromium.org): Figure out switching a single surface between multiple
+            // Vulkan devices. Probably needs to block too, but could reuse the surface!
+            if (previousSwapChain->GetDevice() != GetDevice()) {
+                return DAWN_VALIDATION_ERROR("vulkan::SwapChain cannot switch between devices");
+            }
 
             // The previous swapchain is a dawn_native::vulkan::SwapChain so we can reuse its
             // VkSurfaceKHR provided they are on the same instance.
@@ -207,10 +215,6 @@ namespace dawn_native { namespace vulkan {
             SwapChain* previousVulkanSwapChain = static_cast<SwapChain*>(previousSwapChain);
             std::swap(previousVulkanSwapChain->mVkSurface, mVkSurface);
 
-            // TODO(cwallez@chromium.org): Figure out switching a single surface between multiple
-            // Vulkan devices. Probably needs to block too, but could reuse the surface!
-            ASSERT(previousSwapChain->GetDevice() == GetDevice());
-
             // The previous swapchain was on the same Vulkan device so we can use Vulkan's
             // "oldSwapchain" mechanism to ensure a seamless transition. We track the old swapchain
             // for release immediately so it is not leaked in case of an error. (Vulkan allows
@@ -218,10 +222,6 @@ namespace dawn_native { namespace vulkan {
             // using the fenced deleter makes the code simpler).
             std::swap(previousVulkanSwapChain->mSwapChain, oldVkSwapChain);
             device->GetFencedDeleter()->DeleteWhenUnused(oldVkSwapChain);
-
-            if (previousSwapChain != this) {
-                previousSwapChain->DetachFromSurface();
-            }
         }
 
         if (mVkSurface == VK_NULL_HANDLE) {
