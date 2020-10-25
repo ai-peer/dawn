@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7126bdea_10a90165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-25T02:34:45Z",
+      "side": 1,
+      "message": "That surprise me. Because I always need to handle seperate textures from VideoFrame(https://source.chromium.org/chromium/chromium/src/+/master:media/renderers/video_frame_yuv_converter.cc;l\u003d512;drc\u003d70a3423e3bedbbca0f74c6b62cc6a3def9239f80). So I thought it is decoded in seperate textures on Windows. But I searched and find the code here (https://source.chromium.org/chromium/chromium/src/+/master:media/gpu/windows/d3d11_texture_selector.cc;l\u003d56;bpv\u003d0;bpt\u003d0) Is this the place where the decoder provide the back resource for D3D11?",
+      "parentUuid": "8d1c1178_c5ebb755",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b00c2541_b8774d98",
