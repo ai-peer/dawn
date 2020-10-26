@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1d9fb2_674e1c12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-10-26T16:35:20Z",
+      "side": 1,
+      "message": "@Shaobo, me too. d3d11_video_decoder.cc is where the underlying D3D11 resource gets created. The decoder outputs a single 2D texture array where the slice is bound to separate GL texture.\n\nI know this because in order to move the decoded DX11 texture into shared image, I had to figure out exactly what it was.",
+      "parentUuid": "c165ccbc_79e5857c",
+      "revId": "0b2800d00157c9f02552cb7c2e3387c0c9114868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b00c2541_b8774d98",
