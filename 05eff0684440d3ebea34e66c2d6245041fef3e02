@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea09895_3a68382d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a3139b8_a086b158",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28e6202d_07de6370",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dc11468_3fadf64b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28e6202d_07de6370",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4eb03e7_c4062c1c",
@@ -48,6 +84,24 @@
       "writtenOn": "2020-10-23T17:27:14Z",
       "side": 1,
       "message": "Nit: suggest , after \"addition\"",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc239afa_fb506200",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4eb03e7_c4062c1c",
       "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +180,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9108bc9c_e804c7bc",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae50b195_9e455f2b",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ee3357_b12f0ae6",
@@ -145,6 +223,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "beb1c8ef_4b0312c7",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Eventually we should allow surfaces to be used between multiple devices on different APIs and it\u0027s not clear that it will be a complete graph so I\u0027d like to keep the validation of it per-backend.",
+      "parentUuid": "68ee3357_b12f0ae6",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e86c997_429e81f3",
         "filename": "src/dawn_native/null/DeviceNull.cpp",
         "patchSetId": 3
@@ -156,6 +252,24 @@
       "writtenOn": "2020-10-23T17:27:14Z",
       "side": 1,
       "message": "[1]",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee0950c_31cfe4cb",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e86c997_429e81f3",
       "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -183,6 +297,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6593b86_c80ab10f",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "It\u0027s a leftover from a previous version. Done.",
+      "parentUuid": "cc9f835d_58608bce",
+      "range": {
+        "startLine": 183,
+        "startChar": 8,
+        "endLine": 183,
+        "endChar": 29
+      },
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bf26305_44fac271",
@@ -196,6 +334,24 @@
       "writtenOn": "2020-10-23T17:19:39Z",
       "side": 1,
       "message": "and then test: when we lose the ref to the surface, then the texture view is destroyed",
+      "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46e00425_0b1d32b9",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T08:27:37Z",
+      "side": 1,
+      "message": "It is tested in another test below but I think it\u0027s better to also have it here. Done.",
+      "parentUuid": "6bf26305_44fac271",
       "revId": "05eff0684440d3ebea34e66c2d6245041fef3e02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
