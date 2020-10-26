@@ -16,6 +16,7 @@
 #define DAWNNATIVE_OPENGL_BACKENDGL_H_
 
 #include "dawn_native/BackendConnection.h"
+#include "common/DynamicLib.h"
 
 namespace dawn_native { namespace opengl {
 
@@ -29,6 +30,8 @@ namespace dawn_native { namespace opengl {
 
       private:
         bool mCreatedAdapter = false;
+        DynamicLib mLibEGL;
+        DynamicLib mLibGLESv2;
     };
 
 }}  // namespace dawn_native::opengl
