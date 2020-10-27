@@ -80,7 +80,7 @@ namespace dawn_native { namespace metal {
         size.height = GetHeight();
         [mLayer setDrawableSize:size];
 
-        [mLayer setFramebufferOnly:(GetUsage() == wgpu::TextureUsage::OutputAttachment)];
+        [mLayer setFramebufferOnly:(GetUsage() == wgpu::TextureUsage::RenderAttachment)];
         [mLayer setDevice:ToBackend(GetDevice())->GetMTLDevice()];
         [mLayer setPixelFormat:MetalPixelFormat(GetFormat())];
 
