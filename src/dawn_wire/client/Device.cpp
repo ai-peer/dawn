@@ -115,6 +115,11 @@ namespace dawn_wire { namespace client {
         }
         mErrorScopeStackSize--;
 
+        if (GetClient()->IsDisconnected()) {
+            callback(WGPUErrorType_DeviceLost, "GPU device disconnected", userdata);
+            return true;
+        }
+
         uint64_t serial = mErrorScopeRequestSerial++;
         ASSERT(mErrorScopes.find(serial) == mErrorScopes.end());
 
@@ -179,6 +184,11 @@ namespace dawn_wire { namespace client {
     void Device::CreateReadyComputePipeline(WGPUComputePipelineDescriptor const* descriptor,
                                             WGPUCreateReadyComputePipelineCallback callback,
                                             void* userdata) {
+        if (device->GetClient()->IsDisconnected()) {
+            return callback(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr,
+                            "GPU device disconnected", userdata);
+        }
+
         DeviceCreateReadyComputePipelineCmd cmd;
         cmd.device = ToAPI(this);
         cmd.descriptor = descriptor;
@@ -230,6 +240,10 @@ namespace dawn_wire { namespace client {
     void Device::CreateReadyRenderPipeline(WGPURenderPipelineDescriptor const* descriptor,
                                            WGPUCreateReadyRenderPipelineCallback callback,
                                            void* userdata) {
+        if (GetClient()->IsDisconnected()) {
+            return callback(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr,
+                            "GPU device disconnected", userdata);
+        }
         DeviceCreateReadyRenderPipelineCmd cmd;
         cmd.device = ToAPI(this);
         cmd.descriptor = descriptor;

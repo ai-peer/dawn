@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/WireClient.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -212,4 +214,32 @@ TEST_F(WireCreateReadyPipelineTest, CreateReadyRenderPipelineError) {
         .Times(1);
 
     FlushServer();
+}
+
+// Test that registering a callback after wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireCreateReadyPipelineTest, CreateReadyPipelineAfterDisconnect) {
+    WGPUShaderModuleDescriptor vertexDescriptor = {};
+    WGPUShaderModule vsModule = wgpuDeviceCreateShaderModule(device, &vertexDescriptor);
+    WGPUShaderModule apiVsModule = api.GetNewShaderModule();
+    EXPECT_CALL(api, DeviceCreateShaderModule(apiDevice, _)).WillOnce(Return(apiVsModule));
+
+    WGPUProgrammableStageDescriptor fragmentStage = {};
+    fragmentStage.module = vsModule;
+    fragmentStage.entryPoint = "main";
+
+    WGPURenderPipelineDescriptor pipelineDescriptor{};
+    pipelineDescriptor.vertexStage.module = vsModule;
+    pipelineDescriptor.vertexStage.entryPoint = "main";
+    pipelineDescriptor.fragmentStage = &fragmentStage;
+
+    FlushClient();
+
+    GetWireClient()->Disconnect();
+
+    EXPECT_CALL(*mockCreateReadyRenderPipelineCallback,
+                Call(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr, _, this))
+        .Times(1);
+    wgpuDeviceCreateReadyRenderPipeline(device, &pipelineDescriptor,
+                                        ToMockCreateReadyRenderPipelineCallback, this);
 }

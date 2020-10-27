@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/WireClient.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -214,6 +216,22 @@ TEST_F(WireErrorCallbackTests, PopErrorScopeDeviceDestroyed) {
     EXPECT_CALL(*mockDevicePopErrorScopeCallback,
                 Call(WGPUErrorType_Unknown, ValidStringMessage(), this))
         .Times(1);
+}
+
+// Test that registering a callback after wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireErrorCallbackTests, PopErrorScopeAfterDisconnect) {
+    wgpuDevicePushErrorScope(device, WGPUErrorFilter_Validation);
+    EXPECT_CALL(api, DevicePushErrorScope(apiDevice, WGPUErrorFilter_Validation)).Times(1);
+
+    FlushClient();
+
+    GetWireClient()->Disconnect();
+
+    EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                Call(WGPUErrorType_DeviceLost, ValidStringMessage(), this))
+        .Times(1);
+    EXPECT_TRUE(wgpuDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this));
 }
 
 // Test that PopErrorScope returns false if there are no error scopes.
