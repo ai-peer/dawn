@@ -199,6 +199,9 @@ DAWN_INSTANTIATE_TEST(QueueWriteBufferTests,
                       OpenGLBackend(),
                       VulkanBackend());
 
+// For MinimumDataSpec bytesPerRow and rowsPerImage, compute a default from the copy extent.
+constexpr uint32_t STRIDE_COMPUTE_DEFAULT = 0xFFFF'FFFE;
+
 class QueueWriteTextureTests : public DawnTest {
   protected:
     static constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::RGBA8Unorm;
@@ -217,14 +220,17 @@ class QueueWriteTextureTests : public DawnTest {
     };
 
     static DataSpec MinimumDataSpec(wgpu::Extent3D writeSize,
-                                    uint32_t bytesPerRow = 0,
-                                    uint32_t rowsPerImage = 0) {
-        if (bytesPerRow == 0) {
-            bytesPerRow = writeSize.width * utils::GetTexelBlockSizeInBytes(kTextureFormat);
+                                    uint32_t overrideBytesPerRow = STRIDE_COMPUTE_DEFAULT,
+                                    uint32_t overrideRowsPerImage = STRIDE_COMPUTE_DEFAULT) {
+        uint32_t bytesPerRow = writeSize.width * utils::GetTexelBlockSizeInBytes(kTextureFormat);
+        if (overrideBytesPerRow != STRIDE_COMPUTE_DEFAULT) {
+            bytesPerRow = overrideBytesPerRow;
         }
-        if (rowsPerImage == 0) {
-            rowsPerImage = writeSize.height;
+        uint32_t rowsPerImage = writeSize.height;
+        if (overrideRowsPerImage != STRIDE_COMPUTE_DEFAULT) {
+            rowsPerImage = overrideRowsPerImage;
         }
+
         uint32_t totalDataSize =
             utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, writeSize, kTextureFormat);
         return {totalDataSize, 0, bytesPerRow, rowsPerImage};
@@ -282,10 +288,14 @@ class QueueWriteTextureTests : public DawnTest {
         wgpu::Extent3D mipSize = {textureSpec.textureSize.width >> textureSpec.level,
                                   textureSpec.textureSize.height >> textureSpec.level,
                                   textureSpec.textureSize.depth};
-        uint32_t alignedBytesPerRow = Align(dataSpec.bytesPerRow, bytesPerTexel);
+        uint32_t bytesPerRow = dataSpec.bytesPerRow;
+        if (bytesPerRow == WGPU_STRIDE_UNDEFINED) {
+            bytesPerRow = mipSize.width * bytesPerTexel;
+        }
+        uint32_t alignedBytesPerRow = Align(bytesPerRow, bytesPerTexel);
         uint32_t appliedRowsPerImage =
             dataSpec.rowsPerImage > 0 ? dataSpec.rowsPerImage : mipSize.height;
-        uint32_t bytesPerImage = dataSpec.bytesPerRow * appliedRowsPerImage;
+        uint32_t bytesPerImage = bytesPerRow * appliedRowsPerImage;
 
         const uint32_t maxArrayLayer = textureSpec.copyOrigin.z + copySize.depth;
 
@@ -296,7 +306,7 @@ class QueueWriteTextureTests : public DawnTest {
             // Pack the data in the specified copy region to have the same
             // format as the expected texture data.
             std::vector<RGBA8> expected(texelCountLastLayer);
-            PackTextureData(&data[dataOffset], copySize.width, copySize.height,
+            PackTextureData(data.data() + dataOffset, copySize.width, copySize.height,
                             dataSpec.bytesPerRow, expected.data(), copySize.width, bytesPerTexel);
 
             EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, textureSpec.copyOrigin.x,
@@ -468,7 +478,7 @@ TEST_P(QueueWriteTextureTests, VaryingRowsPerImage) {
         textureSpec.textureSize = {kWidth, kHeight, kDepth};
         textureSpec.level = 0;
 
-        DataSpec dataSpec = MinimumDataSpec(copySize, 0, copySize.height + r);
+        DataSpec dataSpec = MinimumDataSpec(copySize, STRIDE_COMPUTE_DEFAULT, copySize.height + r);
         DoTest(textureSpec, dataSpec, copySize);
     }
 }
@@ -488,13 +498,13 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
     for (unsigned int b : {1, 2, 3, 4}) {
         uint32_t bytesPerRow =
             copyExtent.width * utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
-        DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow, 0), copyExtent);
+        DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow), copyExtent);
     }
 }
 
 // Test that writing with bytesPerRow = 0 and bytesPerRow < bytesInACompleteRow works
 // when we're copying one row only
-TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
+TEST_P(QueueWriteTextureTests, BytesPerRowWithZeroOrOneRowCopy) {
     constexpr uint32_t kWidth = 259;
     constexpr uint32_t kHeight = 127;
 
@@ -503,12 +513,16 @@ TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
     textureSpec.textureSize = {kWidth, kHeight, 1};
     textureSpec.level = 0;
 
-    // bytesPerRow = 0
     {
         constexpr wgpu::Extent3D copyExtent = {5, 1, 1};
-
         DataSpec dataSpec = MinimumDataSpec(copyExtent);
+
+        // bytesPerRow = 0
         dataSpec.bytesPerRow = 0;
+        EXPECT_DEPRECATION_WARNING(DoTest(textureSpec, dataSpec, copyExtent));
+
+        // bytesPerRow undefined
+        dataSpec.bytesPerRow = WGPU_STRIDE_UNDEFINED;
         DoTest(textureSpec, dataSpec, copyExtent);
     }
 
@@ -518,7 +532,7 @@ TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
 
         DataSpec dataSpec = MinimumDataSpec(copyExtent);
         dataSpec.bytesPerRow = 256;
-        DoTest(textureSpec, dataSpec, copyExtent);
+        EXPECT_DEPRECATION_WARNING(DoTest(textureSpec, dataSpec, copyExtent));
     }
 }
 
@@ -549,6 +563,37 @@ TEST_P(QueueWriteTextureTests, VaryingArrayBytesPerRow) {
             copyExtent.width * utils::GetTexelBlockSizeInBytes(kTextureFormat) + b;
         uint32_t rowsPerImage = 23;
         DoTest(textureSpec, MinimumDataSpec(copyExtent, bytesPerRow, rowsPerImage), copyExtent);
+    }
+}
+
+// Test valid special cases of bytesPerRow and rowsPerImage (0 or undefined).
+TEST_P(QueueWriteTextureTests, StrideSpecialCases) {
+    TextureSpec textureSpec;
+    textureSpec.copyOrigin = {0, 0, 0};
+    textureSpec.textureSize = {4, 4, 4};
+    textureSpec.level = 0;
+
+    // bytesPerRow 0
+    for (const wgpu::Extent3D copyExtent :
+         {wgpu::Extent3D{0, 2, 2}, {0, 0, 2}, {0, 2, 0}, {0, 0, 0}}) {
+        DoTest(textureSpec, MinimumDataSpec(copyExtent, 0, 2), copyExtent);
+    }
+
+    // bytesPerRow undefined
+    for (const wgpu::Extent3D copyExtent :
+         {wgpu::Extent3D{2, 1, 1}, {2, 0, 1}, {2, 1, 0}, {2, 0, 0}}) {
+        DoTest(textureSpec, MinimumDataSpec(copyExtent, WGPU_STRIDE_UNDEFINED, 2), copyExtent);
+    }
+
+    // rowsPerImage 0
+    for (const wgpu::Extent3D copyExtent :
+         {wgpu::Extent3D{2, 0, 2}, {2, 0, 0}, {0, 0, 2}, {0, 0, 0}}) {
+        DoTest(textureSpec, MinimumDataSpec(copyExtent, 256, 0), copyExtent);
+    }
+
+    // rowsPerImage undefined
+    for (const wgpu::Extent3D copyExtent : {wgpu::Extent3D{2, 2, 1}, {2, 2, 0}}) {
+        DoTest(textureSpec, MinimumDataSpec(copyExtent, 256, WGPU_STRIDE_UNDEFINED), copyExtent);
     }
 }
 
