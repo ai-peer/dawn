@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/WireClient.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -673,4 +675,13 @@ TEST_F(WireBufferMappingTests, MaxSizeMappableBufferOOMDirectly) {
         EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice)).WillOnce(Return(apiBuffer));
         FlushClient();
     }
+}
+
+// Test that registering a callback after wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireBufferMappingTests, MapAfterDisconnect) {
+    GetWireClient()->Disconnect();
+
+    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_DeviceLost, this)).Times(1);
+    wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, ToMockBufferMapCallback, this);
 }
