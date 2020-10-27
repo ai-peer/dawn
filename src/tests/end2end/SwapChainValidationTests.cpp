@@ -46,7 +46,7 @@ class SwapChainValidationTests : public DawnTest {
 
         goodDescriptor.width = 1;
         goodDescriptor.height = 1;
-        goodDescriptor.usage = wgpu::TextureUsage::OutputAttachment;
+        goodDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
         goodDescriptor.format = wgpu::TextureFormat::BGRA8Unorm;
         goodDescriptor.presentMode = wgpu::PresentMode::Mailbox;
 
@@ -69,7 +69,7 @@ class SwapChainValidationTests : public DawnTest {
     wgpu::SwapChainDescriptor goodDescriptor;
     wgpu::SwapChainDescriptor badDescriptor;
 
-    // Checks that an OutputAttachment view is an error by trying to create a render pass on it.
+    // Checks that an RenderAttachment view is an error by trying to create a render pass on it.
     void CheckTextureViewIsError(wgpu::TextureView view) {
         utils::ComboRenderPassDescriptor renderPassDesc({view});
 
@@ -79,7 +79,7 @@ class SwapChainValidationTests : public DawnTest {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    // Checks that an OutputAttachment view is an error by trying to create a render pass on it.
+    // Checks that an RenderAttachment view is an error by trying to create a render pass on it.
     void CheckTextureViewIsDestroyed(wgpu::TextureView view) {
         utils::ComboRenderPassDescriptor renderPassDesc({view});
 
@@ -135,7 +135,7 @@ TEST_P(SwapChainValidationTests, InvalidCreationSize) {
     }
 }
 
-// Checks that the creation usage must be OutputAttachment
+// Checks that the creation usage must be RenderAttachment
 TEST_P(SwapChainValidationTests, InvalidCreationUsage) {
     wgpu::SwapChainDescriptor desc = goodDescriptor;
     desc.usage = wgpu::TextureUsage::Sampled;
@@ -226,7 +226,7 @@ TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
     // Create a second texture to be used as render pass attachment. Validation will check that the
     // size of the view matches the size of this texture.
     wgpu::TextureDescriptor textureDesc;
-    textureDesc.usage = wgpu::TextureUsage::OutputAttachment;
+    textureDesc.usage = wgpu::TextureUsage::RenderAttachment;
     textureDesc.dimension = wgpu::TextureDimension::e2D;
     textureDesc.size = {1, 1, 1};
     textureDesc.format = wgpu::TextureFormat::R8Unorm;
@@ -238,7 +238,7 @@ TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
     wgpu::TextureView view = swapchain.GetCurrentTextureView();
 
     // Validation will also check the dimension of the view is 2D, and it's usage contains
-    // OutputAttachment
+    // RenderAttachment
     utils::ComboRenderPassDescriptor renderPassDesc({view, secondTexture.CreateView()});
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
