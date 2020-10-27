@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "48670601275a366ac9044a8be4293a71fd380dc0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125a43d2_9118021c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-10-27T14:44:39Z",
+      "side": 1,
+      "message": "LGTM\n\nIt might be nice to link to the relevant WebGPU spec discussion, if possible.",
+      "revId": "48670601275a366ac9044a8be4293a71fd380dc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
