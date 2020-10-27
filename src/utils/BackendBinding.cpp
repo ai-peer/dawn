@@ -50,7 +50,8 @@ namespace utils {
         DAWN_UNUSED(type);
         DAWN_UNUSED(window);
 
-        if (type == wgpu::BackendType::OpenGL) {
+#if 0
+        if (false && type == wgpu::BackendType::OpenGL) {
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
             glfwMakeContextCurrent(window);
             dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
@@ -58,8 +59,11 @@ namespace utils {
             instance->DiscoverAdapters(&adapterOptions);
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
         } else {
+#endif
             instance->DiscoverDefaultAdapters();
+#if 0
         }
+#endif
     }
 
     BackendBinding* CreateBinding(wgpu::BackendType type, GLFWwindow* window, WGPUDevice device) {

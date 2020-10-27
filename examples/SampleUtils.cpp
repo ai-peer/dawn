@@ -26,7 +26,13 @@
 #include <dawn_native/DawnNative.h>
 #include <dawn_wire/WireClient.h>
 #include <dawn_wire/WireServer.h>
+#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3.h"
+#include "GLFW/glfw3native.h"
+#include "EGL/egl.h"
+#endif
+#include <windows.h>
 
 #include <algorithm>
 #include <cstring>
@@ -101,6 +107,29 @@ wgpu::Device CreateCppDawnDevice() {
     if (!window) {
         return wgpu::Device();
     }
+
+#if 1
+    HWND hwnd = glfwGetWin32Window(window);
+    HDC hdc = GetDC(hwnd);
+    EGLDisplay display = eglGetDisplay(hdc);
+    eglInitialize(display, NULL, NULL);
+    EGLint defaultAttribList[] = {EGL_RED_SIZE,     8,
+                                  EGL_GREEN_SIZE,   8,
+                                  EGL_BLUE_SIZE,    8,
+                                  EGL_DEPTH_SIZE,   24,
+                                  EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+                                  EGL_NONE};
+    EGLint numConfigs;
+    EGLConfig config;
+    eglChooseConfig(display, defaultAttribList, &config, 1, &numConfigs);
+    EGLContext share_context = EGL_NO_CONTEXT;
+    EGLint contextAttribList[] = {EGL_CONTEXT_MAJOR_VERSION, 3, EGL_CONTEXT_MINOR_VERSION, 1,
+                                  EGL_NONE};
+    EGLContext context = eglCreateContext(display, config, share_context, contextAttribList);
+    EGLSurface surface = eglCreateWindowSurface(display, config, hwnd, nullptr);
+    eglMakeCurrent(display, surface, surface, context);
+
+#endif
 
     instance = std::make_unique<dawn_native::Instance>();
     utils::DiscoverAdapter(instance.get(), window, backendType);
