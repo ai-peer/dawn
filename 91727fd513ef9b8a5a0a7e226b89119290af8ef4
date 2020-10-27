@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c177348_e2a8f6cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-27T10:48:30Z",
+      "side": 1,
+      "message": "TBRing, the other CL was for the wrong branch.",
+      "revId": "91727fd513ef9b8a5a0a7e226b89119290af8ef4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
