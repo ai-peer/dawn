@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f88aa0_063310c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-27T17:51:07Z",
+      "side": 1,
+      "message": "Good call, I forgot to update end2end tests for this.",
+      "parentUuid": "01007781_d53d7749",
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71a95862_ebca8162",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc3ff0f_1dff9d69",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-27T17:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71a95862_ebca8162",
+      "range": {
+        "startLine": 588,
+        "startChar": 26,
+        "endLine": 588,
+        "endChar": 53
+      },
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ffce9c6_69cbbb7c",
@@ -71,6 +113,30 @@
       "writtenOn": "2020-10-27T16:20:28Z",
       "side": 1,
       "message": "if (HasOneBit(format.aspects)) return format.aspects;\n\nelse return validation error",
+      "range": {
+        "startLine": 592,
+        "startChar": 16,
+        "endLine": 592,
+        "endChar": 41
+      },
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ff4f3c_96dfa64d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-27T17:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ffce9c6_69cbbb7c",
       "range": {
         "startLine": 592,
         "startChar": 16,
