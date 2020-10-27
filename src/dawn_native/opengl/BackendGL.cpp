@@ -26,6 +26,9 @@ namespace dawn_native { namespace opengl {
 
     namespace {
 
+	constexpr const char* kGLESv2LibName = "libGLESv2.dll";
+	constexpr const char* kEGLLibName = "libEGL.dll";
+
         struct Vendor {
             const char* vendorName;
             uint32_t vendorId;
@@ -233,7 +236,24 @@ namespace dawn_native { namespace opengl {
         : BackendConnection(instance, wgpu::BackendType::OpenGL) {
     }
 
+    MaybeError Backend::Initialize() {
+        if (!mLibEGL.Open(kEGLLibName)) {
+	    dawn::WarningLog() << std::string("Couldn't open ") + kEGLLibName;
+            return DAWN_INTERNAL_ERROR("Couldn't load libEGL");
+        }
+        if (!mLibGLESv2.Open(kGLESv2LibName)) {
+	    dawn::WarningLog() << std::string("Couldn't open ") + kGLESv2LibName;
+            return DAWN_INTERNAL_ERROR("Couldn't load libGLESv2");
+        }
+        return {};
+    }
+
     std::vector<std::unique_ptr<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+        void* eglGetProcAddress = mLibEGL.GetProc("eglGetProcAddress");
+        dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
+        adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(eglGetProcAddress);
+        GetInstance()->DiscoverAdapters(&adapterOptions);
+
         // The OpenGL backend needs at least "getProcAddress" to discover an adapter.
         return {};
     }
@@ -264,7 +284,14 @@ namespace dawn_native { namespace opengl {
     }
 
     BackendConnection* Connect(InstanceBase* instance) {
-        return new Backend(instance);
+        Backend* backend = new Backend(instance);
+
+        if (instance->ConsumedError(backend->Initialize())) {
+            delete backend;
+            return nullptr;
+        }
+
+        return backend;
     }
 
 }}  // namespace dawn_native::opengl
