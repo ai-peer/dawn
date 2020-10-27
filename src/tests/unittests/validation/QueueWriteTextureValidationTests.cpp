@@ -247,7 +247,9 @@ namespace {
                 TestWriteTexture(128, 0, 11, 1, destination, 0, {0, 0, 0}, {3, 1, 2}));
 
             // copyHeight = 1 and copyDepth = 1
-            TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 1, 1});
+            // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+            EXPECT_DEPRECATION_WARNING(
+                TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 1, 1}));
         }
 
         // bytesPerRow = 12 is valid since a row takes 12 bytes.

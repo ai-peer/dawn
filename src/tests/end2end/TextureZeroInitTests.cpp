@@ -153,7 +153,7 @@ TEST_P(TextureZeroInitTest, CopyMultipleTextureArrayLayersToBufferSource) {
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
     const wgpu::BufferCopyView bufferCopyView =
-        utils::CreateBufferCopyView(buffer, 0, bytesPerRow, 0);
+        utils::CreateBufferCopyView(buffer, 0, bytesPerRow, kSize);
     const wgpu::TextureCopyView textureCopyView =
         utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
     const wgpu::Extent3D copySize = {kSize, kSize, kArrayLayers};
@@ -340,7 +340,7 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureMultipleArrayLayers) {
         device, data.data(), static_cast<uint32_t>(data.size()), wgpu::BufferUsage::CopySrc);
 
     const wgpu::BufferCopyView bufferCopyView =
-        utils::CreateBufferCopyView(stagingBuffer, 0, kSize * kFormatBlockByteSize, 0);
+        utils::CreateBufferCopyView(stagingBuffer, 0, kSize * kFormatBlockByteSize, kSize);
     const wgpu::TextureCopyView textureCopyView =
         utils::CreateTextureCopyView(texture, 0, {0, 0, kBaseArrayLayer});
     const wgpu::Extent3D copySize = {kSize, kSize, kCopyLayerCount};

@@ -1028,6 +1028,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyWhole2DArrayTexture) {
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, kArrayLayerCount};
+    config.rowsPerImage = 8;
 
     config.copyExtent3D = config.textureDescriptor.size;
     config.copyExtent3D.depth = kArrayLayerCount;
@@ -1054,6 +1055,7 @@ TEST_P(CompressedTextureBCFormatTest, CopyMultiple2DArrayLayers) {
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, kArrayLayerCount};
+    config.rowsPerImage = 8;
 
     constexpr uint32_t kCopyBaseArrayLayer = 1;
     constexpr uint32_t kCopyLayerCount = 2;
