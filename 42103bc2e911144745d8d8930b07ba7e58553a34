@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade3dc96_026516c9",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-27T12:57:21Z",
+      "side": 0,
+      "message": "nit: keep empty line?",
+      "revId": "42103bc2e911144745d8d8930b07ba7e58553a34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
