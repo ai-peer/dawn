@@ -451,22 +451,32 @@ namespace dawn_native {
         mUsedQuerySets.insert(querySet);
     }
 
-    void CommandEncoder::TrackUsedQueryIndex(QuerySetBase* querySet, uint32_t queryIndex) {
-        UsedQueryMap::iterator it = mUsedQueryIndices.find(querySet);
-        if (it != mUsedQueryIndices.end()) {
+    void CommandEncoder::TrackQueryState(QuerySetBase* querySet,
+                                         uint32_t queryIndex,
+                                         QueryState state) {
+        DAWN_ASSERT(querySet != nullptr);
+
+        QueryStatesMap::iterator it = mQueryStatesMap.find(querySet);
+        if (it != mQueryStatesMap.end()) {
             // Record index on existing query set
-            std::vector<bool>& queryIndices = it->second;
-            queryIndices[queryIndex] = 1;
+            std::vector<QueryState>& queryStates = it->second;
+            queryStates[queryIndex] = state;
         } else {
             // Record index on new query set
-            std::vector<bool> queryIndices(querySet->GetQueryCount(), 0);
-            queryIndices[queryIndex] = 1;
-            mUsedQueryIndices.insert({querySet, std::move(queryIndices)});
+            std::vector<QueryState> queryStates(querySet->GetQueryCount(), QueryState::Unavailable);
+            queryStates[queryIndex] = state;
+            mQueryStatesMap.insert({querySet, std::move(queryStates)});
         }
     }
 
-    const UsedQueryMap& CommandEncoder::GetUsedQueryIndices() const {
-        return mUsedQueryIndices;
+    std::vector<QueryState> CommandEncoder::GetQueryStates(QuerySetBase* querySet) {
+        QueryStatesMap::const_iterator it = mQueryStatesMap.find(querySet);
+        std::vector<QueryState> queryStates = {};
+        if (it != mQueryStatesMap.end()) {
+            queryStates = it->second;
+        }
+
+        return queryStates;
     }
 
     // Implementation of the API's command recording methods
@@ -854,11 +864,11 @@ namespace dawn_native {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex, GetUsedQueryIndices()));
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex, GetQueryStates(querySet)));
                 TrackUsedQuerySet(querySet);
             }
 
-            TrackUsedQueryIndex(querySet, queryIndex);
+            TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
