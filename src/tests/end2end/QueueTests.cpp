@@ -518,7 +518,7 @@ TEST_P(QueueWriteTextureTests, BytesPerRowWithOneRowCopy) {
 
         DataSpec dataSpec = MinimumDataSpec(copyExtent);
         dataSpec.bytesPerRow = 256;
-        DoTest(textureSpec, dataSpec, copyExtent);
+        EXPECT_DEPRECATION_WARNING(DoTest(textureSpec, dataSpec, copyExtent));
     }
 }
 

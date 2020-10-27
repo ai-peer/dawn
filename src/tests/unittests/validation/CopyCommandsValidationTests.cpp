@@ -501,10 +501,10 @@ TEST_F(CopyCommandTest_B2T, IncorrectUsage) {
     TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, sampled, 0, {0, 0, 0}, {4, 4, 1});
 }
 
-TEST_F(CopyCommandTest_B2T, IncorrectBytesPerRow) {
+TEST_F(CopyCommandTest_B2T, BytesPerRowConstraints) {
     uint64_t bufferSize = BufferSizeForTextureCopy(128, 16, 1);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
-    wgpu::Texture destination = Create2DTexture(128, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm,
+    wgpu::Texture destination = Create2DTexture(128, 16, 5, 5, wgpu::TextureFormat::RGBA8Unorm,
                                                 wgpu::TextureUsage::CopyDst);
 
     // bytes per row is 0
@@ -512,10 +512,14 @@ TEST_F(CopyCommandTest_B2T, IncorrectBytesPerRow) {
         // copyHeight > 1
         TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 0, destination, 0, {0, 0, 0},
                     {64, 4, 1});
+        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
+                    {0, 4, 1});
 
         // copyDepth > 1
         TestB2TCopy(utils::Expectation::Failure, source, 0, 0, 1, destination, 0, {0, 0, 0},
                     {64, 1, 4});
+        TestB2TCopy(utils::Expectation::Success, source, 0, 0, 1, destination, 0, {0, 0, 0},
+                    {0, 1, 4});
 
         // copyHeight = 1 and copyDepth = 1
         TestB2TCopy(utils::Expectation::Success, source, 0, 0, 0, destination, 0, {0, 0, 0},
@@ -538,36 +542,48 @@ TEST_F(CopyCommandTest_B2T, IncorrectBytesPerRow) {
         // copyHeight > 1
         TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
                     {65, 2, 1});
+        // copyHeight == 0
+        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
+                    {65, 0, 1});
 
         // copyDepth > 1
         TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 1, destination, 0, {0, 0, 0},
                     {65, 1, 2});
+        // copyDepth == 0
+        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 0, destination, 0, {0, 0, 0},
+                    {65, 1, 0});
 
         // copyHeight = 1 and copyDepth = 1
-        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0, destination, 0, {0, 0, 0},
-                    {65, 1, 1});
+        // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+        EXPECT_DEPRECATION_WARNING(TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0,
+                                               destination, 0, {0, 0, 0}, {65, 1, 1}));
     }
 }
 
-TEST_F(CopyCommandTest_B2T, ImageHeightConstraint) {
-    uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 1);
+TEST_F(CopyCommandTest_B2T, RowsPerImageConstraints) {
+    uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 6);
     wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
     wgpu::Texture destination =
-        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+        Create2DTexture(16, 16, 1, 5, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
 
-    // Image height is zero (Valid)
+    // rowsPerImage is zero
     TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0, destination, 0, {0, 0, 0},
                 {4, 4, 1});
+    // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+    EXPECT_DEPRECATION_WARNING(TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0,
+                                           destination, 0, {0, 0, 0}, {4, 4, 2}));
 
-    // Image height is equal to copy height (Valid)
-    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 0, destination, 0, {0, 0, 0},
+    // rowsPerImage is equal to copy height (Valid)
+    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 4, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 
-    // Image height is larger than copy height (Valid)
+    // rowsPerImage is larger than copy height (Valid)
     TestB2TCopy(utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
                 {4, 4, 1});
+    TestB2TCopy(utils::Expectation::Success, source, 0, 256, 5, destination, 0, {0, 0, 0},
+                {4, 4, 2});
 
-    // Image height is less than copy height (Invalid)
+    // rowsPerImage is less than copy height (Invalid)
     TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 3, destination, 0, {0, 0, 0},
                 {4, 4, 1});
 }
@@ -1036,9 +1052,9 @@ TEST_F(CopyCommandTest_T2B, IncorrectUsage) {
     TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, vertex, 0, 256, 0, {4, 4, 1});
 }
 
-TEST_F(CopyCommandTest_T2B, IncorrectBytesPerRow) {
+TEST_F(CopyCommandTest_T2B, BytesPerRowConstraints) {
     uint64_t bufferSize = BufferSizeForTextureCopy(128, 16, 1);
-    wgpu::Texture source = Create2DTexture(128, 16, 5, 1, wgpu::TextureFormat::RGBA8Unorm,
+    wgpu::Texture source = Create2DTexture(128, 16, 5, 5, wgpu::TextureFormat::RGBA8Unorm,
                                            wgpu::TextureUsage::CopySrc);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
@@ -1047,10 +1063,14 @@ TEST_F(CopyCommandTest_T2B, IncorrectBytesPerRow) {
         // copyHeight > 1
         TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 0,
                     {64, 4, 1});
+        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
+                    {0, 4, 1});
 
         // copyDepth > 1
         TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 0, 1,
                     {64, 1, 4});
+        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 1,
+                    {0, 1, 4});
 
         // copyHeight = 1 and copyDepth = 1
         TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 0, 0,
@@ -1073,36 +1093,48 @@ TEST_F(CopyCommandTest_T2B, IncorrectBytesPerRow) {
         // copyHeight > 1
         TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
                     {65, 2, 1});
+        // copyHeight == 0
+        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
+                    {65, 0, 1});
 
         // copyDepth > 1
         TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
                     {65, 1, 2});
+        // copyDepth == 0
+        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 0,
+                    {65, 1, 0});
 
         // copyHeight = 1 and copyDepth = 1
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 0,
-                    {65, 1, 1});
+        // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+        EXPECT_DEPRECATION_WARNING(TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+                                               destination, 0, 256, 0, {65, 1, 1}));
     }
 }
 
-TEST_F(CopyCommandTest_T2B, ImageHeightConstraint) {
-    uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 1);
+TEST_F(CopyCommandTest_T2B, RowsPerImageConstraints) {
+    uint64_t bufferSize = BufferSizeForTextureCopy(5, 5, 6);
     wgpu::Texture source =
-        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+        Create2DTexture(16, 16, 1, 5, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
 
-    // Image height is zero (Valid)
+    // rowsPerImage is zero (Valid)
     TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 0,
                 {4, 4, 1});
+    // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+    EXPECT_DEPRECATION_WARNING(TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0},
+                                           destination, 0, 256, 0, {4, 4, 2}));
 
-    // Image height is equal to copy height (Valid)
+    // rowsPerImage is equal to copy height (Valid)
     TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 4,
                 {4, 4, 1});
 
-    // Image height exceeds copy height (Valid)
+    // rowsPerImage exceeds copy height (Valid)
     TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
                 {4, 4, 1});
+    TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 5,
+                {4, 4, 2});
 
-    // Image height is less than copy height (Invalid)
+    // rowsPerImage is less than copy height (Invalid)
     TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 3,
                 {4, 4, 1});
 }

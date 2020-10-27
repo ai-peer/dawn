@@ -218,8 +218,8 @@ namespace {
     }
 
     // Test incorrect values of bytesPerRow and that values not divisible by 256 are allowed.
-    TEST_F(QueueWriteTextureValidationTest, BytesPerRowLimitations) {
-        wgpu::Texture destination = Create2DTexture({3, 7, 1}, 1, wgpu::TextureFormat::RGBA8Unorm,
+    TEST_F(QueueWriteTextureValidationTest, BytesPerRowConstraints) {
+        wgpu::Texture destination = Create2DTexture({3, 7, 2}, 1, wgpu::TextureFormat::RGBA8Unorm,
                                                     wgpu::TextureUsage::CopyDst);
 
         // bytesPerRow = 0
@@ -227,10 +227,12 @@ namespace {
             // copyHeight > 1
             ASSERT_DEVICE_ERROR(
                 TestWriteTexture(128, 0, 0, 0, destination, 0, {0, 0, 0}, {3, 7, 1}));
+            TestWriteTexture(128, 0, 0, 0, destination, 0, {0, 0, 0}, {0, 7, 1});
 
             // copyDepth > 1
             ASSERT_DEVICE_ERROR(
                 TestWriteTexture(128, 0, 0, 1, destination, 0, {0, 0, 0}, {3, 1, 2}));
+            TestWriteTexture(128, 0, 0, 1, destination, 0, {0, 0, 0}, {0, 1, 2});
 
             // copyHeight = 1 and copyDepth = 1
             TestWriteTexture(128, 0, 0, 0, destination, 0, {0, 0, 0}, {3, 1, 1});
@@ -241,13 +243,21 @@ namespace {
             // copyHeight > 1
             ASSERT_DEVICE_ERROR(
                 TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 7, 1}));
+            // copyHeight == 0
+            ASSERT_DEVICE_ERROR(
+                TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 0, 1}));
 
             // copyDepth > 1
             ASSERT_DEVICE_ERROR(
                 TestWriteTexture(128, 0, 11, 1, destination, 0, {0, 0, 0}, {3, 1, 2}));
+            // copyDepth == 0
+            ASSERT_DEVICE_ERROR(
+                TestWriteTexture(128, 0, 11, 1, destination, 0, {0, 0, 0}, {3, 1, 0}));
 
             // copyHeight = 1 and copyDepth = 1
-            TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 1, 1});
+            // TODO(crbug.com/dawn/520): Change to ASSERT_DEVICE_ERROR.
+            EXPECT_DEPRECATION_WARNING(
+                TestWriteTexture(128, 0, 11, 0, destination, 0, {0, 0, 0}, {3, 1, 1}));
         }
 
         // bytesPerRow = 12 is valid since a row takes 12 bytes.
@@ -258,22 +268,25 @@ namespace {
     }
 
     // Test that if rowsPerImage is greater than 0, it must be at least copy height.
-    TEST_F(QueueWriteTextureValidationTest, ImageHeightConstraint) {
+    TEST_F(QueueWriteTextureValidationTest, RowsPerImageConstraints) {
         uint64_t dataSize =
-            utils::RequiredBytesInCopy(256, 0, {4, 4, 1}, wgpu::TextureFormat::RGBA8Unorm);
-        wgpu::Texture destination = Create2DTexture({16, 16, 1}, 1, wgpu::TextureFormat::RGBA8Unorm,
+            utils::RequiredBytesInCopy(256, 5, {4, 4, 2}, wgpu::TextureFormat::RGBA8Unorm);
+        wgpu::Texture destination = Create2DTexture({16, 16, 2}, 1, wgpu::TextureFormat::RGBA8Unorm,
                                                     wgpu::TextureUsage::CopyDst);
 
-        // Image height is zero (Valid)
+        // rowsPerImage is zero
         TestWriteTexture(dataSize, 0, 256, 0, destination, 0, {0, 0, 0}, {4, 4, 1});
+        EXPECT_DEPRECATION_WARNING(
+            TestWriteTexture(dataSize, 0, 256, 0, destination, 0, {0, 0, 0}, {4, 4, 2}));
 
-        // Image height is equal to copy height (Valid)
+        // rowsPerImage is equal to copy height (Valid)
         TestWriteTexture(dataSize, 0, 256, 4, destination, 0, {0, 0, 0}, {4, 4, 1});
 
-        // Image height is larger than copy height (Valid)
+        // rowsPerImage is larger than copy height (Valid)
         TestWriteTexture(dataSize, 0, 256, 5, destination, 0, {0, 0, 0}, {4, 4, 1});
+        TestWriteTexture(dataSize, 0, 256, 5, destination, 0, {0, 0, 0}, {4, 4, 2});
 
-        // Image height is less than copy height (Invalid)
+        // rowsPerImage is less than copy height (Invalid)
         ASSERT_DEVICE_ERROR(
             TestWriteTexture(dataSize, 0, 256, 3, destination, 0, {0, 0, 0}, {4, 4, 1}));
     }

@@ -56,16 +56,12 @@ class CopyTests : public DawnTest {
         return textureData;
     }
 
-    static BufferSpec MinimumBufferSpec(uint32_t width,
-                                        uint32_t height,
-                                        uint32_t arrayLayer = 1,
-                                        bool testZeroRowsPerImage = true) {
+    static BufferSpec MinimumBufferSpec(uint32_t width, uint32_t height, uint32_t arrayLayer = 1) {
         const uint32_t bytesPerRow = utils::GetMinimumBytesPerRow(kTextureFormat, width);
         const uint32_t rowsPerImage = height;
         const uint32_t totalBufferSize = utils::RequiredBytesInCopy(
             bytesPerRow, rowsPerImage, {width, height, arrayLayer}, kTextureFormat);
-        uint32_t appliedRowsPerImage = testZeroRowsPerImage ? 0 : height;
-        return {totalBufferSize, 0, bytesPerRow, appliedRowsPerImage};
+        return {totalBufferSize, 0, bytesPerRow, rowsPerImage};
     }
 
     static void PackTextureData(const RGBA8* srcData,
@@ -102,8 +98,7 @@ class CopyTests_T2B : public CopyTests {
 
         const utils::TextureDataCopyLayout copyLayout =
             utils::GetTextureDataCopyLayoutForTexture2DAtLevel(
-                kTextureFormat, textureSpec.textureSize, textureSpec.level,
-                bufferSpec.rowsPerImage);
+                kTextureFormat, textureSpec.textureSize, textureSpec.level, 0);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
@@ -113,7 +108,7 @@ class CopyTests_T2B : public CopyTests {
             wgpu::Buffer uploadBuffer = utils::CreateBufferFromData(
                 device, textureArrayData.data(), copyLayout.byteLength, wgpu::BufferUsage::CopySrc);
             wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
-                uploadBuffer, 0, copyLayout.bytesPerRow, bufferSpec.rowsPerImage);
+                uploadBuffer, 0, copyLayout.bytesPerRow, copyLayout.mipSize.height);
             wgpu::TextureCopyView textureCopyView =
                 utils::CreateTextureCopyView(texture, textureSpec.level, {0, 0, 0});
             encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyLayout.mipSize);
@@ -163,15 +158,16 @@ class CopyTests_T2B : public CopyTests {
             EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<const uint32_t*>(expected.data()), buffer,
                                        bufferOffset, static_cast<uint32_t>(expected.size()))
                 << "Texture to Buffer copy failed copying region [(" << textureSpec.copyOrigin.x
-                << ", " << textureSpec.copyOrigin.y << "), ("
+                << ", " << textureSpec.copyOrigin.y << ", " << textureSpec.copyOrigin.z << "), ("
                 << textureSpec.copyOrigin.x + copySize.width << ", "
-                << textureSpec.copyOrigin.y + copySize.height << ")) from "
+                << textureSpec.copyOrigin.y + copySize.height << ", "
+                << textureSpec.copyOrigin.z + copySize.depth << ")) from "
                 << textureSpec.textureSize.width << " x " << textureSpec.textureSize.height
                 << " texture at mip level " << textureSpec.level << " layer " << slice << " to "
                 << bufferSpec.size << "-byte buffer with offset " << bufferOffset
                 << " and bytes per row " << bufferSpec.bytesPerRow << std::endl;
 
-            bufferOffset += copyLayout.bytesPerImage;
+            bufferOffset += bufferSpec.bytesPerRow * bufferSpec.rowsPerImage;
         }
     }
 };
@@ -294,8 +290,8 @@ class CopyTests_T2T : public CopyTests {
 
         wgpu::Buffer uploadBuffer = utils::CreateBufferFromData(
             device, textureArrayCopyData.data(), copyLayout.byteLength, wgpu::BufferUsage::CopySrc);
-        wgpu::BufferCopyView bufferCopyView =
-            utils::CreateBufferCopyView(uploadBuffer, 0, copyLayout.bytesPerRow, 0);
+        wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
+            uploadBuffer, 0, copyLayout.bytesPerRow, copyLayout.mipSize.height);
         wgpu::TextureCopyView textureCopyView =
             utils::CreateTextureCopyView(srcTexture, srcSpec.level, {0, 0, srcSpec.copyOrigin.z});
         encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyLayout.mipSize);
@@ -706,11 +702,12 @@ TEST_P(CopyTests_T2B, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove this block.
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);
         bufferSpec.bytesPerRow = 256;
-        DoTest(textureSpec, bufferSpec, {259, 1, 1});
+        EXPECT_DEPRECATION_WARNING(DoTest(textureSpec, bufferSpec, {259, 1, 1}));
     }
 }
 
@@ -780,7 +777,7 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionNonzeroRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.rowsPerImage = kRowsPerImage;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
@@ -801,7 +798,7 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetOddRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.offset += 128u;
     bufferSpec.size += 128u;
     bufferSpec.rowsPerImage = kRowsPerImage;
@@ -824,7 +821,7 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.offset += 128u;
     bufferSpec.size += 128u;
     bufferSpec.rowsPerImage = kRowsPerImage;
@@ -1156,11 +1153,12 @@ TEST_P(CopyTests_B2T, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove this block.
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);
         bufferSpec.bytesPerRow = 256;
-        DoTest(textureSpec, bufferSpec, {259, 1, 1});
+        EXPECT_DEPRECATION_WARNING(DoTest(textureSpec, bufferSpec, {259, 1, 1}));
     }
 }
 
@@ -1211,7 +1209,7 @@ TEST_P(CopyTests_B2T, Texture2DArrayRegionNonzeroRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.rowsPerImage = kRowsPerImage;
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
@@ -1232,7 +1230,7 @@ TEST_P(CopyTests_B2T, Texture2DArrayRegionWithOffsetOddRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.offset += 128u;
     bufferSpec.size += 128u;
     bufferSpec.rowsPerImage = kRowsPerImage;
@@ -1255,7 +1253,7 @@ TEST_P(CopyTests_B2T, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
     textureSpec.level = 0;
 
-    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers, false);
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kRowsPerImage, kCopyLayers);
     bufferSpec.offset += 128u;
     bufferSpec.size += 128u;
     bufferSpec.rowsPerImage = kRowsPerImage;
