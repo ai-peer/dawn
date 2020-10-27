@@ -44,6 +44,7 @@ namespace utils {
 
         layout.bytesPerRow = GetMinimumBytesPerRow(format, layout.mipSize.width);
 
+        // TODO(crbug.com/dawn/520): Remove this defaulting.
         uint32_t appliedRowsPerImage = rowsPerImage > 0 ? rowsPerImage : layout.mipSize.height;
         layout.bytesPerImage = layout.bytesPerRow * appliedRowsPerImage;
 

@@ -706,6 +706,7 @@ TEST_P(CopyTests_T2B, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove this block.
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);
@@ -1156,6 +1157,7 @@ TEST_P(CopyTests_B2T, BytesPerRowWithOneRowCopy) {
         DoTest(textureSpec, bufferSpec, {5, 1, 1});
     }
 
+    // TODO(crbug.com/dawn/520): This behavior is deprecated; remove this block.
     // bytesPerRow < bytesInACompleteRow
     {
         BufferSpec bufferSpec = MinimumBufferSpec(259, 1);
