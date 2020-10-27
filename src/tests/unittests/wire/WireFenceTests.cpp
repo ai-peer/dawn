@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/WireClient.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -141,6 +143,16 @@ TEST_F(WireFenceTests, OnCompletionError) {
 
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_Error, _)).Times(1);
     FlushServer();
+}
+
+// Test that registering a callback after wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireFenceTests, OnCompletionAfterDisconnect) {
+    GetWireClient()->Disconnect();
+
+    EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_DeviceLost, this))
+        .Times(1);
+    wgpuFenceOnCompletion(fence, 0, ToMockFenceOnCompletionCallback, this);
 }
 
 // Without any flushes, it is valid to wait on a value less than or equal to
