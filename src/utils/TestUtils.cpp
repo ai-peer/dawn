@@ -120,7 +120,8 @@ namespace utils {
         wgpu::Texture texture = device.CreateTexture(&descriptor);
 
         wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
-        wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(0, 0, 0);
+        wgpu::TextureDataLayout textureDataLayout =
+            utils::CreateTextureDataLayout(0, WGPU_STRIDE_UNDEFINED);
         wgpu::Extent3D copyExtent = {1, 1, 1};
 
         // WriteTexture with exactly 1 byte of data.
