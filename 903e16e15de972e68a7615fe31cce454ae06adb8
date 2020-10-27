@@ -16,6 +16,69 @@
       "message": "PTAL",
       "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01007781_d53d7749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-27T16:20:28Z",
+      "side": 1,
+      "message": "LGTM. we should add some end2end tests were the source is unaligned since it was previously invalid.",
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a95862_ebca8162",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-27T16:20:28Z",
+      "side": 1,
+      "message": "maybe call this SingleAspectUsedBy..",
+      "range": {
+        "startLine": 588,
+        "startChar": 26,
+        "endLine": 588,
+        "endChar": 53
+      },
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffce9c6_69cbbb7c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-27T16:20:28Z",
+      "side": 1,
+      "message": "if (HasOneBit(format.aspects)) return format.aspects;\n\nelse return validation error",
+      "range": {
+        "startLine": 592,
+        "startChar": 16,
+        "endLine": 592,
+        "endChar": 41
+      },
+      "revId": "903e16e15de972e68a7615fe31cce454ae06adb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
