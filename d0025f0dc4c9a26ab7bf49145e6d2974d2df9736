@@ -251,6 +251,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a352d5c_af6abe4a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T11:19:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, what is it that\u0027s not possible with the combination of bgra8unorm to the format rgba8unorm-srgb? both switching R and B and converting color spaces should work well with uniform and if else no?",
+      "parentUuid": "53747a3a_902140e8",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "484a21de_b81592b2",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -496,6 +520,24 @@
       "side": 1,
       "message": "Yes, I think it maybe a bug, because https://source.chromium.org/chromium/chromium/src/+/master:out/android-Debug/gen/third_party/dawn/src/include/dawn/webgpu_cpp.h;l\u003d1306?q\u003dRenderPassDescriptor\u0026ss\u003dchromium%2Fchromium%2Fsrc doesn\u0027t set nullptr to it and without this line, I\u0027ll got error when I running the tests. The same for resolveTarget(https://source.chromium.org/chromium/chromium/src/+/master:out/android-Debug/gen/third_party/dawn/src/include/dawn/webgpu_cpp.h;l\u003d1267?q\u003dRenderPassDescriptor\u0026ss\u003dchromium%2Fchromium%2Fsrc)",
       "parentUuid": "b8657f8a_04ef5957",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5dad9d_fd9aca79",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T11:19:22Z",
+      "side": 1,
+      "message": "Thanks for the explanation, that\u0027s a bug and I put up a fix CL here https://dawn-review.googlesource.com/c/dawn/+/31200",
+      "parentUuid": "50e80b1c_fcaf5da9",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
