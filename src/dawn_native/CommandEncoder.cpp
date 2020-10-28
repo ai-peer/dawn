@@ -451,22 +451,48 @@ namespace dawn_native {
         mUsedQuerySets.insert(querySet);
     }
 
-    void CommandEncoder::TrackUsedQueryIndex(QuerySetBase* querySet, uint32_t queryIndex) {
-        UsedQueryMap::iterator it = mUsedQueryIndices.find(querySet);
-        if (it != mUsedQueryIndices.end()) {
+    void CommandEncoder::TrackQueryState(QuerySetBase* querySet,
+                                         uint32_t queryIndex,
+                                         QueryState state) {
+        DAWN_ASSERT(querySet != nullptr);
+
+        QueryStatesMap::iterator it = mQueryStatesMap.find(querySet);
+        if (it != mQueryStatesMap.end()) {
             // Record index on existing query set
-            std::vector<bool>& queryIndices = it->second;
-            queryIndices[queryIndex] = 1;
+            std::vector<QueryState>& queryStates = it->second;
+            queryStates[queryIndex] = state;
         } else {
             // Record index on new query set
-            std::vector<bool> queryIndices(querySet->GetQueryCount(), 0);
-            queryIndices[queryIndex] = 1;
-            mUsedQueryIndices.insert({querySet, std::move(queryIndices)});
+            std::vector<QueryState> queryStates(querySet->GetQueryCount(), QueryState::Unavailable);
+            queryStates[queryIndex] = state;
+            mQueryStatesMap.insert({querySet, std::move(queryStates)});
         }
     }
 
-    const UsedQueryMap& CommandEncoder::GetUsedQueryIndices() const {
-        return mUsedQueryIndices;
+    const QueryStatesMap& CommandEncoder::GetQueryStatesMap() const {
+        return mQueryStatesMap;
+    }
+
+    // Merge the query states from render/compute encoders into command encoder.
+    void CommandEncoder::AddQueryStatesMap(QueryStatesMap& queryStatesMap) {
+        for (auto& p : queryStatesMap) {
+            QuerySetBase* querySet = p.first;
+            std::vector<QueryState>& queryStates = p.second;
+
+            // Check whether the query set has been used in command encoder, if it's used, update
+            // its query states, otherwise insert directly.
+            QueryStatesMap::iterator iter = mQueryStatesMap.find(querySet);
+            if (iter != mQueryStatesMap.end()) {
+                for (uint32_t i = 0; i < queryStates.size(); i++) {
+                    // Only update the used queries.
+                    if (queryStates[i] == QueryState::Available) {
+                        iter->second[i] = QueryState::Available;
+                    }
+                }
+            } else {
+                mQueryStatesMap.insert({querySet, std::move(queryStates)});
+            }
+        }
     }
 
     // Implementation of the API's command recording methods
@@ -854,11 +880,11 @@ namespace dawn_native {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex, GetUsedQueryIndices()));
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
                 TrackUsedQuerySet(querySet);
             }
 
-            TrackUsedQueryIndex(querySet, queryIndex);
+            TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

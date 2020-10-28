@@ -21,6 +21,7 @@
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/QuerySet.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstring>
@@ -91,6 +92,28 @@ namespace dawn_native {
                                                      ErrorTag errorTag,
                                                      PassType passType)
         : ObjectBase(device, errorTag), mEncodingContext(encodingContext), mUsageTracker(passType) {
+    }
+
+    void ProgrammablePassEncoder::TrackQueryState(QuerySetBase* querySet,
+                                                  uint32_t queryIndex,
+                                                  QueryState state) {
+        DAWN_ASSERT(querySet != nullptr);
+
+        QueryStatesMap::iterator it = mQueryStatesMap.find(querySet);
+        if (it != mQueryStatesMap.end()) {
+            // Record index on existing query set
+            std::vector<QueryState>& queryStates = it->second;
+            queryStates[queryIndex] = state;
+        } else {
+            // Record index on new query set
+            std::vector<QueryState> queryStates(querySet->GetQueryCount(), QueryState::Unavailable);
+            queryStates[queryIndex] = state;
+            mQueryStatesMap.insert({querySet, std::move(queryStates)});
+        }
+    }
+
+    const QueryStatesMap& ProgrammablePassEncoder::GetQueryStatesMap() const {
+        return mQueryStatesMap;
     }
 
     void ProgrammablePassEncoder::InsertDebugMarker(const char* groupLabel) {
