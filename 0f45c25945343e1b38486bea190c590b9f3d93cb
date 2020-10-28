@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601284d2_9d9f18fe",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:28:36Z",
+      "side": 1,
+      "message": "This should return a const reference, not a copy. It\u0027s probably better if we return a reference to the map as the original code did. We can do the lookup and check for existence of |querySet| at the caller, instead of trying to return a default empty vector here.",
+      "range": {
+        "startLine": 472,
+        "startChar": 4,
+        "endLine": 472,
+        "endChar": 27
+      },
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14e8811_b25ff440",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:28:36Z",
+      "side": 1,
+      "message": "typo: can\u0027t",
+      "range": {
+        "startLine": 366,
+        "startChar": 80,
+        "endLine": 366,
+        "endChar": 86
+      },
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
