@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a45d2d27_a0f51a95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "Just to be sure I understand, 3) is that freeing on the server side means that even if we completely drop everything on the client side, all objects are properly freed? Or is it that we avoid leaking renderer process memory on teardown?\n\nOh, I just realized this change makes the tracking happen on the client side. Sounds good but we also need to make the server-side resilient if it isn\u0027t already (I think it frees all its child object before the device, but we need to add weak_ptr in more callbacks).",
+      "parentUuid": "400d0139_d1ff1cab",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba645fa_fa9e659e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "Looks good overall. Can we have tests for the new behavior?",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "105ed75c_73782c14",
         "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
         "patchSetId": 1
@@ -37,6 +72,23 @@
         "endLine": 28,
         "endChar": 18
       },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3900c526_f6ca877b",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "nit: put in the .cpp",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -89,6 +141,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8195c7c4_1e9b7c91",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "Oh, we have a single list of all the objects \u003e_\u003e Maybe we could have per-type lists since we have an enum for the type.",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ff0ae7_b0051495",
+        "filename": "src/dawn_wire/client/Fence.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fcc2023_5630a347",
         "filename": "src/dawn_wire/client/ObjectAllocator.h",
         "patchSetId": 1
@@ -130,6 +216,64 @@
         "endLine": 76,
         "endChar": 13
       },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d69618_3ff2edee",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "Uh, we need to define the exact semantic of the device destruction in webgpu-native. I think skipping this check for now (with an ASSERT(IsInList)) would work. Basically the reference to the child object should be destroyed, and this called, before the object is removed from the list.",
+      "parentUuid": "8ecca3d1_7d438682",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ddb54c_2486b5b5",
+        "filename": "src/dawn_wire/client/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "nit: comment that they are all part of a linked list of objects of the same type.\n\nAlso how are we going to handle multithreaded creation / destruction with that mechanism?",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "150806bb_4dae72df",
+        "filename": "src/dawn_wire/client/Queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:57:58Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
