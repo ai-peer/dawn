@@ -16,6 +16,91 @@
       "message": "No deprecation tests yet (see https://dawn-review.googlesource.com/c/dawn/+/31141) but PTAL",
       "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffb60d4_4aae189f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:25:22Z",
+      "side": 1,
+      "message": "Can we have tests for the deprecated code paths, or tests for the newly allowed parameters?\n\nOverall it feels the validation for linear data is more complicated than it could be, wouldn\u0027t it be simpler to just ignore bytesPerRow or rowsPerImage if copySize \u003d (w, \u003c1, \u003c1) or (w, h, \u003c1) respectively?",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6679339_b1c7bc41",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:25:22Z",
+      "side": 1,
+      "message": "nit: specified (non-0)",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5f49c2_b141488d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:25:22Z",
+      "side": 1,
+      "message": "nit: unspecified (set to 0)",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b049afa1_1837a0dd",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:25:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a13356_efd5d37a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:25:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
