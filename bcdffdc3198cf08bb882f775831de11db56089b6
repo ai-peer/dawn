@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "400d0139_d1ff1cab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:40:26Z",
+      "side": 1,
+      "message": "3. And also so we don\u0027t leak ALL the objects on page teardown. Right now, destructors do nothing after we get the context destroyed lifecycle event because we destroy the object that\u0027s holding onto the dawn_wire procs. That means we never release() any Dawn objects on teardown. This could change if I figure out how to use the static/per-thread dawn_wire proc table in the Renderer process.",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105ed75c_73782c14",
+        "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:40:26Z",
+      "side": 1,
+      "message": "nit: extraneous comment",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cae767b_2700d622",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:40:26Z",
+      "side": 1,
+      "message": "nit: extraneous forward declaration",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73b1d8f_cc80f1f8",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:40:26Z",
+      "side": 1,
+      "message": "nit: extraneous",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 9
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fcc2023_5630a347",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:40:26Z",
+      "side": 1,
+      "message": "maybe we don\u0027t need this? in Chrome:\n 1. all child objects of a device ref the device\n 2. all objects ref a \"holder\" which owns and keeps the wire client alive\n\nSo all child objects should get freed first, then the device, then the wire client.\n\nIt does let us have simpler destructors in Blink though. ~GPUBuffer can just call:\nwgpuBufferRelease(handle_)\n\ninstead of:\nif (PageDestroyed()) return;\n\nwgpuBufferRelease(handle_);",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
