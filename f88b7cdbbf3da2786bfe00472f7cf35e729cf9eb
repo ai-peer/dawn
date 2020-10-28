@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b96d1210_2632d88b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-28T00:45:35Z",
+      "side": 1,
+      "message": "WDYT? I think this will make life nicer for the bytesPerRow/rowsPerImage CL. (https://dawn-review.googlesource.com/c/dawn/+/31140)",
+      "revId": "f88b7cdbbf3da2786bfe00472f7cf35e729cf9eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
