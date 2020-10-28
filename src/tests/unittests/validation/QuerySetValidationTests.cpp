@@ -185,14 +185,6 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnCommandEncoder) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    // Fail to write timestamp to the same index twice on command encoder
-    {
-        wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
-        encoder.WriteTimestamp(timestampQuerySet, 0);
-        encoder.WriteTimestamp(timestampQuerySet, 0);
-        ASSERT_DEVICE_ERROR(encoder.Finish());
-    }
-
     // Fail to submit timestamp query with a destroyed query set
     {
         wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
@@ -245,26 +237,6 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnComputePassEncoder) {
         wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.WriteTimestamp(timestampQuerySet, 2);
-        pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
-    }
-
-    // Fail to write timestamp to the same index twice on compute encoder
-    {
-        wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
-        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
-        pass.WriteTimestamp(timestampQuerySet, 0);
-        pass.WriteTimestamp(timestampQuerySet, 0);
-        pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
-    }
-
-    // Fail to write timestamp to the same index twice on command encoder and compute encoder
-    {
-        wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
-        encoder.WriteTimestamp(timestampQuerySet, 0);
-        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
-        pass.WriteTimestamp(timestampQuerySet, 0);
         pass.EndPass();
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
@@ -329,21 +301,11 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnRenderPassEncoder) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
-    // Fail to write timestamp to the same index twice on command encoder and render encoder
+    // Fail to write timestamp to the same query index twice on same render encoder
     {
         wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.WriteTimestamp(timestampQuerySet, 0);
-        pass.WriteTimestamp(timestampQuerySet, 0);
-        pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
-    }
-
-    // Fail to write timestamp to the same index twice on command encoder and render encoder
-    {
-        wgpu::CommandEncoder encoder = deviceWithTimestamp.CreateCommandEncoder();
-        encoder.WriteTimestamp(timestampQuerySet, 0);
-        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
         pass.WriteTimestamp(timestampQuerySet, 0);
         pass.EndPass();
         ASSERT_DEVICE_ERROR(encoder.Finish());
