@@ -765,6 +765,11 @@ void DawnTestBase::SetUp() {
 }
 
 void DawnTestBase::TearDown() {
+    if (!UsesWire()) {
+        EXPECT_EQ(mLastWarningCount,
+                  dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
+    }
+
     FlushWire();
 
     MapSlotsSynchronously();
