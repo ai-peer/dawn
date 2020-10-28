@@ -155,6 +155,21 @@ TEST_F(WireFenceTests, OnCompletionAfterDisconnect) {
     wgpuFenceOnCompletion(fence, 0, ToMockFenceOnCompletionCallback, this);
 }
 
+// Test that registering a callback then wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireFenceTests, OnCompletionThenDisconnect) {
+    wgpuFenceOnCompletion(fence, 0, ToMockFenceOnCompletionCallback, this);
+    EXPECT_CALL(api, OnFenceOnCompletionCallback(apiFence, 0u, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            api.CallFenceOnCompletionCallback(apiFence, WGPUFenceCompletionStatus_Success);
+        }));
+    FlushClient();
+
+    EXPECT_CALL(*mockFenceOnCompletionCallback, Call(WGPUFenceCompletionStatus_DeviceLost, this))
+        .Times(1);
+    GetWireClient()->Disconnect();
+}
+
 // Without any flushes, it is valid to wait on a value less than or equal to
 // the last signaled value
 TEST_F(WireFenceTests, OnCompletionSynchronousValidationSuccess) {
