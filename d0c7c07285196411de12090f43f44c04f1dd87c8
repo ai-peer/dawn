@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0317d9f9_8d6230dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-28T20:47:39Z",
+      "side": 1,
+      "message": "Will get to tests.\n\nIdk about the validation rules, I think they\u0027re pretty reasonable in JS, they just get complicated when you try to implement them for C. The thing I like about these rules is if you specify a bytesPerRow or rowsPerImage then it must be a reasonable one. It prevents you from writing code with a bytesPerRow or rowsPerImage that looks like it was chosen intentionally, but could actually be nonsense.",
+      "parentUuid": "4ffb60d4_4aae189f",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6679339_b1c7bc41",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2020-10-28T14:25:22Z",
       "side": 1,
       "message": "nit: specified (non-0)",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2959931d_bda37341",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-28T20:47:39Z",
+      "side": 1,
+      "message": "I made this intentionally vague so the error message wouldn\u0027t be misleading when surfaced to JS. WDYT?",
+      "parentUuid": "f6679339_b1c7bc41",
       "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
