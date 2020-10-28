@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6a43fd_e1684a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T00:43:58Z",
+      "side": 1,
+      "message": "Big thanks for the comments (and thanks for the patience too :)).\nReply some comments because they may affect the structure. \n\nI\u0027m fighting with the crash bots (RenderPipeline::Initialize crash on linux vulkan, which I cannot reproduce on local with different mesa driver version from bots and a hang issue when running the case with validation layer with D3D12 on windows, which I can reproduce local, it is also related to the renderPipeline) and will address all of them after I fix the bots :)",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc403be1_8dfbb63f",
@@ -106,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eca683a6_b3ed93ec",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T00:43:58Z",
+      "side": 1,
+      "message": "Absolutely, I think this is the reason why my test fails in border case when rect is a bit big.",
+      "parentUuid": "c4ee3889_a9807f8b",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b5edecb_c7f560af",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -180,6 +215,30 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "Do we see any other shaders in the future? Likewise it seems that with a uniform buffer there could be a single shader.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53747a3a_902140e8",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T00:43:58Z",
+      "side": 1,
+      "message": "Actually, based on current spec, limit the src and dst texture to 2D, the only concern is copy from formats like bgra8unorm to the format rgba8unorm-srgb.  I\u0027m trying to use usampler to get the uint value and use fragment shader to write it into the dest. I think it cannot be handled by uniform + if-else.",
+      "parentUuid": "c3ead796_f4d97fc1",
       "range": {
         "startLine": 108,
         "startChar": 0,
@@ -419,6 +478,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: that\u0027s the default value.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e80b1c_fcaf5da9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T00:43:58Z",
+      "side": 1,
+      "message": "Yes, I think it maybe a bug, because https://source.chromium.org/chromium/chromium/src/+/master:out/android-Debug/gen/third_party/dawn/src/include/dawn/webgpu_cpp.h;l\u003d1306?q\u003dRenderPassDescriptor\u0026ss\u003dchromium%2Fchromium%2Fsrc doesn\u0027t set nullptr to it and without this line, I\u0027ll got error when I running the tests. The same for resolveTarget(https://source.chromium.org/chromium/chromium/src/+/master:out/android-Debug/gen/third_party/dawn/src/include/dawn/webgpu_cpp.h;l\u003d1267?q\u003dRenderPassDescriptor\u0026ss\u003dchromium%2Fchromium%2Fsrc)",
+      "parentUuid": "b8657f8a_04ef5957",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -772,6 +849,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "We can use WriteTexture instead!! (and remove the need for the encoder and Submit below.)",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18951a86_d88c4e71",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T00:43:58Z",
+      "side": 1,
+      "message": "Super agree! It release tons of code.",
+      "parentUuid": "5222a190_823e8a80",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
