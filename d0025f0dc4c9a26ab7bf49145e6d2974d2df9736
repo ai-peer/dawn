@@ -299,6 +299,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb84a05e_d8d6225d",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T13:13:59Z",
+      "side": 1,
+      "message": "It just removes the need to have a key for the FS and the pipeline in the InternalPipelineStore. And since each module is only used once, then maybe we could avoid storing them on the InternalPipelineStore. But that\u0027s the extent of the simplification.",
+      "parentUuid": "4533063d_516a775a",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "484a21de_b81592b2",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
