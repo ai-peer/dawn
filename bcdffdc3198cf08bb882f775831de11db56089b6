@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "305d24ac_bdbb581f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T15:11:12Z",
+      "side": 1,
+      "message": "Yea this is specifically about renderer process memory. Server already destroys everything on teardown, but yes needs more weak_ptr. and probably some notion of what objects belong to what device in the future.",
+      "parentUuid": "a45d2d27_a0f51a95",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8ba645fa_fa9e659e",
@@ -152,6 +170,24 @@
       "writtenOn": "2020-10-28T14:57:58Z",
       "side": 1,
       "message": "Oh, we have a single list of all the objects \u003e_\u003e Maybe we could have per-type lists since we have an enum for the type.",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b696e84_dc3bff49",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T15:11:12Z",
+      "side": 1,
+      "message": "Actually with per-type lists, I don\u0027t think we even need the enum!\n\nMultithreaded creation would have to lock I guess - but per-type lists also helps reduce the frequency of lock contention. We\u0027ll need some locks anyway for the ObjectAllocators. I think atomic refcounts and locked allocators should be sufficient. - unless we try to have lock-free vectors for the object ids. Last time I tried that it was quite tricky.\n\nTBD on whether or not object allocators need to be per-device.",
+      "parentUuid": "8195c7c4_1e9b7c91",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
