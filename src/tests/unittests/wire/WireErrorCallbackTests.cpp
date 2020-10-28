@@ -234,6 +234,23 @@ TEST_F(WireErrorCallbackTests, PopErrorScopeAfterDisconnect) {
     EXPECT_TRUE(wgpuDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this));
 }
 
+// Test that registering a callback then wire disconnect calls the callback with
+// DeviceLost.
+TEST_F(WireErrorCallbackTests, PopErrorScopeThenDisconnect) {
+    wgpuDevicePushErrorScope(device, WGPUErrorFilter_Validation);
+    EXPECT_CALL(api, DevicePushErrorScope(apiDevice, WGPUErrorFilter_Validation)).Times(1);
+
+    EXPECT_TRUE(wgpuDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this));
+    EXPECT_CALL(api, OnDevicePopErrorScopeCallback(apiDevice, _, _)).WillOnce(Return(true));
+
+    FlushClient();
+
+    EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                Call(WGPUErrorType_DeviceLost, ValidStringMessage(), this))
+        .Times(1);
+    GetWireClient()->Disconnect();
+}
+
 // Test that PopErrorScope returns false if there are no error scopes.
 TEST_F(WireErrorCallbackTests, PopErrorScopeEmptyStack) {
     // Empty stack
