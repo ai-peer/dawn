@@ -106,12 +106,11 @@ namespace dawn_native {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex,
-                                                mCommandEncoder->GetUsedQueryIndices()));
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
                 mCommandEncoder->TrackUsedQuerySet(querySet);
             }
 
-            mCommandEncoder->TrackUsedQueryIndex(querySet, queryIndex);
+            mCommandEncoder->TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

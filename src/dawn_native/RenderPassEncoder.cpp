@@ -28,6 +28,26 @@
 #include <cstring>
 
 namespace dawn_native {
+    namespace {
+
+        MaybeError ValidateQueryIndexOverwrite(QuerySetBase* querySet,
+                                               uint32_t queryIndex,
+                                               const QueryStatesMap& queryStatesMap) {
+            QueryStatesMap::const_iterator it = queryStatesMap.find(querySet);
+            if (it != queryStatesMap.end()) {
+                const std::vector<QueryState>& queryStates = it->second;
+                // Check the query state at queryIndex is unavailable, otherwise it can't be
+                // written.
+                if (queryStates[queryIndex] != QueryState::Unavailable) {
+                    return DAWN_VALIDATION_ERROR(
+                        "The same query cannot be written twice in same render pass.");
+                }
+            }
+
+            return {};
+        }
+
+    }  // namespace
 
     // The usage tracker is passed in here, because it is prepopulated with usages from the
     // BeginRenderPassCmd. If we had RenderPassEncoder responsible for recording the
@@ -65,6 +85,9 @@ namespace dawn_native {
                 return {};
             })) {
             mEncodingContext->ExitPass(this, mUsageTracker.AcquireResourceUsage());
+
+            mCommandEncoder->AddQueryStatesMap(mQueryStatesMap);
+            mQueryStatesMap.clear();
         }
     }
 
@@ -180,12 +203,13 @@ namespace dawn_native {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex,
-                                                mCommandEncoder->GetUsedQueryIndices()));
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
+                // In same render pass, the query at same query can't be writen twice.
+                DAWN_TRY(ValidateQueryIndexOverwrite(querySet, queryIndex, GetQueryStatesMap()));
                 mCommandEncoder->TrackUsedQuerySet(querySet);
             }
 
-            mCommandEncoder->TrackUsedQueryIndex(querySet, queryIndex);
+            TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

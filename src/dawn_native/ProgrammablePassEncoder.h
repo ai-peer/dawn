@@ -34,6 +34,9 @@ namespace dawn_native {
                                 EncodingContext* encodingContext,
                                 PassType passType);
 
+        void TrackQueryState(QuerySetBase* querySet, uint32_t queryIndex, QueryState state);
+        const QueryStatesMap& GetQueryStatesMap() const;
+
         void InsertDebugMarker(const char* groupLabel);
         void PopDebugGroup();
         void PushDebugGroup(const char* groupLabel);
@@ -52,6 +55,13 @@ namespace dawn_native {
 
         EncodingContext* mEncodingContext = nullptr;
         PassResourceUsageTracker mUsageTracker;
+
+        // This map is to indicate the state of the queries used in render pass. Although it's
+        // duplicated with the one in command encoder but needed. The same query cannot be
+        // written twice in same render pass, so every render pass need to have its own query
+        // states. Finally the query states will be added to command encoder at the end of the
+        // render pass.
+        QueryStatesMap mQueryStatesMap;
     };
 
 }  // namespace dawn_native
