@@ -398,22 +398,26 @@ namespace dawn_native {
         mUsedQuerySets.insert(querySet);
     }
 
-    void CommandEncoder::TrackUsedQueryIndex(QuerySetBase* querySet, uint32_t queryIndex) {
-        UsedQueryMap::iterator it = mUsedQueryIndices.find(querySet);
-        if (it != mUsedQueryIndices.end()) {
-            // Record index on existing query set
-            std::vector<bool>& queryIndices = it->second;
-            queryIndices[queryIndex] = 1;
+    void CommandEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex) {
+        DAWN_ASSERT(querySet != nullptr);
+
+        if (GetDevice()->IsValidationEnabled()) {
+            TrackUsedQuerySet(querySet);
+        }
+
+        if (mQueryAvailabilityMap.find(querySet) != mQueryAvailabilityMap.end()) {
+            // Record query availability at query index on existing query set
+            mQueryAvailabilityMap.find(querySet)->second[queryIndex] = 1;
         } else {
-            // Record index on new query set
-            std::vector<bool> queryIndices(querySet->GetQueryCount(), 0);
-            queryIndices[queryIndex] = 1;
-            mUsedQueryIndices.insert({querySet, std::move(queryIndices)});
+            // Record query availability at query index on new query set
+            std::vector<bool> queryAvailabilities(querySet->GetQueryCount());
+            queryAvailabilities[queryIndex] = 1;
+            mQueryAvailabilityMap.insert({querySet, std::move(queryAvailabilities)});
         }
     }
 
-    const UsedQueryMap& CommandEncoder::GetUsedQueryIndices() const {
-        return mUsedQueryIndices;
+    const QueryAvailabilityMap& CommandEncoder::GetQueryAvailabilityMap() const {
+        return mQueryAvailabilityMap;
     }
 
     // Implementation of the API's command recording methods
@@ -781,11 +785,10 @@ namespace dawn_native {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex, GetUsedQueryIndices()));
-                TrackUsedQuerySet(querySet);
+                DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
             }
 
-            TrackUsedQueryIndex(querySet, queryIndex);
+            TrackQueryAvailability(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
