@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d094c6_098c4f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T14:41:05Z",
+      "side": 1,
+      "message": "Commented on https://github.com/gpuweb/gpuweb/pull/1161 I think we\u0027re getting confused as to what must be validated when.",
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601284d2_9d9f18fe",
