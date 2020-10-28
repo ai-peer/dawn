@@ -108,6 +108,30 @@
       },
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecca3d1_7d438682",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T14:53:00Z",
+      "side": 1,
+      "message": "nvm, we can\u0027t have the simpler destructor because it would go dereference a bunch of already-destroyed objects.",
+      "parentUuid": "1fcc2023_5630a347",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
