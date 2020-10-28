@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f61693d_46ab4302",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-28T01:24:52Z",
+      "side": 1,
+      "message": "No deprecation tests yet (see https://dawn-review.googlesource.com/c/dawn/+/31141) but PTAL",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
