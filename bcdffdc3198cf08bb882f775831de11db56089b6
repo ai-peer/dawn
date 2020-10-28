@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be97e694_abd20e84",
+        "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105ed75c_73782c14",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3900c526_f6ca877b",
@@ -125,6 +149,24 @@
       "writtenOn": "2020-10-28T14:57:58Z",
       "side": 1,
       "message": "nit: put in the .cpp",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fdcfa98_a468ea4e",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "not applicable anymore.",
+      "parentUuid": "3900c526_f6ca877b",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -152,6 +194,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "299bafcf_58f95f59",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cae767b_2700d622",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c73b1d8f_cc80f1f8",
@@ -165,6 +231,30 @@
       "writtenOn": "2020-10-28T14:40:26Z",
       "side": 1,
       "message": "nit: extraneous",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 9
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21c10e3_3db10bbf",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c73b1d8f_cc80f1f8",
       "range": {
         "startLine": 29,
         "startChar": 4,
@@ -228,6 +318,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "486f0d3a_c006f22f",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21686aa5_9b8f3771",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2ff0ae7_b0051495",
@@ -241,6 +349,24 @@
       "writtenOn": "2020-10-28T14:57:58Z",
       "side": 1,
       "message": "ditto",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83dc661a_ccfe14c1",
+        "filename": "src/dawn_wire/client/Fence.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "not applicable anymore.",
+      "parentUuid": "c2ff0ae7_b0051495",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -316,6 +442,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9251ee_cf5e064b",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9d69618_3ff2edee",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81ddb54c_2486b5b5",
@@ -333,6 +483,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0f6851_bbc26ab2",
+        "filename": "src/dawn_wire/client/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81ddb54c_2486b5b5",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "150806bb_4dae72df",
@@ -346,6 +514,24 @@
       "writtenOn": "2020-10-28T14:57:58Z",
       "side": 1,
       "message": "ditto",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f153a3_9b56324d",
+        "filename": "src/dawn_wire/client/Queue.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-28T18:49:07Z",
+      "side": 1,
+      "message": "not applicable anymore.",
+      "parentUuid": "150806bb_4dae72df",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
