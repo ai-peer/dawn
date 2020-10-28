@@ -275,6 +275,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4533063d_516a775a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T12:11:59Z",
+      "side": 1,
+      "message": "Maybe it works. But I prefer to do the thing like keep the content in the texture as it is and just switch the channel info. More specific case is like :\nCopy rgba8unorm to rgba8unorm-srgb, which is directly copy and no need to do the color conversion in shaders.\n\nBut let\u0027s assume the case can be covered by the uniform buffer and and color space converting logic. So we\u0027ll have one pipeline and one shaders to handle all of the case.\n\nAnd in this condition, do you have more suggestions about the structure? (And I\u0027m happy to accept it if it can simplify current logic ：）)",
+      "parentUuid": "7a352d5c_af6abe4a",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "484a21de_b81592b2",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -538,6 +562,24 @@
       "side": 1,
       "message": "Thanks for the explanation, that\u0027s a bug and I put up a fix CL here https://dawn-review.googlesource.com/c/dawn/+/31200",
       "parentUuid": "50e80b1c_fcaf5da9",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6e8cf3_a9f87682",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-28T12:11:59Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "9f5dad9d_fd9aca79",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
