@@ -1203,6 +1203,14 @@ namespace dawn_native { namespace opengl {
                     break;
                 }
 
+                case Command::BeginOcclusionQuery: {
+                    return DAWN_UNIMPLEMENTED_ERROR("BeginOcclusionQuery unimplemented.");
+                }
+
+                case Command::EndOcclusionQuery: {
+                    return DAWN_UNIMPLEMENTED_ERROR("EndOcclusionQuery unimplemented.");
+                }
+
                 case Command::WriteTimestamp:
                     return DAWN_UNIMPLEMENTED_ERROR("WriteTimestamp unimplemented");
 

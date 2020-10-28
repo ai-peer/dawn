@@ -36,10 +36,12 @@ namespace dawn_native {
                                          CommandEncoder* commandEncoder,
                                          EncodingContext* encodingContext,
                                          PassResourceUsageTracker usageTracker,
+                                         QuerySetBase* occlusionQuerySet,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight)
         : RenderEncoderBase(device, encodingContext),
           mCommandEncoder(commandEncoder),
+          mOcclusionQuerySet(occlusionQuerySet),
           mRenderTargetWidth(renderTargetWidth),
           mRenderTargetHeight(renderTargetHeight) {
         mUsageTracker = std::move(usageTracker);
@@ -61,6 +63,14 @@ namespace dawn_native {
     void RenderPassEncoder::EndPass() {
         if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
+
+                // Validates that all starting queries are ended.
+                if (GetDevice()->IsValidationEnabled()) {
+                    if (mOcclusionQuerySet != nullptr) {
+                        DAWN_TRY(ValidateQueriesEnded(
+                            mCommandEncoder->GetQueryStates(mOcclusionQuerySet.Get())));
+                    }
+                }
 
                 return {};
             })) {
@@ -176,16 +186,62 @@ namespace dawn_native {
         });
     }
 
+    void RenderPassEncoder::BeginOcclusionQuery(uint32_t queryIndex) {
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateOcclusionQuery(
+                    Command::BeginOcclusionQuery, mOcclusionQuerySet.Get(), queryIndex,
+                    mCommandEncoder->GetQueryStates(mOcclusionQuerySet.Get())));
+                DAWN_TRY(GetDevice()->ValidateObject(mOcclusionQuerySet.Get()));
+                mCommandEncoder->TrackUsedQuerySet(mOcclusionQuerySet.Get());
+            }
+
+            mCommandEncoder->TrackQueryState(mOcclusionQuerySet.Get(), queryIndex,
+                                             QueryState::Active);
+
+            // Record the current query index for endOcclusionQuery.
+            mCurrentOcclusionQueryIndex = queryIndex;
+
+            BeginOcclusionQueryCmd* cmd =
+                allocator->Allocate<BeginOcclusionQueryCmd>(Command::BeginOcclusionQuery);
+            cmd->querySet = mOcclusionQuerySet.Get();
+            cmd->queryIndex = queryIndex;
+
+            return {};
+        });
+    }
+
+    void RenderPassEncoder::EndOcclusionQuery() {
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateOcclusionQuery(
+                    Command::EndOcclusionQuery, mOcclusionQuerySet.Get(),
+                    mCurrentOcclusionQueryIndex,
+                    mCommandEncoder->GetQueryStates(mOcclusionQuerySet.Get())));
+            }
+
+            mCommandEncoder->TrackQueryState(mOcclusionQuerySet.Get(), mCurrentOcclusionQueryIndex,
+                                             QueryState::Available);
+
+            EndOcclusionQueryCmd* cmd =
+                allocator->Allocate<EndOcclusionQueryCmd>(Command::EndOcclusionQuery);
+            cmd->querySet = mOcclusionQuerySet.Get();
+            cmd->queryIndex = mCurrentOcclusionQueryIndex;
+
+            return {};
+        });
+    }
+
     void RenderPassEncoder::WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
                 DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex,
-                                                mCommandEncoder->GetUsedQueryIndices()));
+                                                mCommandEncoder->GetQueryStates(querySet)));
                 mCommandEncoder->TrackUsedQuerySet(querySet);
             }
 
-            mCommandEncoder->TrackUsedQueryIndex(querySet, queryIndex);
+            mCommandEncoder->TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

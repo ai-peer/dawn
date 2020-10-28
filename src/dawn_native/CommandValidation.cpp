@@ -18,7 +18,6 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBufferStateTracker.h"
-#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/PassResourceUsage.h"
 #include "dawn_native/QuerySet.h"
@@ -159,6 +158,16 @@ namespace dawn_native {
         Command type;
         while (commands->NextCommandId(&type)) {
             switch (type) {
+                case Command::BeginOcclusionQuery: {
+                    commands->NextCommand<BeginOcclusionQueryCmd>();
+                    break;
+                }
+
+                case Command::EndOcclusionQuery: {
+                    commands->NextCommand<EndOcclusionQueryCmd>();
+                    break;
+                }
+
                 case Command::EndRenderPass: {
                     commands->NextCommand<EndRenderPassCmd>();
                     DAWN_TRY(ValidateFinalDebugGroupStackSize(debugGroupStackSize));
@@ -351,22 +360,80 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateQueriesEnded(const std::vector<QueryState>& queryStates) {
+        if (!queryStates.empty()) {
+            for (uint32_t i = 0; i < queryStates.size(); i++) {
+                if (queryStates[i] == QueryState::Active) {
+                    return DAWN_VALIDATION_ERROR("All starting query must be ended.");
+                }
+            }
+        }
+
+        return {};
+    }
+
+    MaybeError ValidateOcclusionQuery(Command type,
+                                      QuerySetBase* querySet,
+                                      uint32_t queryIndex,
+                                      const std::vector<QueryState>& queryStates) {
+        if (querySet == nullptr) {
+            return DAWN_VALIDATION_ERROR(
+                "The occlusionQuerySet in RenderPassDescriptor must be set.");
+        }
+
+        // The type of querySet has been validated by ValidateRenderPassDescriptor
+
+        if (queryIndex >= querySet->GetQueryCount()) {
+            return DAWN_VALIDATION_ERROR("Query index exceeds the number of queries in query set");
+        }
+
+        switch (type) {
+            case Command::BeginOcclusionQuery: {
+                // Check the query state at queryIndex is unavailable, otherwise it cann't be
+                // writen.
+                if (!queryStates.empty() && queryStates[queryIndex] != QueryState::Unavailable) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Duplicated BeginOcclusionQuery at same query index.");
+                }
+                break;
+            }
+
+            case Command::EndOcclusionQuery: {
+                // If there is no any query state, it means no BeginOcclusionQuery is called.
+                if (queryStates.empty()) {
+                    return DAWN_VALIDATION_ERROR(
+                        "EndOcclusionQuery is called without corresponding BeginOcclusionQuery.");
+                }
+
+                // If the query state is active, it has been
+                if (queryStates[queryIndex] == QueryState::Available) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Duplicated EndOcclusionQuery at same query index.");
+                }
+                break;
+            }
+
+            default:
+                return {};
+        }
+
+        return {};
+    }
+
     MaybeError ValidateTimestampQuery(QuerySetBase* querySet,
                                       uint32_t queryIndex,
-                                      const UsedQueryMap& usedQueryIndices) {
+                                      const std::vector<QueryState>& queryStates) {
         if (querySet->GetQueryType() != wgpu::QueryType::Timestamp) {
-            return DAWN_VALIDATION_ERROR("The query type of query set must be Timestamp");
+            return DAWN_VALIDATION_ERROR("The type of query set must be Timestamp");
         }
 
         if (queryIndex >= querySet->GetQueryCount()) {
             return DAWN_VALIDATION_ERROR("Query index exceeds the number of queries in query set");
         }
 
-        UsedQueryMap::const_iterator it = usedQueryIndices.find(querySet);
-        if (it != usedQueryIndices.end()) {
-            // Get the used query index records
-            const std::vector<bool>& queryIndices = it->second;
-            if (queryIndices[queryIndex] == 1) {
+        if (!queryStates.empty()) {
+            // Check the query state at queryIndex is unavailable, otherwise it cann't be writen.
+            if (queryStates[queryIndex] != QueryState::Unavailable) {
                 return DAWN_VALIDATION_ERROR("Duplicated query index writen");
             }
         }
