@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f587d14_3086d958",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T15:56:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "305d24ac_bdbb581f",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8ba645fa_fa9e659e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -188,6 +206,24 @@
       "side": 1,
       "message": "Actually with per-type lists, I don\u0027t think we even need the enum!\n\nMultithreaded creation would have to lock I guess - but per-type lists also helps reduce the frequency of lock contention. We\u0027ll need some locks anyway for the ObjectAllocators. I think atomic refcounts and locked allocators should be sufficient. - unless we try to have lock-free vectors for the object ids. Last time I tried that it was quite tricky.\n\nTBD on whether or not object allocators need to be per-device.",
       "parentUuid": "8195c7c4_1e9b7c91",
+      "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21686aa5_9b8f3771",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T15:56:45Z",
+      "side": 1,
+      "message": "Yeah we could have locking per type of object, but stay careful about never recursing into a function that would also take a lock.",
+      "parentUuid": "9b696e84_dc3bff49",
       "revId": "bcdffdc3198cf08bb882f775831de11db56089b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
