@@ -29,7 +29,7 @@ namespace dawn_wire { namespace client {
     class LinkedObjectBase;
     class Queue;
 
-    class Device : public ObjectBase {
+    class Device final : public ObjectBase {
       public:
         Device(Client* client, uint32_t refcount, uint32_t id);
         ~Device();
@@ -64,6 +64,8 @@ namespace dawn_wire { namespace client {
         WGPUQueue GetDefaultQueue();
 
         void TrackObject(ObjectBase* object);
+
+        void CancelCallbacksForDisconnect() override;
 
       private:
         void DestroyAllObjects();

@@ -24,7 +24,7 @@
 
 namespace dawn_wire { namespace client {
 
-    class Queue : public ObjectBase {
+    class Queue final : public ObjectBase {
       public:
         Queue(Device* device_, uint32_t refcount_, uint32_t id_)
             : ObjectBase(ObjectType::Queue, device_, refcount_, id_) {

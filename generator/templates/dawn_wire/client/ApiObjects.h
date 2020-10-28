@@ -24,7 +24,7 @@ namespace dawn_wire { namespace client {
         {% if type.name.CamelCase() in client_special_objects %}
             class {{Type}};
         {% else %}
-            struct {{type.name.CamelCase()}} : ObjectBase {
+            struct {{type.name.CamelCase()}} final : ObjectBase {
                 // using ObjectBase::ObjectBase;
                 {{type.name.CamelCase()}}(Device* device_, uint32_t refcount_, uint32_t id_) : ObjectBase(ObjectType::{{type.name.CamelCase()}}, device_, refcount_, id_) {}
             };
