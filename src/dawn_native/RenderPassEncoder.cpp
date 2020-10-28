@@ -181,11 +181,11 @@ namespace dawn_native {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
                 DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex,
-                                                mCommandEncoder->GetUsedQueryIndices()));
+                                                mCommandEncoder->GetQueryStates(querySet)));
                 mCommandEncoder->TrackUsedQuerySet(querySet);
             }
 
-            mCommandEncoder->TrackUsedQueryIndex(querySet, queryIndex);
+            mCommandEncoder->TrackQueryState(querySet, queryIndex, QueryState::Available);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

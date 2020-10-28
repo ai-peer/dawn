@@ -16,10 +16,10 @@
 #define DAWNNATIVE_COMMANDVALIDATION_H_
 
 #include "dawn_native/CommandAllocator.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Texture.h"
 
-#include <map>
 #include <vector>
 
 namespace dawn_native {
@@ -29,8 +29,6 @@ namespace dawn_native {
     struct BeginRenderPassCmd;
     struct PassResourceUsage;
     struct TexelBlockInfo;
-
-    using UsedQueryMap = std::map<QuerySetBase*, std::vector<bool>>;
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize);
     MaybeError ValidateFinalDebugGroupStackSize(uint64_t debugGroupStackSize);
@@ -44,7 +42,7 @@ namespace dawn_native {
 
     MaybeError ValidateTimestampQuery(QuerySetBase* querySet,
                                       uint32_t queryIndex,
-                                      const UsedQueryMap& usedQueryIndices);
+                                      const std::vector<QueryState>& queryStates);
 
     ResultOrError<uint64_t> ComputeRequiredBytesInCopy(const TexelBlockInfo& blockInfo,
                                                        const Extent3D& copySize,
