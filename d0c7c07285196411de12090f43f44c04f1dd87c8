@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f9c5e18_e6d4944e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T16:28:14Z",
+      "side": 1,
+      "message": "But why do we need to care about validating these parameters when they are not used? If folks write some non-sensical value for these parameters then either it doesn\u0027t matter, or they\u0027ll run into a 256 alignment issue when they extend the copy. In both cases the \"reasonable value\" validation doesn\u0027t help them.",
+      "parentUuid": "0317d9f9_8d6230dc",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6679339_b1c7bc41",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 1
