@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb53f5c6_a5bf8e25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-29T01:31:41Z",
+      "side": 1,
+      "message": "This CL latest version has been moved to here CL https://dawn-review.googlesource.com/c/dawn/+/30960 due to switch from \"master\" to \"main\" branch and no way to merge them. The latest CL still have a bots fail due to some render pipeline creation issue. So no need to do review in hurry.",
+      "revId": "04a962866f7df8b31641b19a48516d4c7d224e7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
