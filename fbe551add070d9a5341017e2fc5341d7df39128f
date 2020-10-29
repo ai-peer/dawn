@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddab5c6_ae7e1337",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-29T17:53:34Z",
+      "side": 1,
+      "message": "Oops, didn\u0027t realize this one didn\u0027t need to stay.",
+      "parentUuid": "50f700f1_e1301aab",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13619fac_6d6ef316",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-10-29T12:58:16Z",
       "side": 1,
       "message": "ditto",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c735fe_64569e23",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-29T17:53:34Z",
+      "side": 1,
+      "message": "This entire test becomes obsolete once \u0027multisampled: true\u0027 is removed from the API, so figured I\u0027d just keep it as a deprecation test, but it could also be deleted.",
+      "parentUuid": "13619fac_6d6ef316",
       "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0900aec3_ee93c03b",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-29T17:53:34Z",
+      "side": 1,
+      "message": "This might lose coverage for SampledTexture+multisampled:true, maybe just keep it and remove when multisampled:true is removed?",
+      "parentUuid": "092c2353_d70e3df7",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57e22f36_248137bf",
         "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 1
@@ -116,6 +170,24 @@
       "writtenOn": "2020-10-29T12:58:16Z",
       "side": 1,
       "message": "Maybe this one can stay.",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4ba21b_b56a14ae",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-29T17:53:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "57e22f36_248137bf",
       "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
