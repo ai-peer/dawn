@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126c2b69_7d9ed5a9",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-29T21:28:15Z",
+      "side": 1,
+      "message": "open for discussion, but maybe this can be named \"copy texture to texture with transform\" ?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 25,
+        "endLine": 1040,
+        "endChar": 49
+      },
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931d35d7_6be519fb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-29T21:28:15Z",
+      "side": 1,
+      "message": "nit: the \"g\" prefix is good, though I think in other parts of Dawn we\u0027re using \"s\" to mean \"static\". Also, let\u0027s keep the name camelCase.",
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3399b44f_85516e84",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-29T21:28:15Z",
+      "side": 1,
+      "message": "AcquireRef, and then you don\u0027t need to manually Release all of these objects at the bottom of the function.",
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29920506_9163014f",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-29T21:28:15Z",
+      "side": 1,
+      "message": "nit: first letter lowercase",
+      "range": {
+        "startLine": 31,
+        "startChar": 32,
+        "endLine": 31,
+        "endChar": 61
+      },
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4273f174_3bc3fd0c",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-29T21:28:15Z",
+      "side": 1,
+      "message": "unit: crbug.com/tint/278",
+      "range": {
+        "startLine": 157,
+        "startChar": 30,
+        "endLine": 157,
+        "endChar": 44
+      },
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
