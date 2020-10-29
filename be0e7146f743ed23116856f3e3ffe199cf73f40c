@@ -16,6 +16,57 @@
       "message": "PTAL! (not actually dependent on the previous CL)",
       "revId": "be0e7146f743ed23116856f3e3ffe199cf73f40c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4623c60c_96325450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T16:48:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "be0e7146f743ed23116856f3e3ffe199cf73f40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0491a50_d84dad1f",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T16:48:47Z",
+      "side": 1,
+      "message": "u-unit: empty newline?",
+      "revId": "be0e7146f743ed23116856f3e3ffe199cf73f40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492ad6d8_8a43d92a",
+        "filename": "src/tests/unittests/wire/WireCreateReadyPipelineTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T16:48:47Z",
+      "side": 1,
+      "message": "Can we test for compute pipelines as well given that it is a different code path?",
+      "revId": "be0e7146f743ed23116856f3e3ffe199cf73f40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
