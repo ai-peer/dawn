@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b381ce49_64ef9c0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-29T17:12:30Z",
+      "side": 1,
+      "message": "Do you think we should ease the restrictions on the JS side or just in Dawn and put the additional validation in front since we have to have validation in front anyway?",
+      "parentUuid": "9f9c5e18_e6d4944e",
+      "revId": "d0c7c07285196411de12090f43f44c04f1dd87c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6679339_b1c7bc41",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 1
