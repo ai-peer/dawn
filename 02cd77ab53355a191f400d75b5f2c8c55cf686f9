@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea21721d_accaaad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T13:11:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "02cd77ab53355a191f400d75b5f2c8c55cf686f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed621a81_1a1a7674",
+        "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T13:11:03Z",
+      "side": 1,
+      "message": "I think we can do template values like in this https://godbolt.org/z/9nbK4s",
+      "revId": "02cd77ab53355a191f400d75b5f2c8c55cf686f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2710854e_8ca6f65f",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-29T13:11:03Z",
+      "side": 1,
+      "message": "fot (auto\u0026 objectList : mObjects)?",
+      "revId": "02cd77ab53355a191f400d75b5f2c8c55cf686f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
