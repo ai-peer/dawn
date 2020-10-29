@@ -50,6 +50,23 @@
       "message": "Shaobo, PTAL!",
       "revId": "5a89a8b2fe4c276f54b6873b89bac283b71374c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efe92ea_7de79dfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-29T02:45:12Z",
+      "side": 1,
+      "message": "Thanks for quick fix. LGTM!",
+      "revId": "5a89a8b2fe4c276f54b6873b89bac283b71374c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
