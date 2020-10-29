@@ -272,7 +272,9 @@ TEST_F(GetBindGroupLayoutTests, Multisampled) {
         layout(set = 0, binding = 0) uniform texture2DMS tex;
 
         void main() {})");
-        EXPECT_EQ(device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get());
+        wgpu::BindGroupLayout bgl;
+        EXPECT_DEPRECATION_WARNING(bgl = device.CreateBindGroupLayout(&desc));
+        EXPECT_EQ(bgl.Get(), pipeline.GetBindGroupLayout(0).Get());
     }
 }
 
