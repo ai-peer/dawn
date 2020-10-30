@@ -233,6 +233,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac886b08_f2a94235",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T15:54:42Z",
+      "side": 1,
+      "message": "I believe I was getting always the 0th component which is reasonable. I guess we could try asking them if it truly is \"undefined\". If it\u0027s always the 0th we can probably make D3D12/Vulkan do the same for depth/stencil textures. If it is actually undefined.. idk we just say on older Apple OSes you get undefined value..",
+      "parentUuid": "0b32a7c4_10299965",
+      "range": {
+        "startLine": 585,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 0
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91528e24_28f843d4",
         "filename": "src/tests/end2end/DepthSamplingTests.cpp",
         "patchSetId": 13
