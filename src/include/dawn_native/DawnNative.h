@@ -91,7 +91,6 @@ namespace dawn_native {
       public:
         Adapter();
         Adapter(AdapterBase* impl);
-        ~Adapter();
 
         // DEPRECATED: use GetProperties instead.
         BackendType GetBackendType() const;

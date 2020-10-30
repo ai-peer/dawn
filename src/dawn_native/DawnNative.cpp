@@ -41,10 +41,6 @@ namespace dawn_native {
     Adapter::Adapter(AdapterBase* impl) : mImpl(impl) {
     }
 
-    Adapter::~Adapter() {
-        mImpl = nullptr;
-    }
-
     void Adapter::GetProperties(wgpu::AdapterProperties* properties) const {
         properties->backendType = mImpl->GetBackendType();
         properties->adapterType = mImpl->GetAdapterType();
