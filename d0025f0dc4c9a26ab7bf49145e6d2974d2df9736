@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1b37c9_d8624cb0",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f8aba28_20752857",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e617938_58876403",
@@ -100,6 +118,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "Can we have these be either switch statements or arrays? Chromium disallows any new static initializer (that gets executed before main()) like these ones.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3aec973_9dff9d52",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e617938_58876403",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +198,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2999f869_a976f02f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b5edecb_c7f560af",
+      "range": {
+        "startLine": 60,
+        "startChar": 37,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c84b00_f5dbef95",
@@ -175,6 +235,30 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: ValidateCopyTextureFormatConversion?",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 43
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15008d85_892c0c5c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3c84b00_f5dbef95",
       "range": {
         "startLine": 92,
         "startChar": 19,
@@ -321,6 +405,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae373848_99bd609e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Remove all keys and add back them if necessary in future.",
+      "parentUuid": "fb84a05e_d8d6225d",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "484a21de_b81592b2",
@@ -334,6 +442,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "Yeah maybe in that case we could decay to just a CopyTextureToTexture command.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d230ba0_f0efb7d2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "484a21de_b81592b2",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -355,6 +481,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7545d7e4_35648c28",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5736bc59_4b9492e7",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ab77fef_e9a85a0d",
@@ -368,6 +512,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "the refcounting problems in InternalPipelineStore would disappear if this user AvquireRef(device-\u003eCreateShaderModule) ditto for pipelines. The issue is that the shader module is created with one ref, then assigning it to a Ref\u003c\u003e takes another ref, when instead what we want to do here is make the Ref\u003c\u003e take ownership of it.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3662ee9f_c9fe4063",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ab77fef_e9a85a0d",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -395,6 +557,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b113c394_8562e3ba",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e28962bd_859699b9",
+      "range": {
+        "startLine": 198,
+        "startChar": 33,
+        "endLine": 198,
+        "endChar": 44
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f28062d9_e404b8c2",
@@ -408,6 +594,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: group this with the declaration of the variable?",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea02b96f_f5fcf6cf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f28062d9_e404b8c2",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -429,6 +633,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e3bade2_0229ecbf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a8661e6_0e45d6de",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2d6d9fc_e628b34c",
@@ -442,6 +664,30 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: configuration",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 32
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37827e93_ab3faa07",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2d6d9fc_e628b34c",
       "range": {
         "startLine": 221,
         "startChar": 23,
@@ -503,6 +749,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "658d478f_9b753ea6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4ce8986_51b552c6",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20aabf68_f6464eca",
@@ -520,6 +784,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "925de5f3_7f40451c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20aabf68_f6464eca",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2679421_796799ae",
@@ -533,6 +815,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "The loadOp must be Load otherwise the whole texture will be cleared (which would be incorrect for sub-texture copies, or we could detect subtexture vs. full texture copies)",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ceb9f51_ca2fe42f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2679421_796799ae",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -608,6 +908,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e97840b_50075895",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d6e8cf3_a9f87682",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2557e4b_a6fad8fa",
@@ -625,6 +943,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b193703_b643bc77",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "It\u0027s a self reminder note, not need this, removed.",
+      "parentUuid": "a2557e4b_a6fad8fa",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16ca69e7_23f9870c",
@@ -638,6 +974,30 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "these are the default values, we could add them to the method declaration on ProgrammablePassEncoder.",
+      "range": {
+        "startLine": 289,
+        "startChar": 46,
+        "endLine": 289,
+        "endChar": 58
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7ad845_2d2f0cc1",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16ca69e7_23f9870c",
       "range": {
         "startLine": 289,
         "startChar": 46,
@@ -671,6 +1031,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d838dc98_1fd7a1ee",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6b9c8e3_ef7b146a",
+      "range": {
+        "startLine": 290,
+        "startChar": 27,
+        "endLine": 290,
+        "endChar": 36
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86e207e_2a44d080",
@@ -684,6 +1068,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "Let\u0027s use Ref\u003c\u003e and AcquireRef to prevent leaks instead!",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21cc4e2d_e11babca",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e86e207e_2a44d080",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -705,6 +1107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc3e25a_9f16a4ec",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd4f4244_9ce0e1a8",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2266d645_97e81828",
@@ -718,6 +1138,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: put it next to the other make_uniques and keep the mepty line.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "539dea9e_f5db0d22",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2266d645_97e81828",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -739,6 +1177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21cebcd_5738bc34",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30e65ddb_5a46d5da",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89ab39a3_344c7888",
@@ -752,6 +1208,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: no need to separate it from the block above.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbfc9c9b_0019ae75",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89ab39a3_344c7888",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -773,6 +1247,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e36b83_59664868",
+        "filename": "src/dawn_native/InternalPipelineStore.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done by using acquireRef",
+      "parentUuid": "c144e8b5_ca3bb9ea",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89f9573d_58665e23",
@@ -790,6 +1282,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc65030_61de7edd",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89f9573d_58665e23",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2c6e769_2efbb1ea",
@@ -803,6 +1313,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c040c399_9a1d3f7e",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c6e769_2efbb1ea",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -853,6 +1381,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "910c4770_d381c1c4",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d38adcba_adce130c",
+      "range": {
+        "startLine": 32,
+        "startChar": 62,
+        "endLine": 32,
+        "endChar": 91
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2103e50d_04493ac9",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Keys removed.",
+      "parentUuid": "dc5993d3_b592e176",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51e744ad_401cdaba",
@@ -866,6 +1442,30 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: sliceOffset?",
+      "range": {
+        "startLine": 36,
+        "startChar": 27,
+        "endLine": 36,
+        "endChar": 51
+      },
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebcc790d_c1a9242b",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51e744ad_401cdaba",
       "range": {
         "startLine": 36,
         "startChar": 27,
@@ -893,6 +1493,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b734af_30ed1395",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bd0dc77_9be830f3",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a56ad1bd_575293c6",
@@ -910,6 +1528,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7797278c_e08e0186",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a56ad1bd_575293c6",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4edbf83a_f07e19a6",
@@ -923,6 +1559,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df2c448_91fe0ea0",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4edbf83a_f07e19a6",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -981,6 +1635,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2518db9a_ac380e9d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "But OpenGL backend is an exception because no writeTexture implemented there :(",
+      "parentUuid": "18951a86_d88c4e71",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d55e428a_940a597d",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
@@ -992,6 +1664,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: add a high-level comment saying we perform the copy and that\u0027s what we\u0027re actually testing.",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c438ae22_991034b3",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d55e428a_940a597d",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1013,6 +1703,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00204aa0_577bc8be",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4a0cf1_ea799253",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "357b75de_678f1cfd",
@@ -1026,6 +1734,24 @@
       "writtenOn": "2020-10-27T12:57:21Z",
       "side": 1,
       "message": "nit: maybe put a link? http://crbug.com/tint/278",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d322a724_6e4d8f20",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "357b75de_678f1cfd",
       "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

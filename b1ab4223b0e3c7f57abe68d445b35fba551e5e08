@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e021b2_b07cbdcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T08:54:30Z",
+      "side": 1,
+      "message": "Please takes another look. And the bots crash reason is in my last comments.\n",
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
