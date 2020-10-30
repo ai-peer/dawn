@@ -140,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb912c45_bb367628",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-10-30T17:08:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1967ea14_83027ce3",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "092c2353_d70e3df7",
