@@ -18,6 +18,63 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3405f7d4_76f06982",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b561f9_5f687363",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "nit: add a comment that explains at a high level what we do in this branch?",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f44ddea_79d78db5",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "We should really have a IsSubset(subset, set); helper for this type of thing, we do thiss type of computations over and over again using (A \u0026 B) \u003d\u003d B but it could just be if (IsSubset(B, A))",
+      "range": {
+        "startLine": 97,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 70
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "657f250a_2a9a49bb",
@@ -31,6 +88,98 @@
       "writtenOn": "2020-10-30T03:33:35Z",
       "side": 1,
       "message": "fyi: I did not rename this file because Gerrit won\u0027t render the diff with the rename. I\u0027ll do it in a follow-up.",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606fcdd3_a0fa2644",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "657f250a_2a9a49bb",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a98de1_afe0bca9",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "nit: we switch on the aspect below, maybe the ternaries could instead be done by moving the logic inside the switch\u0027s cases?",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58c07fb_5fbfcde7",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "442f8b48_40696ea2",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "nit: UpdateInputDepth? Same thing below for UpdateInputStencil?",
+      "range": {
+        "startLine": 278,
+        "startChar": 9,
+        "endLine": 278,
+        "endChar": 27
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b29ae7_f7002571",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "Maybe we could do that unconditionally, it should work to use DepthOnly instead of All for a depth only texture.",
       "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +203,64 @@
         "endLine": 590,
         "endChar": 0
       },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b32a7c4_10299965",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "Eeeeek I don\u0027t know. Maybe we can ask what the unspecified values are and leave it unspecified for WebGPU too? :X If we don\u0027t do that we\u0027ll need to pass a uniform buffer that per texture says if it needs to have that emulation.",
+      "parentUuid": "25247b7c_784a147d",
+      "range": {
+        "startLine": 585,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 0
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91528e24_28f843d4",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "nit: textures",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ead5f8_0747c920",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T12:09:51Z",
+      "side": 1,
+      "message": "What about stencil8?",
       "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
