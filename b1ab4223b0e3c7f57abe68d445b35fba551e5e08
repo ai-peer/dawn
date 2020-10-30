@@ -16,6 +16,109 @@
       "message": "Please takes another look. And the bots crash reason is in my last comments.\n",
       "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd1931a_217abe82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "LGTM, this is amazingly better, thanks for the iteration!",
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f317f5ba_dafd7be3",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "u-nit: could be just before the render pass descriptor since it is part of it.",
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac64a656_d2dfa036",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "u-nit: we could get the layout before we prepare the BGDesc, and call createBindGroup right after we prepare the entries, just to group things together a bit better.",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5276e0a2_8a3789bb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "We could add the defaulting to nullptr in CommandBUfferBase::Finish, that descriptor is optional.",
+      "range": {
+        "startLine": 294,
+        "startChar": 74,
+        "endLine": 294,
+        "endChar": 81
+      },
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d92f05_dac555b2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "This adds a reference to the queue so I think we\u0027re going to leak it. Can we AcquireRef the queue too?",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 31
+      },
+      "revId": "b1ab4223b0e3c7f57abe68d445b35fba551e5e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1653,6 +1653,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a12cebf1_64d52e7f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T10:09:35Z",
+      "side": 1,
+      "message": "Ah, let\u0027s just skip on OpenGL for now with a TODO on the WriteTexture bug to enable it once it is implemented.",
+      "parentUuid": "2518db9a_ac380e9d",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d55e428a_940a597d",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
