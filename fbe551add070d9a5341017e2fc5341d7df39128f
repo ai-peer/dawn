@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1967ea14_83027ce3",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T09:45:17Z",
+      "side": 1,
+      "message": "Gotcha",
+      "parentUuid": "d1c735fe_64569e23",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "092c2353_d70e3df7",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 1
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "This might lose coverage for SampledTexture+multisampled:true, maybe just keep it and remove when multisampled:true is removed?",
       "parentUuid": "092c2353_d70e3df7",
+      "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2506f3_f1287082",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-30T09:45:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0900aec3_ee93c03b",
       "revId": "fbe551add070d9a5341017e2fc5341d7df39128f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
