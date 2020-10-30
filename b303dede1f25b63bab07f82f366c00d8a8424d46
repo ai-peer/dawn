@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "004d769c_243175f3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b561f9_5f687363",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f44ddea_79d78db5",
@@ -65,6 +83,30 @@
       "writtenOn": "2020-10-30T12:09:51Z",
       "side": 1,
       "message": "We should really have a IsSubset(subset, set); helper for this type of thing, we do thiss type of computations over and over again using (A \u0026 B) \u003d\u003d B but it could just be if (IsSubset(B, A))",
+      "range": {
+        "startLine": 97,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 70
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6832412b_4c818562",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f44ddea_79d78db5",
       "range": {
         "startLine": 97,
         "startChar": 16,
@@ -127,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a0a864_ed8552b5",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a98de1_afe0bca9",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f58c07fb_5fbfcde7",
@@ -140,6 +200,24 @@
       "writtenOn": "2020-10-30T12:09:51Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e90390_97a07cc1",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f58c07fb_5fbfcde7",
       "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +245,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52508ce_485e46ae",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "442f8b48_40696ea2",
+      "range": {
+        "startLine": 278,
+        "startChar": 9,
+        "endLine": 278,
+        "endChar": 27
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96b29ae7_f7002571",
@@ -180,6 +282,24 @@
       "writtenOn": "2020-10-30T12:09:51Z",
       "side": 1,
       "message": "Maybe we could do that unconditionally, it should work to use DepthOnly instead of All for a depth only texture.",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6558f01d_4659b232",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b29ae7_f7002571",
       "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -272,6 +392,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afb2f058_d1ee6398",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91528e24_28f843d4",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69ead5f8_0747c920",
@@ -285,6 +423,24 @@
       "writtenOn": "2020-10-30T12:09:51Z",
       "side": 1,
       "message": "What about stencil8?",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e5af6b_88107d31",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69ead5f8_0747c920",
       "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

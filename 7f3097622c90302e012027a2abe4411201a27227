@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92bbc6b0_5c23eac4",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:16:33Z",
+      "side": 1,
+      "message": "note: these are different because one may be a plain enum, and the other might be the result of a bitwise operation i.e. BoolConvertible\u003ctypename LowerBitmask\u003c..\u003e::type\u003e",
+      "range": {
+        "startLine": 142,
+        "startChar": 23,
+        "endLine": 142,
+        "endChar": 37
+      },
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
