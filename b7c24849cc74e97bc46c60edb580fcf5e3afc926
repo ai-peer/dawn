@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91300025_aaed96ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-10-30T02:34:25Z",
+      "side": 1,
+      "message": "Ausin@: thanks for reviewing.\nI\u0027m fighting with the bots fail and got some results. And I\u0027ll start address comments today.\n\nIt seems the crash related with https://bugs.chromium.org/p/tint/issues/detail?id\u003d63 too.\nThe bots is running with mesa-19.0.2, and I built a mesa-19.0.2 it in my local machine. By adding some error output,\nit says: \"Unhandled capability: SpvCapabilityVulkanMemoryModelKHR(5345)\" and crashed. Mesa-19.2.3 still report the same crash.\nMy local machine uses mesa-19.3.5 originally(I also built one to double check), and the test finally passed.\n\nI suspect the hang issue of D3D12 bots with validation layers has the same root cause.\n",
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "126c2b69_7d9ed5a9",
