@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcbe166_1eeecf3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T03:33:35Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657f250a_2a9a49bb",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T03:33:35Z",
+      "side": 1,
+      "message": "fyi: I did not rename this file because Gerrit won\u0027t render the diff with the rename. I\u0027ll do it in a follow-up.",
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25247b7c_784a147d",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T03:33:35Z",
+      "side": 1,
+      "message": "\u003e_\u003e we can fix it (hopefully) in MacOS 10.15 and iOS 13.0 by forcing the swizzle pattern for these texture views to (x, 0, 0, 1), but otherwise we\u0027ll need to add some emulation..",
+      "range": {
+        "startLine": 585,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 0
+      },
+      "revId": "b303dede1f25b63bab07f82f366c00d8a8424d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
