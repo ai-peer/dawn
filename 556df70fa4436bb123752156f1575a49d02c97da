@@ -16,6 +16,92 @@
       "message": "PTAL!",
       "revId": "556df70fa4436bb123752156f1575a49d02c97da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4c2a478_3db3f4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:46:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "556df70fa4436bb123752156f1575a49d02c97da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2981b7_28756e93",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:46:47Z",
+      "side": 1,
+      "message": "nit: there\u0027s a double space here",
+      "range": {
+        "startLine": 77,
+        "startChar": 37,
+        "endLine": 77,
+        "endChar": 39
+      },
+      "revId": "556df70fa4436bb123752156f1575a49d02c97da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f8da6e_1ab490f7",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:46:47Z",
+      "side": 1,
+      "message": "u-u-unit: probably a period and not a comma",
+      "range": {
+        "startLine": 140,
+        "startChar": 43,
+        "endLine": 140,
+        "endChar": 44
+      },
+      "revId": "556df70fa4436bb123752156f1575a49d02c97da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe31122_fbe39a55",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-10-30T21:46:47Z",
+      "side": 1,
+      "message": "nit: prefer to copy the format from the DummyRenderPass",
+      "range": {
+        "startLine": 48,
+        "startChar": 34,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "556df70fa4436bb123752156f1575a49d02c97da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
