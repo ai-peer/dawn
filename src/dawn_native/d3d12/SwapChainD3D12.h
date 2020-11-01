@@ -17,20 +17,49 @@
 
 #include "dawn_native/SwapChain.h"
 
+#include "dawn_native/IntegerTypes.h"
+#include "dawn_native/d3d12/d3d12_platform.h"
+
 namespace dawn_native { namespace d3d12 {
 
     class Device;
+    class Texture;
 
-    class SwapChain final : public OldSwapChainBase {
+    class OldSwapChain final : public OldSwapChainBase {
       public:
-        SwapChain(Device* device, const SwapChainDescriptor* descriptor);
+        OldSwapChain(Device* device, const SwapChainDescriptor* descriptor);
 
       protected:
-        ~SwapChain() override;
+        ~OldSwapChain() override;
         TextureBase* GetNextTextureImpl(const TextureDescriptor* descriptor) override;
         MaybeError OnBeforePresent(TextureViewBase* view) override;
 
         wgpu::TextureUsage mTextureUsage;
+    };
+
+    class SwapChain : public NewSwapChainBase {
+      public:
+        static ResultOrError<SwapChain*> Create(Device* device,
+                                                Surface* surface,
+                                                NewSwapChainBase* previousSwapChain,
+                                                const SwapChainDescriptor* descriptor);
+        ~SwapChain() override;
+
+      private:
+        using NewSwapChainBase::NewSwapChainBase;
+        MaybeError Initialize(NewSwapChainBase* previousSwapChain);
+
+        // NewSwapChainBase implementation
+        MaybeError PresentImpl() override;
+        ResultOrError<TextureViewBase*> GetCurrentTextureViewImpl() override;
+        void DetachFromSurfaceImpl() override;
+
+        ComPtr<IDXGISwapChain3> mDXGISwapChain;
+        std::vector<ComPtr<ID3D12Resource>> mBuffers;
+        std::vector<ExecutionSerial> mBufferSerials;
+        uint32_t mCurrentBuffer = 0;
+
+        Ref<Texture> mApiTexture;
     };
 
 }}  // namespace dawn_native::d3d12
