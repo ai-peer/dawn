@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8fe0b0_09e2063c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T20:00:22Z",
+      "side": 1,
+      "message": "LGTM\n\nAny way to test this? I imagine it\u0027s difficult, but I had to ask.",
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
