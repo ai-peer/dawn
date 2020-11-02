@@ -1063,6 +1063,31 @@ TEST_F(BindGroupLayoutValidationTest, MultisampledMustBeSampledTexture) {
                 }));
 }
 
+// Test that it is allowed to use DepthComparison for a texture used as shadow2DSampler. This is a
+// regression test for crbug.com/dawn/561
+TEST_F(BindGroupLayoutValidationTest, DepthComparisonAllowedWithPipelineUsingTextureForDepth) {
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device,
+        {
+            {0, wgpu::ShaderStage::Compute, wgpu::BindingType::ComparisonSampler},
+            {1, wgpu::ShaderStage::Compute, wgpu::BindingType::SampledTexture, false, 0, false,
+             wgpu::TextureViewDimension::e2D, wgpu::TextureComponentType::DepthComparison},
+        });
+
+    wgpu::ComputePipelineDescriptor desc;
+    desc.computeStage.module =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
+            #version 450
+            layout(set = 0, binding = 0) uniform samplerShadow samp;
+            layout(set = 0, binding = 1) uniform texture2D tex;
+
+            void main() {
+                texture(sampler2DShadow(tex, samp), vec3(0.5, 0.5, 0.0));
+            })");
+    desc.computeStage.entryPoint = "main";
+    device.CreateComputePipeline(&desc);
+}
+
 constexpr uint64_t kBufferSize = 3 * kMinDynamicBufferOffsetAlignment + 8;
 constexpr uint32_t kBindingSize = 9;
 

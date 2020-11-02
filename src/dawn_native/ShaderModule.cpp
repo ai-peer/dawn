@@ -438,6 +438,16 @@ namespace dawn_native {
                                     "TextureComponentType::Float is deprecated use "
                                     "TextureComponentType::DepthComparison in the bind group "
                                     "layout instead.");
+                            // } else if (layoutInfo.textureComponentType ==
+                            //                wgpu::TextureComponentType::DepthComparison &&
+                            //            shaderInfo.textureComponentType ==
+                            //                wgpu::TextureComponentType::Float) {
+                            //     // Do nothing because SPIRV-Cross doesn't correctly reflect
+                            //     // whether a texture is used for a shadow sampler or not, so all
+                            //     // texture2D are Float even when they should be DepthComparison.
+                            //     // TODO(cwallez@chromium.org): Remove this validation skip when
+                            //     // all the shader reflection goes through Tint (and depth
+                            //     // texture2D are correctly detected).
                             } else {
                                 return DAWN_VALIDATION_ERROR(
                                     "The textureComponentType of the bind group layout entry is "
