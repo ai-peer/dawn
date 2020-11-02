@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3891fdef_7d37fc17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-11-02T04:57:56Z",
+      "side": 1,
+      "message": "Update the patch and skip failure tests.\nPlease take another look, thanks!",
+      "revId": "9ae2386a31f8ed3d41e06b67dc9d0a961cc92312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
