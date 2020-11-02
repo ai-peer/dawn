@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e9d2ff_32aecae1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:45:40Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36cfbfb_ca704d67",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:45:40Z",
+      "side": 1,
+      "message": "uNit: looks like the first component could be D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1 for symmetry with the other three.",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92bbc6b0_5c23eac4",
@@ -101,6 +135,23 @@
         "endLine": 144,
         "endChar": 24
       },
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15fb2472_ccbdbc90",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:45:40Z",
+      "side": 1,
+      "message": "It seems like there would be a lot of ways for this test to give a false positive, given the duplicated components.\n\nNot sure if that\u0027s fixable (could we do an actual stencil operation to give different values? or is it always going to be 0, 0, 1?), just thought I\u0027d mention it.",
       "revId": "7f3097622c90302e012027a2abe4411201a27227",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
