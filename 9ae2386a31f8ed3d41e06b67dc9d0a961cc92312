@@ -16,6 +16,23 @@
       "message": "Update the patch and skip failure tests.\nPlease take another look, thanks!",
       "revId": "9ae2386a31f8ed3d41e06b67dc9d0a961cc92312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5069240_fb97efa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:46:24Z",
+      "side": 1,
+      "message": "LGTM, please mark comments that are handled as \"Done\". Austin PTAL!",
+      "revId": "9ae2386a31f8ed3d41e06b67dc9d0a961cc92312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
