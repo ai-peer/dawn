@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a7d498_1e281889",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:28:15Z",
+      "side": 1,
+      "message": "LGTM overall.",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92bbc6b0_5c23eac4",
@@ -19,6 +36,70 @@
         "startChar": 23,
         "endLine": 142,
         "endChar": 37
+      },
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7922e35d_ed769ac1",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:28:15Z",
+      "side": 1,
+      "message": "Oh I didn\u0027t think you\u0027d just make that. Can we have a couple tests for it including the bool convertible thing? Also how come the uses of it don\u0027t need to use wgpu::? (I\u0027m thinking maybe it should be internal to dawn, maybe in Math.h).",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5a9c84_57fa6e1f",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:28:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92bbc6b0_5c23eac4",
+      "range": {
+        "startLine": 142,
+        "startChar": 23,
+        "endLine": 142,
+        "endChar": 37
+      },
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d571e346_ad0efb88",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:28:15Z",
+      "side": 1,
+      "message": "nit: I should be uppercase.",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 24
       },
       "revId": "7f3097622c90302e012027a2abe4411201a27227",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
