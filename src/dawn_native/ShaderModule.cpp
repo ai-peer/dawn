@@ -33,6 +33,7 @@
 // clang-format on
 #endif  // DAWN_ENABLE_WGSL
 
+#include "common/Log.h"
 #include <sstream>
 
 namespace dawn_native {
@@ -427,6 +428,7 @@ namespace dawn_native {
                 switch (layoutInfo.type) {
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::MultisampledTexture: {
+                        DAWN_DEBUG() << uint32_t(layoutInfo.textureComponentType) << " " << uint32_t(shaderInfo.textureComponentType);
                         if (layoutInfo.textureComponentType != shaderInfo.textureComponentType) {
                             // TODO(dawn:527): Remove once the deprecation timeline is complete.
                             if (layoutInfo.textureComponentType ==
@@ -438,6 +440,16 @@ namespace dawn_native {
                                     "TextureComponentType::Float is deprecated use "
                                     "TextureComponentType::DepthComparison in the bind group "
                                     "layout instead.");
+                            // } else if (layoutInfo.textureComponentType ==
+                            //                wgpu::TextureComponentType::DepthComparison &&
+                            //            shaderInfo.textureComponentType ==
+                            //                wgpu::TextureComponentType::Float) {
+                            //     // Do nothing because SPIRV-Cross doesn't correctly reflect
+                            //     // whether a texture is used for a shadow sampler or not, so all
+                            //     // texture2D are Float even when they should be DepthComparison.
+                            //     // TODO(cwallez@chromium.org): Remove this validation skip when
+                            //     // all the shader reflection goes through Tint (and depth
+                            //     // texture2D are correctly detected).
                             } else {
                                 return DAWN_VALIDATION_ERROR(
                                     "The textureComponentType of the bind group layout entry is "
