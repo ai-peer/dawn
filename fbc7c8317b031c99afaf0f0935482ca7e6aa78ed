@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a221207c_a1cf6fea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-02T13:15:37Z",
+      "side": 1,
+      "message": "Thanks for the CL, ideally we want to always enable that CL so that we don\u0027t regress. A while ago I tried doing this in https://dawn-review.googlesource.com/c/dawn/+/30701 but it was more complicated than it seems. In the meantime I\u0027ll add a suppression for this warning.",
+      "revId": "fbc7c8317b031c99afaf0f0935482ca7e6aa78ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
