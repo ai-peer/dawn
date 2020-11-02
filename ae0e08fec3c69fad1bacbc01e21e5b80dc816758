@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d9f8f4_ad29e1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:55:46Z",
+      "side": 1,
+      "message": "Out of curiosity, could this toggle also be used for APIs which will never be made safe?\n\nIf so, it\u0027d be great to have LoadOp::DontCare for use by native apps, for example.",
+      "revId": "ae0e08fec3c69fad1bacbc01e21e5b80dc816758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3ad3e2_7693e171",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:55:46Z",
+      "side": 1,
+      "message": "Nit: entrypoints -\u003e entry points",
+      "revId": "ae0e08fec3c69fad1bacbc01e21e5b80dc816758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9adc5d6b_02b4e775",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:55:46Z",
+      "side": 1,
+      "message": "uNit: }} it clearer -\u003e so it is clearer ?",
+      "revId": "ae0e08fec3c69fad1bacbc01e21e5b80dc816758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
