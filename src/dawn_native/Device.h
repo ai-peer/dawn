@@ -38,6 +38,7 @@ namespace dawn_native {
     class ErrorScope;
     class ErrorScopeTracker;
     class StagingBufferBase;
+    class PersistentCache;
 
     class DeviceBase {
       public:
@@ -179,6 +180,8 @@ namespace dawn_native {
 
         ErrorScope* GetCurrentErrorScope();
 
+        PersistentCache* GetPersistentCache();
+
         void Reference();
         void Release();
 
@@ -223,6 +226,7 @@ namespace dawn_native {
         bool IsToggleEnabled(Toggle toggle) const;
         bool IsValidationEnabled() const;
         bool IsRobustnessEnabled() const;
+        bool IsPipelineCachingEnabled() const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
         size_t GetDeprecationWarningCountForTesting();
@@ -385,6 +389,8 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        std::unique_ptr<PersistentCache> mPersistentCache;
     };
 
 }  // namespace dawn_native

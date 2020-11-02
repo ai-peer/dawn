@@ -15,7 +15,11 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "common/HashUtils.h"
+#include "dawn_native/FingerprintRecorder.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/PipelineCacheD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
@@ -43,33 +47,21 @@ namespace dawn_native { namespace d3d12 {
 
         ShaderModule* module = ToBackend(descriptor->computeStage.module);
 
-        // Note that the HLSL will always use entryPoint "main".
-        std::string hlslSource;
-        DAWN_TRY_ASSIGN(hlslSource, module->TranslateToHLSL(descriptor->computeStage.entryPoint,
-                                                            SingleShaderStage::Compute,
-                                                            ToBackend(GetLayout())));
-
         D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
+        bool usePipelineCache = true;
+
+        CompiledShader compiledShader;
+        DAWN_TRY_ASSIGN(
+            compiledShader,
+            module->Compile(descriptor->computeStage.entryPoint, SingleShaderStage::Compute,
+                            ToBackend(GetLayout()), compileFlags, &usePipelineCache));
+        d3dDesc.CS = compiledShader.GetD3D12ShaderBytecode();
+
         d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
-        ComPtr<IDxcBlob> compiledDXCShader;
-        ComPtr<ID3DBlob> compiledFXCShader;
+        DAWN_TRY_ASSIGN(mPipelineState, device->GetPipelineCache()->getOrCreateComputePipeline(
+                                            d3dDesc, getKey(), usePipelineCache));
 
-        if (device->IsToggleEnabled(Toggle::UseDXC)) {
-            DAWN_TRY_ASSIGN(compiledDXCShader, CompileShaderDXC(device, SingleShaderStage::Compute,
-                                                                hlslSource, "main", compileFlags));
-
-            d3dDesc.CS.pShaderBytecode = compiledDXCShader->GetBufferPointer();
-            d3dDesc.CS.BytecodeLength = compiledDXCShader->GetBufferSize();
-        } else {
-            DAWN_TRY_ASSIGN(compiledFXCShader, CompileShaderFXC(device, SingleShaderStage::Compute,
-                                                                hlslSource, "main", compileFlags));
-            d3dDesc.CS.pShaderBytecode = compiledFXCShader->GetBufferPointer();
-            d3dDesc.CS.BytecodeLength = compiledFXCShader->GetBufferSize();
-        }
-
-        device->GetD3D12Device()->CreateComputePipelineState(&d3dDesc,
-                                                             IID_PPV_ARGS(&mPipelineState));
         return {};
     }
 

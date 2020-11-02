@@ -133,7 +133,13 @@ namespace dawn_native {
              {Toggle::MetalEnableVertexPulling,
               {"metal_enable_vertex_pulling",
                "Uses vertex pulling to protect out-of-bounds reads on Metal",
-               "https://crbug.com/dawn/480"}}}};
+               "https://crbug.com/dawn/480"}},
+             {Toggle::DisableD3D12ShaderCaching,
+              {"disable_d3d12_shader_caching", "Disable caching of DX shaders in release builds.",
+               "https://crbug.com/dawn/TODO"}},
+             {Toggle::DisablePipelineCaching,
+              {"disable_pipeline_caching", "Disables pipeline caching.",
+               "https://crbug.com/dawn/549"}}}};
 
     }  // anonymous namespace
 
