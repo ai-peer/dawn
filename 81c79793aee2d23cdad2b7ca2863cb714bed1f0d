@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c3b33ac_b086c1a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:50:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "81c79793aee2d23cdad2b7ca2863cb714bed1f0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1670ef9c_348ff527",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-02T19:50:24Z",
+      "side": 1,
+      "message": "Nit: Test -\u003e Test that?",
+      "revId": "81c79793aee2d23cdad2b7ca2863cb714bed1f0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
