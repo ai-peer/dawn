@@ -140,6 +140,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d60725f_a70091d3",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T17:02:10Z",
+      "side": 1,
+      "message": "Oh maybe it shouldn\u0027t support it, I don\u0027t remember what we decided in the WGSL group. Dan do you remember?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acc11d82_a9068af4",
         "filename": "src/tests/end2end/EntryPointTests.cpp",
         "patchSetId": 1
@@ -151,6 +168,24 @@
       "writtenOn": "2020-11-03T16:55:28Z",
       "side": 1,
       "message": "unit: maybe `IsD3D12() \u0026\u0026 UseTint()` toggle is more fitting?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ddaecba_7ab6f79e",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T17:02:10Z",
+      "side": 1,
+      "message": "I don\u0027t think we have a UseTint() yet. The problem is that there isn\u0027t a single boolean that says to use Tint for the whole frontent-backend combination and it\u0027s specifically failing in the backend. (but maybe we can just rename the entrypoints if WGSL spec disallows conflicts.)",
+      "parentUuid": "acc11d82_a9068af4",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
