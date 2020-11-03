@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc4ebf2_f51dcefa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:25:54Z",
+      "side": 1,
+      "message": "This is the same thing now? They\u0027re both 64bit so we could add a uint64_t luid to the adapter descriptor and say that if it is 0, then it wasn\u0027t found?",
+      "parentUuid": "2e2a5799_09421101",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "192ff630_977f5bd7",
