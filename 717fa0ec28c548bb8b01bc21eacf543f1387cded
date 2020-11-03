@@ -51,6 +51,47 @@
       "parentUuid": "3a8fe0b0_09e2063c",
       "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92aab93c_6ff54bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:54:03Z",
+      "side": 1,
+      "message": "I think it\u0027s fine to add if the tests are fast to run and likely to have hit the race. We have this for some atomics and memory synchronization tests",
+      "parentUuid": "49587dbf_e353877b",
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56025eb8_32c880d1",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:54:03Z",
+      "side": 1,
+      "message": "retain returns itself, so couldn\u0027t this be\n\ncmds \u003d [mLastSubmittedCommands retain]\n[cmds waitUntilScheduled]\n[cmds release]\n\nI would hope that Obj-C\u0027s reference counting is thread safe...\n\n\nMaybe I don\u0027t know what the bug is though (don\u0027t have privileges to view).\nis it because mLastSubmittedCommands is nil?\nmLastSubmittedCommands is set to nil while waitUntilScheduled is executing?",
+      "range": {
+        "startLine": 360,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 41
+      },
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
