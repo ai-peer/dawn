@@ -17,6 +17,9 @@
 #include "dawn_native/vulkan/BackendVk.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 
+#include <iomanip>
+#include <sstream>
+
 namespace dawn_native { namespace vulkan {
 
     Adapter::Adapter(Backend* backend, VkPhysicalDevice physicalDevice)
@@ -59,7 +62,22 @@ namespace dawn_native { namespace vulkan {
 
         mPCIInfo.deviceId = mDeviceInfo.properties.deviceID;
         mPCIInfo.vendorId = mDeviceInfo.properties.vendorID;
-        mPCIInfo.name = mDeviceInfo.properties.deviceName;
+
+        if ((mDeviceInfo.HasExt(DeviceExt::ExternalFenceCapabilities) ||
+             mDeviceInfo.HasExt(DeviceExt::ExternalMemoryCapabilities) ||
+             mDeviceInfo.HasExt(DeviceExt::ExternalSemaphoreCapabilities)) &&
+            mDeviceInfo.deviceIDProperties.deviceLUIDValid == VK_TRUE) {
+            std::ostringstream ostream;
+            ostream << mDeviceInfo.properties.deviceName << ", LUID = {";
+            for (uint32_t i = 0; i < VK_LUID_SIZE; ++i) {
+                ostream << std::hex << std::setw(2) << std::setfill('0')
+                        << static_cast<uint32_t>(mDeviceInfo.deviceIDProperties.deviceLUID[i]);
+            }
+            ostream << "}";
+            mPCIInfo.name = ostream.str();
+        } else {
+            mPCIInfo.name = mDeviceInfo.properties.deviceName;
+        }
 
         switch (mDeviceInfo.properties.deviceType) {
             case VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU:

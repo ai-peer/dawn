@@ -64,6 +64,7 @@ namespace dawn_native { namespace vulkan {
         VkPhysicalDeviceProperties properties;
         VkPhysicalDeviceDriverProperties driverProperties;
         VkPhysicalDeviceSubgroupSizeControlPropertiesEXT subgroupSizeControlProperties;
+        VkPhysicalDeviceIDProperties deviceIDProperties;
 
         std::vector<VkQueueFamilyProperties> queueFamilies;
 
