@@ -33,6 +33,24 @@
       "message": "LGTM\n\nAny way to test this? I imagine it\u0027s difficult, but I had to ask.",
       "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49587dbf_e353877b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:04:54Z",
+      "side": 1,
+      "message": "We could have a stress test that hammers submissions and calls to WaitForCommandsToBeScheduled but I don\u0027t know if / or mostly how we want such tests in Dawn. Austin WDYT?",
+      "parentUuid": "3a8fe0b0_09e2063c",
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
