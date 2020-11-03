@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2a5799_09421101",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-03T13:05:13Z",
+      "side": 1,
+      "message": "I am still wondering if we should add a member in PCIInfo to record LUIDs instead of changing the name of the adapter as it may be useful to get LUIDs inside Chromium. But the difficulty is the types of LUIDs are different on D3D12(a 64-bit value[1]) and Vulkan (an 8-member array of uint8 as VK_LUID_SIZE is 8 currently). What do you think?\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-getadapterluid",
+      "parentUuid": "2e9784f7_681b81a4",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "192ff630_977f5bd7",
