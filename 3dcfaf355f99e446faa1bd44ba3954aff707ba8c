@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2df6d623_705712a6",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T18:07:11Z",
+      "side": 1,
+      "message": "Either way would work. If it\u0027s per-backend then it the defaulting of the toggle would need to be per backend too.",
+      "parentUuid": "498a6706_e923ef56",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88afbac1_b24fc12d",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 1
