@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "094f29a5_78420274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-03T16:55:28Z",
+      "side": 1,
+      "message": "Looks good overall. Also, seems weird that we must redundantly parse (esp. when off by default). Maybe Ryan knows if it\u0027s safe to disable?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88afbac1_b24fc12d",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-03T16:55:28Z",
+      "side": 1,
+      "message": "uunit: relocate near |entryPoint|?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec8869cf_3f675f18",
@@ -31,6 +65,24 @@
       "writtenOn": "2020-11-03T10:30:18Z",
       "side": 1,
       "message": "nit: Can we split TranslateToHLSL into two functions: TranslateToHLSLWithTint and TranslateToHLSLWithSPIRVCross? I was going to suggest that the SPIRV-Cross stuff should be in an else clause, but that\u0027s already a lot of code in a single function so I think we can split it. (especially since the Tint side will grow over time.)",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffe4540_56c26fd6",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-03T16:55:28Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ec8869cf_3f675f18",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +134,23 @@
       "writtenOn": "2020-11-03T10:30:18Z",
       "side": 1,
       "message": "This compares the pointer values, which happens to work because the linker does string deduplication so two static strings that are the same get the same value. But please use std::string comparison or strcmp() \u003d\u003d 0.",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc11d82_a9068af4",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-03T16:55:28Z",
+      "side": 1,
+      "message": "unit: maybe `IsD3D12() \u0026\u0026 UseTint()` toggle is more fitting?",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
