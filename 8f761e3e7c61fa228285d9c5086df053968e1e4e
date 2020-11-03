@@ -16,6 +16,23 @@
       "message": "I removed these in https://dawn-review.googlesource.com/c/dawn/+/24840, why are they needed now?",
       "revId": "8f761e3e7c61fa228285d9c5086df053968e1e4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dbb9c35_0713faa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T18:14:37Z",
+      "side": 1,
+      "message": "I set up a new Mac and realized that clang-format wasn\u0027t downloaded unless the DEPS file did it.",
+      "revId": "8f761e3e7c61fa228285d9c5086df053968e1e4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
