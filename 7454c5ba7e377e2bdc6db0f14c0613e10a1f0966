@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a091dd_04f7af47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:27:30Z",
+      "side": 1,
+      "message": "Or if we\u0027re worried that 0 might be valid, then it can be a pointer to a uint64_t that if not null is the LUID.",
+      "parentUuid": "5dc4ebf2_f51dcefa",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "192ff630_977f5bd7",
