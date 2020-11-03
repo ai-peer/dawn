@@ -254,6 +254,8 @@ class DawnTestBase {
 
     bool IsAsan() const;
 
+    bool HasWorkaroundEnabled(const char* workaround) const;
+
     void StartExpectDeviceError();
     bool EndExpectDeviceError();
 

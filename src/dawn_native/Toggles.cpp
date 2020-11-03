@@ -133,7 +133,10 @@ namespace dawn_native {
              {Toggle::MetalEnableVertexPulling,
               {"metal_enable_vertex_pulling",
                "Uses vertex pulling to protect out-of-bounds reads on Metal",
-               "https://crbug.com/dawn/480"}}}};
+               "https://crbug.com/dawn/480"}},
+             {Toggle::UseTintHLSL,
+              {"use_tint_hlsl", "Use Tint instead of SPRIV-cross to generate HLSL.",
+               "https://crbug.com/dawn/548"}}}};
 
     }  // anonymous namespace
 

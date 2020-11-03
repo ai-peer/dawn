@@ -72,6 +72,9 @@ TEST_P(EntryPointTests, FragAndVertexSameModuleSameName) {
     // TODO: Reenable once Tint is able to produce Vulkan 1.0 / 1.1 SPIR-V.
     DAWN_SKIP_TEST_IF(IsVulkan());
 
+    // TODO: Reenable once Tint's HLSL writer supports multiple entryPoints with the same name.
+    DAWN_SKIP_TEST_IF(HasWorkaroundEnabled("use_tint_hlsl"));
+
     wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
         [[builtin(position)]] var<out> Position : vec4<f32>;
 
@@ -119,6 +122,9 @@ TEST_P(EntryPointTests, FragAndVertexSameModuleSameName) {
 TEST_P(EntryPointTests, TwoComputeInModule) {
     // TODO: Reenable once Tint is able to produce Vulkan 1.0 / 1.1 SPIR-V.
     DAWN_SKIP_TEST_IF(IsVulkan());
+
+    // TODO: Reenable once Tint's HLSL writer supports multiple entryPoints on a single stage.
+    DAWN_SKIP_TEST_IF(HasWorkaroundEnabled("use_tint_hlsl"));
 
     wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
         [[block]] struct Data {
@@ -189,6 +195,7 @@ TEST_P(EntryPointTests, TwoComputeInModule) {
 
 DAWN_INSTANTIATE_TEST(EntryPointTests,
                       D3D12Backend(),
+                      D3D12Backend({"use_tint_hlsl"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       VulkanBackend());

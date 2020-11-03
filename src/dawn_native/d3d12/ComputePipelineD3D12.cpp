@@ -55,15 +55,22 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<IDxcBlob> compiledDXCShader;
         ComPtr<ID3DBlob> compiledFXCShader;
 
+        const char* entryPoint = "main";
+        if (device->IsToggleEnabled(Toggle::UseTintHLSL)) {
+            entryPoint = descriptor->computeStage.entryPoint;
+        }
+
         if (device->IsToggleEnabled(Toggle::UseDXC)) {
-            DAWN_TRY_ASSIGN(compiledDXCShader, CompileShaderDXC(device, SingleShaderStage::Compute,
-                                                                hlslSource, "main", compileFlags));
+            DAWN_TRY_ASSIGN(compiledDXCShader,
+                            CompileShaderDXC(device, SingleShaderStage::Compute, hlslSource,
+                                             entryPoint, compileFlags));
 
             d3dDesc.CS.pShaderBytecode = compiledDXCShader->GetBufferPointer();
             d3dDesc.CS.BytecodeLength = compiledDXCShader->GetBufferSize();
         } else {
-            DAWN_TRY_ASSIGN(compiledFXCShader, CompileShaderFXC(device, SingleShaderStage::Compute,
-                                                                hlslSource, "main", compileFlags));
+            DAWN_TRY_ASSIGN(compiledFXCShader,
+                            CompileShaderFXC(device, SingleShaderStage::Compute, hlslSource,
+                                             entryPoint, compileFlags));
             d3dDesc.CS.pShaderBytecode = compiledFXCShader->GetBufferPointer();
             d3dDesc.CS.BytecodeLength = compiledFXCShader->GetBufferSize();
         }

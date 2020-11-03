@@ -317,15 +317,22 @@ namespace dawn_native { namespace d3d12 {
                             modules[stage]->TranslateToHLSL(GetStage(stage).entryPoint.c_str(),
                                                             stage, ToBackend(GetLayout())));
 
+            const char* entryPoint = "main";
+            if (device->IsToggleEnabled(Toggle::UseTintHLSL)) {
+                entryPoint = GetStage(stage).entryPoint.c_str();
+            }
+
             if (device->IsToggleEnabled(Toggle::UseDXC)) {
-                DAWN_TRY_ASSIGN(compiledDXCShader[stage],
-                                CompileShaderDXC(device, stage, hlslSource, "main", compileFlags));
+                DAWN_TRY_ASSIGN(
+                    compiledDXCShader[stage],
+                    CompileShaderDXC(device, stage, hlslSource, entryPoint, compileFlags));
 
                 shaders[stage]->pShaderBytecode = compiledDXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledDXCShader[stage]->GetBufferSize();
             } else {
-                DAWN_TRY_ASSIGN(compiledFXCShader[stage],
-                                CompileShaderFXC(device, stage, hlslSource, "main", compileFlags));
+                DAWN_TRY_ASSIGN(
+                    compiledFXCShader[stage],
+                    CompileShaderFXC(device, stage, hlslSource, entryPoint, compileFlags));
 
                 shaders[stage]->pShaderBytecode = compiledFXCShader[stage]->GetBufferPointer();
                 shaders[stage]->BytecodeLength = compiledFXCShader[stage]->GetBufferSize();

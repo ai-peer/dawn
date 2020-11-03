@@ -1,3 +1,4 @@
+#include "DawnTest.h"
 // Copyright 2017 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -626,6 +627,15 @@ bool DawnTestBase::IsAsan() const {
 #else
     return false;
 #endif
+}
+
+bool DawnTestBase::HasWorkaroundEnabled(const char* workaround) const {
+    for (const char* toggle : mParam.forceEnabledWorkarounds) {
+        if (toggle == workaround) {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool DawnTestBase::HasVendorIdFilter() const {
