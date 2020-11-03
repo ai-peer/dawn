@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cca30bc_22bef10d",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:29:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "401c8f71_59f727de",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f8aba28_20752857",

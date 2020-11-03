@@ -16,6 +16,46 @@
       "message": "Update with adding some TODOs for tracking. I think the only unresolved one is about the API name.",
       "revId": "ec6b24d8a79ee73d2250345c63ae0ca7932cd43a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98608624_39a1e317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:29:33Z",
+      "side": 1,
+      "message": "Only minor comments now. LGTM",
+      "revId": "ec6b24d8a79ee73d2250345c63ae0ca7932cd43a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87f9ca4_185c37c9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:29:33Z",
+      "side": 1,
+      "message": "nit: sizeof(rotationMatrix)",
+      "range": {
+        "startLine": 235,
+        "startChar": 35,
+        "endLine": 235,
+        "endChar": 37
+      },
+      "revId": "ec6b24d8a79ee73d2250345c63ae0ca7932cd43a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
