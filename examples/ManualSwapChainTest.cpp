@@ -269,6 +269,7 @@ int main(int argc, const char* argv[]) {
     dawnProcSetProcs(&procs);
 
     instance = std::make_unique<dawn_native::Instance>();
+    instance->EnableBackendValidation(true);
     instance->DiscoverDefaultAdapters();
 
     std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
