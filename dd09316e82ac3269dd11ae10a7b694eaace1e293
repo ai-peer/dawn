@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "dd09316e82ac3269dd11ae10a7b694eaace1e293",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc889f27_6f51f33b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:36:02Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "dd09316e82ac3269dd11ae10a7b694eaace1e293",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0fa353_81d8e8fa",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T18:36:02Z",
+      "side": 1,
+      "message": "nit: we also have this in DawnPerfTest.h",
+      "revId": "dd09316e82ac3269dd11ae10a7b694eaace1e293",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
