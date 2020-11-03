@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1862cab_71f16cfb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "This method would disappear.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83aba15c_a86b5349",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "I don\u0027t think we need Active: there can be at most one active occlusion query and at most on active pipeline statistics query, so the render pass encoder can remember which one is currently active, if any. So all we need is a boolean. We could call the map QueryAvailabilityMap.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917ad24d_84f6373e",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "This and other changes to this file are only used by the RenderPassEncoder so they could be put there instead of being for all programmable encoders.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3618b7d8_e3a5f5a6",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "This function is only used at [1] so it could be inlined.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d50772_6133fe7b",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "nit: the temporary it variable could be avoided and used directly in this if. It is a common pattern to do .find() !\u003d .end().",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932fcce4_e5e0d805",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "nit: It might be simpler to just call Track on both this, and the command encoder at [2] instead of merging query states.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ebb217_8f94b5bf",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed72ee2c_99a148c0",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T14:01:48Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
