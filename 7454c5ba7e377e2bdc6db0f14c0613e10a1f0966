@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9784f7_681b81a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "I slight concern I have is that it means the test name will potentially change on every builder / between reboots on the same builder. This might make automated tooling that looks for flakes not realize that two tests running with different LUIDs are actually the same.\n\nI guess we can fix this issue when it happens, if it happens.",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "192ff630_977f5bd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964ded16_c05e8f95",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "nit: we could always use an ostringstream:\n\n std::ostringstream nameStream;\n nameStread \u003c\u003c mDeviceInfo.properties.deviceName;\n\n // If driver can tell use what the LUID is, add it to the name to differentiate similar devices.\n if (\u003cbig condition\u003e) {\n   \u003cadd LUID to nameStream\u003e\n }\n\n  mPCIInfo.name \u003d nameStream.str();",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ab6b9f_f963f213",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "Could the formatting here match the formatting in D3D12? The point is that the LUID should be the same between the two APIs but right now it\u0027s not clear (one is two numbers, the other a bunch of hex).",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f40dcc_4abc7ba0",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "u-u-nit: put it just before ExternalMemoryCapabilities? Ditto for the DeviceExt.",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4970b8e2_80861f7c",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:19:43Z",
+      "side": 1,
+      "message": "Oh wow it\u0027s so weird that the three extensions add the same sub-structure.",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
