@@ -90,10 +90,17 @@ namespace dawn_native { namespace d3d12 {
                                                : wgpu::AdapterType::DiscreteGPU;
         }
 
-        // Get the adapter's name as a UTF8 string.
-        std::wstring_convert<DeletableFacet<std::codecvt<wchar_t, char, std::mbstate_t>>> converter(
-            "Error converting");
-        mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
+        // Get the adapter's name as a UTF8 string and the adapter LUID. On Remote Desktop sessions
+        // there can be multiple DXGI adapters that have the same name and type, and the adapter
+        // LUID is the only identifier to distinguish each of the adapters on Windows.
+        {
+            std::wstring_convert<DeletableFacet<std::codecvt<wchar_t, char, std::mbstate_t>>>
+                converter("Error converting");
+            std::ostringstream o;
+            o << converter.to_bytes(adapterDesc.Description) << ", LUID = {"
+              << adapterDesc.AdapterLuid.HighPart << ", " << adapterDesc.AdapterLuid.LowPart << "}";
+            mPCIInfo.name = o.str();
+        }
 
         // Convert the adapter's D3D12 driver version to a readable string like "24.21.13.9793".
         LARGE_INTEGER umdVersion;

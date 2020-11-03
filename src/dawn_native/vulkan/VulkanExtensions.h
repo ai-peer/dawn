@@ -27,6 +27,7 @@ namespace dawn_native { namespace vulkan {
         GetPhysicalDeviceProperties2,
         ExternalMemoryCapabilities,
         ExternalSemaphoreCapabilities,
+        ExternalFenceCapabilities,
 
         // Surface extensions
         Surface,
@@ -81,6 +82,7 @@ namespace dawn_native { namespace vulkan {
         GetMemoryRequirements2,
         ExternalMemoryCapabilities,
         ExternalSemaphoreCapabilities,
+        ExternalFenceCapabilities,
         ExternalMemory,
         ExternalSemaphore,
         _16BitStorage,
