@@ -38,6 +38,8 @@ namespace dawn_native { namespace vulkan {
          VulkanVersion_1_1},
         {InstanceExt::ExternalSemaphoreCapabilities, "VK_KHR_external_semaphore_capabilities",
          VulkanVersion_1_1},
+        {InstanceExt::ExternalFenceCapabilities, "VK_KHR_external_fence_capabilities",
+         VulkanVersion_1_1},
 
         {InstanceExt::Surface, "VK_KHR_surface", NeverPromoted},
         {InstanceExt::FuchsiaImagePipeSurface, "VK_FUCHSIA_imagepipe_surface", NeverPromoted},
@@ -101,6 +103,7 @@ namespace dawn_native { namespace vulkan {
 
                 case InstanceExt::ExternalMemoryCapabilities:
                 case InstanceExt::ExternalSemaphoreCapabilities:
+                case InstanceExt::ExternalFenceCapabilities:
                     hasDependencies = HasDep(InstanceExt::GetPhysicalDeviceProperties2);
                     break;
 
@@ -145,6 +148,8 @@ namespace dawn_native { namespace vulkan {
         {DeviceExt::ExternalMemoryCapabilities, "VK_KHR_external_memory_capabilities",
          VulkanVersion_1_1},
         {DeviceExt::ExternalSemaphoreCapabilities, "VK_KHR_external_semaphore_capabilities",
+         VulkanVersion_1_1},
+        {DeviceExt::ExternalFenceCapabilities, "VK_KHR_external_fence_capabilities",
          VulkanVersion_1_1},
         {DeviceExt::ExternalMemory, "VK_KHR_external_memory", VulkanVersion_1_1},
         {DeviceExt::ExternalSemaphore, "VK_KHR_external_semaphore", VulkanVersion_1_1},
@@ -233,6 +238,11 @@ namespace dawn_native { namespace vulkan {
                     hasDependencies =
                         instanceExts.Has(InstanceExt::ExternalSemaphoreCapabilities) &&
                         HasDep(DeviceExt::GetPhysicalDeviceProperties2);
+                    break;
+
+                case DeviceExt::ExternalFenceCapabilities:
+                    hasDependencies = instanceExts.Has(InstanceExt::ExternalFenceCapabilities) &&
+                                      HasDep(DeviceExt::GetPhysicalDeviceProperties2);
                     break;
 
                 case DeviceExt::DebugMarker:
