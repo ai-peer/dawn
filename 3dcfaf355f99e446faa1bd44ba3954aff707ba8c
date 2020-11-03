@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e95aa6_5f149bd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:30:18Z",
+      "side": 1,
+      "message": "Adding Tint folks, right now this does redundant module parsing in the D3D12 backend, is that ok for now until we move to using Tint to ingest SPIR-V in the frontend?\n\nLGTM",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8869cf_3f675f18",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:30:18Z",
+      "side": 1,
+      "message": "nit: Can we split TranslateToHLSL into two functions: TranslateToHLSLWithTint and TranslateToHLSLWithSPIRVCross? I was going to suggest that the SPIRV-Cross stuff should be in an else clause, but that\u0027s already a lot of code in a single function so I think we can split it. (especially since the Tint side will grow over time.)",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa405b34_693354ca",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:30:18Z",
+      "side": 1,
+      "message": "nit: Stray include done by VisualStudio\u0027s \"automatic declaration\" quick fix.",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f24c6b_50106a0f",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:30:18Z",
+      "side": 1,
+      "message": "Mmmh the terminology should be \"toggle\" instead of workaround. In this CL we can fix just the name of this function but we should rename the concept throughout DawnTest later.",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f193e57_7eefd3ce",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-03T10:30:18Z",
+      "side": 1,
+      "message": "This compares the pointer values, which happens to work because the linker does string deduplication so two static strings that are the same get the same value. But please use std::string comparison or strcmp() \u003d\u003d 0.",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
