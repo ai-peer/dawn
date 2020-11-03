@@ -154,6 +154,24 @@
       "message": "It seems like there would be a lot of ways for this test to give a false positive, given the duplicated components.\n\nNot sure if that\u0027s fixable (could we do an actual stencil operation to give different values? or is it always going to be 0, 0, 1?), just thought I\u0027d mention it.",
       "revId": "7f3097622c90302e012027a2abe4411201a27227",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a4a509_d36ec02d",
+        "filename": "src/tests/end2end/DepthSamplingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T19:30:06Z",
+      "side": 1,
+      "message": "it\u0027s always going to be 0, 0, 1 here since the texture view only has a single component that is stencil. Getting components 2, 3, 4 is supposed to return default values of 0,0,1",
+      "parentUuid": "15fb2472_ccbdbc90",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
