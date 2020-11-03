@@ -175,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e48d01f_2b7bcb03",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-11-03T01:32:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eca683a6_b3ed93ec",
+      "revId": "d0025f0dc4c9a26ab7bf49145e6d2974d2df9736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b5edecb_c7f560af",
