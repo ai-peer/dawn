@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "30349a33f5cfce03ea473f6146c1b9044693f152",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9991349b_b33dc11e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-11-03T01:52:09Z",
+      "side": 1,
+      "message": "Double checked and it won\u0027t affect previous default value, LGTM!",
+      "revId": "30349a33f5cfce03ea473f6146c1b9044693f152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
