@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2881df10_419e11b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-03T08:59:31Z",
+      "side": 1,
+      "message": "I‘ve updated the SPEC and this PR to only validate query index overwrite in same render pass. PTAL, thanks!",
+      "parentUuid": "33d094c6_098c4f71",
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601284d2_9d9f18fe",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "834435f6_98124b82",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-03T08:59:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "601284d2_9d9f18fe",
+      "range": {
+        "startLine": 472,
+        "startChar": 4,
+        "endLine": 472,
+        "endChar": 27
+      },
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f14e8811_b25ff440",
@@ -54,6 +96,30 @@
       "writtenOn": "2020-10-28T14:28:36Z",
       "side": 1,
       "message": "typo: can\u0027t",
+      "range": {
+        "startLine": 366,
+        "startChar": 80,
+        "endLine": 366,
+        "endChar": 86
+      },
+      "revId": "0f45c25945343e1b38486bea190c590b9f3d93cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a4fdbde_c27e5660",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-03T08:59:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f14e8811_b25ff440",
       "range": {
         "startLine": 366,
         "startChar": 80,
