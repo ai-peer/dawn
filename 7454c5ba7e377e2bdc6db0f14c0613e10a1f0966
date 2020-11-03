@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "37515fce_07e69a46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-03T19:15:36Z",
+      "side": 1,
+      "message": "+1 about the bot concern. I don\u0027t think we need to handle name conflicts by using the LUID. Right now, in DawnTest.h, we use INSTANTIATE_TEST_SUITE_P we use testing::PrintToStringParamName()  which just takes the test params and stringifies them. A couple of other options:\n - Make GetAvailableAdapterTestParamsForBackends smarter and add some extra computed \"index\" field to AdapterTestParam. This would be more deterministic than the LUID (though still dependent on the OS adapter discovery order)\n - replace testing::PrintToStringParamName() with something that appends a suffix if it detects duplicate names",
+      "parentUuid": "47a091dd_04f7af47",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "192ff630_977f5bd7",
