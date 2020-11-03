@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661da383_6c0c3b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-03T18:10:11Z",
+      "side": 1,
+      "message": "I removed these in https://dawn-review.googlesource.com/c/dawn/+/24840, why are they needed now?",
+      "revId": "8f761e3e7c61fa228285d9c5086df053968e1e4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
