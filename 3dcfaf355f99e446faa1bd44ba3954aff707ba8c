@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "498a6706_e923ef56",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-03T17:51:53Z",
+      "side": 1,
+      "message": "Is the plan to have a toggle per backend? Or, should this just be a UseTintGenerators instead of making it HLSL specific?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88afbac1_b24fc12d",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 1
@@ -83,6 +100,23 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "ec8869cf_3f675f18",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d8304e_fc43d27b",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-03T17:51:53Z",
+      "side": 1,
+      "message": "This also needs to run the tint::Validator to validate the WGSL module (and probably the transform to do bounding of array accesses as well)",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +191,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4282210c_d7436539",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-03T17:51:53Z",
+      "side": 1,
+      "message": "You can\u0027t have multiple entry points with the same name in WGSL anymore. They all have to be unique.",
+      "parentUuid": "6d60725f_a70091d3",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acc11d82_a9068af4",
         "filename": "src/tests/end2end/EntryPointTests.cpp",
         "patchSetId": 1
@@ -186,6 +238,41 @@
       "side": 1,
       "message": "I don\u0027t think we have a UseTint() yet. The problem is that there isn\u0027t a single boolean that says to use Tint for the whole frontent-backend combination and it\u0027s specifically failing in the backend. (but maybe we can just rename the entrypoints if WGSL spec disallows conflicts.)",
       "parentUuid": "acc11d82_a9068af4",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf453af0_0b09a5ad",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-03T17:51:53Z",
+      "side": 1,
+      "message": "We should rename the entrypoints as this isn\u0027t valid WGSL any more.",
+      "parentUuid": "8ddaecba_7ab6f79e",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af57b946_5446815b",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-03T17:51:53Z",
+      "side": 1,
+      "message": "This one should already be fine, what is the issue causing it to be disabled?",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
