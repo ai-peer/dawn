@@ -92,6 +92,30 @@
       },
       "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8a44ec_426e50d8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T13:19:32Z",
+      "side": 1,
+      "message": "I was not able to reproduce locally with 250 iterations of the following:\n\n+TEST_P(MetalAutoreleasePoolTests, AAA) {\n+    wgpu::BufferDescriptor desc;\n+    desc.size \u003d 4;\n+    desc.usage \u003d wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;\n+\n+    wgpu::Buffer buffer1 \u003d device.CreateBuffer(\u0026desc);\n+    wgpu::Buffer buffer2 \u003d device.CreateBuffer(\u0026desc);\n+\n+    for (int i \u003d 0; i \u003c 1000\u0027000; i +\u003d 50) {\n+        wgpu::CommandEncoder encoder \u003d device.CreateCommandEncoder();\n+        encoder.CopyBufferToBuffer(buffer1, 0, buffer2, 0, 4);\n+        wgpu::CommandBuffer commands \u003d encoder.Finish();\n+        queue.Submit(1, \u0026commands);\n+\n+        volatile int a \u003d 0;\n+        for (int j \u003d 0; j \u003c i; j++) {\n+            a \u003d j;\n+        }\n+\n+        dawn_native::metal::WaitForCommandsToBeScheduled(device.Get());\n+    }\n+}\n+\n\nSo IDK.",
+      "parentUuid": "56025eb8_32c880d1",
+      "range": {
+        "startLine": 360,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 41
+      },
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
