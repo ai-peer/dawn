@@ -473,6 +473,24 @@
       "parentUuid": "af57b946_5446815b",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce715a6_b4913ea4",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T02:47:50Z",
+      "side": 1,
+      "message": "Can you please file this as a bug in `crbug.com/tint` with the below shader? This is a bad compilation due to the buffer begin used in both entry points.",
+      "parentUuid": "f82f7db9_328523e2",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

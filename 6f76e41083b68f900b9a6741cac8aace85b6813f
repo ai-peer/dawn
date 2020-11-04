@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f892022_ae7091f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T02:47:50Z",
+      "side": 1,
+      "message": "lg to me. rharrison@ any comments?",
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3ed806d_20182ee0",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T02:47:50Z",
+      "side": 1,
+      "message": "This is probably fine for now, but in the future should change to having a transform manager which this transform gets added into.",
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
