@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d07d632e_05b90048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T15:30:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "18e86210b0f958120af728c89392bb7b34e93deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ab3ecb_04eae35e",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T15:30:36Z",
+      "side": 1,
+      "message": "I think these arguments are flipped. We want to check if format.aspects has both Depth and Stencil which means both D/S are contained inside the set fornat.aspects",
+      "range": {
+        "startLine": 172,
+        "startChar": 21,
+        "endLine": 172,
+        "endChar": 68
+      },
+      "revId": "18e86210b0f958120af728c89392bb7b34e93deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
