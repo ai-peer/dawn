@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a0cdbb_05f97a00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:13:21Z",
+      "side": 1,
+      "message": "PTAL! This will land after https://dawn-review.googlesource.com/c/dawn/+/31640 that does the same change to EntryPiontTests",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
