@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "919f260c_21093a8f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T01:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d36cfbfb_ca704d67",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92bbc6b0_5c23eac4",
@@ -116,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ffa83e3_b395197f",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T01:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7922e35d_ed769ac1",
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d571e346_ad0efb88",
@@ -129,6 +165,30 @@
       "writtenOn": "2020-11-02T13:28:15Z",
       "side": 1,
       "message": "nit: I should be uppercase.",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "7f3097622c90302e012027a2abe4411201a27227",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad22dc4_d8e31700",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T01:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d571e346_ad0efb88",
       "range": {
         "startLine": 144,
         "startChar": 11,
