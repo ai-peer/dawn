@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a092fa_799ef31c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-04T22:11:43Z",
+      "side": 1,
+      "message": "Sorry for the colossal amount of test updates. It was necessary because I needed to make sure that no unrelated negative validation tests accidentally started hitting the stride validation instead of the validation they intended to test. I\u0027m pretty sure I got most of them.",
+      "revId": "22b6584eabde81ac9581d3a237e10bb3d6d05a82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
