@@ -86,6 +86,24 @@
       "parentUuid": "d7d8ff48_3c074034",
       "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c494c48a_db46db0a",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T14:50:33Z",
+      "side": 1,
+      "message": "Opened https://bugs.chromium.org/p/dawn/issues/detail?id\u003d564",
+      "parentUuid": "78d6000e_e22cf4fe",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
