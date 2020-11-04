@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1790d43f_f8e9e0f5",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-04T07:48:20Z",
+      "side": 1,
+      "message": "Do you mean we can have another map to track the active queries in render pass? If that we need to track same query in the two maps (command encoder\u0027s and render pass\u0027s), and traverse map and senquence twice for each query index, but if we add Active, just once.",
+      "parentUuid": "83aba15c_a86b5349",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cdcfe9e_8c5f1109",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-04T07:48:20Z",
+      "side": 1,
+      "message": "Put it here for the pipeline statistics query can use it in future. I will move to RenderPassEncoder. If it is needed in pipeline statistics query, then move it back.",
+      "parentUuid": "917ad24d_84f6373e",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3618b7d8_e3a5f5a6",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 4
@@ -65,6 +101,24 @@
       "writtenOn": "2020-11-03T14:01:48Z",
       "side": 1,
       "message": "This function is only used at [1] so it could be inlined.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f9b3a2_51401800",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-04T07:48:20Z",
+      "side": 1,
+      "message": "This will be reused in pipeline statistics query which also need check the same query overwrite.",
+      "parentUuid": "3618b7d8_e3a5f5a6",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +153,24 @@
       "writtenOn": "2020-11-03T14:01:48Z",
       "side": 1,
       "message": "nit: It might be simpler to just call Track on both this, and the command encoder at [2] instead of merging query states.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8367896_01f5ded3",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-04T07:48:20Z",
+      "side": 1,
+      "message": "Add this method is to avoid traversing the two map twice every time when call query operation on render pass, just need to update the query state to command encoder when ending a pass.",
+      "parentUuid": "932fcce4_e5e0d805",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
