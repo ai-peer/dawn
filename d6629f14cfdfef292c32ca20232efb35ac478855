@@ -50,6 +50,24 @@
       "message": "Can this emit the entry point name as well to make debugging easier? And maybe the stages?",
       "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d8ff48_3c074034",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T14:08:52Z",
+      "side": 1,
+      "message": "I\u0027d rather not do one-offs like that until we agree on a plan for detailed error messages (that take into consideration performance but also internationalization and maintainability).",
+      "parentUuid": "f9863b94_29064cd0",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
