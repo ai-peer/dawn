@@ -509,6 +509,24 @@
       "parentUuid": "f82f7db9_328523e2",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f990d68b_e4e5d2f3",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T14:09:44Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d297 to track this issue. Can you add that in to the comment.",
+      "parentUuid": "0ce715a6_b4913ea4",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
