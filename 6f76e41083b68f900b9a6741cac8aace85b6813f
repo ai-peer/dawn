@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "758ba628_d4c38ee7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8dabd67_2bf4cc9b",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8f892022_ae7091f4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -98,6 +122,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "031e0106_28bdce81",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e706ad3a_23b03443",
+      "range": {
+        "startLine": 57,
+        "startChar": 74,
+        "endLine": 57,
+        "endChar": 79
+      },
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19c82620_15652cb2",
@@ -121,6 +169,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55dcec86_42449845",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c82620_15652cb2",
+      "range": {
+        "startLine": 325,
+        "startChar": 78,
+        "endLine": 325,
+        "endChar": 83
+      },
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3ed806d_20182ee0",
@@ -134,6 +206,24 @@
       "writtenOn": "2020-11-04T02:47:50Z",
       "side": 1,
       "message": "This is probably fine for now, but in the future should change to having a transform manager which this transform gets added into.",
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8c594b_3d4a5979",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3ed806d_20182ee0",
       "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

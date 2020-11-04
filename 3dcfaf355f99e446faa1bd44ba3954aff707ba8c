@@ -527,6 +527,24 @@
       "parentUuid": "0ce715a6_b4913ea4",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "091386c1_17f186a6",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f990d68b_e4e5d2f3",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ba0019_3f43db54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T22:27:01Z",
+      "side": 1,
+      "message": "@Ryan, I have ran the the code against other tests. Some tests, like DrawTest, complete successfully. However, tests that index into a local array fail due to missing GLSLstd450SClamp in the SPIRV reader and invalid HLSL array assignments. It seems that HLSL supports initializers during declaration but not assignments. For example, \"float arr[2] \u003d {1,2};\" works but \"float arr[2]; arr \u003d {1,2};\" fails.\n\n ",
+      "revId": "089dce4f81e1f21fd60ff17fa3e7104c78c98682",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
