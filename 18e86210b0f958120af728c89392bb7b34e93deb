@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1384b17f_2f12701d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T16:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc7fb5cd_72f07e20",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 51
+      },
+      "revId": "18e86210b0f958120af728c89392bb7b34e93deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d07d632e_05b90048",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-04T15:30:36Z",
       "side": 1,
       "message": "I think these arguments are flipped. We want to check if format.aspects has both Depth and Stencil which means both D/S are contained inside the set fornat.aspects",
+      "range": {
+        "startLine": 172,
+        "startChar": 21,
+        "endLine": 172,
+        "endChar": 68
+      },
+      "revId": "18e86210b0f958120af728c89392bb7b34e93deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0885999d_7bf101f1",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T16:01:46Z",
+      "side": 1,
+      "message": "Yes, and in general the value after the \u003d\u003d should be the first in the IsSubset call.\n\nDone",
+      "parentUuid": "58ab3ecb_04eae35e",
       "range": {
         "startLine": 172,
         "startChar": 21,
