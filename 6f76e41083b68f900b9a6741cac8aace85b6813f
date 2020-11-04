@@ -58,6 +58,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a44070_72a5259f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-04T15:11:04Z",
+      "side": 1,
+      "message": "lgtm, has this been tested with real/full shaders to confirm the behaviour is correct?",
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e706ad3a_23b03443",
