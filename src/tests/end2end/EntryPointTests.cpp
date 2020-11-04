@@ -67,58 +67,13 @@ TEST_P(EntryPointTests, FragAndVertexSameModule) {
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kRed, renderPass.color, 0, 0);
 }
 
-// Test creating a render pipeline from two entryPoints in the same module with the same name.
-TEST_P(EntryPointTests, FragAndVertexSameModuleSameName) {
-    // TODO: Reenable once Tint is able to produce Vulkan 1.0 / 1.1 SPIR-V.
-    DAWN_SKIP_TEST_IF(IsVulkan());
-
-    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]]
-        fn main() -> void {
-            Position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
-            return;
-        }
-
-        [[location(0)]] var<out> outColor : vec4<f32>;
-
-        [[stage(fragment)]]
-        fn main() -> void {
-          outColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
-          return;
-        }
-    )");
-
-    // Create a point pipeline from the module.
-    utils::ComboRenderPipelineDescriptor desc(device);
-    desc.vertexStage.module = module;
-    desc.vertexStage.entryPoint = "main";
-    desc.cFragmentStage.module = module;
-    desc.cFragmentStage.entryPoint = "main";
-    desc.cColorStates[0].format = wgpu::TextureFormat::RGBA8Unorm;
-    desc.primitiveTopology = wgpu::PrimitiveTopology::PointList;
-    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&desc);
-
-    // Render the point and check that it was rendered.
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    {
-        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-        pass.SetPipeline(pipeline);
-        pass.Draw(1);
-        pass.EndPass();
-    }
-    wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
-
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kRed, renderPass.color, 0, 0);
-}
-
 // Test creating two compute pipelines from the same module.
 TEST_P(EntryPointTests, TwoComputeInModule) {
     // TODO: Reenable once Tint is able to produce Vulkan 1.0 / 1.1 SPIR-V.
     DAWN_SKIP_TEST_IF(IsVulkan());
+
+    // TODO: Reenable once Tint's HLSL writer supports multiple entryPoints on a single stage.
+    DAWN_SKIP_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
 
     wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
         [[block]] struct Data {
@@ -189,6 +144,7 @@ TEST_P(EntryPointTests, TwoComputeInModule) {
 
 DAWN_INSTANTIATE_TEST(EntryPointTests,
                       D3D12Backend(),
+                      D3D12Backend({"use_tint_generator"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       VulkanBackend());
