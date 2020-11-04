@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "aa7215da511e0a4db36ea85e99d1ab98ada323a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87c17570_f934718a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T09:27:46Z",
+      "side": 1,
+      "message": "Note that this is also related to a roll failure in Chromium. I\u0027m checking if your CL would fix it as well. I think the long-term solution is to make DawnPlatform a true component with its own DAWN_PLATFORM_EXPORT macro.",
+      "revId": "aa7215da511e0a4db36ea85e99d1ab98ada323a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
