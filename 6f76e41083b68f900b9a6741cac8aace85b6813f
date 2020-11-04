@@ -18,6 +18,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbcedb92_5a76ce5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:02:43Z",
+      "side": 1,
+      "message": "Stil LGTM!",
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e706ad3a_23b03443",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:02:43Z",
+      "side": 1,
+      "message": "typo: SPIRV",
+      "range": {
+        "startLine": 57,
+        "startChar": 74,
+        "endLine": 57,
+        "endChar": 79
+      },
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c82620_15652cb2",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:02:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 325,
+        "startChar": 78,
+        "endLine": 325,
+        "endChar": 83
+      },
+      "revId": "6f76e41083b68f900b9a6741cac8aace85b6813f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3ed806d_20182ee0",

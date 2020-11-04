@@ -440,6 +440,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07936e1b_c40cee9c",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:02:43Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "5c61d2a6_9e942f05",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af57b946_5446815b",
