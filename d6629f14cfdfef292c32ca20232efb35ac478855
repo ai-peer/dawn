@@ -68,6 +68,24 @@
       "parentUuid": "f9863b94_29064cd0",
       "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d6000e_e22cf4fe",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T14:15:10Z",
+      "side": 1,
+      "message": "Can we file a bug that this error should have more info like the entry point and stage names and then link that here?",
+      "parentUuid": "d7d8ff48_3c074034",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
