@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4db7237_c693152b",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:05:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28cf8ae8_19e233b6",
+      "range": {
+        "startLine": 169,
+        "startChar": 17,
+        "endLine": 169,
+        "endChar": 41
+      },
+      "revId": "a07c9c25797fe8ee9ad22c557f1d6991a92819e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bcc5f23_0dadd2ab",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c99f24_23f84b6f",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:05:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bcc5f23_0dadd2ab",
+      "range": {
+        "startLine": 367,
+        "startChar": 60,
+        "endLine": 367,
+        "endChar": 68
+      },
+      "revId": "a07c9c25797fe8ee9ad22c557f1d6991a92819e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "060f3fe1_b72b66d5",
@@ -94,6 +142,30 @@
       "writtenOn": "2020-11-03T18:15:24Z",
       "side": 1,
       "message": "nit: maybe this should be minImageCount or targetImageCount",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "a07c9c25797fe8ee9ad22c557f1d6991a92819e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43678698_7c9f913b",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T10:05:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "060f3fe1_b72b66d5",
       "range": {
         "startLine": 64,
         "startChar": 12,
