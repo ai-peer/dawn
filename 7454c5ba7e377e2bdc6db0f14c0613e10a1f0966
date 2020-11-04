@@ -92,6 +92,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "55091a8a_ec4c5115",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-04T06:30:31Z",
+      "side": 1,
+      "message": "Done\n\nIn the latest patch I am choosing the solution 1 here. PTAL, thanks!",
+      "parentUuid": "37515fce_07e69a46",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "192ff630_977f5bd7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -124,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6ae7e2_57ce7a0a",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-04T06:30:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "964ded16_c05e8f95",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14ab6b9f_f963f213",
@@ -141,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43be1b2_8efbacb9",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-04T06:30:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14ab6b9f_f963f213",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6f40dcc_4abc7ba0",
@@ -154,6 +208,24 @@
       "writtenOn": "2020-11-03T10:19:43Z",
       "side": 1,
       "message": "u-u-nit: put it just before ExternalMemoryCapabilities? Ditto for the DeviceExt.",
+      "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceee4eb3_02559997",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-04T06:30:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a6f40dcc_4abc7ba0",
       "revId": "7454c5ba7e377e2bdc6db0f14c0613e10a1f0966",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
