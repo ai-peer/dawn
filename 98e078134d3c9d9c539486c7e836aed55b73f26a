@@ -16,6 +16,24 @@
       "message": "lgtm - re: roll failure, did we recently start building this in a different way?",
       "revId": "98e078134d3c9d9c539486c7e836aed55b73f26a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6eb1d81_d0b29b11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T16:40:21Z",
+      "side": 1,
+      "message": "We started having .cpp files here: https://dawn-review.googlesource.com/c/dawn/+/30701",
+      "parentUuid": "616d2391_ea8c67ad",
+      "revId": "98e078134d3c9d9c539486c7e836aed55b73f26a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
