@@ -107,6 +107,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8441cb70_b8c0e83a",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-11-04T01:52:24Z",
+      "side": 1,
+      "message": "Agree and Ack.",
+      "parentUuid": "06075fdd_bd42fc3c",
+      "range": {
+        "startLine": 1040,
+        "startChar": 25,
+        "endLine": 1040,
+        "endChar": 49
+      },
+      "revId": "b7c24849cc74e97bc46c60edb580fcf5e3afc926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "931d35d7_6be519fb",
