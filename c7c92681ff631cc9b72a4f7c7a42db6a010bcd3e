@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2bd2e5_00fcaed4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "LGTM although like discussed in our meeting, maybe a good solution would be to just skip the adapter if it is already present in the set.",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446871f8_b17fd827",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "Maybe std::set\u003cstd::pair\u003cBackendType, string\u003e\u003e would work too and would result in marginally simpler code and would be closer to the semantic of what we want to do.",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed8b510_66cb2797",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "nit: tempIndex is a bit vague. Current additional ID maybe? Can we have a comment explaining why we have it?",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5642459a_43808da2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "nit: small comment to explain what we\u0027re doing.",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf295c8e_b624ea89",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "nit: {{properties.name}};",
+      "range": {
+        "startLine": 392,
+        "startChar": 53,
+        "endLine": 392,
+        "endChar": 97
+      },
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c8af31_d0271886",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:10:38Z",
+      "side": 1,
+      "message": "nit: maybe additionalAdapterId?",
+      "range": {
+        "startLine": 127,
+        "startChar": 13,
+        "endLine": 127,
+        "endChar": 35
+      },
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
