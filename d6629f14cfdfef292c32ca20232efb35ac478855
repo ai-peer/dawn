@@ -16,6 +16,40 @@
       "message": "PTAL! This will land after https://dawn-review.googlesource.com/c/dawn/+/31640 that does the same change to EntryPiontTests",
       "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d21923f_b00e083b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T14:06:06Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9863b94_29064cd0",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-04T14:06:06Z",
+      "side": 1,
+      "message": "Can this emit the entry point name as well to make debugging easier? And maybe the stages?",
+      "revId": "d6629f14cfdfef292c32ca20232efb35ac478855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
