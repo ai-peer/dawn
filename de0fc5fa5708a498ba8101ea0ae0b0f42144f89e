@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af6f05e8_364f12a6",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:22:51Z",
+      "side": 1,
+      "message": "Thank you for your thoughts.\n\nI agree that there\u0027s a bit of a duplicated map lookup for RenderPassEncoder::Begin... but doing so let\u0027s us avoid merging the data on endPass which is expensive because it is O(sum(size of query sets)) and it also makes the query maps std::vector\u003cbool\u003e which has a very compact representation and should be faster to manipulate.\n\nIt\u0027s a bit of a tradeoff, but since it isn\u0027t super clear what side is better, I think we should aim, for as much code simplicity as possible, and this means the duplicate maps.",
+      "parentUuid": "11c3b9fd_64627c6a",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1de2a3b2_224d7f10",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:22:51Z",
+      "side": 1,
+      "message": "Ah I understand. I think with the other changes I suggested, PipelineStatisticsQuery wouldn\u0027t need this so we can move it to RenderPassEncoder.",
+      "parentUuid": "2cdcfe9e_8c5f1109",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3618b7d8_e3a5f5a6",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 4
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "This will be reused in pipeline statistics query which also need check the same query overwrite.",
       "parentUuid": "3618b7d8_e3a5f5a6",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60e0d83_724a0443",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T11:22:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9f9b3a2_51401800",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
