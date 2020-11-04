@@ -132,8 +132,12 @@ BackendTestConfig VulkanBackend(std::initializer_list<const char*> forceEnabledW
 }
 
 TestAdapterProperties::TestAdapterProperties(const wgpu::AdapterProperties& properties,
-                                             bool selected)
-    : wgpu::AdapterProperties(properties), adapterName(properties.name), selected(selected) {
+                                             bool selected,
+                                             uint32_t additionalIndex)
+    : wgpu::AdapterProperties(properties),
+      adapterName(properties.name),
+      selected(selected),
+      adapterAdditionalIndex(additionalIndex) {
 }
 
 AdapterTestParam::AdapterTestParam(const BackendTestConfig& config,
@@ -155,13 +159,8 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param) {
 
     os << ParamName(param.adapterProperties.backendType) << "_" << sanitizedName.c_str();
 
-    // In a Windows Remote Desktop session there are two adapters named "Microsoft Basic Render
-    // Driver" with different adapter types. We must differentiate them to avoid any tests using the
-    // same name.
-    if (param.adapterProperties.deviceID == 0x008C) {
-        std::string adapterType = AdapterTypeName(param.adapterProperties.adapterType);
-        std::replace(adapterType.begin(), adapterType.end(), ' ', '_');
-        os << "_" << adapterType;
+    if (param.adapterProperties.adapterAdditionalIndex > 0) {
+        os << "_" << param.adapterProperties.adapterAdditionalIndex;
     }
 
     for (const char* forceEnabledWorkaround : param.forceEnabledWorkarounds) {
@@ -352,6 +351,8 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn_native::In
         }
     }
 
+    std::map<wgpu::BackendType, std::vector<std::string>> adapterNameMap;
+    int32_t tempIndex = 1u;
     for (const dawn_native::Adapter& adapter : instance->GetAdapters()) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
@@ -386,7 +387,19 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn_native::In
             selected = true;
         }
 
-        mAdapterProperties.emplace_back(properties, selected);
+        uint32_t additionalIndex = 0u;
+        if (adapterNameMap.find(properties.backendType) == adapterNameMap.cend()) {
+            adapterNameMap[properties.backendType] = std::vector<std::string>(1, properties.name);
+        } else {
+            std::vector<std::string>* adapterNames = &adapterNameMap[properties.backendType];
+            if (std::find(adapterNames->begin(), adapterNames->end(), properties.name) ==
+                adapterNames->end()) {
+                adapterNames->push_back(properties.name);
+            } else {
+                additionalIndex = tempIndex++;
+            }
+        }
+        mAdapterProperties.emplace_back(properties, selected, additionalIndex);
     }
 }
 
@@ -394,6 +407,7 @@ std::vector<AdapterTestParam> DawnTestEnvironment::GetAvailableAdapterTestParams
     const BackendTestConfig* params,
     size_t numParams) {
     std::vector<AdapterTestParam> testParams;
+
     for (size_t i = 0; i < numParams; ++i) {
         for (const auto& adapterProperties : mAdapterProperties) {
             if (params[i].backendType == adapterProperties.backendType &&
@@ -432,11 +446,13 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
         deviceId << std::setfill('0') << std::uppercase << std::internal << std::hex << std::setw(4)
                  << properties.deviceID;
 
-        // Preparing for outputting hex numbers
-        log << std::showbase << std::hex << std::setfill('0') << std::setw(4)
+        log << " - \"" << properties.adapterName << "\"";
 
-            << " - \"" << properties.adapterName << "\" - \"" << properties.driverDescription
-            << "\"\n"
+        if (properties.adapterAdditionalIndex > 0) {
+            log << "(" << properties.adapterAdditionalIndex << ") ";
+        }
+
+        log << " - \"" << properties.driverDescription << "\"\n"
             << "   type: " << AdapterTypeName(properties.adapterType)
             << ", backend: " << ParamName(properties.backendType) << "\n"
             << "   vendorId: 0x" << vendorId.str() << ", deviceId: 0x" << deviceId.str()

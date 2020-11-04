@@ -119,9 +119,12 @@ struct BackendTestConfig {
 };
 
 struct TestAdapterProperties : wgpu::AdapterProperties {
-    TestAdapterProperties(const wgpu::AdapterProperties& properties, bool selected);
+    TestAdapterProperties(const wgpu::AdapterProperties& properties,
+                          bool selected,
+                          uint32_t additionalIndex);
     std::string adapterName;
     bool selected;
+    uint32_t adapterAdditionalIndex;
 
   private:
     // This may be temporary, so it is copied into |adapterName| and made private.
