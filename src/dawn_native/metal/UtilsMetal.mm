@@ -169,8 +169,7 @@ namespace dawn_native { namespace metal {
         ASSERT(HasOneBit(aspect));
         ASSERT(format.aspects & aspect);
 
-        constexpr Aspect kDepthStencil = Aspect::Depth | Aspect::Stencil;
-        if ((format.aspects & kDepthStencil) == kDepthStencil) {
+        if (IsSubset(format.aspects, Aspect::Depth | Aspect::Stencil)) {
             // We only provide a blit option if the format has both depth and stencil.
             // It is invalid to provide a blit option otherwise.
             switch (aspect) {
