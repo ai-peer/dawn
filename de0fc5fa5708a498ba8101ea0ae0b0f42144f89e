@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11c3b9fd_64627c6a",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-04T09:57:46Z",
+      "side": 1,
+      "message": "Like you said, if we have two maps, one is tracking unused queries in command encoder, another is tracking active queries in render encoder, then we need to do the steps in render pass when tracking the query index and active query in each call of begin operation: 1, find the vector of bool for the query set in the map; 2, update the value at queryIndex in the vector. In validation, we also need to  traverse the vectors in both of two maps to detect whether the queries is active or used.\n\nBut if we have the QueryState and add a QueryStateMap in render pass, we can just use the QueryStateMap on render pass for tracking and validating, we can reduce the research of map and the index of vector for each begin operation for one time. When the pass is ended, move the tracking data to command encoder.",
+      "parentUuid": "1790d43f_f8e9e0f5",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
