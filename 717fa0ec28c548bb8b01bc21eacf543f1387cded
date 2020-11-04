@@ -116,6 +116,30 @@
       },
       "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee1f1228_c2c40dd1",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T15:47:54Z",
+      "side": 1,
+      "message": "ok thinking again, the mutex is probably more correct. it\u0027s not retain/release that\u0027s racing it\u0027s retain and the assignment to mLastSubmittedCommands.",
+      "parentUuid": "bb8a44ec_426e50d8",
+      "range": {
+        "startLine": 360,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 41
+      },
+      "revId": "717fa0ec28c548bb8b01bc21eacf543f1387cded",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
