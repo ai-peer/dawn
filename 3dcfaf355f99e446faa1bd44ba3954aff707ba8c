@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c072c9d_dc22ae45",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Moved to a common toggle.",
+      "parentUuid": "2df6d623_705712a6",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88afbac1_b24fc12d",
@@ -83,6 +101,24 @@
       "writtenOn": "2020-11-03T16:55:28Z",
       "side": 1,
       "message": "uunit: relocate near |entryPoint|?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e717c45_8a705c93",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88afbac1_b24fc12d",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d56a25_15c6a705",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ffe4540_56c26fd6",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d8304e_fc43d27b",
@@ -135,6 +189,24 @@
       "writtenOn": "2020-11-03T17:51:53Z",
       "side": 1,
       "message": "This also needs to run the tint::Validator to validate the WGSL module (and probably the transform to do bounding of array accesses as well)",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c83615c_d7a760e8",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d8304e_fc43d27b",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ea2009_d02963c8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa405b34_693354ca",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22f24c6b_50106a0f",
@@ -173,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e80f69d3_b7f67081",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f24c6b_50106a0f",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f193e57_7eefd3ce",
@@ -186,6 +294,24 @@
       "writtenOn": "2020-11-03T10:30:18Z",
       "side": 1,
       "message": "This compares the pointer values, which happens to work because the linker does string deduplication so two static strings that are the same get the same value. But please use std::string comparison or strcmp() \u003d\u003d 0.",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbdc343c_686753fe",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f193e57_7eefd3ce",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -221,6 +347,24 @@
       "side": 1,
       "message": "You can\u0027t have multiple entry points with the same name in WGSL anymore. They all have to be unique.",
       "parentUuid": "6d60725f_a70091d3",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300e596a_131ddb7c",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Done, we should probably make it fail during validation.",
+      "parentUuid": "4282210c_d7436539",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -278,6 +422,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c61d2a6_9e942f05",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "Since FragAndVertexSameModule already exists, I removed the test.",
+      "parentUuid": "bf453af0_0b09a5ad",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af57b946_5446815b",
@@ -291,6 +453,24 @@
       "writtenOn": "2020-11-03T17:51:53Z",
       "side": 1,
       "message": "This one should already be fine, what is the issue causing it to be disabled?",
+      "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82f7db9_328523e2",
+        "filename": "src/tests/end2end/EntryPointTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2020-11-04T01:15:17Z",
+      "side": 1,
+      "message": "It is generating 2 RWByteAddressBuffer\u0027s with the same name\n\n struct Data {\n  uint data;\n };\n\n RWByteAddressBuffer data : register(u0);\n\n RWByteAddressBuffer data : register(u0);",
+      "parentUuid": "af57b946_5446815b",
       "revId": "3dcfaf355f99e446faa1bd44ba3954aff707ba8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
