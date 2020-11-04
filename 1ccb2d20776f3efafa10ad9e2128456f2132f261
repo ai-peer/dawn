@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf46d6e8_6fcfe673",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-04T23:08:32Z",
+      "side": 1,
+      "message": "I updated the solution so the end2end test will render into a NV12 quad then re-construct the source bitmap back into the FB using separate per-plane views. @Corentin, are you interested to pursue this as an extension?",
+      "revId": "1ccb2d20776f3efafa10ad9e2128456f2132f261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
