@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f992264_6f4dbfe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-04T09:53:14Z",
+      "side": 1,
+      "message": "Still LGTM, IsSubset is amazing and we should use it in many places!",
+      "revId": "3769b6a3a79fea7f032918639adcf5a8942f832e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
