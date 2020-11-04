@@ -16,6 +16,23 @@
       "message": "Still LGTM, IsSubset is amazing and we should use it in many places!",
       "revId": "3769b6a3a79fea7f032918639adcf5a8942f832e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c92094_36b164ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-04T15:25:37Z",
+      "side": 1,
+      "message": "Thanks for the reviews!",
+      "revId": "3769b6a3a79fea7f032918639adcf5a8942f832e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
