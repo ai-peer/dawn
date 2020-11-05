@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "150af3090f6da2225f194795acb45335d6d41aec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bb66d8_14f8cb1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T10:47:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "150af3090f6da2225f194795acb45335d6d41aec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce9ba9f_250fea5d",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T10:47:24Z",
+      "side": 1,
+      "message": "Maybe this should be folded in DeviceLost?",
+      "revId": "150af3090f6da2225f194795acb45335d6d41aec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a733cf69_f908a5fb",
+        "filename": "src/dawn_wire/client/ObjectBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T10:47:24Z",
+      "side": 1,
+      "message": "It\u0027s a bit unfortunate that this makes all the objects 8 bytes bigger to store the vtable. But I guess that was going to happen at some point anyway.",
+      "revId": "150af3090f6da2225f194795acb45335d6d41aec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
