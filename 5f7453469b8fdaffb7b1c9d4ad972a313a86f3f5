@@ -16,6 +16,46 @@
       "message": "(PTAL)",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75911798_dc8f0ab6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-05T00:17:34Z",
+      "side": 1,
+      "message": "lgtm, looks like some changes needed in Shaobo\u0027s new code/tests",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6479062_4e89fb88",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-05T00:17:34Z",
+      "side": 1,
+      "message": "nit: prefer !\u003d nullptr",
+      "range": {
+        "startLine": 492,
+        "startChar": 15,
+        "endLine": 492,
+        "endChar": 21
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
