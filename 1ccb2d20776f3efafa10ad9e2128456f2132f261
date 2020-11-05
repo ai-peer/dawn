@@ -16,6 +16,24 @@
       "message": "I updated the solution so the end2end test will render into a NV12 quad then re-construct the source bitmap back into the FB using separate per-plane views. @Corentin, are you interested to pursue this as an extension?",
       "revId": "1ccb2d20776f3efafa10ad9e2128456f2132f261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a30998_63ecabca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T11:03:29Z",
+      "side": 1,
+      "message": "Yeah we should go ahead with. Some high-level comments:\n\n - The name NV12 is not super descriptive, and in a sense it has more semantic than what we need because it says its content is yuv when actually it\u0027s just fullres R8Unorm + quarter size RG8Unorm.\n - It\u0027s not clear if it should be an extension, and how it should work if it is. Basically do we want applications to be able to create NV12 textures asides from just importing them in WebGPU? If we want applications to be able to create them then we need to support at least CopySrc / CopyDst and lazy clearing.\n - If applications are able to write to the texture with CopyDst (or even RenderAttachment) we\u0027ll need to be careful with validation because I believe that in D3D12 you can only transition the whole resource, not each plane separately.\n - Checking binary files in the repo isn\u0027t great. It\u0027s good that this CL shows an end2end example with YUV data encoded, but for the real CL we can just check that each plane is addressed separately as it\u0027s just R8Unorm + RG8Unorm.\n - Maybe we can plane to have a plane 2 already?",
+      "parentUuid": "bf46d6e8_6fcfe673",
+      "revId": "1ccb2d20776f3efafa10ad9e2128456f2132f261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
