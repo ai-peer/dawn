@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d6d4f96_6a90c078",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-05T19:54:19Z",
+      "side": 1,
+      "message": "HandleDeviceLost is also called when the client get\u0027s a device lost from the server and the wire is still connected. In this case, we should still get the callback rejections through the wire. We.. probably don\u0027t have tests for this though. I\u0027ll look at doing that in a following patch.",
+      "parentUuid": "bce9ba9f_250fea5d",
+      "revId": "150af3090f6da2225f194795acb45335d6d41aec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a733cf69_f908a5fb",
