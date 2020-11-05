@@ -26,7 +26,6 @@
 #include <dawn_native/DawnNative.h>
 #include <dawn_wire/WireClient.h>
 #include <dawn_wire/WireServer.h>
-#include "GLFW/glfw3.h"
 
 #include <algorithm>
 #include <cstring>
@@ -89,21 +88,8 @@ static utils::TerribleCommandBuffer* c2sBuf = nullptr;
 static utils::TerribleCommandBuffer* s2cBuf = nullptr;
 
 wgpu::Device CreateCppDawnDevice() {
-    glfwSetErrorCallback(PrintGLFWError);
-    if (!glfwInit()) {
-        return wgpu::Device();
-    }
-
-    // Create the test window and discover adapters using it (esp. for OpenGL)
-    utils::SetupGLFWWindowHintsForBackend(backendType);
-    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
-    window = glfwCreateWindow(640, 480, "Dawn window", nullptr, nullptr);
-    if (!window) {
-        return wgpu::Device();
-    }
-
     instance = std::make_unique<dawn_native::Instance>();
-    utils::DiscoverAdapter(instance.get(), window, backendType);
+    instance->DiscoverDefaultAdapters();
 
     // Get an adapter for the backend to use, and create the device.
     dawn_native::Adapter backendAdapter;
@@ -251,11 +237,10 @@ void DoFlush() {
 
         ASSERT(c2sSuccess && s2cSuccess);
     }
-    glfwPollEvents();
 }
 
 bool ShouldQuit() {
-    return glfwWindowShouldClose(window);
+    return false;
 }
 
 GLFWwindow* GetGLFWWindow() {

@@ -24,7 +24,6 @@
 
 wgpu::Device device;
 wgpu::Queue queue;
-wgpu::SwapChain swapchain;
 wgpu::RenderPipeline pipeline;
 wgpu::BindGroup bindGroup;
 wgpu::Buffer ubo;
@@ -51,9 +50,6 @@ void init() {
     device = CreateCppDawnDevice();
 
     queue = device.GetDefaultQueue();
-    swapchain = GetSwapChain(device);
-    swapchain.Configure(GetPreferredSwapChainTextureFormat(), wgpu::TextureUsage::RenderAttachment,
-                        640, 480);
 
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
@@ -119,7 +115,7 @@ void init() {
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
     descriptor.vertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
-    descriptor.cColorStates[0].format = GetPreferredSwapChainTextureFormat();
+    descriptor.cColorStates[0].format = wgpu::TextureFormat::BGRA8Unorm;
 
     pipeline = device.CreateRenderPipeline(&descriptor);
 
@@ -142,7 +138,17 @@ void init() {
 }
 
 void frame() {
-    wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = 640;
+    descriptor.size.height = 480;
+    descriptor.size.depth = 1;
+    descriptor.sampleCount = 1;
+    descriptor.format = wgpu::TextureFormat::BGRA8Unorm;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture backbuffer = device.CreateTexture(&descriptor);
+    wgpu::TextureView backbufferView = backbuffer.CreateView();
 
     static int f = 0;
     f++;
@@ -168,7 +174,6 @@ void frame() {
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
-    swapchain.Present();
     DoFlush();
     fprintf(stderr, "frame %i\n", f);
 }
