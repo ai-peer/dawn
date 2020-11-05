@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd873db_7b7c9748",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-05T14:24:03Z",
+      "side": 1,
+      "message": "\u003cbikeshed\u003e Not new to this patch, but I feel that this would read better as \"IsSet()\" than \"IsSubset()\". WDYT? \u003c/bikeshed\u003e",
+      "revId": "6de722f3e37a477e70ecdbf1512c71e90a26ebfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
