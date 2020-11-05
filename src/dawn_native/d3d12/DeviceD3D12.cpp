@@ -228,8 +228,11 @@ namespace dawn_native { namespace d3d12 {
         mRenderTargetViewAllocator->Tick(completedSerial);
         mDepthStencilViewAllocator->Tick(completedSerial);
         mUsedComObjectRefs.ClearUpTo(completedSerial);
-        DAWN_TRY(ExecutePendingCommandContext());
-        DAWN_TRY(NextSerial());
+
+        if (mPendingCommands.IsOpen()) {
+            DAWN_TRY(ExecutePendingCommandContext());
+            DAWN_TRY(NextSerial());
+        }
 
         DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
@@ -256,7 +259,13 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ExecutionSerial Device::CheckAndUpdateCompletedSerials() {
-        return ExecutionSerial(mFence->GetCompletedValue());
+        ExecutionSerial serial = ExecutionSerial(mFence->GetCompletedValue());
+
+        if (serial < GetCompletedCommandSerial()) {
+            return ExecutionSerial(0);
+        }
+
+        return serial;
     }
 
     void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
