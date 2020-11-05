@@ -35,6 +35,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db83f77_3ac419fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "LGTM too! Thanks for the great test updates too!",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c73590f_0a292246",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "UINT32_MAX is actually optional in stdint.h: https://en.cppreference.com/w/cpp/header/cstdint can we have a (0xffffffffUL) instead?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152162d8_f5ef4876",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "u-nit: srcLayout?",
+      "range": {
+        "startLine": 636,
+        "startChar": 30,
+        "endLine": 636,
+        "endChar": 36
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb7498e_41b66ad6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "Do you think it would be possible to do something where we start this function by validating the cases where undefined is disallowed and fixing them, then the rest of the code can just assume they have a correct value?\n\nNote that it needs to be done here or as a follow up, but if you think it is possible a TODO would be nice.",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6479062_4e89fb88",
@@ -54,6 +128,370 @@
         "endLine": 492,
         "endChar": 21
       },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3e67c0_0659bbde",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "Maybe define these variables only in the corresponding if block?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1d0701_9cdc3250",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: these variables are only used later, maybe defined them at [1]?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529b8eaf_ef02a94b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abedf83d_66d461f0",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: suffix with u or ul to make sure it doesn\u0027t become 0x7FFF\u0027FFFE (not sure if it does but you never know with C++)",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 54
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6056fb8_382b8ef4",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: TODO ASSERT_DEVICE_ERROR",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a628c6af_fdea67b4",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c056662_f50b5049",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539e0919_f48c5df3",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf23987_57e91641",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 203,
+        "startChar": 43,
+        "endLine": 203,
+        "endChar": 54
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f968c3_00f928d9",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "TODO change to ASSERT_DEVICE_ERROR",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ebb21aa_015be027",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b7eec19_4d94afeb",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: comment that the failures are because height / depth aren\u0027t 1.",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1a8844_a917177f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "TODO change to failure?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be7ccbf7_b9936d8a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: comment that it fails because the depth \u003e 1",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac0d7b6_52a0d9dd",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: TODO change to failure?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa975fe_57b194c1",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: failure",
+      "range": {
+        "startLine": 1168,
+        "startChar": 47,
+        "endLine": 1168,
+        "endChar": 66
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d19778c_6dc9372f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: failure",
+      "range": {
+        "startLine": 1181,
+        "startChar": 43,
+        "endLine": 1181,
+        "endChar": 62
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabd91e9_a400feba",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "nit: Comment why it is a failure?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141f271c_7153de32",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "TODO change to failure ...",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15ff448_0d8e3539",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-05T13:33:38Z",
+      "side": 1,
+      "message": "Why does this emit a deprecation warning?",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
