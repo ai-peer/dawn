@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "426751d2_ac84ef52",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T08:25:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "446871f8_b17fd827",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed8b510_66cb2797",
@@ -70,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "460f29a8_e63aae67",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T08:25:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ed8b510_66cb2797",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5642459a_43808da2",
@@ -83,6 +119,24 @@
       "writtenOn": "2020-11-04T11:10:38Z",
       "side": 1,
       "message": "nit: small comment to explain what we\u0027re doing.",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946e4133_ccb9acaa",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T08:25:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5642459a_43808da2",
       "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30eb183_de4bbaa8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T08:25:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf295c8e_b624ea89",
+      "range": {
+        "startLine": 392,
+        "startChar": 53,
+        "endLine": 392,
+        "endChar": 97
+      },
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3c8af31_d0271886",
@@ -123,6 +201,30 @@
       "writtenOn": "2020-11-04T11:10:38Z",
       "side": 1,
       "message": "nit: maybe additionalAdapterId?",
+      "range": {
+        "startLine": 127,
+        "startChar": 13,
+        "endLine": 127,
+        "endChar": 35
+      },
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b78db99_343af470",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T08:25:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d3c8af31_d0271886",
       "range": {
         "startLine": 127,
         "startChar": 13,
