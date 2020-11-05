@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f034c10c_c35abcbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-05T02:07:04Z",
+      "side": 1,
+      "message": "Hi Corentin, I\u0027ve changed my CL to skip the adapters that have the same name and backend type. PTAL, thanks!",
+      "parentUuid": "3e2bd2e5_00fcaed4",
+      "revId": "c7c92681ff631cc9b72a4f7c7a42db6a010bcd3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446871f8_b17fd827",
