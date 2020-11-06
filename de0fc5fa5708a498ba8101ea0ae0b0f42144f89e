@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd6cb4e1_6b7f6dca",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-06T09:15:22Z",
+      "side": 1,
+      "message": "In this case, I don’t think this patch is needed. We only need to check whether there is a query which is only begun but not ended for occlusion query in render pass encoder, this is simpler and only a flag to identify the query is begun or ended, see https://dawn-review.googlesource.com/c/dawn/+/31321. Abandoned this one.",
+      "parentUuid": "af6f05e8_364f12a6",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Ah I understand. I think with the other changes I suggested, PipelineStatisticsQuery wouldn\u0027t need this so we can move it to RenderPassEncoder.",
       "parentUuid": "2cdcfe9e_8c5f1109",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d002b79_4a08715a",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-06T09:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1de2a3b2_224d7f10",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
