@@ -161,6 +161,7 @@ namespace dawn_native { namespace vulkan {
         {DeviceExt::ExternalSemaphoreFD, "VK_KHR_external_semaphore_fd", NeverPromoted},
         {DeviceExt::ExternalSemaphoreZirconHandle, "VK_FUCHSIA_external_semaphore", NeverPromoted},
 
+        {DeviceExt::DepthClipEnable, "VK_EXT_depth_clip_enable", NeverPromoted},
         {DeviceExt::DebugMarker, "VK_EXT_debug_marker", NeverPromoted},
         {DeviceExt::ImageDrmFormatModifier, "VK_EXT_image_drm_format_modifier", NeverPromoted},
         {DeviceExt::Swapchain, "VK_KHR_swapchain", NeverPromoted},
@@ -211,6 +212,7 @@ namespace dawn_native { namespace vulkan {
             switch (ext) {
                 // Happy extensions don't need anybody else!
                 case DeviceExt::BindMemory2:
+                case DeviceExt::DepthClipEnable:
                 case DeviceExt::GetMemoryRequirements2:
                 case DeviceExt::Maintenance1:
                 case DeviceExt::ImageFormatList:

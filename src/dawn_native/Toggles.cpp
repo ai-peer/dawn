@@ -144,6 +144,14 @@ namespace dawn_native {
             {Toggle::UseTintGenerator,
              {"use_tint_generator", "Use Tint instead of SPRIV-cross to generate shaders.",
               "https://crbug.com/dawn/548"}},
+            {Toggle::UseDepthClampToClampDepthBias,
+             {"use_depth_clamp_to_clamp_depth_bias",
+              "This is a workaround for NVIDIA Vulkan drivers not correctly clamping the depth "
+              "after applying the depth bias. It works by enabling depthClamping (which fixes the "
+              "behavior in the driver) and enabling the depth clipping so that the clamping only "
+              "applies to the depthbiased values (but we still clip triangles that go outside the "
+              "viewport). This is NVIDIA bug 3171019.",
+              "https://crbug.com/dawn/536"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 

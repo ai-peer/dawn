@@ -230,9 +230,6 @@ TEST_P(DepthBiasTests, NegativeBiasOnFloatWithClamp) {
 
 // Test adding positive infinite slope bias to output
 TEST_P(DepthBiasTests, PositiveInfinitySlopeBiasOnFloat) {
-    // NVIDIA GPUs do not clamp values to 1 when using Inf slope bias.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // Draw quad with z from 0 to 0.5 with inf slope bias
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.125, QuadAngle::TiltedX, 0,
                      std::numeric_limits<float>::infinity(), 0);
@@ -249,9 +246,6 @@ TEST_P(DepthBiasTests, PositiveInfinitySlopeBiasOnFloat) {
 
 // Test adding positive infinite slope bias to output
 TEST_P(DepthBiasTests, NegativeInfinityBiasOnFloat) {
-    // NVIDIA GPUs do not clamp values to 0 when using -Inf slope bias.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // Draw quad with z from 0 to 0.5 with -inf slope bias
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.125, QuadAngle::TiltedX, 0,
                      -std::numeric_limits<float>::infinity(), 0);

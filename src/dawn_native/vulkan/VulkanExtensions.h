@@ -99,6 +99,7 @@ namespace dawn_native { namespace vulkan {
         ExternalSemaphoreZirconHandle,
 
         // Others
+        DepthClipEnable,
         DebugMarker,
         ImageDrmFormatModifier,
         Swapchain,
