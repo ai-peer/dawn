@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5728ef_9c2aaf60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-06T15:56:42Z",
+      "side": 1,
+      "message": "LGTM\n\nSounds like the naming discussion is heading towards a consensus on IsSubset(). Thanks for indulging me.",
+      "revId": "7496f33999275fd2f12047e64bd5713a490c7613",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
