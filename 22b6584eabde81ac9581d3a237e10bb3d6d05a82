@@ -34,6 +34,24 @@
       "parentUuid": "a0a092fa_799ef31c",
       "revId": "22b6584eabde81ac9581d3a237e10bb3d6d05a82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e178237_c42b7e1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "At Corentin\u0027s suggestion, I confirmed by adding ASSERT(false) in all the new validation errors and rerunning dawn_end2end_tests. Passed!",
+      "parentUuid": "2d338e81_77ad8bcf",
+      "revId": "22b6584eabde81ac9581d3a237e10bb3d6d05a82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f55707_f1d8a0a3",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c73590f_0a292246",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "152162d8_f5ef4876",
@@ -82,6 +100,30 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "u-nit: srcLayout?",
+      "range": {
+        "startLine": 636,
+        "startChar": 30,
+        "endLine": 636,
+        "endChar": 36
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df59fcb3_033af77c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "152162d8_f5ef4876",
       "range": {
         "startLine": 636,
         "startChar": 30,
@@ -111,6 +153,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98a20598_72539b8c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Validating requires knowing blockInfo, blockInfo requires knowing the texture format, which requires the texture to have been validated. Technically would work if GetFormat() gave us an arbitrary answer on invalid textures, but that\u0027s weird.",
+      "parentUuid": "4bb7498e_41b66ad6",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6479062_4e89fb88",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -122,6 +182,30 @@
       "writtenOn": "2020-11-05T00:17:34Z",
       "side": 1,
       "message": "nit: prefer !\u003d nullptr",
+      "range": {
+        "startLine": 492,
+        "startChar": 15,
+        "endLine": 492,
+        "endChar": 21
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e020be8c_1ab506bb",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6479062_4e89fb88",
       "range": {
         "startLine": 492,
         "startChar": 15,
@@ -149,6 +233,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fd26551_84241753",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e3e67c0_0659bbde",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e1d0701_9cdc3250",
@@ -168,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "372920c1_8c86320a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "heightInBlocks is used just below here, but moved the others. Technically we could get rid of heightInBlocks (saves a division operation) and do e.g. copyExtent.height \u003e layout.rowsPerImage * blockInfo.height, but I think that\u0027s too confusing.",
+      "parentUuid": "0e1d0701_9cdc3250",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "529b8eaf_ef02a94b",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 8
@@ -179,6 +299,24 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "[1]",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51ff524_64053292",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "529b8eaf_ef02a94b",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -206,6 +344,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad4df5b6_26d1baef",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abedf83d_66d461f0",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 54
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6056fb8_382b8ef4",
@@ -219,6 +381,24 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "nit: TODO ASSERT_DEVICE_ERROR",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa746817_b8524866",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "These are end2end tests, and the device errors should be caught by validation tests instead. Added TODO to remove.",
+      "parentUuid": "f6056fb8_382b8ef4",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -297,6 +477,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "977b7e00_12311638",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cf23987_57e91641",
+      "range": {
+        "startLine": 203,
+        "startChar": 43,
+        "endLine": 203,
+        "endChar": 54
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f968c3_00f928d9",
@@ -348,6 +552,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ce239d8_be573f34",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b7eec19_4d94afeb",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b1a8844_a917177f",
@@ -361,6 +583,24 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "TODO change to failure?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63ccabad_7003cdaa",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1a8844_a917177f",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -382,6 +622,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f47c50d_53ca698e",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be7ccbf7_b9936d8a",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac0d7b6_52a0d9dd",
@@ -399,6 +657,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "965581c7_8e1db902",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aac0d7b6_52a0d9dd",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aa975fe_57b194c1",
@@ -412,6 +688,30 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "nit: failure",
+      "range": {
+        "startLine": 1168,
+        "startChar": 47,
+        "endLine": 1168,
+        "endChar": 66
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b1b1b6_3b43791f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aa975fe_57b194c1",
       "range": {
         "startLine": 1168,
         "startChar": 47,
@@ -445,6 +745,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3c7096_b45ad733",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d19778c_6dc9372f",
+      "range": {
+        "startLine": 1181,
+        "startChar": 43,
+        "endLine": 1181,
+        "endChar": 62
+      },
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fabd91e9_a400feba",
@@ -458,6 +782,24 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "nit: Comment why it is a failure?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb0725a_a7023a13",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fabd91e9_a400feba",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -479,6 +821,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6acabbd8_15b72cf0",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "141f271c_7153de32",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c15ff448_0d8e3539",
@@ -492,6 +852,24 @@
       "writtenOn": "2020-11-05T13:33:38Z",
       "side": 1,
       "message": "Why does this emit a deprecation warning?",
+      "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889557f6_ad16eaf0",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-11-06T02:44:27Z",
+      "side": 1,
+      "message": "The original behavior (https://dawn-review.googlesource.com/c/dawn/+/30741 base) seems to have been that bytesPerRow was checked only if height \u003e 1 || depth \u003e 1.",
+      "parentUuid": "c15ff448_0d8e3539",
       "revId": "5f7453469b8fdaffb7b1c9d4ad972a313a86f3f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
