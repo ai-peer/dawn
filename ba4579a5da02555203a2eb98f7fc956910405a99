@@ -1,0 +1,238 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73fa450_2ed00ee9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5771220_10f962a4",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "nit: \"The occlusion query must be ended before endPass\"?",
+      "range": {
+        "startLine": 69,
+        "startChar": 54,
+        "endLine": 69,
+        "endChar": 86
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e294f7_b347274e",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "nit: Only a single occlusion query can be active at a time. ?",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 93
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c087869_021ca9cc",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "I think this is the same discussion as for https://dawn-review.googlesource.com/c/dawn/+/31180\n\nIt should be valid to start an occlusion query in a render pass, then start it again in another render pass in the same command encoder. This means that the tracking of queries active must be per renderpass.",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f349786f_0187014d",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "nit: cannot",
+      "range": {
+        "startLine": 210,
+        "startChar": 77,
+        "endLine": 210,
+        "endChar": 83
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8878ab4_9573b9a8",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "nit: written",
+      "range": {
+        "startLine": 210,
+        "startChar": 87,
+        "endLine": 210,
+        "endChar": 93
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed923901_e095d6ba",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "Isn\u0027t this done automatically with [1]?",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6864b435_a6c16f96",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d18ca393_071c72c7",
+        "filename": "src/dawn_native/RenderPassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "mHasBegun... or more simply mOcclusionQueryActive",
+      "range": {
+        "startLine": 71,
+        "startChar": 13,
+        "endLine": 71,
+        "endChar": 36
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c3812e_ff334298",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "Please let\u0027s not create devices with custom options in the middle like that. (there\u0027s a caveat that errors on them aren\u0027t caught by ValidationTest which cost me 2 hours of debugging in the past). Can this be in the TimestampQueryTests instead?",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b57cbe_9f1ca8e5",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "Can we test that it is valid to use the same query index twice in the same command encoder if it is in two different render passes?",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80df3623_02c1eab9",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:55:19Z",
+      "side": 1,
+      "message": "I think we\u0027re missing a test for an occlusion query being started but not ended at endPass.",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
