@@ -32,6 +32,12 @@ static_library("dawn_sample_utils") {
     "SampleUtils.h",
   ]
 
+  include_dirs = [ "${dawn_root}/third_party/angle/include" ]
+  lib_dirs = [ "${dawn_root}/third_party/angle/out/Release" ]
+  libs = [
+      "libGLESv2.dll.lib",
+      "libEGL.dll.lib",
+  ]
   # Export all of these as public deps so that `gn check` allows includes
   public_deps = [
     "${dawn_root}/src/common",

@@ -37,7 +37,10 @@
 #include <unordered_map>
 
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#    define GLFW_EXPOSE_NATIVE_WIN32
 #    include "GLFW/glfw3.h"
+#    include "GLFW/glfw3native.h"
+#    include "EGL/egl.h"
 #    include "dawn_native/OpenGLBackend.h"
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 
@@ -306,13 +309,42 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     instance->EnableBackendValidation(mEnableBackendValidation);
     instance->EnableGPUBasedBackendValidation(mEnableBackendValidation);
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
-
-    instance->DiscoverDefaultAdapters();
-
 #ifdef DAWN_ENABLE_BACKEND_OPENGL
     if (!glfwInit()) {
         return instance;
     }
+#    if 1
+    glfwDefaultWindowHints();
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+    std::string windowName = "Dawn OpenGLES test window";
+    GLFWwindow* window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
+
+    HWND hwnd = glfwGetWin32Window(window);
+    HDC hdc = GetDC(hwnd);
+    EGLDisplay display = eglGetDisplay(hdc);
+    eglInitialize(display, NULL, NULL);
+    EGLint defaultAttribList[] = {
+        EGL_RED_SIZE, 8,
+        EGL_GREEN_SIZE, 8,
+        EGL_BLUE_SIZE, 8,
+        EGL_DEPTH_SIZE, 24,
+        EGL_SURFACE_TYPE,
+        EGL_WINDOW_BIT,
+        EGL_NONE
+    };
+    EGLint numConfigs;
+    EGLConfig config;
+    eglChooseConfig(display, defaultAttribList, &config, 1, &numConfigs);
+    EGLContext share_context = EGL_NO_CONTEXT;
+    EGLint contextAttribList[] = {
+        EGL_CONTEXT_MAJOR_VERSION, 3,
+        EGL_CONTEXT_MINOR_VERSION, 1,
+        EGL_NONE};
+    EGLContext context = eglCreateContext(display, config, share_context, contextAttribList);
+    EGLSurface surface = eglCreateWindowSurface(display, config, hwnd, nullptr);
+    eglMakeCurrent(display, surface, surface, context);
+#    else
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
@@ -323,10 +355,11 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     GLFWwindow* window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
 
     glfwMakeContextCurrent(window);
-    dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
-    adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
-    instance->DiscoverAdapters(&adapterOptions);
+#    endif
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
+
+
+    instance->DiscoverDefaultAdapters();
 
     return instance;
 }
