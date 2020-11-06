@@ -22,6 +22,8 @@
 
 #include <cstring>
 
+#include "common/Log.h"
+
 namespace dawn_native { namespace vulkan {
 
     namespace {
@@ -122,6 +124,7 @@ namespace dawn_native { namespace vulkan {
             }
 
             for (const VkExtensionProperties& extension : extensionsProperties) {
+                DAWN_DEBUG() << extension.extensionName;
                 auto it = knownExts.find(extension.extensionName);
                 if (it != knownExts.end()) {
                     info.extensions.Set(it->second, true);
@@ -283,6 +286,11 @@ namespace dawn_native { namespace vulkan {
         if (info.extensions.Has(DeviceExt::DriverProperties)) {
             propertiesChain.Add(&info.driverProperties,
                                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES);
+        }
+
+        if (info.extensions.Has(DeviceExt::DepthClipEnable)) {
+            propertiesChain.Add(&info.depthClipEnableFeatures,
+                                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT);
         }
 
         // If we have DeviceExt::GetPhysicalDeviceProperties2, use features2 and properties2 so

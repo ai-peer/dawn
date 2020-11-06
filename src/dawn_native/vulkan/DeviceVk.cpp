@@ -41,6 +41,8 @@
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
+#include "common/Log.h"
+
 namespace dawn_native { namespace vulkan {
 
     // static
@@ -52,7 +54,6 @@ namespace dawn_native { namespace vulkan {
 
     Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
         : DeviceBase(adapter, descriptor) {
-        InitTogglesFromDriver();
     }
 
     MaybeError Device::Initialize() {
@@ -76,16 +77,16 @@ namespace dawn_native { namespace vulkan {
 
             DAWN_TRY(functions->LoadDeviceProcs(mVkDevice, mDeviceInfo));
 
+            InitTogglesFromDriver();
+
             // The queue can be loaded before the fenced deleter because their lifetime is tied to
             // the device.
             GatherQueueFromDevice();
-
-            mDeleter = std::make_unique<FencedDeleter>(this);
         }
 
+        mDeleter = std::make_unique<FencedDeleter>(this);
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
         mResourceMemoryAllocator = std::make_unique<ResourceMemoryAllocator>(this);
-
         mExternalMemoryService = std::make_unique<external_memory::Service>(this);
         mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(this);
 
@@ -436,12 +437,27 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Device::InitTogglesFromDriver() {
+        bool hasDepthClipEnable = mDeviceInfo.HasExt(DeviceExt::DepthClipEnable) &&
+                                  mDeviceInfo.depthClipEnableFeatures.depthClipEnable;
+        bool hasDriverProperties = mDeviceInfo.HasExt(DeviceExt::DriverProperties);
+        bool isNvidiaProprietary = hasDriverProperties && mDeviceInfo.driverProperties.driverID ==
+                                                              VK_DRIVER_ID_NVIDIA_PROPRIETARY;
+
         // TODO(jiawei.shao@intel.com): tighten this workaround when this issue is fixed in both
         // Vulkan SPEC and drivers.
         SetToggle(Toggle::UseTemporaryBufferInCompressedTextureToTextureCopy, true);
 
         // By default try to use D32S8 for Depth24PlusStencil8
         SetToggle(Toggle::VulkanUseD32S8, true);
+
+        DAWN_DEBUG() << hasDepthClipEnable << " " << hasDriverProperties << " " << isNvidiaProprietary;
+
+        // TODO(cwallez@chromium.org): Tighten this workaround when it is fixed in Nvidia drivers.
+        // https://crbug.com/dawn/536: Enable clamping of biased depth by using (depthClamp = true,
+        // depthClip = true).
+        if (hasDepthClipEnable && isNvidiaProprietary) {
+            SetToggle(Toggle::UseDepthClampToClampDepthBias, true);
+        }
     }
 
     void Device::ApplyDepth24PlusS8Toggle() {
