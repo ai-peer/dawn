@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d5a7013_bdaab360",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T13:41:55Z",
+      "side": 1,
+      "message": "Uh? I thought we needed to check that the same query is not written twice in a render pass so at least some of the logic in this CL is needed.\n\nAlso I thought the logic for CommandEncoder was needed to track which query needed zero-initializing, something like that.",
+      "parentUuid": "fd6cb4e1_6b7f6dca",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
