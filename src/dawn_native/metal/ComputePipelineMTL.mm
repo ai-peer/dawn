@@ -38,8 +38,9 @@ namespace dawn_native { namespace metal {
                                                ToBackend(GetLayout()), &computeData));
 
         NSError* error = nil;
-        mMtlComputePipelineState =
-            [mtlDevice newComputePipelineStateWithFunction:computeData.function error:&error];
+        mMtlComputePipelineState.Acquire([mtlDevice
+            newComputePipelineStateWithFunction:computeData.function.Get()
+                                          error:&error]);
         if (error != nil) {
             NSLog(@" error => %@", error);
             return DAWN_INTERNAL_ERROR("Error creating pipeline state");
@@ -53,12 +54,8 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    ComputePipeline::~ComputePipeline() {
-        [mMtlComputePipelineState release];
-    }
-
     void ComputePipeline::Encode(id<MTLComputeCommandEncoder> encoder) {
-        [encoder setComputePipelineState:mMtlComputePipelineState];
+        [encoder setComputePipelineState:mMtlComputePipelineState.Get()];
     }
 
     MTLSize ComputePipeline::GetLocalWorkGroupSize() const {
