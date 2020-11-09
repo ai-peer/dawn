@@ -84,9 +84,9 @@ namespace dawn_native { namespace metal {
             return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
         }
 
-        mMtlBuffer = [ToBackend(GetDevice())->GetMTLDevice() newBufferWithLength:currentSize
-                                                                         options:storageMode];
-        if (mMtlBuffer == nil) {
+        mMtlBuffer.Acquire([ToBackend(GetDevice())->GetMTLDevice() newBufferWithLength:currentSize
+                                                                         options:storageMode]);
+        if (mMtlBuffer == nullptr) {
             return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation failed");
         }
 
@@ -136,8 +136,7 @@ namespace dawn_native { namespace metal {
     }
 
     void Buffer::DestroyImpl() {
-        [mMtlBuffer release];
-        mMtlBuffer = nil;
+        mMtlBuffer = nullptr;
     }
 
     void Buffer::EnsureDataInitialized(CommandRecordingContext* commandContext) {

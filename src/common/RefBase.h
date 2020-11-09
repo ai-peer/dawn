@@ -138,12 +138,12 @@ class RefBase {
     }
 
     // Operator * and -> to act like a pointer.
-    const typename Traits::PointedType& operator*() const {
-        return *mValue;
-    }
-    typename Traits::PointedType& operator*() {
-        return *mValue;
-    }
+    //const typename Traits::PointedType& operator*() const {
+    //    return *mValue;
+    //}
+    //typename Traits::PointedType& operator*() {
+    //    return *mValue;
+    //}
 
     const T operator->() const {
         return mValue;
@@ -164,6 +164,11 @@ class RefBase {
         T value = mValue;
         mValue = kNullValue;
         return value;
+    }
+
+    void Acquire(T value) {
+        Release();
+        mValue = value;
     }
 
   private:
