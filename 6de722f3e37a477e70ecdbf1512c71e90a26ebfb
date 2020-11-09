@@ -52,6 +52,24 @@
       "parentUuid": "e102f5b1_98f11037",
       "revId": "6de722f3e37a477e70ecdbf1512c71e90a26ebfb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112a516e_a2d5285a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-09T20:05:23Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s why I meant. Now that you mention it, IsSubsetOf() would be another option. (Ideally, A.IsSubsetOf(B), but not possible for primitive types.)",
+      "parentUuid": "1e3ed7fa_b92e02c1",
+      "revId": "6de722f3e37a477e70ecdbf1512c71e90a26ebfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
