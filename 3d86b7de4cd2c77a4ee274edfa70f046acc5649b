@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d1e6fd9_116bfbf8",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-09T21:33:26Z",
+      "side": 1,
+      "message": "It\u0027s going to be deprecated - though there\u0027s some multithreading concerns we need to address first. No worries for the questions. Historically we had a single device per wire, but will need to fix that in the future. I recently wrote this doc about it https://docs.google.com/document/d/1dcNqoSY-HjooM3-guhwDYj_iRKTvrjSR3Y_9oOiu30E/edit feel free to comment.\n\nRe: both list and mDevice - I could change this to return mDevices.head()-\u003evalue() ?",
+      "parentUuid": "592d2152_6aaa1203",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9329f1ba_f057e91a",
         "filename": "src/dawn_wire/client/Client.h",
         "patchSetId": 3
@@ -82,6 +100,24 @@
       "writtenOn": "2020-11-09T20:27:32Z",
       "side": 1,
       "message": "Nit: Why not a vector of Devices? The TrackObject() function takes a Device*.\n\nAlternatively, if this is eventually going to hold more than devices, it should be named mObjects.",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95981e15_04aea0db",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-09T21:33:26Z",
+      "side": 1,
+      "message": "Not a vector so we don\u0027t need a linear scan when we remove one of the devices.\nI\u0027m not sure if it will ever contain more than devices.\n\nAlso, in the following patch we also keep objects separated by type so we don\u0027t have everything acquiring a mutex to operate on a linked list (in the future). The synchronization is only per-object-type.",
+      "parentUuid": "9329f1ba_f057e91a",
       "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
