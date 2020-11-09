@@ -17,6 +17,8 @@
 
 #include "dawn_native/QuerySet.h"
 
+#include "common/NSRef.h"
+
 #import <Metal/Metal.h>
 
 namespace dawn_native { namespace metal {
@@ -40,7 +42,7 @@ namespace dawn_native { namespace metal {
         // Dawn API
         void DestroyImpl() override;
 
-        id<MTLBuffer> mVisibilityBuffer = nil;
+        NSPRef<id<MTLBuffer>> mVisibilityBuffer;
         id<MTLCounterSampleBuffer> mCounterSampleBuffer API_AVAILABLE(macos(10.15),
                                                                       ios(14.0)) = nil;
     };

@@ -236,45 +236,48 @@ namespace dawn_native { namespace metal {
             }
         }
 
-        MTLDepthStencilDescriptor* MakeDepthStencilDesc(
+        NSRef<MTLDepthStencilDescriptor> MakeDepthStencilDesc(
             const DepthStencilStateDescriptor* descriptor) {
-            MTLDepthStencilDescriptor* mtlDepthStencilDescriptor = [MTLDepthStencilDescriptor new];
+            NSRef<MTLDepthStencilDescriptor> mtlDepthStencilDescriptor =
+                AcquireNSRef([MTLDepthStencilDescriptor new]);
 
-            mtlDepthStencilDescriptor.depthCompareFunction =
-                ToMetalCompareFunction(descriptor->depthCompare);
-            mtlDepthStencilDescriptor.depthWriteEnabled = descriptor->depthWriteEnabled;
+            [*mtlDepthStencilDescriptor
+                setDepthCompareFunction:ToMetalCompareFunction(descriptor->depthCompare)];
+            [*mtlDepthStencilDescriptor setDepthWriteEnabled:descriptor->depthWriteEnabled];
 
             if (StencilTestEnabled(descriptor)) {
-                MTLStencilDescriptor* backFaceStencil = [MTLStencilDescriptor new];
-                MTLStencilDescriptor* frontFaceStencil = [MTLStencilDescriptor new];
+                NSRef<MTLStencilDescriptor> backFaceStencil =
+                    AcquireNSRef([MTLStencilDescriptor new]);
+                NSRef<MTLStencilDescriptor> frontFaceStencil =
+                    AcquireNSRef([MTLStencilDescriptor new]);
 
-                backFaceStencil.stencilCompareFunction =
-                    ToMetalCompareFunction(descriptor->stencilBack.compare);
-                backFaceStencil.stencilFailureOperation =
-                    MetalStencilOperation(descriptor->stencilBack.failOp);
-                backFaceStencil.depthFailureOperation =
-                    MetalStencilOperation(descriptor->stencilBack.depthFailOp);
-                backFaceStencil.depthStencilPassOperation =
-                    MetalStencilOperation(descriptor->stencilBack.passOp);
-                backFaceStencil.readMask = descriptor->stencilReadMask;
-                backFaceStencil.writeMask = descriptor->stencilWriteMask;
+                [*backFaceStencil setStencilCompareFunction:ToMetalCompareFunction(
+                                                                descriptor->stencilBack.compare)];
+                [*backFaceStencil setStencilFailureOperation:MetalStencilOperation(
+                                                                 descriptor->stencilBack.failOp)];
+                [*backFaceStencil
+                    setDepthFailureOperation:MetalStencilOperation(
+                                                 descriptor->stencilBack.depthFailOp)];
+                [*backFaceStencil setDepthStencilPassOperation:MetalStencilOperation(
+                                                                   descriptor->stencilBack.passOp)];
+                [*backFaceStencil setReadMask:descriptor->stencilReadMask];
+                [*backFaceStencil setWriteMask:descriptor->stencilWriteMask];
 
-                frontFaceStencil.stencilCompareFunction =
-                    ToMetalCompareFunction(descriptor->stencilFront.compare);
-                frontFaceStencil.stencilFailureOperation =
-                    MetalStencilOperation(descriptor->stencilFront.failOp);
-                frontFaceStencil.depthFailureOperation =
-                    MetalStencilOperation(descriptor->stencilFront.depthFailOp);
-                frontFaceStencil.depthStencilPassOperation =
-                    MetalStencilOperation(descriptor->stencilFront.passOp);
-                frontFaceStencil.readMask = descriptor->stencilReadMask;
-                frontFaceStencil.writeMask = descriptor->stencilWriteMask;
+                [*frontFaceStencil setStencilCompareFunction:ToMetalCompareFunction(
+                                                                 descriptor->stencilFront.compare)];
+                [*frontFaceStencil setStencilFailureOperation:MetalStencilOperation(
+                                                                  descriptor->stencilFront.failOp)];
+                [*frontFaceStencil
+                    setDepthFailureOperation:MetalStencilOperation(
+                                                 descriptor->stencilFront.depthFailOp)];
+                [*frontFaceStencil
+                    setDepthStencilPassOperation:MetalStencilOperation(
+                                                     descriptor->stencilFront.passOp)];
+                [*frontFaceStencil setReadMask:descriptor->stencilReadMask];
+                [*frontFaceStencil setWriteMask:descriptor->stencilWriteMask];
 
-                mtlDepthStencilDescriptor.backFaceStencil = backFaceStencil;
-                mtlDepthStencilDescriptor.frontFaceStencil = frontFaceStencil;
-
-                [backFaceStencil release];
-                [frontFaceStencil release];
+                [*mtlDepthStencilDescriptor setBackFaceStencil:backFaceStencil.Get()];
+                [*mtlDepthStencilDescriptor setFrontFaceStencil:frontFaceStencil.Get()];
             }
 
             return mtlDepthStencilDescriptor;
@@ -317,20 +320,18 @@ namespace dawn_native { namespace metal {
         mMtlCullMode = ToMTLCullMode(GetCullMode());
         auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
-        MTLRenderPipelineDescriptor* descriptorMTL = [MTLRenderPipelineDescriptor new];
+        NSRef<MTLRenderPipelineDescriptor> descriptorMTL =
+            AcquireNSRef([MTLRenderPipelineDescriptor new]);
 
         // TODO: MakeVertexDesc should be const in the future, so we don't need to call it here when
         // vertex pulling is enabled
-        MTLVertexDescriptor* vertexDesc = MakeVertexDesc();
-        descriptorMTL.vertexDescriptor = vertexDesc;
-        [vertexDesc release];
+        NSRef<MTLVertexDescriptor> vertexDesc = MakeVertexDesc();
 
+        // Calling MakeVertexDesc first is important since it sets indices for packed bindings
         if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
-            // Calling MakeVertexDesc first is important since it sets indices for packed bindings
-            MTLVertexDescriptor* emptyVertexDesc = [MTLVertexDescriptor new];
-            descriptorMTL.vertexDescriptor = emptyVertexDesc;
-            [emptyVertexDesc release];
+            vertexDesc = AcquireNSRef([MTLVertexDescriptor new]);
         }
+        [*descriptorMTL setVertexDescriptor:vertexDesc.Get()];
 
         ShaderModule* vertexModule = ToBackend(descriptor->vertexStage.module);
         const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
@@ -339,7 +340,7 @@ namespace dawn_native { namespace metal {
                                               ToBackend(GetLayout()), &vertexData, 0xFFFFFFFF,
                                               this));
 
-        descriptorMTL.vertexFunction = vertexData.function;
+        [*descriptorMTL setVertexFunction:vertexData.function.Get()];
         if (vertexData.needsStorageBufferLength) {
             mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Vertex;
         }
@@ -351,7 +352,7 @@ namespace dawn_native { namespace metal {
                                                 ToBackend(GetLayout()), &fragmentData,
                                                 descriptor->sampleMask));
 
-        descriptorMTL.fragmentFunction = fragmentData.function;
+        [*descriptorMTL setFragmentFunction:fragmentData.function.Get()];
         if (fragmentData.needsStorageBufferLength) {
             mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Fragment;
         }
@@ -362,32 +363,33 @@ namespace dawn_native { namespace metal {
             MTLPixelFormat metalFormat = MetalPixelFormat(depthStencilFormat);
 
             if (internalFormat.HasDepth()) {
-                descriptorMTL.depthAttachmentPixelFormat = metalFormat;
+                [*descriptorMTL setDepthAttachmentPixelFormat:metalFormat];
             }
             if (internalFormat.HasStencil()) {
-                descriptorMTL.stencilAttachmentPixelFormat = metalFormat;
+                [*descriptorMTL setStencilAttachmentPixelFormat:metalFormat];
             }
         }
 
         const auto& fragmentOutputsWritten =
             GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten;
         for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
-            descriptorMTL.colorAttachments[static_cast<uint8_t>(i)].pixelFormat =
+            [*descriptorMTL colorAttachments][static_cast<uint8_t>(i)].pixelFormat =
                 MetalPixelFormat(GetColorAttachmentFormat(i));
             const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
-            ComputeBlendDesc(descriptorMTL.colorAttachments[static_cast<uint8_t>(i)], descriptor,
+            ComputeBlendDesc([*descriptorMTL colorAttachments][static_cast<uint8_t>(i)], descriptor,
                              fragmentOutputsWritten[i]);
         }
 
-        descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
-        descriptorMTL.sampleCount = GetSampleCount();
-        descriptorMTL.alphaToCoverageEnabled = descriptor->alphaToCoverageEnabled;
+        [*descriptorMTL
+            setInputPrimitiveTopology:MTLInputPrimitiveTopology(GetPrimitiveTopology())];
+        [*descriptorMTL setSampleCount:GetSampleCount()];
+        [*descriptorMTL setAlphaToCoverageEnabled:descriptor->alphaToCoverageEnabled];
 
         {
             NSError* error = nil;
-            mMtlRenderPipelineState = [mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL
-                                                                                error:&error];
-            [descriptorMTL release];
+            mMtlRenderPipelineState =
+                AcquireNSPRef([mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL.Get()
+                                                                        error:&error]);
             if (error != nil) {
                 NSLog(@" error => %@", error);
                 return DAWN_INTERNAL_ERROR("Error creating rendering pipeline state");
@@ -397,17 +399,12 @@ namespace dawn_native { namespace metal {
         // Create depth stencil state and cache it, fetch the cached depth stencil state when we
         // call setDepthStencilState() for a given render pipeline in CommandEncoder, in order to
         // improve performance.
-        MTLDepthStencilDescriptor* depthStencilDesc =
+        NSRef<MTLDepthStencilDescriptor> depthStencilDesc =
             MakeDepthStencilDesc(GetDepthStencilStateDescriptor());
-        mMtlDepthStencilState = [mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc];
-        [depthStencilDesc release];
+        mMtlDepthStencilState =
+            AcquireNSPRef([mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc.Get()]);
 
         return {};
-    }
-
-    RenderPipeline::~RenderPipeline() {
-        [mMtlRenderPipelineState release];
-        [mMtlDepthStencilState release];
     }
 
     MTLPrimitiveType RenderPipeline::GetMTLPrimitiveTopology() const {
@@ -423,11 +420,11 @@ namespace dawn_native { namespace metal {
     }
 
     void RenderPipeline::Encode(id<MTLRenderCommandEncoder> encoder) {
-        [encoder setRenderPipelineState:mMtlRenderPipelineState];
+        [encoder setRenderPipelineState:mMtlRenderPipelineState.Get()];
     }
 
     id<MTLDepthStencilState> RenderPipeline::GetMTLDepthStencilState() {
-        return mMtlDepthStencilState;
+        return mMtlDepthStencilState.Get();
     }
 
     uint32_t RenderPipeline::GetMtlVertexBufferIndex(VertexBufferSlot slot) const {

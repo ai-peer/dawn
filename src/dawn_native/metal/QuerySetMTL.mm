@@ -26,7 +26,8 @@ namespace dawn_native { namespace metal {
             Device* device,
             MTLCommonCounterSet counterSet,
             uint32_t count) API_AVAILABLE(macos(10.15), ios(14.0)) {
-            MTLCounterSampleBufferDescriptor* descriptor = [MTLCounterSampleBufferDescriptor new];
+            NSRef<MTLCounterSampleBufferDescriptor> descriptor =
+                AcquireNSRef([MTLCounterSampleBufferDescriptor new]);
 
             // To determine which counters are available from a device, we need to iterate through
             // the counterSets property of a MTLDevice. Then configure which counters will be
@@ -34,20 +35,20 @@ namespace dawn_native { namespace metal {
             // property to the matched one of the available set.
             for (id<MTLCounterSet> set in device->GetMTLDevice().counterSets) {
                 if ([set.name isEqualToString:counterSet]) {
-                    descriptor.counterSet = set;
+                    [*descriptor setCounterSet:set];
                     break;
                 }
             }
-            ASSERT(descriptor.counterSet != nil);
-            descriptor.sampleCount = count;
-            descriptor.storageMode = MTLStorageModePrivate;
+            ASSERT([*descriptor counterSet] != nil);
+            [*descriptor setSampleCount:count];
+            [*descriptor setStorageMode:MTLStorageModePrivate];
             if (device->IsToggleEnabled(Toggle::MetalUseSharedModeForCounterSampleBuffer)) {
-                descriptor.storageMode = MTLStorageModeShared;
+                [*descriptor setStorageMode:MTLStorageModeShared];
             }
 
             NSError* error = nil;
             id<MTLCounterSampleBuffer> counterSampleBuffer =
-                [device->GetMTLDevice() newCounterSampleBufferWithDescriptor:descriptor
+                [device->GetMTLDevice() newCounterSampleBufferWithDescriptor:descriptor.Get()
                                                                        error:&error];
             if (error != nil) {
                 const char* errorString = [error.localizedDescription UTF8String];
@@ -73,9 +74,9 @@ namespace dawn_native { namespace metal {
             case wgpu::QueryType::Occlusion: {
                 // Create buffer for writing 64-bit results.
                 NSUInteger bufferSize = static_cast<NSUInteger>(GetQueryCount() * sizeof(uint64_t));
-                mVisibilityBuffer =
-                    [device->GetMTLDevice() newBufferWithLength:bufferSize
-                                                        options:MTLResourceStorageModePrivate];
+                mVisibilityBuffer = AcquireNSPRef([device->GetMTLDevice()
+                    newBufferWithLength:bufferSize
+                                options:MTLResourceStorageModePrivate]);
                 break;
             }
             case wgpu::QueryType::PipelineStatistics:
@@ -105,7 +106,7 @@ namespace dawn_native { namespace metal {
     }
 
     id<MTLBuffer> QuerySet::GetVisibilityBuffer() const {
-        return mVisibilityBuffer;
+        return mVisibilityBuffer.Get();
     }
 
     id<MTLCounterSampleBuffer> QuerySet::GetCounterSampleBuffer() const
@@ -118,16 +119,11 @@ namespace dawn_native { namespace metal {
     }
 
     void QuerySet::DestroyImpl() {
-        if (mVisibilityBuffer != nil) {
-            [mVisibilityBuffer release];
-            mVisibilityBuffer = nil;
-        }
+        mVisibilityBuffer = nullptr;
 
         if (@available(macOS 10.15, iOS 14.0, *)) {
-            if (mCounterSampleBuffer != nil) {
-                [mCounterSampleBuffer release];
-                mCounterSampleBuffer = nil;
-            }
+            [mCounterSampleBuffer release];
+            mCounterSampleBuffer = nullptr;
         }
     }
 

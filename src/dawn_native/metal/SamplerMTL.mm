@@ -62,38 +62,33 @@ namespace dawn_native { namespace metal {
 
     Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
         : SamplerBase(device, descriptor) {
-        MTLSamplerDescriptor* mtlDesc = [MTLSamplerDescriptor new];
+        NSRef<MTLSamplerDescriptor> mtlDesc = AcquireNSRef([MTLSamplerDescriptor new]);
 
-        mtlDesc.minFilter = FilterModeToMinMagFilter(descriptor->minFilter);
-        mtlDesc.magFilter = FilterModeToMinMagFilter(descriptor->magFilter);
-        mtlDesc.mipFilter = FilterModeToMipFilter(descriptor->mipmapFilter);
+        [*mtlDesc setMinFilter:FilterModeToMinMagFilter(descriptor->minFilter)];
+        [*mtlDesc setMagFilter:FilterModeToMinMagFilter(descriptor->magFilter)];
+        [*mtlDesc setMipFilter:FilterModeToMipFilter(descriptor->mipmapFilter)];
 
-        mtlDesc.sAddressMode = AddressMode(descriptor->addressModeU);
-        mtlDesc.tAddressMode = AddressMode(descriptor->addressModeV);
-        mtlDesc.rAddressMode = AddressMode(descriptor->addressModeW);
+        [*mtlDesc setSAddressMode:AddressMode(descriptor->addressModeU)];
+        [*mtlDesc setTAddressMode:AddressMode(descriptor->addressModeV)];
+        [*mtlDesc setRAddressMode:AddressMode(descriptor->addressModeW)];
 
-        mtlDesc.lodMinClamp = descriptor->lodMinClamp;
-        mtlDesc.lodMaxClamp = descriptor->lodMaxClamp;
+        [*mtlDesc setLodMinClamp:descriptor->lodMinClamp];
+        [*mtlDesc setLodMaxClamp:descriptor->lodMaxClamp];
 
         if (descriptor->compare != wgpu::CompareFunction::Undefined) {
             // Sampler compare is unsupported before A9, which we validate in
             // Sampler::Create.
-            mtlDesc.compareFunction = ToMetalCompareFunction(descriptor->compare);
+            [*mtlDesc setCompareFunction:ToMetalCompareFunction(descriptor->compare)];
             // The value is default-initialized in the else-case, and we don't set it or the
             // Metal debug device errors.
         }
 
-        mMtlSamplerState = [device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc];
-
-        [mtlDesc release];
-    }
-
-    Sampler::~Sampler() {
-        [mMtlSamplerState release];
+        mMtlSamplerState =
+            AcquireNSPRef([device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc.Get()]);
     }
 
     id<MTLSamplerState> Sampler::GetMTLSamplerState() {
-        return mMtlSamplerState;
+        return mMtlSamplerState.Get();
     }
 
 }}  // namespace dawn_native::metal
