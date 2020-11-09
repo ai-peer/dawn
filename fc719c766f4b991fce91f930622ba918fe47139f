@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "fc719c766f4b991fce91f930622ba918fe47139f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a4e570b_f62fcbc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-09T23:12:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fc719c766f4b991fce91f930622ba918fe47139f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89a287c_1fd60973",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-09T23:12:20Z",
+      "side": 1,
+      "message": "unit: casing",
+      "range": {
+        "startLine": 189,
+        "startChar": 11,
+        "endLine": 189,
+        "endChar": 28
+      },
+      "revId": "fc719c766f4b991fce91f930622ba918fe47139f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
