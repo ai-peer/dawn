@@ -14,9 +14,9 @@
 
 #include "dawn_native/Pipeline.h"
 
-#include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/ShaderModule.h"
 
@@ -135,21 +135,14 @@ namespace dawn_native {
         return bgl;
     }
 
-    // static
-    size_t PipelineBase::HashForCache(const PipelineBase* pipeline) {
-        size_t hash = 0;
+    void PipelineBase::fingerprint(FingerprintRecorder* recorder) {
+        recorder->recordObject(mLayout.Get());
 
-        // The layout is deduplicated so it can be hashed by pointer.
-        HashCombine(&hash, pipeline->mLayout.Get());
-
-        HashCombine(&hash, pipeline->mStageMask);
-        for (SingleShaderStage stage : IterateStages(pipeline->mStageMask)) {
-            // The module is deduplicated so it can be hashed by pointer.
-            HashCombine(&hash, pipeline->mStages[stage].module.Get());
-            HashCombine(&hash, pipeline->mStages[stage].entryPoint);
+        recorder->record(mStageMask);
+        for (SingleShaderStage stage : IterateStages(mStageMask)) {
+            recorder->recordObject(mStages[stage].module.Get());
+            recorder->record(mStages[stage].entryPoint);
         }
-
-        return hash;
     }
 
     // static
