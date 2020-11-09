@@ -120,6 +120,24 @@
       "parentUuid": "9329f1ba_f057e91a",
       "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd727a2_a488f66a",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-09T21:37:09Z",
+      "side": 1,
+      "message": "Sorry, not the next patch, it\u0027s this patch. The device owns all the other objects, and stores a linked list of each type.",
+      "parentUuid": "95981e15_04aea0db",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
