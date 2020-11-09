@@ -60,8 +60,8 @@ class Ref : public RefBase<T*, RefCountedTraits<T>> {
 
 template <typename T>
 Ref<T> AcquireRef(T* pointee) {
-    Ref<T> ref(pointee);
-    ref->Release();
+    Ref<T> ref;
+    ref.Acquire(pointee);
     return ref;
 }
 

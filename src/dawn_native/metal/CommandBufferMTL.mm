@@ -53,9 +53,12 @@ namespace dawn_native { namespace metal {
             }
         }
 
-        // Creates an autoreleased MTLRenderPassDescriptor matching desc
-        MTLRenderPassDescriptor* CreateMTLRenderPassDescriptor(BeginRenderPassCmd* renderPass) {
-            MTLRenderPassDescriptor* descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+        NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
+            BeginRenderPassCmd* renderPass) {
+            // Note that this creates a descriptor that's autoreleased so we don't use AcquireNSRef
+            NSRef<MTLRenderPassDescriptor> descriptorRef =
+                [MTLRenderPassDescriptor renderPassDescriptor];
+            MTLRenderPassDescriptor* descriptor = descriptorRef.Get();
 
             for (ColorAttachmentIndex attachment :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
@@ -167,7 +170,7 @@ namespace dawn_native { namespace metal {
                 }
             }
 
-            return descriptor;
+            return descriptorRef;
         }
 
         // Helper function for Toggle EmulateStoreAndMSAAResolve
@@ -175,23 +178,27 @@ namespace dawn_native { namespace metal {
             CommandRecordingContext* commandContext,
             const MTLRenderPassDescriptor* mtlRenderPass,
             const std::array<id<MTLTexture>, kMaxColorAttachments>& resolveTextures) {
-            MTLRenderPassDescriptor* mtlRenderPassForResolve =
+            // Note that this creates a descriptor that's autoreleased so we don't use AcquireNSRef
+            NSRef<MTLRenderPassDescriptor> mtlRenderPassForResolveRef =
                 [MTLRenderPassDescriptor renderPassDescriptor];
+            MTLRenderPassDescriptor* mtlRenderPassForResolve = mtlRenderPassForResolveRef.Get();
+
             for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
                 if (resolveTextures[i] == nil) {
                     continue;
                 }
 
-                mtlRenderPassForResolve.colorAttachments[i].texture =
-                    mtlRenderPass.colorAttachments[i].texture;
-                mtlRenderPassForResolve.colorAttachments[i].loadAction = MTLLoadActionLoad;
-                mtlRenderPassForResolve.colorAttachments[i].storeAction =
-                    MTLStoreActionMultisampleResolve;
-                mtlRenderPassForResolve.colorAttachments[i].resolveTexture = resolveTextures[i];
-                mtlRenderPassForResolve.colorAttachments[i].resolveLevel =
-                    mtlRenderPass.colorAttachments[i].resolveLevel;
-                mtlRenderPassForResolve.colorAttachments[i].resolveSlice =
-                    mtlRenderPass.colorAttachments[i].resolveSlice;
+                MTLRenderPassColorAttachmentDescriptor* attachmentForResolve =
+                    [mtlRenderPassForResolve colorAttachments][i];
+                MTLRenderPassColorAttachmentDescriptor* originalAttachment =
+                    [mtlRenderPass colorAttachments][i];
+
+                [attachmentForResolve setTexture:[originalAttachment texture]];
+                [attachmentForResolve setLoadAction:MTLLoadActionLoad];
+                [attachmentForResolve setStoreAction:MTLStoreActionMultisampleResolve];
+                [attachmentForResolve setResolveTexture:resolveTextures[i]];
+                [attachmentForResolve setResolveLevel:[originalAttachment resolveLevel]];
+                [attachmentForResolve setResolveSlice:[originalAttachment resolveSlice]];
             }
 
             commandContext->BeginRender(mtlRenderPassForResolve);
@@ -199,11 +206,13 @@ namespace dawn_native { namespace metal {
         }
 
         // Helper functions for Toggle AlwaysResolveIntoZeroLevelAndLayer
-        id<MTLTexture> CreateResolveTextureForWorkaround(Device* device,
-                                                         MTLPixelFormat mtlFormat,
-                                                         uint32_t width,
-                                                         uint32_t height) {
-            MTLTextureDescriptor* mtlDesc = [MTLTextureDescriptor new];
+        NSPRef<id<MTLTexture>> CreateResolveTextureForWorkaround(Device* device,
+                                                                 MTLPixelFormat mtlFormat,
+                                                                 uint32_t width,
+                                                                 uint32_t height) {
+            NSRef<MTLTextureDescriptor> mtlDescRef = AcquireNSRef([MTLTextureDescriptor new]);
+            MTLTextureDescriptor* mtlDesc = mtlDescRef.Get();
+
             mtlDesc.textureType = MTLTextureType2D;
             mtlDesc.usage = MTLTextureUsageRenderTarget;
             mtlDesc.pixelFormat = mtlFormat;
@@ -214,10 +223,8 @@ namespace dawn_native { namespace metal {
             mtlDesc.arrayLength = 1;
             mtlDesc.storageMode = MTLStorageModePrivate;
             mtlDesc.sampleCount = 1;
-            id<MTLTexture> resolveTexture =
-                [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc];
-            [mtlDesc release];
-            return resolveTexture;
+
+            return AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc]);
         }
 
         void CopyIntoTrueResolveTarget(CommandRecordingContext* commandContext,
@@ -578,8 +585,9 @@ namespace dawn_native { namespace metal {
                     commandContext->EndBlit();
 
                     LazyClearRenderPassAttachments(cmd);
-                    MTLRenderPassDescriptor* descriptor = CreateMTLRenderPassDescriptor(cmd);
-                    DAWN_TRY(EncodeRenderPass(commandContext, descriptor, cmd->width, cmd->height));
+                    NSRef<MTLRenderPassDescriptor> descriptor = CreateMTLRenderPassDescriptor(cmd);
+                    DAWN_TRY(EncodeRenderPass(commandContext, descriptor.Get(), cmd->width,
+                                              cmd->height));
 
                     nextPassNumber++;
                     break;
@@ -792,9 +800,9 @@ namespace dawn_native { namespace metal {
                     char* label = mCommands.NextData<char>(cmd->length + 1);
 
                     if (@available(macos 10.13, *)) {
-                        NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-                        [commandContext->GetCommands() pushDebugGroup:mtlLabel];
-                        [mtlLabel release];
+                        NSRef<NSString> mtlLabel =
+                            AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                        [commandContext->GetCommands() pushDebugGroup:mtlLabel.Get()];
                     }
 
                     break;
@@ -876,10 +884,9 @@ namespace dawn_native { namespace metal {
                 case Command::InsertDebugMarker: {
                     InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
                     char* label = mCommands.NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder insertDebugSignpost:mtlLabel];
-                    [mtlLabel release];
+                    NSRef<NSString> mtlLabel =
+                        AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                    [encoder insertDebugSignpost:mtlLabel.Get()];
                     break;
                 }
 
@@ -893,10 +900,9 @@ namespace dawn_native { namespace metal {
                 case Command::PushDebugGroup: {
                     PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
                     char* label = mCommands.NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder pushDebugGroup:mtlLabel];
-                    [mtlLabel release];
+                    NSRef<NSString> mtlLabel =
+                        AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                    [encoder pushDebugGroup:mtlLabel.Get()];
                     break;
                 }
 
@@ -944,7 +950,7 @@ namespace dawn_native { namespace metal {
             // Use temporary resolve texture on the resolve targets with non-zero resolveLevel or
             // resolveSlice.
             bool useTemporaryResolveTexture = false;
-            std::array<id<MTLTexture>, kMaxColorAttachments> temporaryResolveTextures = {};
+            std::array<NSPRef<id<MTLTexture>>, kMaxColorAttachments> temporaryResolveTextures = {};
             for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
                 if (mtlRenderPass.colorAttachments[i].resolveTexture == nil) {
                     continue;
@@ -963,7 +969,8 @@ namespace dawn_native { namespace metal {
                 temporaryResolveTextures[i] =
                     CreateResolveTextureForWorkaround(device, mtlFormat, width, height);
 
-                mtlRenderPass.colorAttachments[i].resolveTexture = temporaryResolveTextures[i];
+                mtlRenderPass.colorAttachments[i].resolveTexture =
+                    temporaryResolveTextures[i].Get();
                 mtlRenderPass.colorAttachments[i].resolveLevel = 0;
                 mtlRenderPass.colorAttachments[i].resolveSlice = 0;
                 useTemporaryResolveTexture = true;
@@ -981,9 +988,7 @@ namespace dawn_native { namespace metal {
                     ASSERT(temporaryResolveTextures[i] != nil);
                     CopyIntoTrueResolveTarget(commandContext, trueResolveTextures[i],
                                               trueResolveLevels[i], trueResolveSlices[i],
-                                              temporaryResolveTextures[i], width, height);
-                    [temporaryResolveTextures[i] release];
-                    temporaryResolveTextures[i] = nil;
+                                              temporaryResolveTextures[i].Get(), width, height);
                 }
                 return {};
             }
@@ -1148,10 +1153,9 @@ namespace dawn_native { namespace metal {
                 case Command::InsertDebugMarker: {
                     InsertDebugMarkerCmd* cmd = iter->NextCommand<InsertDebugMarkerCmd>();
                     char* label = iter->NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder insertDebugSignpost:mtlLabel];
-                    [mtlLabel release];
+                    NSRef<NSString> mtlLabel =
+                        AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                    [encoder insertDebugSignpost:mtlLabel.Get()];
                     break;
                 }
 
@@ -1165,10 +1169,9 @@ namespace dawn_native { namespace metal {
                 case Command::PushDebugGroup: {
                     PushDebugGroupCmd* cmd = iter->NextCommand<PushDebugGroupCmd>();
                     char* label = iter->NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder pushDebugGroup:mtlLabel];
-                    [mtlLabel release];
+                    NSRef<NSString> mtlLabel =
+                        AcquireNSRef([[NSString alloc] initWithUTF8String:label]);
+                    [encoder pushDebugGroup:mtlLabel.Get()];
                     break;
                 }
 
