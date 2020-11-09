@@ -33,6 +33,57 @@
       "message": "Stephen, I think you may have missed reviewing this one.",
       "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8a8277_93065314",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-09T20:27:32Z",
+      "side": 1,
+      "message": "uNit: obejct -\u003e object",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "592d2152_6aaa1203",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-09T20:27:32Z",
+      "side": 1,
+      "message": "Is this going to stay around, or is it going to be deprecated?\n\nIt seems a little odd to have one \"special\" device and then a vector of other devices, but maybe I\u0027m missing the big picture here. I also notice that one is a WGPUDevice* and the other a Device* (well, actually cast to ObjectBase), so maybe these are not the same thing? Or is it just that way because we don\u0027t want to have the vector contain owning pointers? (ie., no lifetime management)?\n\nSorry for all the questions; just trying to get up to speed. Feel free to point me at a design doc or discussion.",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9329f1ba_f057e91a",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-09T20:27:32Z",
+      "side": 1,
+      "message": "Nit: Why not a vector of Devices? The TrackObject() function takes a Device*.\n\nAlternatively, if this is eventually going to hold more than devices, it should be named mObjects.",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
