@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c403711c_a7d70ad2",
+        "filename": "src/dawn_native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-09T17:39:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d5dcea1a_c3f0ce71",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4fafb05_cacb32e2",
@@ -54,6 +78,24 @@
       "writtenOn": "2020-10-22T16:46:45Z",
       "side": 1,
       "message": "[1]",
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c66ccf41_4a9d1a6b",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-09T17:39:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f4fafb05_cacb32e2",
       "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -287,6 +329,30 @@
       "side": 1,
       "message": "\u003e object deduplication. We need to have strict equality there.\n\nPlan to use CompareVisitor (like your design) there, so we\u0027re good there.\n\n\u003e serialization is that we are going to need to do it\n\nFor other blobs, yes (ie. shader or pipeline cache blobs) but recall, neither of those key from pipeline state. Unless we roll our own pipeline library, pipeline object serialization is not useful to me and one can always add a SerializedVistor.\n\nThank you for the discussion.",
       "parentUuid": "ef119b83_041e1c18",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e134660_54faf63b",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-09T17:39:01Z",
+      "side": 1,
+      "message": "Resolved offline, only using hashes for now.",
+      "parentUuid": "51f913bb_7883a03f",
       "range": {
         "startLine": 24,
         "startChar": 5,
