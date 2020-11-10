@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fdb493f_e5d74847",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T22:55:28Z",
+      "side": 1,
+      "message": "LGTM overall, one more question",
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9c94e3_376f7998",
@@ -43,6 +60,53 @@
         "startChar": 8,
         "endLine": 267,
         "endChar": 0
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bcb618c_505a96c8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T22:55:28Z",
+      "side": 1,
+      "message": "Ah I see. I hadn\u0027t remembered returning 0 indicates nothing happened. I see now that the other backends do this and the comment in Device.h describes it.",
+      "parentUuid": "16bf5aaa_7b7ec4e2",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 0
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f91a5ab_5a9a7b6a",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T22:55:28Z",
+      "side": 1,
+      "message": "I don\u0027t think we should be touching the specific internals here. Would we test the same thing if all the tests in this suite did an empty queue.submit instead ?",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
