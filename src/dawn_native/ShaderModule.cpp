@@ -692,6 +692,45 @@ namespace dawn_native {
         return {};
     }
 
+#ifdef DAWN_ENABLE_WGSL
+    MaybeError ApplyVertexPullingTransform(tint::Context* context,
+                                           tint::ast::Module* module,
+                                           const std::string& entryPoint,
+                                           const VertexStateDescriptor& vertexState,
+                                           uint32_t pullingBufferBindingSet,
+                                           std::ostringstream* errorStream) {
+        tint::transform::VertexPullingTransform transform(context, module);
+        auto state = std::make_unique<tint::transform::VertexStateDescriptor>();
+        for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
+            auto& vertexBuffer = vertexState.vertexBuffers[i];
+            tint::transform::VertexBufferLayoutDescriptor layout;
+            layout.array_stride = vertexBuffer.arrayStride;
+            layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
+
+            for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
+                auto& attribute = vertexBuffer.attributes[j];
+                tint::transform::VertexAttributeDescriptor attr;
+                attr.format = ToTintVertexFormat(attribute.format);
+                attr.offset = attribute.offset;
+                attr.shader_location = attribute.shaderLocation;
+
+                layout.attributes.push_back(std::move(attr));
+            }
+
+            state->vertex_buffers.push_back(std::move(layout));
+        }
+        transform.SetVertexState(std::move(state));
+        transform.SetEntryPoint(entryPoint);
+        transform.SetPullingBufferBindingSet(pullingBufferBindingSet);
+
+        if (!transform.Run()) {
+            *errorStream << "Vertex pulling transform: " << transform.error();
+            return DAWN_VALIDATION_ERROR(errorStream->str().c_str());
+        }
+        return {};
+    }
+#endif  // DAWN_ENABLE_WGSL
+
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
@@ -782,34 +821,8 @@ namespace dawn_native {
         }
         tint::ast::Module module = std::move(result.AcquireSuccess());
 
-        tint::transform::VertexPullingTransform transform(&context, &module);
-        auto state = std::make_unique<tint::transform::VertexStateDescriptor>();
-        for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
-            auto& vertexBuffer = vertexState.vertexBuffers[i];
-            tint::transform::VertexBufferLayoutDescriptor layout;
-            layout.array_stride = vertexBuffer.arrayStride;
-            layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
-
-            for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
-                auto& attribute = vertexBuffer.attributes[j];
-                tint::transform::VertexAttributeDescriptor attr;
-                attr.format = ToTintVertexFormat(attribute.format);
-                attr.offset = attribute.offset;
-                attr.shader_location = attribute.shaderLocation;
-
-                layout.attributes.push_back(std::move(attr));
-            }
-
-            state->vertex_buffers.push_back(std::move(layout));
-        }
-        transform.SetVertexState(std::move(state));
-        transform.SetEntryPoint(entryPoint);
-        transform.SetPullingBufferBindingSet(pullingBufferBindingSet);
-
-        if (!transform.Run()) {
-            errorStream << "Vertex pulling transform: " << transform.error();
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
+        DAWN_TRY(ApplyVertexPullingTransform(&context, &module, entryPoint, vertexState,
+                                             pullingBufferBindingSet, &errorStream));
 
         tint::TypeDeterminer type_determiner(&context, &module);
         if (!type_determiner.Determine()) {
