@@ -122,42 +122,6 @@ namespace dawn_native {
         }
 #endif
 
-        MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
-            spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
-
-            std::ostringstream errorStream;
-            errorStream << "SPIRV Validation failure:" << std::endl;
-
-            spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
-                                                         const spv_position_t& position,
-                                                         const char* message) {
-                switch (level) {
-                    case SPV_MSG_FATAL:
-                    case SPV_MSG_INTERNAL_ERROR:
-                    case SPV_MSG_ERROR:
-                        errorStream << "error: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_WARNING:
-                        errorStream << "warning: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_INFO:
-                        errorStream << "info: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    default:
-                        break;
-                }
-            });
-
-            if (!spirvTools.Validate(code, codeSize)) {
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            return {};
-        }
-
 #ifdef DAWN_ENABLE_WGSL
         MaybeError ValidateWGSL(const char* source) {
             std::ostringstream errorStream;
@@ -625,6 +589,40 @@ namespace dawn_native {
         }
 
     }  // anonymous namespace
+
+    MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
+        spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
+
+        std::ostringstream errorStream;
+        errorStream << "SPIRV Validation failure:" << std::endl;
+
+        spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
+                                                     const spv_position_t& position,
+                                                     const char* message) {
+            switch (level) {
+                case SPV_MSG_FATAL:
+                case SPV_MSG_INTERNAL_ERROR:
+                case SPV_MSG_ERROR:
+                    errorStream << "error: line " << position.index << ": " << message << std::endl;
+                    break;
+                case SPV_MSG_WARNING:
+                    errorStream << "warning: line " << position.index << ": " << message
+                                << std::endl;
+                    break;
+                case SPV_MSG_INFO:
+                    errorStream << "info: line " << position.index << ": " << message << std::endl;
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        if (!spirvTools.Validate(code, codeSize)) {
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        return {};
+    }
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor) {
