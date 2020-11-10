@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9c94e3_376f7998",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T18:47:21Z",
+      "side": 1,
+      "message": "Hm.. could you explain why we do this?",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 0
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
