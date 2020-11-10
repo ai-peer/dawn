@@ -43,17 +43,28 @@ namespace dawn_native { namespace metal {
                 [function release];
             }
         };
-        MaybeError CreateFunction(const char* entryPointName,
-                                  SingleShaderStage stage,
-                                  const PipelineLayout* layout,
-                                  MetalFunctionData* out,
-                                  uint32_t sampleMask = 0xFFFFFFFF,
-                                  const RenderPipeline* renderPipeline = nullptr);
+        MaybeError CreateFunctionWithTint(const char* entryPointName,
+                                          SingleShaderStage stage,
+                                          const PipelineLayout* layout,
+                                          MetalFunctionData* out,
+                                          uint32_t sampleMask = 0xFFFFFFFF,
+                                          const RenderPipeline* renderPipeline = nullptr);
+
+        MaybeError CreateFunctionWithSPIRVCross(const char* entryPointName,
+                                                SingleShaderStage stage,
+                                                const PipelineLayout* layout,
+                                                MetalFunctionData* out,
+                                                uint32_t sampleMask = 0xFFFFFFFF,
+                                                const RenderPipeline* renderPipeline = nullptr);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
         MaybeError Initialize();
+
+        MaybeError CreateFunctionFromMsl(const char* entryPointName,
+                                         const std::string& msl,
+                                         MetalFunctionData* out);
     };
 
 }}  // namespace dawn_native::metal

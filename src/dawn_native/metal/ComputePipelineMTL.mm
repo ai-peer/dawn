@@ -34,8 +34,16 @@ namespace dawn_native { namespace metal {
         ShaderModule* computeModule = ToBackend(descriptor->computeStage.module);
         const char* computeEntryPoint = descriptor->computeStage.entryPoint;
         ShaderModule::MetalFunctionData computeData;
-        DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
-                                               ToBackend(GetLayout()), &computeData));
+
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            DAWN_TRY(computeModule->CreateFunctionWithTint(computeEntryPoint,
+                                                           SingleShaderStage::Compute,
+                                                           ToBackend(GetLayout()), &computeData));
+        } else {
+            DAWN_TRY(computeModule->CreateFunctionWithSPIRVCross(
+                computeEntryPoint, SingleShaderStage::Compute, ToBackend(GetLayout()),
+                &computeData));
+        }
 
         NSError* error = nil;
         mMtlComputePipelineState =
