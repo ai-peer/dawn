@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad039c2a_ed8d8d11",
+        "filename": "generator/templates/dawn_wire/ObjectType.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T19:09:45Z",
+      "side": 1,
+      "message": "I need to add this to CMakeLists.txt",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da8a8277_93065314",
         "filename": "src/dawn_wire/client/Client.cpp",
         "patchSetId": 3
@@ -190,6 +207,24 @@
       "side": 1,
       "message": "Sorry, I didn\u0027t mean a vector per-se. Linked list is fine; I\u0027m just asking about the component type: why not Device* rather than ObjectBase* (and the implicit upcast in TrackObject).\n\nI see the sorted-by-type flavour on the other class (I think it\u0027s Device) but this one if it only holds Devices could be Device* without the upcast.\n\nIt\u0027s a very minor nit, I was just curious.",
       "parentUuid": "7bd727a2_a488f66a",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb14ec6_79d091f3",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-10T19:09:45Z",
+      "side": 1,
+      "message": "oh this is because of how the class hierarchy is.\n\nwe have Device -\u003e ObjectBase -\u003e LinkNode\u003cObjectBase\u003e\n\nif we wanted LinkedList\u003cDevice\u003e, I think we need:\n\nDevice : public ObjectBase, public LinkNode\u003cDevice\u003e\n\nwhich is multiple concrete classes",
+      "parentUuid": "36179e28_7d1f43c2",
       "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
