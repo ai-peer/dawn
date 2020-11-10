@@ -70,6 +70,24 @@
       "parentUuid": "1e3ed7fa_b92e02c1",
       "revId": "6de722f3e37a477e70ecdbf1512c71e90a26ebfb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc3fadf_c796f64b",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-10T13:51:41Z",
+      "side": 1,
+      "message": "Yeah it\u0027s not possible to do it for primitive types. If everyone wants IsSubsetOf it should be easy to do the rename.",
+      "parentUuid": "112a516e_a2d5285a",
+      "revId": "6de722f3e37a477e70ecdbf1512c71e90a26ebfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
