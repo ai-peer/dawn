@@ -28,6 +28,24 @@ namespace dawn_platform {
         GPUWork,     // Actual GPU work
     };
 
+    class CachingInterface {
+      public:
+        CachingInterface() = default;
+        virtual ~CachingInterface() = default;
+
+        virtual size_t loadData(void* device,
+                                const void* key,
+                                size_t keySize,
+                                void* valueOut,
+                                size_t valueSize) = 0;
+
+        virtual bool storeData(void* device,
+                               const void* key,
+                               size_t keySize,
+                               const void* value,
+                               size_t valueSize) = 0;
+    };
+
     class DAWN_PLATFORM_EXPORT Platform {
       public:
         Platform();
@@ -47,6 +65,16 @@ namespace dawn_platform {
                                        const unsigned char* argTypes,
                                        const uint64_t* argValues,
                                        unsigned char flags) = 0;
+
+        // PersistentCache API. Not abstract since not all platforms have support.
+        virtual dawn_platform::CachingInterface* CachingInterface(void* fingerprint,
+                                                                  size_t fingerprintSize) {
+            return nullptr;
+        }
+
+        virtual dawn_platform::CachingInterface* GetCachingInterface() {
+            return nullptr;
+        }
 
       private:
         Platform(const Platform&) = delete;

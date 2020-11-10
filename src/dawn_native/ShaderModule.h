@@ -121,14 +121,15 @@ namespace dawn_native {
       protected:
         MaybeError InitializeBase();
 
+        std::vector<uint32_t> mOriginalSpirv;
+        std::string mWgsl;
+
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         enum class Type { Undefined, Spirv, Wgsl };
         Type mType;
-        std::vector<uint32_t> mOriginalSpirv;
         std::vector<uint32_t> mSpirv;
-        std::string mWgsl;
 
         // A map from [name, stage] to EntryPointMetadata.
         std::unordered_map<std::string, std::unique_ptr<EntryPointMetadata>> mEntryPoints;

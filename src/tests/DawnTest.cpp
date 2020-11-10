@@ -173,6 +173,57 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param) {
     return os;
 }
 
+// Implementation of FakePersistentCache
+
+FakePersistentCache::~FakePersistentCache() {
+    if (!mCache.empty()) {
+        dawn::LogMessage log = dawn::InfoLog();
+        log << "Persistent cache\n";
+        log << "Data size: " << mCacheInfo.total_size << " bytes (" << mCache.size()
+            << " entries)\n";
+        log << "Hit / Miss: " << mCacheInfo.hit_count << " / " << mCacheInfo.miss_count << "\n";
+
+        const size_t lookupCount = mCacheInfo.miss_count + mCacheInfo.hit_count;
+        const size_t hit_ratio =
+            (lookupCount == 0) ? 0
+                               : ((mCacheInfo.hit_count / static_cast<float>(lookupCount)) * 100);
+        log << "Hit Ratio: " << hit_ratio << "%\n";
+    }
+}
+
+bool FakePersistentCache::storeData(void* device,
+                                    const void* key,
+                                    size_t keySize,
+                                    const void* value,
+                                    size_t valueSize) {
+    const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+
+    const uint8_t* value_start = reinterpret_cast<const uint8_t*>(value);
+    std::vector<uint8_t> entry_value(value_start, value_start + valueSize);
+
+    mCacheInfo.total_size += valueSize;
+
+    return mCache.insert({keyStr, std::move(entry_value)}).second;
+}
+
+size_t FakePersistentCache::loadData(void* device,
+                                     const void* key,
+                                     size_t keySize,
+                                     void* value,
+                                     size_t valueSize) {
+    const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
+    auto entry = mCache.find(keyStr);
+    if (entry == mCache.end()) {
+        mCacheInfo.miss_count++;
+        return 0;
+    }
+    if (valueSize >= entry->second.size()) {
+        memcpy(value, entry->second.data(), entry->second.size());
+    }
+    mCacheInfo.hit_count++;
+    return entry->second.size();
+}
+
 // Implementation of DawnTestEnvironment
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv) {
@@ -228,6 +279,11 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 
         if (strcmp("--skip-validation", argv[i]) == 0) {
             mSkipDawnValidation = true;
+            continue;
+        }
+
+        if (strcmp("-p", argv[i]) == 0 || strcmp("--enable-persistent-cache", argv[i]) == 0) {
+            mEnablePersistentCache = true;
             continue;
         }
 
@@ -295,7 +351,9 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
                    "on multi-GPU systems \n"
                    "  --exclusive-device-type-preference: Comma-delimited list of preferred device "
                    "types. For each backend, tests will run only on adapters that match the first "
-                   "available device type\n";
+                   "available device type\n"
+                   "  -p, --enable-persistent-cache: Enable the persistent cache (defaults"
+                   "to disabled)\n";
             continue;
         }
     }
@@ -430,7 +488,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
            "BeginCaptureOnStartup: "
         << (mBeginCaptureOnStartup ? "true" : "false")
         << "\n"
-           "\n"
+           "EnablePersistentCache: "
+        << (mEnablePersistentCache ? "true" : "false") << " ("
+        << "\n"
         << "System adapters: \n";
 
     for (const TestAdapterProperties& properties : mAdapterProperties) {
@@ -456,6 +516,14 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
 void DawnTestEnvironment::SetUp() {
     mInstance = CreateInstanceAndDiscoverAdapters();
     ASSERT(mInstance);
+
+    mPlatform = std::make_unique<DawnTestPlatform>();
+    if (mEnablePersistentCache) {
+        // TODO(bryan.bernhart@intel.com): prefix the keys from the fingerprint.
+        mPlatform->CachingInterface(/*fingerprint*/ nullptr, /*fingerprintSize*/ 0);
+    }
+
+    mInstance->SetPlatform(mPlatform.get());
 }
 
 void DawnTestEnvironment::TearDown() {
@@ -478,6 +546,10 @@ bool DawnTestEnvironment::IsDawnValidationSkipped() const {
 
 dawn_native::Instance* DawnTestEnvironment::GetInstance() const {
     return mInstance.get();
+}
+
+bool DawnTestEnvironment::IsPersistentCacheEnabled() const {
+    return mEnablePersistentCache;
 }
 
 bool DawnTestEnvironment::HasVendorIdFilter() const {
@@ -619,6 +691,10 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
 
 bool DawnTestBase::IsDawnValidationSkipped() const {
     return gTestEnv->IsDawnValidationSkipped();
+}
+
+bool DawnTestBase::IsPersistentCacheEnabled() const {
+    return gTestEnv->IsPersistentCacheEnabled();
 }
 
 bool DawnTestBase::HasWGSL() const {
