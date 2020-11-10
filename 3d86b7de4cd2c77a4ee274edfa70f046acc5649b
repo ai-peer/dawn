@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25fa18b7_b560d489",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-10T09:56:46Z",
+      "side": 1,
+      "message": "Also WGPUDevice and Device* are the same thing, WGPUDevice is the external WebGPU API, Device* is what this object is internally to dawn_wire.",
+      "parentUuid": "3d1e6fd9_116bfbf8",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9329f1ba_f057e91a",
         "filename": "src/dawn_wire/client/Client.h",
         "patchSetId": 3
