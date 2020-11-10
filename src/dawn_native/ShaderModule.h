@@ -47,6 +47,7 @@ namespace dawn_native {
 
     struct EntryPointMetadata;
 
+    MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize);
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor);
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
