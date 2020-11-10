@@ -21,6 +21,7 @@
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/CachedObject.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/Forward.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -39,7 +40,7 @@ namespace dawn_native {
 
     using StageAndDescriptor = std::pair<SingleShaderStage, const ProgrammableStageDescriptor*>;
 
-    class PipelineLayoutBase : public CachedObject {
+    class PipelineLayoutBase : public CachedObject, public RecordedObject {
       public:
         PipelineLayoutBase(DeviceBase* device, const PipelineLayoutDescriptor* descriptor);
         ~PipelineLayoutBase() override;
@@ -61,10 +62,7 @@ namespace dawn_native {
         // [0, kMaxBindGroups]
         BindGroupIndex GroupsInheritUpTo(const PipelineLayoutBase* other) const;
 
-        // Functors necessary for the unordered_set<PipelineLayoutBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const PipelineLayoutBase* pl) const;
-        };
+        // Functor necessary for the unordered_set<PipelineLayoutBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
         };
@@ -74,6 +72,10 @@ namespace dawn_native {
 
         BindGroupLayoutArray mBindGroupLayouts;
         BindGroupLayoutMask mMask;
+
+      private:
+        // RecordedObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
     };
 
 }  // namespace dawn_native

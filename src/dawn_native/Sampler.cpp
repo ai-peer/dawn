@@ -14,8 +14,8 @@
 
 #include "dawn_native/Sampler.h"
 
-#include "common/HashUtils.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cmath>
@@ -63,6 +63,11 @@ namespace dawn_native {
           mLodMinClamp(descriptor->lodMinClamp),
           mLodMaxClamp(descriptor->lodMaxClamp),
           mCompareFunction(descriptor->compare) {
+        // Only record the key on a blueprint and pass the blueprint key to the real object.
+        if (!IsCachedReference()) {
+            FingerprintRecorder recorder;
+            recorder.RecordObject(this);
+        }
     }
 
     SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -84,20 +89,9 @@ namespace dawn_native {
         return mCompareFunction != wgpu::CompareFunction::Undefined;
     }
 
-    size_t SamplerBase::HashFunc::operator()(const SamplerBase* module) const {
-        size_t hash = 0;
-
-        HashCombine(&hash, module->mAddressModeU);
-        HashCombine(&hash, module->mAddressModeV);
-        HashCombine(&hash, module->mAddressModeW);
-        HashCombine(&hash, module->mMagFilter);
-        HashCombine(&hash, module->mMinFilter);
-        HashCombine(&hash, module->mMipmapFilter);
-        HashCombine(&hash, module->mLodMinClamp);
-        HashCombine(&hash, module->mLodMaxClamp);
-        HashCombine(&hash, module->mCompareFunction);
-
-        return hash;
+    void SamplerBase::Fingerprint(FingerprintRecorder* recorder) {
+        recorder->Record(mAddressModeU, mAddressModeV, mAddressModeW, mMagFilter, mMinFilter,
+                         mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction);
     }
 
     bool SamplerBase::EqualityFunc::operator()(const SamplerBase* a, const SamplerBase* b) const {

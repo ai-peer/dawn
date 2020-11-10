@@ -14,9 +14,9 @@
 
 #include "dawn_native/ShaderModule.h"
 
-#include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/SpirvUtils.h"
@@ -827,6 +827,12 @@ namespace dawn_native {
             default:
                 UNREACHABLE();
         }
+
+        // Only record the key on a blueprint and pass the blueprint key to the real object.
+        if (!IsCachedReference()) {
+            FingerprintRecorder recorder;
+            recorder.RecordObject(this);
+        }
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -853,20 +859,10 @@ namespace dawn_native {
         return *mEntryPoints.at(entryPoint);
     }
 
-    size_t ShaderModuleBase::HashFunc::operator()(const ShaderModuleBase* module) const {
-        size_t hash = 0;
-
-        HashCombine(&hash, module->mType);
-
-        for (uint32_t word : module->mOriginalSpirv) {
-            HashCombine(&hash, word);
-        }
-
-        for (char c : module->mWgsl) {
-            HashCombine(&hash, c);
-        }
-
-        return hash;
+    void ShaderModuleBase::Fingerprint(FingerprintRecorder* recorder) {
+        recorder->Record(mType);
+        recorder->RecordIterable(mOriginalSpirv);
+        recorder->RecordIterable(mWgsl);
     }
 
     bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
