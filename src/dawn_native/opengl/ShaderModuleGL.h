@@ -52,6 +52,10 @@ namespace dawn_native { namespace opengl {
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
+
+        MaybeError Initialize();
+
+        std::vector<uint32_t> mTintSpirv;
     };
 
 }}  // namespace dawn_native::opengl
