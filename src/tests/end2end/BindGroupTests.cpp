@@ -327,6 +327,9 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
 }
 
 TEST_P(BindGroupTests, MultipleBindLayouts) {
+    // TODO(crbug.com/tint/312): Crashes in type determination.
+    DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
+
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::ShaderModule vsModule =
