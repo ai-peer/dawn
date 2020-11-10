@@ -191,6 +191,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool UsesWire() const;
     bool IsBackendValidationEnabled() const;
     bool IsDawnValidationSkipped() const;
+    bool UsesTintGenerator() const;
     dawn_native::Instance* GetInstance() const;
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
@@ -208,6 +209,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool mUseWire = false;
     bool mEnableBackendValidation = false;
     bool mSkipDawnValidation = false;
+    bool mUseTintGenerator = false;
     bool mBeginCaptureOnStartup = false;
     bool mHasVendorIdFilter = false;
     uint32_t mVendorIdFilter = 0;
@@ -249,7 +251,6 @@ class DawnTestBase {
 
     bool UsesWire() const;
     bool IsBackendValidationEnabled() const;
-    bool IsDawnValidationSkipped() const;
     bool HasWGSL() const;
 
     bool IsAsan() const;
@@ -423,7 +424,7 @@ class DawnTestBase {
             size_t warningsAfter =                                               \
                 dawn_native::GetDeprecationWarningCountForTesting(device.Get()); \
             EXPECT_EQ(mLastWarningCount, warningsBefore);                        \
-            if (!IsDawnValidationSkipped()) {                                    \
+            if (!HasToggleEnabled("skip_validation")) {                          \
                 EXPECT_EQ(warningsAfter, warningsBefore + 1);                    \
             }                                                                    \
             mLastWarningCount = warningsAfter;                                   \

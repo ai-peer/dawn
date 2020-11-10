@@ -231,6 +231,11 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("--use-tint-generator", argv[i]) == 0) {
+            mUseTintGenerator = true;
+            continue;
+        }
+
         constexpr const char kVendorIdFilterArg[] = "--adapter-vendor-id=";
         argLen = sizeof(kVendorIdFilterArg) - 1;
         if (strncmp(argv[i], kVendorIdFilterArg, argLen) == 0) {
@@ -427,6 +432,9 @@ void DawnTestEnvironment::PrintTestConfigurationAndAdapterInfo() const {
            "SkipDawnValidation: "
         << (mSkipDawnValidation ? "true" : "false")
         << "\n"
+           "UseTintGenerator: "
+        << (mUseTintGenerator ? "true" : "false")
+        << "\n"
            "BeginCaptureOnStartup: "
         << (mBeginCaptureOnStartup ? "true" : "false")
         << "\n"
@@ -474,6 +482,10 @@ bool DawnTestEnvironment::IsBackendValidationEnabled() const {
 
 bool DawnTestEnvironment::IsDawnValidationSkipped() const {
     return mSkipDawnValidation;
+}
+
+bool DawnTestEnvironment::UsesTintGenerator() const {
+    return mUseTintGenerator;
 }
 
 dawn_native::Instance* DawnTestEnvironment::GetInstance() const {
@@ -617,10 +629,6 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->IsBackendValidationEnabled();
 }
 
-bool DawnTestBase::IsDawnValidationSkipped() const {
-    return gTestEnv->IsDawnValidationSkipped();
-}
-
 bool DawnTestBase::HasWGSL() const {
 #ifdef DAWN_ENABLE_WGSL
     return true;
@@ -638,12 +646,10 @@ bool DawnTestBase::IsAsan() const {
 }
 
 bool DawnTestBase::HasToggleEnabled(const char* toggle) const {
-    for (const char* toggleEnabled : mParam.forceEnabledWorkarounds) {
-        if (strcmp(toggle, toggleEnabled) == 0) {
-            return true;
-        }
-    }
-    return false;
+    auto toggles = dawn_native::GetTogglesUsed(device.Get());
+    return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
+               return strcmp(toggle, name) == 0;
+           }) != toggles.end();
 }
 
 bool DawnTestBase::HasVendorIdFilter() const {
@@ -722,6 +728,12 @@ void DawnTestBase::SetUp() {
     if (gTestEnv->IsDawnValidationSkipped()) {
         ASSERT(gTestEnv->GetInstance()->GetToggleInfo(kSkipValidationToggle) != nullptr);
         deviceDescriptor.forceEnabledToggles.push_back(kSkipValidationToggle);
+    }
+
+    static constexpr char kUseTintGeneratorToggle[] = "use_tint_generator";
+    if (gTestEnv->UsesTintGenerator()) {
+        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(kUseTintGeneratorToggle) != nullptr);
+        deviceDescriptor.forceEnabledToggles.push_back(kUseTintGeneratorToggle);
     }
 
     backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
