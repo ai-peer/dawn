@@ -57,6 +57,15 @@ namespace dawn_native {
     RequiredBufferSizes ComputeRequiredBufferSizesForLayout(const EntryPointMetadata& entryPoint,
                                                             const PipelineLayoutBase* layout);
 
+#if DAWN_ENABLE_WGSL
+    MaybeError ApplyVertexPullingTransform(tint::Context* context,
+                                           tint::ast::Module* module,
+                                           const std::string& entryPoint,
+                                           const VertexStateDescriptor& vertexState,
+                                           uint32_t pullingBufferBindingSet,
+                                           std::ostringstream* errorStream);
+#endif  // DAWN_ENABLE_WGSL
+
     // Contains all the reflection data for a valid (ShaderModule, entryPoint, stage). They are
     // stored in the ShaderModuleBase and destroyed only when the shader module is destroyed so
     // pointers to EntryPointMetadata are safe to store as long as you also keep a Ref to the
