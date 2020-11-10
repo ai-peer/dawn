@@ -49,6 +49,9 @@ class VertexFormatTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
+        // TODO(crbug.com/tint/313): Crashes in bound array transformer.
+        DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
+
         renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
     }
 
