@@ -14,8 +14,8 @@
 
 #include "dawn_native/ComputePipeline.h"
 
-#include "common/HashUtils.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/FingerprintRecorder.h"
 
 namespace dawn_native {
 
@@ -41,6 +41,11 @@ namespace dawn_native {
         : PipelineBase(device,
                        descriptor->layout,
                        {{SingleShaderStage::Compute, &descriptor->computeStage}}) {
+        // Only record the key on a blueprint and pass the blueprint key to the real object.
+        if (!IsCachedReference()) {
+            FingerprintRecorder recorder;
+            recorder.RecordObject(this);
+        }
     }
 
     ComputePipelineBase::ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -57,10 +62,6 @@ namespace dawn_native {
     // static
     ComputePipelineBase* ComputePipelineBase::MakeError(DeviceBase* device) {
         return new ComputePipelineBase(device, ObjectBase::kError);
-    }
-
-    size_t ComputePipelineBase::HashFunc::operator()(const ComputePipelineBase* pipeline) const {
-        return PipelineBase::HashForCache(pipeline);
     }
 
     bool ComputePipelineBase::EqualityFunc::operator()(const ComputePipelineBase* a,

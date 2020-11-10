@@ -17,6 +17,7 @@
 
 #include "common/TypedInteger.h"
 #include "dawn_native/AttachmentState.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/Pipeline.h"
 
@@ -91,16 +92,16 @@ namespace dawn_native {
 
         const AttachmentState* GetAttachmentState() const;
 
-        // Functors necessary for the unordered_set<RenderPipelineBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const RenderPipelineBase* pipeline) const;
-        };
+        // Functor necessary for the unordered_set<RenderPipelineBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const RenderPipelineBase* a, const RenderPipelineBase* b) const;
         };
 
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        // RecoredObject implementation
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         // Vertex state
         VertexStateDescriptor mVertexState;

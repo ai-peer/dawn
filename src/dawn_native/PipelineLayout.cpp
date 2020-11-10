@@ -16,10 +16,10 @@
 
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
-#include "common/HashUtils.h"
 #include "common/ityp_stack_vec.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/FingerprintRecorder.h"
 #include "dawn_native/ShaderModule.h"
 
 namespace dawn_native {
@@ -55,6 +55,12 @@ namespace dawn_native {
              ++group) {
             mBindGroupLayouts[group] = descriptor->bindGroupLayouts[static_cast<uint32_t>(group)];
             mMask.set(group);
+        }
+
+        // Only record the key on a blueprint and pass the blueprint key to the real object.
+        if (!IsCachedReference()) {
+            FingerprintRecorder recorder;
+            recorder.RecordObject(this);
         }
     }
 
@@ -253,14 +259,12 @@ namespace dawn_native {
         return kMaxBindGroupsTyped;
     }
 
-    size_t PipelineLayoutBase::HashFunc::operator()(const PipelineLayoutBase* pl) const {
-        size_t hash = Hash(pl->mMask);
+    void PipelineLayoutBase::Fingerprint(FingerprintRecorder* recorder) {
+        recorder->Record(mMask);
 
-        for (BindGroupIndex group : IterateBitSet(pl->mMask)) {
-            HashCombine(&hash, pl->GetBindGroupLayout(group));
+        for (BindGroupIndex group : IterateBitSet(mMask)) {
+            recorder->RecordObject(GetBindGroupLayout(group));
         }
-
-        return hash;
     }
 
     bool PipelineLayoutBase::EqualityFunc::operator()(const PipelineLayoutBase* a,
