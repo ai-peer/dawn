@@ -22,6 +22,30 @@
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16bf5aaa_7b7ec4e2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-10T20:21:53Z",
+      "side": 1,
+      "message": "In the function that calls CheckAndUpdateCompletedSerials(), DeviceBase::CheckPassedSerials(), returning 0 causes mCompletedSerial to not be updated - which is what we want when no progress was made. \n\nIf we don\u0027t return 0, and don\u0027t make forward progress inside TickImpl, it\u0027s possible we would try to update mCompletedSerial with a lower value when mCompletedSerial has been incremented outside of CheckPassedSerials (i.e. AssumeCommandsCompleted()) - which is not allowed.",
+      "parentUuid": "4d9c94e3_376f7998",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 0
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
