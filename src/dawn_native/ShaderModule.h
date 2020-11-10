@@ -35,6 +35,14 @@ namespace spirv_cross {
     class Compiler;
 }
 
+namespace tint {
+    class Context;
+
+    namespace ast {
+        class Module;
+    }  // namespace ast
+}  // namespace tint
+
 namespace dawn_native {
 
     struct EntryPointMetadata;
@@ -116,10 +124,18 @@ namespace dawn_native {
             const VertexStateDescriptor& vertexState,
             const std::string& entryPoint,
             uint32_t pullingBufferBindingSet) const;
+
+        ResultOrError<tint::ast::Module> GenerateTintModule(tint::Context* context,
+                                                            std::ostringstream* errorStream) const;
 #endif
 
       protected:
         MaybeError InitializeBase();
+
+#ifdef DAWN_ENABLE_WGSL
+        // TODO(enga): Merge into InitializeBase when WGSL is always enabled.
+        ResultOrError<tint::ast::Module> InitializeModule(tint::Context* context);
+#endif
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);

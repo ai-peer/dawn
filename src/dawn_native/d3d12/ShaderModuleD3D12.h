@@ -19,6 +19,10 @@
 
 #include "dawn_native/d3d12/d3d12_platform.h"
 
+namespace tint { namespace writer { namespace hlsl {
+    class Generator;
+}}}  // namespace tint::writer::hlsl
+
 namespace dawn_native { namespace d3d12 {
 
     class Device;
@@ -53,6 +57,13 @@ namespace dawn_native { namespace d3d12 {
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
+
+        MaybeError Initialize();
+
+#ifdef DAWN_ENABLE_WGSL
+        std::unique_ptr<tint::Context> mTintContext;
+        std::unique_ptr<tint::writer::hlsl::Generator> mHlslGenerator;
+#endif
     };
 
 }}  // namespace dawn_native::d3d12

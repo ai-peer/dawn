@@ -172,12 +172,28 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<ShaderModule*> ShaderModule::Create(Device* device,
                                                       const ShaderModuleDescriptor* descriptor) {
         Ref<ShaderModule> module = AcquireRef(new ShaderModule(device, descriptor));
-        DAWN_TRY(module->InitializeBase());
+        DAWN_TRY(module->Initialize());
         return module.Detach();
     }
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
         : ShaderModuleBase(device, descriptor) {
+    }
+
+    MaybeError ShaderModule::Initialize() {
+        DAWN_TRY(InitializeBase());
+#ifdef DAWN_ENABLE_WGSL
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            mTintContext.reset(new tint::Context());
+            // TODO(crbug.com/tint/306): Use DAWN_TRY_ASSIGN
+            auto result = InitializeModule(mTintContext.get());
+            if (result.IsError()) {
+                DAWN_TRY(std::move(result));
+            }
+            mHlslGenerator.reset(new tint::writer::hlsl::Generator(result.AcquireSuccess()));
+        }
+#endif
+        return {};
     }
 
     ResultOrError<std::string> ShaderModule::TranslateToHLSLWithTint(
@@ -186,57 +202,22 @@ namespace dawn_native { namespace d3d12 {
         PipelineLayout* layout,
         std::string* remappedEntryPointName) const {
         ASSERT(!IsError());
-
 #ifdef DAWN_ENABLE_WGSL
+        ASSERT(mHlslGenerator);
+
         std::ostringstream errorStream;
         errorStream << "Tint HLSL failure:" << std::endl;
 
-        // TODO: Remove redundant SPIRV step between WGSL and HLSL.
-        tint::Context context;
-        tint::reader::spirv::Parser parser(&context, GetSpirv());
-
-        if (!parser.Parse()) {
-            errorStream << "Parser: " << parser.error() << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        tint::ast::Module module = parser.module();
-        if (!module.IsValid()) {
-            errorStream << "Invalid module generated..." << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        tint::TypeDeterminer typeDeterminer(&context, &module);
-        if (!typeDeterminer.Determine()) {
-            errorStream << "Type Determination: " << typeDeterminer.error();
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        tint::Validator validator;
-        if (!validator.Validate(&module)) {
-            errorStream << "Validation: " << validator.error() << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        tint::transform::BoundArrayAccessorsTransform boundArrayTransformer(&context, &module);
-        if (!boundArrayTransformer.Run()) {
-            errorStream << "Bound Array Accessors Transform: " << boundArrayTransformer.error()
-                        << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        ASSERT(remappedEntryPointName != nullptr);
-        tint::inspector::Inspector inspector(module);
-        *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
-
-        tint::writer::hlsl::Generator generator(std::move(module));
         // TODO: Switch to GenerateEntryPoint once HLSL writer supports it.
-        if (!generator.Generate()) {
-            errorStream << "Generator: " << generator.error() << std::endl;
+        if (!mHlslGenerator->Generate()) {
+            errorStream << "Generator: " << mHlslGenerator->error() << std::endl;
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
         }
 
-        return generator.result();
+        std::string hlsl = mHlslGenerator->result();
+        mHlslGenerator->Reset();
+
+        return std::move(hlsl);
 #else
         return DAWN_VALIDATION_ERROR("Using Tint to generate HLSL is not supported.");
 #endif  // DAWN_ENABLE_WGSL
