@@ -20,6 +20,14 @@
 
 #include <spirv_cross.hpp>
 
+#ifdef DAWN_ENABLE_WGSL
+// Tint include must be after spirv_cross.hpp, because spirv-cross has its own
+// version of spirv_headers.
+#    include <tint/tint.h>
+#endif  // DAWN_ENABLE_WGSL
+
+#include <sstream>
+
 namespace dawn_native { namespace vulkan {
 
     // static
@@ -38,15 +46,51 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError ShaderModule::Initialize() {
         DAWN_TRY(InitializeBase());
-        const std::vector<uint32_t>& spirv = GetSpirv();
+
+        std::vector<uint32_t> generatedSpirv;
+        const std::vector<uint32_t>* spirv;
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            tint::Context context;
+            // TODO(crbug.com/tint/306): Use DAWN_TRY_ASSIGN
+            auto result = InitializeModule(&context);
+            if (result.IsError()) {
+                DAWN_TRY(std::move(result));
+            }
+            tint::ast::Module module = std::move(result.AcquireSuccess());
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V failure:" << std::endl;
+
+            tint::writer::spirv::Generator generator(std::move(module));
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            generatedSpirv = generator.result();
+
+            // TODO(crbug.com/dawn/571): Eventually, this should never produce invalid SPIR-V,
+            // but that's true right now. Throw a validation error so we can run and triage test
+            // failures without crashing. Most end2end tests fail, but it's unclear if this is a
+            // SPIR-V frontend problem or a SPIR-V backend problem.
+            DAWN_TRY(ValidateSpirv(generatedSpirv.data(), generatedSpirv.size()));
+
+            spirv = &generatedSpirv;
+#else
+            return DAWN_VALIDATION_ERROR("Using Tint to generate SPIR-V is not supported.");
+#endif
+        } else {
+            spirv = &GetSpirv();
+        }
 
         VkShaderModuleCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
         std::vector<uint32_t> vulkanSource;
-        createInfo.codeSize = spirv.size() * sizeof(uint32_t);
-        createInfo.pCode = spirv.data();
+        createInfo.codeSize = spirv->size() * sizeof(uint32_t);
+        createInfo.pCode = spirv->data();
 
         Device* device = ToBackend(GetDevice());
         return CheckVkSuccess(

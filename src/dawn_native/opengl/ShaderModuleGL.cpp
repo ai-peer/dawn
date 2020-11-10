@@ -21,6 +21,12 @@
 
 #include <spirv_glsl.hpp>
 
+#ifdef DAWN_ENABLE_WGSL
+// Tint include must be after spirv_cross.hpp, because spirv-cross has its own
+// version of spirv_headers.
+#    include <tint/tint.h>
+#endif  // DAWN_ENABLE_WGSL
+
 #include <sstream>
 
 namespace dawn_native { namespace opengl {
@@ -55,12 +61,50 @@ namespace dawn_native { namespace opengl {
     ResultOrError<ShaderModule*> ShaderModule::Create(Device* device,
                                                       const ShaderModuleDescriptor* descriptor) {
         Ref<ShaderModule> module = AcquireRef(new ShaderModule(device, descriptor));
-        DAWN_TRY(module->InitializeBase());
+        DAWN_TRY(module->Initialize());
         return module.Detach();
     }
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
         : ShaderModuleBase(device, descriptor) {
+    }
+
+    MaybeError ShaderModule::Initialize() {
+        DAWN_TRY(InitializeBase());
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            tint::Context context;
+            // TODO(crbug.com/tint/306): Use DAWN_TRY_ASSIGN
+            auto result = InitializeModule(&context);
+            if (result.IsError()) {
+                DAWN_TRY(std::move(result));
+            }
+            tint::ast::Module module = std::move(result.AcquireSuccess());
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V (for GLSL) failure:" << std::endl;
+
+            tint::writer::spirv::Generator generator(std::move(module));
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            std::vector<uint32_t> spirv = generator.result();
+
+            // TODO(crbug.com/dawn/571): Eventually, this should never produce invalid SPIR-V,
+            // but that's true right now. Throw a validation error so we can run and triage test
+            // failures without crashing. Most end2end tests fail, but it's unclear if this is a
+            // SPIR-V frontend problem or a SPIR-V backend problem.
+            DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
+            mTintSpirv = std::move(spirv);
+#else
+            return DAWN_VALIDATION_ERROR(
+                "Using Tint to generate SPIR-V (for GLSL) is not supported.");
+#endif
+        }
+
+        return {};
     }
 
     std::string ShaderModule::TranslateToGLSL(const char* entryPointName,
@@ -83,8 +127,18 @@ namespace dawn_native { namespace opengl {
 #else
         options.version = 440;
 #endif
+        const std::vector<uint32_t>* spirv;
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            spirv = &mTintSpirv;
+#else
+            UNREACHABLE();
+#endif
+        } else {
+            spirv = &GetSpirv();
+        }
 
-        spirv_cross::CompilerGLSL compiler(GetSpirv());
+        spirv_cross::CompilerGLSL compiler(*spirv);
         compiler.set_common_options(options);
         compiler.set_entry_point(entryPointName, ShaderStageToExecutionModel(stage));
 
