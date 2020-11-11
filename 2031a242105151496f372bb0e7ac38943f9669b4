@@ -16,6 +16,29 @@
       "message": "Thanks for the help, Austin.",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e822b00_ba391c26",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T18:39:44Z",
+      "side": 1,
+      "message": "nit: maybe name it \"CreateHLSLKey\" so we don\u0027t mess this up in the future and use it for something else",
+      "range": {
+        "startLine": 368,
+        "startChar": 37,
+        "endLine": 368,
+        "endChar": 46
+      },
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

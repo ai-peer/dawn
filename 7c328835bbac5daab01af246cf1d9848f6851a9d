@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c178416c_46fa0459",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T18:39:44Z",
+      "side": 1,
+      "message": "okay great, doing just HLSL sounds like a much safer starting point for this.\n\n\u003e Hmm. Could the client cypto take care of this? Injecting random stuff in the shader seems scary.\n\ncrypto can\u0027t take care of it because:\n - stream \u003c\u003c \"myString1\" \u003c\u003c 5\n - stream \u003c\u003c \"myString\" \u003c\u003c 15\n\nare identical and would hash to the same thing\n\nso maybe we can put some \"guards\" around what\u0027s user/not user code.\n\nstream \u003c\u003c kSomethingTheUserCantProvide;\nstream \u003c\u003c hlslSource;\nstream \u003c\u003c kSomethingTheUserCantProvide;\n\n?",
+      "parentUuid": "8d0e6c8c_9fa2d814",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30876168_97bbbcfc",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
         "patchSetId": 5
