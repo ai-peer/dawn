@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b11594_ca47c5d8",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "I think this was correct but maybe worded poorly, please re-open if unclear.",
+      "parentUuid": "af33f59b_164d78f2",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35916ed9_8f2a5899",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-11T01:46:25Z",
       "side": 1,
       "message": "unit: prefer \"callback\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0561ef3_08d5c039",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35916ed9_8f2a5899",
       "range": {
         "startLine": 42,
         "startChar": 30,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dae966ee_04bc3faf",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "Yea, it was to help avoid potential mistakes a developer could make using [Load|Store]Data directly (ex. use-after-free, not checking the cache, using the wrong key, etc) using the cache.",
+      "parentUuid": "f3846080_629c3319",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 85
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0321b37b_94fdb919",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 5
@@ -100,6 +172,30 @@
       "writtenOn": "2020-11-11T01:46:25Z",
       "side": 1,
       "message": "nit: could have const getters for these instead of making them protected",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 26
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac28721_a04e0558",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "Ack (no longer used).",
+      "parentUuid": "0321b37b_94fdb919",
       "range": {
         "startLine": 124,
         "startChar": 8,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d0e6c8c_9fa2d814",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "\u003e Maybe we can insert some non-ASCII padding after the wgsl and entrypoint\n\nHmm. Could the client cypto take care of this? Injecting random stuff in the shader seems scary.\n\n\u003e Perhaps we can start with just caching the HLSL-\u003eblob part, and not the WGSL-\u003eHLSL ?\n\nGood point. It makes more sense to key from HLSL since the d3d compiler does not care about pipeline layouts.\n\nI left a TODO to consider keying from WGSL as the next step since it\u0027s more involved (I agree with your points).\n\n\u003e Does this function need to include the compile flags?\n\nYup, done.",
+      "parentUuid": "8854fd0f_47f7661d",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30876168_97bbbcfc",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
         "patchSetId": 5
@@ -146,6 +266,30 @@
       "writtenOn": "2020-11-11T01:46:25Z",
       "side": 1,
       "message": "What\u0027s the intended difference between these?\n\nlooks like from your implementation, one of them does a CreateAndReturn and the other does Get. Why not have just a GetOrCreate semantic? Do we expect the fingerprint to change within an instance of the browser?",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa06fa9_dfac1645",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-11T18:20:39Z",
+      "side": 1,
+      "message": "I need some way to allow Dawn to check/access the client cache (GetCachingInterface) AND have the client easily blow away the cache if needed (new CachingInterface). Only the client cares about the fingerprint + blowing away part so I kept it separated.",
+      "parentUuid": "30876168_97bbbcfc",
       "range": {
         "startLine": 70,
         "startChar": 8,
