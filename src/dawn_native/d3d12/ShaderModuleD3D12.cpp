@@ -301,4 +301,87 @@ namespace dawn_native { namespace d3d12 {
         return compiler.compile();
     }
 
+    ResultOrError<CompiledShader> ShaderModule::Compile(const char* entryPointName,
+                                                        SingleShaderStage stage,
+                                                        PipelineLayout* layout,
+                                                        uint32_t compileFlags) {
+        Device* device = ToBackend(GetDevice());
+
+        // Compile the source shader to HLSL.
+        std::string hlslSource;
+        if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSLWithTint(entryPointName, stage, layout));
+
+        } else {
+            DAWN_TRY_ASSIGN(hlslSource,
+                            TranslateToHLSLWithSPIRVCross(entryPointName, stage, layout));
+
+            // Note that the HLSL will always use entryPoint "main" under
+            // SPIRV-cross.
+            entryPointName = "main";
+        }
+
+        // Use HLSL source as the input for the key since it does need to know about the pipeline
+        // layout. The pipeline layout is only required if we key from WGSL: two different pipeline
+        // layouts could be used to produce different shader blobs and the wrong shader blob could
+        // be loaded since the pipeline layout was missing from the key.
+        // TODO(dawn:549): Consider keying from WGSL and serialize the pipeline layout it used.
+        const PersistentCacheKey& shaderCacheKey =
+            CreateKey(entryPointName, stage, hlslSource, compileFlags);
+
+        CompiledShader compiledShader = {};
+        DAWN_TRY_ASSIGN(compiledShader.cachedShader,
+                        device->GetPersistentCache()->GetOrCreate(
+                            shaderCacheKey, [&](PersistentCache::DoCache doCache) -> MaybeError {
+                                if (device->IsToggleEnabled(Toggle::UseDXC)) {
+                                    DAWN_TRY_ASSIGN(compiledShader.compiledDXCShader,
+                                                    CompileShaderDXC(device, stage, hlslSource,
+                                                                     entryPointName, compileFlags));
+                                } else {
+                                    DAWN_TRY_ASSIGN(compiledShader.compiledFXCShader,
+                                                    CompileShaderFXC(device, stage, hlslSource,
+                                                                     entryPointName, compileFlags));
+                                }
+
+                                const D3D12_SHADER_BYTECODE shader =
+                                    compiledShader.GetD3D12ShaderBytecode();
+                                doCache(shader.pShaderBytecode, shader.BytecodeLength);
+
+                                return {};
+                            }));
+
+        return std::move(compiledShader);
+    }
+
+    D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
+        if (cachedShader.buffer != nullptr) {
+            return {cachedShader.buffer.get(), cachedShader.bufferSize};
+        } else if (compiledFXCShader != nullptr) {
+            return {compiledFXCShader->GetBufferPointer(), compiledFXCShader->GetBufferSize()};
+        } else if (compiledDXCShader != nullptr) {
+            return {compiledDXCShader->GetBufferPointer(), compiledDXCShader->GetBufferSize()};
+        }
+        UNREACHABLE();
+        return {};
+    }
+
+    PersistentCacheKey ShaderModule::CreateKey(const char* entryPointName,
+                                               SingleShaderStage stage,
+                                               const std::string& hlslSource,
+                                               uint32_t compileFlags) const {
+        std::stringstream stream;
+        stream << hlslSource;
+        stream << compileFlags;
+
+        // TODO(dawn:549): add the HLSL compiler version for good measure.
+
+        // If the source contains multiple entry points, ensure they are cached seperately
+        // per stage since DX shader code can only be compiled per stage using the same
+        // entry point.
+        stream << static_cast<uint32_t>(stage);
+        stream << entryPointName;
+
+        const std::string keyStr(stream.str());
+        return PersistentCacheKey(keyStr.begin(), keyStr.end());
+    }
 }}  // namespace dawn_native::d3d12
