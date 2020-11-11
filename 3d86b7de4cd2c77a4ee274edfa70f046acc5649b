@@ -227,6 +227,24 @@
       "parentUuid": "36179e28_7d1f43c2",
       "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3348f436_4bc93b5f",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-11T17:11:30Z",
+      "side": 1,
+      "message": "Oh right, I forgot that these linked lists are intrusive. Looks good as-is.",
+      "parentUuid": "1eb14ec6_79d091f3",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
