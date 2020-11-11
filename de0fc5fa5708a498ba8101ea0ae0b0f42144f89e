@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8734aec_63bc1913",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-11T08:59:06Z",
+      "side": 1,
+      "message": "This patch just add query state to replace the query index tracking which had been done in https://dawn-review.googlesource.com/c/dawn/+/27561. So we have had the support for checking the same query overwritten and zero-initializing. I will updated the timestamp query validation in render pass.",
+      "parentUuid": "6d5a7013_bdaab360",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "917ad24d_84f6373e",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
