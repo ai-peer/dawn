@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5564e9d7_5ab00019",
+        "filename": "generator/templates/dawn_wire/ObjectType.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T18:24:59Z",
+      "side": 1,
+      "message": "nvm this is a template. generated files are all included in CMakeLists.txt",
+      "parentUuid": "ad039c2a_ed8d8d11",
+      "revId": "3d86b7de4cd2c77a4ee274edfa70f046acc5649b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da8a8277_93065314",
