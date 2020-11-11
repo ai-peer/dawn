@@ -107,22 +107,46 @@ namespace dawn_native { namespace opengl {
                              const ColorStateDescriptor* descriptor) {
             GLuint colorBuffer = static_cast<GLuint>(static_cast<uint8_t>(attachment));
             if (BlendEnabled(descriptor)) {
-                gl.Enablei(GL_BLEND, colorBuffer);
-                gl.BlendEquationSeparatei(colorBuffer,
-                                          GLBlendMode(descriptor->colorBlend.operation),
-                                          GLBlendMode(descriptor->alphaBlend.operation));
-                gl.BlendFuncSeparatei(colorBuffer,
-                                      GLBlendFactor(descriptor->colorBlend.srcFactor, false),
-                                      GLBlendFactor(descriptor->colorBlend.dstFactor, false),
-                                      GLBlendFactor(descriptor->alphaBlend.srcFactor, true),
-                                      GLBlendFactor(descriptor->alphaBlend.dstFactor, true));
+                if (gl.Enablei) {
+                    gl.Enablei(GL_BLEND, colorBuffer);
+                    gl.BlendEquationSeparatei(colorBuffer,
+                                              GLBlendMode(descriptor->colorBlend.operation),
+                                              GLBlendMode(descriptor->alphaBlend.operation));
+                    gl.BlendFuncSeparatei(colorBuffer,
+                                          GLBlendFactor(descriptor->colorBlend.srcFactor, false),
+                                          GLBlendFactor(descriptor->colorBlend.dstFactor, false),
+                                          GLBlendFactor(descriptor->alphaBlend.srcFactor, true),
+                                          GLBlendFactor(descriptor->alphaBlend.dstFactor, true));
+                } else {
+                    DAWN_ASSERT(colorBuffer == 0);
+                    gl.Enable(GL_BLEND);
+                    gl.BlendEquationSeparate(GLBlendMode(descriptor->colorBlend.operation),
+                                             GLBlendMode(descriptor->alphaBlend.operation));
+                    gl.BlendFuncSeparate(GLBlendFactor(descriptor->colorBlend.srcFactor, false),
+                                         GLBlendFactor(descriptor->colorBlend.dstFactor, false),
+                                         GLBlendFactor(descriptor->alphaBlend.srcFactor, true),
+                                         GLBlendFactor(descriptor->alphaBlend.dstFactor, true));
+                }
             } else {
-                gl.Disablei(GL_BLEND, colorBuffer);
+                if (gl.Disablei) {
+                    gl.Disablei(GL_BLEND, colorBuffer);
+                } else {
+                    DAWN_ASSERT(colorBuffer == 0);
+                    gl.Disable(GL_BLEND);
+                }
             }
-            gl.ColorMaski(colorBuffer, descriptor->writeMask & wgpu::ColorWriteMask::Red,
-                          descriptor->writeMask & wgpu::ColorWriteMask::Green,
-                          descriptor->writeMask & wgpu::ColorWriteMask::Blue,
-                          descriptor->writeMask & wgpu::ColorWriteMask::Alpha);
+            if (gl.ColorMaski) {
+                gl.ColorMaski(colorBuffer, descriptor->writeMask & wgpu::ColorWriteMask::Red,
+                              descriptor->writeMask & wgpu::ColorWriteMask::Green,
+                              descriptor->writeMask & wgpu::ColorWriteMask::Blue,
+                              descriptor->writeMask & wgpu::ColorWriteMask::Alpha);
+            } else {
+                DAWN_ASSERT(colorBuffer == 0);
+                gl.ColorMask(descriptor->writeMask & wgpu::ColorWriteMask::Red,
+                             descriptor->writeMask & wgpu::ColorWriteMask::Green,
+                             descriptor->writeMask & wgpu::ColorWriteMask::Blue,
+                             descriptor->writeMask & wgpu::ColorWriteMask::Alpha);
+            }
         }
 
         GLuint OpenGLStencilOperation(wgpu::StencilOperation stencilOperation) {

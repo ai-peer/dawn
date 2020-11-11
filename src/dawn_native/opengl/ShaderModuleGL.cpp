@@ -78,7 +78,10 @@ namespace dawn_native { namespace opengl {
         options.vertex.fixup_clipspace = true;
 
         // TODO(cwallez@chromium.org): discover the backing context version and use that.
-#if defined(DAWN_PLATFORM_APPLE)
+#if 1
+        options.es = true;
+        options.version = 310;
+#elif defined(DAWN_PLATFORM_APPLE)
         options.version = 410;
 #else
         options.version = 440;
