@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6eba12a_c1899136",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T19:33:59Z",
+      "side": 1,
+      "message": "this class is duplicated in RecordedObject.h ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9eee9b_d9933803",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T19:33:59Z",
+      "side": 1,
+      "message": "Let\u0027s not rely on the developer to call the correct Record function. If I called, Record on a RecordedObject*, everything would still \"work\" but this likely isn\u0027t what I want.\n\nInstead, I suggest:\n\nvoid Record(const T\u0026 value, const Args\u0026... args) {\n    RecordImpl\u003cT, Args...\u003e::Call(\u0026mHash, value, args...);\n}\n\nand do specialization of RecordImpl to implement the iterable and RecordedObject* cases",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 47
+      },
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d72bbb_2f4be89e",
+        "filename": "src/dawn_native/RecordedObject.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T19:33:59Z",
+      "side": 1,
+      "message": "would prefer to have a separate boolean for empty. It would be possible for a hash to end up being this value",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
