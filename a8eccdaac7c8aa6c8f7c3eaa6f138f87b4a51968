@@ -505,6 +505,30 @@
       },
       "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9023801a_bc27c6a3",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T18:00:33Z",
+      "side": 1,
+      "message": "Fair point, let\u0027s finish this CL and deduplicate the equality traversal then.",
+      "parentUuid": "7012e28a_df3d0e43",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
