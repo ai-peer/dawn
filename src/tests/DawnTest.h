@@ -20,6 +20,7 @@
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
 
+#include <dawn_platform/DawnPlatform.h>
 #include <gtest/gtest.h>
 
 #include <memory>
@@ -174,6 +175,79 @@ namespace dawn_wire {
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
 
+class FakePersistentCache : public dawn_platform::CachingInterface {
+  public:
+    FakePersistentCache() = default;
+    ~FakePersistentCache() override;
+
+    // PersistentCache API
+    bool StoreData(void* device,
+                   const void* key,
+                   size_t keySize,
+                   const void* value,
+                   size_t valueSize) override;
+
+    size_t LoadData(void* device,
+                    const void* key,
+                    size_t keySize,
+                    void* value,
+                    size_t valueSize) override;
+
+    using Blob = std::vector<uint8_t>;
+    using FakeCache = std::unordered_map<std::string, Blob>;
+
+    FakeCache mCache;
+
+    struct CacheInfo {
+        size_t hit_count = 0;
+        size_t miss_count = 0;
+        size_t total_size = 0;
+    } mCacheInfo;
+};
+
+class DawnTestPlatform : public dawn_platform::Platform {
+  public:
+    DawnTestPlatform() = default;
+    ~DawnTestPlatform() override = default;
+
+    // PersistentCache API
+    dawn_platform::CachingInterface* CachingInterface(void* fingerprint,
+                                                      size_t fingerprintSize) override {
+        mPersistentCache = std::make_unique<FakePersistentCache>();
+        return mPersistentCache.get();
+    }
+
+  private:
+    dawn_platform::CachingInterface* GetCachingInterface() override {
+        return mPersistentCache.get();
+    }
+
+    std::unique_ptr<FakePersistentCache> mPersistentCache;
+
+    // Tracing API
+    const unsigned char* GetTraceCategoryEnabledFlag(
+        dawn_platform::TraceCategory category) override {
+        return nullptr;
+    }
+
+    double MonotonicallyIncreasingTime() override {
+        return 0;
+    }
+
+    uint64_t AddTraceEvent(char phase,
+                           const unsigned char* categoryGroupEnabled,
+                           const char* name,
+                           uint64_t id,
+                           double timestamp,
+                           int numArgs,
+                           const char** argNames,
+                           const unsigned char* argTypes,
+                           const uint64_t* argValues,
+                           unsigned char flags) override {
+        return 0;
+    }
+};
+
 class DawnTestEnvironment : public testing::Environment {
   public:
     DawnTestEnvironment(int argc, char** argv);
@@ -216,6 +290,7 @@ class DawnTestEnvironment : public testing::Environment {
     std::vector<TestAdapterProperties> mAdapterProperties;
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
+    std::unique_ptr<DawnTestPlatform> mPlatform;
 };
 
 class DawnTestBase {

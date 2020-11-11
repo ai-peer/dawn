@@ -39,6 +39,7 @@ namespace dawn_native {
     class ErrorScopeTracker;
     class StagingBufferBase;
     struct InternalPipelineStore;
+    class PersistentCache;
 
     class DeviceBase {
       public:
@@ -180,6 +181,8 @@ namespace dawn_native {
         MaybeError ValidateIsAlive() const;
 
         ErrorScope* GetCurrentErrorScope();
+
+        PersistentCache* GetPersistentCache();
 
         void Reference();
         void Release();
@@ -389,6 +392,8 @@ namespace dawn_native {
         ExtensionsSet mEnabledExtensions;
 
         std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
+
+        std::unique_ptr<PersistentCache> mPersistentCache;
     };
 
 }  // namespace dawn_native
