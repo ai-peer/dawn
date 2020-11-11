@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6577b39_fb62f281",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T21:04:59Z",
+      "side": 1,
+      "message": "I think the following would work:\n\ntemplate \u003ctypename CreateFn\u003e\nvoid GetOrCreate(const PersistentCacheKey\u0026 key, CreateFn\u0026\u0026 createFn) {\n  ...\n  DAWN_TRY(createFn([this, key](const void* value, size_t size){\n    this-\u003eStoreData(key, value, size);\n  }));\n}\n\n\ndevice-\u003eGetPersistentCache()-\u003eGetOrCreate(\n    shaderCacheKey, [\u0026](auto doCache /* auto!! */ ) -\u003e MaybeError {\n  ....\n  doCache(ptr, size);\n  return {};\n}));\n\n\n\n^^ if we do this though we should factor as much as we can out so it\u0027s not all inline.",
+      "parentUuid": "dae966ee_04bc3faf",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 85
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0321b37b_94fdb919",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 5
@@ -314,6 +338,30 @@
       "side": 1,
       "message": "I need some way to allow Dawn to check/access the client cache (GetCachingInterface) AND have the client easily blow away the cache if needed (new CachingInterface). Only the client cares about the fingerprint + blowing away part so I kept it separated.",
       "parentUuid": "30876168_97bbbcfc",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "122ad0a2_21c3f025",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T21:04:59Z",
+      "side": 1,
+      "message": "Please see question at [1]",
+      "parentUuid": "0aa06fa9_dfac1645",
       "range": {
         "startLine": 70,
         "startChar": 8,

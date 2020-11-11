@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c51a7c4_1a238a7d",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T21:04:59Z",
+      "side": 1,
+      "message": "[1] Is this expected to change throughout the lifetime of the PersistentCache ? I would think that we only need to get the interface once on construction of the persistent cache. We would also pass in the device fingerprint there too.",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 95
+      },
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e822b00_ba391c26",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 6
