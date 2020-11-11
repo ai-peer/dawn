@@ -110,6 +110,30 @@
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a2b6fc7_7b2d75bb",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-11T00:00:44Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s not ideal. This test was designed around mCompletedSerial and mLastSubmittedSerial incrementing by one each loop. Now that we don\u0027t increment serials upon Tick(), anytime we call Tick() (Queue.Submit calls Tick()) we will call AssumeCommandsComplete(), and it will increment mCompletedSerial by more than one. This causes different behavior in the AllocateAndSwitch() call.",
+      "parentUuid": "3f91a5ab_5a9a7b6a",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
