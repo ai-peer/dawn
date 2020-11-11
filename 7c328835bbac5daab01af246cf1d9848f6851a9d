@@ -16,6 +16,144 @@
       "message": "PTAL. FYI, next CLs will be the d3d then VK pipeline cache impls. I am working on the Chromium-side now so (hopefully) we can do this one in parallel.",
       "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af33f59b_164d78f2",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "typo: unsuccessful",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35916ed9_8f2a5899",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "unit: prefer \"callback\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3846080_629c3319",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "eek, I don\u0027t love this, but the lifetime guarantees are nice. What about having the createFn implementation just call StoreData though?",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 85
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0321b37b_94fdb919",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "nit: could have const getters for these instead of making them protected",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 125,
+        "endChar": 26
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8854fd0f_47f7661d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "we need to make sure it\u0027s completely impossible to manufacture inputs that look the same. Since these are all letters and numbers, it seems like it\u0027s quite possible to do so. Maybe we can insert some non-ASCII padding after the wgsl and entrypoint that would be illegal in the shader. (also will need to sanitize WGSL into ASCII. It\u0027s going to be Unicode. or use non-Unicode padding).\n\nDoes this function need to include the compile flags?\n\nI think it\u0027ll also need to include the set of shader-related device extensions....\n\nAnd also the serialized bind group layout. Two different layouts can be compatible with the same shader and produce different results...\n\nI believe these things are some of the motivations for having the serialize approach :-/ \n\nPerhaps we can start with just caching the HLSL-\u003eblob part, and not the WGSL-\u003eHLSL ?",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30876168_97bbbcfc",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T01:46:25Z",
+      "side": 1,
+      "message": "What\u0027s the intended difference between these?\n\nlooks like from your implementation, one of them does a CreateAndReturn and the other does Get. Why not have just a GetOrCreate semantic? Do we expect the fingerprint to change within an instance of the browser?",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
