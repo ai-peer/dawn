@@ -134,6 +134,30 @@
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3825c2a3_63c5e641",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-11T21:40:25Z",
+      "side": 1,
+      "message": "mm okay. I don\u0027t have any better suggestions here then",
+      "parentUuid": "2a2b6fc7_7b2d75bb",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
