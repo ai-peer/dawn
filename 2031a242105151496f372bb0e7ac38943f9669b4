@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e4d5c51_bef9f91c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "We should destroy the persistent cache here most likely.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2a2449_426522be",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "u-nit: sort alphabetically.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c51a7c4_1a238a7d",
         "filename": "src/dawn_native/PersistentCache.cpp",
         "patchSetId": 6
@@ -91,6 +125,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5c271ab_479fc3f7",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Why not just std::vector\u003cuint8_t\u003e? It would avoid src/dawn_native/d3d12/ShaderModuleD3D12.h to have to include src/dawn_native/PersistentCache.h and propagate \u003cfunctional\u003e",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed8edc4_880fa18b",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "What does the bool do? How should the createFn react to each return value?",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ed03cb_55f83899",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Can we have a trivial example showing its use? Also the code in GetOrCreate to breath a bit with newline and comments.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e58f9eb8_25ca5d11",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "I have some concerns that this interface only works for things that produce blobs, but not for things that produce structured data. For example what is the code path for caching of Tint reflection data when we have a cache miss? Right now it seems it would do:\n\n - createFn\n  - Extracts the reflection data\n  - Serializes it\n  - Call DoCache\n - We get a vector\u003cuint8_t\u003e\n - Deserialize that vector into reflection data.\n\nIf it\u0027s too complicated to find a nice solution for this now we can add a comment about it and figure it out when we start caching structured data.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e822b00_ba391c26",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 6
@@ -132,6 +234,193 @@
         "endLine": 368,
         "endChar": 46
       },
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d551fab2_91a50afe",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Can multiple entrypoints have the same name if they are different stages? That\u0027s not allowed in WGSL at least.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e319f153_1a457ad4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "We should also have a prefix for each type of key so make sure that there can\u0027t be collision where different types of cached things end up with the same key.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "135d731c_40f06062",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Isn\u0027t there a way to create a vector from a stringstream without that extra copy? :(",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e4e9341_6c351ce1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "nit: Manages a ref to one of the various representations of shader blobs.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10eb5b88_67aa1b11",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Nice",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4250c7d0_869a9d7d",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "nit: DAWN_PLATFORM_EXPORT and put the \u003d default in DawnPlatform.cpp",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc63338_d9e93d3b",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Please add comments that explain how these functions will be called (in particular the valueSize \u003d 0)",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f606dcf9_6f9522fb",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Can we have a comment about the lifetime of the return object and what the fingerprint is?",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b60904c7_9a976bb8",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "ditto, put implementations in DawnPlatform.cpp",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37d79e2_2da41bf6",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "Is this version of GetCachingInterface ever used?",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb2ac53_40e6490d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:39:25Z",
+      "side": 1,
+      "message": "This means the testing of the caching interface is done manually by looking at the test output and adds more implicit logic in all the tests. Instead could we have the platform created just for the tests that need it by having a virtual CreateTestPlatform in DawnTestBase that\u0027s overloaded for the D3D12CachingTests?\n\nThen in these tests a fake cache could be added that checks for specific things, like the HLSL compilation being reused, but also duplicate compilation working even when the cache isn\u0027t present (by having the fake cache always return a size of 0).",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
