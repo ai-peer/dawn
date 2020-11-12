@@ -314,16 +314,16 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
         return instance;
     }
     glfwDefaultWindowHints();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
 
     std::string windowName = "Dawn OpenGL test window";
     GLFWwindow* window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
 
     glfwMakeContextCurrent(window);
-    dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
+    dawn_native::opengl::AdapterDiscoveryOptions adapterOptions(WGPUBackendType_OpenGL);
     adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptions);
 #endif  // DAWN_ENABLE_BACKEND_OPENGL

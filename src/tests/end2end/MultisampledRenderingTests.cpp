@@ -393,6 +393,7 @@ TEST_P(MultisampledRenderingTest, ResolveInAnotherRenderPass) {
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargets) {
     // TODO(dawn:462): Investigate backend validation failure.
     DAWN_SKIP_TEST_IF(IsD3D12() && IsNvidia() && IsBackendValidationEnabled());
+    DAWN_SKIP_TEST_IF(IsOpenGL());  // FIXME: test and use OES_draw_buffers_indexed
 
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
@@ -509,6 +510,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoOneMipmapLevelOf2DTexture) {
 TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
     // TODO(dawn:462): Investigate backend validation failure.
     DAWN_SKIP_TEST_IF(IsD3D12() && IsNvidia() && IsBackendValidationEnabled());
+    DAWN_SKIP_TEST_IF(IsOpenGL());  // FIXME: test and use OES_draw_buffers_indexed
 
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
@@ -628,6 +630,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default sample
 // mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL());  // FIXME: test and use OES_draw_buffers_indexed
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForOutputAttachment(kColorFormat, 1);
@@ -773,6 +776,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default
 // shader-output mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOutputMask) {
+    DAWN_SKIP_TEST_IF(IsOpenGL());  // FIXME: shader fails to link? missing extension maybe?
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForOutputAttachment(kColorFormat, 1);
@@ -870,6 +874,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverage) {
 // alphaToCoverage. The alphaToCoverage mask is computed based on the alpha
 // component of the first color output attachment.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCoverage) {
+    DAWN_SKIP_TEST_IF(IsOpenGL());  // FIXME: test and use OES_draw_buffers_indexed
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForOutputAttachment(kColorFormat, 1);
