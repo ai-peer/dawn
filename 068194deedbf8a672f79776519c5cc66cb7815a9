@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "792be018_e0606b4e",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-12T18:46:44Z",
+      "side": 1,
+      "message": "Nope, roll was intentional, since the last autoroll did not include the patch that temporarily makes the GetRemapped function a no-op. Without this CL, the entry point names are going to be wrong.",
+      "parentUuid": "422fce60_76d81baa",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "129789f6_a7c9de90",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7904c2c5_c023c129",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-12T18:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "129789f6_a7c9de90",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93f6fe90_b2c7cafd",
@@ -48,6 +84,24 @@
       "writtenOn": "2020-11-12T18:43:04Z",
       "side": 1,
       "message": "I think this could be unconditional and we can ASSERT(remappedEntryPointName !\u003d nullptr)",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e735c9_8635aac6",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-12T18:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f6fe90_b2c7cafd",
       "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
