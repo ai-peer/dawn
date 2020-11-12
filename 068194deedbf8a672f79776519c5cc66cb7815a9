@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b72605_60ca592f",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-12T19:25:59Z",
+      "side": 1,
+      "message": "Ack. Forgot that git cl upload doesn\u0027t send the new version of the patch description,",
+      "parentUuid": "e6a741c1_59bde03e",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "129789f6_a7c9de90",

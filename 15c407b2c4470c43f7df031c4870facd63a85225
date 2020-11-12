@@ -34,6 +34,24 @@
       "parentUuid": "68806d0b_b12d4c6f",
       "revId": "15c407b2c4470c43f7df031c4870facd63a85225",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9739e568_3b92f843",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-12T19:25:59Z",
+      "side": 1,
+      "message": "Sorry, we actually do, my bad.",
+      "parentUuid": "08e94981_d872bbd7",
+      "revId": "15c407b2c4470c43f7df031c4870facd63a85225",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
