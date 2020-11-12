@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "f5896ced2ab9bdd7a9d2485bfac33bc2660f8852",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70120da5_d1f05afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:51:17Z",
+      "side": 1,
+      "message": "LGTM. We could also consider having a --enable-toggles\u003d\u003ccomma-separated-list\u003e and --disable-toggles\u003d.. like Jiawei is adding in Chromium.",
+      "revId": "f5896ced2ab9bdd7a9d2485bfac33bc2660f8852",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
