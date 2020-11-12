@@ -230,12 +230,23 @@ TEST_P(D3D12DescriptorHeapTests, PoolHeapsInMultipleSubmits) {
 
     EXPECT_EQ(allocator->GetShaderVisiblePoolSizeForTesting(), 0u);
 
+    // Because this test relies on sequential ticking, and Tick() only increments serials
+    // sequentially if pending commands exist - we write to a buffer before we call Tick().
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+    constexpr uint32_t bufferWriteValue = 0x00000000;
+
     // Allocate + Tick() up to |kFrameDepth| and ensure heaps are always unique.
     for (uint32_t i = 0; i < kFrameDepth; i++) {
         EXPECT_TRUE(allocator->AllocateAndSwitchShaderVisibleHeap().IsSuccess());
         ComPtr<ID3D12DescriptorHeap> heap = allocator->GetShaderVisibleHeap();
         EXPECT_TRUE(std::find(heaps.begin(), heaps.end(), heap) == heaps.end());
         heaps.push_back(heap);
+
+        // Write to a buffer to ensure Tick increments serials sequentially.
+        queue.WriteBuffer(buffer, 0, &bufferWriteValue, sizeof(bufferWriteValue));
         mD3DDevice->Tick();
     }
 
@@ -247,6 +258,9 @@ TEST_P(D3D12DescriptorHeapTests, PoolHeapsInMultipleSubmits) {
         ComPtr<ID3D12DescriptorHeap> heap = allocator->GetShaderVisibleHeap();
         EXPECT_TRUE(heaps.front() == heap);
         heaps.pop_front();
+
+        // Write to a buffer to ensure Tick increments serials sequentially.
+        queue.WriteBuffer(buffer, 0, &bufferWriteValue, sizeof(bufferWriteValue));
         mD3DDevice->Tick();
     }
 
