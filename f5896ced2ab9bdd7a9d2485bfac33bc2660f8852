@@ -33,6 +33,24 @@
       "message": "LGTM. We could also consider having a --enable-toggles\u003d\u003ccomma-separated-list\u003e and --disable-toggles\u003d.. like Jiawei is adding in Chromium.",
       "revId": "f5896ced2ab9bdd7a9d2485bfac33bc2660f8852",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d191b1b_e15e7e02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T17:07:35Z",
+      "side": 1,
+      "message": "That\u0027s a good idea and will make it much easier to create different test configs. I\u0027ll do that in this CL, but keep the old flags until we update Chromium.",
+      "parentUuid": "70120da5_d1f05afd",
+      "revId": "f5896ced2ab9bdd7a9d2485bfac33bc2660f8852",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
