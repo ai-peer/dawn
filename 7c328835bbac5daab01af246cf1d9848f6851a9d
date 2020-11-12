@@ -207,6 +207,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b483166_8c1023f8",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-12T18:29:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6577b39_fb62f281",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 85
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0321b37b_94fdb919",
@@ -315,6 +339,30 @@
       "side": 1,
       "message": "okay great, doing just HLSL sounds like a much safer starting point for this.\n\n\u003e Hmm. Could the client cypto take care of this? Injecting random stuff in the shader seems scary.\n\ncrypto can\u0027t take care of it because:\n - stream \u003c\u003c \"myString1\" \u003c\u003c 5\n - stream \u003c\u003c \"myString\" \u003c\u003c 15\n\nare identical and would hash to the same thing\n\nso maybe we can put some \"guards\" around what\u0027s user/not user code.\n\nstream \u003c\u003c kSomethingTheUserCantProvide;\nstream \u003c\u003c hlslSource;\nstream \u003c\u003c kSomethingTheUserCantProvide;\n\n?",
       "parentUuid": "8d0e6c8c_9fa2d814",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ed67e9_042b6255",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-12T18:29:49Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c178416c_46fa0459",
       "range": {
         "startLine": 376,
         "startChar": 7,
