@@ -193,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5805fa9d_62dfd4dd",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T18:43:45Z",
+      "side": 1,
+      "message": "I think this is probably good enough for now, Bryan\u0027s CL avoids the extra serialize+deserialize shenanigans because:\n\nMyBlob blob;\nCache()-\u003eGetOrCreate(key, [\u0026](doCache) {\n   // stuff\n   doCache(blob.data(), blob.size());\n});\n\n\n// I still have |blob| here and don\u0027t need to deserialize it from the cache!\nreturn std::move(blob);",
+      "parentUuid": "e58f9eb8_25ca5d11",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e822b00_ba391c26",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 6
