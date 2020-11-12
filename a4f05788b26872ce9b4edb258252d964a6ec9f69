@@ -33,6 +33,23 @@
       "message": "Still LGTM",
       "revId": "a4f05788b26872ce9b4edb258252d964a6ec9f69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f0d7a6_f063a559",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-12T20:15:52Z",
+      "side": 1,
+      "message": "Investigating failure. CL passes locally....",
+      "revId": "a4f05788b26872ce9b4edb258252d964a6ec9f69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
