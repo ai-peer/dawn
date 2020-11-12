@@ -142,7 +142,6 @@ namespace dawn_native { namespace metal {
         {
             // SPIRV-Cross also supports re-ordering attributes but it seems to do the correct thing
             // by default.
-            NSString* mslSource;
             std::string msl = compiler.compile();
 
             // Some entry point names are forbidden in MSL so SPIRV-Cross modifies them. Query the
@@ -159,13 +158,16 @@ namespace dawn_native { namespace metal {
 #pragma clang diagnostic ignored "-Wall"
 #endif
 )" + msl;
-            mslSource = [[NSString alloc] initWithUTF8String:msl.c_str()];
+
+            NSRef<NSString> mslSource =
+                AcquireNSRef([[NSString alloc] initWithUTF8String:msl.c_str()]);
 
             auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
             NSError* error = nil;
-            id<MTLLibrary> library = [mtlDevice newLibraryWithSource:mslSource
-                                                             options:nil
-                                                               error:&error];
+            NSPRef<id<MTLLibrary>> library =
+                AcquireNSPRef([mtlDevice newLibraryWithSource:mslSource.Get()
+                                                      options:nil
+                                                        error:&error]);
             if (error != nil) {
                 if (error.code != MTLLibraryErrorCompileWarning) {
                     const char* errorString = [error.localizedDescription UTF8String];
@@ -174,9 +176,9 @@ namespace dawn_native { namespace metal {
                 }
             }
 
-            NSString* name = [[NSString alloc] initWithUTF8String:modifiedEntryPointName.c_str()];
-            out->function = [library newFunctionWithName:name];
-            [library release];
+            NSRef<NSString> name =
+                AcquireNSRef([[NSString alloc] initWithUTF8String:modifiedEntryPointName.c_str()]);
+            out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
         }
 
         out->needsStorageBufferLength = compiler.needs_buffer_size_buffer();
