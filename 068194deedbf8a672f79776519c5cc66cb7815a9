@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a741c1_59bde03e",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:48:29Z",
+      "side": 1,
+      "message": "Ack, can we have a tiny mention of this single-commit roll in the commit message?",
+      "parentUuid": "792be018_e0606b4e",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "129789f6_a7c9de90",
