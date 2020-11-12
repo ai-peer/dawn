@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e03630b_b2dbdc9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:09:24Z",
+      "side": 1,
+      "message": "PTAL!\n\nNext I\u0027ll make CoreFoundationRef.h and IOKitRef.h\n\n(I just didn\u0027t want to name NSRef.h NextStepRef.h as that would be quite anachronistic ^^)",
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
