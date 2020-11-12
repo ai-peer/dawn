@@ -31,13 +31,18 @@ TEST_P(ComputeStorageBufferBarrierTests, AddIncrement) {
     wgpu::Buffer buffer = utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
-        #version 450
-        #define kNumValues 100
-        layout(std430, set = 0, binding = 0) buffer Buf { uint buf[kNumValues]; };
-        void main() {
-            buf[gl_GlobalInvocationID.x] += 0x1234;
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Buf {
+            [[offset(0)]] data : [[stride(4)]] array<u32, 100>;
+        };
+
+        [[set(0), binding(0)]] var<storage_buffer> buf : Buf;
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]]
+        fn main() -> void {
+            buf.data[GlobalInvocationID.x] = buf.data[GlobalInvocationID.x] + 0x1234;
+            return;
         }
     )");
 
@@ -78,15 +83,19 @@ TEST_P(ComputeStorageBufferBarrierTests, AddPingPong) {
     wgpu::Buffer bufferB = utils::CreateBufferFromData(
         device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
-        #version 450
-        #define kNumValues 100
-        layout(std430, set = 0, binding = 0) buffer Src { uint src[kNumValues]; };
-        layout(std430, set = 0, binding = 1) buffer Dst { uint dst[kNumValues]; };
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            dst[index] = src[index] + 0x1234;
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Buf {
+            [[offset(0)]] data : [[stride(4)]] array<u32, 100>;
+        };
+
+        [[set(0), binding(0)]] var<storage_buffer> src : Buf;
+        [[set(0), binding(1)]] var<storage_buffer> dst : Buf;
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]]
+        fn main() -> void {
+            dst.data[GlobalInvocationID.x] = src.data[GlobalInvocationID.x] + 0x1234;
+            return;
         }
     )");
 
@@ -208,15 +217,20 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPong) {
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
-        #version 450
-        #define kNumValues 100
-        layout(std140, set = 0, binding = 0) uniform Src { uvec4 src[kNumValues / 4]; };
-        layout(std430, set = 0, binding = 1) buffer Dst { uvec4 dst[kNumValues / 4]; };
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            dst[index] = src[index] + 0x1234;
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Buf {
+            [[offset(0)]] data : [[stride(16)]] array<vec4<u32>, 25>;
+        };
+
+        [[set(0), binding(0)]] var<uniform> src : Buf;
+        [[set(0), binding(1)]] var<storage_buffer> dst : Buf;
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]]
+        fn main() -> void {
+            dst.data[GlobalInvocationID.x] = src.data[GlobalInvocationID.x] +
+                vec4<u32>(0x1234, 0x1234, 0x1234, 0x1234);
+            return;
         }
     )");
 
@@ -273,15 +287,20 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
         device, data.data(), bufferSize,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc);
 
-    wgpu::ShaderModule module =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
-        #version 450
-        #define kNumValues 100
-        layout(std140, set = 0, binding = 0) uniform Src { uvec4 src[kNumValues / 4]; };
-        layout(std430, set = 0, binding = 1) buffer Dst { uvec4 dst[kNumValues / 4]; };
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            dst[index] = src[index] + 0x1234;
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Buf {
+            [[offset(0)]] data : [[stride(16)]] array<vec4<u32>, 25>;
+        };
+
+        [[set(0), binding(0)]] var<uniform> src : Buf;
+        [[set(0), binding(1)]] var<storage_buffer> dst : Buf;
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]]
+        fn main() -> void {
+            dst.data[GlobalInvocationID.x] = src.data[GlobalInvocationID.x] +
+                vec4<u32>(0x1234, 0x1234, 0x1234, 0x1234);
+            return;
         }
     )");
 
