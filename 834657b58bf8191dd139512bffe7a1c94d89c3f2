@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a500716d_85a3933d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-12T18:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af08852e_3975023b",
+      "range": {
+        "startLine": 264,
+        "startChar": 27,
+        "endLine": 264,
+        "endChar": 28
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9c94e3_376f7998",
@@ -214,6 +238,30 @@
       "side": 1,
       "message": "It is unfortunate that this is a change-detecting test. Maybe it would be ok to do what Austin suggested and call Tick or an empty submit and update the constants in the test accordingly?",
       "parentUuid": "3825c2a3_63c5e641",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbde2e8_9b2fd297",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-12T18:29:38Z",
+      "side": 1,
+      "message": "The test relies on serials being +1\u0027d each Tick(), but an empty submit will cause +2 because of AssumeCommandsComplete(). Instead I\u0027ve found that doing Queue.Write will produce the +1 behavior needed.",
+      "parentUuid": "7aebe3e6_dd9181b1",
       "range": {
         "startLine": 240,
         "startChar": 8,
