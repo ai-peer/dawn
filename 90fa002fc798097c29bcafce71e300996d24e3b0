@@ -16,6 +16,63 @@
       "message": "PTAL, this is going to need a roll for Tint to be landable, but I wanted to queue it up and check it looks reasonable.",
       "revId": "90fa002fc798097c29bcafce71e300996d24e3b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2e7fbc_e3247f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T17:01:52Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "90fa002fc798097c29bcafce71e300996d24e3b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a609db2c_b346473e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T17:01:52Z",
+      "side": 1,
+      "message": "nit: missing comma -\u003e compile error?",
+      "range": {
+        "startLine": 186,
+        "startChar": 30,
+        "endLine": 186,
+        "endChar": 31
+      },
+      "revId": "90fa002fc798097c29bcafce71e300996d24e3b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11a6997_29a8384c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T17:01:52Z",
+      "side": 1,
+      "message": "nit: use pointers for out parameters so it is clear at the callsite that they will be modified.",
+      "revId": "90fa002fc798097c29bcafce71e300996d24e3b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
