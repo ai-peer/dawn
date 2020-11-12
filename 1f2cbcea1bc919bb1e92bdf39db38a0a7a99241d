@@ -16,6 +16,24 @@
       "message": "LGTM2\n\nSorry, this one fell through the cracks.",
       "revId": "1f2cbcea1bc919bb1e92bdf39db38a0a7a99241d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9164f059_dfcf6598",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T17:33:47Z",
+      "side": 1,
+      "message": "No worries :)",
+      "parentUuid": "7eccd3ff_ade7a8eb",
+      "revId": "1f2cbcea1bc919bb1e92bdf39db38a0a7a99241d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
