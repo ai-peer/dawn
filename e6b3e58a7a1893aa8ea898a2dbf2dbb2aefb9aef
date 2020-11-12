@@ -16,6 +16,109 @@
       "message": "PTAL!\n\nNext I\u0027ll make CoreFoundationRef.h and IOKitRef.h\n\n(I just didn\u0027t want to name NSRef.h NextStepRef.h as that would be quite anachronistic ^^)",
       "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "948409a5_a0b9f296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T19:24:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667fca19_4a9e8554",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T19:24:02Z",
+      "side": 1,
+      "message": "\"protocol\" with an o",
+      "range": {
+        "startLine": 100,
+        "startChar": 42,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901927f8_08ed0e0f",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T19:24:02Z",
+      "side": 1,
+      "message": "I was surprised to see comparison with nullptr - could it be nil? And in other places as well, like assignment. Not sure if \"nil\" is a different type and we can specialize that operator.",
+      "range": {
+        "startLine": 90,
+        "startChar": 26,
+        "endLine": 90,
+        "endChar": 33
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723b22f8_b3737e97",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T19:24:02Z",
+      "side": 1,
+      "message": "nit: also add a small comment that this one is not refcounted the others, so you don\u0027t have to double check the header",
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bae54e_57118b2c",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T19:24:02Z",
+      "side": 1,
+      "message": "is it worth making this a ref since it\u0027s well-scoped and autoreleased?",
+      "range": {
+        "startLine": 468,
+        "startChar": 20,
+        "endLine": 468,
+        "endChar": 62
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
