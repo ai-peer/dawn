@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f471fe_7233f71b",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1862cab_71f16cfb",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83aba15c_a86b5349",
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "This patch just add query state to replace the query index tracking which had been done in https://dawn-review.googlesource.com/c/dawn/+/27561. So we have had the support for checking the same query overwritten and zero-initializing. I will updated the timestamp query validation in render pass.",
       "parentUuid": "6d5a7013_bdaab360",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7837d0bf_c6a9c3e5",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8734aec_63bc1913",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -301,6 +337,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab909125_8634dc71",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8d50772_6133fe7b",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "932fcce4_e5e0d805",
@@ -336,6 +390,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9913c9_32502756",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8367896_01f5ded3",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91ebb217_8f94b5bf",
@@ -353,6 +425,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02018d6_3e87075f",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91ebb217_8f94b5bf",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed72ee2c_99a148c0",
@@ -366,6 +456,24 @@
       "writtenOn": "2020-11-03T14:01:48Z",
       "side": 1,
       "message": "[2]",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b52c52e_5c96ba80",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T09:56:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed72ee2c_99a148c0",
       "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
