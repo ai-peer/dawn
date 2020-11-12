@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "323e6e8f94a96a784b3acfd87f8f9935d7e0d425",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74686938_fc9cd37c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:14:18Z",
+      "side": 1,
+      "message": "LGTM, that ASAN limitation is becoming a bit annoying, it\u0027s the third time we had to add workarounds for it.",
+      "revId": "323e6e8f94a96a784b3acfd87f8f9935d7e0d425",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c672747_bff560fb",
+        "filename": "src/dawn_wire/ChunkedCommandHandler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:14:18Z",
+      "side": 1,
+      "message": "I\u0027m surprised const_cast is sufficient for removing the volatile keyword.",
+      "range": {
+        "startLine": 76,
+        "startChar": 42,
+        "endLine": 76,
+        "endChar": 65
+      },
+      "revId": "323e6e8f94a96a784b3acfd87f8f9935d7e0d425",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
