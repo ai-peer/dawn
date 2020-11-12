@@ -270,6 +270,30 @@
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909d330d_fa993e1b",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-11-12T23:43:30Z",
+      "side": 1,
+      "message": "I\u0027ve reverted back to the original test workaround. I think this is the best solution short of putting more time into a test that works differently. \n\nThe test is reliant on always +1ing the serials every tick, but I don\u0027t believe it is possible to do just +1 without exposing internal members because Tick() will +2 mCompletedSerial when it calls AssumeCommandsComplete(). \n\nI think we can be somewhat lenient on using the internal functions since this is a whitebox test. I\u0027m hoping that we can merge this as is - WDYT?",
+      "parentUuid": "5bbde2e8_9b2fd297",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
