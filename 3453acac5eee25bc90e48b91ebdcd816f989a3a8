@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4113c5_7eb033bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-12T20:47:36Z",
+      "side": 1,
+      "message": "PTAL! We could also add this to the pass encoders very easily, but we don\u0027t have a use right now.",
+      "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
