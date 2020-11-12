@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422fce60_76d81baa",
+        "filename": "DEPS",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:43:04Z",
+      "side": 1,
+      "message": "nit: Roll probably included accidentally.",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129789f6_a7c9de90",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:43:04Z",
+      "side": 1,
+      "message": "nit: missing ;",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f6fe90_b2c7cafd",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T18:43:04Z",
+      "side": 1,
+      "message": "I think this could be unconditional and we can ASSERT(remappedEntryPointName !\u003d nullptr)",
+      "revId": "068194deedbf8a672f79776519c5cc66cb7815a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
