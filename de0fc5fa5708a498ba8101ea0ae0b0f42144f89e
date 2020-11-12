@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d8caa9b_7abece08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-12T01:21:07Z",
+      "side": 1,
+      "message": "Oh, I see. I originally wanted to add query index tracking in render pass in the occlusion query implementation, then updated the timestamp query. But I never thought I forgot to do that in https://dawn-review.googlesource.com/c/dawn/+/31321. I restore this one, and will update it to add the tracking in render pass.",
+      "revId": "de0fc5fa5708a498ba8101ea0ae0b0f42144f89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1862cab_71f16cfb",
