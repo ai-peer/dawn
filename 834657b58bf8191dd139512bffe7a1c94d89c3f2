@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa0f06c_c9256ef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:03:51Z",
+      "side": 1,
+      "message": "LGTM too but the change-detecting test is unfortunate.",
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af08852e_3975023b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:03:51Z",
+      "side": 1,
+      "message": "nit: I think this can be \u003c\u003d ?",
+      "range": {
+        "startLine": 264,
+        "startChar": 27,
+        "endLine": 264,
+        "endChar": 28
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9c94e3_376f7998",
@@ -150,6 +190,30 @@
       "side": 1,
       "message": "mm okay. I don\u0027t have any better suggestions here then",
       "parentUuid": "2a2b6fc7_7b2d75bb",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aebe3e6_dd9181b1",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-12T11:03:51Z",
+      "side": 1,
+      "message": "It is unfortunate that this is a change-detecting test. Maybe it would be ok to do what Austin suggested and call Tick or an empty submit and update the constants in the test accordingly?",
+      "parentUuid": "3825c2a3_63c5e641",
       "range": {
         "startLine": 240,
         "startChar": 8,
