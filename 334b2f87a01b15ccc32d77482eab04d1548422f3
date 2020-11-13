@@ -16,6 +16,24 @@
       "message": "PTAL at this and previous patches (so ClipSpaceTests -\u003e DepthBiasTests)\n\nI think the only WGSL stuff that might change in these is that `return` will become optional.",
       "revId": "334b2f87a01b15ccc32d77482eab04d1548422f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ddb347_742c4932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-13T02:18:00Z",
+      "side": 1,
+      "message": "There are a few other things that will be updated, like the `uniform_constant` storage class going away, but we\u0027ll make sure both ways work and update Dawn before removing the old way.",
+      "parentUuid": "9029625c_84f54e99",
+      "revId": "334b2f87a01b15ccc32d77482eab04d1548422f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
