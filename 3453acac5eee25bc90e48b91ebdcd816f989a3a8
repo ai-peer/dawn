@@ -33,6 +33,40 @@
       "message": "nice!",
       "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0199a681_fada828b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T10:58:29Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f69174_fd0ed383",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T10:58:29Z",
+      "side": 1,
+      "message": "nit: Also TODO add it to other encoders.",
+      "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
