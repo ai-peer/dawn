@@ -294,6 +294,30 @@
       },
       "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f7c29d_d29b2d04",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-13T00:44:39Z",
+      "side": 1,
+      "message": "Fine to merge as is",
+      "parentUuid": "909d330d_fa993e1b",
+      "range": {
+        "startLine": 240,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 58
+      },
+      "revId": "834657b58bf8191dd139512bffe7a1c94d89c3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
