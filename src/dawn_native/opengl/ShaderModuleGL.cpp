@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Platform.h"
+#include "dawn_native/Adapter.h"
 #include "dawn_native/SpirvUtils.h"
 #include "dawn_native/opengl/DeviceGL.h"
 
@@ -78,11 +79,16 @@ namespace dawn_native { namespace opengl {
         options.vertex.fixup_clipspace = true;
 
         // TODO(cwallez@chromium.org): discover the backing context version and use that.
+        if (GetDevice()->GetAdapter()->GetBackendType() == wgpu::BackendType::OpenGLES) {
+            options.es = true;
+            options.version = 310;
+        } else {
 #if defined(DAWN_PLATFORM_APPLE)
-        options.version = 410;
+            options.version = 410;
 #else
-        options.version = 440;
+            options.version = 440;
 #endif
+        }
 
         spirv_cross::CompilerGLSL compiler(GetSpirv());
         compiler.set_common_options(options);
