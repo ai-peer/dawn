@@ -1082,12 +1082,6 @@ namespace dawn_native { namespace vulkan {
             return;
         }
         if (!IsSubresourceContentInitialized(range)) {
-            // TODO(jiawei.shao@intel.com): initialize textures in BC formats with Buffer-to-Texture
-            // copies.
-            if (GetFormat().isCompressed) {
-                return;
-            }
-
             // If subresource has not been initialized, clear it to black as it could contain dirty
             // bits from recycled memory
             GetDevice()->ConsumedError(
