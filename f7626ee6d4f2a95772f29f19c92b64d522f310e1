@@ -79,6 +79,57 @@
       "message": "would prefer to have a separate boolean for empty. It would be possible for a hash to end up being this value",
       "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6e705c_51cc415c",
+        "filename": "src/dawn_native/RecordedObject.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T18:01:54Z",
+      "side": 1,
+      "message": "Uh, why does it needs to be different from CachedObject? We don\u0027t need to store the key even for persistently stored objects either no?",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d551b7_e953b183",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T18:01:54Z",
+      "side": 1,
+      "message": "This should probably be automatic in GetOrCreate somehow",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198d157a_84533f9d",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T18:01:54Z",
+      "side": 1,
+      "message": "Why did this need to be moved?",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
