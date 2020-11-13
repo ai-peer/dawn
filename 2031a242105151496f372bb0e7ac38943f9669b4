@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cadf523a_b43f8951",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e4d5c51_bef9f91c",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac2a2449_426522be",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "u-nit: sort alphabetically.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3955f02_d8bcc2da",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac2a2449_426522be",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c3ac83_9dd7567d",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a1737bb_996555a3",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 95
+      },
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c271ab_479fc3f7",
@@ -136,6 +196,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "Why not just std::vector\u003cuint8_t\u003e? It would avoid src/dawn_native/d3d12/ShaderModuleD3D12.h to have to include src/dawn_native/PersistentCache.h and propagate \u003cfunctional\u003e",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b857e4_95018444",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "I had a slight preference away from vector because the buffer should not ever be grown, initialized outside LoadData, nor iterable and so on. But if you prefer vector for future uses, that\u0027s fine too.",
+      "parentUuid": "e5c271ab_479fc3f7",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +235,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d11035_ba9080f8",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Oops, removed.",
+      "parentUuid": "7ed8edc4_880fa18b",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ed03cb_55f83899",
@@ -170,6 +266,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "Can we have a trivial example showing its use? Also the code in GetOrCreate to breath a bit with newline and comments.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e66b6f0_ca787c3f",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ed03cb_55f83899",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -205,6 +319,24 @@
       "side": 1,
       "message": "I think this is probably good enough for now, Bryan\u0027s CL avoids the extra serialize+deserialize shenanigans because:\n\nMyBlob blob;\nCache()-\u003eGetOrCreate(key, [\u0026](doCache) {\n   // stuff\n   doCache(blob.data(), blob.size());\n});\n\n\n// I still have |blob| here and don\u0027t need to deserialize it from the cache!\nreturn std::move(blob);",
       "parentUuid": "e58f9eb8_25ca5d11",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b7d9b6c_58aedce9",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Yup, if we keep a ref to the original structured data then there is no need to de-serialize upon store.",
+      "parentUuid": "5805fa9d_62dfd4dd",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -273,6 +405,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7addcd9_5618758a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Absolutely.",
+      "parentUuid": "d551fab2_91a50afe",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e319f153_1a457ad4",
@@ -286,6 +436,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "We should also have a prefix for each type of key so make sure that there can\u0027t be collision where different types of cached things end up with the same key.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f31e05_7530ea23",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e319f153_1a457ad4",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -307,6 +475,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e154a90_e0d89cf2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Oh yea, can use istreambuf and do 1 copy.",
+      "parentUuid": "135d731c_40f06062",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e4e9341_6c351ce1",
@@ -320,6 +506,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "nit: Manages a ref to one of the various representations of shader blobs.",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5441e88_b3b76807",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e4e9341_6c351ce1",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -341,6 +545,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54679c92_bcfcda24",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "10eb5b88_67aa1b11",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4250c7d0_869a9d7d",
@@ -354,6 +576,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "nit: DAWN_PLATFORM_EXPORT and put the \u003d default in DawnPlatform.cpp",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a490ce_21f01c46",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4250c7d0_869a9d7d",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -375,6 +615,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb69f543_a5c115d6",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dc63338_d9e93d3b",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f606dcf9_6f9522fb",
@@ -388,6 +646,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "Can we have a comment about the lifetime of the return object and what the fingerprint is?",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87e088c_c4d1212c",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f606dcf9_6f9522fb",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -409,6 +685,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a82a43fd_b4013d03",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b60904c7_9a976bb8",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c37d79e2_2da41bf6",
@@ -426,6 +720,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac7bd5bb_ba93dd44",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Combined",
+      "parentUuid": "c37d79e2_2da41bf6",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acb2ac53_40e6490d",
@@ -439,6 +751,24 @@
       "writtenOn": "2020-11-12T18:39:25Z",
       "side": 1,
       "message": "This means the testing of the caching interface is done manually by looking at the test output and adds more implicit logic in all the tests. Instead could we have the platform created just for the tests that need it by having a virtual CreateTestPlatform in DawnTestBase that\u0027s overloaded for the D3D12CachingTests?\n\nThen in these tests a fake cache could be added that checks for specific things, like the HLSL compilation being reused, but also duplicate compilation working even when the cache isn\u0027t present (by having the fake cache always return a size of 0).",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ef0411_d609e963",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acb2ac53_40e6490d",
       "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

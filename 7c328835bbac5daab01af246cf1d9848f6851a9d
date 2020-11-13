@@ -442,6 +442,30 @@
       },
       "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5a492b_ab293f59",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-13T22:45:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "122ad0a2_21c3f025",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "7c328835bbac5daab01af246cf1d9848f6851a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
