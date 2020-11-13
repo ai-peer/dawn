@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e181b4d_d43ba239",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-13T07:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bf16001_77154cba",
+      "revId": "23412d4034290da63e8d274b37473943fbcf3918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2ff5bc8_ae827299",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "827deeb8_eec16b11",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-13T07:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2ff5bc8_ae827299",
+      "revId": "23412d4034290da63e8d274b37473943fbcf3918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f237465_6b52d2e1",
@@ -82,6 +118,24 @@
       "writtenOn": "2020-11-12T10:55:04Z",
       "side": 1,
       "message": "ditto, I think we can avoid duplicate lookups by doing the following.\n\n  // Gets the iterator for that querySet or create a new vector of bool set to false\n  // if the querySet wasn\u0027t registered.\n  auto it \u003d map.emplace(querySet)-\u003efirst;\n  it-\u003esecond.set(queryIndex);\n\n  mCommandEncoder-\u003e ...",
+      "revId": "23412d4034290da63e8d274b37473943fbcf3918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "224d44a5_7303b5b3",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-13T07:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f237465_6b52d2e1",
       "revId": "23412d4034290da63e8d274b37473943fbcf3918",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
