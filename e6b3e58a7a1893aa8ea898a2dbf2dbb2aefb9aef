@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ae8181_30a0cb5f",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "667fca19_4a9e8554",
+      "range": {
+        "startLine": 100,
+        "startChar": 42,
+        "endLine": 100,
+        "endChar": 50
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "901927f8_08ed0e0f",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-11-12T19:24:02Z",
       "side": 1,
       "message": "I was surprised to see comparison with nullptr - could it be nil? And in other places as well, like assignment. Not sure if \"nil\" is a different type and we can specialize that operator.",
+      "range": {
+        "startLine": 90,
+        "startChar": 26,
+        "endLine": 90,
+        "endChar": 33
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f800b86_7e954352",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T11:36:09Z",
+      "side": 1,
+      "message": "nil and nullptr are the same thing (nil is #defined to (id)0 and id is #defined to void*), I think it is marginally better to use nullptr everywhere in the codebase.",
+      "parentUuid": "901927f8_08ed0e0f",
       "range": {
         "startLine": 90,
         "startChar": 26,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a12f353_391451d8",
+        "filename": "src/dawn_native/metal/QuerySetMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T11:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723b22f8_b3737e97",
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10bae54e_57118b2c",
@@ -111,6 +177,30 @@
       "writtenOn": "2020-11-12T19:24:02Z",
       "side": 1,
       "message": "is it worth making this a ref since it\u0027s well-scoped and autoreleased?",
+      "range": {
+        "startLine": 468,
+        "startChar": 20,
+        "endLine": 468,
+        "endChar": 62
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b67a1c_f9c6a466",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T11:36:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I kind of took the route of not trusting ObjC at all. It also helps avoid issues when we refactor code.",
+      "parentUuid": "10bae54e_57118b2c",
       "range": {
         "startLine": 468,
         "startChar": 20,
