@@ -1087,7 +1087,6 @@ namespace dawn_native { namespace vulkan {
             if (GetFormat().isCompressed) {
                 return;
             }
-
             // If subresource has not been initialized, clear it to black as it could contain dirty
             // bits from recycled memory
             GetDevice()->ConsumedError(
