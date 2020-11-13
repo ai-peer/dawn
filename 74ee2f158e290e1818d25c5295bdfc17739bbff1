@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ada827_3137dfd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T11:36:42Z",
+      "side": 1,
+      "message": "Left a couple comments unaddressed, WDYT?",
+      "revId": "74ee2f158e290e1818d25c5295bdfc17739bbff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
