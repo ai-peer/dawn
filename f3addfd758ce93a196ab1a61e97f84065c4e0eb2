@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec619a4f_f1204730",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T10:45:46Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "f3addfd758ce93a196ab1a61e97f84065c4e0eb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5ec3fe_2cfefa6e",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-13T10:45:46Z",
+      "side": 1,
+      "message": "Maybe the extra return isn\u0027t needed already? Same comment in other CLs if that\u0027s the case.",
+      "revId": "f3addfd758ce93a196ab1a61e97f84065c4e0eb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
