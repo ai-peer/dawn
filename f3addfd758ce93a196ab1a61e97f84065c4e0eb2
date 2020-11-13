@@ -33,6 +33,24 @@
       "message": "Maybe the extra return isn\u0027t needed already? Same comment in other CLs if that\u0027s the case.",
       "revId": "f3addfd758ce93a196ab1a61e97f84065c4e0eb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd30e512_6c951e18",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-13T16:38:38Z",
+      "side": 1,
+      "message": "As mentioned in chat, we need the return or the SPIR-V is invalid.",
+      "parentUuid": "3b5ec3fe_2cfefa6e",
+      "revId": "f3addfd758ce93a196ab1a61e97f84065c4e0eb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
