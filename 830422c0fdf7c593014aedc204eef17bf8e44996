@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "541c05d1_9994e0a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "Overall I really like this. The lifetime and ownership of these objects has always been confusing and error-prone and begging for a smart pointer. That said, I do find some inconsistency in the usage of nil/nullptr, and let\u0027s consider whether or not to use operator bool().",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2913c32e_27e16bb6",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "Nit: automative -\u003e automatic?",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85815842_bc55f3c0",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "Nit: if foo is a dumb (C) pointer, shouldn\u0027t this be foo-\u003ea?",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c5f357_110029d0",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "\u003cbikeshed\u003e NSPRef -\u003e NSProtocolRef?",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebfc987_a6c45dfd",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "Since RefBase has an operator bool(), couldn\u0027t this be !mMtlBuffer (here and elsewhere)?\n\n(Having said that, I\u0027m actually not fond of autoconversion to bool, so I\u0027d actually remove the operator from RefBase and leave this code as is. But if it\u0027s there, might as well use it.)\n\nOTOH, I\u0027m a little confused about initialization from nil (in the .h), but comparison against nullptr. Which might be an argument for keeping the operator.",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbfad5b8_d518fff7",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-13T22:35:51Z",
+      "side": 1,
+      "message": "Assigning to nullptr here, initializing from nil elsewhere. Maybe it\u0027s Emerson\u0027s hobgoblin, but I find it inconsistent.",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
