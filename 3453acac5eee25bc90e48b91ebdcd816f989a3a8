@@ -67,6 +67,24 @@
       "message": "nit: Also TODO add it to other encoders.",
       "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5f05c2_4410df19",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-14T00:45:50Z",
+      "side": 1,
+      "message": "I thought about it, but right now there\u0027s no need for error injection there, so I didn\u0027t do it.\n\nI\u0027m just going to land this, and if you think we should add it now, I\u0027ll do it next week. It should be super quick",
+      "parentUuid": "45f69174_fd0ed383",
+      "revId": "3453acac5eee25bc90e48b91ebdcd816f989a3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
