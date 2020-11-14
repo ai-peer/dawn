@@ -131,6 +131,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdc9c9d7_e2df0540",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-14T00:42:23Z",
+      "side": 1,
+      "message": "We should do that everywhere else too then, like [1] - and I think Stephen mentioned a few places as well that are inconsistent",
+      "parentUuid": "1f800b86_7e954352",
+      "range": {
+        "startLine": 90,
+        "startChar": 26,
+        "endLine": 90,
+        "endChar": 33
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc28e1f_d38b2528",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-14T00:42:23Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 187,
+        "startChar": 42,
+        "endLine": 187,
+        "endChar": 45
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "723b22f8_b3737e97",
         "filename": "src/dawn_native/metal/QuerySetMTL.mm",
         "patchSetId": 10
@@ -201,6 +248,30 @@
       "side": 1,
       "message": "I\u0027m not sure, I kind of took the route of not trusting ObjC at all. It also helps avoid issues when we refactor code.",
       "parentUuid": "10bae54e_57118b2c",
+      "range": {
+        "startLine": 468,
+        "startChar": 20,
+        "endLine": 468,
+        "endChar": 62
+      },
+      "revId": "e6b3e58a7a1893aa8ea898a2dbf2dbb2aefb9aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cf0493_e691948b",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-14T00:42:23Z",
+      "side": 1,
+      "message": "okay. I don\u0027t really feel that strongly, it\u0027s just slightly uglier but ok since it\u0027s just one spot in the code",
+      "parentUuid": "79b67a1c_f9c6a466",
       "range": {
         "startLine": 468,
         "startChar": 20,
