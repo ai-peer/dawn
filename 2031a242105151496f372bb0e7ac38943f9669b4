@@ -220,6 +220,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70004187_1feaaeaa",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-14T01:10:52Z",
+      "side": 1,
+      "message": "unique_ptr seems fine to me, and \u003cfunctional\u003e isn\u0027t an issue any more",
+      "parentUuid": "50b857e4_95018444",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ed8edc4_880fa18b",
         "filename": "src/dawn_native/PersistentCache.h",
         "patchSetId": 6
