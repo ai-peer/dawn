@@ -23,6 +23,27 @@ namespace dawn_wire { namespace client {
 
     Device::Device(Client* client, uint32_t initialRefcount, uint32_t initialId)
         : ObjectBase(this, initialRefcount, initialId), mClient(client) {
+#ifndef NDEBUG
+        mErrorCallback = [](WGPUErrorType, char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No device uncaptured error callback was set. This is "
+                                      "probably not intended. If you really want to ignore errors "
+                                      "and suppress this message, set the callback to null.";
+            }
+        };
+
+        mDeviceLostCallback = [](char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No device lost callback was set. This is probably not "
+                                      "intended. If you really want to ignore device lost "
+                                      "and suppress this message, set the callback to null.";
+            }
+        };
+#endif
         // Get the default queue for this device.
         auto* allocation = mClient->QueueAllocator().New(this);
         mDefaultQueue = allocation->object.get();

@@ -101,6 +101,31 @@ namespace dawn_native {
         mRootErrorScope = AcquireRef(new ErrorScope());
         mCurrentErrorScope = mRootErrorScope.Get();
 
+#ifndef NDEBUG
+        mRootErrorScope->SetCallback(
+            [](WGPUErrorType, char const*, void*) {
+                static bool calledOnce = false;
+                if (!calledOnce) {
+                    calledOnce = true;
+                    dawn::WarningLog()
+                        << "No device uncaptured error callback was set. This is "
+                           "probably not intended. If you really want to ignore errors "
+                           "and suppress this message, set the callback to null.";
+                }
+            },
+            nullptr);
+
+        mDeviceLostCallback = [](char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No device lost callback was set. This is probably not "
+                                      "intended. If you really want to ignore device lost "
+                                      "and suppress this message, set the callback to null.";
+            }
+        };
+#endif
+
         mCaches = std::make_unique<DeviceBase::Caches>();
         mErrorScopeTracker = std::make_unique<ErrorScopeTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
