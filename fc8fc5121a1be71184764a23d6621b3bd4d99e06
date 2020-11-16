@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf0f7f37_5b2b474b",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T22:53:40Z",
+      "side": 1,
+      "message": "I was thinking that libdawn_native would have a build rule which added a #define for the concatenated hashes of the dawn revision, tint revision, etc. Dawn would pass that in as the fingerprint, not the client.\nWhat would be part of the fingerprint that the client needs to provide?",
+      "parentUuid": "3b5d6958_60a6a808",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26a49a52_a63c2dfb",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -244,6 +268,53 @@
         "startChar": 8,
         "endLine": 386,
         "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5957cd1f_0b9514e1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T22:53:40Z",
+      "side": 1,
+      "message": "Sure. Let\u0027s also add an ASSERT that the hlsl code doesn\u0027t have any \"//\"",
+      "parentUuid": "83c11224_71aa12b7",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a6c08c_71e45a6e",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T22:53:40Z",
+      "side": 1,
+      "message": "I think these can be WGPUDevice?",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
       },
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
