@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fdfd31_ce8e5884",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T22:29:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e7822a8_9a1f039e",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b4ab2c3_fd9037f1",
@@ -88,6 +106,24 @@
       "writtenOn": "2020-11-16T18:38:05Z",
       "side": 1,
       "message": "Same comments",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "312bf551_5435c14b",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T22:29:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1841b463_37cf889d",
       "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
