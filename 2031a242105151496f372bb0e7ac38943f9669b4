@@ -236,6 +236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be5ee6e_583fd2a6",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-16T19:34:40Z",
+      "side": 1,
+      "message": "Okay, do re-open if not.",
+      "parentUuid": "70004187_1feaaeaa",
+      "revId": "2031a242105151496f372bb0e7ac38943f9669b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed8edc4_880fa18b",
