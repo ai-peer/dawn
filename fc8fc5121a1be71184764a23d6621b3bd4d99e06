@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "692bdad5_5d8db574",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T21:15:10Z",
+      "side": 1,
+      "message": "I\u0027m suggesting we call GetCachingInterface(fingerprint..) only once in the constructor of PersistentCache.\n\nThe fingerprint should never change throughout the lifetime of the persistent cache object.",
+      "parentUuid": "8cf91545_f8a4b52b",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26a49a52_a63c2dfb",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "Yes, Tint always strips comments before reaching the backend so these comments are considered non-user code.",
       "parentUuid": "26a49a52_a63c2dfb",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885682db_1222ee68",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T21:15:10Z",
+      "side": 1,
+      "message": "+Dan Sinclar, is this something Tint can commit to?\n\nconsider that in the future there may be an extension like WebGL\u0027s getTranslatedShaderSource and it may be reasonable to preserve comments through the translation.",
+      "parentUuid": "120bbcb9_6113db1c",
       "range": {
         "startLine": 384,
         "startChar": 8,
@@ -171,6 +219,53 @@
         "startChar": 6,
         "endLine": 404,
         "endChar": 40
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b80bfa6_7ea6bb7c",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T21:15:10Z",
+      "side": 1,
+      "message": "So yes, we should only DAWN_INSTANTIATE_TEST for the D3D12Backend(), but the test (to my knowledge) isn\u0027t using internal Dawn APIs. Everything uses the public interface so it can be inside the dawn_end2end_tests binary.",
+      "parentUuid": "46900870_353e0757",
+      "range": {
+        "startLine": 404,
+        "startChar": 6,
+        "endLine": 404,
+        "endChar": 40
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8acf93b_b0e7b3b0",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T21:15:10Z",
+      "side": 1,
+      "message": "nit: these tests should work on the wire as well, though you may need to insert some flushes into the EXPECT_CACHE_HIT macro",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 5
       },
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
