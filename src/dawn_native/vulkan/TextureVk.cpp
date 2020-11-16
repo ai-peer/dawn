@@ -1062,9 +1062,48 @@ namespace dawn_native { namespace vulkan {
                         case wgpu::TextureComponentType::DepthComparison:
                             UNREACHABLE();
                     }
-                    device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
-                                                  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                                  &clearColorValue, 1, &imageRange);
+                    if (GetFormat().isCompressed) {
+                        // need to initialize the texture with a copy from buffer
+                        const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspects).block;
+
+                        uint32_t bytesPerRow =
+                            Align((GetWidth() / blockInfo.width) * blockInfo.byteSize,
+                                  kTextureBytesPerRowAlignment);
+                        uint64_t bufferSize64 = bytesPerRow * (GetHeight() / blockInfo.height);
+                        if (bufferSize64 > std::numeric_limits<uint32_t>::max()) {
+                            return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+                        }
+                        uint32_t bufferSize = static_cast<uint32_t>(bufferSize64);
+
+                        DynamicUploader* uploader = device->GetDynamicUploader();
+                        UploadHandle uploadHandle;
+                        DAWN_TRY_ASSIGN(
+                            uploadHandle,
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
+                                               blockInfo.byteSize));
+                        memset(uploadHandle.mappedBuffer, uClearColor, bufferSize);
+
+                        TextureDataLayout dataLayout;
+                        dataLayout.offset = uploadHandle.startOffset;
+                        dataLayout.rowsPerImage = GetHeight() / blockInfo.height;
+                        dataLayout.bytesPerRow = bytesPerRow;
+                        Extent3D copySize = GetMipLevelPhysicalSize(level);
+                        TextureCopy textureCopy;
+                        textureCopy.aspect = aspects;
+                        textureCopy.mipLevel = level;
+                        textureCopy.origin = {0, 0, 0};
+                        textureCopy.texture = this;
+                        VkBufferImageCopy region =
+                            ComputeBufferImageCopyRegion(dataLayout, textureCopy, copySize);
+                        device->fn.CmdCopyBufferToImage(
+                            recordingContext->commandBuffer,
+                            ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(), GetHandle(),
+                            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+                    } else {
+                        device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
+                                                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                                      &clearColorValue, 1, &imageRange);
+                    }
                 }
             }
         }
@@ -1082,12 +1121,6 @@ namespace dawn_native { namespace vulkan {
             return;
         }
         if (!IsSubresourceContentInitialized(range)) {
-            // TODO(jiawei.shao@intel.com): initialize textures in BC formats with Buffer-to-Texture
-            // copies.
-            if (GetFormat().isCompressed) {
-                return;
-            }
-
             // If subresource has not been initialized, clear it to black as it could contain dirty
             // bits from recycled memory
             GetDevice()->ConsumedError(

@@ -19,19 +19,6 @@
 #include "utils/TestUtils.h"
 #include "utils/WGPUHelpers.h"
 
-#define EXPECT_LAZY_CLEAR(N, statement)                                                       \
-    do {                                                                                      \
-        if (UsesWire()) {                                                                     \
-            statement;                                                                        \
-        } else {                                                                              \
-            size_t lazyClearsBefore = dawn_native::GetLazyClearCountForTesting(device.Get()); \
-            statement;                                                                        \
-            size_t lazyClearsAfter = dawn_native::GetLazyClearCountForTesting(device.Get());  \
-            EXPECT_EQ(N, lazyClearsAfter - lazyClearsBefore);                                 \
-        }                                                                                     \
-    } while (0)
-
-// TODO(natlee@microsoft.com): test compressed textures are cleared
 class TextureZeroInitTest : public DawnTest {
   protected:
     void SetUp() override {
@@ -1635,6 +1622,37 @@ TEST_P(TextureZeroInitTest, WriteTextureHalfAtMipLevel) {
     // second half should be cleared
     EXPECT_TEXTURE_RGBA8_EQ(expectedZeros.data(), texture, kMipSize / 2, 0, kMipSize / 2, kMipSize,
                             kMipLevel, 0);
+}
+
+TEST_P(TextureZeroInitTest, CopyBufferToTextureHalfCompressed2) {
+    // wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
+    //     4, 1,
+    //     wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
+    //     wgpu::TextureFormat::BC1RGBAUnorm);
+    // wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    // wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
+    //     device, data.data(), static_cast<uint32_t>(data.size()), wgpu::BufferUsage::CopySrc);
+
+    // wgpu::BufferCopyView bufferCopyView =
+    //     utils::CreateBufferCopyView(stagingBuffer, 0, kSize * sizeof(uint16_t));
+    // wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, {0, 0, 0});
+    // wgpu::Extent3D copySize = {kSize / 2, kSize, 1};
+
+    // wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    // encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+    // wgpu::CommandBuffer commands = encoder.Finish();
+    // EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commands));
+
+    // std::vector<RGBA8> expected100((kSize / 2) * kSize, {100, 100, 100, 100});
+    // std::vector<RGBA8> expectedZeros((kSize / 2) * kSize, {0, 0, 0, 0});
+    // // first half filled with 100, by the buffer data
+    // EXPECT_TEXTURE_RGBA8_EQ(expected100.data(), texture, 0, 0, kSize / 2, kSize, 0, 0);
+    // // second half should be cleared
+    // EXPECT_TEXTURE_RGBA8_EQ(expectedZeros.data(), texture, kSize / 2, 0, kSize / 2, kSize, 0, 0);
+
+    // // Expect texture subresource initialized to be true
+    // EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(texture.Get(), 0, 1, 0, 1));
 }
 
 DAWN_INSTANTIATE_TEST(TextureZeroInitTest,
