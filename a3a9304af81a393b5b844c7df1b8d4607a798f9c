@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b31ffa4_0af9c538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T18:35:12Z",
+      "side": 1,
+      "message": "I saw you spend hours because of swallowed errors - WDYT?",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
