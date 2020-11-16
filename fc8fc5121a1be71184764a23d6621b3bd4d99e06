@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b5d6958_60a6a808",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-16T22:44:07Z",
+      "side": 1,
+      "message": "But can you clarify where the fingerprint data comes from and where it will be used?\n\nI\u0027m assuming the client provides the fingerprint data then Dawn uses it in [Load|Store]Data (vs Dawn calling GetCachingInterface() then embedder does device-based lookup).",
+      "parentUuid": "692bdad5_5d8db574",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26a49a52_a63c2dfb",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -191,6 +215,30 @@
       "side": 1,
       "message": "We don\u0027t pass through comments now, but I don\u0027t want to commit to _never_ passing them through.\n\nThat said, we probably won\u0027t emit comments, generated WGSL code isn\u0027t readable, especially when we start hashing all the names of things.",
       "parentUuid": "885682db_1222ee68",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c11224_71aa12b7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-16T22:44:07Z",
+      "side": 1,
+      "message": "Thanks, Dan. @AE, I can leave a TODO + comment that it should be changed (leaving it for now) if we ever decide to emit comments.",
+      "parentUuid": "7b06bbc8_a2e78f71",
       "range": {
         "startLine": 384,
         "startChar": 8,
