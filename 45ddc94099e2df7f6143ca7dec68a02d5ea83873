@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b69ca8_8e95a306",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T21:19:00Z",
+      "side": 1,
+      "message": "Corentin, TBR. CL to change old usage in Chromium has landed.",
+      "revId": "45ddc94099e2df7f6143ca7dec68a02d5ea83873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
