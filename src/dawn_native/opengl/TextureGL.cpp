@@ -202,11 +202,6 @@ namespace dawn_native { namespace opengl {
 
     MaybeError Texture::ClearTexture(const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): initialize the textures with compressed formats.
-        if (GetFormat().isCompressed) {
-            return {};
-        }
-
         Device* device = ToBackend(GetDevice());
         const OpenGLFunctions& gl = device->gl;
 

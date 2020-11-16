@@ -1220,3 +1220,77 @@ DAWN_INSTANTIATE_TEST(CompressedTextureWriteTextureTest,
                       D3D12Backend(),
                       MetalBackend(),
                       VulkanBackend());
+
+class CompressedTextureZeroInitTest : public CompressedTextureBCFormatTest {
+  protected:
+    void SetUp() override {
+        DawnTest::SetUp();
+        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
+    }
+
+    // Copy the compressed texture data into the destination texture as is specified in copyConfig.
+    void InitializeDataInCompressedTextureExpectLazyClear(wgpu::Texture bcCompressedTexture,
+                                                          const CopyConfig& copyConfig) {
+        ASSERT(IsBCFormatSupported());
+
+        std::vector<uint8_t> data = UploadData(copyConfig);
+
+        // Copy texture data from a staging buffer to the destination texture.
+        wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), data.size(),
+                                                                 wgpu::BufferUsage::CopySrc);
+        wgpu::BufferCopyView bufferCopyView =
+            utils::CreateBufferCopyView(stagingBuffer, copyConfig.bufferOffset,
+                                        copyConfig.bytesPerRowAlignment, copyConfig.rowsPerImage);
+
+        wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
+            bcCompressedTexture, copyConfig.viewMipmapLevel, copyConfig.copyOrigin3D);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyConfig.copyExtent3D);
+        wgpu::CommandBuffer copy = encoder.Finish();
+        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &copy));
+    }
+
+    // Run the tests that copies pre-prepared BC format data into a BC texture and verifies if we
+    // can render correctly with the pixel values sampled from the BC texture.
+    void TestCopyRegionIntoBCFormatTextures(const CopyConfig& config) {
+        ASSERT(IsBCFormatSupported());
+
+        wgpu::Texture bcTexture = device.CreateTexture(&config.textureDescriptor);
+        InitializeDataInCompressedTextureExpectLazyClear(bcTexture, config);
+
+        VerifyBCTexture(config, bcTexture);
+        EXPECT_TRUE(dawn_native::IsTextureSubresourceInitialized(bcTexture.Get(),
+                                                                 config.viewMipmapLevel, 1, 0, 1));
+    }
+};
+
+TEST_P(CompressedTextureZeroInitTest, CopyBufferToTextureHalfCompressed) {
+    // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan
+    // bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    constexpr static uint32_t kSize = 16;
+    CopyConfig config;
+    config.textureDescriptor.usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    config.textureDescriptor.size = {kSize, kSize, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+
+    const wgpu::Origin3D kOrigin = {0, 0, 0};
+    const wgpu::Extent3D kExtent3D = {kSize / 2, kSize / 2, 1};
+    config.copyOrigin3D = kOrigin;
+    config.copyExtent3D = kExtent3D;
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTextures(config);
+    }
+}
+
+DAWN_INSTANTIATE_TEST(CompressedTextureZeroInitTest,
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
