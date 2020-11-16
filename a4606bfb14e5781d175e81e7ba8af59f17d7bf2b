@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab43f423_cc7f4a06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T17:52:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a4606bfb14e5781d175e81e7ba8af59f17d7bf2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea54229_074a3050",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-16T17:52:37Z",
+      "side": 1,
+      "message": "Seems, fine though already possible by doing foo(..., \u0026ref.Get());\nThe ASSERT is nice though",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 5
+      },
+      "revId": "a4606bfb14e5781d175e81e7ba8af59f17d7bf2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
