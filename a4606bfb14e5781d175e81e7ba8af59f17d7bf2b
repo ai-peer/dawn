@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "00a76118_b1b28c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-16T20:33:25Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "a4606bfb14e5781d175e81e7ba8af59f17d7bf2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cea54229_074a3050",
         "filename": "src/common/RefBase.h",
         "patchSetId": 2
