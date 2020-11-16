@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b06bbc8_a2e78f71",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-16T21:19:32Z",
+      "side": 1,
+      "message": "We don\u0027t pass through comments now, but I don\u0027t want to commit to _never_ passing them through.\n\nThat said, we probably won\u0027t emit comments, generated WGSL code isn\u0027t readable, especially when we start hashing all the names of things.",
+      "parentUuid": "885682db_1222ee68",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e7dc30d_20505b65",
         "filename": "src/tests/BUILD.gn",
         "patchSetId": 9
