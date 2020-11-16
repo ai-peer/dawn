@@ -16,6 +16,80 @@
       "message": "I saw you spend hours because of swallowed errors - WDYT?",
       "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7497fca9_ec0139d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T18:38:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7822a8_9a1f039e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T18:38:05Z",
+      "side": 1,
+      "message": "Maybe #if defined(DAWN_ENABLE_ASSERTS) that\u0027s kind of our replacement for NDEBUG.",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4ab2c3_fd9037f1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T18:38:05Z",
+      "side": 1,
+      "message": "nit: mention Dawn and WebGPU so people know what that is if it\u0027s in the middle of a big application.",
+      "range": {
+        "startLine": 111,
+        "startChar": 31,
+        "endLine": 111,
+        "endChar": 37
+      },
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1841b463_37cf889d",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T18:38:05Z",
+      "side": 1,
+      "message": "Same comments",
+      "revId": "a3a9304af81a393b5b844c7df1b8d4607a798f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
