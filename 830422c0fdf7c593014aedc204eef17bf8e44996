@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf4f7d9_943626ba",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-16T20:38:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "356f318c_b05a4c2d",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ebfc987_a6c45dfd",
