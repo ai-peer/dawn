@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e7f35e_3628fd72",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T15:23:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2913c32e_27e16bb6",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85815842_bc55f3c0",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-13T22:35:51Z",
       "side": 1,
       "message": "Nit: if foo is a dumb (C) pointer, shouldn\u0027t this be foo-\u003ea?",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e8ce6a_e4ed6df7",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T15:23:40Z",
+      "side": 1,
+      "message": "Not for pointers to ObjectiveC classes. Yes, this is weird xD modified the comment to call that out.",
+      "parentUuid": "85815842_bc55f3c0",
       "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "356f318c_b05a4c2d",
+        "filename": "src/common/NSRef.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T15:23:40Z",
+      "side": 1,
+      "message": "That\u0027s what I had in the first version but it was very long to type, and didn\u0027t add a lot of clarity. NSRef and NSPRef being so similar is kind of on purpose because from our point of view it doesn\u0027t matter if something is a class or a protocol.",
+      "parentUuid": "08c5f357_110029d0",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ebfc987_a6c45dfd",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 12
@@ -82,6 +136,24 @@
       "writtenOn": "2020-11-13T22:35:51Z",
       "side": 1,
       "message": "Since RefBase has an operator bool(), couldn\u0027t this be !mMtlBuffer (here and elsewhere)?\n\n(Having said that, I\u0027m actually not fond of autoconversion to bool, so I\u0027d actually remove the operator from RefBase and leave this code as is. But if it\u0027s there, might as well use it.)\n\nOTOH, I\u0027m a little confused about initialization from nil (in the .h), but comparison against nullptr. Which might be an argument for keeping the operator.",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56824242_e501bfb7",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T15:23:40Z",
+      "side": 1,
+      "message": "Yeah I think we should removed the operator bool() from RefBase, in general I dislike the autoconversion to bool too. I\u0027ll remove the initialization from nil. I shouldn\u0027t have left it.",
+      "parentUuid": "0ebfc987_a6c45dfd",
       "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2020-11-13T22:35:51Z",
       "side": 1,
       "message": "Assigning to nullptr here, initializing from nil elsewhere. Maybe it\u0027s Emerson\u0027s hobgoblin, but I find it inconsistent.",
+      "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd3410a_5b86b31a",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-16T15:23:40Z",
+      "side": 1,
+      "message": "Removed all references to nil and replaced with the functionally equivalent nullptr.",
+      "parentUuid": "fbfad5b8_d518fff7",
       "revId": "830422c0fdf7c593014aedc204eef17bf8e44996",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
