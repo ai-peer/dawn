@@ -50,6 +50,24 @@
       "message": "Instead of adding this extra overload we can do it similarly to how the Vulkan backend handles the D42S8 toggle: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d96?q\u003dDeviceVk.cpp%20f:dawn\n\nIt uses ForceSetToggle inside vulkan::Device::Initialize to turn a toggle to false if not supported. I don\u0027t know if the warning is necessary in Dawn itself, because the application can detect that by comparing the list of actually used toggles with what it requested (and in general we should avoid printing to stdout / stderr from inside Dawn when we can)",
       "revId": "9d5d3d071cfb90b2c564812fbef9edf01479a394",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e840573_bfd400a7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-17T12:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "237b8c5b_0c4b13e0",
+      "revId": "9d5d3d071cfb90b2c564812fbef9edf01479a394",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
