@@ -19,6 +19,7 @@
 
 #include "dawn_native/Error.h"
 #include "dawn_native/Extensions.h"
+#include "dawn_native/Toggles.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
@@ -45,11 +46,14 @@ namespace dawn_native {
             const std::vector<const char*>& requestedExtensions) const;
         WGPUDeviceProperties GetAdapterProperties() const;
 
+        TogglesSet GetDisabledToggles() const;
+
       protected:
         PCIInfo mPCIInfo = {};
         wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
         std::string mDriverDescription;
         ExtensionsSet mSupportedExtensions;
+        TogglesSet mDisabledToggles;
 
       private:
         virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;

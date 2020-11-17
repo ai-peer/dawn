@@ -46,6 +46,10 @@ namespace dawn_native {
         return mSupportedExtensions;
     }
 
+    TogglesSet AdapterBase::GetDisabledToggles() const {
+        return mDisabledToggles;
+    }
+
     bool AdapterBase::SupportsAllRequestedExtensions(
         const std::vector<const char*>& requestedExtensions) const {
         for (const char* extensionStr : requestedExtensions) {

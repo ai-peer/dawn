@@ -1127,11 +1127,20 @@ namespace dawn_native {
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
 
+        const TogglesSet& disabledToggles = GetAdapter()->GetDisabledToggles();
+
         for (const char* toggleName : deviceDescriptor->forceEnabledToggles) {
             Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
             if (toggle != Toggle::InvalidEnum) {
-                mEnabledToggles.Set(toggle, true);
-                mOverridenToggles.Set(toggle, true);
+                if (disabledToggles.Has(toggle)) {
+                    dawn::WarningLog()
+                        << "Failed to enable toggle \"" << toggleName << "\" (Toggle description: "
+                        << GetAdapter()->GetInstance()->GetToggleInfo(toggleName)->description
+                        << ")";
+                } else {
+                    mEnabledToggles.Set(toggle, true);
+                    mOverridenToggles.Set(toggle, true);
+                }
             }
         }
         for (const char* toggleName : deviceDescriptor->forceDisabledToggles) {

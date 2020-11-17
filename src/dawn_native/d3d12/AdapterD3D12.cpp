@@ -111,6 +111,7 @@ namespace dawn_native { namespace d3d12 {
         }
 
         InitializeSupportedExtensions();
+        InitializeDisabledToggles();
 
         return {};
     }
@@ -121,6 +122,12 @@ namespace dawn_native { namespace d3d12 {
         mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
         if (mDeviceInfo.supportsShaderFloat16 && GetBackend()->GetFunctions()->IsDXCAvailable()) {
             mSupportedExtensions.EnableExtension(Extension::ShaderFloat16);
+        }
+    }
+
+    void Adapter::InitializeDisabledToggles() {
+        if (!GetBackend()->GetFunctions()->IsDXCAvailable()) {
+            mDisabledToggles.Set(Toggle::UseDXC, true);
         }
     }
 

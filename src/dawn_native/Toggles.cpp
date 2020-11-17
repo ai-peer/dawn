@@ -126,7 +126,13 @@ namespace dawn_native {
               "default. This setting is used to test bindgroup encoding.",
               "https://crbug.com/dawn/155"}},
             {Toggle::UseDXC,
-             {"use_dxc", "Use DXC instead of FXC for compiling HLSL",
+             {"use_dxc",
+              "Use DXC instead of FXC for compiling HLSL. Currently Dawn can only find dxil.dll "
+              "and dxcompiler.dll when they are at the same directory of the executable using "
+              "Dawn or when their parent folder is set in the PATH system environmental variable "
+              "TODO(jiawei.shao@intel.com): follow the way depot_tools does to get dxil.dll and "
+              "dxcompiler.dll by searching their default installation path "
+              "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.{Windows SDK version}.0\\x64",
               "https://crbug.com/dawn/402"}},
             {Toggle::DisableRobustness,
              {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480"}},
