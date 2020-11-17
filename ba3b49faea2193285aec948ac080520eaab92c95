@@ -16,6 +16,57 @@
       "message": "Please mark comments that have been resolved as \"resolved\". Is this ready for another review?",
       "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6acd1d_bb7ffecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:01:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e310edf7_c7d6eeba",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:01:34Z",
+      "side": 1,
+      "message": "Can we mark this code path as \"unsafe\" until it is fully implemented similarly to https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/RenderEncoderBase.cpp;l\u003d118 ?\n\nThis won\u0027t prevent testing (as we\u0027ll force disable the toggle in tests), but will soon prevent developers from using the API while it is incomplete (which is important for security).",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff03b19_3ff57b53",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:01:34Z",
+      "side": 1,
+      "message": "nit: reword as \"Only a single occlusion query can be active at a time.\" ?",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
