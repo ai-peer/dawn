@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb2e25f_22ef516c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "LGTM overall.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fc7550e_1d25851b",
@@ -168,6 +185,30 @@
       "side": 1,
       "message": "I would expect the new Dawn (version) strings to be concatenated to the Dawn key (like other static attributes). Originally, the client \"fingerprint\" was the origin data but now \"fingerprint\" could be Dawn data. I\u0027d prefer to do away with \"fingerprint\" and just have each side deal with building their own key.",
       "parentUuid": "cf0f7f37_5b2b474b",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1e8588_d8fa761f",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand. Where would the Dawn commit hash, Tint commit hash and backend device UUID be used to influence the caching key?\n\nThe original idea behind having the caching interface take the fingerprint was so that this way embedders know they can completely discard the dawn caches when the fingerprint key changes.",
+      "parentUuid": "219da6fc_c4449100",
       "range": {
         "startLine": 57,
         "startChar": 29,
@@ -323,6 +364,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8429ad67_1b73e269",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure I followed what started this thread. Why do we need to create a string that users can\u0027t produce themselves?",
+      "parentUuid": "5957cd1f_0b9514e1",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6a6c08c_71e45a6e",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
         "patchSetId": 9
@@ -358,6 +423,30 @@
       "side": 1,
       "message": "Can I include the whole webgpu.h?",
       "parentUuid": "f6a6c08c_71e45a6e",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6f8ff3_340aa29c",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "I think we could, be we would need to modify the BUILD.gn and CMakeLists.txt to add public dependencies on dawn_headers.",
+      "parentUuid": "69b4c233_82bfc306",
       "range": {
         "startLine": 43,
         "startChar": 32,
@@ -441,6 +530,97 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "061f9155_6cfc663f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "nit: this could return a unique_ptr to make the ownership clear.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45811840_e5121f8b",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "We could also do a thing similar to deprecation warnings errors, etc where we check that every single cache hit has been surrounded by a EXPECT_CACHE_HIT",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835418e0_90e183f2",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "Mmmh I don\u0027t think that\u0027s correct because what\u0027s tested below is a property of std::unordered_map. Having multiple values per keys would only be possible with std::unordered_multimap. Instead we can rely on the check you already added in StoreData.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e46286_49c3735e",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "nit: return 0 directly if mDisabled?",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f13d2e8e_93c9d26c",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "nit: public members can use snakeCase (instead of mSnakeCase), same for FakePersistentCache. I\u0027m not 100% sure we decided on that so Austin WDYT?",
+      "range": {
+        "startLine": 96,
+        "startChar": 37,
+        "endLine": 96,
+        "endChar": 54
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8acf93b_b0e7b3b0",
         "filename": "src/tests/white_box/D3D12CachingTests.cpp",
         "patchSetId": 9
@@ -458,6 +638,23 @@
         "endLine": 104,
         "endChar": 5
       },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be700ee_72cc540b",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T13:59:19Z",
+      "side": 1,
+      "message": "Why is this 4 and not 2? The comment above the test tries to explain it but I don\u0027t understand why each entrypoint is compiled once per stage given they are used by a single stage.",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
