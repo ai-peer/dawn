@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90512795_ebec980c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-17T19:21:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c3bd0a_bc182246",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfadc508_c0d36eea",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-17T10:50:39Z",
       "side": 1,
       "message": "I believe there is always going to be just Aspect::Color for compressed textures, so we can ASSERT() that and remove this for loop.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2589f862_81260e89",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-17T19:21:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfadc508_c0d36eea",
       "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d38b423_040d2508",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-17T19:21:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c50fd6a0_235f6b63",
+      "range": {
+        "startLine": 1014,
+        "startChar": 45,
+        "endLine": 1014,
+        "endChar": 73
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eded2eeb_3d02f841",
@@ -88,6 +148,24 @@
       "writtenOn": "2020-11-17T10:50:39Z",
       "side": 1,
       "message": "Why is this logic needed? Buffer sizes in Vulkan are 64bit.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8da879_7c8ff415",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-17T19:21:33Z",
+      "side": 1,
+      "message": "I actually realized we had this before here\nhttps://dawn-review.googlesource.com/c/dawn/+/10760\nbut didn\u0027t realize Allocate now takes uint64. Probably should fix this for d3d12 too then? \n\nAlso with that previous CL, I\u0027m wondering if there was a reason this block of code was removed?",
+      "parentUuid": "eded2eeb_3d02f841",
       "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
