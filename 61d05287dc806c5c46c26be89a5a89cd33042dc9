@@ -16,6 +16,177 @@
       "message": "PTAL!\nI haven\u0027t looked into fixing opengl clearTexture implementation but I can take a look at it after this is reviewed. \nI also can\u0027t repro the CompressedTextureWriteTextureTest.WriteMultiple2DArrayLayers/ for vulkan failure on the linux-dawn-rel job, it says layout VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL--instead, current layout is VK_IMAGE_LAYOUT_UNDEFINED.\" but I\u0027m not sure why the transition to that layout isn\u0027t successful for this test. \n\nThanks!",
       "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c3bd0a_bc182246",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "nit: extra newline before the if to delimitate bloxks.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfadc508_c0d36eea",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "I believe there is always going to be just Aspect::Color for compressed textures, so we can ASSERT() that and remove this for loop.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c50fd6a0_235f6b63",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "This isn\u0027t needed in Vulkan, instead we could use device-\u003eGetOptimalBytesPerRowAlignment()",
+      "range": {
+        "startLine": 1014,
+        "startChar": 45,
+        "endLine": 1014,
+        "endChar": 73
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eded2eeb_3d02f841",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "Why is this logic needed? Buffer sizes in Vulkan are 64bit.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c899dbb_beb80347",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "Instead of doing regions one by one, we can gather them in an std::vector and do a single CmdCopyBufferToImage call.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbb34e5_5c197ca0",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "This seems to be the only thing that we use from CompressedTextureBCFormatTest but we don\u0027t actually need real data, and instead could just use utils::RequiredBytesInCopy, create an empty vector and memset it to 1.\n\nThis would allow moving this code back to src/tests/end2end/TextureZeroInitTests.cpp and avoid adding EXPECT_LAZY_CLEAR to DawnTest.h",
+      "range": {
+        "startLine": 1238,
+        "startChar": 36,
+        "endLine": 1238,
+        "endChar": 46
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e091fd_952b1d3c",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "nit: utils::kBCFormats",
+      "range": {
+        "startLine": 1288,
+        "startChar": 38,
+        "endLine": 1288,
+        "endChar": 48
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6636101d_8fc53490",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "Can you open a bug for this one this CL is landed and CC Intel folks?",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f11b7ce_fd96f11a",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T10:50:39Z",
+      "side": 1,
+      "message": "It would be nice to test copying to a non-zero array layer too.\n\nAlso it would be nice testing texture-to-texture copy on a miplevel full and partial.\n\nFinally we should test that blocks that have been zero-initialized are indeed full of zeroes. This could be done by copying in a buffer and checking the buffer is empty.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
