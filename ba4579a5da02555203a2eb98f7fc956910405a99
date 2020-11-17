@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07b276de_5919e0dc",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5771220_10f962a4",
+      "range": {
+        "startLine": 69,
+        "startChar": 54,
+        "endLine": 69,
+        "endChar": 86
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60e294f7_b347274e",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "184ead57_67af5444",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Yes, begin and end must be called in pairs, not nested.",
+      "parentUuid": "60e294f7_b347274e",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 93
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c087869_021ca9cc",
@@ -77,6 +125,24 @@
       "writtenOn": "2020-11-06T13:55:19Z",
       "side": 1,
       "message": "I think this is the same discussion as for https://dawn-review.googlesource.com/c/dawn/+/31180\n\nIt should be valid to start an occlusion query in a render pass, then start it again in another render pass in the same command encoder. This means that the tracking of queries active must be per renderpass.",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1f601c_f7899118",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c087869_021ca9cc",
       "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -127,6 +193,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c84a4262_53c6acec",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8878ab4_9573b9a8",
+      "range": {
+        "startLine": 210,
+        "startChar": 87,
+        "endLine": 210,
+        "endChar": 93
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c728ade7_5b8d259e",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f349786f_0187014d",
+      "range": {
+        "startLine": 210,
+        "startChar": 77,
+        "endLine": 210,
+        "endChar": 83
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed923901_e095d6ba",
@@ -144,6 +258,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25c6999_0068c311",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed923901_e095d6ba",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6864b435_a6c16f96",
@@ -157,6 +289,24 @@
       "writtenOn": "2020-11-06T13:55:19Z",
       "side": 1,
       "message": "[1]",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6915c606_0bfbbb39",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6864b435_a6c16f96",
       "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -184,6 +334,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa7dcd88_1f2ba924",
+        "filename": "src/dawn_native/RenderPassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d18ca393_071c72c7",
+      "range": {
+        "startLine": 71,
+        "startChar": 13,
+        "endLine": 71,
+        "endChar": 36
+      },
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0c3812e_ff334298",
@@ -197,6 +371,24 @@
       "writtenOn": "2020-11-06T13:55:19Z",
       "side": 1,
       "message": "Please let\u0027s not create devices with custom options in the middle like that. (there\u0027s a caveat that errors on them aren\u0027t caught by ValidationTest which cost me 2 hours of debugging in the past). Can this be in the TimestampQueryTests instead?",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9e7d2d_fa09e8ca",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c3812e_ff334298",
       "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -218,6 +410,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28065200_c8ad5574",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b57cbe_9f1ca8e5",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80df3623_02c1eab9",
@@ -231,6 +441,24 @@
       "writtenOn": "2020-11-06T13:55:19Z",
       "side": 1,
       "message": "I think we\u0027re missing a test for an occlusion query being started but not ended at endPass.",
+      "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d32875_bdbd48ce",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-17T01:07:50Z",
+      "side": 1,
+      "message": "The first sub-case is to test this check point.",
+      "parentUuid": "80df3623_02c1eab9",
       "revId": "ba4579a5da02555203a2eb98f7fc956910405a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
