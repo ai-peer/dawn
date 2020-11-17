@@ -50,6 +50,23 @@
       "message": "This will need to be refactored to incorporate https://dawn-review.googlesource.com/c/tint/+/33124",
       "revId": "bce5dec3a6f6415c38a64225bc3c5be9c435a049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571b1224_83ceb42a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-17T22:02:26Z",
+      "side": 1,
+      "message": "PTAL, this will fail on -rel bots until Tint rolls into Chromium.",
+      "revId": "bce5dec3a6f6415c38a64225bc3c5be9c435a049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
