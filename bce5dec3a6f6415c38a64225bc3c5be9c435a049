@@ -16,6 +16,23 @@
       "message": "This should be complete now",
       "revId": "bce5dec3a6f6415c38a64225bc3c5be9c435a049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203a0b52_a3e9cce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-17T20:35:17Z",
+      "side": 1,
+      "message": "I need to make a change to the manager API, before using here.",
+      "revId": "bce5dec3a6f6415c38a64225bc3c5be9c435a049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
