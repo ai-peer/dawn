@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "778342f6_0c344f4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T23:25:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e310edf7_c7d6eeba",
@@ -83,6 +100,29 @@
       "writtenOn": "2020-11-17T10:01:34Z",
       "side": 1,
       "message": "nit: reword as \"Only a single occlusion query can be active at a time.\" ?",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9a2e0e_5ce4af53",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T23:25:35Z",
+      "side": 1,
+      "message": "nit: also test query index 1",
+      "range": {
+        "startLine": 78,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 5
+      },
       "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
