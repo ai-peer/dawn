@@ -388,6 +388,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d1bd8dc_416c4244",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T17:16:22Z",
+      "side": 1,
+      "message": "So the user can\u0027t make two shaders that end up having the same key",
+      "parentUuid": "8429ad67_1b73e269",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6a6c08c_71e45a6e",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
         "patchSetId": 9
@@ -609,6 +633,30 @@
       "writtenOn": "2020-11-17T13:59:19Z",
       "side": 1,
       "message": "nit: public members can use snakeCase (instead of mSnakeCase), same for FakePersistentCache. I\u0027m not 100% sure we decided on that so Austin WDYT?",
+      "range": {
+        "startLine": 96,
+        "startChar": 37,
+        "endLine": 96,
+        "endChar": 54
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1df588_3864fdf3",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T17:16:22Z",
+      "side": 1,
+      "message": "seems okay as long as the actual class definition is small. If it gets bigger it\u0027s hard to distinguish member variables from other local variables inside a member function",
+      "parentUuid": "f13d2e8e_93c9d26c",
       "range": {
         "startLine": 96,
         "startChar": 37,
