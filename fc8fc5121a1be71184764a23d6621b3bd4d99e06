@@ -219,6 +219,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a7472d_f3df9253",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Make sense, thanks for clarifying.",
+      "parentUuid": "5f1e8588_d8fa761f",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26a49a52_a63c2dfb",
@@ -410,6 +434,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b6853c_ff02f157",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5957cd1f_0b9514e1",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a6c08c_71e45a6e",
@@ -471,6 +519,30 @@
       "side": 1,
       "message": "I think we could, be we would need to modify the BUILD.gn and CMakeLists.txt to add public dependencies on dawn_headers.",
       "parentUuid": "69b4c233_82bfc306",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c70555_e215a6f0",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Got it. Please check.",
+      "parentUuid": "6d6f8ff3_340aa29c",
       "range": {
         "startLine": 43,
         "startChar": 32,
@@ -552,6 +624,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eead105d_12b6ee84",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b80bfa6_7ea6bb7c",
+      "range": {
+        "startLine": 404,
+        "startChar": 6,
+        "endLine": 404,
+        "endChar": 40
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "061f9155_6cfc663f",
@@ -565,6 +661,24 @@
       "writtenOn": "2020-11-17T13:59:19Z",
       "side": 1,
       "message": "nit: this could return a unique_ptr to make the ownership clear.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53335fc_87c9c457",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "061f9155_6cfc663f",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -588,6 +702,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a09b881c_bdb54aaa",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Do you prefer we do it like deprecation warnings or leave it as-is? If the latter, DawnTestPlatform would probably need be global or added to every test which uses EXPECT_CACHE_HIT. I want to do this for pipeline caching anyway; if OK, I\u0027ll make note to add it then.",
+      "parentUuid": "45811840_e5121f8b",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "835418e0_90e183f2",
         "filename": "src/tests/white_box/D3D12CachingTests.cpp",
         "patchSetId": 9
@@ -599,6 +731,24 @@
       "writtenOn": "2020-11-17T13:59:19Z",
       "side": 1,
       "message": "Mmmh I don\u0027t think that\u0027s correct because what\u0027s tested below is a property of std::unordered_map. Having multiple values per keys would only be possible with std::unordered_multimap. Instead we can rely on the check you already added in StoreData.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ce3d96_1db28f65",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Good catch, removed.",
+      "parentUuid": "835418e0_90e183f2",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -616,6 +766,24 @@
       "writtenOn": "2020-11-17T13:59:19Z",
       "side": 1,
       "message": "nit: return 0 directly if mDisabled?",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd9c544_6a80745e",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "If nothing is stored, we `return 0` early so it should be equivalent.",
+      "parentUuid": "56e46286_49c3735e",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -690,6 +858,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5137225_aa379641",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8acf93b_b0e7b3b0",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 5
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4be700ee_72cc540b",
@@ -703,6 +895,24 @@
       "writtenOn": "2020-11-17T13:59:19Z",
       "side": 1,
       "message": "Why is this 4 and not 2? The comment above the test tries to explain it but I don\u0027t understand why each entrypoint is compiled once per stage given they are used by a single stage.",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "575a9dbb_0928866f",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T19:35:43Z",
+      "side": 1,
+      "message": "Re-worded. It\u0027s due to LoadData being called twice (once to peak, again to get) each time a shader is retrieved from the cache.",
+      "parentUuid": "4be700ee_72cc540b",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
