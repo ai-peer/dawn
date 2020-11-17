@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbf66a3_da75981d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-17T01:47:25Z",
+      "side": 1,
+      "message": "PTAL!\nI haven\u0027t looked into fixing opengl clearTexture implementation but I can take a look at it after this is reviewed. \nI also can\u0027t repro the CompressedTextureWriteTextureTest.WriteMultiple2DArrayLayers/ for vulkan failure on the linux-dawn-rel job, it says layout VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL--instead, current layout is VK_IMAGE_LAYOUT_UNDEFINED.\" but I\u0027m not sure why the transition to that layout isn\u0027t successful for this test. \n\nThanks!",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
