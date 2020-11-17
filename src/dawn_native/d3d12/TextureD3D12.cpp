@@ -851,11 +851,6 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
-        // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with copies.
-        if (GetFormat().isCompressed) {
-            SetIsSubresourceContentInitialized(true, range);
-            return {};
-        }
 
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
@@ -967,7 +962,7 @@ namespace dawn_native { namespace d3d12 {
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     // compute d3d12 texture copy locations for texture and buffer
-                    Extent3D copySize = GetMipLevelVirtualSize(level);
+                    Extent3D copySize = GetMipLevelPhysicalSize(level);
 
                     uint32_t rowsPerImage = GetHeight() / blockInfo.height;
                     Texture2DCopySplit copySplit = ComputeTextureCopySplit(
