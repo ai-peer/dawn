@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "219da6fc_c4449100",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T00:59:43Z",
+      "side": 1,
+      "message": "I would expect the new Dawn (version) strings to be concatenated to the Dawn key (like other static attributes). Originally, the client \"fingerprint\" was the origin data but now \"fingerprint\" could be Dawn data. I\u0027d prefer to do away with \"fingerprint\" and just have each side deal with building their own key.",
+      "parentUuid": "cf0f7f37_5b2b474b",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26a49a52_a63c2dfb",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -310,6 +334,30 @@
       "writtenOn": "2020-11-16T22:53:40Z",
       "side": 1,
       "message": "I think these can be WGPUDevice?",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b4c233_82bfc306",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-17T00:59:43Z",
+      "side": 1,
+      "message": "Can I include the whole webgpu.h?",
+      "parentUuid": "f6a6c08c_71e45a6e",
       "range": {
         "startLine": 43,
         "startChar": 32,
