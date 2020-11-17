@@ -20,6 +20,7 @@
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
 
+#include <dawn_platform/DawnPlatform.h>
 #include <gtest/gtest.h>
 
 #include <memory>
@@ -265,6 +266,8 @@ class DawnTestBase {
     wgpu::Instance GetInstance() const;
     dawn_native::Adapter GetAdapter() const;
 
+    virtual std::unique_ptr<dawn_platform::Platform> CreateTestPlatform();
+
   protected:
     wgpu::Device device;
     wgpu::Queue queue;
@@ -400,6 +403,8 @@ class DawnTestBase {
     void ResolveExpectations();
 
     dawn_native::Adapter mBackendAdapter;
+
+    std::unique_ptr<dawn_platform::Platform> mTestPlatform;
 };
 
 // Skip a test when the given condition is satisfied.
