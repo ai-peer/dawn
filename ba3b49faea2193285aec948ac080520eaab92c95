@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0771f29e_eab1727d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-17T16:07:33Z",
+      "side": 1,
+      "message": "Also add a test in src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+      "parentUuid": "e310edf7_c7d6eeba",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bff03b19_3ff57b53",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 5
