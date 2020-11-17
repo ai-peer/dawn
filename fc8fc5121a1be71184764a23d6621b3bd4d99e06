@@ -458,6 +458,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e137766b_13ebbdac",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T23:48:56Z",
+      "side": 1,
+      "message": "I realized just now that it\u0027s okay if the user can produce these strings. What\u0027s important is that there\u0027s just any |foo| at:\n - PersistentKeyType::Shader, foo, hlslSource\n - hlslSource, foo, compileFlags\n\nsuch that you don\u0027t get weird conflicts like:\n  hlslSource..(foo \u003d 1)..(compileFlags \u003d 15)         \u003d\u003e hlslSource115\n  hlslSourceEndingIn1..(foo \u003d 1)..(compileFlags \u003d 5) \u003d\u003e hlslSource115\n\nwhich probably isn\u0027t a concern either since |hlslSource| wouldn\u0027t be ending with a token that could conflict with |compileFlags|",
+      "parentUuid": "83b6853c_ff02f157",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a6c08c_71e45a6e",
@@ -543,6 +567,30 @@
       "side": 1,
       "message": "Got it. Please check.",
       "parentUuid": "6d6f8ff3_340aa29c",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a7213e_7b4b5c46",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-17T23:48:56Z",
+      "side": 1,
+      "message": "Make it const?",
+      "parentUuid": "11c70555_e215a6f0",
       "range": {
         "startLine": 43,
         "startChar": 32,
