@@ -1220,3 +1220,164 @@ DAWN_INSTANTIATE_TEST(CompressedTextureWriteTextureTest,
                       D3D12Backend(),
                       MetalBackend(),
                       VulkanBackend());
+
+class CompressedTextureZeroInitTest : public CompressedTextureBCFormatTest {
+  protected:
+    void SetUp() override {
+        DawnTest::SetUp();
+        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
+    }
+
+    // Copy the compressed texture data into the destination texture as is specified in copyConfig.
+    void InitializeDataInCompressedTextureAndExpectLazyClear(wgpu::Texture bcCompressedTexture,
+                                                             const CopyConfig& copyConfig,
+                                                             size_t lazyClearCount) {
+        ASSERT(IsBCFormatSupported());
+
+        std::vector<uint8_t> data = UploadData(copyConfig);
+
+        // Copy texture data from a staging buffer to the destination texture.
+        wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), data.size(),
+                                                                 wgpu::BufferUsage::CopySrc);
+        wgpu::BufferCopyView bufferCopyView =
+            utils::CreateBufferCopyView(stagingBuffer, copyConfig.bufferOffset,
+                                        copyConfig.bytesPerRowAlignment, copyConfig.rowsPerImage);
+
+        wgpu::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
+            bcCompressedTexture, copyConfig.viewMipmapLevel, copyConfig.copyOrigin3D);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copyConfig.copyExtent3D);
+        wgpu::CommandBuffer copy = encoder.Finish();
+        EXPECT_LAZY_CLEAR(lazyClearCount, queue.Submit(1, &copy));
+    }
+
+    // Run the tests that copies pre-prepared BC format data into a BC texture and verifies if we
+    // can render correctly with the pixel values sampled from the BC texture.
+    // Expect that the texture subresource is initialized
+    void TestCopyRegionIntoBCFormatTexturesAndCheckSubresourceIsInitialized(
+        const CopyConfig& config,
+        size_t lazyClearCount) {
+        ASSERT(IsBCFormatSupported());
+
+        wgpu::Texture bcTexture = device.CreateTexture(&config.textureDescriptor);
+        InitializeDataInCompressedTextureAndExpectLazyClear(bcTexture, config, lazyClearCount);
+
+        VerifyBCTexture(config, bcTexture);
+        EXPECT_TRUE(dawn_native::IsTextureSubresourceInitialized(bcTexture.Get(),
+                                                                 config.viewMipmapLevel, 1, 0, 1));
+    }
+};
+
+//  Test that the clearing is skipped when we use a full mip copy (with the physical size different
+//  than the virtual mip size)
+TEST_P(CompressedTextureZeroInitTest, FullMipCopy) {
+    // TODO: find out why this test is flaky on Windows Intel Vulkan bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    constexpr static uint32_t kSize = 60;
+    CopyConfig config;
+    config.textureDescriptor.usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    config.textureDescriptor.size = {kSize, kSize, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+    config.copyOrigin3D = {0, 0, 0};
+    config.copyExtent3D = {kSize, kSize, 1};
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTexturesAndCheckSubresourceIsInitialized(config, 0u);
+    }
+}
+
+//  Test that the clearing is skipped when we use a full mip copy to a non zero mip level
+// (with the physical size different than the virtual mip size)
+TEST_P(CompressedTextureZeroInitTest, FullMipCopyToNonZeroMipLevel) {
+    // TODO: find out why this test is flaky on Windows Intel Vulkan bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    constexpr static uint32_t kSize = 60;
+    CopyConfig config;
+    config.textureDescriptor.usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    config.textureDescriptor.size = {kSize, kSize, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+    config.viewMipmapLevel = 2;
+    config.copyOrigin3D = {0, 0, 0};
+
+    const wgpu::Extent3D textureSizeLevel0 = config.textureDescriptor.size;
+    const uint32_t kActualWidthAtLevel = textureSizeLevel0.width >> config.viewMipmapLevel;
+    const uint32_t kActualHeightAtLevel = textureSizeLevel0.height >> config.viewMipmapLevel;
+
+    const uint32_t kCopyWidthAtLevel = (kActualWidthAtLevel + kBCBlockWidthInTexels - 1) /
+                                       kBCBlockWidthInTexels * kBCBlockWidthInTexels;
+    const uint32_t kCopyHeightAtLevel = (kActualHeightAtLevel + kBCBlockHeightInTexels - 1) /
+                                        kBCBlockHeightInTexels * kBCBlockHeightInTexels;
+
+    config.copyExtent3D = {kCopyWidthAtLevel / 2, kCopyHeightAtLevel, 1};
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTexturesAndCheckSubresourceIsInitialized(config, 0u);
+    }
+}
+
+// Test that 1 lazy clear count happens when we copy to half the texture
+TEST_P(CompressedTextureZeroInitTest, CopyBufferToTextureHalf) {
+    // TODO: find out why this test is flaky on Windows Intel Vulkan bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    constexpr static uint32_t kSize = 16;
+    CopyConfig config;
+    config.textureDescriptor.usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    config.textureDescriptor.size = {kSize, kSize, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+    config.copyOrigin3D = {0, 0, 0};
+    config.copyExtent3D = {kSize / 2, kSize, 1};
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTexturesAndCheckSubresourceIsInitialized(config, 1u);
+    }
+}
+
+// Test that 1 lazy clear count happens when we copy to half the texture to a nonzero mip level
+// (with physical size different from the virtual mip size)
+TEST_P(CompressedTextureZeroInitTest, CopyToNonZeroMipLevel) {
+    // TODO: find out why this test is flaky on Windows Intel Vulkan bots.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
+
+    constexpr static uint32_t kSize = 60;
+    CopyConfig config;
+    config.textureDescriptor.usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
+    config.textureDescriptor.size = {kSize, kSize, 1};
+    config.textureDescriptor.mipLevelCount = 4;
+    config.viewMipmapLevel = 2;
+    config.copyOrigin3D = {0, 0, 0};
+
+    const wgpu::Extent3D textureSizeLevel0 = config.textureDescriptor.size;
+    const uint32_t kActualWidthAtLevel = textureSizeLevel0.width >> config.viewMipmapLevel;
+    const uint32_t kActualHeightAtLevel = textureSizeLevel0.height >> config.viewMipmapLevel;
+
+    const uint32_t kCopyWidthAtLevel = (kActualWidthAtLevel + kBCBlockWidthInTexels - 1) /
+                                       kBCBlockWidthInTexels * kBCBlockWidthInTexels;
+    const uint32_t kCopyHeightAtLevel = (kActualHeightAtLevel + kBCBlockHeightInTexels - 1) /
+                                        kBCBlockHeightInTexels * kBCBlockHeightInTexels;
+
+    config.copyExtent3D = {kCopyWidthAtLevel / 2, kCopyHeightAtLevel, 1};
+
+    for (wgpu::TextureFormat format : kBCFormats) {
+        config.textureDescriptor.format = format;
+        TestCopyRegionIntoBCFormatTexturesAndCheckSubresourceIsInitialized(config, 1u);
+    }
+}
+
+DAWN_INSTANTIATE_TEST(CompressedTextureZeroInitTest,
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"},
+                                   {"use_d3d12_render_pass"}),
+                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
