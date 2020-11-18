@@ -243,6 +243,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ed14e5_7e031997",
+        "filename": "src/dawn_native/PersistentCache.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "Current code looks good and we can create the fingerprint key in follow-ups.",
+      "parentUuid": "38a7472d_f3df9253",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26a49a52_a63c2dfb",
@@ -482,6 +506,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4985a2bc_f47ed923",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "I still don\u0027t get what the issue is. Is it that the HLSL part can kind of overwrite the compile flags? It seems that we should just put any variable-length part of the key (that happens only for shader code) at the end of the key. This removes the problem no?",
+      "parentUuid": "e137766b_13ebbdac",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a6c08c_71e45a6e",
@@ -591,6 +639,30 @@
       "side": 1,
       "message": "Make it const?",
       "parentUuid": "11c70555_e215a6f0",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d477f1_6bf5cdad",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "I think that will make the pointer const, not the pointed content const.",
+      "parentUuid": "25a7213e_7b4b5c46",
       "range": {
         "startLine": 43,
         "startChar": 32,
@@ -768,6 +840,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be251d0e_54adce78",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "I think if we do it like deprecation warning we could have it in a CachingTest base class that\u0027s in a separate file from DawnTest. I guess we can TODO and do it when we extract common functionality for the pipeline caching tests.",
+      "parentUuid": "a09b881c_bdb54aaa",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "835418e0_90e183f2",
         "filename": "src/tests/white_box/D3D12CachingTests.cpp",
         "patchSetId": 9
@@ -832,6 +922,24 @@
       "side": 1,
       "message": "If nothing is stored, we `return 0` early so it should be equivalent.",
       "parentUuid": "56e46286_49c3735e",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa7d8cb_fbb4e417",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2fd9c544_6a80745e",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -961,6 +1069,24 @@
       "side": 1,
       "message": "Re-worded. It\u0027s due to LoadData being called twice (once to peak, again to get) each time a shader is retrieved from the cache.",
       "parentUuid": "4be700ee_72cc540b",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f06216_6f97617a",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "Gotcha, thanks for the clarification",
+      "parentUuid": "575a9dbb_0928866f",
       "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

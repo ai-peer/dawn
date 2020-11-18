@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ba52dd_21655a3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88b34cf_bb478137",
@@ -37,6 +54,23 @@
         "endLine": 26,
         "endChar": 9
       },
+      "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ed0528_35ef35d7",
+        "filename": "src/tests/end2end/D3D12CachingTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T10:27:10Z",
+      "side": 1,
+      "message": "I think now these two can be removed?",
       "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
