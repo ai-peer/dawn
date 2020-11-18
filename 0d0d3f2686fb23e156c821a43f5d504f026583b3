@@ -50,6 +50,24 @@
       "message": "Looks good, but does the roll need to be in the same commit? It seems like it should be able to be separate.",
       "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cc8db5_1b5b2ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-18T15:33:51Z",
+      "side": 1,
+      "message": "We need \u00272020-11-17 rharrison [transform] Add calling type determiner in manager\u0027 to be in the tree, since this CL depends on an API changes from that patch. I missed the window for the autoroll on that patch by a little bit, so it is going to be like 24 hours, from late yesterday, before it autorolls, which is why I included a roll in this patch.",
+      "parentUuid": "66f4a54e_0b3622d9",
+      "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
