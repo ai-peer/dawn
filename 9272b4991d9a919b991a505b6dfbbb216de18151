@@ -16,6 +16,91 @@
       "message": "PTAL, thanks!",
       "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3666ad5d_a0ac635d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:55:45Z",
+      "side": 1,
+      "message": "LGTM except for the regex part.",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3bbe7d_d4203ca7",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:55:45Z",
+      "side": 1,
+      "message": "nit: this can be a standalone function in an anonymous namespace since it doesn\u0027t use any member variables (except to set mWindowsSDKBasePath at the end, that can be done by LoadFunctions).",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728c5854_3896a69d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:55:45Z",
+      "side": 1,
+      "message": "I\u0027m worried that using a regex will bring a lot of additional binary size because the rest of Chromium uses re2 and not std::regex. I know this is a bit annoying but we should do without a regex.",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08229c5_2e74b82d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:55:45Z",
+      "side": 1,
+      "message": "Maybe we can had a small comment that explains that we search X first then Y (or maybe have an std::vector\u003cstd::string\u003e mSearchPaths and loop over them, the first string being the empty string?)",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430b6866_0677692b",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:55:45Z",
+      "side": 1,
+      "message": "Either in this CL or in a follow up we can do what we discussed today where using the shader_float16 extension implicitly enabled the DXC toggle.",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
