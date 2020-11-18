@@ -190,6 +190,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2702c3fb_5a7d294f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-11-18T19:42:14Z",
+      "side": 1,
+      "message": "Vulkan used to a block of code in ClearTexture to do a tmp buffer copy to texture, but I guess it was removed, maybe @austin would know?",
+      "parentUuid": "8fbe4fdf_9320cd58",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c899dbb_beb80347",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
