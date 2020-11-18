@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f2c9d0c_98c10a7c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T18:13:27Z",
+      "side": 1,
+      "message": "I worry that it might be overkill for our purpose by supporting recursive directories, symlinks and .. and depend on other stuff in //base/.",
+      "parentUuid": "68878a52_190a16d3",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 53
+      },
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "728c5854_3896a69d",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 2
