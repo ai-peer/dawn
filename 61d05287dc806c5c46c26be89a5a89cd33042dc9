@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fbe4fdf_9320cd58",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:57:46Z",
+      "side": 1,
+      "message": "Yeah I guess Allocate changed to take 64bit instead of 32bit. Fixing it in D3D12 sounds good too.\n\n\u003e Also with that previous CL, I\u0027m wondering if there was a reason this block of code was removed?\n\nWhich block of code?",
+      "parentUuid": "ea8da879_7c8ff415",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c899dbb_beb80347",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
