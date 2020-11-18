@@ -140,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "119cc8b7_4692f597",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T09:46:35Z",
+      "side": 1,
+      "message": "The use of \"begun\" seems a bit weird but I\u0027m not a native english speaker. I think it\u0027s fine as is and we can revisit the wording if someone complains :)",
+      "parentUuid": "07084823_e30e900e",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b9a2e0e_5ce4af53",
