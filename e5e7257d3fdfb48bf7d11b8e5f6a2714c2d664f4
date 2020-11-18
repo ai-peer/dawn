@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375b37e0_ceeba1c6",
+        "filename": "src/tests/end2end/D3D12CachingTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88b34cf_bb478137",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34ed0528_35ef35d7",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb31d82a_b7fde777",
+        "filename": "src/tests/end2end/D3D12CachingTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34ed0528_35ef35d7",
+      "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6500e09b_0ecd21b9",
@@ -88,6 +130,30 @@
       "writtenOn": "2020-11-17T23:48:56Z",
       "side": 1,
       "message": "typo: peek",
+      "range": {
+        "startLine": 278,
+        "startChar": 60,
+        "endLine": 278,
+        "endChar": 64
+      },
+      "revId": "e5e7257d3fdfb48bf7d11b8e5f6a2714c2d664f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4406acc_2ddcf5e1",
+        "filename": "src/tests/end2end/D3D12CachingTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6500e09b_0ecd21b9",
       "range": {
         "startLine": 278,
         "startChar": 60,

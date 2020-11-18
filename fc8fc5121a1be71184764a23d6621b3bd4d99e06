@@ -530,6 +530,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "977215e7_6e244499",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "@CW, yea the HLSL part could (in theory) form a conflict with the next piece of data in the key (before or after, I don\u0027t think order matters). The guard strings may not be strictly required (per @AE comment) but I think it\u0027s good idea anyway.",
+      "parentUuid": "4985a2bc_f47ed923",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 386,
+        "endChar": 16
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a6c08c_71e45a6e",
@@ -663,6 +687,30 @@
       "side": 1,
       "message": "I think that will make the pointer const, not the pointed content const.",
       "parentUuid": "25a7213e_7b4b5c46",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 37
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "766e6405_cf5a7deb",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Hmm. WGPUDevice \u003d Impl* so `const WGPUDevice` should be pointed content being const.",
+      "parentUuid": "26d477f1_6bf5cdad",
       "range": {
         "startLine": 43,
         "startChar": 32,
@@ -856,6 +904,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ec07e5_fbcb265d",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be251d0e_54adce78",
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "835418e0_90e183f2",
@@ -981,6 +1047,30 @@
       "side": 1,
       "message": "seems okay as long as the actual class definition is small. If it gets bigger it\u0027s hard to distinguish member variables from other local variables inside a member function",
       "parentUuid": "f13d2e8e_93c9d26c",
+      "range": {
+        "startLine": 96,
+        "startChar": 37,
+        "endLine": 96,
+        "endChar": 54
+      },
+      "revId": "fc8fc5121a1be71184764a23d6621b3bd4d99e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c4c031_9bdf0049",
+        "filename": "src/tests/white_box/D3D12CachingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-18T23:11:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ee1df588_3864fdf3",
       "range": {
         "startLine": 96,
         "startChar": 37,
