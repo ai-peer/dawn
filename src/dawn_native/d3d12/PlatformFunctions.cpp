@@ -16,6 +16,10 @@
 
 #include "common/DynamicLib.h"
 
+#include <comdef.h>
+#include <regex>
+#include <sstream>
+
 namespace dawn_native { namespace d3d12 {
 
     PlatformFunctions::PlatformFunctions() {
@@ -26,6 +30,7 @@ namespace dawn_native { namespace d3d12 {
     MaybeError PlatformFunctions::LoadFunctions() {
         DAWN_TRY(LoadD3D12());
         DAWN_TRY(LoadDXGI());
+        GetWindowsSDKBasePath();
         LoadDXIL();
         LoadDXCompiler();
         DAWN_TRY(LoadFXCompiler());
@@ -74,15 +79,76 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    void PlatformFunctions::GetWindowsSDKBasePath() {
+        const char* kDefaultWindowsSDKPath = "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\*";
+        WIN32_FIND_DATAA fileData;
+        HANDLE handle = FindFirstFileA(kDefaultWindowsSDKPath, &fileData);
+        if (handle == INVALID_HANDLE_VALUE) {
+            return;
+        }
+
+        std::smatch match;
+        std::regex windowsSDKVersionRegex("10\\.0\\.([0-9]+)\\.0");
+
+        uint32_t highestWindowsSDKVersion = 0;
+        do {
+            if (!(fileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+                continue;
+            }
+
+            const std::string pathStr = fileData.cFileName;
+            if (std::regex_search(pathStr, match, windowsSDKVersionRegex)) {
+                uint32_t windowsSDKVersion = std::atoi(match[1].str().c_str());
+                highestWindowsSDKVersion = std::max(highestWindowsSDKVersion, windowsSDKVersion);
+            }
+        } while (FindNextFileA(handle, &fileData));
+
+        if (highestWindowsSDKVersion == 0) {
+            return;
+        }
+
+        // Currently we only support using DXC on x64.
+        std::ostringstream ostream;
+        ostream << "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0."
+                << highestWindowsSDKVersion << ".0\\x64\\";
+
+        mWindowsSDKBasePath = ostream.str();
+    }
+
     void PlatformFunctions::LoadDXIL() {
-        if (!mDXILLib.Open("dxil.dll", nullptr)) {
+        const char* dxilDLLName = "dxil.dll";
+
+        if (mDXILLib.Open(dxilDLLName, nullptr)) {
+            return;
+        }
+
+        if (mWindowsSDKBasePath.empty()) {
+            mDXILLib.Close();
+            return;
+        }
+
+        if (!mDXILLib.Open(mWindowsSDKBasePath + dxilDLLName, nullptr)) {
             mDXILLib.Close();
         }
     }
 
+    bool PlatformFunctions::OpenDXCompiler() {
+        const char* dxcompilerDLLName = "dxcompiler.dll";
+
+        if (mDXCompilerLib.Open(dxcompilerDLLName, nullptr)) {
+            return true;
+        }
+
+        if (mWindowsSDKBasePath.empty()) {
+            return false;
+        }
+
+        return mDXCompilerLib.Open(mWindowsSDKBasePath + dxcompilerDLLName, nullptr);
+    }
+
     void PlatformFunctions::LoadDXCompiler() {
         // DXIL must be loaded before DXC, otherwise shader signing is unavailable
-        if (!mDXCompilerLib.Open("dxcompiler.dll", nullptr) ||
+        if (!OpenDXCompiler() ||
             !mDXCompilerLib.GetProc(&dxcCreateInstance, "DxcCreateInstance", nullptr)) {
             mDXCompilerLib.Close();
         }
