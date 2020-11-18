@@ -95,6 +95,8 @@ namespace dawn_native { namespace d3d12 {
         void LoadDXCompiler();
         MaybeError LoadFXCompiler();
         void LoadPIXRuntime();
+        void GetWindowsSDKBasePath();
+        bool OpenDXCompiler();
 
         DynamicLib mD3D12Lib;
         DynamicLib mD3D11Lib;
@@ -103,6 +105,8 @@ namespace dawn_native { namespace d3d12 {
         DynamicLib mDXCompilerLib;
         DynamicLib mFXCompilerLib;
         DynamicLib mPIXEventRuntimeLib;
+
+        std::string mWindowsSDKBasePath;
     };
 
 }}  // namespace dawn_native::d3d12

@@ -108,4 +108,8 @@ TEST_P(ShaderFloat16Tests, Basic16BitFloatFeaturesTest) {
     EXPECT_BUFFER_U16_RANGE_EQ(expected, bufferOut, 0, 2);
 }
 
-DAWN_INSTANTIATE_TEST(ShaderFloat16Tests, D3D12Backend(), MetalBackend(), VulkanBackend());
+// On D3D12 backend, although the adapter reports it supports "shader_float16" (the driver supports
+// Shader Model 6.0+ and we can find DXC DLLs), we still cannot use that feature unless the device
+// is created with the toggle "use_dxc" enabled, so currently we have to disable this test on D3D12
+// backend again.
+DAWN_INSTANTIATE_TEST(ShaderFloat16Tests, MetalBackend(), VulkanBackend());
