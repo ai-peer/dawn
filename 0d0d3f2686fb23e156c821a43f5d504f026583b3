@@ -68,6 +68,24 @@
       "parentUuid": "66f4a54e_0b3622d9",
       "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd6005a_d81610a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-18T15:57:55Z",
+      "side": 1,
+      "message": "You could roll manually (roll-dep third/tint --option-to-use-origin-master) or trigger a roll manually on https://autoroll.skia.org/",
+      "parentUuid": "a4cc8db5_1b5b2ad7",
+      "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
