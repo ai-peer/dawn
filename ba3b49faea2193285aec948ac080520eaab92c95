@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d8dfc27_9b2941c7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-18T08:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0771f29e_eab1727d",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bff03b19_3ff57b53",
@@ -104,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07084823_e30e900e",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-18T08:26:06Z",
+      "side": 1,
+      "message": "We have no description to explain what the \u0027active\u0027 means, so I think we can update it to \"Only a single occlusion query can be begun at a time.\"",
+      "parentUuid": "bff03b19_3ff57b53",
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b9a2e0e_5ce4af53",
@@ -117,6 +153,30 @@
       "writtenOn": "2020-11-17T23:25:35Z",
       "side": 1,
       "message": "nit: also test query index 1",
+      "range": {
+        "startLine": 78,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "ba3b49faea2193285aec948ac080520eaab92c95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4c9760_5040ceed",
+        "filename": "src/tests/unittests/validation/QuerySetValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-11-18T08:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b9a2e0e_5ce4af53",
       "range": {
         "startLine": 78,
         "startChar": 3,
