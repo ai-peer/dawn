@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68878a52_190a16d3",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-18T18:11:29Z",
+      "side": 1,
+      "message": "Chromium already has a file enumerator in the base library.  See base/files/file_enumerator.h.\n\nI recommend copying that to Dawn and using it instead of rolling your own like you have here.",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 53
+      },
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "728c5854_3896a69d",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 2
@@ -82,6 +105,29 @@
       "writtenOn": "2020-11-18T09:55:45Z",
       "side": 1,
       "message": "Maybe we can had a small comment that explains that we search X first then Y (or maybe have an std::vector\u003cstd::string\u003e mSearchPaths and loop over them, the first string being the empty string?)",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4124bb3_f9fc980a",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-18T18:11:29Z",
+      "side": 1,
+      "message": "To avoid storing unnecessary data, please generate this into a local variable at the time you need to load the DXIL DLL.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 40
+      },
       "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
