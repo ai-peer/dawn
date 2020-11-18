@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eea68c4_6ef7a8a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-11-18T01:51:51Z",
+      "side": 1,
+      "message": "LGTM but let\u0027s hold on landing until change in Chromium is able to land as well.",
+      "revId": "0d0d3f2686fb23e156c821a43f5d504f026583b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
