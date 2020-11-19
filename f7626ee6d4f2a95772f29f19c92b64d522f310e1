@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "379d77cd_d1becb7c",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Oops, left over.",
+      "parentUuid": "f6eba12a_c1899136",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd9eee9b_d9933803",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-11T19:33:59Z",
       "side": 1,
       "message": "Let\u0027s not rely on the developer to call the correct Record function. If I called, Record on a RecordedObject*, everything would still \"work\" but this likely isn\u0027t what I want.\n\nInstead, I suggest:\n\nvoid Record(const T\u0026 value, const Args\u0026... args) {\n    RecordImpl\u003cT, Args...\u003e::Call(\u0026mHash, value, args...);\n}\n\nand do specialization of RecordImpl to implement the iterable and RecordedObject* cases",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 47
+      },
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb6be89_958a6361",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "dd9eee9b_d9933803",
       "range": {
         "startLine": 54,
         "startChar": 8,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a59fcbf_6c4f90fe",
+        "filename": "src/dawn_native/RecordedObject.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d72bbb_2f4be89e",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc6e705c_51cc415c",
@@ -94,6 +160,24 @@
       "writtenOn": "2020-11-13T18:01:54Z",
       "side": 1,
       "message": "Uh, why does it needs to be different from CachedObject? We don\u0027t need to store the key even for persistently stored objects either no?",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e9cbed_d37c8b23",
+        "filename": "src/dawn_native/RecordedObject.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "bc6e705c_51cc415c",
       "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +199,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f486c423_45e27861",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Removed. This was for re-using blueprint hash but thinking some more, I could of also passed the blueprint key.",
+      "parentUuid": "e6d551b7_e953b183",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "198d157a_84533f9d",
@@ -128,6 +230,24 @@
       "writtenOn": "2020-11-13T18:01:54Z",
       "side": 1,
       "message": "Why did this need to be moved?",
+      "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ba4b1c_2cf86a24",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-19T23:28:11Z",
+      "side": 1,
+      "message": "Oops, reverted.",
+      "parentUuid": "198d157a_84533f9d",
       "revId": "f7626ee6d4f2a95772f29f19c92b64d522f310e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
