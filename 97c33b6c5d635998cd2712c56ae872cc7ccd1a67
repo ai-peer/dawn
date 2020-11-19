@@ -186,6 +186,24 @@
       "message": "Instead of passing the backend type here, can it be done automatically by calling glGetString(GL_VERSION)? We could factor this code: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/opengl/OpenGLFunctions.cpp;l\u003d23 somewhere else like UtilsGL",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bc91ba_a3ddb89e",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-19T23:25:57Z",
+      "side": 1,
+      "message": "OK, I\u0027ve refactored the parsing of standard and version into (new class) OpenGLVersion. This seemed cleaner than just parsing the standard and then redoing the getString etc in OpenGLFunctions. OpenGLFunctions now just handles the functions and extensions.\n\nI\u0027m not yet using this in the adapter/backend code, but I\u0027ll put this up as a separate CL and you can tell me what you think.",
+      "parentUuid": "62e9d70b_1ca5baa8",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
