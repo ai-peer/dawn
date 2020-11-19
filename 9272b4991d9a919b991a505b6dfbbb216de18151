@@ -99,6 +99,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a523ce_f8ada993",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b3bbe7d_d4203ca7",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f440759_ad901d8e",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4f2c9d0c_98c10a7c",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 53
+      },
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "728c5854_3896a69d",
@@ -116,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66f1bce_f87e375a",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "728c5854_3896a69d",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c08229c5_2e74b82d",
@@ -129,6 +189,24 @@
       "writtenOn": "2020-11-18T09:55:45Z",
       "side": 1,
       "message": "Maybe we can had a small comment that explains that we search X first then Y (or maybe have an std::vector\u003cstd::string\u003e mSearchPaths and loop over them, the first string being the empty string?)",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37df031_2db97ab8",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c08229c5_2e74b82d",
       "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "764a9fd4_7ccd7a78",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4124bb3_f9fc980a",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "430b6866_0677692b",
@@ -169,6 +271,24 @@
       "writtenOn": "2020-11-18T09:55:45Z",
       "side": 1,
       "message": "Either in this CL or in a follow up we can do what we discussed today where using the shader_float16 extension implicitly enabled the DXC toggle.",
+      "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c52452_d4447f6c",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-19T07:13:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "430b6866_0677692b",
       "revId": "9272b4991d9a919b991a505b6dfbbb216de18151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
