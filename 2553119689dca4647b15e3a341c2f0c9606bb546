@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f40db2_21fd6309",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:29:58Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6191f4e2_d0256aee",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:29:58Z",
+      "side": 1,
+      "message": "should move to be an early return right before [1]",
+      "range": {
+        "startLine": 1035,
+        "startChar": 20,
+        "endLine": 1037,
+        "endChar": 21
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a478d0_09546c81",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:29:58Z",
+      "side": 1,
+      "message": "in what way does D3D12 render pass affect clears ? ClearRenderTargetView doesn\u0027t use a render pass",
+      "range": {
+        "startLine": 1349,
+        "startChar": 37,
+        "endLine": 1349,
+        "endChar": 58
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
