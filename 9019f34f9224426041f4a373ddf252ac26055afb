@@ -79,6 +79,75 @@
       },
       "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1790882a_cae05ce6",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-19T18:27:29Z",
+      "side": 1,
+      "message": "Per the MSDN docs, handle needs to be closed with FindClose. I recommend using an RAII class like base::win::GenericScopedHandle so that you can early return out of the function without leaking file system objects.",
+      "range": {
+        "startLine": 57,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57fcc14b_35f668c5",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-19T18:27:29Z",
+      "side": 1,
+      "message": "If the Open call fails, there shouldn\u0027t be a need to close mDXILLib. In fact, you should be able to assert that mDXILLib is not valid.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 25
+      },
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b71741_327af51b",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-19T18:27:29Z",
+      "side": 1,
+      "message": "If dxCompilerLib fails to load, we should be able to close mDXILLib since we no longer need it.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 9
+      },
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
