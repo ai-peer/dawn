@@ -41,7 +41,7 @@ namespace dawn_wire { namespace client {
         }
 
         template <>
-        static constexpr ObjectType ObjectTypeToTypeEnum<{{type.name.CamelCase()}}> = ObjectType::{{type.name.CamelCase()}};
+        constexpr ObjectType ObjectTypeToTypeEnum<{{type.name.CamelCase()}}> = ObjectType::{{type.name.CamelCase()}};
 
     {% endfor %}
 }}  // namespace dawn_wire::client
