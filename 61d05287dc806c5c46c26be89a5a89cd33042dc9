@@ -208,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2111c1d_50914c52",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T17:20:17Z",
+      "side": 1,
+      "message": "not sure if this is exactly the reason but:\n\nBefore we were doing vkCmdClearColorImage only for renderable texture formats, but that command isn\u0027t actually using a render operation to clear it. It requires VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL. vkCmdClearColorImage isn\u0027t valid for compressed textures though so we still need to do manual copies there.",
+      "parentUuid": "2702c3fb_5a7d294f",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c899dbb_beb80347",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
