@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb8131e_273c8938",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T09:14:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "438ba30e9a4de0d9f6772a2a3f31b36caada3c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50dcb4ab_23a400cc",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T09:14:08Z",
+      "side": 1,
+      "message": "To avoid the double indentation of the rest of the file, this anonymouns namespace can be a in dawn_native::d3d12.",
+      "revId": "438ba30e9a4de0d9f6772a2a3f31b36caada3c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9daaa1a_d5c1d8ef",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T09:14:08Z",
+      "side": 1,
+      "message": "nit: factor the three uses of this into a variable.",
+      "range": {
+        "startLine": 41,
+        "startChar": 41,
+        "endLine": 41,
+        "endChar": 62
+      },
+      "revId": "438ba30e9a4de0d9f6772a2a3f31b36caada3c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5659cb7_13baa459",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T09:14:08Z",
+      "side": 1,
+      "message": "I think it is sufficient to do atoi(directoryName + strlen[kPrefix]); since atoi consumes characters until it finds something that\u0027s not a digit (like \u0027.\u0027).\n\nIt wouldn\u0027t check that the characters in the middle are digits but imho that\u0027s probably ok.",
+      "revId": "438ba30e9a4de0d9f6772a2a3f31b36caada3c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0853f6_24ffd4b2",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T09:14:08Z",
+      "side": 1,
+      "message": "I think OpenDXCompiler could be inlined in this function and lifetime management can be done with std::move:\n\nif (!mDXILLib.Valid()) { return }\n\nkDxCompilrDLLPaths \u003d ...\nDynamicLib dxCompilerLib;\n\nfor (path : paths) {\n   if (dxCompilerLib.Open(..)) {\n       break;\n   }\n}\n\nif (dxCompilerLib.Valid \u0026\u0026 GetProc) {\n    mDXCompilerLib \u003d std::move(dxCompilerLib);\n}",
+      "revId": "438ba30e9a4de0d9f6772a2a3f31b36caada3c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
