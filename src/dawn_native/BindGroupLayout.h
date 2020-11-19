@@ -56,10 +56,7 @@ namespace dawn_native {
         const BindingMap& GetBindingMap() const;
         BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
 
-        // Functors necessary for the unordered_set<BGLBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const BindGroupLayoutBase* bgl) const;
-        };
+        // Functor necessary for the unordered_set<BGLBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
@@ -108,6 +105,8 @@ namespace dawn_native {
 
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         BindingCounts mBindingCounts = {};
         ityp::vector<BindingIndex, BindingInfo> mBindingInfo;
