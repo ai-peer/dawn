@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04c77ea0_2f363444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:28:00Z",
+      "side": 1,
+      "message": "It looks like without the static specifier we\u0027re getting duplicate symbols.\n\nPerhaps we need to make this\nstruct ObjectTypeToObjectEnum {\n  static constexpr value...\n};",
+      "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd2c496_a6ea38b0",
