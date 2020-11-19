@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d5b9b4_1a56b43e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:19:58Z",
+      "side": 1,
+      "message": "Thanks for the fix :) ",
+      "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd2c496_a6ea38b0",
+        "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T22:19:58Z",
+      "side": 1,
+      "message": "should it be removed here too?",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
