@@ -35,16 +35,15 @@ namespace dawn_native {
 
         bool HasCompareFunction() const;
 
-        // Functors necessary for the unordered_set<SamplerBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const SamplerBase* module) const;
-        };
+        // Functor necessary for the unordered_set<SamplerBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const SamplerBase* a, const SamplerBase* b) const;
         };
 
       private:
         SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         // TODO(cwallez@chromium.org): Store a crypto hash of the items instead?
         wgpu::AddressMode mAddressModeU;

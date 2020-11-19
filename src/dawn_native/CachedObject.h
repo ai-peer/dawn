@@ -19,6 +19,8 @@
 
 namespace dawn_native {
 
+    class FingerprintRecorder;
+
     // Some objects are cached so that instead of creating new duplicate objects,
     // we increase the refcount of an existing object.
     // When an object is successfully created, the device should call
@@ -29,11 +31,26 @@ namespace dawn_native {
 
         bool IsCachedReference() const;
 
+        // Functor necessary for the unordered_set<CachedObject*>-based cache.
+        struct HashFunc {
+            size_t operator()(const CachedObject* obj) const;
+        };
+
+        size_t GetHashForTesting() const;
+
       private:
         friend class DeviceBase;
         void SetIsCachedReference();
 
         bool mIsCachedReference = false;
+
+        friend class FingerprintRecorder;
+
+        // Called by FingerprintRecorder upon creation to record the object.
+        virtual void Fingerprint(FingerprintRecorder* recorder) = 0;
+
+        size_t mHash = 0;
+        bool mIsHashInitialized = false;
     };
 
 }  // namespace dawn_native

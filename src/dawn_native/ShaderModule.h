@@ -101,10 +101,7 @@ namespace dawn_native {
         // must be true.
         const EntryPointMetadata& GetEntryPoint(const std::string& entryPoint) const;
 
-        // Functors necessary for the unordered_set<ShaderModuleBase*>-based cache.
-        struct HashFunc {
-            size_t operator()(const ShaderModuleBase* module) const;
-        };
+        // Functor necessary for the unordered_set<ShaderModuleBase*>-based cache.
         struct EqualityFunc {
             bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
         };
@@ -123,6 +120,8 @@ namespace dawn_native {
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void Fingerprint(FingerprintRecorder* recorder) override;
 
         enum class Type { Undefined, Spirv, Wgsl };
         Type mType;

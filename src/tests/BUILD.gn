@@ -159,6 +159,7 @@ test("dawn_unittests") {
     "unittests/EnumMaskIteratorTests.cpp",
     "unittests/ErrorTests.cpp",
     "unittests/ExtensionTests.cpp",
+    "unittests/FingerprintRecorderTests.cpp",
     "unittests/GetProcAddressTests.cpp",
     "unittests/ITypArrayTests.cpp",
     "unittests/ITypBitsetTests.cpp",

@@ -70,6 +70,8 @@ namespace dawn_native {
         uint32_t GetSampleCount() const;
 
       private:
+        void Fingerprint(FingerprintRecorder* recorder) override;
+
         ~AttachmentState() override;
     };
 
