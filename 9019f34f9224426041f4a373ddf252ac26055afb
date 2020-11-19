@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0449d27c_4b9dab4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T17:38:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eadac01_71e3cf4a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T17:38:44Z",
+      "side": 1,
+      "message": "unit: the newline here feels a bit odd. Maybe have it as \"} else if {\" and put the comment inside the if-block.",
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2ea078_cd276706",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T17:38:44Z",
+      "side": 1,
+      "message": "nit: would prefer these constants to be:\n - constexpr char kPrefix[] \u003d \"10.0.\";\n - constexpr uint32_t kPrefixLen \u003d sizeof(kPrefix) - 1;",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 31,
+        "endChar": 58
+      },
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a021abe5_a66ad345",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-19T17:38:44Z",
+      "side": 1,
+      "message": "nit: this one isn\u0027t a constant, so it should not be prefixed with \"k\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 44
+      },
+      "revId": "9019f34f9224426041f4a373ddf252ac26055afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
