@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb7615e_a2d76049",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Approach looks good overall. I\u0027m not sure about having a single OpenGLBackend() testing param that does both GL and GLES, let\u0027s discuss it on the review with Austin.\n\nI think the CL could be landed in several parts:\n - The preliminary change to ShaderModuleGL.\n - What\u0027s necessary to get HelloTriangle working.\n - Integration of ANGLE and its build, etc.\n - Testing OpenGL ES.\n - Integration of Swiftshader + ANGLE for software mode.\n - more stuff (like \"new swapchains\" and our own context creation, ...)",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd29f0d_ed8551ea",
+        "filename": "DEPS",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Let\u0027s not add the DEPS to ANGLE until we are able to build it in our tree and use it.",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f78e2d_cd549649",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Uh, let\u0027s not land that.",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16a4091_633c7cdb",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "This approach seems good, can we assert in OpenGLFunctions that the backendType is the correct one?",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697e40ff_167c3fbf",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "IS that assert necessary? I think it would be ok to set the color mask for all attachments at once given that it is just for the clear?",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63355443_38de4102",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Why? Isn\u0027t that in ES 3.1?",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a6c93e_549f2e4c",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Can we use something like gl.standard \u003d\u003d and gl.IsAtLeast.. similarly to ANGLE\u0027s FunctionsGL? This would make it clearer in the code what code paths are specific to standard / versions instead of cross referencing with the list of functions in each GL standard.",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b96740b_4e1ab06b",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "That\u0027s unfortunate. Also to make sure we don\u0027t forget about them can we open bugs for extra validation that will need to be added and tag them in a comment here?",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffac1589_115293ce",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "This can be landed separately by querying OpenGLFunctions for the version instead of hardcoding stuff.",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ff7e39_bad130e8",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "ditto, add a reference to a bug",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e9d70b_1ca5baa8",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-19T12:31:09Z",
+      "side": 1,
+      "message": "Instead of passing the backend type here, can it be done automatically by calling glGetString(GL_VERSION)? We could factor this code: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/opengl/OpenGLFunctions.cpp;l\u003d23 somewhere else like UtilsGL",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
