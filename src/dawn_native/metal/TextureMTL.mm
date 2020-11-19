@@ -93,8 +93,7 @@ namespace dawn_native { namespace metal {
                 return true;
             }
 
-            if (IsSubset(Aspect::Depth | Aspect::Stencil, texture->GetFormat().aspects) &&
-                textureViewDescriptor->aspect == wgpu::TextureAspect::StencilOnly) {
+            if (IsSubset(Aspect::Depth | Aspect::Stencil, texture->GetFormat().aspects)) {
                 return true;
             }
 
@@ -616,6 +615,21 @@ namespace dawn_native { namespace metal {
             auto arrayLayerRange =
                 NSMakeRange(descriptor->baseArrayLayer, descriptor->arrayLayerCount);
 
+            if (IsSubset(Aspect::Depth | Aspect::Stencil, texture->GetFormat().aspects)) {
+                if (@available(macOS 10.15, iOS 13.0, *)) {
+                    mMtlTextureView =
+                        [mtlTexture newTextureViewWithPixelFormat:format
+                                                      textureType:textureViewType
+                                                           levels:mipLevelRange
+                                                           slices:arrayLayerRange
+                                                          swizzle:MTLTextureSwizzleChannelsMake(
+                                                                      MTLTextureSwizzleRed,
+                                                                      MTLTextureSwizzleZero,
+                                                                      MTLTextureSwizzleZero,
+                                                                      MTLTextureSwizzleOne)];
+                    return;
+                }
+            }
             mMtlTextureView = [mtlTexture newTextureViewWithPixelFormat:format
                                                             textureType:textureViewType
                                                                  levels:mipLevelRange

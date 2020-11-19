@@ -590,12 +590,6 @@ TEST_P(DepthStencilSamplingTest, SampleStencil) {
 // Test that sampling a depth/stencil texture at components 1, 2, and 3 yield 0, 0, and 1
 // respectively
 TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
-    // TODO(enga): In Metal, color textures' unspecified default components values
-    // are (0, 0, 0, 1). Depth/stencil textures are undefined! Figure out what
-    // to do here.
-    // See Section 6.10 of the Metal Shading Language Specification
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     float expectedDepth[4] = {0, 0, 0, 1};
     uint8_t expectedStencil[4] = {0, 0, 0, 1};
 
