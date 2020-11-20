@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "872fe1ea_ac852d0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2020-11-20T08:06:56Z",
+      "side": 1,
+      "message": "Austin,\n\nI cannot reproduced the build failure on my local environment.\nBut I re-worked the solution with your proposal regarding struct usage.\nPlease check it and run CQ+1 to verify.",
+      "parentUuid": "04c77ea0_2f363444",
+      "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd2c496_a6ea38b0",
