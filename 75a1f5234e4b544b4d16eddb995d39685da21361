@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "603aa30c_0e6cddf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T09:41:33Z",
+      "side": 1,
+      "message": "(Other reviewers, I checked that Ivan signed the Google CLA)",
+      "revId": "75a1f5234e4b544b4d16eddb995d39685da21361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
