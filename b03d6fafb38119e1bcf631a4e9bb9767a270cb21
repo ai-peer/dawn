@@ -16,6 +16,24 @@
       "message": "Thank you for pushing this fix (and sorry we didn\u0027t get to it before then). LGTM!",
       "revId": "b03d6fafb38119e1bcf631a4e9bb9767a270cb21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f13376_2373b1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2020-11-20T09:52:04Z",
+      "side": 1,
+      "message": "Thank you for the integration it!\n\n\u003e and sorry we didn\u0027t get to it before then\nYou shouldn\u0027t sorry for it, Google don\u0027t much care about GCC since the main compiler is Clang for their projects.\n\nBut it is really appreciated when Googlers allow to integrate GCC-related fixes.",
+      "parentUuid": "d73418ce_1de24b8e",
+      "revId": "b03d6fafb38119e1bcf631a4e9bb9767a270cb21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
