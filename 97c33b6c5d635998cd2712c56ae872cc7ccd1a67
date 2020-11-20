@@ -204,6 +204,24 @@
       "parentUuid": "62e9d70b_1ca5baa8",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ed9e6e_ab6fdbf4",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-20T14:41:06Z",
+      "side": 1,
+      "message": "Hmm, actually I\u0027m not sure how to proceed. AdapterDiscoveryOptionsBase wants the backend type at construction time. Which means getProc will now have to be set at construction time. It also means it has to be something I can do in the call to the base class constructor (a single function call, no error checking).\n\nOr I move setting the backend type to post-construction.\n\nTBH I like we might be trying to be overly clever here, since the callsite clearly knows already if it\u0027s requesting ES or Desktop, since it has to create the context just prior to creating the options, so passing that as an argument doesn\u0027t seem overly error-prone.",
+      "parentUuid": "e2bc91ba_a3ddb89e",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
