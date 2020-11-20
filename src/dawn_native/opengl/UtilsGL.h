@@ -16,12 +16,14 @@
 #define DAWNNATIVE_OPENGL_UTILSGL_H_
 
 #include "dawn_native/dawn_platform.h"
+#include "dawn_native/opengl/OpenGLVersion.h"
 #include "dawn_native/opengl/opengl_platform.h"
 
 namespace dawn_native { namespace opengl {
 
     GLuint ToOpenGLCompareFunction(wgpu::CompareFunction compareFunction);
     GLint GetStencilMaskFromStencilFormat(wgpu::TextureFormat depthStencilFormat);
+    bool IsOpenGLES(void* (*getProc)(const char*));
 }}  // namespace dawn_native::opengl
 
 #endif  // DAWNNATIVE_OPENGL_UTILSGL_H_

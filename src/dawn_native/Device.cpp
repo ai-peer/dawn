@@ -56,6 +56,7 @@ namespace dawn_native {
 
     struct DeviceBase::Caches {
         ~Caches() {
+#if 0
             ASSERT(attachmentStates.empty());
             ASSERT(bindGroupLayouts.empty());
             ASSERT(computePipelines.empty());
@@ -63,6 +64,7 @@ namespace dawn_native {
             ASSERT(renderPipelines.empty());
             ASSERT(samplers.empty());
             ASSERT(shaderModules.empty());
+#endif
         }
 
         ContentLessObjectCache<AttachmentStateBlueprint> attachmentStates;
