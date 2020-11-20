@@ -120,7 +120,21 @@ namespace dawn_native {
                     return tint::transform::InputStepMode::kInstance;
             }
         }
-#endif
+
+        SingleShaderStage PipelineStateToShaderStage(tint::ast::PipelineStage stage) {
+            switch (stage) {
+                case tint::ast::PipelineStage::kVertex:
+                    return SingleShaderStage::Vertex;
+                case tint::ast::PipelineStage::kFragment:
+                    return SingleShaderStage::Fragment;
+                case tint::ast::PipelineStage::kCompute:
+                    return SingleShaderStage::Compute;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+#endif  // DAWN_ENABLE_WGSL
 
         MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
             spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
@@ -906,7 +920,7 @@ namespace dawn_native {
 #ifdef DAWN_ENABLE_WGSL
             DAWN_TRY_ASSIGN(spirv, ConvertWGSLToSPIRV(mWgsl.c_str()));
 #else
-            return DAWN_VALIDATION_ERROR("WGSL not supported (yet)");
+            return DAWN_VALIDATION_ERROR("Using Tint is not enabled in this build.");
 #endif  // DAWN_ENABLE_WGSL
         } else {
             spirv = mOriginalSpirv;
@@ -918,17 +932,77 @@ namespace dawn_native {
 
         mSpirv = std::move(spirv);
 
-        spirv_cross::Compiler compiler(mSpirv);
-        for (const spirv_cross::EntryPoint& entryPoint : compiler.get_entry_points_and_stages()) {
-            ASSERT(mEntryPoints.count(entryPoint.name) == 0);
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            std::ostringstream errorStream;
+            errorStream << "Tint Reflection failure:" << std::endl;
 
-            SingleShaderStage stage = ExecutionModelToShaderStage(entryPoint.execution_model);
-            compiler.set_entry_point(entryPoint.name, entryPoint.execution_model);
+            tint::Context context;
+            tint::reader::spirv::Parser parser(&context, mSpirv);
 
-            std::unique_ptr<EntryPointMetadata> metadata;
-            DAWN_TRY_ASSIGN(metadata,
-                            ExtractSpirvInfo(GetDevice(), compiler, entryPoint.name, stage));
-            mEntryPoints[entryPoint.name] = std::move(metadata);
+            if (!parser.Parse()) {
+                errorStream << "Parser: " << parser.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::ast::Module module = parser.module();
+            if (!module.IsValid()) {
+                errorStream << "Invalid module generated..." << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::TypeDeterminer typeDeterminer(&context, &module);
+            if (!typeDeterminer.Determine()) {
+                errorStream << "Type Determination: " << typeDeterminer.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::Validator validator;
+            if (!validator.Validate(&module)) {
+                errorStream << "Validation: " << validator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            // TODO(rharrison): Remove references to SPIRV-Cross in Tint
+            // generator path.
+            spirv_cross::Compiler compiler(mSpirv);
+            tint::inspector::Inspector inspector(&context, module);
+            auto entryPoints = inspector.GetEntryPoints();
+            if (inspector.has_error()) {
+                errorStream << "Inspector: " << inspector.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            for (auto& entryPoint : entryPoints) {
+                ASSERT(mEntryPoints.count(entryPoint.name) == 0);
+
+                SingleShaderStage stage = PipelineStateToShaderStage(entryPoint.stage);
+                compiler.set_entry_point(
+                    entryPoint.name,
+                    ShaderStageToExecutionModel(PipelineStateToShaderStage(entryPoint.stage)));
+
+                std::unique_ptr<EntryPointMetadata> metadata;
+                DAWN_TRY_ASSIGN(metadata,
+                                ExtractSpirvInfo(GetDevice(), compiler, entryPoint.name, stage));
+                mEntryPoints[entryPoint.name] = std::move(metadata);
+            }
+#else
+            return DAWN_VALIDATION_ERROR("Using Tint is not enabled in this build.");
+#endif  // DAWN_ENABLE_WGSL
+        } else {
+            spirv_cross::Compiler compiler(mSpirv);
+            for (const spirv_cross::EntryPoint& entryPoint :
+                 compiler.get_entry_points_and_stages()) {
+                ASSERT(mEntryPoints.count(entryPoint.name) == 0);
+
+                SingleShaderStage stage = ExecutionModelToShaderStage(entryPoint.execution_model);
+                compiler.set_entry_point(entryPoint.name, entryPoint.execution_model);
+
+                std::unique_ptr<EntryPointMetadata> metadata;
+                DAWN_TRY_ASSIGN(metadata,
+                                ExtractSpirvInfo(GetDevice(), compiler, entryPoint.name, stage));
+                mEntryPoints[entryPoint.name] = std::move(metadata);
+            }
         }
 
         return {};
