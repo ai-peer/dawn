@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19455cbe_16a9285d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T11:01:21Z",
+      "side": 1,
+      "message": "The code looks good at a glance but I have a suggestion of how to proceed to productionize the inspector ASAP.",
+      "revId": "8370f6ce3ff547d5b7ec67d2904a3a80961bcafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ca4f61_d214fb91",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T11:01:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the plan is to gradually transition this to being used all the time. Gating it on UseTintGenerator seems a bit too constraining no? What do you think doing something like the following:\n\n - Factor the reflection to be a function that returns an unordered_map\u003cstring, unique_ptr\u003cEntryPointMetadata\u003e\u003e.\n - Add a function returning an unordered_map\u003c...\u003e from a tint::inspector::Inspector.\n - Add a toggle UseTintInspector and when it is used, we extract metadata in addition from the extracting metadata with SPIRV-Cross, then go through all entrypoints and complete them or make sure they match between SPIRV-Cross and the Inspector.\n - Relatively quickly turn that toggle on by default (and collect any issue from users while they can work around it with --disable-dawn-features\u003duse_tint_inspector).\n\nOver time we would add more and more things supported by the Inspector and the function would check more and more matches between SPIRV-Cross and the Inspector, while still adding the extra data from SPIRVCross in ShaderBindingInfo.\n\nWhen use_tint_generator and the reflection is complete, we could skip the SPIRV-Cross side of things.\n\nAlso we should look at always enabling WGSL support for Dawn everywhere because Tint is becoming a required dependency (I think only Skia needs work for that?).",
+      "revId": "8370f6ce3ff547d5b7ec67d2904a3a80961bcafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
