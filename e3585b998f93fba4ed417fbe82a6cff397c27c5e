@@ -33,6 +33,24 @@
       "message": "Validation?",
       "revId": "e3585b998f93fba4ed417fbe82a6cff397c27c5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "388e5c8a_e9fd4960",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-20T02:11:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f913a17_de237291",
+      "revId": "e3585b998f93fba4ed417fbe82a6cff397c27c5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
