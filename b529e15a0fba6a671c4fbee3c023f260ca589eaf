@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a730fc5_5b33ac32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-20T19:29:46Z",
+      "side": 1,
+      "message": "Austin: PTAL. Thanks!\n\nIn PS2, I use this to compute the GLSL version. LMK if this looks correct.",
+      "revId": "b529e15a0fba6a671c4fbee3c023f260ca589eaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
