@@ -258,6 +258,24 @@
       "parentUuid": "47a9d833_247e1c7b",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dad8f68_11d8126a",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-20T17:32:54Z",
+      "side": 1,
+      "message": "To be clear, you\u0027re proposing something like opengl::AdapterDiscoveryOptionsDesktop and opengl::AdapterDiscoveryOptionsES? I think I\u0027d like that better.\n\nWe\u0027ll still need to pass the backend type to the opengl::Adapter(), unless you want to do the same there and have an opengl::DesktopAdapter and opengl::ESAdapter or whatever. Probably derived from opengl::Adapter and differing only in what they pass to the AdapterBase constructor.",
+      "parentUuid": "6f542b6e_60545a48",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
