@@ -276,6 +276,24 @@
       "parentUuid": "6f542b6e_60545a48",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835e7fdf_6e06bde3",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T17:40:18Z",
+      "side": 1,
+      "message": "Sounds good, I think it is ok to pass the BackendType to opengl::Adapter as long as we fail initialization if the version doesn\u0027t match the backend type.",
+      "parentUuid": "1dad8f68_11d8126a",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
