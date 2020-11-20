@@ -222,6 +222,24 @@
       "parentUuid": "e2bc91ba_a3ddb89e",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a9d833_247e1c7b",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-20T15:23:27Z",
+      "side": 1,
+      "message": "OK, latest patch does the former: pass getProc in the opengl::AdapterDiscoveryOptions constructor, and use that to determine ES/Desktop. LMK what you think.\n\nNote that I had to discard the MaybeError from OpenGLVersion::Initialize(), which is gross, but not sure how to handle this otherwise from a constructor. Suggestions welcome.",
+      "parentUuid": "f5ed9e6e_ab6fdbf4",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
