@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3242c500_28728d24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T08:21:52Z",
+      "side": 1,
+      "message": "Can we have a tracking bug for GLES?",
+      "revId": "342989f83433d8673e7c105b31730b3ad304c16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24404206_08b69fa2",
@@ -14,6 +31,57 @@
       "writtenOn": "2020-11-19T23:39:17Z",
       "side": 1,
       "message": "Corentin: PTAL. Thanks!",
+      "revId": "342989f83433d8673e7c105b31730b3ad304c16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec918ed4_b2e6e47b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T08:21:52Z",
+      "side": 1,
+      "message": "LGTM, Austin PTAL too!",
+      "revId": "342989f83433d8673e7c105b31730b3ad304c16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f90e77c_76ab2361",
+        "filename": "src/dawn_native/opengl/OpenGLVersion.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T08:21:52Z",
+      "side": 1,
+      "message": "nit: 2020",
+      "revId": "342989f83433d8673e7c105b31730b3ad304c16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1108d2a0_6f3eb0dd",
+        "filename": "src/dawn_native/opengl/OpenGLVersion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T08:21:52Z",
+      "side": 1,
+      "message": "nit: 2020",
       "revId": "342989f83433d8673e7c105b31730b3ad304c16d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
