@@ -15,6 +15,7 @@
 #include "dawn_native/opengl/UtilsGL.h"
 
 #include "common/Assert.h"
+#include "dawn_native/opengl/OpenGLVersion.h"
 
 namespace dawn_native { namespace opengl {
 
@@ -50,5 +51,10 @@ namespace dawn_native { namespace opengl {
             default:
                 UNREACHABLE();
         }
+    }
+    bool IsOpenGLES(void* (*getProc)(const char*)) {
+        OpenGLVersion version;
+        (void)version.Initialize(getProc);
+        return version.IsES();
     }
 }}  // namespace dawn_native::opengl
