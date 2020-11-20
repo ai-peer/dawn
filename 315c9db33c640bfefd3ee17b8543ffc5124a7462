@@ -56,6 +56,30 @@
       },
       "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c87f488_f618970f",
+        "filename": "generator/templates/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2020-11-20T03:43:01Z",
+      "side": 1,
+      "message": "No, this is not explicit template usage, hence the \"static\" can be here, but we can remove it here too, for the consistency.",
+      "parentUuid": "cfd2c496_a6ea38b0",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "315c9db33c640bfefd3ee17b8543ffc5124a7462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
