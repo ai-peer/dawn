@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0970dc4e_8af65c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T10:04:22Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d579 about the failure and sent a suppression TBR.",
+      "revId": "871e383de4f2cf2456a0533f33e2bae018331b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
