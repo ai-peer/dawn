@@ -33,6 +33,24 @@
       "message": "this only matches for versions of OpenGL 3.3 and above. Otherwise, it\u0027s \n\nOpenGL\tGLSL\n2.0\t1.10\n2.1\t1.20\n3.0\t1.30\n3.1\t1.40\n3.2\t1.50\n\nDo we require a minimum version somewhere?",
       "revId": "b529e15a0fba6a671c4fbee3c023f260ca589eaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5872f410_974016a5",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:16:37Z",
+      "side": 1,
+      "message": "I think we can require 3.3 or more for Desktop GL and add an ASSERT here explaining why. Desktop GL support should really be best effort at least for now.",
+      "parentUuid": "1d015b85_9e86a56c",
+      "revId": "b529e15a0fba6a671c4fbee3c023f260ca589eaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
