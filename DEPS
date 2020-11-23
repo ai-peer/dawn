@@ -117,6 +117,11 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
+  'third_party/angle': {
+    'url': 'https://chromium.googlesource.com/angle/angle@c07bd2f23d7e595b8530a185f3c9d3ca979e6aa7',
+    'condition': 'dawn_standalone',
+  },
+
 }
 
 hooks = [

@@ -323,10 +323,14 @@ namespace dawn_native { namespace opengl {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
-                        gl.ClearTexSubImage(mHandle, static_cast<GLint>(level), 0, 0,
-                                            static_cast<GLint>(layer), mipSize.width,
-                                            mipSize.height, 1, glFormat.format, glFormat.type,
-                                            clearColorData.data());
+                        if (gl.ClearTexSubImage) {
+                            gl.ClearTexSubImage(mHandle, static_cast<GLint>(level), 0, 0,
+                                                static_cast<GLint>(layer), mipSize.width,
+                                                mipSize.height, 1, glFormat.format, glFormat.type,
+                                                clearColorData.data());
+                        } else {
+                            ASSERT(false);
+                        }
                     }
                 }
             }
