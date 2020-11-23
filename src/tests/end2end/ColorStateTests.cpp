@@ -748,6 +748,7 @@ TEST_P(ColorStateTest, ColorWriteMaskBlendingDisabled) {
 // Test that independent color states on render targets works
 TEST_P(ColorStateTest, IndependentColorState) {
     DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
+    DAWN_SKIP_TEST_IF(IsOpenGLES());  // FIXME: test and use OES_draw_buffers_indexed
 
     std::array<wgpu::Texture, 4> renderTargets;
     std::array<wgpu::TextureView, 4> renderTargetViews;
