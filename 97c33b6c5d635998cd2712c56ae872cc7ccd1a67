@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad008460_fbe1ecc4",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:24:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5c7c646c_3287c08e",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "697e40ff_167c3fbf",
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Assuming that other color mask users make no assumptions about the state in other attachments. The only other user is RenderPipelineGL::ApplyColorState(), and it seems to set all the ones it uses unconditionally, so it should be ok.\n\nRemoved.",
       "parentUuid": "697e40ff_167c3fbf",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cea0fef_5533e6d6",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:24:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "51cf4d97_8ae87084",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -159,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fefe7738_5ac06c62",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:24:57Z",
+      "side": 1,
+      "message": "Let\u0027s think about it more in the split off CL that adds support for it.",
+      "parentUuid": "b1035cc2_a13e02f6",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22a6c93e_549f2e4c",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 11
@@ -188,6 +242,24 @@
       "side": 1,
       "message": "Done.\n\nI had thought we would group all functionality into profiles (e.g., IsWebGPUCompat() or something), but using IsAtLeast() is definitely better than this.\n\nBTW, ANGLE actually supports this functionality via OES_draw_buffers_indexed. I just couldn\u0027t figure out how to get the extensions loading mechanism to load it yet. I think OES_draw_buffers_indexed is fairly widely supported (and required in 3.2) so maybe it doesn\u0027t have be excluded from the WebGPU Compat profile.",
       "parentUuid": "22a6c93e_549f2e4c",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd52e20_8c05cc5d",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:24:57Z",
+      "side": 1,
+      "message": "We\u0027ll have to see the prevalence of it on Android.\n\nAlso the WebGPU feature level and the GL version are better as two different things: the feature level will be a pure frontend restriction that will happen to only allow commands that are implementable on GLES 3.1. Internally the GL backend does feature detection to know what\u0027s available (and ASSERTs if asked to do something that\u0027s not available), but it doesn\u0027t need to look at the frontend\u0027s feature level ideally.",
+      "parentUuid": "d0eefe8b_7d239552",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

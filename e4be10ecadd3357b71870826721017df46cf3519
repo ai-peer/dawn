@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "852fd359_e8a40339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T14:24:57Z",
+      "side": 1,
+      "message": "FYI you could use the feature of gerrit that allows pushing a stack of patches in a single operation so that you can push both the OpenGLVersion change and this CL without the OpenGLVersion change. (it would also help by trimming some stuff from this WIP CL)",
+      "revId": "e4be10ecadd3357b71870826721017df46cf3519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
