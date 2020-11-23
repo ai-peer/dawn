@@ -944,7 +944,11 @@ namespace dawn_native { namespace opengl {
 
                 // Load op - color
                 if (attachmentInfo->loadOp == wgpu::LoadOp::Clear) {
-                    gl.ColorMaski(i, true, true, true, true);
+                    if (gl.IsAtLeastGL(3, 0) || gl.IsAtLeastGLES(3, 2)) {
+                        gl.ColorMaski(i, true, true, true, true);
+                    } else {
+                        gl.ColorMask(true, true, true, true);
+                    }
 
                     wgpu::TextureComponentType baseType =
                         attachmentInfo->view->GetFormat().GetAspectInfo(Aspect::Color).baseType;
