@@ -134,8 +134,10 @@ namespace dawn_native { namespace opengl {
                         GLuint location = gl.GetProgramResourceIndex(
                             mProgram, GL_SHADER_STORAGE_BLOCK, name.c_str());
                         if (location != GL_INVALID_INDEX) {
-                            gl.ShaderStorageBlockBinding(mProgram, location,
-                                                         indices[group][bindingIndex]);
+                            GLuint binding = indices[group][bindingIndex];
+                            if (location != binding) {
+                                gl.ShaderStorageBlockBinding(mProgram, location, binding);
+                            }
                         }
                         break;
                     }

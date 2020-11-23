@@ -21,7 +21,7 @@
 namespace dawn_native { namespace opengl {
 
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
-        AdapterDiscoveryOptions();
+        AdapterDiscoveryOptions(void* (*getProc)(const char*));
 
         void* (*getProc)(const char*);
     };
