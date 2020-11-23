@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "841ebd96_37317447",
+        "filename": "DEPS",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1fd29f0d_ed8551ea",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f78e2d_cd549649",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-19T12:31:09Z",
       "side": 1,
       "message": "Uh, let\u0027s not land that.",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "235449ee_280f0522",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Ack.\n\n(Did I mention this was a WIP? :) )",
+      "parentUuid": "28f78e2d_cd549649",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +247,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d5d3bd_d1619e54",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "fefe7738_5ac06c62",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22a6c93e_549f2e4c",
@@ -264,6 +318,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd6e762_1fd0ea0e",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Ack.\n\nThat makes a lot of sense. It avoids backend churn if the feature level spec changes.",
+      "parentUuid": "2fd52e20_8c05cc5d",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b96740b_4e1ab06b",
@@ -277,6 +349,24 @@
       "writtenOn": "2020-11-19T12:31:09Z",
       "side": 1,
       "message": "That\u0027s unfortunate. Also to make sure we don\u0027t forget about them can we open bugs for extra validation that will need to be added and tag them in a comment here?",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526030f2_72f1aedd",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b96740b_4e1ab06b",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -298,6 +388,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2675d52b_ae9ddc32",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffac1589_115293ce",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46ff7e39_bad130e8",
@@ -311,6 +419,24 @@
       "writtenOn": "2020-11-19T12:31:09Z",
       "side": 1,
       "message": "ditto, add a reference to a bug",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be793d8a_40d2e249",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46ff7e39_bad130e8",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -436,6 +562,24 @@
       "side": 1,
       "message": "Sounds good, I think it is ok to pass the BackendType to opengl::Adapter as long as we fail initialization if the version doesn\u0027t match the backend type.",
       "parentUuid": "1dad8f68_11d8126a",
+      "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72869ef4_e45405cf",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-23T18:19:51Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "835e7fdf_6e06bde3",
       "revId": "97c33b6c5d635998cd2712c56ae872cc7ccd1a67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
