@@ -20,11 +20,16 @@
 #include "common/SwapChainUtils.h"
 #include "dawn_native/opengl/DeviceGL.h"
 #include "dawn_native/opengl/NativeSwapChainImplGL.h"
+#include "dawn_native/opengl/UtilsGL.h"
 
 namespace dawn_native { namespace opengl {
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions()
         : AdapterDiscoveryOptionsBase(WGPUBackendType_OpenGL) {
+    }
+
+    AdapterDiscoveryOptionsES::AdapterDiscoveryOptionsES()
+        : AdapterDiscoveryOptionsBase(WGPUBackendType_OpenGLES) {
     }
 
     DawnSwapChainImplementation CreateNativeSwapChainImpl(WGPUDevice device,
