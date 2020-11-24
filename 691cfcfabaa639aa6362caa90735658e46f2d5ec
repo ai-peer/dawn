@@ -16,6 +16,210 @@
       "message": "This is probably clean enough now to consider landing.\n\nIf you\u0027d prefer I peel of bits and land separately, I\u0027m fine with that too.",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c59ba6_ed59eb2c",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "ditto redundant assert.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3cf5a43_afa455e6",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "I think these ASSERTS are a bit redundant because in Connect we choose one or the other.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21b9dcd_ad5e1c0b",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "ASSERT(optionsBase-\u003ebackendType \u003d\u003d the backend type passed to the constructor).",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee37f804_b0ac8581",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "I think we can use glColorMask unconditionally here and that it will set the color mask for all buffers.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009610f2_74552940",
+        "filename": "src/dawn_native/opengl/OpenGLBackend.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "nit: unused.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ace5f28_094da0df",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "Instead of this logic that kinda magically does nothing in OpenGL ES, can we instead have \n\n if (isES) {\n   // Blurb explaining that in ES the storage location on the API side is exactly what\u0027s put in the layout()\n   ASSERT(binding \u003d\u003d location);\n } else {\n   gl.ShaderStorageBlockBinding\n }\n\nAlso I don\u0027t think we correctly set the location of storage buffers in the produced GLSL, can you double check and maybe plan to make a test that tries using two storage buffers, and then the same thing but with storage buffers declared in a different order?",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb368e8_5a9a7f7f",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "I think the logic would be more clear if it was:\n\n if(supportsDrawBuffersIndexed) {\n   logic for drawBufferIndexed\n } else {\n   // TODO\n   ASSERT(colorBuffer \u003d\u003d 0);\n   logic without drawBufferIndexed\n }",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad37668_2770c8f2",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "nit: TODO(crbug.com/dawn/582): Add validation to prevent this as it is not supported on GLES \u003c 3.2",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063fdee5_161a6fb8",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "nit: Add the same TODO",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d136d0_da926f98",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "nit: add the same TODO.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922508ae_85582d5a",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "nit: TODO(crbug.com/dawn/581): Implement a fallback path on OpenGL ES because it doesn\u0027t support glClearTexSubImage.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3ba2b03_2eaa9546",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T12:00:20Z",
+      "side": 1,
+      "message": "Can we split everything in tests/ in a separate patch? It\u0027s making the CQ fail on Linux NVIDIA because they expose a GLES driver that gets picked up automatically.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
