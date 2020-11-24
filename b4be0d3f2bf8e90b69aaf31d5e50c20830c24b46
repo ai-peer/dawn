@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "b4be0d3f2bf8e90b69aaf31d5e50c20830c24b46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bab690c5_03ad250d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:59:45Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "b4be0d3f2bf8e90b69aaf31d5e50c20830c24b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28549d35_58bb92a1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:59:45Z",
+      "side": 1,
+      "message": "uNit: this is called indexFormatSize in the GL backend which I find a bit easier to read, and matches the macro used to compute it. I realize you\u0027re probably trying to match Metal naming here, which is a fair point so feel free to ignore me.",
+      "revId": "b4be0d3f2bf8e90b69aaf31d5e50c20830c24b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
