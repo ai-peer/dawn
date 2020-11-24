@@ -240,8 +240,7 @@ class DepthStencilCopyTests : public DawnTest {
         // Pipeline for a full screen quad.
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
 
-        pipelineDescriptor.vertexStage.module =
-            utils::CreateShaderModuleFromWGSL(device, R"(
+        pipelineDescriptor.vertexStage.module = utils::CreateShaderModuleFromWGSL(device, R"(
         [[builtin(vertex_idx)]] var<in> VertexIndex : i32;
         [[builtin(position)]] var<out> Position : vec4<f32>;
 
@@ -632,8 +631,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
         // A quad is drawn in the bottom left.
         utils::ComboRenderPipelineDescriptor renderPipelineDesc(device);
         renderPipelineDesc.vertexStage.module = mVertexModule;
-        renderPipelineDesc.cFragmentStage.module =
-            utils::CreateShaderModuleFromWGSL(device, R"(
+        renderPipelineDesc.cFragmentStage.module = utils::CreateShaderModuleFromWGSL(device, R"(
     [[stage(fragment)]]
     fn main() -> void {
     })");
