@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e7637a9_9e451941",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:17:36Z",
+      "side": 1,
+      "message": "there\u0027s some precedent for true/false here (my fault), but it might be more clear to just pass the backend type through. It would also get rid of the ternary inside the implementation of opengl::Connect",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6946d503_c6739009",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 34
@@ -31,6 +48,29 @@
       "writtenOn": "2020-11-24T17:06:28Z",
       "side": 1,
       "message": "That\u0027s not the issue, the issue is that we need to make sure that location \u003d\u003d binding. Also can we have a bug opened for that TODO?",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b66ec63_bba2d1fc",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:17:36Z",
+      "side": 1,
+      "message": "PipelineGL::Initialize should probably return MaybeError so we can bubble this up as a DeviceLost (or perhaps just Validation) error for better telemetry. Same for the program link/compile errors above this.\n\nFine to do later though since the existing code lacks error handling.",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 140,
+        "endChar": 46
+      },
       "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
