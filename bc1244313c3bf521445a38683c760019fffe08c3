@@ -16,6 +16,420 @@
       "message": "PTAL!",
       "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb2a490_613fa84f",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Please add a comment that explains why you chose the numbers you did for BufferCountForPresentMode.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263ed618_b63e9019",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Please add a comment that explains why you chose the numbers you did for SwapIntervalForPresentMode.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed862a13_6ad7e797",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "I can\u0027t think of a reason why we would want to allow people\u0027s WebGPU content to tear. Is this intended to be for people hosting Dawn outside of Chromium?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63f0931a_d713cde4",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Nit: For empty destructors, prefer to use \"\u003d default.\"",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 5
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b47953_8816cdde",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Assigning ptr to d3d12Texture will increment the reference count on the texture. Is this what you intended? If no code decrements the reference of next.texture.ptr, then this code leaks memory and you need to fix it by using ComPtr\u0027s Attach method.",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 93
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc2d2c2_5b2a30e8",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "For my understanding, when will a non-null previous swapchain be passed here? Why can\u0027t the caller reuse the previous swap chain instead of complicating this code with having to transfer internal objects?",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156e50fd_25153e96",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "What is the rationale for swaping our buffers with the previous swap chain instead of just using std::move? std::move makes is clearer that the previous swap chain will not longer point to anything useful.",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccc5f2d_47f59248",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Nit: We -\u003e we",
+      "range": {
+        "startLine": 197,
+        "startChar": 41,
+        "endLine": 197,
+        "endChar": 43
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b21ca3_d0218bda",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "I think this code will work but it seems wrong to take the objects from previousD3D12SwapChain earlier in this function and then keep calling methods on it. If we change the code such that DetachAndWaitDeallocation uses those objects then this code will stop working. Consider waiting for the GPU work to finish first before transferring objects from the old to the new swap chain.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 70
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141b13b3_b8fc5a4f",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "QueryInterface increments the reference count of objects. You need to use ComPtr\u003cIDXGIFactory2\u003e here to avoid a memory leak.",
+      "range": {
+        "startLine": 229,
+        "startChar": 8,
+        "endLine": 229,
+        "endChar": 42
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8644c0d_33226ad3",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "You need to check the return value of CreateSwapChainForHwnd.",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61bd4694_38ff3b2e",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Present can return DXGI_STATUS_OCCLUDED, which is an error code, if the window is not visible. We probably don\u0027t want to make this a Dawn error.",
+      "range": {
+        "startLine": 271,
+        "startChar": 1,
+        "endLine": 272,
+        "endChar": 53
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d921fe_12224000",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Nit: Synchrounously -\u003e synchronously",
+      "range": {
+        "startLine": 287,
+        "startChar": 11,
+        "endLine": 287,
+        "endChar": 25
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4ab573_8b6c4b9d",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Unless I am missing something, waiting for GPU work to finish on the CPU is only necessary for readback or when we\u0027re resizing buffers. \n\nWhat is \"frame pacing\"?",
+      "range": {
+        "startLine": 292,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 80
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047c68d5_88dc0d84",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Don\u0027t refcounted objects in Dawn start with a RefCount of 1? If so, this statement leaks memory and you need to use AcquireRef instead.",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 97
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1939556d_a8c519e0",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Why do we wait for GetLastSubmittedCommandSerial instead of the serials in mBufferLastUsedSerials?",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 5
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce504697_b58c52d8",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "I see that DetachFromSurface is called from the destructor. Like other D3D12 resources, I think we need to wait for GPU work to be done before we can release the last reference to the resource on the CPU.",
+      "range": {
+        "startLine": 315,
+        "startChar": 1,
+        "endLine": 316,
+        "endChar": 25
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d706d7_3ae3a9cf",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-24T21:37:31Z",
+      "side": 1,
+      "message": "Please make RefCounted derived class destructors be private.",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
