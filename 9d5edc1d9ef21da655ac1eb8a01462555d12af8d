@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4de116_70e027a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:06:28Z",
+      "side": 1,
+      "message": "LGTM except for the split.",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6946d503_c6739009",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:06:28Z",
+      "side": 1,
+      "message": "That\u0027s not the issue, the issue is that we need to make sure that location \u003d\u003d binding. Also can we have a bug opened for that TODO?",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

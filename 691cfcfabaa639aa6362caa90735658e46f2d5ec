@@ -333,6 +333,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27ee426_dbe8613d",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:06:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52d8f789_e783174d",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04d136d0_da926f98",
@@ -364,6 +382,24 @@
       "side": 1,
       "message": "Ibid.",
       "parentUuid": "04d136d0_da926f98",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0b9aea_41907fb0",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:06:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b2d49f9c_9bac1045",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -434,6 +470,24 @@
       "side": 1,
       "message": "Actually I think the Linux GL (not GLES) backend is failing due to the glShaderStorageBlockBinding() change. Apparently that call doesn\u0027t do what I thought it did. I\u0027ll revert it for now and see if the bots are happier.\n\n(I don\u0027t think the GLES backend is being tested anymore, probably since I made the change to allow the GL and GLES backends to coexist, instead of forcing GL to be GLES.)",
       "parentUuid": "c3ba2b03_2eaa9546",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14de86ba_b501b17e",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:06:28Z",
+      "side": 1,
+      "message": "I think I\u0027d still like testing to be in a separate CL so we can revert it separately if needed and because I think we\u0027d want to add OpenGLESBackend in addition to OpenGLBackend. Not sure.",
+      "parentUuid": "77e4bc59_90c5e397",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
