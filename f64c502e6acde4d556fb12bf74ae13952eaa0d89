@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7066f91e_a742f028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T16:57:40Z",
+      "side": 1,
+      "message": "nit: \"default to\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 42,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "f64c502e6acde4d556fb12bf74ae13952eaa0d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e248f63_c02086e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T16:57:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f64c502e6acde4d556fb12bf74ae13952eaa0d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
