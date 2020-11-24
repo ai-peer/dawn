@@ -180,7 +180,15 @@ namespace dawn_native {
 
                     if ((dynamicOffsets[i] > bufferBinding.buffer->GetSize() -
                                                  bufferBinding.offset - bufferBinding.size)) {
-                        return DAWN_VALIDATION_ERROR("dynamic offset out of bounds");
+                        if ((bufferBinding.buffer->GetSize() - bufferBinding.offset) ==
+                            bufferBinding.size) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Dynamic offset out of bounds. The binding goes to the end of the "
+                                "buffer even without an offset. Did you forget to specify the "
+                                "binding's size?");
+                        } else {
+                            return DAWN_VALIDATION_ERROR("Dynamic offset out of bounds");
+                        }
                     }
                 }
             }
