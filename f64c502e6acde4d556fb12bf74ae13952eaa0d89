@@ -24,6 +24,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d79c28a_ffd910c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T21:18:35Z",
+      "side": 1,
+      "message": "uNit: \"allows using it\" -\u003e \"allows its use\" (slightly less awkward)",
+      "revId": "f64c502e6acde4d556fb12bf74ae13952eaa0d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9e248f63_c02086e2",
@@ -37,6 +54,23 @@
       "writtenOn": "2020-11-24T16:57:40Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "f64c502e6acde4d556fb12bf74ae13952eaa0d89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5d726a_007d2558",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T21:18:35Z",
+      "side": 1,
+      "message": "LGTM2",
       "revId": "f64c502e6acde4d556fb12bf74ae13952eaa0d89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
