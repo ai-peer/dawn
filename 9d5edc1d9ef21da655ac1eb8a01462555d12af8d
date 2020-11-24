@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "351f7244_d161b5e6",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T18:26:30Z",
+      "side": 1,
+      "message": "Done.\n\nYeah, I was just following the SwiftShader pattern. I prefer explicit enum to an anonymous bool anyway.",
+      "parentUuid": "8e7637a9_9e451941",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6946d503_c6739009",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2cd1af2_4f7fdcf0",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T18:26:30Z",
+      "side": 1,
+      "message": "TODO added.\n\nSkipping this call when location \u003d\u003d binding (my original change) was causing some tests to fail in the GL backend (both on the bots and locally). Reverting just that change made them pass. So I don\u0027t think it works as I thought it did (as a mapping that can be skipped when identity).",
+      "parentUuid": "6946d503_c6739009",
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b66ec63_bba2d1fc",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 34
@@ -65,6 +101,30 @@
       "writtenOn": "2020-11-24T17:17:36Z",
       "side": 1,
       "message": "PipelineGL::Initialize should probably return MaybeError so we can bubble this up as a DeviceLost (or perhaps just Validation) error for better telemetry. Same for the program link/compile errors above this.\n\nFine to do later though since the existing code lacks error handling.",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 140,
+        "endChar": 46
+      },
+      "revId": "9d5edc1d9ef21da655ac1eb8a01462555d12af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61920dc0_5546723b",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T18:26:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b66ec63_bba2d1fc",
       "range": {
         "startLine": 138,
         "startChar": 32,
