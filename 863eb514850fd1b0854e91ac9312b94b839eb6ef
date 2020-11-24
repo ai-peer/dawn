@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0d91e6_5421bb0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:34:34Z",
+      "side": 1,
+      "message": "LGTM. for all: explicit return is no longer needed!",
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af187961_04165197",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:34:34Z",
+      "side": 1,
+      "message": "uuunit: I would have changed this to R\"(..)\"",
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
