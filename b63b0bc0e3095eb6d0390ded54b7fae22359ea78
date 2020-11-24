@@ -132,6 +132,30 @@
       },
       "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa7554e_26df6134",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:42:05Z",
+      "side": 1,
+      "message": "Oh okay, looks good now",
+      "parentUuid": "5f4c7af6_8c621910",
+      "range": {
+        "startLine": 187,
+        "startChar": 39,
+        "endLine": 187,
+        "endChar": 62
+      },
+      "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
