@@ -56,51 +56,56 @@ void init() {
                         640, 480);
 
     wgpu::ShaderModule vsModule =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
-        #version 450
+        utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Constants {
+            [[offset(0)]] scale : f32;
+            [[offset(0)]] time : f32;
+            [[offset(0)]] offsetX : f32;
+            [[offset(0)]] offsetY : f32;
+            [[offset(0)]] scalar : f32;
+            [[offset(0)]] scalarOffset : f32;
+        };
+        [[set(0), binding(0)]] var<uniform> c : Constants;
 
-        layout(std140, set = 0, binding = 0) uniform Constants {
-            float scale;
-            float time;
-            float offsetX;
-            float offsetY;
-            float scalar;
-            float scalarOffset;
-        } c;
+        [[location(0)]] var<out> v_color : vec4<f32>;
+        [[builtin(vertex_idx)]] var<in> VertexIndex : u32;
+        [[builtin(position)]] var<out> Position : vec4<f32>;
 
-        layout(location = 0) out vec4 v_color;
+        [[stage(vertex)]] fn main() -> void {
+            var positions : array<vec4<f32>, 3> = array<vec4<f32>, 3>(
+                vec4<f32>( 0.0,  0.1, 0.0, 1.0),
+                vec4<f32>(-0.1, -0.1, 0.0, 1.0),
+                vec4<f32>( 0.1, -0.1, 0.0, 1.0)
+            );
 
-        const vec4 positions[3] = vec4[3](
-            vec4( 0.0f,  0.1f, 0.0f, 1.0f),
-            vec4(-0.1f, -0.1f, 0.0f, 1.0f),
-            vec4( 0.1f, -0.1f, 0.0f, 1.0f)
-        );
+            var colors : array<vec4<f32>, 3> = array<vec4<f32>, 3>(
+                vec4<f32>(1.0, 0.0, 0.0, 1.0),
+                vec4<f32>(0.0, 1.0, 0.0, 1.0),
+                vec4<f32>(0.0, 0.0, 1.0, 1.0)
+            );
 
-        const vec4 colors[3] = vec4[3](
-            vec4(1.0f, 0.0f, 0.0f, 1.0f),
-            vec4(0.0f, 1.0f, 0.0f, 1.0f),
-            vec4(0.0f, 0.0f, 1.0f, 1.0f)
-        );
+            var position : vec4<f32> = positions[VertexIndex];
+            var color : vec4<f32> = colors[VertexIndex];
 
-        void main() {
-            vec4 position = positions[gl_VertexIndex];
-            vec4 color = colors[gl_VertexIndex];
-
-            float fade = mod(c.scalarOffset + c.time * c.scalar / 10.0, 1.0);
+            var _integerPart : f32;
+            var fade : f32 = modf(c.scalarOffset + c.time * c.scalar / 10.0, _integerPart);
             if (fade < 0.5) {
                 fade = fade * 2.0;
             } else {
                 fade = (1.0 - fade) * 2.0;
             }
-            float xpos = position.x * c.scale;
-            float ypos = position.y * c.scale;
-            float angle = 3.14159 * 2.0 * fade;
-            float xrot = xpos * cos(angle) - ypos * sin(angle);
-            float yrot = xpos * sin(angle) + ypos * cos(angle);
+
+            var xpos : f32 = position.x * c.scale;
+            var ypos : f32 = position.y * c.scale;
+            var angle : f32 = 3.14159 * 2.0 * fade;
+            var xrot : f32 = xpos * cos(angle) - ypos * sin(angle);
+            var yrot : f32 = xpos * sin(angle) + ypos * cos(angle);
             xpos = xrot + c.offsetX;
             ypos = yrot + c.offsetY;
-            v_color = vec4(fade, 1.0 - fade, 0.0, 1.0) + color;
-            gl_Position = vec4(xpos, ypos, 0.0, 1.0);
+
+            v_color = vec4<f32>(fade, 1.0 - fade, 0.0, 1.0) + color;
+            Position = vec4<f32>(xpos, ypos, 0.0, 1.0);
+            return;
         })");
 
     wgpu::ShaderModule fsModule = utils::CreateShaderModuleFromWGSL(device, R"(
