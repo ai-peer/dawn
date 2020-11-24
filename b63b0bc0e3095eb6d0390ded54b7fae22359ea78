@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "89df0b33_fa905e0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fd50dd1_b4004e82",
+      "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2bf010d1_4745d028",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -82,6 +100,30 @@
       "writtenOn": "2020-11-24T17:00:38Z",
       "side": 1,
       "message": "not sure about this bit - did you mean something like \"even if the size is omitted\" ?",
+      "range": {
+        "startLine": 187,
+        "startChar": 39,
+        "endLine": 187,
+        "endChar": 62
+      },
+      "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4c7af6_8c621910",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-24T17:29:59Z",
+      "side": 1,
+      "message": "I tried to reword to make it more clear, WDYT?",
+      "parentUuid": "6972c4e3_5b1512ee",
       "range": {
         "startLine": 187,
         "startChar": 39,
