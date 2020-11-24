@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c91947_1c8e4bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:00:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6972c4e3_5b1512ee",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T17:00:38Z",
+      "side": 1,
+      "message": "not sure about this bit - did you mean something like \"even if the size is omitted\" ?",
+      "range": {
+        "startLine": 187,
+        "startChar": 39,
+        "endLine": 187,
+        "endChar": 62
+      },
+      "revId": "b63b0bc0e3095eb6d0390ded54b7fae22359ea78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
