@@ -134,8 +134,14 @@ namespace dawn_native { namespace opengl {
                         GLuint location = gl.GetProgramResourceIndex(
                             mProgram, GL_SHADER_STORAGE_BLOCK, name.c_str());
                         if (location != GL_INVALID_INDEX) {
-                            gl.ShaderStorageBlockBinding(mProgram, location,
-                                                         indices[group][bindingIndex]);
+                            if (gl.GetVersion().IsES()) {
+                                // ES does not have this entry point.
+                                // TODO: figure out a substitute or add additional validation.
+                                ASSERT(false);
+                            } else {
+                                gl.ShaderStorageBlockBinding(mProgram, location,
+                                                             indices[group][bindingIndex]);
+                            }
                         }
                         break;
                     }
