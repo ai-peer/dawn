@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1c2ff6_6950f03b",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2c59ba6_ed59eb2c",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3cf5a43_afa455e6",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-24T12:00:20Z",
       "side": 1,
       "message": "I think these ASSERTS are a bit redundant because in Connect we choose one or the other.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7bd007_e79528bb",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3cf5a43_afa455e6",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e162179_a6d8ed3d",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f21b9dcd_ad5e1c0b",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee37f804_b0ac8581",
@@ -82,6 +136,24 @@
       "writtenOn": "2020-11-24T12:00:20Z",
       "side": 1,
       "message": "I think we can use glColorMask unconditionally here and that it will set the color mask for all buffers.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "764ca0ef_32c34981",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ee37f804_b0ac8581",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eece9c1_e5107be4",
+        "filename": "src/dawn_native/opengl/OpenGLBackend.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "009610f2_74552940",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ace5f28_094da0df",
@@ -116,6 +206,24 @@
       "writtenOn": "2020-11-24T12:00:20Z",
       "side": 1,
       "message": "Instead of this logic that kinda magically does nothing in OpenGL ES, can we instead have \n\n if (isES) {\n   // Blurb explaining that in ES the storage location on the API side is exactly what\u0027s put in the layout()\n   ASSERT(binding \u003d\u003d location);\n } else {\n   gl.ShaderStorageBlockBinding\n }\n\nAlso I don\u0027t think we correctly set the location of storage buffers in the produced GLSL, can you double check and maybe plan to make a test that tries using two storage buffers, and then the same thing but with storage buffers declared in a different order?",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e02dfc35_27f07c59",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Yeah, I think it was a faulty assumption on my part, leading to the CQ failures. I\u0027ve made it assert(false) on ES and do the old code on Desktop.",
+      "parentUuid": "1ace5f28_094da0df",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8430ec31_0a4dc3dc",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fb368e8_5a9a7f7f",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ad37668_2770c8f2",
@@ -150,6 +276,24 @@
       "writtenOn": "2020-11-24T12:00:20Z",
       "side": 1,
       "message": "nit: TODO(crbug.com/dawn/582): Add validation to prevent this as it is not supported on GLES \u003c 3.2",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d643fa10_ba20ed51",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad37668_2770c8f2",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -173,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52d8f789_e783174d",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Now that the support check is centralized, it seems ok to just put the TODO there.\nIf you\u0027d still prefer multiple TODOs, I can do that.",
+      "parentUuid": "063fdee5_161a6fb8",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04d136d0_da926f98",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 31
@@ -190,6 +352,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2d49f9c_9bac1045",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Ibid.",
+      "parentUuid": "04d136d0_da926f98",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "922508ae_85582d5a",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 31
@@ -201,6 +381,24 @@
       "writtenOn": "2020-11-24T12:00:20Z",
       "side": 1,
       "message": "nit: TODO(crbug.com/dawn/581): Implement a fallback path on OpenGL ES because it doesn\u0027t support glClearTexSubImage.",
+      "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1353b51_11fd3c4d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-11-24T17:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "922508ae_85582d5a",
       "revId": "691cfcfabaa639aa6362caa90735658e46f2d5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
