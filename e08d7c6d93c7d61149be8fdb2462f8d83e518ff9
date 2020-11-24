@@ -16,6 +16,126 @@
       "message": "PTAL. I noticed win-dawn-rel bot is failing on unrelated tests, is this a known issue?",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ce0711_ea9c57fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "See comment in FingerprintRecorderTests.cpp as most of my concern is w.r.t to that",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d521f310_b5fa0f98",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "nit: better to have a SetHash method instead of setting both members independently",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465f389f_48261069",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "this makes it seem that an object\u0027s hash includes all of the previous hashed state.\n\nIt\u0027s probably the case that we hit this code path always when the FingerprintRecorder is \"fresh\", but the structure of the code makes it very not obvious. When exactly the hash is created is not clear, and the hash needs to be explicitly set - it\u0027s not always lazily created.\n\nIf we explicitly set the hash, we need to make it clear how and where that happens.\nIf we don\u0027t want to be so verbose, we should have the hash always get lazily created from a fresh recording state.\n\nPossible suggestion:\n 1) Have CachedObject::Fingerprint, take no arguments, and return |size_t hash|.\n    Implementations should make a local FingerprintRecorder and return\n    FingerprintRecorder::GetKey().\n 2) CachedObject::HashFunc stays the way it is.\n 3) FingerprintRecorder::RecordObject just returns HashFunc(*obj);\n 4) DeviceBase::GetOrCreate looks like:\n    BindGroupLayoutBase blueprint(this, descriptor);\n    size_t hash \u003d blueprint.Fingerprint();\n    blueprint.SetHash(hash);\n    if (findInCache...) {\n      ...\n    } else {\n      backendObj \u003d CreateImpl(descriptor);\n      backendObj-\u003eSetHash(hash);\n      backendObj-\u003eSetIsCachedReference(); // maybe this could set the hash too.\n    }\n 5) Remove fingerprint recorder stuff from object constructors\n\n\nAlternatively:\n 1) structure it as \"class Foo : public CachedObject\u003cFoo\u003e ..\"\n 2) CachedObject\u003cT\u003e::HashFunc always does the isHashInitialized check, and if it\u0027s not, \n    makes a local FingerprintRecorder, and does `recorder.RecordObject\u003cstatic_cast\u003cT*\u003e(this));`\n 3+) Similar as above but no explicit SetHash",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6aadd1_2c3ef200",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs the extra template arg:\nstruct RecordImpl\u003cCachedObject*\u003e {\n  ...\n};",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ecbaf4_4716d1e8",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "nit: vector\u003cT\u003e ?",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37c1af4_9ad684c1",
+        "filename": "src/tests/unittests/FingerprintRecorderTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-24T18:35:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t they be the same?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
