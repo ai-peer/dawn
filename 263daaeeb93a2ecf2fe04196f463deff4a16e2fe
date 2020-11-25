@@ -16,6 +16,24 @@
       "message": "nit: dedent, ditto below.",
       "revId": "263daaeeb93a2ecf2fe04196f463deff4a16e2fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53555949_b1c79e18",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5be9102a_71f85763",
+      "revId": "263daaeeb93a2ecf2fe04196f463deff4a16e2fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
