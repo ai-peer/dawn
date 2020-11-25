@@ -138,7 +138,7 @@ namespace dawn_native { namespace opengl {
                                 // TODO(crbug.com/dawn/584): Figure out a substitute for
                                 // glShaderStorageBlockBinding on ES or add additional validation.
                                 ASSERT(false);
-                            } else {
+                            } else if (location != indices[group][bindingIndex]) {
                                 gl.ShaderStorageBlockBinding(mProgram, location,
                                                              indices[group][bindingIndex]);
                             }
