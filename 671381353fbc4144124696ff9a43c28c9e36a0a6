@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "671381353fbc4144124696ff9a43c28c9e36a0a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e23f013_dd81add9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T18:08:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "671381353fbc4144124696ff9a43c28c9e36a0a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ee07aa_d2f07e27",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T18:08:48Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 487,
+        "startChar": 57,
+        "endLine": 487,
+        "endChar": 60
+      },
+      "revId": "671381353fbc4144124696ff9a43c28c9e36a0a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
