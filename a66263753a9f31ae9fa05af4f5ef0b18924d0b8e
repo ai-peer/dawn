@@ -22,6 +22,30 @@
       },
       "revId": "a66263753a9f31ae9fa05af4f5ef0b18924d0b8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ac6200_c13ad67c",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T18:34:09Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1c40acd8_aca8e729",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 0
+      },
+      "revId": "a66263753a9f31ae9fa05af4f5ef0b18924d0b8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

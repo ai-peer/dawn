@@ -56,6 +56,30 @@
       },
       "revId": "d40e7542b64472eab2986f7a1e980a7b3333b9b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05946fe9_240bd4d5",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a894247e_1c380766",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 21
+      },
+      "revId": "d40e7542b64472eab2986f7a1e980a7b3333b9b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
