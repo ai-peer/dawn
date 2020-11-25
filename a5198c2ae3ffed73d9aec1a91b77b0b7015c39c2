@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5699e8_f0ad3e11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "same comments throughout the file",
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0340f884_4827b87e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "dedent this and the other blocks",
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca2857f_4810b2ca",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1078,
+        "startChar": 76,
+        "endLine": 1078,
+        "endChar": 77
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869809f7_a2ccfbd0",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1102,
+        "startChar": 76,
+        "endLine": 1102,
+        "endChar": 77
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64da9c7_07e8f82c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1529,
+        "startChar": 87,
+        "endLine": 1529,
+        "endChar": 88
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5d10ee_2d0fd0ae",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "no return needed",
+      "range": {
+        "startLine": 1540,
+        "startChar": 55,
+        "endLine": 1540,
+        "endChar": 61
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe290c0_fc039a48",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "no return",
+      "range": {
+        "startLine": 1675,
+        "startChar": 20,
+        "endLine": 1675,
+        "endChar": 26
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e98db1_2d950b28",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1697,
+        "startChar": 72,
+        "endLine": 1697,
+        "endChar": 73
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f954d9a6_77e618e4",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1731,
+        "startChar": 72,
+        "endLine": 1731,
+        "endChar": 73
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fdb5ee9_c94b9b10",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:53:22Z",
+      "side": 1,
+      "message": "no return needed",
+      "range": {
+        "startLine": 1735,
+        "startChar": 16,
+        "endLine": 1735,
+        "endChar": 22
+      },
+      "revId": "a5198c2ae3ffed73d9aec1a91b77b0b7015c39c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
