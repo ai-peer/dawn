@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9211b651_9310907d",
+        "filename": "src/tests/end2end/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d9f564f_6137261a",
+      "revId": "b92d92ec8cc6808b278ca96c100cd78db0c22979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5447838_bdd2e55a",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-11-25T17:19:10Z",
       "side": 1,
       "message": "nit: this is 0.0 in the original shader.",
+      "range": {
+        "startLine": 124,
+        "startChar": 53,
+        "endLine": 124,
+        "endChar": 56
+      },
+      "revId": "b92d92ec8cc6808b278ca96c100cd78db0c22979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd0a4854_073c37c6",
+        "filename": "src/tests/end2end/ObjectCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:36:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5447838_bdd2e55a",
       "range": {
         "startLine": 124,
         "startChar": 53,
