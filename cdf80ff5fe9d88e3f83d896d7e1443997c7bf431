@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9746d05b_ca7bc016",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8522ac00_96249799",
+      "revId": "cdf80ff5fe9d88e3f83d896d7e1443997c7bf431",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8b6166d_bfdd7739",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-25T17:05:44Z",
       "side": 1,
       "message": "nit: dedent twice so it is one indentation level from the function\u0027s",
+      "revId": "cdf80ff5fe9d88e3f83d896d7e1443997c7bf431",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da993d12_f178eeed",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8b6166d_bfdd7739",
       "revId": "cdf80ff5fe9d88e3f83d896d7e1443997c7bf431",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
