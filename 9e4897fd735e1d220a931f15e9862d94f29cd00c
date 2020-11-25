@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "9e4897fd735e1d220a931f15e9862d94f29cd00c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2642c540_91c2f458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:44:47Z",
+      "side": 1,
+      "message": "LGTM. I\u0027m not sure if the new syntax is texture_sampled_2d or texture_2d but we can always do a bulk rename later.",
+      "revId": "9e4897fd735e1d220a931f15e9862d94f29cd00c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
