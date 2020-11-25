@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45cb7d3b_d99e8ca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:08:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "234c9b303b3aeb264be248382af1e054afc72e9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732946d4_c4e9a055",
+        "filename": "src/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:08:49Z",
+      "side": 1,
+      "message": "This should be u32 as per the WGSL spec.",
+      "range": {
+        "startLine": 30,
+        "startChar": 58,
+        "endLine": 30,
+        "endChar": 61
+      },
+      "revId": "234c9b303b3aeb264be248382af1e054afc72e9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace5bdb6_cf229799",
+        "filename": "src/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:08:49Z",
+      "side": 1,
+      "message": "nit: dedent.",
+      "revId": "234c9b303b3aeb264be248382af1e054afc72e9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
