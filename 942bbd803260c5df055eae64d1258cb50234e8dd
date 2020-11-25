@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6641166_b5cffb39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T00:36:56Z",
+      "side": 1,
+      "message": "PTAL the chain DepthStencilCopyTests -\u003e SwapChainValidationTests\n\nWin failures are unrelated - suppressing in https://dawn-review.googlesource.com/c/dawn/+/33888",
+      "revId": "942bbd803260c5df055eae64d1258cb50234e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
