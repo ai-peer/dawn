@@ -33,6 +33,24 @@
       "message": "nit: dedent, ditto in other files.",
       "revId": "b9bd3fac32f337d82d8e03635b7475f90ee92bd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6601193_41406f59",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:11:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f1f0603_276783b3",
+      "revId": "b9bd3fac32f337d82d8e03635b7475f90ee92bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
