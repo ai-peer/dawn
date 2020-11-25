@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "271bc42b_5897f712",
+        "filename": "src/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:37:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a5b43c_2283816c",
+      "range": {
+        "startLine": 58,
+        "startChar": 58,
+        "endLine": 58,
+        "endChar": 61
+      },
+      "revId": "7693f009eef2e9c3aa1af99af25c006b04415f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f85a2e4_6b70a166",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-25T17:22:09Z",
       "side": 1,
       "message": "Does / 2.0 work?",
+      "range": {
+        "startLine": 81,
+        "startChar": 77,
+        "endLine": 81,
+        "endChar": 96
+      },
+      "revId": "7693f009eef2e9c3aa1af99af25c006b04415f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b85716_0d3e3a32",
+        "filename": "src/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:37:21Z",
+      "side": 1,
+      "message": "Sadly it does not",
+      "parentUuid": "4f85a2e4_6b70a166",
       "range": {
         "startLine": 81,
         "startChar": 77,
