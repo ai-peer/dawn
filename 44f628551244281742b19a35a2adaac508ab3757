@@ -50,6 +50,24 @@
       "message": "this lost the write to\nlayout(std430, set \u003d 0, binding \u003d 1) buffer Buf { uint buf; };",
       "revId": "44f628551244281742b19a35a2adaac508ab3757",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7124c6e_030894d7",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T18:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ec8a01d_608d695f",
+      "revId": "44f628551244281742b19a35a2adaac508ab3757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
