@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab433f4_68b17634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:15:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ea21ee98acc6605ebd2ed25f0f96fbf6969eca26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e11951_bb15b5e2",
+        "filename": "src/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:15:11Z",
+      "side": 1,
+      "message": "nit: u32 as per the WGSL spec.",
+      "range": {
+        "startLine": 251,
+        "startChar": 62,
+        "endLine": 251,
+        "endChar": 65
+      },
+      "revId": "ea21ee98acc6605ebd2ed25f0f96fbf6969eca26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
