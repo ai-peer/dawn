@@ -56,6 +56,30 @@
       },
       "revId": "671381353fbc4144124696ff9a43c28c9e36a0a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb3d7f7_cd7547a8",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T18:26:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ee07aa_d2f07e27",
+      "range": {
+        "startLine": 487,
+        "startChar": 57,
+        "endLine": 487,
+        "endChar": 60
+      },
+      "revId": "671381353fbc4144124696ff9a43c28c9e36a0a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
