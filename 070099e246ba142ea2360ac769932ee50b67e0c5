@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "070099e246ba142ea2360ac769932ee50b67e0c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cd44a2_560a9e8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:49:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "070099e246ba142ea2360ac769932ee50b67e0c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4776b781_c43e1d98",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:49:49Z",
+      "side": 1,
+      "message": "[[access(read_write)]] Storage\n\naccess qualifier will be required",
+      "range": {
+        "startLine": 50,
+        "startChar": 66,
+        "endLine": 50,
+        "endChar": 73
+      },
+      "revId": "070099e246ba142ea2360ac769932ee50b67e0c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
