@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "44f628551244281742b19a35a2adaac508ab3757",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d515e6f_f9938a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T18:13:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "44f628551244281742b19a35a2adaac508ab3757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec8a01d_608d695f",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T18:13:48Z",
+      "side": 1,
+      "message": "this lost the write to\nlayout(std430, set \u003d 0, binding \u003d 1) buffer Buf { uint buf; };",
+      "revId": "44f628551244281742b19a35a2adaac508ab3757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

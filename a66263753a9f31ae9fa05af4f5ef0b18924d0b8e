@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b91f34b_dbd71d84",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T18:13:48Z",
+      "side": 0,
+      "message": "maybe keep these for SPIR-V ingestion?",
+      "revId": "a66263753a9f31ae9fa05af4f5ef0b18924d0b8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
