@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "0e4ffd8126c3ce982d12b5188da684de7abadba8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3663acde_ae55384f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:03:09Z",
+      "side": 1,
+      "message": "LGTM +2 since it is a whitespace change",
+      "revId": "0e4ffd8126c3ce982d12b5188da684de7abadba8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
