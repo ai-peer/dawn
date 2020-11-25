@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e63114b_f03e9efc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:10:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c72222c7453a200e47d16778cca3ec01c6a57f65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c0d74c_1d057a1c",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:10:32Z",
+      "side": 1,
+      "message": "nit: u32 as per the WGSL spec.",
+      "range": {
+        "startLine": 24,
+        "startChar": 58,
+        "endLine": 24,
+        "endChar": 61
+      },
+      "revId": "c72222c7453a200e47d16778cca3ec01c6a57f65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32d876f_77a2987c",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:10:32Z",
+      "side": 1,
+      "message": "Is the change from 0.5 to 0.0 intentional?",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 58
+      },
+      "revId": "c72222c7453a200e47d16778cca3ec01c6a57f65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
