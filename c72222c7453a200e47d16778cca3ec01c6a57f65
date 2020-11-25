@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e786e43_1dab112b",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:34:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7c0d74c_1d057a1c",
+      "range": {
+        "startLine": 24,
+        "startChar": 58,
+        "endLine": 24,
+        "endChar": 61
+      },
+      "revId": "c72222c7453a200e47d16778cca3ec01c6a57f65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f32d876f_77a2987c",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-25T17:10:32Z",
       "side": 1,
       "message": "Is the change from 0.5 to 0.0 intentional?",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 58
+      },
+      "revId": "c72222c7453a200e47d16778cca3ec01c6a57f65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d179ea_7336d7ce",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:34:49Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f32d876f_77a2987c",
       "range": {
         "startLine": 36,
         "startChar": 57,
