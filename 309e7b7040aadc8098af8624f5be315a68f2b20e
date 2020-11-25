@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1804865c_2d46448b",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7421df45_fefb4bea",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6498dc1a_c37178ce",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-25T17:13:05Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b3700e_5bdd7ec6",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6498dc1a_c37178ce",
       "range": {
         "startLine": 93,
         "startChar": 58,
