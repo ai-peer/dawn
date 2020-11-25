@@ -50,6 +50,24 @@
       "message": "nit: I\u0027ve found it nicer to put [[stage(vertex)]] fn main() -\u003e void on a single line, WDYT?",
       "revId": "942bbd803260c5df055eae64d1258cb50234e8dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7b7fa7_d6c08c33",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-25T17:02:01Z",
+      "side": 1,
+      "message": "Sure, I updated the rest of the code base to do this too.",
+      "parentUuid": "51bb8521_0b93ce72",
+      "revId": "942bbd803260c5df055eae64d1258cb50234e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
