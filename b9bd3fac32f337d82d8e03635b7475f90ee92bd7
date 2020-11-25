@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77cc71bc_67000a96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:06:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b9bd3fac32f337d82d8e03635b7475f90ee92bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1f0603_276783b3",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:06:20Z",
+      "side": 1,
+      "message": "nit: dedent, ditto in other files.",
+      "revId": "b9bd3fac32f337d82d8e03635b7475f90ee92bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
