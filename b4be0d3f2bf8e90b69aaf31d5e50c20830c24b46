@@ -67,6 +67,24 @@
       "message": "uNit: this is called indexFormatSize in the GL backend which I find a bit easier to read, and matches the macro used to compute it. I realize you\u0027re probably trying to match Metal naming here, which is a fair point so feel free to ignore me.",
       "revId": "b4be0d3f2bf8e90b69aaf31d5e50c20830c24b46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "414c7698_0b2089fb",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T08:52:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28549d35_58bb92a1",
+      "revId": "b4be0d3f2bf8e90b69aaf31d5e50c20830c24b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
