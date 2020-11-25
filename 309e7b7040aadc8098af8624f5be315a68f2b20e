@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36dba810_cf8d516a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:13:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7421df45_fefb4bea",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:13:05Z",
+      "side": 1,
+      "message": "nit: u32 as per the WGSL spec.",
+      "range": {
+        "startLine": 53,
+        "startChar": 58,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6498dc1a_c37178ce",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:13:05Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f30183c5_f8decddf",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:13:05Z",
+      "side": 1,
+      "message": "Out of curiosity, is that the new or the deprecated way to do sampled textures?",
+      "range": {
+        "startLine": 110,
+        "startChar": 63,
+        "endLine": 110,
+        "endChar": 73
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b8a9fa_b4c71e93",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:13:05Z",
+      "side": 1,
+      "message": "Doesn\u0027t division of a vector by a scalar work? Is it expected to work?",
+      "range": {
+        "startLine": 117,
+        "startChar": 66,
+        "endLine": 117,
+        "endChar": 87
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
