@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456d315d_893b3a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:20:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ae1e40a97f38ebfd78c511367f9e719a3bdd817d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ded4c3_2627bdbb",
+        "filename": "src/tests/end2end/RenderBundleTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:20:05Z",
+      "side": 1,
+      "message": "nit: dedent, ditto below.",
+      "revId": "ae1e40a97f38ebfd78c511367f9e719a3bdd817d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
