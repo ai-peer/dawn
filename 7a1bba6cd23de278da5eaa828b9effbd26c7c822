@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf5f51e_9424b044",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:16:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7a1bba6cd23de278da5eaa828b9effbd26c7c822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6e25c6_204dd9b0",
+        "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-25T17:16:10Z",
+      "side": 1,
+      "message": "nit: u32 as per the WGSL spec.",
+      "range": {
+        "startLine": 80,
+        "startChar": 58,
+        "endLine": 80,
+        "endChar": 61
+      },
+      "revId": "7a1bba6cd23de278da5eaa828b9effbd26c7c822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
