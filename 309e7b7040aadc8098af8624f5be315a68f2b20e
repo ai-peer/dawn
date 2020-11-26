@@ -159,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d574cc_e9353328",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "480e62d1_16fbbd8e",
+      "range": {
+        "startLine": 110,
+        "startChar": 63,
+        "endLine": 110,
+        "endChar": 73
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b8a9fa_b4c71e93",
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "It doesn\u0027t work. Not sure if it\u0027s expected to.",
       "parentUuid": "32b8a9fa_b4c71e93",
+      "range": {
+        "startLine": 117,
+        "startChar": 66,
+        "endLine": 117,
+        "endChar": 87
+      },
+      "revId": "309e7b7040aadc8098af8624f5be315a68f2b20e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7c1976_4da176e0",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b7b7fbe_05863a18",
       "range": {
         "startLine": 117,
         "startChar": 66,
