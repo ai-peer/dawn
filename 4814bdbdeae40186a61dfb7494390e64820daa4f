@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5cf076_07c2d575",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-26T21:10:35Z",
+      "side": 0,
+      "message": "The current code doesn\u0027t encode the stage here, and shouldn\u0027t be needed, since entry points names need to be unique.",
+      "range": {
+        "startLine": 133,
+        "startChar": 28,
+        "endLine": 133,
+        "endChar": 29
+      },
+      "revId": "4814bdbdeae40186a61dfb7494390e64820daa4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
