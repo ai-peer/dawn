@@ -22,6 +22,30 @@
       },
       "revId": "90a3232ac8d9f5ce4b211508a254fc2f7f6c1a82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57b0975_e382da7f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T13:06:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91a58bee_5a733c56",
+      "range": {
+        "startLine": 1672,
+        "startChar": 20,
+        "endLine": 1672,
+        "endChar": 27
+      },
+      "revId": "90a3232ac8d9f5ce4b211508a254fc2f7f6c1a82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
