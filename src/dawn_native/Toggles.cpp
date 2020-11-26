@@ -152,6 +152,13 @@ namespace dawn_native {
               "applies to the depthbiased values (but we still clip triangles that go outside the "
               "viewport). This is NVIDIA bug 3171019.",
               "https://crbug.com/dawn/536"}},
+            {Toggle::HalveDepthBiasConstantFactor,
+             {"halve_depth_bias_constant_factor",
+              "This is a workaround for NVIDIA Vulkan drivers have the depthBiasConstantFactor be "
+              "twice what it should be to work around HW precision issues. Work around the "
+              "workaround by halving the depthBiasConstantFactor except for very small values that "
+              "would cause the precision issue. This is NVIDIA bug 3177165",
+              "https://crbug.com/dawn/536"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 

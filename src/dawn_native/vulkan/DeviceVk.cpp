@@ -454,6 +454,13 @@ namespace dawn_native { namespace vulkan {
         if (hasDepthClipEnable && isNvidiaProprietary) {
             SetToggle(Toggle::UseDepthClampToClampDepthBias, true);
         }
+
+        // TODO(cwallez@chromium.org): Tighten this workaround when it is fixed in Nvidia drivers.
+        // https://crbug.com/dawn/536: Halve the depth bias constant factor to work around the
+        // driver setting it to twice the value.
+        if (isNvidiaProprietary) {
+            SetToggle(Toggle::HalveDepthBiasConstantFactor, true);
+        }
     }
 
     void Device::ApplyDepth24PlusS8Toggle() {

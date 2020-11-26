@@ -46,6 +46,7 @@ namespace dawn_native {
         DisallowUnsafeAPIs,
         UseTintGenerator,
         UseDepthClampToClampDepthBias,
+        HalveDepthBiasConstantFactor,
 
         EnumCount,
         InvalidEnum = EnumCount,
