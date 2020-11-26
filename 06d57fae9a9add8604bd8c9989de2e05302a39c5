@@ -56,6 +56,30 @@
       },
       "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984dc0f5_874a4e5d",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T13:21:09Z",
+      "side": 1,
+      "message": "Sorry, I now see the first arg is vec3. Ignore me.",
+      "parentUuid": "819f2187_4b588be8",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 58,
+        "endChar": 24
+      },
+      "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
