@@ -80,6 +80,30 @@
       },
       "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdff15a8_a72335f8",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T13:22:38Z",
+      "side": 1,
+      "message": "Ack, it\u0027s true it\u0027s not very clear from the code.",
+      "parentUuid": "984dc0f5_874a4e5d",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 58,
+        "endChar": 24
+      },
+      "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
