@@ -400,6 +400,20 @@ namespace dawn_native { namespace vulkan {
             depthClip.depthClipEnable = VK_TRUE;
         }
 
+        // Nvidia HW has a precision issue for small depth bias constant factor for unorm depth. The
+        // drivers work around it by multiplying depthBiasConstantFactor by two. We undo this
+        // multiplication except for very small values on unorm depth buffers. See
+        // https://crbug.com/dawn/536
+        if (device->IsToggleEnabled(Toggle::HalveDepthBiasConstantFactor)) {
+            // TODO(cwallez@chromium.org) hadnle Depth24 and depth24Stencil8 when we add them.
+            bool isUnormDepth = GetDepthStencilFormat() == wgpu::TextureFormat::Depth24Plus ||
+                                GetDepthStencilFormat() == wgpu::TextureFormat::Depth24PlusStencil8;
+
+            if (isUnormDepth && rasterization.depthBiasConstantFactor > 3.0f) {
+                rasterization.depthBiasConstantFactor *= 0.5f;
+            }
+        }
+
         VkPipelineMultisampleStateCreateInfo multisample;
         multisample.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
         multisample.pNext = nullptr;

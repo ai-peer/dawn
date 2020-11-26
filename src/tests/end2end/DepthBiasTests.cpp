@@ -36,48 +36,45 @@ class DepthBiasTests : public DawnTest {
             case QuadAngle::Flat:
                 // Draw a square at z = 0.25
                 vertexSource = R"(
-    [[builtin(vertex_idx)]] var<in> VertexIndex : u32;
-    [[builtin(position)]] var<out> Position : vec4<f32>;
-    [[stage(vertex)]] fn main() -> void {
-        const pos : array<vec2<f32>, 6> = array<vec2<f32>, 6>(
-            vec2<f32>(-1.0, -1.0),
-            vec2<f32>( 1.0, -1.0),
-            vec2<f32>(-1.0,  1.0),
-            vec2<f32>(-1.0,  1.0),
-            vec2<f32>( 1.0, -1.0),
-            vec2<f32>( 1.0,  1.0));
-        Position = vec4<f32>(pos[VertexIndex], 0.25, 1.0);
-        return;
-    })";
+                    [[builtin(vertex_idx)]] var<in> VertexIndex : u32;
+                    [[builtin(position)]] var<out> Position : vec4<f32>;
+                    [[stage(vertex)]] fn main() -> void {
+                        const pos : array<vec2<f32>, 6> = array<vec2<f32>, 6>(
+                            vec2<f32>(-1.0, -1.0),
+                            vec2<f32>( 1.0, -1.0),
+                            vec2<f32>(-1.0,  1.0),
+                            vec2<f32>(-1.0,  1.0),
+                            vec2<f32>( 1.0, -1.0),
+                            vec2<f32>( 1.0,  1.0));
+                        Position = vec4<f32>(pos[VertexIndex], 0.25, 1.0);
+                    })";
                 break;
 
             case QuadAngle::TiltedX:
                 // Draw a square ranging from 0 to 0.5, bottom to top
                 vertexSource = R"(
-    [[builtin(vertex_idx)]] var<in> VertexIndex : u32;
-    [[builtin(position)]] var<out> Position : vec4<f32>;
-    [[stage(vertex)]] fn main() -> void {
-        const pos : array<vec3<f32>, 6> = array<vec3<f32>, 6>(
-            vec3<f32>(-1.0, -1.0, 0.0),
-            vec3<f32>( 1.0, -1.0, 0.0),
-            vec3<f32>(-1.0,  1.0, 0.5),
-            vec3<f32>(-1.0,  1.0, 0.5),
-            vec3<f32>( 1.0, -1.0, 0.0),
-            vec3<f32>( 1.0,  1.0, 0.5));
-        Position = vec4<f32>(pos[VertexIndex], 1.0);
-        return;
-    })";
+                    [[builtin(vertex_idx)]] var<in> VertexIndex : u32;
+                    [[builtin(position)]] var<out> Position : vec4<f32>;
+                    [[stage(vertex)]] fn main() -> void {
+                        const pos : array<vec3<f32>, 6> = array<vec3<f32>, 6>(
+                            vec3<f32>(-1.0, -1.0, 0.0),
+                            vec3<f32>( 1.0, -1.0, 0.0),
+                            vec3<f32>(-1.0,  1.0, 0.5),
+                            vec3<f32>(-1.0,  1.0, 0.5),
+                            vec3<f32>( 1.0, -1.0, 0.0),
+                            vec3<f32>( 1.0,  1.0, 0.5));
+                        Position = vec4<f32>(pos[VertexIndex], 1.0);
+                    })";
                 break;
         }
 
         wgpu::ShaderModule vertexModule = utils::CreateShaderModuleFromWGSL(device, vertexSource);
 
         wgpu::ShaderModule fragmentModule = utils::CreateShaderModuleFromWGSL(device, R"(
-    [[location(0)]] var<out> fragColor : vec4<f32>;;
-    [[stage(fragment)]] fn main() -> void {
-        fragColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
-        return;
-    })");
+            [[location(0)]] var<out> fragColor : vec4<f32>;;
+            [[stage(fragment)]] fn main() -> void {
+                fragColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
+            })");
 
         {
             wgpu::TextureDescriptor descriptor;
@@ -148,9 +145,6 @@ class DepthBiasTests : public DawnTest {
 
 // Test adding positive bias to output
 TEST_P(DepthBiasTests, PositiveBiasOnFloat) {
-    // NVIDIA GPUs under Vulkan seem to be using a different scale than everyone else.
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // OpenGL uses a different scale than the other APIs
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
@@ -189,9 +183,6 @@ TEST_P(DepthBiasTests, PositiveBiasOnFloatWithClamp) {
 
 // Test adding negative bias to output
 TEST_P(DepthBiasTests, NegativeBiasOnFloat) {
-    // NVIDIA GPUs seems to be using a different scale than everyone else
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
-
     // OpenGL uses a different scale than the other APIs
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
