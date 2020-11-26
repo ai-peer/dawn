@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819f2187_4b588be8",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T13:19:33Z",
+      "side": 1,
+      "message": "Doesn\u0027t this produce vec4\u003cf32\u003e() call with just two parameters?\nNot sure if that\u0027s legal.",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 58,
+        "endChar": 24
+      },
+      "revId": "06d57fae9a9add8604bd8c9989de2e05302a39c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
