@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc360557_2fc6ca82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:44:36Z",
+      "side": 1,
+      "message": "These functions aren\u0027t spec\u0027d yet, and might change (and might be called textureRead).\nWill probably do this at the same time as textureStore()/textureWrite()\n\nI\u0027ll leave the decision to land this up to you.",
+      "revId": "ccf303e64ff0d80d6987a071af0a9b4829d7ade0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7002d2ad_f3a81b33",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:44:36Z",
+      "side": 1,
+      "message": "Missing the write to Position?",
+      "range": {
+        "startLine": 28,
+        "startChar": 49,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "ccf303e64ff0d80d6987a071af0a9b4829d7ade0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
