@@ -305,6 +305,20 @@ TEST_P(DepthBiasTests, NegativeHalfSlopeBiasOnFloat) {
                       wgpu::TextureAspect::DepthOnly);
 }
 
+// Test using a bias of 1 with float depth textures produces a different value than 0.
+TEST_P(DepthBiasTests, SmallestBiasOnFloat) {
+    // Draw quad with z from 0 to 0.5 with a slope bias of 1
+    RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.25f, QuadAngle::Flat, 1, 0, 0);
+
+    // The biased depth is larger than 0.5 so all pixels are drawn.
+    std::vector<RGBA8> expected = {
+        RGBA8::kRed, RGBA8::kRed,  //
+        RGBA8::kRed, RGBA8::kRed,  //
+    };
+
+    EXPECT_TEXTURE_RGBA8_EQ(expected.data(), mRenderTarget, 0, 0, kRTSize, kRTSize, 0, 0);
+}
+
 // Test adding positive bias to output
 TEST_P(DepthBiasTests, PositiveBiasOn24bit) {
     // Draw quad flat on z = 0.25 with 0.25 bias
@@ -356,8 +370,23 @@ TEST_P(DepthBiasTests, PositiveSlopeBiasOn24bit) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), mRenderTarget, 0, 0, kRTSize, kRTSize, 0, 0);
 }
 
+// Test using a bias of 1 with 24bit depth textures produces a different value than 0.
+TEST_P(DepthBiasTests, SmallestBiasOn24bit) {
+    // Draw quad with z from 0 to 0.5 with a slope bias of 1
+    RunDepthBiasTest(wgpu::TextureFormat::Depth24PlusStencil8, 0.25f, QuadAngle::Flat, 1, 0, 0);
+
+    // The biased depth is larger than 0.5 so all pixels are drawn.
+    std::vector<RGBA8> expected = {
+        RGBA8::kRed, RGBA8::kRed,  //
+        RGBA8::kRed, RGBA8::kRed,  //
+    };
+
+    EXPECT_TEXTURE_RGBA8_EQ(expected.data(), mRenderTarget, 0, 0, kRTSize, kRTSize, 0, 0);
+}
+
 DAWN_INSTANTIATE_TEST(DepthBiasTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
-                      VulkanBackend());
+                      VulkanBackend({"vulkan_use_d32s8"}, {}),
+                      VulkanBackend({}, {"vulkan_use_d32s8"}));
