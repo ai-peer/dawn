@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef918d3_78a179eb",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T16:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09622e7c_e479de78",
+      "range": {
+        "startLine": 42,
+        "startChar": 9,
+        "endLine": 42,
+        "endChar": 21
+      },
+      "revId": "cd79acb45d17b405ab6eed855d86d0518b832cb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b40fa90_6dd6f843",
