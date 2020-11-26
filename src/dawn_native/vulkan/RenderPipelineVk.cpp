@@ -385,6 +385,21 @@ namespace dawn_native { namespace vulkan {
         rasterization.depthBiasSlopeFactor = GetDepthBiasSlopeScale();
         rasterization.lineWidth = 1.0f;
 
+        PNextChainBuilder rasterChain(&rasterization);
+
+        VkPipelineRasterizationDepthClipStateCreateInfoEXT depthClip;
+        // Work around an Nvidia bug where depth clamping of bias depth doesn't happen by setting
+        // depthClampEnable to true. At the same time make sure that triangles are still clipped to
+        // the viewport by setting depthClipEnable to true.
+        // See https://crbug.com/dawn/536
+        if (device->IsToggleEnabled(Toggle::UseDepthClampToClampDepthBias) &&
+            !rasterization.depthClampEnable) {
+            rasterChain.Add(
+                &depthClip,
+                VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT);
+            depthClip.depthClipEnable = VK_TRUE;
+        }
+
         VkPipelineMultisampleStateCreateInfo multisample;
         multisample.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
         multisample.pNext = nullptr;

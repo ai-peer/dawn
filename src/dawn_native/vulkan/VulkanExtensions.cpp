@@ -212,7 +212,7 @@ namespace dawn_native { namespace vulkan {
             switch (ext) {
                 // Happy extensions don't need anybody else!
                 case DeviceExt::BindMemory2:
-                case DeviceExt::DepthClipEnable,
+                case DeviceExt::DepthClipEnable:
                 case DeviceExt::GetMemoryRequirements2:
                 case DeviceExt::Maintenance1:
                 case DeviceExt::ImageFormatList:
