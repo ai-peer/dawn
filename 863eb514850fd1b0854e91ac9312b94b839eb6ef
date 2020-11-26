@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "595e0423_cfe5d495",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257fb42b_874ab63a",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3405c7e9_1e173d51",
@@ -106,6 +130,30 @@
       "writtenOn": "2020-11-26T11:47:10Z",
       "side": 1,
       "message": "nit: You\u0027ve used FragColor everywhere else",
+      "range": {
+        "startLine": 118,
+        "startChar": 33,
+        "endLine": 118,
+        "endChar": 42
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bab7465_fb2c1980",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3405c7e9_1e173d51",
       "range": {
         "startLine": 118,
         "startChar": 33,
@@ -139,6 +187,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f3f1fc_19697a98",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:17:27Z",
+      "side": 1,
+      "message": "Added it back and made the array of particles unsized.",
+      "parentUuid": "a6ba37bf_9e26ac47",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 9
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b70f0860_9794dac2",
@@ -162,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b7fd77_715609e1",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b70f0860_9794dac2",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 74
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a31dfc7b_bc65764c",
@@ -175,6 +271,30 @@
       "writtenOn": "2020-11-26T11:47:10Z",
       "side": 1,
       "message": "Again, could be moved to global scope with const",
+      "range": {
+        "startLine": 319,
+        "startChar": 12,
+        "endLine": 323,
+        "endChar": 14
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724bd5e0_3328f428",
+        "filename": "examples/ManualSwapChainTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a31dfc7b_bc65764c",
       "range": {
         "startLine": 319,
         "startChar": 12,
