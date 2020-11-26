@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f803a5_34db3f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T13:14:39Z",
+      "side": 1,
+      "message": "Great, I agree with this approach. Just wanted to make sure you\u0027re aware.",
+      "parentUuid": "ba174e40_37b32dde",
+      "revId": "ccf303e64ff0d80d6987a071af0a9b4829d7ade0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7002d2ad_f3a81b33",
