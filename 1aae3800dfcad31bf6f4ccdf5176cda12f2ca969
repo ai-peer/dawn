@@ -22,6 +22,30 @@
       },
       "revId": "1aae3800dfcad31bf6f4ccdf5176cda12f2ca969",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c63289d_d9643145",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:28:28Z",
+      "side": 1,
+      "message": "Scratch that!",
+      "parentUuid": "c171da9e_b40f251f",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "1aae3800dfcad31bf6f4ccdf5176cda12f2ca969",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
