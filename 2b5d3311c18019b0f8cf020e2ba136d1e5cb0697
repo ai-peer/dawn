@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e8a71c_7c4dd19f",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:09:20Z",
+      "side": 1,
+      "message": "nit: remove? (and the many other places)",
+      "range": {
+        "startLine": 1068,
+        "startChar": 20,
+        "endLine": 1068,
+        "endChar": 27
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8238ad4_23bba6d8",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:09:20Z",
+      "side": 1,
+      "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1078,
+        "startChar": 75,
+        "endLine": 1078,
+        "endChar": 76
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a15d593_bacfc84b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:09:20Z",
+      "side": 1,
+      "message": "[[access(read_write)]] here and many places below",
+      "range": {
+        "startLine": 1102,
+        "startChar": 75,
+        "endLine": 1102,
+        "endChar": 76
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1239bf4f_783556aa",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:09:20Z",
+      "side": 1,
+      "message": "need [[access()]] here too",
+      "range": {
+        "startLine": 1529,
+        "startChar": 81,
+        "endLine": 1529,
+        "endChar": 83
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
