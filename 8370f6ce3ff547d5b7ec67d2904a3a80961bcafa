@@ -51,6 +51,24 @@
       "parentUuid": "f9ca4f61_d214fb91",
       "revId": "8370f6ce3ff547d5b7ec67d2904a3a80961bcafa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9298bc34_80b7da2d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-26T21:09:43Z",
+      "side": 1,
+      "message": "I have implemented a first cut of what you were suggesting. PTAL and see if it matches what you are thinking. I still need to root cause some test failures with the Inspector enabled.",
+      "parentUuid": "6b4b3d2a_06516931",
+      "revId": "8370f6ce3ff547d5b7ec67d2904a3a80961bcafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
