@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165b186e_0ec7f10a",
+        "filename": "src/tests/unittests/validation/ComputeIndirectValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:16:05Z",
+      "side": 1,
+      "message": "can just be workgroup_size(1) to match glsl",
+      "range": {
+        "startLine": 26,
+        "startChar": 30,
+        "endLine": 26,
+        "endChar": 53
+      },
+      "revId": "7c1f0efd981d3bdcd8e7bf06fafc1abcd7f3bbbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
