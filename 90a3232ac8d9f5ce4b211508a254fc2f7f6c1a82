@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a58bee_5a733c56",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T13:00:53Z",
+      "side": 1,
+      "message": "nit: another return that could be removed",
+      "range": {
+        "startLine": 1672,
+        "startChar": 20,
+        "endLine": 1672,
+        "endChar": 27
+      },
+      "revId": "90a3232ac8d9f5ce4b211508a254fc2f7f6c1a82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
