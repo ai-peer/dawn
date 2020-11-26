@@ -141,6 +141,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b70f0860_9794dac2",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T11:59:37Z",
+      "side": 1,
+      "message": "Need [[access]] here",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 74
+      },
+      "revId": "863eb514850fd1b0854e91ac9312b94b839eb6ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a31dfc7b_bc65764c",
         "filename": "examples/ManualSwapChainTest.cpp",
         "patchSetId": 1
