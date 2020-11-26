@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e44efa_77499ac3",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:25:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3e8a71c_7c4dd19f",
+      "range": {
+        "startLine": 1068,
+        "startChar": 20,
+        "endLine": 1068,
+        "endChar": 27
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8238ad4_23bba6d8",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-26T12:09:20Z",
       "side": 1,
       "message": "[[access(read_write)]]",
+      "range": {
+        "startLine": 1078,
+        "startChar": 75,
+        "endLine": 1078,
+        "endChar": 76
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6d211b_1dc2cfdf",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:25:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8238ad4_23bba6d8",
       "range": {
         "startLine": 1078,
         "startChar": 75,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19bc8d53_6ecdc212",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:25:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a15d593_bacfc84b",
+      "range": {
+        "startLine": 1102,
+        "startChar": 75,
+        "endLine": 1102,
+        "endChar": 76
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1239bf4f_783556aa",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-11-26T12:09:20Z",
       "side": 1,
       "message": "need [[access()]] here too",
+      "range": {
+        "startLine": 1529,
+        "startChar": 81,
+        "endLine": 1529,
+        "endChar": 83
+      },
+      "revId": "2b5d3311c18019b0f8cf020e2ba136d1e5cb0697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c18650_22b63515",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:25:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1239bf4f_783556aa",
       "range": {
         "startLine": 1529,
         "startChar": 81,
