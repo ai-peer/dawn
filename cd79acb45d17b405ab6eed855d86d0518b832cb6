@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b40fa90_6dd6f843",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-26T12:18:19Z",
+      "side": 1,
+      "message": "Note: this fixes the sample after https://dawn-review.googlesource.com/c/dawn/+/32023",
+      "revId": "cd79acb45d17b405ab6eed855d86d0518b832cb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
