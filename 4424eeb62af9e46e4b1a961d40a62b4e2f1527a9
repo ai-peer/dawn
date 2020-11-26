@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af96fb02_41a1bf69",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-11-26T12:26:45Z",
+      "side": 1,
+      "message": "nit: Could be moved out to global scope to match the original glsl",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "4424eeb62af9e46e4b1a961d40a62b4e2f1527a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
