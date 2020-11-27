@@ -27,8 +27,10 @@
 
 #ifdef DAWN_ENABLE_WGSL
 // Tint include must be after spirv_cross.hpp, because spirv-cross has its own
-// version of spirv_headers.
+// version of spirv_headers. We also need to undef SPV_REVISION because SPIRV-Cross
+// is at 3 while spirv-headers is at 4.
 // clang-format off
+#undef SPV_REVISION
 #include <tint/tint.h>
 // clang-format on
 #endif  // DAWN_ENABLE_WGSL
