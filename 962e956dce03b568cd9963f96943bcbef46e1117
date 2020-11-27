@@ -16,6 +16,177 @@
       "message": "PTAL! Thanks!",
       "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "026971bf_33627a82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d78029_4392b954",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "u-nit: we don\u0027t align the colon here. However I think we temporarily settled on putting a space before the colon. (we might revisit this since it doesn\u0027t match the code formatter for Rust.)",
+      "range": {
+        "startLine": 41,
+        "startChar": 37,
+        "endLine": 41,
+        "endChar": 39
+      },
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567fe6db_ba7a5f2c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "pos can be replaced by texcoords completely.",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423f9466_7bbb4833",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "nit: just texcoords",
+      "range": {
+        "startLine": 48,
+        "startChar": 18,
+        "endLine": 48,
+        "endChar": 28
+      },
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "265fe6f9_d6ef44d3",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "nit: u32",
+      "range": {
+        "startLine": 55,
+        "startChar": 58,
+        "endLine": 55,
+        "endChar": 61
+      },
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21bc91d_0639c101",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "nit: we settled on putting the [[stage]] on the same line as the fn main.",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae86075_cafea410",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "nit: the extra return; can now be removed ditto below!",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69b5042_c5de2a90",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "Instead of \"temp\" which is not descriptive, what about the following:\n\n  var clampedTexcoord : vec2\u003cf32\u003e \u003d clamp(v_texcoord, vec2\u003cf32\u003e(0.0, 0.0), vec2\u003cf32\u003e(1.0, 1.0));\n\n  if (!all(clampedTexcoord \u003d\u003d v_texcoord)) {...}",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67b1b03_31e89a52",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T09:51:32Z",
+      "side": 1,
+      "message": "That issue is marked as fixed, are the tests still failing?",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
