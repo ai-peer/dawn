@@ -24,6 +24,7 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include <functional>
 #include <vector>
 
 namespace dawn_native {
@@ -96,6 +97,32 @@ namespace dawn_native {
         static SubresourceRange SingleMipAndLayer(uint32_t baseMipLevel,
                                                   uint32_t baseArrayLayer,
                                                   Aspect aspects);
+    };
+
+    template <typename T>
+    struct SubresourceStorage {
+        SubresourceStorage();
+        SubresourceStorage(T defaultValue,
+                           Aspect aspects,
+                           uint32_t arrayLayerCount_,
+                           uint32_t mipLevelCount_);
+        SubresourceStorage(T defaultValue, TextureBase* texture);
+        ~SubresourceStorage();
+
+        SubresourceStorage(SubresourceStorage<T>&& other) = default;
+
+        bool Empty();
+
+        void Update(const SubresourceRange& range,
+                    std::function<T(const SubresourceRange&, const T&)> updateFunc);
+
+        template <typename U>
+        void Merge(const SubresourceStorage<U>& other,
+                   std::function<T(const SubresourceRange&, const T&, const U&)> mergeFunc);
+
+        void Iterate(std::function<void(const SubresourceRange&, const T&)> updateFunc) const;
+
+        const T& Get(Aspect aspect, uint32_t arrayLayer, uint32_t mipLevel) const;
     };
 
     class TextureBase : public ObjectBase {

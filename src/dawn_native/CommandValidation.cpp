@@ -333,6 +333,7 @@ namespace dawn_native {
             const PassTextureUsage& textureUsage = pass.textureUsages[i];
             wgpu::TextureUsage usage = textureUsage.usage;
 
+            /// Why is this needed? Don't we check on bindgroup creation and beginRenderPass?
             if (usage & ~texture->GetUsage()) {
                 return DAWN_VALIDATION_ERROR("Texture missing usage for the pass");
             }
@@ -349,14 +350,18 @@ namespace dawn_native {
             }
             // Inspect the subresources if the usage of the whole texture violates usage validation.
             // Every single subresource can only be used as single-write or multiple read.
-            for (wgpu::TextureUsage subresourceUsage : textureUsage.subresourceUsages) {
-                bool readOnly = IsSubset(subresourceUsage, kReadOnlyTextureUsages);
-                bool singleUse = wgpu::HasZeroOrOneBits(subresourceUsage);
-                if (!readOnly && !singleUse) {
-                    return DAWN_VALIDATION_ERROR(
-                        "Texture used as writable usage and another usage in render pass");
-                }
-            }
+
+            MaybeError error = {};
+            textureUsage.subresourceUsages.Iterate(
+                [&](const SubresourceRange&, const wgpu::TextureUsage& usage) {
+                    bool readOnly = IsSubset(usage, kReadOnlyTextureUsages);
+                    bool singleUse = wgpu::HasZeroOrOneBits(usage);
+                    if (!readOnly && !singleUse && !error.IsError()) {
+                        error = DAWN_VALIDATION_ERROR(
+                            "Texture used as writable usage and another usage in render pass");
+                    }
+                });
+            DAWN_TRY(std::move(error));
         }
         return {};
     }

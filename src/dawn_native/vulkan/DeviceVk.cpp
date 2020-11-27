@@ -450,7 +450,8 @@ namespace dawn_native { namespace vulkan {
         // By default try to use D32S8 for Depth24PlusStencil8
         SetToggle(Toggle::VulkanUseD32S8, true);
 
-        DAWN_DEBUG() << hasDepthClipEnable << " " << hasDriverProperties << " " << isNvidiaProprietary;
+        DAWN_DEBUG() << hasDepthClipEnable << " " << hasDriverProperties << " "
+                     << isNvidiaProprietary;
 
         // TODO(cwallez@chromium.org): Tighten this workaround when it is fixed in Nvidia drivers.
         // https://crbug.com/dawn/536: Enable clamping of biased depth by using (depthClamp = true,

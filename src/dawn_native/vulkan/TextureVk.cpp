@@ -486,6 +486,11 @@ namespace dawn_native { namespace vulkan {
         return texture;
     }
 
+    Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)
+        : TextureBase(device, descriptor, state),
+          mSubresourceLastUsages(wgpu::TextureUsage::None, this) {
+    }
+
     MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         Device* device = ToBackend(GetDevice());
 
@@ -621,7 +626,7 @@ namespace dawn_native { namespace vulkan {
         // Release the texture
         mExternalState = ExternalState::Released;
 
-        wgpu::TextureUsage usage = mSubresourceLastUsages[0];
+        wgpu::TextureUsage usage = mSubresourceLastUsages.Get(Aspect::Color, 0, 0);
 
         VkImageMemoryBarrier barrier;
         barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -825,67 +830,27 @@ namespace dawn_native { namespace vulkan {
         wgpu::TextureUsage allUsages = wgpu::TextureUsage::None;
         wgpu::TextureUsage allLastUsages = wgpu::TextureUsage::None;
 
-        uint32_t subresourceCount = GetSubresourceCount();
-        ASSERT(textureUsages.subresourceUsages.size() == subresourceCount);
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
-        // If new usages of all subresources are the same and old usages of all subresources are
-        // the same too, we can use one barrier to do state transition for all subresources.
-        // Note that if the texture has only one mip level and one array slice, it will fall into
-        // this category.
-        if (textureUsages.sameUsagesAcrossSubresources && mSameLastUsagesAcrossSubresources) {
-            if (CanReuseWithoutBarrier(mSubresourceLastUsages[0], textureUsages.usage)) {
-                return;
-            }
-
-            imageBarriers->push_back(BuildMemoryBarrier(format, mHandle, mSubresourceLastUsages[0],
-                                                        textureUsages.usage, GetAllSubresources()));
-            allLastUsages = mSubresourceLastUsages[0];
-            allUsages = textureUsages.usage;
-            for (uint32_t i = 0; i < subresourceCount; ++i) {
-                mSubresourceLastUsages[i] = textureUsages.usage;
-            }
-        } else {
-            for (uint32_t arrayLayer = 0; arrayLayer < GetArrayLayers(); ++arrayLayer) {
-                for (uint32_t mipLevel = 0; mipLevel < GetNumMipLevels(); ++mipLevel) {
-                    wgpu::TextureUsage lastUsage = wgpu::TextureUsage::None;
-                    wgpu::TextureUsage usage = wgpu::TextureUsage::None;
-
-                    // Accumulate usage for all format aspects because we cannot transition
-                    // separately.
-                    // TODO(enga): Use VK_KHR_separate_depth_stencil_layouts.
-                    for (Aspect aspect : IterateEnumMask(GetFormat().aspects)) {
-                        uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
-
-                        usage |= textureUsages.subresourceUsages[index];
-                        lastUsage |= mSubresourceLastUsages[index];
-                    }
-
-                    // Avoid encoding barriers when it isn't needed.
-                    if (usage == wgpu::TextureUsage::None) {
-                        continue;
-                    }
-
-                    if (CanReuseWithoutBarrier(lastUsage, usage)) {
-                        continue;
-                    }
-
-                    allLastUsages |= lastUsage;
-                    allUsages |= usage;
-
-                    for (Aspect aspect : IterateEnumMask(GetFormat().aspects)) {
-                        uint32_t index = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
-                        mSubresourceLastUsages[index] = usage;
-                    }
-
-                    imageBarriers->push_back(
-                        BuildMemoryBarrier(format, mHandle, lastUsage, usage,
-                                           SubresourceRange::SingleMipAndLayer(
-                                               mipLevel, arrayLayer, GetFormat().aspects)));
+        // TODO depth-stencil is a bit more effy without the extension to handle them separately
+        mSubresourceLastUsages.Merge<wgpu::TextureUsage>(
+            textureUsages.subresourceUsages,
+            [&](const SubresourceRange& range, const wgpu::TextureUsage& lastUsage,
+                const wgpu::TextureUsage& newUsage) -> wgpu::TextureUsage {
+                if (newUsage == wgpu::TextureUsage::None ||
+                    CanReuseWithoutBarrier(lastUsage, newUsage)) {
+                    return lastUsage;
                 }
-            }
-        }
+
+                imageBarriers->push_back(
+                    BuildMemoryBarrier(format, mHandle, lastUsage, newUsage, range));
+
+                allLastUsages |= lastUsage;
+                allUsages |= newUsage;
+
+                return newUsage;
+            });
 
         if (mExternalState != ExternalState::InternalOnly) {
             TweakTransitionForExternalUsage(recordingContext, imageBarriers,
@@ -894,7 +859,6 @@ namespace dawn_native { namespace vulkan {
 
         *srcStages |= VulkanPipelineStage(allLastUsages, format);
         *dstStages |= VulkanPipelineStage(allUsages, format);
-        mSameLastUsagesAcrossSubresources = textureUsages.sameUsagesAcrossSubresources;
     }
 
     void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
@@ -934,60 +898,24 @@ namespace dawn_native { namespace vulkan {
         // This transitions assume it is a 2D texture
         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
 
-        // If the usages transitions can cover all subresources, and old usages of all subresources
-        // are the same, then we can use one barrier to do state transition for all subresources.
-        // Note that if the texture has only one mip level and one array slice, it will fall into
-        // this category.
-        bool areAllSubresourcesCovered = (range.levelCount == GetNumMipLevels() &&  //
-                                          range.layerCount == GetArrayLayers() &&   //
-                                          range.aspects == format.aspects);
-        if (mSameLastUsagesAcrossSubresources && areAllSubresourcesCovered) {
-            ASSERT(range.baseMipLevel == 0 && range.baseArrayLayer == 0);
-            if (CanReuseWithoutBarrier(mSubresourceLastUsages[0], usage)) {
-                return;
-            }
-            imageBarriers->push_back(
-                BuildMemoryBarrier(format, mHandle, mSubresourceLastUsages[0], usage, range));
-            allLastUsages = mSubresourceLastUsages[0];
-            for (uint32_t i = 0; i < GetSubresourceCount(); ++i) {
-                mSubresourceLastUsages[i] = usage;
-            }
-        } else {
-            for (uint32_t layer = range.baseArrayLayer;
-                 layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    // Accumulate usage for all format aspects because we cannot transition
-                    // separately.
-                    // TODO(enga): Use VK_KHR_separate_depth_stencil_layouts.
-                    wgpu::TextureUsage lastUsage = wgpu::TextureUsage::None;
-                    for (Aspect aspect : IterateEnumMask(format.aspects)) {
-                        uint32_t index = GetSubresourceIndex(level, layer, aspect);
-                        lastUsage |= mSubresourceLastUsages[index];
-                    }
-
-                    if (CanReuseWithoutBarrier(lastUsage, usage)) {
-                        continue;
-                    }
-
-                    allLastUsages |= lastUsage;
-
-                    for (Aspect aspect : IterateEnumMask(format.aspects)) {
-                        uint32_t index = GetSubresourceIndex(level, layer, aspect);
-                        mSubresourceLastUsages[index] = usage;
-                    }
-
-                    imageBarriers->push_back(BuildMemoryBarrier(
-                        format, mHandle, lastUsage, usage,
-                        SubresourceRange::SingleMipAndLayer(level, layer, format.aspects)));
+        // TODO depth-stencil is a bit more effy without the extension to handle them separately
+        mSubresourceLastUsages.Update(
+            range,
+            [&](const SubresourceRange& range,
+                const wgpu::TextureUsage& lastUsage) -> wgpu::TextureUsage {
+                if (CanReuseWithoutBarrier(lastUsage, usage)) {
+                    return lastUsage;
                 }
-            }
-        }
+
+                imageBarriers->push_back(
+                    BuildMemoryBarrier(format, mHandle, lastUsage, usage, range));
+
+                allLastUsages |= lastUsage;
+                return usage;
+            });
 
         *srcStages |= VulkanPipelineStage(allLastUsages, format);
         *dstStages |= VulkanPipelineStage(usage, format);
-
-        mSameLastUsagesAcrossSubresources = areAllSubresourcesCovered;
     }
 
     MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
@@ -1096,8 +1024,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     VkImageLayout Texture::GetCurrentLayoutForSwapChain() const {
-        ASSERT(mSubresourceLastUsages.size() == 1);
-        return VulkanImageLayout(mSubresourceLastUsages[0], GetFormat());
+        return VulkanImageLayout(mSubresourceLastUsages.Get(Aspect::Color, 0, 0), GetFormat());
     }
 
     // static

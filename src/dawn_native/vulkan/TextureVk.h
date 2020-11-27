@@ -101,7 +101,7 @@ namespace dawn_native { namespace vulkan {
 
       private:
         ~Texture() override;
-        using TextureBase::TextureBase;
+        Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
 
         MaybeError InitializeAsInternalTexture(VkImageUsageFlags extraUsages);
         MaybeError InitializeFromExternal(const ExternalImageDescriptorVk* descriptor,
@@ -137,12 +137,7 @@ namespace dawn_native { namespace vulkan {
         VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
         std::vector<VkSemaphore> mWaitRequirements;
 
-        bool mSameLastUsagesAcrossSubresources = true;
-
-        // A usage of none will make sure the texture is transitioned before its first use as
-        // required by the Vulkan spec.
-        std::vector<wgpu::TextureUsage> mSubresourceLastUsages =
-            std::vector<wgpu::TextureUsage>(GetSubresourceCount(), wgpu::TextureUsage::None);
+        SubresourceStorage<wgpu::TextureUsage> mSubresourceLastUsages;
     };
 
     class TextureView final : public TextureViewBase {
