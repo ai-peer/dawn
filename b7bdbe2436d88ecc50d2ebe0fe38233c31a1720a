@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "976bac6f_57dfd79a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 1,
+      "message": "Took another shot at compressing the subresource storage with an interface that prevents errors. WDYT?",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d82a3e9f_bc65e8f9",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 1,
+      "message": "Seems this code was originally wrong in that it checked even if all subresources are the same?",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74bf75b_354ea701",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 1,
+      "message": "This is an example of what the datastructure implementation could look like.",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dfef26_18917a12",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 1,
+      "message": "This is very verbose but a bunch of stuff could go in helper: the decompression routines, the UpdateRange creation and the recompression at the end.",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950e1444_ca69bb0f",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 1,
+      "message": "This is a declaration of the datastructure without the implementation so I can try using it in the frontend and the Vulkan backend.",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

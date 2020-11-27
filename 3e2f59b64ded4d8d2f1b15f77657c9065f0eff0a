@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bae0406_e3775779",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T17:19:16Z",
+      "side": 0,
+      "message": "I think we could change this to instead have depth-stencil textures be single plane as far as mSubresourceLastUsages goes.",
+      "revId": "3e2f59b64ded4d8d2f1b15f77657c9065f0eff0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
