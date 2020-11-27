@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec406eb9_dd77512e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T10:01:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5408c8c1_ca59debe",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T10:01:46Z",
+      "side": 1,
+      "message": "We should figure out how to make Tint non-optional. I think we\u0027ll need to add it to Skia.",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f73eddf8_e5f78768",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T10:01:46Z",
+      "side": 1,
+      "message": "nit: stray spirv-cross compiler?",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b718202_89bff02f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T10:01:46Z",
+      "side": 1,
+      "message": "nit: Maybe explain at a high-level what we are doing, how we see it growing and why we\u0027re doing it like that?",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40805a2b_de602376",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T10:01:46Z",
+      "side": 1,
+      "message": "nit: we marginally prefer using declaration:\n\n  using EntryPointMetadataTable \u003d std::unordered_map\u003cstd::string, std::unique_ptr\u003cEntryPointMetadata\u003e\u003e;",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
