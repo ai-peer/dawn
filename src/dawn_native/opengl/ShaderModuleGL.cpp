@@ -134,8 +134,8 @@ namespace dawn_native { namespace opengl {
                 }
 
                 compiler.set_name(resourceId, GetBindingName(group, bindingNumber));
-                compiler.unset_decoration(info.id, spv::DecorationBinding);
-                compiler.unset_decoration(info.id, spv::DecorationDescriptorSet);
+                //                compiler.unset_decoration(info.id, spv::DecorationBinding);
+                //                compiler.unset_decoration(info.id, spv::DecorationDescriptorSet);
             }
         }
 
