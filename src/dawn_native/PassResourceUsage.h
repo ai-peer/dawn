@@ -17,6 +17,8 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "dawn_native/Texture.h"
+
 #include <set>
 #include <vector>
 
@@ -46,9 +48,10 @@ namespace dawn_native {
     // the vector to record every single subresource's Usages. The texture usage is enough. And we
     // can decompress texture usage to a vector if necessary.
     struct PassTextureUsage {
+        PassTextureUsage(const TextureBase*);
+
         wgpu::TextureUsage usage = wgpu::TextureUsage::None;
-        bool sameUsagesAcrossSubresources = true;
-        std::vector<wgpu::TextureUsage> subresourceUsages;
+        SubresourceStorage<wgpu::TextureUsage> subresourceUsages;
     };
 
     // Which resources are used by pass and how they are used. The command buffer validation
