@@ -187,6 +187,24 @@
       "message": "That issue is marked as fixed, are the tests still failing?",
       "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bbafab_f2dde32a",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-11-29T02:35:16Z",
+      "side": 1,
+      "message": "No, I\u0027d like to use another CL to remove the skip flag. WDYT?",
+      "parentUuid": "b67b1b03_31e89a52",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
