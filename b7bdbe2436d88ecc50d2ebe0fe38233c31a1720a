@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60c6ee89_8a42feeb",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T19:34:01Z",
+      "side": 1,
+      "message": "It initializes the SubresourceStorage with the proper aspect, mipLevelCount and arrayLayerCount.",
+      "parentUuid": "50b7ec01_cce0d778",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8926da2d_6b05ce93",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 2
@@ -112,6 +136,30 @@
       "writtenOn": "2020-11-30T19:06:39Z",
       "side": 1,
       "message": "let\u0027s make this a constexpr inside some namespace instead of a define",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3fdb617_dda651fa",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T19:34:01Z",
+      "side": 1,
+      "message": "Yeah that\u0027s for the WIP, I didn\u0027t even try compiling this file xD",
+      "parentUuid": "8926da2d_6b05ce93",
       "range": {
         "startLine": 3,
         "startChar": 0,
@@ -181,6 +229,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57df4e9e_76409a89",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T19:34:01Z",
+      "side": 1,
+      "message": "Yeah that\u0027s the goal. The vector stays allocated to the full size because that\u0027s the worst case and doesn\u0027t consume that much CPU memory compared of the amount of GPU memory used. (up to discussion like everything else here)",
+      "parentUuid": "1f6fc6af_747466a3",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 82,
+        "endChar": 21
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdf8e72d_209c23e4",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 2
@@ -192,6 +264,30 @@
       "writtenOn": "2020-11-30T19:06:39Z",
       "side": 1,
       "message": "I think you meant false?",
+      "range": {
+        "startLine": 134,
+        "startChar": 81,
+        "endLine": 134,
+        "endChar": 85
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79aede91_07a074fd",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T19:34:01Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "bdf8e72d_209c23e4",
       "range": {
         "startLine": 134,
         "startChar": 81,
