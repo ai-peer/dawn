@@ -85,7 +85,7 @@ namespace dawn_native { namespace opengl {
         for (SingleShaderStage stage : IterateStages(activeStages)) {
             const ShaderModule* module = ToBackend(stages[stage].module.Get());
             std::string glsl = module->TranslateToGLSL(stages[stage].entryPoint.c_str(), stage,
-                                                       &combinedSamplers[stage]);
+                                                       &combinedSamplers[stage], layout);
             GLuint shader = CreateShader(gl, GLShaderType(stage), glsl.c_str());
             gl.AttachShader(mProgram, shader);
         }
@@ -133,15 +133,9 @@ namespace dawn_native { namespace opengl {
                     case wgpu::BindingType::ReadonlyStorageBuffer: {
                         GLuint location = gl.GetProgramResourceIndex(
                             mProgram, GL_SHADER_STORAGE_BLOCK, name.c_str());
-                        if (location != GL_INVALID_INDEX) {
-                            if (gl.GetVersion().IsES()) {
-                                // TODO(crbug.com/dawn/584): Figure out a substitute for
-                                // glShaderStorageBlockBinding on ES or add additional validation.
-                                ASSERT(false);
-                            } else {
-                                gl.ShaderStorageBlockBinding(mProgram, location,
-                                                             indices[group][bindingIndex]);
-                            }
+                        if (location != GL_INVALID_INDEX && !gl.GetVersion().IsES()) {
+                            gl.ShaderStorageBlockBinding(mProgram, location,
+                                                         indices[group][bindingIndex]);
                         }
                         break;
                     }
