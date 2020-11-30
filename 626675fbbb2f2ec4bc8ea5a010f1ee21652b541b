@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f560b19_8d6bcfc3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T07:48:37Z",
+      "side": 1,
+      "message": "I don\u0027t think we can do this validation easily at the moment because we don\u0027t know at bindgroup creation what textures the sampler will be used with. This is fixed in WebGPU with GPUSamplerType.\"non-filtering\" https://gpuweb.github.io/gpuweb/#dom-gpusamplertype-non-filtering but taking advantage of it would require a large refactor of our bindings code.\n\nI think we should leave this issue unadressed until we do the next BindGroupLayoutEntry refactor, otherwise we\u0027ll need to introduce the draw-time validation that we\u0027ll remove soon in the future.",
+      "revId": "626675fbbb2f2ec4bc8ea5a010f1ee21652b541b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d9070485_7d99771f",
@@ -14,6 +31,40 @@
       "writtenOn": "2020-11-30T07:05:37Z",
       "side": 1,
       "message": "PTAL, thanks!",
+      "revId": "626675fbbb2f2ec4bc8ea5a010f1ee21652b541b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de7ec3dd_063c9ba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T07:48:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "626675fbbb2f2ec4bc8ea5a010f1ee21652b541b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faa6fa2a_02f3d97d",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T07:48:37Z",
+      "side": 1,
+      "message": "nit: Explain that\u0027s because we are sampling integer textures that must be sampled with Nearest.",
       "revId": "626675fbbb2f2ec4bc8ea5a010f1ee21652b541b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
