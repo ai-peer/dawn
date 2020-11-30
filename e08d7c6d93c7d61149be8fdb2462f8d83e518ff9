@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d695d71_17e53c6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T19:49:55Z",
+      "side": 1,
+      "message": "Thanks for the pass, AE!",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d521f310_b5fa0f98",
@@ -83,6 +100,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25c3c091_6647f0b2",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T19:49:55Z",
+      "side": 1,
+      "message": "If I understand correctly, this means CachedObject::HashFunc cannot re-use the hash unless it was already computed for the blueprint object (ie. not on traversal). This surprises me because SetHash(blueprintHash) is orthogonal to this check.\n\nTo help jog our memory, an example use-case is when an attachmentState is first created then a pipeline is created that uses it. Is not having this extra traversal still important?",
+      "parentUuid": "465f389f_48261069",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6aadd1_2c3ef200",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
@@ -94,6 +135,24 @@
       "writtenOn": "2020-11-24T18:35:20Z",
       "side": 1,
       "message": "I don\u0027t think this needs the extra template arg:\nstruct RecordImpl\u003cCachedObject*\u003e {\n  ...\n};",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78747e1_ea49e596",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T19:49:55Z",
+      "side": 1,
+      "message": "Are you sure? Removing the argument means Record(\u0026obj) now matches \u003ctypename T, typename.. Args\u003e which doesn\u0027t produce the right result.",
+      "parentUuid": "be6aadd1_2c3ef200",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +187,30 @@
       "writtenOn": "2020-11-24T18:35:20Z",
       "side": 1,
       "message": "Shouldn\u0027t they be the same?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e7ff85_fede264a",
+        "filename": "src/tests/unittests/FingerprintRecorderTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T19:49:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be the same b/c B recording state was based off of A or \"B depends on A\".",
+      "parentUuid": "d37c1af4_9ad684c1",
       "range": {
         "startLine": 89,
         "startChar": 0,
