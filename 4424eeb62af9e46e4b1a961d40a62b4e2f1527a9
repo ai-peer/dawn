@@ -22,6 +22,30 @@
       },
       "revId": "4424eeb62af9e46e4b1a961d40a62b4e2f1527a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdfe497a_026236c2",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:15:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af96fb02_41a1bf69",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "4424eeb62af9e46e4b1a961d40a62b4e2f1527a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
