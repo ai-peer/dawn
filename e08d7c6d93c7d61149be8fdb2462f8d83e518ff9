@@ -148,6 +148,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9766c050_bd1ac52d",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T21:13:56Z",
+      "side": 1,
+      "message": "The parent object hash depends on the child object it hashes.\n\nRecall, previously the child object hash used was its own memory address. Alternatively, we could call SetKey in Fingerprint but if we still consider the extra traversal important, the cached key must be stored then conditionally set somewhere. Do let me know what you prefer.",
+      "parentUuid": "17021874_f16dd2df",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6aadd1_2c3ef200",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
@@ -195,6 +219,24 @@
       "side": 1,
       "message": "template \u003c\u003e\nstruct RecordImpl\u003cCachedObject*\u003e \n\nshould be the explicit template specialization specifically for CachedObject*.. I think?\n\nWhat you have here is specializing for *any* pointer and we jut happen to be calling it CachedObjectT",
       "parentUuid": "e78747e1_ea49e596",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5354654d_7938b015",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-11-30T21:13:56Z",
+      "side": 1,
+      "message": "That will compile but the template resolution will be wrong. \n\nCachedObject* will be seen as `RecordImpl\u003cCachedObject*\u003e` which (incorrectly) matches the primary template `RecordImpl::Call(.., const T\u0026 value, ..)`.",
+      "parentUuid": "b20b7168_41eebdf3",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
