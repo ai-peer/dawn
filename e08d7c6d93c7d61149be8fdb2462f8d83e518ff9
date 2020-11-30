@@ -124,6 +124,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17021874_f16dd2df",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T20:24:36Z",
+      "side": 1,
+      "message": "err, the base question is the one at [1]. I don\u0027t think that an object\u0027s hash should depend on the previous recording state. Why must it?",
+      "parentUuid": "25c3c091_6647f0b2",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6aadd1_2c3ef200",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
@@ -153,6 +177,24 @@
       "side": 1,
       "message": "Are you sure? Removing the argument means Record(\u0026obj) now matches \u003ctypename T, typename.. Args\u003e which doesn\u0027t produce the right result.",
       "parentUuid": "be6aadd1_2c3ef200",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20b7168_41eebdf3",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T20:24:36Z",
+      "side": 1,
+      "message": "template \u003c\u003e\nstruct RecordImpl\u003cCachedObject*\u003e \n\nshould be the explicit template specialization specifically for CachedObject*.. I think?\n\nWhat you have here is specializing for *any* pointer and we jut happen to be calling it CachedObjectT",
+      "parentUuid": "e78747e1_ea49e596",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +253,30 @@
       "side": 1,
       "message": "Shouldn\u0027t be the same b/c B recording state was based off of A or \"B depends on A\".",
       "parentUuid": "d37c1af4_9ad684c1",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858e4a75_3f56d4c5",
+        "filename": "src/tests/unittests/FingerprintRecorderTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T20:24:36Z",
+      "side": 1,
+      "message": "[1]",
+      "parentUuid": "85e7ff85_fede264a",
       "range": {
         "startLine": 89,
         "startChar": 0,
