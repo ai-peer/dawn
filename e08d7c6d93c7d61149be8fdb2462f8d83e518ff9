@@ -172,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fc0f97e_590316ec",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T23:21:41Z",
+      "side": 1,
+      "message": "Discussed over VC to do the fingerprinting in GetOrCreate and not have child objects depend on previous state. This is because child objects are always created before parents. Now, instead of passing the recorder object through from the parent into the child, the recorder can just hash against child-\u003eGetKey()\n\nWe can do key reuse by taking the key from the blueprint and doing createdObject-\u003eSetKey(..) which would happen nicely adjacent to createdObject-\u003eSetIsCachedReference()",
+      "parentUuid": "9766c050_bd1ac52d",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6aadd1_2c3ef200",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
