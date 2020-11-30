@@ -116,15 +116,15 @@ TEST_P(IndexFormatTest, Uint16) {
 }
 
 // Test for primitive restart use vertices like in the drawing and draw the following
-// indices: 0 1 2 PRIM_RESTART 3 4 2. Then A and B should be written but not C.
+// indices: 0 1 2 PRIM_RESTART 3 4 5. Then A and B should be written but not C.
 //      |--------------|
-//      |      0       |
-//      |      |\      |
-//      |      |B \    |
-//      |      2---1   |
-//      |     /| C     |
-//      |   / A|       |
-//      |  4---3       |
+//      |      0---1   |
+//      |       \ B|   |
+//      |         \|   |
+//      |  3   C   2   |
+//      |  |\          |
+//      |  |A \        |
+//      |  4---5       |
 //      |--------------|
 
 // Test use of primitive restart with an Uint32 index format
@@ -134,8 +134,8 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
     wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
         device, wgpu::BufferUsage::Vertex,
         {
-            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
-            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+            0.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f,  0.0f, 1.0f, -1.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
         });
     wgpu::Buffer indexBuffer =
         utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
@@ -146,7 +146,7 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
                                                   0xFFFFFFFFu,
                                                   3,
                                                   4,
-                                                  2,
+                                                  5,
                                               });
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -162,9 +162,9 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 190, 190);  // A
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 210, 210);  // B
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 210, 190);   // C
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 50, 50);    // A
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 350, 350);  // B
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 200, 200);   // C
 }
 
 // Test use of primitive restart with an Uint16 index format
@@ -174,8 +174,8 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
     wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
         device, wgpu::BufferUsage::Vertex,
         {
-            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
-            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+            0.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f,  0.0f, 1.0f, -1.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
         });
     wgpu::Buffer indexBuffer =
         utils::CreateBufferFromData<uint16_t>(device, wgpu::BufferUsage::Index,
@@ -186,7 +186,7 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
                                                   0xFFFFu,
                                                   3,
                                                   4,
-                                                  2,
+                                                  5,
                                                   // This value is for padding.
                                                   0xFFFFu,
                                               });
@@ -204,9 +204,9 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 190, 190);  // A
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 210, 210);  // B
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 210, 190);   // C
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 50, 50);    // A
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 350, 350);  // B
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 200, 200);   // C
 }
 
 // Test that the index format used is the format of the last set pipeline. This is to
