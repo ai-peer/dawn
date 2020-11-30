@@ -16,6 +16,194 @@
       "message": "The failures on Vulkan try bots are caused by https://bugs.chromium.org/p/dawn/issues/detail?id\u003d588, and I\u0027ve just had a temporary fix about it: https://dawn-review.googlesource.com/c/dawn/+/34280\n\nThe failures on Windows try bots are caused by https://bugs.chromium.org/p/dawn/issues/detail?id\u003d462，which has been exposed after the upgrade of Windows version on the try bots (17134 -\u003e 18362).",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba01fda_072a0eaa",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "Instead of putting it in the header now, maybe we could put it in the .cpp and expose a temporary function that returns a ComputePipelineBase* that we then cast to a WGPUComputePipeline.",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd0e1d17_8e23d93e",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "nit: [[access(read)]], this decoration will soon be required.",
+      "range": {
+        "startLine": 33,
+        "startChar": 62,
+        "endLine": 33,
+        "endChar": 63
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2111a74d_2f7eaf26",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "nit: [[access(read_write)]]",
+      "range": {
+        "startLine": 34,
+        "startChar": 63,
+        "endLine": 34,
+        "endChar": 64
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de806c21_4d701093",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "Why do we need to substract from the baseline? Developers should be able to do that on their own. This assumption would simplify a lot of the code in this shader (the whole two loops above disappears).",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4277ba_aff67eb2",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "We should work with local variables instead of doing constant reads and writes to storage buffers as they are much more expensive than what we\u0027re used to in C/C++ CPU code.",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709d7d42_8a7f0585",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "nit: in general for readability we put the \"easy\" case first as it gives an idea of what the more complex case below does.",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d8e84f_89291fec",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "nit: return is optional now, so we can remove it.",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48b7357_41b71aa1",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "Good idea to test internal shaders with a whitebox test (at least when it\u0027s not directly accessible like the textureCopyForBrowser one)",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32eebd75_a6d31431",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "nit: unsigned.",
+      "range": {
+        "startLine": 62,
+        "startChar": 50,
+        "endLine": 62,
+        "endChar": 58
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5b2d13_54ad5933",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T14:38:18Z",
+      "side": 1,
+      "message": "The substraction will can be done by developers so we don\u0027t need this logic, am I missing something?",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
