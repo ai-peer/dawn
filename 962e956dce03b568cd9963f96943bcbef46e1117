@@ -349,6 +349,24 @@
       "parentUuid": "b67b1b03_31e89a52",
       "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2339d3bc_ed1b0063",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T07:44:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e3bbafab_f2dde32a",
+      "revId": "962e956dce03b568cd9963f96943bcbef46e1117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
