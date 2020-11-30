@@ -325,6 +325,21 @@ namespace dawn_native { namespace d3d12 {
             descriptorD3D12.InputLayout = ComputeInputLayout(&inputElementDescriptors);
         }
 
+        if (GetPrimitiveTopology() == wgpu::PrimitiveTopology::TriangleStrip) {
+            switch (GetVertexStateDescriptor()->indexFormat) {
+                case wgpu::IndexFormat::Uint16:
+                    descriptorD3D12.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_0xFFFF;
+                    break;
+                case wgpu::IndexFormat::Uint32:
+                    descriptorD3D12.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_0xFFFFFFFF;
+                    break;
+                case wgpu::IndexFormat::Undefined:
+                default:
+                    descriptorD3D12.IBStripCutValue = D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED;
+                    break;
+            }
+        }
+
         descriptorD3D12.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
         descriptorD3D12.RasterizerState.CullMode = D3D12CullMode(GetCullMode());
         descriptorD3D12.RasterizerState.FrontCounterClockwise =
