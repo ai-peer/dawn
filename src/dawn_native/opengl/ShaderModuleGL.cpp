@@ -135,7 +135,13 @@ namespace dawn_native { namespace opengl {
 
                 compiler.set_name(resourceId, GetBindingName(group, bindingNumber));
                 compiler.unset_decoration(info.id, spv::DecorationBinding);
-                compiler.unset_decoration(info.id, spv::DecorationDescriptorSet);
+                if (version.IsES() && (info.type == wgpu::BindingType::StorageBuffer ||
+                                       info.type == wgpu::BindingType::ReadonlyStorageBuffer)) {
+                    compiler.set_decoration(info.id, spv::DecorationBinding,
+                                            static_cast<uint32_t>(info.binding));
+                } else {
+                    compiler.unset_decoration(info.id, spv::DecorationDescriptorSet);
+                }
             }
         }
 
