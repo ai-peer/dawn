@@ -116,26 +116,26 @@ TEST_P(IndexFormatTest, Uint16) {
 }
 
 // Test for primitive restart use vertices like in the drawing and draw the following
-// indices: 0 1 2 PRIM_RESTART 3 4 2. Then A and B should be written but not C.
+// indices: 0 1 2 PRIM_RESTART 3 4 5. Then A and B should be written but not C.
 //      |--------------|
-//      |      0       |
-//      |      |\      |
-//      |      |B \    |
-//      |      2---1   |
-//      |     /| C     |
-//      |   / A|       |
-//      |  4---3       |
+//      |      0---1   |
+//      |       \ B|   |
+//      |         \|   |
+//      |  3   C   2   |
+//      |  |\          |
+//      |  |A \        |
+//      |  4---5       |
 //      |--------------|
 
 // Test use of primitive restart with an Uint32 index format
-TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
+TEST_P(IndexFormatTest, Uint32TriangleStripPrimitiveRestart) {
     wgpu::RenderPipeline pipeline = MakeTestPipeline(wgpu::IndexFormat::Uint32);
 
     wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
         device, wgpu::BufferUsage::Vertex,
         {
-            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
-            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+            0.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f,  0.0f, 1.0f, -1.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
         });
     wgpu::Buffer indexBuffer =
         utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
@@ -146,7 +146,7 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
                                                   0xFFFFFFFFu,
                                                   3,
                                                   4,
-                                                  2,
+                                                  5,
                                               });
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -162,20 +162,63 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 190, 190);  // A
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 210, 210);  // B
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 210, 190);   // C
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 50, 50);    // A
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 350, 350);  // B
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 200, 200);   // C
+}
+
+// Same as the above test, but uses an OOB index to emulate primitive restart being disabled,
+// causing C to be written to.
+TEST_P(IndexFormatTest, Uint32TriangleStripWithoutPrimitiveRestart) {
+    // The behavior of OOB indexes is not strictly defined on non-D3D12 platforms.
+    DAWN_SKIP_TEST_IF(!IsD3D12());
+    wgpu::RenderPipeline pipeline = MakeTestPipeline(wgpu::IndexFormat::Uint32);
+
+    wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, wgpu::BufferUsage::Vertex,
+        {
+            0.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f,  0.0f, 1.0f, -1.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        });
+    wgpu::Buffer indexBuffer =
+        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
+                                              {
+                                                  0,
+                                                  1,
+                                                  2,
+                                                  0xFFFFFFFEu,  // Not a valid index.
+                                                  3,
+                                                  4,
+                                                  5,
+                                              });
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
+        pass.DrawIndexed(7);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 50, 50);    // A
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 350, 350);  // B
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 200, 200);  // C
 }
 
 // Test use of primitive restart with an Uint16 index format
-TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
+TEST_P(IndexFormatTest, Uint16TriangleStripPrimitiveRestart) {
     wgpu::RenderPipeline pipeline = MakeTestPipeline(wgpu::IndexFormat::Uint16);
 
     wgpu::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
         device, wgpu::BufferUsage::Vertex,
         {
-            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
-            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+            0.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 0.0f,  0.0f, 1.0f, -1.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
         });
     wgpu::Buffer indexBuffer =
         utils::CreateBufferFromData<uint16_t>(device, wgpu::BufferUsage::Index,
@@ -186,7 +229,7 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
                                                   0xFFFFu,
                                                   3,
                                                   4,
-                                                  2,
+                                                  5,
                                                   // This value is for padding.
                                                   0xFFFFu,
                                               });
@@ -204,9 +247,111 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 190, 190);  // A
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 210, 210);  // B
-    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 210, 190);   // C
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 50, 50);    // A
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 350, 350);  // B
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 200, 200);   // C
+}
+
+// Test for primitive restart use vertices like in the drawing and draw the following
+// indices: 0 1 PRIM_RESTART 2 3. Then 1 and 2 should be written but not A.
+//      |--------------|
+//      |      3      0|
+//      |      |      ||
+//      |      |      ||
+//      |      2  A   1|
+//      |              |
+//      |              |
+//      |              |
+//      |--------------|
+TEST_P(IndexFormatTest, Uint32LineStripPrimitiveRestart) {
+    wgpu::RenderPipeline pipeline =
+        MakeTestPipeline(wgpu::IndexFormat::Uint32, wgpu::PrimitiveTopology::LineStrip);
+
+    wgpu::Buffer vertexBuffer =
+        utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Vertex,
+                                           {1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                                            0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f});
+    wgpu::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Index, {0, 1, 0xFFFFFFFFu, 2, 3});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
+        pass.DrawIndexed(5);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 399, 199);  // 1
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 199, 199);  // 2
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 300, 199);   // A
+}
+
+// Same as the above test, but uses an OOB index to emulate primitive restart being disabled,
+// causing C to be written to.
+TEST_P(IndexFormatTest, Uint32LineStripWithoutPrimitiveRestart) {
+    // The behavior of OOB indexes is not strictly defined on non-D3D12 platforms.
+    DAWN_SKIP_TEST_IF(!IsD3D12());
+    wgpu::RenderPipeline pipeline =
+        MakeTestPipeline(wgpu::IndexFormat::Uint32, wgpu::PrimitiveTopology::LineStrip);
+
+    wgpu::Buffer vertexBuffer =
+        utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Vertex,
+                                           {1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                                            0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f});
+    wgpu::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Index, {0, 1, 0xFFFFFFFEu, 2, 3});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
+        pass.DrawIndexed(5);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 399, 199);  // 1
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 199, 199);  // 2
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 300, 199);  // A
+}
+
+TEST_P(IndexFormatTest, Uint16LineStripPrimitiveRestart) {
+    wgpu::RenderPipeline pipeline =
+        MakeTestPipeline(wgpu::IndexFormat::Uint16, wgpu::PrimitiveTopology::LineStrip);
+
+    wgpu::Buffer vertexBuffer =
+        utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Vertex,
+                                           {1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+                                            0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f});
+    wgpu::Buffer indexBuffer = utils::CreateBufferFromData<uint16_t>(
+        device, wgpu::BufferUsage::Index, {0, 1, 0xFFFFu, 2, 3, 0xFFFFu});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint16);
+        pass.DrawIndexed(5);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 399, 199);  // 1
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kGreen, renderPass.color, 199, 199);  // 2
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kZero, renderPass.color, 300, 199);   // A
 }
 
 // Test that the index format used is the format of the last set pipeline. This is to
