@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d430c6f_f8d6d184",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-30T19:43:30Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d589",
+      "parentUuid": "5408c8c1_ca59debe",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f73eddf8_e5f78768",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-11-27T10:01:46Z",
       "side": 1,
       "message": "nit: stray spirv-cross compiler?",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4728964a_eac54cdf",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-30T19:43:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f73eddf8_e5f78768",
       "revId": "d17240257fbfb85bc85b76507958865d877e9527",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dbecca2_910fefb9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-30T19:43:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b718202_89bff02f",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40805a2b_de602376",
@@ -116,6 +170,24 @@
       "writtenOn": "2020-11-27T10:01:46Z",
       "side": 1,
       "message": "nit: we marginally prefer using declaration:\n\n  using EntryPointMetadataTable \u003d std::unordered_map\u003cstd::string, std::unique_ptr\u003cEntryPointMetadata\u003e\u003e;",
+      "revId": "d17240257fbfb85bc85b76507958865d877e9527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670ab024_d1665b1a",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-11-30T19:43:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40805a2b_de602376",
       "revId": "d17240257fbfb85bc85b76507958865d877e9527",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
