@@ -37,6 +37,93 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49f64f62_cce08769",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "ah, probably it should have checked to sameUsagesAcrossSubresources bool",
+      "parentUuid": "d82a3e9f_bc65e8f9",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044eaffc_1945a7f8",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "minor, but it would be kinda nice to have an IterateWhile or even ReduceWhile for this",
+      "range": {
+        "startLine": 355,
+        "startChar": 43,
+        "endLine": 355,
+        "endChar": 50
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b7ec01_cce0d778",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "comment what this does. also, I couldn\u0027t actually find the definition of this constructor",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 45
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8926da2d_6b05ce93",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "let\u0027s make this a constexpr inside some namespace instead of a define",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b74bf75b_354ea701",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 2
@@ -65,6 +152,52 @@
       "writtenOn": "2020-11-27T17:19:16Z",
       "side": 1,
       "message": "This is very verbose but a bunch of stuff could go in helper: the decompression routines, the UpdateRange creation and the recompression at the end.",
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f6fc6af_747466a3",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "Interesting. I was under the impression that we would actually grow/shrink the vector. I guess this is still a good step toward minimizing the number of times we need to run updateFunc",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 82,
+        "endChar": 21
+      },
+      "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf8e72d_209c23e4",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 1,
+      "message": "I think you meant false?",
+      "range": {
+        "startLine": 134,
+        "startChar": 81,
+        "endLine": 134,
+        "endChar": 85
+      },
       "revId": "b7bdbe2436d88ecc50d2ebe0fe38233c31a1720a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -16,6 +16,24 @@
       "message": "I think we could change this to instead have depth-stencil textures be single plane as far as mSubresourceLastUsages goes.",
       "revId": "3e2f59b64ded4d8d2f1b15f77657c9065f0eff0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256ac500_b750cd3f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T19:06:39Z",
+      "side": 0,
+      "message": "We need the separate tracking for D3D12 though\n\nI don\u0027t see a nice way to make Merge support this though :-/ something like MergeReduceAspects which would have a different iteration order, a reduce functor and a merge functor...\n\nMaybe we could have the backend initialize the subresource state though. So instead of GetPlaneIndex and GetPlaneCount, the backend provides a lookup table.\n^ also we might need this anyway for stencil only formats. Presumably Stencil is plane index 0, not 1 there.\n\nAlso.. have another Aspect enum that is combined DepthStencil ?",
+      "parentUuid": "1bae0406_e3775779",
+      "revId": "3e2f59b64ded4d8d2f1b15f77657c9065f0eff0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
