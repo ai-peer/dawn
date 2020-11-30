@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28961fe8_4a430747",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T13:57:47Z",
+      "side": 1,
+      "message": "The binding decoration doesn\u0027t have the same type in WGSL and GLSL ES because in WGSL it is per-bindgroup while in GLSL ES it is global. Instead, if we are an SSBO or readonlySSBO we should use the renumbering that\u0027s done in the pipelinelayout: layout-\u003eGetBindingIndexInfo()[group][bindingIndex] (and that only if IsES() instead of hardcoding per-OS)",
+      "revId": "19f7d742cdc3c2e165787c393efff40bdd2a8838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1754f4_dfe9fd85",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-30T13:57:47Z",
+      "side": 1,
+      "message": "I think we still need to unset the descriptorSet decoration since GLSL for OpenGL doesn\u0027t have layout(set\u003d)",
+      "revId": "19f7d742cdc3c2e165787c393efff40bdd2a8838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
