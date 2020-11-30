@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!",
       "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab427ded_ccd35e41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-11-30T23:31:53Z",
+      "side": 1,
+      "message": "LGTM but is there a test for this or a test that it fixes?",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
