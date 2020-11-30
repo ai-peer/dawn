@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0bb7447_ffab9ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-30T07:12:13Z",
+      "side": 1,
+      "message": "The failures on Vulkan try bots are caused by https://bugs.chromium.org/p/dawn/issues/detail?id\u003d588, and I\u0027ve just had a temporary fix about it: https://dawn-review.googlesource.com/c/dawn/+/34280\n\nThe failures on Windows try bots are caused by https://bugs.chromium.org/p/dawn/issues/detail?id\u003d462，which has been exposed after the upgrade of Windows version on the try bots (17134 -\u003e 18362).",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
