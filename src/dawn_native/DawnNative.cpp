@@ -180,13 +180,13 @@ namespace dawn_native {
         return deviceBase->GetDeprecationWarningCountForTesting();
     }
 
-    bool IsTextureSubresourceInitialized(WGPUTexture texture_,
+    bool IsTextureSubresourceInitialized(WGPUTexture cTexture,
                                          uint32_t baseMipLevel,
                                          uint32_t levelCount,
                                          uint32_t baseArrayLayer,
                                          uint32_t layerCount,
                                          WGPUTextureAspect aspect_) {
-        dawn_native::TextureBase* texture = reinterpret_cast<dawn_native::TextureBase*>(texture_);
+        dawn_native::TextureBase* texture = reinterpret_cast<dawn_native::TextureBase*>(cTexture);
 
         Aspect aspect =
             ConvertAspect(texture->GetFormat(), static_cast<wgpu::TextureAspect>(aspect_));
