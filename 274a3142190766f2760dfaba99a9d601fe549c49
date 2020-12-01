@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6b0e75da_df764daa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T20:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1f595b9_b38a1357",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c900e647_284d179a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Yeah that would be part of the added validation for WebGPU compat to make sure the textures views bound don\u0027t have two texture views of the same texture with incompatible parameters.",
       "parentUuid": "d968cb18_2cbf1250",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89590cb3_c0dc41c7",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T20:31:58Z",
+      "side": 1,
+      "message": "OK, I\u0027ve opened https://bugs.chromium.org/p/dawn/issues/detail?id\u003d593 which describes the general problem.\n\n(I haven\u0027t delved into depth/stencil specifics in the bug because I\u0027d likely describe them poorly with my current knowledge and also in case there are non-depth/stencil issues which need to be addressed.)",
+      "parentUuid": "1a16e5b6_67f16288",
       "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
