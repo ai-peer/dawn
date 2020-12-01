@@ -16,6 +16,91 @@
       "message": "PTAL!",
       "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc0466f_8ff5d96d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:06:28Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d4b330_338d44ef",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:06:28Z",
+      "side": 1,
+      "message": "This structure should extensible and until it has extensions, we should validate that its nextInChain is nullptr.",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf528dc6_4f9c2a32",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:06:28Z",
+      "side": 1,
+      "message": "I remember Austin had a concern with the name, did we resolve to keep it as is, or should we update it to something else?",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a72612_26b414b3",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:06:28Z",
+      "side": 1,
+      "message": "Do we ever see the need to not pass any options? It might be better to make this non-optional.",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e26531_f32252c8",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:06:28Z",
+      "side": 1,
+      "message": "nit: \"because ... is unimplemented\", or \"due to ... being unimplemented\"",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
