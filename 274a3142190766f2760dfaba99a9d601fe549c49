@@ -102,6 +102,24 @@
       "parentUuid": "ba4d0cce_df6e5d22",
       "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a16e5b6_67f16288",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T19:09:28Z",
+      "side": 1,
+      "message": "Yeah that would be part of the added validation for WebGPU compat to make sure the textures views bound don\u0027t have two texture views of the same texture with incompatible parameters.",
+      "parentUuid": "d968cb18_2cbf1250",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
