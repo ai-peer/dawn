@@ -22,6 +22,7 @@ namespace dawn_native {
     class DeviceBase;
     struct Extent3D;
     struct TextureCopyView;
+    struct CopyTextureForBrowserOptions;
 
     MaybeError ValidateCopyTextureForBrowser(DeviceBase* device,
                                              const TextureCopyView* source,
@@ -31,7 +32,8 @@ namespace dawn_native {
     MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                        const TextureCopyView* source,
                                        const TextureCopyView* destination,
-                                       const Extent3D* copySize);
+                                       const Extent3D* copySize,
+                                       const CopyTextureForBrowserOptions* options);
 
 }  // namespace dawn_native
 
