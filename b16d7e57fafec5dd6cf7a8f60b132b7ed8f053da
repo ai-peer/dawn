@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d318fb9a_b18f6cab",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:44:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f3f7498_0b2ca72d",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd0e1d17_8e23d93e",
@@ -178,6 +196,24 @@
       "side": 1,
       "message": "Background: The original timestamps returned by different GPUs are different, for example:\nOn Intel, they are GPU counters, like 10079569507, 11697837239, they need to be converted to time vulue via a timestamp period.\nOn Nvidia, they are time intervals since 1970, like 1598336066423815168, 1598334105191607296.\n\nBased on this, we need to unify these timestamps. The solution used here is substract each timestamp from the first one and get a time interval. \n          t0           t1           t2\noriginal  10079569507  10394415012  10712715425\nresult    0            314845505    633145918\n\n\nIf t1 \u003c t2, it meams the timestamp is reset from t2, we will set both t2 and the following values to 0.",
       "parentUuid": "de806c21_4d701093",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e67c453_21ec0183",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T11:44:28Z",
+      "side": 1,
+      "message": "Why do we need to unify them? They\u0027re timestamps that the developer should substract themselves so the absolute start of time doesn\u0027t matter.",
+      "parentUuid": "9e5eb77a_40274748",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
