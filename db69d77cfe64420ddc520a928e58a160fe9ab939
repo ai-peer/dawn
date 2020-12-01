@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e5a666_42d11213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T17:33:21Z",
+      "side": 1,
+      "message": "It enables \"Update TextureFormatTests to use WGSL\". I can squash them after that CL gets reviewed.",
+      "parentUuid": "4edaa282_efcadd43",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db9f6321_0bb7fbb9",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-01T08:03:16Z",
       "side": 1,
       "message": "nit: The dummy sampler could live on the device and be queried with GetOrCreateDummySampler, or created on device creation. Also the pipeline doesn\u0027t need to know about it asides from ApplyNow so it could query it from the device there.",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9d404d_c4aca0cd",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T17:33:21Z",
+      "side": 1,
+      "message": "Why does it need to be on device creation? Right now it\u0027ll happen on pipeline creation, and it uses GetOrCreateSampler so there\u0027s a good chance one of this type already exists.\n\nThe current solution does bloat the pipeline by an extra pointer, but that doesn\u0027t seem so bad given that we\u0027ll always need the sampler as long as the pipeline is used.",
+      "parentUuid": "db9f6321_0bb7fbb9",
       "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
