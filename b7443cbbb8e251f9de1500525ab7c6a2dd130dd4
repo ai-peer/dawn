@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47071169_9a706bef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:11:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2258d527_7f6a17c9",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:11:20Z",
+      "side": 1,
+      "message": "What about line-strip? I think we should have a strip cut value in that case too.",
+      "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
