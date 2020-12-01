@@ -33,6 +33,24 @@
       "message": "What about line-strip? I think we should have a strip cut value in that case too.",
       "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf83f70_ab1ea548",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-01T17:30:29Z",
+      "side": 1,
+      "message": "Hmmm...the documentation [1] for IBStripCutValue doesn’t say anything about line strip. I’m unable to find further documentation about how primitive restart works with line strip. I’ll have to experiment with this.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_index_buffer_strip_cut_value",
+      "parentUuid": "2258d527_7f6a17c9",
+      "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
