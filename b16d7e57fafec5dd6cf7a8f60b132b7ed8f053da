@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3f7498_0b2ca72d",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "If that, I\u0027d like to implement the internal pipeline and helper function to this PR, and test them directly.",
+      "parentUuid": "2ba01fda_072a0eaa",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd0e1d17_8e23d93e",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-11-30T14:38:18Z",
       "side": 1,
       "message": "nit: [[access(read)]], this decoration will soon be required.",
+      "range": {
+        "startLine": 33,
+        "startChar": 62,
+        "endLine": 33,
+        "endChar": 63
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec68770_09989c08",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd0e1d17_8e23d93e",
       "range": {
         "startLine": 33,
         "startChar": 62,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6efee6d5_2433f410",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2111a74d_2f7eaf26",
+      "range": {
+        "startLine": 34,
+        "startChar": 63,
+        "endLine": 34,
+        "endChar": 64
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de806c21_4d701093",
@@ -94,6 +160,24 @@
       "writtenOn": "2020-11-30T14:38:18Z",
       "side": 1,
       "message": "Why do we need to substract from the baseline? Developers should be able to do that on their own. This assumption would simplify a lot of the code in this shader (the whole two loops above disappears).",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5eb77a_40274748",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Background: The original timestamps returned by different GPUs are different, for example:\nOn Intel, they are GPU counters, like 10079569507, 11697837239, they need to be converted to time vulue via a timestamp period.\nOn Nvidia, they are time intervals since 1970, like 1598336066423815168, 1598334105191607296.\n\nBased on this, we need to unify these timestamps. The solution used here is substract each timestamp from the first one and get a time interval. \n          t0           t1           t2\noriginal  10079569507  10394415012  10712715425\nresult    0            314845505    633145918\n\n\nIf t1 \u003c t2, it meams the timestamp is reset from t2, we will set both t2 and the following values to 0.",
+      "parentUuid": "de806c21_4d701093",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +199,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f86ae4_ba3b8ca6",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce4277ba_aff67eb2",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "709d7d42_8a7f0585",
@@ -128,6 +230,24 @@
       "writtenOn": "2020-11-30T14:38:18Z",
       "side": 1,
       "message": "nit: in general for readability we put the \"easy\" case first as it gives an idea of what the more complex case below does.",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abc151f_24917698",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "709d7d42_8a7f0585",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +269,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e00f4b6_f556191d",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3d8e84f_89291fec",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c48b7357_41b71aa1",
@@ -162,6 +300,24 @@
       "writtenOn": "2020-11-30T14:38:18Z",
       "side": 1,
       "message": "Good idea to test internal shaders with a whitebox test (at least when it\u0027s not directly accessible like the textureCopyForBrowser one)",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8704b05_67c5954a",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c48b7357_41b71aa1",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +345,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caf20568_82ee11e4",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32eebd75_a6d31431",
+      "range": {
+        "startLine": 62,
+        "startChar": 50,
+        "endLine": 62,
+        "endChar": 58
+      },
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa5b2d13_54ad5933",
@@ -202,6 +382,24 @@
       "writtenOn": "2020-11-30T14:38:18Z",
       "side": 1,
       "message": "The substraction will can be done by developers so we don\u0027t need this logic, am I missing something?",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a653dace_28488f66",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T11:34:31Z",
+      "side": 1,
+      "message": "Replied in the shader part.",
+      "parentUuid": "fa5b2d13_54ad5933",
       "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
