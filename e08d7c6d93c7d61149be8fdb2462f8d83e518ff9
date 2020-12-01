@@ -315,6 +315,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca6694c8_888a0d08",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T22:36:22Z",
+      "side": 1,
+      "message": "ok right we need to SFINAE with std::is_base_of like https://godbolt.org/z/oxfhfY. Let\u0027s do that, I\u0027d like to not have it accept any pointer here.",
+      "parentUuid": "5354654d_7938b015",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52ecbaf4_4716d1e8",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
@@ -326,6 +344,24 @@
       "writtenOn": "2020-11-24T18:35:20Z",
       "side": 1,
       "message": "nit: vector\u003cT\u003e ?",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77283bbf_02a499ea",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T22:36:22Z",
+      "side": 1,
+      "message": "Not addressed",
+      "parentUuid": "52ecbaf4_4716d1e8",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

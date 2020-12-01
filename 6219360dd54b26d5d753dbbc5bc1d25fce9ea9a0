@@ -16,6 +16,69 @@
       "message": "Cool. The only re-use case remaining is AttachmentStateBlueprint now.",
       "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e16710_132a5876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T22:36:22Z",
+      "side": 1,
+      "message": "LGTM thanks, much simpler now",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26038500_64803a04",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T22:36:22Z",
+      "side": 1,
+      "message": "nit: can we rename \"key\" and \"hash\" to both be \"fingerprint\" ? Or maybe \"contentHash\" is a better name.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a347ee89_f0ce0953",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T22:36:22Z",
+      "side": 1,
+      "message": "hm, maybe my suggestion wasn\u0027t great. Seems like it would be better to have this do recorder-\u003eRecordObject(obj-\u003eGetKey());",
+      "range": {
+        "startLine": 54,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 30
+      },
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
