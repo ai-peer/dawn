@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be53fd18_a4bf625d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T17:35:55Z",
+      "side": 1,
+      "message": "Ah ok I think it\u0027s fine to do it in two CLs.",
+      "parentUuid": "e6e5a666_42d11213",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db9f6321_0bb7fbb9",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Why does it need to be on device creation? Right now it\u0027ll happen on pipeline creation, and it uses GetOrCreateSampler so there\u0027s a good chance one of this type already exists.\n\nThe current solution does bloat the pipeline by an extra pointer, but that doesn\u0027t seem so bad given that we\u0027ll always need the sampler as long as the pipeline is used.",
       "parentUuid": "db9f6321_0bb7fbb9",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "016e0c67_26de240a",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T17:35:55Z",
+      "side": 1,
+      "message": "It\u0027s basically that there being an empty sampler needed is the pipeline\u0027s concern but not the value of this empty sampler no? It\u0027s not about the extra pointer but that now the pipeline is manipulating a resource object.",
+      "parentUuid": "5f9d404d_c4aca0cd",
       "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
