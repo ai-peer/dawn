@@ -16,6 +16,80 @@
       "message": "PTAL! Tests passed (at least on linux where OpenGL runs) in the next patch.",
       "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4edaa282_efcadd43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:03:16Z",
+      "side": 1,
+      "message": "LGTM, do we have a test that this would enable? Maybe we can add a trivial texel fetch test?",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db9f6321_0bb7fbb9",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:03:16Z",
+      "side": 1,
+      "message": "nit: The dummy sampler could live on the device and be queried with GetOrCreateDummySampler, or created on device creation. Also the pipeline doesn\u0027t need to know about it asides from ApplyNow so it could query it from the device there.",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686ca693_2a2b9e77",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:03:16Z",
+      "side": 1,
+      "message": "nit: this argument would disappear once the dummy sampler is queried from the device.",
+      "range": {
+        "startLine": 73,
+        "startChar": 52,
+        "endLine": 73,
+        "endChar": 69
+      },
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0554293a_cbc14ae1",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:03:16Z",
+      "side": 1,
+      "message": "nit: comment why this is needed for reference in the future.",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
