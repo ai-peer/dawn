@@ -196,6 +196,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc10eaab_e4ac6e26",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T18:50:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ec46073_73949d40",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "686ca693_2a2b9e77",
@@ -219,6 +237,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "848436c7_f73b6063",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T18:50:38Z",
+      "side": 1,
+      "message": "Resolved to not query from the device.",
+      "parentUuid": "686ca693_2a2b9e77",
+      "range": {
+        "startLine": 73,
+        "startChar": 52,
+        "endLine": 73,
+        "endChar": 69
+      },
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0554293a_cbc14ae1",
@@ -232,6 +274,24 @@
       "writtenOn": "2020-12-01T08:03:16Z",
       "side": 1,
       "message": "nit: comment why this is needed for reference in the future.",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094a9971_1ed1cb56",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T18:50:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0554293a_cbc14ae1",
       "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
