@@ -165,6 +165,7 @@ TEST_P(CopyTextureForBrowserTests, PassthroughCopy) {
     // OpenGL tests fails due to 'WriteTexture' unimplemented.
     // Related bug : crbug.com/dawn/483
     DAWN_SKIP_TEST_IF(IsOpenGL());
+    DAWN_SKIP_TEST_IF(IsOpenGLES());
 
     constexpr uint32_t kWidth = 10;
     constexpr uint32_t kHeight = 1;
@@ -180,4 +181,5 @@ DAWN_INSTANTIATE_TEST(CopyTextureForBrowserTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
+                      OpenGLESBackend(),
                       VulkanBackend());
