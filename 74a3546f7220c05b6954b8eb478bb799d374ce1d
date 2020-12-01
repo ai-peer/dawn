@@ -33,6 +33,57 @@
       "message": "LGTM but is there a test for this or a test that it fixes?",
       "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cff2519f_fcdb30e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:15:31Z",
+      "side": 1,
+      "message": "LGTM but +1 for having a test enabled in this CL.",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b68850c_1bbd2eef",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:15:31Z",
+      "side": 1,
+      "message": "nit: we should skip the GetProgramResourceIndex on ES so the code would become\n\n // OpenGL ES\u0027s SSBO binding index in the SSBO table is the value of the location\u003d decoration\n // in GLSL contrary to all other bindings types. glShaderStorageBlockBinding doesn\u0027t exist\n // in OpenGL ES so skip that logic completely:\n if (IsDesktop) {\n    get location, if not invalid index do ShaderStorageBlockBinding\n }",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5680db49_e6728ba9",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T08:15:31Z",
+      "side": 1,
+      "message": "nit: Add a small comment explaining why we do that?",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
