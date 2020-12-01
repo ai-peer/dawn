@@ -220,6 +220,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d41625c4_e9922a51",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-01T15:36:19Z",
+      "side": 1,
+      "message": "I mean the timestamps on Intel and NV have different meanings, different forms of timestamp may confuse users about what the timestamps are. The subtraction can eliminate the difference and only return the time intervals to users. If this doesn’t matter, we can remove the subtraction.",
+      "parentUuid": "5e67c453_21ec0183",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce4277ba_aff67eb2",
         "filename": "src/dawn_native/QueryHelper.h",
         "patchSetId": 11
