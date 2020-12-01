@@ -33,6 +33,24 @@
       "message": "LGTM but maybe after the initial batch we shouldn\u0027t keep adding suppressions for new / modified tests all the time and instead batch them for when we integrate ANGLE and run OpenGL ES on the CQ?",
       "revId": "4dfbb54a4acc2ac792bae6d8b9bb45132fea8fdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413afa3c_88016f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T19:27:00Z",
+      "side": 1,
+      "message": "Yeah. TBH these tests are what\u0027s passing on NV GLES 3.2, since it\u0027s the most comprehensive. We\u0027ll probably have to add more suppressions/workarounds once we run ANGLE on the bots, since it\u0027s less full-featured.",
+      "parentUuid": "8da98975_cdd3db91",
+      "revId": "4dfbb54a4acc2ac792bae6d8b9bb45132fea8fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
