@@ -263,6 +263,7 @@ source_set("dawn_native_sources") {
     "StagingBuffer.h",
     "Subresource.cpp",
     "Subresource.h",
+    "SubresourceStorage.h",
     "Surface.cpp",
     "Surface.h",
     "SwapChain.cpp",
