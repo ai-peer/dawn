@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a83409f_9f496d4f",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T17:51:23Z",
+      "side": 1,
+      "message": "I feel it sort of is the pipeline\u0027s concern that we\u0027re getting a non-filtering sampler. I guess we could always have the sampler on device creation have a more explicit name.\n\nIt mostly feels like it\u0027s not something that needs to be device global and live forever. If an application never does a texelFetch, we would have created the sampler for no reason. And, it adds more things to the device destruction.",
+      "parentUuid": "016e0c67_26de240a",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "686ca693_2a2b9e77",
         "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 1
