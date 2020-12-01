@@ -31,10 +31,12 @@ namespace dawn_native { namespace opengl {
     struct OpenGLFunctions;
     class PersistentPipelineState;
     class PipelineLayout;
+    class Sampler;
 
     class PipelineGL {
       public:
         PipelineGL();
+        ~PipelineGL();
 
         void Initialize(const OpenGLFunctions& gl,
                         const PipelineLayout* layout,
@@ -56,6 +58,8 @@ namespace dawn_native { namespace opengl {
         GLuint mProgram;
         std::vector<std::vector<SamplerUnit>> mUnitsForSamplers;
         std::vector<std::vector<GLuint>> mUnitsForTextures;
+        std::vector<GLuint> mDummySamplerUnits;
+        Ref<Sampler> mDummySampler;
     };
 
 }}  // namespace dawn_native::opengl
