@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f595b9_b38a1357",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T19:03:09Z",
+      "side": 1,
+      "message": "nit: on OpenGL ES",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c900e647_284d179a",
@@ -14,6 +31,40 @@
       "writtenOn": "2020-12-01T18:59:03Z",
       "side": 1,
       "message": "PTAL. Thanks!",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c49a3ac_491cad4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T19:03:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba4d0cce_df6e5d22",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T19:03:09Z",
+      "side": 1,
+      "message": "Can we open bug to use GL_DEPTH_STENCIL_TEXTURE_MODE for this?",
       "revId": "274a3142190766f2760dfaba99a9d601fe549c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
