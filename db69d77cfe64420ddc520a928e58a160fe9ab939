@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1da5405_58a01ce3",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T17:57:12Z",
+      "side": 1,
+      "message": "Is the problem that Sampler is a content-less object so it makes the destruction order more complicated?",
+      "parentUuid": "5a83409f_9f496d4f",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "686ca693_2a2b9e77",
         "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 1
