@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ec46073_73949d40",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-01T18:02:42Z",
+      "side": 1,
+      "message": "Ugh that\u0027s annoying. Yeah let\u0027s have it as a member and comment that maybe it should be some place else?",
+      "parentUuid": "0e23fd40_fae706bc",
+      "revId": "db69d77cfe64420ddc520a928e58a160fe9ab939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "686ca693_2a2b9e77",
         "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 1
