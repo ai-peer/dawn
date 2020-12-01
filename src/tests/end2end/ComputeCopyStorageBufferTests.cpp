@@ -29,7 +29,7 @@ class ComputeCopyStorageBufferTests : public DawnTest {
 
 void ComputeCopyStorageBufferTests::BasicTest(const char* shader) {
     // Set up shader and pipeline
-    auto module = utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, shader);
+    auto module = utils::CreateShaderModuleFromWGSL(device, shader);
 
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.computeStage.module = module;
@@ -88,13 +88,22 @@ void ComputeCopyStorageBufferTests::BasicTest(const char* shader) {
 // Test that a trivial compute-shader memcpy implementation works.
 TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfBasic) {
     BasicTest(R"(
-        #version 450
-        #define kInstances 4
-        layout(std140, set = 0, binding = 0) buffer Src { uvec4 s[kInstances]; } src;
-        layout(std140, set = 0, binding = 1) buffer Dst { uvec4 s[kInstances]; } dst;
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            if (index >= kInstances) { return; }
+        [[block]] struct Buf1 {
+            [[offset(0)]] s : [[stride(16)]] array<vec4<u32>, 4>;
+        };
+        [[block]] struct Buf2 {
+            [[offset(0)]] s : [[stride(16)]] array<vec4<u32>, 4>;
+        };
+
+        // TODO(crbug.com/tint/386): Use the same struct type
+        [[set(0), binding(0)]] var<storage> src : Buf1;
+        [[set(0), binding(1)]] var<storage> dst : Buf2;
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]] fn main() -> void {
+            var index : u32 = GlobalInvocationID.x;
+            if (index >= 4) { return; }
             dst.s[index] = src.s[index];
         })");
 }
@@ -102,33 +111,50 @@ TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfBasic) {
 // Test that a slightly-less-trivial compute-shader memcpy implementation works.
 TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfStruct) {
     BasicTest(R"(
-        #version 450
-        #define kInstances 4
         struct S {
-            uvec2 a, b;  // kUintsPerInstance = 4
+            [[offset(0)]] a : vec2<u32>;
+            [[offset(8)]] b : vec2<u32>;
         };
-        layout(std140, set = 0, binding = 0) buffer Src { S s[kInstances]; } src;
-        layout(std140, set = 0, binding = 1) buffer Dst { S s[kInstances]; } dst;
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            if (index >= kInstances) { return; }
+
+        [[block]] struct Buf1 {
+            [[offset(0)]] s : [[stride(16)]] array<S, 4>;
+        };
+        [[block]] struct Buf2 {
+            [[offset(0)]] s : [[stride(16)]] array<S, 4>;
+        };
+
+        // TODO(crbug.com/tint/386): Use the same struct type
+        [[set(0), binding(0)]] var<storage> src : Buf1;
+        [[set(0), binding(1)]] var<storage> dst : Buf2;
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]] fn main() -> void {
+            var index : u32 = GlobalInvocationID.x;
+            if (index >= 4) { return; }
             dst.s[index] = src.s[index];
         })");
 }
 
 // Test that a trivial compute-shader memcpy implementation works.
 TEST_P(ComputeCopyStorageBufferTests, UnsizedArrayOfBasic) {
-    // TODO(crbug.com/tint/400)
-    // Tint transform failure: error: invalid 0 size for array or vector
-    DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
     BasicTest(R"(
-        #version 450
-        #define kInstances 4
-        layout(std140, set = 0, binding = 0) buffer Src { uvec4 s[]; } src;
-        layout(std140, set = 0, binding = 1) buffer Dst { uvec4 s[]; } dst;
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            if (index >= kInstances) { return; }
+        [[block]] struct Buf1 {
+            [[offset(0)]] s : [[stride(16)]] array<vec4<u32>>;
+        };
+        [[block]] struct Buf2 {
+            [[offset(0)]] s : [[stride(16)]] array<vec4<u32>>;
+        };
+
+        // TODO(crbug.com/tint/386): Use the same struct type
+        [[set(0), binding(0)]] var<storage> src : Buf1;
+        [[set(0), binding(1)]] var<storage> dst : Buf2;
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]] fn main() -> void {
+            var index : u32 = GlobalInvocationID.x;
+            if (index >= 4) { return; }
             dst.s[index] = src.s[index];
         })");
 }
@@ -139,16 +165,23 @@ TEST_P(ComputeCopyStorageBufferTests, UnsizedArrayOfBasic) {
 // VkDescriptorSetLayoutBinding::descriptorCount). https://github.com/gpuweb/gpuweb/pull/61
 TEST_P(ComputeCopyStorageBufferTests, DISABLED_SizedDescriptorArray) {
     BasicTest(R"(
-        #version 450
-        #define kInstances 4
         struct S {
-            uvec2 a, b;  // kUintsPerInstance = 4
+            [[offset(0)]] a : vec2<u32>;
+            [[offset(8)]] b : vec2<u32>;
         };
-        layout(std140, set = 0, binding = 0) buffer Src { S s; } src[kInstances];
-        layout(std140, set = 0, binding = 1) buffer Dst { S s; } dst[kInstances];
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            if (index >= kInstances) { return; }
+
+        [[block]] struct Buf {
+            [[offset(0)]] s : S;
+        };
+
+        [[set(0), binding(0)]] var<storage> src : Buf[4];
+        [[set(0), binding(1)]] var<storage> dst : Buf[4];
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]] fn main() -> void {
+            var index : u32 = GlobalInvocationID.x;
+            if (index >= 4) { return; }
             dst[index].s = src[index].s;
         })");
 }
@@ -160,17 +193,23 @@ TEST_P(ComputeCopyStorageBufferTests, DISABLED_SizedDescriptorArray) {
 // Linking on OpenGL fails with "OpenGL requires constant indexes for unsized array access(dst)".
 TEST_P(ComputeCopyStorageBufferTests, DISABLED_UnsizedDescriptorArray) {
     BasicTest(R"(
-        #version 450
-        #extension GL_EXT_nonuniform_qualifier : require
-        #define kInstances 4
         struct S {
-            uvec2 a, b;  // kUintsPerInstance = 4
+            [[offset(0)]] a : vec2<u32>;
+            [[offset(8)]] b : vec2<u32>;
         };
-        layout(std140, set = 0, binding = 0) buffer Src { S s; } src[];
-        layout(std140, set = 0, binding = 1) buffer Dst { S s; } dst[];
-        void main() {
-            uint index = gl_GlobalInvocationID.x;
-            if (index >= kInstances) { return; }
+
+        [[block]] struct Buf {
+            [[offset(0)]] s : S;
+        };
+
+        [[set(0), binding(0)]] var<storage> src : Buf[];
+        [[set(0), binding(1)]] var<storage> dst : Buf[];
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+        [[stage(compute)]] fn main() -> void {
+            var index : u32 = GlobalInvocationID.x;
+            if (index >= 4) { return; }
             dst[index].s = src[index].s;
         })");
 }
