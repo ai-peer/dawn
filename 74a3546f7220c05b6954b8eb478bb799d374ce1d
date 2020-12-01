@@ -52,6 +52,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebdf027_19ad5fb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T17:12:43Z",
+      "side": 1,
+      "message": "It fixes BindGroupTests.DynamicOffsetOrder.",
+      "parentUuid": "ab427ded_ccd35e41",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2037ef_629586fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T17:12:43Z",
+      "side": 1,
+      "message": "There\u0027s one more failure in BindGroupTests; I\u0027ve disabled that one on ES and \nenabled the rest.",
+      "parentUuid": "cff2519f_fcdb30e9",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b68850c_1bbd2eef",
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "094eebb9_53cd78bf",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T17:12:43Z",
+      "side": 1,
+      "message": "Done (with some edits).",
+      "parentUuid": "1b68850c_1bbd2eef",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5680db49_e6728ba9",
@@ -82,6 +136,24 @@
       "writtenOn": "2020-12-01T08:15:31Z",
       "side": 1,
       "message": "nit: Add a small comment explaining why we do that?",
+      "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0393f503_058cc317",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-01T17:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5680db49_e6728ba9",
       "revId": "74a3546f7220c05b6954b8eb478bb799d374ce1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
