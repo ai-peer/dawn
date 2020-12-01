@@ -39,6 +39,30 @@
       },
       "revId": "635a7b8aa053343976f2290ea6226a4469bba096",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55865f91_7ad14210",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-01T02:34:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cc0b041_00ed37ff",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "635a7b8aa053343976f2290ea6226a4469bba096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
