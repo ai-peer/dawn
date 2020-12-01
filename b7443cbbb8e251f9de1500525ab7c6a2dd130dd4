@@ -51,6 +51,24 @@
       "parentUuid": "2258d527_7f6a17c9",
       "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9658f36c_5665d53a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-01T20:53:11Z",
+      "side": 1,
+      "message": "My experimentation shows that IBStripCutValue does work with line strips. Added functionality + tests.",
+      "parentUuid": "8bf83f70_ab1ea548",
+      "revId": "b7443cbbb8e251f9de1500525ab7c6a2dd130dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
