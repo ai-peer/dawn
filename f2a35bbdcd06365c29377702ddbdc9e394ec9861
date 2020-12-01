@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04944827_3ae4797d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T21:57:22Z",
+      "side": 1,
+      "message": "LGTM though would it be possible to have some control cases that test what would happen if primitive restart were not enabled? i.e. we see a super large index instead of the cut value. We could test it by passing 0xFFFFFFFE instead of 0xFFFFFFFF. It would have to rely on the robust buffer access behavior to either clamp the huge index or use 0.",
+      "revId": "f2a35bbdcd06365c29377702ddbdc9e394ec9861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
