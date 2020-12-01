@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5451c70f_3a7b55bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-01T01:57:00Z",
+      "side": 1,
+      "message": "Cool. The only re-use case remaining is AttachmentStateBlueprint now.",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

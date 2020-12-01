@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78823c51_fc8e1ce2",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-01T01:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d521f310_b5fa0f98",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "465f389f_48261069",
@@ -184,6 +208,30 @@
       "side": 1,
       "message": "Discussed over VC to do the fingerprinting in GetOrCreate and not have child objects depend on previous state. This is because child objects are always created before parents. Now, instead of passing the recorder object through from the parent into the child, the recorder can just hash against child-\u003eGetKey()\n\nWe can do key reuse by taking the key from the blueprint and doing createdObject-\u003eSetKey(..) which would happen nicely adjacent to createdObject-\u003eSetIsCachedReference()",
       "parentUuid": "9766c050_bd1ac52d",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f041792c_34eddca7",
+        "filename": "src/dawn_native/FingerprintRecorder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-01T01:57:00Z",
+      "side": 1,
+      "message": "Good insight, SGTM.",
+      "parentUuid": "8fc0f97e_590316ec",
       "range": {
         "startLine": 31,
         "startChar": 12,
@@ -343,6 +391,30 @@
       "side": 1,
       "message": "[1]",
       "parentUuid": "85e7ff85_fede264a",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 12
+      },
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09307328_bee64b25",
+        "filename": "src/tests/unittests/FingerprintRecorderTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-01T01:57:00Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "858e4a75_3f56d4c5",
       "range": {
         "startLine": 89,
         "startChar": 0,

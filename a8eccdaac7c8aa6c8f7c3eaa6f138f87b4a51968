@@ -529,6 +529,30 @@
       },
       "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d670f8_32229824",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-01T01:57:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9023801a_bc27c6a3",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "a8eccdaac7c8aa6c8f7c3eaa6f138f87b4a51968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
