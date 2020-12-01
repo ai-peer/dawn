@@ -34,6 +34,24 @@
       "parentUuid": "04944827_3ae4797d",
       "revId": "f2a35bbdcd06365c29377702ddbdc9e394ec9861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8f0bad_63874e2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-01T23:19:43Z",
+      "side": 1,
+      "message": "Ok, I think there\u0027s still value in having it only enabled on D3D12 so we know our testing is actually correct. IIUC, this test originally passed regardless of whether primitive restart was enabled or not.",
+      "parentUuid": "7b3e569a_d4838280",
+      "revId": "f2a35bbdcd06365c29377702ddbdc9e394ec9861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
