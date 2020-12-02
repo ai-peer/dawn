@@ -104,6 +104,7 @@ TEST_P(DrawTest, Uint32) {
 
 DAWN_INSTANTIATE_TEST(DrawTest,
                       D3D12Backend(),
+                      D3D12Backend({"use_tint_generator"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
