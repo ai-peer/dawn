@@ -152,6 +152,30 @@
       },
       "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1c5f1d_8d9970c7",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-02T19:20:57Z",
+      "side": 1,
+      "message": "I added the toggle to TextureZeroInitTests because the texture zero initialization implementation is different between the D3D12 \"native\" render pass path and and emulated fallback render pass path and both needed tested.",
+      "parentUuid": "a51bc57d_a077cce7",
+      "range": {
+        "startLine": 1349,
+        "startChar": 37,
+        "endLine": 1349,
+        "endChar": 58
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
