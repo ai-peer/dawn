@@ -259,6 +259,9 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPong) {
 // Test that Storage to Uniform buffer transitions work and synchronize correctly
 // by ping-ponging between Storage/Uniform usage in one compute pass.
 TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
+    // TODO(crbug.com/dawn/598): Hanging and causes device removed.
+    DAWN_SKIP_TEST_IF(IsD3D12() && IsIntel());
+
     std::vector<uint32_t> data(kNumValues, 0);
     std::vector<uint32_t> expectedA(kNumValues, 0x1234 * kIterations);
     std::vector<uint32_t> expectedB(kNumValues, 0x1234 * (kIterations - 1));
