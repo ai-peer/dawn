@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf35db41_00ecb3ab",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T03:58:28Z",
+      "side": 1,
+      "message": "fine to rename later, my suggestion is \"copy texture with transform\" or \"blit texture with transform\"",
+      "parentUuid": "c894aca1_5e25366b",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55a72612_26b414b3",
         "filename": "dawn.json",
         "patchSetId": 1
