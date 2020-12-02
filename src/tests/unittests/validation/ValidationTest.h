@@ -76,6 +76,7 @@ class ValidationTest : public testing::Test {
     };
 
     bool HasWGSL() const;
+    bool IsTintInspectorEnabled() const;
 
   protected:
     virtual wgpu::Device CreateTestDevice();
