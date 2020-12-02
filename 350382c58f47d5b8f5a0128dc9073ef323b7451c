@@ -16,6 +16,23 @@
       "message": "Apparently that win-dawn-rel run was on a canary LUCI instance. There is a note in the log that if it fails unexpectedly (like it did) to just try it again.",
       "revId": "350382c58f47d5b8f5a0128dc9073ef323b7451c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622255d9_9dde4576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T22:17:51Z",
+      "side": 1,
+      "message": "It appears this entire bot is broken https://ci.chromium.org/p/chromium/builders/ci/Dawn%20Win10%20x64%20DEPS%20Release%20%28Intel%20HD%20630%29",
+      "revId": "350382c58f47d5b8f5a0128dc9073ef323b7451c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
