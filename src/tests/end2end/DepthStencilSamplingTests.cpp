@@ -57,6 +57,8 @@ class DepthStencilSamplingTest : public DawnTest {
 
     void SetUp() override {
         DawnTest::SetUp();
+        // TODO(crbug.com/dawn/598): Hanging and causes device removed.
+        DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsD3D12() && IsIntel());
 
         wgpu::BufferDescriptor uniformBufferDesc;
         uniformBufferDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;

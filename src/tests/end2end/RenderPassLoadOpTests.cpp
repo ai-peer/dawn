@@ -55,6 +55,8 @@ class RenderPassLoadOpTests : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
+        // TODO(crbug.com/dawn/598): Hanging and causes device removed.
+        DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsD3D12() && IsIntel());
 
         wgpu::TextureDescriptor descriptor;
         descriptor.dimension = wgpu::TextureDimension::e2D;
