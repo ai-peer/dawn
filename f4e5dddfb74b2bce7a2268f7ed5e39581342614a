@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2625185d_626f7187",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-02T02:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61d4b330_338d44ef",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf528dc6_4f9c2a32",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-01T11:06:28Z",
       "side": 1,
       "message": "I remember Austin had a concern with the name, did we resolve to keep it as is, or should we update it to something else?",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c894aca1_5e25366b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-02T02:24:55Z",
+      "side": 1,
+      "message": "Yes and I don\u0027t take time to consider a better name(really not good at giving a good name) now.\nI\u0027d like to complete the API function first and using a CL to update all the names after we have a good one and before we expose this to chromium.\n\nAustin@, if you have a candidate, please comment :)",
+      "parentUuid": "bf528dc6_4f9c2a32",
       "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdb055f_d95a539d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-02T02:24:55Z",
+      "side": 1,
+      "message": "Actually we always need flipY. Done.",
+      "parentUuid": "55a72612_26b414b3",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77e26531_f32252c8",
@@ -99,6 +153,24 @@
       "writtenOn": "2020-12-01T11:06:28Z",
       "side": 1,
       "message": "nit: \"because ... is unimplemented\", or \"due to ... being unimplemented\"",
+      "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248f79a1_20a37436",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-02T02:24:55Z",
+      "side": 1,
+      "message": "Done.\n(Fixing translation machine in my brain too.)",
+      "parentUuid": "77e26531_f32252c8",
       "revId": "f4e5dddfb74b2bce7a2268f7ed5e39581342614a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
