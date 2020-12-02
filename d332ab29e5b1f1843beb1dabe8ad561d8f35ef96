@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953480b2_728503a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Thanks! If we like the GetOrCreate refactor idea, I\u0027ll do a follow-up CL given this one seems to be in a good state.",
+      "revId": "d332ab29e5b1f1843beb1dabe8ad561d8f35ef96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -99,6 +99,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c0ba2d_b7d7a7b2",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0a560d_267644a7",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66bb6563_47e61fa8",
@@ -118,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "436bcb1d_22807601",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Hmm. Could do something like...\n\n    template \u003ctypename Obj, typename Desc, typename CreateFn\u003e\n    ResultOrError\u003cRef\u003cObj\u003e\u003e GetOrCreateCachedObjectHelper(\n        Device* device,\n        const Descriptor* descriptor,\n        ContentLessObjectCache\u003cObj\u003e\u0026 cache,\n        CreateFn createFn) {\n    ...\n    DAWN_TRY_ASSIGN(backendObj, ((*device).*(createFn))(descriptor));\n    ...\n   }\n\nThen each GetOrCreate...\n\n    GetOrCreateCachedObjectHelper(this, descriptor, mCaches-\u003ebindGroupLayouts,\n    \u0026DeviceBase::CreateBindGroupLayoutImpl);\n\nWould that work?",
+      "parentUuid": "66bb6563_47e61fa8",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "100d7a18_2cdd7acb",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 15
@@ -129,6 +171,24 @@
       "writtenOn": "2020-12-02T15:24:28Z",
       "side": 1,
       "message": "This object is always only used in a local scope and that ends with `return GetKey()`, it seems that it\u0027s just extending HashCombine and Hash (the only issue is that we want to use GetKey for pointers I guess?)",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1b7cbf_8ac64048",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Yup, fixed comment. Requires the use of GetKey() and disallows hashing T*.",
+      "parentUuid": "100d7a18_2cdd7acb",
       "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

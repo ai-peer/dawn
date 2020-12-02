@@ -333,6 +333,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ffff98c_4133f752",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Slight preference to keep it as-is.\n\nThis is because we cannot accept any ptr (ever). Otherwise, Record(NotCachedObj*) would falsely \"work\" (ie. resolve to use HashCombine) defeating the benefit of RecordImpl. There is no easy way to distinguish a bad hash from cache miss \u003d(",
+      "parentUuid": "ca6694c8_888a0d08",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52ecbaf4_4716d1e8",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
@@ -361,6 +379,24 @@
       "writtenOn": "2020-12-01T22:36:22Z",
       "side": 1,
       "message": "Not addressed",
+      "parentUuid": "52ecbaf4_4716d1e8",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c0b806_6c49f89a",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-02T20:28:14Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "52ecbaf4_4716d1e8",
       "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
