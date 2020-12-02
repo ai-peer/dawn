@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1a49761_ce041f1d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80f40db2_21fd6309",
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6191f4e2_d0256aee",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "923f8737_b171c76e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6191f4e2_d0256aee",
+      "range": {
+        "startLine": 1035,
+        "startChar": 20,
+        "endLine": 1037,
+        "endChar": 21
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88a478d0_09546c81",
@@ -54,6 +96,30 @@
       "writtenOn": "2020-11-19T22:29:58Z",
       "side": 1,
       "message": "in what way does D3D12 render pass affect clears ? ClearRenderTargetView doesn\u0027t use a render pass",
+      "range": {
+        "startLine": 1349,
+        "startChar": 37,
+        "endLine": 1349,
+        "endChar": 58
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91d866e_4ce8201c",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "I used a render pass to sample the compressed texture into a render target, I saw the flag was used in TextureZoerInitTests, is it not needed for this?",
+      "parentUuid": "88a478d0_09546c81",
       "range": {
         "startLine": 1349,
         "startChar": 37,

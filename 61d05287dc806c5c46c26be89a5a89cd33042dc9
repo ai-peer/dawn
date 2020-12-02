@@ -224,6 +224,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ec38ba_eee11bf0",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2111c1d_50914c52",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c899dbb_beb80347",
@@ -237,6 +255,24 @@
       "writtenOn": "2020-11-17T10:50:39Z",
       "side": 1,
       "message": "Instead of doing regions one by one, we can gather them in an std::vector and do a single CmdCopyBufferToImage call.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964d4d6d_10812587",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c899dbb_beb80347",
       "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -264,6 +300,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10fc7bb_847714ec",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bbb34e5_5c197ca0",
+      "range": {
+        "startLine": 1238,
+        "startChar": 36,
+        "endLine": 1238,
+        "endChar": 46
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7e091fd_952b1d3c",
@@ -277,6 +337,30 @@
       "writtenOn": "2020-11-17T10:50:39Z",
       "side": 1,
       "message": "nit: utils::kBCFormats",
+      "range": {
+        "startLine": 1288,
+        "startChar": 38,
+        "endLine": 1288,
+        "endChar": 48
+      },
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b23535_31833039",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7e091fd_952b1d3c",
       "range": {
         "startLine": 1288,
         "startChar": 38,
@@ -317,6 +401,24 @@
       "writtenOn": "2020-11-17T10:50:39Z",
       "side": 1,
       "message": "It would be nice to test copying to a non-zero array layer too.\n\nAlso it would be nice testing texture-to-texture copy on a miplevel full and partial.\n\nFinally we should test that blocks that have been zero-initialized are indeed full of zeroes. This could be done by copying in a buffer and checking the buffer is empty.",
+      "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efff80f3_d3aeab3f",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f11b7ce_fd96f11a",
       "revId": "61d05287dc806c5c46c26be89a5a89cd33042dc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
