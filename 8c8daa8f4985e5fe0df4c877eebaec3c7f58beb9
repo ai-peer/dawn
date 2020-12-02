@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5f9639_8fede732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-02T07:20:32Z",
+      "side": 1,
+      "message": "Please take another look since there is some dawn.json changes! Thanks!",
+      "revId": "8c8daa8f4985e5fe0df4c877eebaec3c7f58beb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
