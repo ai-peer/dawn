@@ -24,6 +24,8 @@ class RenderPassTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
+        // TODO(crbug.com/dawn/598): Hanging and causes device removed.
+        DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsD3D12() && IsIntel());
 
         // Shaders to draw a bottom-left triangle in blue.
         mVSModule = utils::CreateShaderModuleFromWGSL(device, R"(
