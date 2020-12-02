@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abdd0abe_763e4d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-12-02T20:41:30Z",
+      "side": 1,
+      "message": "n/p, Done",
+      "parentUuid": "b3946972_0a7165bf",
+      "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47c4dd55_697b0c3a",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-02T20:20:17Z",
       "side": 1,
       "message": "u-u-nit: stdlib includes go after the dawn includes.",
+      "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67641e1b_e9ac6c78",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-12-02T20:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47c4dd55_697b0c3a",
       "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
