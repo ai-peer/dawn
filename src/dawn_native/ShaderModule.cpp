@@ -877,6 +877,36 @@ namespace dawn_native {
         }
         return std::move(output.module);
     }
+
+    std::unique_ptr<tint::transform::VertexPulling> MakeVertexPullingTransform(
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint,
+        uint32_t pullingBufferBindingSet) {
+        auto transform = std::make_unique<tint::transform::VertexPulling>();
+        tint::transform::VertexStateDescriptor state;
+        for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
+            const auto& vertexBuffer = vertexState.vertexBuffers[i];
+            tint::transform::VertexBufferLayoutDescriptor layout;
+            layout.array_stride = vertexBuffer.arrayStride;
+            layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
+
+            for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
+                const auto& attribute = vertexBuffer.attributes[j];
+                tint::transform::VertexAttributeDescriptor attr;
+                attr.format = ToTintVertexFormat(attribute.format);
+                attr.offset = attribute.offset;
+                attr.shader_location = attribute.shaderLocation;
+
+                layout.attributes.push_back(std::move(attr));
+            }
+
+            state.push_back(std::move(layout));
+        }
+        transform->SetVertexState(std::move(state));
+        transform->SetEntryPoint(entryPoint);
+        transform->SetPullingBufferBindingSet(pullingBufferBindingSet);
+        return transform;
+    }
 #endif
 
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
@@ -988,32 +1018,8 @@ namespace dawn_native {
         errorStream << "Tint vertex pulling failure:" << std::endl;
 
         tint::transform::Manager transformManager;
-        {
-            auto transform = std::make_unique<tint::transform::VertexPulling>();
-            tint::transform::VertexStateDescriptor state;
-            for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
-                const auto& vertexBuffer = vertexState.vertexBuffers[i];
-                tint::transform::VertexBufferLayoutDescriptor layout;
-                layout.array_stride = vertexBuffer.arrayStride;
-                layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
-
-                for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
-                    const auto& attribute = vertexBuffer.attributes[j];
-                    tint::transform::VertexAttributeDescriptor attr;
-                    attr.format = ToTintVertexFormat(attribute.format);
-                    attr.offset = attribute.offset;
-                    attr.shader_location = attribute.shaderLocation;
-
-                    layout.attributes.push_back(std::move(attr));
-                }
-
-                state.push_back(std::move(layout));
-            }
-            transform->SetVertexState(std::move(state));
-            transform->SetEntryPoint(entryPoint);
-            transform->SetPullingBufferBindingSet(pullingBufferBindingSet);
-            transformManager.append(std::move(transform));
-        }
+        transformManager.append(
+            MakeVertexPullingTransform(vertexState, entryPoint, pullingBufferBindingSet));
         if (GetDevice()->IsRobustnessEnabled()) {
             // TODO(enga): Run the Tint BoundArrayAccessors transform instead of the SPIRV Tools
             // one, but it appears to crash after running VertexPulling.
