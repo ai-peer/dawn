@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2d015a_1dbd5037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T23:33:28Z",
+      "side": 1,
+      "message": "I\u0027m having trouble getting repros of the failures for linux and vulkan ",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30c51373_423daaa5",
@@ -14,6 +31,24 @@
       "writtenOn": "2020-12-02T19:06:58Z",
       "side": 1,
       "message": "just to be sure: on Vulkan, do we need this? i.e. does vkCmdClearColorImage not work for compressed textures?\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearColorImage.html\nthe only format-related restriction looks like:\n\n\"image must not use a format listed in https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion\"",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f69d82_70d4ea57",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-02T23:33:28Z",
+      "side": 1,
+      "message": "Before adding this, I was seeing errors like this https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket.appspot.com/8861987630119504432/+/steps/Run_the_Dawn_end2end_tests_with_SwiftShader/0/stdout saying ../../third_party/swiftshader/src/Vulkan/VkFormat.cpp:1988 ABORT: UNSUPPORTED: format 133.",
+      "parentUuid": "30c51373_423daaa5",
       "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
