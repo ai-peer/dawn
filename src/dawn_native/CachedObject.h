@@ -29,11 +29,25 @@ namespace dawn_native {
 
         bool IsCachedReference() const;
 
+        // Functor necessary for the unordered_set<CachedObject*>-based cache.
+        struct HashFunc {
+            size_t operator()(const CachedObject* obj) const;
+        };
+
+        size_t GetKey() const;
+        void SetKey(size_t contentHash);
+
       private:
         friend class DeviceBase;
         void SetIsCachedReference();
 
         bool mIsCachedReference = false;
+
+        // Called by ObjectContentHasher upon creation to record the object.
+        virtual size_t Fingerprint() = 0;
+
+        size_t mContentHash = 0;
+        bool mIsContentHashInitialized = false;
     };
 
 }  // namespace dawn_native
