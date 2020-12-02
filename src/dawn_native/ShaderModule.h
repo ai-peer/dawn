@@ -31,6 +31,14 @@
 #include <unordered_map>
 #include <vector>
 
+namespace tint {
+    class Context;
+    namespace ast {
+        class Module;
+    }  // namespace ast
+
+}  // namespace tint
+
 namespace spirv_cross {
     class Compiler;
 }
@@ -43,8 +51,22 @@ namespace dawn_native {
     using EntryPointMetadataTable =
         std::unordered_map<std::string, std::unique_ptr<EntryPointMetadata>>;
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
-                                              const ShaderModuleDescriptor* descriptor);
+    struct ShaderModuleParseResult {
+        ShaderModuleParseResult();
+        ~ShaderModuleParseResult();
+        ShaderModuleParseResult(ShaderModuleParseResult&& rhs);
+        ShaderModuleParseResult& operator=(ShaderModuleParseResult&& rhs);
+#ifdef DAWN_ENABLE_WGSL
+
+        std::unique_ptr<tint::Context> tintContext;
+        std::unique_ptr<tint::ast::Module> tintModule;
+#endif
+        std::vector<uint32_t> spirv;
+    };
+
+    ResultOrError<ShaderModuleParseResult> ValidateShaderModuleDescriptor(
+        DeviceBase* device,
+        const ShaderModuleDescriptor* descriptor);
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                        const EntryPointMetadata& entryPoint,
                                                        const PipelineLayoutBase* layout);
@@ -117,13 +139,21 @@ namespace dawn_native {
 
 #ifdef DAWN_ENABLE_WGSL
         ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
+            const std::vector<uint32_t>& spirv,
+            const VertexStateDescriptor& vertexState,
+            const std::string& entryPoint,
+            uint32_t pullingBufferBindingSet) const;
+
+        ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
+            tint::Context* context,
+            tint::ast::Module&& module,
             const VertexStateDescriptor& vertexState,
             const std::string& entryPoint,
             uint32_t pullingBufferBindingSet) const;
 #endif
 
       protected:
-        MaybeError InitializeBase();
+        MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);

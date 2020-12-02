@@ -564,7 +564,8 @@ namespace dawn_native {
     }
 
     ResultOrError<ShaderModuleBase*> DeviceBase::GetOrCreateShaderModule(
-        const ShaderModuleDescriptor* descriptor) {
+        const ShaderModuleDescriptor* descriptor,
+        ShaderModuleParseResult* parseResult) {
         ShaderModuleBase blueprint(this, descriptor);
 
         auto iter = mCaches->shaderModules.find(&blueprint);
@@ -574,7 +575,18 @@ namespace dawn_native {
         }
 
         ShaderModuleBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor));
+        if (parseResult == nullptr) {
+            // We skip the parse on creation if validation isn't enabled which let's us quickly
+            // lookup in the cache without validating and parsing. We need the parsed module now, so
+            // call validate. Most of |ValidateShaderModuleDescriptor| is parsing, but we can
+            // consider splitting it if additional valdiation is added.
+            ASSERT(!IsValidationEnabled());
+            ShaderModuleParseResult localParseResult =
+                ValidateShaderModuleDescriptor(this, descriptor).AcquireSuccess();
+            DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor, &localParseResult));
+        } else {
+            DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor, parseResult));
+        }
         backendObj->SetIsCachedReference();
         mCaches->shaderModules.insert(backendObj);
         return backendObj;
@@ -1037,10 +1049,15 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateShaderModuleInternal(ShaderModuleBase** result,
                                                       const ShaderModuleDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
+
+        ShaderModuleParseResult parseResult = {};
+        ShaderModuleParseResult* parseResultPtr = nullptr;
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateShaderModuleDescriptor(this, descriptor));
+            DAWN_TRY_ASSIGN(parseResult, ValidateShaderModuleDescriptor(this, descriptor));
+            parseResultPtr = &parseResult;
         }
-        DAWN_TRY_ASSIGN(*result, GetOrCreateShaderModule(descriptor));
+
+        DAWN_TRY_ASSIGN(*result, GetOrCreateShaderModule(descriptor, parseResultPtr));
         return {};
     }
 
