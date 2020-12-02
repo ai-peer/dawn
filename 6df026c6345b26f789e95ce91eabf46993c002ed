@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "272ccd21_9aad2c49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-12-02T20:22:23Z",
+      "side": 1,
+      "message": "https://chromium-review.googlesource.com/c/chromium/tools/build/+/2570095 does this, it can be landed after this CL",
+      "parentUuid": "8367f307_0bf22889",
+      "revId": "6df026c6345b26f789e95ce91eabf46993c002ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79eb49bc_eecb914d",
