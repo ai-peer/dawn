@@ -16,6 +16,40 @@
       "message": "err.. I\u0027m sorry for the multiple iterations; I should have seen this the first time reviewing. ValidationTest.h also has DAWN_SKIP_TEST_IF which we can use instead.",
       "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07f9867_2bb0912c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T20:20:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c4dd55_697b0c3a",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T20:20:17Z",
+      "side": 1,
+      "message": "u-u-nit: stdlib includes go after the dawn includes.",
+      "revId": "968fe9865c12585faffe5d5208dee9208e5f95b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
