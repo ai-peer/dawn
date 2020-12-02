@@ -47,80 +47,6 @@ namespace dawn_native {
         }
 
 #ifdef DAWN_ENABLE_WGSL
-        tint::transform::VertexFormat ToTintVertexFormat(wgpu::VertexFormat format) {
-            switch (format) {
-                case wgpu::VertexFormat::UChar2:
-                    return tint::transform::VertexFormat::kVec2U8;
-                case wgpu::VertexFormat::UChar4:
-                    return tint::transform::VertexFormat::kVec4U8;
-                case wgpu::VertexFormat::Char2:
-                    return tint::transform::VertexFormat::kVec2I8;
-                case wgpu::VertexFormat::Char4:
-                    return tint::transform::VertexFormat::kVec4I8;
-                case wgpu::VertexFormat::UChar2Norm:
-                    return tint::transform::VertexFormat::kVec2U8Norm;
-                case wgpu::VertexFormat::UChar4Norm:
-                    return tint::transform::VertexFormat::kVec4U8Norm;
-                case wgpu::VertexFormat::Char2Norm:
-                    return tint::transform::VertexFormat::kVec2I8Norm;
-                case wgpu::VertexFormat::Char4Norm:
-                    return tint::transform::VertexFormat::kVec4I8Norm;
-                case wgpu::VertexFormat::UShort2:
-                    return tint::transform::VertexFormat::kVec2U16;
-                case wgpu::VertexFormat::UShort4:
-                    return tint::transform::VertexFormat::kVec4U16;
-                case wgpu::VertexFormat::Short2:
-                    return tint::transform::VertexFormat::kVec2I16;
-                case wgpu::VertexFormat::Short4:
-                    return tint::transform::VertexFormat::kVec4I16;
-                case wgpu::VertexFormat::UShort2Norm:
-                    return tint::transform::VertexFormat::kVec2U16Norm;
-                case wgpu::VertexFormat::UShort4Norm:
-                    return tint::transform::VertexFormat::kVec4U16Norm;
-                case wgpu::VertexFormat::Short2Norm:
-                    return tint::transform::VertexFormat::kVec2I16Norm;
-                case wgpu::VertexFormat::Short4Norm:
-                    return tint::transform::VertexFormat::kVec4I16Norm;
-                case wgpu::VertexFormat::Half2:
-                    return tint::transform::VertexFormat::kVec2F16;
-                case wgpu::VertexFormat::Half4:
-                    return tint::transform::VertexFormat::kVec4F16;
-                case wgpu::VertexFormat::Float:
-                    return tint::transform::VertexFormat::kF32;
-                case wgpu::VertexFormat::Float2:
-                    return tint::transform::VertexFormat::kVec2F32;
-                case wgpu::VertexFormat::Float3:
-                    return tint::transform::VertexFormat::kVec3F32;
-                case wgpu::VertexFormat::Float4:
-                    return tint::transform::VertexFormat::kVec4F32;
-                case wgpu::VertexFormat::UInt:
-                    return tint::transform::VertexFormat::kU32;
-                case wgpu::VertexFormat::UInt2:
-                    return tint::transform::VertexFormat::kVec2U32;
-                case wgpu::VertexFormat::UInt3:
-                    return tint::transform::VertexFormat::kVec3U32;
-                case wgpu::VertexFormat::UInt4:
-                    return tint::transform::VertexFormat::kVec4U32;
-                case wgpu::VertexFormat::Int:
-                    return tint::transform::VertexFormat::kI32;
-                case wgpu::VertexFormat::Int2:
-                    return tint::transform::VertexFormat::kVec2I32;
-                case wgpu::VertexFormat::Int3:
-                    return tint::transform::VertexFormat::kVec3I32;
-                case wgpu::VertexFormat::Int4:
-                    return tint::transform::VertexFormat::kVec4I32;
-            }
-        }
-
-        tint::transform::InputStepMode ToTintInputStepMode(wgpu::InputStepMode mode) {
-            switch (mode) {
-                case wgpu::InputStepMode::Vertex:
-                    return tint::transform::InputStepMode::kVertex;
-                case wgpu::InputStepMode::Instance:
-                    return tint::transform::InputStepMode::kInstance;
-            }
-        }
-
         SingleShaderStage PipelineStateToShaderStage(tint::ast::PipelineStage stage) {
             switch (stage) {
                 case tint::ast::PipelineStage::kVertex:
@@ -136,42 +62,6 @@ namespace dawn_native {
 
 #endif  // DAWN_ENABLE_WGSL
 
-        MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
-            spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
-
-            std::ostringstream errorStream;
-            errorStream << "SPIRV Validation failure:" << std::endl;
-
-            spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
-                                                         const spv_position_t& position,
-                                                         const char* message) {
-                switch (level) {
-                    case SPV_MSG_FATAL:
-                    case SPV_MSG_INTERNAL_ERROR:
-                    case SPV_MSG_ERROR:
-                        errorStream << "error: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_WARNING:
-                        errorStream << "warning: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_INFO:
-                        errorStream << "info: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    default:
-                        break;
-                }
-            });
-
-            if (!spirvTools.Validate(code, codeSize)) {
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            return {};
-        }
-
 #ifdef DAWN_ENABLE_WGSL
         ResultOrError<tint::ast::Module> ParseWGSL(tint::Context* context, const char* wgsl) {
             std::ostringstream errorStream;
@@ -179,25 +69,6 @@ namespace dawn_native {
 
             tint::Source::File file("", wgsl);
             tint::reader::wgsl::Parser parser(context, &file);
-            if (!parser.Parse()) {
-                errorStream << "Parser: " << parser.error() << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            tint::ast::Module module = parser.module();
-            if (!module.IsValid()) {
-                errorStream << "Invalid module generated..." << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-            return std::move(module);
-        }
-
-        ResultOrError<tint::ast::Module> ParseSPIRV(tint::Context* context,
-                                                    const std::vector<uint32_t>& spirv) {
-            std::ostringstream errorStream;
-            errorStream << "Tint SPIRV reader failure:" << std::endl;
-
-            tint::reader::spirv::Parser parser(context, spirv);
             if (!parser.Parse()) {
                 errorStream << "Parser: " << parser.error() << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
@@ -783,6 +654,61 @@ namespace dawn_native {
     ShaderModuleParseResult& ShaderModuleParseResult::operator=(ShaderModuleParseResult&& rhs) =
         default;
 
+    MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
+        spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
+
+        std::ostringstream errorStream;
+        errorStream << "SPIRV Validation failure:" << std::endl;
+
+        spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
+                                                     const spv_position_t& position,
+                                                     const char* message) {
+            switch (level) {
+                case SPV_MSG_FATAL:
+                case SPV_MSG_INTERNAL_ERROR:
+                case SPV_MSG_ERROR:
+                    errorStream << "error: line " << position.index << ": " << message << std::endl;
+                    break;
+                case SPV_MSG_WARNING:
+                    errorStream << "warning: line " << position.index << ": " << message
+                                << std::endl;
+                    break;
+                case SPV_MSG_INFO:
+                    errorStream << "info: line " << position.index << ": " << message << std::endl;
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        if (!spirvTools.Validate(code, codeSize)) {
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        return {};
+    }
+
+#ifdef DAWN_ENABLE_WGSL
+    ResultOrError<tint::ast::Module> ParseSPIRV(tint::Context* context,
+                                                const std::vector<uint32_t>& spirv) {
+        std::ostringstream errorStream;
+        errorStream << "Tint SPIRV reader failure:" << std::endl;
+
+        tint::reader::spirv::Parser parser(context, spirv);
+        if (!parser.Parse()) {
+            errorStream << "Parser: " << parser.error() << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
+        tint::ast::Module module = parser.module();
+        if (!module.IsValid()) {
+            errorStream << "Invalid module generated..." << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+        return std::move(module);
+    }
+#endif
+
     ResultOrError<ShaderModuleParseResult> ValidateShaderModuleDescriptor(
         DeviceBase* device,
         const ShaderModuleDescriptor* descriptor) {
@@ -968,94 +894,6 @@ namespace dawn_native {
         ASSERT(!GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator));
         return mSpirv;
     }
-
-#ifdef DAWN_ENABLE_WGSL
-    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
-        const std::vector<uint32_t>& spirv,
-        const VertexStateDescriptor& vertexState,
-        const std::string& entryPoint,
-        uint32_t pullingBufferBindingSet) const {
-        tint::Context context;
-        tint::ast::Module module;
-        DAWN_TRY_ASSIGN(module, ParseSPIRV(&context, spirv));
-
-        return GeneratePullingSpirv(&context, std::move(module), vertexState, entryPoint,
-                                    pullingBufferBindingSet);
-    }
-
-    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
-        tint::Context* context,
-        tint::ast::Module&& module,
-        const VertexStateDescriptor& vertexState,
-        const std::string& entryPoint,
-        uint32_t pullingBufferBindingSet) const {
-        std::ostringstream errorStream;
-        errorStream << "Tint vertex pulling failure:" << std::endl;
-
-        {
-            tint::TypeDeterminer typeDeterminer(context, &module);
-            if (!typeDeterminer.Determine()) {
-                errorStream << "Type Determination: " << typeDeterminer.error();
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-        }
-
-        tint::transform::Manager transformManager(context, &module);
-        {
-            auto transform =
-                std::make_unique<tint::transform::VertexPullingTransform>(context, &module);
-            auto state = std::make_unique<tint::transform::VertexStateDescriptor>();
-            for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
-                auto& vertexBuffer = vertexState.vertexBuffers[i];
-                tint::transform::VertexBufferLayoutDescriptor layout;
-                layout.array_stride = vertexBuffer.arrayStride;
-                layout.step_mode = ToTintInputStepMode(vertexBuffer.stepMode);
-
-                for (uint32_t j = 0; j < vertexBuffer.attributeCount; ++j) {
-                    auto& attribute = vertexBuffer.attributes[j];
-                    tint::transform::VertexAttributeDescriptor attr;
-                    attr.format = ToTintVertexFormat(attribute.format);
-                    attr.offset = attribute.offset;
-                    attr.shader_location = attribute.shaderLocation;
-
-                    layout.attributes.push_back(std::move(attr));
-                }
-
-                state->vertex_buffers.push_back(std::move(layout));
-            }
-            transform->SetVertexState(std::move(state));
-            transform->SetEntryPoint(entryPoint);
-            transform->SetPullingBufferBindingSet(pullingBufferBindingSet);
-            transformManager.append(std::move(transform));
-        }
-        transformManager.append(
-            std::make_unique<tint::transform::BoundArrayAccessorsTransform>(context, &module));
-
-        if (!transformManager.Run()) {
-            errorStream << "Vertex pulling + bound array acccessors tranforms: "
-                        << transformManager.error();
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        {
-            tint::TypeDeterminer typeDeterminer(context, &module);
-            if (!typeDeterminer.Determine()) {
-                errorStream << "Type Determination: " << typeDeterminer.error();
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-        }
-
-        tint::writer::spirv::Generator generator(std::move(module));
-        if (!generator.Generate()) {
-            errorStream << "Generator: " << generator.error() << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
-
-        std::vector<uint32_t> spirv = generator.result();
-        DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
-        return std::move(spirv);
-    }
-#endif
 
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {
 #ifdef DAWN_ENABLE_WGSL
