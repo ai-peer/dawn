@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "644bd8878992ca85eae0c7d67600050a4b3753a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93c443f_02b29984",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T17:48:16Z",
+      "side": 1,
+      "message": "Also, feel free to set Auto-Submit if you intend to just land this after approval",
+      "revId": "644bd8878992ca85eae0c7d67600050a4b3753a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
