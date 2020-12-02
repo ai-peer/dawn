@@ -48,15 +48,54 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
         DAWN_TRY(InitializeBase(parseResult));
-        const std::vector<uint32_t>& spirv = GetSpirv();
+
+        std::vector<uint32_t> spirv;
+        const std::vector<uint32_t>* spirvPtr;
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            tint::Context* context = parseResult->tintContext.get();
+            tint::ast::Module module = std::move(*parseResult->tintModule.release());
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V writer failure:" << std::endl;
+
+            tint::transform::Manager transformManager(context, &module);
+            transformManager.append(
+                std::make_unique<tint::transform::BoundArrayAccessorsTransform>(context, &module));
+
+            if (!transformManager.Run()) {
+                errorStream << "Bound array acccessors tranform: " << transformManager.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::TypeDeterminer typeDeterminer(context, &module);
+            if (!typeDeterminer.Determine()) {
+                errorStream << "Type Determination: " << typeDeterminer.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::writer::spirv::Generator generator(std::move(module));
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            spirv = generator.result();
+            spirvPtr = &spirv;
+#else
+            UNREACHABLE();
+#endif
+        } else {
+            spirvPtr = &GetSpirv();
+        }
 
         VkShaderModuleCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
         std::vector<uint32_t> vulkanSource;
-        createInfo.codeSize = spirv.size() * sizeof(uint32_t);
-        createInfo.pCode = spirv.data();
+        createInfo.codeSize = spirvPtr->size() * sizeof(uint32_t);
+        createInfo.pCode = spirvPtr->data();
 
         Device* device = ToBackend(GetDevice());
         return CheckVkSuccess(
