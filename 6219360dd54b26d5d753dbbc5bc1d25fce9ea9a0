@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5548b60f_ede5c295",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T22:50:55Z",
+      "side": 1,
+      "message": "Seems like a good idea. we could probably even make the cache a tuple so we can do: objCache \u003d std::get\u003cObj\u003e(caches) and avoid passing the cache explicitly. I might also reorder template args in case we have an Impl that takes more than one argument (I have a CL that does thaT). So have a varadic thing at the end.\n\nalso, protected/private might give you a hard time. the helper might need to be a friend struct forward declared in the header or something.\n\nLet\u0027s be sure though to keep the template instantiation only in Device.cpp so we don\u0027t add too much bloat.",
+      "parentUuid": "436bcb1d_22807601",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "100d7a18_2cdd7acb",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 15

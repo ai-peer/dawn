@@ -351,6 +351,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10e84fdc_5eceb8e1",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T22:50:55Z",
+      "side": 1,
+      "message": "Okay, that\u0027s fine. Let\u0027s call the template argument just T* then, and make it a static_assert instead of a runtime ASSERT.",
+      "parentUuid": "6ffff98c_4133f752",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52ecbaf4_4716d1e8",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 14
