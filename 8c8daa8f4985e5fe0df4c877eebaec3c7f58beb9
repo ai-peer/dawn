@@ -16,6 +16,23 @@
       "message": "Please take another look since there is some dawn.json changes! Thanks!",
       "revId": "8c8daa8f4985e5fe0df4c877eebaec3c7f58beb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0994cfa9_73bf35a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T08:11:49Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "8c8daa8f4985e5fe0df4c877eebaec3c7f58beb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
