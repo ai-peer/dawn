@@ -70,6 +70,24 @@
       "parentUuid": "0a8f0bad_63874e2e",
       "revId": "f2a35bbdcd06365c29377702ddbdc9e394ec9861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b59288_6cc60b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T01:51:45Z",
+      "side": 1,
+      "message": "Yep, I trust that you did that, but it\u0027s good to have a test in case test changes or code changes regress something. Thanks!",
+      "parentUuid": "83054dce_23c41dbc",
+      "revId": "f2a35bbdcd06365c29377702ddbdc9e394ec9861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
