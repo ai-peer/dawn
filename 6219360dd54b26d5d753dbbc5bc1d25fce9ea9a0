@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95572b9b_79f06df9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T15:24:28Z",
+      "side": 1,
+      "message": "LGTM too with some comments.",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26038500_64803a04",
@@ -54,6 +71,64 @@
         "endLine": 36,
         "endChar": 5
       },
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c0a560d_267644a7",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T15:24:28Z",
+      "side": 1,
+      "message": "nit: Then maybe FingerprintRecorder should be ObejctContentHasher or something?",
+      "parentUuid": "26038500_64803a04",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 5
+      },
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bb6563_47e61fa8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T15:24:28Z",
+      "side": 1,
+      "message": "Do we see a way to factor all this very similar looking code to avoid missing a SetKey somewhere when we add more content-less objects? (or don\u0027t forget to update one of the functions when we modify the logic)?",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100d7a18_2cdd7acb",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T15:24:28Z",
+      "side": 1,
+      "message": "This object is always only used in a local scope and that ends with `return GetKey()`, it seems that it\u0027s just extending HashCombine and Hash (the only issue is that we want to use GetKey for pointers I guess?)",
       "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
