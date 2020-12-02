@@ -23,6 +23,14 @@
 
 #include <spirv_glsl.hpp>
 
+#ifdef DAWN_ENABLE_WGSL
+// Tint include must be after spirv_glsl.hpp, because spirv-cross has its own
+// version of spirv_headers. We also need to undef SPV_REVISION because SPIRV-Cross
+// is at 3 while spirv-headers is at 4.
+#    undef SPV_REVISION
+#    include <tint/tint.h>
+#endif  // DAWN_ENABLE_WGSL
+
 #include <sstream>
 
 namespace dawn_native { namespace opengl {
@@ -58,12 +66,51 @@ namespace dawn_native { namespace opengl {
                                                       const ShaderModuleDescriptor* descriptor,
                                                       ShaderModuleParseResult* parseResult) {
         Ref<ShaderModule> module = AcquireRef(new ShaderModule(device, descriptor));
-        DAWN_TRY(module->InitializeBase(parseResult));
+        DAWN_TRY(module->Initialize(parseResult));
         return module.Detach();
     }
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
         : ShaderModuleBase(device, descriptor) {
+    }
+
+    MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
+        DAWN_TRY(InitializeBase(parseResult));
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+#ifdef DAWN_ENABLE_WGSL
+            tint::Context* context = parseResult->tintContext.get();
+            tint::ast::Module module = std::move(*parseResult->tintModule.release());
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V (for GLSL) writer failure:" << std::endl;
+
+            tint::transform::Manager transformManager(context, &module);
+            transformManager.append(
+                std::make_unique<tint::transform::BoundArrayAccessorsTransform>(context, &module));
+
+            if (!transformManager.Run()) {
+                errorStream << "Bound array acccessors tranform: " << transformManager.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::TypeDeterminer typeDeterminer(context, &module);
+            if (!typeDeterminer.Determine()) {
+                errorStream << "Type Determination: " << typeDeterminer.error();
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            tint::writer::spirv::Generator generator(std::move(module));
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            mSpirv = generator.result();
+#else
+            UNREACHABLE();
+#endif
+        }
+        return {};
     }
 
     std::string ShaderModule::TranslateToGLSL(const char* entryPointName,
@@ -89,7 +136,8 @@ namespace dawn_native { namespace opengl {
         options.es = version.IsES();
         options.version = version.GetMajor() * 100 + version.GetMinor() * 10;
 
-        spirv_cross::CompilerGLSL compiler(GetSpirv());
+        spirv_cross::CompilerGLSL compiler(
+            GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator) ? mSpirv : GetSpirv());
         compiler.set_common_options(options);
         compiler.set_entry_point(entryPointName, ShaderStageToExecutionModel(stage));
 

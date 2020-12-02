@@ -1078,7 +1078,6 @@ namespace dawn_native {
             DAWN_TRY_ASSIGN(mSpirv, RunRobustBufferAccessPass(mSpirv));
         }
 
-
         // We still need the spirv for reflection. Remove this when we use the Tint inspector
         // completely.
         std::vector<uint32_t>* spirvPtr = &mSpirv;
