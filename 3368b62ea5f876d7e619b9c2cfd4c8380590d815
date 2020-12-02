@@ -16,6 +16,74 @@
       "message": "still LGTM",
       "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f1ec27_1b6216c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T09:39:29Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb75cc7_fa86184e",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T09:39:29Z",
+      "side": 1,
+      "message": "nit: Can we use empty comments to split each vertex on its own line? It would make the test easier to read. Also the data could be put in a constexpr float kTriangleTestVertices[24] constant shared between tests.\n\nDitto for line test cases.",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86ab63f_3a5237a5",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T09:39:29Z",
+      "side": 1,
+      "message": "u-nit: this drawing has y\u003d-1 at the bottom while the drawing for the triangles is in the other direction. Can we make them consistent?",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3381dd_5b283d4b",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-02T09:39:29Z",
+      "side": 1,
+      "message": "nit: explain the last 0xFFFF is for padding to an alignment of 4 bytes but isn\u0027t used.",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
