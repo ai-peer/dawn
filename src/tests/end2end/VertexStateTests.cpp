@@ -603,6 +603,7 @@ DAWN_INSTANTIATE_TEST(VertexStateTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
+                      OpenGLESBackend(),
                       VulkanBackend());
 
 // TODO for the input state:
@@ -661,4 +662,5 @@ DAWN_INSTANTIATE_TEST(OptionalVertexStateTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
+                      OpenGLESBackend(),
                       VulkanBackend());
