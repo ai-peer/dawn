@@ -128,6 +128,30 @@
       },
       "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51bc57d_a077cce7",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T19:06:58Z",
+      "side": 1,
+      "message": "I don\u0027t remember why it was added. @brandon added it in https://dawn-review.googlesource.com/c/dawn/+/13082, do you know?",
+      "parentUuid": "c91d866e_4ce8201c",
+      "range": {
+        "startLine": 1349,
+        "startChar": 37,
+        "endLine": 1349,
+        "endChar": 58
+      },
+      "revId": "2553119689dca4647b15e3a341c2f0c9606bb546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
