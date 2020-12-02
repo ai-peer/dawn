@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a621c4d_7e56e10c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T16:28:41Z",
+      "side": 1,
+      "message": "WDYT? It\u0027s not so pretty since we have this 2x2 feature matrix of UseTintGenerator/UseTintInspector on/off ",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
