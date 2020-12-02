@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593dcce4_571866f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-12-02T21:45:42Z",
+      "side": 1,
+      "message": "Apparently that win-dawn-rel run was on a canary LUCI instance. There is a note in the log that if it fails unexpectedly (like it did) to just try it again.",
+      "revId": "350382c58f47d5b8f5a0128dc9073ef323b7451c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
