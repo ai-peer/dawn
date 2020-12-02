@@ -16,6 +16,40 @@
       "message": "PTAL. Thanks!",
       "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0fa93ea_ce176c35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T17:46:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def38922_c32f6065",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-02T17:46:45Z",
+      "side": 1,
+      "message": "nit: would prefer explicit casts here",
+      "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
