@@ -14,6 +14,8 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include <algorithm>
+
 #include "common/Assert.h"
 #include "dawn/dawn_proc.h"
 #include "dawn/webgpu.h"
@@ -95,6 +97,13 @@ bool ValidationTest::HasWGSL() const {
 #else
     return false;
 #endif
+}
+
+bool ValidationTest::HasToggleEnabled(const char* toggle) const {
+    auto toggles = dawn_native::GetTogglesUsed(device.Get());
+    return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
+               return strcmp(toggle, name) == 0;
+           }) != toggles.end();
 }
 
 wgpu::Device ValidationTest::CreateTestDevice() {
