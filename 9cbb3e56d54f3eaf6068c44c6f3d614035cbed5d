@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7450b4_5ae9627a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-02T17:36:47Z",
+      "side": 1,
+      "message": "Just FYI: this is everything needed to get all remaining end2end tests running or explicitly skipped on GL ES.\n\nException: I didn\u0027t bother skipping the TextureZeroInit tests since only 3 of them pass (the NonRenderable ones).\n\nI\u0027ll put some more interesting bits up for review separately.",
+      "revId": "9cbb3e56d54f3eaf6068c44c6f3d614035cbed5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
