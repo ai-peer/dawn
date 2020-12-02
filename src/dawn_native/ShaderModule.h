@@ -39,6 +39,7 @@ namespace tint {
 
     namespace transform {
         class Manager;
+        class VertexPulling;
     }  // namespace transform
 
 }  // namespace tint
@@ -79,6 +80,11 @@ namespace dawn_native {
 #ifdef DAWN_ENABLE_WGSL
     ResultOrError<tint::ast::Module> RunTransforms(tint::transform::Manager* manager,
                                                    tint::ast::Module* module);
+
+    std::unique_ptr<tint::transform::VertexPulling> MakeVertexPullingTransform(
+        const VertexStateDescriptor& vertexState,
+        const std::string& entryPoint,
+        uint32_t pullingBufferBindingSet);
 #endif
 
     // Contains all the reflection data for a valid (ShaderModule, entryPoint, stage). They are
