@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a64a562_64e3f49b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:18:53Z",
+      "side": 1,
+      "message": "Why was this needed? IIRC from the CL that added it we thought we could reuse the split between layers.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c3351c_acdd54ad",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:18:53Z",
+      "side": 1,
+      "message": "The comment is misleading, it doesn\u0027t create an empty vector.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87b56e5_7cf9ccbd",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:18:53Z",
+      "side": 1,
+      "message": "There should be a lazy clear only if we don\u0027t copy to the full mip.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ecde48_dc859486",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:18:53Z",
+      "side": 1,
+      "message": "This is supposed to make the copy happen for only half the texture but it isn\u0027t forwarded to InitializeDataInCompressedTextureAndExpectLazyClear??",
+      "range": {
+        "startLine": 1718,
+        "startChar": 13,
+        "endLine": 1718,
+        "endChar": 25
+      },
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bb7305_7f7fcd62",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:18:53Z",
+      "side": 1,
+      "message": "Ideally we should be able to just do device.CreateSampler() but that\u0027s not implemented in Dawn at the moment. I opened https://bugs.chromium.org/p/dawn/issues/detail?id\u003d599 for it.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
