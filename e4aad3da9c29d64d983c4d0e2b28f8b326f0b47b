@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ca1a7e_af559e6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T20:27:03Z",
+      "side": 1,
+      "message": "ok, let\u0027s just land this so we can switch over to the new API",
+      "revId": "e4aad3da9c29d64d983c4d0e2b28f8b326f0b47b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
