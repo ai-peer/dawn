@@ -236,6 +236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76dc8806_a8eda8a8",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-03T15:28:07Z",
+      "side": 1,
+      "message": "After remove the subtraction, accuracy loss rises to ~0.17%，because the original timestamp value is more bigger than delta, for some critical value, this simulation may cause such a accuracy loss, it gets same results when running this simulation on CPU. Considering that the user will get the timestamp delta through subtraction, and the adjacent timestamps will have a similar accuracy loss, so it will mitigate the loss in timestamp  delta.",
+      "parentUuid": "d41625c4_e9922a51",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce4277ba_aff67eb2",
