@@ -318,4 +318,5 @@ DAWN_INSTANTIATE_TEST(IndexFormatTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
+                      OpenGLESBackend(),
                       VulkanBackend());
