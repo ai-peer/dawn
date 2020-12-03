@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1306e33_808a4834",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:54Z",
+      "side": 1,
+      "message": "LGTM, it\u0027s great that our test caught this issue!",
+      "revId": "36166c45342b24baf5846a1ed5eecc9c2f7ae103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f632f226_c73d302d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:54Z",
+      "side": 1,
+      "message": "Wooops :)",
+      "revId": "36166c45342b24baf5846a1ed5eecc9c2f7ae103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
