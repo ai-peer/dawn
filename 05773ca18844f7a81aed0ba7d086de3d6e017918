@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18dca876_a058d0cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:21:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "05773ca18844f7a81aed0ba7d086de3d6e017918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bafb812_8667852b",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:21:10Z",
+      "side": 1,
+      "message": "nit: Maybe we could store the result in a variable and then ASSERT?",
+      "revId": "05773ca18844f7a81aed0ba7d086de3d6e017918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
