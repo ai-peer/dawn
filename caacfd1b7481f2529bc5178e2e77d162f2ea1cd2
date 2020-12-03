@@ -52,6 +52,24 @@
       "parentUuid": "70647b5e_6f8d5e23",
       "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686d68f3_b1838b40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T21:52:03Z",
+      "side": 1,
+      "message": "Brandon/Bryan/Rafael, can you help here? I think we should delegate diagnosing and reproducing D3D12 issues to you all as you have better access to hardware, drivers, and debugging tools.\n\n(like PIX isn\u0027t completely allowed on my corp machine)",
+      "parentUuid": "ddc9cf26_fe16a86b",
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
