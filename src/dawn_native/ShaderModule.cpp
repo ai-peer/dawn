@@ -214,6 +214,15 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
 
+            tint::transform::Manager transformManager(&context, &module);
+            transformManager.append(
+                std::make_unique<tint::transform::AddVertexBuiltinsTransform>(&context, &module));
+            if (!transformManager.Run()) {
+                errorStream << "AddVertexBuiltinsTransform: " << transformManager.error()
+                            << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
             tint::TypeDeterminer type_determiner(&context, &module);
             if (!type_determiner.Determine()) {
                 errorStream << "Type Determination: " << type_determiner.error();
@@ -287,8 +296,10 @@ namespace dawn_native {
                 transformManager.append(std::move(transform));
             }
 
+            transformManager.append(
+                std::make_unique<tint::transform::AddVertexBuiltinsTransform>(&context, &module));
             if (!transformManager.Run()) {
-                errorStream << "Vertex pulling transform: " << transformManager.error();
+                errorStream << "Transform: " << transformManager.error();
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
 
@@ -689,6 +700,9 @@ namespace dawn_native {
                 // Without a location qualifier on vertex outputs, spirv_cross::CompilerMSL gives
                 // them all the location 0, causing a compile error.
                 for (const auto& attrib : resources.stage_outputs) {
+                    // auto bitset = compiler.get_decoration_bitset(attrib.id);
+                    // if (!(bitset.get(spv::DecorationLocation) ||
+                    //      bitset.get(spv::DecorationBuiltIn))) {
                     if (!compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation)) {
                         return DAWN_VALIDATION_ERROR("Need location qualifier on vertex output");
                     }
