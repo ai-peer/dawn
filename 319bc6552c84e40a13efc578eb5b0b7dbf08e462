@@ -121,6 +121,29 @@
       "parentUuid": "96f69d82_70d4ea57",
       "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a13116_a78f8b5c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T00:31:58Z",
+      "side": 1,
+      "message": "this should be |layer|, not 0. that\u0027s probably the cause of the validation failures\n\nideally we should have a test that catches this",
+      "range": {
+        "startLine": 1047,
+        "startChar": 48,
+        "endLine": 1047,
+        "endChar": 49
+      },
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
