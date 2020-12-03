@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5fe98d2_62a0f877",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "Sorry I can move this back out if it\u0027s unnecessary. I was just trying to stay consistent with Vulkan since for texture copy origin we needed to use the layer there, it confused me as I was basing off Vulkan\u0027s impl with D3D12. Should the texture offset not be based on the current array layer we are trying to clear?",
+      "parentUuid": "6a64a562_64e3f49b",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6c3351c_acdd54ad",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2020-12-03T09:18:53Z",
       "side": 1,
       "message": "The comment is misleading, it doesn\u0027t create an empty vector.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472056b5_b2b5934f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1687,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "My bad, this was a stray comment, Done.",
+      "parentUuid": "c6c3351c_acdd54ad",
       "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2020-12-03T09:18:53Z",
       "side": 1,
       "message": "There should be a lazy clear only if we don\u0027t copy to the full mip.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a658ee_8be08698",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "That is checked by having lazyClearCount \u003d 0, we do this in other tests too",
+      "parentUuid": "d87b56e5_7cf9ccbd",
       "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10505349_6d5f5471",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "InitializeDataInCompressedTextureAndExpectLazyClear should initialize based off the the copyExtentSize which is set to half the texture. This bool was more for us to check the other half of the render target to see it was initialized to black.",
+      "parentUuid": "80ecde48_dc859486",
+      "range": {
+        "startLine": 1718,
+        "startChar": 13,
+        "endLine": 1718,
+        "endChar": 25
+      },
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66bb7305_7f7fcd62",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 6
@@ -88,6 +166,24 @@
       "writtenOn": "2020-12-03T09:18:53Z",
       "side": 1,
       "message": "Ideally we should be able to just do device.CreateSampler() but that\u0027s not implemented in Dawn at the moment. I opened https://bugs.chromium.org/p/dawn/issues/detail?id\u003d599 for it.",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48639a56_7943dd1f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66bb7305_7f7fcd62",
       "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

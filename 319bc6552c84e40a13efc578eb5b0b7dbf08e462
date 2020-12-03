@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87214d08_3a5cf336",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "Thanks, I was able to repro with --enable-backend-validation and temp removing the skip test line",
+      "parentUuid": "3d809bfa_8a0ebdc3",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30c51373_423daaa5",
@@ -136,6 +154,30 @@
       "writtenOn": "2020-12-03T00:31:58Z",
       "side": 1,
       "message": "this should be |layer|, not 0. that\u0027s probably the cause of the validation failures\n\nideally we should have a test that catches this",
+      "range": {
+        "startLine": 1047,
+        "startChar": 48,
+        "endLine": 1047,
+        "endChar": 49
+      },
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71aa14f_6ad1008a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a13116_a78f8b5c",
       "range": {
         "startLine": 1047,
         "startChar": 48,

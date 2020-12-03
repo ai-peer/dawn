@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef29d79_dc501cc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T20:31:42Z",
+      "side": 1,
+      "message": "any tips on how to repro win failure for CompressedTextureBCFormatTest.CopyIntoNonZeroArrayLayer/D3D12_Intel_R_HD_Graphics_630 is much appreciated. Thanks!",
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
