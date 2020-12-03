@@ -16,6 +16,24 @@
       "message": "any tips on how to repro win failure for CompressedTextureBCFormatTest.CopyIntoNonZeroArrayLayer/D3D12_Intel_R_HD_Graphics_630 is much appreciated. Thanks!",
       "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70647b5e_6f8d5e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T21:35:25Z",
+      "side": 1,
+      "message": "that one also looks like a validation error\n\nfrom the d3d12 validation layers:\nD3D12 ERROR: ID3D12CommandList::CopyTextureRegion: The destination region extends past, at least, one of the edges of the destination subresource. When the destination format is BC1_TYPELESS, the source format is BC1_TYPELESS, DstX is 0, DstY is 0, DstZ is 1 and the effective SrcBox width is 8, height is 8, and depth is 1, the operation requires the destination subresource to have 8 width, 8 height, and 2 depth. But the destination subresource only has 8 width, 8 height, and 1 depth. [ RESOURCE_MANIPULATION ERROR #858: COPYTEXTUREREGION_DSTREGIONOUTOFBOUNDS]\n\ndoes it not repro with backend validation on for you?",
+      "parentUuid": "bef29d79_dc501cc8",
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
