@@ -39,6 +39,30 @@
       },
       "revId": "814c153d2a48aa558ae1367329c0675b4259dcca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2f583c_01e23211",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-03T20:17:48Z",
+      "side": 1,
+      "message": "Yes, good spot! Done.",
+      "parentUuid": "3f612dfd_b45f11cf",
+      "range": {
+        "startLine": 232,
+        "startChar": 8,
+        "endLine": 232,
+        "endChar": 9
+      },
+      "revId": "814c153d2a48aa558ae1367329c0675b4259dcca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
