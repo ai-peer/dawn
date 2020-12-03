@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ca15513_e0fecab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T00:10:55Z",
+      "side": 1,
+      "message": "for the current failures, it looks like a transition to COPY_DST is missing",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30c51373_423daaa5",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "Before adding this, I was seeing errors like this https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket.appspot.com/8861987630119504432/+/steps/Run_the_Dawn_end2end_tests_with_SwiftShader/0/stdout saying ../../third_party/swiftshader/src/Vulkan/VkFormat.cpp:1988 ABORT: UNSUPPORTED: format 133.",
       "parentUuid": "30c51373_423daaa5",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f7c1ae_49df5a26",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T00:10:55Z",
+      "side": 1,
+      "message": "nvm I found it:\n\n\"VUID-vkCmdClearColorImage-image-00007\nimage must not have a compressed or depth/stencil format\"\n\nthis is okay then.",
+      "parentUuid": "96f69d82_70d4ea57",
       "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
