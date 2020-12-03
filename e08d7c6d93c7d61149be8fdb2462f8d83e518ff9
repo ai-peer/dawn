@@ -367,6 +367,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ddbca6_6f311048",
+        "filename": "src/dawn_native/FingerprintRecorder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T17:29:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "10e84fdc_5eceb8e1",
+      "revId": "e08d7c6d93c7d61149be8fdb2462f8d83e518ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ecbaf4_4716d1e8",

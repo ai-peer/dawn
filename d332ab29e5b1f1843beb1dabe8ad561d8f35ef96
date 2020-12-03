@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f01476c5_7c1cbd36",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T17:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcf78a57_453ed457",
+      "range": {
+        "startLine": 33,
+        "startChar": 25,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "d332ab29e5b1f1843beb1dabe8ad561d8f35ef96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3624dae3_50e887f8",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-02T22:50:55Z",
       "side": 1,
       "message": "nit: SetContentHash ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "d332ab29e5b1f1843beb1dabe8ad561d8f35ef96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46b16a5_553069a2",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T17:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3624dae3_50e887f8",
       "range": {
         "startLine": 38,
         "startChar": 23,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a0fd33_3f20dc15",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T17:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fc87de_359313cb",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 34
+      },
+      "revId": "d332ab29e5b1f1843beb1dabe8ad561d8f35ef96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51997172_8525b551",
@@ -100,6 +172,30 @@
       "writtenOn": "2020-12-02T22:50:55Z",
       "side": 1,
       "message": "nit: GetContentHash() ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 15,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "d332ab29e5b1f1843beb1dabe8ad561d8f35ef96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "215fea01_60bb416f",
+        "filename": "src/dawn_native/ObjectContentHasher.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T17:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51997172_8525b551",
       "range": {
         "startLine": 35,
         "startChar": 15,
