@@ -73,9 +73,6 @@ namespace utils {
             case wgpu::TextureFormat::RGBA8Snorm:
             case wgpu::TextureFormat::RGBA8Uint:
             case wgpu::TextureFormat::RGBA8Sint:
-            case wgpu::TextureFormat::RG32Uint:
-            case wgpu::TextureFormat::RG32Sint:
-            case wgpu::TextureFormat::RG32Float:
             case wgpu::TextureFormat::RGBA16Uint:
             case wgpu::TextureFormat::RGBA16Sint:
             case wgpu::TextureFormat::RGBA16Float:
@@ -83,6 +80,12 @@ namespace utils {
             case wgpu::TextureFormat::RGBA32Sint:
             case wgpu::TextureFormat::RGBA32Float:
                 return true;
+
+            // FIXME: just for ES testing
+            case wgpu::TextureFormat::RG32Float:
+            case wgpu::TextureFormat::RG32Uint:
+            case wgpu::TextureFormat::RG32Sint:
+                return false;
 
             default:
                 return false;
