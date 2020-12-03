@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0035aac_e1d34524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T03:58:40Z",
+      "side": 1,
+      "message": "Comments addressed. Refactored primitive restart tests into their own class. Additionally I found that the OOB index tests do not work correctly on Intel hardware, so I’ve disabled them. Should be ready to merge if everything still looks okay.\n\n",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

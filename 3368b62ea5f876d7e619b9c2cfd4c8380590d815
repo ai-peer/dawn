@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70da722_117b1d7a",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T03:58:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fb75cc7_fa86184e",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f86ab63f_3a5237a5",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ef339d_fa813f0c",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T03:58:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f86ab63f_3a5237a5",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf3381dd_5b283d4b",
@@ -82,6 +118,24 @@
       "writtenOn": "2020-12-02T09:39:29Z",
       "side": 1,
       "message": "nit: explain the last 0xFFFF is for padding to an alignment of 4 bytes but isn\u0027t used.",
+      "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90647ff2_3777444a",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T03:58:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf3381dd_5b283d4b",
       "revId": "3368b62ea5f876d7e619b9c2cfd4c8380590d815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
