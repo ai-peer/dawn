@@ -70,6 +70,24 @@
       "parentUuid": "ddc9cf26_fe16a86b",
       "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6162a45_bc41a791",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T23:19:58Z",
+      "side": 1,
+      "message": "I\u0027m unable to repro on PS#8, but I can on PS#7. Seems like it was fixed.",
+      "parentUuid": "686d68f3_b1838b40",
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
