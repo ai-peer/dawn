@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cbab794_7f2ca920",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-03T00:19:56Z",
+      "side": 1,
+      "message": "I thought this transition here was sufficient. I\u0027m unable to repro the failure locally so I\u0027m not able to see why this transition is failing",
+      "revId": "319bc6552c84e40a13efc578eb5b0b7dbf08e462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30c51373_423daaa5",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
