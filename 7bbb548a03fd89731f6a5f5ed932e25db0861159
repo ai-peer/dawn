@@ -16,6 +16,114 @@
       "message": "WDYT? It\u0027s not so pretty since we have this 2x2 feature matrix of UseTintGenerator/UseTintInspector on/off ",
       "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5750b732_0871661c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "LGTM, like you said the 2x2 combination is quite unfortunate but hopefully it can be fixed soon :)",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e30a744_d4faf4ca",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "nit: const \u003ctypename\u003e\u0026 or better use a range-based for loop",
+      "range": {
+        "startLine": 1009,
+        "startChar": 16,
+        "endLine": 1009,
+        "endChar": 20
+      },
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d15f2eb_5d0a174c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0bd282_6855f6a5",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "u-u-u-nit: put the newlint before the #ifdef?",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a0941f_68f12c1b",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "Do you think we should add a tint_platform.h to do this for us or just eat the ugliness until we remove spirv-cross?",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d74f0c_dd79e781",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:44:26Z",
+      "side": 1,
+      "message": "nit: not needed in this CL. Same for other backends.",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
