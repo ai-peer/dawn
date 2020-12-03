@@ -254,6 +254,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8cae83_d2a55026",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T15:56:18Z",
+      "side": 1,
+      "message": "The accuracy loss is a bit unfortunate but anything less than a couple percents is fine I think. We can always improve accuracy when there\u0027s some support for double precision.",
+      "parentUuid": "76dc8806_a8eda8a8",
+      "revId": "b16d7e57fafec5dd6cf7a8f60b132b7ed8f053da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce4277ba_aff67eb2",
