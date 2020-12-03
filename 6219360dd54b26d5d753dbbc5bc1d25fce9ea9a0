@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97b29aba_12256cc9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:55:29Z",
+      "side": 1,
+      "message": "Sounds good, but I was only suggesting it as a follow-up if we do it so as to not block this CL.",
+      "parentUuid": "5548b60f_ede5c295",
+      "revId": "6219360dd54b26d5d753dbbc5bc1d25fce9ea9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "100d7a18_2cdd7acb",
         "filename": "src/dawn_native/FingerprintRecorder.h",
         "patchSetId": 15
