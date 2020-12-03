@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b3f286_6814b24b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-03T00:26:54Z",
+      "side": 1,
+      "message": "We might also need https://dawn-review.googlesource.com/c/dawn/+/34761 to get the bot green?",
+      "revId": "182f26f2ce033685fdb105c962e0b7453aaaf8f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
