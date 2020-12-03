@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a62954a_62d99e6e",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T21:43:17Z",
+      "side": 1,
+      "message": "Done. The behavior I see on Intel is as if the 0xFFFFFFFEu is being treated as a primitive restart value. I don\u0027t think this is relevant to Dawn since the robust access will eventually catch this - I\u0027m looking into filing the bug against the driver guys on my end though.",
+      "parentUuid": "b394b92b_b73412c4",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c33b8cc1_69450671",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4358f4f0_3625950a",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T21:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c33b8cc1_69450671",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b402be5_69c9ddfd",
@@ -82,6 +118,24 @@
       "writtenOn": "2020-12-03T08:50:10Z",
       "side": 1,
       "message": "Same comments as for triangle strip.",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c304b5bb_20566a80",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-12-03T21:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b402be5_69c9ddfd",
       "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
