@@ -16,6 +16,74 @@
       "message": "Comments addressed. Refactored primitive restart tests into their own class. Additionally I found that the OOB index tests do not work correctly on Intel hardware, so I’ve disabled them. Should be ready to merge if everything still looks okay.\n\n",
       "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "047cc522_c6c0b689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:10Z",
+      "side": 1,
+      "message": "Still LGTM, feel free to land and address comments as a follow-up.",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b394b92b_b73412c4",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:10Z",
+      "side": 1,
+      "message": "Yet! Can you add a TODO to reenable this once vertex robust vertex access is implemented on all backends? Or is the issue that it returns something other than (0, 0, 0, 1)? If it s the later we could detect it with gl_VertexIndex \u003d 0xFFFEu or 0xFFFFFFFEu in the vertex shader and set gl_Position to a known position.",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c33b8cc1_69450671",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:10Z",
+      "side": 1,
+      "message": "nit: Make the suppression more target to Intel D3D12",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b402be5_69c9ddfd",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T08:50:10Z",
+      "side": 1,
+      "message": "Same comments as for triangle strip.",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
