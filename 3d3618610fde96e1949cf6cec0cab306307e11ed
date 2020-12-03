@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ed9fb6_62a1fa45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T21:58:28Z",
+      "side": 1,
+      "message": "nit: missing BUG",
+      "revId": "3d3618610fde96e1949cf6cec0cab306307e11ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "685efb26_2c9e1ed4",
@@ -14,6 +31,23 @@
       "writtenOn": "2020-12-03T21:56:16Z",
       "side": 1,
       "message": "PTAL. Thanks!\n\nThis is now all straightforward enables/disables, but I\u0027m happy to peel bits out separately if you\u0027d like.\n",
+      "revId": "3d3618610fde96e1949cf6cec0cab306307e11ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58400662_b7f59400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-03T21:58:28Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "3d3618610fde96e1949cf6cec0cab306307e11ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
