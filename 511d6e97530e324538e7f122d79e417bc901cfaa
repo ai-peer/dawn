@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da13c123_db006484",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T16:08:50Z",
+      "side": 1,
+      "message": "Maybe we\u0027ll round on all backends in the future if that becomes a problem. But IMHO it\u0027s the type of little differences that\u0027s fine to keep because you can\u0027t paper over every single precision issue.\n\nFine to close the issue!",
+      "parentUuid": "5c1ae452_7107bcb2",
+      "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "def38922_c32f6065",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
