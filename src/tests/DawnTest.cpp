@@ -756,6 +756,11 @@ bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions
 }
 
 void DawnTestBase::SetUp() {
+    // A very large number of tests hang on Intel D3D12 with the debug adapter after a driver
+    // upgrade. Violently suppress this whole configuration until we figure out what to do.
+    // See https://crbug.com/dawn/598
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
+
     {
         // Find the adapter that exactly matches our adapter properties.
         const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
