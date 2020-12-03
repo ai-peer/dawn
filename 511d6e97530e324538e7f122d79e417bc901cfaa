@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c1ae452_7107bcb2",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-03T16:04:25Z",
+      "side": 1,
+      "message": "OK, so should I close the bug?\n\nAlso, should this be / is this looseness codified in the spec?\n\nIt feels like this could lead to universality problems. If I write and test my app on an implementation with subpixel precision, I might assume the same result on all platforms. (OTOH it seems like rendering differences are likely to be minor, but maybe I haven\u0027t thought through the corner cases).",
+      "parentUuid": "ab50437c_a77ed874",
+      "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "def38922_c32f6065",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
@@ -82,6 +100,24 @@
       "writtenOn": "2020-12-02T17:46:45Z",
       "side": 1,
       "message": "nit: would prefer explicit casts here",
+      "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69cb302_f8e56378",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-03T16:04:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "def38922_c32f6065",
       "revId": "511d6e97530e324538e7f122d79e417bc901cfaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
