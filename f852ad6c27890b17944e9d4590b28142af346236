@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0b56ef_759ffd91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-03T23:35:47Z",
+      "side": 1,
+      "message": "kainino@ and cwallez@: This isn\u0027t quite finished, as there\u0027s at least one issue I have to resolve with the deprecation warning throwing off some of the tests, but I wanted to get your eyes on it sooner to make sure that everyone is comfortable with the direction it\u0027s going.\n\nMy biggest concern is that, as you can see with the various tests that needed to be changed, any code that was previously initializing a BindGroupLayoutEntry directly with an initializer list will need to be updated with this change. I\u0027ve made the MakeBindGroupLayout helper function pretty flexible to assist with that, but since not every instance of the code was using that previously there was still some breakage. I don\u0027t know how to avoid that without introducing a separate BindGroupLayoutEntry type until the depreciation period has passed.",
+      "revId": "f852ad6c27890b17944e9d4590b28142af346236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
