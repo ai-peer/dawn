@@ -50,6 +50,24 @@
       "message": "nit: Maybe we could store the result in a variable and then ASSERT?",
       "revId": "05773ca18844f7a81aed0ba7d086de3d6e017918",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "826ce700_8e3f126e",
+        "filename": "src/utils/WindowsDebugLogger.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-03T09:31:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bafb812_8667852b",
+      "revId": "05773ca18844f7a81aed0ba7d086de3d6e017918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
