@@ -113,7 +113,7 @@ void init() {
         })");
 
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer, true}});
+        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true}});
 
     utils::ComboRenderPipelineDescriptor descriptor(device);
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);

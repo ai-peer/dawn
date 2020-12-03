@@ -250,9 +250,9 @@ void initSim() {
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Compute, wgpu::BindingType::UniformBuffer},
-                    {1, wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer},
-                    {2, wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer},
+                    {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
+                    {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
+                    {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
                 });
 
     wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);

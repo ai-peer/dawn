@@ -116,8 +116,8 @@ void init() {
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler},
-                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture},
+                    {0, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering},
+                    {1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float},
                 });
 
     wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
