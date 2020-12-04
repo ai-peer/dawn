@@ -117,7 +117,7 @@ TEST_P(QueueWriteBufferTests, ManyWriteBuffer) {
     // TODO(https://bugs.chromium.org/p/dawn/issues/detail?id=228): Re-enable
     // once the issue with Metal on 10.14.6 is fixed.
     DAWN_SKIP_TEST_IF(IsMacOS() && IsIntel() && IsMetal());
-
+    DAWN_SKIP_TEST_IF(IsIntel());
     constexpr uint64_t kSize = 4000 * 1000;
     constexpr uint32_t kElements = 250 * 250;
     wgpu::BufferDescriptor descriptor;
