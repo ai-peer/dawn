@@ -39,6 +39,30 @@
       },
       "revId": "b8d70aaa6d5d2fa957c6c371de9a7d4e7df549a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8e9ed5_0de27f16",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-04T21:55:59Z",
+      "side": 1,
+      "message": "Maybe also comment what this is for since it\u0027s not obvious until you read the test much later in the file.",
+      "parentUuid": "7fd81a78_2b508630",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 19
+      },
+      "revId": "b8d70aaa6d5d2fa957c6c371de9a7d4e7df549a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
