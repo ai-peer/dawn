@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28be7f17_99c62487",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-04T14:49:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ae615108_ee0f166e",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68af4443_dd9cb369",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-04T09:18:23Z",
       "side": 1,
       "message": "ditto",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650c68cd_12780ca1",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-04T14:49:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "68af4443_dd9cb369",
       "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f030f2d3_9a990605",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-04T14:49:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ba8a478_8c3f2fe7",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4e97fcc_9d831655",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0119bb4_dc6ae983",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-04T14:49:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b4e97fcc_9d831655",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48c23afb_ff2331a1",
@@ -99,6 +171,24 @@
       "writtenOn": "2020-12-04T09:18:23Z",
       "side": 1,
       "message": "That\u0027s a different thing, we\u0027ll need to figure out how we handle the fact that GLES has 2D vs cubemap as different types of textures. We could opportunistically create cubemaps if arrayLayer % 6 \u003d\u003d 0 and copy between 2D array or cubemap depending on what\u0027s actually used. That\u0027s a larger change so can we open a bug about it?",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9201efda_be85f7d5",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-04T14:49:42Z",
+      "side": 1,
+      "message": "Done.\n\nLMK if I\u0027ve characterized the problem correctly.",
+      "parentUuid": "48c23afb_ff2331a1",
       "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
