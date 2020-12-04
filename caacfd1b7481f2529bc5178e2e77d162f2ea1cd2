@@ -147,6 +147,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6703342_2f0199c2",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-04T18:58:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6649687_c02e2e26",
+      "range": {
+        "startLine": 1753,
+        "startChar": 12,
+        "endLine": 1754,
+        "endChar": 62
+      },
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e22cddb1_2f4dff6a",
@@ -160,6 +184,30 @@
       "writtenOn": "2020-12-04T13:25:31Z",
       "side": 1,
       "message": "nit: We can use Align() that\u0027s in common/Math.h\n\nditto below",
+      "range": {
+        "startLine": 1832,
+        "startChar": 38,
+        "endLine": 1833,
+        "endChar": 81
+      },
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1afbfb2_8a2b6a7c",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1833,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-12-04T18:58:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e22cddb1_2f4dff6a",
       "range": {
         "startLine": 1832,
         "startChar": 38,
