@@ -29,6 +29,10 @@ namespace dawn_wire {
         return mImpl->GetDevice();
     }
 
+    WGPUInstance WireClient::GetInstance() const {
+        return mImpl->GetInstance();
+    }
+
     const volatile char* WireClient::HandleCommands(const volatile char* commands, size_t size) {
         return mImpl->HandleCommands(commands, size);
     }

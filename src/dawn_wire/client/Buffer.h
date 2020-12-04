@@ -24,9 +24,10 @@
 
 namespace dawn_wire { namespace client {
 
-    class Buffer final : public ObjectBase {
+    class Device;
+    class Buffer final : public ObjectBaseTmpl<Buffer, Device> {
       public:
-        using ObjectBase::ObjectBase;
+        using ObjectBaseTmpl::ObjectBaseTmpl;
 
         static WGPUBuffer Create(Device* device, const WGPUBufferDescriptor* descriptor);
         static WGPUBuffer CreateError(Device* device);

@@ -38,8 +38,7 @@ namespace dawn_wire { namespace server {
 
     struct ErrorScopeUserdata {
         Server* server;
-        // TODO(enga): ObjectHandle device;
-        // when the wire supports multiple devices.
+        ObjectHandle device;
         uint64_t requestSerial;
     };
 
@@ -58,16 +57,14 @@ namespace dawn_wire { namespace server {
     struct CreateReadyPipelineUserData {
         std::weak_ptr<bool> isServerAlive;
         Server* server;
+        ObjectHandle device;
         uint64_t requestSerial;
         ObjectId pipelineObjectID;
     };
 
     class Server : public ServerBase {
       public:
-        Server(WGPUDevice device,
-               const DawnProcTable& procs,
-               CommandSerializer* serializer,
-               MemoryTransferService* memoryTransferService);
+        Server(const WireServerDescriptor& descriptor);
         ~Server() override;
 
         // ChunkedCommandHandler implementation
@@ -106,8 +103,8 @@ namespace dawn_wire { namespace server {
                                                      void* userdata);
 
         // Error callbacks
-        void OnUncapturedError(WGPUErrorType type, const char* message);
-        void OnDeviceLost(const char* message);
+        void OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message);
+        void OnDeviceLost(ObjectHandle device, const char* message);
         void OnDevicePopErrorScope(WGPUErrorType type,
                                    const char* message,
                                    ErrorScopeUserdata* userdata);
@@ -132,6 +129,8 @@ namespace dawn_wire { namespace server {
         DawnProcTable mProcs;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
         MemoryTransferService* mMemoryTransferService = nullptr;
+
+        WGPUDevice mCreatedWithDevice = nullptr;
 
         std::shared_ptr<bool> mIsAlive;
     };

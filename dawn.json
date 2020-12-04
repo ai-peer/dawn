@@ -14,6 +14,19 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }
+        ]
+    },
     "adapter properties": {
         "category": "structure",
         "extensible": true,
@@ -864,6 +877,14 @@
                 "args": [
                     {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
                 ]
+            },
+            {
+                "name": "request adapter",
+                "args": [
+                    {"name": "options", "type": "request adapter options", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
             }
         ]
     },
@@ -1437,6 +1458,50 @@
             {"name": "dummy stage", "type": "programmable stage descriptor"}
         ]
     },
+    "request adapter callback": {
+        "category": "callback",
+        "args": [
+            {"name": "status", "type": "request adapter status"},
+            {"name": "adapter", "type": "adapter"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request adapter options": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
+    "request adapter options chromium": {
+        "category": "structure",
+        "chained": true,
+        "members": [
+            {"name": "power preference", "type": "power preference"}
+        ]
+    },
+    "request adapter status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "error"},
+            {"value": 2, "name": "unknown"}
+        ]
+    },
+    "request device callback": {
+        "category": "callback",
+        "args": [
+            {"name": "status", "type": "request device status"},
+            {"name": "device", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request device status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "error"},
+            {"value": 2, "name": "unknown"}
+        ]
+    },
     "sampler": {
         "category": "object"
     },
@@ -1603,9 +1668,10 @@
             {"value": 4, "name": "surface descriptor from canvas HTML selector"},
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
-            {"value": 7, "name": "sampler descriptor dummy anisotropic filtering"},
-            {"value": 8, "name": "render pipeline descriptor dummy extension"},
-            {"value": 9, "name": "device descriptor dawn native"}
+            {"value": 7, "name": "request adapter options chromium"},
+            {"value": 8, "name": "device descriptor dawn native"},
+            {"value": 9, "name": "sampler descriptor dummy anisotropic filtering"},
+            {"value": 10, "name": "render pipeline descriptor dummy extension"}
         ]
     },
     "texture": {
@@ -1791,6 +1857,13 @@
         ],
         "TODO": [
             "jiawei.shao@intel.com: support 1D and 3D texture views"
+        ]
+    },
+    "power preference": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "low power"},
+            {"value": 1, "name": "high performance"}
         ]
     },
     "vertex format": {

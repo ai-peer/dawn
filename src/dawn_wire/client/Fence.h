@@ -22,10 +22,11 @@
 
 namespace dawn_wire { namespace client {
 
+    class Device;
     class Queue;
-    class Fence final : public ObjectBase {
+    class Fence final : public ObjectBaseTmpl<Fence, Device> {
       public:
-        using ObjectBase::ObjectBase;
+        using ObjectBaseTmpl::ObjectBaseTmpl;
         ~Fence();
         void Initialize(Queue* queue, const WGPUFenceDescriptor* descriptor);
 

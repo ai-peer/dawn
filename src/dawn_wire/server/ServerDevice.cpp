@@ -17,13 +17,15 @@
 namespace dawn_wire { namespace server {
 
     void Server::ForwardUncapturedError(WGPUErrorType type, const char* message, void* userdata) {
-        auto server = static_cast<Server*>(userdata);
-        server->OnUncapturedError(type, message);
+        auto* data = static_cast<ObjectData<WGPUDevice>*>(userdata);
+        ObjectHandle device(data->id, data->generation);
+        data->server->OnUncapturedError(device, type, message);
     }
 
     void Server::ForwardDeviceLost(const char* message, void* userdata) {
-        auto server = static_cast<Server*>(userdata);
-        server->OnDeviceLost(message);
+        auto* data = static_cast<ObjectData<WGPUDevice>*>(userdata);
+        ObjectHandle device(data->id, data->generation);
+        data->server->OnDeviceLost(device, message);
     }
 
     void Server::ForwardCreateReadyComputePipeline(WGPUCreateReadyPipelineStatus status,
@@ -60,27 +62,41 @@ namespace dawn_wire { namespace server {
             status, pipeline, message, createReadyPipelineUserData.release());
     }
 
-    void Server::OnUncapturedError(WGPUErrorType type, const char* message) {
+    void Server::OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message) {
         ReturnDeviceUncapturedErrorCallbackCmd cmd;
+        cmd.device = device;
         cmd.type = type;
         cmd.message = message;
 
         SerializeCommand(cmd);
     }
 
-    void Server::OnDeviceLost(const char* message) {
+    void Server::OnDeviceLost(ObjectHandle device, const char* message) {
         ReturnDeviceLostCallbackCmd cmd;
+        cmd.device = device;
         cmd.message = message;
 
         SerializeCommand(cmd);
     }
 
-    bool Server::DoDevicePopErrorScope(WGPUDevice cDevice, uint64_t requestSerial) {
+    bool Server::DoDevicePopErrorScope(ObjectId deviceId, uint64_t requestSerial) {
+        // The null object isn't valid as `self`
+        if (deviceId == 0) {
+            return false;
+        }
+
+        auto* deviceData = DeviceObjects().Get(deviceId);
+        if (deviceData == nullptr) {
+            return false;
+        }
+
         ErrorScopeUserdata* userdata = new ErrorScopeUserdata;
         userdata->server = this;
+        userdata->device = ObjectHandle{deviceId, deviceData->generation};
         userdata->requestSerial = requestSerial;
 
-        bool success = mProcs.devicePopErrorScope(cDevice, ForwardPopErrorScope, userdata);
+        bool success =
+            mProcs.devicePopErrorScope(deviceData->handle, ForwardPopErrorScope, userdata);
         if (!success) {
             delete userdata;
         }
@@ -88,10 +104,20 @@ namespace dawn_wire { namespace server {
     }
 
     bool Server::DoDeviceCreateReadyComputePipeline(
-        WGPUDevice cDevice,
+        ObjectId deviceId,
         uint64_t requestSerial,
         ObjectHandle pipelineObjectHandle,
         const WGPUComputePipelineDescriptor* descriptor) {
+        // The null object isn't valid as `self`
+        if (deviceId == 0) {
+            return false;
+        }
+
+        auto* deviceData = DeviceObjects().Get(deviceId);
+        if (deviceData == nullptr) {
+            return false;
+        }
+
         auto* resultData = ComputePipelineObjects().Allocate(pipelineObjectHandle.id);
         if (resultData == nullptr) {
             return false;
@@ -103,11 +129,12 @@ namespace dawn_wire { namespace server {
             std::make_unique<CreateReadyPipelineUserData>();
         userdata->isServerAlive = mIsAlive;
         userdata->server = this;
+        userdata->device = ObjectHandle{deviceId, deviceData->generation};
         userdata->requestSerial = requestSerial;
         userdata->pipelineObjectID = pipelineObjectHandle.id;
 
         mProcs.deviceCreateReadyComputePipeline(
-            cDevice, descriptor, ForwardCreateReadyComputePipeline, userdata.release());
+            deviceData->handle, descriptor, ForwardCreateReadyComputePipeline, userdata.release());
         return true;
     }
 
@@ -141,16 +168,27 @@ namespace dawn_wire { namespace server {
 
         ReturnDeviceCreateReadyComputePipelineCallbackCmd cmd;
         cmd.status = status;
+        cmd.device = data->device;
         cmd.requestSerial = data->requestSerial;
         cmd.message = message;
 
         SerializeCommand(cmd);
     }
 
-    bool Server::DoDeviceCreateReadyRenderPipeline(WGPUDevice cDevice,
+    bool Server::DoDeviceCreateReadyRenderPipeline(ObjectId deviceId,
                                                    uint64_t requestSerial,
                                                    ObjectHandle pipelineObjectHandle,
                                                    const WGPURenderPipelineDescriptor* descriptor) {
+        // The null object isn't valid as `self`
+        if (deviceId == 0) {
+            return false;
+        }
+
+        auto* deviceData = DeviceObjects().Get(deviceId);
+        if (deviceData == nullptr) {
+            return false;
+        }
+
         auto* resultData = RenderPipelineObjects().Allocate(pipelineObjectHandle.id);
         if (resultData == nullptr) {
             return false;
@@ -162,11 +200,12 @@ namespace dawn_wire { namespace server {
             std::make_unique<CreateReadyPipelineUserData>();
         userdata->isServerAlive = mIsAlive;
         userdata->server = this;
+        userdata->device = ObjectHandle{deviceId, deviceData->generation};
         userdata->requestSerial = requestSerial;
         userdata->pipelineObjectID = pipelineObjectHandle.id;
 
         mProcs.deviceCreateReadyRenderPipeline(
-            cDevice, descriptor, ForwardCreateReadyRenderPipeline, userdata.release());
+            deviceData->handle, descriptor, ForwardCreateReadyRenderPipeline, userdata.release());
         return true;
     }
 
@@ -200,6 +239,7 @@ namespace dawn_wire { namespace server {
 
         ReturnDeviceCreateReadyRenderPipelineCallbackCmd cmd;
         cmd.status = status;
+        cmd.device = data->device;
         cmd.requestSerial = data->requestSerial;
         cmd.message = message;
 
@@ -219,6 +259,7 @@ namespace dawn_wire { namespace server {
 
         ReturnDevicePopErrorScopeCallbackCmd cmd;
         cmd.requestSerial = data->requestSerial;
+        cmd.device = data->device;
         cmd.type = type;
         cmd.message = message;
 

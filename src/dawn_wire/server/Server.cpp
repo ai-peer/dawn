@@ -17,29 +17,41 @@
 
 namespace dawn_wire { namespace server {
 
-    Server::Server(WGPUDevice device,
-                   const DawnProcTable& procs,
-                   CommandSerializer* serializer,
-                   MemoryTransferService* memoryTransferService)
-        : mSerializer(serializer),
-          mProcs(procs),
-          mMemoryTransferService(memoryTransferService),
+    Server::Server(const WireServerDescriptor& descriptor)
+        : mSerializer(descriptor.serializer),
+          mProcs(*descriptor.procs),
+          mMemoryTransferService(descriptor.memoryTransferService),
           mIsAlive(std::make_shared<bool>(true)) {
         if (mMemoryTransferService == nullptr) {
             // If a MemoryTransferService is not provided, fallback to inline memory.
             mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
             mMemoryTransferService = mOwnedMemoryTransferService.get();
         }
-        // The client-server knowledge is bootstrapped with device 1.
-        auto* deviceData = DeviceObjects().Allocate(1);
-        deviceData->handle = device;
 
-        mProcs.deviceSetUncapturedErrorCallback(device, ForwardUncapturedError, this);
-        mProcs.deviceSetDeviceLostCallback(device, ForwardDeviceLost, this);
+        // The client-server knowledge is bootstrapped with instance 1.
+        auto* instanceData = InstanceObjects().Allocate(1);
+        instanceData->handle = descriptor.instance;
+
+        if (descriptor.device != nullptr) {
+            // The server does not take a ref on device it was created with in the
+            // deprecated code path. We need to remember which device pointer it
+            // is so we don't call release on destruction.
+            mCreatedWithDevice = descriptor.device;
+
+            // The client-server knowledge is bootstrapped with device 1.
+            auto* deviceData = DeviceObjects().Allocate(1);
+            deviceData->handle = descriptor.device;
+            deviceData->id = 1;
+            deviceData->server = this;
+
+            mProcs.deviceSetUncapturedErrorCallback(descriptor.device, ForwardUncapturedError,
+                                                    deviceData);
+            mProcs.deviceSetDeviceLostCallback(descriptor.device, ForwardDeviceLost, deviceData);
+        }
     }
 
     Server::~Server() {
-        DestroyAllObjects(mProcs);
+        DestroyAllObjects(mProcs, mCreatedWithDevice);
     }
 
     bool Server::InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation) {

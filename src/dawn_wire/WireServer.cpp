@@ -18,10 +18,7 @@
 namespace dawn_wire {
 
     WireServer::WireServer(const WireServerDescriptor& descriptor)
-        : mImpl(new server::Server(descriptor.device,
-                                   *descriptor.procs,
-                                   descriptor.serializer,
-                                   descriptor.memoryTransferService)) {
+        : mImpl(new server::Server(descriptor)) {
     }
 
     WireServer::~WireServer() {

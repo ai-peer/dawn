@@ -48,7 +48,7 @@ namespace dawn_wire { namespace client {
     void Fence::OnCompletion(uint64_t value,
                              WGPUFenceOnCompletionCallback callback,
                              void* userdata) {
-        if (device->GetClient()->IsDisconnected()) {
+        if (GetClient()->IsDisconnected()) {
             return callback(WGPUFenceCompletionStatus_DeviceLost, userdata);
         }
 
@@ -62,7 +62,7 @@ namespace dawn_wire { namespace client {
 
         mOnCompletionRequests[serial] = {callback, userdata};
 
-        this->device->GetClient()->SerializeCommand(cmd);
+        GetClient()->SerializeCommand(cmd);
     }
 
     void Fence::OnUpdateCompletedValueCallback(uint64_t value) {

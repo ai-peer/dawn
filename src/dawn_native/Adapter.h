@@ -17,6 +17,7 @@
 
 #include "dawn_native/DawnNative.h"
 
+#include "common/RefCounted.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Extensions.h"
 #include "dawn_native/dawn_platform.h"
@@ -27,7 +28,7 @@ namespace dawn_native {
 
     class DeviceBase;
 
-    class AdapterBase {
+    class AdapterBase : public RefCounted {
       public:
         AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
         virtual ~AdapterBase() = default;
@@ -39,6 +40,9 @@ namespace dawn_native {
         InstanceBase* GetInstance() const;
 
         DeviceBase* CreateDevice(const DeviceDescriptorDawnNative* descriptor = nullptr);
+        void RequestDevice(const DeviceDescriptor* descriptor,
+                           WGPURequestDeviceCallback callback,
+                           void* userdata);
 
         ExtensionsSet GetSupportedExtensions() const;
         bool SupportsAllRequestedExtensions(

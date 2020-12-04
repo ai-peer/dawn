@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNWIRE_CLIENT_QUEUE_H_
-#define DAWNWIRE_CLIENT_QUEUE_H_
+#ifndef DAWNWIRE_CLIENT_SURFACE_H_
+#define DAWNWIRE_CLIENT_SURFACE_H_
 
 #include <dawn/webgpu.h>
 
@@ -24,20 +24,12 @@
 
 namespace dawn_wire { namespace client {
 
-    class Device;
-    class Queue final : public ObjectBaseTmpl<Queue, Device> {
+    class Client;
+    class Surface final : public ObjectBaseTmpl<Surface, Client> {
       public:
         using ObjectBaseTmpl::ObjectBaseTmpl;
-
-        WGPUFence CreateFence(const WGPUFenceDescriptor* descriptor);
-        void WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size);
-        void WriteTexture(const WGPUTextureCopyView* destination,
-                          const void* data,
-                          size_t dataSize,
-                          const WGPUTextureDataLayout* dataLayout,
-                          const WGPUExtent3D* writeSize);
     };
 
 }}  // namespace dawn_wire::client
 
-#endif  // DAWNWIRE_CLIENT_QUEUE_H_
+#endif  // DAWNWIRE_CLIENT_SURFACE_H_
