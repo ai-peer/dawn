@@ -34,9 +34,14 @@ class IndexFormatTest : public DawnTest {
         wgpu::PrimitiveTopology primitiveTopology = wgpu::PrimitiveTopology::TriangleStrip) {
         wgpu::ShaderModule vsModule = utils::CreateShaderModuleFromWGSL(device, R"(
             [[location(0)]] var<in> pos : vec4<f32>;
+            [[builtin(vertex_idx)]] var<in> idx : u32;
             [[builtin(position)]] var<out> Position : vec4<f32>;
             [[stage(vertex)]] fn main() -> void {
-                Position = pos;
+                if(idx == 0xFFFFFFFEu) {
+                    Position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+                } else {
+                    Position = pos;
+                }
             })");
 
         wgpu::ShaderModule fsModule = utils::CreateShaderModuleFromWGSL(device, R"(
@@ -239,14 +244,13 @@ class TriangleStripPrimitiveRestartTests : public IndexFormatTest {
     void SetUp() override {
         IndexFormatTest::SetUp();
         mVertexBuffer = utils::CreateBufferFromData<float>(device, wgpu::BufferUsage::Vertex,
-                                                           {
-                                                               0.0f,  1.0f,  0.0f, 1.0f,  // 0
-                                                               1.0f,  1.0f,  0.0f, 1.0f,  // 1
-                                                               1.0f,  0.0f,  0.0f, 1.0f,  // 2
-                                                               -1.0f, 0.0f,  0.0f, 1.0f,  // 3
-                                                               -1.0f, -1.0f, 0.0f, 1.0f,  // 4
-                                                               0.0f,  -1.0f, 0.0f, 1.0f,  // 5
-                                                           });
+                                                           {0.0f,  1.0f,  0.0f, 1.0f,  // 0
+                                                            1.0f,  1.0f,  0.0f, 1.0f,  // 1
+                                                            1.0f,  0.0f,  0.0f, 1.0f,  // 2
+                                                            -1.0f, 0.0f,  0.0f, 1.0f,  // 3
+                                                            -1.0f, -1.0f, 0.0f, 1.0f,  // 4
+                                                            0.0f,  -1.0f, 0.0f, 1.0f,  // 5
+                                                            0.0f,  0.0f,  0.0f, 1.0f});
     }
 };
 
@@ -287,13 +291,6 @@ TEST_P(TriangleStripPrimitiveRestartTests, Uint32PrimitiveRestart) {
 // Same as the above test, but uses an OOB index to emulate primitive restart being disabled,
 // causing point C to be written to.
 TEST_P(TriangleStripPrimitiveRestartTests, Uint32WithoutPrimitiveRestart) {
-    // TODO: Re-enable for all backends after robust vertex access is implemented.
-    // The behavior of OOB indexes is not strictly defined on non-D3D12 platforms.
-    DAWN_SKIP_TEST_IF(!IsD3D12());
-    // OOB indexes should return a (0,0,0,1) vertex in D3D12, however this does not occur on Intel
-    // GPUs, so we must skip this test on Intel for now.
-    DAWN_SKIP_TEST_IF(IsIntel() && IsD3D12());
-
     wgpu::RenderPipeline pipeline = MakeTestPipeline(wgpu::IndexFormat::Uint32);
     wgpu::Buffer indexBuffer =
         utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index,
@@ -419,13 +416,6 @@ TEST_P(LineStripPrimitiveRestartTests, Uint32PrimitiveRestart) {
 // Same as the above test, but uses an OOB index to emulate primitive restart being disabled,
 // causing point A to be written to.
 TEST_P(LineStripPrimitiveRestartTests, Uint32WithoutPrimitiveRestart) {
-    // TODO: Re-enable for all backends after robust vertex access is implemented.
-    // The behavior of OOB indexes is not strictly defined on non-D3D12 platforms.
-    DAWN_SKIP_TEST_IF(!IsD3D12());
-    // OOB indexes should return a (0,0,0,1) vertex in D3D12, however this does not occur on Intel
-    // GPUs, so we must skip this test on Intel for now.
-    DAWN_SKIP_TEST_IF(IsIntel() && IsD3D12());
-
     wgpu::RenderPipeline pipeline =
         MakeTestPipeline(wgpu::IndexFormat::Uint32, wgpu::PrimitiveTopology::LineStrip);
 
