@@ -33,10 +33,12 @@ namespace dawn_native {
         bool IsError() const;
 
       protected:
-        ~ObjectBase() override = default;
+        ~ObjectBase() override;
 
       private:
-        DeviceBase* mDevice;
+        // If numerous ref/release becomes a problem with the blueprint object creation
+        // pattern, we could consider moving the Ref from the blueprint into the new object.
+        Ref<DeviceBase> mDevice;
     };
 
 }  // namespace dawn_native

@@ -14,6 +14,8 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include "dawn_native/Device.h"
+
 namespace dawn_native {
 
     static constexpr uint64_t kErrorPayload = 0;
@@ -26,8 +28,10 @@ namespace dawn_native {
         : RefCounted(kErrorPayload), mDevice(device) {
     }
 
+    ObjectBase::~ObjectBase() = default;
+
     DeviceBase* ObjectBase::GetDevice() const {
-        return mDevice;
+        return mDevice.Get();
     }
 
     bool ObjectBase::IsError() const {
