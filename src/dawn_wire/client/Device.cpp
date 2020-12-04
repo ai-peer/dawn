@@ -23,7 +23,7 @@
 namespace dawn_wire { namespace client {
 
     Device::Device(Client* client, uint32_t initialRefcount, uint32_t initialId)
-        : ObjectBase(this, initialRefcount, initialId), mClient(client) {
+        : ObjectBaseTmpl(client, initialRefcount, initialId), mClient(client) {
 #if defined(DAWN_ENABLE_ASSERTS)
         mErrorCallback = [](WGPUErrorType, char const*, void*) {
             static bool calledOnce = false;
@@ -45,15 +45,6 @@ namespace dawn_wire { namespace client {
             }
         };
 #endif  // DAWN_ENABLE_ASSERTS
-        // Get the default queue for this device.
-        auto* allocation = mClient->QueueAllocator().New(this);
-        mDefaultQueue = allocation->object.get();
-
-        DeviceGetDefaultQueueCmd cmd;
-        cmd.self = ToAPI(this);
-        cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
-
-        mClient->SerializeCommand(cmd);
     }
 
     Device::~Device() {
@@ -94,10 +85,6 @@ namespace dawn_wire { namespace client {
                 mClient->FreeObject(objectType, object);
             }
         }
-    }
-
-    Client* Device::GetClient() {
-        return mClient;
     }
 
     void Device::HandleError(WGPUErrorType errorType, const char* message) {
@@ -180,7 +167,7 @@ namespace dawn_wire { namespace client {
         mErrorScopes[serial] = {callback, userdata};
 
         DevicePopErrorScopeCmd cmd;
-        cmd.device = ToAPI(this);
+        cmd.deviceId = this->id;
         cmd.requestSerial = serial;
 
         mClient->SerializeCommand(cmd);
@@ -231,6 +218,17 @@ namespace dawn_wire { namespace client {
     }
 
     WGPUQueue Device::GetDefaultQueue() {
+        if (mDefaultQueue == nullptr) {
+            // Get the default queue for this device.
+            auto* allocation = mClient->QueueAllocator().New(this);
+            mDefaultQueue = allocation->object.get();
+
+            DeviceGetDefaultQueueCmd cmd;
+            cmd.self = ToAPI(this);
+            cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
+
+            mClient->SerializeCommand(cmd);
+        }
         mDefaultQueue->refcount++;
         return ToAPI(mDefaultQueue);
     }
@@ -238,13 +236,13 @@ namespace dawn_wire { namespace client {
     void Device::CreateReadyComputePipeline(WGPUComputePipelineDescriptor const* descriptor,
                                             WGPUCreateReadyComputePipelineCallback callback,
                                             void* userdata) {
-        if (device->GetClient()->IsDisconnected()) {
+        if (GetClient()->IsDisconnected()) {
             return callback(WGPUCreateReadyPipelineStatus_DeviceLost, nullptr,
                             "GPU device disconnected", userdata);
         }
 
         DeviceCreateReadyComputePipelineCmd cmd;
-        cmd.device = ToAPI(this);
+        cmd.deviceId = this->id;
         cmd.descriptor = descriptor;
 
         uint64_t serial = mCreateReadyPipelineRequestSerial++;
@@ -299,7 +297,7 @@ namespace dawn_wire { namespace client {
                             "GPU device disconnected", userdata);
         }
         DeviceCreateReadyRenderPipelineCmd cmd;
-        cmd.device = ToAPI(this);
+        cmd.deviceId = this->id;
         cmd.descriptor = descriptor;
 
         uint64_t serial = mCreateReadyPipelineRequestSerial++;

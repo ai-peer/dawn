@@ -27,7 +27,7 @@ namespace dawn_wire { namespace server {
     struct ObjectDataBase {
         // The backend-provided handle and generation to this object.
         T handle;
-        uint32_t generation = 0;
+        ObjectGeneration generation = 0;
 
         // Whether this object has been allocated, used by the KnownObjects queries
         // TODO(cwallez@chromium.org): make this an internal bit vector in KnownObjects.
@@ -37,6 +37,15 @@ namespace dawn_wire { namespace server {
     // Stores what the backend knows about the type.
     template <typename T>
     struct ObjectData : public ObjectDataBase<T> {};
+
+    template <>
+    struct ObjectData<WGPUDevice> : public ObjectDataBase<WGPUDevice> {
+        // The device has a repeating uncaptured error callback which means
+        // we can't acquire and destroy the userdata once the callback is called.
+        // The userdata needs to live exactly as long as the device.
+        Server* server;
+        ObjectId id;
+    };
 
     enum class BufferMapWriteState { Unmapped, Mapped, MapError };
 

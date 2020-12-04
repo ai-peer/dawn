@@ -29,12 +29,11 @@ namespace dawn_wire { namespace client {
     class Client;
     class Queue;
 
-    class Device final : public ObjectBase {
+    class Device final : public ObjectBaseTmpl<Device, Client> {
       public:
         Device(Client* client, uint32_t refcount, uint32_t id);
         ~Device();
 
-        Client* GetClient();
         void SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata);
         void SetDeviceLostCallback(WGPUDeviceLostCallback errorCallback, void* errorUserdata);
         void InjectError(WGPUErrorType type, const char* message);

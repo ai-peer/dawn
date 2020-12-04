@@ -44,7 +44,10 @@ namespace dawn_wire { namespace client {
     }  // anonymous namespace
 
     Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-        : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+        : ClientBase(),
+          mInstance(InstanceAllocator().New(this)->object.get()),
+          mSerializer(serializer),
+          mMemoryTransferService(memoryTransferService) {
         if (mMemoryTransferService == nullptr) {
             // If a MemoryTransferService is not provided, fall back to inline memory.
             mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -54,21 +57,41 @@ namespace dawn_wire { namespace client {
 
     Client::~Client() {
         DestroyAllObjects();
+        InstanceAllocator().Free(mInstance);
+        ASSERT(mInstances.empty());
     }
 
     void Client::DestroyAllObjects() {
         while (!mDevices.empty()) {
-            // Note: We don't send a DestroyObject command for the device
-            // since freeing a device object is done out of band.
-            DeviceAllocator().Free(static_cast<Device*>(mDevices.head()->value()));
+            ObjectBase* device = mDevices.head()->value();
+
+            DestroyObjectCmd cmd;
+            cmd.objectType = ObjectType::Device;
+            cmd.objectId = device->id;
+            SerializeCommand(cmd);
+            FreeObject(cmd.objectType, device);
         }
+
+        while (!mAdapters.empty()) {
+            ObjectBase* adapter = mAdapters.head()->value();
+
+            DestroyObjectCmd cmd;
+            cmd.objectType = ObjectType::Adapter;
+            cmd.objectId = adapter->id;
+            SerializeCommand(cmd);
+            FreeObject(cmd.objectType, adapter);
+        }
+    }
+
+    WGPUInstance Client::GetInstance() {
+        return reinterpret_cast<WGPUInstance>(mInstance);
     }
 
     WGPUDevice Client::GetDevice() {
         if (mDevice == nullptr) {
             mDevice = DeviceAllocator().New(this)->object.get();
         }
-        return reinterpret_cast<WGPUDeviceImpl*>(mDevice);
+        return reinterpret_cast<WGPUDevice>(mDevice);
     }
 
     ReservedTexture Client::ReserveTexture(WGPUDevice cDevice) {
@@ -91,8 +114,21 @@ namespace dawn_wire { namespace client {
         }
     }
 
+    void Client::TrackObject(Instance* instance) {
+        mInstances.Append(instance);
+    }
+
+    void Client::TrackObject(Adapter* adapter) {
+        mAdapters.Append(adapter);
+    }
+
     void Client::TrackObject(Device* device) {
         mDevices.Append(device);
+    }
+
+    void Client::TrackObject(Surface* surface) {
+        // Surfaces in the wire are not implemented.
+        ASSERT(false);
     }
 
     bool Client::IsDisconnected() const {

@@ -20,7 +20,29 @@
 
 namespace dawn_wire { namespace client {
 
-    bool Client::DoDeviceUncapturedErrorCallback(WGPUErrorType errorType, const char* message) {
+    bool Client::DoInstanceRequestAdapterCallback(Instance* instance,
+                                                  uint64_t requestSerial,
+                                                  WGPURequestAdapterStatus status,
+                                                  bool isNull) {
+        ASSERT(instance != nullptr);
+        ASSERT(instance == mInstance);
+        return instance->OnRequestAdapterCallback(requestSerial, status, isNull);
+    }
+
+    bool Client::DoAdapterRequestDeviceCallback(Adapter* adapter,
+                                                uint64_t requestSerial,
+                                                WGPURequestDeviceStatus status,
+                                                bool isNull) {
+        // The adapter might have been deleted or recreated so this isn't an error.
+        if (adapter == nullptr) {
+            return true;
+        }
+        return adapter->OnRequestDeviceCallback(requestSerial, status, isNull);
+    }
+
+    bool Client::DoDeviceUncapturedErrorCallback(Device* device,
+                                                 WGPUErrorType errorType,
+                                                 const char* message) {
         switch (errorType) {
             case WGPUErrorType_NoError:
             case WGPUErrorType_Validation:
@@ -31,19 +53,28 @@ namespace dawn_wire { namespace client {
             default:
                 return false;
         }
-        mDevice->HandleError(errorType, message);
+        device->HandleError(errorType, message);
         return true;
     }
 
-    bool Client::DoDeviceLostCallback(char const* message) {
-        mDevice->HandleDeviceLost(message);
+    bool Client::DoDeviceLostCallback(Device* device, char const* message) {
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+        device->HandleDeviceLost(message);
         return true;
     }
 
-    bool Client::DoDevicePopErrorScopeCallback(uint64_t requestSerial,
+    bool Client::DoDevicePopErrorScopeCallback(Device* device,
+                                               uint64_t requestSerial,
                                                WGPUErrorType errorType,
                                                const char* message) {
-        return mDevice->OnPopErrorScopeCallback(requestSerial, errorType, message);
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+        return device->OnPopErrorScopeCallback(requestSerial, errorType, message);
     }
 
     bool Client::DoBufferMapAsyncCallback(Buffer* buffer,
@@ -82,16 +113,26 @@ namespace dawn_wire { namespace client {
         return true;
     }
 
-    bool Client::DoDeviceCreateReadyComputePipelineCallback(uint64_t requestSerial,
+    bool Client::DoDeviceCreateReadyComputePipelineCallback(Device* device,
+                                                            uint64_t requestSerial,
                                                             WGPUCreateReadyPipelineStatus status,
                                                             const char* message) {
-        return mDevice->OnCreateReadyComputePipelineCallback(requestSerial, status, message);
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+        return device->OnCreateReadyComputePipelineCallback(requestSerial, status, message);
     }
 
-    bool Client::DoDeviceCreateReadyRenderPipelineCallback(uint64_t requestSerial,
+    bool Client::DoDeviceCreateReadyRenderPipelineCallback(Device* device,
+                                                           uint64_t requestSerial,
                                                            WGPUCreateReadyPipelineStatus status,
                                                            const char* message) {
-        return mDevice->OnCreateReadyRenderPipelineCallback(requestSerial, status, message);
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+        return device->OnCreateReadyRenderPipelineCallback(requestSerial, status, message);
     }
 
 }}  // namespace dawn_wire::client

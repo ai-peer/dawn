@@ -73,8 +73,8 @@ namespace dawn_wire { namespace server {
         switch(objectType) {
             {% for type in by_category["object"] %}
                 case ObjectType::{{type.name.CamelCase()}}: {
-                    {% if type.name.CamelCase() == "Device" %}
-                        //* Freeing the device has to be done out of band.
+                    {% if type.name.CamelCase() == "Instance" %}
+                        //* Freeing the instance has to be done out of band.
                         return false;
                     {% else %}
                         auto* data = {{type.name.CamelCase()}}Objects().Get(objectId);

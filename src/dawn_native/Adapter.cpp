@@ -77,6 +77,13 @@ namespace dawn_native {
         return result;
     }
 
+    void AdapterBase::RequestDevice(const DeviceDescriptor2* descriptor,
+                                    WGPURequestDeviceCallback callback,
+                                    void* userdata) {
+        // Not implemented.
+        callback(WGPURequestDeviceStatus_Error, nullptr, userdata);
+    }
+
     MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
                                                  const DeviceDescriptor* descriptor) {
         if (descriptor != nullptr) {

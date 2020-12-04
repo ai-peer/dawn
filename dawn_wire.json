@@ -18,6 +18,12 @@
         "Remove usage of size_t because it is not network transparent"
     ],
     "commands": {
+        "adapter request device": [
+            { "name": "adapter id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "descriptor", "type": "device descriptor 2", "annotation": "const*" },
+            { "name": "device handle", "type": "ObjectHandle", "handle_type": "device"}
+        ],
         "buffer map async": [
             { "name": "buffer id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint32_t" },
@@ -40,19 +46,19 @@
             { "name": "handle create info", "type": "uint8_t", "annotation": "const*", "length": "handle create info length", "skip_serialize": true}
         ],
         "device create ready compute pipeline": [
-            { "name": "device", "type": "device" },
+            { "name": "device id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "pipeline object handle", "type": "ObjectHandle", "handle_type": "compute pipeline"},
             { "name": "descriptor", "type": "compute pipeline descriptor", "annotation": "const*"}
         ],
         "device create ready render pipeline": [
-            { "name": "device", "type": "device" },
+            { "name": "device id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "pipeline object handle", "type": "ObjectHandle", "handle_type": "render pipeline"},
             { "name": "descriptor", "type": "render pipeline descriptor", "annotation": "const*"}
         ],
         "device pop error scope": [
-            { "name": "device", "type": "device" },
+            { "name": "device id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint64_t" }
         ],
         "destroy object": [
@@ -63,6 +69,12 @@
             { "name": "fence id", "type": "ObjectId" },
             { "name": "value", "type": "uint64_t" },
             { "name": "request serial", "type": "uint64_t" }
+        ],
+        "instance request adapter": [
+            { "name": "instance id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "options", "type": "request adapter options", "annotation": "const*" },
+            { "name": "adapter handle", "type": "ObjectHandle", "handle_type": "adapter"}
         ],
         "queue write buffer internal": [
             {"name": "queue id", "type": "ObjectId" },
@@ -81,6 +93,12 @@
         ]
     },
     "return commands": {
+        "adapter request device callback": [
+            { "name": "adapter", "type": "ObjectHandle", "handle_type": "adapter" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "request device status" },
+            { "name": "is null", "type": "bool" }
+        ],
         "buffer map async callback": [
             { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
@@ -89,23 +107,28 @@
             { "name": "read initial data info", "type": "uint8_t", "annotation": "const*", "length": "read initial data info length", "skip_serialize": true }
         ],
         "device create ready compute pipeline callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "status", "type": "create ready pipeline status" },
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
         ],
         "device create ready render pipeline callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "status", "type": "create ready pipeline status" },
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
         ],
         "device uncaptured error callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "type", "type": "error type"},
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
         ],
         "device lost callback" : [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
         ],
         "device pop error scope callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "type", "type": "error type" },
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
@@ -118,6 +141,12 @@
         "fence update completed value": [
             { "name": "fence", "type": "ObjectHandle", "handle_type": "fence" },
             { "name": "value", "type": "uint64_t" }
+        ],
+        "instance request adapter callback": [
+            { "name": "instance", "type": "ObjectHandle", "handle_type": "instance" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "request adapter status" },
+            { "name": "is null", "type": "bool" }
         ]
     },
     "special items": {
@@ -127,6 +156,7 @@
             "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [
+            "AdapterRequestDevice",
             "BufferMapAsync",
             "BufferGetConstMappedRange",
             "BufferGetMappedRange",
@@ -138,6 +168,7 @@
             "DeviceSetUncapturedErrorCallback",
             "FenceGetCompletedValue",
             "FenceOnCompletion",
+            "InstanceRequestAdapter",
             "QueueWriteBuffer",
             "QueueWriteTexture"
         ],
@@ -151,10 +182,13 @@
             "QueueCreateFence"
         ],
         "client_special_objects": [
+            "Adapter",
             "Buffer",
             "Device",
             "Fence",
-            "Queue"
+            "Instance",
+            "Queue",
+            "Surface"
         ],
         "server_custom_pre_handler_commands": [
             "BufferDestroy",

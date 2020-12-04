@@ -42,6 +42,10 @@ namespace dawn_native {
 
         const std::vector<std::unique_ptr<AdapterBase>>& GetAdapters() const;
 
+        void RequestAdapter(const RequestAdapterOptions* options,
+                            WGPURequestAdapterCallback callback,
+                            void* userdata);
+
         // Used to handle error that happen up to device creation.
         bool ConsumedError(MaybeError maybeError);
 

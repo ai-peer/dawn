@@ -116,6 +116,13 @@ namespace dawn_native {
         return mAdapters;
     }
 
+    void InstanceBase::RequestAdapter(const RequestAdapterOptions* options,
+                                      WGPURequestAdapterCallback callback,
+                                      void* userdata) {
+        // Not implemented.
+        callback(WGPURequestAdapterStatus_Error, nullptr, userdata);
+    }
+
     void InstanceBase::EnsureBackendConnections() {
         if (mBackendsConnected) {
             return;

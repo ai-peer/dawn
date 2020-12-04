@@ -25,13 +25,14 @@ namespace dawn_wire { namespace client {
         static constexpr ObjectType value = static_cast<ObjectType>(-1);
     };
 
+    class Device;
     {% for type in by_category["object"] %}
         {% set Type = type.name.CamelCase() %}
-        {% if type.name.CamelCase() in client_special_objects %}
+        {% if Type in client_special_objects %}
             class {{Type}};
         {% else %}
-            struct {{type.name.CamelCase()}} final : ObjectBase {
-                using ObjectBase::ObjectBase;
+            struct {{Type}} final : ObjectBaseTmpl<{{Type}}, Device> {
+                using ObjectBaseTmpl::ObjectBaseTmpl;
             };
         {% endif %}
 
