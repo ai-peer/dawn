@@ -18,6 +18,8 @@
 #include "dawn_native/EnumClassBitmasks.h"
 #include "dawn_native/dawn_platform.h"
 
+#include <utility>
+
 namespace dawn_native {
 
     // Note: Subresource indices are computed by iterating the aspects in increasing order.
@@ -49,15 +51,25 @@ namespace dawn_native {
     Aspect TryConvertAspect(const Format& format, wgpu::TextureAspect aspect);
 
     struct SubresourceRange {
-        uint32_t baseMipLevel;
-        uint32_t levelCount;
+        SubresourceRange(Aspect aspects,
+                         std::pair<uint32_t, uint32_t> arrayLayerParam,
+                         std::pair<uint32_t, uint32_t> mipLevelParams);
+        SubresourceRange();
+
+        Aspect aspects;
         uint32_t baseArrayLayer;
         uint32_t layerCount;
-        Aspect aspects;
+        uint32_t baseMipLevel;
+        uint32_t levelCount;
 
         static SubresourceRange SingleMipAndLayer(uint32_t baseMipLevel,
                                                   uint32_t baseArrayLayer,
                                                   Aspect aspects);
+        static SubresourceRange Single(Aspect aspect,
+                                       uint32_t baseArrayLayer,
+                                       uint32_t baseMipLevel);
+
+        static SubresourceRange Full(Aspect aspects, uint32_t layerCount, uint32_t levelCount);
     };
 
     // Helper function to use aspects as linear indices in arrays.
