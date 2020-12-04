@@ -384,7 +384,10 @@ source_set("dawn_white_box_tests_sources") {
     "${dawn_root}/src/dawn_native:dawn_native_static",
   ]
 
-  sources = [ "DawnTest.h" ]
+  sources = [
+    "DawnTest.h",
+    "white_box/DeviceRefCountTests.cpp",
+  ]
 
   if (dawn_enable_vulkan) {
     deps += [ "${dawn_root}/third_party/khronos:vulkan_headers" ]

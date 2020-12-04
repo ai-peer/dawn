@@ -141,6 +141,10 @@ namespace dawn_native {
 
         DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, CreateEmptyBindGroupLayout());
 
+        // There are cyclical references since the device refs some internal objects, and all child
+        // objects ref the device. This means the Device's ref count can't hit zero. Instead, we'll
+        // consider the device's "zero" ref count as the ref count just after successful creation.
+        mSelfRefCount = mRefCount.load() - 1u;
         return {};
     }
 
@@ -868,16 +872,30 @@ namespace dawn_native {
     }
 
     void DeviceBase::Reference() {
-        ASSERT(mRefCount != 0);
-        mRefCount++;
+        uint64_t previousRefCount = mRefCount.fetch_add(1, std::memory_order_relaxed);
+        ASSERT(previousRefCount != 0);
     }
 
     void DeviceBase::Release() {
-        ASSERT(mRefCount != 0);
-        mRefCount--;
-        if (mRefCount == 0) {
+        uint64_t previousRefCount = mRefCount.fetch_sub(1, std::memory_order_release);
+
+        // The ref count should always be greater than the self-referencing count
+        // unless we're in the disconnect phase when the Device's own objects are
+        // being destroyed.
+        ASSERT(mState == State::Disconnected || previousRefCount > mSelfRefCount);
+
+        // Note: if Device creation never succeeded, |mSelfRefCount| will be 0.
+        previousRefCount -= mSelfRefCount;
+        if (previousRefCount == 1) {
+            std::atomic_thread_fence(std::memory_order_acquire);
             delete this;
         }
+    }
+
+    uint64_t DeviceBase::GetRefCountForTesting() const {
+        uint64_t refCount = mRefCount.load();
+        ASSERT(refCount > mSelfRefCount);
+        return mRefCount.load() - mSelfRefCount;
     }
 
     QueueBase* DeviceBase::GetDefaultQueue() {

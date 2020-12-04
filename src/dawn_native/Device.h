@@ -42,7 +42,7 @@ namespace dawn_native {
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
 
-    class DeviceBase {
+    class DeviceBase : public RefCounted {
       public:
         DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
         virtual ~DeviceBase();
@@ -187,6 +187,7 @@ namespace dawn_native {
 
         void Reference();
         void Release();
+        uint64_t GetRefCountForTesting() const;
 
         virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
             size_t size) = 0;
@@ -382,7 +383,9 @@ namespace dawn_native {
         struct DeprecationWarnings;
         std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
 
-        uint32_t mRefCount = 1;
+        std::atomic<uint64_t> mRefCount{1};
+        uint64_t mSelfRefCount = 0;
+
         State mState = State::BeingCreated;
 
         FormatTable mFormatTable;
