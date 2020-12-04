@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485cc41f_e2505ea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae615108_ee0f166e",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "We should be able to do it with glTexParameter selecting the correct mip levels. In general we can configure a GLES texture to be any texture view we want, but the problem is that we can\u0027t have two incompatible texture views of the same texture used at the same time. Ok to leave the TODO as is and handle this as part of 593",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68af4443_dd9cb369",
+        "filename": "src/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba8a478_8c3f2fe7",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e97fcc_9d831655",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c23afb_ff2331a1",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T09:18:23Z",
+      "side": 1,
+      "message": "That\u0027s a different thing, we\u0027ll need to figure out how we handle the fact that GLES has 2D vs cubemap as different types of textures. We could opportunistically create cubemaps if arrayLayer % 6 \u003d\u003d 0 and copy between 2D array or cubemap depending on what\u0027s actually used. That\u0027s a larger change so can we open a bug about it?",
+      "revId": "133bb79c14c536d4c5b3b6491aa36dcbaea9c2c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
