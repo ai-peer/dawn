@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!\n\nI\u0027m *pretty* sure this is correct, but I kind of stumbled on it accidentally. Once the test actually checks for the toggle, it passes with and without the code change. The problem is, the platform I\u0027m testing on (ES 3.1) has neither baseVertex nor baseInstance support, so it\u0027s hard to distinguish. Maybe this should be a unit test of the toggle?",
       "revId": "47b697927c90903c704c0e10149112fa9d9c79ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bdf7961_f729712b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T15:10:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47b697927c90903c704c0e10149112fa9d9c79ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
