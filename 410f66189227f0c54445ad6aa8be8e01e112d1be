@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8b9cb12_a414d7d8",
+        "filename": "src/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T12:24:32Z",
+      "side": 1,
+      "message": "The thing is that robust access won\u0027t catch this, it is technically allowed (if not reasonably common) to use an index buffer and no vertex buffers, just for the VertexIndex builtin. 0xFFFFFFFE causing a primitive restart on Intel should be considered a bug.\n\nMy suggestion was to not wait for robust access behavior that doesn\u0027t guarantee any specific value, especially on Vulkan or in the emulation on Metal, but instead look at gl_VertexIndex in the shader.",
+      "parentUuid": "9a62954a_62d99e6e",
+      "revId": "410f66189227f0c54445ad6aa8be8e01e112d1be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c33b8cc1_69450671",
         "filename": "src/tests/end2end/IndexFormatTests.cpp",
         "patchSetId": 11
