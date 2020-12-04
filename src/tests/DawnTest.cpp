@@ -333,7 +333,7 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDiscoverAdapters() {
     auto instance = std::make_unique<dawn_native::Instance>();
     instance->EnableBackendValidation(mEnableBackendValidation);
-    instance->EnableGPUBasedBackendValidation(mEnableBackendValidation);
+    instance->EnableGPUBasedBackendValidation(false);
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
 
     instance->DiscoverDefaultAdapters();
@@ -872,8 +872,7 @@ void DawnTestBase::SetUp() {
     // A very large number of tests hang on Intel D3D12 with the debug adapter after a driver
     // upgrade. Violently suppress this whole configuration until we figure out what to do.
     // See https://crbug.com/dawn/598
-    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
-
+    // DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
 }
 
 void DawnTestBase::TearDown() {
