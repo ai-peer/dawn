@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fff0eb24_06594940",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "I\u0027m happy to sort them, but keeping them group here was significantly easier to work with while debugging. Worth nothing this file is only somewhat alphabetical as-is.",
+      "parentUuid": "7080a84e_52658ab6",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11cc3f99_d98e1d80",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "nit: Maybe these sub-descriptors should be extensible in case we want to add more members to them in the future? ditto below",
+      "range": {
+        "startLine": 100,
+        "startChar": 22,
+        "endLine": 100,
+        "endChar": 27
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed871a0_d0847a0e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11cc3f99_d98e1d80",
       "range": {
         "startLine": 100,
         "startChar": 22,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7878ed75_32beab2a",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b1a3e5_3f26777e",
+      "range": {
+        "startLine": 141,
+        "startChar": 85,
+        "endLine": 141,
+        "endChar": 87
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e3efc37_b2928e89",
@@ -100,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd030fb0_a6da68d3",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Leaving this undefined simply means that it\u0027s not a storage texture binding. In order to be valid you can only have one of buffer.type, sampler.type, texture.sampleType, or storageTexture.access defined.",
+      "parentUuid": "0e3efc37_b2928e89",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4909b244_e7ec2586",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -111,6 +195,30 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 160,
+        "startChar": 87,
+        "endLine": 160,
+        "endChar": 88
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a6b46d_1481694a",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4909b244_e7ec2586",
       "range": {
         "startLine": 160,
         "startChar": 87,
@@ -157,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a61a3d3_97948bac",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "We would need to add the enum, and the reason I avoided it here is because that ended up touching a lot more files where the new enum would need to be accounted for in switch statements (almost universally with an UNREACHED). Agreed that it\u0027s probably the right approach overall, but I didn\u0027t want to dive into that until this general direction was given the thumbs up.",
+      "parentUuid": "53125f31_c5ab094a",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0fb669d_834cb2de",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
@@ -168,6 +294,24 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "I just realized we should do this for both Storage and ReadonlyStorage. Can you the path to check for ReadonlyStorage to the check here and at [1] and edit the UnsafeAPITests? (here or as a follow up if that\u0027s too cumbersome? But if in a follow up please add a TODO(dawn:527) so we don\u0027t forget)",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee581e2_22045719",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0fb669d_834cb2de",
       "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -206,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15dc6bd_723c1a7a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e45de15_fb2d6f77",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0495a000_25e8a2da",
@@ -219,6 +381,24 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "[1]",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "899be46e_35d78132",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0495a000_25e8a2da",
       "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -240,6 +420,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76a75e38_083bbea7",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Yeah, once we no longer have to worry about the deprecated path this gets a lot easier. Could probably drop this function all together.",
+      "parentUuid": "13537ada_5f77840f",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77a6c487_e1349da8",
@@ -253,6 +451,24 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "nit: TODO(dawn:527)\n\n+1 to the staggered approach.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52e2e84_40cebd13",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-04T19:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77a6c487_e1349da8",
       "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
