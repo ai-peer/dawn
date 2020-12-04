@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810fb6d9_76237c06",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-12-04T02:14:29Z",
+      "side": 1,
+      "message": "I investigated compressed texture support for 3D texture at native side. It looks like that BC formats can be supported on D3D12, Metal and Vulkan. But according to Jiawei\u0027s comment above, you may discussed this and got a conclusion about this before (or I misunderstood something). In addition, I think 3D compressed textures are not widely used as 2D compressed textures for developers. So I add validation rule to say that 3D (and 1D) compressed textures are not supported. \n\nTexture format support on DX12: https://docs.microsoft.com/en-us/windows/win32/api/dxgiformat/ne-dxgiformat-dxgi_format\nTexture format support on Metal: https://developer.apple.com/documentation/metal/mtlpixelformat",
+      "range": {
+        "startLine": 560,
+        "startChar": 4,
+        "endLine": 570,
+        "endChar": 5
+      },
+      "revId": "3268cae6fa7e9e249037348da72c12741e40331f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
