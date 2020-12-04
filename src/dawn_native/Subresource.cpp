@@ -68,11 +68,40 @@ namespace dawn_native {
         }
     }
 
+    SubresourceRange::SubresourceRange(Aspect aspects,
+                                       std::pair<uint32_t, uint32_t> arrayLayerParam,
+                                       std::pair<uint32_t, uint32_t> mipLevelParams)
+        : aspects(aspects),
+          baseArrayLayer(arrayLayerParam.first),
+          layerCount(arrayLayerParam.second),
+          baseMipLevel(mipLevelParams.first),
+          levelCount(mipLevelParams.second) {
+    }
+
+    SubresourceRange::SubresourceRange()
+        : aspects(Aspect::None), baseArrayLayer(0), layerCount(0), baseMipLevel(0), levelCount(0) {
+    }
+
     // static
     SubresourceRange SubresourceRange::SingleMipAndLayer(uint32_t baseMipLevel,
                                                          uint32_t baseArrayLayer,
                                                          Aspect aspects) {
-        return {baseMipLevel, 1, baseArrayLayer, 1, aspects};
+        return {aspects, {baseArrayLayer, 1}, {baseMipLevel, 1}};
+    }
+
+    // static
+    SubresourceRange SubresourceRange::Single(Aspect aspect,
+                                              uint32_t baseArrayLayer,
+                                              uint32_t baseMipLevel) {
+        ASSERT(HasOneBit(aspect));
+        return {aspect, {baseArrayLayer, 1}, {baseMipLevel, 1}};
+    }
+
+    // static
+    SubresourceRange SubresourceRange::Full(Aspect aspects,
+                                            uint32_t layerCount,
+                                            uint32_t levelCount) {
+        return {aspects, {0, layerCount}, {0, levelCount}};
     }
 
 }  // namespace dawn_native
