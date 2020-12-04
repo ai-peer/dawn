@@ -1,0 +1,311 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c09270d_ebea4bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7080a84e_52658ab6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "u-unit: we try to keep this file sorted alphabetically. Maybe that\u0027s not a good call and we should have sections instead, I\u0027m not sure.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11cc3f99_d98e1d80",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "nit: Maybe these sub-descriptors should be extensible in case we want to add more members to them in the future? ditto below",
+      "range": {
+        "startLine": 100,
+        "startChar": 22,
+        "endLine": 100,
+        "endChar": 27
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b1a3e5_3f26777e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "nit: I think we might want to keep the logic that says that undefined means 2D so that 0 initialization in C/C++ provides the default values.",
+      "range": {
+        "startLine": 141,
+        "startChar": 85,
+        "endLine": 141,
+        "endChar": 87
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3efc37_b2928e89",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "What\u0027s the default when undefined is used (if there\u0027s one?)",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4909b244_e7ec2586",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 160,
+        "startChar": 87,
+        "endLine": 160,
+        "endChar": 88
+      },
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb83893_93a939e3",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "Putting it at the end so the tests can be updated in a separate PR is a good idea!",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53125f31_c5ab094a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "For all of the \"new\" code paths we should raise a validation error if bindingType is set to something other than Undefined (we might need to add the enum) because it would show that the code is using both old and new at the same time, which is probably a mistake. We should have DeprecationAPITests that cover this temporary validation in each of the 4 cases too.\n\nWe should probably add this in this CL contrary to the other comments.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fb669d_834cb2de",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "I just realized we should do this for both Storage and ReadonlyStorage. Can you the path to check for ReadonlyStorage to the check here and at [1] and edit the UnsafeAPITests? (here or as a follow up if that\u0027s too cumbersome? But if in a follow up please add a TODO(dawn:527) so we don\u0027t forget)",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8e3aff_0e21467f",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "Yeah, when we add the deprecation warning all the tests will have to be moved to the new API, and to not lose coverage we should add DeprecatedAPITests that check that each of the members of the old path work as expected (we can do that by checking bindgrouplayout \u003c-\u003e bindgroup compatibility, except for hasDynamicOffset which we could not cover and hope it doesn\u0027t break).",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e45de15_fb2d6f77",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "Could we have similar defaulting for the new storageTexture and sampleTexture paths? This is so zero-initialization puts all values to the default which is quite a nice feature in C.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0495a000_25e8a2da",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13537ada_5f77840f",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "note: I assume the goal is to change it to `return binding.buffer.type !\u003d undefined` in the future?",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77a6c487_e1349da8",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "nit: TODO(dawn:527)\n\n+1 to the staggered approach.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf9e9e7_9bcec668",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "See below, I don\u0027t remember what we decided for WGSL here either.",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324d9c04_acca32f4",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "I don\u0027t remember what we decided for WGSL, will these be different types of textures in the shader or do we determine things statically?",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f66420_0f4995b3",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:06:27Z",
+      "side": 1,
+      "message": "I think these could stay wgpu::BindGroupLayoutEntry so that we don\u0027t rely implicitly on BindingLayoutEntryInitializationHelper having the no additional size compared to it?",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
