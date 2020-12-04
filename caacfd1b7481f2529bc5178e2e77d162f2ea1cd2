@@ -107,6 +107,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21760085_80a04f24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-04T18:44:26Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6649687_c02e2e26",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-04T18:44:26Z",
+      "side": 1,
+      "message": "is there a reason you overrode these two to Nearest? utils::GetDefaultSamplerDescriptor() gives you Linear for minFilter, magFilter, AND mipMapFilter. Did you want them all to be Nearest?\n\nNearest is the default so you could just do \n\"samplerDesc \u003d {}\"",
+      "range": {
+        "startLine": 1753,
+        "startChar": 12,
+        "endLine": 1754,
+        "endChar": 62
+      },
+      "revId": "caacfd1b7481f2529bc5178e2e77d162f2ea1cd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e22cddb1_2f4dff6a",
