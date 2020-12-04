@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee72dd4_27aa68ee",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:25:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5fe98d2_62a0f877",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6c3351c_acdd54ad",
@@ -106,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "986a8136_681307d7",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:25:31Z",
+      "side": 1,
+      "message": "Sorry I got confused. No concerns here.",
+      "parentUuid": "44a658ee_8be08698",
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80ecde48_dc859486",
@@ -143,6 +179,30 @@
       "side": 1,
       "message": "InitializeDataInCompressedTextureAndExpectLazyClear should initialize based off the the copyExtentSize which is set to half the texture. This bool was more for us to check the other half of the render target to see it was initialized to black.",
       "parentUuid": "80ecde48_dc859486",
+      "range": {
+        "startLine": 1718,
+        "startChar": 13,
+        "endLine": 1718,
+        "endChar": 25
+      },
+      "revId": "ff4949bebcc0932c7080ac77942b2f6f22396a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "210fab84_cc051557",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-04T13:25:31Z",
+      "side": 1,
+      "message": "Sorry I got really confused. No concerns here.",
+      "parentUuid": "10505349_6d5f5471",
       "range": {
         "startLine": 1718,
         "startChar": 13,
