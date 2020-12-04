@@ -71,73 +71,148 @@ namespace dawn_native {
             const BindGroupLayoutEntry& entry = descriptor->entries[i];
             BindingNumber bindingNumber = BindingNumber(entry.binding);
 
-            DAWN_TRY(ValidateShaderStage(entry.visibility));
-            DAWN_TRY(ValidateBindingType(entry.type));
-            DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
-
-            wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::e2D;
-            if (entry.viewDimension != wgpu::TextureViewDimension::Undefined) {
-                DAWN_TRY(ValidateTextureViewDimension(entry.viewDimension));
-                viewDimension = entry.viewDimension;
-            }
-
             if (bindingsSet.count(bindingNumber) != 0) {
                 return DAWN_VALIDATION_ERROR("some binding index was specified more than once");
             }
 
-            bool canBeDynamic = false;
+            DAWN_TRY(ValidateShaderStage(entry.visibility));
+
+            int bindingMemberCount = 0;
             wgpu::ShaderStage allowedStages = kAllStages;
 
-            switch (entry.type) {
-                case wgpu::BindingType::StorageBuffer:
+            if (entry.buffer.type != wgpu::BufferBindingType::Undefined) {
+                bindingMemberCount++;
+                const BufferBindingLayout& buffer = entry.buffer;
+                DAWN_TRY(ValidateBufferBindingType(buffer.type));
+
+                if (buffer.type == wgpu::BufferBindingType::Storage ||
+                    buffer.type == wgpu::BufferBindingType::ReadonlyStorage) {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
-                    DAWN_FALLTHROUGH;
-                case wgpu::BindingType::UniformBuffer:
-                case wgpu::BindingType::ReadonlyStorageBuffer:
-                    canBeDynamic = true;
-                    break;
 
-                case wgpu::BindingType::SampledTexture:
-                    break;
-
-                case wgpu::BindingType::MultisampledTexture:
-                    if (viewDimension != wgpu::TextureViewDimension::e2D) {
-                        return DAWN_VALIDATION_ERROR("Multisampled binding must be 2D.");
-                    }
-                    if (entry.textureComponentType == wgpu::TextureComponentType::DepthComparison) {
+                    // Dynamic storage buffers aren't bounds checked properly in D3D12. Disallow
+                    // them as unsafe until the bounds checks are implemented.
+                    if (device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) &&
+                        buffer.hasDynamicOffset) {
                         return DAWN_VALIDATION_ERROR(
-                            "Multisampled binding must not be DepthComparison.");
+                            "Dynamic storage buffers are disallowed because they aren't secure "
+                            "yet. See https://crbug.com/dawn/429");
                     }
-                    break;
+                }
+            } else if (entry.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                bindingMemberCount++;
+                DAWN_TRY(ValidateSamplerBindingType(entry.sampler.type));
+            } else if (entry.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                bindingMemberCount++;
+                const TextureBindingLayout& texture = entry.texture;
+                DAWN_TRY(ValidateTextureSampleType(texture.sampleType));
 
-                case wgpu::BindingType::WriteonlyStorageTexture:
+                // viewDimension defaults to 2D if left undefined, needs validation otherwise.
+                if (texture.viewDimension != wgpu::TextureViewDimension::Undefined) {
+                    DAWN_TRY(ValidateTextureViewDimension(texture.viewDimension));
+                }
+
+                if (texture.multisampled) {
+                    if (texture.viewDimension != wgpu::TextureViewDimension::e2D) {
+                        return DAWN_VALIDATION_ERROR("Multisampled texture bindings must be 2D.");
+                    }
+                    if (texture.sampleType == wgpu::TextureSampleType::Depth) {
+                        return DAWN_VALIDATION_ERROR(
+                            "Multisampled texture bindings must not be Depth.");
+                    }
+                }
+            } else if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                bindingMemberCount++;
+                const StorageTextureBindingLayout& storageTexture = entry.storageTexture;
+                DAWN_TRY(ValidateStorageTextureAccess(storageTexture.access));
+                DAWN_TRY(ValidateStorageTextureFormat(device, storageTexture.format));
+
+                // viewDimension defaults to 2D if left undefined, needs validation otherwise.
+                if (storageTexture.viewDimension != wgpu::TextureViewDimension::Undefined) {
+                    DAWN_TRY(ValidateTextureViewDimension(storageTexture.viewDimension));
+                    DAWN_TRY(ValidateStorageTextureViewDimension(storageTexture.viewDimension));
+                }
+
+                if (storageTexture.access == wgpu::StorageTextureAccess::Writeonly) {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
-                    DAWN_FALLTHROUGH;
-                case wgpu::BindingType::ReadonlyStorageTexture:
-                    DAWN_TRY(ValidateStorageTextureFormat(device, entry.storageTextureFormat));
-                    DAWN_TRY(ValidateStorageTextureViewDimension(viewDimension));
-                    break;
+                }
+            } else {
+                // TODO(dawn:527): Raising this warning breaks a ton of validation tests.
+                // Deprecated validation path
+                /*device->EmitDeprecationWarning(
+                    "the format of BindGroupLayoutEntry has changed, and will soon require the "
+                    "buffer, sampler, texture, or storageTexture members be set rather than "
+                    "setting type, etc. on the entry directly.");*/
 
-                case wgpu::BindingType::Sampler:
-                case wgpu::BindingType::ComparisonSampler:
-                    break;
+                DAWN_TRY(ValidateBindingType(entry.type));
+                DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
+
+                wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::e2D;
+                if (entry.viewDimension != wgpu::TextureViewDimension::Undefined) {
+                    DAWN_TRY(ValidateTextureViewDimension(entry.viewDimension));
+                    viewDimension = entry.viewDimension;
+                }
+
+                bool canBeDynamic = false;
+
+                switch (entry.type) {
+                    case wgpu::BindingType::StorageBuffer:
+                        allowedStages &= ~wgpu::ShaderStage::Vertex;
+                        DAWN_FALLTHROUGH;
+                    case wgpu::BindingType::UniformBuffer:
+                    case wgpu::BindingType::ReadonlyStorageBuffer:
+                        canBeDynamic = true;
+                        break;
+
+                    case wgpu::BindingType::SampledTexture:
+                        break;
+
+                    case wgpu::BindingType::MultisampledTexture:
+                        if (viewDimension != wgpu::TextureViewDimension::e2D) {
+                            return DAWN_VALIDATION_ERROR("Multisampled binding must be 2D.");
+                        }
+                        if (entry.textureComponentType ==
+                            wgpu::TextureComponentType::DepthComparison) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Multisampled binding must not be DepthComparison.");
+                        }
+                        break;
+
+                    case wgpu::BindingType::WriteonlyStorageTexture:
+                        allowedStages &= ~wgpu::ShaderStage::Vertex;
+                        DAWN_FALLTHROUGH;
+                    case wgpu::BindingType::ReadonlyStorageTexture:
+                        DAWN_TRY(ValidateStorageTextureFormat(device, entry.storageTextureFormat));
+                        DAWN_TRY(ValidateStorageTextureViewDimension(viewDimension));
+                        break;
+
+                    case wgpu::BindingType::Sampler:
+                    case wgpu::BindingType::ComparisonSampler:
+                        break;
+                }
+
+                if (entry.hasDynamicOffset && !canBeDynamic) {
+                    return DAWN_VALIDATION_ERROR("Binding type cannot be dynamic.");
+                }
+
+                // Dynamic storage buffers aren't bounds checked properly in D3D12. Disallow them as
+                // unsafe until the bounds checks are implemented.
+                if (device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) && entry.hasDynamicOffset &&
+                    (entry.type == wgpu::BindingType::StorageBuffer ||
+                     entry.type == wgpu::BindingType::ReadonlyStorageBuffer)) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Dynamic storage buffers are disallowed because they aren't secure yet. "
+                        "See https://crbug.com/dawn/429");
+                }
             }
 
-            if (entry.hasDynamicOffset && !canBeDynamic) {
-                return DAWN_VALIDATION_ERROR("Binding type cannot be dynamic.");
+            if (bindingMemberCount > 1) {
+                return DAWN_VALIDATION_ERROR(
+                    "Only one of buffer, sampler, texture, or storageTexture may be set for each "
+                    "BindGroupLayoutEntry");
             }
 
             if (!IsSubset(entry.visibility, allowedStages)) {
                 return DAWN_VALIDATION_ERROR("Binding type cannot be used with this visibility.");
-            }
-
-            // Dynamic storage buffers aren't bounds checked properly in D3D12. Disallow them as
-            // unsafe until the bounds checks are implemented.
-            if (device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) &&
-                entry.type == wgpu::BindingType::StorageBuffer && entry.hasDynamicOffset) {
-                return DAWN_VALIDATION_ERROR(
-                    "Dynamic storage buffers are disallowed because they aren't secure yet. See "
-                    "https://crbug.com/dawn/429");
             }
 
             IncrementBindingCounts(&bindingCounts, entry);
@@ -163,8 +238,8 @@ namespace dawn_native {
                    a.minBufferBindingSize != b.minBufferBindingSize;
         }
 
-        bool IsBufferBinding(wgpu::BindingType bindingType) {
-            switch (bindingType) {
+        bool IsBufferBindingType(wgpu::BindingType type) {
+            switch (type) {
                 case wgpu::BindingType::UniformBuffer:
                 case wgpu::BindingType::StorageBuffer:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
@@ -179,9 +254,23 @@ namespace dawn_native {
             }
         }
 
+        bool IsBufferBinding(const BindGroupLayoutEntry& binding) {
+            if (binding.buffer.type != wgpu::BufferBindingType::Undefined) {
+                return true;
+            } else if (binding.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                return false;
+            } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                return false;
+            } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return false;
+            }
+
+            return IsBufferBindingType(binding.type);
+        }
+
         bool SortBindingsCompare(const BindGroupLayoutEntry& a, const BindGroupLayoutEntry& b) {
-            const bool aIsBuffer = IsBufferBinding(a.type);
-            const bool bIsBuffer = IsBufferBinding(b.type);
+            const bool aIsBuffer = IsBufferBinding(a);
+            const bool bIsBuffer = IsBufferBinding(b);
             if (aIsBuffer != bIsBuffer) {
                 // Always place buffers first.
                 return aIsBuffer;
@@ -232,7 +321,7 @@ namespace dawn_native {
             BindingIndex lastBufferIndex{0};
             BindingIndex firstNonBufferIndex = std::numeric_limits<BindingIndex>::max();
             for (BindingIndex i{0}; i < bindings.size(); ++i) {
-                if (IsBufferBinding(bindings[i].type)) {
+                if (IsBufferBindingType(bindings[i].type)) {
                     lastBufferIndex = std::max(i, lastBufferIndex);
                 } else {
                     firstNonBufferIndex = std::min(i, firstNonBufferIndex);
@@ -258,22 +347,113 @@ namespace dawn_native {
 
         for (BindingIndex i{0}; i < mBindingInfo.size(); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
-            mBindingInfo[i].binding = BindingNumber(binding.binding);
-            mBindingInfo[i].type = binding.type;
-            mBindingInfo[i].visibility = binding.visibility;
-            mBindingInfo[i].textureComponentType = binding.textureComponentType;
-            mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
-            mBindingInfo[i].minBufferBindingSize = binding.minBufferBindingSize;
 
-            if (binding.viewDimension == wgpu::TextureViewDimension::Undefined) {
-                mBindingInfo[i].viewDimension = wgpu::TextureViewDimension::e2D;
+            // TODO(dawn:527): This code currently converts the new-style BindGroupLayoutEntry
+            // definitions into the older-style BindingInfo. This is to allow for a staggered
+            // conversion, but it means that there's some combinations that the more expressive new
+            // style can handle that will be lost in the translation. The solution is to update
+            // BindingInfo to only reflect the new-style entry layout and convert the old-style
+            // entry layout into it instead.
+            mBindingInfo[i].binding = BindingNumber(binding.binding);
+            mBindingInfo[i].visibility = binding.visibility;
+
+            if (binding.buffer.type != wgpu::BufferBindingType::Undefined) {
+                switch (binding.buffer.type) {
+                    case wgpu::BufferBindingType::Uniform:
+                        mBindingInfo[i].type = wgpu::BindingType::UniformBuffer;
+                        break;
+                    case wgpu::BufferBindingType::Storage:
+                        mBindingInfo[i].type = wgpu::BindingType::StorageBuffer;
+                        break;
+                    case wgpu::BufferBindingType::ReadonlyStorage:
+                        mBindingInfo[i].type = wgpu::BindingType::ReadonlyStorageBuffer;
+                        break;
+                    case wgpu::BufferBindingType::Undefined:
+                        UNREACHABLE();
+                        break;
+                }
+                mBindingInfo[i].minBufferBindingSize = binding.buffer.minBindingSize;
+                mBindingInfo[i].hasDynamicOffset = binding.buffer.hasDynamicOffset;
+            } else if (binding.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                switch (binding.sampler.type) {
+                    case wgpu::SamplerBindingType::Filtering:
+                    case wgpu::SamplerBindingType::NonFiltering:
+                        mBindingInfo[i].type = wgpu::BindingType::Sampler;
+                        break;
+                    case wgpu::SamplerBindingType::Comparison:
+                        mBindingInfo[i].type = wgpu::BindingType::ComparisonSampler;
+                        break;
+                    case wgpu::SamplerBindingType::Undefined:
+                        UNREACHABLE();
+                        break;
+                }
+            } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                mBindingInfo[i].type = binding.texture.multisampled
+                                           ? wgpu::BindingType::MultisampledTexture
+                                           : wgpu::BindingType::SampledTexture;
+                switch (binding.texture.sampleType) {
+                    case wgpu::TextureSampleType::Float:
+                    case wgpu::TextureSampleType::UnfilterableFloat:
+                        mBindingInfo[i].textureComponentType = wgpu::TextureComponentType::Float;
+                        break;
+                    case wgpu::TextureSampleType::Sint:
+                        mBindingInfo[i].textureComponentType = wgpu::TextureComponentType::Sint;
+                        break;
+                    case wgpu::TextureSampleType::Uint:
+                        mBindingInfo[i].textureComponentType = wgpu::TextureComponentType::Uint;
+                        break;
+                    case wgpu::TextureSampleType::Depth:
+                        mBindingInfo[i].textureComponentType =
+                            wgpu::TextureComponentType::DepthComparison;
+                        break;
+                    case wgpu::TextureSampleType::Undefined:
+                        UNREACHABLE();
+                        break;
+                }
+
+                if (binding.texture.viewDimension == wgpu::TextureViewDimension::Undefined) {
+                    mBindingInfo[i].viewDimension = wgpu::TextureViewDimension::e2D;
+                } else {
+                    mBindingInfo[i].viewDimension = binding.texture.viewDimension;
+                }
+            } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                switch (binding.storageTexture.access) {
+                    case wgpu::StorageTextureAccess::Readonly:
+                        mBindingInfo[i].type = wgpu::BindingType::ReadonlyStorageTexture;
+                        break;
+                    case wgpu::StorageTextureAccess::Writeonly:
+                        mBindingInfo[i].type = wgpu::BindingType::WriteonlyStorageTexture;
+                        break;
+                    case wgpu::StorageTextureAccess::Undefined:
+                        UNREACHABLE();
+                        break;
+                }
+
+                mBindingInfo[i].storageTextureFormat = binding.storageTexture.format;
+
+                if (binding.storageTexture.viewDimension == wgpu::TextureViewDimension::Undefined) {
+                    mBindingInfo[i].viewDimension = wgpu::TextureViewDimension::e2D;
+                } else {
+                    mBindingInfo[i].viewDimension = binding.storageTexture.viewDimension;
+                }
             } else {
-                mBindingInfo[i].viewDimension = binding.viewDimension;
+                // Deprecated entry layout. As noted above, though, this is currently the only
+                // lossless path.
+                mBindingInfo[i].type = binding.type;
+                mBindingInfo[i].textureComponentType = binding.textureComponentType;
+                mBindingInfo[i].storageTextureFormat = binding.storageTextureFormat;
+                mBindingInfo[i].minBufferBindingSize = binding.minBufferBindingSize;
+
+                if (binding.viewDimension == wgpu::TextureViewDimension::Undefined) {
+                    mBindingInfo[i].viewDimension = wgpu::TextureViewDimension::e2D;
+                } else {
+                    mBindingInfo[i].viewDimension = binding.viewDimension;
+                }
+
+                mBindingInfo[i].hasDynamicOffset = binding.hasDynamicOffset;
             }
 
-            mBindingInfo[i].hasDynamicOffset = binding.hasDynamicOffset;
-
-            if (IsBufferBinding(binding.type)) {
+            if (IsBufferBinding(binding)) {
                 // Buffers must be contiguously packed at the start of the binding info.
                 ASSERT(GetBufferCount() == i);
             }
