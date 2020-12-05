@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeea5cd5_5d491872",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T03:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e30a744_d4faf4ca",
+      "range": {
+        "startLine": 1009,
+        "startChar": 16,
+        "endLine": 1009,
+        "endChar": 20
+      },
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d15f2eb_5d0a174c",
@@ -71,6 +95,24 @@
       "writtenOn": "2020-12-03T08:44:26Z",
       "side": 1,
       "message": "ditto",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d4366e9_81ef4c7a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T03:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d15f2eb_5d0a174c",
       "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0392f8_f1b41296",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T03:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c0bd282_6855f6a5",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1a0941f_68f12c1b",
@@ -109,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0eb54af_fe7c7cff",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T03:18:36Z",
+      "side": 1,
+      "message": "I think it\u0027s fine for now.",
+      "parentUuid": "f1a0941f_68f12c1b",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66d74f0c_dd79e781",
@@ -122,6 +200,24 @@
       "writtenOn": "2020-12-03T08:44:26Z",
       "side": 1,
       "message": "nit: not needed in this CL. Same for other backends.",
+      "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5314e36_2329395c",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T03:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d74f0c_dd79e781",
       "revId": "7bbb548a03fd89731f6a5f5ed932e25db0861159",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
