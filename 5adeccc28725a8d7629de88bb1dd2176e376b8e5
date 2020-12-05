@@ -16,6 +16,137 @@
       "message": "Thanks for the feedback!",
       "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbaa38e_d72c24eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "I said a bunch of stuff but only one comment is actually important. Plenty to chat about though. LGTM",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad8bacf_ec054a95",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "Results in funky capitalization in C++ (Readonly/Writeonly); I guess we should try to avoid that? Could change it to\n\n \"name\": \"read only\", \"jsrepr\": \"\\\"readonly\\\"\"\n\nbut it would still come out as READ_ONLY and not READONLY in C.\n\n(also jsrepr is just some stuff I put in there to make my life easier when updating Emscripten bindings, not extremely important)\n\nI guess we already had the funky capitalization, but now is the best time if we want to fix it.",
+      "range": {
+        "startLine": 150,
+        "startChar": 34,
+        "endLine": 151,
+        "endChar": 43
+      },
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181cb848_abd31955",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "Should just be multiple \"if\"s instead of an \"else if\" chain, in order to validate the bindingMemberCount later, right?",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88175031_4e903501",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "I think this check should become obsolete. In the spec, depth now can be used with regular sampling and not just comparison sampling. So instead of this, in pipeline creation we have to check that if a comparison sampler bgl entry is used with a texture bgl entry, that texture must be both depth *and* multisampled:false. Of course, this probably happens after the internal representation gets fixed as mentioned in the TODO below.\n\nLeave a TODO here for this?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 21
+      },
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db9b032_78436597",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "I\u0027m thinking we should make viewDimension default at the header level (so it would default in C++, but would still be required in C), instead of defaulting it like this. I guess it depends on how nice we want the C API to be.\n\nLater changing from that to what you have now would be nonbreaking, fwiw.",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd729a5_c57b99cb",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "I think you can just unconditionally set entry.storageTexture.format. It should be ignored in all other cases.",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d343cf_a3e7d80c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 1,
+      "message": "Is it necessary to handle both old and new here? Does this one test file still hit both paths?",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

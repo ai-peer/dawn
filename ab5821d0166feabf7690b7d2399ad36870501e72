@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f086037_20c8835e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-05T02:35:50Z",
+      "side": 0,
+      "message": "Unrelated to this CL but, re: earlier idea about providing nice constructors for all of the C++ types in the future:\n\nIn prep for that we could consider disallowing aggregate initialization. I thiiiiiink if we defined `Constructor() {}` for every struct then it would turn off the aggregate initializers. However trying to do that as a deprecation might not be possible. The change also might be too annoying to users. But I think it would prevent the breakages due to struct member changes that we keep causing, which would be really nice.\n\nAlso, assuming we added nice constructors later, without adding constructor-equivalents of the current initializer syntax (possible I think but kinda ugly), then we have to break initializers when we do that anyway. Doing that earlier rather than later seems good.\n\nFinally, I think we could actually add the nice constructors without killing autogeneration. We can put a list of \"constructors\": [\"uint32, wgpu::ShaderStage, ...\", ...] in the JSON that define just the constructor args, and write the constructor implementations by hand in the _cpp.cpp template.\n\nhttps://www.reddit.com/r/cpp/comments/7ln4q6/aggregate_initialization_ignores_explicitly/drnmslh/\nhttps://stackoverflow.com/a/43694276",
+      "revId": "ab5821d0166feabf7690b7d2399ad36870501e72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
