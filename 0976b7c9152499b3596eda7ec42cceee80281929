@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28ad4ceb_3575cced",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001911
+      },
+      "writtenOn": "2020-12-05T15:23:13Z",
+      "side": 1,
+      "message": "This is my first contribution to dawn. Not sure if I have to add myself to some authors file.\nI don\u0027t have access to dry runs and can\u0027t commit.",
+      "revId": "0976b7c9152499b3596eda7ec42cceee80281929",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
