@@ -111,6 +111,10 @@ namespace dawn_native {
         return reinterpret_cast<WGPUDevice>(mImpl->CreateDevice(deviceDescriptor));
     }
 
+    WGPUAdapter Adapter::Get() const {
+        return reinterpret_cast<WGPUAdapter>(mImpl);
+    }
+
     // AdapterDiscoverOptionsBase
 
     AdapterDiscoveryOptionsBase::AdapterDiscoveryOptionsBase(WGPUBackendType type)

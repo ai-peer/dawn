@@ -282,11 +282,9 @@ class DawnTestBase {
     virtual std::unique_ptr<dawn_platform::Platform> CreateTestPlatform();
 
   protected:
+    wgpu::Instance instance;
     wgpu::Device device;
     wgpu::Queue queue;
-
-    DawnProcTable backendProcs = {};
-    WGPUDevice backendDevice = nullptr;
 
     size_t mLastWarningCount = 0;
 

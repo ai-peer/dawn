@@ -116,6 +116,9 @@ namespace dawn_native {
         // On an error, nullptr is returned.
         WGPUDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
 
+        // Returns the underlying WGPUAdapter object.
+        WGPUAdapter Get() const;
+
       private:
         AdapterBase* mImpl = nullptr;
     };
