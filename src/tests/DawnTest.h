@@ -282,11 +282,10 @@ class DawnTestBase {
     virtual std::unique_ptr<dawn_platform::Platform> CreateTestPlatform();
 
   protected:
+    wgpu::Instance instance;
+    wgpu::Adapter adapter;
     wgpu::Device device;
     wgpu::Queue queue;
-
-    DawnProcTable backendProcs = {};
-    WGPUDevice backendDevice = nullptr;
 
     size_t mLastWarningCount = 0;
 
@@ -415,7 +414,11 @@ class DawnTestBase {
     // Assuming the data is mapped, checks all expectations
     void ResolveExpectations();
 
-    dawn_native::Adapter mBackendAdapter;
+    dawn_native::Adapter mTmpBackendAdapter = nullptr;
+    WGPUDevice mTmpBackendDevice = nullptr;
+
+    std::map<WGPUAdapter, dawn_native::Adapter> mBackendAdapterMap;
+    std::map<WGPUDevice, WGPUDevice> mBackendDeviceMap;
 
     std::unique_ptr<dawn_platform::Platform> mTestPlatform;
 };

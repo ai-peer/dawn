@@ -152,18 +152,9 @@ namespace dawn_wire { namespace server {
                 computePipelineObject->handle = pipeline;
                 break;
 
-            case WGPUCreateReadyPipelineStatus_Error:
+            default:
                 ComputePipelineObjects().Free(data->pipelineObjectID);
                 break;
-
-            // Currently this code is unreachable because WireServer is always deleted before the
-            // removal of the device. In the future this logic may be changed when we decide to
-            // support sharing one pair of WireServer/WireClient to multiple devices.
-            case WGPUCreateReadyPipelineStatus_DeviceLost:
-            case WGPUCreateReadyPipelineStatus_DeviceDestroyed:
-            case WGPUCreateReadyPipelineStatus_Unknown:
-            default:
-                UNREACHABLE();
         }
 
         ReturnDeviceCreateReadyComputePipelineCallbackCmd cmd;
@@ -223,18 +214,9 @@ namespace dawn_wire { namespace server {
                 renderPipelineObject->handle = pipeline;
                 break;
 
-            case WGPUCreateReadyPipelineStatus_Error:
+            default:
                 RenderPipelineObjects().Free(data->pipelineObjectID);
                 break;
-
-            // Currently this code is unreachable because WireServer is always deleted before the
-            // removal of the device. In the future this logic may be changed when we decide to
-            // support sharing one pair of WireServer/WireClient to multiple devices.
-            case WGPUCreateReadyPipelineStatus_DeviceLost:
-            case WGPUCreateReadyPipelineStatus_DeviceDestroyed:
-            case WGPUCreateReadyPipelineStatus_Unknown:
-            default:
-                UNREACHABLE();
         }
 
         ReturnDeviceCreateReadyRenderPipelineCallbackCmd cmd;

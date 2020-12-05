@@ -120,6 +120,9 @@ namespace dawn_native {
         WGPUDevice CreateDevice(const DeviceDescriptorDawnNative* deviceDescriptor);
         WGPUDevice CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor = nullptr);
 
+        // Returns the underlying WGPUAdapter object.
+        WGPUAdapter Get() const;
+
       private:
         AdapterBase* mImpl = nullptr;
     };

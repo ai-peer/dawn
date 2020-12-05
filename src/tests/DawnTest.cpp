@@ -589,16 +589,18 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
 }
 
 DawnTestBase::~DawnTestBase() {
+    // Ensure all release calls are sent for dropped client objects.
+    FlushWire();
+
     // We need to destroy child objects before the Device
     mReadbackSlots.clear();
     queue = wgpu::Queue();
     device = wgpu::Device();
+    adapter = wgpu::Adapter();
+    instance = wgpu::Instance();
 
     mWireClient = nullptr;
     mWireServer = nullptr;
-    if (gTestEnv->UsesWire()) {
-        backendProcs.deviceRelease(backendDevice);
-    }
 
     dawnProcSetProcs(nullptr);
 }
@@ -709,7 +711,7 @@ bool DawnTestBase::IsAsan() const {
 }
 
 bool DawnTestBase::HasToggleEnabled(const char* toggle) const {
-    auto toggles = dawn_native::GetTogglesUsed(backendDevice);
+    auto toggles = dawn_native::GetTogglesUsed(mBackendDeviceMap.at(device.Get()));
     return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
                return strcmp(toggle, name) == 0;
            }) != toggles.end();
@@ -728,7 +730,7 @@ wgpu::Instance DawnTestBase::GetInstance() const {
 }
 
 dawn_native::Adapter DawnTestBase::GetAdapter() const {
-    return mBackendAdapter;
+    return mBackendAdapterMap.at(adapter.Get());
 }
 
 std::vector<const char*> DawnTestBase::GetRequiredExtensions() {
@@ -740,9 +742,8 @@ const wgpu::AdapterProperties& DawnTestBase::GetAdapterProperties() const {
 }
 
 bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions) {
-    ASSERT(mBackendAdapter);
     std::set<std::string> supportedExtensionsSet;
-    for (const char* supportedExtensionName : mBackendAdapter.GetSupportedExtensions()) {
+    for (const char* supportedExtensionName : GetAdapter().GetSupportedExtensions()) {
         supportedExtensionsSet.insert(supportedExtensionName);
     }
 
@@ -756,7 +757,15 @@ bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions
 }
 
 void DawnTestBase::SetUp() {
-    {
+    DawnProcTable backendProcs = dawn_native::GetProcs();
+    WGPUInstance backendInstance = gTestEnv->GetInstance()->Get();
+
+    static DawnTestBase* currentTest;
+    currentTest = this;
+    backendProcs.instanceRequestAdapter = [](WGPUInstance instance,
+                                             const WGPURequestAdapterOptions* options,
+                                             WGPURequestAdapterCallback callback, void* userdata) {
+        const AdapterTestParam& param = currentTest->mParam;
         // Find the adapter that exactly matches our adapter properties.
         const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
         const auto& it = std::find_if(
@@ -764,62 +773,74 @@ void DawnTestBase::SetUp() {
                 wgpu::AdapterProperties properties;
                 adapter.GetProperties(&properties);
 
-                return (mParam.adapterProperties.selected &&
-                        properties.deviceID == mParam.adapterProperties.deviceID &&
-                        properties.vendorID == mParam.adapterProperties.vendorID &&
-                        properties.adapterType == mParam.adapterProperties.adapterType &&
-                        properties.backendType == mParam.adapterProperties.backendType &&
-                        strcmp(properties.name, mParam.adapterProperties.adapterName.c_str()) == 0);
+                return (param.adapterProperties.selected &&
+                        properties.deviceID == param.adapterProperties.deviceID &&
+                        properties.vendorID == param.adapterProperties.vendorID &&
+                        properties.adapterType == param.adapterProperties.adapterType &&
+                        properties.backendType == param.adapterProperties.backendType &&
+                        strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
             });
         ASSERT(it != adapters.end());
-        mBackendAdapter = *it;
-    }
+        WGPUAdapter adapter = it->Get();
+        ASSERT(adapter != nullptr);
+        dawn_native::GetProcs().adapterReference(adapter);
+        currentTest->mTmpBackendAdapter = *it;
+        callback(WGPURequestAdapterStatus_Success, adapter, userdata);
+    };
+
+    backendProcs.adapterRequestDevice = [](WGPUAdapter adapter,
+                                           const WGPUDeviceDescriptor* descriptor,
+                                           WGPURequestDeviceCallback callback, void* userdata) {
+        const AdapterTestParam& param = currentTest->mParam;
+
+        // Create the device from the adapter
+        for (const char* forceEnabledWorkaround : param.forceEnabledWorkarounds) {
+            ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
+        }
+        for (const char* forceDisabledWorkaround : param.forceDisabledWorkarounds) {
+            ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
+        }
+        dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
+        deviceDescriptor.forceEnabledToggles = param.forceEnabledWorkarounds;
+        deviceDescriptor.forceDisabledToggles = param.forceDisabledWorkarounds;
+        deviceDescriptor.requiredExtensions = currentTest->GetRequiredExtensions();
+
+        for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
+            const dawn_native::ToggleInfo* info =
+                gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
+            ASSERT(info != nullptr);
+            deviceDescriptor.forceEnabledToggles.push_back(info->name);
+        }
+
+        for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
+            const dawn_native::ToggleInfo* info =
+                gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
+            ASSERT(info != nullptr);
+            deviceDescriptor.forceDisabledToggles.push_back(info->name);
+        }
+
+        dawn_native::Adapter adapterImpl(reinterpret_cast<dawn_native::AdapterBase*>(adapter));
+
+        WGPUDevice device = adapterImpl.CreateDevice(&deviceDescriptor);
+        WGPURequestDeviceStatus status =
+            device != nullptr ? WGPURequestDeviceStatus_Success : WGPURequestDeviceStatus_Error;
+        currentTest->mTmpBackendDevice = device;
+        callback(status, device, userdata);
+    };
 
     // Setup the per-test platform. Tests can provide one by overloading CreateTestPlatform.
     mTestPlatform = CreateTestPlatform();
     gTestEnv->GetInstance()->SetPlatform(mTestPlatform.get());
 
-    // Create the device from the adapter
-    for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
-        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
-    }
-    for (const char* forceDisabledWorkaround : mParam.forceDisabledWorkarounds) {
-        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
-    }
-    dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
-    deviceDescriptor.forceEnabledToggles = mParam.forceEnabledWorkarounds;
-    deviceDescriptor.forceDisabledToggles = mParam.forceDisabledWorkarounds;
-    deviceDescriptor.requiredExtensions = GetRequiredExtensions();
-
-    for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
-        const dawn_native::ToggleInfo* info =
-            gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
-        ASSERT(info != nullptr);
-        deviceDescriptor.forceEnabledToggles.push_back(info->name);
-    }
-
-    for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
-        const dawn_native::ToggleInfo* info =
-            gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
-        ASSERT(info != nullptr);
-        deviceDescriptor.forceDisabledToggles.push_back(info->name);
-    }
-
-    backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
-    ASSERT_NE(nullptr, backendDevice);
-
-    backendProcs = dawn_native::GetProcs();
-
-    // Choose whether to use the backend procs and devices directly, or set up the wire.
-    WGPUDevice cDevice = nullptr;
     DawnProcTable procs;
+    WGPUInstance cInstance;
 
     if (gTestEnv->UsesWire()) {
         mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
         mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
         dawn_wire::WireServerDescriptor serverDesc = {};
-        serverDesc.device = backendDevice;
+        serverDesc.instance = backendInstance;
         serverDesc.procs = &backendProcs;
         serverDesc.serializer = mS2cBuf.get();
 
@@ -845,18 +866,72 @@ void DawnTestBase::SetUp() {
         clientDesc.serializer = mC2sBuf.get();
 
         mWireClient.reset(new dawn_wire::WireClient(clientDesc));
-        cDevice = mWireClient->GetDevice();
-        procs = dawn_wire::client::GetProcs();
         mS2cBuf->SetHandler(mWireClient.get());
+
+        cInstance = mWireClient->GetInstance();
+        procs = dawn_wire::client::GetProcs();
     } else {
+        cInstance = backendInstance;
         procs = backendProcs;
-        cDevice = backendDevice;
     }
+
+    dawnProcSetProcs(&procs);
+    instance = wgpu::Instance(cInstance);
+
+    {
+        struct Userdata {
+            wgpu::Adapter* adapterPtr;
+            bool done;
+        } userdata = {&adapter, false};
+
+        wgpu::RequestAdapterOptions adapterOptions{};
+        instance.RequestAdapter(
+            &adapterOptions,
+            [](WGPURequestAdapterStatus status, WGPUAdapter cAdapter, void* userdata) {
+                ASSERT(cAdapter != nullptr);
+                if (status == WGPURequestAdapterStatus_Success) {
+                    currentTest->mBackendAdapterMap.emplace(cAdapter,
+                                                            currentTest->mTmpBackendAdapter);
+                    *static_cast<Userdata*>(userdata)->adapterPtr =
+                        wgpu::Adapter::Acquire(cAdapter);
+                }
+                currentTest->mTmpBackendAdapter = {};
+                static_cast<Userdata*>(userdata)->done = true;
+            },
+            &userdata);
+        while (!userdata.done) {
+            WaitABit();
+        }
+    }
+    ASSERT(adapter);
+
+    {
+        struct Userdata {
+            wgpu::Device* devicePtr;
+            bool done;
+        } userdata = {&device, false};
+
+        wgpu::DeviceDescriptor deviceDescriptor{};
+        adapter.RequestDevice(
+            &deviceDescriptor,
+            [](WGPURequestDeviceStatus status, WGPUDevice cDevice, void* userdata) {
+                ASSERT(cDevice != nullptr);
+                if (status == WGPURequestDeviceStatus_Success) {
+                    currentTest->mBackendDeviceMap.emplace(cDevice, currentTest->mTmpBackendDevice);
+                    *static_cast<Userdata*>(userdata)->devicePtr = wgpu::Device::Acquire(cDevice);
+                }
+                currentTest->mTmpBackendDevice = nullptr;
+                static_cast<Userdata*>(userdata)->done = true;
+            },
+            &userdata);
+        while (!userdata.done) {
+            WaitABit();
+        }
+    }
+    ASSERT(device);
 
     // Set up the device and queue because all tests need them, and DawnTestBase needs them too for
     // the deferred expectations.
-    dawnProcSetProcs(&procs);
-    device = wgpu::Device::Acquire(cDevice);
     queue = device.GetDefaultQueue();
 
     device.SetUncapturedErrorCallback(OnDeviceError, this);
@@ -1008,7 +1083,9 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
 }
 
 void DawnTestBase::WaitABit() {
-    device.Tick();
+    if (device) {
+        device.Tick();
+    }
     FlushWire();
 
     utils::USleep(100);
