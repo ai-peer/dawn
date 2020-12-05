@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!",
       "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b027397_47c9fea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-05T04:13:13Z",
+      "side": 1,
+      "message": "LGTM, will you add the validation next?",
+      "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
