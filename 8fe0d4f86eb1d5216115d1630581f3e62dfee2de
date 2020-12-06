@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ebabec9_6407d21a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001911
+      },
+      "writtenOn": "2020-12-06T21:49:02Z",
+      "side": 1,
+      "message": "I don\u0027t have access to dry runs and can\u0027t commit.",
+      "revId": "8fe0d4f86eb1d5216115d1630581f3e62dfee2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
