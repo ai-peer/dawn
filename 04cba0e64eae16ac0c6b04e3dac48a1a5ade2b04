@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c4c616_f4e314c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T09:44:59Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f388925_f7ebc641",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T09:44:59Z",
+      "side": 1,
+      "message": "This could be a freestanding function given it never accesses `this`.",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
