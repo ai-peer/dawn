@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9daabb26_faea3c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T16:18:25Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4c9f29_aacd4e8f",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T16:18:25Z",
+      "side": 1,
+      "message": "note: I\u0027ll remove this in a follow-up but didn\u0027t want to block the start of SubresourceStorage on that.",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
