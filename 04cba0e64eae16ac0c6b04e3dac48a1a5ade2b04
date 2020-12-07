@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2105cc_32f09318",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:27:43Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1799b7c0_6e25710c",
@@ -100,6 +117,24 @@
       "writtenOn": "2020-12-07T17:15:17Z",
       "side": 1,
       "message": "[2]",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c2ce27_8e1850a7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:27:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7901d49_48f32e93",
       "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -277,6 +312,24 @@
       "side": 1,
       "message": "I tried to put the error in the message at [2]. I think this works since it\u0027s what Ben had before?",
       "parentUuid": "37e224ca_ef282863",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac70b237_d33897e7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:27:43Z",
+      "side": 1,
+      "message": "Ah, failed to see how the bits hooked together correctly.",
+      "parentUuid": "125be7fe_82c284d7",
       "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
