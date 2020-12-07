@@ -97,6 +97,30 @@
       },
       "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a2cf59_bc3fa272",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-07T19:42:39Z",
+      "side": 1,
+      "message": "oh yes, the \"And\" is important",
+      "parentUuid": "ef00928a_ea91b667",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
