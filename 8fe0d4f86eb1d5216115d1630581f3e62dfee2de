@@ -16,6 +16,23 @@
       "message": "I don\u0027t have access to dry runs and can\u0027t commit.",
       "revId": "8fe0d4f86eb1d5216115d1630581f3e62dfee2de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc57f54_686d6388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T10:10:48Z",
+      "side": 1,
+      "message": "LGTM, you should now have tryjobs access and be able to commit the CLs once they have CR+2.",
+      "revId": "8fe0d4f86eb1d5216115d1630581f3e62dfee2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
