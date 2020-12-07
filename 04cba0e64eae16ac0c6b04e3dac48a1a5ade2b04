@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1799b7c0_6e25710c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T14:51:21Z",
+      "side": 1,
+      "message": "nit; validation",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f388925_f7ebc641",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 11
@@ -48,6 +65,57 @@
       "writtenOn": "2020-12-07T09:44:59Z",
       "side": 1,
       "message": "This could be a freestanding function given it never accesses `this`.",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43daf99f_56bffd96",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T14:51:21Z",
+      "side": 1,
+      "message": "Is there a bug filed for this? Can we run vertex pulling and then generate WGSL from the resulting module so we can see what\u0027s happening?",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "348bdeca_611c424b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T14:51:21Z",
+      "side": 1,
+      "message": "Should this one be inside the `ifdef`? Isn\u0027t this for the non-wgsl case?",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb91648e_53d0440f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T14:51:21Z",
+      "side": 1,
+      "message": "Switching to DAWN_TRY_ASSIGN, won\u0027t we lose the output of the error messages?",
       "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
