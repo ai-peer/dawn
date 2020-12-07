@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "1e24ce30e2a1a6e24ac1d07bc839d07bb8ab7389",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22a74f4_0edef51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T09:54:53Z",
+      "side": 1,
+      "message": "LGTM and we can refine the logic when we start enabling tests with this toggle.",
+      "revId": "1e24ce30e2a1a6e24ac1d07bc839d07bb8ab7389",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ad8d24_73799fb6",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T09:54:53Z",
+      "side": 1,
+      "message": "nit: kMaxBindGroups; so that it works properly when / if we increase it to 8? Also this could go in PipelineLayoutMTL.h next to the definition of things like kBufferLengthBufferSlot ?",
+      "revId": "1e24ce30e2a1a6e24ac1d07bc839d07bb8ab7389",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
