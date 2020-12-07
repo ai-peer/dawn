@@ -47,8 +47,9 @@ class WireMultipleDeviceTests : public testing::Test {
 
             // This SetCallback call cannot be ignored because it is done as soon as we start the
             // server
-            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
-            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallback(_, _, _)).Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallbackCallback(_, _, _))
+                .Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallbackCallback(_, _, _)).Times(Exactly(1));
 
             mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
             mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
@@ -129,7 +130,7 @@ class WireMultipleDeviceTests : public testing::Test {
             .WillOnce(Invoke([&](WGPUDevice device, WGPUErrorType type, const char* message) {
                 errorMessage = message;
                 // Mock the call to the error callback.
-                wire->Api()->CallDeviceErrorCallback(device, type, message);
+                wire->Api()->CallDeviceSetUncapturedErrorCallbackCallback(device, type, message);
             }));
         wire->FlushClient();
 

@@ -96,7 +96,8 @@ TEST_F(WireErrorCallbackTests, DeviceErrorCallback) {
 
     // Calling the callback on the server side will result in the callback being called on the
     // client side
-    api.CallDeviceErrorCallback(apiDevice, WGPUErrorType_Validation, "Some error message");
+    api.CallDeviceSetUncapturedErrorCallbackCallback(apiDevice, WGPUErrorType_Validation,
+                                                     "Some error message");
 
     EXPECT_CALL(*mockDeviceErrorCallback,
                 Call(WGPUErrorType_Validation, StrEq("Some error message"), this))
@@ -289,7 +290,7 @@ TEST_F(WireErrorCallbackTests, DeviceLostCallback) {
 
     // Calling the callback on the server side will result in the callback being called on the
     // client side
-    api.CallDeviceLostCallback(apiDevice, "Some error message");
+    api.CallDeviceSetDeviceLostCallbackCallback(apiDevice, "Some error message");
 
     EXPECT_CALL(*mockDeviceLostCallback, Call(StrEq("Some error message"), this)).Times(1);
 

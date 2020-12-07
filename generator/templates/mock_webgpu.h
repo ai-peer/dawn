@@ -52,82 +52,49 @@ class ProcTableAsClass {
         {% endfor %}
 
         // Stores callback and userdata and calls the On* methods
-        void DeviceCreateReadyComputePipeline(WGPUDevice self,
-                                              WGPUComputePipelineDescriptor const * descriptor,
-                                              WGPUCreateReadyComputePipelineCallback callback,
-                                              void* userdata);
-        void DeviceCreateReadyRenderPipeline(WGPUDevice self,
-                                             WGPURenderPipelineDescriptor const * descriptor,
-                                             WGPUCreateReadyRenderPipelineCallback callback,
-                                             void* userdata);
-        void DeviceSetUncapturedErrorCallback(WGPUDevice self,
-                                    WGPUErrorCallback callback,
-                                    void* userdata);
-        void DeviceSetDeviceLostCallback(WGPUDevice self,
-                                         WGPUDeviceLostCallback callback,
-                                         void* userdata);
-        bool DevicePopErrorScope(WGPUDevice self, WGPUErrorCallback callback, void* userdata);
-        void BufferMapAsync(WGPUBuffer self,
-                            WGPUMapModeFlags mode,
-                            size_t offset,
-                            size_t size,
-                            WGPUBufferMapCallback callback,
-                            void* userdata);
-        void FenceOnCompletion(WGPUFence self,
-                               uint64_t value,
-                               WGPUFenceOnCompletionCallback callback,
-                               void* userdata);
+        {% for type in by_category["object"] %}
+            {% for method in type.methods if len(method.arguments) < 10 and has_callback_arguments(method) %}
+                //* The proc which will save the callback and userdata on the object
+                {{as_cType(method.return_type.name)}} {{as_MethodSuffix(type.name, method.name)}}(
+                    {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                    {%- for arg in method.arguments -%}
+                        , {{as_annotated_cType(arg)}}
+                    {%- endfor -%}
+                );
+                //* The virtual function to call after saving the callback and userdata in the proc
+                virtual {{as_cType(method.return_type.name)}} On{{as_MethodSuffix(type.name, method.name)}}Callback(
+                    {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                    {%- for arg in method.arguments -%}
+                        , {{as_annotated_cType(arg)}}
+                    {%- endfor -%}
+                ) = 0;
 
-        // Special cased mockable methods
-        virtual void OnDeviceCreateReadyComputePipelineCallback(
-            WGPUDevice device,
-            WGPUComputePipelineDescriptor const * descriptor,
-            WGPUCreateReadyComputePipelineCallback callback,
-            void* userdata) = 0;
-        virtual void OnDeviceCreateReadyRenderPipelineCallback(
-            WGPUDevice device,
-            WGPURenderPipelineDescriptor const * descriptor,
-            WGPUCreateReadyRenderPipelineCallback callback,
-            void* userdata) = 0;
-        virtual void OnDeviceSetUncapturedErrorCallback(WGPUDevice device,
-                                              WGPUErrorCallback callback,
-                                              void* userdata) = 0;
-        virtual void OnDeviceSetDeviceLostCallback(WGPUDevice device,
-                                                   WGPUDeviceLostCallback callback,
-                                                   void* userdata) = 0;
-        virtual bool OnDevicePopErrorScopeCallback(WGPUDevice device,
-                                              WGPUErrorCallback callback,
-                                              void* userdata) = 0;
-        virtual void OnBufferMapAsyncCallback(WGPUBuffer buffer,
-                                              WGPUBufferMapCallback callback,
-                                              void* userdata) = 0;
-        virtual void OnFenceOnCompletionCallback(WGPUFence fence,
-                                                 uint64_t value,
-                                                 WGPUFenceOnCompletionCallback callback,
-                                                 void* userdata) = 0;
+            {% endfor %}
+        {% endfor %}
 
         // Calls the stored callbacks
-        void CallDeviceCreateReadyComputePipelineCallback(WGPUDevice device,
-                                                          WGPUCreateReadyPipelineStatus status,
-                                                          WGPUComputePipeline pipeline,
-                                                          const char* message);
-        void CallDeviceCreateReadyRenderPipelineCallback(WGPUDevice device,
-                                                         WGPUCreateReadyPipelineStatus status,
-                                                         WGPURenderPipeline pipeline,
-                                                         const char* message);
-        void CallDeviceErrorCallback(WGPUDevice device, WGPUErrorType type, const char* message);
-        void CallDeviceLostCallback(WGPUDevice device, const char* message);
-        void CallMapAsyncCallback(WGPUBuffer buffer, WGPUBufferMapAsyncStatus status);
-        void CallFenceOnCompletionCallback(WGPUFence fence, WGPUFenceCompletionStatus status);
+        {% for type in by_category["object"] %}
+            {% for method in type.methods if len(method.arguments) < 10 and has_callback_arguments(method) %}
+                {% for callback_arg in method.arguments if callback_arg.type.category == 'callback' %}
+                    void Call{{as_MethodSuffix(type.name, method.name)}}Callback(
+                        {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                        {%- for arg in callback_arg.type.arguments -%}
+                            {%- if not loop.last -%}, {{as_annotated_cType(arg)}}{%- endif -%}
+                        {%- endfor -%}
+                    );
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
 
         struct Object {
             ProcTableAsClass* procs = nullptr;
-            WGPUErrorCallback deviceErrorCallback = nullptr;
-            WGPUCreateReadyComputePipelineCallback createReadyComputePipelineCallback = nullptr;
-            WGPUCreateReadyRenderPipelineCallback createReadyRenderPipelineCallback = nullptr;
-            WGPUDeviceLostCallback deviceLostCallback = nullptr;
-            WGPUBufferMapCallback mapAsyncCallback = nullptr;
-            WGPUFenceOnCompletionCallback fenceOnCompletionCallback = nullptr;
+            {% for type in by_category["object"] %}
+                {% for method in type.methods if len(method.arguments) < 10 and has_callback_arguments(method) %}
+                    {% for callback_arg in method.arguments if callback_arg.type.category == 'callback' %}
+                        {{as_cType(callback_arg.type.name)}} m{{as_MethodSuffix(type.name, method.name)}}Callback = nullptr;
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
             void* userdata = 0;
         };
 
@@ -158,26 +125,17 @@ class MockProcTable : public ProcTableAsClass {
             MOCK_METHOD(void, {{as_MethodSuffix(type.name, Name("release"))}}, ({{as_cType(type.name)}} self), (override));
         {% endfor %}
 
-        MOCK_METHOD(void,
-                    OnDeviceCreateReadyComputePipelineCallback,
-                    (WGPUDevice device, WGPUComputePipelineDescriptor const * descriptor,
-                     WGPUCreateReadyComputePipelineCallback callback,
-                     void* userdata),
-                    (override));
-        MOCK_METHOD(void,
-                    OnDeviceCreateReadyRenderPipelineCallback,
-                    (WGPUDevice device, WGPURenderPipelineDescriptor const * descriptor,
-                     WGPUCreateReadyRenderPipelineCallback callback,
-                     void* userdata),
-                    (override));
-        MOCK_METHOD(void, OnDeviceSetUncapturedErrorCallback, (WGPUDevice device, WGPUErrorCallback callback, void* userdata), (override));
-        MOCK_METHOD(void, OnDeviceSetDeviceLostCallback, (WGPUDevice device, WGPUDeviceLostCallback callback, void* userdata), (override));
-        MOCK_METHOD(bool, OnDevicePopErrorScopeCallback, (WGPUDevice device, WGPUErrorCallback callback, void* userdata), (override));
-        MOCK_METHOD(void,
-                    OnBufferMapAsyncCallback,
-                    (WGPUBuffer buffer, WGPUBufferMapCallback callback, void* userdata),
-                    (override));
-        MOCK_METHOD(void, OnFenceOnCompletionCallback, (WGPUFence fence, uint64_t value, WGPUFenceOnCompletionCallback callback, void* userdata), (override));
+        {% for type in by_category["object"] %}
+            {% for method in type.methods if len(method.arguments) < 10 and has_callback_arguments(method) %}
+                MOCK_METHOD({{as_cType(method.return_type.name)}},{{" "-}}
+                    On{{as_MethodSuffix(type.name, method.name)}}Callback, (
+                        {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                        {%- for arg in method.arguments -%}
+                            , {{as_annotated_cType(arg)}}
+                        {%- endfor -%}
+                    ), (override));
+            {% endfor %}
+        {% endfor %}
 };
 
 #endif  // MOCK_WEBGPU_H
