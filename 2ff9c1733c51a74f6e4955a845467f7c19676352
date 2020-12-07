@@ -16,6 +16,40 @@
       "message": "I don\u0027t have access to dry runs and can\u0027t commit.",
       "revId": "2ff9c1733c51a74f6e4955a845467f7c19676352",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7eeb9f9_97d8cf0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T10:12:02Z",
+      "side": 1,
+      "message": "LGTM with nit, thanks for the fixes!",
+      "revId": "2ff9c1733c51a74f6e4955a845467f7c19676352",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c771da_9824d705",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T10:12:02Z",
+      "side": 1,
+      "message": "nit: cstddef (and actually can you fix to cstring in the change in https://dawn-review.googlesource.com/c/dawn/+/35001 I didn\u0027t notice it the first review)",
+      "revId": "2ff9c1733c51a74f6e4955a845467f7c19676352",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
