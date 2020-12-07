@@ -7,6 +7,7 @@ vars = {
   'dawn_git': 'https://dawn.googlesource.com',
   'github_git': 'https://github.com',
   'swiftshader_git': 'https://swiftshader.googlesource.com',
+  'angle_git': 'https://chromium.googlesource.com/angle',
 
   'dawn_standalone': True,
 }
@@ -109,6 +110,11 @@ deps = {
   },
   'third_party/vulkan-loader': {
     'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Loader@d846ea5a2427eb0119cf98288aa337eced10edbd',
+    'condition': 'dawn_standalone',
+  },
+
+  'third_party/angle': {
+    'url': '{angle_git}/angle@4277f2f022d278d35eb5406c0205d732fb6bb97e',
     'condition': 'dawn_standalone',
   },
 
