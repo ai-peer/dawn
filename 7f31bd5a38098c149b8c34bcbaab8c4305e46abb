@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90d4718e_da7c3164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T22:18:37Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f60c43f_5e7deb76",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T22:18:37Z",
+      "side": 1,
+      "message": "Style nit: this the first use of trailing underscores on variables I\u0027ve seen in dawn. Full disclosure: I find them ugly (like the variable is drooling). I actually prefer the original (textureBase for the local var below).",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4c9f29_aacd4e8f",
@@ -48,6 +82,23 @@
       "writtenOn": "2020-12-07T16:18:25Z",
       "side": 1,
       "message": "note: I\u0027ll remove this in a follow-up but didn\u0027t want to block the start of SubresourceStorage on that.",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc127fb8_a0986458",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T22:18:37Z",
+      "side": 1,
+      "message": "Nit: It\u0027s nice when factory function have verbs in the name. e.g., CreateSingle() or MakeSingle().",
       "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
