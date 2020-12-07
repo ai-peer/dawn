@@ -73,6 +73,30 @@
       },
       "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef00928a_ea91b667",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T19:41:50Z",
+      "side": 1,
+      "message": "Good idea, maybe FirstAndCountRange?",
+      "parentUuid": "4ff982a0_007d0b3d",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
