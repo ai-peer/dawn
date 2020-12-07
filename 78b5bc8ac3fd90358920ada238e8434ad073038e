@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feb5a842_dd542377",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Yeah maybe we should sort by blocks of related types instead of be functionality. Allowing comments would help. Let\u0027s keep the bindings stuff as is and see about reordering in the future.",
+      "parentUuid": "fff0eb24_06594940",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11cc3f99_d98e1d80",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -182,6 +200,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7ad1f2_4c2642c3",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cd030fb0_a6da68d3",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4909b244_e7ec2586",
@@ -283,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c20ab333_5a34d9b3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Ack, I think what\u0027s in the correct version of the CL is pretty good and atomic except for that one part.",
+      "parentUuid": "6a61a3d3_97948bac",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0fb669d_834cb2de",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
@@ -329,6 +383,24 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "Yeah, when we add the deprecation warning all the tests will have to be moved to the new API, and to not lose coverage we should add DeprecatedAPITests that check that each of the members of the old path work as expected (we can do that by checking bindgrouplayout \u003c-\u003e bindgroup compatibility, except for hasDynamicOffset which we could not cover and hope it doesn\u0027t break).",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2584a18_76790c94",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a8e3aff_0e21467f",
       "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -509,6 +581,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2667690c_76e7b695",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Kai, do you know?",
+      "parentUuid": "324d9c04_acca32f4",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58f66420_0f4995b3",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -520,6 +610,24 @@
       "writtenOn": "2020-12-04T13:06:27Z",
       "side": 1,
       "message": "I think these could stay wgpu::BindGroupLayoutEntry so that we don\u0027t rely implicitly on BindingLayoutEntryInitializationHelper having the no additional size compared to it?",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ece81dc_97ac5a07",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58f66420_0f4995b3",
       "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

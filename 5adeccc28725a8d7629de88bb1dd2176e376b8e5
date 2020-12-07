@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f6284d1_85bd1d4a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "181cb848_abd31955",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88175031_4e903501",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 4
@@ -111,6 +129,24 @@
       "writtenOn": "2020-12-05T02:35:50Z",
       "side": 1,
       "message": "I\u0027m thinking we should make viewDimension default at the header level (so it would default in C++, but would still be required in C), instead of defaulting it like this. I guess it depends on how nice we want the C API to be.\n\nLater changing from that to what you have now would be nonbreaking, fwiw.",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c020abb_5b4843c7",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T14:29:26Z",
+      "side": 1,
+      "message": "Ideally the C API zero-intialization is the same as the default values in C++. We can discuss this more in https://github.com/webgpu-native/webgpu-headers/issues/45",
+      "parentUuid": "2db9b032_78436597",
       "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
