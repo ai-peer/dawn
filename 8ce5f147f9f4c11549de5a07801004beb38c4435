@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d989ba7_f8daa8b1",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T18:34:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86ad5fa3_d0262b6e",
+      "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f1b195_bf47c62c",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6b6fd5_7111cdaf",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T18:34:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f1b195_bf47c62c",
+      "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "608ec032_acfeb9be",
@@ -99,6 +135,30 @@
       "writtenOn": "2020-12-07T09:40:43Z",
       "side": 1,
       "message": "Checking for format equality shouldn\u0027t be needed because it is set with the FBO instead of being an indexed state.",
+      "range": {
+        "startLine": 314,
+        "startChar": 49,
+        "endLine": 314,
+        "endChar": 72
+      },
+      "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8afe5db6_747c534e",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T18:34:18Z",
+      "side": 1,
+      "message": "Good point. Fixed.",
+      "parentUuid": "608ec032_acfeb9be",
       "range": {
         "startLine": 314,
         "startChar": 49,
