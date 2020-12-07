@@ -51,6 +51,24 @@
       "parentUuid": "2fc57f54_686d6388",
       "revId": "8fe0d4f86eb1d5216115d1630581f3e62dfee2de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "395c1d23_178848b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T10:33:41Z",
+      "side": 1,
+      "message": "I just added you to dawn-tryjobs-acces :)",
+      "parentUuid": "9343804d_a4baa888",
+      "revId": "8fe0d4f86eb1d5216115d1630581f3e62dfee2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
