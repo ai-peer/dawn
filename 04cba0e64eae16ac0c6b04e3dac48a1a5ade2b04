@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "026d8a72_1484d3aa",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:10:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "803211c3_aad21f33",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "348bdeca_611c424b",
@@ -157,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71cd5b22_972a0120",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:10:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b1b7ab45_4c59aaa8",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb91648e_53d0440f",
@@ -188,6 +224,24 @@
       "side": 1,
       "message": "Yes and no. We should do errors overall this way and have it be more consistent with the rest of Dawn. The error generated here won\u0027t have \"Tint HLSL failure: ...\" but it will have the function name inside it: \"Tint transform failure: blah blah... at TranslateToHLSLWithTint ...\"",
       "parentUuid": "bb91648e_53d0440f",
+      "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e224ca_ef282863",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-12-07T17:10:30Z",
+      "side": 1,
+      "message": "Right, but if the transformer generated an error message won\u0027t that be lost? Don\u0027t we want to see what caused the transform to fail?",
+      "parentUuid": "2080fa71_fdf90546",
       "revId": "04cba0e64eae16ac0c6b04e3dac48a1a5ade2b04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
