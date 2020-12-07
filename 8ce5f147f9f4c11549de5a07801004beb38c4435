@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96dd7639_7df6b557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T18:37:43Z",
+      "side": 1,
+      "message": "I\u0027d like to, but I think we need to scope out how that validation will look at a higher level: whether there will be one bucket or more, what\u0027s in it, etc. At least this first pass gives us some data for requirements.",
+      "parentUuid": "7b027397_47c9fea3",
+      "revId": "8ce5f147f9f4c11549de5a07801004beb38c4435",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86ad5fa3_d0262b6e",
