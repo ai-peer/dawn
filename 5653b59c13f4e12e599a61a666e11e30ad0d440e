@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "5653b59c13f4e12e599a61a666e11e30ad0d440e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919dba38_0a141bbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-07T22:08:37Z",
+      "side": 1,
+      "message": "LGTM2\n\nThanks for the followup!",
+      "revId": "5653b59c13f4e12e599a61a666e11e30ad0d440e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
