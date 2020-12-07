@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad11c30_b5a66052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-07T16:19:45Z",
+      "side": 1,
+      "message": "PTAL! Note that the end state is supposed to look a bit like what\u0027s in this prototype CL: https://dawn-review.googlesource.com/c/dawn/+/34180",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
