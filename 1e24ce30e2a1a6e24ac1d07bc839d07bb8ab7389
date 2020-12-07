@@ -50,6 +50,24 @@
       "message": "nit: kMaxBindGroups; so that it works properly when / if we increase it to 8? Also this could go in PipelineLayoutMTL.h next to the definition of things like kBufferLengthBufferSlot ?",
       "revId": "1e24ce30e2a1a6e24ac1d07bc839d07bb8ab7389",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45c0d25_1bdf79a3",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-07T21:10:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2ad8d24_73799fb6",
+      "revId": "1e24ce30e2a1a6e24ac1d07bc839d07bb8ab7389",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
