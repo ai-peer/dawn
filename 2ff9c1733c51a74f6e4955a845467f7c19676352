@@ -50,6 +50,24 @@
       "message": "nit: cstddef (and actually can you fix to cstring in the change in https://dawn-review.googlesource.com/c/dawn/+/35001 I didn\u0027t notice it the first review)",
       "revId": "2ff9c1733c51a74f6e4955a845467f7c19676352",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e7cae46_a8941121",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001911
+      },
+      "writtenOn": "2020-12-07T10:16:28Z",
+      "side": 1,
+      "message": "I did that in the past as well, but someone in chromium review pointed me to this discussion: https://groups.google.com/a/chromium.org/g/cxx/c/Bc1XyEL9pp4/discussion\n\nIf you want I can change to c prefixed headers.",
+      "parentUuid": "25c771da_9824d705",
+      "revId": "2ff9c1733c51a74f6e4955a845467f7c19676352",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
