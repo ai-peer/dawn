@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d6082f_ce56298e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "\u003e First batch of comments - this is taking a while to review as this is all new to me, so I\u0027ll post comments in batches.\n\u003e \n\u003e Lots of nits which are completely ignorable.\n\nSounds good, and feel free to ping me if you have any questions!",
+      "parentUuid": "5d763c97_5f65c1fd",
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6d97ca4_2d6a7144",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6e9ce5_565e4539",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "Whoops that\u0027s should have been part of the earlier CL, and you\u0027re right aspect_ should have changed to cAspect (the C is because we\u0027re converting from Dawn\u0027s C API). Done and integrated in the earlier CL instead of this one.",
+      "parentUuid": "c6d97ca4_2d6a7144",
+      "range": {
+        "startLine": 183,
+        "startChar": 41,
+        "endLine": 183,
+        "endChar": 61
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4e5895f_8c8458a5",
@@ -54,6 +96,30 @@
       "writtenOn": "2020-12-08T10:50:56Z",
       "side": 1,
       "message": "nit: Maybe reorder these fields so they\u0027re not reversed from the other two functions?",
+      "range": {
+        "startLine": 70,
+        "startChar": 32,
+        "endLine": 72,
+        "endChar": 66
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da6d7ba4_e5d079ec",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "Oh no I completely missed my git-fu that should have been part of an earlier CL (and that function will go away in https://dawn-review.googlesource.com/c/dawn/+/35016/2)",
+      "parentUuid": "d4e5895f_8c8458a5",
       "range": {
         "startLine": 70,
         "startChar": 32,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5f12fb4_8d313a0d",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "That\u0027s a good idea, although would require including type_traits in a bunch of places. That\u0027s probably ok.\n\nAustin WDYT of having a common/TypeTraits.h that includes type_traits and also adds traits like what Ben suggested above? I think we might already have custom traits in some places (there\u0027s at least alignof_if_defined_else_default in Result.h).",
+      "parentUuid": "a5b48da5_fb15e00d",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acaa243a_268eae9b",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
@@ -112,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef617de2_bdcb37a3",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "Reworded slightly in a way that also allows getting a T by value in the second argument. WDYT?",
+      "parentUuid": "acaa243a_268eae9b",
+      "range": {
+        "startLine": 89,
+        "startChar": 32,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a794a5f9_7936c1aa",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
@@ -123,6 +237,30 @@
       "writtenOn": "2020-12-08T10:50:56Z",
       "side": 1,
       "message": "The error handling is a bit unexpected for an example.\nIf error handling is something you particularly care about, I\u0027d suggest using a non-void return type so you can immediately stop the iteration, and then have Iterate return the error code.",
+      "range": {
+        "startLine": 96,
+        "startChar": 17,
+        "endLine": 96,
+        "endChar": 55
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e5d7a64_def337b7",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "We don\u0027t particularly care about it and in particular we heavily bias towards optimizing the success case at the expense of the error case. (so it would be fine to finish the whole iteration even if it is useless when an error crept up in the middle vs. adding more branches that aren\u0027t taken in the success case).\n\nRemoved the error from the example to avoid the confusion.",
+      "parentUuid": "a794a5f9_7936c1aa",
       "range": {
         "startLine": 96,
         "startChar": 17,
@@ -158,6 +296,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fc9cd23_b9767c40",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "Aspect is defined as `enum class Aspect : uint8_t` so I think all three members together should pack in 4 bytes, am I missing something?\n\nI didn\u0027t think there would be a cost associated with the data being smaller because IIRC both x86 and ARM ISAs have instructions to load 8 or 16 bytes from memory into a register? I could be completely wrong though.",
+      "parentUuid": "b3c9c23d_4fa353f3",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 34
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d6d1a48_90c24287",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
@@ -169,6 +331,30 @@
       "writtenOn": "2020-12-08T10:50:56Z",
       "side": 1,
       "message": "nit: Offset makes me think bytes, when this is an index in mData.",
+      "range": {
+        "startLine": 182,
+        "startChar": 19,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae41d82e_b816f01c",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T11:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d6d1a48_90c24287",
       "range": {
         "startLine": 182,
         "startChar": 19,
