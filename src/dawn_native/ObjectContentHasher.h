@@ -55,14 +55,14 @@ namespace dawn_native {
 
         template <>
         struct RecordImpl<std::string> {
-            static constexpr void Call(ObjectContentHasher* recorder, const std::string& str) {
+            static void Call(ObjectContentHasher* recorder, const std::string& str) {
                 recorder->RecordIterable<std::string>(str);
             }
         };
 
         template <typename T>
         struct RecordImpl<std::vector<T>> {
-            static constexpr void Call(ObjectContentHasher* recorder, const std::vector<T>& vec) {
+            static void Call(ObjectContentHasher* recorder, const std::vector<T>& vec) {
                 recorder->RecordIterable<std::vector<T>>(vec);
             }
         };
