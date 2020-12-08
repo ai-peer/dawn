@@ -163,6 +163,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void PlatformFunctions::LoadDXIL(const std::string& baseWindowsSDKPath) {
+        printf("LoadDXIL baseWindowsSDKPath %s\n", baseWindowsSDKPath.c_str());
         const char* dxilDLLName = "dxil.dll";
         const std::array<std::string, 2> kDxilDLLPaths = {
             {dxilDLLName, baseWindowsSDKPath + dxilDLLName}};
