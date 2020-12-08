@@ -109,5 +109,4 @@ DAWN_INSTANTIATE_TEST(DrawTest,
                       OpenGLBackend({"use_tint_generator"}),
                       OpenGLESBackend(),
                       OpenGLESBackend({"use_tint_generator"}),
-                      VulkanBackend(),
-                      VulkanBackend({"use_tint_generator"}));
+                      VulkanBackend());
