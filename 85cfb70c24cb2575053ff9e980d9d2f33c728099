@@ -531,6 +531,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c85f631_c93cb4e9",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T14:19:22Z",
+      "side": 1,
+      "message": "std::make_unique\u003cT[]\u003e(N) will allocate N elements, and call the no-arg constructor for each element. You then assign with operator \u003d () in the for loop.\nYou can replace a no-arg constructor + assignment with a copy-constructor, with something like:\n\n    mData \u003d std::unique_ptr\u003cT[]\u003e(reinterpret_cast\u003cT*\u003e(new std::aligned_storage\u003csizeof(T) * count, alignof(T)\u003e::type)); \n    for (size_t i \u003d 0; i \u003c count; i++) {\n        new (\u0026p[i]) T(initialValue);\n    }\n\nThis would mean your contract for T would require copy-constructor as well as an assignment operator.\n\nAnyway, as I said before, microopt.",
+      "parentUuid": "32a1e805_4515db45",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 87
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6d1a48_90c24287",
