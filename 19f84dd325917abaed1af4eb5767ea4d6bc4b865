@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "932fe781_761f8c4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T06:10:51Z",
+      "side": 1,
+      "message": "WDYT?",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa56fde_208a0a17",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T06:10:51Z",
+      "side": 1,
+      "message": "technically I could do this by splitting the bot suites in Chromium to be per platform and add it just for Linux... but I think it\u0027s an unnecessary amount of config work when we\u0027re just going to merge the configs into one again.",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
