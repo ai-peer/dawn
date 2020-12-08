@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a7f62cc_afc6d5c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:24:11Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a61b61_74e72ee3",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:24:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the jsrepr be \"readonly-storage\"?",
+      "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

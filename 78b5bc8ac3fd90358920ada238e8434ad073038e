@@ -337,6 +337,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30dbfb52_ed8874c0",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:24:11Z",
+      "side": 1,
+      "message": "This is the last comment that still needs to be handled. We can chose to add wgpu::BindingType::Undefined in the next CL along with the validation so that we can make forward progress with the stack, but if that\u0027s the case it should be the next CL in the stack to make sure people don\u0027t mistakenly start using both paths in tests.",
+      "parentUuid": "c20ab333_5a34d9b3",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0fb669d_834cb2de",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
