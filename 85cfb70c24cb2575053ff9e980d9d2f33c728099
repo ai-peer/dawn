@@ -132,6 +132,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "419856be_d61bdcf9",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T11:30:54Z",
+      "side": 1,
+      "message": "After reading this a few times, I think it would be good to state exactly what compression / decompression really means. The mental model I\u0027ve formed is a tree:\n\n    ├─ aspect 0\n    │   │\n    │   ├─ layer 0\n    │   │   │\n    │   │   ├─ level 0\n    │   │   ├─ level 1\n    │   │   │ ...\n    │   │   └─ level mipLevelCount-1\n    │   │\n    │   │ ...\n    │   │\n    │   └─ arrayLayerCount-1\n    │       │\n    │       ├─ level 0\n    │       │ ...\n    │       └─ level mipLevelCount-1\n    │\n    └─ aspect 1\n        │\n        ├─ layer 0\n        │   │\n        │   │ ...\n        │\n        │ ... \n        │\n        └─ arrayLayerCount-1\n            │\n            │ ...\n\nWhere:\n• Recompression is the removal of all children of a non-leaf node (aspect or layer), which is possible iff all child nodes have the same data.\n• Decompression is the expansion of an aspect or layer node, by copying the parent data to the children.\n\nIs that right?",
+      "range": {
+        "startLine": 45,
+        "startChar": 32,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5b48da5_fb15e00d",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
@@ -313,6 +336,52 @@
         "startChar": 0,
         "endLine": 135,
         "endChar": 34
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b50dc435_f62372d5",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T11:30:54Z",
+      "side": 1,
+      "message": "I suggest adding index methods for these:\n\n  bool\u0026 LayerCompressed(uint32_t aspectIndex, uint32_t layerIndex);\n  T\u0026 Data(uint32_t aspectIndex, uint32_t layerIndex \u003d 0, uint32_t levelIndex \u003d 0);\n\nWorth also documenting that an aspect\u0027s data is the [layer0, level0]\u0027s data, and that a layer\u0027s data is the level0\u0027s data.",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 35
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03f8400c_a18ea3d6",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T11:30:54Z",
+      "side": 1,
+      "message": "übernit: might be slightly more efficient to allocate the memory, and copy-construct than construct and assign, but this is a microopt.",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 87
       },
       "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
