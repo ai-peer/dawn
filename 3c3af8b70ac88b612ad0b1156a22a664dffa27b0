@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b92e65f_fc7f8007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T15:51:41Z",
+      "side": 1,
+      "message": "Sorry I forgot to CQ this, and Ryan put up a CL that drive-by fixes the issue. https://dawn-review.googlesource.com/c/dawn/+/35103\n\nIt should land shortly.",
+      "revId": "3c3af8b70ac88b612ad0b1156a22a664dffa27b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
