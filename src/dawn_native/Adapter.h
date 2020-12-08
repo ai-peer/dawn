@@ -37,6 +37,7 @@ namespace dawn_native {
         const std::string& GetDriverDescription() const;
         const PCIInfo& GetPCIInfo() const;
         InstanceBase* GetInstance() const;
+        const std::string& GetPipelineCacheVersion() const;
 
         DeviceBase* CreateDevice(const DeviceDescriptor* descriptor = nullptr);
 
@@ -50,6 +51,7 @@ namespace dawn_native {
         wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
         std::string mDriverDescription;
         ExtensionsSet mSupportedExtensions;
+        std::string mPipelineCacheVersion;
 
       private:
         virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;

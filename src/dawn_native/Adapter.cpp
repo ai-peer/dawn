@@ -42,6 +42,10 @@ namespace dawn_native {
         return mInstance;
     }
 
+    const std::string& AdapterBase::GetPipelineCacheVersion() const {
+        return mPipelineCacheVersion;
+    }
+
     ExtensionsSet AdapterBase::GetSupportedExtensions() const {
         return mSupportedExtensions;
     }
