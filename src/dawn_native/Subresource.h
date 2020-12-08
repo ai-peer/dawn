@@ -67,9 +67,6 @@ namespace dawn_native {
         uint32_t baseMipLevel;
         uint32_t levelCount;
 
-        static SubresourceRange SingleMipAndLayer(uint32_t baseMipLevel,
-                                                  uint32_t baseArrayLayer,
-                                                  Aspect aspects);
         static SubresourceRange MakeSingle(Aspect aspect,
                                            uint32_t baseArrayLayer,
                                            uint32_t baseMipLevel);

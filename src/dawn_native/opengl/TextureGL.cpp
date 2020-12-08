@@ -249,8 +249,7 @@ namespace dawn_native { namespace opengl {
                                 for (Aspect aspect : IterateEnumMask(range.aspects)) {
                                     if (clearValue == TextureBase::ClearValue::Zero &&
                                         IsSubresourceContentInitialized(
-                                            SubresourceRange::SingleMipAndLayer(level, 0,
-                                                                                aspect))) {
+                                            SubresourceRange::MakeSingle(aspect, 0, level))) {
                                         // Skip lazy clears if already initialized.
                                         continue;
                                     }
@@ -272,8 +271,8 @@ namespace dawn_native { namespace opengl {
                                     for (Aspect aspect : IterateEnumMask(range.aspects)) {
                                         if (clearValue == TextureBase::ClearValue::Zero &&
                                             IsSubresourceContentInitialized(
-                                                SubresourceRange::SingleMipAndLayer(level, layer,
-                                                                                    aspect))) {
+                                                SubresourceRange::MakeSingle(aspect, layer,
+                                                                             level))) {
                                             // Skip lazy clears if already initialized.
                                             continue;
                                         }
@@ -319,7 +318,7 @@ namespace dawn_native { namespace opengl {
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
+                                SubresourceRange::MakeSingle(Aspect::Color, layer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -382,7 +381,7 @@ namespace dawn_native { namespace opengl {
                         if (GetArrayLayers() == 1) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
                                 IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleMipAndLayer(level, 0, Aspect::Color))) {
+                                    SubresourceRange::MakeSingle(Aspect::Color, 0, level))) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -393,9 +392,8 @@ namespace dawn_native { namespace opengl {
                             for (uint32_t layer = range.baseArrayLayer;
                                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
                                 if (clearValue == TextureBase::ClearValue::Zero &&
-                                    IsSubresourceContentInitialized(
-                                        SubresourceRange::SingleMipAndLayer(level, layer,
-                                                                            Aspect::Color))) {
+                                    IsSubresourceContentInitialized(SubresourceRange::MakeSingle(
+                                        Aspect::Color, layer, level))) {
                                     // Skip lazy clears if already initialized.
                                     continue;
                                 }
