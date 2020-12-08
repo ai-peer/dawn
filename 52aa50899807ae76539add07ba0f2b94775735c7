@@ -16,6 +16,350 @@
       "message": "PTAL! Note that the end state is supposed to look a bit like what\u0027s in this prototype CL: https://dawn-review.googlesource.com/c/dawn/+/34180",
       "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18cebd51_5f658758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "Overall looks good; I need to look at the tests again",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651e3c29_ed560c36",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "missing \".h\"",
+      "range": {
+        "startLine": 155,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 23
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9335e809_abb451ce",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "\"views\"",
+      "range": {
+        "startLine": 36,
+        "startChar": 71,
+        "endLine": 36,
+        "endChar": 75
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec05dcd_3d0072f4",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "\"allow per-subresource\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b0e445_a1ad33a6",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "\"closure\"",
+      "range": {
+        "startLine": 48,
+        "startChar": 62,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "939bd4b2_7714b1ed",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "we should consider adding TypedInteger for these and in the future, updating the types across the code base\n\nthough internal to this class, I think the raw integers are fine since making them typed would make the code hard to read. so basically - types only on the public interface?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 34
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e0ccfe_6dd737be",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "As a future TODO, we might want to consider a custom bitset implementation. At high array layer counts, this is more storage than std::vector\u003cbool\u003e I think, because std::vector\u003cbool\u003e gets a specialized implementation.",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5f81ed_0c6fd704",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "what do you think about also having an UpdateTo function that takes a value instead of a closure? It wouldn\u0027t need to do any checking if compression is possible if a whole layer/aspect is passed. I would need to look more closely at usages as I don\u0027t remember if an \"UpdateTo\" would even be used in our current code.",
+      "range": {
+        "startLine": 169,
+        "startChar": 32,
+        "endLine": 169,
+        "endChar": 38
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "518d0331_34a71ca8",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "here and in the other recompress helper, I think it makes more sense to do the equality check and early return. and then only update this if we never early return. As it is now, the state flips back and forth.",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc3891c_ae66eeea",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "nit: also ASSERT the aspect is not compressed",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0986ccbd_ad1e3d01",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "nit: also ASSERT the aspect is not compressed",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3392d623_94c0aad0",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "nit: unsigned",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 19
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93978808_0af9d51b",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "this one does set a default value, also use the same 077u with the \"u\" suffix to be consistent",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 228,
+        "endChar": 36
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1d605f_819019e3",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "crossing",
+      "range": {
+        "startLine": 332,
+        "startChar": 22,
+        "endLine": 332,
+        "endChar": 30
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde0b94b_bc3b31d4",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "updated",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fef7a35_b8a1d90a",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T01:09:00Z",
+      "side": 1,
+      "message": "\"extrema\" is already plural",
+      "range": {
+        "startLine": 389,
+        "startChar": 22,
+        "endLine": 389,
+        "endChar": 30
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
