@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa78f568_1c6c9f18",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-08T06:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cad8bacf_ec054a95",
+      "range": {
+        "startLine": 150,
+        "startChar": 34,
+        "endLine": 151,
+        "endChar": 43
+      },
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "181cb848_abd31955",
@@ -93,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b796ba51_d6153256",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-08T06:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6284d1_85bd1d4a",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88175031_4e903501",
@@ -106,6 +148,30 @@
       "writtenOn": "2020-12-05T02:35:50Z",
       "side": 1,
       "message": "I think this check should become obsolete. In the spec, depth now can be used with regular sampling and not just comparison sampling. So instead of this, in pipeline creation we have to check that if a comparison sampler bgl entry is used with a texture bgl entry, that texture must be both depth *and* multisampled:false. Of course, this probably happens after the internal representation gets fixed as mentioned in the TODO below.\n\nLeave a TODO here for this?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 21
+      },
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2359efd3_bcc26871",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-08T06:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88175031_4e903501",
       "range": {
         "startLine": 118,
         "startChar": 0,
@@ -186,6 +252,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9d2bbe_cf8aba59",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-08T06:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bd729a5_c57b99cb",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7d343cf_a3e7d80c",
@@ -199,6 +283,24 @@
       "writtenOn": "2020-12-05T02:35:50Z",
       "side": 1,
       "message": "Is it necessary to handle both old and new here? Does this one test file still hit both paths?",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff679777_2c966647",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-08T06:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d343cf_a3e7d80c",
       "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
