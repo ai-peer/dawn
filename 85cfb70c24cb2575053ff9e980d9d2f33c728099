@@ -153,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d2ebf4_fe29bcb4",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T13:39:22Z",
+      "side": 1,
+      "message": "That\u0027s correct. Added more explanation to the block comment.",
+      "parentUuid": "419856be_d61bdcf9",
+      "range": {
+        "startLine": 45,
+        "startChar": 32,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5b48da5_fb15e00d",
@@ -438,6 +462,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ebfa0e21_28a34ffd",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T13:39:22Z",
+      "side": 1,
+      "message": "Added the documentation.\n\nI was thinking that adding these helpers could produce slower code, but we shouldn\u0027t care about that level optimization now. Done.",
+      "parentUuid": "b50dc435_f62372d5",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 35
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "03f8400c_a18ea3d6",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
@@ -449,6 +497,30 @@
       "writtenOn": "2020-12-08T11:30:54Z",
       "side": 1,
       "message": "übernit: might be slightly more efficient to allocate the memory, and copy-construct than construct and assign, but this is a microopt.",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 87
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a1e805_4515db45",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T13:39:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understood this. We only initialize the mData elements that correspond to compressed layers so if T isn\u0027t even defaulted, then nothing should happen.",
+      "parentUuid": "03f8400c_a18ea3d6",
       "range": {
         "startLine": 161,
         "startChar": 8,

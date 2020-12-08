@@ -22,6 +22,30 @@
       },
       "revId": "408cb52a1485b50777af601d7c01e70347df9688",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f1b590_0d326e20",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T13:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87110093_050c9ce7",
+      "range": {
+        "startLine": 106,
+        "startChar": 54,
+        "endLine": 106,
+        "endChar": 77
+      },
+      "revId": "408cb52a1485b50777af601d7c01e70347df9688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
