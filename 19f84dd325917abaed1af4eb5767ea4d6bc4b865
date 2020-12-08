@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "07e28e99_174221c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T15:33:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92c63e8a_4d5ca4cf",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "932fe781_761f8c4c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -110,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9933071a_be211bf6",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T15:33:25Z",
+      "side": 1,
+      "message": "Yep did my best to do this. These ones I\u0027m not so sure yet and will need some further triage. The code looks right but the test simply fails.",
+      "parentUuid": "5a14b967_c7bb6664",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "575151e6_3816c46e",
@@ -123,6 +165,24 @@
       "writtenOn": "2020-12-08T08:33:25Z",
       "side": 1,
       "message": "nit: missing comment?",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4869e28b_56a01dd0",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T15:33:25Z",
+      "side": 1,
+      "message": "Whoops, this skip is redundant",
+      "parentUuid": "575151e6_3816c46e",
       "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
