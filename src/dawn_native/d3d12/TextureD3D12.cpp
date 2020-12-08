@@ -872,7 +872,7 @@ namespace dawn_native { namespace d3d12 {
                         for (Aspect aspect : IterateEnumMask(range.aspects)) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
                                 IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
+                                    SubresourceRange::MakeSingle(aspect, layer, level))) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -920,7 +920,7 @@ namespace dawn_native { namespace d3d12 {
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
+                                SubresourceRange::MakeSingle(Aspect::Color, layer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -968,7 +968,7 @@ namespace dawn_native { namespace d3d12 {
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
+                                SubresourceRange::MakeSingle(aspect, layer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }

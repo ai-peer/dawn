@@ -83,13 +83,6 @@ namespace dawn_native {
     }
 
     // static
-    SubresourceRange SubresourceRange::SingleMipAndLayer(uint32_t baseMipLevel,
-                                                         uint32_t baseArrayLayer,
-                                                         Aspect aspects) {
-        return {aspects, {baseArrayLayer, 1}, {baseMipLevel, 1}};
-    }
-
-    // static
     SubresourceRange SubresourceRange::MakeSingle(Aspect aspect,
                                                   uint32_t baseArrayLayer,
                                                   uint32_t baseMipLevel) {
