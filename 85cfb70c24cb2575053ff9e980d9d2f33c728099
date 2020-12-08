@@ -294,6 +294,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a6fa38_eeeaceb7",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T12:43:59Z",
+      "side": 1,
+      "message": "Looks fine, thanks",
+      "parentUuid": "6e5d7a64_def337b7",
+      "range": {
+        "startLine": 96,
+        "startChar": 17,
+        "endLine": 96,
+        "endChar": 55
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3c9c23d_4fa353f3",
@@ -331,6 +355,30 @@
       "side": 1,
       "message": "Aspect is defined as `enum class Aspect : uint8_t` so I think all three members together should pack in 4 bytes, am I missing something?\n\nI didn\u0027t think there would be a cost associated with the data being smaller because IIRC both x86 and ARM ISAs have instructions to load 8 or 16 bytes from memory into a register? I could be completely wrong though.",
       "parentUuid": "b3c9c23d_4fa353f3",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 34
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61988a9f_b34581b5",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T12:43:59Z",
+      "side": 1,
+      "message": "Ah, I missed that Aspect was 8 bit. Ignore me.",
+      "parentUuid": "0fc9cd23_b9767c40",
       "range": {
         "startLine": 134,
         "startChar": 0,
