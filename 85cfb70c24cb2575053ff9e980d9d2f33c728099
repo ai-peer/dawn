@@ -555,6 +555,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81fee7f3_d342ed88",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T14:20:31Z",
+      "side": 1,
+      "message": "Ah yeah, that\u0027s kind of a micro-opt, let\u0027s skip it for now if you don\u0027t mind.",
+      "parentUuid": "7c85f631_c93cb4e9",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 87
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6d1a48_90c24287",
