@@ -375,6 +375,11 @@ class VertexFormatTest : public DawnTest {
     void DoVertexFormatTest(wgpu::VertexFormat format,
                             std::vector<VertexType> vertex,
                             std::vector<ExpectedType> expectedData) {
+        // TODO(crbug.com/tint/402): Unimplemented min / max
+        DAWN_SKIP_TEST_IF(
+            (IsFloatFormat(format) || IsHalfFormat(format) || IsNormalizedFormat(format)) &&
+            HasToggleEnabled("use_tint_generator"));
+
         wgpu::RenderPipeline pipeline = MakeTestPipeline(format, expectedData);
         wgpu::Buffer vertexBuffer = utils::CreateBufferFromData(
             device, vertex.data(), vertex.size() * sizeof(VertexType), wgpu::BufferUsage::Vertex);
@@ -495,6 +500,8 @@ TEST_P(VertexFormatTest, Char4) {
 }
 
 TEST_P(VertexFormatTest, UChar2Norm) {
+    DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
+
     // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
     // See http://crbug.com/dawn/259
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
