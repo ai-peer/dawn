@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddcd1234_bce7885c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T16:04:17Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "7e60a2d982ff8264805b2b0c85ba9368ea0bff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b399b0af_c1749288",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T16:04:17Z",
+      "side": 1,
+      "message": "we always CallUpdateOnBoth, and then do FakeStorage::CheckSameAs\n\nWhat do you think about having a \"ValidatedSubresourceStorage\" wrapper around SubresourceStorage which holds both the storage and fake storage. It\u0027ll proxy Update calls to both of them and check they\u0027re the same and tracked exactly after calls to Update (and Merge when you add it).\n\nI guess this makes the testing more implicit though and testing the constructors too is less obvious and indirect, so maybe the middle ground would be to just move the CheckSameAs check into this function next to CheckTrackedExactly.",
+      "revId": "7e60a2d982ff8264805b2b0c85ba9368ea0bff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

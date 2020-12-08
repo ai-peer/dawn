@@ -317,6 +317,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7df834_27c40e55",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T16:04:17Z",
+      "side": 1,
+      "message": "good point that it makes the indexing expression more complex",
+      "parentUuid": "331569c1_a60afe6e",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a5f81ed_0c6fd704",
@@ -354,6 +378,30 @@
       "side": 1,
       "message": "At least for now an UpdateTo function wouldn\u0027t be used, it\u0027s a good idea to keep in mind. I\u0027ll add a comment with potential ideas for the operation algebra.",
       "parentUuid": "8a5f81ed_0c6fd704",
+      "range": {
+        "startLine": 169,
+        "startChar": 32,
+        "endLine": 169,
+        "endChar": 38
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "419dea1b_d3874cfe",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T16:04:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70d58db4_5f4ec814",
       "range": {
         "startLine": 169,
         "startChar": 32,

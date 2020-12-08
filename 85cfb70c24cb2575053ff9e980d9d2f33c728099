@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0563165f_e32e12b2",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-08T16:04:17Z",
+      "side": 1,
+      "message": "I think type traits are great! Sounds good for stuff like the equality operator, etc. We shouldn\u0027t move *all* traits there though if they\u0027re fairly local to the implementation - like maybe traits that would use is_base_of\u003cParent, ..\u003e since those might make more sense next to the Parent.",
+      "parentUuid": "e5f12fb4_8d313a0d",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acaa243a_268eae9b",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 5
