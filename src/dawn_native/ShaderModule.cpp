@@ -14,6 +14,7 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "common/Log.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ObjectContentHasher.h"
@@ -192,6 +193,10 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
 
+            tint::writer::wgsl::Generator wgslWriter(&program);
+            wgslWriter.Generate();
+            DAWN_DEBUG() << wgslWriter.result();
+
             return std::move(program);
         }
 
@@ -234,6 +239,12 @@ namespace dawn_native {
             }
 
             std::vector<uint32_t> spirv = generator.result();
+
+            spvtools::SpirvTools tools(SPV_ENV_VULKAN_1_1);
+            std::string out;
+            tools.Disassemble(spirv, &out);
+            DAWN_DEBUG() << out;
+
             return std::move(spirv);
         }
 #endif  // DAWN_ENABLE_WGSL
@@ -858,6 +869,7 @@ namespace dawn_native {
                     static_cast<const ShaderModuleWGSLDescriptor*>(chainedDescriptor);
 
                 tint::Source::File file("", wgslDesc->source);
+                DAWN_DEBUG() << wgslDesc->source;
 
                 tint::Program program;
                 DAWN_TRY_ASSIGN(program, ParseWGSL(&file));

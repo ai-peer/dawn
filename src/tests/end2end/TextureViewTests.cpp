@@ -686,6 +686,99 @@ TEST_P(TextureViewTest, OnlyCopySrcDst) {
     wgpu::TextureView view = texture.CreateView();
 }
 
+TEST_P(TextureViewTest, RG8UnormComputeShaderSampling) {
+    const uint32_t kMipLevelCount = 5;
+    const uint32_t kSliceCount = 7;
+    const uint32_t mipLevel = 1;
+    const uint32_t slice = 4;
+
+    wgpu::TextureDescriptor textureDesc;
+    textureDesc.size = {1 << kMipLevelCount, 1 << kMipLevelCount, kSliceCount};
+    textureDesc.usage = wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopyDst;
+    textureDesc.format = wgpu::TextureFormat::RG8Unorm;
+    textureDesc.mipLevelCount = kMipLevelCount;
+
+    uint32_t mipWidth = textureDesc.size.width >> mipLevel;
+    uint32_t mipHeight = textureDesc.size.height >> mipLevel;
+
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+    wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.baseArrayLayer = slice;
+    viewDesc.arrayLayerCount = 1;
+    viewDesc.baseMipLevel = 0;
+    viewDesc.mipLevelCount = kMipLevelCount;
+
+    wgpu::TextureCopyView textureCopyView = {};
+    textureCopyView.texture = texture;
+    textureCopyView.mipLevel = mipLevel;
+    textureCopyView.origin = {0, 0, slice};
+
+    wgpu::TextureDataLayout textureDataLayout = {};
+    textureDataLayout.bytesPerRow = mipWidth * sizeof(uint8_t[2]);
+    std::vector<uint8_t> textureData(mipWidth * mipHeight * 2, 255);
+    wgpu::Extent3D writeSize = {mipWidth, mipHeight, 1};
+    queue.WriteTexture(&textureCopyView, textureData.data(), textureData.size(), &textureDataLayout,
+                       &writeSize);
+
+    wgpu::TextureView textureView = texture.CreateView(&viewDesc);
+
+    wgpu::BufferDescriptor bufferDesc = {};
+    bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+    bufferDesc.size = mipWidth * mipHeight * sizeof(float[2]);
+    wgpu::Buffer resultBuffer = device.CreateBuffer(&bufferDesc);
+
+    std::ostringstream shader;
+    shader << R"(
+        [[set(0), binding(1)]] var myTexture : texture_2d<f32>;
+
+        [[block]] struct Result {
+            [[offset(0)]] values : [[stride(4)]] array<f32>;
+        };
+        [[set(0), binding(3)]] var<storage> result : Result;
+
+        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+    )"
+           << "const width : u32 = " << mipWidth << "u;\n"
+           << "const componentCount : u32 = 2u;\n"
+           << "const level : i32 = " << mipLevel << ";\n"
+           << R"(
+        [[stage(compute)]]
+        fn main() -> void {
+            var flatIndex : u32 = width * GlobalInvocationID.y + GlobalInvocationID.x;
+            flatIndex = flatIndex * componentCount;
+            var texel : vec4<f32> = textureLoad(
+            myTexture, vec2<i32>(GlobalInvocationID.xy), level);
+
+            for (var i : u32 = flatIndex; i < flatIndex + componentCount; i = i + 1) {
+                result.values[i] = texel.rg[i];
+            }
+        }
+    )";
+
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, shader.str().c_str());
+
+    wgpu::ComputePipelineDescriptor pipelineDesc = {};
+    pipelineDesc.computeStage.module = module;
+    pipelineDesc.computeStage.entryPoint = "main";
+
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {{1, textureView}, {3, resultBuffer}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.Dispatch(mipWidth, mipHeight);
+    pass.EndPass();
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    std::vector<float> expected(mipWidth * mipHeight, 1.f);
+    EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), resultBuffer, 0, mipWidth * mipHeight);
+}
+
 DAWN_INSTANTIATE_TEST(TextureViewTest,
                       D3D12Backend(),
                       MetalBackend(),
