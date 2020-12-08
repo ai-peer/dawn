@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afffbfc0_dca62803",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "651e3c29_ed560c36",
+      "range": {
+        "startLine": 155,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 23
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9335e809_abb451ce",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "\"views\"",
+      "range": {
+        "startLine": 36,
+        "startChar": 71,
+        "endLine": 36,
+        "endChar": 75
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "416353d3_40ca56f9",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9335e809_abb451ce",
       "range": {
         "startLine": 36,
         "startChar": 71,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d5412bc_e297d137",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ec05dcd_3d0072f4",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b0e445_a1ad33a6",
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7822754e_e9c83732",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1b0e445_a1ad33a6",
+      "range": {
+        "startLine": 48,
+        "startChar": 62,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "939bd4b2_7714b1ed",
@@ -140,6 +236,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "we should consider adding TypedInteger for these and in the future, updating the types across the code base\n\nthough internal to this class, I think the raw integers are fine since making them typed would make the code hard to read. so basically - types only on the public interface?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 34
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfde6d5b_01c1819b",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "That\u0027s an interesting idea, maybe TypedInteger would help (and the storage would be smaller than what we currently use). Things that need to compute indices into flat arrays from typed integers could use a helper function to make this transparent maybe?\n\nLike you said, I\u0027d rather not do it internally to this class given the amount of arithmetic we do.",
+      "parentUuid": "939bd4b2_7714b1ed",
       "range": {
         "startLine": 128,
         "startChar": 8,
@@ -175,6 +295,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "331569c1_a60afe6e",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Yeah std::vector has this packed implementation, which is pretty annoying actually.\n\nHowever I think that for this class it could be better to store bools as bytes because the extra storage isn\u0027t that big (compared to mData) and there is much less code produces when accessing mLayerCompressed. (versus 1 \u0026 (v[i \u003e\u003e 5] \u003e\u003e (i \u0026 0x1F)) )",
+      "parentUuid": "89e0ccfe_6dd737be",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 49
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a5f81ed_0c6fd704",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 3
@@ -186,6 +330,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "what do you think about also having an UpdateTo function that takes a value instead of a closure? It wouldn\u0027t need to do any checking if compression is possible if a whole layer/aspect is passed. I would need to look more closely at usages as I don\u0027t remember if an \"UpdateTo\" would even be used in our current code.",
+      "range": {
+        "startLine": 169,
+        "startChar": 32,
+        "endLine": 169,
+        "endChar": 38
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d58db4_5f4ec814",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "At least for now an UpdateTo function wouldn\u0027t be used, it\u0027s a good idea to keep in mind. I\u0027ll add a comment with potential ideas for the operation algebra.",
+      "parentUuid": "8a5f81ed_0c6fd704",
       "range": {
         "startLine": 169,
         "startChar": 32,
@@ -213,6 +381,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f69790c_c70f35e9",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "We assert that the Recompress can only be called if the aspect isn\u0027t compressed so instead I changed the code to loop and do early return, and only after that sets aspectCompressed \u003d true.",
+      "parentUuid": "518d0331_34a71ca8",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cc3891c_ae66eeea",
@@ -226,6 +412,24 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "nit: also ASSERT the aspect is not compressed",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c6aef9_20a4ff66",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cc3891c_ae66eeea",
       "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -247,6 +451,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92b24e8_0ae48051",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0986ccbd_ad1e3d01",
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3392d623_94c0aad0",
@@ -260,6 +482,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "nit: unsigned",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 19
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3089d1d4_dd97b31a",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3392d623_94c0aad0",
       "range": {
         "startLine": 109,
         "startChar": 16,
@@ -293,6 +539,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "235ad5ae_c8b6706d",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93978808_0af9d51b",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 228,
+        "endChar": 36
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b1d605f_819019e3",
@@ -306,6 +576,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "crossing",
+      "range": {
+        "startLine": 332,
+        "startChar": 22,
+        "endLine": 332,
+        "endChar": 30
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8aa7c26_e08c999c",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1d605f_819019e3",
       "range": {
         "startLine": 332,
         "startChar": 22,
@@ -339,6 +633,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "258711a9_9c45402d",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde0b94b_bc3b31d4",
+      "range": {
+        "startLine": 348,
+        "startChar": 29,
+        "endLine": 348,
+        "endChar": 36
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fef7a35_b8a1d90a",
@@ -352,6 +670,30 @@
       "writtenOn": "2020-12-08T01:09:00Z",
       "side": 1,
       "message": "\"extrema\" is already plural",
+      "range": {
+        "startLine": 389,
+        "startChar": 22,
+        "endLine": 389,
+        "endChar": 30
+      },
+      "revId": "52aa50899807ae76539add07ba0f2b94775735c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76308d29_00e19733",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fef7a35_b8a1d90a",
       "range": {
         "startLine": 389,
         "startChar": 22,
