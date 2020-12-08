@@ -736,7 +736,7 @@ namespace dawn_native { namespace vulkan {
             if (barriers->size() == transitionBarrierStart) {
                 barriers->push_back(BuildMemoryBarrier(
                     GetFormat(), mHandle, wgpu::TextureUsage::None, wgpu::TextureUsage::None,
-                    SubresourceRange::SingleMipAndLayer(0, 0, GetFormat().aspects)));
+                    SubresourceRange::MakeSingle(GetFormat().aspects, 0, 0)));
             }
 
             VkImageMemoryBarrier* barrier = &(*barriers)[transitionBarrierStart];
@@ -879,10 +879,9 @@ namespace dawn_native { namespace vulkan {
                         mSubresourceLastUsages[index] = usage;
                     }
 
-                    imageBarriers->push_back(
-                        BuildMemoryBarrier(format, mHandle, lastUsage, usage,
-                                           SubresourceRange::SingleMipAndLayer(
-                                               mipLevel, arrayLayer, GetFormat().aspects)));
+                    imageBarriers->push_back(BuildMemoryBarrier(
+                        format, mHandle, lastUsage, usage,
+                        SubresourceRange::MakeSingle(GetFormat().aspects, arrayLayer, mipLevel)));
                 }
             }
         }
@@ -979,7 +978,7 @@ namespace dawn_native { namespace vulkan {
 
                     imageBarriers->push_back(BuildMemoryBarrier(
                         format, mHandle, lastUsage, usage,
-                        SubresourceRange::SingleMipAndLayer(level, layer, format.aspects)));
+                        SubresourceRange::MakeSingle(format.aspects, layer, level)));
                 }
             }
         }
@@ -1032,7 +1031,7 @@ namespace dawn_native { namespace vulkan {
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                     if (clearValue == TextureBase::ClearValue::Zero &&
                         IsSubresourceContentInitialized(
-                            SubresourceRange::SingleMipAndLayer(level, layer, range.aspects))) {
+                            SubresourceRange::MakeSingle(range.aspects, layer, level))) {
                         // Skip lazy clears if already initialized.
                         continue;
                     }
@@ -1065,7 +1064,7 @@ namespace dawn_native { namespace vulkan {
                     for (Aspect aspect : IterateEnumMask(range.aspects)) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
+                                SubresourceRange::MakeSingle(aspect, layer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }

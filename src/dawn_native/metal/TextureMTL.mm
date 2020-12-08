@@ -413,8 +413,8 @@ namespace dawn_native { namespace metal {
                     for (uint32_t arrayLayer = range.baseArrayLayer;
                          arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                level, arrayLayer, range.aspects))) {
+                            IsSubresourceContentInitialized(
+                                SubresourceRange::MakeSingle(range.aspects, arrayLayer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -429,8 +429,8 @@ namespace dawn_native { namespace metal {
                         // determine which to clear.
                         for (Aspect aspect : IterateEnumMask(range.aspects)) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                    level, arrayLayer, aspect))) {
+                                IsSubresourceContentInitialized(
+                                    SubresourceRange::MakeSingle(aspect, arrayLayer, level))) {
                                 // Skip lazy clears if already initialized.
                                 continue;
                             }
@@ -475,8 +475,8 @@ namespace dawn_native { namespace metal {
                     for (uint32_t arrayLayer = range.baseArrayLayer;
                          arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                level, arrayLayer, Aspect::Color))) {
+                            IsSubresourceContentInitialized(
+                                SubresourceRange::MakeSingle(Aspect::Color, arrayLayer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
@@ -556,7 +556,7 @@ namespace dawn_native { namespace metal {
                          arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, arrayLayer, aspect))) {
+                                SubresourceRange::MakeSingle(aspect, arrayLayer, level))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
