@@ -50,6 +50,24 @@
       "message": "nit: cstddef for consistency with the rest of Dawn.",
       "revId": "8ac1271e53b55f4eb9038a85bdf5402cffc32806",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094726bc_4e390c7b",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-12-08T15:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "137d7b27_d40d6593",
+      "revId": "8ac1271e53b55f4eb9038a85bdf5402cffc32806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
