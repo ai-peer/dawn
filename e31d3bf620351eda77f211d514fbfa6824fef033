@@ -33,6 +33,24 @@
       "message": "Shouldn\u0027t the jsrepr be \"readonly-storage\"?",
       "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f6dca02_fceb3781",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-08T18:46:49Z",
+      "side": 1,
+      "message": "yes, but also this diverges from WGPUBindingType (which is also upstream) which is Readonly instead of ReadOnly. Maybe we should decide on the headers repo if we can before landing this. https://github.com/webgpu-native/webgpu-headers/issues/72",
+      "parentUuid": "a1a61b61_74e72ee3",
+      "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

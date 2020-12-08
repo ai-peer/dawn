@@ -235,6 +235,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c180da6_6a52eab7",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-08T18:46:49Z",
+      "side": 1,
+      "message": "In which case this is resolved.",
+      "parentUuid": "7fc353b5_898bb6d0",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bd729a5_c57b99cb",
