@@ -153,6 +153,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fc353b5_898bb6d0",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-08T01:04:35Z",
+      "side": 1,
+      "message": "I think that\u0027s fine. We\u0027d just treat 0 \u003d WGPU_X_UNDEFINED like in JS where the defaulting happens inside the API.",
+      "parentUuid": "8c020abb_5b4843c7",
+      "revId": "5adeccc28725a8d7629de88bb1dd2176e376b8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bd729a5_c57b99cb",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 4
