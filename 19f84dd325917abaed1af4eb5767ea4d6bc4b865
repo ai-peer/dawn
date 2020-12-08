@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7b176c_d57cd0d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:33:25Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aa56fde_208a0a17",
@@ -31,6 +48,58 @@
       "writtenOn": "2020-12-08T06:10:51Z",
       "side": 1,
       "message": "technically I could do this by splitting the bot suites in Chromium to be per platform and add it just for Linux... but I think it\u0027s an unnecessary amount of config work when we\u0027re just going to merge the configs into one again.",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf0ca95_4a62ad90",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:33:25Z",
+      "side": 1,
+      "message": "Oh wow that\u0027s a crazy hack but if it\u0027s only temporary while we add suppression on all backends, it seems fine.",
+      "parentUuid": "9aa56fde_208a0a17",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a14b967_c7bb6664",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:33:25Z",
+      "side": 1,
+      "message": "Maybe we could take a guess at whether a failure is on all backends or not to avoid extra work adding IsD3D12() and then simplifying it down when noticing it also fails on Metal? Ditto in all other expectations.\n\nAh it seems like you maybe already did that, feel free to ignore this comment if you already thought about it.",
+      "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575151e6_3816c46e",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:33:25Z",
+      "side": 1,
+      "message": "nit: missing comment?",
       "revId": "19f84dd325917abaed1af4eb5767ea4d6bc4b865",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
