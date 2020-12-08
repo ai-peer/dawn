@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f7aab5_e537a656",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:41:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f60c43f_5e7deb76",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4c9f29_aacd4e8f",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b981ba31_55dcc4b8",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:41:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab4c9f29_aacd4e8f",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc127fb8_a0986458",
@@ -99,6 +135,24 @@
       "writtenOn": "2020-12-07T22:18:37Z",
       "side": 1,
       "message": "Nit: It\u0027s nice when factory function have verbs in the name. e.g., CreateSingle() or MakeSingle().",
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "784eba61_f26e9dac",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:41:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc127fb8_a0986458",
       "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -164,6 +218,30 @@
       "side": 1,
       "message": "oh yes, the \"And\" is important",
       "parentUuid": "ef00928a_ea91b667",
+      "range": {
+        "startLine": 55,
+        "startChar": 25,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "7f31bd5a38098c149b8c34bcbaab8c4305e46abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86226be_d8e482bd",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T08:41:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a2cf59_bc3fa272",
       "range": {
         "startLine": 55,
         "startChar": 25,
