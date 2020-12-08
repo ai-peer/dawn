@@ -248,6 +248,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e907da03_f6154d40",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-08T17:29:38Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll add the start of typetrait header as a follow-up.",
+      "parentUuid": "0563165f_e32e12b2",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acaa243a_268eae9b",
