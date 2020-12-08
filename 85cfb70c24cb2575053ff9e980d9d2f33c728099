@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d763c97_5f65c1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "First batch of comments - this is taking a while to review as this is all new to me, so I\u0027ll post comments in batches.\n\nLots of nits which are completely ignorable.",
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d97ca4_2d6a7144",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "nit: What does the \u0027c\u0027 prefix represent? Seems odd to change this but keep \u0027aspect_\u0027",
+      "range": {
+        "startLine": 183,
+        "startChar": 41,
+        "endLine": 183,
+        "endChar": 61
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e5895f_8c8458a5",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "nit: Maybe reorder these fields so they\u0027re not reversed from the other two functions?",
+      "range": {
+        "startLine": 70,
+        "startChar": 32,
+        "endLine": 72,
+        "endChar": 66
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b48da5_fb15e00d",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "Fine as is, but you could add:\n\n    namespace detail {\n        struct Unsupported {}; \n\n        template\u003ctypename LHS, typename RHS\u003e\n        Unsupported operator \u003d\u003d (LHS, RHS);\n\n        template\u003ctypename LHS, typename RHS \u003d LHS\u003e\n        struct HasEqualityOperator\n        {\n            static constexpr const bool value \u003d std::is_same\u003cdecltype(std::declval\u003cLHS\u003e() \u003d\u003d std::declval\u003cRHS\u003e()), bool\u003e::value;\n        };\n    }\n\n    template \u003ctypename T\u003e\n    class SubresourceStorage {\n      public:\n        static_assert(std::is_copy_assignable\u003cT\u003e::value, \"T must be copyable\");\n        static_assert(detail::HasEqualityOperator\u003cT\u003e::value, \"T requires bool operator \u003d\u003d (T, T)\");\n        ...",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 75
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acaa243a_268eae9b",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this technically needs to be convertible (nor do I think it always can be). The terminology I tend to use for this is:\n\n\"F must be a function or function-like object with the signature: void(const SubresourceRange\u0026 range, const T\u0026 data)\"",
+      "range": {
+        "startLine": 89,
+        "startChar": 32,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a794a5f9_7936c1aa",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "The error handling is a bit unexpected for an example.\nIf error handling is something you particularly care about, I\u0027d suggest using a non-void return type so you can immediately stop the iteration, and then have Iterate return the error code.",
+      "range": {
+        "startLine": 96,
+        "startChar": 17,
+        "endLine": 96,
+        "endChar": 55
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c9c23d_4fa353f3",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "übernit: you might save some space swapping these two fields, however the cost is probably negligible, and you\u0027d probably get better arithmetic performance if they were native register width.\nI\u0027m curious to know why you\u0027ve used small types here instead of uint32_t or size_t?",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 34
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6d1a48_90c24287",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-08T10:50:56Z",
+      "side": 1,
+      "message": "nit: Offset makes me think bytes, when this is an index in mData.",
+      "range": {
+        "startLine": 182,
+        "startChar": 19,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "85cfb70c24cb2575053ff9e980d9d2f33c728099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
