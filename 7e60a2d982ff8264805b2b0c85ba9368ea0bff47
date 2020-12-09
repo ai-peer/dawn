@@ -51,6 +51,24 @@
       "parentUuid": "b399b0af_c1749288",
       "revId": "7e60a2d982ff8264805b2b0c85ba9368ea0bff47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6db4dd9_c41adfc0",
+        "filename": "src/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T14:44:49Z",
+      "side": 1,
+      "message": "I tried to do the ValidatedSubresourceStorage like you suggested but it moved a lot of code and added even more indirection for questionable gains.\n\nWent with moving CheckSameAs in CallUpdateOnBoth like you suggested.",
+      "parentUuid": "578d82b5_81c5db72",
+      "revId": "7e60a2d982ff8264805b2b0c85ba9368ea0bff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
