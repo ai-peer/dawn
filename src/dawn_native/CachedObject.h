@@ -37,9 +37,10 @@ namespace dawn_native {
         size_t GetContentHash() const;
         void SetContentHash(size_t contentHash);
 
+        void SetIsCachedReference();
+
       private:
         friend class DeviceBase;
-        void SetIsCachedReference();
 
         bool mIsCachedReference = false;
 

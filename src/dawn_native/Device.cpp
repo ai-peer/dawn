@@ -433,26 +433,41 @@ namespace dawn_native {
         return mFormatTable[index];
     }
 
-    ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
-        const BindGroupLayoutDescriptor* descriptor) {
-        BindGroupLayoutBase blueprint(this, descriptor);
+    template <typename CachedObjectT,
+              typename CachedObjectDescriptorT,
+              typename CreateFn,
+              typename... Args>
+    ResultOrError<Ref<CachedObjectT>> GetOrCreateCachedObjectHelper(
+        DeviceBase* device,
+        const CachedObjectDescriptorT* descriptor,
+        ContentLessObjectCache<CachedObjectT>& cache,
+        CreateFn createFn,
+        Args&&... createArgs) {
+        CachedObjectT blueprint(device, descriptor);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
         blueprint.SetContentHash(blueprintHash);
 
-        Ref<BindGroupLayoutBase> result = nullptr;
-        auto iter = mCaches->bindGroupLayouts.find(&blueprint);
-        if (iter != mCaches->bindGroupLayouts.end()) {
+        Ref<CachedObjectT> result = nullptr;
+        auto iter = cache.find(&blueprint);
+        if (iter != cache.end()) {
             result = *iter;
         } else {
-            BindGroupLayoutBase* backendObj;
-            DAWN_TRY_ASSIGN(backendObj, CreateBindGroupLayoutImpl(descriptor));
+            CachedObjectT* backendObj;
+            DAWN_TRY_ASSIGN(backendObj, ((*device).*(createFn))(
+                                            descriptor, std::forward<Args&&>(createArgs)...));
             backendObj->SetIsCachedReference();
             backendObj->SetContentHash(blueprintHash);
-            mCaches->bindGroupLayouts.insert(backendObj);
+            cache.insert(backendObj);
             result = AcquireRef(backendObj);
         }
         return std::move(result);
+    }
+
+    ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
+        const BindGroupLayoutDescriptor* descriptor) {
+        return GetOrCreateCachedObjectHelper(this, descriptor, mCaches->bindGroupLayouts,
+                                             &DeviceBase::CreateBindGroupLayoutImpl);
     }
 
     void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
@@ -477,23 +492,11 @@ namespace dawn_native {
 
     ResultOrError<ComputePipelineBase*> DeviceBase::GetOrCreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
-        ComputePipelineBase blueprint(this, descriptor);
-
-        const size_t blueprintHash = blueprint.ComputeContentHash();
-        blueprint.SetContentHash(blueprintHash);
-
-        auto iter = mCaches->computePipelines.find(&blueprint);
-        if (iter != mCaches->computePipelines.end()) {
-            (*iter)->Reference();
-            return *iter;
-        }
-
-        ComputePipelineBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(descriptor));
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->computePipelines.insert(backendObj);
-        return backendObj;
+        Ref<ComputePipelineBase> ref;
+        DAWN_TRY_ASSIGN(ref,
+                        GetOrCreateCachedObjectHelper(this, descriptor, mCaches->computePipelines,
+                                                      &DeviceBase::CreateComputePipelineImpl));
+        return ref.Detach();
     }
 
     void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
@@ -504,23 +507,11 @@ namespace dawn_native {
 
     ResultOrError<PipelineLayoutBase*> DeviceBase::GetOrCreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
-        PipelineLayoutBase blueprint(this, descriptor);
-
-        const size_t blueprintHash = blueprint.ComputeContentHash();
-        blueprint.SetContentHash(blueprintHash);
-
-        auto iter = mCaches->pipelineLayouts.find(&blueprint);
-        if (iter != mCaches->pipelineLayouts.end()) {
-            (*iter)->Reference();
-            return *iter;
-        }
-
-        PipelineLayoutBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreatePipelineLayoutImpl(descriptor));
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->pipelineLayouts.insert(backendObj);
-        return backendObj;
+        Ref<PipelineLayoutBase> ref;
+        DAWN_TRY_ASSIGN(ref,
+                        GetOrCreateCachedObjectHelper(this, descriptor, mCaches->pipelineLayouts,
+                                                      &DeviceBase::CreatePipelineLayoutImpl));
+        return ref.Detach();
     }
 
     void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
@@ -531,23 +522,11 @@ namespace dawn_native {
 
     ResultOrError<RenderPipelineBase*> DeviceBase::GetOrCreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
-        RenderPipelineBase blueprint(this, descriptor);
-
-        const size_t blueprintHash = blueprint.ComputeContentHash();
-        blueprint.SetContentHash(blueprintHash);
-
-        auto iter = mCaches->renderPipelines.find(&blueprint);
-        if (iter != mCaches->renderPipelines.end()) {
-            (*iter)->Reference();
-            return *iter;
-        }
-
-        RenderPipelineBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateRenderPipelineImpl(descriptor));
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->renderPipelines.insert(backendObj);
-        return backendObj;
+        Ref<RenderPipelineBase> ref;
+        DAWN_TRY_ASSIGN(ref,
+                        GetOrCreateCachedObjectHelper(this, descriptor, mCaches->renderPipelines,
+                                                      &DeviceBase::CreateRenderPipelineImpl));
+        return ref.Detach();
     }
 
     void DeviceBase::UncacheRenderPipeline(RenderPipelineBase* obj) {
@@ -558,23 +537,10 @@ namespace dawn_native {
 
     ResultOrError<SamplerBase*> DeviceBase::GetOrCreateSampler(
         const SamplerDescriptor* descriptor) {
-        SamplerBase blueprint(this, descriptor);
-
-        const size_t blueprintHash = blueprint.ComputeContentHash();
-        blueprint.SetContentHash(blueprintHash);
-
-        auto iter = mCaches->samplers.find(&blueprint);
-        if (iter != mCaches->samplers.end()) {
-            (*iter)->Reference();
-            return *iter;
-        }
-
-        SamplerBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateSamplerImpl(descriptor));
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->samplers.insert(backendObj);
-        return backendObj;
+        Ref<SamplerBase> ref;
+        DAWN_TRY_ASSIGN(ref, GetOrCreateCachedObjectHelper(this, descriptor, mCaches->samplers,
+                                                           &DeviceBase::CreateSamplerImpl));
+        return ref.Detach();
     }
 
     void DeviceBase::UncacheSampler(SamplerBase* obj) {
@@ -586,34 +552,21 @@ namespace dawn_native {
     ResultOrError<ShaderModuleBase*> DeviceBase::GetOrCreateShaderModule(
         const ShaderModuleDescriptor* descriptor,
         ShaderModuleParseResult* parseResult) {
-        ShaderModuleBase blueprint(this, descriptor);
-
-        const size_t blueprintHash = blueprint.ComputeContentHash();
-        blueprint.SetContentHash(blueprintHash);
-
-        auto iter = mCaches->shaderModules.find(&blueprint);
-        if (iter != mCaches->shaderModules.end()) {
-            (*iter)->Reference();
-            return *iter;
-        }
-
-        ShaderModuleBase* backendObj;
+        ShaderModuleParseResult localParseResult;
         if (parseResult == nullptr) {
             // We skip the parse on creation if validation isn't enabled which let's us quickly
             // lookup in the cache without validating and parsing. We need the parsed module now, so
             // call validate. Most of |ValidateShaderModuleDescriptor| is parsing, but we can
             // consider splitting it if additional validation is added.
             ASSERT(!IsValidationEnabled());
-            ShaderModuleParseResult localParseResult =
-                ValidateShaderModuleDescriptor(this, descriptor).AcquireSuccess();
-            DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor, &localParseResult));
-        } else {
-            DAWN_TRY_ASSIGN(backendObj, CreateShaderModuleImpl(descriptor, parseResult));
+            localParseResult = ValidateShaderModuleDescriptor(this, descriptor).AcquireSuccess();
+            parseResult = &localParseResult;
         }
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->shaderModules.insert(backendObj);
-        return backendObj;
+        Ref<ShaderModuleBase> ref;
+        DAWN_TRY_ASSIGN(
+            ref, GetOrCreateCachedObjectHelper(this, descriptor, mCaches->shaderModules,
+                                               &DeviceBase::CreateShaderModuleImpl, parseResult));
+        return ref.Detach();
     }
 
     void DeviceBase::UncacheShaderModule(ShaderModuleBase* obj) {
