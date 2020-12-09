@@ -62,7 +62,8 @@ namespace dawn_native {
           mMipmapFilter(descriptor->mipmapFilter),
           mLodMinClamp(descriptor->lodMinClamp),
           mLodMaxClamp(descriptor->lodMaxClamp),
-          mCompareFunction(descriptor->compare) {
+          mCompareFunction(descriptor->compare),
+          mMaxAnisotropy(GetClampedMaxAnisotropy(descriptor->maxAnisotropy)) {
     }
 
     SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -87,7 +88,8 @@ namespace dawn_native {
     size_t SamplerBase::ComputeContentHash() {
         ObjectContentHasher recorder;
         recorder.Record(mAddressModeU, mAddressModeV, mAddressModeW, mMagFilter, mMinFilter,
-                        mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction);
+                        mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction,
+                        mMaxAnisotropy);
         return recorder.GetContentHash();
     }
 
@@ -105,7 +107,7 @@ namespace dawn_native {
                a->mAddressModeW == b->mAddressModeW && a->mMagFilter == b->mMagFilter &&
                a->mMinFilter == b->mMinFilter && a->mMipmapFilter == b->mMipmapFilter &&
                a->mLodMinClamp == b->mLodMinClamp && a->mLodMaxClamp == b->mLodMaxClamp &&
-               a->mCompareFunction == b->mCompareFunction;
+               a->mCompareFunction == b->mCompareFunction && a->mMaxAnisotropy == b->mMaxAnisotropy;
     }
 
 }  // namespace dawn_native

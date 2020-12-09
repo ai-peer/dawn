@@ -47,7 +47,11 @@ namespace dawn_native {
              {Extension::TimestampQuery,
               {"timestamp_query", "Support Timestamp Query",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=434"},
-              &WGPUDeviceProperties::timestampQuery}}};
+              &WGPUDeviceProperties::timestampQuery},
+             {Extension::TextureFilterAnisotropic,
+              {"texture_filter_anisotropic", "Support Anisotropic Texturing Filtering",
+               "https://crbug.com/dawn/568"},
+              nullptr}}};
 
     }  // anonymous namespace
 
