@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d7ed78_cfe1d3fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-09T04:27:29Z",
+      "side": 1,
+      "message": "Adds some maxAnisotropy implementation to sampler.\n* Is dawn_native/[platform]/Sampler[Plt] the right place to do the value clamping?\n* Looking around SamplerValidationTest and SamplerTest, it seems the test would be at CTS level. What do you think?",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
