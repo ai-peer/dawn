@@ -106,6 +106,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffed9f0d_4d4454df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-09T22:39:07Z",
+      "side": 1,
+      "message": "Since you\u0027ve both gotten to it already, I think I won\u0027t review.",
+      "parentUuid": "bee6c27d_20d876bf",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f105b19_41266cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-09T22:39:07Z",
+      "side": 1,
+      "message": "Unfortunately there are a few mobile Vulkan devices out there which have maxSamplerAnisotropy of 1, so we would expect there to be no rendering difference at all.\n\nI do think it would be nice to have a CTS test that at least warns if anisotropy seems to have no effect.\n\nMaybe we should have a folder in the CTS for tests that \"ideally should pass, but might not on some hardware\"? For things like this, to make sure the WebGPU side of the implementation is correct. Then our automated testing could permanently suppress such tests on any hardware that can\u0027t pass. (For this one, we don\u0027t even test on any such hardware - it seems to be just older Mali.)",
+      "parentUuid": "aec82674_af930e58",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f6961a8_7f6538ee",
@@ -230,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f47a462_457a137b",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-09T22:39:07Z",
+      "side": 1,
+      "message": "feel free to rope me in on this, since it\u0027s spec",
+      "parentUuid": "1a3f71a4_6c5d695f",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "038b78c0_69a42f96",
         "filename": "src/dawn_native/opengl/SamplerGL.cpp",
         "patchSetId": 1
@@ -259,6 +313,24 @@
       "side": 1,
       "message": "Double check as I misunderstood this on first read: Reading through the later comment [2], I think this indicates we don\u0027t need adding a GPUFeatureName (Like TextureFilterAnisotropic) https://gpuweb.github.io/gpuweb/#gpufeaturename? \"The developer can set max, but they can\u0027t force the driver to actually do the filtering.\" We only do the actual setting for OpenGL when there\u0027s support.",
       "parentUuid": "038b78c0_69a42f96",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1088f9_c31d7dd8",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-09T22:39:07Z",
+      "side": 1,
+      "message": "That\u0027s correct.",
+      "parentUuid": "5b3a61b8_97f21992",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
