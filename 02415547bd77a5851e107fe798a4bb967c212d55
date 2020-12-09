@@ -16,6 +16,155 @@
       "message": "Adds some maxAnisotropy implementation to sampler.\n* Is dawn_native/[platform]/Sampler[Plt] the right place to do the value clamping?\n* Looking around SamplerValidationTest and SamplerTest, it seems the test would be at CTS level. What do you think?",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "223d9851_232d1084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "Great first patch! Usually I/Corentin review, but Kai can too if he wants.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0147ba1_2104c222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "I think you\u0027ve got things in pretty much the right place.\n\nI think we should do our best to at least have some simple tests in SamplerTest that maxAnisotropy\u003d1, maxAnisotropy\u003d8, maxAnisotropy\u003d16 produce different and directionally expected results when rendering a slanted plane. Just to be sure that it\u0027s actually turned on. I\u0027m not sure how much more testing we can do since the filtering is implementation defined.\n\nAlso if the validation I mentioned (that anisotropy implies linear filtering is correct), those validation tests should be in SamplerValidationTest.",
+      "parentUuid": "62d7ed78_cfe1d3fa",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f6961a8_7f6538ee",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "I think we should store the clamped value that way:\n 1. 0 and 1 hash the same since they actually produce the same object.\n 2. Your GetClampedMaxAnisotropy is only needed in this file, and checking in the backends is simpler.",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061034b1_d00b8bc7",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1036b92_455d87d8",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "since this helper doesn\u0027t need a \"this\" pointer, we can put it as a free function like at [1]\n\nAlthough, with my suggestion to do the clamping on creation, we wouldn\u0027t need the helper declared in the header at all.",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 9
+      },
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "affa326d_beff3d59",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "we need to encode the anisotropic bits into this as well. There\u0027s \nD3D12_FILTER_ANISOTROPIC and D3D12_FILTER_COMPARISON_ANISOTROPIC that we might want to produce.\n\nLooks like the helper we would use is D3D12_ENCODE_ANISOTROPIC_FILTER\nhttps://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_filter\n\nAlso, it looks like anisotropic filtering on D3D12 implies the min, mag, mipmap filters are LINEAR (makes a lot of sense). We should update ValidateSamplerDescriptor to validate this if maxAnisotropy \u003e 1 and clarify the details in the working group.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038b78c0_69a42f96",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "we probably need to guard this on either Open GL version 4.6 or  EXT_texture_filter_anisotropic\n\nSee for example:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/opengl/BackendGL.cpp;l\u003d219?q\u003df:dawn%20IsGLExtensionSupported",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f46ee4_af87f867",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-09T05:14:46Z",
+      "side": 1,
+      "message": "if maxAnisotropy is greater than 1, we need to set aniostropyEnable to VK_TRUE or this won\u0027t do anything.\n\nAlso, anisotropic filtering is actually a Vulkan extension, so before setting anisotropyEnable to VK_TRUE or setting maxAnisotropy, we need to check that it\u0027s supported and request it when the device is created. If it\u0027s not supported, we won\u0027t enable it here.\n\nNote that even though anisotropic filtering is an optional feature, we \"always\" support it in WebGPU. That\u0027s because there\u0027s no min anisotropy and the filtering is implementation defined. The developer can set max, but they can\u0027t force the driver to actually do the filtering.\n\nAsking to enable the feature would be similar to enabling something based on an extension as done here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d313?q\u003dDeviceVk.cpp\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nYou\u0027d probably say usedKnobs.features.samplerAnisotropy \u003d mDeviceInfo.features.samplerAnisotropy\n\n|usedKnobs.features| are the features we\u0027re requesting.\n|mDeviceInfo.features| are the features that are available.\n\n|mDeviceInfo| is populated here https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d60?q\u003df:dawn%20mDeviceInfo\u0026sq\u003d which queries the Adapter for available features and extensions.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
