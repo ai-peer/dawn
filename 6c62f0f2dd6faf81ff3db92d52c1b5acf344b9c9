@@ -33,6 +33,23 @@
       "message": "PTAL, thanks!",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf5ea63_8584f1f0",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T11:34:37Z",
+      "side": 1,
+      "message": "Maybe we should still support DXC before that version, and only gate float16 on having a higher version of DXC? PlatformFunctions would need to remember the version of DXC, or alternatively we should query the version of DXC from its interface directly with https://github.com/microsoft/DirectXShaderCompiler/blob/master/include/dxc/dxcapi.h#L594 using a call to QueryInterface (but I\u0027m not sure on which interface, the DXC docs don\u0027t seem to exist). Rafael any hints?",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
