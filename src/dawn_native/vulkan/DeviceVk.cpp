@@ -316,6 +316,10 @@ namespace dawn_native { namespace vulkan {
             mComputeSubgroupSize = FindComputeSubgroupSize();
         }
 
+        if (mDeviceInfo.HasExt(Extension::TextureFilterAnisotropic)) {
+            usedKnobs.features.samplerAnisotropy = VK_TRUE;
+        }
+
         if (IsExtensionEnabled(Extension::TextureCompressionBC)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionBC ==
                    VK_TRUE);
