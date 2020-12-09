@@ -87,7 +87,9 @@ namespace dawn_native { namespace d3d12 {
                              GetWindowsSDKVersionFromDirectoryName(fileData.cFileName));
             } while (FindNextFileA(handle.GetHandle(), &fileData));
 
-            if (highestWindowsSDKVersion == 0) {
+            // Starting with Windows 10 SDK (10.0.19041.0), DXC compiler fully supports templated
+            // Store methods for byte address buffer.
+            if (highestWindowsSDKVersion < 19041) {
                 return "";
             }
 
