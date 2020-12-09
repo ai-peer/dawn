@@ -89,6 +89,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91991fcf_1f7c8647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-09T20:25:56Z",
+      "side": 1,
+      "message": "Thanks for the review! one double checking question.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f6961a8_7f6538ee",
@@ -230,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b3a61b8_97f21992",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-09T20:25:56Z",
+      "side": 1,
+      "message": "Double check as I misunderstood this on first read: Reading through the later comment [2], I think this indicates we don\u0027t need adding a GPUFeatureName (Like TextureFilterAnisotropic) https://gpuweb.github.io/gpuweb/#gpufeaturename? \"The developer can set max, but they can\u0027t force the driver to actually do the filtering.\" We only do the actual setting for OpenGL when there\u0027s support.",
+      "parentUuid": "038b78c0_69a42f96",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f46ee4_af87f867",
         "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
         "patchSetId": 1
@@ -241,6 +276,24 @@
       "writtenOn": "2020-12-09T05:14:46Z",
       "side": 1,
       "message": "if maxAnisotropy is greater than 1, we need to set aniostropyEnable to VK_TRUE or this won\u0027t do anything.\n\nAlso, anisotropic filtering is actually a Vulkan extension, so before setting anisotropyEnable to VK_TRUE or setting maxAnisotropy, we need to check that it\u0027s supported and request it when the device is created. If it\u0027s not supported, we won\u0027t enable it here.\n\nNote that even though anisotropic filtering is an optional feature, we \"always\" support it in WebGPU. That\u0027s because there\u0027s no min anisotropy and the filtering is implementation defined. The developer can set max, but they can\u0027t force the driver to actually do the filtering.\n\nAsking to enable the feature would be similar to enabling something based on an extension as done here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d313?q\u003dDeviceVk.cpp\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nYou\u0027d probably say usedKnobs.features.samplerAnisotropy \u003d mDeviceInfo.features.samplerAnisotropy\n\n|usedKnobs.features| are the features we\u0027re requesting.\n|mDeviceInfo.features| are the features that are available.\n\n|mDeviceInfo| is populated here https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d60?q\u003df:dawn%20mDeviceInfo\u0026sq\u003d which queries the Adapter for available features and extensions.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f74a0f_b21968dc",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-09T20:25:56Z",
+      "side": 1,
+      "message": "[2]",
+      "parentUuid": "76f46ee4_af87f867",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
