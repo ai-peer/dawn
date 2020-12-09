@@ -55,6 +55,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aec82674_af930e58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T12:16:03Z",
+      "side": 1,
+      "message": "Testing 1 vs. 16 with slanted planes in the X and Y direction is probably enough like you said, given that the anisotropic filtering is so implementation dependent.",
+      "parentUuid": "b0147ba1_2104c222",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee6c27d_20d876bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T12:16:03Z",
+      "side": 1,
+      "message": "No additional comments!",
+      "parentUuid": "223d9851_232d1084",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f6961a8_7f6538ee",
         "filename": "src/dawn_native/Sampler.cpp",
         "patchSetId": 1
@@ -118,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "189a5a69_72263ac9",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T12:16:03Z",
+      "side": 1,
+      "message": "I think we might want to clamp to a backend-dependent values (or clamp to 16 and add a TODO to clamp to the backend specific value)",
+      "parentUuid": "f1036b92_455d87d8",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 9
+      },
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "affa326d_beff3d59",
         "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
         "patchSetId": 1
@@ -129,6 +189,24 @@
       "writtenOn": "2020-12-09T05:14:46Z",
       "side": 1,
       "message": "we need to encode the anisotropic bits into this as well. There\u0027s \nD3D12_FILTER_ANISOTROPIC and D3D12_FILTER_COMPARISON_ANISOTROPIC that we might want to produce.\n\nLooks like the helper we would use is D3D12_ENCODE_ANISOTROPIC_FILTER\nhttps://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_filter\n\nAlso, it looks like anisotropic filtering on D3D12 implies the min, mag, mipmap filters are LINEAR (makes a lot of sense). We should update ValidateSamplerDescriptor to validate this if maxAnisotropy \u003e 1 and clarify the details in the working group.",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3f71a4_6c5d695f",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T12:16:03Z",
+      "side": 1,
+      "message": "That\u0027s a great excuse to make a spec PR indeed!",
+      "parentUuid": "affa326d_beff3d59",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
