@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b18052_38857b23",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T15:43:22Z",
+      "side": 1,
+      "message": "Sorry for the crazy slow review, I started re-reviewing this CL multiple times but got confused and so it fell off my tab list multiple days. https://bugs.chromium.org/p/dawn/issues/detail?id\u003d434#c20 reminded me of this. Feel free to ping me directly when reviews take more than a working day.",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f8fe32_90a2fd69",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T15:43:22Z",
+      "side": 1,
+      "message": "This could also have an \"offset\" from the start of buffer that\u0027s added to GlobalInvocationID.x so we don\u0027t need to care about the 256 alignment. Even better this shader could also take a readonly storage buffer that for each timestamp says if it should be looked up in `input` or if it is the default value of 0 (so that we don\u0027t read garbage data). We probably need an outputOffset too.",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb96cb1_2ce60f57",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T15:43:22Z",
+      "side": 1,
+      "message": "This is dead code except for the returns, and I\u0027m not quite sure what the purpose of them is.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 17
+      },
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "252f34b2_3cb2c755",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T15:43:22Z",
+      "side": 1,
+      "message": "instead of having a W we could build the result timestamp in registers, then in the else {} do result.y +\u003d t1 \u003e\u003e 16",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a62a25_a88c2fc8",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-09T15:43:22Z",
+      "side": 1,
+      "message": "With this dispatch size and the workgroup size, at most 64 timestamps will be converted. We should compute the dispatch size dynamically.\n\nAlso can you add the defaulting of y and z to 1 in ComputePassEncoder-\u003eDispatch() so that we can write Dispatch(N) here?",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
