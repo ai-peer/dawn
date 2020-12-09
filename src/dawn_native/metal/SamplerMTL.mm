@@ -75,6 +75,7 @@ namespace dawn_native { namespace metal {
 
         mtlDesc.lodMinClamp = descriptor->lodMinClamp;
         mtlDesc.lodMaxClamp = descriptor->lodMaxClamp;
+        mtlDesc.maxAnisotropy = GetClampedMaxAnisotropy(descriptor->maxAnisotropy);
 
         if (descriptor->compare != wgpu::CompareFunction::Undefined) {
             // Sampler compare is unsupported before A9, which we validate in

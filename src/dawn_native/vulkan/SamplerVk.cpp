@@ -72,7 +72,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->addressModeW);
         createInfo.mipLodBias = 0.0f;
         createInfo.anisotropyEnable = VK_FALSE;
-        createInfo.maxAnisotropy = 1.0f;
+        createInfo.maxAnisotropy = GetClampedMaxAnisotropy(descriptor->maxAnisotropy);
         if (descriptor->compare != wgpu::CompareFunction::Undefined) {
             createInfo.compareOp = ToVulkanCompareOp(descriptor->compare);
             createInfo.compareEnable = VK_TRUE;
