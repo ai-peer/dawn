@@ -28,6 +28,7 @@ namespace dawn_platform {
 
 namespace wgpu {
     struct AdapterProperties;
+    struct DeviceDescriptor;
 }
 
 namespace dawn_native {

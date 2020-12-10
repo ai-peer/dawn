@@ -799,6 +799,18 @@
             }
         ]
     },
+    "device descriptor dawn native": {
+        "category": "structure",
+        "chained": true,
+        "members": [
+            {"name": "force enabled toggles", "type": "char", "annotation": "const*const*", "length": "force enabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force enabled toggles count", "type": "uint32_t", "default": 0},
+            {"name": "force disabled toggles", "type": "char", "annotation": "const*const*", "length": "force disabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force disabled toggles count", "type": "uint32_t", "default": 0},
+            {"name": "required extensions", "type": "char", "annotation": "const*const*", "length": "required extensions count",  "element length": "strlen", "optional": true},
+            {"name": "required extensions count", "type": "uint32_t", "default": 0}
+        ]
+    },
     "device lost callback": {
         "category": "callback",
         "args": [
@@ -1681,8 +1693,9 @@
             {"value": 4, "name": "surface descriptor from canvas HTML selector"},
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
-            {"value": 7, "name": "sampler descriptor dummy anisotropic filtering"},
-            {"value": 8, "name": "render pipeline descriptor dummy extension"}
+            {"value": "0x32960000", "name": "device descriptor dawn native"},
+            {"value": "0x32960001", "name": "sampler descriptor dummy anisotropic filtering"},
+            {"value": "0x32960002", "name": "render pipeline descriptor dummy extension"}
         ]
     },
     "texture": {
