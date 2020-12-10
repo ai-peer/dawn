@@ -106,6 +106,7 @@ TEST_P(QueueWriteBufferTests, SmallDataAtOffset) {
 
 // Stress test for many calls to WriteBuffer
 TEST_P(QueueWriteBufferTests, ManyWriteBuffer) {
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
     // Note: Increasing the size of the buffer will likely cause timeout issues.
     // In D3D12, timeout detection occurs when the GPU scheduler tries but cannot preempt the task
     // executing these commands in-flight. If this takes longer than ~2s, a device reset occurs and

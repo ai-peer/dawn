@@ -73,6 +73,7 @@ TEST_P(ComputeSharedMemoryTests, Basic) {
     // TODO(crbug.com/tint/375): Implement barriers in Tint.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
 
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
     BasicTest(R"(
         #version 450
         const uint kTileSize = 4;

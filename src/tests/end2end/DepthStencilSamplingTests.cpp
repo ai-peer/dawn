@@ -736,6 +736,7 @@ TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
 TEST_P(DepthStencilSamplingTest, CompareFunctionsRender) {
     // Initialization via renderPass loadOp doesn't work on Mac Intel.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
 
     wgpu::RenderPipeline pipeline = CreateComparisonRenderPipeline();
 
@@ -754,6 +755,7 @@ TEST_P(DepthStencilSamplingTest, CompareFunctionsRender) {
 TEST_P(DepthStencilSamplingTest, CompareFunctionsCompute) {
     // Initialization via renderPass loadOp doesn't work on Mac Intel.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
 
     wgpu::ComputePipeline pipeline = CreateComparisonComputePipeline();
 
