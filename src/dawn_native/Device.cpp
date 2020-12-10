@@ -891,10 +891,12 @@ namespace dawn_native {
 
     void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
-        ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
+
+        ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->features,
+                                                            deviceDescriptor->featuresCount));
 
         mEnabledExtensions = GetAdapter()->GetInstance()->ExtensionNamesToExtensionsSet(
-            deviceDescriptor->requiredExtensions);
+            deviceDescriptor->features, deviceDescriptor->featuresCount);
     }
 
     std::vector<const char*> DeviceBase::GetEnabledExtensions() const {
@@ -1177,14 +1179,21 @@ namespace dawn_native {
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
 
-        for (const char* toggleName : deviceDescriptor->forceEnabledToggles) {
+        const DeviceDescriptorDawnNative* deviceDescriptorDawnNative;
+        if (!GetExtensionStruct(deviceDescriptor->nextInChain, &deviceDescriptorDawnNative)) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < deviceDescriptorDawnNative->forceEnabledTogglesCount; ++i) {
+            const char* toggleName = deviceDescriptorDawnNative->forceEnabledToggles[i];
             Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
             if (toggle != Toggle::InvalidEnum) {
                 mEnabledToggles.Set(toggle, true);
                 mOverridenToggles.Set(toggle, true);
             }
         }
-        for (const char* toggleName : deviceDescriptor->forceDisabledToggles) {
+        for (uint32_t i = 0; i < deviceDescriptorDawnNative->forceDisabledTogglesCount; ++i) {
+            const char* toggleName = deviceDescriptorDawnNative->forceDisabledToggles[i];
             Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
             if (toggle != Toggle::InvalidEnum) {
                 mEnabledToggles.Set(toggle, false);

@@ -121,15 +121,16 @@ namespace dawn_native {
         return Extension::InvalidEnum;
     }
 
-    ExtensionsSet ExtensionsInfo::ExtensionNamesToExtensionsSet(
-        const std::vector<const char*>& requiredExtensions) const {
+    ExtensionsSet ExtensionsInfo::ExtensionNamesToExtensionsSet(const char* const* features,
+                                                                uint32_t featuresCount) const {
         ExtensionsSet extensionsSet;
 
-        for (const char* extensionName : requiredExtensions) {
-            Extension extensionEnum = ExtensionNameToEnum(extensionName);
+        for (uint32_t i = 0; i < featuresCount; ++i) {
+            Extension extensionEnum = ExtensionNameToEnum(features[i]);
             ASSERT(extensionEnum != Extension::InvalidEnum);
             extensionsSet.EnableExtension(extensionEnum);
         }
+
         return extensionsSet;
     }
 

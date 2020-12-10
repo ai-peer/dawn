@@ -46,10 +46,10 @@ namespace dawn_native {
         return mSupportedExtensions;
     }
 
-    bool AdapterBase::SupportsAllRequestedExtensions(
-        const std::vector<const char*>& requestedExtensions) const {
-        for (const char* extensionStr : requestedExtensions) {
-            Extension extensionEnum = mInstance->ExtensionNameToEnum(extensionStr);
+    bool AdapterBase::SupportsAllRequestedExtensions(const char* const* features,
+                                                     uint32_t featuresCount) const {
+        for (uint32_t i = 0; i < featuresCount; ++i) {
+            Extension extensionEnum = mInstance->ExtensionNameToEnum(features[i]);
             if (extensionEnum == Extension::InvalidEnum) {
                 return false;
             }
@@ -79,10 +79,9 @@ namespace dawn_native {
 
     MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
                                                  const DeviceDescriptor* descriptor) {
-        if (descriptor != nullptr) {
-            if (!SupportsAllRequestedExtensions(descriptor->requiredExtensions)) {
-                return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");
-            }
+        if (descriptor != nullptr &&
+            !SupportsAllRequestedExtensions(descriptor->features, descriptor->featuresCount)) {
+            return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");
         }
 
         // TODO(cwallez@chromium.org): This will eventually have validation that the device

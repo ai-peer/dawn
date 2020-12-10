@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include <array>
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -208,6 +210,48 @@ TEST_F(WireExtensionTests, ChainedStructWithSubdescriptor) {
             EXPECT_EQ(ext->chain.next, nullptr);
 
             return api.GetNewRenderPipeline();
+        }));
+    FlushClient();
+}
+
+// Test (de)serializing a string list works correctly. Note: We only use CreateSampler as
+// a way to send the DeviceDescriptorDawnNative struct since the wire doesn't support
+// any commands that would directly use the DeviceDescriptor yet.
+TEST_F(WireExtensionTests, StringList) {
+    // test some normal and empty strings
+    std::array<const char*, 5> forceEnabledToggles = {"", "foo", "bar", "", "foobar"};
+    // test empty list
+    std::array<const char*, 0> forceDisabledToggles = {};
+
+    WGPUDeviceDescriptorDawnNative clientExt = {};
+    clientExt.chain.sType = WGPUSType_DeviceDescriptorDawnNative;
+    clientExt.chain.next = nullptr;
+    clientExt.forceEnabledToggles = forceEnabledToggles.data();
+    clientExt.forceEnabledTogglesCount = forceEnabledToggles.size();
+    clientExt.forceDisabledToggles = forceDisabledToggles.data();
+    clientExt.forceDisabledTogglesCount = forceDisabledToggles.size();
+
+    WGPUSamplerDescriptor clientDesc = {};
+    clientDesc.nextInChain = &clientExt.chain;
+
+    wgpuDeviceCreateSampler(device, &clientDesc);
+    EXPECT_CALL(api, DeviceCreateSampler(apiDevice, NotNull()))
+        .WillOnce(Invoke([&](Unused, const WGPUSamplerDescriptor* serverDesc) -> WGPUSampler {
+            const auto* ext =
+                reinterpret_cast<const WGPUDeviceDescriptorDawnNative*>(serverDesc->nextInChain);
+            EXPECT_EQ(ext->chain.sType, clientExt.chain.sType);
+            EXPECT_EQ(ext->chain.next, nullptr);
+
+            EXPECT_EQ(ext->forceEnabledTogglesCount, forceEnabledToggles.size());
+            for (size_t i = 0; i < forceEnabledToggles.size(); ++i) {
+                EXPECT_STREQ(ext->forceEnabledToggles[i], forceEnabledToggles[i]);
+            }
+
+            // Points to a non-null but empty list.
+            EXPECT_NE(ext->forceDisabledToggles, nullptr);
+            EXPECT_EQ(ext->forceDisabledTogglesCount, 0u);
+
+            return api.GetNewSampler();
         }));
     FlushClient();
 }
