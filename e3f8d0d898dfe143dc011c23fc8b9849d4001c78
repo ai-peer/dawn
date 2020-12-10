@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4776f694_fa49d768",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T18:46:38Z",
+      "side": 1,
+      "message": "Ah, you can always get the device with GetDevice() and then cast it to the backend with ToBackend\n\nYou\u0027ll see these ToBackend(GetDevice()) everywhere.",
+      "parentUuid": "ff09cb8f_b0690456",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f62dec5_ccf531ca",
         "filename": "src/dawn_native/opengl/SamplerGL.cpp",
         "patchSetId": 8
