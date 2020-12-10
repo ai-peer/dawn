@@ -29,6 +29,7 @@ namespace dawn_native { namespace opengl {
 
       private:
         bool mCreatedAdapter = false;
+        bool mEnableTextureFilteringAnisotropic = false;
     };
 
 }}  // namespace dawn_native::opengl

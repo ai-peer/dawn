@@ -232,6 +232,15 @@ namespace dawn_native { namespace opengl {
                         dawn_native::Extension::TextureCompressionBC);
                 }
             }
+
+            // EXT_texture_filter_anisotropic
+            {
+                if (mFunctions.IsAtLeastGL(4, 6) ||
+                    mFunctions.IsGLExtensionsSupported("GL_EXT_texture_filter_anisotropic")) {
+                    mSupportedExtensions.EnableExtension(
+                        dawn_native::Extension::TextureFilterAnisotropic);
+                }
+            }
         }
     };
 
