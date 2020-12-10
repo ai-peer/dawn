@@ -96,6 +96,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70082c18_da2de5aa",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T12:54:30Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t quite understand how to do with the offset. Do you mean we can set offset at [1]? If that, we need to re-compile pipeline if the offset is changed, which will cause a lot of overhead. \n\nNo I mean the outputOffset and inputOffset like you described below.\n\n\u003e Yes, what I thought is pass the outOffset as a parameter, and calculate the write index for output. For example, for the input value at [index], it should be written to the [index + outputOffset/8] in output. Is this what you mean?\n\nYes, although (nit) we can do the device on the CPU side. With the offset you can always bind the whole buffer and use outputOffset to select which part to act on. Ditto for the inputOffset.\n\n\u003e This offset problem only affects output buffer. For input, we can create a small buffer with the size of queryCount * sizeof(uint64_t), don\u0027t need same with output buffer, so its offset can always start from 0.\n\nI\u0027m not sure what the plan is, but it seems that might not be the case in all backends, can we add inputOffset and set it to 0 in backend that don\u0027t use it?",
+      "parentUuid": "bc62e634_04d73449",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fb96cb1_2ce60f57",
         "filename": "src/dawn_native/QueryHelper.cpp",
         "patchSetId": 17
@@ -131,6 +149,30 @@
       "side": 1,
       "message": "This piece of code is to check whether there is any timestamp less than previous one in [0, index]. If found, set the output value to default value(0) at [index], which mean timestamp reset happens.\n\nBecause in the resolve range, there may be 0 or garbage data in [0, index], so we need to record the previous valid timestamp for comparation.",
       "parentUuid": "1fb96cb1_2ce60f57",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 17
+      },
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0631cbf_cf2f03b8",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T12:54:30Z",
+      "side": 1,
+      "message": "I\u0027m still not sure I understand what this achieves, but in all cases this seems brittle because you cannot trust what\u0027s in the uninitialized data, it could be a value bigger than the current timestamp etc.\n\n\u003e Even better this shader could also take a readonly storage buffer that for each timestamp says if it should be looked up in `input` or if it is the default value of 0 (so that we don\u0027t read garbage data). \n\nWe know what timestamps have been written on the CPU side so we can pass the data of which slots is initialized from the CPU to the GPU as quoted above.",
+      "parentUuid": "f44996a5_688fa78a",
       "range": {
         "startLine": 59,
         "startChar": 0,
