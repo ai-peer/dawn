@@ -70,6 +70,7 @@ void ComputeSharedMemoryTests::BasicTest(const char* shader) {
 
 // Basic shared memory test
 TEST_P(ComputeSharedMemoryTests, Basic) {
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
     BasicTest(R"(
         #version 450
         const uint kTileSize = 4;
