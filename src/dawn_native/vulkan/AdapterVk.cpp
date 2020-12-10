@@ -84,6 +84,10 @@ namespace dawn_native { namespace vulkan {
             mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
         }
 
+        if (mDeviceInfo.features.samplerAnisotropy == VK_TRUE) {
+            mSupportedExtensions.EnableExtension(Extension::TextureFilterAnisotropic);
+        }
+
         if (mDeviceInfo.HasExt(DeviceExt::ShaderFloat16Int8) &&
             mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
             mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
