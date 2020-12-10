@@ -68,6 +68,24 @@
       "parentUuid": "fcf5ea63_8584f1f0",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd9f847_3911032e",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T12:55:32Z",
+      "side": 1,
+      "message": "Oh wow that\u0027s unfortunate. Yeah let\u0027s gate 6.2 on that version of DXC this way we can still use older DXCs to test things.",
+      "parentUuid": "5e3a14c6_394a6f97",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
