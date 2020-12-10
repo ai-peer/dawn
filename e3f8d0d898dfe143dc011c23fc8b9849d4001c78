@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "946acfc2_765c422e",
+        "filename": "src/dawn_native/Extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-10T16:58:04Z",
+      "side": 1,
+      "message": "I don\u0027t feel so strongly, but I think we shouldn\u0027t add the extension for consistency with WebGPU. If I remember correctly, in the group we concluded that a developer isn\u0027t going to do anything different if the extension is present or not - especially since the sampling pattern/implementation is not specified.\n\nI guess it would also allow native developers to have some notion of \"definitely won\u0027t support\" and \"maybe will support\". But again, not sure if they will react to that or just notify the user to get a new GPU card for higher quality graphics.",
+      "parentUuid": "1aef0f52_5849c1e5",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "599006b4_f6dd4208",
         "filename": "src/dawn_native/Sampler.cpp",
         "patchSetId": 8
