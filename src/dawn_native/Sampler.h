@@ -26,6 +26,8 @@ namespace dawn_native {
 
     MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor);
 
+    uint16_t GetClampedMaxAnisotropy(uint16_t value);
+
     class SamplerBase : public CachedObject {
       public:
         SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor);
@@ -55,6 +57,7 @@ namespace dawn_native {
         float mLodMinClamp;
         float mLodMaxClamp;
         wgpu::CompareFunction mCompareFunction;
+        uint16_t mMaxAnisotropy;
     };
 
 }  // namespace dawn_native

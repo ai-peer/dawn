@@ -71,6 +71,10 @@ namespace dawn_native { namespace opengl {
 
         gl.GenSamplers(1, &mNonFilteringHandle);
         SetupGLSampler(mNonFilteringHandle, descriptor, true);
+
+        if (device->IsExtensionEnabled(Extension::TextureFilterAnisotropic)) {
+            mSupportTextureFilterAnisotropic = true;
+        }
     }
 
     Sampler::~Sampler() {
@@ -104,6 +108,10 @@ namespace dawn_native { namespace opengl {
             gl.SamplerParameteri(sampler, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
             gl.SamplerParameteri(sampler, GL_TEXTURE_COMPARE_FUNC,
                                  ToOpenGLCompareFunction(descriptor->compare));
+        }
+
+        if (mSupportTextureFilterAnisotropic) {
+            gl.SamplerParameterf(sampler, GL_TEXTURE_MAX_ANISOTROPY, descriptor->maxAnisotropy);
         }
     }
 

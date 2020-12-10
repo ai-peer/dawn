@@ -40,6 +40,8 @@ namespace dawn_native { namespace opengl {
         // This is a sampler equivalent to mFilteringHandle except that it uses NEAREST filtering
         // for everything, which is important to preserve texture completeness for u/int textures.
         GLuint mNonFilteringHandle;
+
+        bool mSupportTextureFilterAnisotropic = false;
     };
 
 }}  // namespace dawn_native::opengl
