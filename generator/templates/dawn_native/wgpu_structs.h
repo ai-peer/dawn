@@ -39,7 +39,7 @@ namespace dawn_native {
         wgpu::SType sType = wgpu::SType::Invalid;
     };
 
-    {% for type in by_category["structure"] if type.name.get() != "device descriptor" %}
+    {% for type in by_category["structure"] %}
         {% if type.chained %}
             struct {{as_cppType(type.name)}} : ChainedStruct {
                 {{as_cppType(type.name)}}() {

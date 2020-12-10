@@ -71,8 +71,6 @@ namespace dawn_native {
         std::vector<const char*> forceDisabledToggles;
     };
 
-    using DeviceDescriptor = DeviceDescriptorDawnNative;
-
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
     // can be manually configured to run or not outside Dawn, including workarounds, special
     // features and optimizations.
