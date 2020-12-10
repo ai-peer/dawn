@@ -40,8 +40,8 @@ namespace {
 ProcTableAsClass::~ProcTableAsClass() {
 }
 
-void ProcTableAsClass::GetProcTableAndDevice(DawnProcTable* table, WGPUDevice* device) {
-    *device = GetNewDevice();
+void ProcTableAsClass::GetProcTableAndInstance(DawnProcTable* table, WGPUInstance* instance) {
+    *instance = GetNewInstance();
 
     {% for type in by_category["object"] %}
         {% for method in c_methods(type) if len(method.arguments) < 10 %}

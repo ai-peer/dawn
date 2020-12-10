@@ -124,10 +124,13 @@ class WireTest : public testing::Test {
     void FlushServer(bool success = true);
 
     testing::StrictMock<MockProcTable> api;
-    WGPUDevice apiDevice;
-    WGPUQueue apiQueue;
-    WGPUDevice device;
-    WGPUQueue queue;
+    WGPUInstance apiInstance = nullptr;
+    WGPUAdapter apiAdapter = nullptr;
+    WGPUDevice apiDevice = nullptr;
+    WGPUQueue apiQueue = nullptr;
+    WGPUInstance instance = nullptr;
+    WGPUDevice device = nullptr;
+    WGPUQueue queue = nullptr;
 
     dawn_wire::WireServer* GetWireServer();
     dawn_wire::WireClient* GetWireClient();

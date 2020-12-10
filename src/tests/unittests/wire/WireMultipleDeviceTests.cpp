@@ -40,22 +40,16 @@ class WireMultipleDeviceTests : public testing::Test {
       public:
         WireHolder() {
             DawnProcTable mockProcs;
-            mApi.GetProcTableAndDevice(&mockProcs, &mServerDevice);
+            mApi.GetProcTableAndInstance(&mockProcs, &mServerInstance);
 
             // Ignore Tick()
             EXPECT_CALL(mApi, DeviceTick(_)).Times(AnyNumber());
-
-            // This SetCallback call cannot be ignored because it is done as soon as we start the
-            // server
-            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallbackCallback(_, _, _))
-                .Times(Exactly(1));
-            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallbackCallback(_, _, _)).Times(Exactly(1));
 
             mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
             mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
             WireServerDescriptor serverDesc = {};
-            serverDesc.device = mServerDevice;
+            serverDesc.instance = mServerInstance;
             serverDesc.procs = &mockProcs;
             serverDesc.serializer = mS2cBuf.get();
 
@@ -68,9 +62,51 @@ class WireMultipleDeviceTests : public testing::Test {
             mWireClient.reset(new WireClient(clientDesc));
             mS2cBuf->SetHandler(mWireClient.get());
 
-            mClientDevice = mWireClient->GetDevice();
+            mClientInstance = mWireClient->GetInstance();
 
-            // The GetDefaultQueue is done on WireClient startup so we expect it now.
+            WGPUAdapter clientAdapter = nullptr;
+            WGPURequestAdapterOptions options = {};
+            wgpuInstanceRequestAdapter(
+                mClientInstance, &options,
+                [](WGPURequestAdapterStatus, WGPUAdapter adapter, void* userdata) {
+                    *reinterpret_cast<WGPUAdapter*>(userdata) = adapter;
+                },
+                &clientAdapter);
+
+            WGPUAdapter serverAdapter = mApi.GetNewAdapter();
+            EXPECT_CALL(mApi, OnInstanceRequestAdapterCallback(mServerInstance, _, _, _))
+                .WillOnce(InvokeWithoutArgs([&]() {
+                    mApi.CallInstanceRequestAdapterCallback(
+                        mServerInstance, WGPURequestAdapterStatus_Success, serverAdapter);
+                }));
+
+            FlushClient();
+            FlushServer();
+            ASSERT(clientAdapter != nullptr);
+
+            WGPUDeviceDescriptor deviceDescriptor = {};
+            wgpuAdapterRequestDevice(
+                clientAdapter, &deviceDescriptor,
+                [](WGPURequestDeviceStatus, WGPUDevice device, void* userdata) {
+                    *reinterpret_cast<WGPUDevice*>(userdata) = device;
+                },
+                &mClientDevice);
+
+            mServerDevice = mApi.GetNewDevice();
+            EXPECT_CALL(mApi, OnAdapterRequestDeviceCallback(serverAdapter, _, _, _))
+                .WillOnce(InvokeWithoutArgs([&]() {
+                    mApi.CallAdapterRequestDeviceCallback(
+                        serverAdapter, WGPURequestDeviceStatus_Success, mServerDevice);
+                }));
+            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallbackCallback(mServerDevice, _, _))
+                .Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallbackCallback(mServerDevice, _, _))
+                .Times(Exactly(1));
+
+            FlushClient();
+            FlushServer();
+            ASSERT(mClientDevice != nullptr);
+
             mClientQueue = wgpuDeviceGetDefaultQueue(mClientDevice);
             mServerQueue = mApi.GetNewQueue();
             EXPECT_CALL(mApi, DeviceGetDefaultQueue(mServerDevice)).WillOnce(Return(mServerQueue));
@@ -117,10 +153,12 @@ class WireMultipleDeviceTests : public testing::Test {
         std::unique_ptr<dawn_wire::WireClient> mWireClient;
         std::unique_ptr<utils::TerribleCommandBuffer> mS2cBuf;
         std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
-        WGPUDevice mServerDevice;
-        WGPUDevice mClientDevice;
-        WGPUQueue mServerQueue;
-        WGPUQueue mClientQueue;
+        WGPUInstance mServerInstance = nullptr;
+        WGPUInstance mClientInstance = nullptr;
+        WGPUDevice mServerDevice = nullptr;
+        WGPUDevice mClientDevice = nullptr;
+        WGPUQueue mServerQueue = nullptr;
+        WGPUQueue mClientQueue = nullptr;
     };
 
     void ExpectInjectedError(WireHolder* wire) {

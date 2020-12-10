@@ -28,7 +28,7 @@ class ProcTableAsClass {
     public:
         virtual ~ProcTableAsClass();
 
-        void GetProcTableAndDevice(DawnProcTable* table, WGPUDevice* device);
+        void GetProcTableAndInstance(DawnProcTable* table, WGPUInstance* instance);
 
         // Creates an object that can be returned by a mocked call as in WillOnce(Return(foo)).
         // It returns an object of the write type that isn't equal to any previously returned object.
