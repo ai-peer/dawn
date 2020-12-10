@@ -54,8 +54,8 @@ namespace dawn_native {
         // name of an extension supported in Dawn.
         const ExtensionInfo* GetExtensionInfo(const char* extensionName);
         Extension ExtensionNameToEnum(const char* extensionName);
-        ExtensionsSet ExtensionNamesToExtensionsSet(
-            const std::vector<const char*>& requiredExtensions);
+        ExtensionsSet ExtensionNamesToExtensionsSet(const char* const* features,
+                                                    uint32_t featuresCount);
 
         void EnableBackendValidation(bool enableBackendValidation);
         bool IsBackendValidationEnabled() const;

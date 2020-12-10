@@ -41,8 +41,8 @@ namespace dawn_native {
         DeviceBase* CreateDevice(const DeviceDescriptor* descriptor = nullptr);
 
         ExtensionsSet GetSupportedExtensions() const;
-        bool SupportsAllRequestedExtensions(
-            const std::vector<const char*>& requestedExtensions) const;
+        bool SupportsAllRequestedExtensions(const char* const* features,
+                                            uint32_t featuresCount) const;
         WGPUDeviceProperties GetAdapterProperties() const;
 
       protected:

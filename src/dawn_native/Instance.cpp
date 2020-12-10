@@ -107,9 +107,9 @@ namespace dawn_native {
         return mExtensionsInfo.ExtensionNameToEnum(extensionName);
     }
 
-    ExtensionsSet InstanceBase::ExtensionNamesToExtensionsSet(
-        const std::vector<const char*>& requiredExtensions) {
-        return mExtensionsInfo.ExtensionNamesToExtensionsSet(requiredExtensions);
+    ExtensionsSet InstanceBase::ExtensionNamesToExtensionsSet(const char* const* features,
+                                                              uint32_t featuresCount) {
+        return mExtensionsInfo.ExtensionNamesToExtensionsSet(features, featuresCount);
     }
 
     const std::vector<std::unique_ptr<AdapterBase>>& InstanceBase::GetAdapters() const {
