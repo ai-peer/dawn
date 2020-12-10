@@ -560,9 +560,16 @@ namespace {
     class WriteTextureTest_CompressedTextureFormats : public QueueWriteTextureValidationTest {
       protected:
         wgpu::Device CreateTestDevice() override {
-            dawn_native::DeviceDescriptor descriptor;
-            descriptor.requiredExtensions = {"texture_compression_bc"};
-            return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+            const char* extensionName = "texture_compression_bc";
+
+            wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+            deviceDescriptorDawnNative.requiredExtensions = &extensionName;
+            deviceDescriptorDawnNative.requiredExtensionsCount = 1;
+
+            wgpu::DeviceDescriptor deviceDescriptor;
+            deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
+            return wgpu::Device::Acquire(adapter.CreateDevice(&deviceDescriptor));
         }
 
         wgpu::Texture Create2DTexture(wgpu::TextureFormat format,

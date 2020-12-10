@@ -211,9 +211,16 @@ TEST_F(OcclusionQueryValidationTest, InvalidBeginAndEnd) {
 class TimestampQueryValidationTest : public QuerySetValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
-        descriptor.requiredExtensions = {"timestamp_query"};
-        return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        const char* extensionName = "timestamp_query";
+
+        wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+        deviceDescriptorDawnNative.requiredExtensions = &extensionName;
+        deviceDescriptorDawnNative.requiredExtensionsCount = 1;
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
+        return wgpu::Device::Acquire(adapter.CreateDevice(&deviceDescriptor));
     }
 };
 
@@ -414,9 +421,16 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnRenderPassEncoder) {
 class PipelineStatisticsQueryValidationTest : public QuerySetValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
-        descriptor.requiredExtensions = {"pipeline_statistics_query"};
-        return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        const char* extensionName = "pipeline_statistics_query";
+
+        wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+        deviceDescriptorDawnNative.requiredExtensions = &extensionName;
+        deviceDescriptorDawnNative.requiredExtensionsCount = 1;
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
+        return wgpu::Device::Acquire(adapter.CreateDevice(&deviceDescriptor));
     }
 };
 
