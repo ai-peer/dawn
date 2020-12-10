@@ -55,8 +55,7 @@ namespace dawn_native {
         // name of an extension supported in Dawn
         const ExtensionInfo* GetExtensionInfo(const char* extensionName) const;
         Extension ExtensionNameToEnum(const char* extensionName) const;
-        ExtensionsSet ExtensionNamesToExtensionsSet(
-            const std::vector<const char*>& requiredExtensions) const;
+        ExtensionsSet ExtensionNamesToExtensionsSet(const char* const* requiredExtensions) const;
 
       private:
         std::unordered_map<std::string, Extension> mExtensionNameToEnumMap;

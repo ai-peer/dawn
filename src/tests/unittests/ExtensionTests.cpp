@@ -55,7 +55,7 @@ TEST_F(ExtensionTests, AdapterWithRequiredExtensionDisabled) {
         mAdapterBase.SetSupportedExtensions(extensionNamesWithoutOne);
         dawn_native::Adapter adapterWithoutExtension(&mAdapterBase);
 
-        dawn_native::DeviceDescriptor deviceDescriptor;
+        dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
         const char* extensionName = ExtensionEnumToName(notSupportedExtension);
         deviceDescriptor.requiredExtensions = std::vector<const char*>(1, extensionName);
         WGPUDevice deviceWithExtension = adapterWithoutExtension.CreateDevice(&deviceDescriptor);
@@ -70,7 +70,7 @@ TEST_F(ExtensionTests, GetEnabledExtensions) {
         dawn_native::Extension extension = static_cast<dawn_native::Extension>(i);
         const char* extensionName = ExtensionEnumToName(extension);
 
-        dawn_native::DeviceDescriptor deviceDescriptor;
+        dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
         deviceDescriptor.requiredExtensions = {extensionName};
         dawn_native::DeviceBase* deviceBase =
             reinterpret_cast<dawn_native::DeviceBase*>(adapter.CreateDevice(&deviceDescriptor));

@@ -891,10 +891,14 @@ namespace dawn_native {
 
     void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
-        ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
+        const DeviceDescriptorDawnNative* deviceDescriptorDawnNative;
+        if (GetExtensionStruct(deviceDescriptor->nextInChain, &deviceDescriptorDawnNative)) {
+            ASSERT(GetAdapter()->SupportsAllRequestedExtensions(
+                deviceDescriptorDawnNative->requiredExtensions));
 
-        mEnabledExtensions = GetAdapter()->GetInstance()->ExtensionNamesToExtensionsSet(
-            deviceDescriptor->requiredExtensions);
+            mEnabledExtensions = GetAdapter()->GetInstance()->ExtensionNamesToExtensionsSet(
+                deviceDescriptorDawnNative->requiredExtensions);
+        }
     }
 
     std::vector<const char*> DeviceBase::GetEnabledExtensions() const {
@@ -1177,15 +1181,22 @@ namespace dawn_native {
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
 
-        for (const char* toggleName : deviceDescriptor->forceEnabledToggles) {
-            Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
+        const DeviceDescriptorDawnNative* deviceDescriptorDawnNative;
+        if (!GetExtensionStruct(deviceDescriptor->nextInChain, &deviceDescriptorDawnNative)) {
+            return;
+        }
+
+        for (const char* const* toggleName = deviceDescriptorDawnNative->forceEnabledToggles;
+             *toggleName != nullptr; ++toggleName) {
+            Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(*toggleName);
             if (toggle != Toggle::InvalidEnum) {
                 mEnabledToggles.Set(toggle, true);
                 mOverridenToggles.Set(toggle, true);
             }
         }
-        for (const char* toggleName : deviceDescriptor->forceDisabledToggles) {
-            Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
+        for (const char* const* toggleName = deviceDescriptorDawnNative->forceDisabledToggles;
+             *toggleName != nullptr; ++toggleName) {
+            Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(*toggleName);
             if (toggle != Toggle::InvalidEnum) {
                 mEnabledToggles.Set(toggle, false);
                 mOverridenToggles.Set(toggle, true);

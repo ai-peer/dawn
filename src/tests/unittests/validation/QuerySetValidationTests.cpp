@@ -211,7 +211,7 @@ TEST_F(OcclusionQueryValidationTest, InvalidBeginAndEnd) {
 class TimestampQueryValidationTest : public QuerySetValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
+        dawn_native::DeviceDescriptorDawnNative descriptor;
         descriptor.requiredExtensions = {"timestamp_query"};
         return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
     }
@@ -414,7 +414,7 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnRenderPassEncoder) {
 class PipelineStatisticsQueryValidationTest : public QuerySetValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
+        dawn_native::DeviceDescriptorDawnNative descriptor;
         descriptor.requiredExtensions = {"pipeline_statistics_query"};
         return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
     }

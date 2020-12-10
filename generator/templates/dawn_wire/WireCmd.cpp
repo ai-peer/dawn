@@ -123,7 +123,12 @@ namespace {
 
         //* const char* have their length embedded directly in the command.
         {% for member in members if member.length == "strlen" %}
-            size_t {{as_varName(member.name)}}Strlen;
+            {% if member.annotation == "const*const*" %}
+                size_t {{as_varName(member.name)}}TotalStrLen;
+                size_t {{as_varName(member.name)}}StrCount;
+            {% else %}
+                size_t {{as_varName(member.name)}}Strlen;
+            {% endif %}
         {% endfor %}
 
         {% for member in members if member.optional and member.annotation != "value" and member.type.category != "object" %}
@@ -162,7 +167,14 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-            result += std::strlen(record.{{memberName}});
+            {% if member.annotation == "const*const*" %}
+                for (size_t i = 0; record.{{memberName}}[i] != nullptr; ++i) {
+                    // Include the null terminator.
+                    result += std::strlen(record.{{memberName}}[i]) + 1;
+                }
+            {% else %}
+                result += std::strlen(record.{{memberName}});
+            {% endif %}
             }
         {% endfor %}
 
@@ -244,10 +256,27 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-            transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
+            {% if member.annotation == "const*const*" %}
+                size_t totalStrLen = 0;
+                uint32_t strCount = 0;
+                for (size_t i = 0; record.{{memberName}}[i] != nullptr; ++i) {
+                    const char* ptr = record.{{memberName}}[i];
+                    // Include the null terminator.
+                    size_t strLen = std::strlen(ptr) + 1;
+                    memcpy(*buffer, ptr, strLen);
 
-            memcpy(*buffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
-            *buffer += transfer->{{memberName}}Strlen;
+                    totalStrLen += strLen;
+                    *buffer += strLen;
+                    strCount++;
+                }
+                transfer->{{memberName}}TotalStrLen = totalStrLen;
+                transfer->{{memberName}}StrCount = strCount;
+            {% else %}
+                transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
+
+                memcpy(*buffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
+                *buffer += transfer->{{memberName}}Strlen;
+            {% endif %}
             }
         {% endfor %}
 
@@ -325,15 +354,20 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-                size_t stringLength = transfer->{{memberName}}Strlen;
-                const volatile char* stringInBuffer = nullptr;
-                DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
+                {% if member.annotation == "const*const*" %}
+                    DESERIALIZE_TRY(DeserializeStringList(
+                        buffer, size, allocator, transfer->{{memberName}}StrCount, transfer->{{memberName}}TotalStrLen, &record->{{memberName}}));
+                {% else %}
+                    size_t stringLength = transfer->{{memberName}}Strlen;
+                    const volatile char* stringInBuffer = nullptr;
+                    DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
 
-                char* copiedString = nullptr;
-                DESERIALIZE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
-                std::copy(stringInBuffer, stringInBuffer + stringLength, copiedString);
-                copiedString[stringLength] = '\0';
-                record->{{memberName}} = copiedString;
+                    char* copiedString = nullptr;
+                    DESERIALIZE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
+                    strncpy(copiedString, const_cast<const char*>(stringInBuffer), stringLength);
+                    copiedString[stringLength] = '\0';
+                    record->{{memberName}} = copiedString;
+                {% endif %}
             }
         {% endfor %}
 
@@ -490,6 +524,52 @@ namespace dawn_wire {
             if (*out == nullptr) {
                 return DeserializeResult::FatalError;
             }
+
+            return DeserializeResult::Success;
+        }
+
+        DeserializeResult DeserializeStringList(
+                const volatile char** buffer,
+                size_t* size,
+                DeserializeAllocator* allocator,
+                size_t strCount,
+                size_t totalStringLength,
+                const char* const** result) {
+            const volatile char* stringBuffer = nullptr;
+            DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, totalStringLength, &stringBuffer));
+
+            char** strList = nullptr;
+            DESERIALIZE_TRY(GetSpace(allocator, strCount + 1, &strList));
+
+            const volatile char* currentString = stringBuffer;
+            size_t remainingChars = totalStringLength;
+            for (size_t i = 0; i < strCount; ++i) {
+                size_t stringLength = strnlen(const_cast<const char*>(currentString), remainingChars);
+                char* copiedString = nullptr;
+                DESERIALIZE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
+                strncpy(copiedString, const_cast<const char*>(currentString), stringLength);
+                copiedString[stringLength] = '\0';
+
+                strList[i] = copiedString;
+
+                // We should not require more than |remainingChars|. This could happen
+                // if strnlen stops at the max length. This means an input string was not
+                // properly null-terminated.
+                if (stringLength + 1 > remainingChars) {
+                    return DeserializeResult::FatalError;
+                }
+                currentString += stringLength + 1;
+                remainingChars -= stringLength + 1;
+            }
+
+            if (remainingChars != 0) {
+                // All characters should be consumed.
+                return DeserializeResult::FatalError;
+            }
+
+            // Null-terminate the list.
+            strList[strCount] = nullptr;
+            *result = strList;
 
             return DeserializeResult::Success;
         }

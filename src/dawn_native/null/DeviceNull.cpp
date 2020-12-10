@@ -37,7 +37,7 @@ namespace dawn_native { namespace null {
     Adapter::~Adapter() = default;
 
     // Used for the tests that intend to use an adapter without all extensions enabled.
-    void Adapter::SetSupportedExtensions(const std::vector<const char*>& requiredExtensions) {
+    void Adapter::SetSupportedExtensions(const char* const* requiredExtensions) {
         mSupportedExtensions = GetInstance()->ExtensionNamesToExtensionsSet(requiredExtensions);
     }
 

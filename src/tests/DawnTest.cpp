@@ -799,24 +799,35 @@ void DawnTestBase::SetUp() {
     for (const char* forceDisabledWorkaround : mParam.forceDisabledWorkarounds) {
         ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
     }
-    dawn_native::DeviceDescriptor deviceDescriptor;
-    deviceDescriptor.forceEnabledToggles = mParam.forceEnabledWorkarounds;
-    deviceDescriptor.forceDisabledToggles = mParam.forceDisabledWorkarounds;
-    deviceDescriptor.requiredExtensions = GetRequiredExtensions();
+    auto forceEnabledToggles = mParam.forceEnabledWorkarounds;
+    auto forceDisabledToggles = mParam.forceDisabledWorkarounds;
+    auto requiredExtensions = GetRequiredExtensions();
 
     for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
         const dawn_native::ToggleInfo* info =
             gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
         ASSERT(info != nullptr);
-        deviceDescriptor.forceEnabledToggles.push_back(info->name);
+        forceEnabledToggles.push_back(info->name);
     }
 
     for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
         const dawn_native::ToggleInfo* info =
             gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
         ASSERT(info != nullptr);
-        deviceDescriptor.forceDisabledToggles.push_back(info->name);
+        forceDisabledToggles.push_back(info->name);
     }
+
+    forceEnabledToggles.push_back(nullptr);
+    forceDisabledToggles.push_back(nullptr);
+    requiredExtensions.push_back(nullptr);
+
+    wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+    deviceDescriptorDawnNative.forceEnabledToggles = forceEnabledToggles.data();
+    deviceDescriptorDawnNative.forceDisabledToggles = forceDisabledToggles.data();
+    deviceDescriptorDawnNative.requiredExtensions = requiredExtensions.data();
+
+    wgpu::DeviceDescriptor deviceDescriptor;
+    deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
 
     backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
     ASSERT_NE(nullptr, backendDevice);
