@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff09cb8f_b0690456",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-10T18:44:26Z",
+      "side": 1,
+      "message": "I think reason I put it here is that I don\u0027t have a device available at [1] (mDevice seems private) -_-",
+      "parentUuid": "0a39348d_8191b602",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f62dec5_ccf531ca",
         "filename": "src/dawn_native/opengl/SamplerGL.cpp",
         "patchSetId": 8
