@@ -87,7 +87,7 @@ namespace dawn_wire { namespace client {
         bool DeviceMatches(const Device* device, WGPUChainedStruct const* chainedStruct) {
             while (chainedStruct != nullptr) {
                 switch (chainedStruct->sType) {
-                    {% for sType in types["s type"].values if sType.valid %}
+                    {% for sType in types["s type"].values if sType.valid and sType.name.CamelCase() not in client_side_structures %}
                         {% set CType = as_cType(sType.name) %}
                         case {{as_cEnum(types["s type"].name, sType.name)}}: {
                             {% if types[sType.name.get()].may_have_dawn_object %}

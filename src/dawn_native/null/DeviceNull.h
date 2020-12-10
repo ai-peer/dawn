@@ -166,7 +166,8 @@ namespace dawn_native { namespace null {
         ~Adapter() override;
 
         // Used for the tests that intend to use an adapter without all extensions enabled.
-        void SetSupportedExtensions(const std::vector<const char*>& requiredExtensions);
+        void SetSupportedExtensions(const char* const* requiredExtensions,
+                                    uint32_t requiredExtensionsCount);
 
       private:
         ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;

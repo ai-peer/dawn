@@ -1877,7 +1877,7 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
 class CopyCommandTest_CompressedTextureFormats : public CopyCommandTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
+        dawn_native::DeviceDescriptorDawnNative descriptor;
         descriptor.requiredExtensions = {"texture_compression_bc"};
         return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
     }

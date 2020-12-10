@@ -148,6 +148,7 @@ class RecordMember:
         self.type = typ
         self.annotation = annotation
         self.length = None
+        self.element_length = None
         self.optional = optional
         self.is_return_value = is_return_value
         self.handle_type = None
@@ -234,15 +235,27 @@ def linked_record_members(json_data, types):
     for (member, m) in zip(members, json_data):
         if member.annotation != 'value':
             if not 'length' in m:
+                assert member.annotation == 'const*' or member.annotation == '*'
                 if member.type.category != 'object':
                     member.length = "constant"
                     member.constant_length = 1
                 else:
                     assert False
             elif m['length'] == 'strlen':
+                assert member.annotation == 'const*' or member.annotation == '*'
                 member.length = 'strlen'
             else:
                 member.length = members_by_name[m['length']]
+
+                if not 'element length' in m:
+                    member.element_length = "constant"
+                    member.constant_element_length = 1
+                elif m['element length'] == 'strlen':
+                    assert member.annotation == 'const*const*'
+                    member.element_length = 'strlen'
+                else:
+                    assert member.annotation == 'const*const*'
+                    member.element_length = members_by_name[m['element length']]
 
     return members
 
