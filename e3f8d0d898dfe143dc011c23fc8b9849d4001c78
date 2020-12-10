@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aef0f52_5849c1e5",
+        "filename": "src/dawn_native/Extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T15:16:10Z",
+      "side": 1,
+      "message": "optional: Like you pointed out in a previous comment, we shouldn\u0027t add an extension for this because it isn\u0027t an optional feature in WebGPU, but instead maxAnisotropy gets clamped to 1 if it is not available. Or do you think we should have it as an optional feature but always request it in Blink?",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "599006b4_f6dd4208",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T15:16:10Z",
+      "side": 1,
+      "message": "You might have missed this comment from a previous patchset:\n\n\u003e I think we might want to clamp to a backend-dependent values (or max-clamp to 16 and add a TODO to clamp to the backend specific value)",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b3f6f7_5b13f840",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T15:16:10Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used anywhere outside of Sampler.cpp so instead the function can completely live inside Sampler.cpp in an anonymous namespace (that we usually put at the top of the dawn_native namespace)",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a39348d_8191b602",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T15:16:10Z",
+      "side": 1,
+      "message": "nit: this can be done directly in [1] since SetupGLSampler is called only once. The mSupportTextureFilterAnisotropic would disappear.",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f62dec5_ccf531ca",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-10T15:16:10Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
