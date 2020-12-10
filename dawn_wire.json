@@ -122,6 +122,7 @@
     },
     "special items": {
         "client_side_structures": [
+            "DeviceDescriptorDawnNative",
             "SurfaceDescriptorFromMetalLayer",
             "SurfaceDescriptorFromWindowsHWND",
             "SurfaceDescriptorFromXlib"

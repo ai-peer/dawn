@@ -42,7 +42,8 @@ namespace dawn_native { namespace vulkan {
 
     class Device : public DeviceBase {
       public:
-        static ResultOrError<Device*> Create(Adapter* adapter, const DeviceDescriptor* descriptor);
+        static ResultOrError<Device*> Create(Adapter* adapter,
+                                             const DeviceDescriptorDawnNative* descriptor);
         ~Device() override;
 
         MaybeError Initialize();
@@ -109,7 +110,7 @@ namespace dawn_native { namespace vulkan {
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
       private:
-        Device(Adapter* adapter, const DeviceDescriptor* descriptor);
+        Device(Adapter* adapter, const DeviceDescriptorDawnNative* descriptor);
 
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;

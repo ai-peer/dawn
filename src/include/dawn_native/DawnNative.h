@@ -16,7 +16,7 @@
 #define DAWNNATIVE_DAWNNATIVE_H_
 
 #include <dawn/dawn_proc_table.h>
-#include <dawn/webgpu.h>
+#include <dawn/webgpu_cpp.h>
 #include <dawn_native/dawn_native_export.h>
 
 #include <string>
@@ -62,11 +62,16 @@ namespace dawn_native {
 
     // An optional parameter of Adapter::CreateDevice() to send additional information when creating
     // a Device. For example, we can use it to enable a workaround, optimization or feature.
-    struct DAWN_NATIVE_EXPORT DeviceDescriptor {
-        std::vector<const char*> requiredExtensions;
+    struct DAWN_NATIVE_EXPORT DeviceDescriptorDawnNative : wgpu::ChainedStruct {
+        DeviceDescriptorDawnNative() {
+            sType = wgpu::SType::DeviceDescriptorDawnNative;
+        }
+        alignas(wgpu::ChainedStruct) std::vector<const char*> requiredExtensions;
         std::vector<const char*> forceEnabledToggles;
         std::vector<const char*> forceDisabledToggles;
     };
+
+    using DeviceDescriptor = DeviceDescriptorDawnNative;
 
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
     // can be manually configured to run or not outside Dawn, including workarounds, special
@@ -114,7 +119,8 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
-        WGPUDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
+        WGPUDevice CreateDevice(const DeviceDescriptorDawnNative* deviceDescriptor);
+        WGPUDevice CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor = nullptr);
 
       private:
         AdapterBase* mImpl = nullptr;

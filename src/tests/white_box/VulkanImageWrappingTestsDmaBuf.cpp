@@ -308,7 +308,7 @@ namespace dawn_native { namespace vulkan {
 
       protected:
         dawn_native::vulkan::Adapter* backendAdapter;
-        dawn_native::DeviceDescriptor deviceDescriptor;
+        dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
 
         wgpu::Device secondDevice;
         dawn_native::vulkan::Device* secondDeviceVk;

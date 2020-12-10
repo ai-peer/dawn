@@ -36,7 +36,7 @@ namespace dawn_native { namespace metal {
       public:
         static ResultOrError<Device*> Create(AdapterBase* adapter,
                                              NSPRef<id<MTLDevice>> mtlDevice,
-                                             const DeviceDescriptor* descriptor);
+                                             const DeviceDescriptorDawnNative* descriptor);
         ~Device() override;
 
         MaybeError Initialize();
@@ -74,7 +74,7 @@ namespace dawn_native { namespace metal {
       private:
         Device(AdapterBase* adapter,
                NSPRef<id<MTLDevice>> mtlDevice,
-               const DeviceDescriptor* descriptor);
+               const DeviceDescriptorDawnNative* descriptor);
 
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;

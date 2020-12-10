@@ -716,6 +716,12 @@
             }
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+        ]
+    },
     "device lost callback": {
         "category": "callback",
         "args": [
@@ -1598,7 +1604,8 @@
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
             {"value": 7, "name": "sampler descriptor dummy anisotropic filtering"},
-            {"value": 8, "name": "render pipeline descriptor dummy extension"}
+            {"value": 8, "name": "render pipeline descriptor dummy extension"},
+            {"value": 9, "name": "device descriptor dawn native"}
         ]
     },
     "texture": {

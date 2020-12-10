@@ -38,7 +38,7 @@ namespace dawn_native {
         const PCIInfo& GetPCIInfo() const;
         InstanceBase* GetInstance() const;
 
-        DeviceBase* CreateDevice(const DeviceDescriptor* descriptor = nullptr);
+        DeviceBase* CreateDevice(const DeviceDescriptorDawnNative* descriptor = nullptr);
 
         ExtensionsSet GetSupportedExtensions() const;
         bool SupportsAllRequestedExtensions(
@@ -52,9 +52,11 @@ namespace dawn_native {
         ExtensionsSet mSupportedExtensions;
 
       private:
-        virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;
+        virtual ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const DeviceDescriptorDawnNative* descriptor) = 0;
 
-        MaybeError CreateDeviceInternal(DeviceBase** result, const DeviceDescriptor* descriptor);
+        MaybeError CreateDeviceInternal(DeviceBase** result,
+                                        const DeviceDescriptorDawnNative* descriptor);
 
         InstanceBase* mInstance = nullptr;
         wgpu::BackendType mBackend;

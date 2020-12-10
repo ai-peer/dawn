@@ -44,7 +44,7 @@ namespace dawn_native {
 
     class DeviceBase {
       public:
-        DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
+        DeviceBase(AdapterBase* adapter, const DeviceDescriptorDawnNative* descriptor);
         virtual ~DeviceBase();
 
         void HandleError(InternalErrorType type, const char* message);
@@ -321,8 +321,8 @@ namespace dawn_native {
                                              TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
 
-        void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
-        void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);
+        void ApplyToggleOverrides(const DeviceDescriptorDawnNative* deviceDescriptor);
+        void ApplyExtensions(const DeviceDescriptorDawnNative* deviceDescriptor);
 
         void SetDefaultToggles();
 

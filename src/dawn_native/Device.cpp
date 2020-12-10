@@ -83,7 +83,7 @@ namespace dawn_native {
 
     // DeviceBase
 
-    DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
+    DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptorDawnNative* descriptor)
         : mAdapter(adapter) {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
@@ -889,7 +889,7 @@ namespace dawn_native {
         return mDefaultQueue.Get();
     }
 
-    void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
+    void DeviceBase::ApplyExtensions(const DeviceDescriptorDawnNative* deviceDescriptor) {
         ASSERT(deviceDescriptor);
         ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
 
@@ -1174,7 +1174,7 @@ namespace dawn_native {
         SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
     }
 
-    void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
+    void DeviceBase::ApplyToggleOverrides(const DeviceDescriptorDawnNative* deviceDescriptor) {
         ASSERT(deviceDescriptor);
 
         for (const char* toggleName : deviceDescriptor->forceEnabledToggles) {

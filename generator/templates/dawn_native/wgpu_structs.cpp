@@ -25,7 +25,7 @@ namespace dawn_native {
     static_assert(offsetof(ChainedStruct, sType) == offsetof(WGPUChainedStruct, sType),
             "offsetof mismatch for ChainedStruct::sType");
 
-    {% for type in by_category["structure"] %}
+    {% for type in by_category["structure"] if type.name.get() != "device descriptor" %}
         {% set CppType = as_cppType(type.name) %}
         {% set CType = as_cType(type.name) %}
 

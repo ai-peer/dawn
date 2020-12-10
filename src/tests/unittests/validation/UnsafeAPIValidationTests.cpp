@@ -21,7 +21,7 @@
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
+        dawn_native::DeviceDescriptorDawnNative descriptor;
         descriptor.forceEnabledToggles.push_back("disallow_unsafe_apis");
         return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
     }
