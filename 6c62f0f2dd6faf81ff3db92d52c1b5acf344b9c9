@@ -50,6 +50,24 @@
       "message": "Maybe we should still support DXC before that version, and only gate float16 on having a higher version of DXC? PlatformFunctions would need to remember the version of DXC, or alternatively we should query the version of DXC from its interface directly with https://github.com/microsoft/DirectXShaderCompiler/blob/master/include/dxc/dxcapi.h#L594 using a call to QueryInterface (but I\u0027m not sure on which interface, the DXC docs don\u0027t seem to exist). Rafael any hints?",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3a14c6_394a6f97",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-10T06:51:31Z",
+      "side": 1,
+      "message": "SPIRV-CROSS will translate spirv to use RWByteAddressBuffer templated Store methods for all types, not only float16, when shader model is 6.2.\nhttps://github.com/KhronosGroup/SPIRV-Cross/blob/1eb42eb18c22be1d70b89105469a357ed2a6403d/spirv_hlsl.cpp#L4095\n\nShould it gate shader model 6.2 on higher DXC?",
+      "parentUuid": "fcf5ea63_8584f1f0",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
