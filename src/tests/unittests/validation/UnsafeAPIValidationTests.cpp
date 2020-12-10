@@ -21,9 +21,16 @@
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     wgpu::Device CreateTestDevice() override {
-        dawn_native::DeviceDescriptor descriptor;
-        descriptor.forceEnabledToggles.push_back("disallow_unsafe_apis");
-        return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        const char* kToggleName = "disallow_unsafe_apis";
+
+        wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+        deviceDescriptorDawnNative.forceEnabledToggles = &kToggleName;
+        deviceDescriptorDawnNative.forceEnabledTogglesCount = 1;
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
+        return wgpu::Device::Acquire(adapter.CreateDevice(&deviceDescriptor));
     }
 };
 

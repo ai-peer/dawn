@@ -100,7 +100,8 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
+    ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(
+        const DeprecatedDeviceDescriptor* descriptor) {
         return Device::Create(this, descriptor);
     }
 

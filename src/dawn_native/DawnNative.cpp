@@ -107,8 +107,64 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    WGPUDevice Adapter::CreateDevice(const DeviceDescriptor* deviceDescriptor) {
+    WGPUDevice Adapter::CreateDevice(const DeprecatedDeviceDescriptor* deviceDescriptor) {
         return reinterpret_cast<WGPUDevice>(mImpl->CreateDevice(deviceDescriptor));
+    }
+
+    WGPUDevice Adapter::CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor) {
+        return CreateDevice(reinterpret_cast<const DeviceDescriptor*>(deviceDescriptor));
+    }
+
+    WGPUDevice Adapter::CreateDevice(const DeviceDescriptor* deviceDescriptor) {
+        DeprecatedDeviceDescriptor deprecatedDeviceDescriptor = {};
+
+        if (deviceDescriptor != nullptr) {
+            for (uint32_t i = 0; i < deviceDescriptor->featuresCount; ++i) {
+                switch (deviceDescriptor->features[i]) {
+                    case wgpu::FeatureName::Undefined:
+                        // Never implemented.
+                        break;
+                    case wgpu::FeatureName::DepthClamping:
+                    case wgpu::FeatureName::Depth24UnormStencil8:
+                    case wgpu::FeatureName::Depth32FloatStencil8:
+                        // Not implemented.
+                        break;
+                    case wgpu::FeatureName::PipelineStatisticsQuery:
+                        deprecatedDeviceDescriptor.requiredExtensions.push_back(
+                            "pipeline_statistics_query");
+                        break;
+                    case wgpu::FeatureName::TextureCompressionBC:
+                        deprecatedDeviceDescriptor.requiredExtensions.push_back(
+                            "texture_compression_bc");
+                        break;
+                    case wgpu::FeatureName::TimestampQuery:
+                        deprecatedDeviceDescriptor.requiredExtensions.push_back("timestamp_query");
+                        break;
+                    case wgpu::FeatureName::ShaderFloat16:
+                        deprecatedDeviceDescriptor.requiredExtensions.push_back("shader_float16");
+                        break;
+                }
+            }
+            const DeviceDescriptorDawnNative* dawnNativeDeviceDescriptor;
+            if (GetExtensionStruct(deviceDescriptor->nextInChain, &dawnNativeDeviceDescriptor)) {
+                for (uint32_t i = 0; i < dawnNativeDeviceDescriptor->forceEnabledTogglesCount;
+                     ++i) {
+                    deprecatedDeviceDescriptor.forceEnabledToggles.push_back(
+                        dawnNativeDeviceDescriptor->forceEnabledToggles[i]);
+                }
+                for (uint32_t i = 0; i < dawnNativeDeviceDescriptor->forceDisabledTogglesCount;
+                     ++i) {
+                    deprecatedDeviceDescriptor.forceDisabledToggles.push_back(
+                        dawnNativeDeviceDescriptor->forceDisabledToggles[i]);
+                }
+                for (uint32_t i = 0; i < dawnNativeDeviceDescriptor->requiredExtensionsCount; ++i) {
+                    deprecatedDeviceDescriptor.requiredExtensions.push_back(
+                        dawnNativeDeviceDescriptor->requiredExtensions[i]);
+                }
+            }
+        }
+
+        return CreateDevice(&deprecatedDeviceDescriptor);
     }
 
     // AdapterDiscoverOptionsBase

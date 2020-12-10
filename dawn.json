@@ -799,6 +799,26 @@
             }
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "features", "type": "feature name", "annotation": "const*", "length": "features count", "optional": true},
+            {"name": "features count", "type": "uint32_t", "default": 0}
+        ]
+    },
+    "device descriptor dawn native": {
+        "category": "structure",
+        "chained": true,
+        "members": [
+            {"name": "force enabled toggles", "type": "char", "annotation": "const*const*", "length": "force enabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force enabled toggles count", "type": "uint32_t", "default": 0},
+            {"name": "force disabled toggles", "type": "char", "annotation": "const*const*", "length": "force disabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force disabled toggles count", "type": "uint32_t", "default": 0},
+            {"name": "required extensions", "type": "char", "annotation": "const*const*", "length": "required extensions count",  "element length": "strlen", "optional": true},
+            {"name": "required extensions count", "type": "uint32_t", "default": 0}
+        ]
+    },
     "device lost callback": {
         "category": "callback",
         "args": [
@@ -864,6 +884,19 @@
             {"name": "width", "type": "uint32_t", "default": 1},
             {"name": "height", "type": "uint32_t", "default": 1},
             {"name": "depth", "type": "uint32_t", "default": 1}
+        ]
+    },
+    "feature name": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "undefined", "valid": false},
+            {"value": 1, "name": "depth clamping"},
+            {"value": 2, "name": "depth 24 unorm stencil 8"},
+            {"value": 3, "name": "depth 32 float stencil 8"},
+            {"value": 4, "name": "pipeline statistics query"},
+            {"value": 5, "name": "texture compression BC"},
+            {"value": 6, "name": "timestamp query"},
+            {"value": 7, "name": "shader float 16"}
         ]
     },
     "fence": {
@@ -1681,8 +1714,9 @@
             {"value": 4, "name": "surface descriptor from canvas HTML selector"},
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
-            {"value": 7, "name": "sampler descriptor dummy anisotropic filtering"},
-            {"value": 8, "name": "render pipeline descriptor dummy extension"}
+            {"value": "0x32960000", "name": "device descriptor dawn native"},
+            {"value": "0x32960001", "name": "sampler descriptor dummy anisotropic filtering"},
+            {"value": "0x32960002", "name": "render pipeline descriptor dummy extension"}
         ]
     },
     "texture": {

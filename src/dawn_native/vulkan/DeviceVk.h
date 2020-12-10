@@ -42,7 +42,8 @@ namespace dawn_native { namespace vulkan {
 
     class Device : public DeviceBase {
       public:
-        static ResultOrError<Device*> Create(Adapter* adapter, const DeviceDescriptor* descriptor);
+        static ResultOrError<Device*> Create(Adapter* adapter,
+                                             const DeprecatedDeviceDescriptor* descriptor);
         ~Device() override;
 
         MaybeError Initialize();
@@ -111,7 +112,7 @@ namespace dawn_native { namespace vulkan {
         float GetTimestampPeriodInNS() const override;
 
       private:
-        Device(Adapter* adapter, const DeviceDescriptor* descriptor);
+        Device(Adapter* adapter, const DeprecatedDeviceDescriptor* descriptor);
 
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
