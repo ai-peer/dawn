@@ -353,6 +353,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2c17cd_d525d880",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-11T19:28:51Z",
+      "side": 1,
+      "message": "I decided to go ahead and make this change in this CL. It makes it a bit more noisy but also keeps it atomic and I feel better about it now that you\u0027ve had a chance to review the reset separately.",
+      "parentUuid": "30dbfb52_ed8874c0",
+      "revId": "78b5bc8ac3fd90358920ada238e8434ad073038e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0fb669d_834cb2de",

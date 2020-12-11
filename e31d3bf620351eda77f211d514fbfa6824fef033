@@ -51,6 +51,24 @@
       "parentUuid": "a1a61b61_74e72ee3",
       "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dddb34_a36ca58a",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-11T19:28:51Z",
+      "side": 1,
+      "message": "Changed the jsrep to `readonly-storage`, because that\u0027s what the spec does say. Any idea when we\u0027ll be able to resolve this? I\u0027d prefer to not leave this CL hanging over one naming question.",
+      "parentUuid": "9f6dca02_fceb3781",
+      "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
