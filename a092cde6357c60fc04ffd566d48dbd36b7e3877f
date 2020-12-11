@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcdcaa8d_b89987fd",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-11T16:47:01Z",
+      "side": 1,
+      "message": "It is, nice catch! Aren\u0027t we worried about the code explosion that will ensue? (the template will be always inlined because F will be a lambda type) Update\u0027s code is much bigger than just this and will also reiterate over aspects and likely will check the compression booleans again.",
+      "parentUuid": "29bd63d8_062fe1fb",
+      "range": {
+        "startLine": 304,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 46
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33060318_1dbd92e4",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 7
