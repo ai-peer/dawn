@@ -86,6 +86,24 @@
       "parentUuid": "1b84a514_75689d21",
       "revId": "59934875023e37b6035fc55b1cba4215d9772877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0bce8a2_63941a32",
+        "filename": "src/common/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-11T17:32:18Z",
+      "side": 1,
+      "message": "Yeah I went with SFINAE because I was worried that the Unsupported operator \u003d\u003d would show up when the compiler complains about not finding an operator \u003d\u003d (and would add even more stuff to the GIANT error messages it produces in that case).",
+      "parentUuid": "d809a988_5579fb21",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
