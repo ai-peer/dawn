@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bd63d8_062fe1fb",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-11T16:33:56Z",
+      "side": 1,
+      "message": "Is this not equivalent to:\n\n  Update(SubresourceRange::MakeFull(aspect, mArrayLayerCount, mMipLevelCount),\n         [\u0026](const SubresourceRange\u0026 subrange, T* data) {\n               mergeFunc(subrange, data, otherData);\n         });\n\nAnd then the same pattern below?",
+      "range": {
+        "startLine": 304,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 46
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33060318_1dbd92e4",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-11T16:33:56Z",
+      "side": 1,
+      "message": "if",
+      "range": {
+        "startLine": 334,
+        "startChar": 55,
+        "endLine": 334,
+        "endChar": 57
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
