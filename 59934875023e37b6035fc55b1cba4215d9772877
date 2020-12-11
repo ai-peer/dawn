@@ -50,6 +50,24 @@
       "message": "nit: do we need the SFINAE for this? or could we just say value \u003d std::is_same\u003c...\u003e::value ?",
       "revId": "59934875023e37b6035fc55b1cba4215d9772877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b84a514_75689d21",
+        "filename": "src/common/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-11T17:11:57Z",
+      "side": 1,
+      "message": "No, you\u0027re right. This can be:\n\n    namespace detail {\n\n        struct Unsupported {}; \n\n        template\u003ctypename LHS, typename RHS\u003e\n        Unsupported operator \u003d\u003d (LHS, RHS);\n\n        template \u003ctypename LHS, typename RHS \u003d LHS\u003e\n        struct HasEqualityOperator {\n            static constexpr const bool value \u003d std::is_same\u003cdecltype(std::declval\u003cLHS\u003e() \u003d\u003d std::declval\u003cRHS\u003e()), bool\u003e::value;\n        };\n\n    }\n\nBut note that this code currently doesn\u0027t have the \u0027Unsupported\u0027 magic. Without this, the is_same logic will error if there\u0027s no operator \u003d\u003d for the types, which renders the whole trait useless.",
+      "parentUuid": "00df7e0a_be8ff336",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
