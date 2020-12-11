@@ -364,6 +364,9 @@ namespace dawn_native { namespace opengl {
                                                 isLayered, view->GetBaseArrayLayer(), access,
                                                 texture->GetGLFormat().internalFormat);
                             break;
+
+                            case wgpu::BindingType::Undefined:
+                                UNREACHABLE();
                         }
                     }
                 }
