@@ -319,8 +319,11 @@ namespace dawn_native { namespace d3d12 {
         // layouts could be used to produce different shader blobs and the wrong shader blob could
         // be loaded since the pipeline layout was missing from the key.
         // TODO(dawn:549): Consider keying from WGSL and serialize the pipeline layout it used.
+        std::string hlslCompilerVersion;
+        DAWN_TRY_ASSIGN(hlslCompilerVersion, GetHLSLCompilerVersion());
+
         const PersistentCacheKey& shaderCacheKey =
-            CreateHLSLKey(entryPointName, stage, hlslSource, compileFlags);
+            CreateHLSLKey(entryPointName, stage, hlslSource, compileFlags, hlslCompilerVersion);
 
         CompiledShader compiledShader = {};
         DAWN_TRY_ASSIGN(compiledShader.cachedShader,
@@ -359,7 +362,8 @@ namespace dawn_native { namespace d3d12 {
     PersistentCacheKey ShaderModule::CreateHLSLKey(const char* entryPointName,
                                                    SingleShaderStage stage,
                                                    const std::string& hlslSource,
-                                                   uint32_t compileFlags) const {
+                                                   uint32_t compileFlags,
+                                                   const std::string& hlslCompilerVersion) const {
         std::stringstream stream;
 
         // Prefix the key with the type to avoid collisions from another type that could have the
@@ -379,7 +383,8 @@ namespace dawn_native { namespace d3d12 {
 
         stream << compileFlags;
 
-        // TODO(dawn:549): add the HLSL compiler version for good measure.
+        // Add the HLSL compiler version for good measure.
+        stream << hlslCompilerVersion;
 
         // If the source contains multiple entry points, ensure they are cached seperately
         // per stage since DX shader code can only be compiled per stage using the same
@@ -390,4 +395,25 @@ namespace dawn_native { namespace d3d12 {
         return PersistentCacheKey(std::istreambuf_iterator<char>{stream},
                                   std::istreambuf_iterator<char>{});
     }
+
+    ResultOrError<std::string> ShaderModule::GetHLSLCompilerVersion() const {
+        std::stringstream stream;
+        Device* device = ToBackend(GetDevice());
+        if (device->IsToggleEnabled(Toggle::UseDXC)) {
+            ComPtr<IDxcValidator> dxcValidator;
+            DAWN_TRY_ASSIGN(dxcValidator, device->GetOrCreateDxcValidator());
+
+            ComPtr<IDxcVersionInfo> versionInfo;
+            ASSERT_SUCCESS(dxcValidator.As(&versionInfo));
+
+            uint32_t compilerMajor, compilerMinor;
+            ASSERT_SUCCESS(versionInfo->GetVersion(&compilerMajor, &compilerMinor));
+
+            stream << compilerMajor << "." << compilerMinor;
+        } else {
+            stream << D3D_COMPILER_VERSION;
+        }
+        return stream.str();
+    }
+
 }}  // namespace dawn_native::d3d12

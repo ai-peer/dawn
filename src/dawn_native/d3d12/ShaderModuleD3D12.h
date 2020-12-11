@@ -62,7 +62,10 @@ namespace dawn_native { namespace d3d12 {
         PersistentCacheKey CreateHLSLKey(const char* entryPointName,
                                          SingleShaderStage stage,
                                          const std::string& hlslSource,
-                                         uint32_t compileFlags) const;
+                                         uint32_t compileFlags,
+                                         const std::string& dxCompilerVersion) const;
+
+        ResultOrError<std::string> GetHLSLCompilerVersion() const;
 
 #ifdef DAWN_ENABLE_WGSL
         std::unique_ptr<tint::ast::Module> mTintModule;
