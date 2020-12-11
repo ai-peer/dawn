@@ -68,6 +68,24 @@
       "parentUuid": "00df7e0a_be8ff336",
       "revId": "59934875023e37b6035fc55b1cba4215d9772877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d809a988_5579fb21",
+        "filename": "src/common/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T17:23:25Z",
+      "side": 1,
+      "message": "Oh right. It seems like the current sfinae version is better then so we don\u0027t need to check Unsupported",
+      "parentUuid": "1b84a514_75689d21",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
