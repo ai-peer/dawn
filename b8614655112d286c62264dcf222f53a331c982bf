@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "b8614655112d286c62264dcf222f53a331c982bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762013aa_9302fe88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T18:14:14Z",
+      "side": 1,
+      "message": "Thanks for the CL - it\u0027s a promising direction, but overall, I realized there are some big issues with having a library be per-device.\nChromium is going to do per-origin cache isolation which will be fine with the current design.\nPages from the same origin and device/adapter properties will be looking up pipelines in the same cache.\n\nThe big issue though is that we load the pipeline cache on device creation, store it on device destruction, and there\u0027s zero cross-device communication about pipelines added to the cache.\n\nThis means if I load both webgpu.shadertoy.com/foo and webgpu.shadertoy.com/bar in two tabs, then close foo first, then bar, foo\u0027s pipelines will be written into the persistent cache, then bar\u0027s will also be written and overwrite pipelines from foo.\n\nThis becomes less of a problem if/when we multiplex multiple logical devices onto the same physical device, but we don\u0027t want to block the caching implementation on that since we have no concrete timeline on multiplexing at this time.\n\nMaybe we should first write a concrete design about how we\u0027ll integrate this into Chromium. The other doc you have (which needs updating now that we\u0027ve iterated a bunch) talks mostly about the native APIs available and how we\u0027ll implement it in Dawn, but we also need to figure out integration with the embedder. Some primitive ideas here, but it seems like for D3D12 we will need some way to tell other Dawn devices created on different instances about new pipelines - can you even StorePipeline a PSO created on a different D3D12 device? For Vulkan maybe we can use vkMergePipelines.\n\nThat said.. I think the video work is more important at this time and we should focus on that unless it\u0027s blocked on something.",
+      "revId": "b8614655112d286c62264dcf222f53a331c982bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1bf6bf_1a43d67a",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T18:14:14Z",
+      "side": 1,
+      "message": "comment about why we allow this error code",
+      "range": {
+        "startLine": 52,
+        "startChar": 56,
+        "endLine": 52,
+        "endChar": 68
+      },
+      "revId": "b8614655112d286c62264dcf222f53a331c982bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
