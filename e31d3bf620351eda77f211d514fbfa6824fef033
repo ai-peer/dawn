@@ -87,6 +87,24 @@
       "parentUuid": "95dddb34_a36ca58a",
       "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581f6122_447a7ef5",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-11T19:59:24Z",
+      "side": 1,
+      "message": "er, I guess the jsrepr can just be removed, because it should be the same as the generated default.",
+      "parentUuid": "7c1b898a_0490edaf",
+      "revId": "e31d3bf620351eda77f211d514fbfa6824fef033",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
