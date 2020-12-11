@@ -71,7 +71,8 @@ namespace {
                     clientDesc.serializer = mC2sBuf.get();
                     mWireClient = std::make_unique<dawn_wire::WireClient>(clientDesc);
 
-                    mDevice = wgpu::Device::Acquire(mWireClient->GetDevice());
+                    // In the wire, the device is unused for GetProcAddress.
+                    mDevice = nullptr;
                     mProcs = dawn_wire::client::GetProcs();
                     break;
                 }

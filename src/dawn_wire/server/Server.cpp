@@ -31,23 +31,6 @@ namespace dawn_wire { namespace server {
         // The client-server knowledge is bootstrapped with instance 1.
         auto* instanceData = InstanceObjects().Allocate(1);
         instanceData->handle = descriptor.instance;
-
-        if (descriptor.device != nullptr) {
-            // The server does not take a ref on device it was created with in the
-            // deprecated code path. We need to remember which device pointer it
-            // is so we don't call release on destruction.
-            mCreatedWithDevice = descriptor.device;
-
-            // The client-server knowledge is bootstrapped with device 1.
-            auto* deviceData = DeviceObjects().Allocate(1);
-            deviceData->handle = descriptor.device;
-            deviceData->id = 1;
-            deviceData->server = this;
-
-            mProcs.deviceSetUncapturedErrorCallback(descriptor.device, ForwardUncapturedError,
-                                                    deviceData);
-            mProcs.deviceSetDeviceLostCallback(descriptor.device, ForwardDeviceLost, deviceData);
-        }
     }
 
     Server::~Server() {

@@ -49,69 +49,6 @@ namespace dawn_wire { namespace client {
             }
         {% endfor %}
 
-        bool DeviceMatches(const Client* device, WGPUChainedStruct const* chainedStruct);
-
-        {% for type in by_category["structure"] if type.may_have_dawn_object %}
-            DAWN_DECLARE_UNUSED bool DeviceMatches(const Client* device, const {{as_cType(type.name)}}& obj) {
-                {% if type.extensible %}
-                    if (!DeviceMatches(device, obj.nextInChain)) {
-                        return false;
-                    }
-                {% endif %}
-                {% for member in type.members if member.type.may_have_dawn_object or member.type.category == "object" %}
-                    {% if member.optional %}
-                        if (obj.{{as_varName(member.name)}} != nullptr)
-                    {% endif %}
-                    {
-                        if (!DeviceMatches(device, obj.{{as_varName(member.name)}}
-                            {%- if member.annotation != "value" and member.length != "strlen" -%}
-                                , {{member_length(member, "obj.")}}
-                            {%- endif -%})) {
-                            return false;
-                        }
-                    }
-                {% endfor %}
-                return true;
-            }
-
-            DAWN_DECLARE_UNUSED bool DeviceMatches(const Client* device, const {{as_cType(type.name)}} *const obj, uint32_t count = 1) {
-                for (uint32_t i = 0; i < count; ++i) {
-                    if (!DeviceMatches(device, obj[i])) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        {% endfor %}
-
-        bool DeviceMatches(const Client* device, WGPUChainedStruct const* chainedStruct) {
-            while (chainedStruct != nullptr) {
-                switch (chainedStruct->sType) {
-                    {% for sType in types["s type"].values if sType.valid and sType.name.CamelCase() not in client_side_structures %}
-                        {% set CType = as_cType(sType.name) %}
-                        case {{as_cEnum(types["s type"].name, sType.name)}}: {
-                            {% if types[sType.name.get()].may_have_dawn_object %}
-                                if (!DeviceMatches(device, reinterpret_cast<const {{CType}}*>(chainedStruct))) {
-                                    return false;
-                                }
-                            {% endif %}
-                            break;
-                        }
-                    {% endfor %}
-                    case WGPUSType_Invalid:
-                        break;
-                    default:
-                        UNREACHABLE();
-                        dawn::WarningLog()
-                            << "All objects may not be from the same device. "
-                            << "Unknown sType " << chainedStruct->sType << " discarded.";
-                        return false;
-                }
-                chainedStruct = chainedStruct->next;
-            }
-            return true;
-        }
-
     }  // anonymous namespace
 
     //* Implementation of the client API functions.
@@ -131,51 +68,6 @@ namespace dawn_wire { namespace client {
                     , {{as_annotated_cType(arg)}}
                 {%- endfor -%}
             ) {
-                {% if len(method.arguments) > 0 %}
-                    {
-                        bool sameDevice = true;
-                        auto self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
-                        Client* device = self->GetClient();
-                        DAWN_UNUSED(device);
-
-                        do {
-                            {% for arg in method.arguments if arg.type.may_have_dawn_object or arg.type.category == "object" %}
-                                {% if arg.optional %}
-                                    if ({{as_varName(arg.name)}} != nullptr)
-                                {% endif %}
-                                {
-                                    if (!DeviceMatches(device, {{as_varName(arg.name)}}
-                                        {%- if arg.annotation != "value" and arg.length != "strlen" -%}
-                                            , {{member_length(arg, "")}}
-                                        {%- endif -%})) {
-                                        sameDevice = false;
-                                        break;
-                                    }
-                                }
-                            {% endfor %}
-                        } while (false);
-
-                        if (DAWN_UNLIKELY(!sameDevice)) {
-                            self->FindAncestor<Device>()->InjectError(
-                                WGPUErrorType_Validation,
-                                "All objects must be from the same device.");
-                            {% if method.return_type.category == "object" %}
-                                // Allocate an object without registering it on the server. This is backed by a real allocation on
-                                // the client so commands can be sent with it. But because it's not allocated on the server, it will
-                                // be a fatal error to use it.
-                                auto self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
-                                auto* allocation = self->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(
-                                    self->FindAncestor<{{method.return_type.name.CamelCase()}}::Parent>());
-                                return reinterpret_cast<{{as_cType(method.return_type.name)}}>(allocation->object.get());
-                            {% elif method.return_type.name.canonical_case() == "void" %}
-                                return;
-                            {% else %}
-                                return {};
-                            {% endif %}
-                        }
-                    }
-                {% endif %}
-
                 auto self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
                 {% if Suffix not in client_handwritten_commands %}
                     {{Suffix}}Cmd cmd;

@@ -36,12 +36,6 @@ namespace dawn_wire { namespace server {
                 {
                     std::vector<{{as_cType(type.name)}}> handles = mKnown{{type.name.CamelCase()}}.AcquireAllHandles();
                     for ({{as_cType(type.name)}} handle : handles) {
-                        //
-                        {% if type.name.canonical_case() == "device" %}
-                            if (handle == createdWithDevice) {
-                                continue;
-                            }
-                        {% endif %}
                         procs.{{as_varName(type.name, Name("release"))}}(handle);
                     }
                 }

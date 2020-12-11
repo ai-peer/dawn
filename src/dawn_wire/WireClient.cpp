@@ -25,10 +25,6 @@ namespace dawn_wire {
         mImpl.reset();
     }
 
-    WGPUDevice WireClient::GetDevice() const {
-        return mImpl->GetDevice();
-    }
-
     WGPUInstance WireClient::GetInstance() const {
         return mImpl->GetInstance();
     }

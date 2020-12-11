@@ -87,13 +87,6 @@ namespace dawn_wire { namespace client {
         return reinterpret_cast<WGPUInstance>(mInstance);
     }
 
-    WGPUDevice Client::GetDevice() {
-        if (mDevice == nullptr) {
-            mDevice = DeviceAllocator().New(this)->object.get();
-        }
-        return reinterpret_cast<WGPUDevice>(mDevice);
-    }
-
     ReservedTexture Client::ReserveTexture(WGPUDevice cDevice) {
         Device* device = FromAPI(cDevice);
         auto* allocation = TextureAllocator().New(device);
