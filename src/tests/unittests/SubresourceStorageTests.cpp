@@ -49,6 +49,19 @@ struct FakeStorage {
         }
     }
 
+    template <typename U, typename F>
+    void Merge(const SubresourceStorage<U>& other, F&& mergeFunc) {
+        for (Aspect aspect : IterateEnumMask(mAspects)) {
+            for (uint32_t layer = 0; layer < mArrayLayerCount; layer++) {
+                for (uint32_t level = 0; level < mMipLevelCount; level++) {
+                    SubresourceRange range = SubresourceRange::MakeSingle(aspect, layer, level);
+                    mergeFunc(range, &mData[GetDataIndex(aspect, layer, level)],
+                              other.Get(aspect, layer, level));
+                }
+            }
+        }
+    }
+
     const T& Get(Aspect aspect, uint32_t arrayLayer, uint32_t mipLevel) const {
         return mData[GetDataIndex(aspect, arrayLayer, mipLevel)];
     }
@@ -257,6 +270,7 @@ void CallUpdateOnBoth(SubresourceStorage<T>* s,
         tracker.Track(range);
         updateFunc(range, data);
     });
+
     f->Update(range, updateFunc);
 
     tracker.CheckTrackedExactly(range);
@@ -444,6 +458,35 @@ TEST(SubresourceStorageTest, UpdateLevel0sHappenToMatch) {
     CheckLayerCompressed(s, Aspect::Color, 0, false);
     CheckLayerCompressed(s, Aspect::Color, 1, false);
 }
+
+// XXX
+// The tests for Merge() all follow the same pattern of setting up a real and a fake storage then
+// performing one or multiple Update()s on them and checking:
+//  - They have the same content.
+//  - The Update() range was correct.
+//  - The aspects and layers have the expected "compressed" status.
+
+// Similar to CallUpdateOnBoth but for Merge
+template <typename T, typename U, typename F>
+void CallMergeOnBoth(SubresourceStorage<T>* s,
+                      FakeStorage<T>* f,
+                      const SubresourceStorage<U>& other,
+                      F&& mergeFunc) {
+    RangeTracker tracker(*s);
+
+    s->Merge(other, [&](const SubresourceRange& range, T* data, const U& otherData) {
+        tracker.Track(range);
+        mergeFunc(range, data, otherData);
+    });
+    f->Merge(other, mergeFunc);
+
+
+    tracker.CheckTrackedExactly(SubresourceRange::MakeFull(f->mAspects, f->mArrayLayerCount, f->mMipLevelCount));
+    f->CheckSameAs(*s);
+}
+
+// TODO DO TESTS OMG
+
 
 // Bugs found while testing:
 //  - mLayersCompressed not initialized to true.
