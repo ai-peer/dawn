@@ -79,6 +79,12 @@ namespace dawn_native {
     // would be operations that touch all Nth mips of a 2D array texture without touching the
     // others.
     //
+    // There are several hot code paths that create new SubresourceStorage like the tracking of
+    // resource usage per-pass. We don't want to allocate a container for the decompressed data
+    // unless we have to because it would dramatically lower performance. Instead
+    // SubresourceStorage contains an inline array that contains the per-aspect compressed data
+    // and only allocates a per-subresource on aspect decompression.
+    //
     // T must be a copyable type that supports equality comparison with ==.
     //
     // The implementation of functions in this file can have a lot of control flow and corner cases
@@ -94,8 +100,6 @@ namespace dawn_native {
            third_party/dawn/src/dawn_native
     */
     //
-    // TODO(cwallez@chromium.org): Inline the storage for aspects to avoid allocating when
-    // possible.
     // TODO(cwallez@chromium.org): Make the recompression optional, the calling code should know
     // if recompression can happen or not in Update() and Merge()
     template <typename T>
@@ -179,11 +183,19 @@ namespace dawn_native {
 
         SubresourceRange GetFullLayerRange(Aspect aspect, uint32_t layer) const;
 
+        // LayerCompressed should never be called when the aspect is compressed otherwise it would
+        // need to check that mLayerCompressed is not null before indexing it.
         bool& LayerCompressed(uint32_t aspectIndex, uint32_t layerIndex);
         bool LayerCompressed(uint32_t aspectIndex, uint32_t layerIndex) const;
 
-        T& Data(uint32_t aspectIndex, uint32_t layerIndex = 0, uint32_t levelIndex = 0);
-        const T& Data(uint32_t aspectIndex, uint32_t layerIndex = 0, uint32_t levelIndex = 0) const;
+        // Return references to the data for a compressed plane / layer or subresource.
+        // Each variant should be called exactly under the correct compression level.
+        T& Data(uint32_t aspectIndex);
+        T& Data(uint32_t aspectIndex, uint32_t layer);
+        T& Data(uint32_t aspectIndex, uint32_t layer, uint32_t level);
+        const T& Data(uint32_t aspectIndex) const;
+        const T& Data(uint32_t aspectIndex, uint32_t layer) const;
+        const T& Data(uint32_t aspectIndex, uint32_t layer, uint32_t level) const;
 
         Aspect mAspects;
         uint8_t mMipLevelCount;
@@ -193,6 +205,8 @@ namespace dawn_native {
         // compressed.
         static constexpr size_t kMaxAspects = 2;
         std::array<bool, kMaxAspects> mAspectCompressed;
+        std::array<T, kMaxAspects> mInlineAspectData;
+
         // Indexed as mLayerCompressed[aspectIndex * mArrayLayerCount + layer].
         std::unique_ptr<bool[]> mLayerCompressed;
 
@@ -214,16 +228,9 @@ namespace dawn_native {
         uint32_t aspectCount = GetAspectCount(aspects);
         ASSERT(aspectCount <= kMaxAspects);
 
-        mLayerCompressed = std::make_unique<bool[]>(aspectCount * mArrayLayerCount);
-        mData = std::make_unique<T[]>(aspectCount * mArrayLayerCount * mMipLevelCount);
-
         for (uint32_t aspectIndex = 0; aspectIndex < aspectCount; aspectIndex++) {
             mAspectCompressed[aspectIndex] = true;
             Data(aspectIndex) = initialValue;
-        }
-
-        for (uint32_t layerIndex = 0; layerIndex < aspectCount * mArrayLayerCount; layerIndex++) {
-            mLayerCompressed[layerIndex] = true;
         }
     }
 
@@ -420,60 +427,86 @@ namespace dawn_native {
 
     template <typename T>
     bool SubresourceStorage<T>::IsLayerCompressedForTesting(Aspect aspect, uint32_t layer) const {
-        return mLayerCompressed[GetAspectIndex(aspect) * mArrayLayerCount + layer];
+        return mAspectCompressed[GetAspectIndex(aspect)] ||
+               mLayerCompressed[GetAspectIndex(aspect) * mArrayLayerCount + layer];
     }
 
     template <typename T>
     void SubresourceStorage<T>::DecompressAspect(uint32_t aspectIndex) {
         ASSERT(mAspectCompressed[aspectIndex]);
+        T aspectData = Data(aspectIndex);
+        mAspectCompressed[aspectIndex] = false;
 
-        ASSERT(LayerCompressed(aspectIndex, 0));
-        for (uint32_t layer = 1; layer < mArrayLayerCount; layer++) {
-            Data(aspectIndex, layer) = Data(aspectIndex);
-            ASSERT(LayerCompressed(aspectIndex, layer));
+        // Extra allocations are only needed when aspects are decompressed. Create them lazily.
+        if (mData == nullptr) {
+            ASSERT(mLayerCompressed == nullptr);
+
+            uint32_t aspectCount = GetAspectCount(mAspects);
+            mLayerCompressed = std::make_unique<bool[]>(aspectCount * mArrayLayerCount);
+            mData = std::make_unique<T[]>(aspectCount * mArrayLayerCount * mMipLevelCount);
+
+            for (uint32_t layerIndex = 0; layerIndex < aspectCount * mArrayLayerCount;
+                 layerIndex++) {
+                mLayerCompressed[layerIndex] = true;
+            }
         }
 
-        mAspectCompressed[aspectIndex] = false;
+        ASSERT(LayerCompressed(aspectIndex, 0));
+        for (uint32_t layer = 0; layer < mArrayLayerCount; layer++) {
+            Data(aspectIndex, layer) = aspectData;
+            ASSERT(LayerCompressed(aspectIndex, layer));
+        }
     }
 
     template <typename T>
     void SubresourceStorage<T>::RecompressAspect(uint32_t aspectIndex) {
         ASSERT(!mAspectCompressed[aspectIndex]);
+        // All layers of the aspect must be compressed for the aspect to possibly recompress.
+        for (uint32_t layer = 0; layer < mArrayLayerCount; layer++) {
+            if (!LayerCompressed(aspectIndex, layer)) {
+                return;
+            }
+        }
 
+        T layer0Data = Data(aspectIndex, 0);
         for (uint32_t layer = 1; layer < mArrayLayerCount; layer++) {
-            if (Data(aspectIndex, layer) != Data(aspectIndex) ||
-                !LayerCompressed(aspectIndex, layer)) {
+            if (Data(aspectIndex, layer) != layer0Data) {
                 return;
             }
         }
 
         mAspectCompressed[aspectIndex] = true;
+        Data(aspectIndex) = layer0Data;
     }
 
     template <typename T>
     void SubresourceStorage<T>::DecompressLayer(uint32_t aspectIndex, uint32_t layer) {
         ASSERT(LayerCompressed(aspectIndex, layer));
         ASSERT(!mAspectCompressed[aspectIndex]);
-
-        for (uint32_t level = 1; level < mMipLevelCount; level++) {
-            Data(aspectIndex, layer, level) = Data(aspectIndex, layer);
-        }
-
+        T layerData = Data(aspectIndex, layer);
         LayerCompressed(aspectIndex, layer) = false;
+
+        // We assume that (aspect, layer, 0) is stored at the same place as (aspect, layer) which
+        // allows starting the iteration at level 1.
+        for (uint32_t level = 1; level < mMipLevelCount; level++) {
+            Data(aspectIndex, layer, level) = layerData;
+        }
     }
 
     template <typename T>
     void SubresourceStorage<T>::RecompressLayer(uint32_t aspectIndex, uint32_t layer) {
         ASSERT(!LayerCompressed(aspectIndex, layer));
         ASSERT(!mAspectCompressed[aspectIndex]);
+        T level0Data = Data(aspectIndex, layer, 0);
 
         for (uint32_t level = 1; level < mMipLevelCount; level++) {
-            if (Data(aspectIndex, layer, level) != Data(aspectIndex, layer)) {
+            if (Data(aspectIndex, layer, level) != level0Data) {
                 return;
             }
         }
 
         LayerCompressed(aspectIndex, layer) = true;
+        Data(aspectIndex, layer) = level0Data;
     }
 
     template <typename T>
@@ -483,23 +516,46 @@ namespace dawn_native {
 
     template <typename T>
     bool& SubresourceStorage<T>::LayerCompressed(uint32_t aspectIndex, uint32_t layer) {
+        ASSERT(!mAspectCompressed[aspectIndex]);
         return mLayerCompressed[aspectIndex * mArrayLayerCount + layer];
     }
 
     template <typename T>
     bool SubresourceStorage<T>::LayerCompressed(uint32_t aspectIndex, uint32_t layer) const {
+        ASSERT(!mAspectCompressed[aspectIndex]);
         return mLayerCompressed[aspectIndex * mArrayLayerCount + layer];
     }
 
     template <typename T>
+    T& SubresourceStorage<T>::Data(uint32_t aspectIndex) {
+        ASSERT(mAspectCompressed[aspectIndex]);
+        return mInlineAspectData[aspectIndex];
+    }
+    template <typename T>
+    T& SubresourceStorage<T>::Data(uint32_t aspectIndex, uint32_t layer) {
+        ASSERT(!mAspectCompressed[aspectIndex] && LayerCompressed(aspectIndex, layer));
+        return mData[(aspectIndex * mArrayLayerCount + layer) * mMipLevelCount];
+    }
+    template <typename T>
     T& SubresourceStorage<T>::Data(uint32_t aspectIndex, uint32_t layer, uint32_t level) {
+        ASSERT(!LayerCompressed(aspectIndex, layer));
         return mData[(aspectIndex * mArrayLayerCount + layer) * mMipLevelCount + level];
     }
-
+    template <typename T>
+    const T& SubresourceStorage<T>::Data(uint32_t aspectIndex) const {
+        ASSERT(mAspectCompressed[aspectIndex]);
+        return mInlineAspectData[aspectIndex];
+    }
+    template <typename T>
+    const T& SubresourceStorage<T>::Data(uint32_t aspectIndex, uint32_t layer) const {
+        ASSERT(!mAspectCompressed[aspectIndex] && LayerCompressed(aspectIndex, layer));
+        return mData[(aspectIndex * mArrayLayerCount + layer) * mMipLevelCount];
+    }
     template <typename T>
     const T& SubresourceStorage<T>::Data(uint32_t aspectIndex,
                                          uint32_t layer,
                                          uint32_t level) const {
+        ASSERT(!LayerCompressed(aspectIndex, layer));
         return mData[(aspectIndex * mArrayLayerCount + layer) * mMipLevelCount + level];
     }
 
