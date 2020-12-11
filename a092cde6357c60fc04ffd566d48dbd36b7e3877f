@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7348676_b6d13fa4",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T17:16:42Z",
+      "side": 1,
+      "message": "mergeFunc",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 30
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9085335b_db78320d",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T17:16:42Z",
+      "side": 1,
+      "message": "const U\u0026",
+      "range": {
+        "startLine": 148,
+        "startChar": 82,
+        "endLine": 148,
+        "endChar": 84
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c695832_ef897108",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T17:16:42Z",
+      "side": 1,
+      "message": "I was trying to see if there\u0027s a way to structurally enforce this, though maybe it\u0027s too messy:\nInstead, we could pass in a binary op function-like object as well which only receives the T* data and const U\u0026 otherData. then mergeFunc for possible side effects gets called with everything const so it can\u0027t mutate data, but also gets a functor to apply the binary op conditionally if it wants. Gets called like:\n\nmergeFunc(\n  range,\n  /* const ref */ data,\n  /* const ref */ otherData,\n  /* apply binOp */, [\u0026]() {\n  binOpFunc(\u0026data, otherData);\n});",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 41
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29bd63d8_062fe1fb",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 7
