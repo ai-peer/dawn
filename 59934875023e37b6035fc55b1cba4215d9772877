@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "59934875023e37b6035fc55b1cba4215d9772877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab3a0dc_6388f72c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T16:59:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00df7e0a_be8ff336",
+        "filename": "src/common/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-11T16:59:11Z",
+      "side": 1,
+      "message": "nit: do we need the SFINAE for this? or could we just say value \u003d std::is_same\u003c...\u003e::value ?",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
