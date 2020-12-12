@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ded076_300e9f30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-12T01:52:55Z",
+      "side": 1,
+      "message": "(note: this patch stack is not fully tested yet)\n\nthis is the bulk of it, though some of the adapter apis aren\u0027t implemented yet.\nRight now:\n - 1:1 relationship between instance and wire, though on the server we could have a proxy instance that forwards to the same dawn_native::Instance\n - Adapters are mostly there on the client side to convey information. They don\u0027t own the devices.\n - Instance owns Adapters, Devices, and Surfaces - though surfaces are unimplemented in the wire\n - Devices own all the other api objects.\n - The ownership is tricky especially with generated code since we have to \"walk\" up the chain to find the Client pointer or the Device pointer, depending on what we want.\n\nWDYT overall?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
