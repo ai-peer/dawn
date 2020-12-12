@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0b555a_dfbd902d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-12T01:44:58Z",
+      "side": 1,
+      "message": "(note: this patch stack is not fully tested yet)\nSo this is what it would look like if we did the extra ref counting in dawn_native.\n\nI didn\u0027t try it in dawn_wire just yet, because I\u0027m not sure it actually solves our problem.\nThe issue is that a bad app could manage to destroy a device before the child objects. A linked list in the wire doesn\u0027t save us there because we can still destroy the device before child objects. I guess it does allow us to detect when this happens and lose the context. I feel iffy about this as it seems like a rather heavyweight solution rather than making the whole system more robust and resistant to failure.",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
