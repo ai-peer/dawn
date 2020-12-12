@@ -159,10 +159,10 @@ namespace dawn_native {
             } else if (bindingMemberCount == 0) {
                 // TODO(dawn:527): Raising this warning breaks a ton of validation tests.
                 // Deprecated validation path
-                /*device->EmitDeprecationWarning(
-                    "the format of BindGroupLayoutEntry has changed, and will soon require the "
+                device->EmitDeprecationWarning(
+                    "The format of BindGroupLayoutEntry has changed, and will soon require the "
                     "buffer, sampler, texture, or storageTexture members be set rather than "
-                    "setting type, etc. on the entry directly.");*/
+                    "setting type, etc. on the entry directly.");
 
                 DAWN_TRY(ValidateBindingType(entry.type));
                 DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
@@ -287,6 +287,20 @@ namespace dawn_native {
             return IsBufferBindingType(binding.type);
         }
 
+        bool BindingHasDynamicOffset(const BindGroupLayoutEntry& binding) {
+            if (binding.buffer.type != wgpu::BufferBindingType::Undefined) {
+                return binding.buffer.hasDynamicOffset;
+            } else if (binding.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                return false;
+            } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                return false;
+            } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return false;
+            }
+
+            return binding.hasDynamicOffset;
+        }
+
         bool SortBindingsCompare(const BindGroupLayoutEntry& a, const BindGroupLayoutEntry& b) {
             const bool aIsBuffer = IsBufferBinding(a);
             const bool bIsBuffer = IsBufferBinding(b);
@@ -295,15 +309,17 @@ namespace dawn_native {
                 return aIsBuffer;
             } else {
                 if (aIsBuffer) {
+                    bool aHasDynamicOffset = BindingHasDynamicOffset(a);
+                    bool bHasDynamicOffset = BindingHasDynamicOffset(b);
                     ASSERT(bIsBuffer);
-                    if (a.hasDynamicOffset != b.hasDynamicOffset) {
+                    if (aHasDynamicOffset != bHasDynamicOffset) {
                         // Buffers with dynamic offsets should come before those without.
                         // This makes it easy to iterate over the dynamic buffer bindings
                         // [0, dynamicBufferCount) during validation.
-                        return a.hasDynamicOffset;
+                        return aHasDynamicOffset;
                     }
-                    if (a.hasDynamicOffset) {
-                        ASSERT(b.hasDynamicOffset);
+                    if (aHasDynamicOffset) {
+                        ASSERT(bHasDynamicOffset);
                         ASSERT(a.binding != b.binding);
                         // Above, we ensured that dynamic buffers are first. Now, ensure that
                         // dynamic buffer bindings are in increasing order. This is because dynamic
