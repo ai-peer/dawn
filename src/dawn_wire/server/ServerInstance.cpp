@@ -22,7 +22,8 @@ namespace dawn_wire { namespace server {
             Server* server;
             ObjectHandle instance;
             uint64_t requestSerial;
-            ObjectId adapterId;
+            ObjectHandle adapter;
+            const DawnProcTable* procs;
         };
     }  // namespace
 
@@ -49,29 +50,43 @@ namespace dawn_wire { namespace server {
         userdata->server = this;
         userdata->instance = ObjectHandle{instanceId, instanceData->generation};
         userdata->requestSerial = requestSerial;
-        userdata->adapterId = adapterHandle.id;
+        userdata->adapter = adapterHandle;
+        userdata->procs = &mProcs;
 
         mProcs.instanceRequestAdapter(
             instanceData->handle, options,
-            [](WGPURequestAdapterStatus status, WGPUAdapter adapter, void* userdata) {
+            [](WGPURequestAdapterStatus status, WGPUAdapter cAdapter, void* userdata) {
                 auto data = std::unique_ptr<InstanceRequestAdapterUserdata>(
                     reinterpret_cast<InstanceRequestAdapterUserdata*>(userdata));
 
-                auto* adapterObject = data->server->AdapterObjects().Get(data->adapterId);
+                auto* adapterObject = data->server->AdapterObjects().Get(data->adapter.id);
                 ASSERT(adapterObject != nullptr);
 
-                adapterObject->handle = adapter;
-                if (status != WGPURequestAdapterStatus_Success || adapter == nullptr) {
-                    data->server->AdapterObjects().Free(data->adapterId);
+                adapterObject->handle = cAdapter;
+                if (status != WGPURequestAdapterStatus_Success || cAdapter == nullptr) {
+                    data->server->AdapterObjects().Free(data->adapter.id);
                 }
+                {
+                    ReturnAdapterSetPropertiesCmd cmd;
+                    cmd.adapter = data->adapter;
+                    data->procs->adapterGetProperties(cAdapter, &cmd.properties);
+                    data->server->SerializeCommand(cmd);
+                }
+                {
+                    ReturnAdapterSetFeaturesCmd cmd;
+                    cmd.adapter = data->adapter;
+                    data->procs->adapterGetFeatures(cAdapter, &cmd.features);
+                    data->server->SerializeCommand(cmd);
+                }
+                {
+                    ReturnInstanceRequestAdapterCallbackCmd cmd;
+                    cmd.instance = data->instance;
+                    cmd.requestSerial = data->requestSerial;
+                    cmd.status = status;
+                    cmd.isNull = cAdapter == nullptr;
 
-                ReturnInstanceRequestAdapterCallbackCmd cmd;
-                cmd.instance = data->instance;
-                cmd.requestSerial = data->requestSerial;
-                cmd.status = status;
-                cmd.isNull = adapter == nullptr;
-
-                data->server->SerializeCommand(cmd);
+                    data->server->SerializeCommand(cmd);
+                }
             },
             userdata);
         return true;

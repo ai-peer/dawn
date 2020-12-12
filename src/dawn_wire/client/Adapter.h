@@ -32,6 +32,9 @@ namespace dawn_wire { namespace client {
 
         ~Adapter();
 
+        void GetProperties(WGPUAdapterProperties* properties);
+        void GetFeatures(WGPUFeatures* features);
+
         void RequestDevice(const WGPUDeviceDescriptor* descriptor,
                            WGPURequestDeviceCallback callback,
                            void* userdata);
@@ -39,6 +42,9 @@ namespace dawn_wire { namespace client {
         bool OnRequestDeviceCallback(uint64_t requestSerial,
                                      WGPURequestDeviceStatus status,
                                      bool isNull);
+
+        void SetProperties(const WGPUAdapterProperties& properties);
+        void SetFeatures(const WGPUFeatures& features);
 
       private:
         struct RequestDeviceRequest {
@@ -48,6 +54,9 @@ namespace dawn_wire { namespace client {
         };
         uint64_t mRequestDeviceSerial = 0;
         std::map<uint64_t, RequestDeviceRequest> mRequestDeviceRequests;
+
+        WGPUAdapterProperties mProperties;
+        WGPUFeatures mFeatures;
     };
 
 }}  // namespace dawn_wire::client

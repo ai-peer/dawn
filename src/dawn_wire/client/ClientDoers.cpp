@@ -29,6 +29,24 @@ namespace dawn_wire { namespace client {
         return instance->OnRequestAdapterCallback(requestSerial, status, isNull);
     }
 
+    bool Client::DoAdapterSetProperties(Adapter* adapter, const WGPUAdapterProperties& properties) {
+        // The adapter might have been deleted or recreated so this isn't an error.
+        if (adapter == nullptr) {
+            return true;
+        }
+        adapter->SetProperties(properties);
+        return true;
+    }
+
+    bool Client::DoAdapterSetFeatures(Adapter* adapter, const WGPUFeatures& features) {
+        // The adapter might have been deleted or recreated so this isn't an error.
+        if (adapter == nullptr) {
+            return true;
+        }
+        adapter->SetFeatures(features);
+        return true;
+    }
+
     bool Client::DoAdapterRequestDeviceCallback(Adapter* adapter,
                                                 uint64_t requestSerial,
                                                 WGPURequestDeviceStatus status,

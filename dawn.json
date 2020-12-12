@@ -24,6 +24,18 @@
                     {"name": "callback", "type": "request device callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
+            },
+            {
+                "name": "get properties",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get features",
+                "args": [
+                    {"name": "features", "type": "features", "annotation": "*"}
+                ]
             }
         ]
     },
@@ -800,6 +812,16 @@
             {"name": "width", "type": "uint32_t", "default": 1},
             {"name": "height", "type": "uint32_t", "default": 1},
             {"name": "depth", "type": "uint32_t", "default": 1}
+        ]
+    },
+    "features": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "texture compression BC", "type": "bool", "default": "false"},
+            {"name": "shader float16", "type": "bool", "default": "false"},
+            {"name": "pipeline statistics query", "type": "bool", "default": "false"},
+            {"name": "timestamp query", "type": "bool", "default": "false"}
         ]
     },
     "fence": {

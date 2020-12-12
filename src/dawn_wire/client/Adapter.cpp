@@ -27,6 +27,22 @@ namespace dawn_wire { namespace client {
         mRequestDeviceRequests.clear();
     }
 
+    void Adapter::GetProperties(WGPUAdapterProperties* properties) {
+        *properties = mProperties;
+    }
+
+    void Adapter::GetFeatures(WGPUFeatures* features) {
+        *features = mFeatures;
+    }
+
+    void Adapter::SetProperties(const WGPUAdapterProperties& properties) {
+        mProperties = properties;
+    }
+
+    void Adapter::SetFeatures(const WGPUFeatures& features) {
+        mFeatures = features;
+    }
+
     void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
                                 WGPURequestDeviceCallback callback,
                                 void* userdata) {

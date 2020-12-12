@@ -23,6 +23,8 @@
         {%- for member in command.members -%}
             {%- if member.handle_type -%}
                 {{as_wireType(member.handle_type)}} {{as_varName(member.name)}}
+            {%- elif member.type.category == "structure" -%}
+                const {{as_wireType(member.type)}} & {{as_varName(member.name)}}
             {%- else -%}
                 {{as_annotated_wireType(member)}}
             {%- endif -%}

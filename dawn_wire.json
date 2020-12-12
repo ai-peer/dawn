@@ -99,6 +99,14 @@
             { "name": "status", "type": "request device status" },
             { "name": "is null", "type": "bool" }
         ],
+        "adapter set properties": [
+            { "name": "adapter", "type": "ObjectHandle", "handle_type": "adapter" },
+            { "name": "properties", "type": "adapter properties" }
+        ],
+        "adapter set features": [
+            { "name": "adapter", "type": "ObjectHandle", "handle_type": "adapter" },
+            { "name": "features", "type": "features" }
+        ],
         "buffer map async callback": [
             { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
@@ -157,6 +165,8 @@
             "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [
+            "AdapterGetProperties",
+            "AdapterGetFeatures",
             "AdapterRequestDevice",
             "BufferMapAsync",
             "BufferGetConstMappedRange",

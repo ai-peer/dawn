@@ -115,7 +115,7 @@ namespace dawn_wire {
         //*  - Success if everything went well (yay!)
         //*  - FatalError is something bad happened (buffer too small for example)
         DeserializeResult Deserialize(const volatile char** buffer, size_t* size, DeserializeAllocator* allocator
-            {%- if command.may_have_dawn_object -%}
+            {%- if command.may_have_dawn_object and not is_return_command -%}
                 , const ObjectIdResolver& resolver
             {%- endif -%}
         );

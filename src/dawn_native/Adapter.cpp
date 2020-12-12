@@ -67,6 +67,22 @@ namespace dawn_native {
         return adapterProperties;
     }
 
+    void AdapterBase::GetProperties(AdapterProperties* properties) const {
+        properties->deviceID = mPCIInfo.deviceId;
+        properties->vendorID = mPCIInfo.vendorId;
+        properties->name = mPCIInfo.name.c_str();
+        properties->driverDescription = mDriverDescription.c_str();
+        properties->adapterType = mAdapterType;
+        properties->backendType = mBackend;
+    }
+
+    void AdapterBase::GetFeatures(Features* features) const {
+        // TODO(enga): Remvoe WGPUDeviceProperties and use Features everywhere.
+        static_assert(sizeof(Features) == sizeof(WGPUDeviceProperties), "");
+        mSupportedExtensions.InitializeDeviceProperties(
+            reinterpret_cast<WGPUDeviceProperties*>(features));
+    }
+
     DeviceBase* AdapterBase::CreateDevice(const DeviceDescriptorDawnNative* descriptor) {
         DeviceBase* result = nullptr;
 

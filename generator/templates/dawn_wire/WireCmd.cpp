@@ -54,7 +54,7 @@
 {% macro serialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
-        {{out}} = provider.Get{{Optional}}Id({{in}});
+        {{out}} = provider->Get{{Optional}}Id({{in}});
     {% elif member.type.category == "structure"%}
         {%- set Provider = ", provider" if member.type.may_have_dawn_object else "" -%}
         {% if member.annotation == "const*const*" %}
@@ -71,7 +71,7 @@
 {% macro deserialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
-        DESERIALIZE_TRY(resolver.Get{{Optional}}FromId({{in}}, &{{out}}));
+        DESERIALIZE_TRY(resolver->Get{{Optional}}FromId({{in}}, &{{out}}));
     {%- elif member.type.category == "structure" -%}
         DESERIALIZE_TRY({{as_cType(member.type.name)}}Deserialize(&{{out}}, &{{in}}, buffer, size, allocator
             {%- if member.type.may_have_dawn_object -%}
@@ -203,7 +203,7 @@ namespace {
     DAWN_DECLARE_UNUSED void {{Return}}{{name}}Serialize(const {{Return}}{{name}}{{Cmd}}& record, {{Return}}{{name}}Transfer* transfer,
                            char** buffer
         {%- if record.may_have_dawn_object -%}
-            , const ObjectIdProvider& provider
+            , const ObjectIdProvider* provider = nullptr
         {%- endif -%}
     ) {
         DAWN_UNUSED(buffer);
@@ -279,7 +279,7 @@ namespace {
     DAWN_DECLARE_UNUSED DeserializeResult {{Return}}{{name}}Deserialize({{Return}}{{name}}{{Cmd}}* record, const volatile {{Return}}{{name}}Transfer* transfer,
                                           const volatile char** buffer, size_t* size, DeserializeAllocator* allocator
         {%- if record.may_have_dawn_object -%}
-            , const ObjectIdResolver& resolver
+            , const ObjectIdResolver* resolver = nullptr
         {%- endif -%}
     ) {
         DAWN_UNUSED(allocator);
@@ -395,14 +395,14 @@ namespace {
         buffer += sizeof({{Name}}Transfer);
 
         {{Name}}Serialize(*this, transfer, &buffer
-            {%- if command.may_have_dawn_object -%}
-                , objectIdProvider
+            {%- if command.may_have_dawn_object and not is_return -%}
+                , &objectIdProvider
             {%- endif -%}
         );
     }
 
     DeserializeResult {{Cmd}}::Deserialize(const volatile char** buffer, size_t* size, DeserializeAllocator* allocator
-        {%- if command.may_have_dawn_object -%}
+        {%- if command.may_have_dawn_object and not is_return -%}
             , const ObjectIdResolver& resolver
         {%- endif -%}
     ) {
@@ -410,8 +410,8 @@ namespace {
         DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
 
         return {{Name}}Deserialize(this, transfer, buffer, size, allocator
-            {%- if command.may_have_dawn_object -%}
-                , resolver
+            {%- if command.may_have_dawn_object and not is_return -%}
+                , &resolver
             {%- endif -%}
         );
     }
@@ -497,12 +497,12 @@ namespace dawn_wire {
         size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct);
         void SerializeChainedStruct(WGPUChainedStruct const* chainedStruct,
                                     char** buffer,
-                                    const ObjectIdProvider& provider);
+                                    const ObjectIdProvider* provider);
         DeserializeResult DeserializeChainedStruct(const WGPUChainedStruct** outChainNext,
                                                    const volatile char** buffer,
                                                    size_t* size,
                                                    DeserializeAllocator* allocator,
-                                                   const ObjectIdResolver& resolver);
+                                                   const ObjectIdResolver* resolver);
 
         //* Output structure [de]serialization first because it is used by commands.
         {% for type in by_category["structure"] %}
@@ -541,7 +541,7 @@ namespace dawn_wire {
 
         void SerializeChainedStruct(WGPUChainedStruct const* chainedStruct,
                                     char** buffer,
-                                    const ObjectIdProvider& provider) {
+                                    const ObjectIdProvider* provider) {
             ASSERT(chainedStruct != nullptr);
             ASSERT(buffer != nullptr);
             do {
@@ -583,7 +583,7 @@ namespace dawn_wire {
                                                    const volatile char** buffer,
                                                    size_t* size,
                                                    DeserializeAllocator* allocator,
-                                                   const ObjectIdResolver& resolver) {
+                                                   const ObjectIdResolver* resolver) {
             bool hasNext;
             do {
                 if (*size < sizeof(WGPUChainedStructTransfer)) {
