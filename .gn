@@ -23,6 +23,14 @@ default_args = {
   # Chromium is still on 10.10).
   mac_deployment_target = "10.11.0"
   mac_min_system_version = "10.11.0"
+
+  angle_enable_abseil = false
+
+  angle_standalone = false
+
+  angle_build_all = false
+
+  angle_enable_vulkan_validation_layers = false
 }
 
 check_targets = [
