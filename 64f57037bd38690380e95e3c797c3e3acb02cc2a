@@ -33,6 +33,24 @@
       "message": "Don\u0027t we want to implement these functions in dawn_native first, then expose GetProperties in dawn_wire and finally use the async functions directly?",
       "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0babbd09_d4906d5a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:03:16Z",
+      "side": 1,
+      "message": "For the tests yea we can do that, though at the time I didn\u0027t implement GetProperties and the stuff in this patch stack is a bit out of order.\n\nIn Chromium we\u0027ll have to override this because we can\u0027t directly give the Renderer whatever is requests. Do you think something like this would work?\n\nIn the other comment:\n\nI\u0027m thinking however it might be a good idea to have the wire server add a chained struct to the RequestAdapterOptions or DeviceDescriptor with a pointer to itself. This would make it significantly easier to get a pointer to the current webgpu decoder instead of:\n\n - the static hack I\u0027m doing here - though it would indeed work in Chrome.\n - make some \"fake\" WGPUInstance and WGPUAdapter objects that we proxy commands through and store a back reference to the decoder.",
+      "parentUuid": "07734b7c_d4c18c2c",
+      "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
