@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f951b0cb_bf15a179",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 0,
+      "message": "nit: can this be a separate change because it\u0027s not clear if it will break some WebGPU \"finishes in finite time\" guarantee?",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1dfbe0_99ff33e1",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 0,
+      "message": "Why did we need to move this?",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

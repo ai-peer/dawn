@@ -16,6 +16,437 @@
       "message": "(note: this patch stack is not fully tested yet)\n\nthis is the bulk of it, though some of the adapter apis aren\u0027t implemented yet.\nRight now:\n - 1:1 relationship between instance and wire, though on the server we could have a proxy instance that forwards to the same dawn_native::Instance\n - Adapters are mostly there on the client side to convey information. They don\u0027t own the devices.\n - Instance owns Adapters, Devices, and Surfaces - though surfaces are unimplemented in the wire\n - Devices own all the other api objects.\n - The ownership is tricky especially with generated code since we have to \"walk\" up the chain to find the Client pointer or the Device pointer, depending on what we want.\n\nWDYT overall?",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b8a8f3a_3670c58a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "There\u0027s a lot going on here and no new tests. Can we split this change in several smaller ones that are either to reason about? For example the addition of the device to some of the chatter between the client and the server, the change in the client\u0027s ObjectBase, and the change that adds instance and adapter logic?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee3ab3d_108377f8",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "I think Kai might change this to be synchronous soon.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e208b6a_926e56db",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1862,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "nit: that\u0027s a bit of a random spot, did you mean to sort alphabetically or group with the adapter options?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9401561f_08d45116",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "To make it easier to land code, maybe we could do these changes of tying requests to a specific device separately. (ditto for the same thing in \"commands\")",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4def69_ab553b3c",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we return a device descriptor that contains the limits and extensions too?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e891561_12e713b1",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Why did this need to change? We shouldn\u0027t need to validate that objects come from the same client so we can keep the logic that checks that objects come from the same device and once we can rely on a server-side check, remove the whole logic.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b1c3f09_54572ee8",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "This changes the lifetime of adapters from being owned by the instance to being independent of the instance. I think we might need the AdapterBase to Ref\u003c\u003e its instance. But then we get in the same Destroy() issue as for devices. Or we can get the instance to remember all of its devices and internally null them on destruction.\n\nLikewise for the adapter\u003c-\u003edevice link.\n\nIs the dawn_wire client able to call Ref/Release on the adapter and instance? If yes then we need to handle this issue prior to giving the wire the possibility to ref/release instance/adapter.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281b783f_f61b4c5a",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "ditto: .count() \u003d\u003d 0",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d338ea19_21353d39",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "ditto, can the return value be null on success?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df95fc4_5708edb2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "nit: these changes we could land separately by adding a GetClient() to ObjectBase.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d94bf2_c479e0ac",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why we need GetParent() and can\u0027t have GetDevice(). Can we land the change to call GetDevice() and GetClient() separately?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca247fb0_1918d369",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Do we need to send the destroy commands? Maybe we can skip it and assume the server will be destroyed out of band and free all these objects?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc2318ce_500a4e9a",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "I think this could use ToAPI(mDevice)",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f27c4d8_1341eaf1",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Should we cancel the RequestDevice and RequestAdapter callbacks too?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58bbce7_86b1cdf1",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Does dawn_wire support CreateInstance(WGPUInstanceDescriptor)? Could it support it with the linked list mechanism?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b9f308_0975d439",
+        "filename": "src/dawn_wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "nit: .count() \u003d\u003d 0, I\u0027m not sure why we didn\u0027t do this in other places.",
+      "range": {
+        "startLine": 38,
+        "startChar": 39,
+        "endLine": 38,
+        "endChar": 91
+      },
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971a004e_47b69e8e",
+        "filename": "src/dawn_wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Can it be a success and still return null?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084a179b_4296d561",
+        "filename": "src/dawn_wire/client/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "This seems a bit complicated, can\u0027t we have ObjectBase, ClientObjectBase and DeviceObjectBase to differentiate between things? Right now there\u0027s a bit too much recursive template magic.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ec78a1_409b53d5",
+        "filename": "src/dawn_wire/client/Surface.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "nit: maybe we don\u0027t need this file? dawn_wire::client::Instance doesn\u0027t have CreateSurface.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688de9ba_4ea13997",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6220ca_9f98a1b4",
+        "filename": "src/dawn_wire/server/ServerAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "ditto: .Get should handle id \u003d\u003d 0",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1edfe3d_3e134410",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b33644_dd7bd116",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de72357_e8bafd24",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "Doesn\u0027t this handle the case where instanceId \u003d\u003d 0?",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad7c7e4a_56f41279",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:46:43Z",
+      "side": 1,
+      "message": "This is another callback that will need to support having a weakptr to the server. Ditto for requestDevice.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
