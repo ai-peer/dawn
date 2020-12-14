@@ -316,6 +316,30 @@
       },
       "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42fc01f9_7f872b15",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T17:31:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46b4dc73_3e984114",
+      "range": {
+        "startLine": 567,
+        "startChar": 8,
+        "endLine": 567,
+        "endChar": 53
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
