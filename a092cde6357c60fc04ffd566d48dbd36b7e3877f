@@ -119,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ca330f7_10be8953",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-14T10:50:44Z",
+      "side": 1,
+      "message": "Sure, I was just pointing out that there\u0027s room for some refactoring here (you could move out post-compression-check logic to private methods). I thought you might be interested in this given the Big Fat Warning about the number of testable code paths in this logic.",
+      "parentUuid": "fcdcaa8d_b89987fd",
+      "range": {
+        "startLine": 304,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 46
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33060318_1dbd92e4",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 7
