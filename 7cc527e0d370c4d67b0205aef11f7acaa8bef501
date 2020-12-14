@@ -33,6 +33,24 @@
       "message": "Why did we need to move this?",
       "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "460bfdae_8cf7d578",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 0,
+      "message": "a device object is created on the client side before sending requestDevice, but we can\u0027t make its default queue until requestDevice comes back successfully. Server no longer has a hardcoded device that always exists.",
+      "parentUuid": "7a1dfbe0_99ff33e1",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

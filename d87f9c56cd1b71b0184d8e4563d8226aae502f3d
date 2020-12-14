@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71f92aa_d4121ac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "heh I was not at all intending to actually land this as is. it\u0027s just the overall structure of things",
+      "parentUuid": "38aa8d1c_11acc6c1",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ee3ab3d_108377f8",
@@ -123,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ae3bbe1_3c5cdcba",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "I was planning to do this as in patch \"Implement Adapter GetProperties and GetFeatures\"",
+      "parentUuid": "3d4def69_ab553b3c",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e891561_12e713b1",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 2
@@ -134,6 +170,24 @@
       "writtenOn": "2020-12-14T14:46:43Z",
       "side": 1,
       "message": "Why did this need to change? We shouldn\u0027t need to validate that objects come from the same client so we can keep the logic that checks that objects come from the same device and once we can rely on a server-side check, remove the whole logic.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cbabc62_bdf01f58",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "I did this because you can\u0027t do GetDevice() on an adapter or instance - I should have just omitted these checks for the instance adapter.",
+      "parentUuid": "3e891561_12e713b1",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -293,6 +347,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73053537_0689c5e0",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "we could probably do it, though do we want more than one instance? or - what do we forsee being inside the instance descriptor ?",
+      "parentUuid": "d58bbce7_86b1cdf1",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86b9f308_0975d439",
         "filename": "src/dawn_wire/client/Instance.cpp",
         "patchSetId": 2
@@ -350,6 +422,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bccdf8e7_7c2f8a02",
+        "filename": "src/dawn_wire/client/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "great idea; idk why I didn\u0027t do that",
+      "parentUuid": "084a179b_4296d561",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09ec78a1_409b53d5",
         "filename": "src/dawn_wire/client/Surface.h",
         "patchSetId": 2
@@ -378,6 +468,24 @@
       "writtenOn": "2020-12-14T14:46:43Z",
       "side": 1,
       "message": "I don\u0027t understand this comment.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfbb70c4_06109415",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "all our other callbacks malloc a userdata, and free it when the callback is called. The same userdata lifetime doesn\u0027t apply for a repeating callback like this one.",
+      "parentUuid": "688de9ba_4ea13997",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -463,6 +571,24 @@
       "writtenOn": "2020-12-14T14:46:43Z",
       "side": 1,
       "message": "This is another callback that will need to support having a weakptr to the server. Ditto for requestDevice.",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82b9a9f_c4b8d9f4",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T18:20:50Z",
+      "side": 1,
+      "message": "Yea, Jiawei only fixed this for create ready pipeline. I\u0027m going to fix the other callbacks as well before this patch probably.",
+      "parentUuid": "ad7c7e4a_56f41279",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
