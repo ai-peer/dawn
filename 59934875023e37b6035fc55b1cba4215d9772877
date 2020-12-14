@@ -104,6 +104,24 @@
       "parentUuid": "d809a988_5579fb21",
       "revId": "59934875023e37b6035fc55b1cba4215d9772877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71475c88_9f359e9c",
+        "filename": "src/common/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-14T10:45:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e0bce8a2_63941a32",
+      "revId": "59934875023e37b6035fc55b1cba4215d9772877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
