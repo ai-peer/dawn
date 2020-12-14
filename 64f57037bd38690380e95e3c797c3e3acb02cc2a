@@ -16,6 +16,23 @@
       "message": "see the test SetUp in this patch for how we can override requestAdapter and requestDevice in Chromium.\n\nI\u0027m thinking however it might be a good idea to have the wire server add a chained struct to the RequestAdapterOptions or DeviceDescriptor with a pointer to itself. This would make it significantly easier to get a pointer to the current webgpu decoder instead of:\n - the static hack I\u0027m doing here - though it would indeed work in Chrome.\n - make some \"fake\" WGPUInstance and WGPUAdapter objects that we proxy commands through and store a back reference to the decoder.",
       "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07734b7c_d4c18c2c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T14:50:27Z",
+      "side": 1,
+      "message": "Don\u0027t we want to implement these functions in dawn_native first, then expose GetProperties in dawn_wire and finally use the async functions directly?",
+      "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
