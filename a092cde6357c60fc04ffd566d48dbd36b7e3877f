@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f4d894c_2bc37854",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-14T17:06:05Z",
+      "side": 1,
+      "message": "yea it would indeed be complicated. mergeFunc would get a reference to a lambda which calls binOp - so the merge can insert the binary operation wherever it wants - in the beginning or end of the merge. I\u0027m not suggesting we must do it; just floating the possible idea.",
+      "parentUuid": "bf388784_3828727b",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 41
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29bd63d8_062fe1fb",
         "filename": "src/dawn_native/SubresourceStorage.h",
         "patchSetId": 7
