@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfc56651_6fec668a",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:15:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7348676_b6d13fa4",
+      "range": {
+        "startLine": 142,
+        "startChar": 20,
+        "endLine": 142,
+        "endChar": 30
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9085335b_db78320d",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7662108e_81fc2f95",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:15:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9085335b_db78320d",
+      "range": {
+        "startLine": 148,
+        "startChar": 82,
+        "endLine": 148,
+        "endChar": 84
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c695832_ef897108",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-12-11T17:16:42Z",
       "side": 1,
       "message": "I was trying to see if there\u0027s a way to structurally enforce this, though maybe it\u0027s too messy:\nInstead, we could pass in a binary op function-like object as well which only receives the T* data and const U\u0026 otherData. then mergeFunc for possible side effects gets called with everything const so it can\u0027t mutate data, but also gets a functor to apply the binary op conditionally if it wants. Gets called like:\n\nmergeFunc(\n  range,\n  /* const ref */ data,\n  /* const ref */ otherData,\n  /* apply binOp */, [\u0026]() {\n  binOpFunc(\u0026data, otherData);\n});",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 41
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf388784_3828727b",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:15:31Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understood everything, but like you said, it seems maybe too complicated and I\u0027m still not sure it prevents all side effects: binOp would have to be called before mergeFunc, but the you lose the possibility to factor out computations. (or you would store partial results on the Merge caller\u0027s stack?)",
+      "parentUuid": "7c695832_ef897108",
       "range": {
         "startLine": 152,
         "startChar": 8,
@@ -141,6 +213,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c695e7de_54c17b8a",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:15:31Z",
+      "side": 1,
+      "message": "Thought about it over the weekend and I agree that this is most likely premature optimization as 1) computers are fast 2) number of operations stay the same. We can revisit if we see that this is a bottleneck in the future.",
+      "parentUuid": "8ca330f7_10be8953",
+      "range": {
+        "startLine": 304,
+        "startChar": 16,
+        "endLine": 324,
+        "endChar": 46
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33060318_1dbd92e4",
@@ -154,6 +250,30 @@
       "writtenOn": "2020-12-11T16:33:56Z",
       "side": 1,
       "message": "if",
+      "range": {
+        "startLine": 334,
+        "startChar": 55,
+        "endLine": 334,
+        "endChar": 57
+      },
+      "revId": "a092cde6357c60fc04ffd566d48dbd36b7e3877f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d99ee7e_86111441",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:15:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33060318_1dbd92e4",
       "range": {
         "startLine": 334,
         "startChar": 55,
