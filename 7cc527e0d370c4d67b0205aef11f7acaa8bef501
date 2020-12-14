@@ -16,6 +16,23 @@
       "message": "(note: this patch stack is not fully tested yet)\nSo this is what it would look like if we did the extra ref counting in dawn_native.\n\nI didn\u0027t try it in dawn_wire just yet, because I\u0027m not sure it actually solves our problem.\nThe issue is that a bad app could manage to destroy a device before the child objects. A linked list in the wire doesn\u0027t save us there because we can still destroy the device before child objects. I guess it does allow us to detect when this happens and lose the context. I feel iffy about this as it seems like a rather heavyweight solution rather than making the whole system more robust and resistant to failure.",
       "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d5104e_36adcb97",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T13:53:57Z",
+      "side": 1,
+      "message": "I\u0027m still a bit worried about this because it\u0027s not clear how to handle cyclical references that are added later for example for lazily created internal pipelines: the device owns a unique_ptr to the InternalPipelineStore that owns a Ref\u003c\u003e to a Pipeline that owns a Ref\u003c\u003e to the device.\n\nThe only other alternative I see is that the device knows the pointer to all child objects, either via a linked list, or via handles (like the handle allocator in dawn_wire\u0027s server) and calls \"Destroy()\" on all of them inside device\u0027s destruction.",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
