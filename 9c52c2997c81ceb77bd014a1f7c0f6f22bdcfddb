@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0767e1_c5c5f282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T13:43:47Z",
+      "side": 1,
+      "message": "I know this is a difficult change that block further ones, but there was a bit too many logic changes to be comfortable landing without a re-review.",
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3be2d2f_45f045a0",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T13:43:47Z",
+      "side": 1,
+      "message": "Was this for disallowing unsafe APIs? It should be that ReadOnlyStorage should have the same limitation as Storage when used with a dynamic offset.",
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "829b929b_74625c72",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T13:43:47Z",
+      "side": 1,
+      "message": "This branch can never be taken.",
+      "range": {
+        "startLine": 154,
+        "startChar": 14,
+        "endLine": 154,
+        "endChar": 48
+      },
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
