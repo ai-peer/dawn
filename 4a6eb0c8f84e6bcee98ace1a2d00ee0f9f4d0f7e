@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df7de94c_3ec491f2",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b357e17_3ba0ff1e",
+      "range": {
+        "startLine": 463,
+        "startChar": 8,
+        "endLine": 463,
+        "endChar": 9
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12bc8db6_3a9d1c73",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd801150_65760272",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12bc8db6_3a9d1c73",
+      "range": {
+        "startLine": 512,
+        "startChar": 8,
+        "endLine": 512,
+        "endChar": 9
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdd42147_709f57c5",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-12-11T17:41:46Z",
       "side": 1,
       "message": "for this reason, we should split up Data(aspect, layer, mip) and DataInline(aspect) so they have different names. It should be more clear throughout this code when we are/are not accessing the same data storage.",
+      "range": {
+        "startLine": 515,
+        "startChar": 8,
+        "endLine": 516,
+        "endChar": 52
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87997694_46983fc9",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdd42147_709f57c5",
       "range": {
         "startLine": 515,
         "startChar": 8,
@@ -110,6 +182,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "687707a5_829cb43d",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6bdcec8_b6229958",
+      "range": {
+        "startLine": 526,
+        "startChar": 8,
+        "endLine": 526,
+        "endChar": 10
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6334707_4c785211",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d335b42_026a91d6",
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abe9b25e_529b0e47",
@@ -133,6 +247,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f00ffb_9cb265c1",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abe9b25e_529b0e47",
+      "range": {
+        "startLine": 535,
+        "startChar": 8,
+        "endLine": 535,
+        "endChar": 46
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daba8ea3_2a75150d",
@@ -146,6 +284,30 @@
       "writtenOn": "2020-12-11T17:41:46Z",
       "side": 1,
       "message": "this could be ASSERT(level \u003d\u003d 0 || !LayerCompressed..) which would make it not matter at [1] whether you use the three arg version or the two arg version.",
+      "range": {
+        "startLine": 567,
+        "startChar": 8,
+        "endLine": 567,
+        "endChar": 53
+      },
+      "revId": "4a6eb0c8f84e6bcee98ace1a2d00ee0f9f4d0f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b4dc73_3e984114",
+        "filename": "src/dawn_native/SubresourceStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-14T16:30:23Z",
+      "side": 1,
+      "message": "I kinda liked that the different Data variants required that the correct compressed bits be set, but you\u0027re right that it makes the code more complicated than it should be.",
+      "parentUuid": "daba8ea3_2a75150d",
       "range": {
         "startLine": 567,
         "startChar": 8,
