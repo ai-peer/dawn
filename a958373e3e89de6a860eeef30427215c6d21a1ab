@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b8aea54_9cb66221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2020-12-15T21:07:06Z",
+      "side": 1,
+      "message": "I filed issues for the new validation failures.",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e2e894c_6aaa5c63",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2020-12-15T21:07:06Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d413 for this.",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13b1225_af418f8c",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2020-12-15T21:07:06Z",
+      "side": 1,
+      "message": "I think this is the same as the problem in https://bugs.chromium.org/p/tint/issues/detail?id\u003d413",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
