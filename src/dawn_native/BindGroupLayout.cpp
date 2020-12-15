@@ -87,7 +87,8 @@ namespace dawn_native {
 
                 // TODO(dawn:527): ReadOnlyStorage should have the same limits as Storage
                 // regarding use with Vertex shaders.
-                if (buffer.type == wgpu::BufferBindingType::Storage) {
+                if (buffer.type == wgpu::BufferBindingType::Storage ||
+                    buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
 
                     // Dynamic storage buffers aren't bounds checked properly in D3D12. Disallow
@@ -160,10 +161,10 @@ namespace dawn_native {
             } else if (bindingMemberCount == 0) {
                 // TODO(dawn:527): Raising this warning breaks a ton of validation tests.
                 // Deprecated validation path
-                /*device->EmitDeprecationWarning(
+                device->EmitDeprecationWarning(
                     "The format of BindGroupLayoutEntry has changed, and will soon require the "
                     "buffer, sampler, texture, or storageTexture members be set rather than "
-                    "setting type, etc. on the entry directly.");*/
+                    "setting type, etc. on the entry directly.");
 
                 DAWN_TRY(ValidateBindingType(entry.type));
                 DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
@@ -302,6 +303,34 @@ namespace dawn_native {
             return binding.hasDynamicOffset;
         }
 
+        uint64_t BindingMinBufferSize(const BindGroupLayoutEntry& binding) {
+            if (binding.buffer.type != wgpu::BufferBindingType::Undefined) {
+                return binding.buffer.minBindingSize;
+            } else if (binding.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                return 0;
+            } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                return 0;
+            } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return 0;
+            }
+
+            return binding.minBufferBindingSize;
+        }
+
+        wgpu::TextureViewDimension BindingViewDimension(const BindGroupLayoutEntry& binding) {
+            if (binding.buffer.type != wgpu::BufferBindingType::Undefined) {
+                return wgpu::TextureViewDimension::Undefined;
+            } else if (binding.sampler.type != wgpu::SamplerBindingType::Undefined) {
+                return wgpu::TextureViewDimension::Undefined;
+            } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                return binding.texture.viewDimension;
+            } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return binding.storageTexture.viewDimension;
+            }
+
+            return binding.viewDimension;
+        }
+
         bool SortBindingsCompare(const BindGroupLayoutEntry& a, const BindGroupLayoutEntry& b) {
             const bool aIsBuffer = IsBufferBinding(a);
             const bool bIsBuffer = IsBufferBinding(b);
@@ -332,21 +361,28 @@ namespace dawn_native {
                 if (a.type != b.type) {
                     return a.type < b.type;
                 }
+
+                uint64_t aMinBindingSize = BindingMinBufferSize(a);
+                uint64_t bMinBindingSize = BindingMinBufferSize(b);
+
+                if (aMinBindingSize != bMinBindingSize) {
+                    return aMinBindingSize < bMinBindingSize;
+                }
             }
             if (a.visibility != b.visibility) {
                 return a.visibility < b.visibility;
             }
-            if (a.viewDimension != b.viewDimension) {
-                return a.viewDimension < b.viewDimension;
+
+            wgpu::TextureViewDimension aViewDimension = BindingViewDimension(a);
+            wgpu::TextureViewDimension bViewDimension = BindingViewDimension(b);
+            if (aViewDimension != bViewDimension) {
+                return aViewDimension < bViewDimension;
             }
             if (a.textureComponentType != b.textureComponentType) {
                 return a.textureComponentType < b.textureComponentType;
             }
             if (a.storageTextureFormat != b.storageTextureFormat) {
                 return a.storageTextureFormat < b.storageTextureFormat;
-            }
-            if (a.minBufferBindingSize != b.minBufferBindingSize) {
-                return a.minBufferBindingSize < b.minBufferBindingSize;
             }
             return false;
         }

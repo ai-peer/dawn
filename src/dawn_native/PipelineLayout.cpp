@@ -83,14 +83,34 @@ namespace dawn_native {
         // Merges two entries at the same location, if they are allowed to be merged.
         auto MergeEntries = [](BindGroupLayoutEntry* modifiedEntry,
                                const BindGroupLayoutEntry& mergedEntry) -> MaybeError {
-            // Minimum buffer binding size excluded because we take the maximum seen across stages.
             // Visibility is excluded because we take the OR across stages.
             bool compatible =
-                modifiedEntry->binding == mergedEntry.binding &&                    //
-                modifiedEntry->type == mergedEntry.type &&                          //
-                modifiedEntry->hasDynamicOffset == mergedEntry.hasDynamicOffset &&  //
-                modifiedEntry->viewDimension == mergedEntry.viewDimension &&        //
-                modifiedEntry->textureComponentType == mergedEntry.textureComponentType;
+                modifiedEntry->binding == mergedEntry.binding &&
+                modifiedEntry->buffer.type == mergedEntry.buffer.type &&
+                modifiedEntry->sampler.type == mergedEntry.sampler.type &&
+                modifiedEntry->texture.sampleType == mergedEntry.texture.sampleType &&
+                modifiedEntry->storageTexture.access == mergedEntry.storageTexture.access;
+
+            // Minimum buffer binding size excluded because we take the maximum seen across stages.
+            if (modifiedEntry->buffer.type != wgpu::BufferBindingType::Undefined) {
+                compatible = compatible && modifiedEntry->buffer.hasDynamicOffset ==
+                                               mergedEntry.buffer.hasDynamicOffset;
+            }
+
+            if (modifiedEntry->texture.sampleType != wgpu::TextureSampleType::Undefined) {
+                compatible =
+                    compatible &&
+                    modifiedEntry->texture.viewDimension == mergedEntry.texture.viewDimension &&
+                    modifiedEntry->texture.multisampled == mergedEntry.texture.multisampled;
+            }
+
+            if (modifiedEntry->storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                compatible =
+                    compatible &&
+                    modifiedEntry->storageTexture.viewDimension ==
+                        mergedEntry.storageTexture.viewDimension &&
+                    modifiedEntry->storageTexture.format == mergedEntry.storageTexture.format;
+            }
 
             // Check if any properties are incompatible with existing entry
             // If compatible, we will merge some properties
@@ -100,9 +120,11 @@ namespace dawn_native {
                     "not compatible with previous declaration");
             }
 
-            // Use the max |minBufferBindingSize| we find.
-            modifiedEntry->minBufferBindingSize =
-                std::max(modifiedEntry->minBufferBindingSize, mergedEntry.minBufferBindingSize);
+            if (modifiedEntry->buffer.type != wgpu::BufferBindingType::Undefined) {
+                // Use the max |minBufferBindingSize| we find.
+                modifiedEntry->buffer.minBindingSize = std::max(
+                    modifiedEntry->buffer.minBindingSize, mergedEntry.buffer.minBindingSize);
+            }
 
             // Use the OR of all the stages at which we find this binding.
             modifiedEntry->visibility |= mergedEntry.visibility;
@@ -114,12 +136,67 @@ namespace dawn_native {
         auto ConvertMetadataToEntry =
             [](const EntryPointMetadata::ShaderBindingInfo& shaderBinding) -> BindGroupLayoutEntry {
             BindGroupLayoutEntry entry = {};
-            entry.type = shaderBinding.type;
-            entry.hasDynamicOffset = false;
-            entry.viewDimension = shaderBinding.viewDimension;
-            entry.textureComponentType = shaderBinding.textureComponentType;
-            entry.storageTextureFormat = shaderBinding.storageTextureFormat;
-            entry.minBufferBindingSize = shaderBinding.minBufferBindingSize;
+
+            switch (shaderBinding.type) {
+                case wgpu::BindingType::UniformBuffer:
+                    entry.buffer.type = wgpu::BufferBindingType::Uniform;
+                    entry.buffer.minBindingSize = entry.minBufferBindingSize;
+                    entry.buffer.hasDynamicOffset = false;
+                    break;
+                case wgpu::BindingType::StorageBuffer:
+                    entry.buffer.type = wgpu::BufferBindingType::Storage;
+                    entry.buffer.minBindingSize = entry.minBufferBindingSize;
+                    entry.buffer.hasDynamicOffset = false;
+                    break;
+                case wgpu::BindingType::ReadonlyStorageBuffer:
+                    entry.buffer.type = wgpu::BufferBindingType::ReadOnlyStorage;
+                    entry.buffer.minBindingSize = entry.minBufferBindingSize;
+                    entry.buffer.hasDynamicOffset = false;
+                    break;
+
+                case wgpu::BindingType::Sampler:
+                    entry.sampler.type = wgpu::SamplerBindingType::Filtering;
+                    break;
+                case wgpu::BindingType::ComparisonSampler:
+                    entry.sampler.type = wgpu::SamplerBindingType::Comparison;
+                    break;
+
+                case wgpu::BindingType::MultisampledTexture:
+                    entry.texture.multisampled = true;
+                    DAWN_FALLTHROUGH;
+                case wgpu::BindingType::SampledTexture:
+                    switch (shaderBinding.textureComponentType) {
+                        case wgpu::TextureComponentType::Float:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Float;
+                            break;
+                        case wgpu::TextureComponentType::Uint:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Uint;
+                            break;
+                        case wgpu::TextureComponentType::Sint:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Sint;
+                            break;
+                        case wgpu::TextureComponentType::DepthComparison:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Depth;
+                            break;
+                    }
+                    entry.texture.viewDimension = shaderBinding.viewDimension;
+                    break;
+
+                case wgpu::BindingType::ReadonlyStorageTexture:
+                    entry.storageTexture.access = wgpu::StorageTextureAccess::ReadOnly;
+                    entry.storageTexture.format = shaderBinding.storageTextureFormat;
+                    entry.storageTexture.viewDimension = shaderBinding.viewDimension;
+                    break;
+                case wgpu::BindingType::WriteonlyStorageTexture:
+                    entry.storageTexture.access = wgpu::StorageTextureAccess::WriteOnly;
+                    entry.storageTexture.format = shaderBinding.storageTextureFormat;
+                    entry.storageTexture.viewDimension = shaderBinding.viewDimension;
+                    break;
+
+                case wgpu::BindingType::Undefined:
+                    UNREACHABLE();
+            }
+
             return entry;
         };
 
