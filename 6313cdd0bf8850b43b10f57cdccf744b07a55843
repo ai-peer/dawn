@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64a2a72_04324526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-15T22:18:35Z",
+      "side": 1,
+      "message": "ping (sorry, didn\u0027t attach a \"PTAL\" comment before), hopefully this still builds",
+      "revId": "6313cdd0bf8850b43b10f57cdccf744b07a55843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
