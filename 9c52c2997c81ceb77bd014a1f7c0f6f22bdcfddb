@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9cfe2b7_7a7c4f20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-15T00:25:15Z",
+      "side": 1,
+      "message": "I apologize! I was trying to get it landed before the weekend and got sloppy. I\u0027ll be more cautious about that in the future, and have addressed your comments in https://dawn-review.googlesource.com/c/dawn/+/35700",
+      "parentUuid": "6e0767e1_c5c5f282",
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3be2d2f_45f045a0",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6a9f24a_abb08449",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-15T00:25:15Z",
+      "side": 1,
+      "message": "Ah, that was a point of confusion for me, then. I thought you meant that it shouldn\u0027t be allowed in Vertex shaders either, which caused some validation errors elsewhere that were non-trivial to resolve, hence why I deferred the change.",
+      "parentUuid": "e3be2d2f_45f045a0",
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "829b929b_74625c72",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 12
@@ -48,6 +84,30 @@
       "writtenOn": "2020-12-14T13:43:47Z",
       "side": 1,
       "message": "This branch can never be taken.",
+      "range": {
+        "startLine": 154,
+        "startChar": 14,
+        "endLine": 154,
+        "endChar": 48
+      },
+      "revId": "9c52c2997c81ceb77bd014a1f7c0f6f22bdcfddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91516f1_7a29b386",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-15T00:25:15Z",
+      "side": 1,
+      "message": "Derp. Yeah, that was definitely meant to be an `\u003d\u003d`.",
+      "parentUuid": "829b929b_74625c72",
       "range": {
         "startLine": 154,
         "startChar": 14,
