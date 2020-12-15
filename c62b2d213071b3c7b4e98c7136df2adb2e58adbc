@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4215a5d_b88a2b3b",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-15T14:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0746e91_73d1a374",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f75ccddb_2868cfb7",
@@ -112,6 +130,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cff3d865_8be4256f",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-15T14:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70082c18_da2de5aa",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fb96cb1_2ce60f57",
@@ -183,6 +219,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b777d99_9f43b9eb",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-15T14:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0631cbf_cf2f03b8",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 17
+      },
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "252f34b2_3cb2c755",
@@ -200,6 +260,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b4953d_3164e7b4",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-15T14:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "252f34b2_3cb2c755",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2a62a25_a88c2fc8",
@@ -213,6 +291,24 @@
       "writtenOn": "2020-12-09T15:43:22Z",
       "side": 1,
       "message": "With this dispatch size and the workgroup size, at most 64 timestamps will be converted. We should compute the dispatch size dynamically.\n\nAlso can you add the defaulting of y and z to 1 in ComputePassEncoder-\u003eDispatch() so that we can write Dispatch(N) here?",
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ca60d6_b6978614",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-15T14:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a62a25_a88c2fc8",
       "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
