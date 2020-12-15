@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbca058b_f0f297f7",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2020-12-15T20:57:35Z",
+      "side": 1,
+      "message": "I compiled this shader with glslc, then through spirv-reader.  I get that validation problem.\nBut when I start at the AST it looks ok.\n\nPlease file an issue to resolve this.",
+      "parentUuid": "7275aac9_89e57cea",
+      "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd568e76_693b5914",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 3
