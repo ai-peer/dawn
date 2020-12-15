@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53abed75_2bb97806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T17:19:32Z",
+      "side": 1,
+      "message": "Note: This fixes the `__e_use_tint_generator` suffixed tests, but not the non-suffixed. I still don\u0027t quite understand what each flavour of test really means.",
+      "revId": "c6b845941d9bbe5c4f4472d20f0d5d0028f47a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
