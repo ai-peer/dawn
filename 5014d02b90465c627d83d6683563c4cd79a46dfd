@@ -16,6 +16,23 @@
       "message": "Adding you as a reviewer of your own change, in case you wanted to land this rebased version.",
       "revId": "5014d02b90465c627d83d6683563c4cd79a46dfd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0fd76a_fa887dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T18:57:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5014d02b90465c627d83d6683563c4cd79a46dfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
