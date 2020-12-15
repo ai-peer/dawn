@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc70f2e_dca56ea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:47:12Z",
+      "side": 1,
+      "message": "Does this fix the non- __e_use_tint_generator tests too now?",
+      "revId": "846f653e09b36c646167483e6ec546aa8ac6203f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c6702b_2ac655f0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:47:12Z",
+      "side": 1,
+      "message": "nit: would prefer using the helper\n\nDAWN_TRY_ASSIGN(module, RunTransforms(\u0026transformManager, \u0026module));",
+      "range": {
+        "startLine": 842,
+        "startChar": 24,
+        "endLine": 848,
+        "endChar": 58
+      },
+      "revId": "846f653e09b36c646167483e6ec546aa8ac6203f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
