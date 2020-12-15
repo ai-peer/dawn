@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1427ab9f_153b79af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35b34bd_f5a175b0",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "nit: in this shader, I would prfer to refer to the low and high bits with [0] and [1] instead of .x and .y since these are not coordinates\n\nalternatively, maybe this is better as just two u32 members called .low and .high",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f00552e_4df1c354",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "maybe just above this shader, we can have c++ static_asserts about the offsets in dawn_native::TsParams",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2279dbf_c2cad673",
@@ -66,6 +117,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d2add1d_6d347ba2",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "unit: \" : \"",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f1e7983_2aa0f48c",
         "filename": "src/dawn_native/QueryHelper.cpp",
         "patchSetId": 18
@@ -99,6 +173,179 @@
         "startChar": 0,
         "endLine": 96,
         "endChar": 0
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca1793a_9d7a1e7b",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "I think we still might need this code to find the reset point.\n\nHowever, can\u0027t this code walk backward starting from |inputIndex| instead going from 0 all the way to inputIndex? If inputIndex is large, we would be walking the entire input array.\n\nSecondly, this could potentially be improved if we have all threads look only at index i and i-1 to compute an array of 0\u0027s and 1\u0027s in shared memory that indicates whether a reset occured. Instead of one thread walking an entire range, all threads look only at two values. This would be much better for parallelism. We can\u0027t really use shared memory without barriers in WGSL yet, so perhaps leave this as a TODO.",
+      "parentUuid": "53bcaa75_a6fe328e",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 0
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa191961_9da543f5",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "we should have a temp variable first and write out to output.t[outputIndex].y just once at the end. The code as it is now will probably actually write into the storage buffer twice which is more memory bandwidth than necessary.",
+      "range": {
+        "startLine": 115,
+        "startChar": 20,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0723c32_6e6c3dcb",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "nit: prefer std::array",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 42
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11868d0_56f389ad",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "unit: newline above this",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735ef1bf_334e8ef3",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "nit: would prefer spelling this out as \"TimestampParams\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a92f21_496e5926",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "nit: This could have a more specific name like: EncodeConvertTimestampTicksToNanoseconds.\nSame for the name of the shader",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ac4ce4_33b00c80",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "it would help to also describe here how the test tests this",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe308bb4_32e8b9e0",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T21:06:28Z",
+      "side": 1,
+      "message": "nit: a bit clearer to just use kTimestampCount",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 42
       },
       "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
