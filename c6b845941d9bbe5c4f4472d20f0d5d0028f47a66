@@ -33,6 +33,24 @@
       "message": "LGTM!",
       "revId": "c6b845941d9bbe5c4f4472d20f0d5d0028f47a66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04277f26_956a68cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:26:06Z",
+      "side": 1,
+      "message": "I think you can add it around here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/ShaderModule.cpp;l\u003d840;bpv\u003d0;bpt\u003d1\n\nwithout the suffix means we do WGSL -\u003e SPIRV -\u003e SPIRV-Cross\n\nWe also need to add the transform in ShaderModuleGL, and in  ShaderModuleBase::GeneratePullingSpirv",
+      "parentUuid": "53abed75_2bb97806",
+      "revId": "c6b845941d9bbe5c4f4472d20f0d5d0028f47a66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
