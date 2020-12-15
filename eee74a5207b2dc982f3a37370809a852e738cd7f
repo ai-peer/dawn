@@ -16,6 +16,46 @@
       "message": "cwallez@ and enga@: PTAL!\n\nI was going to include turning on the deprecation warning in this CL, but it turns out that there\u0027s still a few changes that will need to be made internally before that can fully happen (For example, making sure that the default bind group layout that gets created for a pipeline uses the new format in order to not trigger the deprecation warning internally.)\n\nAs such, this change ends up just being a bunch of test changes to the new layout. There\u0027s enough of it that needs to be done, though, that it\u0027s probably for the best to keep this fairly mechanical change separate from any additional logic changes.",
       "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536e2bf5_4f0b51c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T22:54:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996f7a75_26501468",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T22:54:15Z",
+      "side": 1,
+      "message": "this isn\u0027t default?",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 68
+      },
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
