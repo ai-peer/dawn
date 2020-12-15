@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf67b4e_b35f7df1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-12-15T16:31:31Z",
+      "side": 1,
+      "message": "LGTM!LGTM",
+      "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6293679c_98b481fb",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-12-15T16:31:31Z",
+      "side": 1,
+      "message": "Do we have a bug for these?",
+      "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd568e76_693b5914",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2020-12-15T16:31:31Z",
+      "side": 1,
+      "message": "Do we have a bug for this?",
+      "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
