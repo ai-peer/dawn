@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3723d0ce_27092fb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T18:29:05Z",
+      "side": 1,
+      "message": "Adding you as a reviewer of your own change, in case you wanted to land this rebased version.",
+      "revId": "5014d02b90465c627d83d6683563c4cd79a46dfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
