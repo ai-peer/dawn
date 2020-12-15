@@ -104,6 +104,24 @@
       "parentUuid": "3cd9f847_3911032e",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76db4f4f_efdcd18d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-15T08:21:55Z",
+      "side": 1,
+      "message": "I think it is better to know the minimum dxc version that supports templated STORE methods, and query the current dxc version to determine whether support FP16 extension.\n@Rafael, could you give us the minimum dxc version value? \nIf there is not exact version. On my local machine with SDK 10.0.19041.0, the dxc version is 1.5. Could I directly restrict the dxc version to 1.5 or higher, instead of SDK version?",
+      "parentUuid": "60e60ed9_7529c0ee",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
