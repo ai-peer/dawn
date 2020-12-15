@@ -50,6 +50,23 @@
       "message": "Nicer. Thanks!",
       "revId": "e140d00f4cd3a439f9a9485adc9bbd72556a9cd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78a8c68_adcb63f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T13:08:53Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "e140d00f4cd3a439f9a9485adc9bbd72556a9cd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
