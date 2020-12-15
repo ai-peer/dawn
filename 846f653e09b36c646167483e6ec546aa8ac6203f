@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79c7ca30_624d1d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T17:55:34Z",
+      "side": 1,
+      "message": "Yes, thanks. See the change above, where I\u0027ll confirm with a dry run.",
+      "parentUuid": "0fc70f2e_dca56ea1",
+      "revId": "846f653e09b36c646167483e6ec546aa8ac6203f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0c6702b_2ac655f0",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-12-15T17:47:12Z",
       "side": 1,
       "message": "nit: would prefer using the helper\n\nDAWN_TRY_ASSIGN(module, RunTransforms(\u0026transformManager, \u0026module));",
+      "range": {
+        "startLine": 842,
+        "startChar": 24,
+        "endLine": 848,
+        "endChar": 58
+      },
+      "revId": "846f653e09b36c646167483e6ec546aa8ac6203f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e524830_5c0b84b5",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T17:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c6702b_2ac655f0",
       "range": {
         "startLine": 842,
         "startChar": 24,
