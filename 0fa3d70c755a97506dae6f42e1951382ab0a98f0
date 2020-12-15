@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64555db6_29ec094f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T22:47:44Z",
+      "side": 1,
+      "message": "Mostly unrelated to other patches in this stack. PTAL!",
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
