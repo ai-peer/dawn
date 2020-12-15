@@ -122,6 +122,24 @@
       "parentUuid": "60e60ed9_7529c0ee",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d5fc07e_33cf0112",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:04:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure - did we get an answer to this question?",
+      "parentUuid": "76db4f4f_efdcd18d",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
