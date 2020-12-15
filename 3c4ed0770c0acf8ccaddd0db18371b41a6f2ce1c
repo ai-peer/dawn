@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e681edb1_a07c58d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:06:34Z",
+      "side": 1,
+      "message": "nit: erroneous spelling of erroneous",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "3c4ed0770c0acf8ccaddd0db18371b41a6f2ce1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "69e9799b_07d33679",
@@ -31,6 +54,23 @@
       "writtenOn": "2020-12-15T09:11:59Z",
       "side": 1,
       "message": "LGTM!",
+      "revId": "3c4ed0770c0acf8ccaddd0db18371b41a6f2ce1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f4ecdec_029392f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T17:06:34Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "3c4ed0770c0acf8ccaddd0db18371b41a6f2ce1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
