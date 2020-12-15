@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2add9449_244c388e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:23:58Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d53fea_a7e26639",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:23:58Z",
+      "side": 1,
+      "message": "nit: DoesDXCSupportTemplatedStoreMethods or HasDXCTemplatedStoreMethods.",
+      "range": {
+        "startLine": 222,
+        "startChar": 28,
+        "endLine": 222,
+        "endChar": 61
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
