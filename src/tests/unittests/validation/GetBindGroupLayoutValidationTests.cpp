@@ -142,8 +142,8 @@ TEST_F(GetBindGroupLayoutTests, ComputePipeline) {
 
     wgpu::BindGroupLayoutEntry binding = {};
     binding.binding = 0;
-    binding.type = wgpu::BindingType::UniformBuffer;
     binding.visibility = wgpu::ShaderStage::Compute;
+    binding.type = wgpu::BindingType::UniformBuffer;
     binding.hasDynamicOffset = false;
     binding.minBufferBindingSize = 4 * sizeof(float);
 
@@ -227,6 +227,8 @@ TEST_F(GetBindGroupLayoutTests, BindingType) {
         EXPECT_EQ(device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get());
     }
 
+    binding.texture.sampleType = wgpu::TextureSampleType::Undefined;
+
     {
         binding.type = wgpu::BindingType::Sampler;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
@@ -242,16 +244,15 @@ TEST_F(GetBindGroupLayoutTests, BindingType) {
 TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     wgpu::BindGroupLayoutEntry binding = {};
     binding.binding = 0;
-    binding.type = wgpu::BindingType::SampledTexture;
     binding.visibility = wgpu::ShaderStage::Fragment;
-    binding.hasDynamicOffset = false;
+    binding.texture.sampleType = wgpu::TextureSampleType::Float;
 
     wgpu::BindGroupLayoutDescriptor desc = {};
     desc.entryCount = 1;
     desc.entries = &binding;
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::e1D;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::e1D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_1d<f32>;
 
@@ -261,7 +262,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     }
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::e2D;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::e2D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_2d<f32>;
 
@@ -271,7 +272,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     }
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::e2DArray;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::e2DArray;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_2d_array<f32>;
 
@@ -281,7 +282,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     }
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::e3D;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::e3D;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_3d<f32>;
 
@@ -291,7 +292,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     }
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::Cube;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::Cube;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_cube<f32>;
 
@@ -301,7 +302,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
     }
 
     {
-        binding.viewDimension = wgpu::TextureViewDimension::CubeArray;
+        binding.texture.viewDimension = wgpu::TextureViewDimension::CubeArray;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_cube_array<f32>;
 
@@ -315,16 +316,14 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
 TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
     wgpu::BindGroupLayoutEntry binding = {};
     binding.binding = 0;
-    binding.type = wgpu::BindingType::SampledTexture;
     binding.visibility = wgpu::ShaderStage::Fragment;
-    binding.hasDynamicOffset = false;
 
     wgpu::BindGroupLayoutDescriptor desc = {};
     desc.entryCount = 1;
     desc.entries = &binding;
 
     {
-        binding.textureComponentType = wgpu::TextureComponentType::Float;
+        binding.texture.sampleType = wgpu::TextureSampleType::Float;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_2d<f32>;
 
@@ -334,7 +333,7 @@ TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
     }
 
     {
-        binding.textureComponentType = wgpu::TextureComponentType::Sint;
+        binding.texture.sampleType = wgpu::TextureSampleType::Sint;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_2d<i32>;
 
@@ -344,7 +343,7 @@ TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
     }
 
     {
-        binding.textureComponentType = wgpu::TextureComponentType::Uint;
+        binding.texture.sampleType = wgpu::TextureSampleType::Uint;
         wgpu::RenderPipeline pipeline = RenderPipelineFromFragmentShader(R"(
             [[set(0), binding(0)]] var<uniform_constant> myTexture : texture_sampled_2d<u32>;
 
@@ -715,7 +714,7 @@ TEST_F(GetBindGroupLayoutTests, UnusedIndex) {
 TEST_F(GetBindGroupLayoutTests, Reflection) {
     wgpu::BindGroupLayoutEntry binding = {};
     binding.binding = 0;
-    binding.type = wgpu::BindingType::UniformBuffer;
+    binding.buffer.type = wgpu::BufferBindingType::Uniform;
     binding.visibility = wgpu::ShaderStage::Vertex;
 
     wgpu::BindGroupLayoutDescriptor bglDesc = {};
