@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f67b6b_6ddb6dca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T13:46:34Z",
+      "side": 1,
+      "message": "It seems like the Tint fix might not have been enough?\n\n[ RUN      ] DepthStencilCopyTests.FromDepthAspect/OpenGL_Mesa_DRI_Intel_R_HD_Graphics_630_Kaby_Lake_GT2__e_use_tint_generator\n../../third_party/dawn/src/tests/DawnTest.cpp:922: Failure\nValue of: self-\u003emExpectError\n  Actual: false\nExpected: true\nGot unexpected device error: SPIRV Validation failure:\nerror: line 17: [VUID-FragDepth-FragDepth-04216] Vulkan spec requires DepthReplacing execution mode to be declared when using BuiltIn FragDepth. ID \u003c0\u003e (OpStore) is referencing ID \u003c1\u003e (OpVariable) which is decorated with BuiltIn FragDepth in function \u003c7\u003e.\n  OpStore %gl_FragDepth %float_0_300000012\n\n\n    at ValidateSpirv (../../third_party/dawn/src/dawn_native/ShaderModule.cpp:169)\n    at InitializeBase (../../third_party/dawn/src/dawn_native/ShaderModule.cpp:1077)\n    at Initialize (../../third_party/dawn/src/dawn_native/opengl/ShaderModuleGL.cpp:82)\n    at Create (../../third_party/dawn/src/dawn_native/opengl/ShaderModuleGL.cpp:73)\n    at GetOrCreateShaderModule (../../third_party/dawn/src/dawn_native/Device.cpp:611)\n    at CreateShaderModuleInternal (../../third_party/dawn/src/dawn_native/Device.cpp:1085)",
+      "revId": "02f69c7861f6b5114a5f58e3ca30d41ddc976b86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
