@@ -834,6 +834,20 @@ namespace dawn_native {
                 } else {
                     tint::ast::Module module;
                     DAWN_TRY_ASSIGN(module, ParseWGSL(wgslDesc->source));
+
+                    {
+                        tint::transform::Manager transformManager;
+                        transformManager.append(
+                            std::make_unique<tint::transform::EmitVertexPointSize>());
+                        auto output = transformManager.Run(&module);
+                        if (DAWN_UNLIKELY(output.diagnostics.contains_errors())) {
+                            std::string err = "Tint transform failure: " +
+                                              tint::diag::Formatter{}.format(output.diagnostics);
+                            return DAWN_VALIDATION_ERROR(err.c_str());
+                        }
+                        module = std::move(output.module);
+                    }
+
                     if (device->IsValidationEnabled()) {
                         DAWN_TRY(ValidateModule(&module));
                     }
@@ -1023,6 +1037,7 @@ namespace dawn_native {
         tint::transform::Manager transformManager;
         transformManager.append(
             MakeVertexPullingTransform(vertexState, entryPoint, pullingBufferBindingSet));
+        transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
         if (GetDevice()->IsRobustnessEnabled()) {
             // TODO(enga): Run the Tint BoundArrayAccessors transform instead of the SPIRV Tools
             // one, but it appears to crash after running VertexPulling.
