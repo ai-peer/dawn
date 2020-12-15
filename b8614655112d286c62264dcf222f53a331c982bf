@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc726589_b12f5d6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-15T20:54:51Z",
+      "side": 1,
+      "message": "\u003e \"fork\" so we have two \"newest\" versions that need to be merged. Is that possible?\n\nRight. To merge, we load the cache again (get newest version) then call StorePipelines using mCaches. Optionally, swap (vs discard) to continue use of the newer version if not on shutdown. We\u0027ll eventually need to do more to keep caches synchronized like Vulkan does for you.\n\n\u003e So is that means that we *can* call StorePipeline cross-device if it came from the same factory?\n\nYup. a \"D3D device\" is nothing more than an AddRef. If two d3d devices correspond to the same adapter IDs then a d3d library created on one can be used with the other.",
+      "parentUuid": "cedd2288_cf4acac3",
+      "revId": "b8614655112d286c62264dcf222f53a331c982bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1bf6bf_1a43d67a",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
