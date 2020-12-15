@@ -51,6 +51,24 @@
       "parentUuid": "7a1dfbe0_99ff33e1",
       "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c716e9cb_14394a31",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 0,
+      "message": "Thanks for the explanation, it makes sense.",
+      "parentUuid": "460bfdae_8cf7d578",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

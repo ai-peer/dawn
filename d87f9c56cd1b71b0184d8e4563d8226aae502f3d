@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c016b6_8b44cf66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 1,
+      "message": "Ok, I was quite surprised too ^^",
+      "parentUuid": "e71f92aa_d4121ac9",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ee3ab3d_108377f8",
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "I was planning to do this as in patch \"Implement Adapter GetProperties and GetFeatures\"",
       "parentUuid": "3d4def69_ab553b3c",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a3b292_daf43b74",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ae3bbe1_3c5cdcba",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -365,6 +401,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d95f7c01_bcce231a",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 1,
+      "message": "The instance descriptor could contains platform functions, backendValidationEnabled, stuff like that. I don\u0027t think we need more than one instance but it doesn\u0027t make the code much more complicated because the additional function is traded for less special case on the only instance.",
+      "parentUuid": "73053537_0689c5e0",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86b9f308_0975d439",
         "filename": "src/dawn_wire/client/Instance.cpp",
         "patchSetId": 2
@@ -490,6 +544,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "222bab48_908207b2",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cfbb70c4_06109415",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb6220ca_9f98a1b4",
@@ -589,6 +661,24 @@
       "side": 1,
       "message": "Yea, Jiawei only fixed this for create ready pipeline. I\u0027m going to fix the other callbacks as well before this patch probably.",
       "parentUuid": "ad7c7e4a_56f41279",
+      "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe06c8b_0eca8aba",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T09:31:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a82b9a9f_c4b8d9f4",
       "revId": "d87f9c56cd1b71b0184d8e4563d8226aae502f3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
