@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b1bc634_ea6cf7cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-15T20:00:45Z",
+      "side": 1,
+      "message": "Thanks for taking a look! I am still working through on the embedder side change.\n\nFor the overwrite pipeline concern, d3d12::PipelineCache::MergePipeline(src \u003d current library, dst \u003d newest) can be readily added to do the more optimal update-modify (aka vkMergePipelines) strategy in this CL or a follow-up. I was missing access to mCaches - a bit more plumbing is needed (WDYT of  DeviceBase::GetCachedRenderPipelines?) but that idea is spot on.\n\nIn D3D, StorePipeline must be called on the same device the pipeline was created with. note: a d3d device comes from a stateless factory so another but not different device can only use the same library (via key).\n\nI don\u0027t mind looking more into video but it would be nice to get a basic version of pipeline cache done while it\u0027s still fresh in my mind or while I wait on CRs.",
+      "parentUuid": "762013aa_9302fe88",
+      "revId": "b8614655112d286c62264dcf222f53a331c982bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1bf6bf_1a43d67a",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
