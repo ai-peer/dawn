@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b17f03c_4bfa95c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T17:35:10Z",
+      "side": 1,
+      "message": "New code. PTAL",
+      "revId": "a389acc74dcbffe66d3e3f162d700011ecfa01b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56ff71f9_a346ca0c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T17:35:10Z",
+      "side": 1,
+      "message": "Also added the transform here, which also covers the non \u0027__e_use_tint_generator\u0027 test cases.\nNot sure if this is the best or right place to do this.",
+      "range": {
+        "startLine": 838,
+        "startChar": 20,
+        "endLine": 849,
+        "endChar": 21
+      },
+      "revId": "a389acc74dcbffe66d3e3f162d700011ecfa01b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
