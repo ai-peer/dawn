@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e9799b_07d33679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-15T00:26:07Z",
+      "side": 1,
+      "message": "cwallez@: Please take a look to ensure I\u0027ve addressed your concerns about the previous CL!",
+      "revId": "3c4ed0770c0acf8ccaddd0db18371b41a6f2ce1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
