@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb7e93a_42690712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T17:09:14Z",
+      "side": 1,
+      "message": "Sorry I still wasn\u0027t able to take a look at the tests. Austin can you TAL too?",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2279dbf_c2cad673",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T17:09:14Z",
+      "side": 1,
+      "message": "nit: sizeofTimestamp, this is closer to the semantic of what we\u0027re doing to address an array.",
+      "range": {
+        "startLine": 56,
+        "startChar": 18,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c88581_ce93d034",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T17:09:14Z",
+      "side": 1,
+      "message": "nit: inputByteOffset, same for outputOffset.",
+      "range": {
+        "startLine": 60,
+        "startChar": 69,
+        "endLine": 60,
+        "endChar": 80
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1e7983_2aa0f48c",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T17:09:14Z",
+      "side": 1,
+      "message": "Write a zero and then return, which allows skipping all of [this].",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bcaa75_a6fe328e",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T17:09:14Z",
+      "side": 1,
+      "message": "[this]",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 0
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
