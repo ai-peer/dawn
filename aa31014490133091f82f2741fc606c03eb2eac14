@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4007f1d_7518649c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-15T18:46:29Z",
+      "side": 1,
+      "message": "Now that you\u0027re returning more than the path, please rename the function to something like \"GetWindowsSDKPathAndVersion\" or \"GetWindowsSDKInfo\".",
+      "range": {
+        "startLine": 70,
+        "startChar": 20,
+        "endLine": 70,
+        "endChar": 41
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db749db9_4532563c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-15T18:46:29Z",
+      "side": 1,
+      "message": "Since this function does not return any error codes, please ensure that ALL out parameters are initialized to meaningful defaults. For this function, should be sufficient to initialize windowsSDKVersion to zero right at the beginning.",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7d53fea_a7e26639",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 6
@@ -36,6 +82,29 @@
         "startChar": 28,
         "endLine": 222,
         "endChar": 61
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe66b3a_ad699d8c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-15T18:46:29Z",
+      "side": 1,
+      "message": "Please prefix all member variables with the letter \u0027m\u0027.",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 38
       },
       "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
