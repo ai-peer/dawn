@@ -68,6 +68,24 @@
       "message": "Oh yeah that must be it!",
       "revId": "02f69c7861f6b5114a5f58e3ca30d41ddc976b86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1984b783_ed3e0e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-15T13:52:55Z",
+      "side": 1,
+      "message": "As in it\u0027s because the Tint change hasn\u0027t rolled in Chromium yet.",
+      "parentUuid": "04d6f2c7_6b97a61f",
+      "revId": "02f69c7861f6b5114a5f58e3ca30d41ddc976b86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
