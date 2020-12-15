@@ -119,7 +119,8 @@ namespace dawn_native { namespace d3d12 {
         mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
         mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
         mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
-        if (mDeviceInfo.supportsShaderFloat16 && GetBackend()->GetFunctions()->IsDXCAvailable()) {
+        if (mDeviceInfo.supportsShaderFloat16 &&
+            GetBackend()->GetFunctions()->IsDXCSupportTemplatedStoreMethods()) {
             mSupportedExtensions.EnableExtension(Extension::ShaderFloat16);
         }
     }
