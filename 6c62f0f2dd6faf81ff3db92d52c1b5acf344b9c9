@@ -86,6 +86,24 @@
       "parentUuid": "5e3a14c6_394a6f97",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e60ed9_7529c0ee",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-15T07:47:18Z",
+      "side": 1,
+      "message": "Our shader-float16 extension is already gated on shader model 6.2 or higher, so it is not very exact that gates shader model 6.2 here. It should be gated in which SDK version and its DXC supports templated STORE methods",
+      "parentUuid": "3cd9f847_3911032e",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
