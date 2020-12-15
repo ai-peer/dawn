@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cedd2288_cf4acac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-15T20:03:52Z",
+      "side": 1,
+      "message": "How would this work on D3D12? From what I understand, if we make two tabs, the cache will \"fork\" so we have two \"newest\" versions that need to be merged. Is that possible?\n\n\u003e note: a d3d device comes from a stateless factory so another but not different device can only use the same library (via key).\nSo is that means that we *can* call StorePipeline cross-device if it came from the same factory?",
+      "parentUuid": "0b1bc634_ea6cf7cc",
+      "revId": "b8614655112d286c62264dcf222f53a331c982bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1bf6bf_1a43d67a",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
