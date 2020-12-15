@@ -86,6 +86,23 @@
       "parentUuid": "04d6f2c7_6b97a61f",
       "revId": "02f69c7861f6b5114a5f58e3ca30d41ddc976b86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e1fbac7_ba05f698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-15T16:06:58Z",
+      "side": 1,
+      "message": "Looking better now. PTAL",
+      "revId": "02f69c7861f6b5114a5f58e3ca30d41ddc976b86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
