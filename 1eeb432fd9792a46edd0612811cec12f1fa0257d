@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b643dfe0_805d918a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "Does the WebGPU spec guarantee that the device\u0027s lost callback is called in finite time? It seems likely that it doesn\u0027t because it would make the GC observable. Maybe the semantics can be slightly different in native and we guarantee the callback is always called.",
+      "parentUuid": "2ada2ef7_35b93fd5",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9f8e002e_15db4d7a",
@@ -37,6 +61,137 @@
       "writtenOn": "2020-12-16T04:54:18Z",
       "side": 1,
       "message": "PTAL! This generalizes Jiawei\u0027s previous work to all of the server callbacks.",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7ec960_3588a881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a332213_25d9fd42",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "It should somehow be possible to do MakeForwardToServerCallback(\u0026Server::OnDeviceLost) without the decltype and double mention of OnDeviceLost.",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 99
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec40b241_99a3603e",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "Can we have a comment that explain how to use this, MakeUserData and MakeForwardToServerCallback?",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3448e8_ce5c3832",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "ditto, some small comment would help",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21784ca_acd66834",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "Template magic could use some more comments. The logic looks good but it was quite hard to understand without something saying what we\u0027re trying to do.",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f5988a_d0e28b9a",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "Why is this one needed?",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec73851c_419cc530",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:10:56Z",
+      "side": 1,
+      "message": "nit: why not just SerializeCommand?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 22
+      },
       "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
