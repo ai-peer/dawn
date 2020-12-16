@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cbbe7d_2200131f",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T04:54:18Z",
+      "side": 1,
+      "message": "WDYT? The helper here is nice because it automatically handles the lifetime of the userdata, checking of serverIsAlive, and casting - but the usage of it is rather ugly:\n\nprocs.someFunction(..., ForwardToServer\u003cdecltype(\u0026Server::Foo), \u0026Server::Foo\u003e::Func(), ...);\n\nWe could make it better with a macro?",
+      "revId": "1e0acdfd225412bfe6ba26192ebb12f9489d9f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee6bb9d_48d69395",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T04:54:18Z",
+      "side": 1,
+      "message": "whoops, unnecessary cast here",
+      "revId": "1e0acdfd225412bfe6ba26192ebb12f9489d9f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

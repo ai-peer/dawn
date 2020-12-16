@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ada2ef7_35b93fd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T04:54:18Z",
+      "side": 1,
+      "message": "we don\u0027t have to do this; I\u0027m not sure if Dawn was simply wrong before.\n\nIf we don\u0027t do this, then on destruction of the server, we need to set the device lost and error callbacks to no-op.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8e002e_15db4d7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T04:54:18Z",
+      "side": 1,
+      "message": "PTAL! This generalizes Jiawei\u0027s previous work to all of the server callbacks.",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
