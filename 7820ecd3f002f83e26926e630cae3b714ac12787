@@ -129,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7465b8bc_ac98ae1f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-16T23:58:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9d591f7_1d3b535c",
+      "range": {
+        "startLine": 317,
+        "startChar": 11,
+        "endLine": 317,
+        "endChar": 39
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6cb94d3_4fb96f21",
@@ -213,6 +237,30 @@
       "writtenOn": "2020-12-16T22:49:45Z",
       "side": 1,
       "message": "https://dawn-review.googlesource.com/c/dawn/+/35260 needs the HLSL compiler version in the form of a number. I suggest having a version of this function that returns the DLL version in the form of a number (major and minor) and add a separate helper that converts the number to a string.",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 399,
+        "endChar": 69
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0a6bf8_4247c4d5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-16T23:58:51Z",
+      "side": 1,
+      "message": "Done. \n\nI actually don\u0027t need a pretty XX.YY string here, same number should work.",
+      "parentUuid": "6a81ab2a_63b24520",
       "range": {
         "startLine": 399,
         "startChar": 4,
