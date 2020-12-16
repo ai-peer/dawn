@@ -157,6 +157,11 @@ namespace dawn_native {
                 // Ignore errors so that we can continue with destruction
                 IgnoreErrors(WaitForIdleForDestruction());
                 AssumeCommandsComplete();
+
+                if (mDeviceLostCallback != nullptr) {
+                    mDeviceLostCallback("Device destroyed", mDeviceLostUserdata);
+                    mDeviceLostCallback = nullptr;
+                }
                 break;
 
             case State::BeingDisconnected:
