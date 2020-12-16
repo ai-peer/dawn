@@ -104,6 +104,24 @@
       "parentUuid": "dd568e76_693b5914",
       "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3853c2d9_644f3804",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T18:18:49Z",
+      "side": 1,
+      "message": "Thanks, I put this in a comment",
+      "parentUuid": "0e376e8e_973e12dc",
+      "revId": "8911d6f4cf9c5a3d2a3ef9b86c277a3a35b959f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

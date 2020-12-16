@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "840c21cf_b73460b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T18:18:49Z",
+      "side": 1,
+      "message": "Thanks David, I\u0027ll add the comments into Ben\u0027s CL and land it.",
+      "parentUuid": "1b8aea54_9cb66221",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e2e894c_6aaa5c63",
