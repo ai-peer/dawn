@@ -33,6 +33,195 @@
       "message": "It looks much better now!",
       "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b9a948_5bb82ccb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "LGTM overall, bunch of suggestions for the code generators.",
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "821e30c1_1211ec01",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 54,
+        "startChar": 34,
+        "endLine": 54,
+        "endChar": 63
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401da98f_71d5dd23",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "nit: we can extract Suffix in a temporary variable.",
+      "range": {
+        "startLine": 63,
+        "startChar": 25,
+        "endLine": 63,
+        "endChar": 68
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d834e1_860f375d",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "This could be a single loop.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 101
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eeca800_d0052e07",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "I think this check can be removed now. We remove the large functions we had pre-descriptorization of object creation. Ditto in other places. Also MOCK_METHOD removes the limit of 10 arguments I believe.",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619e0c4d_7c1e2049",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "nit: Can be extracted to a Suffix temporary variable.",
+      "range": {
+        "startLine": 58,
+        "startChar": 54,
+        "endLine": 58,
+        "endChar": 97
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b6fc83_f7e4d94a",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "nit: comment that this is what is mockable.",
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37252424_ea72e8ba",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "Why do we need the \"Callback\" part of this name? It was there before, but it\u0027s a bit weird given it\u0027s triggered when we call {{Suffix}} and not when we call {{Suffix}}\u0027s callback.\n\nBasically BufferMapAsync should call OnBufferMapAsync that\u0027s mockable, and the function to call the callback should be CallBufferMapAsyncCallback.",
+      "range": {
+        "startLine": 65,
+        "startChar": 107,
+        "endLine": 65,
+        "endChar": 115
+      },
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9baa3664_d5c89ad0",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T10:23:44Z",
+      "side": 1,
+      "message": "nit: This could be in the same loop as the others. (only Object needs its own loop)",
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
