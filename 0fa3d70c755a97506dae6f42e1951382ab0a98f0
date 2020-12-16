@@ -16,6 +16,23 @@
       "message": "Mostly unrelated to other patches in this stack. PTAL!",
       "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a30302a_9a08859e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-12-16T00:18:54Z",
+      "side": 1,
+      "message": "It looks much better now!",
+      "revId": "0fa3d70c755a97506dae6f42e1951382ab0a98f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
