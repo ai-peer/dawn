@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a469b05f_524ecf73",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T22:44:46Z",
+      "side": 1,
+      "message": "@Xinghua, GetWindowsSDKPathAndVersion has an early return on line 76. If that codepath is taken, the out parameter ends up uninitialized.\n\nSince GetWindowsSDKPathAndVersion does not have a clear error code or well defined order in which the out parameters are meant to be checked by the caller, I would initialize all the out parameters at the top of the function before any early returns.\n\nIf you don\u0027t do this and a new caller happens to assume that windowsSDKVersion !\u003d 0 implies the return value contains valid string, calamity will ensue.",
+      "parentUuid": "84f08141_7305093a",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7d53fea_a7e26639",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 6

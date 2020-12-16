@@ -158,6 +158,24 @@
       "parentUuid": "3d5fc07e_33cf0112",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d73163_5c8397de",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T22:44:46Z",
+      "side": 1,
+      "message": "@Xinghua, good catch on the DLL copy scenario. I forgot we needed to support this and you\u0027re right that checking the SDK directory name is insufficient.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/35480 adds a way to check the compiler version by asking the DLL itself. We should use that instead.",
+      "parentUuid": "ccc0fdbc_ff7babf5",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
