@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "570de188_323ecf1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T01:15:05Z",
+      "side": 1,
+      "message": "The description of bug 529 is \"Implement CreateReadyRenderPipeline and CreateReadyComputePipeline\". Not immediately clear to me why that work item needs the HLSL compiler version as a key. \n\nIs this correct Dawn bug?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1c03a3da_78892907",
@@ -14,6 +37,52 @@
       "writtenOn": "2020-12-16T00:24:08Z",
       "side": 1,
       "message": "Rafael, is my d3d version check correct?",
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d591f7_1d3b535c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T01:15:05Z",
+      "side": 1,
+      "message": "The comment says we should use the HLSL source as input. Please amend the comment with why we need to use the version as well.",
+      "range": {
+        "startLine": 317,
+        "startChar": 11,
+        "endLine": 317,
+        "endChar": 39
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6cb94d3_4fb96f21",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T01:15:05Z",
+      "side": 1,
+      "message": "Seems like a better long term approach would be to do what the TODO says and key it off WGSL. \nEventually, there will be no \"HLSL source\" in the pipeline; it will just be WGSL -\u003e DXIL. What\u0027s in between is an implementation detail.",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 323,
+        "endChar": 71
+      },
       "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
