@@ -86,11 +86,17 @@ namespace dawn_native {
             // Minimum buffer binding size excluded because we take the maximum seen across stages.
             // Visibility is excluded because we take the OR across stages.
             bool compatible =
-                modifiedEntry->binding == mergedEntry.binding &&                    //
-                modifiedEntry->type == mergedEntry.type &&                          //
-                modifiedEntry->hasDynamicOffset == mergedEntry.hasDynamicOffset &&  //
-                modifiedEntry->viewDimension == mergedEntry.viewDimension &&        //
-                modifiedEntry->textureComponentType == mergedEntry.textureComponentType;
+                modifiedEntry->binding == mergedEntry.binding &&  //
+                modifiedEntry->buffer.type == mergedEntry.buffer.type &&
+                modifiedEntry->buffer.hasDynamicOffset == mergedEntry.buffer.hasDynamicOffset &&
+                modifiedEntry->sampler.type == mergedEntry.sampler.type &&
+                modifiedEntry->texture.sampleType == mergedEntry.texture.sampleType &&
+                modifiedEntry->texture.viewDimension == mergedEntry.texture.viewDimension &&
+                modifiedEntry->texture.multisampled == mergedEntry.texture.multisampled &&
+                modifiedEntry->storageTexture.access == mergedEntry.storageTexture.access &&
+                modifiedEntry->storageTexture.format == mergedEntry.storageTexture.format &&
+                modifiedEntry->storageTexture.viewDimension ==
+                    mergedEntry.storageTexture.viewDimension;
 
             // Check if any properties are incompatible with existing entry
             // If compatible, we will merge some properties
@@ -101,8 +107,8 @@ namespace dawn_native {
             }
 
             // Use the max |minBufferBindingSize| we find.
-            modifiedEntry->minBufferBindingSize =
-                std::max(modifiedEntry->minBufferBindingSize, mergedEntry.minBufferBindingSize);
+            modifiedEntry->buffer.minBindingSize =
+                std::max(modifiedEntry->buffer.minBindingSize, mergedEntry.buffer.minBindingSize);
 
             // Use the OR of all the stages at which we find this binding.
             modifiedEntry->visibility |= mergedEntry.visibility;
@@ -114,12 +120,20 @@ namespace dawn_native {
         auto ConvertMetadataToEntry =
             [](const EntryPointMetadata::ShaderBindingInfo& shaderBinding) -> BindGroupLayoutEntry {
             BindGroupLayoutEntry entry = {};
-            entry.type = shaderBinding.type;
-            entry.hasDynamicOffset = false;
-            entry.viewDimension = shaderBinding.viewDimension;
-            entry.textureComponentType = shaderBinding.textureComponentType;
-            entry.storageTextureFormat = shaderBinding.storageTextureFormat;
-            entry.minBufferBindingSize = shaderBinding.minBufferBindingSize;
+            switch (shaderBinding.bindingType) {
+                case BindingInfoType::Buffer:
+                    entry.buffer = shaderBinding.buffer;
+                    break;
+                case BindingInfoType::Sampler:
+                    entry.sampler = shaderBinding.sampler;
+                    break;
+                case BindingInfoType::Texture:
+                    entry.texture = shaderBinding.texture;
+                    break;
+                case BindingInfoType::StorageTexture:
+                    entry.storageTexture = shaderBinding.storageTexture;
+                    break;
+            }
             return entry;
         };
 

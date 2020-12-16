@@ -101,8 +101,9 @@ namespace dawn_native {
 
           private:
             // Disallow access to unused members.
-            using BindingInfo::hasDynamicOffset;
-            using BindingInfo::visibility;
+            // TODO: How to do this with new structure?
+            /*using BindingInfo::hasDynamicOffset;
+            using BindingInfo::visibility;*/
         };
 
         // bindings[G][B] is the reflection data for the binding defined with

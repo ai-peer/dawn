@@ -155,32 +155,23 @@ namespace dawn_native { namespace vulkan {
                 for (BindGroupIndex index : IterateBitSet(mBindGroupLayoutsMask)) {
                     BindGroupLayoutBase* layout = mBindGroups[index]->GetLayout();
                     for (BindingIndex binding{0}; binding < layout->GetBindingCount(); ++binding) {
-                        switch (layout->GetBindingInfo(binding).type) {
-                            case wgpu::BindingType::StorageBuffer:
-                            case wgpu::BindingType::ReadonlyStorageBuffer: {
-                                VkBufferMemoryBarrier bufferBarrier;
-                                if (ToBackend(mBindGroups[index]
-                                                  ->GetBindingAsBufferBinding(binding)
-                                                  .buffer)
-                                        ->TransitionUsageAndGetResourceBarrier(
-                                            wgpu::BufferUsage::Storage, &bufferBarrier, &srcStages,
-                                            &dstStages)) {
-                                    bufferBarriers.push_back(bufferBarrier);
-                                }
-                                break;
-                            }
+                        const BindingInfo& bindingInfo = layout->GetBindingInfo(binding);
 
-                            case wgpu::BindingType::ReadonlyStorageTexture:
-                            case wgpu::BindingType::WriteonlyStorageTexture: {
-                                TextureViewBase* view =
-                                    mBindGroups[index]->GetBindingAsTextureView(binding);
-                                ToBackend(view->GetTexture())
-                                    ->TransitionUsageAndGetResourceBarrier(
-                                        wgpu::TextureUsage::Storage, view->GetSubresourceRange(),
-                                        &imageBarriers, &srcStages, &dstStages);
-                                break;
-                            }
-                            case wgpu::BindingType::UniformBuffer: {
+                        switch (bindingInfo.bindingType) {
+                            case BindingInfoType::Buffer: {
+                                wgpu::BufferUsage usage;
+                                switch (bindingInfo.buffer.type) {
+                                    case wgpu::BufferBindingType::Uniform:
+                                        usage = wgpu::BufferUsage::Uniform;
+                                        break;
+                                    case wgpu::BufferBindingType::Storage:
+                                    case wgpu::BufferBindingType::ReadOnlyStorage:
+                                        usage = wgpu::BufferUsage::Storage;
+                                        break;
+                                    case wgpu::BufferBindingType::Undefined:
+                                        UNREACHABLE();
+                                }
+
                                 VkBufferMemoryBarrier bufferBarrier;
                                 if (ToBackend(mBindGroups[index]
                                                   ->GetBindingAsBufferBinding(binding)
@@ -193,8 +184,17 @@ namespace dawn_native { namespace vulkan {
                                 break;
                             }
 
-                            case wgpu::BindingType::SampledTexture:
-                            case wgpu::BindingType::MultisampledTexture: {
+                            case BindingInfoType::StorageTexture: {
+                                TextureViewBase* view =
+                                    mBindGroups[index]->GetBindingAsTextureView(binding);
+                                ToBackend(view->GetTexture())
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::TextureUsage::Storage, view->GetSubresourceRange(),
+                                        &imageBarriers, &srcStages, &dstStages);
+                                break;
+                            }
+
+                            case BindingInfoType::Texture: {
                                 TextureViewBase* view =
                                     mBindGroups[index]->GetBindingAsTextureView(binding);
                                 ToBackend(view->GetTexture())
@@ -204,13 +204,9 @@ namespace dawn_native { namespace vulkan {
                                 break;
                             }
 
-                            case wgpu::BindingType::Sampler:
-                            case wgpu::BindingType::ComparisonSampler:
+                            case BindingInfoType::Sampler:
                                 // Don't require barriers.
                                 break;
-
-                            case wgpu::BindingType::Undefined:
-                                UNREACHABLE();
                         }
                     }
                 }
