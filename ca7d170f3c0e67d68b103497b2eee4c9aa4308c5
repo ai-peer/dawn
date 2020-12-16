@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e96dfc4_b38c7929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T06:28:50Z",
+      "side": 1,
+      "message": "good news is this works; bad news is this CL didn\u0027t compile anything or actually run tests. I needed to change something that wasn\u0027t a template in the next patch to get the analyze step on the bots to actually detect changes :o ",
+      "revId": "ca7d170f3c0e67d68b103497b2eee4c9aa4308c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
