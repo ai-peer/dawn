@@ -140,6 +140,24 @@
       "parentUuid": "76db4f4f_efdcd18d",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc0fdbc_ff7babf5",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-16T03:51:47Z",
+      "side": 1,
+      "message": "Currently, if use Windows SDK version to determine fp16 extension, fp16 cannot work in the situation that copy DXC DLLs to current working directory. So I think it is better to query dxc version.",
+      "parentUuid": "3d5fc07e_33cf0112",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
