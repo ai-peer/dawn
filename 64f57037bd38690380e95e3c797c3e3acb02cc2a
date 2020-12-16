@@ -51,6 +51,24 @@
       "parentUuid": "07734b7c_d4c18c2c",
       "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "add82c6e_26a556bd",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T14:11:16Z",
+      "side": 1,
+      "message": "How would the pointer to the WireServer help? We would still need to go through a map from WireServer to WebGPUCommandDecoderImpl or something like that. The \"fake\" WGPUInstance and WGPUAdapter would work well and isn\u0027t that much work, there\u0027s only some casts to do in some places and the we could hide this into a small helper library that exposes base classes for the fake adapter and the fake device and that you initialize with a factory method for fake instances.",
+      "parentUuid": "0babbd09_d4906d5a",
+      "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
