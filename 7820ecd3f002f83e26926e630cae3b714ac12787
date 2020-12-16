@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f58c13e_9617883e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-16T01:25:36Z",
+      "side": 1,
+      "message": "Yes, it\u0027s holding the pipeline cache related work.",
+      "parentUuid": "570de188_323ecf1d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1c03a3da_78892907",
@@ -37,6 +61,23 @@
       "writtenOn": "2020-12-16T00:24:08Z",
       "side": 1,
       "message": "Rafael, is my d3d version check correct?",
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95ee20e_23d6288a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-16T01:25:36Z",
+      "side": 1,
+      "message": "Thanks!",
       "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +118,30 @@
       "writtenOn": "2020-12-16T01:15:05Z",
       "side": 1,
       "message": "Seems like a better long term approach would be to do what the TODO says and key it off WGSL. \nEventually, there will be no \"HLSL source\" in the pipeline; it will just be WGSL -\u003e DXIL. What\u0027s in between is an implementation detail.",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 323,
+        "endChar": 71
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61030dd5_df400387",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-12-16T01:25:36Z",
+      "side": 1,
+      "message": "If HLSL goes away, we can still key from DXIL.\n\nThe TODO is there because keying from WGSL is non-trivial but I wanted to explore doing so later.",
+      "parentUuid": "b6cb94d3_4fb96f21",
       "range": {
         "startLine": 322,
         "startChar": 1,
