@@ -114,12 +114,20 @@ namespace dawn_native {
         auto ConvertMetadataToEntry =
             [](const EntryPointMetadata::ShaderBindingInfo& shaderBinding) -> BindGroupLayoutEntry {
             BindGroupLayoutEntry entry = {};
-            entry.type = shaderBinding.type;
-            entry.hasDynamicOffset = false;
-            entry.viewDimension = shaderBinding.viewDimension;
-            entry.textureComponentType = shaderBinding.textureComponentType;
-            entry.storageTextureFormat = shaderBinding.storageTextureFormat;
-            entry.minBufferBindingSize = shaderBinding.minBufferBindingSize;
+            switch (shaderBinding.bindingType) {
+                case BindingInfoType::Buffer:
+                    entry.buffer = shaderBinding.buffer;
+                    break;
+                case BindingInfoType::Sampler:
+                    entry.sampler = shaderBinding.sampler;
+                    break;
+                case BindingInfoType::Texture:
+                    entry.texture = shaderBinding.texture;
+                    break;
+                case BindingInfoType::StorageTexture:
+                    entry.storageTexture = shaderBinding.storageTexture;
+                    break;
+            }
             return entry;
         };
 
