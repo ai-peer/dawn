@@ -69,6 +69,24 @@
       "parentUuid": "60908cb2_07e8af99",
       "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0392c7f3_baafb898",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T14:07:05Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t realize the desire was to also fix this for native users running into the issue that the device needs to be kept alive. I\u0027m worried that we\u0027ll have more and more special cases to break up cycles, for example the pipeline cache pipelines, the objects in the contentless caches, internal pipelines, the empty BGL, (eventually) the zero buffer, etc. How much work do you think the proper solution in dawn_native would be (linked list, or \"handle allocator\" style)?",
+      "parentUuid": "0ad6838e_6450f0f4",
+      "revId": "7cc527e0d370c4d67b0205aef11f7acaa8bef501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
