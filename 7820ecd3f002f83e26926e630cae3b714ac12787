@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4163657b_87913d70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T22:49:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2f58c13e_9617883e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1c03a3da_78892907",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -147,6 +171,53 @@
         "startChar": 1,
         "endLine": 323,
         "endChar": 71
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21148559_daf9a0de",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T22:49:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "61030dd5_df400387",
+      "range": {
+        "startLine": 322,
+        "startChar": 1,
+        "endLine": 323,
+        "endChar": 71
+      },
+      "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a81ab2a_63b24520",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-12-16T22:49:45Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/35260 needs the HLSL compiler version in the form of a number. I suggest having a version of this function that returns the DLL version in the form of a number (major and minor) and add a separate helper that converts the number to a string.",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 399,
+        "endChar": 69
       },
       "revId": "7820ecd3f002f83e26926e630cae3b714ac12787",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
