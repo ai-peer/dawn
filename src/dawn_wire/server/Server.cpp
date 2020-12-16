@@ -34,8 +34,22 @@ namespace dawn_wire { namespace server {
         auto* deviceData = DeviceObjects().Allocate(1);
         deviceData->handle = device;
 
-        mProcs.deviceSetUncapturedErrorCallback(device, ForwardUncapturedError, this);
-        mProcs.deviceSetDeviceLostCallback(device, ForwardDeviceLost, this);
+        auto userdata = MakeUserdata<CallbackUserdata>();
+        mProcs.deviceSetUncapturedErrorCallback(
+            device,
+            [](WGPUErrorType type, const char* message, void* userdata) {
+                // Note: the userdata is acquired and freed in the device lost callback which always
+                // happens once. Uncaptured error should never happen after device lost.
+                CallbackUserdata* data = static_cast<CallbackUserdata*>(userdata);
+                if (data->serverIsAlive.expired()) {
+                    return;
+                }
+                data->server->OnUncapturedError(type, message);
+            },
+            userdata.get());
+        mProcs.deviceSetDeviceLostCallback(
+            device, ForwardToServer<decltype(&Server::OnDeviceLost)>::Func<&Server::OnDeviceLost>(),
+            userdata.release());
     }
 
     Server::~Server() {

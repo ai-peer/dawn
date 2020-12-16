@@ -605,6 +605,10 @@ DawnTestBase::~DawnTestBase() {
     // We need to destroy child objects before the Device
     mReadbackSlots.clear();
     queue = wgpu::Queue();
+
+    // Device lost happens on destruction. Clear the callback which would normally
+    // fail the test.
+    device.SetDeviceLostCallback([](const char* message, void* userdata) {}, this);
     device = wgpu::Device();
 
     mWireClient = nullptr;
