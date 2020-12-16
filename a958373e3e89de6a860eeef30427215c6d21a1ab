@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8d92e58_b2a9df22",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-16T11:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e2e894c_6aaa5c63",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d13b1225_af418f8c",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-15T21:07:06Z",
       "side": 1,
       "message": "I think this is the same as the problem in https://bugs.chromium.org/p/tint/issues/detail?id\u003d413",
+      "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4624ad7a_957181f3",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2020-12-16T11:55:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d13b1225_af418f8c",
       "revId": "a958373e3e89de6a860eeef30427215c6d21a1ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
