@@ -107,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7123f138_8a654986",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T22:03:37Z",
+      "side": 1,
+      "message": "I tried hard to make this work, but sadly I don\u0027t think it\u0027s possible until C++17. That\u0027s why I\u0027m hesitant overall on this patch because it\u0027s quite ugly.\n\nThe specialization needs to be something like:\n\ntemplate \u003ctypename R, typename...Args, R(Server::*Func)(Args...)\u003e\nstruct MakeForwardToServerImpl\u003cFunc\u003e {\n};\n\nbut we need C++17 to have the base template be:\ntemplate \u003cauto F\u003e\nstruct MakeForwardToServerImpl;\n\nusing \"typename\" doesn\u0027t work because the pointer-to-member-function is a value, not a type.",
+      "parentUuid": "1a332213_25d9fd42",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 99
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec40b241_99a3603e",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 2
