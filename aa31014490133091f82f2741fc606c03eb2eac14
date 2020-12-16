@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84f08141_7305093a",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:41:08Z",
+      "side": 1,
+      "message": "Since GetWindowsSDKPathAndVersion uses it as an out parameter, doing it inside this function is marginally better so that the output value is always \"valid\" after the function call.",
+      "parentUuid": "71d45f16_1a5d1525",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7d53fea_a7e26639",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 6
@@ -172,6 +196,30 @@
       "writtenOn": "2020-12-15T18:46:29Z",
       "side": 1,
       "message": "Please prefix all member variables with the letter \u0027m\u0027.",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 38
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6de8fc02_20be3ab5",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbe66b3a_ad699d8c",
       "range": {
         "startLine": 106,
         "startChar": 8,
