@@ -16,6 +16,23 @@
       "message": "ping (sorry, didn\u0027t attach a \"PTAL\" comment before), hopefully this still builds",
       "revId": "6313cdd0bf8850b43b10f57cdccf744b07a55843",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a637e210_6b2df3d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T07:52:09Z",
+      "side": 1,
+      "message": "LGTM! Can you add a row in the \"API Changes\" spreadsheet if there isn\u0027t one already?",
+      "revId": "6313cdd0bf8850b43b10f57cdccf744b07a55843",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
