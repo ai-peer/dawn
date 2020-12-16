@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce28d61_6a8d90bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-16T23:30:42Z",
+      "side": 1,
+      "message": "I\u0027m happy to do those as a separate CL to (somewhat futilely) try to keep the size of these reviews down.",
+      "parentUuid": "bdb88e95_21b688bf",
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeeec318_b69462db",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aba7081_5e23f547",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-16T23:30:42Z",
+      "side": 1,
+      "message": "No, the fact that this line moved at all was an accident. This test isn\u0027t going to be updated yet because it requires some Dawn internal changes first.",
+      "parentUuid": "aeeec318_b69462db",
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "996f7a75_26501468",
@@ -82,6 +118,30 @@
       "writtenOn": "2020-12-15T22:54:15Z",
       "side": 1,
       "message": "this isn\u0027t default?",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 68
+      },
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744ce2b1_c726f18e",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-16T23:30:42Z",
+      "side": 1,
+      "message": "You\u0027re right, thanks! This was leftover from a change that I started and then deferred because some of the Dawn internals will need to change first.",
+      "parentUuid": "996f7a75_26501468",
       "range": {
         "startLine": 230,
         "startChar": 4,
