@@ -69,6 +69,24 @@
       "parentUuid": "0babbd09_d4906d5a",
       "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b565d93f_f6c38e84",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-16T22:14:19Z",
+      "side": 1,
+      "message": "I don\u0027t love the \"fake\" instance/adapter so much since there\u0027s just more casting places to mess up or accidentally use the \"fake\" pointer for something. We talked about this offline just putting it here so I remember:\n\npointer to the wire server helps because the embedder can extend WireServer and get a pointer to itself. That way, when instanceRequestAdapter happens insider WireServer::HandleCommands, you know which server it\u0027s originating from.",
+      "parentUuid": "add82c6e_26a556bd",
+      "revId": "64f57037bd38690380e95e3c797c3e3acb02cc2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
