@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdb88e95_21b688bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:56:11Z",
+      "side": 1,
+      "message": "LGTM too, that\u0027s a massive update!\n\nNote that the files in examples/ also need to be updated (although they could be changed to use GetBindGroupLayout)",
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeeec318_b69462db",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:56:11Z",
+      "side": 1,
+      "message": "did you mean to change this to `binding.buffer.type \u003d wgpu::BufferBindingType::Uniform`?",
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "996f7a75_26501468",
@@ -54,6 +88,23 @@
         "endLine": 230,
         "endChar": 68
       },
+      "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd71044_31f8330c",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:56:11Z",
+      "side": 1,
+      "message": "This type of simplification is quite nice!",
       "revId": "eee74a5207b2dc982f3a37370809a852e738cd7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
