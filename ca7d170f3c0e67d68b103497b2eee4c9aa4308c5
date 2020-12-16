@@ -16,6 +16,23 @@
       "message": "good news is this works; bad news is this CL didn\u0027t compile anything or actually run tests. I needed to change something that wasn\u0027t a template in the next patch to get the analyze step on the bots to actually detect changes :o ",
       "revId": "ca7d170f3c0e67d68b103497b2eee4c9aa4308c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7223c1fc_895aaf43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-16T09:36:21Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ca7d170f3c0e67d68b103497b2eee4c9aa4308c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
