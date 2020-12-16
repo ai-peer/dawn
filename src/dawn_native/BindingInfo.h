@@ -48,15 +48,23 @@ namespace dawn_native {
     // TODO(enga): Figure out a good number for this.
     static constexpr uint32_t kMaxOptimalBindingsPerGroup = 32;
 
+    enum class BindingInfoType {
+        Buffer,
+        Sampler,
+        Texture,
+        StorageTexture,
+    };
+
     struct BindingInfo {
         BindingNumber binding;
         wgpu::ShaderStage visibility;
-        wgpu::BindingType type;
-        wgpu::TextureComponentType textureComponentType = wgpu::TextureComponentType::Float;
-        wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::Undefined;
-        wgpu::TextureFormat storageTextureFormat = wgpu::TextureFormat::Undefined;
-        bool hasDynamicOffset = false;
-        uint64_t minBufferBindingSize = 0;
+
+        BindingInfoType bindingType;
+
+        BufferBindingLayout buffer;
+        SamplerBindingLayout sampler;
+        TextureBindingLayout texture;
+        StorageTextureBindingLayout storageTexture;
     };
 
     struct PerStageBindingCounts {
