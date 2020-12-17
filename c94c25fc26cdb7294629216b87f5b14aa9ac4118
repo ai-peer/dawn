@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4e3f48_4086c6a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:29:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c94c25fc26cdb7294629216b87f5b14aa9ac4118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b64f9a1_8bd69fed",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:29:24Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "c94c25fc26cdb7294629216b87f5b14aa9ac4118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de160bb6_9e0d9c2f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:29:24Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "c94c25fc26cdb7294629216b87f5b14aa9ac4118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
