@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9004504c_f759dcf4",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "nit: read this from |bindingInfo|",
+      "range": {
+        "startLine": 233,
+        "startChar": 52,
+        "endLine": 233,
+        "endChar": 84
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294385ad_9b1c5af2",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "not for this CL, but could these be a union since we have |bindingType| ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 51
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3b4210_ac85196b",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "nit: only check properties based on the type of |binding| ?",
+      "range": {
+        "startLine": 89,
+        "startChar": 15,
+        "endLine": 99,
+        "endChar": 61
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5633295d_81f2f996",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "unit: put it next to StorageTexture",
+      "range": {
+        "startLine": 53,
+        "startChar": 15,
+        "endLine": 54,
+        "endChar": 64
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067d577e_b17bb85a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "may make more sense to check |bindingType| before .buffer.hasDynamicOffset - especially if bindingInfo contains a union in the future",
+      "range": {
+        "startLine": 122,
+        "startChar": 11,
+        "endLine": 126,
+        "endChar": 73
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d109a87_73bde7c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T04:43:04Z",
+      "side": 1,
+      "message": "Storage?",
+      "range": {
+        "startLine": 263,
+        "startChar": 68,
+        "endLine": 263,
+        "endChar": 75
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
