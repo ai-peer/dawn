@@ -51,4 +51,70 @@ namespace {
         }
     }
 
+    TEST_F(SamplerValidationTest, InvalidFilterAnisotropic) {
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            device.CreateSampler(&samplerDesc);
+        }
+        {
+            // maxAnisotropy should be clamped to [1, N], N is implementation dependent
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 0;
+            device.CreateSampler(&samplerDesc);
+        }
+        {
+            // when maxAnisotropy > 1, min, mag, mipmap filter should be linear
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.minFilter = wgpu::FilterMode::Linear;
+            samplerDesc.magFilter = wgpu::FilterMode::Linear;
+            samplerDesc.mipmapFilter = wgpu::FilterMode::Linear;
+            device.CreateSampler(&samplerDesc);
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.minFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.magFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.mipmapFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.minFilter = wgpu::FilterMode::Linear;
+            samplerDesc.magFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.minFilter = wgpu::FilterMode::Linear;
+            samplerDesc.mipmapFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = {};
+            samplerDesc.maxAnisotropy = 2;
+            samplerDesc.magFilter = wgpu::FilterMode::Linear;
+            samplerDesc.mipmapFilter = wgpu::FilterMode::Linear;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+    }
+
 }  // anonymous namespace
