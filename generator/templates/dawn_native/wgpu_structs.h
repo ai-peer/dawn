@@ -64,6 +64,10 @@ namespace dawn_native {
 
     {% endfor %}
 
+    {% for type in by_category["structure"] if type.chained %}
+        bool GetExtensionStruct(const ChainedStruct* in, const {{as_cppType(type.name)}}** out);
+    {% endfor %}
+
 } // namespace dawn_native
 
 #endif  // DAWNNATIVE_WGPU_STRUCTS_H_
