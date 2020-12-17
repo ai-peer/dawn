@@ -165,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "863cb23a_ce1bbd22",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f6961a8_7f6538ee",
+      "range": {
+        "startLine": 92,
+        "startChar": 24,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "061034b1_d00b8bc7",
@@ -178,6 +202,24 @@
       "writtenOn": "2020-12-09T05:14:46Z",
       "side": 1,
       "message": "[1]",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90576000_a38b01ee",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "061034b1_d00b8bc7",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -282,6 +324,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6e212b_0a54d60d",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done. PR to follow",
+      "parentUuid": "7f47a462_457a137b",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "038b78c0_69a42f96",
@@ -335,6 +395,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd47aee7_0a4a4d0d",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1088f9_c31d7dd8",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76f46ee4_af87f867",
@@ -366,6 +444,24 @@
       "side": 1,
       "message": "[2]",
       "parentUuid": "76f46ee4_af87f867",
+      "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d22bbad_5e4241a2",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f74a0f_b21968dc",
       "revId": "02415547bd77a5851e107fe798a4bb967c212d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d2f50f_286bddbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Address most reviews (some still have discussions)\nAdds an end2end test, drawing a slanted plane with a texture of which each mipmap has a different color, with different maxAnisotropy values.\nYou can get an idea of what it does at https://jsfiddle.net/t64kpu81/85/\n",
+      "revId": "b1f7e5b552a28ffd2e73e00bc38079601dbe6b99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

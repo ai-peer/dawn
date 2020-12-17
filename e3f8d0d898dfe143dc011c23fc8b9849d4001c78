@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c92f2e0_569d09f4",
+        "filename": "src/dawn_native/Extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Hmm... I thought adding an enum here but don\u0027t make a pr for webgpu extensions and pass nullptr to is enough. So do you indicate using a private variable to mark if it\u0027s on?",
+      "parentUuid": "946acfc2_765c422e",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "599006b4_f6dd4208",
         "filename": "src/dawn_native/Sampler.cpp",
         "patchSetId": 8
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdfc589a_8376019d",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "I think this clamp is used to clamp 0 to 1 for generating the equivalent hash, and we can do backend-dependent clamp in SamplerMTL/Vk?",
+      "parentUuid": "599006b4_f6dd4208",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59b3f6f7_5b13f840",
         "filename": "src/dawn_native/Sampler.h",
         "patchSetId": 8
@@ -66,6 +102,24 @@
       "writtenOn": "2020-12-10T15:16:10Z",
       "side": 1,
       "message": "nit: this isn\u0027t used anywhere outside of Sampler.cpp so instead the function can completely live inside Sampler.cpp in an anonymous namespace (that we usually put at the top of the dawn_native namespace)",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15bdcb0e_c4a158d5",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59b3f6f7_5b13f840",
       "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fbccd56_c071d7cd",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4776f694_fa49d768",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f62dec5_ccf531ca",
@@ -136,6 +208,24 @@
       "writtenOn": "2020-12-10T15:16:10Z",
       "side": 1,
       "message": "[1]",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df03944_4449ea0e",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f62dec5_ccf531ca",
       "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
