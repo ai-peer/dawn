@@ -176,6 +176,24 @@
       "parentUuid": "ccc0fdbc_ff7babf5",
       "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f89f3cf_513bf151",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-17T10:02:57Z",
+      "side": 1,
+      "message": "I agree that we should use the dxc version to gate fp16 extension.",
+      "parentUuid": "c3d73163_5c8397de",
+      "revId": "6c62f0f2dd6faf81ff3db92d52c1b5acf344b9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d32cb1e_9e648647",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-17T10:02:57Z",
+      "side": 1,
+      "message": "Thank you for explain these details.",
+      "parentUuid": "a469b05f_524ecf73",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "aa31014490133091f82f2741fc606c03eb2eac14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7d53fea_a7e26639",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 6
