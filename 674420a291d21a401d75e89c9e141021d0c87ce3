@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0eff423_1bd28def",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e35b34bd_f5a175b0",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f00552e_4df1c354",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d1094bb_242013d9",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "@Austin, I\u0027m sure why we need static_asserts for the offsets. The input offset is set by ourselves, the output offset are passed by ResolveQuerySet and validated, they also can be different.",
+      "parentUuid": "9f00552e_4df1c354",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2279dbf_c2cad673",
         "filename": "src/dawn_native/QueryHelper.cpp",
         "patchSetId": 18
@@ -82,6 +118,30 @@
       "writtenOn": "2020-12-15T17:09:14Z",
       "side": 1,
       "message": "nit: sizeofTimestamp, this is closer to the semantic of what we\u0027re doing to address an array.",
+      "range": {
+        "startLine": 56,
+        "startChar": 18,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b755ce7_f96c342e",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2279dbf_c2cad673",
       "range": {
         "startLine": 56,
         "startChar": 18,
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30121ca_b4314e3d",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1c88581_ce93d034",
+      "range": {
+        "startLine": 60,
+        "startChar": 69,
+        "endLine": 60,
+        "endChar": 80
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d2add1d_6d347ba2",
@@ -128,6 +212,30 @@
       "writtenOn": "2020-12-15T21:06:28Z",
       "side": 1,
       "message": "unit: \" : \"",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d714dd8_89dedc1a",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d2add1d_6d347ba2",
       "range": {
         "startLine": 65,
         "startChar": 27,
@@ -169,6 +277,24 @@
       "side": 1,
       "message": "This return just skip the invalid or unused timestamp, and don\u0027t modify the output value (in resolve buffer provided by user) at current outputIndex, maybe there is a existing value.",
       "parentUuid": "8f1e7983_2aa0f48c",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc70617_f72790d1",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d928a20_560e18c7",
       "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -244,6 +370,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a5a9918_2881cd19",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Discussed this reset logic with Corentin in bi-weekly meeting, and decided to remove it to make the shader simpler, and note users to take care of the timestamp results which may be reset.",
+      "parentUuid": "d214c989_f838589f",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 0
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa191961_9da543f5",
@@ -257,6 +407,30 @@
       "writtenOn": "2020-12-15T21:06:28Z",
       "side": 1,
       "message": "we should have a temp variable first and write out to output.t[outputIndex].y just once at the end. The code as it is now will probably actually write into the storage buffer twice which is more memory bandwidth than necessary.",
+      "range": {
+        "startLine": 115,
+        "startChar": 20,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0cfc3a0_6e5a3fa9",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Add back the temp variable.",
+      "parentUuid": "fa191961_9da543f5",
       "range": {
         "startLine": 115,
         "startChar": 20,
@@ -290,6 +464,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f6d648f_2409b126",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0723c32_6e6c3dcb",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 42
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f11868d0_56f389ad",
@@ -307,6 +505,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d0cf4b_f37a24ab",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f11868d0_56f389ad",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735ef1bf_334e8ef3",
@@ -320,6 +536,30 @@
       "writtenOn": "2020-12-15T21:06:28Z",
       "side": 1,
       "message": "nit: would prefer spelling this out as \"TimestampParams\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea1b7d2_ebbd2af8",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735ef1bf_334e8ef3",
       "range": {
         "startLine": 25,
         "startChar": 11,
@@ -353,6 +593,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9937be2a_23f305b2",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "The timestamp is ticks on D3D12 and GPU counters on Vulkan and Metal, so update to  EncodeConvertTimestampsToNanoseconds.",
+      "parentUuid": "28a92f21_496e5926",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43ac4ce4_33b00c80",
@@ -370,6 +634,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82cdf220_4de88780",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ac4ce4_33b00c80",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe308bb4_32e8b9e0",
@@ -383,6 +665,30 @@
       "writtenOn": "2020-12-15T21:06:28Z",
       "side": 1,
       "message": "nit: a bit clearer to just use kTimestampCount",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8dcc491_315732ef",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-17T18:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe308bb4_32e8b9e0",
       "range": {
         "startLine": 86,
         "startChar": 25,
