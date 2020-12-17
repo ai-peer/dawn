@@ -243,134 +243,130 @@ namespace dawn_native { namespace opengl {
                     const BindingInfo& bindingInfo =
                         group->GetLayout()->GetBindingInfo(bindingIndex);
 
-                    switch (bindingInfo.type) {
-                        case wgpu::BindingType::UniformBuffer: {
+                    switch (bindingInfo.bindingType) {
+                        case BindingInfoType::Buffer: {
                             BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                             GLuint buffer = ToBackend(binding.buffer)->GetHandle();
-                            GLuint uboIndex = indices[bindingIndex];
+                            GLuint index = indices[bindingIndex];
                             GLuint offset = binding.offset;
 
-                            if (bindingInfo.hasDynamicOffset) {
+                            if (bindingInfo.buffer.hasDynamicOffset) {
                                 offset += dynamicOffsets[currentDynamicOffsetIndex];
                                 ++currentDynamicOffsetIndex;
                             }
 
-                            gl.BindBufferRange(GL_UNIFORM_BUFFER, uboIndex, buffer, offset,
-                                               binding.size);
-                            break;
-                        }
-
-                        case wgpu::BindingType::StorageBuffer:
-                        case wgpu::BindingType::ReadonlyStorageBuffer: {
-                            BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
-                            GLuint buffer = ToBackend(binding.buffer)->GetHandle();
-                            GLuint ssboIndex = indices[bindingIndex];
-                            GLuint offset = binding.offset;
-
-                            if (bindingInfo.hasDynamicOffset) {
-                                offset += dynamicOffsets[currentDynamicOffsetIndex];
-                                ++currentDynamicOffsetIndex;
-                            }
-
-                            gl.BindBufferRange(GL_SHADER_STORAGE_BUFFER, ssboIndex, buffer, offset,
-                                               binding.size);
-                            break;
-                        }
-
-                        case wgpu::BindingType::Sampler:
-                        case wgpu::BindingType::ComparisonSampler: {
-                            Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
-                            GLuint samplerIndex = indices[bindingIndex];
-
-                            for (PipelineGL::SamplerUnit unit :
-                                 mPipeline->GetTextureUnitsForSampler(samplerIndex)) {
-                                // Only use filtering for certain texture units, because int and
-                                // uint texture are only complete without filtering
-                                if (unit.shouldUseFiltering) {
-                                    gl.BindSampler(unit.unit, sampler->GetFilteringHandle());
-                                } else {
-                                    gl.BindSampler(unit.unit, sampler->GetNonFilteringHandle());
-                                }
-                            }
-                            break;
-                        }
-
-                        case wgpu::BindingType::SampledTexture:
-                        case wgpu::BindingType::MultisampledTexture: {
-                            TextureView* view =
-                                ToBackend(group->GetBindingAsTextureView(bindingIndex));
-                            GLuint handle = view->GetHandle();
-                            GLenum target = view->GetGLTarget();
-                            GLuint viewIndex = indices[bindingIndex];
-
-                            for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
-                                gl.ActiveTexture(GL_TEXTURE0 + unit);
-                                gl.BindTexture(target, handle);
-                                if (ToBackend(view->GetTexture())->GetGLFormat().format ==
-                                    GL_DEPTH_STENCIL) {
-                                    Aspect aspect = view->GetAspects();
-                                    ASSERT(HasOneBit(aspect));
-                                    switch (aspect) {
-                                        case Aspect::None:
-                                        case Aspect::Color:
+                            GLenum target;
+                            switch (bindingInfo.buffer.type) {
+                                case wgpu::BufferBindingType::Uniform: {
+                                    target = GL_UNIFORM_BUFFER;
+                                    break;
+                                    case wgpu::BufferBindingType::Storage:
+                                    case wgpu::BufferBindingType::ReadOnlyStorage: {
+                                        target = GL_SHADER_STORAGE_BUFFER;
+                                        break;
+                                        case wgpu::BufferBindingType::Undefined:
                                             UNREACHABLE();
-                                        case Aspect::Depth:
-                                            gl.TexParameteri(target, GL_DEPTH_STENCIL_TEXTURE_MODE,
-                                                             GL_DEPTH_COMPONENT);
-                                            break;
-                                        case Aspect::Stencil:
-                                            gl.TexParameteri(target, GL_DEPTH_STENCIL_TEXTURE_MODE,
-                                                             GL_STENCIL_INDEX);
-                                            break;
                                     }
+
+                                        gl.BindBufferRange(target, index, buffer, offset,
+                                                           binding.size);
+                                        break;
+                                }
+
+                                case BindingInfoType::Sampler: {
+                                    Sampler* sampler =
+                                        ToBackend(group->GetBindingAsSampler(bindingIndex));
+                                    GLuint samplerIndex = indices[bindingIndex];
+
+                                    for (PipelineGL::SamplerUnit unit :
+                                         mPipeline->GetTextureUnitsForSampler(samplerIndex)) {
+                                        // Only use filtering for certain texture units, because int
+                                        // and uint texture are only complete without filtering
+                                        if (unit.shouldUseFiltering) {
+                                            gl.BindSampler(unit.unit,
+                                                           sampler->GetFilteringHandle());
+                                        } else {
+                                            gl.BindSampler(unit.unit,
+                                                           sampler->GetNonFilteringHandle());
+                                        }
+                                    }
+                                    break;
+                                }
+
+                                case BindingInfoType::Texture: {
+                                    TextureView* view =
+                                        ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                                    GLuint handle = view->GetHandle();
+                                    GLenum target = view->GetGLTarget();
+                                    GLuint viewIndex = indices[bindingIndex];
+
+                                    for (auto unit :
+                                         mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
+                                        gl.ActiveTexture(GL_TEXTURE0 + unit);
+                                        gl.BindTexture(target, handle);
+                                        if (ToBackend(view->GetTexture())->GetGLFormat().format ==
+                                            GL_DEPTH_STENCIL) {
+                                            Aspect aspect = view->GetAspects();
+                                            ASSERT(HasOneBit(aspect));
+                                            switch (aspect) {
+                                                case Aspect::None:
+                                                case Aspect::Color:
+                                                    UNREACHABLE();
+                                                case Aspect::Depth:
+                                                    gl.TexParameteri(target,
+                                                                     GL_DEPTH_STENCIL_TEXTURE_MODE,
+                                                                     GL_DEPTH_COMPONENT);
+                                                    break;
+                                                case Aspect::Stencil:
+                                                    gl.TexParameteri(target,
+                                                                     GL_DEPTH_STENCIL_TEXTURE_MODE,
+                                                                     GL_STENCIL_INDEX);
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+
+                                case BindingInfoType::StorageTexture: {
+                                    TextureView* view =
+                                        ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                                    Texture* texture = ToBackend(view->GetTexture());
+                                    GLuint handle = texture->GetHandle();
+                                    GLuint imageIndex = indices[bindingIndex];
+
+                                    GLenum access;
+                                    switch (bindingInfo.storageTexture.access) {
+                                        case wgpu::StorageTextureAccess::ReadOnly:
+                                            access = GL_READ_ONLY;
+                                            break;
+                                        case wgpu::StorageTextureAccess::WriteOnly:
+                                            access = GL_WRITE_ONLY;
+                                            break;
+                                        case wgpu::StorageTextureAccess::Undefined:
+                                            UNREACHABLE();
+                                    }
+
+                                    // OpenGL ES only supports either binding a layer or the entire
+                                    // texture in glBindImageTexture().
+                                    GLboolean isLayered;
+                                    if (view->GetLayerCount() == 1) {
+                                        isLayered = GL_FALSE;
+                                    } else if (texture->GetArrayLayers() == view->GetLayerCount()) {
+                                        isLayered = GL_TRUE;
+                                    } else {
+                                        UNREACHABLE();
+                                    }
+
+                                    gl.BindImageTexture(imageIndex, handle, view->GetBaseMipLevel(),
+                                                        isLayered, view->GetBaseArrayLayer(),
+                                                        access,
+                                                        texture->GetGLFormat().internalFormat);
+                                    break;
                                 }
                             }
-                            break;
                         }
-
-                        case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture: {
-                            TextureView* view =
-                                ToBackend(group->GetBindingAsTextureView(bindingIndex));
-                            Texture* texture = ToBackend(view->GetTexture());
-                            GLuint handle = texture->GetHandle();
-                            GLuint imageIndex = indices[bindingIndex];
-
-                            GLenum access;
-                            switch (bindingInfo.type) {
-                                case wgpu::BindingType::ReadonlyStorageTexture:
-                                    access = GL_READ_ONLY;
-                                    break;
-                                case wgpu::BindingType::WriteonlyStorageTexture:
-                                    access = GL_WRITE_ONLY;
-                                    break;
-
-                                default:
-                                    UNREACHABLE();
-                            }
-
-                            // OpenGL ES only supports either binding a layer or the entire texture
-                            // in glBindImageTexture().
-                            GLboolean isLayered;
-                            if (view->GetLayerCount() == 1) {
-                                isLayered = GL_FALSE;
-                            } else if (texture->GetArrayLayers() == view->GetLayerCount()) {
-                                isLayered = GL_TRUE;
-                            } else {
-                                UNREACHABLE();
-                            }
-
-                            gl.BindImageTexture(imageIndex, handle, view->GetBaseMipLevel(),
-                                                isLayered, view->GetBaseArrayLayer(), access,
-                                                texture->GetGLFormat().internalFormat);
-                            break;
-                        }
-
-                        case wgpu::BindingType::Undefined:
-                            UNREACHABLE();
                     }
-                }
-            }
 
             PipelineGL* mPipeline = nullptr;
         };
