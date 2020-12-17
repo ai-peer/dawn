@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abccfa0_3e9cb0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T10:25:53Z",
+      "side": 1,
+      "message": "Looks good although it\u0027s a bit unfortunate that we have to put the transform in 4 different places. Something to simplify in the future.",
+      "revId": "28f8be9fff413efeef7e9fcb3ec191fff55a3ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
