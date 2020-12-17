@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641f1f8d_3ec822ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee57ff3_544d4d7c",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "nit: extra newline between the buffer and its struct.",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f61b13dd_6aff3e9e",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38712cf6_c3108aaa",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29864fa_a43c5155",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5847684c_a1ffd3f2",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:31:46Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
