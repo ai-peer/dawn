@@ -28,6 +28,7 @@ namespace dawn_native {
         ShaderFloat16,
         PipelineStatisticsQuery,
         TimestampQuery,
+        TextureFilterAnisotropic,
 
         EnumCount,
         InvalidEnum = EnumCount,

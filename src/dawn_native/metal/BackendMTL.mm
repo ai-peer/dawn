@@ -226,6 +226,7 @@ namespace dawn_native { namespace metal {
             }
 
             mSupportedExtensions.EnableExtension(Extension::ShaderFloat16);
+            mSupportedExtensions.EnableExtension(Extension::TextureFilterAnisotropic);
         }
 
         NSPRef<id<MTLDevice>> mDevice;
