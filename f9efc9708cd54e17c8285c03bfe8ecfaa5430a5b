@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e611a824_2469bf82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:37:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bc9073_e1b413bb",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:37:00Z",
+      "side": 1,
+      "message": "nit: indent shaders in this file one level from the C++ code",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaca4a49_c882f479",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:37:00Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9beed2_5563cd3c",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:37:00Z",
+      "side": 1,
+      "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
