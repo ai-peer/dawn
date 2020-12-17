@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9161be_0c2b610b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T10:12:21Z",
+      "side": 1,
+      "message": "I thought all the comments were resolved but it seems we might want to use https://dawn-review.googlesource.com/c/dawn/+/35480? Sorry for the noise.",
+      "revId": "9850719ec76130b17597683dc2532b7082ac8774",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
