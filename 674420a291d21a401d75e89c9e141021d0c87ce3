@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ddaaed1_5443c6ff",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-17T18:42:09Z",
+      "side": 1,
+      "message": "Oh I meant that the struct offsets 0, 4, 8, 12 are the same as the ones in C++ - in case members are added or changed.",
+      "parentUuid": "4d1094bb_242013d9",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2279dbf_c2cad673",
         "filename": "src/dawn_native/QueryHelper.cpp",
         "patchSetId": 18
