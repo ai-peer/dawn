@@ -850,12 +850,6 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
             continue;
         }
 
-        // TODO(jiawei.shao@intel.com): investigate why this test fails with RGBA8Snorm on Linux
-        // Intel OpenGL driver.
-        if (format == wgpu::TextureFormat::RGBA8Snorm && IsIntel() && IsOpenGL() && IsLinux()) {
-            continue;
-        }
-
         // Prepare the write-only storage texture.
         wgpu::Texture writeonlyStorageTexture =
             CreateTexture(format, wgpu::TextureUsage::Storage | wgpu::TextureUsage::CopySrc);
@@ -879,12 +873,6 @@ TEST_P(StorageTextureTests, ReadWriteDifferentStorageTextureInOneDispatchInCompu
     DAWN_SKIP_TEST_IF(IsOpenGLES());
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
-            continue;
-        }
-
-        // TODO(jiawei.shao@intel.com): investigate why this test fails with RGBA8Snorm on Linux
-        // Intel OpenGL driver.
-        if (format == wgpu::TextureFormat::RGBA8Snorm && IsIntel() && IsOpenGL() && IsLinux()) {
             continue;
         }
 
@@ -916,12 +904,6 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
     DAWN_SKIP_TEST_IF(IsOpenGLES());
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
-            continue;
-        }
-
-        // TODO(jiawei.shao@intel.com): investigate why this test fails with RGBA8Snorm on Linux
-        // Intel OpenGL driver.
-        if (format == wgpu::TextureFormat::RGBA8Snorm && IsIntel() && IsOpenGL() && IsLinux()) {
             continue;
         }
 
