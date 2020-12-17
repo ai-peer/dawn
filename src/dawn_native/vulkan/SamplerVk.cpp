@@ -72,7 +72,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->addressModeW);
         createInfo.mipLodBias = 0.0f;
         createInfo.anisotropyEnable = VK_FALSE;
-        createInfo.maxAnisotropy = 1.0f;
+        createInfo.maxAnisotropy = descriptor->maxAnisotropy;
         if (descriptor->compare != wgpu::CompareFunction::Undefined) {
             createInfo.compareOp = ToVulkanCompareOp(descriptor->compare);
             createInfo.compareEnable = VK_TRUE;
@@ -86,6 +86,11 @@ namespace dawn_native { namespace vulkan {
         createInfo.unnormalizedCoordinates = VK_FALSE;
 
         Device* device = ToBackend(GetDevice());
+        if (device->IsExtensionEnabled(Extension::TextureFilterAnisotropic)) {
+            if (createInfo.maxAnisotropy > 1) {
+                createInfo.anisotropyEnable = true;
+            }
+        }
         return CheckVkSuccess(
             device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
             "CreateSampler");
