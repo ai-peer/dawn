@@ -43,4 +43,22 @@ namespace dawn_native {
         {% endfor %}
 
     {% endfor %}
+
+    static const ChainedStruct* GetExtensionStructImpl(const ChainedStruct* in, wgpu::SType sType) {
+        while (in != nullptr && in->sType != sType) {
+            in = in->nextInChain;
+        }
+        return in;
+    }
+
+    {% for type in by_category["structure"] if type.chained %}
+        bool GetExtensionStruct(const ChainedStruct* in, const {{as_cppType(type.name)}}** out) {
+            auto* s = static_cast<const {{as_cppType(type.name)}}*>(
+                GetExtensionStructImpl(in, wgpu::SType::{{as_cppType(type.name)}}));
+            if (s != nullptr) {
+                *out = s;
+            }
+            return s != nullptr;
+        }
+    {% endfor %}
 }
