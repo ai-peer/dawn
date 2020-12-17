@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7752e529_2c351f60",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c408d4c8_c4511ff8",
+      "range": {
+        "startLine": 96,
+        "startChar": 42,
+        "endLine": 96,
+        "endChar": 75
+      },
+      "revId": "d9e8f3b4018783ebc44e2abb63162ccac59a931b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "698c5449_a29db8af",
@@ -71,6 +95,30 @@
       "writtenOn": "2020-12-17T18:38:02Z",
       "side": 1,
       "message": "nit: just make Undefined unreachable. For cases like this where it\u0027s easy to type out all the cases, we prefer doing that so the compiler warns us of unhandled cases should more enums be added.",
+      "range": {
+        "startLine": 347,
+        "startChar": 40,
+        "endLine": 348,
+        "endChar": 58
+      },
+      "revId": "d9e8f3b4018783ebc44e2abb63162ccac59a931b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c08bc38f_47353b95",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "698c5449_a29db8af",
       "range": {
         "startLine": 347,
         "startChar": 40,

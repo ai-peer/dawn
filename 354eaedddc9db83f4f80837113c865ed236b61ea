@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3438d8a_504cf8e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Thanks both of you! Addressed the feedback to the best of my ability. (Still wrestling with my Mac to get a build working there.)",
+      "revId": "354eaedddc9db83f4f80837113c865ed236b61ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

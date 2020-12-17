@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec29ddc8_2a194800",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Not entirely just yet, but it doesn\u0027t need to be a separate function any more.",
+      "parentUuid": "aaef4299_06ad1df3",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "294385ad_9b1c5af2",
@@ -194,6 +212,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69c4ff5_7ce43f62",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "655d8b81_446ffb5d",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce93cffd_5b52cb1b",
@@ -277,6 +313,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eda3aa58_88b27813",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Not clear on what [1] refers to in this case?",
+      "parentUuid": "b08974a0_30505cff",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19ce70f7_2cf8d024",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 6
@@ -288,6 +342,24 @@
       "writtenOn": "2020-12-17T14:25:53Z",
       "side": 1,
       "message": "nit: could be moved in the switch case for ::Buffer",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f642eb_2d654f2d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19ce70f7_2cf8d024",
       "revId": "d1511a63843ae2685b33a32963083877af49225d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -309,6 +381,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c137292_420d0777",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Hrm. I tried this but ran into a bunch of test failures. Digging a bit deeper I would expect that all of the \"Uniform\" buffers should report `StorageClassUniform` and all the \"Storage\" buffers should report `StorageClassStorageBuffer`. That appears to be true most of the time, but for some unit tests (like a bunch of the MinBufferSizePipelineCreationTests) the buffers on the storage branch are consistently reporting as `StorageClassUniform`.\n\nLeaving this as a TODO so we can look at it further in the future.",
+      "parentUuid": "d9097199_ad129d7b",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "400c1560_675001f7",
@@ -322,6 +412,24 @@
       "writtenOn": "2020-12-17T14:25:53Z",
       "side": 1,
       "message": "visibility can still be hidden, and we can just leave hasDynamicOffset as is i guess",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d651409_83e44e64",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "400c1560_675001f7",
       "revId": "d1511a63843ae2685b33a32963083877af49225d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -460,6 +568,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b8aac94_fea22db2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5700171_069af9ac",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4d02cfa_f1c03a8c",
@@ -477,6 +603,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "678cc7b0_b1bebc82",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d02cfa_f1c03a8c",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aba15a2_9bacae7f",
@@ -490,6 +634,30 @@
       "writtenOn": "2020-12-17T14:25:53Z",
       "side": 1,
       "message": "This should be `usage`.",
+      "range": {
+        "startLine": 180,
+        "startChar": 44,
+        "endLine": 180,
+        "endChar": 70
+      },
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "573122ef_f3d25f37",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T19:13:37Z",
+      "side": 1,
+      "message": "Thanks, good catch!",
+      "parentUuid": "3aba15a2_9bacae7f",
       "range": {
         "startLine": 180,
         "startChar": 44,
