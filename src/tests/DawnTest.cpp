@@ -817,14 +817,13 @@ void DawnTestBase::SetUp() {
         forceDisabledToggles.push_back(info->name);
     }
 
-    forceEnabledToggles.push_back(nullptr);
-    forceDisabledToggles.push_back(nullptr);
-    requiredExtensions.push_back(nullptr);
-
     wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
     deviceDescriptorDawnNative.forceEnabledToggles = forceEnabledToggles.data();
+    deviceDescriptorDawnNative.forceEnabledTogglesCount = forceEnabledToggles.size();
     deviceDescriptorDawnNative.forceDisabledToggles = forceDisabledToggles.data();
+    deviceDescriptorDawnNative.forceDisabledTogglesCount = forceDisabledToggles.size();
     deviceDescriptorDawnNative.requiredExtensions = requiredExtensions.data();
+    deviceDescriptorDawnNative.requiredExtensionsCount = requiredExtensions.size();
 
     wgpu::DeviceDescriptor deviceDescriptor;
     deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;

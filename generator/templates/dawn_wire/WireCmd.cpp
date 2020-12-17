@@ -123,12 +123,11 @@ namespace {
 
         //* const char* have their length embedded directly in the command.
         {% for member in members if member.length == "strlen" %}
-            {% if member.annotation == "const*const*" %}
-                size_t {{as_varName(member.name)}}TotalStrLen;
-                size_t {{as_varName(member.name)}}StrCount;
-            {% else %}
                 size_t {{as_varName(member.name)}}Strlen;
-            {% endif %}
+        {% endfor %}
+
+        {% for member in members if member.element_length == "strlen" %}
+            size_t {{as_varName(member.name)}}TotalStrLen;
         {% endfor %}
 
         {% for member in members if member.optional and member.annotation != "value" and member.type.category != "object" %}
@@ -167,19 +166,28 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-            {% if member.annotation == "const*const*" %}
-                for (size_t i = 0; record.{{memberName}}[i] != nullptr; ++i) {
-                    // Include the null terminator.
-                    result += std::strlen(record.{{memberName}}[i]) + 1;
-                }
-            {% else %}
-                result += std::strlen(record.{{memberName}});
+            result += std::strlen(record.{{memberName}});
+            }
+        {% endfor %}
+
+        {% for member in members if member.element_length == "strlen" %}
+            {% set memberName = as_varName(member.name) %}
+
+            {% if member.optional %}
+                bool has_{{memberName}} = record.{{memberName}} != nullptr;
+                if (has_{{memberName}})
             {% endif %}
+            {
+            size_t memberLength = {{member_length(member, "record.")}};
+            for (size_t i = 0; i < memberLength; ++i) {
+                // Include the null terminator.
+                result += std::strlen(record.{{memberName}}[i]) + 1;
+            }
             }
         {% endfor %}
 
         //* Gather how much space will be needed for pointer members.
-        {% for member in members if member.length != "strlen" and not member.skip_serialize %}
+        {% for member in members if member.length != "strlen" and member.element_length != "strlen" and not member.skip_serialize %}
             {% if member.type.category != "object" and member.optional %}
                 if (record.{{as_varName(member.name)}} != nullptr)
             {% endif %}
@@ -256,10 +264,25 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-            {% if member.annotation == "const*const*" %}
+                transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
+
+                memcpy(*buffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
+                *buffer += transfer->{{memberName}}Strlen;
+            }
+        {% endfor %}
+
+        {% for member in members if member.element_length == "strlen" %}
+            {% set memberName = as_varName(member.name) %}
+
+            {% if member.optional %}
+                bool has_{{memberName}} = record.{{memberName}} != nullptr;
+                transfer->has_{{memberName}} = has_{{memberName}};
+                if (has_{{memberName}})
+            {% endif %}
+            {
+                size_t memberLength = {{member_length(member, "record.")}};
                 size_t totalStrLen = 0;
-                uint32_t strCount = 0;
-                for (size_t i = 0; record.{{memberName}}[i] != nullptr; ++i) {
+                for (size_t i = 0; i < memberLength; ++i) {
                     const char* ptr = record.{{memberName}}[i];
                     // Include the null terminator.
                     size_t strLen = std::strlen(ptr) + 1;
@@ -267,21 +290,13 @@ namespace {
 
                     totalStrLen += strLen;
                     *buffer += strLen;
-                    strCount++;
                 }
                 transfer->{{memberName}}TotalStrLen = totalStrLen;
-                transfer->{{memberName}}StrCount = strCount;
-            {% else %}
-                transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
-
-                memcpy(*buffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
-                *buffer += transfer->{{memberName}}Strlen;
-            {% endif %}
             }
         {% endfor %}
 
         //* Allocate space and write the non-value arguments in it.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" and not member.skip_serialize %}
+        {% for member in members if member.annotation != "value" and member.length != "strlen" and member.element_length != "strlen" and not member.skip_serialize %}
             {% set memberName = as_varName(member.name) %}
 
             {% if member.type.category != "object" and member.optional %}
@@ -354,25 +369,34 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-                {% if member.annotation == "const*const*" %}
-                    DESERIALIZE_TRY(DeserializeStringList(
-                        buffer, size, allocator, transfer->{{memberName}}StrCount, transfer->{{memberName}}TotalStrLen, &record->{{memberName}}));
-                {% else %}
-                    size_t stringLength = transfer->{{memberName}}Strlen;
-                    const volatile char* stringInBuffer = nullptr;
-                    DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
+                size_t stringLength = transfer->{{memberName}}Strlen;
+                const volatile char* stringInBuffer = nullptr;
+                DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
 
-                    char* copiedString = nullptr;
-                    DESERIALIZE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
-                    strncpy(copiedString, const_cast<const char*>(stringInBuffer), stringLength);
-                    copiedString[stringLength] = '\0';
-                    record->{{memberName}} = copiedString;
-                {% endif %}
+                char* copiedString = nullptr;
+                DESERIALIZE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
+                strncpy(copiedString, const_cast<const char*>(stringInBuffer), stringLength);
+                copiedString[stringLength] = '\0';
+                record->{{memberName}} = copiedString;
+            }
+        {% endfor %}
+
+        {% for member in members if member.element_length == "strlen" %}
+            {% set memberName = as_varName(member.name) %}
+
+            {% if member.optional %}
+                bool has_{{memberName}} = transfer->has_{{memberName}};
+                record->{{memberName}} = nullptr;
+                if (has_{{memberName}})
+            {% endif %}
+            {
+                DESERIALIZE_TRY(DeserializeStringList(
+                    buffer, size, allocator, {{member_length(member, "record->")}}, transfer->{{memberName}}TotalStrLen, &record->{{memberName}}));
             }
         {% endfor %}
 
         //* Get extra buffer data, and copy pointed to values in extra allocated space.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
+        {% for member in members if member.annotation != "value" and member.length != "strlen" and member.element_length != "strlen" %}
             {% set memberName = as_varName(member.name) %}
 
             {% if member.type.category != "object" and member.optional %}

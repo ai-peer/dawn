@@ -809,9 +809,12 @@
         "category": "structure",
         "chained": true,
         "members": [
-            {"name": "required extensions", "type": "char", "annotation": "const*const*", "length": "strlen", "optional": true},
-            {"name": "force enabled toggles", "type": "char", "annotation": "const*const*", "length": "strlen", "optional": true},
-            {"name": "force disabled toggles", "type": "char", "annotation": "const*const*", "length": "strlen", "optional": true}
+            {"name": "required extensions", "type": "char", "annotation": "const*const*", "length": "required extensions count", "element length": "strlen", "optional": true},
+            {"name": "required extensions count", "type": "uint32_t", "default": 0},
+            {"name": "force enabled toggles", "type": "char", "annotation": "const*const*", "length": "force enabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force enabled toggles count", "type": "uint32_t", "default": 0},
+            {"name": "force disabled toggles", "type": "char", "annotation": "const*const*", "length": "force enabled toggles count", "element length": "strlen", "optional": true},
+            {"name": "force disabled toggles count", "type": "uint32_t", "default": 0}
         ]
     },
     "device lost callback": {

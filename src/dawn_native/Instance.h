@@ -54,7 +54,8 @@ namespace dawn_native {
         // name of an extension supported in Dawn.
         const ExtensionInfo* GetExtensionInfo(const char* extensionName);
         Extension ExtensionNameToEnum(const char* extensionName);
-        ExtensionsSet ExtensionNamesToExtensionsSet(const char* const* requiredExtensions);
+        ExtensionsSet ExtensionNamesToExtensionsSet(const char* const* requiredExtensions,
+                                                    uint32_t requiredExtensionsCount);
 
         void EnableBackendValidation(bool enableBackendValidation);
         bool IsBackendValidationEnabled() const;

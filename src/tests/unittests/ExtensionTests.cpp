@@ -52,12 +52,18 @@ TEST_F(ExtensionTests, AdapterWithRequiredExtensionDisabled) {
         std::vector<const char*> extensionNamesWithoutOne = kAllExtensionNames;
         extensionNamesWithoutOne.erase(extensionNamesWithoutOne.begin() + i);
 
-        mAdapterBase.SetSupportedExtensions(extensionNamesWithoutOne);
+        mAdapterBase.SetSupportedExtensions(extensionNamesWithoutOne.data(),
+                                            extensionNamesWithoutOne.size());
         dawn_native::Adapter adapterWithoutExtension(&mAdapterBase);
 
-        dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
+        dawn_native::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
         const char* extensionName = ExtensionEnumToName(notSupportedExtension);
-        deviceDescriptor.requiredExtensions = std::vector<const char*>(1, extensionName);
+        deviceDescriptorDawnNative.requiredExtensions = &extensionName;
+        deviceDescriptorDawnNative.requiredExtensionsCount = 1;
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
         WGPUDevice deviceWithExtension = adapterWithoutExtension.CreateDevice(&deviceDescriptor);
         ASSERT_EQ(nullptr, deviceWithExtension);
     }
@@ -71,7 +77,12 @@ TEST_F(ExtensionTests, GetEnabledExtensions) {
         const char* extensionName = ExtensionEnumToName(extension);
 
         dawn_native::DeviceDescriptorDawnNative deviceDescriptor;
-        deviceDescriptor.requiredExtensions = {extensionName};
+        deviceDescriptorDawnNative.requiredExtensions = &extensionName;
+        deviceDescriptorDawnNative.requiredExtensionsCount = 1;
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
         dawn_native::DeviceBase* deviceBase =
             reinterpret_cast<dawn_native::DeviceBase*>(adapter.CreateDevice(&deviceDescriptor));
         std::vector<const char*> enabledExtensions = deviceBase->GetEnabledExtensions();

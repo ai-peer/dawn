@@ -894,10 +894,12 @@ namespace dawn_native {
         const DeviceDescriptorDawnNative* deviceDescriptorDawnNative;
         if (GetExtensionStruct(deviceDescriptor->nextInChain, &deviceDescriptorDawnNative)) {
             ASSERT(GetAdapter()->SupportsAllRequestedExtensions(
-                deviceDescriptorDawnNative->requiredExtensions));
+                deviceDescriptorDawnNative->requiredExtensions,
+                deviceDescriptorDawnNative->requiredExtensionsCount));
 
             mEnabledExtensions = GetAdapter()->GetInstance()->ExtensionNamesToExtensionsSet(
-                deviceDescriptorDawnNative->requiredExtensions);
+                deviceDescriptorDawnNative->requiredExtensions,
+                deviceDescriptorDawnNative->requiredExtensionsCount);
         }
     }
 

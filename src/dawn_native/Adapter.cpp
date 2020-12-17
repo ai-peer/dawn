@@ -46,10 +46,11 @@ namespace dawn_native {
         return mSupportedExtensions;
     }
 
-    bool AdapterBase::SupportsAllRequestedExtensions(const char* const* requestedExtensions) const {
-        for (const char* const* extensionStr = requestedExtensions; *extensionStr != nullptr;
-             ++extensionStr) {
-            Extension extensionEnum = mInstance->ExtensionNameToEnum(*extensionStr);
+    bool AdapterBase::SupportsAllRequestedExtensions(const char* const* requestedExtensions,
+                                                     uint32_t requestedExtensionsCount) const {
+        for (uint32_t i = 0; i < requestedExtensionsCount; ++i) {
+            const char* extensionStr = requestedExtensions[i];
+            Extension extensionEnum = mInstance->ExtensionNameToEnum(extensionStr);
             if (extensionEnum == Extension::InvalidEnum) {
                 return false;
             }
@@ -82,7 +83,8 @@ namespace dawn_native {
         const DeviceDescriptorDawnNative* deviceDescriptorDawn;
         if (descriptor != nullptr &&
             GetExtensionStruct(descriptor->nextInChain, &deviceDescriptorDawn)) {
-            if (!SupportsAllRequestedExtensions(deviceDescriptorDawn->requiredExtensions)) {
+            if (!SupportsAllRequestedExtensions(deviceDescriptorDawn->requiredExtensions,
+                                                deviceDescriptorDawn->requiredExtensionsCount)) {
                 return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");
             }
         }

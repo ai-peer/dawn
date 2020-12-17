@@ -37,8 +37,9 @@ namespace dawn_native { namespace null {
     Adapter::~Adapter() = default;
 
     // Used for the tests that intend to use an adapter without all extensions enabled.
-    void Adapter::SetSupportedExtensions(const char* const* requiredExtensions) {
-        mSupportedExtensions = GetInstance()->ExtensionNamesToExtensionsSet(requiredExtensions);
+    void Adapter::SetSupportedExtensions(const char* const* requiredExtensions, uint32_t requiredExtensionsCount) {
+        mSupportedExtensions = GetInstance()->ExtensionNamesToExtensionsSet(
+            requiredExtensions, requiredExtensionsCount);
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
