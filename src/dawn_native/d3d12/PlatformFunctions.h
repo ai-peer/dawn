@@ -37,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
         MaybeError LoadFunctions();
         bool IsPIXEventRuntimeLoaded() const;
         bool IsDXCAvailable() const;
+        bool DoesDXCSupportTemplatedStoreMethods() const;
 
         // Functions from d3d12.dll
         PFN_D3D12_CREATE_DEVICE d3d12CreateDevice = nullptr;
@@ -102,6 +103,7 @@ namespace dawn_native { namespace d3d12 {
         DynamicLib mDXGILib;
         DynamicLib mDXILLib;
         DynamicLib mDXCompilerLib;
+        uint32_t mDxcWindowsSDKVersion;
         DynamicLib mFXCompilerLib;
         DynamicLib mPIXEventRuntimeLib;
     };

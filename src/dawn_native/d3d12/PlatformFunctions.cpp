@@ -67,7 +67,8 @@ namespace dawn_native { namespace d3d12 {
             HANDLE mHandle;
         };
 
-        std::string GetWindowsSDKBasePath() {
+        std::string GetWindowsSDKPathAndVersion(uint32_t* windowsSDKVersion) {
+            *windowsSDKVersion = 0;
             const char* kDefaultWindowsSDKPath =
                 "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\*";
             WIN32_FIND_DATAA fileData;
@@ -87,6 +88,7 @@ namespace dawn_native { namespace d3d12 {
                              GetWindowsSDKVersionFromDirectoryName(fileData.cFileName));
             } while (FindNextFileA(handle.GetHandle(), &fileData));
 
+            *windowsSDKVersion = highestWindowsSDKVersion;
             if (highestWindowsSDKVersion == 0) {
                 return "";
             }
@@ -156,7 +158,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void PlatformFunctions::LoadDXCLibraries() {
-        const std::string& windowsSDKBasePath = GetWindowsSDKBasePath();
+        const std::string& windowsSDKBasePath = GetWindowsSDKPathAndVersion(&mDxcWindowsSDKVersion);
 
         LoadDXIL(windowsSDKBasePath);
         LoadDXCompiler(windowsSDKBasePath);
@@ -216,6 +218,12 @@ namespace dawn_native { namespace d3d12 {
 
     bool PlatformFunctions::IsDXCAvailable() const {
         return mDXILLib.Valid() && mDXCompilerLib.Valid();
+    }
+
+    bool PlatformFunctions::DoesDXCSupportTemplatedStoreMethods() const {
+        // Starting with Windows 10 SDK (10.0.19041.0), DXC compiler fully supports
+        // templated Store methods for byte address buffer.
+        return IsDXCAvailable() && mDxcWindowsSDKVersion >= 19041;
     }
 
     void PlatformFunctions::LoadPIXRuntime() {
