@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06caf8e6_6e86c848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:03:46Z",
+      "side": 1,
+      "message": "LGTM, failure seems like it should be fixed by the EmitPointSize transform",
+      "revId": "3edde7bb42bf1b692095dca75f9bce1683c39c22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
