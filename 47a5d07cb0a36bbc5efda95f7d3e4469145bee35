@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0c05e5_21ec0d7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-17T03:42:28Z",
+      "side": 1,
+      "message": "Oops, seems the anisotropic sampler result is super implementation-dependent. I will loose the expectation check.",
+      "revId": "47a5d07cb0a36bbc5efda95f7d3e4469145bee35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
