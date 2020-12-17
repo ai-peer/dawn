@@ -62,11 +62,13 @@ namespace dawn_native {
 
     // An optional parameter of Adapter::CreateDevice() to send additional information when creating
     // a Device. For example, we can use it to enable a workaround, optimization or feature.
-    struct DAWN_NATIVE_EXPORT DeviceDescriptor {
+    struct DAWN_NATIVE_EXPORT DeviceDescriptorOld {
         std::vector<const char*> requiredExtensions;
         std::vector<const char*> forceEnabledToggles;
         std::vector<const char*> forceDisabledToggles;
     };
+
+    using DeviceDescriptor = DeviceDescriptorOld;
 
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
     // can be manually configured to run or not outside Dawn, including workarounds, special
