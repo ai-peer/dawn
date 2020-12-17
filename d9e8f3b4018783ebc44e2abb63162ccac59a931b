@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fbdc60_b61bda80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-17T17:11:54Z",
+      "side": 1,
+      "message": "Thanks for the feedback! Addressed everything you pointed out, but having a lot of trouble getting my Mac to build right now so I doubt that the issues the bots were seeing on that platform have been resolved, at least.",
+      "revId": "d9e8f3b4018783ebc44e2abb63162ccac59a931b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
