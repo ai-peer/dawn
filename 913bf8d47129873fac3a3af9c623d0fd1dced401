@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a63dae34_b1332ddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:05:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "913bf8d47129873fac3a3af9c623d0fd1dced401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299ec2ae_7995877d",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:05:16Z",
+      "side": 1,
+      "message": "nit: keep pos outside of main to match the GLSL better.",
+      "revId": "913bf8d47129873fac3a3af9c623d0fd1dced401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d10faff7_545fad18",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-17T09:05:16Z",
+      "side": 1,
+      "message": "ditto for points.",
+      "revId": "913bf8d47129873fac3a3af9c623d0fd1dced401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
