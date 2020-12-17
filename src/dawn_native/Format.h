@@ -39,6 +39,7 @@ namespace dawn_native {
 
     // Converts an wgpu::TextureComponentType to its bitmask representation.
     ComponentTypeBit ToComponentTypeBit(wgpu::TextureComponentType type);
+    ComponentTypeBit ToComponentTypeBit(wgpu::TextureSampleType type);
 
     struct TexelBlockInfo {
         uint32_t byteSize;
