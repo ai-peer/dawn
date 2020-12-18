@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "647583c7_82c40117",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-18T21:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b190ed0_1b4ebf0b",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "294385ad_9b1c5af2",
@@ -361,6 +379,24 @@
       "side": 1,
       "message": "Added the note to [1] sorry I forgot it in the first place.",
       "parentUuid": "eda3aa58_88b27813",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b58a6e8_bc4e4c82",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2020-12-18T21:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dfbcade_763cd2e9",
       "revId": "d1511a63843ae2685b33a32963083877af49225d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
