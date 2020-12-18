@@ -48,7 +48,6 @@ namespace dawn_native {
               {"timestamp_query", "Support Timestamp Query",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=434"},
               &WGPUDeviceProperties::timestampQuery}}};
-
     }  // anonymous namespace
 
     void ExtensionsSet::EnableExtension(Extension extension) {
