@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd6dd884_db2b6718",
+        "filename": "src/dawn_native/Extensions.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-18T02:36:07Z",
+      "side": 1,
+      "message": "Removed this extension",
+      "parentUuid": "5c92f2e0_569d09f4",
+      "revId": "e3f8d0d898dfe143dc011c23fc8b9849d4001c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "599006b4_f6dd4208",

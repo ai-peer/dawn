@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abff35a1_08e13fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-18T02:36:07Z",
+      "side": 1,
+      "message": "Enabled vulkan sampler Anisotropy correctly. Should be ready for review now.",
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
