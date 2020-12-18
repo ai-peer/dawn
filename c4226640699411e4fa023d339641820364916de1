@@ -16,6 +16,165 @@
       "message": "@Corentin, @Austin, PTAL again, thanks!",
       "revId": "c4226640699411e4fa023d339641820364916de1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094c2c1b_295f6506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "Looks good, a couple small comments!",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c24c6733_dd8b6482",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "nit: this can be done at the very beginning with if (inputIndex \u003e\u003d GlobalInvocationID.x)",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f974aa_7aa9edbb",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t write 0s for this? The WebGPU spec doesn\u0027t have a concept of availability and instead all queries are as if initialized with 0s so that\u0027s what we should resolve in the buffer.",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43cd1460_a9ae7d5b",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "Why the float division? Dividing by 8 (integer) should work well.",
+      "range": {
+        "startLine": 184,
+        "startChar": 88,
+        "endLine": 184,
+        "endChar": 92
+      },
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddba3512_d2c1c263",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "nit: if expected is 0 we should check that the value in the buffer is exactly 0.",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48998e3_6eb36b04",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "nit: constexpr static float kErrorToleranceRatio maybe?",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1a7b48_6da9ca92",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "Can we fill the output buffer with garbage every time so that we can check that zeroes are written for unavailable queries?",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3931dffa_da307625",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a helper function that does the conversion for the multiple times that we have to do this. So here we would call EncodeConvertTeimstampsToNanosconds(encoder, inputBuffer, availabilityBuffer, outputBuffer, ParamsBuffer) and the helper would do the conversion.",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e5d6fd_a4716a96",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:30:32Z",
+      "side": 1,
+      "message": "nit: This changes both the input and the output offsets. Can we also check that the first piece of data in output isn\u0027t written? (we can WriteBuffer it to a known value and check it later)",
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
