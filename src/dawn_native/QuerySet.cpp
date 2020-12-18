@@ -47,6 +47,10 @@ namespace dawn_native {
 
         switch (descriptor->type) {
             case wgpu::QueryType::Occlusion:
+                if (descriptor->count > kMaxOcclusionQueryCount) {
+                    return DAWN_VALIDATION_ERROR("Occlusion query max count exceeded");
+                }
+
                 if (descriptor->pipelineStatisticsCount != 0) {
                     return DAWN_VALIDATION_ERROR(
                         "The pipeline statistics should not be set if query type is Occlusion");

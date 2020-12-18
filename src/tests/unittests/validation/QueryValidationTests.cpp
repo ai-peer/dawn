@@ -47,6 +47,16 @@ TEST_F(QuerySetValidationTest, CreationWithoutExtensions) {
     ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::Timestamp, 1));
 }
 
+// Test creating occlusion query set with invalid count
+TEST_F(QuerySetValidationTest, InvalidOcclusionQueryCount) {
+    // Success create a occlusion query set with the maximum count
+    CreateQuerySet(device, wgpu::QueryType::Occlusion, kMaxOcclusionQueryCount);
+
+    // Fail to create a occlusion query set with the count which exceeds the maximum
+    ASSERT_DEVICE_ERROR(
+        CreateQuerySet(device, wgpu::QueryType::Occlusion, kMaxOcclusionQueryCount + 1));
+}
+
 // Test creating query set with invalid type
 TEST_F(QuerySetValidationTest, InvalidQueryType) {
     ASSERT_DEVICE_ERROR(CreateQuerySet(device, static_cast<wgpu::QueryType>(0xFFFFFFFF), 1));
@@ -480,6 +490,12 @@ TEST_F(PipelineStatisticsQueryValidationTest, BeginRenderPassWithPipelineStatist
 
 class ResolveQuerySetValidationTest : public QuerySetValidationTest {
   protected:
+    wgpu::Device CreateTestDevice() override {
+        dawn_native::DeviceDescriptor descriptor;
+        descriptor.requiredExtensions = {"timestamp_query"};
+        return wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+    }
+
     wgpu::Buffer CreateBuffer(wgpu::Device cDevice, uint64_t size, wgpu::BufferUsage usage) {
         wgpu::BufferDescriptor descriptor;
         descriptor.size = size;
@@ -493,7 +509,7 @@ class ResolveQuerySetValidationTest : public QuerySetValidationTest {
 TEST_F(ResolveQuerySetValidationTest, ResolveInvalidQuerySetAndIndexCount) {
     constexpr uint32_t kQueryCount = 4;
 
-    wgpu::QuerySet querySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, kQueryCount);
+    wgpu::QuerySet querySet = CreateQuerySet(device, wgpu::QueryType::Timestamp, kQueryCount);
     wgpu::Buffer destination =
         CreateBuffer(device, kQueryCount * sizeof(uint64_t), wgpu::BufferUsage::QueryResolve);
 
@@ -610,7 +626,7 @@ TEST_F(ResolveQuerySetValidationTest, BufferOverflowOn32Bits) {
     // is 8, which is less than the buffer size.
     constexpr uint32_t kQueryCount = std::numeric_limits<uint32_t>::max() / sizeof(uint64_t) + 2;
 
-    wgpu::QuerySet querySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, kQueryCount);
+    wgpu::QuerySet querySet = CreateQuerySet(device, wgpu::QueryType::Timestamp, kQueryCount);
     wgpu::Buffer destination = CreateBuffer(device, 1024, wgpu::BufferUsage::QueryResolve);
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
