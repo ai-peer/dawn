@@ -16,6 +16,23 @@
       "message": "I thought all the comments were resolved but it seems we might want to use https://dawn-review.googlesource.com/c/dawn/+/35480? Sorry for the noise.",
       "revId": "9850719ec76130b17597683dc2532b7082ac8774",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb0a171_31e4738b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2020-12-18T08:52:06Z",
+      "side": 1,
+      "message": "@Rafael, would you be responsible for this issue and fix it in https://dawn-review.googlesource.com/c/dawn/+/35480?\nIf yes, I may close this CL.",
+      "revId": "9850719ec76130b17597683dc2532b7082ac8774",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
