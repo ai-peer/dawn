@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa8af2c_00cd3d07",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T14:55:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "482bf873_8ea369dd",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e044e2fc_5cf1ae23",
