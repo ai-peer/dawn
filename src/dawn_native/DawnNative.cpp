@@ -107,28 +107,6 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    WGPUDevice Adapter::CreateDevice(const DeviceDescriptorOld* deviceDescriptor) {
-        DeviceDescriptorDawnNative wgpuDeviceDescriptorDawnNative = {};
-
-        wgpuDeviceDescriptorDawnNative.forceEnabledToggles =
-            deviceDescriptor->forceEnabledToggles.data();
-        wgpuDeviceDescriptorDawnNative.forceEnabledTogglesCount =
-            deviceDescriptor->forceEnabledToggles.size();
-
-        wgpuDeviceDescriptorDawnNative.forceDisabledToggles =
-            deviceDescriptor->forceDisabledToggles.data();
-        wgpuDeviceDescriptorDawnNative.forceDisabledTogglesCount =
-            deviceDescriptor->forceDisabledToggles.size();
-
-        DeviceDescriptor wgpuDeviceDescriptor = {};
-        wgpuDeviceDescriptor.nextInChain = &wgpuDeviceDescriptorDawnNative;
-
-        wgpuDeviceDescriptor.features = deviceDescriptor->requiredExtensions.data();
-        wgpuDeviceDescriptor.featuresCount = deviceDescriptor->requiredExtensions.size();
-
-        return CreateDevice(&wgpuDeviceDescriptor);
-    }
-
     WGPUDevice Adapter::CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor) {
         return CreateDevice(reinterpret_cast<const DeviceDescriptor*>(deviceDescriptor));
     }
