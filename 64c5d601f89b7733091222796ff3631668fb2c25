@@ -16,6 +16,24 @@
       "message": "We should keep this for timestamp and pipeline statistics queries.",
       "revId": "64c5d601f89b7733091222796ff3631668fb2c25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d99ae02_fd29d08d",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-18T18:41:28Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "09d2e7b6_202744c0",
+      "revId": "64c5d601f89b7733091222796ff3631668fb2c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
