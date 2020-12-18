@@ -107,10 +107,6 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    WGPUDevice Adapter::CreateDevice(const DeprecatedDeviceDescriptor* deviceDescriptor) {
-        return reinterpret_cast<WGPUDevice>(mImpl->CreateDevice(deviceDescriptor));
-    }
-
     WGPUDevice Adapter::CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor) {
         return CreateDevice(reinterpret_cast<const DeviceDescriptor*>(deviceDescriptor));
     }
@@ -164,7 +160,7 @@ namespace dawn_native {
             }
         }
 
-        return CreateDevice(&deprecatedDeviceDescriptor);
+        return reinterpret_cast<WGPUDevice>(mImpl->CreateDevice(&deprecatedDeviceDescriptor));
     }
 
     // AdapterDiscoverOptionsBase
