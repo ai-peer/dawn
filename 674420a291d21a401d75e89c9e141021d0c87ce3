@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd5caa3_832dcb34",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-18T04:43:26Z",
+      "side": 1,
+      "message": "Got it, thanks!",
+      "parentUuid": "2ddaaed1_5443c6ff",
+      "revId": "674420a291d21a401d75e89c9e141021d0c87ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2279dbf_c2cad673",
