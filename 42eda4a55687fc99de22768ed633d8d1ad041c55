@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025ea712_48185f19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T09:53:22Z",
+      "side": 1,
+      "message": "LGTM, Stephen can you TAL too?",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b7c74f_15959815",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T09:53:22Z",
+      "side": 1,
+      "message": "This case is starting to be pretty big, we might want to split it to a separate function in the future. (someone else, not you Jiawei)",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482bf873_8ea369dd",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T09:53:22Z",
+      "side": 1,
+      "message": "This is surprising and the GLES spec doesn\u0027t explicitly call this out, however it matches the validation in ANGLE",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e044e2fc_5cf1ae23",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T09:53:22Z",
+      "side": 1,
+      "message": "Can we add a TODO to do a single copy when the data is correctly packed for it?",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cacf8d_43f24add",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T09:53:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "42eda4a55687fc99de22768ed633d8d1ad041c55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
