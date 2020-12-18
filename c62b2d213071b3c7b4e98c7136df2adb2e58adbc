@@ -77,6 +77,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf514718_006f29bd",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-18T18:08:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f75ccddb_2868cfb7",
+      "range": {
+        "startLine": 34,
+        "startChar": 16,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "c62b2d213071b3c7b4e98c7136df2adb2e58adbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1f8fe32_90a2fd69",
