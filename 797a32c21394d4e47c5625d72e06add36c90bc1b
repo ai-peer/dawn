@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244fe6fb_aa404b75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T14:56:58Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ab9850_870e317e",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T14:56:58Z",
+      "side": 1,
+      "message": "kMaxOcclusionQuerySetSize and make the limit apply only for precise and non-precise occlusion queries.",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
