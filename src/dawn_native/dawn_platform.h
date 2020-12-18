@@ -22,6 +22,8 @@
 // (wgpu::Buffer is dawn_native::BufferBase*)
 #include <dawn_native/wgpu_structs_autogen.h>
 
+#include <vector>
+
 namespace dawn_native {
     // Add an extra buffer usage (readonly storage buffer usage) and an extra texture usage
     // (readonly storage texture usage) for render pass resource tracking
@@ -35,6 +37,13 @@ namespace dawn_native {
     // TODO(cwallez@chromium.org): It currently aliases wgpu::TextureUsage::Present, assign it
     // some bit when wgpu::TextureUsage::Present is removed.
     static constexpr wgpu::TextureUsage kPresentTextureUsage = wgpu::TextureUsage::Present;
+
+    struct DeprecatedDeviceDescriptor {
+        std::vector<const char*> requiredExtensions;
+        std::vector<const char*> forceEnabledToggles;
+        std::vector<const char*> forceDisabledToggles;
+    };
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNPLATFORM_H_

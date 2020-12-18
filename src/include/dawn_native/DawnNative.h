@@ -61,14 +61,6 @@ namespace dawn_native {
     class InstanceBase;
     class AdapterBase;
 
-    // An optional parameter of Adapter::CreateDevice() to send additional information when creating
-    // a Device. For example, we can use it to enable a workaround, optimization or feature.
-    struct DAWN_NATIVE_EXPORT DeprecatedDeviceDescriptor {
-        std::vector<const char*> requiredExtensions;
-        std::vector<const char*> forceEnabledToggles;
-        std::vector<const char*> forceDisabledToggles;
-    };
-
     struct DeviceDescriptor;
 
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
@@ -117,7 +109,6 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
-        WGPUDevice CreateDevice(const DeprecatedDeviceDescriptor* deviceDescriptor);
         WGPUDevice CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor);
         WGPUDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
 
