@@ -16,6 +16,74 @@
       "message": "Looks like I\u0027ve cleaned up the last of the CQ errors! I\u0027m out till Jan 5th, so if you review this and feel comfortable with it as-is feel free to trigger the autosubmit. Otherwise I\u0027ll address any nits/comments/concerns when I\u0027m back. Thanks!",
       "revId": "9aa1fc6c15c8b24bd56839295b58cc20854d560b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff30b72_ce985600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "LGTM still, I think there\u0027s still some comments to address so we can wait until the new year. I don\u0027t expect there will be too many merge conflicts until then. But again, this looks like a very very good refactor!",
+      "revId": "9aa1fc6c15c8b24bd56839295b58cc20854d560b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc1d25e_7e253048",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "Mmmh I think we would be checking this at texture creation so we don\u0027t need to check it here. Maybe it could be removed or made an ASSERT?",
+      "revId": "9aa1fc6c15c8b24bd56839295b58cc20854d560b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "948f366a_06f59eb7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "nit: leftover debugging include!\n\nAlso you can use common/Log.h\u0027s DAWN_DEBUG() like so:\n\n DAWN_DEBUG() \u003c\u003c \"Foo \" \u003c\u003c bar;\n\nIt prints the line file, line number and function along with what you pass in the stream and even works on Android!",
+      "revId": "9aa1fc6c15c8b24bd56839295b58cc20854d560b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2263509f_d8d5b555",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9aa1fc6c15c8b24bd56839295b58cc20854d560b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

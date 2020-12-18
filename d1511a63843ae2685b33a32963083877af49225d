@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b190ed0_1b4ebf0b",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "Ah I see it still needs to handle the deperecated path. Can we add a TODO that it should become `return binding.buffer.type !\u003d Undefined` (and a bunch of asserts to check we already validated that the BGLE is well formed wrt to having a single non-undefined type).",
+      "parentUuid": "ec29ddc8_2a194800",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "294385ad_9b1c5af2",
         "filename": "src/dawn_native/BindingInfo.h",
         "patchSetId": 6
@@ -331,6 +349,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5dfbcade_763cd2e9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "Added the note to [1] sorry I forgot it in the first place.",
+      "parentUuid": "eda3aa58_88b27813",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19ce70f7_2cf8d024",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 6
@@ -395,6 +431,24 @@
       "side": 1,
       "message": "Hrm. I tried this but ran into a bunch of test failures. Digging a bit deeper I would expect that all of the \"Uniform\" buffers should report `StorageClassUniform` and all the \"Storage\" buffers should report `StorageClassStorageBuffer`. That appears to be true most of the time, but for some unit tests (like a bunch of the MinBufferSizePipelineCreationTests) the buffers on the storage branch are consistently reporting as `StorageClassUniform`.\n\nLeaving this as a TODO so we can look at it further in the future.",
       "parentUuid": "d9097199_ad129d7b",
+      "revId": "d1511a63843ae2685b33a32963083877af49225d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2159a3df_e0a13df9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-18T10:05:20Z",
+      "side": 1,
+      "message": "Sounds good, we can also wait until we remove SPIRV-Cross and the problem will disappear by itself!",
+      "parentUuid": "8c137292_420d0777",
       "revId": "d1511a63843ae2685b33a32963083877af49225d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
