@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "789e1fa3_e71a5138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2020-12-20T15:29:58Z",
+      "side": 1,
+      "message": "Building on Windows with MSVC (and not Clang) seems to have been failing for some time. This is one of a few minor tweaks (as individual commits to keep them to the minimum).",
+      "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
