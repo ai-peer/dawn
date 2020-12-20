@@ -63,6 +63,30 @@
       },
       "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd18ae50_fbe37fd2",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-20T15:33:47Z",
+      "side": 1,
+      "message": "I remembered that another reason for limiting the maximum query count to 8192 for all types of queries is that when resolving sparse queries, we need to traverse the available array of queries to calculate the intervals of queries used on each pass, then resolve them separately. If we use a large number of queries (for example UINT32_MAX/32), it will take some time in the calculation. See the discussion in https://github.com/gpuweb/gpuweb/issues/1072#issuecomment-694760558. \n\nFor the maximum query count of timestamp and pipeline statistics, although there is no clear limit on the query heap/pool sizes in D3D12 and Vulkan specifications, but I create it failed with the query count of UINT32_MAX/16 on Intel Windows.\n\nSo I though when we discussed the maximum count limit in issue#1072, it is used for all types of queries.",
+      "parentUuid": "22c1647e_048426f3",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
