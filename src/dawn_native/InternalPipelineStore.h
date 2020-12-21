@@ -25,7 +25,14 @@ namespace dawn_native {
     class ShaderModuleBase;
 
     struct InternalPipelineStore {
-        Ref<RenderPipelineBase> copyTextureForBrowserPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRGBA8UnormPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstBGRA8UnormPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRGB10A2UnormPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRGBA16FloatPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRGBA32FloatPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRG8UnormPipeline;
+        Ref<RenderPipelineBase> copyTextureForBrowserDstRG16FloatPipeline;
+
         Ref<ShaderModuleBase> copyTextureForBrowserVS;
         Ref<ShaderModuleBase> copyTextureForBrowserFS;
     };
