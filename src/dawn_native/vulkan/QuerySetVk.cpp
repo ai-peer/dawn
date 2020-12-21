@@ -93,6 +93,15 @@ namespace dawn_native { namespace vulkan {
         return mHandle;
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {
+        switch (GetQueryType()) {
+            case wgpu::QueryType::Timestamp:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }
