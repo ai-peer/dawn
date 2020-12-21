@@ -16,6 +16,23 @@
       "message": "Am I blocking CL#35260? If so, @AE/CW could you PTAL? FYI, I will be OOO next week. Thanks!",
       "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc4d40f_6bc25cc3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-21T19:18:21Z",
+      "side": 1,
+      "message": "the version from IDxcVersionInfo and D3D_COMPILER_VERSION - are they in the same namespace? i.e. can we get a concatenation of compilerMajor and compilerMinor that happens to match D3D_COMPILER_VERSION ? If we so we should make sure they\u0027re distinct in the HLSL key\n\npresumably https://dawn-review.googlesource.com/c/dawn/+/35260 will also need to know if the number came from IDxcVersionInfo or D3D_COMPILER_VERSION, so maybe we can just have two getters, one for D3D_COMPILER_VERSION and one for the Dxc version. The Dxc version could return 0 if we\u0027re not using Dxc.",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
