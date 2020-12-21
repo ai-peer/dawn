@@ -80,6 +80,25 @@ class SwapChainTests : public DawnTest {
         queue.Submit(1, &commands);
     }
 
+    void TestPresentMode(wgpu::PresentMode mode1, wgpu::PresentMode mode2) {
+        printf("mode1: %d, mode2: %d\n", mode1, mode2);
+        wgpu::SwapChainDescriptor desc = baseDescriptor;
+
+        desc.presentMode = mode1;
+        wgpu::SwapChain swapchain1 = device.CreateSwapChain(surface, &desc);
+        ClearTexture(swapchain1.GetCurrentTextureView(), {0.0, 0.0, 0.0, 1.0});
+        printf("Cleared swapchain1\n");
+        swapchain1.Present();
+        printf("Presented swapchain1\n");
+
+        desc.presentMode = mode2;
+        wgpu::SwapChain swapchain2 = device.CreateSwapChain(surface, &desc);
+        ClearTexture(swapchain2.GetCurrentTextureView(), {0.0, 0.0, 0.0, 1.0});
+        printf("Cleared swapchain2\n");
+        swapchain2.Present();
+        printf("Presented swapchain2\n");
+    }
+
   protected:
     GLFWwindow* window = nullptr;
     wgpu::Surface surface;
@@ -87,153 +106,12 @@ class SwapChainTests : public DawnTest {
     wgpu::SwapChainDescriptor baseDescriptor;
 };
 
-// Basic test for creating a swapchain and presenting one frame.
-TEST_P(SwapChainTests, Basic) {
-    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
-    swapchain.Present();
-}
 
-// Test replacing the swapchain
-TEST_P(SwapChainTests, ReplaceBasic) {
-    wgpu::SwapChain swapchain1 = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain1.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
-    swapchain1.Present();
-
-    wgpu::SwapChain swapchain2 = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain2.GetCurrentTextureView(), {0.0, 1.0, 0.0, 1.0});
-    swapchain2.Present();
-}
-
-// Test replacing the swapchain after GetCurrentTextureView
-TEST_P(SwapChainTests, ReplaceAfterGet) {
-    wgpu::SwapChain swapchain1 = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain1.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
-
-    wgpu::SwapChain swapchain2 = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain2.GetCurrentTextureView(), {0.0, 1.0, 0.0, 1.0});
-    swapchain2.Present();
-}
-
-// Test destroying the swapchain after GetCurrentTextureView
-TEST_P(SwapChainTests, DestroyAfterGet) {
-    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
-}
-
-// Test destroying the surface before the swapchain
-TEST_P(SwapChainTests, DestroySurface) {
-    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &baseDescriptor);
-    surface = nullptr;
-}
-
-// Test destroying the surface before the swapchain but after GetCurrentTextureView
-TEST_P(SwapChainTests, DestroySurfaceAfterGet) {
-    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &baseDescriptor);
-    ClearTexture(swapchain.GetCurrentTextureView(), {1.0, 0.0, 0.0, 1.0});
-    surface = nullptr;
-}
 
 // Test switching between present modes.
 TEST_P(SwapChainTests, SwitchPresentMode) {
-    // Fails with "internal drawable creation failed" on the Windows NVIDIA CQ builders but not
-    // locally.
-    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsNvidia());
-
-    // TODO(jiawei.shao@intel.com): find out why this test sometimes hangs on the latest Linux Intel
-    // Vulkan drivers.
-    DAWN_SKIP_TEST_IF(IsLinux() && IsVulkan() && IsIntel());
-
-    constexpr wgpu::PresentMode kAllPresentModes[] = {
-        wgpu::PresentMode::Immediate,
-        wgpu::PresentMode::Fifo,
-        wgpu::PresentMode::Mailbox,
-    };
-
-    for (wgpu::PresentMode mode1 : kAllPresentModes) {
-        for (wgpu::PresentMode mode2 : kAllPresentModes) {
-            wgpu::SwapChainDescriptor desc = baseDescriptor;
-
-            desc.presentMode = mode1;
-            wgpu::SwapChain swapchain1 = device.CreateSwapChain(surface, &desc);
-            ClearTexture(swapchain1.GetCurrentTextureView(), {0.0, 0.0, 0.0, 1.0});
-            swapchain1.Present();
-
-            desc.presentMode = mode2;
-            wgpu::SwapChain swapchain2 = device.CreateSwapChain(surface, &desc);
-            ClearTexture(swapchain2.GetCurrentTextureView(), {0.0, 0.0, 0.0, 1.0});
-            swapchain2.Present();
-        }
-    }
+    TestPresentMode(wgpu::PresentMode::Mailbox, wgpu::PresentMode::Fifo);
 }
 
-// Test resizing the swapchain and without resizing the window.
-TEST_P(SwapChainTests, ResizingSwapChainOnly) {
-    for (int i = 0; i < 10; i++) {
-        wgpu::SwapChainDescriptor desc = baseDescriptor;
-        desc.width += i * 10;
-        desc.height -= i * 10;
-
-        wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &desc);
-        ClearTexture(swapchain.GetCurrentTextureView(), {0.05f * i, 0.0f, 0.0f, 1.0f});
-        swapchain.Present();
-    }
-}
-
-// Test resizing the window but not the swapchain.
-TEST_P(SwapChainTests, ResizingWindowOnly) {
-    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &baseDescriptor);
-
-    for (int i = 0; i < 10; i++) {
-        glfwSetWindowSize(window, 400 - 10 * i, 400 + 10 * i);
-        glfwPollEvents();
-
-        ClearTexture(swapchain.GetCurrentTextureView(), {0.05f * i, 0.0f, 0.0f, 1.0f});
-        swapchain.Present();
-    }
-}
-
-// Test resizing both the window and the swapchain at the same time.
-TEST_P(SwapChainTests, ResizingWindowAndSwapChain) {
-    for (int i = 0; i < 10; i++) {
-        glfwSetWindowSize(window, 400 - 10 * i, 400 + 10 * i);
-        glfwPollEvents();
-
-        int width;
-        int height;
-        glfwGetFramebufferSize(window, &width, &height);
-
-        wgpu::SwapChainDescriptor desc = baseDescriptor;
-        desc.width = width;
-        desc.height = height;
-
-        wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &desc);
-        ClearTexture(swapchain.GetCurrentTextureView(), {0.05f * i, 0.0f, 0.0f, 1.0f});
-        swapchain.Present();
-    }
-}
-
-// Test switching devices on the same adapter.
-TEST_P(SwapChainTests, SwitchingDevice) {
-    // The Vulkan Validation Layers incorrectly disallow gracefully passing a swapchain between two
-    // VkDevices using "vkSwapchainCreateInfoKHR::oldSwapchain".
-    // See https://github.com/KhronosGroup/Vulkan-ValidationLayers/issues/2256
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsBackendValidationEnabled());
-
-    wgpu::Device device2 = wgpu::Device::Acquire(GetAdapter().CreateDevice());
-
-    for (int i = 0; i < 3; i++) {
-        wgpu::Device deviceToUse;
-        if (i % 2 == 0) {
-            deviceToUse = device;
-        } else {
-            deviceToUse = device2;
-        }
-
-        wgpu::SwapChain swapchain = deviceToUse.CreateSwapChain(surface, &baseDescriptor);
-        swapchain.GetCurrentTextureView();
-        swapchain.Present();
-    }
-}
 
 DAWN_INSTANTIATE_TEST(SwapChainTests, MetalBackend(), VulkanBackend());

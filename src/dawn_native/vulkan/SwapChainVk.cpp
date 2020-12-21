@@ -436,8 +436,9 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-
+        printf("In SwapChainVk.cpp::PresentImpl()\n");
         if (mConfig.needsBlit) {
+            printf("Need blit\n");
             // TODO ditto same as present below: eagerly transition the blit texture to CopySrc.
             mBlitTexture->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
                                              mBlitTexture->GetAllSubresources());
@@ -478,6 +479,8 @@ namespace dawn_native { namespace vulkan {
 
         DAWN_TRY(device->SubmitPendingCommands());
 
+        printf("Pending commands submitted\n");
+
         // Assuming that the present queue is the same as the graphics queue, the proper
         // synchronization has already been done on the queue so we don't need to wait on any
         // semaphores.
@@ -496,8 +499,12 @@ namespace dawn_native { namespace vulkan {
         mTexture->Destroy();
         mTexture = nullptr;
 
+        printf("before vkQueuePresentKHR\n");
+
         VkResult result =
             VkResult::WrapUnsafe(device->fn.QueuePresentKHR(device->GetQueue(), &presentInfo));
+
+        printf("vkQueuePresentKHR returned\n");
 
         switch (result) {
             case VK_SUCCESS:
