@@ -34,6 +34,24 @@
       "parentUuid": "78fa8ebe_19e738d8",
       "revId": "975aad5c1cc7a905afad7e03591b3f263538cc7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e88d3eb_9f1663b3",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T23:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b376d921_a45bef5d",
+      "revId": "975aad5c1cc7a905afad7e03591b3f263538cc7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

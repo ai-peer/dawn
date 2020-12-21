@@ -375,6 +375,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7132dd8a_ea7c6aec",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T23:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beb5cf08_daebcdc8",
+      "range": {
+        "startLine": 152,
+        "startChar": 23,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60919ace_769a0391",
@@ -576,6 +600,30 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "this case isn\u0027t \"Invalid\" - maybe put it in a separate test like MaxAnisotropyBounds, and test 0 as well as some very large value ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6fc34a3_9b9d7327",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T23:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09ddfd86_f72ed4bd",
       "range": {
         "startLine": 59,
         "startChar": 8,
