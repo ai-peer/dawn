@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61652033_b370e754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-21T08:40:10Z",
+      "side": 1,
+      "message": "The main concern is about each dst format will need a pipeline object. In future, I\u0027d like to expand this internal pipeline to support all renderable texture format as dst texture format. And this means we\u0027ll have lots of pipeline object been cached.",
+      "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
