@@ -280,7 +280,10 @@ namespace dawn_native { namespace opengl {
 
         ApplyDepthStencilState(gl, GetDepthStencilStateDescriptor(), &persistentPipelineState);
 
-        gl.SampleMaski(0, GetSampleMask());
+        if (gl.SampleMaski) {
+            gl.SampleMaski(0, GetSampleMask());
+        }
+
         if (IsAlphaToCoverageEnabled()) {
             gl.Enable(GL_SAMPLE_ALPHA_TO_COVERAGE);
         } else {
