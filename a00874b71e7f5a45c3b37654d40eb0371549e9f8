@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f27b48_1d5d65fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-21T08:34:55Z",
+      "side": 1,
+      "message": "(Since it\u0027s holiday, no need to reply in hurry, just FYI).\nThis is a prototying when I try to support color conversion in internal shader. And I hit several issues.\nI try to make a prototyping which is one of the solution as the base of discussion.\n\nMore details are in commit message.",
+      "revId": "a00874b71e7f5a45c3b37654d40eb0371549e9f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
