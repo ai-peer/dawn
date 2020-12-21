@@ -16,6 +16,24 @@
       "message": "The main concern is about each dst format will need a pipeline object. In future, I\u0027d like to expand this internal pipeline to support all renderable texture format as dst texture format. And this means we\u0027ll have lots of pipeline object been cached.",
       "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d149c4ef_45ae6250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-21T21:28:07Z",
+      "side": 1,
+      "message": "Can we just have a map of texture format to Ref\u003cRenderPipelineBase\u003e to simplify the implementation? I\u0027m not sure if it\u0027s so significant of a problem to have lots of cached objects. If the shaders are identical, the driver implementation should be able to deduplicate the state differences in pipelines when we add the backend pipeline caches.\n^ If you want, we could measure this if we add a vkPipelineCache, and then check the serialized size after storing one pipeline, and then check again after storing many of different dst format.\n\nIf it\u0027s a problem, in the future, I think we could always implement some heuristics to prune the cache if it grows too large (like if an internal pipeline hasn\u0027t been used recently).\n\nAs a side note: I\u0027m also curious what the cost of Dawn\u0027s frontend pipeline deduplication is. We already have a way to hash the descriptor and return a ref to an existing pipeline if there already is one. It would simplify things (slightly) to rely on that mechanism instead of having our own cache inside InternalPipelineStore. The main benefit though would be that if we added last-recently-used heuristics, we just need a simple LRU cache of Ref\u003cRenderPipelineBase\u003e and not care about the mapping of dstFormat-\u003eRenderPipelineBase",
+      "parentUuid": "61652033_b370e754",
+      "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
