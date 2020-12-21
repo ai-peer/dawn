@@ -29,6 +29,8 @@ namespace dawn_native { namespace d3d12 {
 
         ID3D12QueryHeap* GetQueryHeap() const;
 
+        bool IsInternalPipelineNeeded() const override;
+
       private:
         ~QuerySet() override;
         using QuerySetBase::QuerySetBase;

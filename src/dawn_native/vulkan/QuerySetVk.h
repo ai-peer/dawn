@@ -30,6 +30,8 @@ namespace dawn_native { namespace vulkan {
 
         VkQueryPool GetHandle() const;
 
+        bool IsInternalPipelineNeeded() const override;
+
       private:
         ~QuerySet() override;
         using QuerySetBase::QuerySetBase;
