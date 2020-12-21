@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78fa8ebe_19e738d8",
+        "filename": "src/dawn_native/Sampler.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "I just noticed these values are not used for assigning the backend version of the sampler (they are still using the one from the descriptor)\nShall we change these from private to protected and use these values in the inherited class instead of the one from descriptor? Or is there other concerns for not using these values in inherited class?",
+      "revId": "975aad5c1cc7a905afad7e03591b3f263538cc7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

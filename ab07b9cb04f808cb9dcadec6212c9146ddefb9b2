@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6712d670_c1ab9a72",
+        "filename": "dawn.json",
+        "patchSetId": 15
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058e7a35_1077c272",
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac909611_b9bec96d",
@@ -100,6 +118,30 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "nit: prefer std::min ?",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 35
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2c032c_134799be",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac909611_b9bec96d",
       "range": {
         "startLine": 78,
         "startChar": 32,
@@ -133,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31494a94_d4cadd9e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ade61d_0ed9241c",
+      "range": {
+        "startLine": 320,
+        "startChar": 44,
+        "endLine": 320,
+        "endChar": 57
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92b53c37_ec517519",
@@ -146,6 +212,24 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "nit: would prefer to set createInfo.maxAnisotropy in this if-statement as well.",
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8967fb_dfcdc42d",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92b53c37_ec517519",
       "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -173,6 +257,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de3a811_508ae09e",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abc24892_b1c58208",
+      "range": {
+        "startLine": 31,
+        "startChar": 16,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd892935_2faad080",
@@ -186,6 +294,30 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "nit: the typenames are short enough we should just say wgpu::ShaderModule here",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 12
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686f2ca9_b28c8020",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd892935_2faad080",
       "range": {
         "startLine": 40,
         "startChar": 8,
@@ -221,6 +353,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "beb5cf08_daebcdc8",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Can premultiply the matrix to vertices position attribute so we are passing NDC space position directly. But I don\u0027t think that is more readable and easy to tweak.\nIf we assign 4 points (in NDC space) directly, the perspective relation might be incorrect and I don\u0027t know if that could effectively test the texture filter behavior",
+      "parentUuid": "5724df03_8097a4ab",
+      "range": {
+        "startLine": 152,
+        "startChar": 23,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60919ace_769a0391",
         "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
         "patchSetId": 15
@@ -232,6 +388,30 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "nit: typo",
+      "range": {
+        "startLine": 200,
+        "startChar": 11,
+        "endLine": 200,
+        "endChar": 25
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92b3a4c_bdbbe5de",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60919ace_769a0391",
       "range": {
         "startLine": 200,
         "startChar": 11,
@@ -265,6 +445,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9eae11_42631dba",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2571c48_dd06c5e1",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 25
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73c28e78_5d4d804f",
@@ -288,6 +492,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df3eac3_ab6d77e4",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c28e78_5d4d804f",
+      "range": {
+        "startLine": 236,
+        "startChar": 11,
+        "endLine": 236,
+        "endChar": 25
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "468bbd21_36a8f99b",
@@ -301,6 +529,30 @@
       "writtenOn": "2020-12-21T18:59:17Z",
       "side": 1,
       "message": "nit: also test some really large value to be sure it\u0027s clamped to something reasonable",
+      "range": {
+        "startLine": 275,
+        "startChar": 49,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7858bfe_0554684d",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-21T21:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "468bbd21_36a8f99b",
       "range": {
         "startLine": 275,
         "startChar": 49,
