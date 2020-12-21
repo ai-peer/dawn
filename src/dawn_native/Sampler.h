@@ -55,6 +55,7 @@ namespace dawn_native {
         float mLodMinClamp;
         float mLodMaxClamp;
         wgpu::CompareFunction mCompareFunction;
+        uint16_t mMaxAnisotropy;
     };
 
 }  // namespace dawn_native
