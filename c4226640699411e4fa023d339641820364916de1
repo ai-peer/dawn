@@ -152,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c702ea07_e4e7ace2",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-21T08:30:38Z",
+      "side": 1,
+      "message": "Gotcha, you could just add a +1, it\u0027s ok to send one more warp than necessary in some cases (or do (input-\u003eGetSize() + 7) / 8)",
+      "parentUuid": "669a5aab_4f8c653a",
+      "range": {
+        "startLine": 184,
+        "startChar": 88,
+        "endLine": 184,
+        "endChar": 92
+      },
+      "revId": "c4226640699411e4fa023d339641820364916de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddba3512_d2c1c263",
