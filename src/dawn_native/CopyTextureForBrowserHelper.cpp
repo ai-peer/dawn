@@ -28,6 +28,7 @@
 #include "dawn_native/Sampler.h"
 #include "dawn_native/Texture.h"
 
+#include <sstream>
 #include <unordered_set>
 
 namespace dawn_native {
@@ -57,25 +58,47 @@ namespace dawn_native {
         )";
 
         static const char sPassthrough2D4ChannelFrag[] = R"(
-            [[binding(1), set(0)]] var<uniform_constant> mySampler: sampler;
-            [[binding(2), set(0)]] var<uniform_constant> myTexture: texture_sampled_2d<f32>;
-            [[location(0)]] var<in> v_texcoord : vec2<f32>;
-            [[location(0)]] var<out> rgbaColor : vec4<f32>;
-            [[stage(fragment)]] fn main() -> void {
-                # Clamp the texcoord and discard the out-of-bound pixels.
-                var clampedTexcoord : vec2<f32> =
-                    clamp(v_texcoord, vec2<f32>(0.0, 0.0), vec2<f32>(1.0, 1.0));
-                if (all(clampedTexcoord == v_texcoord)) {
-                    rgbaColor = textureSample(myTexture, mySampler, v_texcoord);
+                [[binding(1), set(0)]] var<uniform_constant> mySampler: sampler;
+                [[location(0)]] var<in> v_texcoord : vec2<f32>;
+                [[block]] struct ColorConversionOp {
+                    [[offset(0)]] swizzle: u32;
+                    [[offset(4)]] clipToRG: u32;
+                };
+                [[binding(3), set(0)]] var<uniform> colorConversionOp : ColorConversionOp;
+                [[binding(2), set(0)]] var<uniform_constant> myTexture: texture_sampled_2d<f32>;
+                [[location(0)]] var<out> fourChannelColor : vec4<f32>;
+                [[location(1)]] var<out> twoChannelColor : vec2<f32>;
+                [[stage(fragment)]] fn main() -> void {
+                    # Clamp the texcoord and discard the out-of-bound pixels.
+                    var clampedTexcoord : vec2<f32> =
+                        clamp(v_texcoord, vec2<f32>(0.0, 0.0), vec2<f32>(1.0, 1.0)); 
+                    if (all(clampedTexcoord == v_texcoord)) {
+                        # All input textures are 4 channel, unorm channel type.
+                        var tempColor : vec4<f32> = textureSample(myTexture, mySampler, v_texcoord);
+                        if (colorConversionOp.swizzle > 0) {
+                            # In webgpu, swizzle is specialized to rg<ba> <-> <b>gr<a>;
+                            var temp : f32 = tempColor[0];
+                            tempColor[0] = tempColor[2];
+                            tempColor[2] = temp;
+                        }
+                        if (colorConversionOp.clipToRG > 0) {
+                            twoChannelColor[0] = tempColor[0];
+                            twoChannelColor[1] = tempColor[1];
+                        } else {
+                            fourChannelColor = tempColor;
+                        }
+                    }
                 }
-            }
-        )";
+            )";
 
-        // TODO(shaobo.yan@intel.com): Expand supported texture formats
+        // TODO(shaobo.yan@intel.com): Expand copyTextureForBrowser to support any
+        // non-depth, non-stencil, non-compressed texture format pair copy. Now this API
+        // supports CopyImageBitmapToTexture normal format pairs.
         MaybeError ValidateCopyTextureFormatConversion(const wgpu::TextureFormat srcFormat,
                                                        const wgpu::TextureFormat dstFormat) {
             switch (srcFormat) {
                 case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::BGRA8Unorm:
                     break;
                 default:
                     return DAWN_VALIDATION_ERROR(
@@ -84,6 +107,12 @@ namespace dawn_native {
 
             switch (dstFormat) {
                 case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::BGRA8Unorm:
+                case wgpu::TextureFormat::RGB10A2Unorm:
+                case wgpu::TextureFormat::RGBA16Float:
+                case wgpu::TextureFormat::RGBA32Float:
+                case wgpu::TextureFormat::RG8Unorm:
+                case wgpu::TextureFormat::RG16Float:
                     break;
                 default:
                     return DAWN_VALIDATION_ERROR(
@@ -103,10 +132,100 @@ namespace dawn_native {
             return {};
         }
 
-        RenderPipelineBase* GetOrCreateCopyTextureForBrowserPipeline(DeviceBase* device) {
+        uint32_t GetChannelNumber(wgpu::TextureFormat format) {
+            switch (format) {
+                case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::BGRA8Unorm:
+                case wgpu::TextureFormat::RGB10A2Unorm:
+                case wgpu::TextureFormat::RGBA16Float:
+                case wgpu::TextureFormat::RGBA32Float:
+                    return 4;
+                case wgpu::TextureFormat::RG8Unorm:
+                case wgpu::TextureFormat::RG16Float:
+                    return 2;
+                default:
+                    return 0;
+            }
+        }
+
+        void CacheRenderPipeline(InternalPipelineStore* store,
+                                 wgpu::TextureFormat format,
+                                 Ref<RenderPipelineBase> pipeline) {
+            switch (format) {
+                case wgpu::TextureFormat::RGBA8Unorm:
+                    store->copyTextureForBrowserDstRGBA8UnormPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::BGRA8Unorm:
+                    store->copyTextureForBrowserDstBGRA8UnormPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::RGB10A2Unorm:
+                    store->copyTextureForBrowserDstRGB10A2UnormPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::RGBA16Float:
+                    store->copyTextureForBrowserDstRGBA16FloatPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::RGBA32Float:
+                    store->copyTextureForBrowserDstRGBA32FloatPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::RG8Unorm:
+                    store->copyTextureForBrowserDstRG8UnormPipeline = pipeline;
+                    break;
+                case wgpu::TextureFormat::RG16Float:
+                    store->copyTextureForBrowserDstRG16FloatPipeline = pipeline;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        RenderPipelineBase* GetCachedPipeline(InternalPipelineStore* store,
+                                              wgpu::TextureFormat format) {
+            switch (format) {
+                case wgpu::TextureFormat::RGBA8Unorm:
+                    if (store->copyTextureForBrowserDstRGBA8UnormPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRGBA8UnormPipeline.Get();
+                case wgpu::TextureFormat::BGRA8Unorm:
+                    if (store->copyTextureForBrowserDstBGRA8UnormPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstBGRA8UnormPipeline.Get();
+                case wgpu::TextureFormat::RGB10A2Unorm:
+                    if (store->copyTextureForBrowserDstRGB10A2UnormPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRGB10A2UnormPipeline.Get();
+                case wgpu::TextureFormat::RGBA16Float:
+                    if (store->copyTextureForBrowserDstRGBA16FloatPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRGBA16FloatPipeline.Get();
+                case wgpu::TextureFormat::RGBA32Float:
+                    if (store->copyTextureForBrowserDstRGBA32FloatPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRGBA32FloatPipeline.Get();
+                case wgpu::TextureFormat::RG8Unorm:
+                    if (store->copyTextureForBrowserDstRG8UnormPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRG8UnormPipeline.Get();
+                case wgpu::TextureFormat::RG16Float:
+                    if (store->copyTextureForBrowserDstRG16FloatPipeline == nullptr) {
+                        return nullptr;
+                    }
+                    return store->copyTextureForBrowserDstRG16FloatPipeline.Get();
+                default:
+                    return nullptr;
+            }
+        }
+
+        RenderPipelineBase* GetOrCreateCopyTextureForBrowserPipeline(DeviceBase* device,
+                                                                     wgpu::TextureFormat format) {
             InternalPipelineStore* store = device->GetInternalPipelineStore();
 
-            if (store->copyTextureForBrowserPipeline == nullptr) {
+            if (GetCachedPipeline(store, format) == nullptr) {
                 // Create vertex shader module if not cached before.
                 if (store->copyTextureForBrowserVS == nullptr) {
                     ShaderModuleDescriptor descriptor;
@@ -143,8 +262,14 @@ namespace dawn_native {
                 fragmentStage.entryPoint = "main";
 
                 // Prepare color state.
-                ColorStateDescriptor colorState = {};
-                colorState.format = wgpu::TextureFormat::RGBA8Unorm;
+                ColorStateDescriptor colorState[2];
+                if (GetChannelNumber(format) == 4) {
+                    colorState[0].format = format;
+                    colorState[1].format = wgpu::TextureFormat::RG8Unorm;
+                } else {
+                    colorState[0].format = wgpu::TextureFormat::RGBA8Unorm;
+                    colorState[1].format = format;
+                }
 
                 // Create RenderPipeline.
                 RenderPipelineDescriptor renderPipelineDesc = {};
@@ -157,14 +282,14 @@ namespace dawn_native {
 
                 renderPipelineDesc.primitiveTopology = wgpu::PrimitiveTopology::TriangleList;
 
-                renderPipelineDesc.colorStateCount = 1;
-                renderPipelineDesc.colorStates = &colorState;
+                renderPipelineDesc.colorStateCount = 2;
+                renderPipelineDesc.colorStates = colorState;
 
-                store->copyTextureForBrowserPipeline =
-                    AcquireRef(device->CreateRenderPipeline(&renderPipelineDesc));
+                CacheRenderPipeline(store, format,
+                                    AcquireRef(device->CreateRenderPipeline(&renderPipelineDesc)));
             }
 
-            return store->copyTextureForBrowserPipeline.Get();
+            return GetCachedPipeline(store, format);
         }
 
     }  // anonymous namespace
@@ -214,16 +339,18 @@ namespace dawn_native {
                                        const CopyTextureForBrowserOptions* options) {
         // TODO(shaobo.yan@intel.com): In D3D12 and Vulkan, compatible texture format can directly
         // copy to each other. This can be a potential fast path.
-        RenderPipelineBase* pipeline = GetOrCreateCopyTextureForBrowserPipeline(device);
+
+        RenderPipelineBase* pipeline = GetOrCreateCopyTextureForBrowserPipeline(
+            device, destination->texture->GetFormat().format);
 
         // Prepare bind group layout.
         Ref<BindGroupLayoutBase> layout = AcquireRef(pipeline->GetBindGroupLayout(0));
 
         // Prepare bind group descriptor
-        BindGroupEntry bindGroupEntries[3] = {};
+        BindGroupEntry bindGroupEntries[4] = {};
         BindGroupDescriptor bgDesc = {};
         bgDesc.layout = layout.Get();
-        bgDesc.entryCount = 3;
+        bgDesc.entryCount = 4;
         bgDesc.entries = bindGroupEntries;
 
         // Prepare binding 0 resource: uniform buffer.
@@ -258,6 +385,21 @@ namespace dawn_native {
         Ref<TextureViewBase> srcTextureView =
             AcquireRef(source->texture->CreateView(&srcTextureViewDesc));
 
+        // Prepare binding 3 resource: color conversion parameter
+        uint32_t colorConversionOps[] = {
+            0,  // swizzle
+            0   // clipToRG
+        };
+
+        BufferDescriptor colorConversionOpsDesc = {};
+        colorConversionOpsDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+        colorConversionOpsDesc.size = sizeof(colorConversionOps);
+        Ref<BufferBase> colorConversionOpsBuffer =
+            AcquireRef(device->CreateBuffer(&colorConversionOpsDesc));
+
+        device->GetDefaultQueue()->WriteBuffer(colorConversionOpsBuffer.Get(), 0,
+                                               colorConversionOps, sizeof(colorConversionOps));
+
         // Set bind group entries.
         bindGroupEntries[0].binding = 0;
         bindGroupEntries[0].buffer = uniformBuffer.Get();
@@ -266,6 +408,9 @@ namespace dawn_native {
         bindGroupEntries[1].sampler = sampler.Get();
         bindGroupEntries[2].binding = 2;
         bindGroupEntries[2].textureView = srcTextureView.Get();
+        bindGroupEntries[3].binding = 3;
+        bindGroupEntries[3].buffer = colorConversionOpsBuffer.Get();
+        bindGroupEntries[3].size = sizeof(colorConversionOps);
 
         // Create bind group after all binding entries are set.
         Ref<BindGroupBase> bindGroup = AcquireRef(device->CreateBindGroup(&bgDesc));
@@ -282,16 +427,60 @@ namespace dawn_native {
             AcquireRef(destination->texture->CreateView(&dstTextureViewDesc));
 
         // Prepare render pass color attachment descriptor.
-        RenderPassColorAttachmentDescriptor colorAttachmentDesc;
-        colorAttachmentDesc.attachment = dstView.Get();
-        colorAttachmentDesc.loadOp = wgpu::LoadOp::Load;
-        colorAttachmentDesc.storeOp = wgpu::StoreOp::Store;
-        colorAttachmentDesc.clearColor = {0.0, 0.0, 0.0, 1.0};
+        Ref<TextureBase> emptyTexture = nullptr;
+        Ref<TextureViewBase> emptyTextureView = nullptr;
+        RenderPassColorAttachmentDescriptor colorAttachmentDesc[2];
+
+        TextureDescriptor emptyTextureDescriptor;
+        TextureViewDescriptor emptyTextureViewDesc;
+        if (GetChannelNumber(destination->texture->GetFormat().format) == 4) {
+            emptyTextureDescriptor.size = {destination->texture->GetWidth(),
+                                           destination->texture->GetHeight(), 1};
+            emptyTextureDescriptor.format = wgpu::TextureFormat::RG8Unorm;
+            emptyTextureDescriptor.mipLevelCount = 1;
+            emptyTextureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
+            emptyTexture = AcquireRef(device->CreateTexture(&emptyTextureDescriptor));
+
+            emptyTextureViewDesc.baseMipLevel = 0;
+            emptyTextureViewDesc.mipLevelCount = 1;
+            emptyTextureView = AcquireRef(emptyTexture->CreateView(&emptyTextureViewDesc));
+
+            colorAttachmentDesc[0].attachment = dstView.Get();
+            colorAttachmentDesc[0].loadOp = wgpu::LoadOp::Load;
+            colorAttachmentDesc[0].storeOp = wgpu::StoreOp::Store;
+            colorAttachmentDesc[0].clearColor = {0.0, 0.0, 0.0, 1.0};
+
+            colorAttachmentDesc[1].attachment = emptyTextureView.Get();
+            colorAttachmentDesc[1].loadOp = wgpu::LoadOp::Load;
+            colorAttachmentDesc[1].storeOp = wgpu::StoreOp::Store;
+            colorAttachmentDesc[1].clearColor = {0.0, 0.0, 0.0, 1.0};
+        } else {
+            emptyTextureDescriptor.size = {destination->texture->GetWidth(),
+                                           destination->texture->GetHeight(), 1};
+            emptyTextureDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+            emptyTextureDescriptor.mipLevelCount = 1;
+            emptyTextureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
+            emptyTexture = AcquireRef(device->CreateTexture(&emptyTextureDescriptor));
+
+            emptyTextureViewDesc.baseMipLevel = 0;
+            emptyTextureViewDesc.mipLevelCount = 1;
+            emptyTextureView = AcquireRef(emptyTexture->CreateView(&emptyTextureViewDesc));
+
+            colorAttachmentDesc[0].attachment = emptyTextureView.Get();
+            colorAttachmentDesc[0].loadOp = wgpu::LoadOp::Load;
+            colorAttachmentDesc[0].storeOp = wgpu::StoreOp::Store;
+            colorAttachmentDesc[0].clearColor = {0.0, 0.0, 0.0, 1.0};
+
+            colorAttachmentDesc[1].attachment = dstView.Get();
+            colorAttachmentDesc[1].loadOp = wgpu::LoadOp::Load;
+            colorAttachmentDesc[1].storeOp = wgpu::StoreOp::Store;
+            colorAttachmentDesc[1].clearColor = {0.0, 0.0, 0.0, 1.0};
+        }
 
         // Create render pass.
         RenderPassDescriptor renderPassDesc;
-        renderPassDesc.colorAttachmentCount = 1;
-        renderPassDesc.colorAttachments = &colorAttachmentDesc;
+        renderPassDesc.colorAttachmentCount = 2;
+        renderPassDesc.colorAttachments = colorAttachmentDesc;
         Ref<RenderPassEncoder> passEncoder = AcquireRef(encoder->BeginRenderPass(&renderPassDesc));
 
         // Start pipeline  and encode commands to complete
