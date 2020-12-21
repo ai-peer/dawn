@@ -7,6 +7,7 @@ vars = {
   'dawn_git': 'https://dawn.googlesource.com',
   'github_git': 'https://github.com',
   'swiftshader_git': 'https://swiftshader.googlesource.com',
+  'angle_git': 'https://chromium.googlesource.com/angle',
 
   'dawn_standalone': True,
 }
@@ -111,12 +112,31 @@ deps = {
     'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Loader@d846ea5a2427eb0119cf98288aa337eced10edbd',
     'condition': 'dawn_standalone',
   },
+  # Khronos Vulkan tools, required by ANGLE for mocking.
+  'third_party/vulkan-tools/src': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Tools@0e8c2a5ca5f302f0137550bca1d8557cbaf87ad7',
+    'condition': 'dawn_standalone',
+  },
+
+  'third_party/vulkan_memory_allocator': {
+    'url': '{chromium_git}/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator@065e739079d9d58bef28ccd793cbf512261f09ed',
+    'condition': 'dawn_standalone',
+  },
+
+  'third_party/angle': {
+    'url': '{angle_git}/angle@11c31e0a4a73d7d62e765dc7ec400560fbb16b5e',
+    'condition': 'dawn_standalone',
+  },
 
   'third_party/swiftshader': {
     'url': '{swiftshader_git}/SwiftShader@df17a76102dfabb3f1bd6e51449cece9f77b45e3',
     'condition': 'dawn_standalone',
   },
 
+  'third_party/zlib': {
+    'url': '{chromium_git}/chromium/src/third_party/zlib@c29ee8c9c3824ca013479bf8115035527967fe02',
+    'condition': 'dawn_standalone',
+  },
 }
 
 hooks = [
