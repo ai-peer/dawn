@@ -111,6 +111,30 @@
       },
       "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4304b1d1_bd1f29f4",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-21T19:53:34Z",
+      "side": 1,
+      "message": "Oh sorry for the back and forth. Using whatever is in the spec now should be good and we can open an issue about whether to have the 8192 limit for all query types and see later (maybe after Origin Trial).",
+      "parentUuid": "cd906198_946c8afe",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
