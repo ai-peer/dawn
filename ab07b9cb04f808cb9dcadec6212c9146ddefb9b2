@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff995bc9_3dcd6f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-21T19:23:16Z",
+      "side": 1,
+      "message": "Should I do a 2½th review or is this good to go after the open comments?",
+      "revId": "ab07b9cb04f808cb9dcadec6212c9146ddefb9b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "058e7a35_1077c272",
