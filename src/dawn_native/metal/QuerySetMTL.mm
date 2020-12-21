@@ -116,6 +116,8 @@ namespace dawn_native { namespace metal {
         return mCounterSampleBuffer;
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {return false}
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }
