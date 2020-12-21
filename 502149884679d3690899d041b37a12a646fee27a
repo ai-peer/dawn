@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "502149884679d3690899d041b37a12a646fee27a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c9a791_6961614e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-21T19:07:16Z",
+      "side": 1,
+      "message": "LGTM too - are there tests that can be enabled by this change? or were they already enabled but failures were caught when running on Intel platforms?",
+      "revId": "502149884679d3690899d041b37a12a646fee27a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
