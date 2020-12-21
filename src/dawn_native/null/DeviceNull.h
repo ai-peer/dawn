@@ -116,6 +116,8 @@ namespace dawn_native { namespace null {
         uint32_t GetOptimalBytesPerRowAlignment() const override;
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
+        float GetTimestampPeriod() const override;
+
       private:
         using DeviceBase::DeviceBase;
 
@@ -223,6 +225,8 @@ namespace dawn_native { namespace null {
     class QuerySet final : public QuerySetBase {
       public:
         QuerySet(Device* device, const QuerySetDescriptor* descriptor);
+
+        bool IsInternalPipelineNeeded() const override;
 
       private:
         ~QuerySet() override;

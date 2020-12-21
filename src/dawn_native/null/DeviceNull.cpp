@@ -318,6 +318,10 @@ namespace dawn_native { namespace null {
         : QuerySetBase(device, descriptor) {
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {
+        return false;
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }
@@ -468,6 +472,10 @@ namespace dawn_native { namespace null {
 
     uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
         return 1;
+    }
+
+    float Device::GetTimestampPeriod() const {
+        return 0.0f;
     }
 
 }}  // namespace dawn_native::null

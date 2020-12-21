@@ -34,6 +34,8 @@ namespace dawn_native { namespace metal {
         id<MTLCounterSampleBuffer> GetCounterSampleBuffer() const
             API_AVAILABLE(macos(10.15), ios(14.0));
 
+        bool IsInternalPipelineNeeded() const override;
+
       private:
         ~QuerySet() override;
         using QuerySetBase::QuerySetBase;

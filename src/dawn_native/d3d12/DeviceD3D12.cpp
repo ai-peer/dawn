@@ -655,4 +655,10 @@ namespace dawn_native { namespace d3d12 {
         return 1;
     }
 
+    float Device::GetTimestampPeriod() const {
+        uint64_t frequency;
+        mCommandQueue->GetTimestampFrequency(&frequency);
+        return frequency == 0 ? 0.0f : static_cast<float>(1e9) / frequency;
+    }
+
 }}  // namespace dawn_native::d3d12
