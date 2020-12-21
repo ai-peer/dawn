@@ -87,6 +87,30 @@
       },
       "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd906198_946c8afe",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-21T19:44:08Z",
+      "side": 1,
+      "message": "Yes, in that issue it does seem we agreed to enforce this limitation for all queries, so to match the spec, let\u0027s change this back for now and check the size on query set creation for all types of queries. It should be simple to change in the future if we need different limits.",
+      "parentUuid": "bd18ae50_fbe37fd2",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
