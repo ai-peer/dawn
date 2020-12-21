@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f02c3d0_f1fdecdb",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-12-21T08:30:29Z",
+      "side": 1,
+      "message": "nit: we can take by const \u0026 or by value, but taking by \u0026 makes it seems that we\u0027ll modify the value. Here we could take by value because I believe there was a const_cast problem otherwise?",
+      "revId": "ba285262c5149bad2e0c976725d7f2d009b4b760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
