@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13138e91_0947a138",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "typo: contains",
+      "range": {
+        "startLine": 79,
+        "startChar": 28,
+        "endLine": 79,
+        "endChar": 36
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff778856_53fcfb74",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "comments need updating; the input/output are the same buffer now.",
+      "range": {
+        "startLine": 83,
+        "startChar": 5,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29da54b3_1f32ac4e",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "nit: would prefer a simple initializer list:\n\nstd::vector\u003cuint64_t\u003e timestamps \u003d {\n  kOne,\n  10079569507,\n  ...\n};\n\nstd::vector\u003cuint32_t\u003e availabilities \u003d {\n  ...\n};\n\n\nFurther, why do we need the |kOne| magic value? Can\u0027t we check the availabilities buffer instead?",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 5
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8cc2c2_d787ac22",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "|expected| is reused between the test cases below, and it\u0027s confusing to understand since PrepareExpectedResults is mutating it. Can\u0027t we just return a new std::vector from PrepareExpectedResults? From what I understand we are just making a copy of timestampArr starting at |offset|, and then converting the timestamps to nanoseconds.",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb414f89_4797f1d4",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to check the contents here. We can assume that WriteBuffer worked correctly.",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50a0536_3fc3ef7a",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "ditto - check not needed",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd397c58_de4d7171",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T17:53:06Z",
+      "side": 1,
+      "message": "Can we have |PrepareExpectedResults| prepare the entire buffer instead of having to do two separate expectations here?",
+      "range": {
+        "startLine": 204,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 95
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
