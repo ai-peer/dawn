@@ -33,6 +33,24 @@
       "message": "ditto TODO(crbug.com/tint/386) ?",
       "revId": "af4aa72d4f62e22838a4d885b67f8fea426d2464",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983292f7_69daef7a",
+        "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T19:28:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d861e508_99a6d062",
+      "revId": "af4aa72d4f62e22838a4d885b67f8fea426d2464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
