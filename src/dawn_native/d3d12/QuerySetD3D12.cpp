@@ -55,6 +55,15 @@ namespace dawn_native { namespace d3d12 {
         return mQueryHeap.Get();
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {
+        switch (GetQueryType()) {
+            case wgpu::QueryType::Timestamp:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }

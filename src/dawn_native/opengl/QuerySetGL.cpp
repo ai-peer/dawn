@@ -22,6 +22,10 @@ namespace dawn_native { namespace opengl {
         : QuerySetBase(device, descriptor) {
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {
+        return false;
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }
