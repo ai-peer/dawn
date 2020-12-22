@@ -16,6 +16,70 @@
       "message": "The tests start failing again for vulkan swift shader. Maybe there\u0027 something change there. Will look at it",
       "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2f7d89_36450452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T21:04:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure what might have changed, but I\u0027m not too surprised because I think this test is more strict than the specs require. Unfortunately it\u0027s also a very useful test to ensure that the maxAnisotropy setting is getting passed through at all (since they all have different rendering results).\n\nMaybe we should just add suppressions liberally for platforms that don\u0027t pass (like SwiftShader) so we can keep testing that?",
+      "parentUuid": "055e31a6_1cc2081a",
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce9d224_e7318296",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T21:04:17Z",
+      "side": 1,
+      "message": "here too",
+      "range": {
+        "startLine": 563,
+        "startChar": 73,
+        "endLine": 563,
+        "endChar": 76
+      },
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86ed537a_396017a4",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T21:04:17Z",
+      "side": 1,
+      "message": "here too",
+      "range": {
+        "startLine": 564,
+        "startChar": 46,
+        "endLine": 564,
+        "endChar": 49
+      },
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
