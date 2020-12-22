@@ -16,6 +16,319 @@
       "message": "Thanks for the review",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b3e3dce_efbeb13e",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "I didn\u0027t realize this, but it makes sense. Can you make a PR to the spec to add these?\n\nWe don\u0027t have a formal sampler validation section yet, but you can add it to this list informally:\nhttps://github.com/gpuweb/gpuweb/blob/32cd1141da/spec/index.bs#L2365",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c823841d_b8e60078",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "We haven\u0027t clearly specced this, but I think we want a validation error if maxAnisotropy \u003c 1.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab17ed3d_b1e28b99",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "Is this limit coming directly from Vulkan? From what I can tell, there\u0027s no guarantee it will be 1 if the samplerAnisotropy feature is unavailable. So I guess we should only set it if the feature is available, below (or otherwise 1).",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652ccf68_2ea4291c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "Is this implementation shareable with the similar ones above?",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa92beb_eb7bc468",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "And can this be phrased as two calls to that shared code?",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258bc105_3c21b6f4",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "nit: missing punctuation",
+      "range": {
+        "startLine": 563,
+        "startChar": 23,
+        "endLine": 564,
+        "endChar": 49
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9559103e_f90149bc",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "optional:\n\nIt should be possible to embed all of these inside the shader if you want to simplify the test a little bit. (For position/uv, indices indexed by vertex_idx, like in samples.)\n\nAlso if it\u0027s possible to hardcode the positions in clip space, rather than using a matrix, I think it would be a bit easier to reason about. (Pretty sure the test should work the same way.)",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9432485d_049f8a7a",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "nit: colors.size();",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1bb781a_413f7593",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "IIUC, anisotropic filtering should have an effect even on textures which are not mipmapped. Maybe it would be good to have a test for that and maybe it would make it easier to understand the guarantees of what we want to check. (Though, could defer this to CTS.)",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd65d6dc_bf353e4a",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "Note the depth clip range for WebGL (-1 to 1) and WebGPU (0 to 1) are different so this matrix might have a different result.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a5db592_f90625f2",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "UV goes 0-1-50 instead of 0-1, but I don\u0027t exactly understand why. Is it necessary?",
+      "range": {
+        "startLine": 180,
+        "startChar": 86,
+        "endLine": 180,
+        "endChar": 88
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5cb9aa_1ec2e8b2",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "If I reduce the canvas size in this demo to 16x16, then only a few pixels at the edges end up having interpolated values - the ones near the middle are all solid colors. Maybe this test should use a higher resolution?\nhttps://jsfiddle.net/t8k7c95o/5/",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c40723d_be2ea8d6",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "Is there a specific reason to expect filtering not to occur on this pixel? E.g. in the WebGL sample if the resolution is high enough, I can see filtering between blue and green (mipmap filtering, of course, since anisotropic filtering is disabled). Probably this happens to be guaranteed at this resolution but I don\u0027t know.\n\nDiagrams would be helpful here if possible, we probably can\u0027t accurately represent the expectations. And unfortunately I don\u0027t know enough about anisotropic filtering to know what we can expect. E.g.:\n\n top-to-bottom down the middle of the rendering:\n 0BB?GG?RRRRRRRRR\n\n(except that\u0027s not right.)\n\nWhen we get to CTS tests I think it would be good to have several tests that inspect very fine details, e.g.\n- looking just between two miplevels and counting the number of different shades that appear.\n- looking at a single miplevel with two colors in it, and counting shades.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e4c381_fdd15c9d",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "This expectation is different than the one for maxAnisotropy \u003d\u003d 1, which means we\u0027re actually expecting anisotropic filtering to always work. Perhaps it\u0027s okay for a Dawn test, but it would fail on machines without anisotropic filtering. In CTS we would have to issue warnings.\n\nMaybe here we should have increasingly strict tests as the maxAnisotropy goes to 1, e.g.\n\n if (maxAnisotropy \u003e\u003d 16) {\n   // least strict checks\n }\n if (maxAnisotropy \u003d\u003d 2) {\n   // more strict\n }\n if (maxAnisotropy \u003c\u003d 1) {\n   // even more strict\n }\n // Maybe stricter checks for \u003d\u003d2 and \u003e\u003d16 like those you have now, possibly gated on whether the system advertises anisotropic filtering",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b161ccc_b69a1011",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "nit: Could save off this descriptor as constexpr kValidAnisoSamplerDesc, and then inside each case\n\n wgpu::SamplerDescriptor samplerDesc \u003d kValidAnisoSamplerDesc;\n samplerDesc.minFilter \u003d wgpu::FilterMode::Nearest;\n\nand so on.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb99203_709c3e92",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "nit: IMO no need to test these as they each hit two validation errors (and the cases below hit only one).",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab1e61a_c70a3942",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-22T02:11:47Z",
+      "side": 1,
+      "message": "test maxAnisotropy \u003d 0 (invalid) and some other values like 32, 0x7FFF, 0x8000, 0xFFFF (valid)",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
