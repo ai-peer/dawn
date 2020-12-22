@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "176807a4_8c02bb33",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T22:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f61b13dd_6aff3e9e",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38712cf6_c3108aaa",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-17T09:31:46Z",
       "side": 1,
       "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fe97c0_846f65fd",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T22:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38712cf6_c3108aaa",
       "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ab986a_fa4052d2",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T22:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d29864fa_a43c5155",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5847684c_a1ffd3f2",
@@ -99,6 +153,24 @@
       "writtenOn": "2020-12-17T09:31:46Z",
       "side": 1,
       "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171796dd_0efc7505",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T22:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5847684c_a1ffd3f2",
       "revId": "a6acd9517e7744822eabecb59032444ee228e2f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
