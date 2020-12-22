@@ -141,6 +141,8 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetOptimalBytesPerRowAlignment() const override;
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
+        float GetTimestampPeriod() const override;
+
       private:
         using DeviceBase::DeviceBase;
 
