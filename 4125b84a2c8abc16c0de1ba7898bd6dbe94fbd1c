@@ -52,6 +52,24 @@
       "parentUuid": "d149c4ef_45ae6250",
       "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a5257b_3333c941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:48:59Z",
+      "side": 1,
+      "message": "the hashing is certainly less optimal than looking up in a simple map. This was just a side thought. I think we should just do the map for now since we need to store all of the pipelines in some data structure anyway.\n\nIf the parameterization becomes more complex and we have a complex multikey of [dst format, num channels, ... , etc.] \u003d\u003e pipeline mapping, then we should just rely on the frontend caching and store a simple std::vector\u003cRef\u003cRenderPipelineBase\u003e\u003e here.\n\ntbh I don\u0027t think there\u0027s a significant problem with having multiple pipelines. A typical app would probably have more pipelines than we have here.",
+      "parentUuid": "d38551c8_cdd16364",
+      "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
