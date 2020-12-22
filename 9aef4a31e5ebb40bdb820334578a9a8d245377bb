@@ -88,6 +88,24 @@
       "parentUuid": "eb3c45e9_244f7335",
       "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12b0010_d8bcad01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2020-12-22T22:45:46Z",
+      "side": 1,
+      "message": "Totally agree about using Jamie\u0027s 6-layer burrito. I\u0027ll look at that in the new year.\n\nThere\u0027s no need to modify build_with_chromium in Dawn. That\u0027s why I added angle_standalone to ANGLE first.\n\nAnd yeah, we should totally do that for the DEPS, too (Jamie and I discussed it). Dawn is not recursing into ANGLE\u0027s DEPS, so it\u0027s not a problem, but it would be clearer in ANGLE.",
+      "parentUuid": "5f684147_c0dcdaa6",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
