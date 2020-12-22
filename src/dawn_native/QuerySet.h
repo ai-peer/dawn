@@ -39,6 +39,8 @@ namespace dawn_native {
 
         void Destroy();
 
+        virtual bool IsInternalPipelineNeeded() const = 0;
+
       protected:
         QuerySetBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         ~QuerySetBase() override;

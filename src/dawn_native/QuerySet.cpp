@@ -29,6 +29,10 @@ namespace dawn_native {
             ErrorQuerySet(DeviceBase* device) : QuerySetBase(device, ObjectBase::kError) {
             }
 
+            bool IsInternalPipelineNeeded() const override {
+                UNREACHABLE();
+            }
+
           private:
             void DestroyImpl() override {
                 UNREACHABLE();
