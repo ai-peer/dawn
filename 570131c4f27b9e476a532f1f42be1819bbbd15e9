@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6594b833_23c0250e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:11:22Z",
+      "side": 1,
+      "message": "I don\u0027t think the usage of sizeof(availability) and \u0026availability is correct here.\nThe buffer needs an array of uint32_t values, not internal representation of std::vector\u003cbool\u003e which is usually packed as a bitset.",
+      "range": {
+        "startLine": 812,
+        "startChar": 16,
+        "endLine": 815,
+        "endChar": 74
+      },
+      "revId": "570131c4f27b9e476a532f1f42be1819bbbd15e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a568523_e1af659e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:11:22Z",
+      "side": 1,
+      "message": "Why are these in separate if-blocks? Shouldn\u0027t we only create the availability buffer if the query type is timestamp?\n\nis it possible for |querySet| to not be found in |mQueryAvailabilityMap|? If so, right now we\u0027re passing nullptr for the availability buffer when we should pass a buffer of zeros.\nAlthough, if no queries are available, should we just fill the destination buffer with 0?",
+      "range": {
+        "startLine": 816,
+        "startChar": 7,
+        "endLine": 818,
+        "endChar": 73
+      },
+      "revId": "570131c4f27b9e476a532f1f42be1819bbbd15e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
