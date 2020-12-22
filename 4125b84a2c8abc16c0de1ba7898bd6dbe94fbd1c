@@ -34,6 +34,24 @@
       "parentUuid": "61652033_b370e754",
       "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38551c8_cdd16364",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-22T01:29:25Z",
+      "side": 1,
+      "message": "Thanks for replying:\n1. Mapping could be a good option for code clean but also agree with that we don\u0027t know the impact of having so many pipeline objects.\n2. side notes is quite interesting. I\u0027ll look into the hash descriptor to see whether it could support the internal pipeline.",
+      "parentUuid": "d149c4ef_45ae6250",
+      "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
