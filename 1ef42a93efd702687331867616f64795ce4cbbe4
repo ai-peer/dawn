@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2322823_7e0d3cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:26:57Z",
+      "side": 1,
+      "message": "For the backends where we don\u0027t need a compute shader, I think we should always return 1.f as the period. This is what you have in the Metal backend. GL and Null should do the same. since 1.f means the internal pipeline wouldn\u0027t do anything.\n\nThen, I don\u0027t think we need the virtual function in the next patch that returns whether or not the query requires an internal pipeline. We can just check for (queryTime \u003d\u003d Timestamp \u0026\u0026 period !\u003d 1.0).",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0161b7_146340a8",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:26:57Z",
+      "side": 1,
+      "message": "nit: call this \"GetTimestampPeriodNS\" ?",
+      "range": {
+        "startLine": 252,
+        "startChar": 22,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "364e1ac7_3bb964dd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:26:57Z",
+      "side": 1,
+      "message": "This command may fail (though admittedly unlikely). Does the frequency change throughout the lifetime of the command queue? I think we should get and cache the value on creation to simplify error handling.",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
