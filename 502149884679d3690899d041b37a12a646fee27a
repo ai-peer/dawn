@@ -33,6 +33,24 @@
       "message": "LGTM too - are there tests that can be enabled by this change? or were they already enabled but failures were caught when running on Intel platforms?",
       "revId": "502149884679d3690899d041b37a12a646fee27a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1f49ea_56a338ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-12-22T00:37:40Z",
+      "side": 1,
+      "message": "We find CompressedTextureBCFormatTest.Basic will fail without this CL on Intel Mesa OpenGL ES driver. In this test we need to upload 8x8 compressed data into a texture with bytesPerRow \u003d\u003d 256, as glPixelStorei() doesn\u0027t work for glCompressedTexSubImage*D only the first block row is able to be copied correctly.",
+      "parentUuid": "b9c9a791_6961614e",
+      "revId": "502149884679d3690899d041b37a12a646fee27a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
