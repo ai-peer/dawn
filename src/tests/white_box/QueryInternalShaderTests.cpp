@@ -22,15 +22,13 @@
 namespace {
 
     void EncodeConvertTimestampsToNanoseconds(wgpu::CommandEncoder encoder,
-                                              wgpu::Buffer input,
+                                              wgpu::Buffer destination,
                                               wgpu::Buffer availability,
-                                              wgpu::Buffer output,
                                               wgpu::Buffer params) {
         dawn_native::EncodeConvertTimestampsToNanoseconds(
             reinterpret_cast<dawn_native::CommandEncoder*>(encoder.Get()),
-            reinterpret_cast<dawn_native::BufferBase*>(input.Get()),
+            reinterpret_cast<dawn_native::BufferBase*>(destination.Get()),
             reinterpret_cast<dawn_native::BufferBase*>(availability.Get()),
-            reinterpret_cast<dawn_native::BufferBase*>(output.Get()),
             reinterpret_cast<dawn_native::BufferBase*>(params.Get()));
     }
 
@@ -78,14 +76,14 @@ class QueryInternalShaderTests : public DawnTest {};
 // Test the accuracy of timestamp compute shader which uses unsigned 32-bit integers to simulate
 // unsigned 64-bit integers (timestamps) multiplied by float (period).
 // The arguments pass to timestamp internal pipeline:
-// - The input buffer passes the original timestamps resolved from query set (created by manual
-//   here).
+// - The destination buffer contians the original timestamps resolved from query set (created by
+//   manual here), and will be used to store the results processed by the compute shader. Expect
+//   0 for unavailable timestamps and nanoseconds for available timestamps in an expected error
+//   rate.
 // - The availability buffer passes the data of which slot in input buffer is an initialized
 //   timestamp.
-// - The output buffer stores the converted results, expect 0 for unavailable timestamps and
-//   nanoseconds for available timestamps in an expected error rate.
-// - The params buffer passes the offset of input and output buffers, the count of timestamps and
-//   the timestamp period (here use GPU frequency (HZ) on Intel D3D12 to calculate the period in
+// - The params buffer passes the timestamp count, the offset in destination buffer and the
+//   timestamp period (here use GPU frequency (HZ) on Intel D3D12 to calculate the period in
 //   ns for testing).
 TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
     DAWN_SKIP_TEST_IF(UsesWire());
@@ -103,99 +101,110 @@ TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
     constexpr uint64_t kOne = 1u;
 
     // Original timestamp values for testing
-    std::array<uint64_t, kTimestampCount> timestamps;
-    timestamps[0] = 0;            // not written at beginning
-    timestamps[1] = 10079569507;  // t0
-    timestamps[2] = 10394415012;  // t1
-    timestamps[3] = 0;            // not written between timestamps
-    timestamps[4] = 11713454943;  // t2
-    timestamps[5] = 38912556941;  // t3 (big value)
-    timestamps[6] = 10080295766;  // t4 (reset)
-    timestamps[7] = 12159966783;  // t5 (after reset)
-    timestamps[8] = 12651224612;  // t6
-    timestamps[9] = 39872473956;  // t7
+    std::vector<uint64_t> timestamps;
+    timestamps.push_back(kOne);         // garbage data which is not written at beginning
+    timestamps.push_back(10079569507);  // t0
+    timestamps.push_back(10394415012);  // t1
+    timestamps.push_back(kOne);         // garbage data which is not written between timestamps
+    timestamps.push_back(11713454943);  // t2
+    timestamps.push_back(38912556941);  // t3 (big value)
+    timestamps.push_back(10080295766);  // t4 (reset)
+    timestamps.push_back(12159966783);  // t5 (after reset)
+    timestamps.push_back(12651224612);  // t6
+    timestamps.push_back(39872473956);  // t7
 
-    // Expected results: Timestamp value * kNsPerSecond / kGPUFrequency
-    std::array<uint64_t, kTimestampCount> expected;
-    // The availablility state of each timestamp
-    std::array<uint32_t, kTimestampCount> availabilities;
-
+    std::vector<uint32_t> availabilities;
     for (size_t i = 0; i < kTimestampCount; i++) {
-        if (timestamps[i] == 0) {
-            // Not a timestamp value, keep original value
-            expected[i] = 0u;
-            availabilities[i] = 0u;
+        if (timestamps[i] == kOne) {
+            availabilities.push_back(0u);
         } else {
-            // Maybe the timestamp * 10^9 is larger than the maximum of uint64, so cast the delta
-            // value to double (higher precision than float)
-            expected[i] = static_cast<uint64_t>(static_cast<double>(timestamps[i]) * kNsPerSecond /
-                                                kGPUFrequency);
-            availabilities[i] = 1u;
+            availabilities.push_back(1u);
         }
     }
+    // The buffer indicating which values are available timestamps
+    wgpu::Buffer availabilityBuffer =
+        utils::CreateBufferFromData(device, availabilities.data(),
+                                    kTimestampCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
 
-    // The input storage buffer
-    wgpu::Buffer inputBuffer =
-        utils::CreateBufferFromData(device, timestamps.data(), sizeof(timestamps),
-                                    wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
-    EXPECT_BUFFER_U64_RANGE_EQ(timestamps.data(), inputBuffer, 0, kTimestampCount);
-
-    // To indicate which value is available
-    wgpu::Buffer availabilityBuffer = utils::CreateBufferFromData(
-        device, availabilities.data(), sizeof(availabilities), wgpu::BufferUsage::Storage);
-
-    // The output storage buffer
-    wgpu::BufferDescriptor outputDesc;
-    outputDesc.size = kTimestampCount * sizeof(uint64_t);
-    outputDesc.usage =
+    // The resolve buffer storing original timestmaps and the converted values
+    wgpu::BufferDescriptor destinationDesc;
+    destinationDesc.size = kTimestampCount * sizeof(uint64_t);
+    destinationDesc.usage =
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
-    wgpu::Buffer outputBuffer = device.CreateBuffer(&outputDesc);
+    wgpu::Buffer destinationBuffer = device.CreateBuffer(&destinationDesc);
 
-    std::array<uint64_t, kTimestampCount> ones;
-    ones.fill(kOne);
+    // Expected results: Timestamp * kNsPerSecond / kGPUFrequency
+    std::vector<uint64_t> expected;
 
-    // Convert timestamps to output buffer with offset 0
+    auto PrepareExpectedResults = [](std::vector<uint64_t>& expectedArr,
+                                     const std::vector<uint64_t>& timestampArr, uint32_t offset) {
+        for (size_t i = 0; i < timestampArr.size(); i++) {
+            if (i < offset / sizeof(uint64_t)) {
+                expectedArr.push_back(timestampArr[i]);
+                continue;
+            }
+            if (timestampArr[i] == kOne) {
+                // Not a timestamp value, keep original value
+                expectedArr.push_back(0u);
+            } else {
+                // Maybe the timestamp * period is larger than the maximum of uint64, so cast the
+                // delta value to double (higher precision than float)
+                expectedArr.push_back(
+                    static_cast<uint64_t>(static_cast<double>(timestampArr[i]) * kPeriod));
+            }
+        }
+    };
+
+    // Convert timestamps to destination buffer with offset 0
     {
-        queue.WriteBuffer(outputBuffer, 0, ones.data(), sizeof(ones));
-
         constexpr uint32_t kOffset = 0u;
+
+        // Write orignal timestamps to destination buffer
+        queue.WriteBuffer(destinationBuffer, 0, timestamps.data(),
+                          kTimestampCount * sizeof(uint64_t));
+        EXPECT_BUFFER_U64_RANGE_EQ(timestamps.data(), destinationBuffer, 0, kTimestampCount);
+
         // The params uniform buffer
-        dawn_native::TimestampParams params = {kOffset, kOffset, kTimestampCount, kPeriod};
+        dawn_native::TimestampParams params = {kTimestampCount, kOffset, kPeriod};
         wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
                                                                 wgpu::BufferUsage::Uniform);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-
-        EncodeConvertTimestampsToNanoseconds(encoder, inputBuffer, availabilityBuffer, outputBuffer,
+        EncodeConvertTimestampsToNanoseconds(encoder, destinationBuffer, availabilityBuffer,
                                              paramsBuffer);
-
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_BUFFER(outputBuffer, kOffset, kTimestampCount * sizeof(uint64_t),
+        PrepareExpectedResults(expected, timestamps, kOffset);
+
+        EXPECT_BUFFER(destinationBuffer, kOffset, kTimestampCount * sizeof(uint64_t),
                       new InternalShaderExpectation(expected.data(), kTimestampCount));
     }
 
-    // Convert timestamps to output buffer with offset 8 from input buffer with offset 8
+    // Convert timestamps to destination buffer with offset 8
     {
-        queue.WriteBuffer(outputBuffer, 0, ones.data(), sizeof(ones));
-
         constexpr uint32_t kOffset = 8u;
+
+        // Write orignal timestamps to destination buffer
+        queue.WriteBuffer(destinationBuffer, 0, timestamps.data(),
+                          kTimestampCount * sizeof(uint64_t));
+        EXPECT_BUFFER_U64_RANGE_EQ(timestamps.data(), destinationBuffer, 0, kTimestampCount);
+
         // The params uniform buffer
-        dawn_native::TimestampParams params = {kOffset, kOffset, kTimestampCount, kPeriod};
+        dawn_native::TimestampParams params = {kTimestampCount, kOffset, kPeriod};
         wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
                                                                 wgpu::BufferUsage::Uniform);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-
-        EncodeConvertTimestampsToNanoseconds(encoder, inputBuffer, availabilityBuffer, outputBuffer,
+        EncodeConvertTimestampsToNanoseconds(encoder, destinationBuffer, availabilityBuffer,
                                              paramsBuffer);
-
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_BUFFER_U64_RANGE_EQ(&kOne, outputBuffer, 0, 1);
-        EXPECT_BUFFER(outputBuffer, kOffset, (kTimestampCount - 1) * sizeof(uint64_t),
+        PrepareExpectedResults(expected, timestamps, kOffset);
+
+        EXPECT_BUFFER_U64_RANGE_EQ(&kOne, destinationBuffer, 0, 1);
+        EXPECT_BUFFER(destinationBuffer, kOffset, (kTimestampCount - 1) * sizeof(uint64_t),
                       new InternalShaderExpectation(expected.data() + 1, kTimestampCount - 1));
     }
 }
