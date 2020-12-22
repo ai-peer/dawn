@@ -52,6 +52,24 @@
       "parentUuid": "34ab1f49_c0a23731",
       "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb3c45e9_244f7335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:57:14Z",
+      "side": 1,
+      "message": "Also Jamie, I think ANGLE should rename \"not build_with_chromium\" in DEPS to something like \"is_angle_standalone\".\n\nIn Dawn, we\u0027d probably like to have ANGLE use Dawn\u0027s version of vulkan-deps so we don\u0027t have two different versions, and it would be odd for us to set \"build_with_chromium: True\" in standalone Dawn builds.",
+      "parentUuid": "7475c7ac_3da1a0a2",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
