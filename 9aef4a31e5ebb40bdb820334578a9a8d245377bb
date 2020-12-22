@@ -16,6 +16,24 @@
       "message": "Nice! I think we should wait till switching Dawn to use third_party/vulkan-deps instead of adding more vulkan dependencies to synchronize like vulkan_tools. Now also seeing vulkan_memory_allocator here.. seems like this should be moved into vulkan-deps as well?",
       "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ab1f49_c0a23731",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001776
+      },
+      "writtenOn": "2020-12-22T18:38:45Z",
+      "side": 1,
+      "message": "I didn\u0027t move the memory allocator or shaderc into vulkan-deps. I\u0027m on board with moving them if you want.\n\nvulkan-deps is ready to be used right now. I\u0027m in the process of rolling it forward. That doesn\u0027t block adopting it with the current pinned revs which should be similar to what you use now.",
+      "parentUuid": "aba613cb_b4e0bc68",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
