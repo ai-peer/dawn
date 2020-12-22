@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93df1446_d22e8593",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T19:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53bc9073_e1b413bb",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaca4a49_c882f479",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00fb9502_0337d121",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T19:28:18Z",
+      "side": 1,
+      "message": "This one doesn\u0027t have the duplicate struct issue.",
+      "parentUuid": "eaca4a49_c882f479",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d9beed2_5563cd3c",
@@ -65,6 +101,24 @@
       "writtenOn": "2020-12-17T09:37:00Z",
       "side": 1,
       "message": "ditto TODO(crbug.com/tint/386)",
+      "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9e833a3_e5f91c74",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T19:28:18Z",
+      "side": 1,
+      "message": "nor this one. It\u0027s only if you use the same struct dfn for buffers of the same storage class. If one is uniform and one is storage, it\u0027s ok.",
+      "parentUuid": "4d9beed2_5563cd3c",
       "revId": "f9efc9708cd54e17c8285c03bfe8ecfaa5430a5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
