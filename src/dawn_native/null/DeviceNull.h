@@ -226,6 +226,8 @@ namespace dawn_native { namespace null {
       public:
         QuerySet(Device* device, const QuerySetDescriptor* descriptor);
 
+        bool IsInternalPipelineNeeded() const override;
+
       private:
         ~QuerySet() override;
 

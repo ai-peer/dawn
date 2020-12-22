@@ -318,6 +318,10 @@ namespace dawn_native { namespace null {
         : QuerySetBase(device, descriptor) {
     }
 
+    bool QuerySet::IsInternalPipelineNeeded() const {
+        return false;
+    }
+
     QuerySet::~QuerySet() {
         DestroyInternal();
     }

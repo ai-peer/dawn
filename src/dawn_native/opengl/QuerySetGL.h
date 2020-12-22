@@ -25,6 +25,8 @@ namespace dawn_native { namespace opengl {
       public:
         QuerySet(Device* device, const QuerySetDescriptor* descriptor);
 
+        bool IsInternalPipelineNeeded() const override;
+
       private:
         ~QuerySet() override;
 
