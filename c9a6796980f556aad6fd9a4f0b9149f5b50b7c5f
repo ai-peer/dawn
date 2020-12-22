@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "055e31a6_1cc2081a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "The tests start failing again for vulkan swift shader. Maybe there\u0027 something change there. Will look at it",
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

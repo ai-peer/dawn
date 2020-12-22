@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a325e9e8_a7d0b72d",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab17ed3d_b1e28b99",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "652ccf68_2ea4291c",
@@ -82,6 +100,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "Is this implementation shareable with the similar ones above?",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f560e25_d60dd1ea",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "652ccf68_2ea4291c",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7245a2_23376dd3",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa92beb_eb7bc468",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "258bc105_3c21b6f4",
@@ -116,6 +170,30 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "nit: missing punctuation",
+      "range": {
+        "startLine": 563,
+        "startChar": 23,
+        "endLine": 564,
+        "endChar": 49
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "111be11f_0a0b1e6a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "258bc105_3c21b6f4",
       "range": {
         "startLine": 563,
         "startChar": 23,
@@ -166,6 +244,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0d6a6b_edacfa78",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9432485d_049f8a7a",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1bb781a_413f7593",
@@ -183,6 +279,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08bf6ed6_850ae50b",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Prefer to defer this to a new patch.",
+      "parentUuid": "d1bb781a_413f7593",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd65d6dc_bf353e4a",
@@ -196,6 +310,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "Note the depth clip range for WebGL (-1 to 1) and WebGPU (0 to 1) are different so this matrix might have a different result.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "492622ec_54e5326f",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Oh forget to mention here that the values are copied from a local webgpu implementation where clip planes are modified to (0-1) already.",
+      "parentUuid": "fd65d6dc_bf353e4a",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +355,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f20424d_8b45d206",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "In real world use-case anisotropic filtering is usually demonstrated by rendering slanted ceilings and floors. The texture is usually a tiled one and sampler uses repeat mode. Pixels far from camera will have small dFdx but big dFdy for uv. If uv are not scaled together with the position, the dFdy would still be at the same level as dFdx, anisotropic filtering is not demonstrated and smaller mipmap won\u0027t be sampled from.",
+      "parentUuid": "1a5db592_f90625f2",
+      "range": {
+        "startLine": 180,
+        "startChar": 86,
+        "endLine": 180,
+        "endChar": 88
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa5cb9aa_1ec2e8b2",
@@ -240,6 +396,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb12aed9_162deac6",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Ah thanks for the updated version! (realized width in \u003ccanvas id\u003d\"canvas\" width\u003d16 height\u003d16\u003e\u003c/canvas\u003e is different from that from css and \u003ccanvas style\u003d\"width: 16px\"\u003e\u003c/canvas\u003e. And new css attribute image-rendering: pixelated; learnt)",
+      "parentUuid": "aa5cb9aa_1ec2e8b2",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c40723d_be2ea8d6",
@@ -253,6 +427,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "Is there a specific reason to expect filtering not to occur on this pixel? E.g. in the WebGL sample if the resolution is high enough, I can see filtering between blue and green (mipmap filtering, of course, since anisotropic filtering is disabled). Probably this happens to be guaranteed at this resolution but I don\u0027t know.\n\nDiagrams would be helpful here if possible, we probably can\u0027t accurately represent the expectations. And unfortunately I don\u0027t know enough about anisotropic filtering to know what we can expect. E.g.:\n\n top-to-bottom down the middle of the rendering:\n 0BB?GG?RRRRRRRRR\n\n(except that\u0027s not right.)\n\nWhen we get to CTS tests I think it would be good to have several tests that inspect very fine details, e.g.\n- looking just between two miplevels and counting the number of different shades that appear.\n- looking at a single miplevel with two colors in it, and counting shades.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d82dd0_96585e8d",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Yes. It seems in webgl 8,4 is already mostly green. (which make more sense since there are already \u003e\u003d4 rasterized pixels on y\u003d4, do we have a test for mipmap filtering in dawn_end2end test?)\nA more robust test easier for tweaking would have inputs to easily control how many rasterized pixels on each row, by controlling the points position.\nI haven\u0027t figured out how to compare rendering results of different maxAnisotropy easily due to\nasync nature of webgpu \"readpixels\" yet.\nPrefer to defer to a new patch.",
+      "parentUuid": "7c40723d_be2ea8d6",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -291,6 +483,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b5758df_13306ac1",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b161ccc_b69a1011",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "deb99203_709c3e92",
@@ -314,6 +524,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b24013_67ee09c0",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb99203_709c3e92",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fab1e61a_c70a3942",
@@ -327,6 +561,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "test maxAnisotropy \u003d 0 (invalid) and some other values like 32, 0x7FFF, 0x8000, 0xFFFF (valid)",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d61d57c_11db7e66",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-22T04:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fab1e61a_c70a3942",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
