@@ -34,6 +34,24 @@
       "parentUuid": "aba613cb_b4e0bc68",
       "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7475c7ac_3da1a0a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-22T18:45:51Z",
+      "side": 1,
+      "message": "shaderc is only used in tests, and soon won\u0027t be used at all, so that seems less important for us. I don\u0027t know enough about vulkan_memory_allocator to know if it\u0027s prone to the same dependency issues we have with the other vulkan deps.\n\nI\u0027ll look at switching Dawn over to vulkan-deps soon then.",
+      "parentUuid": "34ab1f49_c0a23731",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
