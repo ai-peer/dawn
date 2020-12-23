@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "937cc1af_84a24747",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13138e91_0947a138",
+      "range": {
+        "startLine": 79,
+        "startChar": 28,
+        "endLine": 79,
+        "endChar": 36
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff778856_53fcfb74",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-22T17:53:06Z",
       "side": 1,
       "message": "comments need updating; the input/output are the same buffer now.",
+      "range": {
+        "startLine": 83,
+        "startChar": 5,
+        "endLine": 84,
+        "endChar": 15
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34455679_e80a4b88",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff778856_53fcfb74",
       "range": {
         "startLine": 83,
         "startChar": 5,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db02afd_96d92c4c",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "The kOne is used as garbage data for checking whether the data before offset is written, after merge the two expectations into one at [1], we don\u0027t need it now.",
+      "parentUuid": "29da54b3_1f32ac4e",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 5
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d8cc2c2_d787ac22",
@@ -83,6 +155,24 @@
       "writtenOn": "2020-12-22T17:53:06Z",
       "side": 1,
       "message": "|expected| is reused between the test cases below, and it\u0027s confusing to understand since PrepareExpectedResults is mutating it. Can\u0027t we just return a new std::vector from PrepareExpectedResults? From what I understand we are just making a copy of timestampArr starting at |offset|, and then converting the timestamps to nanoseconds.",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6815b802_9538c169",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d8cc2c2_d787ac22",
       "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f308edd_e2d975db",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb414f89_4797f1d4",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a50a0536_3fc3ef7a",
@@ -121,6 +229,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7737b46_44e5be76",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a50a0536_3fc3ef7a",
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec3c977_0351d0fc",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 206,
+        "startChar": 36,
+        "endLine": 206,
+        "endChar": 40
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd397c58_de4d7171",
@@ -134,6 +283,30 @@
       "writtenOn": "2020-12-22T17:53:06Z",
       "side": 1,
       "message": "Can we have |PrepareExpectedResults| prepare the entire buffer instead of having to do two separate expectations here?",
+      "range": {
+        "startLine": 204,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 95
+      },
+      "revId": "6c1358f9d247417df811fe707d8d13477c08aebb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6c3ed2_fee49f3f",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T15:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd397c58_de4d7171",
       "range": {
         "startLine": 204,
         "startChar": 8,
