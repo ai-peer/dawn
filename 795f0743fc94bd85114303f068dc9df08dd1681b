@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "795f0743fc94bd85114303f068dc9df08dd1681b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22e5437_152b82d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:05:50Z",
+      "side": 1,
+      "message": "LGTM. Overall Jiawei, do we have a plan to have workarounds to fix these bugs on older Intel drivers? How prevalent are the new drivers?",
+      "revId": "795f0743fc94bd85114303f068dc9df08dd1681b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
