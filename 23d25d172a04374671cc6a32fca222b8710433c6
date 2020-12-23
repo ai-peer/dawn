@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fce853_19918b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T05:10:19Z",
+      "side": 1,
+      "message": "Turns out invalidate maxAnisotropy: 0 fails webgpu cts.\nIs the cts at: https://github.com/gpuweb/cts/blob/main/src/webgpu/api/validation/createSampler.spec.ts\n\nin dawn.json we already set default to 1. Wondering what else might need fixing.",
+      "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
