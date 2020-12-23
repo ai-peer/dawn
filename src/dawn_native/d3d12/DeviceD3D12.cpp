@@ -655,4 +655,14 @@ namespace dawn_native { namespace d3d12 {
         return 1;
     }
 
+    float Device::GetTimestampPeriodInNS() const {
+        // The GPU timestamp counter frequency (in ticks/second).
+        uint64_t frequency;
+        if (SUCCEEDED(mCommandQueue->GetTimestampFrequency(&frequency))) {
+            return static_cast<float>(1e9) / frequency;
+        } else {
+            return 1.0f;
+        }
+    }
+
 }}  // namespace dawn_native::d3d12
