@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f3a53f07_8893d4ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "WebGPU definitely won\u0027t resolve it in a way JS can observe for non-fatal lost. Maybe native will be different. Kai and I talked about maybe having a separate status in native for it today. Regardless, I\u0027ll just change this so that we clear out the callback and the userdata on server destruction instead.",
+      "parentUuid": "b643dfe0_805d918a",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9f8e002e_15db4d7a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -146,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad9ccb9_f8f24da9",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec40b241_99a3603e",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e3448e8_ce5c3832",
@@ -159,6 +201,24 @@
       "writtenOn": "2020-12-16T10:10:56Z",
       "side": 1,
       "message": "ditto, some small comment would help",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb10fa8_0ab925fe",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e3448e8_ce5c3832",
       "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -180,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5240316_444d61c0",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a21784ca_acd66834",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f5988a_d0e28b9a",
@@ -197,6 +275,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0c0e78_37a73881",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "It\u0027s the base template that get specialized with the index sequence to unpack args.",
+      "parentUuid": "c4f5988a_d0e28b9a",
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec73851c_419cc530",
@@ -210,6 +306,30 @@
       "writtenOn": "2020-12-16T10:10:56Z",
       "side": 1,
       "message": "nit: why not just SerializeCommand?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b88678_bbe20d4b",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T01:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec73851c_419cc530",
       "range": {
         "startLine": 31,
         "startChar": 8,
