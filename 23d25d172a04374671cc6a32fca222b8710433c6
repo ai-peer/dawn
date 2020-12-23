@@ -16,6 +16,24 @@
       "message": "Turns out invalidate maxAnisotropy: 0 fails webgpu cts.\nIs the cts at: https://github.com/gpuweb/cts/blob/main/src/webgpu/api/validation/createSampler.spec.ts\n\nin dawn.json we already set default to 1. Wondering what else might need fixing.",
       "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87192ea_b6a37c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:12:02Z",
+      "side": 1,
+      "message": "Yea that\u0027s the test. I might check https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/modules/webgpu/gpu_sampler.cc;l\u003d53;drc\u003dc7da897ce80b05744601fdba6edaf0427427dab6;bpv\u003d1;bpt\u003d1 to see if somehow the default isn\u0027t initializing correctly",
+      "parentUuid": "48fce853_19918b82",
+      "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
