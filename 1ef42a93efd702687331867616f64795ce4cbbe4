@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03c10c48_e2c6c963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T18:45:46Z",
+      "side": 1,
+      "message": "Mmm.. okay. So we have timestamp -\u003e ns conversion for timestamps; non-zero -\u003e binary conversion for occlusion; Are there multiple pipelines for each backend for pipeline statistics? If so, it would be better to have this virtual function return an enum which describes what type of conversion we need to do.",
+      "parentUuid": "945827ab_3960fa71",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb0161b7_146340a8",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 1
@@ -114,6 +132,24 @@
       "side": 1,
       "message": "The frequency is the increment rate of GPU timestamp counter on a per-command queue basis and won\u0027t be changed. Currently I just find it is platform dependent(12000048 on Intel, 10^9 on NV). \n\nDo you mean store the frequency at device creation? It\u0027s OK when we only have one command queue currently. If the multiple queue is supported, we need to get the frequency from the queue we execute the commands.\n\nFor ID3D12CommandQueue::GetTimestampFrequency(), it fails if the specified command queue doesn\u0027t support timestamps, that means we also cannot use timestamp extension, so this internal helper won\u0027t be called, but I think we\u0027d better to handle the fail.",
       "parentUuid": "364e1ac7_3bb964dd",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b3d8a0_ad116a8e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T18:45:46Z",
+      "side": 1,
+      "message": "Yea, I mean store it on device creation - when we have multiple queues, we\u0027ll store it on queue creation. We can do the error handling in the creation methods. On device/queue creation, we know what type of queue we\u0027re making (D3D12_COMMAND_LIST_TYPE_DIRECT) so we can perform the call there, and if it fails, assume there\u0027s been some fatal error.",
+      "parentUuid": "04c3e7e8_d8fa2e9a",
       "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
