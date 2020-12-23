@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88d7c33_2438c42d",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "PR: https://github.com/gpuweb/gpuweb/pull/1323",
+      "parentUuid": "5b3e3dce_efbeb13e",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c823841d_b8e60078",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "We haven\u0027t clearly specced this, but I think we want a validation error if maxAnisotropy \u003c 1.",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478f10cb_67f99f27",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c823841d_b8e60078",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +253,30 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "optional:\n\nIt should be possible to embed all of these inside the shader if you want to simplify the test a little bit. (For position/uv, indices indexed by vertex_idx, like in samples.)\n\nAlso if it\u0027s possible to hardcode the positions in clip space, rather than using a matrix, I think it would be a bit easier to reason about. (Pretty sure the test should work the same way.)",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3b659e_8b61535f",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "... please forgive my -1 on this... Don\u0027t think it\u0027s really important for a test... that require some refactor again. Plus I still doubt whether tint would correctly translate the 50 in uv to wgsl",
+      "parentUuid": "9559103e_f90149bc",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -462,6 +522,24 @@
       "writtenOn": "2020-12-22T02:11:47Z",
       "side": 1,
       "message": "This expectation is different than the one for maxAnisotropy \u003d\u003d 1, which means we\u0027re actually expecting anisotropic filtering to always work. Perhaps it\u0027s okay for a Dawn test, but it would fail on machines without anisotropic filtering. In CTS we would have to issue warnings.\n\nMaybe here we should have increasingly strict tests as the maxAnisotropy goes to 1, e.g.\n\n if (maxAnisotropy \u003e\u003d 16) {\n   // least strict checks\n }\n if (maxAnisotropy \u003d\u003d 2) {\n   // more strict\n }\n if (maxAnisotropy \u003c\u003d 1) {\n   // even more strict\n }\n // Maybe stricter checks for \u003d\u003d2 and \u003e\u003d16 like those you have now, possibly gated on whether the system advertises anisotropic filtering",
+      "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a3fd6fc_3fa4e166",
+        "filename": "src/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "Move to a later patch or CTS",
+      "parentUuid": "e8e4c381_fdd15c9d",
       "revId": "dea54d6b2f0f4994430abc27d02f73fad2aa6395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec82ef6d_d05f0df5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "Fixed the vulkan failure.",
+      "revId": "f898cf05ddcc23e6aae4073d76e1aba36c980d18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

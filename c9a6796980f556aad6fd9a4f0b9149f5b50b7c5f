@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5e8bc8_8468f51d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ce9d224_e7318296",
+      "range": {
+        "startLine": 563,
+        "startChar": 73,
+        "endLine": 563,
+        "endChar": 76
+      },
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86ed537a_396017a4",
@@ -72,6 +96,30 @@
       "writtenOn": "2020-12-22T21:04:17Z",
       "side": 1,
       "message": "here too",
+      "range": {
+        "startLine": 564,
+        "startChar": 46,
+        "endLine": 564,
+        "endChar": 49
+      },
+      "revId": "c9a6796980f556aad6fd9a4f0b9149f5b50b7c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecccb3a4_1197ad9f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T02:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86ed537a_396017a4",
       "range": {
         "startLine": 564,
         "startChar": 46,
