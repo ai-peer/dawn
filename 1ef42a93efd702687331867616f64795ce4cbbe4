@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "945827ab_3960fa71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T14:32:06Z",
+      "side": 1,
+      "message": "I don\u0027t think we can give up the virtual IsInternalPipelineNeeded in the next patch. If there is only timestamp query, we could use period value to check whether it requires the internal pipeline, but for occlusion query and pipeline statistics query, it cannot. We need IsInternalPipelineNeeded function to know which type of queries requires the internal pipeline on each backend.\nQuery Type              D3D12  Vulkan  Metal\nOcclusion                     0          1           1\nPipelineStatistics        1          1           1\nTimestamp                   1          1           0\n\nCurrently we only implement timestamp query, so only the type of timestamp is added in IsInternalPipelineNeeded.",
+      "parentUuid": "f2322823_7e0d3cd1",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0161b7_146340a8",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2a71d7_5ef7299a",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T14:32:06Z",
+      "side": 1,
+      "message": "Update to GetTimestampPeriodInNS",
+      "parentUuid": "bb0161b7_146340a8",
+      "range": {
+        "startLine": 252,
+        "startChar": 22,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "364e1ac7_3bb964dd",
@@ -54,6 +96,24 @@
       "writtenOn": "2020-12-22T18:26:57Z",
       "side": 1,
       "message": "This command may fail (though admittedly unlikely). Does the frequency change throughout the lifetime of the command queue? I think we should get and cache the value on creation to simplify error handling.",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04c3e7e8_d8fa2e9a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T14:32:06Z",
+      "side": 1,
+      "message": "The frequency is the increment rate of GPU timestamp counter on a per-command queue basis and won\u0027t be changed. Currently I just find it is platform dependent(12000048 on Intel, 10^9 on NV). \n\nDo you mean store the frequency at device creation? It\u0027s OK when we only have one command queue currently. If the multiple queue is supported, we need to get the frequency from the queue we execute the commands.\n\nFor ID3D12CommandQueue::GetTimestampFrequency(), it fails if the specified command queue doesn\u0027t support timestamps, that means we also cannot use timestamp extension, so this internal helper won\u0027t be called, but I think we\u0027d better to handle the fail.",
+      "parentUuid": "364e1ac7_3bb964dd",
       "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
