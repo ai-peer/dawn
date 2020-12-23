@@ -70,6 +70,24 @@
       "parentUuid": "d38551c8_cdd16364",
       "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd5c376a_1973e562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2020-12-23T01:04:14Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll use map and bake this prototype to a CL.",
+      "parentUuid": "f4a5257b_3333c941",
+      "revId": "4125b84a2c8abc16c0de1ba7898bd6dbe94fbd1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
