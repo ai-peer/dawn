@@ -135,6 +135,30 @@
       },
       "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e5b8cc_67a6bee7",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-23T14:35:21Z",
+      "side": 1,
+      "message": "OK, open issue: https://github.com/gpuweb/gpuweb/issues/1324",
+      "parentUuid": "4304b1d1_bd1f29f4",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "797a32c21394d4e47c5625d72e06add36c90bc1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
