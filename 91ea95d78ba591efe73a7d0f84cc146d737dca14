@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b30cfd16_836cd194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T18:22:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "91ea95d78ba591efe73a7d0f84cc146d737dca14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5825ceb1_71bd8efd",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T18:22:03Z",
+      "side": 1,
+      "message": "nit: Max query count exceeded",
+      "range": {
+        "startLine": 47,
+        "startChar": 42,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "91ea95d78ba591efe73a7d0f84cc146d737dca14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
