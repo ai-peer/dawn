@@ -34,6 +34,23 @@
       "parentUuid": "48fce853_19918b82",
       "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad24291_eae43182",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2020-12-23T22:57:24Z",
+      "side": 1,
+      "message": "A blink level change is at: https://chromium-review.googlesource.com/c/chromium/src/+/2602700\nLanding that first should fix the cts sampler validation error here.",
+      "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
