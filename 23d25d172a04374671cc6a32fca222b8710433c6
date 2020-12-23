@@ -51,6 +51,24 @@
       "message": "A blink level change is at: https://chromium-review.googlesource.com/c/chromium/src/+/2602700\nLanding that first should fix the cts sampler validation error here.",
       "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197bd149_514d512a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T23:04:57Z",
+      "side": 1,
+      "message": "well, we can\u0027t land the Chromium patch though because the maxAnisotropy member doesn\u0027t exist until this Dawn patch here. I was just suggesting to look/debug from there.\n\nLooking at the code now, it\u0027s because WGPUSamplerDescriptor is zero-initialized. It\u0027s not using C++ default initialization since its a C struct.\n\nwhat we can do is just allow 0 for now, and then change it to disallow 0 in Dawn, once we land the CHromium patch.",
+      "parentUuid": "4ad24291_eae43182",
+      "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
