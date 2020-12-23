@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb1b055_24773358",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "701d3592_6db7bab0",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45830b76_f28abe6c",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-17T09:26:56Z",
       "side": 1,
       "message": "We should add a TODO to put this back as a matrix once some Tint bug is fixed.",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29282b0_3147b2d0",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45830b76_f28abe6c",
       "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d45580_d8506413",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b01da9_cef95f77",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29eb59f2_ba4bc064",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3244e73a_3031104a",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29eb59f2_ba4bc064",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f87aa82_335fc94e",
@@ -99,6 +171,24 @@
       "writtenOn": "2020-12-17T09:26:56Z",
       "side": 1,
       "message": "ditto",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0965836_79faae83",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f87aa82_335fc94e",
       "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +216,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab29873_fed30a0f",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66209ed8_47aa4661",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8baa1540_29941327",
@@ -139,6 +253,24 @@
       "writtenOn": "2020-12-17T09:26:56Z",
       "side": 1,
       "message": "nit: same comment about mat2",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87869a7c_077af44e",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8baa1540_29941327",
       "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade462c9_fb5c90df",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "182f5a6e_6736394c",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dbc71ee_5875b23d",
@@ -177,6 +327,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c9f618_faaa3f6d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dbc71ee_5875b23d",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4db0ad97_7b28cf59",
@@ -190,6 +358,24 @@
       "writtenOn": "2020-12-17T09:26:56Z",
       "side": 1,
       "message": "I think these two functions could be merged by taking a format (and implicitly using the low 8 bits of the uint32_t value for the unorm texture)",
+      "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7130c4c1_feaf0e7b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-23T19:37:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4db0ad97_7b28cf59",
       "revId": "07bba3840fb4804890ebddacd391bd25d125c278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
