@@ -87,6 +87,24 @@
       "parentUuid": "197bd149_514d512a",
       "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af82168_83e24a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-12-24T03:09:36Z",
+      "side": 1,
+      "message": "Aha, thanks for catching this. Approach SGTM.",
+      "parentUuid": "0d1f3842_a478a692",
+      "revId": "23d25d172a04374671cc6a32fca222b8710433c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
