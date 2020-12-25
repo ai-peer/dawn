@@ -77,6 +77,9 @@ namespace dawn_native { namespace d3d12 {
             CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
                          "D3D12 create command queue"));
 
+        DAWN_TRY(CheckHRESULT(mCommandQueue->GetTimestampFrequency(&mTimestampFrequency),
+                              "D3D12 get timestamp frequency"));
+
         // If PIX is not attached, the QueryInterface fails. Hence, no need to check the return
         // value.
         mCommandQueue.As(&mD3d12SharingContract);
@@ -653,6 +656,10 @@ namespace dawn_native { namespace d3d12 {
     // so we return 1 and let ComputeTextureCopySplits take care of the alignment.
     uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
         return 1;
+    }
+
+    float Device::GetTimestampPeriodInNS() const {
+        return mTimestampFrequency == 0 ? 1.0f : static_cast<float>(1e9) / mTimestampFrequency;
     }
 
 }}  // namespace dawn_native::d3d12

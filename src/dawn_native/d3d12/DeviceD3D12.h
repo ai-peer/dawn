@@ -141,6 +141,8 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetOptimalBytesPerRowAlignment() const override;
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
+        float GetTimestampPeriodInNS() const override;
+
       private:
         using DeviceBase::DeviceBase;
 
@@ -236,6 +238,9 @@ namespace dawn_native { namespace d3d12 {
         // Sampler cache needs to be destroyed before the CPU sampler allocator to ensure the final
         // release is called.
         std::unique_ptr<SamplerHeapCache> mSamplerHeapCache;
+
+        // The GPU timestamp counter frequency (in ticks/second).
+        uint64_t mTimestampFrequency = 0u;
     };
 
 }}  // namespace dawn_native::d3d12
